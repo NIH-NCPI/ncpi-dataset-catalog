@@ -14,7 +14,7 @@ const logoNcpi = "/images/logoNCPI.png";
 
 // Template constants
 const APP_TITLE = "NCPI Dataset Catalog";
-const BROWSER_URL = "TODO";
+const BROWSER_URL = "https://ncpi-data.dev.clevercanary.com";
 const PORTAL_URL = "https://ncpi-acc.org"; // https://www.ncpi-acc.org/
 const SLOGAN = "NIH Cloud Platform Interoperability Effort";
 
