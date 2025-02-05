@@ -9,7 +9,7 @@ n 20.10.0
 npm ci
 
 # Build
-npm run build-prod:ncpi-catalog
+npm run build:prod
 
 export BUCKET=s3://l5s-ncpi-data.org/
 export SRCDIR=out/

@@ -9,7 +9,7 @@ n 20.10.0
 npm ci
 
 # Build
-npm run build-dev:ncpi-catalog
+npm run build:dev
 
 export BUCKET=s3://g78-ncpi-data.humancellatlas.dev/
 export SRCDIR=out/
