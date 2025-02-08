@@ -7,6 +7,8 @@ run `npm run update-all-ncpi-sources` to update all 4 datasets at once.
 
 ### Manual data retrieval
 
+**AnVIL datasets cannot currently be generated with this tool, and KFDRC datasets are not currently available. Sources from these datasets may be added by editing `dashboard-source-ncpi.tsv` manually.**
+
 The KFDRC (Kid's First) and AnVIL datasets cannot be queried automatically, making additional steps necessary before
 their corresponding scripts can be run.
 
