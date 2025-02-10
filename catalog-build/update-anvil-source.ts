@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import { DbGapId } from "../../app/apis/catalog/ncpi-catalog/common/entities";
+import { DbGapId } from "../app/apis/catalog/ncpi-catalog/common/entities";
 import { Platform } from "./constants";
 import {
   getPlatformStudiesStudyIds,
@@ -11,7 +11,7 @@ type AnVILJSONElement = {
   dbGapId: DbGapId;
 };
 
-const anVILPath = "anvil-catalog/out/anvil-studies.json";
+const anVILPath = "source/anvil-studies.json";
 
 async function updateAnVILSource(sourcePath: string): Promise<void> {
   // Get existing platform studies and study ids from the NCPI source tsv.
@@ -26,7 +26,9 @@ async function updateAnVILSource(sourcePath: string): Promise<void> {
     anvilJson = JSON.parse(fs.readFileSync(anVILPath, "utf-8"));
   } catch {
     console.error(
-      "AnVIL database not present at '/anvil-catalog/out/anvil-studies.json', please run 'npm run build-anvil-db' then try again."
+      "AnVIL database not present at 'catalog-build/" +
+        anVILPath +
+        "', please run 'npm run build-anvil-db' then try again."
     );
     return;
   }

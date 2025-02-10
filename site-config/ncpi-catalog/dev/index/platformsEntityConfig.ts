@@ -122,5 +122,5 @@ export const platformsEntityConfig: EntityConfig<NCPICatalogPlatform> = {
     enableDownload: true,
   },
   route: "platforms",
-  staticLoadFile: "files/ncpi-catalog/out/ncpi-platforms.json",
+  staticLoadFile: "catalog/ncpi-platforms.json",
 };

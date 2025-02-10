@@ -3,11 +3,11 @@ import fs from "fs";
 import {
   DbGapId,
   PlatformStudy,
-} from "../../app/apis/catalog/ncpi-catalog/common/entities";
-import { parseContentRows, readFile } from "../../app/utils/tsvParser";
+} from "../app/apis/catalog/ncpi-catalog/common/entities";
+import { parseContentRows, readFile } from "../app/utils/tsvParser";
 import { Platform, SOURCE_FIELD_KEY, SOURCE_FIELD_TYPE } from "./constants";
 
-export const sourcePath = "ncpi-catalog/files/dashboard-source-ncpi.tsv";
+export const sourcePath = "source/dashboard-source-ncpi.tsv";
 
 export function replaceTsv(path: string, data: string[][]): void {
   const stringifiedOut = stringify(data, { delimiter: "\t" });
