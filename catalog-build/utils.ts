@@ -7,7 +7,7 @@ import {
 import { parseContentRows, readFile } from "../app/utils/tsvParser";
 import { Platform, SOURCE_FIELD_KEY, SOURCE_FIELD_TYPE } from "./constants";
 
-export const sourcePath = "source/dashboard-source-ncpi.tsv";
+export const sourcePath = "catalog-build/source/dashboard-source-ncpi.tsv";
 
 export function replaceTsv(path: string, data: string[][]): void {
   const stringifiedOut = stringify(data, { delimiter: "\t" });

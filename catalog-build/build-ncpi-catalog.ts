@@ -31,12 +31,12 @@ async function buildCatalog(): Promise<void> {
   const ncpiCatalogPlatforms = buildNCPICatalogPlatforms(ncpiPlatformStudies);
 
   await writeAsJSON(
-    "../catalog/ncpi-platform-studies.json",
+    "catalog/ncpi-platform-studies.json",
     Object.fromEntries(ncpiPlatformStudies.entries())
   );
 
   await writeAsJSON(
-    "../catalog/ncpi-platforms.json",
+    "catalog/ncpi-platforms.json",
     Object.fromEntries(ncpiCatalogPlatforms.entries())
   );
 }

@@ -1,4 +1,4 @@
-export const tsvPath = "source/dashboard-source-ncpi.tsv";
+export const tsvPath = "./catalog-build/source/dashboard-source-ncpi.tsv";
 
 export enum Platform {
   ANVIL = "AnVIL",
