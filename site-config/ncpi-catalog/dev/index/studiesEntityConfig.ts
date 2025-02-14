@@ -135,5 +135,5 @@ export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
     enableDownload: true,
   },
   route: "studies",
-  staticLoadFile: "files/ncpi-catalog/out/ncpi-platform-studies.json",
+  staticLoadFile: "catalog/ncpi-platform-studies.json",
 };

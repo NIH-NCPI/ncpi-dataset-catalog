@@ -6,7 +6,7 @@ import {
   updatePlatformStudiesAndReportNewStudies,
 } from "./utils";
 
-const KFDRCDataPath = "ncpi-catalog/out/kfdrc-studies.json";
+const KFDRCDataPath = "catalog-build/source/kfdrc-studies.json";
 
 type KFDRCIdentifier = {
   value: string;
@@ -37,7 +37,9 @@ async function updateKFDRCSource(sourcePath: string): Promise<void> {
     KFDRCJson = JSON.parse(fs.readFileSync(KFDRCDataPath, "utf-8"));
   } catch {
     console.error(
-      "KFDRC data not found. Please download the KFDRC data to ncpi-catalog/out/kfdrc-studies.json"
+      "KFDRC data not found. Please download the KFDRC data to '" +
+        KFDRCDataPath +
+        "'"
     );
     return;
   }

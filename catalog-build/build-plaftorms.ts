@@ -2,11 +2,11 @@ import {
   accumulateValue,
   accumulateValues,
   sumValues,
-} from "../../app/apis/catalog/common/utils";
+} from "../app/apis/catalog/common/utils";
 import {
   NCPICatalogPlatform,
   NCPIStudy,
-} from "../../app/apis/catalog/ncpi-catalog/common/entities";
+} from "../app/apis/catalog/ncpi-catalog/common/entities";
 
 /**
  * Build the catalog Platforms for NCPI

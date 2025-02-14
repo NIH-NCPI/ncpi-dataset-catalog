@@ -1,10 +1,10 @@
-import { DbGapStudy } from "../../app/apis/catalog/common/entities";
+import { DbGapStudy } from "../app/apis/catalog/common/entities";
 import {
   NCPIStudy,
   PlatformStudy,
-} from "../../app/apis/catalog/ncpi-catalog/common/entities";
-import { generateConsentDescriptions } from "../common/consent-codes";
-import { getStudy } from "../common/dbGaP";
+} from "../app/apis/catalog/ncpi-catalog/common/entities";
+import { generateConsentDescriptions } from "./common/consent-codes";
+import { getStudy } from "./common/dbGaP";
 
 /**
  * Build the catalog platform studies for NCPI.

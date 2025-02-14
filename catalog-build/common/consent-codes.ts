@@ -94,7 +94,7 @@ const SOURCE_FIELD_TYPE = {
   DISEASE_NAME: "string",
 };
 
-const tsvPath = "common/disease_abbrev_mapping.tsv";
+const tsvPath = "catalog-build/common/disease_abbrev_mapping.tsv";
 
 const consentSymbolDefsList: ConsentSymbol[] = [
   {
