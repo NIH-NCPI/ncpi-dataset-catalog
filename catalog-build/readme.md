@@ -1,6 +1,6 @@
 ### How to run
 
-First, run `npm ci` from the files directory with Node 16.15.1 to download the correct packages.
+First, make sure you've run `npm ci` from the repository's root directory with Node 16.15.1 to download the correct packages.
 Then, enter `npm run update-[database]-source` to update the source from a particular dataset,
 for instance `npm run update-anvil-source` to retrieve studies from AnVIL. Alternatively, to update all datasets,
 run `npm run update-all-ncpi-sources` to update all 4 datasets at once.
