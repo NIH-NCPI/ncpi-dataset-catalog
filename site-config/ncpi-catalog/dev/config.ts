@@ -85,7 +85,13 @@ const config: SiteConfig = {
         src: logoNcpi,
         target: ANCHOR_TARGET.BLANK,
       }),
-      navLinks: [],
+      navLinks: [
+        {
+          label: "Feedback & Support",
+          target: ANCHOR_TARGET.BLANK,
+          url: "https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/new?template=feedback.md",
+        },
+      ],
       versionInfo: true,
     },
     header: {
