@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.1.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.1.0...v0.1.0) (2025-02-27)
+
+
+### Features
+
+* add feedback link ([#21](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/21)) ([#28](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/28)) ([a219945](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/a219945a4279d2ef89f0712d117814de6991da54))
+* added favicons ([#9](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/9)) ([#16](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/16)) ([329c020](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/329c0203ecb0f7ce462355f720e8f6d24eefefc7))
+* Analytics reports for December & January ([#3](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/3)) ([#4](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/4)) ([#14](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/14)) ([67b61de](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/67b61deab8ec53b9a56dc7c5cbc8a66b92bc29b9))
+
+
+### Chores
+
+* 5 refresh ncpi catalog content ([#15](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/15)) ([54489a5](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/54489a535ee031afd57f1ed7217ba4d07ce8ab0c))
+* added feature issue template [#22](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/22) ([a2c008f](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/a2c008f38f6559f62ac668707d9f4277cf0e7494))
+* refactored files/ folder ([#13](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/13)) ([#17](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/17)) ([430ccaf](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/430ccaf6d6d70af6cb9cc612a12c6a98e8e72620))
+
+
+### Continuous Integration
+
+* update build scritps for new pacage.json ([#10](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/10)) ([#11](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/11)) ([f571b4c](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/f571b4c547ee630f99fb32af6dc2962c588ba0fd))
+
 ## 0.1.0 (2025-02-05)
 
 
