@@ -8,54 +8,33 @@ import {
 } from "./utils";
 
 interface AnvilDatasetsResponse {
-  hits: Array<{
-    datasets: Array<{
-      registered_identifier: (string | null)[];
-    }>;
-  }>;
-  pagination: {
-    next: string | null;
+  termFacets: {
+    "datasets.registered_identifier": {
+      terms: Array<{
+        term: string | null;
+      }>;
+    };
   };
 }
 
 const ANVIL_DATASETS_URL =
-  "https://service.explore.anvilproject.org/index/datasets?size=1000&catalog=anvil8";
+  "https://service.explore.anvilproject.org/index/datasets";
 
-async function fetchAnvilPage(
-  url: string,
-  dbGapIds: Set<DbGapId>
-): Promise<string | null> {
-  const response = await fetch(url);
+async function fetchAnvilIds(): Promise<DbGapId[]> {
+  const response = await fetch(ANVIL_DATASETS_URL);
   if (!response.ok) {
     throw new Error(`HTTP error ${response.status}`);
   }
   const data = (await response.json()) as AnvilDatasetsResponse;
-
-  // Process each dataset
-  for (const hit of data.hits) {
-    for (const dataset of hit.datasets) {
-      for (const id of dataset.registered_identifier) {
-        const idMatch = id && /^phs\d+/.exec(id);
-        if (idMatch) {
-          dbGapIds.add(idMatch[0]);
-        }
-      }
+  const ids = new Set<DbGapId>();
+  for (const { term } of data.termFacets["datasets.registered_identifier"]
+    .terms) {
+    const idMatch = term && /^phs\d+/.exec(term);
+    if (idMatch) {
+      ids.add(idMatch[0]);
     }
   }
-
-  return data.pagination.next;
-}
-
-async function fetchAnvilIds(): Promise<DbGapId[]> {
-  const dbGapIds = new Set<DbGapId>();
-  let url: string | null = ANVIL_DATASETS_URL;
-
-  while (url) {
-    // Add the IDs from the page and get the next page URL.
-    url = await fetchAnvilPage(url, dbGapIds);
-  }
-
-  return Array.from(dbGapIds);
+  return Array.from(ids);
 }
 
 async function updateAnVILSource(sourcePath: string): Promise<void> {
