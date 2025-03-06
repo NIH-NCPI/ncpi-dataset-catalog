@@ -35,9 +35,9 @@ async function fetchAnvilPage(
   for (const hit of data.hits) {
     for (const dataset of hit.datasets) {
       for (const id of dataset.registered_identifier) {
-        // TODO how do we want to handle values such as "phs000744.v5.p2"?
-        if (id && id.startsWith("phs")) {
-          dbGapIds.add(id);
+        const idMatch = id && /^phs\d+/.exec(id);
+        if (idMatch) {
+          dbGapIds.add(idMatch[0]);
         }
       }
     }
