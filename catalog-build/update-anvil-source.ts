@@ -18,6 +18,9 @@ interface AnvilDatasetsResponse {
   };
 }
 
+const ANVIL_DATASETS_URL =
+  "https://service.explore.anvilproject.org/index/datasets?size=1000&catalog=anvil8";
+
 async function fetchAnvilPage(
   url: string,
   dbGapIds: Set<DbGapId>
@@ -45,8 +48,7 @@ async function fetchAnvilPage(
 
 async function fetchAnvilIds(): Promise<DbGapId[]> {
   const dbGapIds = new Set<DbGapId>();
-  let url: string | null =
-    "https://service.explore.anvilproject.org/index/datasets?size=25&catalog=anvil8";
+  let url: string | null = ANVIL_DATASETS_URL;
 
   while (url) {
     // Add the IDs from the page and get the next page URL.
