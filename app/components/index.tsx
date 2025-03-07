@@ -26,3 +26,4 @@ export { ConsentCodeList } from "./Detail/components/ConsentCodeList/consentCode
 export { ConsentTooltip } from "./Detail/components/ConsentTooltip/consentTooltip";
 export { ConsentCodesCell } from "./Index/components/ConsentCodesCell/consentCodesCell";
 export { LabelIconMenuItem } from "./Layout/components/Header/components/Content/components/Navigation/components/NavigationMenuItems/components/LabelIconMenuItem/labelIconMenuItem";
+export { ConditionalComponent } from "@databiosphere/findable-ui/lib/components/ComponentCreator/components/ConditionalComponent/conditionalComponent";

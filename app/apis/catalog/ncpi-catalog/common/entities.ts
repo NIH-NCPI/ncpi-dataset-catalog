@@ -1,13 +1,20 @@
 import { DbGapStudy } from "../../common/entities";
 
+export enum PLATFORM {
+  ANVIL = "AnVIL",
+  BDC = "BDC",
+  CRDC = "CRDC",
+  KFDRC = "KFDRC",
+}
+
 export interface PlatformStudy {
   dbGapId: string;
-  platform: string;
+  platform: PLATFORM;
 }
 
 export interface NCPIStudy extends DbGapStudy {
   consentLongNames: Record<string, string>;
-  platforms: string[];
+  platforms: PLATFORM[];
 }
 
 export type DbGapId = string;
@@ -21,7 +28,7 @@ export interface NCPICatalogPlatform {
   dbGapId: string[];
   focus: string[];
   participantCount: number;
-  platform: string;
+  platform: PLATFORM;
   studyAccession: string[];
   studyDesign: string[];
   title: string[];
@@ -34,7 +41,7 @@ export interface NCPICatalogStudy {
   dbGapId: string;
   focus: string;
   participantCount: number;
-  platform: string[];
+  platform: PLATFORM[];
   studyAccession: string;
   studyDescription: string;
   studyDesign: string[];

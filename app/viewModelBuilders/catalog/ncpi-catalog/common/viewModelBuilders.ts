@@ -1,9 +1,6 @@
 import { stringifyValues } from "@databiosphere/findable-ui/lib/common/utils";
 import { Breadcrumb } from "@databiosphere/findable-ui/lib/components/common/Breadcrumbs/breadcrumbs";
-import {
-  Key,
-  Value,
-} from "@databiosphere/findable-ui/lib/components/common/KeyValuePairs/keyValuePairs";
+import { Key, Value } from "@databiosphere/findable-ui/lib/components/common/KeyValuePairs/keyValuePairs";
 import { ANCHOR_TARGET } from "@databiosphere/findable-ui/lib/components/Links/common/entities";
 import { ViewContext } from "@databiosphere/findable-ui/lib/config/entities";
 import React, { ReactElement } from "react";
@@ -11,10 +8,12 @@ import {
   NCPICatalogEntity,
   NCPICatalogPlatform,
   NCPICatalogStudy,
+  PLATFORM,
 } from "../../../../apis/catalog/ncpi-catalog/common/entities";
 import * as C from "../../../../components";
 import { METADATA_KEY } from "../../../../components/Index/common/entities";
 import { getPluralizedMetadataLabel } from "../../../../components/Index/common/indexTransformer";
+import { TEXT_BODY_400_2_LINES } from "@databiosphere/findable-ui/lib/theme/common/typography";
 
 /**
  * Build props for ConsentCodesCell component from the given NCPI entity.
@@ -22,7 +21,7 @@ import { getPluralizedMetadataLabel } from "../../../../components/Index/common/
  * @returns Model to be used as props for the ConsentCodesCell component.
  */
 export const buildConsentCodes = (
-  ncpiCatalogEntry: NCPICatalogEntity
+  ncpiCatalogEntry: NCPICatalogEntity,
 ): React.ComponentProps<typeof C.ConsentCodesCell> => {
   return {
     consentCode: ncpiCatalogEntry.consentCode,
@@ -37,7 +36,7 @@ export const buildConsentCodes = (
  * @returns Model to be used as props for the NTagCell component.
  */
 export const buildDataTypes = (
-  ncpiCatalogEntry: NCPICatalogEntity
+  ncpiCatalogEntry: NCPICatalogEntity,
 ): React.ComponentProps<typeof C.NTagCell> => {
   return {
     label: getPluralizedMetadataLabel(METADATA_KEY.DATA_TYPE),
@@ -51,7 +50,7 @@ export const buildDataTypes = (
  * @returns Model to be used as props for the BasicCell component.
  */
 export const buildDbGapId = (
-  ncpiCatalogStudy: NCPICatalogStudy
+  ncpiCatalogStudy: NCPICatalogStudy,
 ): React.ComponentProps<typeof C.BasicCell> => {
   return {
     value: ncpiCatalogStudy.dbGapId,
@@ -64,7 +63,7 @@ export const buildDbGapId = (
  * @returns Model to be used as props for the NTagCell component.
  */
 export const buildDbGapIds = (
-  ncpiCatalogPlatform: NCPICatalogPlatform
+  ncpiCatalogPlatform: NCPICatalogPlatform,
 ): React.ComponentProps<typeof C.NTagCell> => {
   return {
     label: getPluralizedMetadataLabel(METADATA_KEY.DBGAP_ID),
@@ -78,7 +77,7 @@ export const buildDbGapIds = (
  * @returns Model to be used as props for the BasicCell component.
  */
 export const buildFocus = (
-  ncpiCatalogStudy: NCPICatalogStudy
+  ncpiCatalogStudy: NCPICatalogStudy,
 ): React.ComponentProps<typeof C.BasicCell> => {
   return {
     value: ncpiCatalogStudy.focus,
@@ -91,7 +90,7 @@ export const buildFocus = (
  * @returns Model to be used as props for the NTagCell component.
  */
 export const buildFocusDiseases = (
-  ncpiCatalogPlatform: NCPICatalogPlatform
+  ncpiCatalogPlatform: NCPICatalogPlatform,
 ): React.ComponentProps<typeof C.NTagCell> => {
   return {
     label: getPluralizedMetadataLabel(METADATA_KEY.FOCUS_DISEASE),
@@ -105,7 +104,7 @@ export const buildFocusDiseases = (
  * @returns Model to be used as props for the BasicCell component.
  */
 export const buildParticipantCount = (
-  ncpiCatalogEntry: NCPICatalogEntity
+  ncpiCatalogEntry: NCPICatalogEntity,
 ): React.ComponentProps<typeof C.BasicCell> => {
   return {
     value: ncpiCatalogEntry.participantCount,
@@ -118,7 +117,7 @@ export const buildParticipantCount = (
  * @returns Model to be used as props for the BasicCell component.
  */
 export const buildPlatform = (
-  ncpiCatalogPlatform: NCPICatalogPlatform
+  ncpiCatalogPlatform: NCPICatalogPlatform,
 ): React.ComponentProps<typeof C.BasicCell> => {
   return {
     value: ncpiCatalogPlatform.platform,
@@ -131,7 +130,7 @@ export const buildPlatform = (
  * @returns Model to be used as props for the NTagCell component.
  */
 export const buildPlatforms = (
-  ncpiCatalogStudy: NCPICatalogStudy
+  ncpiCatalogStudy: NCPICatalogStudy,
 ): React.ComponentProps<typeof C.NTagCell> => {
   return {
     label: getPluralizedMetadataLabel(METADATA_KEY.PLATFORM),
@@ -168,7 +167,7 @@ export const buildStudyApplyingForAccess = (): React.ComponentProps<
  * @returns model to be used as props for the Markdown component.
  */
 export const buildStudyDescription = (
-  ncpiCatalogStudy: NCPICatalogStudy
+  ncpiCatalogStudy: NCPICatalogStudy,
 ): React.ComponentProps<typeof C.Markdown> => {
   return {
     content: ncpiCatalogStudy.studyDescription || "None",
@@ -181,7 +180,7 @@ export const buildStudyDescription = (
  * @returns Model to be used as props for the NTagCell component.
  */
 export const buildStudyDesigns = (
-  ncpiCatalogEntity: NCPICatalogEntity
+  ncpiCatalogEntity: NCPICatalogEntity,
 ): React.ComponentProps<typeof C.NTagCell> => {
   return {
     label: getPluralizedMetadataLabel(METADATA_KEY.STUDY_DESIGN),
@@ -195,7 +194,7 @@ export const buildStudyDesigns = (
  * @returns model to be used as props for the KeyValuePairs component.
  */
 export const buildStudyDetails = (
-  ncpiCatalogStudy: NCPICatalogStudy
+  ncpiCatalogStudy: NCPICatalogStudy,
 ): React.ComponentProps<typeof C.KeyValuePairs> => {
   const { dbGapId, platform, studyAccession } = ncpiCatalogStudy;
   const keyValuePairs = new Map<Key, Value>();
@@ -218,7 +217,7 @@ export const buildStudyDetails = (
  */
 export const buildStudyHero = (
   ncpiCatalogStudy: NCPICatalogStudy,
-  viewContext: ViewContext<NCPICatalogStudy>
+  viewContext: ViewContext<NCPICatalogStudy>,
 ): React.ComponentProps<typeof C.BackPageHero> => {
   const { dbGapId, title } = ncpiCatalogStudy;
   return {
@@ -238,7 +237,7 @@ export const buildStudyHero = (
  * @returns model to be used as props for the Details component.
  */
 export const buildStudySummary = (
-  ncpiCatalogStudy: NCPICatalogStudy
+  ncpiCatalogStudy: NCPICatalogStudy,
 ): React.ComponentProps<typeof C.Details> => {
   const {
     consentCode,
@@ -251,7 +250,7 @@ export const buildStudySummary = (
   const keyValuePairs = new Map<Key, Value>();
   keyValuePairs.set(
     "Consent Codes",
-    C.ConsentCodeList({ consentCode, consentLongName })
+    C.ConsentCodeList({ consentCode, consentLongName }),
   );
   keyValuePairs.set("Focus / Diseases", focus);
   keyValuePairs.set("Study Design", stringifyValues(studyDesign));
@@ -269,7 +268,7 @@ export const buildStudySummary = (
  * @returns Model to be used as props for the Link component.
  */
 export const buildStudyTitle = (
-  ncpiCatalogStudy: NCPICatalogStudy
+  ncpiCatalogStudy: NCPICatalogStudy,
 ): React.ComponentProps<typeof C.Link> => {
   const { dbGapId, studyAccession, title } = ncpiCatalogStudy;
   return {
@@ -284,11 +283,34 @@ export const buildStudyTitle = (
  * @returns Model to be used as props for the NTagCell component.
  */
 export const buildStudyNames = (
-  ncpiCatalogPlatform: NCPICatalogPlatform
+  ncpiCatalogPlatform: NCPICatalogPlatform,
 ): React.ComponentProps<typeof C.NTagCell> => {
   return {
     label: getPluralizedMetadataLabel(METADATA_KEY.STUDY),
     values: ncpiCatalogPlatform.title,
+  };
+};
+
+/**
+ * Build props for Link component from the given NCPI entity.
+ * @param ncpiCatalogStudy - NCPI catalog study.
+ * @returns model to be used as props for the Link component.
+ */
+export const buildViewInAnVIL = (
+  ncpiCatalogStudy: NCPICatalogStudy,
+): React.ComponentProps<typeof C.Link> => {
+  const params = encodeURIComponent(JSON.stringify(
+    [
+      {
+        categoryKey: "datasets.registered_identifier",
+        value: [ncpiCatalogStudy.dbGapId],
+      },
+    ],
+  ));
+  return {
+    label: "View in AnVIL",
+    TypographyProps: { variant: TEXT_BODY_400_2_LINES },
+    url: `https://explore.anvilproject.org/datasets?filter=${params}`,
   };
 };
 
@@ -300,7 +322,7 @@ export const buildStudyNames = (
  */
 function getCatalogBreadcrumbs(
   viewContext: ViewContext<NCPICatalogStudy>,
-  lastCrumbText?: string
+  lastCrumbText?: string,
 ): Breadcrumb[] {
   const { label, route } = viewContext.entityConfig;
   const firstCrumb = {
@@ -345,3 +367,16 @@ function getStudyDbGapIdKeyValue(studyAccession: string): ReactElement {
     url: `https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${studyAccession}`,
   });
 }
+
+/**
+ * Renders configuration component children when the catalog platform is AnVIL.
+ * @param ncpiCatalogStudy - NCPI catalog study.
+ * @returns model to be used as props for the ConditionalComponent component.
+ */
+export const renderWhenPlatformIsAnVIL = (
+  ncpiCatalogStudy: NCPICatalogStudy,
+): React.ComponentProps<typeof C.ConditionalComponent> => {
+  return {
+    isIn: ncpiCatalogStudy.platform.includes(PLATFORM.ANVIL),
+  };
+};
