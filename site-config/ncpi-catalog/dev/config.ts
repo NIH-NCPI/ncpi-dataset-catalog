@@ -9,6 +9,7 @@ import {
 import { platformsEntityConfig } from "./index/platformsEntityConfig";
 import { studiesEntityConfig } from "./index/studiesEntityConfig";
 import { exportConfig } from "./export/export";
+import { socialMedia } from "./socialMedia";
 
 const logoNcpi = "/images/logoNCPI.png";
 
@@ -92,6 +93,7 @@ const config: SiteConfig = {
           url: "https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/new?template=feedback.md",
         },
       ],
+      socials: socialMedia.socials,
       versionInfo: true,
     },
     header: {
@@ -116,6 +118,7 @@ const config: SiteConfig = {
       searchEnabled: false,
       searchURL: ``,
       slogan: SLOGAN,
+      socialMedia: socialMedia,
     },
   },
   redirectRootToPath: "/platforms",
