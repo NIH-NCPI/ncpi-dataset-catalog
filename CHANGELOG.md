@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.2.0...v0.3.0) (2025-04-03)
+
+
+### Features
+
+* add duos id to study data ([#57](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/57)) ([#71](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/71)) ([60a9447](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/60a9447ab9d7b953315ba6a16dba2f8d3960ccce))
+* request access via duos [#26](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/26) ([#73](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/73)) ([183b2e9](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/183b2e96e111ee118ee8f1141b6b53e9057556dd))
+
 ## [0.2.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.1.0...v0.2.0) (2025-03-28)
 
 
