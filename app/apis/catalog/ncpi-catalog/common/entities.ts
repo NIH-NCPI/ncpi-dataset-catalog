@@ -14,6 +14,7 @@ export interface PlatformStudy {
 
 export interface NCPIStudy extends DbGapStudy {
   consentLongNames: Record<string, string>;
+  duosUrl: string | null;
   platforms: PLATFORM[];
 }
 
@@ -38,6 +39,7 @@ export interface NCPICatalogStudy {
   consentCode: string[];
   consentLongName: Record<string, string>;
   dataType: string[];
+  duosUrl: string | null;
   dbGapId: string;
   focus: string;
   participantCount: number;
