@@ -14,6 +14,7 @@ import * as C from "../../../../components";
 import { METADATA_KEY } from "../../../../components/Index/common/entities";
 import { getPluralizedMetadataLabel } from "../../../../components/Index/common/indexTransformer";
 import { TEXT_BODY_400_2_LINES } from "@databiosphere/findable-ui/lib/theme/common/typography";
+import { RequestAccess } from "app/components/RequestAccess/requestAccess";
 
 /**
  * Build props for ConsentCodesCell component from the given NCPI entity.
@@ -221,12 +222,8 @@ export const buildStudyHero = (
 ): React.ComponentProps<typeof C.BackPageHero> => {
   const { dbGapId, title } = ncpiCatalogStudy;
   return {
+    actions: RequestAccess({ ncpiCatalogStudy }),
     breadcrumbs: getCatalogBreadcrumbs(viewContext, title),
-    callToAction: {
-      label: "Request Access",
-      target: ANCHOR_TARGET.BLANK,
-      url: `https://dbgap.ncbi.nlm.nih.gov/aa/wga.cgi?adddataset=${dbGapId}`,
-    },
     title: title,
   };
 };
