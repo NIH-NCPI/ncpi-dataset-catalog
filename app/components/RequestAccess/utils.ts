@@ -5,7 +5,7 @@ import { NCPICatalogStudy } from "app/apis/catalog/ncpi-catalog/common/entities"
  * Generates a list of request access menu options based on the provided study.
  * This function extracts identifiers (DUOS URL and dbGaP ID) from the study and returns an array of menu option objects.
  * Each menu option contains a link `href` and title `primary` and description text `secondary`, to be used in Material UI's `MenuItem` and `ListItemText` component.
- * @param ncpiCatalogStudy - Response model return from datasets API.
+ * @param ncpiCatalogStudy - The study object containing identifiers for DUOS and dbGaP.
  * @returns menu option objects with `href`, `primary`, and `secondary` properties.
  */
 export function getRequestAccessOptions(
