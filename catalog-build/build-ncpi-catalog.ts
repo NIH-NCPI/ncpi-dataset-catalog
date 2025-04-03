@@ -3,7 +3,15 @@ import { parseContentRows, readFile } from "../app/utils/tsvParser";
 import { writeAsJSON } from "./common/utils";
 import { buildNCPICatalogPlatforms } from "./build-plaftorms";
 import { buildNCPIPlatformStudies } from "./build-platform-studies";
-import { SOURCE_FIELD_KEY, SOURCE_FIELD_TYPE, tsvPath } from "./constants";
+import {
+  DUOS_INFO_SOURCE_FIELD_KEY,
+  DUOS_INFO_SOURCE_FIELD_TYPE,
+  duosCsvPath,
+  SOURCE_FIELD_KEY,
+  SOURCE_FIELD_TYPE,
+  tsvPath,
+} from "./constants";
+import { DuosStudyInfo } from "./entities";
 
 console.log("Building NCPI Catalog Data");
 export {};
@@ -13,20 +21,30 @@ export {};
  * @returns void
  */
 async function buildCatalog(): Promise<void> {
-  const file = await readFile(tsvPath);
-  if (!file) {
-    throw new Error(`File ${tsvPath} not found`);
-  }
-
-  const platformStudyStubs = (await parseContentRows(
-    file,
+  const platformStudyStubs = await readValuesFile<PlatformStudy>(
+    tsvPath,
     "\t",
     SOURCE_FIELD_KEY,
     SOURCE_FIELD_TYPE
-  )) as PlatformStudy[];
+  );
 
-  const ncpiPlatformStudies =
-    await buildNCPIPlatformStudies(platformStudyStubs);
+  const duosInfo = await readValuesFile<DuosStudyInfo>(
+    duosCsvPath,
+    ",",
+    DUOS_INFO_SOURCE_FIELD_KEY,
+    DUOS_INFO_SOURCE_FIELD_TYPE
+  );
+  const duosUrlByDbGapId = new Map(
+    duosInfo.map((studyInfo) => [
+      studyInfo["Study PHS"],
+      studyInfo["Study URL"],
+    ])
+  );
+
+  const ncpiPlatformStudies = await buildNCPIPlatformStudies(
+    platformStudyStubs,
+    duosUrlByDbGapId
+  );
 
   const ncpiCatalogPlatforms = buildNCPICatalogPlatforms(ncpiPlatformStudies);
 
@@ -38,6 +56,24 @@ async function buildCatalog(): Promise<void> {
   await writeAsJSON(
     "catalog/ncpi-platforms.json",
     Object.fromEntries(ncpiCatalogPlatforms.entries())
+  );
+}
+
+async function readValuesFile<T>(
+  filePath: string,
+  separator: string,
+  sourceFieldKey: Record<string, string>,
+  sourceFieldType: Record<string, string>
+): Promise<T[]> {
+  const file = await readFile(filePath);
+  if (!file) {
+    throw new Error(`File ${filePath} not found`);
+  }
+  return await parseContentRows(
+    file,
+    separator,
+    sourceFieldKey,
+    sourceFieldType
   );
 }
 

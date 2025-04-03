@@ -9,6 +9,7 @@ export function NCPIStudyInputMapper(ncpiStudy: NCPIStudy): NCPICatalogStudy {
     consentCode: sanitizeStringArray(ncpiStudy.consentCodes),
     consentLongName: ncpiStudy.consentLongNames,
     dataType: sanitizeStringArray(ncpiStudy.dataTypes),
+    duosUrl: ncpiStudy.duosUrl,
     dbGapId: ncpiStudy.dbGapId,
     focus: sanitizeString(ncpiStudy.focus),
     participantCount: ncpiStudy.participantCount,

@@ -9,10 +9,12 @@ import { getStudy } from "./common/dbGaP";
 /**
  * Build the catalog platform studies for NCPI.
  * @param platformStudies - a list of platform study values.
+ * @param duosUrlByDbGapId - map from dbGap ID to DUOS study URL.
  * @returns NCPI catalog platform studies.
  */
 export async function buildNCPIPlatformStudies(
-  platformStudies: PlatformStudy[]
+  platformStudies: PlatformStudy[],
+  duosUrlByDbGapId: Map<string, string>
 ): Promise<NCPIStudy[]> {
   const ncpiStudies: NCPIStudy[] = [];
   const studiesById: Map<string, NCPIStudy> = new Map();
@@ -46,6 +48,7 @@ export async function buildNCPIPlatformStudies(
     const ncpiStudy = {
       ...study,
       consentLongNames,
+      duosUrl: duosUrlByDbGapId.get(study.dbGapId) ?? null,
       platforms: [stub.platform],
     };
 
