@@ -1,12 +1,8 @@
 # CHANGE THESE VALUES TO GENERATE NEW REPORTS
-# The start and end dates of the current month (yyyy-mm-dd)
-START_DATE_CURRENT = "2025-01-01"
-END_DATE_CURRENT = "2025-01-31"
-# The start and end dates of the prior months
-START_DATE_PRIOR = "2024-12-01"
-END_DATE_PRIOR = "2024-12-31"
+# The date of the current month to report on (yyyy-mm)
+CURRENT_MONTH = "2025-03"
 # The name of the folder in which to save the report
-PARENT_FOLDER_NAME = "January 2025"
+PARENT_FOLDER_NAME = "March 2025"
 
 # The name of the spreadsheet with the report
 SHEET_NAME = "NCPI Catalog"
