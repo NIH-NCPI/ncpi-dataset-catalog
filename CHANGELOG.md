@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.3.0...v0.3.1) (2025-04-12)
+
+
+### Bug Fixes
+
+* look only at current commit for version tag ([#77](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/77)) ([#78](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/78)) ([79b1973](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/79b1973a7e3874ca600813effedc238fcca790ab))
+
+
+### Chores
+
+* make march 2025 analytics report using upgraded package ([#68](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/68)) ([#74](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/74)) ([766ee9c](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/766ee9c818a01ae839db764d433b6f73f88168e2))
+* update catalog content for 2025-04 ([#70](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/70)) ([#75](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/75)) ([3453795](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/34537955dcea08c033ab3cd39f0815244c3e9e6c))
+
 ## [0.3.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.2.0...v0.3.0) (2025-04-03)
 
 
