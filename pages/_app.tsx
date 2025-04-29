@@ -14,7 +14,7 @@ import { ConfigProvider as DXConfigProvider } from "@databiosphere/findable-ui/l
 import { ExploreStateProvider } from "@databiosphere/findable-ui/lib/providers/exploreState";
 import { FileManifestStateProvider } from "@databiosphere/findable-ui/lib/providers/fileManifestState";
 import { GoogleSignInAuthenticationProvider } from "@databiosphere/findable-ui/lib/providers/googleSignInAuthentication/provider";
-import { LayoutStateProvider } from "@databiosphere/findable-ui/lib/providers/layoutState";
+import { LayoutDimensionsProvider } from "@databiosphere/findable-ui/lib/providers/layoutDimensions/provider";
 import { SystemStatusProvider } from "@databiosphere/findable-ui/lib/providers/systemStatus";
 import { createAppTheme } from "@databiosphere/findable-ui/lib/theme/theme";
 import { DataExplorerError } from "@databiosphere/findable-ui/lib/types/error";
@@ -75,7 +75,7 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
               SessionController={TerraProfileProvider}
               timeout={SESSION_TIMEOUT}
             >
-              <LayoutStateProvider>
+              <LayoutDimensionsProvider>
                 <AppLayout>
                   <ThemeProvider
                     theme={(theme: Theme): Theme =>
@@ -115,7 +115,7 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
                   </ExploreStateProvider>
                   <Footer {...footer} />
                 </AppLayout>
-              </LayoutStateProvider>
+              </LayoutDimensionsProvider>
             </GoogleSignInAuthenticationProvider>
           </SystemStatusProvider>
         </DXConfigProvider>
