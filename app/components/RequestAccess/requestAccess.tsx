@@ -4,16 +4,12 @@ import { Actions } from "@databiosphere/findable-ui/lib/components/Layout/compon
 import { CallToActionButton } from "@databiosphere/findable-ui/lib/components/common/Button/components/CallToActionButton/callToActionButton";
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import { StyledButton, StyledDropdownMenu } from "./requestAccess.styles";
+import { BUTTON_PROPS } from "@databiosphere/findable-ui/lib/components/common/Button/constants";
 import {
   ANCHOR_TARGET,
   REL_ATTRIBUTE,
 } from "@databiosphere/findable-ui/lib/components/Links/common/entities";
-import {
-  BUTTON_PROPS,
-  LIST_ITEM_TEXT_PROPS,
-  MENU_PROPS,
-  SVG_ICON_PROPS,
-} from "./constants";
+import { LIST_ITEM_TEXT_PROPS, MENU_PROPS, SVG_ICON_PROPS } from "./constants";
 import { getRequestAccessOptions } from "./utils";
 
 export const RequestAccess = ({
@@ -38,7 +34,7 @@ export const RequestAccess = ({
         {...MENU_PROPS}
         button={(props) => (
           <StyledButton
-            {...BUTTON_PROPS}
+            {...BUTTON_PROPS.PRIMARY_CONTAINED}
             endIcon={<ArrowDropDownRoundedIcon {...SVG_ICON_PROPS} />}
             {...props}
           >
