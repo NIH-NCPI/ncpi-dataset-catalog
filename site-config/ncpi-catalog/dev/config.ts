@@ -33,14 +33,17 @@ const config: SiteConfig = {
       {
         categoryConfigs: [
           {
+            enableChartView: false,
             key: NCPI_CATALOG_CATEGORY_KEY.PLATFORM,
             label: NCPI_CATALOG_CATEGORY_LABEL.PLATFORM,
           },
           {
+            enableChartView: false,
             key: NCPI_CATALOG_CATEGORY_KEY.TITLE,
             label: NCPI_CATALOG_CATEGORY_LABEL.TITLE,
           },
           {
+            enableChartView: false,
             key: NCPI_CATALOG_CATEGORY_KEY.DB_GAP_ID,
             label: NCPI_CATALOG_CATEGORY_LABEL.DB_GAP_ID,
           },
@@ -57,6 +60,7 @@ const config: SiteConfig = {
             label: NCPI_CATALOG_CATEGORY_LABEL.STUDY_DESIGN,
           },
           {
+            enableChartView: false,
             key: NCPI_CATALOG_CATEGORY_KEY.CONSENT_CODE,
             label: NCPI_CATALOG_CATEGORY_LABEL.CONSENT_CODE,
           },
@@ -72,6 +76,7 @@ const config: SiteConfig = {
     },
     url: "https://service.nadove2.dev.singlecell.gi.ucsc.edu/",
   },
+  enableEntitiesView: true,
   entities: [platformsEntityConfig, studiesEntityConfig],
   explorerTitle: "NCPI Dataset Catalog",
   export: exportConfig,
