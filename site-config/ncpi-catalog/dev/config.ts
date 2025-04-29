@@ -33,6 +33,7 @@ const config: SiteConfig = {
       {
         categoryConfigs: [
           {
+            enableChartView: false,
             key: NCPI_CATALOG_CATEGORY_KEY.PLATFORM,
             label: NCPI_CATALOG_CATEGORY_LABEL.PLATFORM,
           },
@@ -59,6 +60,7 @@ const config: SiteConfig = {
             label: NCPI_CATALOG_CATEGORY_LABEL.STUDY_DESIGN,
           },
           {
+            enableChartView: false,
             key: NCPI_CATALOG_CATEGORY_KEY.CONSENT_CODE,
             label: NCPI_CATALOG_CATEGORY_LABEL.CONSENT_CODE,
           },
