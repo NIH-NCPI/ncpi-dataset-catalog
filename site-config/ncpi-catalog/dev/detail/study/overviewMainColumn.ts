@@ -7,9 +7,9 @@ export const mainColumn = [
   {
     children: [
       {
-        component: C.Markdown,
+        component: C.MarkdownRenderer,
         viewBuilder: V.buildStudyDescription,
-      } as ComponentConfig<typeof C.Markdown, NCPICatalogStudy>,
+      } as ComponentConfig<typeof C.MarkdownRenderer, NCPICatalogStudy>,
     ],
     component: C.CollapsableSection,
     props: {

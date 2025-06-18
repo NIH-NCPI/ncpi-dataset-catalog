@@ -29,6 +29,7 @@ import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import TagManager from "react-gtm-module";
 import { BREAKPOINTS } from "../site-config/common/constants";
+import { ServicesProvider } from "@databiosphere/findable-ui/lib/providers/services/provider";
 
 const FEATURE_FLAGS = Object.values(FEATURES);
 const SESSION_TIMEOUT = 15 * 60 * 1000; // 15 minutes
@@ -70,54 +71,56 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
         <DXConfigProvider config={appConfig} entityListType={entityListType}>
           <Head pageTitle={pageTitle} />
           <CssBaseline />
-          <SystemStatusProvider>
-            <GoogleSignInAuthenticationProvider
-              SessionController={TerraProfileProvider}
-              timeout={SESSION_TIMEOUT}
-            >
-              <LayoutDimensionsProvider>
-                <AppLayout>
-                  <ThemeProvider
-                    theme={(theme: Theme): Theme =>
-                      createTheme(
-                        deepmerge(theme, {
-                          breakpoints: createBreakpoints(BREAKPOINTS),
-                        })
-                      )
-                    }
-                  >
-                    <Header {...header} />
-                  </ThemeProvider>
-                  <ExploreStateProvider entityListType={entityListType}>
-                    <FileManifestStateProvider>
-                      <Main>
-                        <ErrorBoundary
-                          fallbackRender={({
-                            error,
-                            reset,
-                          }: {
-                            error: DataExplorerError;
-                            reset: () => void;
-                          }): JSX.Element => (
-                            <Error
-                              errorMessage={error.message}
-                              requestUrlMessage={error.requestUrlMessage}
-                              rootPath={redirectRootToPath}
-                              onReset={reset}
-                            />
-                          )}
-                        >
-                          <Component {...pageProps} />
-                          <Floating {...floating} />
-                        </ErrorBoundary>
-                      </Main>
-                    </FileManifestStateProvider>
-                  </ExploreStateProvider>
-                  <Footer {...footer} />
-                </AppLayout>
-              </LayoutDimensionsProvider>
-            </GoogleSignInAuthenticationProvider>
-          </SystemStatusProvider>
+          <ServicesProvider>
+            <SystemStatusProvider>
+              <GoogleSignInAuthenticationProvider
+                SessionController={TerraProfileProvider}
+                timeout={SESSION_TIMEOUT}
+              >
+                <LayoutDimensionsProvider>
+                  <AppLayout>
+                    <ThemeProvider
+                      theme={(theme: Theme): Theme =>
+                        createTheme(
+                          deepmerge(theme, {
+                            breakpoints: createBreakpoints(BREAKPOINTS),
+                          })
+                        )
+                      }
+                    >
+                      <Header {...header} />
+                    </ThemeProvider>
+                    <ExploreStateProvider entityListType={entityListType}>
+                      <FileManifestStateProvider>
+                        <Main>
+                          <ErrorBoundary
+                            fallbackRender={({
+                              error,
+                              reset,
+                            }: {
+                              error: DataExplorerError;
+                              reset: () => void;
+                            }): JSX.Element => (
+                              <Error
+                                errorMessage={error.message}
+                                requestUrlMessage={error.requestUrlMessage}
+                                rootPath={redirectRootToPath}
+                                onReset={reset}
+                              />
+                            )}
+                          >
+                            <Component {...pageProps} />
+                            <Floating {...floating} />
+                          </ErrorBoundary>
+                        </Main>
+                      </FileManifestStateProvider>
+                    </ExploreStateProvider>
+                    <Footer {...footer} />
+                  </AppLayout>
+                </LayoutDimensionsProvider>
+              </GoogleSignInAuthenticationProvider>
+            </SystemStatusProvider>
+          </ServicesProvider>
         </DXConfigProvider>
       </ThemeProvider>
     </EmotionThemeProvider>
