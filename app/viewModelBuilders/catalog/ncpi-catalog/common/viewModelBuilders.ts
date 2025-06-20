@@ -15,6 +15,7 @@ import { METADATA_KEY } from "../../../../components/Index/common/entities";
 import { getPluralizedMetadataLabel } from "../../../../components/Index/common/indexTransformer";
 import { TEXT_BODY_400_2_LINES } from "@databiosphere/findable-ui/lib/theme/common/typography";
 import { RequestAccess } from "app/components/RequestAccess/requestAccess";
+import { MDX_COMPONENTS } from "app/components/MarkdownRenderer/constants";
 
 /**
  * Build props for ConsentCodesCell component from the given NCPI entity.
@@ -163,15 +164,16 @@ export const buildStudyApplyingForAccess = (): React.ComponentProps<
 };
 
 /**
- * Build props for Markdown component from the given NCPI entity.
+ * Build props for MarkdownRenderer component from the given NCPI entity.
  * @param ncpiCatalogStudy - NCPI catalog study.
- * @returns model to be used as props for the Markdown component.
+ * @returns model to be used as props for the MarkdownRenderer component.
  */
 export const buildStudyDescription = (
   ncpiCatalogStudy: NCPICatalogStudy,
-): React.ComponentProps<typeof C.Markdown> => {
+): React.ComponentProps<typeof C.MarkdownRenderer> => {
   return {
-    content: ncpiCatalogStudy.studyDescription || "None",
+    components: MDX_COMPONENTS,
+    value: ncpiCatalogStudy.studyDescription || "None",
   };
 };
 

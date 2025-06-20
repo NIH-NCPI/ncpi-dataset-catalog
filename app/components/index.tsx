@@ -6,7 +6,6 @@ export { OpenInNewIcon } from "@databiosphere/findable-ui/lib/components/common/
 export { KeyElType } from "@databiosphere/findable-ui/lib/components/common/KeyValuePairs/components/KeyElType/keyElType";
 export { ValueElType } from "@databiosphere/findable-ui/lib/components/common/KeyValuePairs/components/ValueElType/valueElType";
 export { KeyValuePairs } from "@databiosphere/findable-ui/lib/components/common/KeyValuePairs/keyValuePairs";
-export { Markdown } from "@databiosphere/findable-ui/lib/components/common/Markdown/markdown";
 export { CollapsableSection } from "@databiosphere/findable-ui/lib/components/common/Section/components/CollapsableSection/collapsableSection";
 export { GridPaperSection } from "@databiosphere/findable-ui/lib/components/common/Section/section.styles";
 export { Stack } from "@databiosphere/findable-ui/lib/components/common/Stack/stack";
@@ -27,3 +26,4 @@ export { ConsentTooltip } from "./Detail/components/ConsentTooltip/consentToolti
 export { ConsentCodesCell } from "./Index/components/ConsentCodesCell/consentCodesCell";
 export { LabelIconMenuItem } from "./Layout/components/Header/components/Content/components/Navigation/components/NavigationMenuItems/components/LabelIconMenuItem/labelIconMenuItem";
 export { ConditionalComponent } from "@databiosphere/findable-ui/lib/components/ComponentCreator/components/ConditionalComponent/conditionalComponent";
+export { MarkdownRenderer } from "@databiosphere/findable-ui/lib/components/MarkdownRenderer/markdownRenderer";
