@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.4.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.3.0...v0.4.0) (2025-06-20)
+
+
+### Features
+
+* add chart view ([#81](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/81)) ([#83](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/83)) ([1b6c81e](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/1b6c81e69ef4dcf3c5f4defad09beaa6ce7c5407))
+* added range filters [#87](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/87) ([#96](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/96)) ([7ca8678](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/7ca867894ebeb9f3f1ab1ac0093927b062ecdd34))
+
+
+### Bug Fixes
+
+* look only at current commit for version tag ([#77](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/77)) ([#78](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/78)) ([79b1973](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/79b1973a7e3874ca600813effedc238fcca790ab))
+
+
+### Chores
+
+* make march 2025 analytics report using upgraded package ([#68](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/68)) ([#74](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/74)) ([766ee9c](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/766ee9c818a01ae839db764d433b6f73f88168e2))
+* update catalog content for 2025-04 ([#70](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/70)) ([#75](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/75)) ([3453795](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/34537955dcea08c033ab3cd39f0815244c3e9e6c))
+* update catalog content for 2025-06 ([#90](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/90)) ([#91](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/91)) ([1de5fd0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/1de5fd0cadb6df3cca21008322f00aed8eb149f1))
+* update finable-ui to latest version v27.0.0 ([#80](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/80)) ([#82](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/82)) ([ee5235e](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/ee5235e4b2a4533874eb231038033028511a52f9))
+* update findable to 36.0.0 ([#92](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/92)) ([#95](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/95)) ([5237b71](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/5237b71c4f3b171fd966ee410bfd1d67c75f7692))
+* update findable-ui to latest version v28.0.0 ([#84](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/84)) ([#85](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/85)) ([f2b7def](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/f2b7defcaacf1ba436a8ce1b3b08aebb8eaecf86))
+
 ## [0.3.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.2.0...v0.3.0) (2025-04-03)
 
 
