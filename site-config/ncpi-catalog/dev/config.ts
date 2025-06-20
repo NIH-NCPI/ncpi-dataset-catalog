@@ -1,5 +1,6 @@
 import { ANCHOR_TARGET } from "@databiosphere/findable-ui/lib/components/Links/common/entities";
 import { SiteConfig } from "@databiosphere/findable-ui/lib/config/entities";
+import { VIEW_KIND } from "@databiosphere/findable-ui/src/common/categories/views/types";
 import * as C from "../../../app/components/index";
 import { GIT_HUB_REPO_URL } from "../../common/constants";
 import {
@@ -63,6 +64,11 @@ const config: SiteConfig = {
             enableChartView: false,
             key: NCPI_CATALOG_CATEGORY_KEY.CONSENT_CODE,
             label: NCPI_CATALOG_CATEGORY_LABEL.CONSENT_CODE,
+          },
+          {
+            key: NCPI_CATALOG_CATEGORY_KEY.PARTICIPANT_COUNT,
+            label: NCPI_CATALOG_CATEGORY_LABEL.PARTICIPANT_COUNT,
+            viewKind: VIEW_KIND.RANGE,
           },
         ],
       },

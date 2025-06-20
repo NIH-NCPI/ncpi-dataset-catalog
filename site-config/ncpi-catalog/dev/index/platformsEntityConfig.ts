@@ -101,6 +101,7 @@ export const platformsEntityConfig: EntityConfig<NCPICatalogPlatform> = {
           component: C.BasicCell,
           viewBuilder: V.buildParticipantCount,
         } as ComponentConfig<typeof C.BasicCell>,
+        filterFn: "inNumberRange",
         header: NCPI_CATALOG_CATEGORY_LABEL.PARTICIPANT_COUNT,
         id: NCPI_CATALOG_CATEGORY_KEY.PARTICIPANT_COUNT,
         width: { max: "1.16fr", min: "116px" },
