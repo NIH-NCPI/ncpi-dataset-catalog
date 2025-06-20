@@ -1,6 +1,6 @@
 import { ANCHOR_TARGET } from "@databiosphere/findable-ui/lib/components/Links/common/entities";
 import { SiteConfig } from "@databiosphere/findable-ui/lib/config/entities";
-import { VIEW_KIND } from "@databiosphere/findable-ui/src/common/categories/views/types";
+import { VIEW_KIND } from "@databiosphere/findable-ui/lib/common/categories/views/types";
 import * as C from "../../../app/components/index";
 import { GIT_HUB_REPO_URL } from "../../common/constants";
 import {
