@@ -9,11 +9,18 @@ export const TABLE_OPTIONS: Omit<
   columns: COLUMN_DEFS,
   initialState: {
     columnVisibility: {
+      annDataLocation: false,
+      bioNetwork: false,
       classKey: true,
-      name: true,
+      description: false,
+      name: false,
+      rationale: false,
+      required: false,
+      tier: false,
       title: false,
+      values: false,
     },
     expanded: true,
-    grouping: ["title"],
+    grouping: ["classKey"],
   },
 };
