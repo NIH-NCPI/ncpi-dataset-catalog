@@ -11,6 +11,11 @@ import { platformsEntityConfig } from "./index/platformsEntityConfig";
 import { studiesEntityConfig } from "./index/studiesEntityConfig";
 import { exportConfig } from "./export/export";
 import { socialMedia } from "./socialMedia";
+import { ROUTES } from "routes/constants";
+import dataDictionary from "./dataDictionary/data-dictionary.json";
+import { buildDataDictionary } from "app/viewModelBuilders/dataDictionaryMapper/dataDictionaryMapper";
+import { TABLE_OPTIONS } from "app/viewModelBuilders/dataDictionaryMapper/tableOptions";
+import { DataDictionaryConfig } from "@databiosphere/findable-ui/lib/common/entities";
 
 const logoNcpi = "/images/logoNCPI.png";
 
@@ -75,6 +80,13 @@ const config: SiteConfig = {
     ],
     key: "ncpi-catalog",
   },
+  dataDictionaries: [
+    {
+      dataDictionary: buildDataDictionary(dataDictionary),
+      path: "ncpi-data-dictionary",
+      tableOptions: TABLE_OPTIONS,
+    },
+  ] as unknown as DataDictionaryConfig[],
   dataSource: {
     defaultListParams: {
       size: "25",
@@ -119,6 +131,10 @@ const config: SiteConfig = {
         undefined,
         undefined,
         [
+          {
+            label: "Data Dictionary",
+            url: ROUTES.DATA_DICTIONARY,
+          },
           {
             label: C.LabelIconMenuItem({ label: "Visit ncpi-acc.org" }),
             target: ANCHOR_TARGET.BLANK,
