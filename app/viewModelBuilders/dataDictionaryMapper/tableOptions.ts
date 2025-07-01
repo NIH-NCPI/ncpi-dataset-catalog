@@ -9,8 +9,6 @@ export const TABLE_OPTIONS: Omit<
   columns: COLUMN_DEFS,
   initialState: {
     columnVisibility: {
-      annDataLocation: false,
-      bioNetwork: false,
       classKey: true,
       description: false,
       name: false,

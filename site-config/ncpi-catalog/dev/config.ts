@@ -83,7 +83,7 @@ const config: SiteConfig = {
   dataDictionaries: [
     {
       dataDictionary: buildDataDictionary(dataDictionary),
-      path: "ncpi-data-dictionary",
+      path: "ncpi-dataset-catalog",
       tableOptions: TABLE_OPTIONS,
     },
   ] as unknown as DataDictionaryConfig[],

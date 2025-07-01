@@ -94,31 +94,6 @@ export const DetailCell = ({
             />
           </Grid>
         )}
-        {row.original.annotations?.bioNetworks && (
-          <Grid>
-            <Typography variant={TEXT_BODY_500}>BioNetworks</Typography>
-            <MarkdownCell
-              {...getPartialCellContext({
-                values: (row.original.annotations.bioNetworks as string[]).join(
-                  ", "
-                ),
-              })}
-            />
-          </Grid>
-        )}
-        <Grid>
-          <Typography variant={TEXT_BODY_500}>AnnData Location</Typography>
-          <MarkdownCell
-            {...getPartialCellContext({
-              values: renderRankedCell(
-                table,
-                row,
-                "annDataLocation",
-                (row.original.annotations?.annDataLocation as string) || "None"
-              ),
-            })}
-          />
-        </Grid>
       </StyledCollapse>
       <StyledButton
         onClick={() => setIsIn((i) => !i)}

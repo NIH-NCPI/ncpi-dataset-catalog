@@ -1,6 +1,6 @@
 {
-  "name": "ncpi_data_dictionary",
-  "title": "NCPI Data Dictionary",
+  "name": "ncpi-catalog_data_dictionary",
+  "title": "NCPI Catalog Data Dictionary",
   "classes": [
     {
       "title": "Study",
@@ -8,28 +8,213 @@
       "name": "study",
       "attributes": [
         {
-          "description": "",
+          "annotations": {
+            "ncpi": ""
+          },
+          "description": "Cloud-based data platform or initiative that collaborates with NCPI to inform and validate interoperability approaches.",
+          "example": "AnVIL",
+          "multivalued": true,
+          "name": "platform",
+          "range": "string",
+          "required": true,
+          "title": "Platform",
+          "values": "AnVIL, BDC, CRDC, or, KFDRC"
+        },
+        {
+          "annotations": {
+            "dbgap": ""
+          },
+          "description": "Unique identifier assigned to a study.",
+          "multivalued": false,
+          "name": "id",
+          "range": "string",
+          "required": true,
+          "title": "dbGaP Id"
+        },
+        {
+          "annotations": {
+            "dbgap": ""
+          },
+          "description": "Name of a study.",
           "multivalued": false,
           "name": "title",
           "range": "string",
           "required": true,
-          "title": "Title"
+          "title": "Study"
         },
         {
-          "description": "",
+          "annotations": {
+            "dbgap": ""
+          },
+          "description": "Primary subject or topic of a study.",
+          "example": "Autistic Disorder;Mendelian Randomization Analysis",
           "multivalued": false,
-          "name": "name",
+          "name": "focus",
           "range": "string",
           "required": true,
-          "title": "Name"
+          "title": "Focus / Disease",
+          "values": "Valid [MeSH](https://meshb.nlm.nih.gov/) term."
+        },
+        {
+          "annotations": {
+            "dbgap": "MolecularDataTypes"
+          },
+          "description": "Molecular data types present in a study.",
+          "example": "SNP/CNV Genotypes (NGS), WXS;SNP Genotypes (NGS)",
+          "multivalued": true,
+          "name": "MolecularDataType",
+          "range": "string",
+          "required": true,
+          "title": "Data Type"
+        },
+        {
+          "annotations": {
+            "dbgap": "StudyDesign"
+          },
+          "description": "Design of a study.",
+          "example": "Case-Control;Cross-Sectional",
+          "multivalued": false,
+          "name": "StudyDesign",
+          "range": "string",
+          "required": true,
+          "title": "Study Design"
+        },
+        {
+          "annotations": {
+            "dbgap": "StudyConsents"
+          },
+          "description": "Participant can be part of different consent groups. This element contains consent groups for a study.",
+          "example": "DS-ASD, GRU, DS-AOND-MDS, HMB-MDS;DS-COPD-RD",
+          "multivalued": true,
+          "name": "StudyConsents",
+          "range": "string",
+          "required": true,
+          "title": "Consent Code"
+        },
+        {
+          "annotations": {
+            "dbgap": "Content-NumSubjects"
+          },
+          "description": "Participant can be part of different consent groups. This element contains consent groups for a study.",
+          "example": "12772",
+          "multivalued": false,
+          "name": "NumSubjects",
+          "range": "number",
+          "required": true,
+          "title": "Participants"
+        }
+      ]
+    },
+    {
+      "title": "Platform",
+      "description": "",
+      "name": "platform",
+      "attributes": [
+        {
+          "annotations": {
+            "ncpi": ""
+          },
+          "description": "Cloud-based data platform or initiative that collaborates with NCPI to inform and validate interoperability approaches.",
+          "example": "AnVIL",
+          "multivalued": false,
+          "name": "platform",
+          "range": "string",
+          "required": true,
+          "title": "Platform",
+          "values": "AnVIL, BDC, CRDC, or, KFDRC"
+        },
+        {
+          "annotations": {
+            "dbgap": ""
+          },
+          "description": "Aggregate of unique study identifiers in a platform.",
+          "multivalued": true,
+          "name": "id",
+          "range": "string",
+          "required": true,
+          "title": "dbGaP Id"
+        },
+        {
+          "annotations": {
+            "dbgap": ""
+          },
+          "description": "Set of study names in a platform.",
+          "multivalued": true,
+          "name": "title",
+          "range": "string",
+          "required": true,
+          "title": "Study"
+        },
+        {
+          "annotations": {
+            "dbgap": ""
+          },
+          "description": "Aggregate of unique study primary subjects in a platform.",
+          "example": "Autistic Disorder;Mendelian Randomization Analysis",
+          "multivalued": true,
+          "name": "focus",
+          "range": "string",
+          "required": true,
+          "title": "Focus / Disease",
+          "values": "Valid [MeSH](https://meshb.nlm.nih.gov/) term."
+        },
+        {
+          "annotations": {
+            "dbgap": "MolecularDataTypes"
+          },
+          "description": "Aggregate of unique study molecular data types in a platform.",
+          "example": "SNP/CNV Genotypes (NGS), WXS;SNP Genotypes (NGS)",
+          "multivalued": true,
+          "name": "MolecularDataType",
+          "range": "string",
+          "required": true,
+          "title": "Data Type"
+        },
+        {
+          "annotations": {
+            "dbgap": "StudyDesign"
+          },
+          "description": "Aggregate of unique study designs in a platform.",
+          "example": "Case-Control;Cross-Sectional",
+          "multivalued": true,
+          "name": "StudyDesign",
+          "range": "string",
+          "required": true,
+          "title": "Study Design"
+        },
+        {
+          "annotations": {
+            "dbgap": "StudyConsents"
+          },
+          "description": "Aggregate of unique study consent codes in a platform.",
+          "example": "DS-ASD, GRU, DS-AOND-MDS, HMB-MDS;DS-COPD-RD",
+          "multivalued": true,
+          "name": "StudyConsents",
+          "range": "string",
+          "required": true,
+          "title": "Consent Code"
+        },
+        {
+          "annotations": {
+            "dbgap": "Content-NumSubjects"
+          },
+          "description": "Count of study participants in a platform.",
+          "example": "84220",
+          "multivalued": true,
+          "name": "NumSubjects",
+          "range": "number",
+          "required": true,
+          "title": "Participants"
         }
       ]
     }
   ],
   "prefixes": {
-    "dbgap": ""
+    "dbgap": "https://dbgap-api.ncbi.nlm.nih.gov/fhir/x1/StructureDefinition/ResearchStudy",
+    "ncpi": "https://ncpi-data.org"
   },
   "annotations": {
-    "dbgap": "dbGaP FHIR API"
+    "dbgap": "dbGaP FHIR API",
+    "ncpi": "NCPI"
   }
 }

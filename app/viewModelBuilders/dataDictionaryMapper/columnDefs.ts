@@ -40,15 +40,6 @@ export const COLUMN_DEFS: ColumnDef<Attribute>[] = [
     id: "required",
   },
   {
-    accessorFn: (row) => row.annotations?.bioNetworks,
-    enableColumnFilter: true,
-    enableGlobalFilter: false,
-    enableHiding: false,
-    filterFn: "arrIncludesSome",
-    header: "BioNetwork",
-    id: "bioNetwork",
-  },
-  {
     accessorFn: (row) => row.annotations?.tier,
     enableColumnFilter: false,
     enableGlobalFilter: false,
@@ -56,14 +47,6 @@ export const COLUMN_DEFS: ColumnDef<Attribute>[] = [
     filterFn: "arrIncludesSome",
     header: "Tier",
     id: "tier",
-  },
-  /* GLOBAL FILTERS */
-  {
-    accessorFn: (row) => row.annotations?.annDataLocation,
-    enableColumnFilter: false,
-    enableGlobalFilter: true,
-    header: "AnnData Location",
-    id: "annDataLocation",
   },
   {
     accessorKey: "name",

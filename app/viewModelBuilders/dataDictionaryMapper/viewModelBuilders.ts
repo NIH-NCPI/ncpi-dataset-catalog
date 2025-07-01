@@ -6,10 +6,13 @@ import {
 import { LABEL } from "@databiosphere/findable-ui/lib/apis/azul/common/entities";
 
 /**
- * Returns the source attribute for a given attribute.
- * @param dataDictionary - The data dictionary.
- * @param attribute - The attribute.
- * @returns The source attribute.
+ * Returns the source attribute for a given attribute with proper labeling and URL.
+ * Currently supports dbgap and ncpi source types, and allows empty (i.e. no link) source
+ * values.
+ *
+ * @param dataDictionary - The data dictionary containing annotations and prefixes.
+ * @param attribute - The attribute to build the source for.
+ * @returns A source object with label and URL or empty values if no valid source is found.
  */
 export function buildSourceAttribute(
   dataDictionary: DataDictionary,
@@ -17,37 +20,44 @@ export function buildSourceAttribute(
 ): Attribute["source"] {
   const { annotations, prefixes } = dataDictionary;
   const attributeAnnotations = attribute.annotations;
+  const defaultSource = { label: LABEL.NONE, url: "" };
 
-  // Guard clause: if dataDictionary's annotations or prefixes are missing or empty, return none.
+  // Guard clause: check for required values.
   if (
     !annotations ||
     !prefixes ||
     Object.keys(annotations).length === 0 ||
-    Object.keys(prefixes).length === 0
+    Object.keys(prefixes).length === 0 ||
+    !attributeAnnotations
   ) {
-    return { label: LABEL.NONE, url: "" };
+    return defaultSource;
   }
 
-  // Determine the key to use, either cxg or cap.
-  const sourceKey = Object.keys(annotations).find(
-    (key) => key === "cxg" || key === "cap"
+  // Determine the supported source keys.
+  const supportedKeys = ["dbgap", "ncpi"];
+
+  // Find the first valid sourceKey where all required data is available
+  const sourceKey = supportedKeys.find(
+    (key) => annotations[key] && prefixes[key] && key in attributeAnnotations // Check if the key exists (allows empty strings)
   );
+
+  // If no valid sourceKey is found, return default.
   if (!sourceKey) {
-    return { label: LABEL.NONE, url: "" };
+    return defaultSource;
   }
 
-  // Check for source
-  if (
-    annotations[sourceKey] &&
-    prefixes[sourceKey] &&
-    attributeAnnotations?.[sourceKey]
-  ) {
+  // Build the appropriate source based on the key type.
+  if (sourceKey === "dbgap") {
+    const attributeValue = attributeAnnotations[sourceKey];
     return {
       label: annotations[sourceKey],
-      url: `${prefixes[sourceKey]}/#${attributeAnnotations[sourceKey]}`,
+      url: attributeValue ? `${prefixes[sourceKey]}-${attributeValue}` : "",
     };
   }
 
-  // Default if neither CXG nor CAP is found, or if attribute has no relevant annotations
-  return { label: LABEL.NONE, url: "" };
+  // No URL for ncpi source.
+  return {
+    label: annotations[sourceKey],
+    url: "",
+  };
 }
