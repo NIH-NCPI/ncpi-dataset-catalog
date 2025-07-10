@@ -137,4 +137,5 @@ export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
   },
   route: "studies",
   staticLoadFile: "catalog/ncpi-platform-studies.json",
+  ui: { enableTabs: true },
 };
