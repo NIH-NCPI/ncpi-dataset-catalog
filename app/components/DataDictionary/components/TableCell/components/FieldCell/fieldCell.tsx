@@ -27,7 +27,6 @@ export const FieldCell = ({
         />
       </Typography>
       {/* NAME */}
-      {/* @ts-expect-error -- TODO see https://github.com/DataBiosphere/findable-ui/issues/540 */}
       <CodeCell
         {...getPartialCellContext(
           <MarkdownCell

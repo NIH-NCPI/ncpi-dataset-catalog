@@ -96,7 +96,6 @@ const config: SiteConfig = {
   },
   enableEntitiesView: true,
   entities: [platformsEntityConfig, studiesEntityConfig],
-  explorerTitle: "NCPI Dataset Catalog",
   export: exportConfig,
   exportToTerraUrl: "https://app.terra.bio",
   gitHubUrl: GIT_HUB_REPO_URL,

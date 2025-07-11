@@ -39,7 +39,8 @@ export const platformsEntityConfig: EntityConfig<NCPICatalogPlatform> = {
           viewBuilder: V.buildPlatform,
         } as ComponentConfig<typeof C.BasicCell>,
         header: NCPI_CATALOG_CATEGORY_LABEL.PLATFORM,
-        id: NCPI_CATALOG_CATEGORY_KEY.PLATFORM, // platform - a singular platform.
+        id: NCPI_CATALOG_CATEGORY_KEY.PLATFORM,
+        meta: { columnPinned: true },
         width: { max: "1fr", min: "100px" },
       },
       {
@@ -48,7 +49,7 @@ export const platformsEntityConfig: EntityConfig<NCPICatalogPlatform> = {
           viewBuilder: V.buildStudyNames,
         } as ComponentConfig<typeof C.NTagCell>,
         header: NCPI_CATALOG_CATEGORY_LABEL.TITLE,
-        id: NCPI_CATALOG_CATEGORY_KEY.TITLE, // studyNames - a list of study names.
+        id: NCPI_CATALOG_CATEGORY_KEY.TITLE,
         width: { max: "2fr", min: "200px" },
       },
       {
@@ -57,7 +58,7 @@ export const platformsEntityConfig: EntityConfig<NCPICatalogPlatform> = {
           viewBuilder: V.buildDbGapIds,
         } as ComponentConfig<typeof C.NTagCell>,
         header: NCPI_CATALOG_CATEGORY_LABEL.DB_GAP_ID,
-        id: NCPI_CATALOG_CATEGORY_KEY.DB_GAP_ID, // dbGapIds - a list of study identifiers.
+        id: NCPI_CATALOG_CATEGORY_KEY.DB_GAP_ID,
         width: { max: "1.24fr", min: "124px" },
       },
       {
@@ -66,7 +67,7 @@ export const platformsEntityConfig: EntityConfig<NCPICatalogPlatform> = {
           viewBuilder: V.buildFocusDiseases,
         } as ComponentConfig<typeof C.NTagCell>,
         header: NCPI_CATALOG_CATEGORY_LABEL.FOCUS,
-        id: NCPI_CATALOG_CATEGORY_KEY.FOCUS, // focusDiseases - a list of focuses / diseases.
+        id: NCPI_CATALOG_CATEGORY_KEY.FOCUS,
         width: { max: "1.6fr", min: "160px" },
       },
       {
@@ -124,4 +125,5 @@ export const platformsEntityConfig: EntityConfig<NCPICatalogPlatform> = {
   },
   route: "platforms",
   staticLoadFile: "catalog/ncpi-platforms.json",
+  ui: { enableTabs: true },
 };
