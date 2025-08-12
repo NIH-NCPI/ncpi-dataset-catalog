@@ -20,7 +20,7 @@ export function buildSourceAttribute(
 ): Attribute["source"] {
   const { annotations, prefixes } = dataDictionary;
   const attributeAnnotations = attribute.annotations;
-  const defaultSource = { label: LABEL.NONE, url: "" };
+  const defaultSource = { children: LABEL.NONE, href: "" };
 
   // Guard clause: check for required values.
   if (
@@ -50,14 +50,14 @@ export function buildSourceAttribute(
   if (sourceKey === "dbgap") {
     const attributeValue = attributeAnnotations[sourceKey];
     return {
-      label: annotations[sourceKey],
-      url: attributeValue ? `${prefixes[sourceKey]}-${attributeValue}` : "",
+      children: annotations[sourceKey],
+      href: attributeValue ? `${prefixes[sourceKey]}-${attributeValue}` : "",
     };
   }
 
   // No URL for ncpi source.
   return {
-    label: annotations[sourceKey],
-    url: "",
+    children: annotations[sourceKey],
+    href: "",
   };
 }

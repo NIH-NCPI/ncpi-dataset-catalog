@@ -1,15 +1,12 @@
-import {
-  textBodyLarge500,
-  textHeadingLarge,
-  textHeadingSmall,
-} from "@databiosphere/findable-ui/lib/styles/common/mixins/fonts";
 import styled from "@emotion/styled";
+import { typographyToCSS } from "../Layout/components/Content/content.styles";
+import { FONT } from "@databiosphere/findable-ui/lib/styles/common/constants/font";
 
 /**
  * H1 styled component. Matches H1 in the Portal.
  */
 export const H1 = styled.h1`
-  ${textHeadingLarge};
+  ${typographyToCSS("heading-large")};
   font-size: 30px;
   letter-spacing: -0.8px;
   line-height: 40px;
@@ -32,7 +29,7 @@ export const H2 = styled.h2`
  * H3 styled component.
  */
 export const H3 = styled.h3`
-  ${textHeadingSmall}
+  ${typographyToCSS("heading-small")};
   margin: 40px 0 16px; /* Matching margin-bottom of H3 in docs */
 `;
 
@@ -40,7 +37,7 @@ export const H3 = styled.h3`
  * H4 styled component.
  */
 export const H4 = styled.h4`
-  ${textBodyLarge500}
+  font: ${FONT.BODY_LARGE_500};
   margin: 16px 0; /* Matching margin-bottom of H4 in docs */
 `;
 
