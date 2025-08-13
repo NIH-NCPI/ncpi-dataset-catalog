@@ -1,20 +1,8 @@
 import { ThemeProps } from "@databiosphere/findable-ui/lib/theme/types";
 import { FONT } from "@databiosphere/findable-ui/lib/styles/common/constants/font";
-import { css, SerializedStyles } from "@emotion/react";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-
-/**
- * Returns typography style for the given variant.
- * @param variant - Variant.
- * @returns Typography styles.
- */
-export function typographyToCSS(
-  variant: keyof ThemeProps["theme"]["typography"]
-) {
-  return (props: ThemeProps): SerializedStyles => {
-    return css(props.theme.typography[variant]);
-  };
-}
+import { typographyToCSS } from "@databiosphere/findable-ui/lib/styles/common/mixins/typography";
 
 const muiAlert = ({ theme }: ThemeProps) => css`
   .MuiAlert-root {

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { typographyToCSS } from "../Layout/components/Content/content.styles";
+import { typographyToCSS } from "@databiosphere/findable-ui/lib/styles/common/mixins/typography";
 import { FONT } from "@databiosphere/findable-ui/lib/styles/common/constants/font";
 
 /**
