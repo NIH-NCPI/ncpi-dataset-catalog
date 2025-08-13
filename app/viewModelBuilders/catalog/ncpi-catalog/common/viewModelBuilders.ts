@@ -13,9 +13,9 @@ import {
 import * as C from "../../../../components";
 import { METADATA_KEY } from "../../../../components/Index/common/entities";
 import { getPluralizedMetadataLabel } from "../../../../components/Index/common/indexTransformer";
-import { TEXT_BODY_400_2_LINES } from "@databiosphere/findable-ui/lib/theme/common/typography";
 import { RequestAccess } from "app/components/RequestAccess/requestAccess";
 import { MDX_COMPONENTS } from "app/components/MarkdownRenderer/constants";
+import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 
 /**
  * Build props for ConsentCodesCell component from the given NCPI entity.
@@ -308,7 +308,7 @@ export const buildViewInAnVIL = (
   ));
   return {
     label: "View in AnVIL",
-    TypographyProps: { variant: TEXT_BODY_400_2_LINES },
+    TypographyProps: { variant: TYPOGRAPHY_PROPS.VARIANT.BODY_400_2_LINES },
     url: `https://explore.anvilproject.org/datasets?filter=${params}`,
   };
 };

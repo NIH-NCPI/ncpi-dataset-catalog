@@ -23,6 +23,6 @@ export function buildRequired(attribute: Attribute): ChipProps {
   return {
     color: isRequired ? CHIP_PROPS.COLOR.ERROR : CHIP_PROPS.COLOR.DEFAULT,
     label: isRequired ? "Required" : "Not Required",
-    variant: "status",
+    variant: CHIP_PROPS.VARIANT.STATUS,
   };
 }

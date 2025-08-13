@@ -1,18 +1,38 @@
 import styled from "@emotion/styled";
-import { Button, Paper, Stack, Collapse } from "@mui/material";
+import { Paper, Stack, Collapse } from "@mui/material";
 import { PALETTE } from "@databiosphere/findable-ui/lib/styles/common/constants/palette";
-import { textBody400 } from "@databiosphere/findable-ui/lib/styles/common/mixins/fonts";
+import { FONT } from "@databiosphere/findable-ui/lib/styles/common/constants/font";
+import { MarkdownCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/MarkdownCell/markdownCell";
 
 export const StyledCell = styled("div")`
   align-self: flex-start;
   justify-items: flex-start;
   padding: 8px 0;
 
-  .MuiGrid-root {
-    display: grid;
-    gap: 4px;
+  .MuiTypography-gutterBottom {
+    margin-bottom: 4px;
   }
 `;
+
+export const StyledMarkdownCell = styled(MarkdownCell)`
+  min-width: 0;
+
+  table {
+    tbody {
+      tr {
+        border-bottom: 1px solid ${PALETTE.SMOKE_MAIN};
+      }
+    }
+  }
+
+  ul {
+    margin-bottom: 8px;
+
+    ul {
+      margin-bottom: 0;
+    }
+  }
+` as typeof MarkdownCell;
 
 export const StyledCollapse = styled(Collapse)`
   .MuiCollapse-wrapperInner {
@@ -28,19 +48,9 @@ export const StyledStack = styled(Stack)`
 `;
 
 export const StyledPaper = styled(Paper)`
-  ${textBody400};
   background-color: ${PALETTE.SMOKE_LIGHT};
   box-shadow: 0 0 0 1px ${PALETTE.SMOKE_MAIN};
+  font: ${FONT.BODY_400};
   font-family: "Roboto Mono", monospace;
   padding: 8px 12px;
-`;
-
-export const StyledButton = styled(Button)`
-  ${textBody400};
-  padding-top: 16px;
-
-  &:hover {
-    background-color: transparent;
-    text-decoration: underline;
-  }
 `;
