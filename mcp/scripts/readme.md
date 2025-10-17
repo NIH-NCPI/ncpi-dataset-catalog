@@ -67,7 +67,7 @@ CREATE TABLE datasets (
 
 ```bash
 OPENAI_API_KEY=your_openai_api_key
-PG_DSN=postgresql://localhost/ncpi_dataset_catalog
+PG_DSN=postgresql://localhost/ncpi-dataset-catalog
 ```
 
 ### Embed Datasets
