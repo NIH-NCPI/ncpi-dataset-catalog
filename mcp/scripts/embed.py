@@ -73,7 +73,9 @@ The length of the embedding list is determined by the model used. The small mode
 
 
 def upsert_entity(name: str, description: str):
-    v = embed(description, model="text-embedding-3-small")
+    # Combine name and description for embedding
+    text_to_embed = f"{name}: {description}"
+    v = embed(text_to_embed, model="text-embedding-3-small")
     with conn.cursor() as cur:
         cur.execute(
             """

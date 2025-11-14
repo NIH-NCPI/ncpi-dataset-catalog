@@ -48,6 +48,10 @@ def search_datasets(ctx: RunContext[Deps], query: str, k: int = 5) -> List[Datas
         .embedding
     )
     rows = ann_search(_conn, query_vector, k=k)
+
+    for r in rows:
+        print(f"Found dataset: Name: {r[0]}, Desc: {r[1]}")
+
     return [
         DatasetHit(name=r[0], description=r[1] or "", distance=float(r[2]))
         for r in rows

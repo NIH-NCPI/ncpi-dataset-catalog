@@ -71,6 +71,7 @@ def answer_with_context(query: str, k=5):
     prompt = f"""
 You are a helpful analyst. Use ONLY the context to answer.
 If the answer isn't in the context, say you don't know.
+Always give me the name of the dataset you are answering about.
 
 User question: {query}
 
@@ -85,7 +86,7 @@ Context:
 
 if __name__ == "__main__":
     # Example query
-    query = "Which datasets mention austim?"
+    query = "Which datasets mention austism?"
     # query = "Which datasets are about genomic research?"
     print(f"Query: {query}\n")
     answer = answer_with_context(query)
