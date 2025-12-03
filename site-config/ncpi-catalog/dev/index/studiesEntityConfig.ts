@@ -121,6 +121,8 @@ export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
       },
     ],
     tableOptions: {
+      downloadFilename: "studies",
+      enableTableDownload: true,
       initialState: {
         sorting: [
           {
@@ -133,7 +135,6 @@ export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
   } as ListConfig<NCPICatalogStudy>,
   listView: {
     disablePagination: true,
-    enableDownload: true,
   },
   route: "studies",
   staticLoadFile: "catalog/ncpi-platform-studies.json",

@@ -16,6 +16,7 @@ import dataDictionary from "./dataDictionary/data-dictionary.json";
 import { buildDataDictionary } from "app/viewModelBuilders/dataDictionaryMapper/dataDictionaryMapper";
 import { TABLE_OPTIONS } from "app/viewModelBuilders/dataDictionaryMapper/tableOptions";
 import { DataDictionaryConfig } from "@databiosphere/findable-ui/lib/common/entities";
+import { FILTER_SORT } from "@databiosphere/findable-ui/lib/common/filters/sort/config/types";
 
 const logoNcpi = "/images/logoNCPI.png";
 
@@ -98,6 +99,7 @@ const config: SiteConfig = {
   entities: [platformsEntityConfig, studiesEntityConfig],
   export: exportConfig,
   exportToTerraUrl: "https://app.terra.bio",
+  filterSort: { sortBy: FILTER_SORT.COUNT },
   gitHubUrl: GIT_HUB_REPO_URL,
   layout: {
     footer: {
