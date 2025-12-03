@@ -109,6 +109,8 @@ export const platformsEntityConfig: EntityConfig<NCPICatalogPlatform> = {
       },
     ],
     tableOptions: {
+      downloadFilename: "platforms",
+      enableTableDownload: true,
       initialState: {
         sorting: [
           {
@@ -121,7 +123,6 @@ export const platformsEntityConfig: EntityConfig<NCPICatalogPlatform> = {
   } as ListConfig<NCPICatalogPlatform>,
   listView: {
     disablePagination: true,
-    enableDownload: true,
   },
   route: "platforms",
   staticLoadFile: "catalog/ncpi-platforms.json",
