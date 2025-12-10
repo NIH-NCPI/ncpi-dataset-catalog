@@ -4,6 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import psycopg
 from pgvector.psycopg import register_vector
+import logging
 from openai import OpenAI
 
 # Load .env from scripts directory
@@ -25,6 +26,12 @@ def get_db_conn():
         register_vector(_conn)
     return _conn
 
+
+# Set the logging level for the OpenAI library
+# logging.getLogger("openai").setLevel(logging.DEBUG)
+
+# Optionally, configure the logging format and handlers
+logging.basicConfig(level=logging.DEBUG)
 
 # OpenAI client
 _client = None
