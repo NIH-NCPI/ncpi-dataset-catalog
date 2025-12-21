@@ -1,18 +1,18 @@
 import { writeAsJSON } from "./common/utils";
 import { buildNCPICatalogPlatforms } from "./build-plaftorms";
-import { buildAllDbGapStudies } from "./build-all-dbgap-studies";
+import { buildAllFHIRStudies } from "./build-fhir-studies";
 
-console.log("Building NCPI Catalog Data (All dbGaP Studies)");
+console.log("Building NCPI Catalog Data (FHIR-First)");
 export {};
 
 /**
  * Builds the NCPI catalog with ALL dbGaP studies.
- * Uses FTP + Gap DB + SRA sources instead of FHIR API.
+ * Uses FHIR API as primary source for comprehensive coverage.
  * @returns void
  */
 async function buildCatalog(): Promise<void> {
-  // Build all dbGaP studies using new FTP+Gap approach
-  const ncpiPlatformStudies = await buildAllDbGapStudies();
+  // Build all dbGaP studies using FHIR-first approach
+  const ncpiPlatformStudies = await buildAllFHIRStudies();
 
   // Convert to map for JSON output (keyed by index for backwards compatibility)
   const studiesMap = new Map(
