@@ -97,14 +97,22 @@ async function loadDuosUrls(): Promise<Map<string, string>> {
 
 /**
  * Checks if a study has required fields for inclusion.
- * @param title
- * @param participantCount
+ * Platform studies (from TSV) are always included if they have a title.
+ * Non-platform studies require both title and participant count.
+ * @param title - Study title.
+ * @param participantCount - Number of participants.
+ * @param isPlatformStudy - Whether this study is in the platform TSV.
  */
 function isStudyComplete(
   title: string | undefined,
-  participantCount: number | null
+  participantCount: number | null,
+  isPlatformStudy: boolean
 ): boolean {
-  return !!(title && participantCount && participantCount > 0);
+  if (!title) return false;
+  // Platform studies are included even without participant count
+  if (isPlatformStudy) return true;
+  // Non-platform studies need participant count
+  return !!(participantCount && participantCount > 0);
 }
 
 /**
@@ -152,8 +160,14 @@ export async function buildAllDbGapStudies(): Promise<NCPIStudy[]> {
     // Fetch Gap DB data
     const gapData = await fetchGapStudyData(phsId);
 
-    // Check completeness
-    if (!isStudyComplete(ftpData.title, gapData.participantCount)) {
+    // Check if this is a platform study (from TSV)
+    const isPlatformStudy = platformMap.has(phsId);
+
+    // Get participant count from Gap DB
+    const participantCount = gapData.participantCount;
+
+    // Check completeness - platform studies included even without participant count
+    if (!isStudyComplete(ftpData.title, participantCount, isPlatformStudy)) {
       skippedIncomplete++;
       continue;
     }
@@ -186,19 +200,19 @@ export async function buildAllDbGapStudies(): Promise<NCPIStudy[]> {
 
     // Build the study object
     const study: NCPIStudy = {
-      dbGapId: phsId,
-      title: ftpData.title,
-      description: ftpData.description,
-      focus: gapData.diseases[0] || "",
       consentCodes: ftpData.consentCodes,
       consentLongNames,
       dataTypes,
-      studyDesigns: ftpData.studyTypes,
-      participantCount: gapData.participantCount!,
-      studyAccession: ftpData.studyAccession,
-      platforms,
-      duosUrl: duosUrlMap.get(phsId) ?? null,
+      dbGapId: phsId,
       dbGapUrl: getDbGapUrl(ftpData.studyAccession),
+      description: ftpData.description,
+      duosUrl: duosUrlMap.get(phsId) ?? null,
+      focus: gapData.diseases[0] || "",
+      participantCount: participantCount || 0,
+      platforms,
+      studyAccession: ftpData.studyAccession,
+      studyDesigns: ftpData.studyTypes,
+      title: ftpData.title,
     };
 
     studies.push(study);
@@ -242,9 +256,15 @@ export async function buildStudiesForIds(
 
     const gapData = await fetchGapStudyData(phsId);
 
-    if (!isStudyComplete(ftpData.title, gapData.participantCount)) {
+    // Check if this is a platform study (from TSV)
+    const isPlatformStudy = platformMap.has(phsId);
+
+    // Get participant count from Gap DB
+    const participantCount = gapData.participantCount;
+
+    if (!isStudyComplete(ftpData.title, participantCount, isPlatformStudy)) {
       console.log(
-        `  Skipped: Incomplete (title: ${!!ftpData.title}, participants: ${gapData.participantCount})`
+        `  Skipped: Incomplete (title: ${!!ftpData.title}, participants: ${participantCount}, platform: ${isPlatformStudy})`
       );
       continue;
     }
@@ -272,23 +292,23 @@ export async function buildStudiesForIds(
     const platforms = platformMap.get(phsId) || [PLATFORM.DBGAP];
 
     const study: NCPIStudy = {
-      dbGapId: phsId,
-      title: ftpData.title,
-      description: ftpData.description,
-      focus: gapData.diseases[0] || "",
       consentCodes: ftpData.consentCodes,
       consentLongNames,
       dataTypes,
-      studyDesigns: ftpData.studyTypes,
-      participantCount: gapData.participantCount!,
-      studyAccession: ftpData.studyAccession,
-      platforms,
-      duosUrl: duosUrlMap.get(phsId) ?? null,
+      dbGapId: phsId,
       dbGapUrl: getDbGapUrl(ftpData.studyAccession),
+      description: ftpData.description,
+      duosUrl: duosUrlMap.get(phsId) ?? null,
+      focus: gapData.diseases[0] || "",
+      participantCount: participantCount || 0,
+      platforms,
+      studyAccession: ftpData.studyAccession,
+      studyDesigns: ftpData.studyTypes,
+      title: ftpData.title,
     };
 
     studies.push(study);
-    console.log(`  Added: ${study.title}`);
+    console.log(`  Added: ${study.title} (${participantCount || 0} participants)`);
   }
 
   return studies;
