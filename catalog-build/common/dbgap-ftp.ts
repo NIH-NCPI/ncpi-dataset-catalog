@@ -398,7 +398,8 @@ export function combineDataTypes(
 
 /**
  * Generates the dbGaP study page URL.
- * @param studyAccession
+ * @param studyAccession - Study accession ID.
+ * @returns URL to the dbGaP study page.
  */
 export function getDbGapUrl(studyAccession: string): string {
   return `https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${studyAccession}`;
