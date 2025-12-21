@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.4.0...v0.4.1) (2025-12-21)
+
+
+### Chores
+
+* update deploy scripts ([7d2587b](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/7d2587b1803ac11571cc0511e9515b88f9333653))
+
 ## [0.4.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.3.0...v0.4.0) (2025-12-16)
 
 
