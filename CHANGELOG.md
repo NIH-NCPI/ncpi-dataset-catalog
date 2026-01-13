@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.4.1...v0.5.0) (2026-01-13)
+
+
+### Features
+
+* use temp login in scripts ([#142](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/142)) ([#143](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/143)) ([9859657](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/98596574fdfcf464aa2460f52067a7797ef20c79))
+
 ## [0.4.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.4.0...v0.4.1) (2025-12-21)
 
 
