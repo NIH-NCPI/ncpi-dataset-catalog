@@ -308,7 +308,9 @@ export async function buildStudiesForIds(
     };
 
     studies.push(study);
-    console.log(`  Added: ${study.title} (${participantCount || 0} participants)`);
+    console.log(
+      `  Added: ${study.title} (${participantCount || 0} participants)`
+    );
   }
 
   return studies;
