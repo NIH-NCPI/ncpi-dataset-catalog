@@ -1,63 +1,110 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/claude-code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-This is the **NCPI Dataset Catalog**, a Next.js-based web application that catalogs biomedical research datasets from multiple NIH data repositories (AnVIL, BDC, CRDC, KFDRC). Built with TypeScript, React 18, and Material-UI.
+NCPI Dataset Catalog is a Next.js static site that aggregates and displays biomedical research datasets from four NIH cloud platforms: AnVIL, BDC (BioData Catalyst), CRDC (Cancer Research Data Commons), and KFDRC (Kids First Data Resource Center). Built on top of the `@databiosphere/findable-ui` library.
 
 ## Common Commands
 
-### Development
-
 ```bash
-npm run dev          # Start development server
-npm run build:dev    # Build for development
-npm run build:prod   # Build for production
-```
+# Development
+npm run dev                       # Start dev server (builds catalog data first)
+npm run lint                      # Run ESLint
+npm run check-format              # Check Prettier formatting
 
-### Testing & Linting
+# Testing
+npm run test                      # Run Jest in watch mode
+npm run test:e2e                  # Run Playwright e2e tests (requires server on localhost:3000)
 
-```bash
-npm run test         # Run Jest tests (watch mode)
-npm run test:e2e     # Run Playwright E2E tests
-npm run lint         # Run ESLint
-npm run check-format # Check Prettier formatting
-```
+# Building
+npm run build:dev                 # Build for development environment
+npm run build:prod                # Build for production (static export to out/)
 
-### Catalog Data Management
-
-```bash
-npm run build-ncpi-db           # Build the complete catalog database
-npm run update-all-ncpi-sources # Update data from all platforms
-npm run update-anvil-source     # Update AnVIL data
-npm run update-bdc-source       # Update BDC data
-npm run update-crdc-source      # Update CRDC data
-npm run update-kfdrc-source     # Update KFDRC data
-npm run update-dbgap-source     # Update dbGaP data
+# Catalog Data Pipeline
+npm run build-ncpi-db             # Rebuild catalog from source TSV files
+npm run update-all-ncpi-sources   # Fetch latest data from all 4 platforms
+npm run update-anvil-source       # Fetch AnVIL data only
+npm run update-bdc-source         # Fetch BDC data only
+npm run update-crdc-source        # Fetch CRDC data only
+npm run update-kfdrc-source       # Fetch KFDRC data only
 ```
 
 ## Architecture
 
-- **`app/`** - Next.js application source (components, APIs, config, utilities)
-- **`catalog/`** - Generated catalog data (JSON files)
-- **`catalog-build/`** - Build scripts and source CSVs for catalog generation
-- **`scripts/`** - Shell scripts for deployment and setup
+### Data Build Pipeline
 
-## Code Style
+```
+Platform APIs (AnVIL, BDC, CRDC, KFDRC)
+    ↓  update-*-source.ts scripts
+catalog-build/source/dashboard-source-ncpi.tsv  (dbGapId → platform mapping)
+    ↓  build-ncpi-catalog.ts
+catalog/ncpi-platform-studies.json  (individual studies with platforms[])
+catalog/ncpi-platforms.json         (aggregated platform statistics)
+```
 
-- **TypeScript** with strict configuration
-- **ESLint** with SonarJS, JSDoc requirements, and TypeScript-sort-keys
-- **Prettier** for formatting
-- **Conventional commits** enforced via commitlint (e.g., `feat:`, `fix:`, `chore:`)
+Studies can exist on multiple platforms. The build process groups by dbGapId and tracks which platforms host each study.
 
-## Key Patterns
+### Key Directories
 
-- Static site generation via Next.js `output: "export"`
-- Material-UI components with Emotion CSS-in-JS
-- MDX support for markdown content with React components
-- Data sourced from CSV files in `catalog-build/source/`
+- `app/` - Core application code (APIs, components, config, viewModelBuilders)
+- `catalog-build/` - Data pipeline scripts (excluded from TypeScript compilation)
+- `catalog/` - Generated JSON data files (built at deploy time)
+- `site-config/ncpi-catalog/{dev,prod}/` - Environment-specific configuration
+- `pages/` - Next.js pages with dynamic routing for entities
 
-## Node Version
+### Configuration System
 
-Requires Node.js 20.10.0
+Site configuration lives in `site-config/ncpi-catalog/`:
+
+- `dev/config.ts` - Main configuration with entity definitions, category filters, layout
+- `prod/config.ts` - Extends dev config, overrides URLs and analytics
+- Build scripts copy `.env` and favicons from site-config to project root
+
+Config is loaded via `NEXT_PUBLIC_SITE_CONFIG` environment variable.
+
+### Entity Configuration Pattern
+
+Entities (Studies, Platforms) are defined in `site-config/.../index/` with:
+
+- `list.columns[]` - Table column definitions with viewBuilder functions
+- `detail.tabs[].mainColumn/sideColumn/top` - Detail page layout
+- `entityMapper` - Data transformation at load time
+- `exploreMode: CS_FETCH_CS_FILTERING` - All data pre-loaded, client-side filtering
+
+### View Model Builders
+
+Located in `app/viewModelBuilders/`. Pure functions that transform entity data into component props:
+
+```typescript
+buildPlatforms(entity) → NTagCell props
+buildConsentCodes(entity) → ConsentCodesCell props
+buildStudyHero(entity) → BackPageHero props
+```
+
+These are referenced in EntityConfig to wire data to UI components.
+
+### findable-ui Integration
+
+The `@databiosphere/findable-ui` library provides:
+
+- Core providers (DXConfigProvider, ExploreStateProvider, etc.)
+- Layout components (AppLayout, Header, Footer)
+- Table/list rendering infrastructure
+- Client-side search and filtering
+
+Webpack aliases in `next.config.mjs` ensure peer dependencies resolve correctly.
+
+## Code Style Requirements
+
+ESLint enforces:
+
+- **Sorted keys**: Object keys, interface properties, and enums must be alphabetically sorted
+- **Sorted destructure keys**: Destructured properties must be sorted
+- **Explicit return types**: Required on all functions (except `.styles.ts` files)
+- **JSDoc requirements**: Functions need descriptions, @param, and @returns documentation
+
+## Static Generation
+
+The site uses `output: "export"` for static HTML generation. Catalog data is JSON files loaded at build time - no runtime API calls for catalog content. All filtering/search happens client-side on pre-loaded data.
