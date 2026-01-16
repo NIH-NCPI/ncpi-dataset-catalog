@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.5.0...v0.5.1) (2026-01-16)
+
+
+### Chores
+
+* update catalog content for 2026-01 ([#127](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/127)) ([#145](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/145)) ([af7a822](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/af7a8224dcbbb486ba6a5b3afeadb1ccc5eb8fd2))
+
 ## [0.5.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.4.1...v0.5.0) (2026-01-13)
 
 
