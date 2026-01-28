@@ -2,7 +2,7 @@ export const tsvPath = "./catalog-build/source/dashboard-source-ncpi.tsv";
 export const duosCsvPath =
   "./catalog-build/source/duos-studies-by-dbgap-id.csv";
 export const dbgapCsvPath =
-  "catalog-build/source/2026-01-14-dbgap-advanced-search.csv";
+  "catalog-build/source/2026-01-27-dbgap-advanced-search.csv";
 
 export enum Platform {
   ANVIL = "AnVIL",
