@@ -4,6 +4,7 @@ export enum PLATFORM {
   ANVIL = "AnVIL",
   BDC = "BDC",
   CRDC = "CRDC",
+  DBGAP = "dbGaP",
   KFDRC = "KFDRC",
 }
 
