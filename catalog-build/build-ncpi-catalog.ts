@@ -4,6 +4,13 @@ import { writeAsJSON } from "./common/utils";
 import { buildNCPICatalogPlatforms } from "./build-plaftorms";
 import { buildNCPIPlatformStudies } from "./build-platform-studies";
 import {
+  getMissingFtpStudies,
+  initializeCSVCache,
+} from "./common/dbGapCSVandFTP";
+import {
+  dbgapCsvPath,
+  DBGAP_CSV_FIELD_KEY,
+  DBGAP_CSV_FIELD_TYPE,
   DUOS_INFO_SOURCE_FIELD_KEY,
   DUOS_INFO_SOURCE_FIELD_TYPE,
   duosCsvPath,
@@ -11,7 +18,7 @@ import {
   SOURCE_FIELD_TYPE,
   tsvPath,
 } from "./constants";
-import { DuosStudyInfo } from "./entities";
+import { DbGapCSVRow, DuosStudyInfo } from "./entities";
 
 console.log("Building NCPI Catalog Data");
 export {};
@@ -21,6 +28,15 @@ export {};
  * @returns void
  */
 async function buildCatalog(): Promise<void> {
+  // Load the dbGaP advanced search CSV and initialize the cache
+  const dbgapCsvRows = await readValuesFile<DbGapCSVRow>(
+    dbgapCsvPath,
+    ",",
+    DBGAP_CSV_FIELD_KEY,
+    DBGAP_CSV_FIELD_TYPE
+  );
+  initializeCSVCache(dbgapCsvRows);
+
   const platformStudyStubs = await readValuesFile<PlatformStudy>(
     tsvPath,
     "\t",
@@ -57,6 +73,17 @@ async function buildCatalog(): Promise<void> {
     "catalog/ncpi-platforms.json",
     Object.fromEntries(ncpiCatalogPlatforms.entries())
   );
+
+  // Report any studies that were not found on the FTP server
+  const missingFtpStudies = getMissingFtpStudies();
+  if (missingFtpStudies.length > 0) {
+    console.log(
+      `\nWarning: ${missingFtpStudies.length} studies not found on FTP server (using truncated CSV descriptions):`
+    );
+    for (const phsId of missingFtpStudies) {
+      console.log(`  - ${phsId}`);
+    }
+  }
 }
 
 async function readValuesFile<T>(

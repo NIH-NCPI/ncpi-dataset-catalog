@@ -38,3 +38,61 @@ export const SOURCE_FIELD_TYPE = {
   [SOURCE_HEADER_KEY.DB_GAP_ID]: "string",
   [SOURCE_HEADER_KEY.PLATFORM]: "string",
 };
+
+// Field mappings for parsing the dbGaP advanced search CSV
+const DBGAP_CSV_HEADER_KEY = {
+  ACCESSION: "accession",
+  ANCESTRY: "ancestry",
+  COLLECTIONS: "collections",
+  DESCRIPTION: "description",
+  EMBARGO_DATE: "embargoDate",
+  NAME: "name",
+  NIH_INSTITUTE: "nihInstitute",
+  PARENT_STUDY: "parentStudy",
+  RELATED_TERMS: "relatedTerms",
+  RELEASE_DATE: "releaseDate",
+  STUDY_CONSENT: "studyConsent",
+  STUDY_CONTENT: "studyContent",
+  STUDY_DESIGN: "studyDesign",
+  STUDY_DISEASE_FOCUS: "studyDiseaseFocus",
+  STUDY_MARKERSET: "studyMarkerset",
+  STUDY_MOLECULAR_DATA_TYPE: "studyMolecularDataType",
+};
+
+export const DBGAP_CSV_FIELD_KEY: Record<string, string> = {
+  [DBGAP_CSV_HEADER_KEY.ACCESSION]: "accession",
+  [DBGAP_CSV_HEADER_KEY.ANCESTRY]: "Ancestry (computed)",
+  [DBGAP_CSV_HEADER_KEY.COLLECTIONS]: "Collections",
+  [DBGAP_CSV_HEADER_KEY.DESCRIPTION]: "description",
+  [DBGAP_CSV_HEADER_KEY.EMBARGO_DATE]: "Embargo Release Date",
+  [DBGAP_CSV_HEADER_KEY.NAME]: "name",
+  [DBGAP_CSV_HEADER_KEY.NIH_INSTITUTE]: "NIH Institute",
+  [DBGAP_CSV_HEADER_KEY.PARENT_STUDY]: "Parent study",
+  [DBGAP_CSV_HEADER_KEY.RELATED_TERMS]: "Related Terms",
+  [DBGAP_CSV_HEADER_KEY.RELEASE_DATE]: "Release Date",
+  [DBGAP_CSV_HEADER_KEY.STUDY_CONSENT]: "Study Consent",
+  [DBGAP_CSV_HEADER_KEY.STUDY_CONTENT]: "Study Content",
+  [DBGAP_CSV_HEADER_KEY.STUDY_DESIGN]: "Study Design",
+  [DBGAP_CSV_HEADER_KEY.STUDY_DISEASE_FOCUS]: "Study Disease/Focus",
+  [DBGAP_CSV_HEADER_KEY.STUDY_MARKERSET]: "Study Markerset",
+  [DBGAP_CSV_HEADER_KEY.STUDY_MOLECULAR_DATA_TYPE]: "Study Molecular Data Type",
+};
+
+export const DBGAP_CSV_FIELD_TYPE: Record<string, string> = {
+  [DBGAP_CSV_HEADER_KEY.ACCESSION]: "string",
+  [DBGAP_CSV_HEADER_KEY.ANCESTRY]: "string",
+  [DBGAP_CSV_HEADER_KEY.COLLECTIONS]: "string",
+  [DBGAP_CSV_HEADER_KEY.DESCRIPTION]: "string",
+  [DBGAP_CSV_HEADER_KEY.EMBARGO_DATE]: "string",
+  [DBGAP_CSV_HEADER_KEY.NAME]: "string",
+  [DBGAP_CSV_HEADER_KEY.NIH_INSTITUTE]: "string",
+  [DBGAP_CSV_HEADER_KEY.PARENT_STUDY]: "string",
+  [DBGAP_CSV_HEADER_KEY.RELATED_TERMS]: "string",
+  [DBGAP_CSV_HEADER_KEY.RELEASE_DATE]: "string",
+  [DBGAP_CSV_HEADER_KEY.STUDY_CONSENT]: "string",
+  [DBGAP_CSV_HEADER_KEY.STUDY_CONTENT]: "string",
+  [DBGAP_CSV_HEADER_KEY.STUDY_DESIGN]: "string",
+  [DBGAP_CSV_HEADER_KEY.STUDY_DISEASE_FOCUS]: "string",
+  [DBGAP_CSV_HEADER_KEY.STUDY_MARKERSET]: "string",
+  [DBGAP_CSV_HEADER_KEY.STUDY_MOLECULAR_DATA_TYPE]: "string",
+};
