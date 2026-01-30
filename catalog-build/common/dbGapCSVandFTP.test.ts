@@ -12,8 +12,12 @@ jest.mock("./utils", () => ({
   delayFetch: jest.fn(),
 }));
 
+import fetch from "node-fetch";
+import { DbGapCSVRow } from "../entities";
 import {
   getLatestVersionXmlUrl,
+  getStudyFromCSVandFTP,
+  initializeCSVCache,
   parseCommaSeparated,
   parseConsentCodes,
   parseDataTypes,
@@ -25,6 +29,8 @@ import {
   processDescription,
   sortVersions,
 } from "./dbGapCSVandFTP";
+
+const mockFetch = fetch as jest.MockedFunction<typeof fetch>;
 
 describe("parseConsentCodes", () => {
   it("parses multiple consent codes with complex descriptions", () => {
@@ -536,5 +542,256 @@ describe("parseDescriptionFromXml", () => {
   it("prefers CDATA over plain text pattern", () => {
     const xml = `<Description><![CDATA[CDATA content]]></Description>`;
     expect(parseDescriptionFromXml(xml)).toBe("CDATA content");
+  });
+});
+
+// Helper to create a test CSV row with defaults
+function createTestCsvRow(overrides: Partial<DbGapCSVRow> = {}): DbGapCSVRow {
+  return {
+    "Ancestry (computed)": "",
+    Collections: "",
+    "Embargo Release Date": "",
+    "NIH Institute": "NCI",
+    "Parent study": "",
+    "Related Terms": "",
+    "Release Date": "2024-01-01",
+    "Study Consent": "GRU --- General Research Use",
+    "Study Content": "100 subjects, 100 samples",
+    "Study Design": "Case-Control",
+    "Study Disease/Focus": "Cancer",
+    "Study Markerset": "",
+    "Study Molecular Data Type": "WGS, RNA-Seq",
+    accession: "phs000123.v1.p1",
+    description: "CSV truncated description",
+    name: "Test Study Title",
+    ...overrides,
+  };
+}
+
+describe("initializeCSVCache", () => {
+  beforeEach(() => {
+    mockFetch.mockReset();
+  });
+
+  it("populates cache with CSV rows mapped by base phsId", async () => {
+    const rows = [
+      createTestCsvRow({ accession: "phs000011.v1.p1", name: "Study One" }),
+      createTestCsvRow({ accession: "phs000012.v2.p2", name: "Study Two" }),
+      createTestCsvRow({ accession: "phs000013.v3.p1", name: "Study Three" }),
+    ];
+
+    initializeCSVCache(rows);
+
+    // Mock FTP failures so we get CSV data back
+    mockFetch.mockResolvedValue({ ok: false } as never);
+
+    // Verify each study is accessible by base phsId (without version)
+    const study1 = await getStudyFromCSVandFTP("phs000011");
+    expect(study1?.title).toBe("Study One");
+
+    const study2 = await getStudyFromCSVandFTP("phs000012");
+    expect(study2?.title).toBe("Study Two");
+
+    const study3 = await getStudyFromCSVandFTP("phs000013");
+    expect(study3?.title).toBe("Study Three");
+  });
+
+  it("handles empty rows array", () => {
+    expect(() => initializeCSVCache([])).not.toThrow();
+  });
+
+  it("overwrites previous cache when called again", async () => {
+    const rows1 = [createTestCsvRow({ accession: "phs000021.v1.p1" })];
+    const rows2 = [createTestCsvRow({ accession: "phs000022.v1.p1" })];
+
+    initializeCSVCache(rows1);
+    initializeCSVCache(rows2);
+
+    // Old study should no longer be in CSV cache (returns null since not fetched before)
+    const oldStudy = await getStudyFromCSVandFTP("phs000021");
+    expect(oldStudy).toBeNull();
+
+    // New study should be in cache (will fail FTP but that's ok - we're testing CSV cache)
+    mockFetch.mockResolvedValueOnce({ ok: false } as never);
+    const newStudy = await getStudyFromCSVandFTP("phs000022");
+    expect(newStudy).not.toBeNull();
+    expect(newStudy?.dbGapId).toBe("phs000022");
+  });
+});
+
+describe("getStudyFromCSVandFTP", () => {
+  beforeEach(() => {
+    mockFetch.mockReset();
+  });
+
+  it("returns study with FTP description when available", async () => {
+    // Use unique phsId to avoid cache conflicts
+    initializeCSVCache([
+      createTestCsvRow({
+        "Study Consent":
+          "GRU --- General Research Use, HMB --- Health/Medical/Biomedical",
+        "Study Content": "500 subjects, 500 samples",
+        "Study Design": "Case-Control",
+        "Study Disease/Focus": "Neoplasms",
+        "Study Molecular Data Type": "WGS, WXS",
+        accession: "phs000001.v1.p1",
+        description: "CSV description fallback",
+        name: "Test Study",
+      }),
+    ]);
+
+    // Mock FTP directory listing
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      text: async () => `<a href="phs000001.v1.p1/">phs000001.v1.p1</a>`,
+    } as never);
+
+    // Mock XML file fetch
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      text: async () =>
+        `<Description><![CDATA[Full FTP description from XML.]]></Description>`,
+    } as never);
+
+    const study = await getStudyFromCSVandFTP("phs000001");
+
+    expect(study).not.toBeNull();
+    expect(study?.dbGapId).toBe("phs000001");
+    expect(study?.title).toBe("Test Study");
+    expect(study?.description).toBe("Full FTP description from XML.");
+    expect(study?.consentCodes).toEqual(["GRU", "HMB"]);
+    expect(study?.participantCount).toBe(500);
+    expect(study?.studyDesigns).toEqual(["Case-Control"]);
+    expect(study?.focus).toBe("Neoplasms");
+    expect(study?.dataTypes).toEqual(["WGS", "WXS"]);
+  });
+
+  it("falls back to CSV description when FTP directory not found", async () => {
+    initializeCSVCache([
+      createTestCsvRow({
+        accession: "phs000002.v1.p1",
+        description: "CSV description fallback",
+      }),
+    ]);
+
+    // Mock FTP directory not found
+    mockFetch.mockResolvedValueOnce({
+      ok: false,
+    } as never);
+
+    const study = await getStudyFromCSVandFTP("phs000002");
+
+    expect(study).not.toBeNull();
+    expect(study?.description).toBe("CSV description fallback");
+  });
+
+  it("falls back to CSV description when no versions found on FTP", async () => {
+    initializeCSVCache([
+      createTestCsvRow({
+        accession: "phs000003.v1.p1",
+        description: "CSV description fallback",
+      }),
+    ]);
+
+    // Mock FTP directory listing with no matching versions
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      text: async () => `<a href="other-file.txt">other-file.txt</a>`,
+    } as never);
+
+    const study = await getStudyFromCSVandFTP("phs000003");
+
+    expect(study).not.toBeNull();
+    expect(study?.description).toBe("CSV description fallback");
+  });
+
+  it("falls back to CSV description when XML file not found", async () => {
+    initializeCSVCache([
+      createTestCsvRow({
+        accession: "phs000004.v1.p1",
+        description: "CSV description fallback",
+      }),
+    ]);
+
+    // Mock FTP directory listing
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      text: async () => `<a href="phs000004.v1.p1/">phs000004.v1.p1</a>`,
+    } as never);
+
+    // Mock XML file not found
+    mockFetch.mockResolvedValueOnce({
+      ok: false,
+    } as never);
+
+    const study = await getStudyFromCSVandFTP("phs000004");
+
+    expect(study).not.toBeNull();
+    expect(study?.description).toBe("CSV description fallback");
+  });
+
+  it("returns null for study not in CSV cache", async () => {
+    initializeCSVCache([]);
+
+    const study = await getStudyFromCSVandFTP("phs999999");
+
+    expect(study).toBeNull();
+    expect(mockFetch).not.toHaveBeenCalled();
+  });
+
+  it("returns null for invalid phsId format", async () => {
+    initializeCSVCache([]);
+
+    const study = await getStudyFromCSVandFTP("invalid-id");
+
+    expect(study).toBeNull();
+    expect(mockFetch).not.toHaveBeenCalled();
+  });
+
+  it("returns cached study on subsequent calls", async () => {
+    initializeCSVCache([
+      createTestCsvRow({
+        accession: "phs000005.v1.p1",
+      }),
+    ]);
+
+    // Mock FTP responses for first call
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      text: async () => `<a href="phs000005.v1.p1/">phs000005.v1.p1</a>`,
+    } as never);
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      text: async () => `<Description>FTP description</Description>`,
+    } as never);
+
+    // First call
+    const study1 = await getStudyFromCSVandFTP("phs000005");
+    expect(study1).not.toBeNull();
+
+    // Reset mock to verify no additional calls
+    mockFetch.mockReset();
+
+    // Second call should return cached result
+    const study2 = await getStudyFromCSVandFTP("phs000005");
+    expect(study2).toEqual(study1);
+    expect(mockFetch).not.toHaveBeenCalled();
+  });
+
+  it("handles fetch errors gracefully", async () => {
+    initializeCSVCache([
+      createTestCsvRow({
+        accession: "phs000006.v1.p1",
+        description: "CSV description fallback",
+      }),
+    ]);
+
+    // Mock fetch throwing an error
+    mockFetch.mockRejectedValueOnce(new Error("Network error"));
+
+    const study = await getStudyFromCSVandFTP("phs000006");
+
+    expect(study).not.toBeNull();
+    expect(study?.description).toBe("CSV description fallback");
   });
 });

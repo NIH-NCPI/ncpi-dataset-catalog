@@ -34,6 +34,7 @@ npm run update-anvil-source     # Update AnVIL data
 npm run update-bdc-source       # Update BDC data
 npm run update-crdc-source      # Update CRDC data
 npm run update-kfdrc-source     # Update KFDRC data
+npm run update-dbgap-source     # Update dbGaP data
 ```
 
 ## Architecture

@@ -14,8 +14,8 @@ const csvStudyCache = new Map<string, DbGapStudy>();
 // Cache for FTP description lookups
 const ftpDescriptionCache = new Map<string, string | null>();
 
-// Track missing FTP studies for reporting
-const missingFtpStudies: string[] = [];
+// Track missing FTP studies for reporting (Set prevents duplicates)
+const missingFtpStudies = new Set<string>();
 
 // dbGaP FTP server base URL for fetching study descriptions
 export const dbgapFtpBaseUrl = "https://ftp.ncbi.nlm.nih.gov/dbgap/studies";
@@ -53,9 +53,9 @@ export function parseConsentCodes(consentString: string): string[] {
   if (!consentString || consentString === "Not Provided") {
     return [];
   }
-  // Match uppercase consent codes (letters, numbers, hyphens) before " --- "
-  // This excludes lowercase words from descriptions that might appear before ---
-  return consentString.match(/\b[A-Z][A-Z0-9-]*(?=\s+---)/g) ?? [];
+  // Match consent codes (uppercase start, then letters/numbers/hyphens) before " --- "
+  // Requires uppercase first char to exclude description words, allows mixed case after (e.g., DS-CROTx)
+  return consentString.match(/\b[A-Z][A-Za-z0-9-]*(?=\s+---)/g) ?? [];
 }
 
 /**
@@ -189,21 +189,25 @@ export function getLatestVersionXmlUrl(
  * @returns The description text, or null if not found.
  */
 export function parseDescriptionFromXml(xml: string): string | null {
-  // Try CDATA section first
-  const cdataMatch = xml.match(
-    /<Description>\s*<!\[CDATA\[([\s\S]*?)\]\]>\s*<\/Description>/
-  );
-  if (cdataMatch && cdataMatch[1]) {
-    return cdataMatch[1].trim();
+  const openTag = "<Description>";
+  const closeTag = "</Description>";
+
+  const startIdx = xml.indexOf(openTag);
+  if (startIdx === -1) return null;
+
+  const contentStart = startIdx + openTag.length;
+  const endIdx = xml.indexOf(closeTag, contentStart);
+  if (endIdx === -1) return null;
+
+  let content = xml.slice(contentStart, endIdx).trim();
+  if (!content) return null;
+
+  // Handle CDATA wrapper
+  if (content.startsWith("<![CDATA[") && content.endsWith("]]>")) {
+    content = content.slice(9, -3).trim();
   }
 
-  // Try without CDATA
-  const plainMatch = xml.match(/<Description>([\s\S]*?)<\/Description>/);
-  if (plainMatch && plainMatch[1]) {
-    return plainMatch[1].trim();
-  }
-
-  return null;
+  return content || null;
 }
 
 /**
@@ -225,7 +229,7 @@ async function fetchDescriptionFromFTP(phsId: string): Promise<string | null> {
     if (!dirResponse.ok) {
       console.log(`FTP directory not found for ${phsId}`);
       ftpDescriptionCache.set(phsId, null);
-      missingFtpStudies.push(phsId);
+      missingFtpStudies.add(phsId);
       return null;
     }
 
@@ -238,7 +242,7 @@ async function fetchDescriptionFromFTP(phsId: string): Promise<string | null> {
     if (!xmlUrl) {
       console.log(`No version directories found for ${phsId}`);
       ftpDescriptionCache.set(phsId, null);
-      missingFtpStudies.push(phsId);
+      missingFtpStudies.add(phsId);
       return null;
     }
 
@@ -252,7 +256,7 @@ async function fetchDescriptionFromFTP(phsId: string): Promise<string | null> {
     if (!xmlResponse.ok) {
       console.log(`XML file not found at ${xmlUrl}`);
       ftpDescriptionCache.set(phsId, null);
-      missingFtpStudies.push(phsId);
+      missingFtpStudies.add(phsId);
       return null;
     }
 
@@ -274,7 +278,7 @@ async function fetchDescriptionFromFTP(phsId: string): Promise<string | null> {
     // Network or other error - report, cache, exit
     console.log(`Error fetching FTP description for ${phsId}:`, error);
     ftpDescriptionCache.set(phsId, null);
-    missingFtpStudies.push(phsId);
+    missingFtpStudies.add(phsId);
     return null;
   }
 }
@@ -352,7 +356,7 @@ export async function getStudyFromCSVandFTP(
     return cached;
   }
 
-  // Grab correpsonding CSV row for phsId
+  // Grab corresponding CSV row for phsId
   const csvRow = csvDataCache.get(phsId);
   if (!csvRow) {
     console.log(`Study ${phsId} not found in CSV`);
