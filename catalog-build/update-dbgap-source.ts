@@ -1,6 +1,9 @@
 import fs from "fs";
 import { parse } from "csv-parse/sync";
-import { DbGapId } from "../app/apis/catalog/ncpi-catalog/common/entities";
+import {
+  DbGapId,
+  PLATFORM,
+} from "../app/apis/catalog/ncpi-catalog/common/entities";
 import { dbgapCsvPath, Platform } from "./constants";
 import { DbGapCSVRow } from "./entities";
 import {
@@ -32,21 +35,31 @@ async function getDbGapIdsFromCsv(csvPath: string): Promise<DbGapId[]> {
 }
 
 async function updateDbGapSource(sourcePath: string): Promise<void> {
-  // Get existing platform studies and study ids from the NCPI source tsv.
-  const [platformStudies, studyIds] = await getPlatformStudiesStudyIds(
+  // Get existing platform studies and dbGaP study ids from the NCPI source tsv.
+  const [allPlatformStudies, dbgapStudyIds] = await getPlatformStudiesStudyIds(
     sourcePath,
     Platform.DBGAP
+  );
+
+  // Get IDs from other platforms (not dbGaP).
+  const otherStudyIds = new Set(
+    allPlatformStudies
+      .filter((platformStudy) => platformStudy.platform !== PLATFORM.DBGAP)
+      .map((study) => study.dbGapId)
   );
 
   // Get all dbGaP IDs from CSV.
   const csvIds = await getDbGapIdsFromCsv(dbgapCsvPath);
 
+  // Filter out IDs that already exist in other platforms.
+  const filteredCsvIds = csvIds.filter((id) => !otherStudyIds.has(id));
+
   // Update platform studies and report new studies for the specified platform.
   updatePlatformStudiesAndReportNewStudies(
     Platform.DBGAP,
-    platformStudies,
-    csvIds,
-    studyIds,
+    allPlatformStudies,
+    filteredCsvIds,
+    dbgapStudyIds,
     sourcePath
   );
 }
