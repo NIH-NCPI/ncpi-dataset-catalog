@@ -11,6 +11,7 @@ import {
   SOURCE_FIELD_KEY,
   SOURCE_FIELD_TYPE,
 } from "./constants";
+import { DbGapCSVRow } from "./entities";
 import {
   addNCPIHeader,
   mergeSourceStudies,
@@ -19,10 +20,6 @@ import {
   sourcePath,
 } from "./utils";
 import { parseContentRows, readFile } from "../app/utils/tsvParser";
-
-interface DbGapCsvRow {
-  accession: string;
-}
 
 function extractBasePhsId(accession: string): DbGapId | null {
   const match = /^phs\d+/.exec(accession);
@@ -34,7 +31,7 @@ async function getDbGapIdsFromCsv(csvPath: string): Promise<DbGapId[]> {
   const records = parse(content, {
     columns: true,
     skip_empty_lines: true,
-  }) as DbGapCsvRow[];
+  }) as DbGapCSVRow[];
 
   const ids = new Set<DbGapId>();
   for (const row of records) {
