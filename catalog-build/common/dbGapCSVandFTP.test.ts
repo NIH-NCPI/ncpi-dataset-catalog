@@ -548,18 +548,10 @@ describe("parseDescriptionFromXml", () => {
 // Helper to create a test CSV row with defaults
 function createTestCsvRow(overrides: Partial<DbGapCSVRow> = {}): DbGapCSVRow {
   return {
-    "Ancestry (computed)": "",
-    Collections: "",
-    "Embargo Release Date": "",
-    "NIH Institute": "NCI",
-    "Parent study": "",
-    "Related Terms": "",
-    "Release Date": "2024-01-01",
     "Study Consent": "GRU --- General Research Use",
     "Study Content": "100 subjects, 100 samples",
     "Study Design": "Case-Control",
     "Study Disease/Focus": "Cancer",
-    "Study Markerset": "",
     "Study Molecular Data Type": "WGS, RNA-Seq",
     accession: "phs000123.v1.p1",
     description: "CSV truncated description",
