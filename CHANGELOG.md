@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.5.1...v0.6.0) (2026-01-31)
+
+
+### Features
+
+* updated build to use CSV and FTP [#122](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/122) ([#147](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/147)) ([c2b846d](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/c2b846d1a9c0c45a1fd66895444f38c9c9e1f53c))
+
 ## [0.5.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.5.0...v0.5.1) (2026-01-16)
 
 
