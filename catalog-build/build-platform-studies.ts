@@ -4,7 +4,7 @@ import {
   PlatformStudy,
 } from "../app/apis/catalog/ncpi-catalog/common/entities";
 import { generateConsentDescriptions } from "./common/consent-codes";
-import { getStudy } from "./common/dbGaP";
+import { getStudyFromCSVandFTP } from "./common/dbGapCSVandFTP";
 
 /**
  * Build the catalog platform studies for NCPI.
@@ -21,7 +21,7 @@ export async function buildNCPIPlatformStudies(
 
   // build workspaces
   for (const stub of platformStudies) {
-    const study = await getStudy(stub.dbGapId);
+    const study = await getStudyFromCSVandFTP(stub.dbGapId);
     /* Continue when the study is incomplete. */
 
     if (!study || !isStudyFieldsComplete(study)) {
