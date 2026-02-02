@@ -11,5 +11,6 @@ export default withPlugins(
     output: "export",
     reactStrictMode: true,
     staticPageGenerationTimeout: 120,
+    transpilePackages: ["@databiosphere/findable-ui"],
   }
 );
