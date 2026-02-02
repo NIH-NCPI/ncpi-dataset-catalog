@@ -60,4 +60,4 @@ npm run update-dbgap-source     # Update dbGaP data
 
 ## Node Version
 
-Requires Node.js 20.10.0
+Requires Node.js 22.12.0

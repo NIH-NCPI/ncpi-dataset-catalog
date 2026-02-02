@@ -1,4 +1,5 @@
 import { CellContext } from "@tanstack/react-table";
+import { JSX } from "react";
 import { Attribute } from "../../../../../../viewModelBuilders/dataDictionaryMapper/types";
 import { Chip, Typography, Grid } from "@mui/material";
 import { StyledGrid } from "./fieldCell.styles";

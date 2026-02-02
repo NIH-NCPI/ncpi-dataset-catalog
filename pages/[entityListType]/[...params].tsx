@@ -4,6 +4,7 @@ import {
   AzulEntityStaticResponse,
   AzulListParams,
 } from "@databiosphere/findable-ui/lib/apis/azul/common/entities";
+import { JSX } from "react";
 import {
   PARAMS_INDEX_TAB,
   PARAMS_INDEX_UUID,

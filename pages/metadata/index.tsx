@@ -1,4 +1,5 @@
 import { Main } from "@databiosphere/findable-ui/lib/components/Layout/components/ContentLayout/components/Main/main";
+import { JSX } from "react";
 import { ContentView } from "@databiosphere/findable-ui/lib/views/ContentView/contentView";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { MDXRemote } from "next-mdx-remote";
