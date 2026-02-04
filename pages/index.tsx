@@ -1,4 +1,5 @@
 import { Redirect } from "@databiosphere/findable-ui/lib/components/Redirect/redirect";
+import { JSX } from "react";
 import { useConfig } from "@databiosphere/findable-ui/lib/hooks/useConfig";
 
 const HomePage = (): JSX.Element => {

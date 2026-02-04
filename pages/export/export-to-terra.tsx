@@ -1,4 +1,5 @@
 import { ExportMethodView } from "@databiosphere/findable-ui/lib/views/ExportMethodView/exportMethodView";
+import { JSX } from "react";
 import { GetStaticProps } from "next";
 
 export const getStaticProps: GetStaticProps = async () => {

@@ -1,4 +1,5 @@
 import { CellContext } from "@tanstack/react-table";
+import { JSX } from "react";
 import { Attribute } from "../../../../../../viewModelBuilders/dataDictionaryMapper/types";
 import { Collapse, Typography } from "@mui/material";
 import {
