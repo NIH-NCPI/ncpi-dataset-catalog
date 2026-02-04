@@ -70,4 +70,4 @@ The fetch step takes ~30 minutes (rate-limited FTP + S2 API calls for ~3,000 stu
 
 ## Node Version
 
-Requires Node.js 20.10.0
+Requires Node.js 22.12.0
