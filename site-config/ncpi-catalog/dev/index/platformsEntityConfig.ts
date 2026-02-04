@@ -45,9 +45,10 @@ export const platformsEntityConfig: EntityConfig<NCPICatalogPlatform> = {
       },
       {
         componentConfig: {
-          component: C.NTagCell,
-          viewBuilder: V.buildStudyNames,
-        } as ComponentConfig<typeof C.NTagCell>,
+          component: C.Link,
+          viewBuilder: V.buildToStudies,
+        } as ComponentConfig<typeof C.Link>,
+        enableSorting: false,
         header: NCPI_CATALOG_CATEGORY_LABEL.TITLE,
         id: NCPI_CATALOG_CATEGORY_KEY.TITLE,
         width: { max: "2fr", min: "200px" },
