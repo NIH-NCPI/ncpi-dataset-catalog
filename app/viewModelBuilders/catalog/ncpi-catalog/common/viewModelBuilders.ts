@@ -284,7 +284,7 @@ export const buildStudyTitle = (
 export const buildToStudies = (
   ncpiCatalogPlatform: NCPICatalogPlatform,
 ): React.ComponentProps<typeof C.Link> => {
-  const { platform } = ncpiCatalogPlatform;
+  const { platform, title } = ncpiCatalogPlatform;
   const queryParams = new URLSearchParams();
   queryParams.set("filter", JSON.stringify([
     {
@@ -293,7 +293,7 @@ export const buildToStudies = (
     },
   ]));
   return {
-    label: `View all ${platform} studies`,
+    label: `${title.length} studies`,
     url: `/studies?${queryParams.toString()}`,
   };
 };
