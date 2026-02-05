@@ -293,7 +293,7 @@ export const buildToStudies = (
     },
   ]));
   return {
-    label: `View  all ${platform} studies`,
+    label: `View all ${platform} studies`,
     url: `/studies?${queryParams.toString()}`,
   };
 };
