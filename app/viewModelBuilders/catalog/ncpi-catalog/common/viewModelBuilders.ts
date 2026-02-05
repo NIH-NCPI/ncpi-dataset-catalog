@@ -277,16 +277,24 @@ export const buildStudyTitle = (
 };
 
 /**
- * Build props for study names NTagCell component from the given NCPI entity.
+ * Build props for studies Link component from the given NCPI entity.
  * @param ncpiCatalogPlatform - NCPI catalog platform.
- * @returns Model to be used as props for the NTagCell component.
+ * @returns Model to be used as props for the Link component.
  */
-export const buildStudyNames = (
+export const buildToStudies = (
   ncpiCatalogPlatform: NCPICatalogPlatform,
-): React.ComponentProps<typeof C.NTagCell> => {
+): React.ComponentProps<typeof C.Link> => {
+  const { platform, title } = ncpiCatalogPlatform;
+  const queryParams = new URLSearchParams();
+  queryParams.set("filter", JSON.stringify([
+    {
+      categoryKey: "platform",
+      value: [platform],
+    },
+  ]));
   return {
-    label: getPluralizedMetadataLabel(METADATA_KEY.STUDY),
-    values: ncpiCatalogPlatform.title,
+    label: `${title.length} studies`,
+    url: `/studies?${queryParams.toString()}`,
   };
 };
 
