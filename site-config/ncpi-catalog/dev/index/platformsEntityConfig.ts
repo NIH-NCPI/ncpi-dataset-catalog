@@ -49,15 +49,16 @@ export const platformsEntityConfig: EntityConfig<NCPICatalogPlatform> = {
           viewBuilder: V.buildToStudies,
         } as ComponentConfig<typeof C.Link>,
         enableSorting: false,
-        header: NCPI_CATALOG_CATEGORY_LABEL.TITLE,
+        header: "Studies",
         id: NCPI_CATALOG_CATEGORY_KEY.TITLE,
-        width: { max: "2fr", min: "200px" },
+        width: { max: "1fr", min: "124px" },
       },
       {
         componentConfig: {
           component: C.NTagCell,
           viewBuilder: V.buildDbGapIds,
         } as ComponentConfig<typeof C.NTagCell>,
+        enableHiding: false,
         header: NCPI_CATALOG_CATEGORY_LABEL.DB_GAP_ID,
         id: NCPI_CATALOG_CATEGORY_KEY.DB_GAP_ID,
         width: { max: "1.24fr", min: "124px" },
@@ -113,6 +114,7 @@ export const platformsEntityConfig: EntityConfig<NCPICatalogPlatform> = {
       downloadFilename: "platforms",
       enableTableDownload: true,
       initialState: {
+        columnVisibility: { [NCPI_CATALOG_CATEGORY_KEY.DB_GAP_ID]: false },
         sorting: [
           {
             desc: SORT_DIRECTION.ASCENDING,
