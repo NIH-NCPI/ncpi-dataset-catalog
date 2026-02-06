@@ -43,6 +43,31 @@ export function getMissingFtpStudies(): string[] {
 }
 
 /**
+ * Parses the "Parent study" CSV field into parent ID and name.
+ * Input format: "Study Name (phsXXXXXX.vN.pM)" or "Not Applicable"
+ * @param value - The Parent study string from CSV.
+ * @returns Object with parentStudyId and parentStudyName, or nulls.
+ */
+export function parseParentStudy(value: string): {
+  parentStudyId: string | null;
+  parentStudyName: string | null;
+} {
+  if (!value || value === "Not Applicable") {
+    return { parentStudyId: null, parentStudyName: null };
+  }
+  const parenIdx = value.indexOf("(phs");
+  if (parenIdx === -1) {
+    return { parentStudyId: null, parentStudyName: null };
+  }
+  const parentStudyName = value.substring(0, parenIdx).trim();
+  const idMatch = value.substring(parenIdx + 1).match(/^(phs\d+)/);
+  if (!idMatch) {
+    return { parentStudyId: null, parentStudyName: null };
+  }
+  return { parentStudyId: idMatch[1], parentStudyName };
+}
+
+/**
  * Parses consent codes from the CSV format.
  * Input: "HMB-IRB-NPU --- Health/Medical/Biomedical (IRB, NPU), DS-FDO-IRB-NPU --- Disease-Specific (Focused Disease Only, IRB, NPU)"
  * Output: ["HMB-IRB-NPU", "DS-FDO-IRB-NPU"]
@@ -388,12 +413,20 @@ export async function getStudyFromCSVandFTP(
   // Decode HTML entities in title
   const title = decode(csvRow.name || "");
 
+  // Parse parent study relationship
+  const { parentStudyId, parentStudyName } = parseParentStudy(
+    csvRow["Parent study"]
+  );
+
   const study: DbGapStudy = {
     consentCodes,
     dataTypes,
     dbGapId: phsId,
     description,
     focus,
+    numChildren: 0,
+    parentStudyId,
+    parentStudyName,
     participantCount,
     studyAccession: csvRow.accession,
     studyDesigns,

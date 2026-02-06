@@ -57,6 +57,21 @@ export async function buildNCPIPlatformStudies(
     ncpiStudies.push(ncpiStudy);
     console.log(ncpiStudy.dbGapId, ncpiStudy.title);
   }
+
+  // Compute numChildren by counting studies that reference each parent
+  const childCounts = new Map<string, number>();
+  for (const study of ncpiStudies) {
+    if (study.parentStudyId) {
+      childCounts.set(
+        study.parentStudyId,
+        (childCounts.get(study.parentStudyId) || 0) + 1
+      );
+    }
+  }
+  for (const study of ncpiStudies) {
+    study.numChildren = childCounts.get(study.dbGapId) || 0;
+  }
+
   return ncpiStudies;
 }
 
