@@ -30,8 +30,14 @@ export interface GapStudyData {
   dataTypes: string[];
   diseases: string[];
   genotypePlatforms: string[];
+  numChildren: number;
+  parentStudyId: string | null;
+  parentStudyName: string | null;
   participantCount: number | null;
+  studyAccession: string | null;
   studyDesign: string | null;
+  studyName: string | null;
+  studyTypes: string[];
 }
 
 /**
@@ -208,7 +214,13 @@ export async function fetchGapStudyData(phsId: string): Promise<GapStudyData> {
     dataTypes: [],
     genotypePlatforms: [],
     diseases: [],
+    studyAccession: null,
     studyDesign: null,
+    studyName: null,
+    studyTypes: [],
+    parentStudyId: null,
+    parentStudyName: null,
+    numChildren: 0,
   };
 
   try {
@@ -237,6 +249,9 @@ export async function fetchGapStudyData(phsId: string): Promise<GapStudyData> {
           d_study_results?: {
             d_num_participants_in_subtree?: string;
             d_study_design?: string;
+            d_study_id?: string;
+            d_study_name?: string;
+            d_study_type_list?: Array<{ d_type?: string }>;
             d_study_disease_list?: Array<{
               d_disease_importance?: string;
               d_disease_name?: string;
@@ -248,6 +263,11 @@ export async function fetchGapStudyData(phsId: string): Promise<GapStudyData> {
             d_study_molecular_data_type_list?: Array<{
               d_molecular_data_type_name?: string;
             }>;
+            d_study_ancestor?: Array<{
+              d_ancestor_id?: string;
+              d_ancestor_name?: string;
+            }>;
+            d_num_descendants_in_subtree?: string;
           };
         }
       >;
@@ -286,12 +306,31 @@ export async function fetchGapStudyData(phsId: string): Promise<GapStudyData> {
       ? parseInt(studyResults.d_num_participants_in_subtree)
       : null;
 
+    // Parent-child relationship
+    const ancestor = studyResults.d_study_ancestor?.[0];
+    const parentStudyId = ancestor?.d_ancestor_id?.match(/phs\d+/)?.[0] || null;
+    const parentStudyName = ancestor?.d_ancestor_name || null;
+    const numChildren = parseInt(studyResults.d_num_descendants_in_subtree || "0") || 0;
+
+    // Study identity (fallback for studies without FTP data)
+    const studyAccession = studyResults.d_study_id || null;
+    const studyName = studyResults.d_study_name || null;
+    const studyTypes = (studyResults.d_study_type_list || [])
+      .map((t) => t.d_type)
+      .filter((t): t is string => !!t && t.trim() !== "");
+
     return {
       participantCount,
       dataTypes: [...new Set(dataTypes)].sort(),
       genotypePlatforms: [...new Set(genotypePlatforms)].sort(),
       diseases: [...new Set(diseases)],
+      studyAccession,
       studyDesign: studyResults.d_study_design || null,
+      studyName,
+      studyTypes,
+      parentStudyId,
+      parentStudyName,
+      numChildren,
     };
   } catch {
     return empty;

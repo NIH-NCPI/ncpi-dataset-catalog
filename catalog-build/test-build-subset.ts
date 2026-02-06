@@ -6,7 +6,8 @@ import { buildStudiesForIds } from "./build-all-dbgap-studies";
 import { writeAsJSON } from "./common/utils";
 
 const testIds = [
-  "phs000007", // Framingham Heart Study - well-known
+  "phs000007", // Framingham Heart Study - parent study
+  "phs000342", // Framingham SHARe - child of phs000007
   "phs000220", // PAGE: MEC - from current catalog
   "phs000298", // Autism - from current catalog
   "phs000424", // GTEx - popular study
@@ -27,6 +28,8 @@ async function runTest() {
     console.log(`  Data Types: ${study.dataTypes.join(", ") || "(none)"}`);
     console.log(`  Consent Codes: ${study.consentCodes.join(", ")}`);
     console.log(`  Platforms: ${study.platforms.join(", ")}`);
+    console.log(`  Parent: ${study.parentStudyId || "(none)"} ${study.parentStudyName || ""}`);
+    console.log(`  Children: ${study.numChildren}`);
     console.log(`  dbGapUrl: ${study.dbGapUrl}`);
     console.log();
   }

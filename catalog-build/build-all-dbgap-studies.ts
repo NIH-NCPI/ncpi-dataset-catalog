@@ -148,17 +148,20 @@ export async function buildAllDbGapStudies(): Promise<NCPIStudy[]> {
       );
     }
 
-    // Fetch FTP data (GapExchange XML)
+    // Fetch FTP data (GapExchange XML) — may be null for child studies
     const ftpData = await fetchFTPStudyData(phsId);
-    if (!ftpData) {
-      skippedNoFtp++;
-      continue;
-    }
 
     await delay(API_DELAY);
 
     // Fetch Gap DB data
     const gapData = await fetchGapStudyData(phsId);
+
+    // Resolve title: prefer FTP, fall back to esummary
+    const title = ftpData?.title || gapData.studyName;
+    if (!title) {
+      skippedNoFtp++;
+      continue;
+    }
 
     // Check if this is a platform study (from TSV)
     const isPlatformStudy = platformMap.has(phsId);
@@ -167,7 +170,7 @@ export async function buildAllDbGapStudies(): Promise<NCPIStudy[]> {
     const participantCount = gapData.participantCount;
 
     // Check completeness - platform studies included even without participant count
-    if (!isStudyComplete(ftpData.title, participantCount, isPlatformStudy)) {
+    if (!isStudyComplete(title, participantCount, isPlatformStudy)) {
       skippedIncomplete++;
       continue;
     }
@@ -188,31 +191,38 @@ export async function buildAllDbGapStudies(): Promise<NCPIStudy[]> {
       gapData.genotypePlatforms
     );
 
-    // Generate consent long names
+    // Consent codes come from FTP only; empty for child studies without FTP
+    const consentCodes = ftpData?.consentCodes || [];
     const consentLongNames: Record<string, string> = {};
-    for (const code of ftpData.consentCodes) {
+    for (const code of consentCodes) {
       const descriptions = await generateConsentDescriptions(code);
       consentLongNames[code] = descriptions.consentLongName;
     }
+
+    // Resolve accession: prefer FTP, fall back to esummary
+    const studyAccession = ftpData?.studyAccession || gapData.studyAccession || phsId;
 
     // Determine platforms - use platform map or default to [PLATFORM.DBGAP]
     const platforms = platformMap.get(phsId) || [PLATFORM.DBGAP];
 
     // Build the study object
     const study: NCPIStudy = {
-      consentCodes: ftpData.consentCodes,
+      consentCodes,
       consentLongNames,
       dataTypes,
       dbGapId: phsId,
-      dbGapUrl: getDbGapUrl(ftpData.studyAccession),
-      description: ftpData.description,
+      dbGapUrl: getDbGapUrl(studyAccession),
+      description: ftpData?.description || "",
       duosUrl: duosUrlMap.get(phsId) ?? null,
       focus: gapData.diseases[0] || "",
+      numChildren: gapData.numChildren,
+      parentStudyId: gapData.parentStudyId,
+      parentStudyName: gapData.parentStudyName,
       participantCount: participantCount || 0,
       platforms,
-      studyAccession: ftpData.studyAccession,
-      studyDesigns: ftpData.studyTypes,
-      title: ftpData.title,
+      studyAccession,
+      studyDesigns: ftpData?.studyTypes || gapData.studyTypes,
+      title,
     };
 
     studies.push(study);
@@ -246,15 +256,19 @@ export async function buildStudiesForIds(
   for (const phsId of phsIds) {
     console.log(`Processing ${phsId}...`);
 
+    // Fetch FTP data — may be null for child studies
     const ftpData = await fetchFTPStudyData(phsId);
-    if (!ftpData) {
-      console.log(`  Skipped: No FTP data`);
-      continue;
-    }
 
     await delay(API_DELAY);
 
     const gapData = await fetchGapStudyData(phsId);
+
+    // Resolve title: prefer FTP, fall back to esummary
+    const title = ftpData?.title || gapData.studyName;
+    if (!title) {
+      console.log(`  Skipped: No title from FTP or esummary`);
+      continue;
+    }
 
     // Check if this is a platform study (from TSV)
     const isPlatformStudy = platformMap.has(phsId);
@@ -262,9 +276,9 @@ export async function buildStudiesForIds(
     // Get participant count from Gap DB
     const participantCount = gapData.participantCount;
 
-    if (!isStudyComplete(ftpData.title, participantCount, isPlatformStudy)) {
+    if (!isStudyComplete(title, participantCount, isPlatformStudy)) {
       console.log(
-        `  Skipped: Incomplete (title: ${!!ftpData.title}, participants: ${participantCount}, platform: ${isPlatformStudy})`
+        `  Skipped: Incomplete (title: ${!!title}, participants: ${participantCount}, platform: ${isPlatformStudy})`
       );
       continue;
     }
@@ -283,28 +297,33 @@ export async function buildStudiesForIds(
       gapData.genotypePlatforms
     );
 
+    const consentCodes = ftpData?.consentCodes || [];
     const consentLongNames: Record<string, string> = {};
-    for (const code of ftpData.consentCodes) {
+    for (const code of consentCodes) {
       const descriptions = await generateConsentDescriptions(code);
       consentLongNames[code] = descriptions.consentLongName;
     }
 
+    const studyAccession = ftpData?.studyAccession || gapData.studyAccession || phsId;
     const platforms = platformMap.get(phsId) || [PLATFORM.DBGAP];
 
     const study: NCPIStudy = {
-      consentCodes: ftpData.consentCodes,
+      consentCodes,
       consentLongNames,
       dataTypes,
       dbGapId: phsId,
-      dbGapUrl: getDbGapUrl(ftpData.studyAccession),
-      description: ftpData.description,
+      dbGapUrl: getDbGapUrl(studyAccession),
+      description: ftpData?.description || "",
       duosUrl: duosUrlMap.get(phsId) ?? null,
       focus: gapData.diseases[0] || "",
+      numChildren: gapData.numChildren,
+      parentStudyId: gapData.parentStudyId,
+      parentStudyName: gapData.parentStudyName,
       participantCount: participantCount || 0,
       platforms,
-      studyAccession: ftpData.studyAccession,
-      studyDesigns: ftpData.studyTypes,
-      title: ftpData.title,
+      studyAccession,
+      studyDesigns: ftpData?.studyTypes || gapData.studyTypes,
+      title,
     };
 
     studies.push(study);
