@@ -5,6 +5,7 @@ export interface DbGapCSVRow {
   accession: string;
   description: string;
   name: string;
+  "Parent study": string;
   "Study Consent": string;
   "Study Content": string;
   "Study Design": string;
