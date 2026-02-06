@@ -166,9 +166,7 @@ async function fetchAbstracts(pmids: string[]): Promise<Map<string, string>> {
     const articleXml = match[0];
 
     // Extract abstract text (handles both simple and labeled abstracts)
-    const abstractMatch = articleXml.match(
-      /<Abstract>([\s\S]*?)<\/Abstract>/i
-    );
+    const abstractMatch = articleXml.match(/<Abstract>([\s\S]*?)<\/Abstract>/i);
     if (abstractMatch) {
       const abstract = stripXmlTags(abstractMatch[1]).trim().slice(0, 2000);
       if (abstract) {
@@ -369,8 +367,14 @@ function loadStudyIds(): Array<{ phsId: string; studyName: string }> {
 const TEST_STUDIES = [
   { phsId: "phs000007", studyName: "Framingham Heart Study" },
   { phsId: "phs000286", studyName: "Jackson Heart Study" },
-  { phsId: "phs000209", studyName: "Multi-Ethnic Study of Atherosclerosis (MESA)" },
-  { phsId: "phs000280", studyName: "Atherosclerosis Risk in Communities (ARIC)" },
+  {
+    phsId: "phs000209",
+    studyName: "Multi-Ethnic Study of Atherosclerosis (MESA)",
+  },
+  {
+    phsId: "phs000280",
+    studyName: "Atherosclerosis Risk in Communities (ARIC)",
+  },
   { phsId: "phs000287", studyName: "Cleveland Family Study" },
 ];
 
@@ -390,13 +394,17 @@ async function main(): Promise<void> {
   console.log("=".repeat(60));
   console.log(`Abstracts: ${skipAbstracts ? "OFF" : "ON"}`);
   console.log(`Full text (methods): ${fetchFullTextContent ? "ON" : "OFF"}`);
-  console.log(`Test mode: ${testMode ? "ON (using well-known studies)" : "OFF"}`);
+  console.log(
+    `Test mode: ${testMode ? "ON (using well-known studies)" : "OFF"}`
+  );
   console.log(`Study limit: ${limit || "none"}`);
   console.log();
 
   // Load studies
   let studies = testMode ? TEST_STUDIES : loadStudyIds();
-  console.log(`Loaded ${studies.length} studies ${testMode ? "(test set)" : "from catalog"}`);
+  console.log(
+    `Loaded ${studies.length} studies ${testMode ? "(test set)" : "from catalog"}`
+  );
 
   if (limit) {
     studies = studies.slice(0, limit);
@@ -440,7 +448,9 @@ async function main(): Promise<void> {
 
     // Progress update every 10 studies
     if ((i + 1) % 10 === 0) {
-      console.log(`  ... processed ${i + 1} studies, ${totalPubs} publications found`);
+      console.log(
+        `  ... processed ${i + 1} studies, ${totalPubs} publications found`
+      );
     }
   }
 
@@ -454,7 +464,12 @@ async function main(): Promise<void> {
   };
 
   // Write output
-  const outputPath = path.join(__dirname, "..", "catalog", "study-publications.json");
+  const outputPath = path.join(
+    __dirname,
+    "..",
+    "catalog",
+    "study-publications.json"
+  );
   fs.writeFileSync(outputPath, JSON.stringify(pipelineResults, null, 2));
 
   console.log();
@@ -462,7 +477,9 @@ async function main(): Promise<void> {
   console.log("Pipeline Complete");
   console.log("=".repeat(60));
   console.log(`Total studies processed: ${pipelineResults.totalStudies}`);
-  console.log(`Studies with publications: ${pipelineResults.studiesWithPublications}`);
+  console.log(
+    `Studies with publications: ${pipelineResults.studiesWithPublications}`
+  );
   console.log(`Total publications found: ${pipelineResults.totalPublications}`);
   console.log(`Output: ${outputPath}`);
 }

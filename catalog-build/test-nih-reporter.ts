@@ -151,10 +151,7 @@ async function getPublicationsForProjects(
 /**
  * Test study - query for projects and publications
  */
-async function testStudy(
-  studyName: string,
-  dbgapId: string
-): Promise<void> {
+async function testStudy(studyName: string, dbgapId: string): Promise<void> {
   console.log(`\n${"=".repeat(60)}`);
   console.log(`Testing: ${studyName} (${dbgapId})`);
   console.log("=".repeat(60));
@@ -168,7 +165,9 @@ async function testStudy(
     console.log("   Top 5 projects:");
     for (const proj of nameResults.results.slice(0, 5)) {
       const title = proj.project_title?.slice(0, 50) || "(no title)";
-      console.log(`   - ${proj.project_num} (FY${proj.fiscal_year}): ${title}...`);
+      console.log(
+        `   - ${proj.project_num} (FY${proj.fiscal_year}): ${title}...`
+      );
     }
   }
 
@@ -185,23 +184,39 @@ async function testStudy(
 
   if (coreProjects.size > 0) {
     const coreList = Array.from(coreProjects).slice(0, 5);
-    console.log(`\n[2] Getting publications for ${coreList.length} core projects: ${coreList.join(", ")}`);
+    console.log(
+      `\n[2] Getting publications for ${coreList.length} core projects: ${coreList.join(", ")}`
+    );
 
     const pubs = await getPublicationsForProjects(coreList);
     console.log(`   Found ${pubs.meta.total} publications`);
 
     if (pubs.results.length > 0) {
-      console.log("   Sample PMIDs:", pubs.results.slice(0, 10).map((p) => p.pmid).join(", "));
+      console.log(
+        "   Sample PMIDs:",
+        pubs.results
+          .slice(0, 10)
+          .map((p) => p.pmid)
+          .join(", ")
+      );
     }
   }
 
   // Strategy 3: Direct publication search by study name
   console.log(`\n[3] Direct publication search for: "${studyName}"`);
   const pubsByName = await searchPublicationsByText(studyName);
-  console.log(`   Found ${pubsByName.meta.total} publications mentioning study name`);
+  console.log(
+    `   Found ${pubsByName.meta.total} publications mentioning study name`
+  );
 
   if (pubsByName.results.length > 0) {
-    console.log("   Sample PMIDs:", pubsByName.results.slice(0, 10).map((p) => p.pmid).join(", "));
+    console.log(
+      "   Sample PMIDs:",
+      pubsByName.results
+        .slice(0, 10)
+        .map((p) => p.pmid)
+        .join(", ")
+    );
   }
 }
 
@@ -277,7 +292,10 @@ async function getPublicationDetails(pmids: number[]): Promise<void> {
 /**
  * Deep test for a single study with verification
  */
-async function deepTestStudy(studyName: string, dbgapId: string): Promise<void> {
+async function deepTestStudy(
+  studyName: string,
+  dbgapId: string
+): Promise<void> {
   console.log(`\n${"=".repeat(60)}`);
   console.log(`DEEP TEST: ${studyName} (${dbgapId})`);
   console.log("=".repeat(60));
@@ -355,7 +373,9 @@ async function searchPubMedForDbGap(dbgapId: string): Promise<void> {
   const pubmedResp = await fetch(pubmedUrl);
   if (pubmedResp.ok) {
     const pubmedData = await pubmedResp.json();
-    console.log(`   Also found ${pubmedData.esearchresult?.count || 0} PubMed abstracts mentioning ${dbgapId}`);
+    console.log(
+      `   Also found ${pubmedData.esearchresult?.count || 0} PubMed abstracts mentioning ${dbgapId}`
+    );
   }
 }
 
@@ -367,7 +387,7 @@ async function main(): Promise<void> {
   console.log("API: https://api.reporter.nih.gov/v2\n");
 
   // Test approach 1: Grant-based discovery
-  console.log("=" .repeat(60));
+  console.log("=".repeat(60));
   console.log("APPROACH 1: Grant-based discovery (NIH RePORTER)");
   console.log("Finds papers from grants that mention the study");
   console.log("=".repeat(60));
