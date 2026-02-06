@@ -615,6 +615,7 @@ AWS S3: s3://pmc-oa-opendata (free egress)
 2. **Methods Extraction**: Use LLM to extract protocols from methods sections?
 3. **Variable-Paper Linking**: Can we automatically detect which variables a paper used?
 
+<<<<<<< HEAD
 ## Platform Deep Links (Study Detail Page)
 
 The study detail page currently shows a "View in AnVIL" link for AnVIL-hosted studies (see `buildViewInAnVIL` in `viewModelBuilders.ts`). This section documents how to add equivalent deep links for the remaining three NCPI platforms.
