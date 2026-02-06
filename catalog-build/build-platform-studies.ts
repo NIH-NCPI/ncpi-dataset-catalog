@@ -48,6 +48,7 @@ export async function buildNCPIPlatformStudies(
     const ncpiStudy = {
       ...study,
       consentLongNames,
+      dbGapUrl: `https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=${study.studyAccession}`,
       duosUrl: duosUrlByDbGapId.get(study.dbGapId) ?? null,
       platforms: [stub.platform],
     };
