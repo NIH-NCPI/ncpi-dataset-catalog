@@ -4,6 +4,7 @@ export interface DbGapStudy {
   dbGapId: string;
   description: string;
   focus: string;
+  gdcProjectId?: string;
   numChildren: number;
   parentStudyId: string | null;
   parentStudyName: string | null;

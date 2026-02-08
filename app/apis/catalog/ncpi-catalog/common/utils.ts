@@ -12,6 +12,7 @@ export function NCPIStudyInputMapper(ncpiStudy: NCPIStudy): NCPICatalogStudy {
     duosUrl: ncpiStudy.duosUrl,
     dbGapId: ncpiStudy.dbGapId,
     focus: sanitizeString(ncpiStudy.focus),
+    gdcProjectId: ncpiStudy.gdcProjectId ?? null,
     participantCount: ncpiStudy.participantCount,
     platform: ncpiStudy.platforms,
     publications: ncpiStudy.publications ?? [],

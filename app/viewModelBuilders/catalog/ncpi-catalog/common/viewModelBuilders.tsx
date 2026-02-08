@@ -314,26 +314,21 @@ export const buildToStudies = (
 };
 
 /**
- * Build props for Link component from the given NCPI entity.
+ * Build props for Links component with deep links to each platform hosting the study.
  * @param ncpiCatalogStudy - NCPI catalog study.
- * @returns model to be used as props for the Link component.
+ * @returns model to be used as props for the Links component.
  */
-export const buildViewInAnVIL = (
+export const buildPlatformLinks = (
   ncpiCatalogStudy: NCPICatalogStudy,
-): React.ComponentProps<typeof C.Link> => {
-  const params = encodeURIComponent(JSON.stringify(
-    [
-      {
-        categoryKey: "datasets.registered_identifier",
-        value: [ncpiCatalogStudy.dbGapId],
-      },
-    ],
-  ));
-  return {
-    label: "View in AnVIL",
-    TypographyProps: { variant: TYPOGRAPHY_PROPS.VARIANT.BODY_400_2_LINES },
-    url: `https://explore.anvilproject.org/datasets?filter=${params}`,
-  };
+): React.ComponentProps<typeof C.Links> => {
+  const links: React.ComponentProps<typeof C.Links>["links"] = [];
+  for (const platform of ncpiCatalogStudy.platform) {
+    const link = getPlatformLink(ncpiCatalogStudy, platform);
+    if (link) {
+      links.push(link);
+    }
+  }
+  return { links };
 };
 
 /**
@@ -391,14 +386,52 @@ function getStudyDbGapIdKeyValue(studyAccession: string): ReactElement {
 }
 
 /**
- * Renders configuration component children when the catalog platform is AnVIL.
+ * Returns a link config for the given platform, or null if no link is available.
  * @param ncpiCatalogStudy - NCPI catalog study.
- * @returns model to be used as props for the ConditionalComponent component.
+ * @param platform - Platform to generate a link for.
+ * @returns link config or null.
  */
-export const renderWhenPlatformIsAnVIL = (
+function getPlatformLink(
   ncpiCatalogStudy: NCPICatalogStudy,
-): React.ComponentProps<typeof C.ConditionalComponent> => {
-  return {
-    isIn: ncpiCatalogStudy.platform.includes(PLATFORM.ANVIL),
-  };
-};
+  platform: PLATFORM,
+): React.ComponentProps<typeof C.Links>["links"][number] | null {
+  const { dbGapId, gdcProjectId } = ncpiCatalogStudy;
+  switch (platform) {
+    case PLATFORM.ANVIL: {
+      const params = encodeURIComponent(
+        JSON.stringify([
+          {
+            categoryKey: "datasets.registered_identifier",
+            value: [dbGapId],
+          },
+        ]),
+      );
+      return {
+        label: "View in AnVIL",
+        target: ANCHOR_TARGET.BLANK,
+        url: `https://explore.anvilproject.org/datasets?filter=${params}`,
+      };
+    }
+    case PLATFORM.BDC:
+      return {
+        label: "View BDC Studies",
+        target: ANCHOR_TARGET.BLANK,
+        url: "https://gen3.biodatacatalyst.nhlbi.nih.gov/discovery",
+      };
+    case PLATFORM.CRDC:
+      if (!gdcProjectId) return null;
+      return {
+        label: "View in CRDC",
+        target: ANCHOR_TARGET.BLANK,
+        url: `https://portal.gdc.cancer.gov/projects/${encodeURIComponent(gdcProjectId)}`,
+      };
+    case PLATFORM.KFDRC:
+      return {
+        label: "View KFDRC Studies",
+        target: ANCHOR_TARGET.BLANK,
+        url: "https://portal.kidsfirstdrc.org/public-studies",
+      };
+    default:
+      return null;
+  }
+}
