@@ -43,6 +43,7 @@ export interface NCPICatalogStudy {
   duosUrl: string | null;
   dbGapId: string;
   focus: string;
+  gdcProjectId: string | null;
   participantCount: number;
   platform: PLATFORM[];
   publications: Publication[];

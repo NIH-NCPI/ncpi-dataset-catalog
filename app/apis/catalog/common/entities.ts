@@ -4,6 +4,7 @@ export interface DbGapStudy {
   dbGapId: string;
   description: string;
   focus: string;
+  gdcProjectId?: string;
   participantCount: number;
   publications: Publication[];
   studyAccession: string;

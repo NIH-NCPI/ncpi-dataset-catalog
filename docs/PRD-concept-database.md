@@ -105,10 +105,10 @@ The most reliable method combines:
 
 ### Priority 3: Web-Only / Registration Required
 
-| Source                   | Records                           | Content                       | Access                                           |
-| ------------------------ | --------------------------------- | ----------------------------- | ------------------------------------------------ |
+| Source                   | Records                           | Content                        | Access                                           |
+| ------------------------ | --------------------------------- | ------------------------------ | ------------------------------------------------ |
 | **PhenX-dbGaP Mappings** | 13,653 variables from 521 studies | PhenX ID ↔ dbGaP phv mappings | [Web tool](https://www.phenxtoolkit.org/vsearch) |
-| **PheKB**                | ~100 phenotype algorithms         | ICD, RxNorm, LOINC code lists | [Registration](https://phekb.org)                |
+| **PheKB**                | ~100 phenotype algorithms         | ICD, RxNorm, LOINC code lists  | [Registration](https://phekb.org)                |
 
 ## Data Model
 
