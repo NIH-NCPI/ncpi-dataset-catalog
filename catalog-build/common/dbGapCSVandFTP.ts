@@ -395,6 +395,7 @@ export async function getStudyFromCSVandFTP(
     description,
     focus,
     participantCount,
+    publications: [],
     studyAccession: csvRow.accession,
     studyDesigns,
     title,
