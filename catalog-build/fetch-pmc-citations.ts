@@ -1,14 +1,19 @@
 /**
- * Fetch publications that cite dbGaP studies
+ * Fetch PMC papers that cite or mention dbGaP study accessions
+ *
+ * These are papers found by searching PubMed Central for each study's
+ * dbGaP accession number (e.g. "phs000007"). Unlike the "Selected
+ * Publications" in GapExchange XML, these are NOT curated by the PI —
+ * they are any paper in PMC that mentions the accession.
  *
  * Pipeline:
- * 1. Search PMC for papers citing each dbGaP accession (phs######)
- * 2. Fetch metadata for those papers (title, authors, journal, year)
- * 3. Optionally fetch full text and extract Methods section
- * 4. Output JSON mapping study IDs to their citing publications
+ * 1. Search PMC via NCBI eUtils for papers mentioning each dbGaP accession (phs######)
+ * 2. Fetch metadata (title, authors, journal, year) via eSummary
+ * 3. Optionally fetch abstracts from PubMed and full text from PMC
+ * 4. Output catalog/pmc-citations.json
  *
  * Usage:
- *   npx esrun catalog-build/fetch-study-publications.ts [--full-text] [--limit=N]
+ *   npx esrun catalog-build/fetch-pmc-citations.ts [--full-text] [--limit=N]
  */
 
 import * as fs from "fs";
@@ -468,7 +473,7 @@ async function main(): Promise<void> {
     __dirname,
     "..",
     "catalog",
-    "study-publications.json"
+    "pmc-citations.json"
   );
   fs.writeFileSync(outputPath, JSON.stringify(pipelineResults, null, 2));
 

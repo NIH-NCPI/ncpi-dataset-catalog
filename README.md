@@ -48,13 +48,13 @@ npm run update-dbgap-source       # Update dbGaP advanced search CSV
 
 ### 2. Fetch publications (optional)
 
-Fetches PI-curated publication lists from each study's GapExchange XML on the dbGaP FTP server, then resolves full metadata (title, authors, DOI, journal, citation count) via the Semantic Scholar API.
+Fetches PI-curated "Selected Publications" from each study's GapExchange XML on the dbGaP FTP server, then resolves full metadata (title, authors, DOI, journal, citation count) via the Semantic Scholar API.
 
 ```bash
-npm run fetch-dbgap-publications
+npm run fetch-dbgap-selected-publications
 ```
 
-This produces `catalog/dbgap-publications.json` (~30 MB, not checked into git). The script takes approximately 30 minutes due to rate-limited FTP and API calls across ~3,000 studies.
+This produces `catalog/dbgap-selected-publications.json` (~30 MB, not checked into git). The script takes approximately 30 minutes due to rate-limited FTP and API calls across ~3,000 studies.
 
 ### 3. Build the catalog database
 
@@ -64,7 +64,7 @@ Merges platform sources, dbGaP metadata, and publications into the final catalog
 npm run build-ncpi-db
 ```
 
-This reads `catalog/dbgap-publications.json` (if present) and attaches publications to each study. The output files (`catalog/ncpi-platform-studies.json` and `catalog/ncpi-platforms.json`) are checked into git and used by the site at build time.
+This reads `catalog/dbgap-selected-publications.json` (if present) and attaches publications to each study. The output files (`catalog/ncpi-platform-studies.json` and `catalog/ncpi-platforms.json`) are checked into git and used by the site at build time.
 
 ### Full refresh
 
@@ -72,7 +72,7 @@ To completely refresh all data and rebuild:
 
 ```bash
 npm run update-all-ncpi-sources
-npm run fetch-dbgap-publications
+npm run fetch-dbgap-selected-publications
 npm run build-ncpi-db
 npm run build:dev
 ```

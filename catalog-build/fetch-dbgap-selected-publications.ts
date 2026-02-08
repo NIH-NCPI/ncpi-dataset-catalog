@@ -1,16 +1,20 @@
 /**
- * Fetch dbGaP "Selected Publications" from GapExchange XML + Semantic Scholar metadata
+ * Fetch dbGaP "Selected Publications" (PI-curated) via GapExchange XML + Semantic Scholar
+ *
+ * These are publications that each study's PI has hand-picked as representative
+ * of the study. They are listed in the <SelectedPublications> section of the
+ * GapExchange XML hosted on the dbGaP FTP server.
  *
  * Pipeline:
  * 1. For each dbGaP study, fetch GapExchange XML from FTP to get curated PMIDs
  * 2. Batch-resolve PMIDs via Semantic Scholar API for full metadata
  *    (title, authors, DOI, journal, citation counts, etc.)
- * 3. Output JSON mapping study IDs to their curated publications
+ * 3. Output catalog/dbgap-selected-publications.json
  *
  * Requires: S2_API_KEY in .env file (free from https://www.semanticscholar.org/product/api)
  *
  * Usage:
- *   npx esrun catalog-build/fetch-dbgap-publications.ts [--test] [--limit=N] [--verbose]
+ *   npx esrun catalog-build/fetch-dbgap-selected-publications.ts [--test] [--limit=N] [--verbose]
  */
 
 import * as fs from "fs";
@@ -461,7 +465,7 @@ async function main(): Promise<void> {
     __dirname,
     "..",
     "catalog",
-    "dbgap-publications.json"
+    "dbgap-selected-publications.json"
   );
   fs.writeFileSync(outputPath, JSON.stringify(pipelineResults, null, 2));
 
