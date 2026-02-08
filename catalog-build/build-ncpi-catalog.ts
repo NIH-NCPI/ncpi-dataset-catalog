@@ -145,10 +145,10 @@ async function readValuesFile<T>(
  */
 function loadPublicationsByStudy(): Map<string, Publication[]> {
   const pubsByStudy = new Map<string, Publication[]>();
-  const pubsPath = "catalog/dbgap-publications.json";
+  const pubsPath = "catalog/dbgap-selected-publications.json";
 
   if (!fs.existsSync(pubsPath)) {
-    console.log("No dbgap-publications.json found, skipping publications");
+    console.log("No dbgap-selected-publications.json found, skipping publications");
     return pubsByStudy;
   }
 
