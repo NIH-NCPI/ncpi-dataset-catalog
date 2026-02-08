@@ -1,3 +1,5 @@
+import fs from "fs";
+import { Publication } from "../app/apis/catalog/common/entities";
 import { PlatformStudy } from "../app/apis/catalog/ncpi-catalog/common/entities";
 import { parseContentRows, readFile } from "../app/utils/tsvParser";
 import { writeAsJSON } from "./common/utils";
@@ -62,6 +64,20 @@ async function buildCatalog(): Promise<void> {
     duosUrlByDbGapId
   );
 
+  // Merge publications from dbgap-publications.json into studies
+  const publicationsByStudy = loadPublicationsByStudy();
+  let studiesWithPubs = 0;
+  for (const study of ncpiPlatformStudies) {
+    const pubs = publicationsByStudy.get(study.dbGapId);
+    if (pubs) {
+      study.publications = pubs;
+      studiesWithPubs++;
+    }
+  }
+  console.log(
+    `Attached publications to ${studiesWithPubs} of ${ncpiPlatformStudies.length} studies`
+  );
+
   const ncpiCatalogPlatforms = buildNCPICatalogPlatforms(ncpiPlatformStudies);
 
   await writeAsJSON(
@@ -102,6 +118,58 @@ async function readValuesFile<T>(
     sourceFieldKey,
     sourceFieldType
   );
+}
+
+/**
+ * Loads publications from dbgap-publications.json and returns a map from phsId to Publication[].
+ * @returns Map from dbGaP study ID to simplified publications array.
+ */
+function loadPublicationsByStudy(): Map<string, Publication[]> {
+  const pubsByStudy = new Map<string, Publication[]>();
+  const pubsPath = "catalog/dbgap-publications.json";
+
+  if (!fs.existsSync(pubsPath)) {
+    console.log("No dbgap-publications.json found, skipping publications");
+    return pubsByStudy;
+  }
+
+  const raw = JSON.parse(fs.readFileSync(pubsPath, "utf-8"));
+  for (const study of raw.studies) {
+    if (!study.publications || study.publications.length === 0) continue;
+    const pubs: Publication[] = study.publications.map(
+      (p: Record<string, unknown>) => ({
+        authors: formatAuthors(
+          p.authors as { name: string }[] | undefined
+        ),
+        citationCount: (p.citationCount as number) ?? 0,
+        doi: (p.externalIds as Record<string, string>)?.DOI ?? "",
+        journal: (p.journal as { name: string })?.name ?? p.venue ?? "",
+        title: (p.title as string) ?? "",
+        year: (p.year as number) ?? 0,
+      })
+    );
+    // Sort by citation count descending (most-cited first)
+    pubs.sort((a, b) => b.citationCount - a.citationCount);
+    pubsByStudy.set(study.phsId, pubs);
+  }
+  console.log(`Loaded publications for ${pubsByStudy.size} studies`);
+  return pubsByStudy;
+}
+
+/**
+ * Formats an array of author objects into a citation-style author string.
+ * @param authors - Array of author objects with name property.
+ * @returns Formatted author string (e.g., "Smith J, Jones A, et al.").
+ */
+function formatAuthors(authors: { name: string }[] | undefined): string {
+  if (!authors || authors.length === 0) return "";
+  if (authors.length <= 3) {
+    return authors.map((a) => a.name).join(", ");
+  }
+  return `${authors
+    .slice(0, 3)
+    .map((a) => a.name)
+    .join(", ")}, et al.`;
 }
 
 buildCatalog();

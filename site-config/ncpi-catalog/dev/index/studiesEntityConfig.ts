@@ -19,6 +19,7 @@ import {
 } from "../../category";
 import { mainColumn } from "../detail/study/overviewMainColumn";
 import { sideColumn } from "../detail/study/overviewSideColumn";
+import { publicationsMainColumn } from "../detail/study/publicationsMainColumn";
 import { top } from "../detail/study/top";
 
 /**
@@ -34,6 +35,11 @@ export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
         mainColumn: mainColumn,
         route: "",
         sideColumn: sideColumn,
+      },
+      {
+        label: "Selected Publications",
+        mainColumn: publicationsMainColumn,
+        route: "selected-publications",
       },
     ],
     top: top,

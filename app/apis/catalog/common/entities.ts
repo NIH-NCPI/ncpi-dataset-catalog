@@ -8,7 +8,17 @@ export interface DbGapStudy {
   parentStudyId: string | null;
   parentStudyName: string | null;
   participantCount: number;
+  publications: Publication[];
   studyAccession: string;
   studyDesigns: string[];
   title: string;
+}
+
+export interface Publication {
+  authors: string;
+  citationCount: number;
+  doi: string;
+  journal: string;
+  title: string;
+  year: number;
 }

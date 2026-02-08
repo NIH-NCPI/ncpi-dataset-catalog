@@ -14,6 +14,7 @@ export function NCPIStudyInputMapper(ncpiStudy: NCPIStudy): NCPICatalogStudy {
     focus: sanitizeString(ncpiStudy.focus),
     participantCount: ncpiStudy.participantCount,
     platform: ncpiStudy.platforms,
+    publications: ncpiStudy.publications ?? [],
     studyAccession: ncpiStudy.studyAccession,
     studyDescription: ncpiStudy.description,
     studyDesign: ncpiStudy.studyDesigns,
