@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.7.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.6.0...v0.7.0) (2026-02-09)
+
+
+### Features
+
+* add parent-child study relationships to catalog ([#159](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/159)) ([1812dad](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/1812dadf2e6127d536affbf243f0dfba67a7c395))
+* add Selected Publications tab to study detail pages ([#164](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/164)) ([db1e24c](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/db1e24cd3ef34f8dadf370d88a9bf816b270ff83))
+* replace “n tag” on platforms with link to filtered studies list ([#151](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/151)) ([#153](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/153)) ([c7924aa](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/c7924aaf43dcc7e53a2b2d3f6608b099e456a421))
+
+
+### Bug Fixes
+
+* add dbGapUrl to CSV-built catalog studies ([#157](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/157)) ([6312633](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/6312633b4f83da22331a0c06bab3274b4dfc014b))
+
+
+### Chores
+
+* update findable-ui to latest ([#149](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/149)) ([#150](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/150)) ([9b637da](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/9b637da8fdf92643c53fdcbcbbe8035d684bbd4b))
+
+
+### Documentation
+
+* add PRD and planning documents for all-dbGaP feature ([#161](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/161)) ([cd99570](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/cd99570d24c2ad34fd09c3bd43b0ea4f32b0516b))
+
 ## [0.6.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.5.1...v0.6.0) (2026-01-31)
 
 
