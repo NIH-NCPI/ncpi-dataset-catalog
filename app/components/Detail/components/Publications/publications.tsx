@@ -6,16 +6,9 @@ import {
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { Link, Typography } from "@mui/material";
 import React, { JSX } from "react";
-import { Publication } from "../../../../apis/catalog/common/entities";
 import { StyledStack } from "./publications.styles";
 import { formatCitation, getDOIUrl } from "./utils";
-
-/**
- * Props for the Publications component.
- */
-export interface PublicationsProps {
-  publications: Publication[];
-}
+import { Props } from "./types";
 
 /**
  * Renders a list of publication cards with title, citation, and DOI link.
@@ -23,9 +16,7 @@ export interface PublicationsProps {
  * @param props.publications - Array of publications to display.
  * @returns Publications element.
  */
-export const Publications = ({
-  publications,
-}: PublicationsProps): JSX.Element => {
+export const Publications = ({ publications }: Props): JSX.Element => {
   return (
     <StyledStack gap={4} useFlexGap>
       {publications.length > 0 ? (
