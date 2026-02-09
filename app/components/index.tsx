@@ -21,9 +21,10 @@ export { BasicCell } from "@databiosphere/findable-ui/lib/components/Table/compo
 export { NTagCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/NTagCell/nTagCell";
 export { ExportMethodView } from "@databiosphere/findable-ui/lib/views/ExportMethodView/exportMethodView";
 export { AlertTitle } from "@mui/material";
-export { ConsentCodeList } from "./Detail/components/ConsentCodeList/consentCodeList";
-export { ConsentTooltip } from "./Detail/components/ConsentTooltip/consentTooltip";
-export { ConsentCodesCell } from "./Index/components/ConsentCodesCell/consentCodesCell";
-export { LabelIconMenuItem } from "./Layout/components/Header/components/Content/components/Navigation/components/NavigationMenuItems/components/LabelIconMenuItem/labelIconMenuItem";
 export { ConditionalComponent } from "@databiosphere/findable-ui/lib/components/ComponentCreator/components/ConditionalComponent/conditionalComponent";
 export { MarkdownRenderer } from "@databiosphere/findable-ui/lib/components/MarkdownRenderer/markdownRenderer";
+export { ConsentCodeList } from "./Detail/components/ConsentCodeList/consentCodeList";
+export { ConsentTooltip } from "./Detail/components/ConsentTooltip/consentTooltip";
+export { Publications } from "./Detail/components/Publications/publications";
+export { ConsentCodesCell } from "./Index/components/ConsentCodesCell/consentCodesCell";
+export { LabelIconMenuItem } from "./Layout/components/Header/components/Content/components/Navigation/components/NavigationMenuItems/components/LabelIconMenuItem/labelIconMenuItem";

@@ -1,4 +1,4 @@
-import { DbGapStudy } from "../../common/entities";
+import { DbGapStudy, Publication } from "../../common/entities";
 
 export enum PLATFORM {
   ANVIL = "AnVIL",
@@ -45,6 +45,7 @@ export interface NCPICatalogStudy {
   focus: string;
   participantCount: number;
   platform: PLATFORM[];
+  publications: Publication[];
   studyAccession: string;
   studyDescription: string;
   studyDesign: string[];

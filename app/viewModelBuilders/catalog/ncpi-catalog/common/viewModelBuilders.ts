@@ -18,6 +18,19 @@ import { MDX_COMPONENTS } from "app/components/MarkdownRenderer/constants";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 
 /**
+ * Build props for Publications component from the given NCPI study.
+ * @param ncpiCatalogStudy - NCPI catalog study.
+ * @returns Model to be used as props for the Publications component.
+ */
+export const buildPublications = (
+  ncpiCatalogStudy: NCPICatalogStudy,
+): React.ComponentProps<typeof C.Publications> => {
+  return {
+    publications: ncpiCatalogStudy.publications ?? [],
+  };
+};
+
+/**
  * Build props for ConsentCodesCell component from the given NCPI entity.
  * @param ncpiCatalogEntry - NCPI catalog entity.
  * @returns Model to be used as props for the ConsentCodesCell component.

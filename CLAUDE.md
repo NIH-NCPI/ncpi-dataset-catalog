@@ -35,7 +35,17 @@ npm run update-bdc-source       # Update BDC data
 npm run update-crdc-source      # Update CRDC data
 npm run update-kfdrc-source     # Update KFDRC data
 npm run update-dbgap-source     # Update dbGaP data
+npm run fetch-dbgap-selected-publications # Fetch PI-curated publications from dbGaP GapExchange XML
 ```
+
+### Updating Publications
+
+To refresh publication data displayed on study detail pages:
+
+1. `npm run fetch-dbgap-selected-publications` — Fetches PI-curated PMIDs from each study's GapExchange XML on the dbGaP FTP server, then resolves full metadata (title, authors, DOI, journal, citation count) via Semantic Scholar. Outputs `catalog/dbgap-selected-publications.json` (not checked into git).
+2. `npm run build-ncpi-db` — Rebuilds the catalog, merging publications into `catalog/ncpi-platform-studies.json`.
+
+The fetch step takes ~30 minutes (rate-limited FTP + S2 API calls for ~3,000 studies).
 
 ## Architecture
 
