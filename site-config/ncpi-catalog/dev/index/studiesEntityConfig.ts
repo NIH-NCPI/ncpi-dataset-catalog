@@ -48,6 +48,7 @@ export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
   exploreMode: EXPLORE_MODE.CS_FETCH_CS_FILTERING,
   getId: getStudyId,
   getTitle: getTitle,
+  hideTabs: true,
   label: "Studies",
   list: {
     columns: [
