@@ -12,10 +12,16 @@ export function buildNextQuery(
 ): ParsedUrlQuery {
   const { entityListType, params } = query;
 
-  if (!entityListType || !params || typeof params === "string")
+  // Guard against hydration or malformed query
+  if (!entityListType || !params) return query;
+
+  // Params expected to be a string[].
+  if (typeof params === "string")
     throw new Error("Unexpected query params", { cause: { query } });
 
   const [entityId] = params;
+
+  if (!tab) return { entityListType, params: [entityId] };
 
   return { entityListType, params: [entityId, tab] };
 }
@@ -28,7 +34,11 @@ export function buildNextQuery(
 export function getTabValue(query: ParsedUrlQuery): string {
   const { params } = query;
 
-  if (!params || typeof params === "string")
+  // Return default during hydration when query isn't ready yet.
+  if (!params) return "";
+
+  // Params expected to be a string[].
+  if (typeof params === "string")
     throw new Error("Unexpected query params", { cause: { query } });
 
   // Handle case where params is an array but has no value at index 1 e.g. "overview" tab where params is [entityId] instead of [entityId, "overview"].

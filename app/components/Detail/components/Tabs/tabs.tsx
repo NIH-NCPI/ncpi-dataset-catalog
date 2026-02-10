@@ -11,7 +11,9 @@ import { StyledTabs } from "./tabs.styles";
  * @param props.publications - Array of publications associated with the study, used to display the count in the "Selected Publications" tab.
  * @returns Tabs element for the study detail page.
  */
-export const Tabs = ({ publications }: NCPICatalogStudy): JSX.Element => {
+export const Tabs = ({
+  publications,
+}: NCPICatalogStudy): JSX.Element | null => {
   const { push, query } = useRouter();
   return (
     <StyledTabs
