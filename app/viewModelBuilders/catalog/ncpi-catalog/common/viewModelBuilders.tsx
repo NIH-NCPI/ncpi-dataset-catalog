@@ -16,6 +16,7 @@ import { getPluralizedMetadataLabel } from "../../../../components/Index/common/
 import { RequestAccess } from "app/components/RequestAccess/requestAccess";
 import { MDX_COMPONENTS } from "app/components/MarkdownRenderer/constants";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
+import { Tabs } from "app/components/Detail/components/Tabs/tabs";
 
 /**
  * Build props for Publications component from the given NCPI study.
@@ -235,10 +236,11 @@ export const buildStudyHero = (
   ncpiCatalogStudy: NCPICatalogStudy,
   viewContext: ViewContext<NCPICatalogStudy>,
 ): React.ComponentProps<typeof C.BackPageHero> => {
-  const { dbGapId, title } = ncpiCatalogStudy;
+  const { title } = ncpiCatalogStudy;
   return {
     actions: RequestAccess({ ncpiCatalogStudy }),
     breadcrumbs: getCatalogBreadcrumbs(viewContext, title),
+    children: <Tabs key="study-detail-tabs" {...ncpiCatalogStudy} />,
     title: title,
   };
 };

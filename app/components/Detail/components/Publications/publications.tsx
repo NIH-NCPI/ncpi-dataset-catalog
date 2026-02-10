@@ -21,7 +21,7 @@ export const Publications = ({ publications }: Props): JSX.Element => {
     <StyledStack gap={4} useFlexGap>
       {publications.length > 0 ? (
         publications.map((publication, i) => (
-          <FluidPaper key={publication.doi || i} elevation={0}>
+          <FluidPaper key={`${publication.doi}-${i}`} elevation={0}>
             <Typography
               component="h4"
               variant={TYPOGRAPHY_PROPS.VARIANT.BODY_LARGE_500}
