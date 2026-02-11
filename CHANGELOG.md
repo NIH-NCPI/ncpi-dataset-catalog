@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.7.0...v0.8.0) (2026-02-10)
+
+
+### Features
+
+* show publication count on selected publications tab ([#167](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/167)) ([#168](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/168)) ([cdfaea5](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/cdfaea57840d194788230946320753845044642a))
+
 ## [0.7.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.6.0...v0.7.0) (2026-02-09)
 
 
