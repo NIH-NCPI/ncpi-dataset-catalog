@@ -19,6 +19,8 @@ import { getEntityService } from "@databiosphere/findable-ui/lib/hooks/useEntity
 import { EXPLORE_MODE } from "@databiosphere/findable-ui/lib/hooks/useExploreMode/types";
 import { database } from "@databiosphere/findable-ui/lib/utils/database";
 import { EntityDetailView } from "@databiosphere/findable-ui/lib/views/EntityDetailView/entityDetailView";
+import { NCPICatalogStudy } from "app/apis/catalog/ncpi-catalog/common/entities";
+import { StudyJsonLd } from "app/components/Detail/components/StudyJsonLd/studyJsonLd";
 import { config } from "app/config/config";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
@@ -36,18 +38,29 @@ interface PageUrl extends ParsedUrlQuery {
 }
 
 export interface EntityDetailPageProps extends AzulEntityStaticResponse {
+  browserURL?: string;
   entityListType: string;
 }
 
 /**
  * Entity detail view page.
  * @param props - Entity detail view page props.
+ * @param props.browserURL - Browser URL.
+ * @param props.data - Entity data.
  * @param props.entityListType - Entity list type.
  * @returns Entity detail view component.
  */
 const EntityDetailPage = (props: EntityDetailPageProps): JSX.Element => {
-  if (!props.entityListType) return <></>;
-  return <EntityDetailView {...props} />;
+  const { browserURL, data, entityListType } = props;
+  if (!entityListType) return <></>;
+  return (
+    <>
+      {entityListType === "studies" && browserURL && data && (
+        <StudyJsonLd browserURL={browserURL} study={data as NCPICatalogStudy} />
+      )}
+      <EntityDetailView {...props} />
+    </>
+  );
 };
 
 /**
@@ -134,7 +147,7 @@ export const getStaticProps: GetStaticProps<AzulEntityStaticResponse> = async ({
   params,
 }: GetStaticPropsContext) => {
   const appConfig = config();
-  const { entities } = appConfig;
+  const { browserURL, entities } = appConfig;
   const entityListType = (params as PageUrl).entityListType;
   const slug = (params as PageUrl).params;
   const entityConfig = getEntityConfig(entities, entityListType);
@@ -143,7 +156,7 @@ export const getStaticProps: GetStaticProps<AzulEntityStaticResponse> = async ({
 
   if (!entityConfig || !entityId) return { notFound: true };
 
-  const props: EntityDetailPageProps = { entityListType };
+  const props: EntityDetailPageProps = { browserURL, entityListType };
 
   // Process entity props.
   await processEntityProps(entityConfig, entityTab, entityId, props);
