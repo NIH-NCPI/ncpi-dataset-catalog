@@ -38,7 +38,9 @@ No single interface lets a researcher filter by disease focus and assay type acr
 
 The four NCPI cloud platforms (AnVIL, BDC, CRDC, KFDRC) collectively host ~412 unique dbGaP studies — roughly **13% of the ~3,100 released studies** in dbGaP. The platforms serve largely non-overlapping research communities with minimal overlap (only 6 studies appear on more than one platform).
 
-The NCPI Dataset Catalog already includes dbGaP itself as a fifth source, bringing study coverage to ~94% (~2,944 studies). With this broad coverage in place, the opportunity is to provide **rich, natural-language search over study-level metadata** — disease focus, molecular data types (WGS, WES, RNA-seq, genotyping arrays, etc.), study design, and participant populations — across all studies in a single interface.
+The NCPI Dataset Catalog already includes dbGaP itself as a fifth source, bringing study coverage to ~94% (~2,944 studies). With this broad coverage in place, the opportunity is to provide **rich, natural-language search over study-level metadata** — disease focus, molecular data types (WGS, WES, RNA-seq, genotyping arrays, etc.), study design, and participant demographics — across all studies in a single interface.
+
+This requires its own concept mapping work. Disease focus terms are free-text PI labels ("Type 2 Diabetes" vs "T2D" vs "Metabolic Syndrome") that need resolution to standard disease ontologies (MeSH, UMLS). Study descriptions contain additional signals — comorbidities, populations, methods — that structured fields miss. Demographics (age ranges, ancestry, sex distribution) are not available as structured metadata but could be extracted from study descriptions or inferred from phenotype variable summary statistics in var_report.xml.
 
 ### Opportunity 2: Concept-Based Variable Search
 
@@ -453,6 +455,30 @@ UMLS (Unified Medical Language System) is the recommended primary standard becau
 Where available, store cross-references to these systems in the `related_codes` field.
 
 ### OpenSearch Index Design
+
+#### Index: `studies`
+
+```json
+{
+  "mappings": {
+    "properties": {
+      "phs_id": { "type": "keyword" },
+      "title": { "type": "text", "analyzer": "standard" },
+      "description": { "type": "text", "analyzer": "standard" },
+      "focus": {
+        "type": "text",
+        "fields": { "keyword": { "type": "keyword" } }
+      },
+      "focus_concepts": { "type": "keyword" },
+      "data_types": { "type": "keyword" },
+      "study_design": { "type": "keyword" },
+      "participant_count": { "type": "integer" },
+      "platforms": { "type": "keyword" },
+      "consent_codes": { "type": "keyword" }
+    }
+  }
+}
+```
 
 #### Index: `concepts`
 
