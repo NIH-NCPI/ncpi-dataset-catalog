@@ -658,3 +658,112 @@ These numbers reflect the downloaded data as of January 2025. dbGaP has since gr
 - 66% of studies have 11-50 variables
 - Only 60 studies (2%) have >1,000 variables
 - Top studies: Framingham (57K), WHI (6.3K), FHS (4.8K)
+
+## Appendix: Existing Variable Search Portals
+
+The following portals currently offer some form of variable-level search across dbGaP studies. Each covers a different subset and offers different capabilities, but none provides unified semantic search across all studies.
+
+### PIC-SURE (BioData Catalyst)
+
+The most powerful variable-level search currently available. Researchers can type a term like "systolic blood pressure" and find matching variables across ~273 studies / 1.4M participants. Supports cohort building by filtering on variable values (e.g., "systolic BP > 140 AND age > 65") across studies. Also surfaces the 44 TOPMed DCC Harmonized Variables. Requires dbGaP authorization for data access; variable search is open.
+
+- Portal: https://picsure.biodatacatalyst.nhlbi.nih.gov/
+- [User Guide](https://bdcatalyst.gitbook.io/biodata-catalyst-documentation/written-documentation/explore-available-data/pic-sure-for-biodata-catalyst-user-guide)
+- [PIC-SURE Platform Paper (2025)](https://www.nature.com/articles/s41746-025-02284-9)
+
+**Limitations:** Covers only BDC/TOPMed studies (~273 of ~3,100). Keyword matching on variable names and descriptions — no semantic/synonym expansion.
+
+### dbGaP Advanced Search
+
+The official NCBI tool for searching across studies, datasets, variables, analyses, and documents. Supports faceted filtering by study focus, molecular data type, consent, and Common Data Elements (since 2023). Covers all dbGaP studies.
+
+- Portal: https://www.ncbi.nlm.nih.gov/gap/advanced_search/
+- [Beta version](https://dbgap.ncbi.nlm.nih.gov/beta/search/)
+- [Third-Party Annotations announcement](https://ncbiinsights.ncbi.nlm.nih.gov/2023/07/13/dbgap-third-party-annotations/)
+
+**Limitations:** Variable search is basic keyword matching. The CDE facet only surfaces the ~13,653 PhenX-mapped variables and NLM/MDM annotations — a small fraction of the total. Better for finding studies than understanding what variables measure.
+
+### PhenX Variable Search Tool
+
+Maps ~13,653 dbGaP variables from 521 studies to standardized PhenX Common Data Elements. Uniquely classifies variable linkages as either **comparable** (same measurement protocol, suitable for cross-study analysis) or **related** (similar concept, different collection method). This distinction directly addresses the harmonization question: are two variables measuring the same thing the same way?
+
+- Portal: https://www.phenxtoolkit.org/vsearch
+- [PhenX-dbGaP Mapping Paper](https://www.nature.com/articles/s41597-022-01660-4)
+
+**Limitations:** Covers only 13,653 variables from 521 studies (estimated 3-5% of all dbGaP variables). Web-only tool — no API or bulk download available.
+
+### AnVIL Data Explorer
+
+Launched 2025, provides faceted search across 280+ datasets with views by dataset, donor, biosample, activity, and file. Designed for building cross-study cohorts for analysis in Terra. Supports search by data type, consortium, and demographic attributes.
+
+- Portal: https://anvilproject.org/
+- [UCSC Announcement](https://news.ucsc.edu/2025/08/new-anvil-data-explorer-makes-valuable-datasets-more-accessible-for-health-research/)
+
+**Limitations:** Operates at dataset/file level, not individual phenotype variables. Covers only AnVIL-hosted studies.
+
+### Summary: The Gap
+
+| Portal                    | Studies      | Variable Search                | Semantic/Synonym | Cross-Study        |
+| ------------------------- | ------------ | ------------------------------ | ---------------- | ------------------ |
+| **PIC-SURE**              | ~273 (BDC)   | Yes, with value filtering      | No               | Yes (within BDC)   |
+| **dbGaP Advanced Search** | ~3,100 (all) | Keyword + CDE facet            | No               | Limited            |
+| **PhenX Variable Search** | 521          | Yes, with comparability labels | No               | Yes (via CDEs)     |
+| **AnVIL Data Explorer**   | ~280 (AnVIL) | No (dataset-level)             | No               | Yes (within AnVIL) |
+
+No existing tool provides **semantic variable search** (synonym expansion, concept clustering) **across all ~3,100 dbGaP studies**. When Framingham calls it `A53` ("NURSE SYSTOLIC BLOOD PRESSURE") and ARIC calls it `BPU01`, keyword search fails. The PhenX mapping covers ~3-5% of variables; PIC-SURE covers ~9% of studies. This is the gap that concept-based search (Phases 2-5 of this PRD) aims to fill.
+
+## Appendix: What Drives High Variable Counts
+
+An analysis of Framingham Heart Study (phs000007) — the study with the most variables at 57,042 unique variable names across 586 dataset tables — reveals several structural factors that explain why large longitudinal studies accumulate tens of thousands of variables.
+
+### Factor 1: Longitudinal Exam Repetition
+
+Framingham spans 70+ years with 3+ cohorts (Original, Offspring, Gen3/Omni), each undergoing many exam cycles (Original: exams 7-32; Offspring: exams 1-8+). Each cycle creates a separate dataset table with its own variable names. The same core measurement — blood pressure — appears with different names at each time point:
+
+| Exam             | Variable | Description                              |
+| ---------------- | -------- | ---------------------------------------- |
+| Offspring Exam 1 | `A53`    | NURSE SYSTOLIC BLOOD PRESSURE            |
+| Offspring Exam 2 | `B22`    | BLOOD PRESSURE, SYSTOLIC, TAKEN BY NURSE |
+| Original Exam 22 | `FO020`  | SYSTOLIC NURSE'S BLOOD PRESSURE          |
+
+31 exam cycle datasets contribute ~11,600 variable names.
+
+### Factor 2: Wearable/Sensor Data Explosion
+
+The single largest contributor: physical activity accelerometer datasets (`t_physactf_*`) contain ~11,500 variables each. These store hourly activity counts for every day of the week — e.g., `bgt_litcntfri0` through `bgt_litcntfri23` (light activity bouts, Friday, hours 0-23) — repeated for every activity metric, every day, every hour. Three versions of this dataset alone account for ~34K variable names.
+
+### Factor 3: Specialized Lab and Omics Assays
+
+126 individual lab/biomarker datasets (`l_*`) each measuring different assays: aldosterone, cortisol, cystatin-C, ceramides, proteomics panels, RNA expression arrays. The proteomics dataset alone has ~870 variables; RNA pilot has ~1,400.
+
+### Factor 4: Derived/Harmonized Variables
+
+127 TOPMed-derived datasets (`t_*`) contribute ~44,300 variable names. These include re-computed harmonized phenotypes, CT scan measurements (abdominal fat, coronary calcium, bone density), brain MRI features, sleep study data, ECG measurements, and food frequency questionnaires.
+
+### Factor 5: Food Frequency Questionnaires
+
+Each food item (APPLE, BACON, BEER, BEER_LITE, YOGURT_FROZEN, etc.) becomes a separate variable. With ~700 food items per questionnaire and 6+ versions across exam cycles, these contribute thousands of variables.
+
+### Factor 6: Event/Outcome Tracking
+
+103 vital records datasets (`vr_*`) track outcomes: cancer events, cardiovascular events, diabetes onset, atrial fibrillation, stroke, mortality — each as a separate dataset with its own variables.
+
+### Framingham Variable Breakdown
+
+| Category                    | Dataset Tables | Variables (per-table sum)   |
+| --------------------------- | -------------- | --------------------------- |
+| Exam cycles (`ex*`)         | 31             | ~11,600                     |
+| Lab assays (`l_`)           | 126            | ~11,000                     |
+| Derived/TOPMed (`t_`)       | 127            | ~44,300                     |
+| Vital records (`vr_`)       | 103            | ~12,200                     |
+| Exam expansions (`e_exam_`) | 13             | ~6,100                      |
+| Other specialty             | 186            | ~8,200                      |
+| **Total**                   | **586**        | **~93,400** (per-table sum) |
+
+The globally-deduplicated count is **57,042 unique variable names** — the difference reflects variable names reused across consent groups and overlapping datasets.
+
+### Implications for Search
+
+1. **Longitudinal repetition is the dominant pattern** — the same conceptual measurement appears under different variable names at different time points. This is exactly the problem that concept-based search (Phase 5) aims to solve.
+2. **Sensor data inflates counts dramatically** — a single accelerometer sub-study can produce more variables than 1,000 small studies combined. These hourly-granularity variables are unlikely to be useful in concept search and may warrant filtering or aggregation.
+3. **Other large studies show similar patterns** — ARIC (phs000280, 415 tables), CARDIA (phs000285, 328 tables), and JHS (phs000286, 114 tables) are all large longitudinal cohorts with the same structural variable multiplication.
