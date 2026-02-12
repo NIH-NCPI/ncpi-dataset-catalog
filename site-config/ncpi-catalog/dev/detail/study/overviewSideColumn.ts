@@ -16,18 +16,12 @@ export const sideColumn = [
   {
     children: [
       {
-        children: [
-          {
-            component: C.Link,
-            viewBuilder: V.buildViewInAnVIL,
-          } as ComponentConfig<typeof C.Link, NCPICatalogStudy>,
-        ],
-        component: C.GridPaperSection,
-      } as ComponentConfig<typeof C.GridPaperSection>,
+        component: C.Links,
+        viewBuilder: V.buildPlatformLinks,
+      } as ComponentConfig<typeof C.Links, NCPICatalogStudy>,
     ],
-    component: C.ConditionalComponent,
-    viewBuilder: V.renderWhenPlatformIsAnVIL,
-  } as ComponentConfig<typeof C.ConditionalComponent, NCPICatalogStudy>,
+    component: C.GridPaperSection,
+  } as ComponentConfig<typeof C.GridPaperSection>,
   {
     component: C.Details,
     viewBuilder: V.buildStudySummary,
