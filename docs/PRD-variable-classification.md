@@ -418,6 +418,53 @@ For the remaining ~20-30% of variables with ambiguous or terse descriptions (e.g
 
 Expert review of the ~5% of variables that automated methods cannot confidently classify. Priority goes to variables in the most-accessed studies.
 
+### Classification Reproducibility
+
+Classification results must be deterministic and auditable. An identical set of source variables must always produce the identical set of concept assignments, regardless of when or where the pipeline runs.
+
+#### Principle: results are a versioned artifact, not a live computation
+
+```
+Source variables (from dbGaP XML)
+  ↓ Phase 1: dataset-level rules (version-controlled config)
+  ↓ Phase 2: keyword rules (version-controlled patterns)
+  ↓ Phase 3: embedding similarity (pinned model + frozen anchors)
+  ↓ Phase 4: human review (stored as rules)
+  = variable-classifications.json (committed, versioned)
+```
+
+Every rebuild produces identical output from the deterministic layers. Non-deterministic layers (embedding, LLM) are invoked only for genuinely new variables, and their output is immediately cached. Nothing is ever re-classified unless explicitly triggered.
+
+#### Determinism controls by phase
+
+**Phases 1-2 (rules)** — Fully deterministic. Dataset-name patterns and keyword rules are stored as versioned config files (JSON or CSV). Same input always produces same output.
+
+**Phase 3 (embeddings)** — Near-deterministic with controls:
+
+- Pin the embedding model version (e.g., `text-embedding-3-small@2024-01-25`, not `latest`)
+- Generate anchor embeddings for each of the ~160 concepts once; freeze and version-control them
+- Assign the concept with the highest cosine similarity above a threshold
+- Use a three-band confidence scheme: cosine > 0.82 = auto-assign, 0.65-0.82 = flag for review, < 0.65 = unclassified
+- Store similarity scores alongside assignments for auditability
+
+**Phase 3 fallback (LLM for ambiguous cases)** — Constrained for reproducibility:
+
+- Temperature = 0 and fixed seed parameter to eliminate sampling randomness
+- Structured output with constrained decoding — force the model to return one of exactly ~160 valid concept IDs, not free text
+- Batch-and-cache: run classification once, store results in a versioned file; the LLM is only invoked for _new_ variables, never to re-classify existing ones
+- Optional majority vote (3 runs, take consensus) for borderline cases; log disagreements for human review
+
+**Phase 4 (human review)** — Deterministic by design. Human assignments are stored as explicit rules that feed back into Phase 1/2 config, growing the deterministic layers over time and shrinking the LLM-dependent tail.
+
+#### Drift detection on model upgrades
+
+When the embedding model or LLM version is updated:
+
+1. Re-run classification on the full corpus
+2. Diff against the previous `variable-classifications.json`
+3. Flag all changed assignments for review before committing the new version
+4. This makes model upgrades an explicit, auditable event rather than silent drift
+
 ## Variable Modifiers
 
 Rather than multiplying concepts for every combination of measurement context, each concept carries optional **modifiers** — orthogonal annotations that describe _how_ or _in whom_ a variable was measured:
