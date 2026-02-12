@@ -89,6 +89,12 @@ export function buildStudyJsonLd(
     "@context": "https://schema.org",
     "@type": "Dataset",
     description: truncateDescription(stripHtmlTags(study.studyDescription)),
+    distribution: [
+      {
+        "@type": "DataDownload",
+        contentUrl: dbGapStudyUrl,
+      },
+    ],
     identifier: [study.dbGapId, study.studyAccession],
     includedInDataCatalog: {
       "@type": "DataCatalog",
@@ -114,15 +120,6 @@ export function buildStudyJsonLd(
   const version = parseVersion(study.studyAccession);
   if (version) {
     jsonLd.version = version;
-  }
-
-  if (study.studyAccession) {
-    jsonLd.distribution = [
-      {
-        "@type": "DataDownload",
-        contentUrl: dbGapStudyUrl,
-      },
-    ];
   }
 
   const citations = buildCitations(study.publications);
