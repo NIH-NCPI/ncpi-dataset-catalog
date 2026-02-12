@@ -410,6 +410,30 @@ Keyword matching on variable descriptions covers another layer:
 
 Keyword rules could classify an additional ~20-30% of variables.
 
+#### Observed match rates (Framingham)
+
+Analysis of 56,927 unique Framingham variable descriptions against a broad keyword list covering all ~160 concepts:
+
+| Category                     | Variables | % of total | Examples                                                   |
+| ---------------------------- | --------- | ---------- | ---------------------------------------------------------- |
+| Keyword-matchable            | ~19,900   | ~35%       | "SYSTOLIC BLOOD PRESSURE", "TOTAL CHOLESTEROL", "SMOKING"  |
+| Dark matter (no keyword hit) | ~37,000   | ~65%       | Accelerometer hourly bins, omics probe IDs, FFQ food items |
+
+The "dark matter" is dominated by high-volume repetitive datasets (accelerometer = ~34K, FFQ = ~4.2K, omics = ~5K) that Phase 1 dataset-level rules already handle. After Phase 1 absorbs these, the remaining unmatched tail for Phase 3 embedding inference is estimated at ~10-15% of variables.
+
+#### Per-study classification difficulty
+
+Not all studies are equally easy to classify. Dataset description richness varies dramatically:
+
+| Study                  | Accession | Dataset tables | Unique descriptions | Classification difficulty                                        |
+| ---------------------- | --------- | -------------- | ------------------- | ---------------------------------------------------------------- |
+| Framingham Heart Study | phs000007 | 586            | 210                 | Medium — rich descriptions but massive scale                     |
+| ARIC                   | phs000090 | 364            | 356                 | Easy — nearly 1:1 descriptions per table                         |
+| WHI                    | phs000200 | 194            | 90                  | Medium — moderate description reuse                              |
+| CARDIA                 | phs000285 | 328            | **6**               | Hard — almost all descriptions are generic IDs like "Subject ID" |
+
+Studies like CARDIA where dataset descriptions are uninformative will rely heavily on Phase 2 keyword rules and Phase 3 embedding inference applied to individual variable descriptions rather than Phase 1 dataset-level rules.
+
 ### Phase 3: Embedding-based inference
 
 For the remaining ~20-30% of variables with ambiguous or terse descriptions (e.g., `MF4` = "RELATIVE WEIGHT, EXAM 1"), use the anchor-propagation approach from the NLS PRD: generate embeddings for variable descriptions, compare to known-classified anchors, and assign concepts above a confidence threshold.
@@ -500,6 +524,95 @@ Modifiers are populated during classification (Phases 1-4) alongside concept ass
 | TOPMed tags | 15 domains / 65 concepts | Cross-study harmonization    | Partially (heart/lung/blood/sleep focus)               | Free     |
 
 None of these standards provides a ready-made ~30-domain taxonomy covering the full breadth of dbGaP variables (clinical measurements, behavioral exposures, omics, study administration). Each was designed for a different purpose.
+
+#### PhenX domain alignment (30 domains)
+
+PhenX's 30 research domains are the closest match to our taxonomy. The table below shows each PhenX domain and its mapping to our domains:
+
+| PhenX domain                                     | Our domain(s)                           | Alignment |
+| ------------------------------------------------ | --------------------------------------- | --------- |
+| Alcohol, Tobacco and Other Substances            | Smoking and Substance Use               | Direct    |
+| Anthropometrics                                  | Anthropometry                           | Direct    |
+| Bone and Joint                                   | Musculoskeletal                         | Direct    |
+| Cancer                                           | Cancer                                  | Direct    |
+| Cancer Outcomes and Survivorship                 | Cancer                                  | Merged    |
+| Cardiovascular                                   | Cardiovascular Disease, Cardiac Imaging | Split     |
+| Demographics                                     | Demographics and Enrollment             | Direct    |
+| Diabetes                                         | Diabetes and Glucose Metabolism         | Direct    |
+| Environmental Exposures                          | Environmental Exposures                 | Direct    |
+| Gastrointestinal                                 | _(not in our taxonomy)_                 | Gap       |
+| Genomic Medicine Implementation                  | _(not in our taxonomy)_                 | Gap       |
+| Geriatrics                                       | _(cross-cutting, not a domain)_         | N/A       |
+| Infectious Diseases and Immunity                 | _(not in our taxonomy)_                 | Gap       |
+| Neurology                                        | Neurocognitive and Mental Health        | Direct    |
+| Nutrition and Dietary Supplements                | Dietary Intake                          | Direct    |
+| Obesity                                          | Anthropometry (BMI concept)             | Merged    |
+| Ocular                                           | Ophthalmology                           | Direct    |
+| Oral Health                                      | _(not in our taxonomy)_                 | Gap       |
+| Pediatric Development                            | _(not in our taxonomy)_                 | Gap       |
+| Physical Activity and Physical Fitness           | Physical Activity                       | Direct    |
+| Pregnancy                                        | Reproductive Health                     | Direct    |
+| Psychiatric                                      | Neurocognitive and Mental Health        | Merged    |
+| Psychosocial                                     | Psychosocial                            | Direct    |
+| Rare Genetic Conditions                          | _(not in our taxonomy)_                 | Gap       |
+| Reproductive Health                              | Reproductive Health                     | Direct    |
+| Skin                                             | _(not in our taxonomy)_                 | Gap       |
+| Respiratory                                      | Lung and Respiratory                    | Direct    |
+| Smoking Cessation, Harm Reduction and Biomarkers | Smoking and Substance Use               | Merged    |
+| Social Environments                              | Psychosocial, Environmental Exposures   | Split     |
+| Speech, Language and Hearing                     | Hearing                                 | Direct    |
+
+**22 of 30** PhenX domains map directly or merge cleanly into our taxonomy. The 7 PhenX gaps (Gastrointestinal, Genomic Medicine Implementation, Infectious Diseases, Oral Health, Pediatric Development, Rare Genetic Conditions, Skin) represent domains with low prevalence in the large longitudinal cohort studies that dominate dbGaP. These could be added as domains if future studies warrant it.
+
+Our taxonomy adds domains PhenX lacks: **Blood Pressure** (separate from Cardiovascular), **ECG and Arrhythmia**, **Lipids**, **Hematology**, **Inflammation**, **Kidney Function**, **Liver Function**, **Thyroid Function**, **Hormones and Endocrine**, **Sleep**, **Stroke**, **Cardiac Imaging**, **Medications**, **High-Throughput Omics**, and **Study Administration**.
+
+#### HPO cross-reference (23 organ-system categories)
+
+HPO's 23 top-level categories under "Phenotypic abnormality" (HP:0000118) provide a clinical frame that partially overlaps our taxonomy:
+
+| HPO category                                   | Our domain(s)                                                                                                                    | Notes                                   |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| Abnormality of the cardiovascular system       | Blood Pressure, CVD, Cardiac Imaging, ECG                                                                                        | Spans 4 of our domains                  |
+| Abnormality of blood and blood-forming tissues | Hematology                                                                                                                       |                                         |
+| Abnormality of the respiratory system          | Lung and Respiratory                                                                                                             |                                         |
+| Abnormality of the nervous system              | Neurocognitive, Stroke                                                                                                           | Spans 2 of our domains                  |
+| Abnormality of the eye                         | Ophthalmology                                                                                                                    |                                         |
+| Abnormality of the ear                         | Hearing                                                                                                                          |                                         |
+| Abnormality of the endocrine system            | Thyroid, Hormones, Diabetes                                                                                                      | Spans 3 of our domains                  |
+| Abnormality of the musculoskeletal system      | Musculoskeletal                                                                                                                  |                                         |
+| Abnormality of the genitourinary system        | Kidney Function, Reproductive Health                                                                                             |                                         |
+| Abnormality of the digestive system            | Liver Function                                                                                                                   | Partial overlap                         |
+| Abnormality of the immune system               | Inflammation                                                                                                                     | Partial overlap                         |
+| Abnormality of metabolism/homeostasis          | Lipids, Diabetes                                                                                                                 |                                         |
+| Growth abnormality                             | Anthropometry                                                                                                                    |                                         |
+| Neoplasm                                       | Cancer                                                                                                                           |                                         |
+| _(no HPO equivalent)_                          | Demographics, Dietary Intake, Physical Activity, Smoking, Psychosocial, Environmental Exposures, Medications, Omics, Study Admin | ~40% of our taxonomy has no HPO mapping |
+
+HPO is useful as a cross-reference for the clinical/biological domains but cannot serve as the primary taxonomy because it entirely lacks behavioral, exposure, lifestyle, omics, and administrative categories.
+
+#### UMLS Semantic Groups (15 groups / 134 types)
+
+Above individual CUIs, UMLS organizes its concepts into 134 **semantic types** aggregated into 15 **semantic groups**. These provide a coarser roll-up that could serve as a super-domain layer above our 30 domains:
+
+| UMLS Semantic Group         | Relevant to our taxonomy?       | Our domains covered                           |
+| --------------------------- | ------------------------------- | --------------------------------------------- |
+| Disorders                   | Yes — disease status concepts   | CVD, Diabetes, Stroke, Cancer, Sleep, COPD    |
+| Chemicals & Drugs           | Yes — lab analytes, medications | Lipids, Hematology, Inflammation, Medications |
+| Procedures                  | Yes — imaging, tests            | Cardiac Imaging, ECG, Ophthalmology           |
+| Physiology                  | Yes — measurements              | Blood Pressure, Anthropometry, Lung           |
+| Anatomy                     | Indirect — body site context    | _(used as modifier, not a domain)_            |
+| Living Beings               | Indirect — species, populations | Demographics (population context)             |
+| Concepts & Ideas            | Indirect — abstract concepts    | Study Administration                          |
+| Activities & Behaviors      | Yes — lifestyle exposures       | Smoking, Physical Activity, Dietary Intake    |
+| Phenomena                   | Marginal                        | _(rarely relevant)_                           |
+| Objects                     | No                              |                                               |
+| Geographic Areas            | Marginal                        | Environmental Exposures                       |
+| Organizations               | No                              |                                               |
+| Occupations                 | Marginal                        | Psychosocial (job strain)                     |
+| Genes & Molecular Sequences | Yes — omics context             | High-Throughput Omics                         |
+| Devices                     | Marginal                        | Physical Activity (accelerometers)            |
+
+The 15 UMLS semantic groups are too coarse for our primary browsing UI (e.g., "Disorders" conflates cardiovascular disease, diabetes, cancer, and sleep apnea), but they could serve as a **super-domain grouping** for high-level faceted navigation if needed.
 
 ### Adopted approach: custom domains + UMLS CUI identifiers
 
