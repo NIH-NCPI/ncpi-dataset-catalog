@@ -216,7 +216,7 @@ export const buildStudyDetails = (
   const { dbGapId, platform, studyAccession } = ncpiCatalogStudy;
   const keyValuePairs = new Map<Key, Value>();
   keyValuePairs.set("Platforms", stringifyValues(platform));
-  keyValuePairs.set("dbGaP ID", getStudyDbGapIdKeyValue(studyAccession));
+  keyValuePairs.set("View in dbGaP", getStudyDbGapIdKeyValue(studyAccession));
   keyValuePairs.set("APIs", getStudyAPIKeyValue(dbGapId));
   return {
     KeyElType: C.KeyElType,
