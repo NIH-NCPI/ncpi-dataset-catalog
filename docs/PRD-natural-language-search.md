@@ -1,10 +1,10 @@
-# PRD: Natural Language Search over dbGaP
+# PRD: Natural Language Search over NIH Genomic Datasets
 
 ## Overview
 
-This document defines the requirements for building a comprehensive discovery layer over dbGaP (database of Genotypes and Phenotypes). The system will enable researchers to:
+This document defines the requirements for building a comprehensive discovery layer over NIH genomic datasets. The primary data source is dbGaP (database of Genotypes and Phenotypes), which serves as the central registry for controlled-access human genomic studies at NIH. The system will enable researchers to:
 
-1. **Query across all dbGaP studies** — not just those hosted on specific cloud platforms
+1. **Query across all studies** — not just those hosted on specific cloud platforms
 2. **Search variables by concept** — finding all variables measuring the same thing regardless of naming conventions
 3. **Discover research context** — understanding both the original research that produced the data and secondary analyses that reused it
 
@@ -12,68 +12,70 @@ The concept database will use OpenSearch to provide exact match, synonym lookup,
 
 ## Problem Statement
 
-### The Core Problem: No Unified Search Across Studies AND Variables
+### Enabling Unified Search Across Studies and Variables
 
 Researchers need to answer questions like:
 
-- _"Which studies focus on cardiovascular disease and have whole genome sequencing data?"_ (disease + data type)
-- _"What diabetes-related phenotype variables exist across all of dbGaP, and which studies contain them?"_ (variable discovery across studies)
-- _"Find me studies with WGS data that also collect systolic blood pressure variables"_ (data type + variable)
-- _"Show me every variable that measures blood pressure, regardless of how each study named it"_ (concept-to-variable lookup)
+- _"Which studies focus on cardiovascular disease and have whole genome sequencing data?"_ (disease focus + assay type)
+- _"Show me all studies with RNA-seq data related to autism"_ (assay type + disease focus)
+- _"Find me studies with WGS data that also collect systolic blood pressure variables"_ (assay type + variable)
+- _"What diabetes-related phenotype variables exist across all NIH genomic studies?"_ (variable discovery)
 
-**Today, these queries are impractical.** Partial capabilities exist but are fragmented, require specialist knowledge, and cover only a sliver of available data:
+These questions span two levels of search:
 
-- **dbGaP Advanced Search** supports faceted filtering by disease, data type, and a "Common Data Elements" facet powered by third-party annotations (TOPMed phenotype tags, PhenX mappings, NLM/LOINC, MDM/UMLS). However, CDE annotations cover only ~30,000 of an estimated 500,000+ variables (~5-8%), and there is no free-text variable search within the faceted interface.
-- **dbGaP Entrez API** supports combined queries (e.g., `diabetes[DIS] AND BMI[VRNM]`), but requires specialist field-code syntax that most researchers don't know.
-- **PIC-SURE (BioData Catalyst)** allows keyword-based variable search across BDC-hosted studies, but uses text matching rather than concept matching ("BMI" won't find "Quetelet index"), and only covers the ~273 studies on that platform.
-- **dbGaP FHIR API** contains UMLS CUI and MeSH codes in ResearchStudy resources, but search parameters beyond `_id` lookups are non-functional as of early 2026.
-- **No cross-platform search** exists across AnVIL, BDC, CRDC, and Kids First. Each platform has its own search interface operating on its own subset of studies.
+1. **Study-level search** by disease focus and molecular data type (assay) — the most common entry point for researchers browsing available datasets
+2. **Variable-level search** by phenotype concept — a deeper capability for researchers who need specific measurements across studies
 
-The fundamental barrier is **semantic heterogeneity**: different studies use different names for the same concept ("SBP" vs "bp_sys" vs "systolic blood pressure"), and existing concept mappings cover only ~5-8% of variables through expert-curated harmonization and annotation efforts.
+**Today, answering these questions requires navigating multiple systems.** Relevant capabilities exist but are spread across different tools, each covering a subset of studies:
 
-### Gap 1: Incomplete Study Coverage
+- **dbGaP Advanced Search** supports faceted filtering by disease, data type, and a "Common Data Elements" facet. It covers all dbGaP studies but each platform's studies must be discovered separately.
+- **PIC-SURE (BioData Catalyst)** allows keyword-based variable search across BDC-hosted studies, but covers the ~273 studies on that platform.
+- **Platform-specific search** on AnVIL, BDC, CRDC, and Kids First each operates on its own subset of studies, with no cross-platform search.
 
-The four NCPI cloud platforms (AnVIL, BDC, CRDC, KFDRC) collectively host only ~412 unique dbGaP studies — roughly **13% of the ~3,100 released studies** in dbGaP (per the dbGaP homepage and FHIR API count of 3,145 as of February 2026). The platforms serve largely non-overlapping communities with minimal overlap (only 6 studies appear on more than one platform).
+No single interface lets a researcher filter by disease focus and assay type across all NIH genomic datasets, then drill into the phenotype variables available in matching studies.
 
-**Note**: The NCPI Dataset Catalog already includes dbGaP itself as a fifth source, bringing study coverage to ~94% (~2,944 studies). The remaining ~6% gap is due to studies with incomplete metadata (missing titles or participant counts) or recently added studies not yet reflected in the catalog's source CSV. The real gap is not study _listing_ but study _enrichment_ — the dbGaP-only studies lack the variable-level concept mappings and research context that this project aims to provide.
+### Opportunity 1: Unified Study Search by Focus and Assay Type
 
-### Gap 2: Variable Naming Inconsistency
+The four NCPI cloud platforms (AnVIL, BDC, CRDC, KFDRC) collectively host ~412 unique dbGaP studies — roughly **13% of the ~3,100 released studies** in dbGaP. The platforms serve largely non-overlapping research communities with minimal overlap (only 6 studies appear on more than one platform).
 
-dbGaP contains an estimated **500,000+ unique phenotype variables** across ~3,100 studies (extrapolated from 384,987 variables across 1,169 studies reported in the [dbgap2x paper, 2018](https://academic.oup.com/bioinformatics/article/36/4/1305/5556117); the database has since grown to 3,100+ studies). Each study uses its own naming conventions:
+The NCPI Dataset Catalog already includes dbGaP itself as a fifth source, bringing study coverage to ~94% (~2,944 studies). With this broad coverage in place, the opportunity is to provide **rich, natural-language search over study-level metadata** — disease focus, molecular data types (WGS, WES, RNA-seq, genotyping arrays, etc.), study design, and participant populations — across all studies in a single interface.
+
+### Opportunity 2: Concept-Based Variable Search
+
+Beyond study-level search, researchers need to find specific phenotype measurements across studies. dbGaP contains an estimated **500,000+ unique phenotype variables** across ~3,100 studies (extrapolated from 384,987 variables across 1,169 studies reported in the [dbgap2x paper, 2018](https://academic.oup.com/bioinformatics/article/36/4/1305/5556117); the database has since grown to 3,100+ studies). Each study uses its own naming conventions:
 
 - "systolic blood pressure" vs "SBP" vs "bp_sys" vs "SYSBP" all mean the same thing
-- No concept-based search that resolves synonymous variable names across all studies
+- Concept-based search that resolves synonymous variable names does not yet exist across all studies
 - Cross-study analysis requires manual curation of variable mappings
 
-Existing harmonization and annotation efforts have mapped an estimated **5-8% of variables** to standard concepts:
+Valuable harmonization and annotation efforts have mapped an estimated **5-8% of variables** to standard concepts:
 
-| Source | Variables Mapped | Studies | Type |
-| --- | --- | --- | --- |
-| **TOPMed Harmonized Phenotypes** | ~1,000-2,000 source variables -> 78 harmonized variables | 17 | Deep harmonization with code |
-| **TOPMed Phenotype Tagging** | 16,671 tagged variables across 65 concepts | 17 | Concept tagging (UMLS CUI) |
-| **PhenX-dbGaP Mapping** | 13,653 variables | 521 | Protocol-level mapping (LOINC, PhenX) |
-| **NLM Lister Hill / MDM** | Unknown count | 585+ | LOINC and UMLS CUI annotations |
+| Source                           | Variables Mapped                                         | Studies | Type                                  |
+| -------------------------------- | -------------------------------------------------------- | ------- | ------------------------------------- |
+| **TOPMed Harmonized Phenotypes** | ~1,000-2,000 source variables -> 78 harmonized variables | 17      | Deep harmonization with code          |
+| **TOPMed Phenotype Tagging**     | 16,671 tagged variables across 65 concepts               | 17      | Concept tagging (UMLS CUI)            |
+| **PhenX-dbGaP Mapping**          | 13,653 variables                                         | 521     | Protocol-level mapping (LOINC, PhenX) |
+| **NLM Lister Hill / MDM**        | Unknown count                                            | 585+    | LOINC and UMLS CUI annotations        |
 
-Since 2023, dbGaP's Advanced Search exposes these annotations through a **Common Data Elements (CDE) facet**, making the annotated subset searchable by UMLS, LOINC, and PhenX terms. However, the annotations use different vocabularies, are not cross-referenced with each other, and leave **92-95% of variables unmapped** to any standard concept.
+Since 2023, dbGaP's Advanced Search exposes these annotations through a **Common Data Elements (CDE) facet**, making the annotated subset searchable by UMLS, LOINC, and PhenX terms. This project aims to build on these foundations and extend concept mapping coverage to the remaining ~92-95% of variables using embedding-based inference.
 
-### Gap 3: Research Context
+### Opportunity 3: Aggregated Research Context
 
-dbGaP stores rich research context — including protocol documents, PI-curated publications, and approved data access requests — but this information is **fragmented across multiple tabs, dynamically loaded sections, FTP files, and APIs**, making it difficult to synthesize:
+NIH genomic studies generate rich research context — including protocol documents, PI-curated publications, and approved data access requests — but this information is **distributed across multiple systems**, making it time-consuming to synthesize:
 
-- **Protocols exist but are buried**: Large studies like Framingham have 1,000+ protocol documents and questionnaire forms available on the Documents tab, but these are individual PDFs behind a dynamic JavaScript interface, not indexed or summarized.
-- **Publications are scattered**: PI-curated PMIDs appear in GapExchange XML; citing papers appear in the FHIR API's `ResearchStudy-Citers` extension (e.g., 170 PMC articles for Framingham); additional papers can be found via PMC full-text search and NIH RePORTER grant linkage. No single view aggregates these.
-- **Secondary use is partially visible**: Approved Data Access Requests with research use statements are shown on study pages, but loaded dynamically and not indexed. There is no tracking of publications resulting from approved DARs.
-- **Smaller studies may have minimal context**: Not every study has extensive documentation — newer or smaller studies may have sparse protocol documents and few citing papers.
+- **Protocols**: Large studies like Framingham have 1,000+ protocol documents and questionnaire forms, but these are individual PDFs, not indexed or summarized.
+- **Publications**: PI-curated PMIDs appear in GapExchange XML; citing papers can be found in PMC and via NIH RePORTER grant linkage. No single view aggregates all of these.
+- **Secondary use**: Approved Data Access Requests with research use statements exist on study pages, but are not indexed. There is no systematic tracking of publications resulting from approved DARs.
 
-The catalog can add value by **aggregating and presenting** these scattered pieces into a coherent research context view, not by filling a complete absence of information.
+The catalog can add value by **aggregating and presenting** these distributed pieces into a coherent research context view for each study.
 
 ## Goals
 
-1. **Complete dbGaP Coverage**: Include all ~3,100 dbGaP studies, not just platform-hosted ones
-2. **Unified Concept Search**: Enable searching by variable name, description, or concept term to find all related dbGaP variables
-3. **Synonym Support**: Return matches for synonymous terms (e.g., "BP" -> "blood pressure")
-4. **Concept Clustering**: Group variables that measure the same underlying concept
-5. **Standard Code Mapping**: Link variables to UMLS CUI, LOINC, and other standard vocabularies
+1. **Broad Study Coverage**: Include all ~3,100 dbGaP studies, not just platform-hosted ones
+2. **Study Search by Focus and Assay**: Enable filtering and natural-language search by disease focus, molecular data type, study design, and participant population
+3. **Variable Concept Search**: Enable searching by variable name, description, or concept term to find related phenotype variables across studies
+4. **Synonym Support**: Return matches for synonymous terms (e.g., "BP" -> "blood pressure")
+5. **Concept Clustering**: Group variables that measure the same underlying concept, with standard code mappings (UMLS CUI, LOINC)
 6. **Publication Discovery**: Surface papers describing study methods and findings
 
 ## Study Ingestion
@@ -82,7 +84,7 @@ The catalog can add value by **aggregating and presenting** these scattered piec
 
 ### Architecture
 
-The catalog ingests all dbGaP studies using two data sources:
+The catalog ingests all dbGaP studies using two data sources, building on dbGaP's publicly available metadata:
 
 #### 1. dbGaP Advanced Search CSV Export
 
@@ -90,17 +92,17 @@ The catalog ingests all dbGaP studies using two data sources:
 
 Provides for each study:
 
-| Field | Description |
-| --- | --- |
-| Study Accession | Full accession (e.g., `phs000007.v35.p16`) |
-| Study Name | Full study title |
-| Description | Truncated study abstract/summary |
-| Study Disease/Focus | Primary condition studied |
-| Study Content | Participant count, dataset counts, variable counts |
-| Study Molecular Data Type | Sequencing/genotyping data types |
-| Study Design | Cohort, case-control, etc. |
-| Study Consent | Consent codes with descriptions |
-| Parent study | Parent study name and accession (for sub-studies) |
+| Field                     | Description                                        |
+| ------------------------- | -------------------------------------------------- |
+| Study Accession           | Full accession (e.g., `phs000007.v35.p16`)         |
+| Study Name                | Full study title                                   |
+| Description               | Truncated study abstract/summary                   |
+| Study Disease/Focus       | Primary condition studied                          |
+| Study Content             | Participant count, dataset counts, variable counts |
+| Study Molecular Data Type | Sequencing/genotyping data types                   |
+| Study Design              | Cohort, case-control, etc.                         |
+| Study Consent             | Consent codes with descriptions                    |
+| Parent study              | Parent study name and accession (for sub-studies)  |
 
 This CSV is the authoritative study list. It is re-exported periodically to capture new studies.
 
@@ -115,31 +117,31 @@ The CSV description field is truncated. For each study, the build fetches the fu
 - **Platform studies** (listed in `dashboard-source-ncpi.tsv`): Included if they have a title, even without participant count
 - **Non-platform studies**: Require both title AND participant count > 0
 
-This ensures platform studies are never dropped, while filtering out incomplete/placeholder dbGaP entries.
+This ensures platform studies are never dropped, while filtering out incomplete or placeholder entries.
 
 ### Key Files
 
-| File | Purpose |
-| --- | --- |
-| `catalog-build/update-dbgap-source.ts` | Reads CSV, filters IDs, updates platform study list |
-| `catalog-build/common/dbGapCSVandFTP.ts` | CSV parsing, FTP description fetching, study construction |
-| `catalog-build/build-platform-studies.ts` | Enriches platform studies with dbGaP data |
-| `catalog-build/build-ncpi-catalog.ts` | Main orchestrator for full catalog build |
+| File                                      | Purpose                                                   |
+| ----------------------------------------- | --------------------------------------------------------- |
+| `catalog-build/update-dbgap-source.ts`    | Reads CSV, filters IDs, updates platform study list       |
+| `catalog-build/common/dbGapCSVandFTP.ts`  | CSV parsing, FTP description fetching, study construction |
+| `catalog-build/build-platform-studies.ts` | Enriches platform studies with dbGaP data                 |
+| `catalog-build/build-ncpi-catalog.ts`     | Main orchestrator for full catalog build                  |
 
 ## Publications Discovery
 
-### Problem
+### Context
 
-dbGaP provides some publication data — PI-curated PMIDs in GapExchange XML, citing papers in the FHIR API's `ResearchStudy-Citers` extension, and references in study descriptions — but this information is scattered across multiple systems with no unified view.
+Publication data for NIH genomic studies is available from multiple sources — PI-curated PMIDs in dbGaP's GapExchange XML, grant-linked papers in NIH Reporter, and citing papers in PMC — but no single view aggregates all of these for a given study.
 
 Key challenges:
 
-1. **Original Research**: PI-curated publications exist for some studies in GapExchange XML, but coverage is inconsistent and the data is not prominently surfaced.
-2. **Secondary Reuse**: DARs are approved for researchers to use dbGaP data, but there is no requirement to report back publications. The FHIR API's Citers extension captures PMC papers that reference the study accession, but many papers don't cite the phs# even when they used the data.
+1. **Original Research**: PI-curated publications exist for some studies in GapExchange XML, but coverage varies across studies.
+2. **Secondary Reuse**: Researchers who receive data access can publish analyses, but there is no requirement to report back publications. Many papers don't cite the study accession even when they used the data.
 
 ### Goal
 
-Enable users to find publications associated with each dbGaP study to understand:
+Enable users to find publications associated with each study to understand:
 
 - **Original research**: Study protocols, cohort descriptions, primary findings
 - **Secondary analyses**: How others have reused the data, what they discovered
@@ -148,24 +150,24 @@ Enable users to find publications associated with each dbGaP study to understand
 
 ### Two Types of Publications
 
-| Type | Description | Example | Discovery Method |
-| --- | --- | --- | --- |
-| **Original** | Papers by study investigators describing the cohort | "The Framingham Heart Study: Design and Methods" | Grant linkage, study documents |
-| **Secondary** | Papers by other researchers who reused the data | "GWAS of blood pressure using FHS data" | Citation search, DAR tracking |
+| Type          | Description                                         | Example                                          | Discovery Method               |
+| ------------- | --------------------------------------------------- | ------------------------------------------------ | ------------------------------ |
+| **Original**  | Papers by study investigators describing the cohort | "The Framingham Heart Study: Design and Methods" | Grant linkage, study documents |
+| **Secondary** | Papers by other researchers who reused the data     | "GWAS of blood pressure using FHS data"          | Citation search, DAR tracking  |
 
 ### Data Sources for Publication Discovery
 
-| Source | Method | Best For | Coverage |
-| --- | --- | --- | --- |
-| **dbGaP GapExchange XML** | PI-curated PMIDs from FTP | Key original papers | Curated but incomplete |
-| **NIH RePORTER API** | Grant -> Publications linkage | Original papers | ~60-70% of primary |
-| **PubMed/PMC Full-Text** | Search "phs######" in text | Secondary analyses | Variable (citation habits) |
+| Source                    | Method                        | Best For            | Coverage                   |
+| ------------------------- | ----------------------------- | ------------------- | -------------------------- |
+| **dbGaP GapExchange XML** | PI-curated PMIDs from FTP     | Key original papers | Curated but incomplete     |
+| **NIH RePORTER API**      | Grant -> Publications linkage | Original papers     | ~60-70% of primary         |
+| **PubMed/PMC Full-Text**  | Search "phs######" in text    | Secondary analyses  | Variable (citation habits) |
 
 ### Publication Discovery Pipeline
 
 #### Phase 1: PI-Curated Publications from GapExchange XML — Implemented
 
-For each dbGaP study, fetch the `<SelectedPublications>` section from the GapExchange XML on the FTP server to get PI-curated PMIDs. Batch-resolve PMIDs via the Semantic Scholar API for full metadata (title, authors, DOI, journal, citation counts).
+For each study, fetch the `<SelectedPublications>` section from the GapExchange XML on the dbGaP FTP server to get PI-curated PMIDs. Batch-resolve PMIDs via the Semantic Scholar API for full metadata (title, authors, DOI, journal, citation counts).
 
 - **Script:** `catalog-build/fetch-dbgap-selected-publications.ts`
 - **Output:** `catalog/dbgap-selected-publications.json` (~35 MB)
@@ -174,7 +176,7 @@ For each dbGaP study, fetch the `<SelectedPublications>` section from the GapExc
 
 #### Phase 2: NIH RePORTER Grant-Linked Publications — Implemented
 
-For each dbGaP study, search the NIH Reporter API for grants mentioning the study name. Collect core project numbers from matching grants and fetch all publications (PMIDs) linked to those grants. Produces a broader set than PI-curated publications.
+For each study, search the NIH Reporter API for grants mentioning the study name. Collect core project numbers from matching grants and fetch all publications (PMIDs) linked to those grants. Produces a broader set than PI-curated publications.
 
 - **Script:** `catalog-build/fetch-grant-publications.ts`
 - **Output:** `catalog/grant-publications.json` (~227 MB)
@@ -182,7 +184,7 @@ For each dbGaP study, search the NIH Reporter API for grants mentioning the stud
 
 #### Phase 3: PMC Full-Text Citation Search — Implemented
 
-Search PubMed Central via NCBI eUtils for papers that cite or mention each dbGaP study accession (e.g., "phs000007") in their text. Fetch metadata (title, authors, journal, year) via eSummary.
+Search PubMed Central via NCBI eUtils for papers that cite or mention each study's dbGaP accession (e.g., "phs000007") in their text. Fetch metadata (title, authors, journal, year) via eSummary.
 
 - **Script:** `catalog-build/fetch-pmc-citations.ts`
 - **Output:** `catalog/pmc-citations.json`
@@ -190,7 +192,7 @@ Search PubMed Central via NCBI eUtils for papers that cite or mention each dbGaP
 
 #### Phase 4: Text Mining for Variable-Level Linkages — Future
 
-Extract detailed information from paper methods sections about which specific variables were used. This would enable linking individual dbGaP variables to the papers that analyzed them.
+Extract detailed information from paper methods sections about which specific variables were used. This would enable linking individual variables to the papers that analyzed them.
 
 - Only works on PMC Open Access papers (~3.4M of ~35M total)
 - Requires NLP/LLM to identify methods sections and variable mentions
@@ -198,13 +200,13 @@ Extract detailed information from paper methods sections about which specific va
 
 ### Coverage Expectations
 
-| Phase | What It Finds | Expected Coverage | Confidence |
-| --- | --- | --- | --- |
-| **Phase 1** | PI-curated key papers | Curated subset | High |
-| **Phase 2** | Original study papers via grants | 60-70% of primary | High |
-| **Phase 3** | Papers citing dbGaP accession | 30-50% of secondary | Medium |
-| **Phase 4** | Variable-level linkages | Unknown | Low-Medium |
-| **Combined** | Union of all sources | Best effort | Varies |
+| Phase        | What It Finds                    | Expected Coverage   | Confidence |
+| ------------ | -------------------------------- | ------------------- | ---------- |
+| **Phase 1**  | PI-curated key papers            | Curated subset      | High       |
+| **Phase 2**  | Original study papers via grants | 60-70% of primary   | High       |
+| **Phase 3**  | Papers citing study accession    | 30-50% of secondary | Medium     |
+| **Phase 4**  | Variable-level linkages          | Unknown             | Low-Medium |
+| **Combined** | Union of all sources             | Best effort         | Varies     |
 
 ### Publication Record Schema
 
@@ -228,11 +230,11 @@ Extract detailed information from paper methods sections about which specific va
 
 ### The Gap We Cannot Fully Close
 
-**Complete tracking is impossible** because:
+**Complete publication tracking is inherently difficult** because:
 
 - No requirement to report publications from DAR approvals
-- Inconsistent citation practices (many don't cite phs#)
-- Some papers behind paywalls, not searchable
+- Inconsistent citation practices (many papers don't cite the study accession)
+- Some papers behind paywalls, not searchable in PMC
 - International researchers may not use NIH grants
 
 **Our approach is best-effort discovery, not complete tracking.** We should clearly communicate this limitation to users.
@@ -241,25 +243,25 @@ Extract detailed information from paper methods sections about which specific va
 
 ### Priority 1: Available for Download
 
-| Source | Records | Content | Access |
-| --- | --- | --- | --- |
-| **dbGaP FTP var_report.xml** | ~500K+ unique variables (estimated) | Variable names, descriptions, statistics | FTP download |
-| **TOPMed Harmonized Phenotypes** | 78 harmonized variables (~1,000-2,000 source variable mappings) | dbGaP phv IDs -> UMLS CUI mappings | [GitHub](https://github.com/UW-GAC/topmed-dcc-harmonized-phenotypes) |
-| **TOPMed Phenotype Tags** | 65 concepts, 16,671 tagged variables | Concept -> UMLS CUI mappings | [CSV download](https://topmed.nhlbi.nih.gov/dcc-phenotype-tagging-details) |
+| Source                           | Records                                                         | Content                                  | Access                                                                     |
+| -------------------------------- | --------------------------------------------------------------- | ---------------------------------------- | -------------------------------------------------------------------------- |
+| **dbGaP FTP var_report.xml**     | ~500K+ unique variables (estimated)                             | Variable names, descriptions, statistics | FTP download                                                               |
+| **TOPMed Harmonized Phenotypes** | 78 harmonized variables (~1,000-2,000 source variable mappings) | dbGaP phv IDs -> UMLS CUI mappings       | [GitHub](https://github.com/UW-GAC/topmed-dcc-harmonized-phenotypes)       |
+| **TOPMed Phenotype Tags**        | 65 concepts, 16,671 tagged variables                            | Concept -> UMLS CUI mappings             | [CSV download](https://topmed.nhlbi.nih.gov/dcc-phenotype-tagging-details) |
 
 ### Priority 2: API/Query Access
 
-| Source | Records | Content | Access |
-| --- | --- | --- | --- |
-| **dbGaP FHIR API** | All studies | Third-party annotations (LOINC, UMLS) | REST API |
-| **ATHENA/OMOP** | Standard vocabularies | Concept relationships, synonyms | Download with license |
+| Source             | Records               | Content                               | Access                |
+| ------------------ | --------------------- | ------------------------------------- | --------------------- |
+| **dbGaP FHIR API** | All studies           | Third-party annotations (LOINC, UMLS) | REST API              |
+| **ATHENA/OMOP**    | Standard vocabularies | Concept relationships, synonyms       | Download with license |
 
 ### Priority 3: Web-Only / Registration Required
 
-| Source | Records | Content | Access |
-| --- | --- | --- | --- |
+| Source                   | Records                           | Content                         | Access                                           |
+| ------------------------ | --------------------------------- | ------------------------------- | ------------------------------------------------ |
 | **PhenX-dbGaP Mappings** | 13,653 variables from 521 studies | PhenX ID <-> dbGaP phv mappings | [Web tool](https://www.phenxtoolkit.org/vsearch) |
-| **PheKB** | ~100 phenotype algorithms | ICD, RxNorm, LOINC code lists | [Registration](https://phekb.org) |
+| **PheKB**                | ~100 phenotype algorithms         | ICD, RxNorm, LOINC code lists   | [Registration](https://phekb.org)                |
 
 ## Concept Database
 
@@ -319,20 +321,20 @@ Extract detailed information from paper methods sections about which specific va
 
 ### Mapping Confidence Levels
 
-| Level | Description | Sources |
-| --- | --- | --- |
-| **harmonized** | Expert-curated, reproducible mapping with code | TOPMed harmonized phenotypes |
-| **tagged** | Manual annotation by domain experts | TOPMed tagging, PhenX comparable |
-| **related** | Similar but may need transformation | PhenX related mappings |
-| **inferred-high** | Embedding similarity >=0.85 to anchor | Phase 5 propagation |
-| **inferred-medium** | Embedding similarity 0.70-0.84 to anchor | Phase 5 propagation |
-| **inferred-low** | Embedding similarity 0.60-0.69 to anchor | Phase 5 propagation |
+| Level               | Description                                    | Sources                          |
+| ------------------- | ---------------------------------------------- | -------------------------------- |
+| **harmonized**      | Expert-curated, reproducible mapping with code | TOPMed harmonized phenotypes     |
+| **tagged**          | Manual annotation by domain experts            | TOPMed tagging, PhenX comparable |
+| **related**         | Similar but may need transformation            | PhenX related mappings           |
+| **inferred-high**   | Embedding similarity >=0.85 to anchor          | Phase 5 propagation              |
+| **inferred-medium** | Embedding similarity 0.70-0.84 to anchor       | Phase 5 propagation              |
+| **inferred-low**    | Embedding similarity 0.60-0.69 to anchor       | Phase 5 propagation              |
 
 **Note**: Inferred mappings prioritize recall (finding all potentially related variables) over precision. They are suitable for discovery/findability but should be reviewed before use in formal analysis.
 
 ### Data Pipeline
 
-#### Phase 1: Ingest dbGaP Variables
+#### Phase 1: Ingest Variables from dbGaP
 
 1. Download var_report.xml for all studies from FTP
 2. Parse XML to extract: phv_id, pht_id, phs_id, variable_name, description, data_type, unit, statistics
@@ -345,7 +347,7 @@ Extract detailed information from paper methods sections about which specific va
 1. Parse TOPMed harmonized phenotypes JSON files
 2. Extract: harmonized variable -> component dbGaP phv IDs -> UMLS CUI
 3. Create concept records with UMLS CUI as concept_id
-4. Link dbGaP variables to concepts with confidence="harmonized"
+4. Link variables to concepts with confidence="harmonized"
 
 **Estimated records**: 78 concepts, ~1,000-2,000 source variable mappings
 
@@ -369,7 +371,7 @@ Extract detailed information from paper methods sections about which specific va
 
 #### Phase 5: Embedding-Based Concept Inference
 
-The existing harmonization and annotation efforts (TOPMed, PhenX, NLM/MDM) cover an estimated 5-8% of dbGaP variables. Phase 5 uses embedding similarity to extend coverage to the remaining ~92-95%.
+The existing harmonization and annotation efforts (TOPMed, PhenX, NLM/MDM) provide a strong foundation covering an estimated 5-8% of variables. Phase 5 uses embedding similarity to extend coverage to the remaining ~92-95%.
 
 ##### Approach: Anchor-Based Propagation
 
@@ -388,34 +390,34 @@ Use expert-curated mappings from Phases 2-4 as "anchors" and propagate their con
 
 ##### Embedding Model Options
 
-| Model | Cost | Domain | Notes |
-| --- | --- | --- | --- |
-| `text-embedding-3-small` (OpenAI) | ~$0.75 for 500K vars | General | Good baseline, cheap |
-| `text-embedding-3-large` (OpenAI) | ~$3.75 for 500K vars | General | Better quality |
-| `PubMedBERT` | Free | Biomedical | May handle medical abbreviations better |
-| `all-MiniLM-L6-v2` | Free | General | Fast, good for prototyping |
+| Model                             | Cost                 | Domain     | Notes                                   |
+| --------------------------------- | -------------------- | ---------- | --------------------------------------- |
+| `text-embedding-3-small` (OpenAI) | ~$0.75 for 500K vars | General    | Good baseline, cheap                    |
+| `text-embedding-3-large` (OpenAI) | ~$3.75 for 500K vars | General    | Better quality                          |
+| `PubMedBERT`                      | Free                 | Biomedical | May handle medical abbreviations better |
+| `all-MiniLM-L6-v2`                | Free                 | General    | Fast, good for prototyping              |
 
 **Recommendation**: Start with `text-embedding-3-small` (<$1) for initial implementation. If precision is insufficient, test biomedical models on a sample.
 
 ##### Confidence Thresholds
 
-| Similarity Score | Confidence Label | UI Treatment |
-| --- | --- | --- |
-| >=0.85 | **high** | Show prominently |
-| 0.70-0.84 | **medium** | Show with indicator |
-| 0.60-0.69 | **low** | Show with caution label |
-| <0.60 | -- | Do not surface |
+| Similarity Score | Confidence Label | UI Treatment            |
+| ---------------- | ---------------- | ----------------------- |
+| >=0.85           | **high**         | Show prominently        |
+| 0.70-0.84        | **medium**       | Show with indicator     |
+| 0.60-0.69        | **low**          | Show with caution label |
+| <0.60            | --               | Do not surface          |
 
 These thresholds prioritize **recall over precision** since the use case is discovery/findability, not clinical decision-making. Users can filter by confidence level.
 
 ##### Cost Estimate
 
-| Item | Cost |
-| --- | --- |
-| Embeddings (500K+ variables x 50 tokens avg) | $0.75-$4 |
-| OpenSearch storage | Existing infrastructure |
-| Compute (cosine similarity) | Minimal |
-| **Total** | **<$10** |
+| Item                                         | Cost                    |
+| -------------------------------------------- | ----------------------- |
+| Embeddings (500K+ variables x 50 tokens avg) | $0.75-$4                |
+| OpenSearch storage                           | Existing infrastructure |
+| Compute (cosine similarity)                  | Minimal                 |
+| **Total**                                    | **<$10**                |
 
 ##### Evaluation Strategy
 
@@ -437,16 +439,16 @@ UMLS (Unified Medical Language System) is the recommended primary standard becau
 - **Already used by TOPMed** anchors (our ground truth)
 - **Integrates 190+ source vocabularies** including SNOMED, LOINC, MeSH, HPO
 - **3.49 million concepts** with cross-mappings
-- **dbGaP's own annotations** use UMLS CUIs
+- **Used in dbGaP's own annotations**
 
 #### Secondary Standards (Cross-Referenced)
 
-| Standard | Size | Best For | When to Use |
-| --- | --- | --- | --- |
-| **LOINC** | ~100K codes | Lab tests, observations | Variables measuring lab values |
-| **SNOMED CT** | ~350K concepts | Clinical terminology | Disease/condition variables |
-| **HPO** | ~17K terms | Phenotypic abnormalities | Rare disease phenotypes |
-| **MeSH** | ~30K descriptors | Literature indexing | Linking to PubMed |
+| Standard      | Size             | Best For                 | When to Use                    |
+| ------------- | ---------------- | ------------------------ | ------------------------------ |
+| **LOINC**     | ~100K codes      | Lab tests, observations  | Variables measuring lab values |
+| **SNOMED CT** | ~350K concepts   | Clinical terminology     | Disease/condition variables    |
+| **HPO**       | ~17K terms       | Phenotypic abnormalities | Rare disease phenotypes        |
+| **MeSH**      | ~30K descriptors | Literature indexing      | Linking to PubMed              |
 
 Where available, store cross-references to these systems in the `related_codes` field.
 
@@ -540,15 +542,15 @@ GET /variables/_search
 
 ## Success Metrics
 
-| Metric | Target | Notes |
-| --- | --- | --- |
-| Variables indexed | >400K | From var_report.xml parsing |
-| Variables with expert mapping | >30,000 | Phases 2-4 (harmonized/tagged) |
-| Variables with any mapping | >300,000 | Including Phase 5 inferred |
-| Unique concepts | >500 | UMLS CUIs |
-| Search latency (p95) | <200ms | |
-| Recall on held-out test | >80% | At inferred-low threshold |
-| Precision at inferred-high | >70% | Validated against expert mappings |
+| Metric                        | Target   | Notes                             |
+| ----------------------------- | -------- | --------------------------------- |
+| Variables indexed             | >400K    | From var_report.xml parsing       |
+| Variables with expert mapping | >30,000  | Phases 2-4 (harmonized/tagged)    |
+| Variables with any mapping    | >300,000 | Including Phase 5 inferred        |
+| Unique concepts               | >500     | UMLS CUIs                         |
+| Search latency (p95)          | <200ms   |                                   |
+| Recall on held-out test       | >80%     | At inferred-low threshold         |
+| Precision at inferred-high    | >70%     | Validated against expert mappings |
 
 ## Dependencies
 
@@ -559,13 +561,13 @@ GET /variables/_search
 
 ## Timeline
 
-| Phase | Scope | Effort |
-| --- | --- | --- |
-| Phase 1 | dbGaP variables | Index ~500K+ variables |
-| Phase 2 | TOPMed harmonized | Add 78 concepts, ~1,000-2,000 mappings |
-| Phase 3 | TOPMed tags | Add 65 concepts, ~16K mappings |
-| Phase 4 | PhenX | Add ~500 concepts, ~13K mappings |
-| Phase 5 | NLP clustering | Expand coverage with inferred mappings |
+| Phase   | Scope                         | Effort                                 |
+| ------- | ----------------------------- | -------------------------------------- |
+| Phase 1 | Variable ingestion from dbGaP | Index ~500K+ variables                 |
+| Phase 2 | TOPMed harmonized             | Add 78 concepts, ~1,000-2,000 mappings |
+| Phase 3 | TOPMed tags                   | Add 65 concepts, ~16K mappings         |
+| Phase 4 | PhenX                         | Add ~500 concepts, ~13K mappings       |
+| Phase 5 | NLP clustering                | Expand coverage with inferred mappings |
 
 ## Open Questions
 
@@ -584,7 +586,7 @@ GET /variables/_search
 2. **Confidence approach**: Three-tier inferred confidence (high/medium/low) based on embedding similarity
 3. **Optimization target**: Recall over precision (better to show more candidates with confidence labels than miss relevant variables)
 4. **Budget**: <$10 for embedding generation (500K+ variables at current API pricing)
-5. **Study ingestion**: CSV export + FTP for descriptions (not FHIR API, which had non-functional search)
+5. **Study ingestion**: CSV export from dbGaP Advanced Search + FTP for full descriptions
 6. **Publication sources**: Three-phase pipeline (GapExchange XML, NIH Reporter, PMC citations) all implemented
 
 ## References
@@ -606,24 +608,24 @@ GET /variables/_search
 
 As of January 2025, the following source data has been downloaded:
 
-| Source | Location | Size | Records |
-| --- | --- | --- | --- |
-| dbGaP var_report.xml | `catalog-build/source/dbgap-variables/` | 642 MB | 14,416 files from 2,721 studies |
-| TOPMed harmonized phenotypes | `catalog-build/source/harmonization-sources/topmed-harmonized/` | ~1 MB | 78 JSON files |
-| TOPMed phenotype tags | `catalog-build/source/harmonization-sources/topmed-phenotype-tags.csv` | 57 KB | 65 concepts |
+| Source                       | Location                                                               | Size   | Records                         |
+| ---------------------------- | ---------------------------------------------------------------------- | ------ | ------------------------------- |
+| dbGaP var_report.xml         | `catalog-build/source/dbgap-variables/`                                | 642 MB | 14,416 files from 2,721 studies |
+| TOPMed harmonized phenotypes | `catalog-build/source/harmonization-sources/topmed-harmonized/`        | ~1 MB  | 78 JSON files                   |
+| TOPMed phenotype tags        | `catalog-build/source/harmonization-sources/topmed-phenotype-tags.csv` | 57 KB  | 65 concepts                     |
 
-### dbGaP Variable Statistics (from Downloaded Snapshot)
+### Variable Statistics (from Downloaded Snapshot)
 
 These numbers reflect the downloaded data as of January 2025. dbGaP has since grown to ~3,100 released studies; the total variable count is estimated at 500,000+ (extrapolated from 384,987 variables across 1,169 studies reported in the [dbgap2x paper, 2018](https://academic.oup.com/bioinformatics/article/36/4/1305/5556117)).
 
-| Metric | Value (downloaded) |
-| --- | --- |
-| Studies with variable data | 2,721 |
-| Total unique variables | 340,617 |
-| Min variables per study | 2 |
-| Max variables per study | 57,042 (Framingham) |
-| Mean per study | 125 |
-| Median per study | 15 |
+| Metric                     | Value (downloaded)  |
+| -------------------------- | ------------------- |
+| Studies with variable data | 2,721               |
+| Total unique variables     | 340,617             |
+| Min variables per study    | 2                   |
+| Max variables per study    | 57,042 (Framingham) |
+| Mean per study             | 125                 |
+| Median per study           | 15                  |
 
 **Distribution (downloaded snapshot):**
 
