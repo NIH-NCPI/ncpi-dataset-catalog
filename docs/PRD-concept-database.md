@@ -105,10 +105,10 @@ The most reliable method combines:
 
 ### Priority 3: Web-Only / Registration Required
 
-| Source                   | Records                           | Content                        | Access                                           |
-| ------------------------ | --------------------------------- | ------------------------------ | ------------------------------------------------ |
+| Source                   | Records                           | Content                       | Access                                           |
+| ------------------------ | --------------------------------- | ----------------------------- | ------------------------------------------------ |
 | **PhenX-dbGaP Mappings** | 13,653 variables from 521 studies | PhenX ID ↔ dbGaP phv mappings | [Web tool](https://www.phenxtoolkit.org/vsearch) |
-| **PheKB**                | ~100 phenotype algorithms         | ICD, RxNorm, LOINC code lists  | [Registration](https://phekb.org)                |
+| **PheKB**                | ~100 phenotype algorithms         | ICD, RxNorm, LOINC code lists | [Registration](https://phekb.org)                |
 
 ## Data Model
 
@@ -628,12 +628,12 @@ The study detail page currently shows a "View in AnVIL" link for AnVIL-hosted st
 | **CRDC**  | Not yet                                                           | Planned                                                                   |
 | **KFDRC** | Not yet                                                           | Blocked (see below)                                                       |
 
-### BDC (BioData Catalyst) — Easy
+### BDC (BioData Catalyst) — No per-study deep link
 
-**URL pattern:** `https://gen3.biodatacatalyst.nhlbi.nih.gov/discovery?keyword=${dbGapId}`
+**URL pattern:** `https://gen3.biodatacatalyst.nhlbi.nih.gov/discovery`
 
-- BDC's Gen3 Discovery page supports a `keyword` query parameter that works directly with the phs ID already in the catalog.
-- BDC also has individual study detail pages (`/discovery/<guid>/`) but the GUIDs include version+consent group suffixes (e.g., `phs000179.v6.p2.c1`) that don't match the `studyAccession` stored in our catalog (e.g., `phs000179.v6.p2`). The keyword search is the safe, reliable approach.
+- The Gen3 Discovery frontend does not support a `keyword` query parameter — the URL simply opens the discovery page where users can search manually.
+- Individual study detail pages (`/discovery/<guid>/`) use GUIDs with version+consent group suffixes (e.g., `phs000179.v6.p2.c1`) that don't match the `studyAccession` stored in our catalog (e.g., `phs000179.v6.p2`), so per-study deep links are not feasible.
 - **261 BDC studies** in catalog.
 
 ### CRDC (GDC Portal) — Medium
