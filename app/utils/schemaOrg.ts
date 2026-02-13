@@ -1,6 +1,7 @@
 import { Publication } from "../apis/catalog/common/entities";
 import { NCPICatalogStudy } from "../apis/catalog/ncpi-catalog/common/entities";
 import { stripHtmlTags } from "./htmlUtils";
+import { getPlatformUrl } from "./platformUrls";
 
 /**
  * Maximum number of publications to include in the JSON-LD citation array.
@@ -89,12 +90,6 @@ export function buildStudyJsonLd(
     "@context": "https://schema.org",
     "@type": "Dataset",
     description: truncateDescription(stripHtmlTags(study.studyDescription)),
-    distribution: [
-      {
-        "@type": "DataDownload",
-        contentUrl: dbGapStudyUrl,
-      },
-    ],
     identifier: [study.dbGapId, study.studyAccession],
     includedInDataCatalog: {
       "@type": "DataCatalog",
@@ -106,6 +101,11 @@ export function buildStudyJsonLd(
     sameAs: dbGapStudyUrl,
     url: `${browserURL}/studies/${study.dbGapId}`,
   };
+
+  const distribution = buildDistribution(study);
+  if (distribution.length > 0) {
+    jsonLd.distribution = distribution;
+  }
 
   const keywords = buildKeywords(study.focus, study.studyDesign);
   if (keywords.length > 0) {
@@ -128,6 +128,25 @@ export function buildStudyJsonLd(
   }
 
   return jsonLd;
+}
+
+/**
+ * Builds Schema.org DataDownload distribution array from study platforms.
+ * @param study - The NCPI catalog study.
+ * @returns Array of DataDownload objects for each platform with a valid URL.
+ */
+function buildDistribution(study: NCPICatalogStudy): SchemaDataDownload[] {
+  const distribution: SchemaDataDownload[] = [];
+  for (const platform of study.platform) {
+    const url = getPlatformUrl(study, platform);
+    if (url) {
+      distribution.push({
+        "@type": "DataDownload",
+        contentUrl: url,
+      });
+    }
+  }
+  return distribution;
 }
 
 /**

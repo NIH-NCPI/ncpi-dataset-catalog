@@ -1,4 +1,7 @@
-import { NCPICatalogStudy } from "../apis/catalog/ncpi-catalog/common/entities";
+import {
+  NCPICatalogStudy,
+  PLATFORM,
+} from "../apis/catalog/ncpi-catalog/common/entities";
 import { buildStudyJsonLd, SchemaDataset } from "./schemaOrg";
 
 const BROWSER_URL = "https://ncpi-data.org";
@@ -13,6 +16,7 @@ function makeStudy(
     dbGapId: "phs000123",
     duosUrl: null,
     focus: "Cardiovascular",
+    gdcProjectId: null,
     participantCount: 100,
     platform: [],
     publications: [],
@@ -72,14 +76,23 @@ describe("buildStudyJsonLd", () => {
     expect(result.measurementTechnique).toEqual(["WGS"]);
   });
 
-  it("includes distribution with dbGaP link", () => {
-    expect(result.distribution).toEqual([
+  it("includes distribution with platform URLs", () => {
+    const study = makeStudy({ platform: [PLATFORM.ANVIL, PLATFORM.BDC] });
+    const jsonLd = buildStudyJsonLd(study, BROWSER_URL);
+    expect(jsonLd.distribution).toEqual([
       {
         "@type": "DataDownload",
-        contentUrl:
-          "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs000123.v1.p1",
+        contentUrl: `https://explore.anvilproject.org/datasets?filter=${encodeURIComponent(JSON.stringify([{ categoryKey: "datasets.registered_identifier", value: ["phs000123"] }]))}`,
+      },
+      {
+        "@type": "DataDownload",
+        contentUrl: "https://gen3.biodatacatalyst.nhlbi.nih.gov/discovery",
       },
     ]);
+  });
+
+  it("omits distribution when platform is empty", () => {
+    expect(result.distribution).toBeUndefined();
   });
 
   it("sets sameAs to dbGaP study URL", () => {
