@@ -13,6 +13,7 @@ import {
 import * as C from "../../../../components";
 import { METADATA_KEY } from "../../../../components/Index/common/entities";
 import { getPluralizedMetadataLabel } from "../../../../components/Index/common/indexTransformer";
+import { getPlatformUrl } from "../../../../utils/platformUrls";
 import { RequestAccess } from "app/components/RequestAccess/requestAccess";
 import { MDX_COMPONENTS } from "app/components/MarkdownRenderer/constants";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
@@ -395,43 +396,18 @@ function getPlatformLink(
   ncpiCatalogStudy: NCPICatalogStudy,
   platform: PLATFORM,
 ): React.ComponentProps<typeof C.Links>["links"][number] | null {
-  const { dbGapId, gdcProjectId } = ncpiCatalogStudy;
-  switch (platform) {
-    case PLATFORM.ANVIL: {
-      const params = encodeURIComponent(
-        JSON.stringify([
-          {
-            categoryKey: "datasets.registered_identifier",
-            value: [dbGapId],
-          },
-        ]),
-      );
-      return {
-        label: "View in AnVIL",
-        target: ANCHOR_TARGET.BLANK,
-        url: `https://explore.anvilproject.org/datasets?filter=${params}`,
-      };
-    }
-    case PLATFORM.BDC:
-      return {
-        label: "View BDC Studies",
-        target: ANCHOR_TARGET.BLANK,
-        url: "https://gen3.biodatacatalyst.nhlbi.nih.gov/discovery",
-      };
-    case PLATFORM.CRDC:
-      if (!gdcProjectId) return null;
-      return {
-        label: "View in CRDC",
-        target: ANCHOR_TARGET.BLANK,
-        url: `https://portal.gdc.cancer.gov/projects/${encodeURIComponent(gdcProjectId)}`,
-      };
-    case PLATFORM.KFDRC:
-      return {
-        label: "View KFDRC Studies",
-        target: ANCHOR_TARGET.BLANK,
-        url: "https://portal.kidsfirstdrc.org/public-studies",
-      };
-    default:
-      return null;
-  }
+  const url = getPlatformUrl(ncpiCatalogStudy, platform);
+  if (!url) return null;
+  const labels: Record<PLATFORM, string> = {
+    [PLATFORM.ANVIL]: "View in AnVIL",
+    [PLATFORM.BDC]: "View BDC Studies",
+    [PLATFORM.CRDC]: "View in CRDC",
+    [PLATFORM.DBGAP]: "View in dbGaP",
+    [PLATFORM.KFDRC]: "View KFDRC Studies",
+  };
+  return {
+    label: labels[platform],
+    target: ANCHOR_TARGET.BLANK,
+    url,
+  };
 }
