@@ -24,13 +24,6 @@
       "description": "'CARe_CHS_Sleep Quality'"
     },
     {
-      "match": { "description": "(?i)Medical History" },
-      "concept": "medical-history",
-      "domain": "Clinical Exam",
-      "rationale": "Matched by description containing 'Medical History'. CHS uses opaque table names (YR5NEW, BASE1, YR12PH, YR12ANNUAL) but descriptions consistently say 'Medical History'. Covers baseline through year 17, 50-1421 vars per visit.",
-      "description": "e.g. 'CARe_CHS_YR5NEW - Medical History', 'CARe_CHS_BASELINE - Medical History (1)', 'CARe_CHS_YR12ANNUAL - Medical History'"
-    },
-    {
       "match": { "description": "(?i)Ultrasound" },
       "concept": "carotid-ultrasound",
       "domain": "Cardiovascular",
@@ -50,55 +43,6 @@
       "domain": "Musculoskeletal",
       "rationale": "Table names explicitly say BONE_DENSITY. Baseline/Year 7 and follow-up datasets.",
       "description": "'CARe_CHS_BONE_DENSITY_BASE_YR7', 'CARe_CHS_BONE_DENSITY_FOLLOWUP'"
-    },
-    {
-      "match": { "tableName": "EVENT" },
-      "concept": "clinical-events",
-      "domain": "Clinical Events",
-      "rationale": "Event summary and time-to-event datasets for adjudicated cardiovascular outcomes.",
-      "description": "'CARe_CHS_EVENT_SUMMARY', 'CARe_CHS_EVENT_TIME_TO_CENSUS'"
-    },
-    {
-      "match": { "tableName": "^ICD9" },
-      "concept": "diagnosis-codes",
-      "domain": "Clinical Events",
-      "rationale": "ICD-9 diagnosis code table from hospitalization records.",
-      "description": "'CARe_CHS_ICD9 Codes'"
-    },
-    {
-      "match": { "description": "(?i)Atrial Fibrillation" },
-      "concept": "clinical-events",
-      "domain": "Clinical Events",
-      "rationale": "Matched by description containing 'Atrial Fibrillation'.",
-      "description": "'CARe_CHS_Atrial Fibrillation'"
-    },
-    {
-      "match": { "description": "(?i)Vitamin D|Calcium|Phosph" },
-      "concept": "clinical-laboratory-results",
-      "domain": "Clinical Labs",
-      "rationale": "Matched by description. Mineral metabolism panel including vitamin D, calcium, alkaline phosphatase, phosphate, and parathyroid hormone.",
-      "description": "'CARe_CHS_Vitamin D/Calcium/Alkaline Phosphatase (bone)/Phosphate/Parathyroid Hormone Data'"
-    },
-    {
-      "match": { "tableName": "(?i)(ADIPONECTIN|DDDIMER|CYST_C|IMT_POLACK|CAC|VTE)" },
-      "concept": "clinical-laboratory-results",
-      "domain": "Clinical Labs",
-      "rationale": "Individual biomarker assay tables identified by name: adiponectin, D-dimer, cystatin C (renal), IMT (Polack method), coronary artery calcium, and venous thromboembolism. 3-5 vars each.",
-      "description": "e.g. 'CARe_CHS_ADIPONECTIN', 'CARe_CHS_CYSTATIN_C_YR5', 'CARe_CHS_Coronary Artery Calcification', 'CARe_CHS_VTE'"
-    },
-    {
-      "match": { "tableName": "(?i)ADDITIONAL_BIOMARKERS" },
-      "concept": "clinical-laboratory-results",
-      "domain": "Clinical Labs",
-      "rationale": "Supplemental biomarker panel not covered by visit-specific labs.",
-      "description": "'CARe_CHS_ADDITIONAL_BIOMARKERS'"
-    },
-    {
-      "match": { "tableName": "(?i)(DOB_CAT|DNA_DRAW|BIRTHYEAR|nsrr)" },
-      "concept": "subject-sample-identifiers",
-      "domain": "Study Administration",
-      "rationale": "Administrative/linkage tables: date of birth category, DNA draw year, children's birth years, and CHS-to-NSRR (National Sleep Research Resource) ID mapping.",
-      "description": "e.g. 'CARe_CHS_DOB_CAT', 'CARe_CHS_DNA_DRAW_YEAR', 'Subject ID mapping - CHS to NSRR'"
     }
   ]
 }
