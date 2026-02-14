@@ -1,18 +1,18 @@
-# PRD: Concept Database for dbGaP Variable Harmonization
+# PRD: Measure Database for dbGaP Variable Harmonization
 
 ## Overview
 
 This document defines the requirements for building a comprehensive discovery layer over dbGaP (database of Genotypes and Phenotypes). The system will enable researchers to:
 
 1. **Query across all dbGaP studies** — not just those hosted on specific cloud platforms
-2. **Search variables by concept** — finding all variables measuring the same thing regardless of naming conventions
+2. **Search variables by measure** — finding all variables measuring the same thing regardless of naming conventions
 3. **Discover research context** — understanding both the original research that produced the data and secondary analyses that reused it
 
-The concept database will use OpenSearch to provide exact match, synonym lookup, and fuzzy matching on phenotype terms, mapping them to standardized concept codes and clustered variable groups.
+The measure database will use OpenSearch to provide exact match, synonym lookup, and fuzzy matching on phenotype terms, mapping them to standardized codes and clustered variable groups.
 
 ### Related Documents
 
-- [PRD: Variable Classification Taxonomy](./PRD-variable-classification.md) — defines the ~30 domains / ~160 concepts taxonomy and the 4-phase classification pipeline for assigning variables to concepts
+- [PRD: Variable Classification Taxonomy](./PRD-variable-classification.md) — defines the ~30 domains / ~160 measures taxonomy and the 4-phase classification pipeline for assigning variables to measures
 - [PRD: Study Publications Discovery](./PRD-study-publications.md) — publication discovery via NIH RePORTER, PMC search, and text mining
 - [PRD: Platform Deep Links](./PRD-platform-deep-links.md) — deep links to BDC, CRDC, and KFDRC portals from study detail pages
 
@@ -54,9 +54,9 @@ Without this context, researchers struggle to understand if a dataset is appropr
 ## Goals
 
 1. **Complete dbGaP Coverage**: Include all ~3,000 dbGaP studies, not just platform-hosted ones
-2. **Unified Concept Search**: Enable searching by variable name, description, or concept term to find all related dbGaP variables
+2. **Unified Measure Search**: Enable searching by variable name, description, or measure term to find all related dbGaP variables
 3. **Synonym Support**: Return matches for synonymous terms (e.g., "BP" → "blood pressure")
-4. **Concept Clustering**: Group variables that measure the same underlying concept
+4. **Measure Clustering**: Group variables that capture the same underlying measure
 5. **Standard Code Mapping**: Link variables to UMLS CUI, LOINC, and other standard vocabularies
 6. **Publication Discovery**: Surface papers describing study methods and findings
 

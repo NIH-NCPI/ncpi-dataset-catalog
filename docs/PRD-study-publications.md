@@ -109,7 +109,7 @@ Step 2: Identify variable mentions
          diastolic blood pressure (DBP) from baseline exam..."
                     ↓
 Step 3: Link to dbGaP variables
-        Match mentions to phv IDs using concept mappings
+        Match mentions to phv IDs using measure mappings
                     ↓
 Step 4: Extract protocol details
         "Blood pressure was measured using mercury
