@@ -10,6 +10,12 @@ This document defines the requirements for building a comprehensive discovery la
 
 The concept database will use OpenSearch to provide exact match, synonym lookup, and fuzzy matching on phenotype terms, mapping them to standardized concept codes and clustered variable groups.
 
+### Related Documents
+
+- [PRD: Variable Classification Taxonomy](./PRD-variable-classification.md) — defines the ~30 domains / ~160 concepts taxonomy and the 4-phase classification pipeline for assigning variables to concepts
+- [PRD: Study Publications Discovery](./PRD-study-publications.md) — publication discovery via NIH RePORTER, PMC search, and text mining
+- [PRD: Platform Deep Links](./PRD-platform-deep-links.md) — deep links to BDC, CRDC, and KFDRC portals from study detail pages
+
 ## Problem Statement
 
 ### The Core Problem: No Unified Search Across Studies AND Variables
