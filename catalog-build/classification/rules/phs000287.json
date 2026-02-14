@@ -4,42 +4,42 @@
   "rules": [
     {
       "match": { "tableName": "^SHHS.*PSG" },
-      "concept": "polysomnography",
+      "measure": "polysomnography",
       "domain": "Sleep",
       "rationale": "SHHS = Sleep Heart Health Study, PSG = Polysomnography. Two tables (SHHS1_PSG, SHHS2_PSG) with ~1300 vars each from overnight sleep recordings.",
       "description": "'CARe_CHS_SHHS-1 (PSG)', 'CARe_CHS_SHHS-2 (PSG)'"
     },
     {
       "match": { "tableName": "^SHHS.*ecg" },
-      "concept": "electrocardiography",
+      "measure": "electrocardiography",
       "domain": "Cardiovascular",
       "rationale": "ECG recordings from SHHS sleep study visits. SHHS1_ecg and SHHS2_ecg, ~34 vars each.",
       "description": "'CARe_CHS_SHHS-1 (ECG)', 'CARe_CHS_SHHS-2 (ECG)'"
     },
     {
       "match": { "tableName": "SHHS" },
-      "concept": "polysomnography",
+      "measure": "polysomnography",
       "domain": "Sleep",
       "rationale": "Catches remaining SHHS table (CHS_SHHS1_15K) — sleep quality questionnaire with 65 vars.",
       "description": "'CARe_CHS_Sleep Quality'"
     },
     {
       "match": { "description": "(?i)Ultrasound" },
-      "concept": "carotid-ultrasound",
+      "measure": "carotid-ultrasound",
       "domain": "Cardiovascular",
       "rationale": "Matched by description containing 'Ultrasound'. Three carotid ultrasound datasets at baseline, year 5, and year 11.",
       "description": "'CARe_CHS_Ultrasound data - Baseline', 'CARe_CHS_Ultrasound data - Year 5', 'CARe_CHS_Ultrasound data - Year 11'"
     },
     {
       "match": { "description": "(?i)MRI" },
-      "concept": "brain-mri",
+      "measure": "brain-mri",
       "domain": "Neuroimaging",
       "rationale": "Matched by description containing 'MRI'. Two brain MRI result tables with 125-133 vars.",
       "description": "'CARe_CHS_MRI1_Details of MRI results (I)', 'CARe_CHS_MRI1_Details of MRI results (II)'"
     },
     {
       "match": { "tableName": "^BONE_DENSITY" },
-      "concept": "bone-mineral-density",
+      "measure": "bone-mineral-density",
       "domain": "Musculoskeletal",
       "rationale": "Table names explicitly say BONE_DENSITY. Baseline/Year 7 and follow-up datasets.",
       "description": "'CARe_CHS_BONE_DENSITY_BASE_YR7', 'CARe_CHS_BONE_DENSITY_FOLLOWUP'"

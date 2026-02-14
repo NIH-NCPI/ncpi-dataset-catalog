@@ -3,95 +3,32 @@
   "studyName": "DCCT-EDIC Clinical Trial (Type 1 Diabetes)",
   "rules": [
     {
-      "match": { "tableName": "^DCCT_bgpdat" },
-      "concept": "blood-glucose-monitoring",
-      "domain": "Metabolic",
-      "rationale": "'bgpdat' = blood glucose profile data. The DCCT trial's primary outcome was glycemic control, making this the central measurement table. Contains C-peptide, creatinine, glucose, and HbA1c from baseline, quarterly visits, and close-out. 888 vars.",
-      "description": "'The dataset represents variables that provide information about blood glucose profiles collected at baseline, quarterly visits, and close-out.'"
-    },
-    {
       "match": { "tableName": "^DCCT_hbam" },
-      "concept": "glycated-hemoglobin",
+      "measure": "glycated-hemoglobin",
       "domain": "Metabolic",
       "rationale": "'hbam' = HbA1c measurements. HbA1c was the primary glycemic control indicator in DCCT. Collected at baseline, quarterly, and close-out. 236 vars.",
       "description": "'The dataset represents variables describing HbA1c values, which were used as the main indicator of glycemic control'"
     },
     {
       "match": { "tableName": "^DCCT_f024" },
-      "concept": "electrocardiography",
+      "measure": "electrocardiography",
       "domain": "Cardiovascular",
       "rationale": "Form 024 = ECG testing data. 54 vars.",
       "description": "'This dataset contains variables that represent ECG testing'"
     },
     {
       "match": { "tableName": "^DCCT_f114" },
-      "concept": "bone-mineral-density",
+      "measure": "bone-mineral-density",
       "domain": "Musculoskeletal",
       "rationale": "Form 114 = bone density measurements. 69 vars.",
       "description": "'The dataset represents variables that were used to obtain bone density measurements'"
     },
     {
       "match": { "tableName": "^EDIC_f030" },
-      "concept": "diabetic-retinopathy",
+      "measure": "diabetic-retinopathy",
       "domain": "Ophthalmology",
       "rationale": "EDIC Form 030 = retinopathy assessment via fundus photography during follow-up. f0302/f0303 for different follow-up years. 143-144 vars. Pure retinal grading data.",
       "description": "'EDIC. Retinopathy of participants with Type 1 diabetes'"
-    },
-    {
-      "match": { "tableName": "^DCCT_f035" },
-      "concept": "scl-90r-symptom-checklist",
-      "domain": "Behavioral",
-      "rationale": "Form 035 = SCL-90R (Symptom Checklist-90-Revised), a specific validated instrument measuring 9 symptom dimensions. 145 vars.",
-      "description": "'This dataset represents variables of the SCL-90R questionnaire used for assessment of emotional status'"
-    },
-    {
-      "match": { "tableName": "^DCCT_f036" },
-      "concept": "quality-of-life-dcct",
-      "domain": "Behavioral",
-      "rationale": "Form 036 = DCCT-specific quality of life assessment instrument. 94 vars.",
-      "description": "'The dataset represents variables used to collect information about quality of life'"
-    },
-    {
-      "match": { "tableName": "^DCCT_f128" },
-      "concept": "sf-36-health-survey",
-      "domain": "Behavioral",
-      "rationale": "Form 128 = SF-36 (Short Form 36), a widely-used generic health-related quality of life survey with 8 subscales. 76 vars.",
-      "description": "'This dataset represents variables of the SF-36 questionnaire'"
-    },
-    {
-      "match": { "tableName": "^DCCT_f122" },
-      "concept": "psychological-assessment",
-      "domain": "Behavioral",
-      "rationale": "Form 122 = close-out psychological assessment administered at end of trial. 86 vars.",
-      "description": "'This dataset represents variables that assess (at close-out) psychological status'"
-    },
-    {
-      "match": { "tableName": "^DCCT_f027" },
-      "concept": "ophthalmology-exam",
-      "domain": "Ophthalmology",
-      "rationale": "Form 027 = eye health status and functionality. Covers eye surgery, photocoagulation, intra-ocular pressure, eye medications. Pure ophthalmic assessment. 137 vars.",
-      "description": "'This dataset represents variables used to collect information about health status and functionality of eyes'"
-    },
-    {
-      "match": { "tableName": "^EDIC_f050" },
-      "concept": "diabetic-neuropathy",
-      "domain": "Neurology",
-      "rationale": "EDIC Form 050 = neuropathy assessment during follow-up. Pure neuropathy evaluation (nerve conduction, sensory exam). f0502/f0503. 38-40 vars.",
-      "description": "'EDIC. Diabetic neuropathy of participants with Type 1 diabetes'"
-    },
-    {
-      "match": { "tableName": "^EDIC_neph" },
-      "concept": "diabetic-nephropathy",
-      "domain": "Renal",
-      "rationale": "EDIC nephropathy follow-up dataset — renal function outcomes over 8 years. Pure kidney function assessment. 53 vars.",
-      "description": "'EDIC. Diabetic nephropathy of participants with Type 1 diabetes at 8 year follow-up'"
-    },
-    {
-      "match": { "tableName": "^EDIC_neuro" },
-      "concept": "diabetic-neuropathy",
-      "domain": "Neurology",
-      "rationale": "EDIC neuropathy follow-up dataset — nerve function outcomes over 8 years. 52 vars.",
-      "description": "'EDIC. Diabetic neuropathy of participants with Type 1 diabetes at 8 year follow-up'"
     }
   ]
 }

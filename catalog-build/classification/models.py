@@ -36,7 +36,7 @@ class Rule:
 
     match_field: str  # "tableName" or "description"
     pattern: str  # regex pattern
-    concept: str  # e.g. "accelerometer-wearable-data"
+    measure: str  # e.g. "accelerometer-wearable-data"
     domain: str  # e.g. "Physical Activity"
     rationale: str | None = None
     description: str | None = None  # example table description(s) for human auditing
@@ -49,7 +49,7 @@ class Rule:
         return cls(
             match_field=match_field,
             pattern=pattern,
-            concept=d["concept"],
+            measure=d.get("measure") or d["concept"],
             domain=d["domain"],
             rationale=d.get("rationale"),
             description=d.get("description"),
@@ -78,12 +78,12 @@ class RuleFile:
 
 @dataclass
 class Classification:
-    """A classification result: a table assigned to a concept."""
+    """A classification result: a table assigned to a measure."""
 
     study_id: str
     dataset_id: str
     table_name: str
-    concept: str
+    measure: str
     domain: str
     phase: int
     rule_source: str  # e.g. "phs000007:tableName:^t_physactf_"
@@ -108,7 +108,7 @@ class CoverageStats:
     classified_variables: int
     unclassified_variables: int
     classification_rate: float
-    concepts: dict[str, int] = field(default_factory=dict)
+    measures: dict[str, int] = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         """Convert to JSON-serializable dict."""
