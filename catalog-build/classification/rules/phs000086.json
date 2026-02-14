@@ -1,0 +1,300 @@
+{
+  "studyId": "phs000086",
+  "studyName": "DCCT-EDIC Clinical Trial (Type 1 Diabetes)",
+  "rules": [
+    {
+      "match": { "tableName": "^DCCT_bgpdat" },
+      "concept": "blood-glucose-monitoring",
+      "domain": "Metabolic",
+      "rationale": "'bgpdat' = blood glucose profile data. The DCCT trial's primary outcome was glycemic control, making this the central measurement table. Contains C-peptide, creatinine, glucose, and HbA1c from baseline, quarterly visits, and close-out. 888 vars.",
+      "description": "'The dataset represents variables that provide information about blood glucose profiles collected at baseline, quarterly visits, and close-out. Measurements include C-peptide, creatinine, glucose, and HbA1c.'"
+    },
+    {
+      "match": { "tableName": "^DCCT_ms" },
+      "concept": "clinical-outcomes",
+      "domain": "Clinical Events",
+      "rationale": "'ms' = manuscript. These tables were created for specific DCCT publications comparing standard vs experimental treatment outcomes. ms2=retinopathy, ms3=nephropathy, ms4=neuropathy, ms5=macrovascular, ms7=neuropsych, ms12=glycemic exposure. 112-713 vars each.",
+      "description": "e.g. 'The dataset represents variables used for a comparison of neuropsychological functions of DCCT volunteers who received standard diabetes treatment to those who received experimental diabetes treatment'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f003" },
+      "concept": "medical-history",
+      "domain": "Clinical Exam",
+      "rationale": "Form 003 = annual history/physical. f0033 is the annual version, f003cmb2 is the combined version, f0034 is the close-out version. Covers diabetes management, adherence, complications, medications, general health. 343-497 vars.",
+      "description": "'The dataset represents variables used to collect annual information about e.g. diabetes management, adherence to treatment plan, diabetes-related complications, usage of medications, general health and well-being'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f002" },
+      "concept": "medical-history",
+      "domain": "Clinical Exam",
+      "rationale": "Form 002 = eligibility physical exam and medical history. f002cmb4 contains detailed information from volunteers deemed eligible following the initial clinic visit. 389 vars.",
+      "description": "'The dataset represents variables that provide further information of volunteers deemed eligible following the initial clinic visit about their diabetes history and management'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f001" },
+      "concept": "enrollment-eligibility",
+      "domain": "Study Administration",
+      "rationale": "Form 001 = enrollment information collected at initial clinic visit.",
+      "description": "'The dataset represents variable information obtained at the initial clinic visit'"
+    },
+    {
+      "match": { "tableName": "^DCCT_hbam" },
+      "concept": "glycemic-measures",
+      "domain": "Metabolic",
+      "rationale": "'hbam' = HbA1c measurements. HbA1c was the primary glycemic control indicator in DCCT. Collected at baseline, quarterly, and close-out. 236 vars.",
+      "description": "'The dataset represents variables describing HbA1c values, which were used as the main indicator of glycemic control; data were collected at baseline, quarterly, and close-out'"
+    },
+    {
+      "match": { "tableName": "^DCCT_diethist" },
+      "concept": "dietary-intake",
+      "domain": "Dietary Intake",
+      "rationale": "'diethist' = dietary history. Collected to assess whether dietary factors might confound treatment group comparisons. 156 vars.",
+      "description": "'The dataset represents variables used to collect information about volunteers' diets in order to determine if dietary factors might represent confounding effects'"
+    },
+    {
+      "match": { "tableName": "^DCCT_cbl" },
+      "concept": "clinical-laboratory-results",
+      "domain": "Clinical Labs",
+      "rationale": "'cbl' = core blood labs. Annual blood panels numbered cbl00 through cbl10 (11 collection timepoints). 67-69 vars each.",
+      "description": "'The dataset represents variables used to collect annual information about blood laboratory results'"
+    },
+    {
+      "match": { "tableName": "^EDIC_cbldata" },
+      "concept": "clinical-laboratory-results",
+      "domain": "Clinical Labs",
+      "rationale": "EDIC follow-up core blood lab data, continuing the DCCT_cbl series. 88 vars.",
+      "description": "'EDIC. Laboratory data of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f021" },
+      "concept": "diabetic-retinopathy",
+      "domain": "Ophthalmology",
+      "rationale": "Form 021 = fundus photography for retinopathy grading. f021cmb6 collects data at randomization and quarterly follow-up about diabetes management and retinal status. 373 vars.",
+      "description": "'The dataset represents variables used to collect information at randomization and at quarterly follow-up visits about diabetes management, adherence to treatment, and retinal health'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f030" },
+      "concept": "diabetic-retinopathy",
+      "domain": "Ophthalmology",
+      "rationale": "EDIC Form 030 = retinopathy assessment during the follow-up phase. f0302/f0303 correspond to different follow-up years. 143-144 vars.",
+      "description": "'EDIC. Retinopathy of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f0217" },
+      "concept": "diabetic-retinopathy",
+      "domain": "Ophthalmology",
+      "rationale": "Extended version of Form 021 — same retinopathy/fundus photography data with additional quarterly visit variables. 294 vars.",
+      "description": "'The dataset represents variables used to collect information at randomization and at quarterly follow-up visits about diabetes management and retinal health'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f035" },
+      "concept": "psychological-assessment",
+      "domain": "Behavioral",
+      "rationale": "Form 035 = SCL-90R (Symptom Checklist-90-Revised), a validated instrument for emotional status: anxiety, depression, fear, guilt, hostility, interpersonal sensitivity, etc. 145 vars.",
+      "description": "'This dataset represents variables of the SCL-90R questionnaire used for assessment of emotional status (presence/absence of anxiety, depression, fear, guilt, hostility)'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f036" },
+      "concept": "quality-of-life",
+      "domain": "Behavioral",
+      "rationale": "Form 036 = quality of life assessment specific to diabetes. 94 vars.",
+      "description": "'The dataset represents variables used to collect information about quality of life'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f128" },
+      "concept": "quality-of-life",
+      "domain": "Behavioral",
+      "rationale": "Form 128 = SF-36 (Short Form 36), a generic health-related quality of life survey. 76 vars.",
+      "description": "'This dataset represents variables of the SF-36 questionnaire'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f122" },
+      "concept": "psychological-assessment",
+      "domain": "Behavioral",
+      "rationale": "Form 122 = close-out psychological assessment administered at end of trial. 86 vars.",
+      "description": "'This dataset represents variables that assess (at close-out) psychological status'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f024" },
+      "concept": "electrocardiography",
+      "domain": "Cardiovascular",
+      "rationale": "Form 024 = ECG testing data. 54 vars.",
+      "description": "'This dataset contains variables that represent ECG testing'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f010" },
+      "concept": "diabetic-nephropathy",
+      "domain": "Renal",
+      "rationale": "Form 010 = CNS/renal function data. Despite 'CNS' mention in description, primary content is cognitive/motor function testing related to kidney disease assessment. 227 vars.",
+      "description": "'The dataset represents variables used to collect information about CNS functions, e.g. cognitive and motor functions, including memory, attention, arithmetic, verbal abilities'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f106" },
+      "concept": "diabetic-neuropathy",
+      "domain": "Neurology",
+      "rationale": "Form 106 = pregnancy and neuropathy assessment (combined form). Despite pregnancy mention in description, the table primarily tracks neuropathy outcomes during pregnancy. 148 vars.",
+      "description": "'The dataset represents variables used to collect information about pregnancies that occurred during DCCT, their outcome, and health of the mother'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f114" },
+      "concept": "bone-mineral-density",
+      "domain": "Musculoskeletal",
+      "rationale": "Form 114 = bone density measurements. 69 vars.",
+      "description": "'The dataset represents variables that were used to obtain bone density measurements'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f002" },
+      "concept": "medical-history",
+      "domain": "Clinical Exam",
+      "rationale": "EDIC Form 002 = medical history and physical exam during the follow-up phase. f0022/f0023/f0024 for different follow-up periods. 381-418 vars each.",
+      "description": "'EDIC. Medical history and physical exam of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f004" },
+      "concept": "medications",
+      "domain": "Treatment",
+      "rationale": "EDIC Form 004 = current medications. f0042/f0043/f0044 for different follow-up periods. 67-82 vars.",
+      "description": "'EDIC. Current medications of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f042" },
+      "concept": "medications",
+      "domain": "Treatment",
+      "rationale": "EDIC Form 042 = glycemia/medication follow-up. Note: f0422/f0423 contain both glycemia AND medication data, but medications are the primary content. 113-115 vars.",
+      "description": "'EDIC. Glycemia of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f070" },
+      "concept": "healthcare-delivery",
+      "domain": "Treatment",
+      "rationale": "EDIC Form 070 = health care delivery data. f0702-f0705 across follow-up periods. 223-237 vars.",
+      "description": "'EDIC. Health care delivery of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f060" },
+      "concept": "psychological-assessment",
+      "domain": "Behavioral",
+      "rationale": "EDIC Form 060 = psychological observations during follow-up. f0602/f0612. 44-65 vars.",
+      "description": "'EDIC. Psychological observations of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f050" },
+      "concept": "diabetic-neuropathy",
+      "domain": "Neurology",
+      "rationale": "EDIC Form 050 = neuropathy assessment during follow-up. f0502/f0503. 38-40 vars.",
+      "description": "'EDIC. Diabetic neuropathy of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^EDIC_neph" },
+      "concept": "diabetic-nephropathy",
+      "domain": "Renal",
+      "rationale": "EDIC nephropathy follow-up dataset — renal function outcomes over 8 years. 53 vars.",
+      "description": "'EDIC. Diabetic nephropathy of participants with Type 1 diabetes at 8 year follow-up'"
+    },
+    {
+      "match": { "tableName": "^EDIC_neuro" },
+      "concept": "diabetic-neuropathy",
+      "domain": "Neurology",
+      "rationale": "EDIC neuropathy follow-up dataset — nerve function outcomes over 8 years. 52 vars.",
+      "description": "'EDIC. Diabetic neuropathy of participants with Type 1 diabetes at 8 year follow-up'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f090" },
+      "concept": "cardiovascular-events",
+      "domain": "Cardiovascular",
+      "rationale": "EDIC Form 090 = cardiovascular disease events. f0902/f0903/f0904 for different follow-up periods. 36-65 vars.",
+      "description": "'EDIC. Cardiovascular disease of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f091" },
+      "concept": "cerebrovascular-events",
+      "domain": "Neurology",
+      "rationale": "EDIC Form 091 = cerebrovascular disease events (stroke, TIA). f0913/f0914. 43-47 vars.",
+      "description": "'EDIC. Cerebrovascular disease of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f092" },
+      "concept": "peripheral-vascular-disease",
+      "domain": "Cardiovascular",
+      "rationale": "EDIC Form 092 = peripheral vascular disease events. f0922/f0923. 48-67 vars.",
+      "description": "'EDIC. Peripheral vascular disease of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f093" },
+      "concept": "adverse-events",
+      "domain": "Clinical Events",
+      "rationale": "EDIC Form 093 = diabetic ketoacidosis (DKA) events. f0932/f0933/f0934. 25-30 vars.",
+      "description": "'EDIC. Diabetic ketoacidosis of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f094" },
+      "concept": "psychiatric-events",
+      "domain": "Behavioral",
+      "rationale": "EDIC Form 094 = psychiatric disease events. f0942/f0943/f0944. 22-24 vars.",
+      "description": "'EDIC. Psychiatric disease of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f095" },
+      "concept": "adverse-events",
+      "domain": "Clinical Events",
+      "rationale": "EDIC Form 095 = major accident events. f0952/f0953/f0954. 28-41 vars.",
+      "description": "'EDIC. Major accident of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^EDIC_f14" },
+      "concept": "patient-status",
+      "domain": "Study Administration",
+      "rationale": "EDIC Form 14xx = patient status and follow-up tracking. f1402/f1412/f1413/f1422/f1442/f1443/f1452. 10-38 vars.",
+      "description": "'EDIC. Patient status of participants with Type 1 diabetes'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f0034$" },
+      "concept": "medical-history",
+      "domain": "Clinical Exam",
+      "rationale": "Form 003 close-out version — comprehensive history collected at trial conclusion. 497 vars.",
+      "description": "'The dataset represents variables used to collect information at close-out about diabetes management, adherence to treatment plan, diabetes-related complications'"
+    },
+    {
+      "match": { "tableName": "^DCCT_m9ex" },
+      "concept": "adverse-events",
+      "domain": "Clinical Events",
+      "rationale": "'m9ex' = manuscript 9 adverse events. Subtypes: m9exall (all events), m9exevet (individual events), m9exdka (DKA), m9excaif (cardiac), m9exhpcs/hpra (hypoglycemia), m9exmorb (morbidity), m9exdeth (death). 9-135 vars each.",
+      "description": "'The information published as Adverse Events and their Association with Treatment Regimens in the DCCT'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f(005|008|028|037|045|046|047|048|049|056|057|083|088|097|108)" },
+      "concept": "clinical-assessment",
+      "domain": "Clinical Exam",
+      "rationale": "Various DCCT clinical assessment forms: f005 (medications), f008 (eligibility), f028 (insulin therapy), f037 (family history), f045/f046 (cognitive), f047/f048/f049 (neurological), f056/f057 (voluntary withdrawal), f083 (retinal), f088 (nerve conduction), f097 (procedures), f108 (first-degree relatives).",
+      "description": "Various clinical assessment and eligibility forms, 14-86 vars each"
+    },
+    {
+      "match": { "tableName": "^DCCT_f013" },
+      "concept": "clinical-assessment",
+      "domain": "Clinical Exam",
+      "rationale": "Form 013 = combined clinical data used alongside other instrument forms. 38 vars.",
+      "description": "'The dataset represents variables used in combination with information from other forms'"
+    },
+    {
+      "match": { "tableName": "^DCCT_(baseline|status|master|dtfamcls)" },
+      "concept": "enrollment-eligibility",
+      "domain": "Study Administration",
+      "rationale": "Administrative tables: baseline (selection of enrollment data, 80 vars), status (study status tracking, 62 vars), master (administrative variables, 8 vars), dtfamcls (family classification for diabetes type, 28 vars).",
+      "description": "e.g. 'The dataset represents a selection of DCCT-relevant data collected at baseline', 'This dataset contains administrative variables used for volunteer tracking'"
+    },
+    {
+      "match": { "tableName": "^DCCT_f027" },
+      "concept": "ophthalmology-exam",
+      "domain": "Ophthalmology",
+      "rationale": "Form 027 = eye health status and functionality. Covers eye surgery, photocoagulation, intra-ocular pressure, eye medications. 137 vars.",
+      "description": "'This dataset represents variables used to collect information about health status and functionality of eyes (presence/absence of eye surgery, photocoagulation, intra-ocular pressure, eye medications)'"
+    },
+    {
+      "match": { "tableName": "^d_eSelectin" },
+      "concept": "clinical-laboratory-results",
+      "domain": "Clinical Labs",
+      "rationale": "E-Selectin serum biomarker — an endothelial cell adhesion molecule, marker of vascular inflammation. 3 vars.",
+      "description": "'EDIC. E-Selectin serum values of participants with Type 1 diabetes'"
+    }
+  ]
+}

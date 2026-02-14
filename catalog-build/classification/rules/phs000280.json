@@ -1,0 +1,111 @@
+{
+  "studyId": "phs000280",
+  "studyName": "Atherosclerosis Risk in Communities (ARIC)",
+  "rules": [
+    {
+      "match": { "tableName": "^ECGPWAV" },
+      "concept": "electrocardiography",
+      "domain": "Cardiovascular",
+      "rationale": "ECGPWAV = ECG P-wave morphology analysis. Four tables (ECGPWAV12/22/32/42) correspond to visits 1-4, each with ~826 vars representing detailed waveform measurements.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "ECG" },
+      "concept": "electrocardiography",
+      "domain": "Cardiovascular",
+      "rationale": "Matches all remaining ECG tables: V1ECG-V4ECG (visit-specific, ~437 vars each), ECG (combined, 429 vars), and ECGC/ECGD/ECGE/ECGMA-MD/ECGX (specialized readings).",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^UBM" },
+      "concept": "carotid-ultrasound",
+      "domain": "Cardiovascular",
+      "rationale": "ARIC ultrasound naming: 'UBM' = Ultrasound B-Mode. Subtypes: UBMD (distal), UBME, UBMF (far wall), UBMG. Letter suffixes BF/BM/WF/WM denote Black Female/Male, White Female/Male strata.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^UB[A-F]B" },
+      "concept": "carotid-ultrasound",
+      "domain": "Cardiovascular",
+      "rationale": "UBAB/UBBB/UBCB/UBDB/UBEB/UBFB are carotid segment ultrasound measurement tables (211 vars each). The two-letter prefix after 'UB' identifies the arterial segment.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "SHHS" },
+      "concept": "polysomnography",
+      "domain": "Sleep",
+      "rationale": "SHHS = Sleep Heart Health Study, an ARIC ancillary. UC6453_ARIC_SHHS1 contains 1,358 polysomnography variables from overnight sleep recordings.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^MR" },
+      "concept": "brain-mri",
+      "domain": "Neuroimaging",
+      "rationale": "MR prefix tables are brain MRI data from the ARIC neurocognitive ancillary study. MRD/MRF/MRM/MRR/MRS/MRW = different MRI measures; MRIA/MRCB = specific sequences. ~130-165 vars each.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^ESM" },
+      "concept": "carotid-ultrasound",
+      "domain": "Cardiovascular",
+      "rationale": "ESM = Extracranial Stenosis Measurement. ESMA/ESMB/ESMC tables contain Doppler ultrasound measurements of carotid artery stenosis at different visits. ~158 vars each.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^TIA" },
+      "concept": "carotid-ultrasound",
+      "domain": "Cardiovascular",
+      "rationale": "TIA = Transient Ischemic Attack study tables. TIAB/TIAC/TIAD/TIAE contain carotid imaging and clinical data from the TIA/stroke ancillary. ~132 vars each.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^DERIVE" },
+      "concept": "derived-phenotype-variables",
+      "domain": "Study Administration",
+      "rationale": "DERIVE tables (DERIVE13, DERIVE37, DERIVE48, etc.) contain computed/harmonized variables derived from raw visit data. Numbering corresponds to internal dataset tracking. 150-190 vars each.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^(BIO_|V1_V7_Longitudinal_Lab|CHEM)" },
+      "concept": "clinical-laboratory-results",
+      "domain": "Clinical Labs",
+      "rationale": "BIO_V5/V6/V7 = biomarker panels from visits 5-7. V1_V7_Longitudinal_Lab_Data = pooled lab results across all visits (395 vars). CHEM2 = blood chemistry panel (372 vars).",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^MSR_" },
+      "concept": "clinical-exam",
+      "domain": "Clinical Exam",
+      "rationale": "MSR = Measures. MSR_V5/V6/V7 contain clinical measurements (BP, anthropometry, physical exam) from visits 5-7. 180-376 vars per visit.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^CHRM|^hfchfa|^CCEL|^CCEB|^CCEA|^hfccel|^cstr" },
+      "concept": "cardiovascular-events",
+      "domain": "Cardiovascular",
+      "rationale": "ARIC event adjudication tables: CHRM = CHD/MI events, hfchfa = heart failure, CCEL/CCEB/CCEA = cerebrovascular events by type, cstr = stroke events. PS19 suffix = through 2019 follow-up.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^afucomposite" },
+      "concept": "cardiovascular-events",
+      "domain": "Cardiovascular",
+      "rationale": "AFU = Annual Follow-Up. 'afucomposite31ps1' is a composite event dataset (196 vars) combining MI, stroke, HF, and death events from annual telephone follow-ups.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^WMRL" },
+      "concept": "brain-mri",
+      "domain": "Neuroimaging",
+      "rationale": "WMRL = White Matter Rating Lesion. Contains 426 vars of semi-quantitative white matter hyperintensity ratings from brain MRI scans.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^NUTR" },
+      "concept": "dietary-intake",
+      "domain": "Dietary Intake",
+      "rationale": "NUTRV2 = Nutrition data from Visit 2. Contains dietary intake variables from food frequency questionnaire.",
+      "description": "(no description in XML)"
+    }
+  ]
+}
