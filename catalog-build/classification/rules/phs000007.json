@@ -1,0 +1,48 @@
+{
+  "studyId": "phs000007",
+  "studyName": "Framingham Heart Study",
+  "rules": [
+    {
+      "match": { "tableName": "^t_physactf_" },
+      "concept": "accelerometer-wearable-data",
+      "domain": "Physical Activity",
+      "rationale": "Table prefix 't_physactf_' = physical activity file. Each table contains ~11K variables representing hourly accelerometer count bins from wrist-worn devices. Three tables cover different exam cohorts.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^(vr_ffreq_|ffreq)" },
+      "concept": "food-frequency-questionnaire",
+      "domain": "Dietary Intake",
+      "rationale": "'ffreq' = food frequency; 'vr_ffreq' = verified/recoded food frequency. These are Willett FFQ tables with 300-700 vars each covering food item frequencies across multiple exams.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^l_rna" },
+      "concept": "gene-expression",
+      "domain": "High-Throughput Omics",
+      "rationale": "FHS lab naming: 'l_' prefix = lab assay, 'rna' = RNA expression. These contain whole-blood gene expression probe-level data, ~1K vars per table.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^l_olink" },
+      "concept": "proteomics",
+      "domain": "High-Throughput Omics",
+      "rationale": "FHS lab naming: 'l_olink' = Olink proteomics platform. Olink is a commercial proximity extension assay measuring ~90-3000 protein biomarkers per panel. No matching tables in current download.",
+      "description": "(no matching tables yet)"
+    },
+    {
+      "match": { "tableName": "^l_mtbl" },
+      "concept": "metabolomics",
+      "domain": "High-Throughput Omics",
+      "rationale": "FHS lab naming: 'l_mtbl' = metabolomics. Subtypes include 'mtbli' (initial platform), 'mtbllipi' (lipidomics), 'mtblcmhi' (clinical metabolomics). Metabolon/Broad platforms, 50-112 vars per table.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "description": "(?i)bone mineral density|\\bDXA\\b|\\bBMD\\b" },
+      "concept": "bone-mineral-density",
+      "domain": "Musculoskeletal",
+      "rationale": "Matched by description containing 'Bone Mineral Density', 'DXA' (dual-energy X-ray absorptiometry), or 'BMD'. Table names like 'bmd0_*' and 'wholedxa0_*' confirmed via descriptions.",
+      "description": "e.g. 'Bone Mineral Density and Related Measures, Exam 9' and DXA body composition tables"
+    }
+  ]
+}
