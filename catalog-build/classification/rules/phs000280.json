@@ -59,52 +59,10 @@
       "description": "(no description in XML)"
     },
     {
-      "match": { "tableName": "^DERIVE" },
-      "concept": "derived-phenotype-variables",
-      "domain": "Study Administration",
-      "rationale": "DERIVE tables (DERIVE13, DERIVE37, DERIVE48, etc.) contain computed/harmonized variables derived from raw visit data. Numbering corresponds to internal dataset tracking. 150-190 vars each.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^(BIO_|V1_V7_Longitudinal_Lab|CHEM)" },
-      "concept": "clinical-laboratory-results",
-      "domain": "Clinical Labs",
-      "rationale": "BIO_V5/V6/V7 = biomarker panels from visits 5-7. V1_V7_Longitudinal_Lab_Data = pooled lab results across all visits (395 vars). CHEM2 = blood chemistry panel (372 vars).",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^MSR_" },
-      "concept": "clinical-exam",
-      "domain": "Clinical Exam",
-      "rationale": "MSR = Measures. MSR_V5/V6/V7 contain clinical measurements (BP, anthropometry, physical exam) from visits 5-7. 180-376 vars per visit.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^CHRM|^hfchfa|^CCEL|^CCEB|^CCEA|^hfccel|^cstr" },
-      "concept": "cardiovascular-events",
-      "domain": "Cardiovascular",
-      "rationale": "ARIC event adjudication tables: CHRM = CHD/MI events, hfchfa = heart failure, CCEL/CCEB/CCEA = cerebrovascular events by type, cstr = stroke events. PS19 suffix = through 2019 follow-up.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^afucomposite" },
-      "concept": "cardiovascular-events",
-      "domain": "Cardiovascular",
-      "rationale": "AFU = Annual Follow-Up. 'afucomposite31ps1' is a composite event dataset (196 vars) combining MI, stroke, HF, and death events from annual telephone follow-ups.",
-      "description": "(no description in XML)"
-    },
-    {
       "match": { "tableName": "^WMRL" },
       "concept": "brain-mri",
       "domain": "Neuroimaging",
       "rationale": "WMRL = White Matter Rating Lesion. Contains 426 vars of semi-quantitative white matter hyperintensity ratings from brain MRI scans.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^NUTR" },
-      "concept": "dietary-intake",
-      "domain": "Dietary Intake",
-      "rationale": "NUTRV2 = Nutrition data from Visit 2. Contains dietary intake variables from food frequency questionnaire.",
       "description": "(no description in XML)"
     }
   ]

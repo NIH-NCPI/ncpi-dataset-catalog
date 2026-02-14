@@ -17,34 +17,6 @@
       "description": "e.g. 'MESA Lung Airway Ancillary Study Exam 1 Dataset: This dataset provides airway data'"
     },
     {
-      "match": { "tableName": "(?i)Exam\\d+Main" },
-      "concept": "clinical-exam",
-      "domain": "Clinical Exam",
-      "rationale": "Main clinical exam datasets: Exam1Main through Exam5Main. Core phenotype data (BP, anthropometry, medications, medical history) collected at each visit. 345-1729 vars per exam.",
-      "description": "(no description in XML for most; Exam5Main has 1729 vars)"
-    },
-    {
-      "match": { "tableName": "(?i)AirNRExam\\d*Main" },
-      "concept": "clinical-exam",
-      "domain": "Clinical Exam",
-      "rationale": "Air New Recruit exam datasets — clinical data for participants enrolled in the MESA Air pollution ancillary study.",
-      "description": "e.g. 'MESA Air Exam Main Dataset: The MESA Air Exam is an ancillary study with clinical exam data'"
-    },
-    {
-      "match": { "tableName": "(?i)FamilyExamMain" },
-      "concept": "clinical-exam",
-      "domain": "Clinical Exam",
-      "rationale": "MESA Family ancillary exam dataset — clinical data for family members of MESA participants.",
-      "description": "'MESA Family Exam Main Dataset: The MESA Family Exam is an ancillary study with clinical exam data'"
-    },
-    {
-      "match": { "tableName": "(?i)dietnutrients" },
-      "concept": "dietary-intake",
-      "domain": "Dietary Intake",
-      "rationale": "Table name contains 'dietnutrients'. Contains computed nutrient intake values from dietary questionnaire, 636 vars.",
-      "description": "(no description in XML)"
-    },
-    {
       "match": { "tableName": "(?i)ECG" },
       "concept": "electrocardiography",
       "domain": "Cardiovascular",
@@ -74,7 +46,7 @@
     },
     {
       "match": { "tableName": "(?i)BodyComp" },
-      "concept": "body-composition",
+      "concept": "body-composition-ct",
       "domain": "Anthropometry",
       "rationale": "Abdominal body composition measured from CT scans — visceral and subcutaneous adipose tissue areas.",
       "description": "'MESA Abdominal Body Composition Ancillary Study Dataset. This dataset provides CT measures of abdominal fat distribution'"
@@ -94,8 +66,15 @@
       "description": "'MESA Classic Aortic Valvular Calcium Dataset: This dataset contains aortic valve calcium measures'"
     },
     {
+      "match": { "tableName": "(?i)PericardialFat" },
+      "concept": "vascular-ct-imaging",
+      "domain": "Cardiovascular",
+      "rationale": "Pericardial fat volume measured from cardiac CT scans, a marker of cardiovascular risk.",
+      "description": "'MESA Pericardial Fat Dataset: This is an ancillary study dataset with pericardial fat measures'"
+    },
+    {
       "match": { "tableName": "(?i)AirExposure" },
-      "concept": "environmental-exposure",
+      "concept": "air-pollution-exposure",
       "domain": "Environmental",
       "rationale": "Air pollution exposure estimates from the MESA Air ancillary study, for MESA classic, Air NR, and Family cohorts.",
       "description": "'MESA Air Ancillary Study MESA Exposure Dataset: This dataset provides estimates of individual-level air pollution exposure'"
@@ -115,15 +94,8 @@
       "description": "'MESA Sleep Ancillary Study Dataset from Exam 5'"
     },
     {
-      "match": { "tableName": "(?i)PericardialFat" },
-      "concept": "vascular-ct-imaging",
-      "domain": "Cardiovascular",
-      "rationale": "Pericardial fat volume measured from cardiac CT scans, a marker of cardiovascular risk.",
-      "description": "'MESA Pericardial Fat Dataset: This is an ancillary study dataset with pericardial fat measures'"
-    },
-    {
       "match": { "tableName": "(?i)NAFLD|LiverCT" },
-      "concept": "liver-imaging",
+      "concept": "liver-ct-imaging",
       "domain": "Hepatology",
       "rationale": "NAFLD = Non-Alcoholic Fatty Liver Disease. Liver CT measurements for hepatic steatosis quantification.",
       "description": "'MESA Non-Alcoholic Fatty Liver Disease (NAFLD) Liver CT Dataset'"
@@ -144,28 +116,28 @@
     },
     {
       "match": { "tableName": "(?i)(SexHormone|urinesexhormone)" },
-      "concept": "hormone-biomarkers",
+      "concept": "sex-hormone-assay",
       "domain": "Clinical Labs",
       "rationale": "Sex hormone assay datasets — serum and urine measurements of testosterone, estradiol, SHBG, etc.",
       "description": "'MESA Sex Hormone Dataset: This is an ancillary study dataset with sex hormone measures'"
     },
     {
       "match": { "tableName": "(?i)(Stress|Cortisol)" },
-      "concept": "stress-cortisol",
-      "domain": "Behavioral",
+      "concept": "salivary-cortisol",
+      "domain": "Clinical Labs",
       "rationale": "MESA Stress ancillary study — salivary cortisol measurements and stress questionnaires.",
       "description": "'MESA Stress Ancillary Study Dataset: This dataset contains participant cortisol measurements'"
     },
     {
       "match": { "tableName": "(?i)FMD" },
-      "concept": "vascular-function",
+      "concept": "flow-mediated-dilation",
       "domain": "Cardiovascular",
       "rationale": "FMD = Flow-Mediated Dilation. Brachial artery ultrasound measure of endothelial function.",
       "description": "'MESA Flow Mediated Dilation (FMD) Dataset: This is an ancillary study dataset with FMD measures'"
     },
     {
       "match": { "tableName": "(?i)RVFunction" },
-      "concept": "cardiac-imaging",
+      "concept": "cardiac-mri",
       "domain": "Cardiovascular",
       "rationale": "Right ventricular function measured from cardiac MRI.",
       "description": "'MESA RV Function Ancillary Study Dataset. This dataset provides right ventricular function measures from cardiac MRI'"
@@ -178,34 +150,6 @@
       "description": "(no description in XML)"
     },
     {
-      "match": { "tableName": "(?i)(Refraction|Eye)" },
-      "concept": "ophthalmology-exam",
-      "domain": "Ophthalmology",
-      "rationale": "Eye ancillary study datasets — refraction measurements and eye exam data from MESA classic and Family cohorts.",
-      "description": "'MESA Eye Ancillary Study Dataset: This dataset provides eye refraction data'"
-    },
-    {
-      "match": { "tableName": "(?i)(Event|Afib|Diabetes)" },
-      "concept": "clinical-events",
-      "domain": "Clinical Events",
-      "rationale": "Clinical event datasets: cardiovascular events through 2011, atrial fibrillation events, and time-to-diabetes onset.",
-      "description": "e.g. 'MESA Atrial Fibrillation Dataset: This dataset contains phenotype data for AFib events'"
-    },
-    {
-      "match": { "tableName": "(?i)Pedigree" },
-      "concept": "subject-sample-identifiers",
-      "domain": "Study Administration",
-      "rationale": "Pedigree table with family relationship structure for the MESA Family ancillary study.",
-      "description": "'The data table contains pedigree information of study participants'"
-    },
-    {
-      "match": { "tableName": "(?i)(Cotinine|Vitamin|Mineral|FetuinA|LpPLA2|Pentraxin|Sphingomyelin|GGT|GlycA|BNP|Apo|RenalFunction|lungvariant|A1AT)" },
-      "concept": "clinical-laboratory-results",
-      "domain": "Clinical Labs",
-      "rationale": "Individual biomarker/lab assay tables: cotinine (smoking), vitamins K/D, mineral metabolites, fetuin-A, Lp-PLA2, pentraxin/SAP3, sphingomyelin, GGT, GlycA, BNP, apolipoproteins, renal function (cystatin C), A1AT (alpha-1 antitrypsin). Each is a small ancillary dataset with 2-21 vars.",
-      "description": "e.g. 'MESA Cotinine Dataset: This dataset contains measures of cotinine for study subjects'"
-    },
-    {
       "match": { "tableName": "(?i)CTRead" },
       "concept": "lung-ct-imaging",
       "domain": "Pulmonary",
@@ -213,11 +157,11 @@
       "description": "'MESA Lung CT Read 185: Lung CT reads for 185 case-control subjects'"
     },
     {
-      "match": { "tableName": "(?i)(CG$)" },
-      "concept": "genomics",
-      "domain": "High-Throughput Omics",
-      "rationale": "CG = Candidate Gene program. Indicator of whether a participant was included in the MESA candidate gene genotyping study.",
-      "description": "'MESA Classic indicator of participation in Candidate Gene Program'"
+      "match": { "tableName": "(?i)Pedigree" },
+      "concept": "subject-sample-identifiers",
+      "domain": "Study Administration",
+      "rationale": "Pedigree table with family relationship structure for the MESA Family ancillary study.",
+      "description": "'The data table contains pedigree information of study participants'"
     }
   ]
 }

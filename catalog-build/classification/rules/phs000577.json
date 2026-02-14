@@ -3,101 +3,10 @@
   "studyName": "UCDC Longitudinal Study (Urea Cycle Disorders)",
   "rules": [
     {
-      "match": { "tableName": "^baselineassessmentform$" },
-      "concept": "clinical-exam",
-      "domain": "Clinical Exam",
-      "rationale": "The largest table in the study (8,184 vars). Name is self-descriptive — comprehensive baseline clinical assessment for urea cycle disorder patients.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^drugandothertreatment$" },
-      "concept": "medications",
-      "domain": "Treatment",
-      "rationale": "Name is self-descriptive — drug and other treatment data for managing urea cycle disorders (nitrogen scavengers, dietary protein restriction, etc.). 1,054 vars.",
-      "description": "(no description in XML)"
-    },
-    {
       "match": { "tableName": "^neuropsych" },
       "concept": "neuropsychological-testing",
       "domain": "Neurology",
-      "rationale": "'neuropsych' prefix tables (forms A through F) contain standardized neuropsychological test batteries. Cognitive impairment is a major outcome in urea cycle disorders due to hyperammonemia. 121-400 vars per form.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^laboratoryform$" },
-      "concept": "clinical-laboratory-results",
-      "domain": "Clinical Labs",
-      "rationale": "Name is self-descriptive — clinical lab results including ammonia levels (key biomarker for urea cycle disorders), amino acids, liver function. 379 vars.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^medicalanddevelopmentalhistory$" },
-      "concept": "medical-history",
-      "domain": "Clinical Exam",
-      "rationale": "Name is self-descriptive — medical and developmental history, important for tracking developmental milestones in pediatric urea cycle disorder patients. 314 vars.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^physical_examination_form$" },
-      "concept": "clinical-exam",
-      "domain": "Clinical Exam",
-      "rationale": "Name is self-descriptive — physical examination data. 235 vars.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^interimeventform$" },
-      "concept": "clinical-events",
-      "domain": "Clinical Events",
-      "rationale": "Name is self-descriptive — interim clinical events between scheduled visits (e.g. hyperammonemic crises, hospitalizations). 180 vars.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^enrollment_demographics$" },
-      "concept": "demographics",
-      "domain": "Demographics",
-      "rationale": "Name is self-descriptive — enrollment and demographic data. 161 vars.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^nutrientdataform$" },
-      "concept": "dietary-intake",
-      "domain": "Dietary Intake",
-      "rationale": "Nutrient/dietary intake data. Protein restriction is a primary treatment for urea cycle disorders, making dietary monitoring critical. 115 vars.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^eligibility$" },
-      "concept": "enrollment-eligibility",
-      "domain": "Study Administration",
-      "rationale": "Name is self-descriptive — eligibility criteria form. 92 vars.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^medicalrecordreviewform$" },
-      "concept": "medical-history",
-      "domain": "Clinical Exam",
-      "rationale": "Name is self-descriptive — medical record review abstracting clinical data. 80 vars.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "(?i)(qualityoflife|qualityoflif|sf_36|pedsql)" },
-      "concept": "quality-of-life",
-      "domain": "Behavioral",
-      "rationale": "Quality of life instruments: SF-36 (adults), PedsQL 4.0 (pediatric, parent and child versions), and UCDC-specific QoL forms. Table names contain 'qualityoflife', 'sf_36', or 'pedsql'. 17-43 vars each.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^adverse_event$" },
-      "concept": "adverse-events",
-      "domain": "Clinical Events",
-      "rationale": "Name is self-descriptive — adverse event reporting. 37 vars.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^deathrecord$" },
-      "concept": "clinical-events",
-      "domain": "Clinical Events",
-      "rationale": "Name is self-descriptive — death records. Urea cycle disorders have significant mortality risk from hyperammonemic crises. 26 vars.",
+      "rationale": "'neuropsych' prefix tables (forms A through F) contain standardized neuropsychological test batteries. Cognitive impairment is a major outcome in urea cycle disorders due to hyperammonemia. 121-400 vars per form. Pure — each form is a specific test battery.",
       "description": "(no description in XML)"
     },
     {
@@ -108,31 +17,10 @@
       "description": "(no description in XML)"
     },
     {
-      "match": { "tableName": "^ae_mro_review$" },
-      "concept": "adverse-events",
-      "domain": "Clinical Events",
-      "rationale": "'ae_mro' = adverse event medical review officer review. Secondary review of adverse events for safety monitoring. 14 vars.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^conclusionofstudyparticipation$" },
-      "concept": "patient-status",
-      "domain": "Study Administration",
-      "rationale": "Name is self-descriptive — study completion or withdrawal form. 11 vars.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "(?i)familyhis" },
-      "concept": "family-history",
-      "domain": "Demographics",
-      "rationale": "Truncated name 'p5101_16897_familyhis' — family history questionnaire. Important because urea cycle disorders are inherited (autosomal recessive or X-linked). 7 vars.",
-      "description": "(no description in XML)"
-    },
-    {
-      "match": { "tableName": "^registration$" },
-      "concept": "enrollment-eligibility",
-      "domain": "Study Administration",
-      "rationale": "Name is self-descriptive — study registration form. 5 vars.",
+      "match": { "tableName": "(?i)(sf_36|pedsql)" },
+      "concept": "quality-of-life-survey",
+      "domain": "Behavioral",
+      "rationale": "Validated QoL instruments: SF-36 (adults) and PedsQL 4.0 (pediatric, parent and child report versions). Each table is a single standardized instrument. 30-43 vars each.",
       "description": "(no description in XML)"
     }
   ]
