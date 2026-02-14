@@ -45,11 +45,11 @@
       "description": "'MESA Eye Ancillary Study Dataset: This dataset provides Exam 2/5 retinal photography data'"
     },
     {
-      "match": { "tableName": "(?i)BodyComp" },
+      "match": { "tableName": "(?i)BodyCompCT" },
       "measure": "body-composition-ct",
       "domain": "Anthropometry",
-      "rationale": "Abdominal body composition measured from CT scans — visceral and subcutaneous adipose tissue areas.",
-      "description": "'MESA Abdominal Body Composition Ancillary Study Dataset. This dataset provides CT measures of abdominal fat distribution'"
+      "rationale": "Abdominal body composition measured from CT scans — visceral and subcutaneous adipose tissue areas. Note: the sibling table 'AbdBodyComposition' (without 'CT') contains serum biomarkers, not CT data.",
+      "description": "'MESA Ancillary Study Dataset: MESA Classic CT measures of Abdominal Body Composition'"
     },
     {
       "match": { "tableName": "(?i)(AbdominalAortic|AorticValvular|Calcium)CT" },
@@ -113,13 +113,6 @@
       "domain": "Cardiovascular",
       "rationale": "Right ventricular function measured from cardiac MRI.",
       "description": "'MESA RV Function Ancillary Study Dataset. This dataset provides right ventricular function measures from cardiac MRI'"
-    },
-    {
-      "match": { "tableName": "(?i)Epigenomic" },
-      "measure": "epigenomics",
-      "domain": "High-Throughput Omics",
-      "rationale": "Epigenomic data linked with complete blood count (CBC) measures.",
-      "description": "(no description in XML)"
     },
     {
       "match": { "tableName": "(?i)CTRead" },
