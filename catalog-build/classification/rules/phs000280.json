@@ -4,63 +4,63 @@
   "rules": [
     {
       "match": { "tableName": "^ECGPWAV" },
-      "concept": "electrocardiography",
+      "measure": "electrocardiography",
       "domain": "Cardiovascular",
       "rationale": "ECGPWAV = ECG P-wave morphology analysis. Four tables (ECGPWAV12/22/32/42) correspond to visits 1-4, each with ~826 vars representing detailed waveform measurements.",
       "description": "(no description in XML)"
     },
     {
       "match": { "tableName": "ECG" },
-      "concept": "electrocardiography",
+      "measure": "electrocardiography",
       "domain": "Cardiovascular",
       "rationale": "Matches all remaining ECG tables: V1ECG-V4ECG (visit-specific, ~437 vars each), ECG (combined, 429 vars), and ECGC/ECGD/ECGE/ECGMA-MD/ECGX (specialized readings).",
       "description": "(no description in XML)"
     },
     {
       "match": { "tableName": "^UBM" },
-      "concept": "carotid-ultrasound",
+      "measure": "carotid-ultrasound",
       "domain": "Cardiovascular",
       "rationale": "ARIC ultrasound naming: 'UBM' = Ultrasound B-Mode. Subtypes: UBMD (distal), UBME, UBMF (far wall), UBMG. Letter suffixes BF/BM/WF/WM denote Black Female/Male, White Female/Male strata.",
       "description": "(no description in XML)"
     },
     {
       "match": { "tableName": "^UB[A-F]B" },
-      "concept": "carotid-ultrasound",
+      "measure": "carotid-ultrasound",
       "domain": "Cardiovascular",
       "rationale": "UBAB/UBBB/UBCB/UBDB/UBEB/UBFB are carotid segment ultrasound measurement tables (211 vars each). The two-letter prefix after 'UB' identifies the arterial segment.",
       "description": "(no description in XML)"
     },
     {
       "match": { "tableName": "SHHS" },
-      "concept": "polysomnography",
+      "measure": "polysomnography",
       "domain": "Sleep",
       "rationale": "SHHS = Sleep Heart Health Study, an ARIC ancillary. UC6453_ARIC_SHHS1 contains 1,358 polysomnography variables from overnight sleep recordings.",
       "description": "(no description in XML)"
     },
     {
       "match": { "tableName": "^MR" },
-      "concept": "brain-mri",
+      "measure": "brain-mri",
       "domain": "Neuroimaging",
       "rationale": "MR prefix tables are brain MRI data from the ARIC neurocognitive ancillary study. MRD/MRF/MRM/MRR/MRS/MRW = different MRI measures; MRIA/MRCB = specific sequences. ~130-165 vars each.",
       "description": "(no description in XML)"
     },
     {
       "match": { "tableName": "^ESM" },
-      "concept": "carotid-ultrasound",
+      "measure": "carotid-ultrasound",
       "domain": "Cardiovascular",
       "rationale": "ESM = Extracranial Stenosis Measurement. ESMA/ESMB/ESMC tables contain Doppler ultrasound measurements of carotid artery stenosis at different visits. ~158 vars each.",
       "description": "(no description in XML)"
     },
     {
       "match": { "tableName": "^TIA" },
-      "concept": "carotid-ultrasound",
+      "measure": "carotid-ultrasound",
       "domain": "Cardiovascular",
       "rationale": "TIA = Transient Ischemic Attack study tables. TIAB/TIAC/TIAD/TIAE contain carotid imaging and clinical data from the TIA/stroke ancillary. ~132 vars each.",
       "description": "(no description in XML)"
     },
     {
       "match": { "tableName": "^WMRL" },
-      "concept": "brain-mri",
+      "measure": "brain-mri",
       "domain": "Neuroimaging",
       "rationale": "WMRL = White Matter Rating Lesion. Contains 426 vars of semi-quantitative white matter hyperintensity ratings from brain MRI scans.",
       "description": "(no description in XML)"

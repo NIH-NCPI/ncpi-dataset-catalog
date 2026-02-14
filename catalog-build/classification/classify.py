@@ -1,4 +1,4 @@
-"""Classify dbGaP dataset tables into concepts using per-study rule files.
+"""Classify dbGaP dataset tables into measures using per-study rule files.
 
 Usage:
     python classify.py                              # Run all studies
@@ -78,7 +78,7 @@ def classify_tables(
     study_filter: str | None = None,
     dry_run: bool = False,
 ) -> list[Classification]:
-    """Classify tables into concepts using rule files.
+    """Classify tables into measures using rule files.
 
     Args:
         tables: All parsed tables.
@@ -121,7 +121,7 @@ def classify_tables(
                     study_id=study_id,
                     dataset_id=table.dataset_id,
                     table_name=table.table_name,
-                    concept=rule.concept,
+                    measure=rule.measure,
                     domain=rule.domain,
                     phase=1,
                     rule_source=f"{source_prefix}:{rule.match_field}:{rule.pattern}",
@@ -133,7 +133,7 @@ def classify_tables(
 
                 if dry_run:
                     print(
-                        f"  MATCH  {table.table_name:40s} -> {rule.concept}"
+                        f"  MATCH  {table.table_name:40s} -> {rule.measure}"
                         f"  ({table.variable_count} vars)"
                     )
             else:
@@ -178,7 +178,7 @@ def save_classifications(classifications: list[Classification], path: Path) -> N
 
 def main() -> None:
     """Run the classification pipeline."""
-    parser = argparse.ArgumentParser(description="Classify dbGaP tables into concepts")
+    parser = argparse.ArgumentParser(description="Classify dbGaP tables into measures")
     parser.add_argument("--study", help="Classify only this study ID (e.g. phs000007)")
     parser.add_argument(
         "--dry-run",
@@ -216,11 +216,11 @@ def main() -> None:
                 t.variable_count for t in tables if t.study_id == args.study
             )
         studies = {c.study_id for c in classifications}
-        concepts = {c.concept for c in classifications}
+        measures = {c.measure for c in classifications}
         rate = (total_vars / all_vars * 100) if all_vars > 0 else 0
 
         print(f"\nClassified {total_vars:,} / {all_vars:,} variables ({rate:.1f}%)")
-        print(f"Across {len(studies)} studies, {len(concepts)} concepts")
+        print(f"Across {len(studies)} studies, {len(measures)} measures")
 
 
 if __name__ == "__main__":

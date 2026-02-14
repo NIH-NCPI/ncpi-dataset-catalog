@@ -4,164 +4,129 @@
   "rules": [
     {
       "match": { "tableName": "(?i)Lung(CT|Exam)" },
-      "concept": "lung-ct-imaging",
+      "measure": "lung-ct-imaging",
       "domain": "Pulmonary",
       "rationale": "MESA Lung ancillary CT imaging datasets. Table names contain 'LungCT' or 'LungExam'. ~1900 vars each, covering quantitative CT measures of lung structure.",
       "description": "e.g. 'MESA Lung Ancillary Study Exam 1 Dataset: This dataset provides Exam 1 quantitative lung CT imaging data'"
     },
     {
       "match": { "tableName": "(?i)LungAirway" },
-      "concept": "lung-ct-imaging",
+      "measure": "lung-ct-imaging",
       "domain": "Pulmonary",
       "rationale": "Lung airway measurements from CT scans. Separate from main LungCT tables, these focus on airway dimensions.",
       "description": "e.g. 'MESA Lung Airway Ancillary Study Exam 1 Dataset: This dataset provides airway data'"
     },
     {
       "match": { "tableName": "(?i)ECG" },
-      "concept": "electrocardiography",
+      "measure": "electrocardiography",
       "domain": "Cardiovascular",
       "rationale": "MESA Exam 1 continuous waveform ECG dataset, 574 vars.",
       "description": "'MESA Continuous wave ECG Dataset: This dataset provides ECG measurements'"
     },
     {
       "match": { "tableName": "(?i)Spirometry" },
-      "concept": "spirometry",
+      "measure": "spirometry",
       "domain": "Pulmonary",
       "rationale": "Lung function spirometry datasets from MESA Lung, Air NR, and Family ancillary studies. ~177-182 vars each.",
       "description": "e.g. 'MESA Lung Spirometry Dataset: The MESA Lung Spirometry Exam provides pulmonary function measures'"
     },
     {
       "match": { "tableName": "(?i)IMT" },
-      "concept": "carotid-ultrasound",
+      "measure": "carotid-ultrasound",
       "domain": "Cardiovascular",
       "rationale": "IMT = Intima-Media Thickness. Carotid ultrasound measurement of arterial wall thickness, a subclinical atherosclerosis marker. 173 vars.",
       "description": "'MESA Air New Recruit Intima-Media Thickness (IMT) Dataset: This dataset provides carotid IMT measures'"
     },
     {
       "match": { "tableName": "(?i)RetinalPhoto" },
-      "concept": "retinal-imaging",
+      "measure": "retinal-imaging",
       "domain": "Ophthalmology",
       "rationale": "Retinal photography from the MESA Eye ancillary study. Exam 2 and Exam 5 datasets, ~198 vars each.",
       "description": "'MESA Eye Ancillary Study Dataset: This dataset provides Exam 2/5 retinal photography data'"
     },
     {
       "match": { "tableName": "(?i)BodyComp" },
-      "concept": "body-composition-ct",
+      "measure": "body-composition-ct",
       "domain": "Anthropometry",
       "rationale": "Abdominal body composition measured from CT scans — visceral and subcutaneous adipose tissue areas.",
       "description": "'MESA Abdominal Body Composition Ancillary Study Dataset. This dataset provides CT measures of abdominal fat distribution'"
     },
     {
       "match": { "tableName": "(?i)(AbdominalAortic|AorticValvular|Calcium)CT" },
-      "concept": "vascular-ct-imaging",
+      "measure": "vascular-ct-imaging",
       "domain": "Cardiovascular",
       "rationale": "CT-based vascular calcification measurements: aortic calcification, aortic valve calcification, and coronary artery calcium scores.",
       "description": "e.g. 'MESA Exam 4 Abdominal Aortic CT Ancillary Dataset: The MESA Exam 4 dataset provides aortic calcification CT measures'"
     },
     {
       "match": { "tableName": "(?i)AorticValvularCalcium$" },
-      "concept": "vascular-ct-imaging",
+      "measure": "vascular-ct-imaging",
       "domain": "Cardiovascular",
       "rationale": "Aortic valvular calcium score datasets without the 'CT' suffix in the name.",
       "description": "'MESA Classic Aortic Valvular Calcium Dataset: This dataset contains aortic valve calcium measures'"
     },
     {
       "match": { "tableName": "(?i)PericardialFat" },
-      "concept": "vascular-ct-imaging",
+      "measure": "vascular-ct-imaging",
       "domain": "Cardiovascular",
       "rationale": "Pericardial fat volume measured from cardiac CT scans, a marker of cardiovascular risk.",
       "description": "'MESA Pericardial Fat Dataset: This is an ancillary study dataset with pericardial fat measures'"
     },
     {
       "match": { "tableName": "(?i)AirExposure" },
-      "concept": "air-pollution-exposure",
+      "measure": "air-pollution-exposure",
       "domain": "Environmental",
       "rationale": "Air pollution exposure estimates from the MESA Air ancillary study, for MESA classic, Air NR, and Family cohorts.",
       "description": "'MESA Air Ancillary Study MESA Exposure Dataset: This dataset provides estimates of individual-level air pollution exposure'"
     },
     {
-      "match": { "tableName": "(?i)Neighbor" },
-      "concept": "neighborhood-environment",
-      "domain": "Social Determinants",
-      "rationale": "MESA Neighborhood ancillary study datasets: perceived neighborhood scales (safety, walkability, social cohesion), food environment (healthy food availability), and SES indicators across exams 1-5.",
-      "description": "e.g. 'MESA Neighborhood Ancillary Study Exam 1 dataset with estimated healthy food availability'"
-    },
-    {
       "match": { "tableName": "(?i)Sleep|Polysomnography" },
-      "concept": "polysomnography",
+      "measure": "polysomnography",
       "domain": "Sleep",
       "rationale": "MESA Sleep ancillary study — overnight polysomnography recordings from Exam 5.",
       "description": "'MESA Sleep Ancillary Study Dataset from Exam 5'"
     },
     {
       "match": { "tableName": "(?i)NAFLD|LiverCT" },
-      "concept": "liver-ct-imaging",
+      "measure": "liver-ct-imaging",
       "domain": "Hepatology",
       "rationale": "NAFLD = Non-Alcoholic Fatty Liver Disease. Liver CT measurements for hepatic steatosis quantification.",
       "description": "'MESA Non-Alcoholic Fatty Liver Disease (NAFLD) Liver CT Dataset'"
     },
     {
-      "match": { "tableName": "(?i)Inflammation" },
-      "concept": "inflammatory-biomarkers",
-      "domain": "Clinical Labs",
-      "rationale": "MESA Inflammation ancillary study — panel of inflammatory biomarkers (CRP, IL-6, fibrinogen, etc.), 67 vars.",
-      "description": "'MESA Inflammation Study Dataset: This is an ancillary study dataset with inflammatory biomarker measures'"
-    },
-    {
       "match": { "tableName": "(?i)BMD" },
-      "concept": "bone-mineral-density",
+      "measure": "bone-mineral-density",
       "domain": "Musculoskeletal",
       "rationale": "BMD = Bone Mineral Density. MESA ancillary study measuring DXA-derived bone density.",
       "description": "'MESA Ancillary Study Dataset: MESA Classic measures of bone mineral density'"
     },
     {
-      "match": { "tableName": "(?i)(SexHormone|urinesexhormone)" },
-      "concept": "sex-hormone-assay",
-      "domain": "Clinical Labs",
-      "rationale": "Sex hormone assay datasets — serum and urine measurements of testosterone, estradiol, SHBG, etc.",
-      "description": "'MESA Sex Hormone Dataset: This is an ancillary study dataset with sex hormone measures'"
-    },
-    {
-      "match": { "tableName": "(?i)(Stress|Cortisol)" },
-      "concept": "salivary-cortisol",
-      "domain": "Clinical Labs",
-      "rationale": "MESA Stress ancillary study — salivary cortisol measurements and stress questionnaires.",
-      "description": "'MESA Stress Ancillary Study Dataset: This dataset contains participant cortisol measurements'"
-    },
-    {
       "match": { "tableName": "(?i)FMD" },
-      "concept": "flow-mediated-dilation",
+      "measure": "flow-mediated-dilation",
       "domain": "Cardiovascular",
       "rationale": "FMD = Flow-Mediated Dilation. Brachial artery ultrasound measure of endothelial function.",
       "description": "'MESA Flow Mediated Dilation (FMD) Dataset: This is an ancillary study dataset with FMD measures'"
     },
     {
       "match": { "tableName": "(?i)RVFunction" },
-      "concept": "cardiac-mri",
+      "measure": "cardiac-mri",
       "domain": "Cardiovascular",
       "rationale": "Right ventricular function measured from cardiac MRI.",
       "description": "'MESA RV Function Ancillary Study Dataset. This dataset provides right ventricular function measures from cardiac MRI'"
     },
     {
       "match": { "tableName": "(?i)Epigenomic" },
-      "concept": "epigenomics",
+      "measure": "epigenomics",
       "domain": "High-Throughput Omics",
       "rationale": "Epigenomic data linked with complete blood count (CBC) measures.",
       "description": "(no description in XML)"
     },
     {
       "match": { "tableName": "(?i)CTRead" },
-      "concept": "lung-ct-imaging",
+      "measure": "lung-ct-imaging",
       "domain": "Pulmonary",
       "rationale": "CT scan reads for 185 lung case-control subjects — visual scoring of CT images.",
       "description": "'MESA Lung CT Read 185: Lung CT reads for 185 case-control subjects'"
-    },
-    {
-      "match": { "tableName": "(?i)Pedigree" },
-      "concept": "subject-sample-identifiers",
-      "domain": "Study Administration",
-      "rationale": "Pedigree table with family relationship structure for the MESA Family ancillary study.",
-      "description": "'The data table contains pedigree information of study participants'"
     }
   ]
 }

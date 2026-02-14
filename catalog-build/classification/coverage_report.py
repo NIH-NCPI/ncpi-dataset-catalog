@@ -60,9 +60,9 @@ def compute_study_coverage(
     classified_tables = sum(1 for t in tables if t.dataset_id in classified_dataset_ids)
     classified_vars = sum(c.variable_count for c in classifications)
 
-    concepts: dict[str, int] = defaultdict(int)
+    measures: dict[str, int] = defaultdict(int)
     for c in classifications:
-        concepts[c.concept] += c.variable_count
+        measures[c.measure] += c.variable_count
 
     rate = (classified_vars / total_vars * 100) if total_vars > 0 else 0
 
@@ -76,7 +76,7 @@ def compute_study_coverage(
         classified_variables=classified_vars,
         unclassified_variables=total_vars - classified_vars,
         classification_rate=round(rate, 1),
-        concepts=dict(sorted(concepts.items(), key=lambda x: -x[1])),
+        measures=dict(sorted(measures.items(), key=lambda x: -x[1])),
     )
 
 
@@ -162,18 +162,18 @@ def generate_report(
         )
 
     # Concept distribution
-    all_concepts: dict[str, int] = defaultdict(int)
+    all_measures: dict[str, int] = defaultdict(int)
     for s in stats_list:
-        for concept, count in s.concepts.items():
-            all_concepts[concept] += count
-    sorted_concepts = sorted(all_concepts.items(), key=lambda x: -x[1])
+        for measure, count in s.measures.items():
+            all_measures[measure] += count
+    sorted_measures = sorted(all_measures.items(), key=lambda x: -x[1])
 
-    print(f"\nConcept distribution ({len(sorted_concepts)} concepts):")
-    print(f"  {'Concept':<45s} {'Variables':>10s} {'Share':>8s}")
+    print(f"\nMeasure distribution ({len(sorted_measures)} measures):")
+    print(f"  {'Measure':<45s} {'Variables':>10s} {'Share':>8s}")
     print(f"  {'-'*45} {'-'*10} {'-'*8}")
-    for concept, count in sorted_concepts:
+    for measure, count in sorted_measures:
         share = (count / classified_vars * 100) if classified_vars > 0 else 0
-        print(f"  {concept:<45s} {count:>10,d} {share:>7.1f}%")
+        print(f"  {measure:<45s} {count:>10,d} {share:>7.1f}%")
 
     return stats_list
 

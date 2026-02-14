@@ -1,34 +1,5 @@
 {
   "studyId": "_default",
   "studyName": "Default rules (all studies)",
-  "rules": [
-    {
-      "match": { "description": "(?i)^(subject id|unique.*participant|de-identified sample)$" },
-      "concept": "subject-sample-identifiers",
-      "domain": "Study Administration",
-      "rationale": "Tables whose entire description is just 'Subject ID' or similar contain only participant/sample identifiers with no phenotype data.",
-      "description": "e.g. 'Subject ID', 'Unique participant identifier', 'De-identified sample'"
-    },
-    {
-      "match": { "description": "(?i)subject consent|consent group" },
-      "concept": "consent-and-access",
-      "domain": "Study Administration",
-      "rationale": "Tables describing consent groups map participants to data access tiers (e.g. GRU, HMB). Description explicitly mentions 'consent'.",
-      "description": "e.g. 'CARe_CHS_Subject - Consent Information', 'DCCT EDIC subject consent'"
-    },
-    {
-      "match": { "tableName": "(?i)_Subject$" },
-      "concept": "subject-sample-identifiers",
-      "domain": "Study Administration",
-      "rationale": "dbGaP convention: tables ending in '_Subject' (e.g. ARIC_Subject, CHS_Subject) contain only subject IDs and minimal demographics.",
-      "description": "e.g. ARIC_Subject, Framingham_Subject, MESA_Subject"
-    },
-    {
-      "match": { "tableName": "(?i)_Sample$|_Sample_Attributes$" },
-      "concept": "subject-sample-identifiers",
-      "domain": "Study Administration",
-      "rationale": "dbGaP convention: tables ending in '_Sample' or '_Sample_Attributes' contain sample IDs and basic attributes (tissue type, analyte).",
-      "description": "e.g. 'This data table contains a mapping of study subject IDs to sample IDs.'"
-    }
-  ]
+  "rules": []
 }
