@@ -14,7 +14,7 @@ For each variable (given as `name: description`), return the most appropriate st
 6. **Administrative/ID variables** → "Study Administration" (subject IDs, sample IDs, consent group, visit indicator, center, form version, etc.).
 7. **Demographics** → use the specific concept: "Age", "Sex", "Race/Ethnicity", "Education", "Marital Status", etc. Do NOT lump them under "Demographics".
 8. **Medication use** → "Medication Use" (generic) or the specific class if clear (e.g. "Antihypertensive Medication Use").
-9. **Medical history** → "Medical History" (generic) or specific condition if clear (e.g. "Diabetes History").
+9. **Medical history** → always use the specific condition (e.g. "Hysterectomy History", "Diabetes History", "Intermittent Claudication"). Only use "Medical History" if the description is truly generic (e.g. "illness", "hospitalization") with no identifiable condition.
 10. **If the description is empty or opaque**, infer from the variable name using standard abbreviation knowledge (e.g. SBP = Systolic Blood Pressure, FEV = Forced Expiratory Volume).
 
 ## Granularity Examples
