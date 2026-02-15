@@ -124,12 +124,15 @@ decision checklist above and return your verdict.
 _agent: Agent[None, TableVerdict] | None = None
 
 
+MODEL = "anthropic:claude-haiku-4-5"
+
+
 def get_agent() -> Agent[None, TableVerdict]:
     """Return the shared Agent instance, creating it on first call."""
     global _agent
     if _agent is None:
         _agent = Agent(
-            "anthropic:claude-haiku-4-5",
+            MODEL,
             output_type=TableVerdict,
             system_prompt=build_system_prompt(),
             retries=3,
@@ -560,6 +563,10 @@ async def main() -> None:
         help="Classify all studies (including those with existing rules)",
     )
     parser.add_argument(
+        "--model",
+        help="Override the model (e.g. anthropic:claude-opus-4-6, anthropic:claude-sonnet-4-5-20250929)",
+    )
+    parser.add_argument(
         "--debug",
         action="store_true",
         help="Dump each LLM request/response to stderr",
@@ -575,6 +582,11 @@ async def main() -> None:
         help="Send traces to local Jaeger (docker run --rm -p 16686:16686 -p 4318:4318 jaegertracing/all-in-one:latest)",
     )
     args = parser.parse_args()
+
+    if args.model:
+        global MODEL
+        MODEL = args.model
+        print(f"Model override: {MODEL}", file=sys.stderr)
 
     if args.debug:
         global DEBUG
