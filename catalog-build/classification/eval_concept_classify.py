@@ -221,6 +221,44 @@ CASES = [
         "CURRENTLY TAKING MEDICATION FOR HIGH BLOOD PRESSURE (ALL PARTICIPANTS)",
         "Antihypertensive Therapy",  # SNOMED 182823005
     ),
+    # -- Medical history granularity (from phs000007/ex0_23s) --
+    # Specific conditions should NOT be lumped as "Medical History"
+    var_case(
+        "history-hysterectomy",
+        "FP120",
+        "HYSTERECTOMY IN INTERIM",
+        "Hysterectomy History",  # SNOMED 161800001
+        study_id="phs000007",
+        study_name="Framingham Heart Study",
+        table_name="ex0_23s",
+    ),
+    var_case(
+        "history-thyroid",
+        "FP102",
+        "DIAGNOSED WITH THYROID CONDITION IN INTERIM",
+        "Thyroid Disease History",
+        study_id="phs000007",
+        study_name="Framingham Heart Study",
+        table_name="ex0_23s",
+    ),
+    var_case(
+        "history-hospitalization",
+        "FP037",
+        "HOSPITALIZATION IN INTERIM",
+        "Hospitalization",  # Correctly generic — no specific condition
+        study_id="phs000007",
+        study_name="Framingham Heart Study",
+        table_name="ex0_23s",
+    ),
+    var_case(
+        "history-illness-generic",
+        "FP039",
+        "ILLNESS WITH VISIT TO DOCTOR",
+        "Medical History",  # Correctly generic — no identifiable condition
+        study_id="phs000007",
+        study_name="Framingham Heart Study",
+        table_name="ex0_23s",
+    ),
 ]
 
 
