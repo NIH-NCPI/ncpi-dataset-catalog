@@ -1,0 +1,13 @@
+{
+  "studyId": "phs001328",
+  "studyName": "Longitudinal Studies of Brain Structure and Function in MPS Disorders",
+  "rules": [
+    {
+      "match": { "tableName": "mri$" },
+      "measure": "brain-mri",
+      "domain": "Neuroimaging",
+      "rationale": "ldn_14090_mri (37 vars) contains brain MRI volumetric measures: VolumeAmygdalaLeft/Right/Total, VolumeHippocampusBodyLeft/Right/HeadLeft/Right, plus FractionalAnisotrophy and MeanDiffusivity (DTI-derived), and qualitative ratings (Atrophy, BasalGanglia, CorpusCallosum). All from one MRI session. Regex anchored to '$' to match only table names ending in 'mri'.",
+      "description": "'Brain Volumes: Manual Tracing and Free Surfer Volumes.'"
+    }
+  ]
+}
