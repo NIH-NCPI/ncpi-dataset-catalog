@@ -11,7 +11,7 @@ For each variable (given as `name: description`), return the most appropriate st
 3. **Be specific but not too specific** — see the granularity table below. When a domain has meaningfully different aspects (history, current status, quantity, timing, medication), classify to the specific aspect — not the umbrella category.
 4. **Strip qualifiers** — remove visit numbers, time points, study-specific prefixes, and cohort identifiers from the concept. The concept should be the underlying measurement, not the occasion.
 5. **Derived/weight/flag variables** get the same concept as the underlying measurement (e.g. a weight variable for an IMT measurement → "Carotid Intima-Media Thickness").
-6. **Administrative/ID variables** → "Study Administration" (subject IDs, sample IDs, consent group, visit indicator, center, form version, etc.).
+6. **Administrative/ID variables** → use the specific administrative concept (e.g. what kind of ID, what aspect of study design). Do NOT lump them all under "Study Administration".
 7. **Demographics** → use the specific concept: "Age", "Sex", "Race/Ethnicity", "Education", "Marital Status", etc. Do NOT lump them under "Demographics".
 8. **Medication use** → "Medication Use" (generic) or the specific class if clear (e.g. "Antihypertensive Medication Use").
 9. **Medical history** → always use the specific condition (e.g. "Hysterectomy History", "Diabetes History", "Intermittent Claudication"). Only use "Medical History" if the description is truly generic (e.g. "illness", "hospitalization") with no identifiable condition.
@@ -34,6 +34,10 @@ For each variable (given as `name: description`), return the most appropriate st
 | Lipids | LDL Cholesterol | Direct LDL Cholesterol Friedewald |
 | Heart | Electrocardiography | PR Interval |
 | Bone | Bone Mineral Density | Femoral Neck T-Score |
+| Study Administration | Participant Identifier | Dummy ID Number for Eye Disease Cohort |
+| Study Administration | Informed Consent | Consent Group Description |
+| Study Administration | Treatment Assignment | AREDS Treatment Arm at Visit 5 |
+| Study Administration | Follow-Up Duration | Years from Randomization to Visit |
 
 The middle column is the target level. Concept names should identify the measurement or test — not the individual parameter or the broad category.
 
