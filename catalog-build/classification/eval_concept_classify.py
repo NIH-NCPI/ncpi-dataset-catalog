@@ -146,79 +146,80 @@ def var_case(
 
 CASES = [
     # -- Smoking (from phs000001/enrollment_randomization) --
+    # SNOMED CT preferred terms verified via Snowstorm API
     var_case(
         "smoking-ever",
         "SMOKEDYN",
         "EVER SMOKED CIGARETTES FOR 6 MONTHS OR MORE (ALL PARTICIPANTS)",
-        "Cigarette Smoking History",  # SNOMED: History of cigarette smoking
+        "History of Smoking",  # SNOMED 10998291000119107
     ),
     var_case(
         "smoking-current",
         "SMKCURR",
         "CURRENTLY SMOKE (ALL PARTICIPANTS)",
-        "Current Smoking Status",  # SNOMED: Current tobacco smoking status
+        "Current Smoker",  # SNOMED 77176002 (Smoker, PT: Current smoker)
     ),
     var_case(
         "smoking-onset-age",
         "SMKAGEST",
         "AGE STARTED SMOKING (ALL PARTICIPANTS)",
-        "Age At Smoking Onset",  # SNOMED-style
+        "Age at Smoking Onset",  # No SNOMED concept — research-only term
     ),
     var_case(
         "smoking-quit-age",
         "SMKAGEQT",
         "AGE QUIT SMOKING (ALL PARTICIPANTS)",
-        "Age At Smoking Cessation",  # SNOMED: 1221000175102
+        "Age at Smoking Cessation",  # SNOMED 1221000175102
     ),
     var_case(
         "smoking-cigarettes-per-day",
         "SMKNOCIG",
         "HOW MANY CIGARETTES A DAY SMOKE (ALL PARTICIPANTS)",
-        "Cigarettes Per Day",
+        "Cigarette Consumption",  # SNOMED 230056004
     ),
     var_case(
         "smoking-packs-per-day",
         "SMKPACKS",
         "AVERAGE PACKS PER DAY SMOKED (ALL PARTICIPANTS)",
-        "Cigarettes Per Day",
+        "Cigarette Consumption",  # SNOMED 230056004
     ),
     # -- Blood pressure (from phs000001/enrollment_randomization) --
-    # These already work well — included as regression tests.
+    # SNOMED CT preferred terms verified via Snowstorm API
     var_case(
         "bp-diastolic-1",
         "SITDIAS1",
         "SITTING DIASTOLIC BLOOD PRESSURE AT BASELINE (ALL PARTICIPANTS)",
-        "Diastolic Blood Pressure",
+        "Diastolic Blood Pressure",  # SNOMED 271650006
     ),
     var_case(
         "bp-diastolic-2",
         "SITDIAS2",
         "SITTING DIASTOLIC BLOOD PRESSURE (2ND READING) AT BASELINE (ALL PARTICIPANTS)",
-        "Diastolic Blood Pressure",
+        "Diastolic Blood Pressure",  # SNOMED 271650006
     ),
     var_case(
         "bp-systolic-1",
         "SITSYST1",
         "SITTING SYSTOLIC BLOOD PRESSURE AT BASELINE (ALL PARTICIPANTS)",
-        "Systolic Blood Pressure",
+        "Systolic Blood Pressure",  # SNOMED 271649006
     ),
     var_case(
         "bp-systolic-2",
         "SITSYST2",
         "SITTING SYSTOLIC BLOOD PRESSURE (2ND READING) AT BASELINE (ALL PARTICIPANTS)",
-        "Systolic Blood Pressure",
+        "Systolic Blood Pressure",  # SNOMED 271649006
     ),
     var_case(
         "bp-hypertension-history",
         "BPHIGHYN",
         "HISTORY OF HIGH BLOOD PRESSURE (ALL PARTICIPANTS)",
-        "Hypertension History",
+        "History of Hypertension",  # SNOMED 161501007
     ),
     var_case(
         "bp-medication",
         "BPMEDNOW",
         "CURRENTLY TAKING MEDICATION FOR HIGH BLOOD PRESSURE (ALL PARTICIPANTS)",
-        "Antihypertensive Medication Use",
+        "Antihypertensive Therapy",  # SNOMED 182823005
     ),
 ]
 
