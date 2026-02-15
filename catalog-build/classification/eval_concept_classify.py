@@ -96,11 +96,12 @@ class ConceptEquals(Evaluator[VariableInput, str, str]):
     """Check if the returned concept matches the expected concept exactly."""
 
     def evaluate(self, ctx: EvaluatorContext[VariableInput, str, str]) -> EvaluationReason:
+        desc = ctx.inputs.variable_description
         if ctx.output == ctx.expected_output:
-            return EvaluationReason(value=True, reason=ctx.output)
+            return EvaluationReason(value=True, reason=f"{desc} -> {ctx.output}")
         return EvaluationReason(
             value=False,
-            reason=f"expected {ctx.expected_output!r}, got {ctx.output!r}",
+            reason=f"{desc} -> expected {ctx.expected_output!r}, got {ctx.output!r}",
         )
 
 
@@ -259,6 +260,61 @@ CASES = [
         study_name="Framingham Heart Study",
         table_name="ex0_23s",
     ),
+    # -- Study administration granularity (from phs000001) --
+    # Should NOT all be lumped as "Study Administration"
+    var_case(
+        "admin-subject-id",
+        "ID2",
+        "DUMMY ID NUMBER",
+        "Participant Identifier",
+        table_name="enrollment_randomization",
+    ),
+    var_case(
+        "admin-sample-id",
+        "specnum",
+        "De-identified sample ID",
+        "Sample Identifier",
+        table_name="AREDS_Sample",
+        table_description="Sample attributes",
+    ),
+    var_case(
+        "admin-consent",
+        "consent",
+        "Consent group description",
+        "Informed Consent",
+        table_name="AREDS_Subject",
+        table_description="Subject attributes",
+    ),
+    var_case(
+        "admin-cohort",
+        "IDTYPE",
+        "COHORT IDENTIFIER",
+        "Cohort Identifier",
+        study_id="phs000007",
+        study_name="Framingham Heart Study",
+        table_name="ex0_23s",
+    ),
+    var_case(
+        "admin-visit-number",
+        "VISNO",
+        "STUDY VISIT NUMBER (ALL PARTICIPANTS)",
+        "Study Visit",
+        table_name="followup",
+    ),
+    var_case(
+        "admin-treatment",
+        "TRTCAT",
+        "AREDS TREATMENT ASSIGNMENT (ALL PARTICIPANTS)",
+        "Treatment Assignment",
+        table_name="enrollment_randomization",
+    ),
+    var_case(
+        "admin-followup-time",
+        "FOLTIME",
+        "YEARS FROM RANDOMIZATION TO DATE OF FOLLOW-UP INTERVIEW (ALL PARTICIPANTS)",
+        "Follow-Up Duration",
+        table_name="followup",
+    ),
 ]
 
 
@@ -293,7 +349,7 @@ async def main() -> None:
         print(f"Model override: {args.model}", file=sys.stderr)
 
     report = await dataset.evaluate(classify_one_variable)
-    report.print(include_input=True, include_output=True)
+    report.print(include_input=False, include_output=True, include_reasons=True)
 
 
 if __name__ == "__main__":
