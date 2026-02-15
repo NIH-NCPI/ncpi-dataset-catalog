@@ -16,7 +16,7 @@ class ParsedTable:
     table_name: str
     study_name: str
     description: str
-    variables: list[str]
+    variables: list[dict[str, str]]  # [{"name": "VAR", "description": "..."}]
     variable_count: int
     file_path: str
 
@@ -88,7 +88,7 @@ class Classification:
     phase: int
     rule_source: str  # e.g. "phs000007:tableName:^t_physactf_"
     variable_count: int
-    variables: list[str]
+    variables: list[dict[str, str]]  # [{"name": "VAR", "description": "..."}]
 
     def to_dict(self) -> dict:
         """Convert to JSON-serializable dict."""
