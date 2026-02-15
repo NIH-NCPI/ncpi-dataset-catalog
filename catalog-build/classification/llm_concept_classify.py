@@ -262,8 +262,11 @@ async def classify_table_concepts(
         total_in += tok_in
         total_out += tok_out
 
-    # Build lookup: variable name -> description from input data
-    desc_by_name = {v["name"]: v.get("description", "") for v in all_vars}
+    # Build lookup: variable name -> metadata from input data
+    meta_by_name = {
+        v["name"]: {"description": v.get("description", ""), "id": v.get("id", "")}
+        for v in all_vars
+    }
 
     # Build result: map by variable name for dedup
     result = []
@@ -271,11 +274,13 @@ async def classify_table_concepts(
     for vc in all_concepts:
         if vc.variable_name not in seen:
             seen.add(vc.variable_name)
-            result.append({
-                "name": vc.variable_name,
-                "description": desc_by_name.get(vc.variable_name, ""),
-                "concept": vc.concept,
-            })
+            meta = meta_by_name.get(vc.variable_name, {})
+            entry = {"name": vc.variable_name}
+            if meta.get("id"):
+                entry["id"] = meta["id"]
+            entry["description"] = meta.get("description", "")
+            entry["concept"] = vc.concept
+            result.append(entry)
 
     return result, total_in, total_out
 

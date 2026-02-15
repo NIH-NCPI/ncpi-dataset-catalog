@@ -385,109 +385,108 @@ The largest compressions come from:
 
 ## Classification Approach
 
-### Phase 1: Dataset-level rules
+### Overview
 
-Many dataset tables can be classified entirely from their table name or description:
-
-- `t_physactf_*` -> Physical Activity: Accelerometer/wearable data
-- `vr_ffreq_*` -> Dietary Intake: Food frequency questionnaire
-- `l_rnapilot_*` -> High-Throughput Omics: Gene expression
-- `fib0_21s` ("Fibrinogen, Original Cohort Exams 20, 21") -> Hematology: Fibrinogen
-
-This alone could classify ~40-60% of variables by volume (because the high-count datasets are the easiest to identify).
-
-### Phase 2: Keyword rules on variable descriptions
-
-Keyword matching on variable descriptions covers another layer:
-
-| Keyword pattern                            | Variables matched (Framingham) | Measure        |
-| ------------------------------------------ | ------------------------------ | -------------- |
-| BLOOD PRESSURE, SYSTOLIC, DIASTOLIC        | 557                            | Blood Pressure |
-| CHOLESTEROL, LDL, HDL, TRIGLYCERIDE, LIPID | 604                            | Lipids         |
-| SMOKING, CIGARETTE                         | 670                            | Smoking        |
-| DEPRESSION, CES-D, DEPRESSED               | 559                            | Depression     |
-| SLEEP, APNEA, AHI                          | 1,472                          | Sleep          |
-
-Keyword rules could classify an additional ~20-30% of variables.
-
-#### Observed match rates (Framingham)
-
-Analysis of 56,927 unique Framingham variable descriptions against a broad keyword list covering all ~160 measures:
-
-| Category                     | Variables | % of total | Examples                                                   |
-| ---------------------------- | --------- | ---------- | ---------------------------------------------------------- |
-| Keyword-matchable            | ~19,900   | ~35%       | "SYSTOLIC BLOOD PRESSURE", "TOTAL CHOLESTEROL", "SMOKING"  |
-| Dark matter (no keyword hit) | ~37,000   | ~65%       | Accelerometer hourly bins, omics probe IDs, FFQ food items |
-
-The "dark matter" is dominated by high-volume repetitive datasets (accelerometer = ~34K, FFQ = ~4.2K, omics = ~5K) that Phase 1 dataset-level rules already handle. After Phase 1 absorbs these, the remaining unmatched tail for Phase 3 embedding inference is estimated at ~10-15% of variables.
-
-#### Per-study classification difficulty
-
-Not all studies are equally easy to classify. Dataset description richness varies dramatically:
-
-| Study                  | Accession | Dataset tables | Unique descriptions | Classification difficulty                                        |
-| ---------------------- | --------- | -------------- | ------------------- | ---------------------------------------------------------------- |
-| Framingham Heart Study | phs000007 | 586            | 210                 | Medium — rich descriptions but massive scale                     |
-| ARIC                   | phs000090 | 364            | 356                 | Easy — nearly 1:1 descriptions per table                         |
-| WHI                    | phs000200 | 194            | 90                  | Medium — moderate description reuse                              |
-| CARDIA                 | phs000285 | 328            | **6**               | Hard — almost all descriptions are generic IDs like "Subject ID" |
-
-Studies like CARDIA where dataset descriptions are uninformative will rely heavily on Phase 2 keyword rules and Phase 3 embedding inference applied to individual variable descriptions rather than Phase 1 dataset-level rules.
-
-### Phase 3: Embedding-based inference
-
-For the remaining ~20-30% of variables with ambiguous or terse descriptions (e.g., `MF4` = "RELATIVE WEIGHT, EXAM 1"), use the anchor-propagation approach from the NLS PRD: generate embeddings for variable descriptions, compare to known-classified anchors, and assign measures above a confidence threshold.
-
-### Phase 4: Manual review of high-value gaps
-
-Expert review of the ~5% of variables that automated methods cannot confidently classify. Priority goes to variables in the most-accessed studies.
-
-### Classification Reproducibility
-
-Classification results must be deterministic and auditable. An identical set of source variables must always produce the identical set of measure assignments, regardless of when or where the pipeline runs.
-
-#### Principle: results are a versioned artifact, not a live computation
+Classification uses a three-step pipeline: LLM classification of every variable to a common medical term, normalization of those terms to UMLS concepts, and human review of the results.
 
 ```
-Source variables (from dbGaP XML)
-  ↓ Phase 1: dataset-level rules (version-controlled config)
-  ↓ Phase 2: keyword rules (version-controlled patterns)
-  ↓ Phase 3: embedding similarity (pinned model + frozen anchors)
-  ↓ Phase 4: human review (stored as rules)
-  = variable-classifications.json (committed, versioned)
+Source variables (from dbGaP var_report.xml)
+  ↓ Step 1: LLM classification — assign a medical concept to every variable
+  ↓ Step 2: UMLS normalization — map free-text concepts to UMLS CUIs
+  ↓ Step 3: Human review — audit, merge, and correct
+  = per-study JSON files (versioned, cached, incrementally updateable)
 ```
 
-Every rebuild produces identical output from the deterministic layers. Non-deterministic layers (embedding, LLM) are invoked only for genuinely new variables, and their output is immediately cached. Nothing is ever re-classified unless explicitly triggered.
+### Step 1: LLM Variable-Level Classification
 
-#### Determinism controls by phase
+Every variable in every dbGaP table is classified by an LLM (Claude Haiku) into a standardized medical concept name. The LLM receives one table at a time — the table name, description, and all variables with their descriptions — and returns a concept for each variable.
 
-**Phases 1-2 (rules)** — Fully deterministic. Dataset-name patterns and keyword rules are stored as versioned config files (JSON or CSV). Same input always produces same output.
+**Why per-variable, not per-table:** The original approach classified entire tables into a single measure (e.g. "this is an ECG table"). This works for single-procedure tables but fails for the majority of tables that mix variable types (e.g. blood pressure + demographics + admin fields in one table). Per-variable classification captures the actual content.
 
-**Phase 3 (embeddings)** — Near-deterministic with controls:
+**Concept naming:** The LLM is instructed to use standard medical terminology as it would appear in MeSH, LOINC, or UMLS. Concept names are free-text in Title Case (e.g. "Systolic Blood Pressure", "Carotid Intima-Media Thickness", "Study Administration"). The prompt provides granularity guidance — concepts should identify the measurement or test, not the individual parameter or the broad category. See `catalog-build/classification/CONCEPT_PROMPT.md` for the full prompt.
 
-- Pin the embedding model version (e.g., `text-embedding-3-small@2024-01-25`, not `latest`)
-- Generate anchor embeddings for each of the ~160 measures once; freeze and version-control them
-- Assign the measure with the highest cosine similarity above a threshold
-- Use a three-band confidence scheme: cosine > 0.82 = auto-assign, 0.65-0.82 = flag for review, < 0.65 = unclassified
-- Store similarity scores alongside assignments for auditability
+**Granularity strategy: leaf concepts first.** Step 1 targets the most specific (leaf-level) concept that meaningfully describes each variable. Parent concepts and domain groupings are derived _after_ classification — either by walking up the UMLS hierarchy once concepts are mapped to CUIs, or via a separate grouping strategy (TBD). This bottom-up approach preserves maximum information: it is easy to roll up "Systolic Blood Pressure" into "Blood Pressure" or "Cardiovascular", but impossible to recover the distinction if the LLM only assigned "Blood Pressure" in the first place.
 
-**Phase 3 fallback (LLM for ambiguous cases)** — Constrained for reproducibility:
+**Batching:** Variables are sent in batches of up to 100 per API call (to fit within output token limits). Tables with more variables are split into multiple batches, each receiving the same table-level context. Tables within a study are classified concurrently (10 parallel calls). Studies are processed sequentially.
 
-- Temperature = 0 and fixed seed parameter to eliminate sampling randomness
-- Structured output with constrained decoding — force the model to return one of exactly ~160 valid measure IDs, not free text
-- Batch-and-cache: run classification once, store results in a versioned file; the LLM is only invoked for _new_ variables, never to re-classify existing ones
-- Optional majority vote (3 runs, take consensus) for borderline cases; log disagreements for human review
+**Incremental processing:** Results are cached as per-study JSON files in `output/llm-concepts/`. Running without flags skips studies that already have output. Re-run a study by deleting its file and running again.
 
-**Phase 4 (human review)** — Deterministic by design. Human assignments are stored as explicit rules that feed back into Phase 1/2 config, growing the deterministic layers over time and shrinking the LLM-dependent tail.
+**Cost:** ~$0.001 per variable via Haiku (~$30 for all 450K variables across 2,870 studies). Dominated by output tokens (the LLM returns each variable name + concept as structured JSON).
 
-#### Drift detection on model upgrades
+**Script:** `catalog-build/classification/llm_concept_classify.py`
 
-When the embedding model or LLM version is updated:
+#### Output format
 
-1. Re-run classification on the full corpus
-2. Diff against the previous `variable-classifications.json`
-3. Flag all changed assignments for review before committing the new version
-4. This makes model upgrades an explicit, auditable event rather than silent drift
+Per-study file (`output/llm-concepts/{study_id}.json`):
+
+```json
+{
+  "studyId": "phs000280",
+  "studyName": "ARIC",
+  "tables": [
+    {
+      "tableName": "UBMDBF02",
+      "datasetId": "pht004209.v4",
+      "description": "...",
+      "concepts": ["Carotid Intima-Media Thickness", "Study Administration"],
+      "variables": [
+        {
+          "name": "LBIADA45",
+          "description": "Derived avg far wall thickness",
+          "concept": "Carotid Intima-Media Thickness"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "description": "Subject ID",
+          "concept": "Study Administration"
+        }
+      ]
+    }
+  ]
+}
+```
+
+Each table carries both the per-variable concept assignments and a deduplicated `concepts` list (the union of its variables' concepts). Studies and the catalog inherit the union of their tables' concepts.
+
+#### Known limitations of Step 1
+
+- **Granularity inconsistency:** The LLM sometimes lumps (e.g. "Smoking Status" covers age-at-onset, cessation, and current status) and sometimes splits (e.g. "Systolic Blood Pressure" vs "Diastolic Blood Pressure"). Prompt tuning and normalization address this.
+- **Concept proliferation:** Initial runs produce ~10,000+ unique concept names, many of which are near-duplicates (e.g. "HDL Cholesterol" vs "High-Density Lipoprotein Cholesterol"). Normalization in Step 2 collapses these.
+- **Opaque variable names:** When descriptions are empty or cryptic, the LLM guesses from the variable name. These guesses are sometimes wrong. Human review in Step 3 catches these.
+
+### Step 2: UMLS Normalization
+
+After LLM classification produces free-text concept names, the next step maps them to UMLS Concept Unique Identifiers (CUIs). This serves three purposes:
+
+1. **Synonym collapse** — "HDL Cholesterol", "High-Density Lipoprotein Cholesterol", and "HDL-C" all map to one CUI (C2603387), eliminating near-duplicates automatically.
+2. **Cross-reference** — each CUI bridges to SNOMED CT, LOINC, MeSH, and ICD codes, enabling interoperability with other systems (TOPMed harmonization, PhenX protocols, clinical EHR data).
+3. **Granularity anchoring** — UMLS's hierarchical structure provides a principled way to choose the right level of specificity. If two concept names map to the same CUI, they are synonyms; if they map to parent-child CUIs, the more specific one is preferred.
+
+**Approach:** Use the UMLS API (requires a UMLS Terminology Services account and API key) to search for each unique concept name, retrieve candidate CUIs, and select the best match. The mapping is stored as a normalization file (`output/concept-normalization-map.json`) and applied to rewrite per-study files with canonical concept names.
+
+**Interim approach (before UMLS API access):** LLM-based synonym grouping (`--normalize` flag) asks the LLM to identify groups of concept names that are synonyms and pick a canonical form. This is a useful first pass but less reliable than UMLS lookup.
+
+**Target:** Collapse ~10,000 raw concept names down to ~500-1,000 canonical concepts, each with a UMLS CUI.
+
+### Step 3: Human Review
+
+After normalization, the concept inventory is reviewed to:
+
+1. **Fix misclassifications** — spot-check variables where the concept seems wrong (e.g. a pacemaker flag classified as "Pacemaker" instead of "Electrocardiography").
+2. **Merge remaining synonyms** — UMLS won't catch domain-specific groupings (e.g. should "Ankle-Brachial Index" be separate from "Blood Pressure" or merged?). These are judgment calls.
+3. **Set granularity policy** — decide which concepts are too broad or too specific for the browsing use case and adjust the prompt or normalization map accordingly.
+4. **Build the domain hierarchy** — assign each canonical concept to a domain (e.g. "Cardiovascular", "Pulmonary") for faceted browsing.
+
+Review results feed back as prompt refinements (Step 1) and normalization rules (Step 2), improving future runs.
+
+### Reproducibility
+
+Classification results are cached as versioned JSON files. The LLM is only invoked for new or re-run studies; existing results are stable. When the prompt or model is updated:
+
+1. Re-run classification on a representative sample
+2. Diff against previous output to assess drift
+3. If acceptable, re-run on the full corpus
+4. Commit the updated output files as a new version
 
 ## Variable Modifiers
 

@@ -48,9 +48,9 @@ def parse_var_report(xml_path: Path, dir_study_id: str) -> ParsedTable:
     desc_elem = root.find("description")
     description = desc_elem.text.strip() if desc_elem is not None and desc_elem.text else ""
 
-    # Collect unique variables with descriptions
+    # Collect unique variables with descriptions and IDs
     # (deduplicates consent-group variants like .c1, .c2)
-    seen: dict[str, str] = {}  # name -> description
+    seen: dict[str, dict[str, str]] = {}  # name -> {description, id}
     for var_elem in root.findall("variable"):
         name = var_elem.get("var_name")
         if name and name not in seen:
@@ -61,10 +61,11 @@ def parse_var_report(xml_path: Path, dir_study_id: str) -> ParsedTable:
                 raw = desc_el.text.strip()
                 bracket = raw.rfind(" [")
                 desc_text = raw[:bracket] if bracket > 0 else raw
-            seen[name] = desc_text
+            phv_id = var_elem.get("id", "")
+            seen[name] = {"description": desc_text, "id": phv_id}
 
     variables = [
-        {"name": name, "description": seen[name]}
+        {"name": name, "description": seen[name]["description"], "id": seen[name]["id"]}
         for name in sorted(seen)
     ]
 
