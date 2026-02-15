@@ -1,0 +1,20 @@
+{
+  "studyId": "phs000343",
+  "studyName": "The Genomics and Randomized Trials Network (GARNET) Vitamin Intervention Stroke Prevention (VISP) Trial",
+  "rules": [
+    {
+      "match": { "tableName": "^Metabolomics" },
+      "measure": "metabolomics",
+      "domain": "High-Throughput Omics",
+      "rationale": "Metabolomics_ScaledImputed_Pheno_DS (931 vars) contains scaled, imputed metabolite values: metabolite_1 through metabolite_117+ with RUN_DAY and METABOLOMICS_CENTER metadata. Single mass-spectrometry platform output.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "^ECG$" },
+      "measure": "electrocardiography",
+      "domain": "Cardiovascular",
+      "rationale": "ECG table (34 vars) from the VISP stroke prevention trial. Variables ECG2-ECG24 with sub-items (ECG4A-D, ECG22A-B) represent standardized ECG readings. Note: ALLDTI sounds like DTI brain imaging but actually contains dietary variables (DIETFLG, DSF1-DSF15) — a naming trap.",
+      "description": "(no description in XML)"
+    }
+  ]
+}

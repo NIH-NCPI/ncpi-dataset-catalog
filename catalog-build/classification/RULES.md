@@ -272,11 +272,31 @@ After writing rules for a study, perform this verification:
 | `phs000285` | CARDIA Cohort | 5 |
 | `phs000286` | Jackson Heart Study (JHS) | 5 |
 | `phs000287` | Cardiovascular Health Study (CHS) | 6 |
+| `phs000343` | GARNET VISP Trial | 2 |
+| `phs000574` | Rett Syndrome Natural History | 0 |
+| `phs000575` | PWS Natural History | 0 |
+| `phs000576` | Angelman Syndrome Natural History | 0 |
 | `phs000577` | UCDC Longitudinal Study (Urea Cycle Disorders) | 0 |
+| `phs000578` | Nondystrophic Myotonias | 0 |
+| `phs000588` | VCRC Giant Cell Arteritis | 0 |
+| `phs000589` | VCRC Takayasu's Arteritis | 0 |
+| `phs000590` | VCRC Polyarteritis Nodosa | 0 |
+| `phs000592` | Bone Marrow Failure Syndromes | 0 |
+| `phs000594` | Tipifarnib in LGL Leukemia | 0 |
 | `phs000605` | MILES Trial (LAM) | 0 |
 | `phs001278` | Longitudinal Study of the Porphyrias | 0 |
+| `phs001288` | LOGIC Cholestatic Liver Diseases | 0 |
+| `phs001318` | Revlimid/Azacitidine Phase I/II | 0 |
 | `phs001326` | SCID Retrospective | 0 |
+| `phs001328` | MPS Brain Structure and Function | 1 |
+| `phs001329` | Mucolipidosis Type IV Natural History | 0 |
+| `phs001332` | Spinocerebellar Ataxias Natural History | 0 |
+| `phs001392` | SCID Disorders Natural History | 0 |
+| `phs001419` | INC Natural History Study | 0 |
+| `phs001430` | STAIR SLOS Longitudinal Study | 0 |
 | `phs001590` | NESARC-III | 0 |
+| `phs001712` | VCRC One-Time DNA Study | 0 |
+| `phs001844` | AADM Type 2 Diabetes GWAS | 0 |
 | `phs002203` | Iowa Bone Development Study | 3 |
 
 ### Adding a New Measure
