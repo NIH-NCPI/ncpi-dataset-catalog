@@ -48,14 +48,25 @@ def parse_var_report(xml_path: Path, dir_study_id: str) -> ParsedTable:
     desc_elem = root.find("description")
     description = desc_elem.text.strip() if desc_elem is not None and desc_elem.text else ""
 
-    # Collect unique var_names (deduplicates consent-group variants like .c1, .c2)
-    var_names: set[str] = set()
+    # Collect unique variables with descriptions
+    # (deduplicates consent-group variants like .c1, .c2)
+    seen: dict[str, str] = {}  # name -> description
     for var_elem in root.findall("variable"):
         name = var_elem.get("var_name")
-        if name:
-            var_names.add(name)
+        if name and name not in seen:
+            desc_text = ""
+            desc_el = var_elem.find("description")
+            if desc_el is not None and desc_el.text:
+                # Strip the trailing "[TableName. Visit N]" context tag
+                raw = desc_el.text.strip()
+                bracket = raw.rfind(" [")
+                desc_text = raw[:bracket] if bracket > 0 else raw
+            seen[name] = desc_text
 
-    variables = sorted(var_names)
+    variables = [
+        {"name": name, "description": seen[name]}
+        for name in sorted(seen)
+    ]
 
     rel_path = str(xml_path.relative_to(SOURCE_DIR.parent.parent))
 
