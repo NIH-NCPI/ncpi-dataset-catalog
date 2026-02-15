@@ -1,0 +1,41 @@
+{
+  "studyId": "phs000286",
+  "studyName": "Jackson Heart Study (JHS) Cohort",
+  "rules": [
+    {
+      "match": { "tableName": "^ecg[ab]" },
+      "measure": "electrocardiography",
+      "domain": "Cardiovascular",
+      "rationale": "ecga_adj (338 vars, Visit 1) contains Pduration, QRSduration, ecga10-ecga113 (waveform measurements). ecgb (189 vars, Visit 2) contains ECGB11-ECGB122. Both are pure ECG device output.",
+      "description": "'ecga_adj: Visit 1. ECG, arrhythmias, atrioventricular (A-V) conduction defects, Cornell Voltage Criteria, heart rate, intraventricular conduction defect...'"
+    },
+    {
+      "match": { "tableName": "^ab[dh]a$" },
+      "measure": "carotid-ultrasound",
+      "domain": "Cardiovascular",
+      "rationale": "abda (10 vars) and abha (24 vars) are both described as 'Carotid Ultrasound Data'. Variables are ABDA3-ABDA10 and ABHA1-ABHA27. Note: abba/abbb (Ankle-Brachial Blood Pressure) and abpa (Post Ambulatory BP) are different procedures and are correctly excluded by this regex.",
+      "description": "'Visit 1. Carotid Ultrasound Data of participants including adult 35-84 years old African Americans'"
+    },
+    {
+      "match": { "tableName": "^echa$" },
+      "measure": "echocardiography",
+      "domain": "Cardiovascular",
+      "rationale": "echa (61 vars) = 'Echocardiographic Abnormalities', Visit 1. Variables ECHA13-ECHA41 are echocardiographic measurements. Single-procedure cardiac ultrasound data.",
+      "description": "'Visit 1. Echocardiographic Abnormalities of participants including adult 35-84 years old African Americans'"
+    },
+    {
+      "match": { "tableName": "^pula$" },
+      "measure": "spirometry",
+      "domain": "Pulmonary",
+      "rationale": "pula (46 vars) = 'Pulmonary Function Data'. Variables include FEV01PP, FVC01PP (FEV1 and FVC percent predicted), pula10-pula50 (spirometric measurements). Single spirometer procedure.",
+      "description": "'Pulmonary Function Data of participants including adult 35-84 years old African Americans'"
+    },
+    {
+      "match": { "tableName": "^mribv" },
+      "measure": "brain-mri",
+      "domain": "Neuroimaging",
+      "rationale": "mribv2 (49 vars, Visit 2) and mribv3 (50 vars, Visit 3) contain brain MRI measurements. 'mrib' = MRI Brain, 'v2'/'v3' = visit number. Variables MRIB2-MRIB35 are volumetric and structural brain measures.",
+      "description": "(no description in XML)"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "studyId": "phs000285",
+  "studyName": "CARDIA Cohort",
+  "rules": [
+    {
+      "match": { "tableName": "ECH[OY]" },
+      "measure": "echocardiography",
+      "domain": "Cardiovascular",
+      "rationale": "CARDIA echocardiography tables: C1ECHO (75 vars, Exam 3/Year 5), E1ECHY05 (114 vars, Exam 6/Year 15 echo at Y5), E1ECHY10 (114 vars, Exam 6/Year 15 echo at Y10). Variables include LVMASS, A2SLVEDV, A2SLVEF (C1ECHO) and EIVSTD, EDVTI, EAHR (E1ECHY*). All are cardiac ultrasound measurements. No non-echo tables contain 'ECHO' or 'ECHY' in their names.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "F12PF" },
+      "measure": "spirometry",
+      "domain": "Pulmonary",
+      "rationale": "CARDIA pulmonary function tables: E1F12PF (125 vars), B2F12PF (94 vars), C1F12PF (90 vars), E1F12PF8 (21 vars). 'F12' = Form 12, 'PF' = Pulmonary Function. Variables include FEV1 (E12FEV11-E12FEV18), FE time (E12FE1TM). Note: B2F12/E1F12/F1F12 (without 'PF' suffix) are respiratory symptom questionnaires with SOB/COLD variables — correctly excluded.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "DEXA" },
+      "measure": "bone-mineral-density",
+      "domain": "Musculoskeletal",
+      "rationale": "D1DEXA (63 vars, Exam 4/Year 7). Variables include DDXHPBMC/DDXHPTOT (hip BMC/total), DDXL2BMD-DDXL4BMD (lumbar spine BMD), DDXNBMC/DDXNBMD (neck), DDXLLFAT/DDXLLLN (leg composition). All from one DXA scanner session.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "EBCT" },
+      "measure": "vascular-ct-imaging",
+      "domain": "Cardiovascular",
+      "rationale": "EBCT = Electron Beam CT for coronary artery calcium scoring. F2EBCT (167 vars, Exam 8/Year 25) and E1EBCT (30 vars, Exam 6/Year 15). Variables include FR3ADJSC (adjusted score), FR3TSCOR (total score), FR3MAREA (area), ER2TSCOR/ER2AFOCI (foci count). Same instrument type as MESA vascular-ct-imaging.",
+      "description": "(no description in XML)"
+    },
+    {
+      "match": { "tableName": "CARTDA" },
+      "measure": "carotid-ultrasound",
+      "domain": "Cardiovascular",
+      "rationale": "C1CARTDA (38 vars, Exam 3/Year 5). 'CARTD' = Carotid, 'A' = dataset A. Variables include bilateral carotid measurements: C1LBDEP/C1RBDEP (left/right bulb depth), C1LCADEP/C1RCADEP (left/right common artery depth), C1DISTEN (distensibility). All from carotid ultrasound.",
+      "description": "(no description in XML)"
+    }
+  ]
+}

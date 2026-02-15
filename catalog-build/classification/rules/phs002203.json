@@ -1,0 +1,27 @@
+{
+  "studyId": "phs002203",
+  "studyName": "Longitudinal Study of Fluoride and Other Factors Related to Dental Fluorosis, Dental Caries, and Bone Health",
+  "rules": [
+    {
+      "match": { "tableName": "^DXA_" },
+      "measure": "bone-mineral-density",
+      "domain": "Musculoskeletal",
+      "rationale": "Iowa Bone Development Study DXA scan tables. 16 tables covering children and parents: Hip (BMC/BMD/AREA), Spine (L1-L4 BMD), Whole Body (regional BMD + body composition), Hip HSA (structural analysis), AndroidGynoid Composition (visceral fat), ObesityIndices (derived), and Scan Summary (metadata). All data from Hologic DXA scanner across waves 3-9 (children) and one visit (parents).",
+      "description": "'DXA Children: Bone outcomes for hip total bone region and sub-regions' / 'DXA Parents: Bone outcomes for whole body (WB)'"
+    },
+    {
+      "match": { "tableName": "^(Crouter|Evenson|Hildebrand)" },
+      "measure": "accelerometer-wearable-data",
+      "domain": "Physical Activity",
+      "rationale": "Accelerometry data summarized by three analysis approaches: Crouter (Waves 5-10, 51-52 vars each — Crouter10SecLight/Moderate/Vigorous, MET estimates), Evenson (all waves, 27 vars — movement counts by intensity), Hildebrand (Waves 6-10, 24 vars — mG-based cutpoints). All derived from the same wrist/hip accelerometer worn by participants.",
+      "description": "'The accelerometry data were analyzed and summarized from the Crouter/Evenson/Hildebrand approach'"
+    },
+    {
+      "match": { "tableName": "^(pQCT|MDCT)" },
+      "measure": "pqct-bone-imaging",
+      "domain": "Musculoskeletal",
+      "rationale": "Peripheral quantitative CT bone imaging. pQCT tables (5 tables): Cort_Sites (32 vars — CRT_A, CRT_DEN, CRT_THK cortical measures), Trab_Sites (25 vars — trabecular BMD/BSI), Cort_Sites_Strength (22 vars — moments of inertia), TibiaSite66_Muscle (28 vars — muscle/IMAT area), Image (7 vars — metadata). MDCT tables (2 tables): Analysis_DS (14 vars — Tb.pBMD, Tb.Th, Cb.Th microstructure), Imaging_DS (7 vars — metadata). Both modalities measure bone microstructure at the distal tibia via CT scanning.",
+      "description": "'pQCT cortical/trabecular bone measures' / 'MDCT trabecular and cortical bone microstructural measures'"
+    }
+  ]
+}

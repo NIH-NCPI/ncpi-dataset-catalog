@@ -231,13 +231,14 @@ After writing rules for a study, perform this verification:
 
 ## 6. Reference: Current Measures
 
-20 measures across 12 domains, as defined in the existing rule files.
+22 measures across 12 domains, as defined in the existing rule files.
 
 | Domain | Measure | Instrument / Procedure |
 |---|---|---|
 | Anthropometry | `body-composition-ct` | CT scan (abdominal adipose tissue) |
 | Cardiovascular | `cardiac-mri` | Cardiac MRI |
 | Cardiovascular | `carotid-ultrasound` | B-mode / Doppler ultrasound of carotid arteries |
+| Cardiovascular | `echocardiography` | Cardiac ultrasound (echocardiogram) |
 | Cardiovascular | `electrocardiography` | ECG device |
 | Cardiovascular | `flow-mediated-dilation` | Brachial artery ultrasound |
 | Cardiovascular | `vascular-ct-imaging` | CT scan (coronary calcium, aortic calcification) |
@@ -248,6 +249,7 @@ After writing rules for a study, perform this verification:
 | High-Throughput Omics | `proteomics` | Olink proximity extension assay |
 | Metabolic | `glycated-hemoglobin` | HbA1c laboratory assay |
 | Musculoskeletal | `bone-mineral-density` | DXA scanner |
+| Musculoskeletal | `pqct-bone-imaging` | pQCT / MDCT scanner (bone microstructure) |
 | Neuroimaging | `brain-mri` | Brain MRI |
 | Ophthalmology | `diabetic-retinopathy` | Fundus photography (retinopathy grading) |
 | Ophthalmology | `retinal-imaging` | Fundus camera (retinal photography) |
@@ -261,10 +263,21 @@ After writing rules for a study, perform this verification:
 | Study ID | Study Name | Rule count |
 |---|---|---|
 | `phs000007` | Framingham Heart Study | 5 |
+| `phs000017` | Whole Genome Association Study of Bipolar Disorder | 0 |
 | `phs000086` | DCCT-EDIC Clinical Trial | 3 |
+| `phs000128` | GAW16 Framingham and Simulated Data | 0 |
+| `phs000200` | Women's Health Initiative | 2 |
 | `phs000209` | Multi-Ethnic Study of Atherosclerosis (MESA) | 17 |
 | `phs000280` | Atherosclerosis Risk in Communities (ARIC) | 9 |
+| `phs000285` | CARDIA Cohort | 5 |
+| `phs000286` | Jackson Heart Study (JHS) | 5 |
 | `phs000287` | Cardiovascular Health Study (CHS) | 6 |
+| `phs000577` | UCDC Longitudinal Study (Urea Cycle Disorders) | 0 |
+| `phs000605` | MILES Trial (LAM) | 0 |
+| `phs001278` | Longitudinal Study of the Porphyrias | 0 |
+| `phs001326` | SCID Retrospective | 0 |
+| `phs001590` | NESARC-III | 0 |
+| `phs002203` | Iowa Bone Development Study | 3 |
 
 ### Adding a New Measure
 

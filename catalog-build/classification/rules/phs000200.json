@@ -1,0 +1,20 @@
+{
+  "studyId": "phs000200",
+  "studyName": "Women's Health Initiative",
+  "rules": [
+    {
+      "match": { "tableName": "^bmd" },
+      "measure": "bone-mineral-density",
+      "domain": "Musculoskeletal",
+      "rationale": "WHI Osteoporosis substudy DXA scans. Three tables: bmdhip_rel2 (24 vars, hip scan — HIPAREA/HIPBMC/HIPBMD), bmdspine_rel2 (20 vars, spine scan — SPNAREA/SPNBMC/SPNBMD), bmdwbody_rel2 (68 vars, whole body — WBAREA/WBBMC/WBBMD/WBFAT). No non-DXA tables share the 'bmd' prefix.",
+      "description": "'Bone Densitometry (BMD) Hip/Spine/Whole Body Scan data file. The BMD data files include results from the DXA scans performed at the Clinical Centers participating in the WHI Osteoporosis substudy.'"
+    },
+    {
+      "match": { "tableName": "^ecg_rel\\d" },
+      "measure": "electrocardiography",
+      "domain": "Cardiovascular",
+      "rationale": "ecg_rel2 (652 vars) contains raw ECG measurements across all 12 leads: BPA_I through BPA_V6 (P-wave amplitudes), BPI (intervals), ATR_FIBR/ATR_FLUT (rhythm), ACEPT_RR (R-R interval). This is device-level ECG data. Note: ecg_mi_nova_rel1 (10 vars) is a Novacode MI outcomes table (ECGPOSMI, ECGSILNTMI) and is correctly excluded by this regex.",
+      "description": "'Electrocardiogram (ECG) - Myocardial Infarction (MI) Novacode Follow-Up Results data file'"
+    }
+  ]
+}
