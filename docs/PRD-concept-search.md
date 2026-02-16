@@ -40,87 +40,103 @@ The LLM never filters datasets directly. The concept index never interprets user
 User NL query
      │
      ▼
-┌──────────────────────────────────┐
-│  LLM: Mention Extraction         │
-│  (structured output)             │
-│                                  │
-│  - Identify concept "mentions"   │
-│  - Correct typos                 │
-│  - Normalize synonyms/abbrevs    │
-│  - Tag boolean logic (AND/OR)    │
-│  - Handle corner cases           │
-│                                  │
-│  Output: QueryModel              │
-└──────────────┬───────────────────┘
+┌──────────────────────────────────────┐
+│  LLM Agent Loop                      │
+│                                      │
+│  1. Extract concept mentions from NL │
+│     - Correct typos                  │
+│     - Normalize synonyms/abbrevs     │
+│     - Tag boolean logic (AND/OR/NOT) │
+│                                      │
+│  2. Resolve each mention via tool    │
+│     search_concepts("blood pressure")│
+│     → see what matched               │
+│                                      │
+│  3. If no match → rewrite & retry    │
+│     "type one diabetes" fails        │
+│     → try "Type 1 Diabetes"          │
+│     → try "Diabetes Mellitus"        │
+│                                      │
+│  4. If still stuck → ask user        │
+│     "Did you mean X or Y?"           │
+│                                      │
+│  Output: QueryModel (resolved terms) │
+└──────────────┬───────────────────────┘
                │ (LLM is done here)
                ▼
-┌──────────────────────────────────┐
-│  Code: Concept Resolution        │
-│  (deterministic, no LLM)        │
-│                                  │
-│  Each mention → concept lookup   │
-│  → exact match → fuzzy match     │
-│  → resolve to canonical concepts │
-└──────────────┬───────────────────┘
-               │
-               ▼
-┌──────────────────────────────────┐
-│  Code: Study Lookup              │
-│  (deterministic, no LLM)        │
-│                                  │
-│  Intersect resolved concepts     │
-│  → return matching studies       │
-│  → return directly to user       │
-└──────────────────────────────────┘
+┌──────────────────────────────────────┐
+│  Code: Study Lookup                  │
+│  (deterministic, no LLM)            │
+│                                      │
+│  Intersect resolved concepts         │
+│  → return matching studies           │
+│  → return directly to user           │
+└──────────────────────────────────────┘
 ```
 
-The LLM emits a `QueryModel` and is done. No study data flows through the LLM. Code handles resolution and results.
+The LLM agent has tools to search the concept index — it needs to verify that its extracted terms actually resolve to real concepts. When they don't, it rewrites and retries. Once all mentions are resolved, it emits a `QueryModel`. Study data never flows through the LLM.
 
 ### The Hard Part: Mention Extraction
 
-The LLM's sole job is parsing natural language into structured concept mentions. This is where the corner cases live:
+Parsing natural language into structured concept mentions is where the corner cases live:
 
 - _"juvenile Hispanics with type one diabetes where insulin response was measured"_ → 3 mentions, not 1. "juvenile" is age, not "juvenile diabetes".
 - _"blood pressure and diabetes"_ → 2 mentions with AND
 - _"studies with BMI"_ → 1 mention, LLM normalizes abbreviation to "Body Mass Index"
 - _"blood sugar studies"_ → 1 mention, LLM translates lay term to "Glucose" or "Fasting Glucose"
 - _"echocardiography but not stress echo"_ → 1 AND, 1 NOT
-- _"lipid panel"_ → could expand to multiple mentions (LDL, HDL, Triglycerides) or stay as one umbrella term — depends on what exists in the concept index
+- _"lipid panel"_ → could expand to multiple mentions (LDL, HDL, Triglycerides) or stay as one umbrella — LLM checks what exists via `search_concepts`
+
+### Agent Tools
+
+The LLM has concept lookup tools — but NOT study lookup tools:
 
 ```python
-class Mention(BaseModel):
-    term: str           # normalized concept phrase
-    bool_op: str        # "AND" | "OR" | "NOT"
+@agent.tool
+def search_concepts(query: str) -> list[ConceptMatch]:
+    """Search the concept index for matching concepts.
+    Returns concept names with study counts.
+    Used by the agent to verify that extracted terms
+    resolve to real concepts in the index."""
+
+@agent.tool
+def browse_concepts(prefix: str) -> list[ConceptSummary]:
+    """Browse concepts by prefix for exploration.
+    Helps the agent discover what concepts exist
+    when the user's phrasing doesn't match directly."""
+```
+
+The agent loop:
+1. Extract mentions from the query
+2. Call `search_concepts` for each mention to check resolution
+3. If a mention fails → rewrite using medical knowledge → retry `search_concepts`
+4. If still unresolved → ask the user for clarification
+5. Emit `QueryModel` with all resolved concept names
+
+### Output Model
+
+```python
+class ResolvedMention(BaseModel):
+    concepts: list[str]  # resolved concept name(s)
+    bool_op: str         # "AND" | "OR" | "NOT"
 
 class QueryModel(BaseModel):
-    mentions: list[Mention]
+    mentions: list[ResolvedMention]
 ```
 
 Example: _"studies with blood pressure and diabetes"_ →
 ```
 mentions: [
-  {term: "Blood Pressure", bool_op: "AND"},
-  {term: "Diabetes", bool_op: "AND"}
+  {concepts: ["Systolic Blood Pressure", "Diastolic Blood Pressure"], bool_op: "AND"},
+  {concepts: ["Diabetes History"], bool_op: "AND"}
 ]
 ```
 
-### Concept Resolution (code, no LLM)
-
-Each mention term is looked up against the concept index:
-
-1. **Exact match** — term matches a concept name
-2. **Substring match** — "Blood Pressure" matches "Systolic Blood Pressure", "Diastolic Blood Pressure"
-3. **Fuzzy match** — handles minor variations the LLM didn't catch
-
-If a mention resolves to multiple concepts (e.g., "Blood Pressure" → Systolic + Diastolic), include all of them as an OR group.
+The agent resolved "blood pressure" to both systolic and diastolic (via `search_concepts`), and "diabetes" to "Diabetes History".
 
 ### Study Lookup (code, no LLM)
 
-Deterministic intersection of resolved concepts against the study index. AND = studies must have ALL concept groups. Results returned directly to the user — the LLM never sees them.
-
-### LLM Retry (future enhancement)
-
-If concept resolution fails for a mention, a second LLM call could rewrite the term and try again. But this is an optimization — start without it, measure the failure rate, add if needed.
+Code takes the `QueryModel`, intersects resolved concepts against the study index, and returns results directly to the user. The LLM never sees study data.
 
 ## Concept Index
 
@@ -166,74 +182,60 @@ The concept vocabulary is small enough (estimated 1K-5K unique after normalizati
 
 No OpenSearch, no vector DB, no embeddings for Phase 1. The concept vocabulary is small enough for exact/fuzzy string matching. Upgrade path to OpenSearch + k-NN exists per DESIGN.md if needed.
 
-## LLM Output Model
-
-The LLM has no tools. It receives the query and emits structured output:
-
-```python
-class Mention(BaseModel):
-    term: str           # normalized concept phrase
-    bool_op: str        # "AND" | "OR" | "NOT"
-
-class QueryModel(BaseModel):
-    mentions: list[Mention]
-```
-
-The system prompt includes the concept vocabulary (or a summary) so the LLM knows what terms are resolvable. This is the only place the concept list enters the LLM context.
-
 ## Testing: Mention Extraction Evals
 
 The hard problem is mention extraction, so we test it directly using pydantic-evals — same pattern as the concept classification evals.
 
+The agent has tools, so eval cases test the full loop — NL query in, resolved `QueryModel` out. The agent should call `search_concepts`, handle misses, and emit resolved concept names.
+
 ```python
-# Each eval case: NL query → expected QueryModel
+# Each eval case: NL query → expected resolved QueryModel
 mention_case(
     "simple-and",
     query="studies with blood pressure and diabetes",
-    expected=[
-        Mention(term="Blood Pressure", bool_op="AND"),
-        Mention(term="Diabetes", bool_op="AND"),
-    ],
+    expected=QueryModel(mentions=[
+        ResolvedMention(concepts=["Systolic Blood Pressure", "Diastolic Blood Pressure"], bool_op="AND"),
+        ResolvedMention(concepts=["Diabetes History"], bool_op="AND"),
+    ]),
 )
 
 mention_case(
     "abbreviation",
     query="studies with BMI data",
-    expected=[
-        Mention(term="Body Mass Index", bool_op="AND"),
-    ],
+    expected=QueryModel(mentions=[
+        ResolvedMention(concepts=["Body Mass Index"], bool_op="AND"),
+    ]),
 )
 
 mention_case(
     "lay-term",
     query="blood sugar studies",
-    expected=[
-        Mention(term="Glucose", bool_op="AND"),
-    ],
+    expected=QueryModel(mentions=[
+        ResolvedMention(concepts=["Fasting Glucose", "Hemoglobin A1c"], bool_op="AND"),
+    ]),
 )
 
 mention_case(
-    "complex-decomposition",
-    query="juvenile Hispanics with type one diabetes where insulin was measured",
-    expected=[
-        Mention(term="Age", bool_op="AND"),
-        Mention(term="Hispanic", bool_op="AND"),
-        Mention(term="Type 1 Diabetes", bool_op="AND"),
-        Mention(term="Insulin", bool_op="AND"),
-    ],
+    "rewrite-needed",
+    query="type one diabetes studies",
+    # Agent tries "type one diabetes" → no match
+    # Rewrites to "Type 1 Diabetes" → matches
+    expected=QueryModel(mentions=[
+        ResolvedMention(concepts=["Type 1 Diabetes Mellitus"], bool_op="AND"),
+    ]),
 )
 
 mention_case(
     "negation",
     query="cardiac imaging but not stress echo",
-    expected=[
-        Mention(term="Cardiac Imaging", bool_op="AND"),
-        Mention(term="Stress Echocardiography", bool_op="NOT"),
-    ],
+    expected=QueryModel(mentions=[
+        ResolvedMention(concepts=["Echocardiography"], bool_op="AND"),
+        ResolvedMention(concepts=["Stress Echocardiography"], bool_op="NOT"),
+    ]),
 )
 ```
 
-Build the eval suite first, then iterate the prompt against it — just like we did for concept classification.
+Build the eval suite first, then iterate the prompt against it — same approach as variable concept classification.
 
 ## API
 
