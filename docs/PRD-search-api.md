@@ -96,18 +96,86 @@ Returns service health and index statistics.
 
 ## Deployment Architecture
 
+### Overview
+
 ```
-[Browser] --HTTPS--> [CloudFront/ALB] --HTTP--> [Docker container: uvicorn + FastAPI]
+[Browser] --HTTPS--> [App Runner (auto TLS)] ---> [uvicorn + FastAPI]
                                                         |
                                                   [ConceptIndex in memory]
                                                         |
                                                   [Anthropic API]
 ```
 
-- Single Docker container running uvicorn with the FastAPI app
-- Data files (LLM concepts, catalog studies, hierarchy JSON) mounted as read-only volumes
-- `ANTHROPIC_API_KEY` provided via environment variable
-- Sits behind a load balancer (ALB or CloudFront origin) with HTTPS termination
+### Why App Runner
+
+| Criteria | App Runner | ECS Fargate | EC2 | Lambda |
+|---|---|---|---|---|
+| Monthly cost | ~$2.60 | ~$23 (needs ALB) | ~$6 | ~$0 |
+| Cold start | None (warm) | 20-60s from zero | None | 2-5s (index load) |
+| Burst handling | Auto-scales | Slow to scale | Single instance | Excellent |
+| HTTPS | Built-in, auto-managed | Needs ALB ($16/mo) | DIY | Built-in |
+| Terraform complexity | ~50 lines | High | Medium | Medium + Mangum wrapper |
+
+App Runner keeps one provisioned instance warm (no cold starts), provides auto-managed HTTPS, auto-scales for bursts, and costs ~$2.60/mo at idle. No ALB, no TLS cert management, no code changes needed.
+
+### Environments
+
+| | **Dev** | **Prod** |
+|---|---|---|
+| AWS account | Clever Canary (`excira` profile) | NCPI prod (`ncpi-prod-deployer` profile) |
+| Frontend | `g78-ncpi-data.humancellatlas.dev` (S3/CloudFront) | `bhy-ncpi-data.org` (S3/CloudFront) |
+| API service | App Runner in same account | App Runner in same account |
+| CORS origins | Dev CloudFront domain + `localhost:3000` | Prod CloudFront domain |
+
+### Infrastructure (Terraform)
+
+Each environment gets identical Terraform with different variable values:
+
+- **ECR repository** — stores the Docker image
+- **App Runner service** — pulls from ECR, runs the container
+  - 0.25 vCPU / 0.5 GB memory (sufficient for async I/O workload)
+  - Min 1 / Max 4 instances (auto-scaling based on concurrency)
+  - Health check on `GET /health`
+  - Environment variables: `ANTHROPIC_API_KEY` (from Secrets Manager), `CORS_ORIGINS`, `NCPI_REPO_ROOT`
+- **Secrets Manager secret** — stores the Anthropic API key
+- **IAM roles** — App Runner access role (ECR pull) + instance role (Secrets Manager read)
+- **S3 bucket or EFS** — data files (catalog JSON, LLM concepts, hierarchy)
+
+### Data File Strategy
+
+Data files (~111MB total) need to be available to the container at runtime. Options:
+
+1. **Bake into Docker image** (simplest) — rebuild and redeploy image when catalog data updates. Works well since catalog rebuilds are infrequent.
+2. **S3 download at startup** — container downloads files from S3 on boot. Adds ~5-10s to startup but decouples data updates from image deploys.
+
+Recommendation: **Bake into the image** for Phase 1. The catalog rebuilds infrequently and a simple CI pipeline can rebuild the image when data changes.
+
+### CI/CD Pipeline
+
+1. Push to `main` (or tag) triggers build
+2. Build Docker image with current data files baked in
+3. Push image to ECR
+4. App Runner auto-deploys from ECR (via image tag update or auto-deployment)
+
+### Terraform Module Structure
+
+```
+terraform/
+  modules/
+    concept-search-api/
+      main.tf          # App Runner service, ECR repo
+      iam.tf           # Roles and policies
+      secrets.tf       # Secrets Manager
+      variables.tf     # Input variables
+      outputs.tf       # Service URL, ARNs
+  environments/
+    dev/
+      main.tf          # Module call with dev values
+      terraform.tfvars
+    prod/
+      main.tf          # Module call with prod values
+      terraform.tfvars
+```
 
 ## Open Questions (Phase 2)
 
@@ -115,4 +183,4 @@ Returns service health and index statistics.
 - **Rate limiting:** Per-IP or per-key throttling to manage Anthropic API costs
 - **Streaming:** SSE for progressive results (show mentions as they resolve)
 - **Caching:** Cache pipeline results for identical queries to reduce LLM calls
-- **Horizontal scaling:** Multiple container instances behind ALB (index is read-only, stateless)
+- **Custom domain:** Route API through a subdomain (e.g., `api.ncpi-data.org`) instead of the App Runner default URL
