@@ -98,7 +98,18 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="category-cholesterol",
             inputs=_mention("cholesterol", Facet.MEASUREMENT),
+            # "cholesterol" is ambiguous — Total, HDL, LDL, Dietary, etc.
+            # Agent should return broad match and disambiguate via message.
             expected_output=ResolveResult(values=["Total Cholesterol"]),
+        ),
+        Case(
+            name="disambig-glucose",
+            inputs=_mention("glucose", Facet.MEASUREMENT),
+            # "glucose" spans 5 categories: Endocrine (Fasting Glucose, 44),
+            # Lab Tests (Glucose, 38), Dietary (Glucose Intake, 5), etc.
+            # Agent should pick Fasting Glucose (highest count) and
+            # disambiguate — importantly NOT an example in the prompt.
+            expected_output=ResolveResult(values=["Fasting Glucose"]),
         ),
         # --- Medical synonym ---
         Case(

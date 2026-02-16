@@ -265,6 +265,37 @@ dataset = Dataset[str, QueryModel, QueryModel](
                 ]
             ),
         ),
+        # --- Obscure and nonsense terms ---
+        Case(
+            name="exercise-with-wiffelball",
+            inputs="studies measuring exercise and wiffelball",
+            # "exercise" resolves to Physical Activity (28 studies).
+            # "wiffelball" is misspelled but actually exists in the hierarchy
+            # as "Organized Wiffleball Participation" (1 study!). The agent
+            # finds this obscure concept and resolves it.
+            expected_output=QueryModel(
+                mentions=[
+                    _m("exercise", Facet.MEASUREMENT, ["Physical Activity"]),
+                    _m(
+                        "wiffelball",
+                        Facet.MEASUREMENT,
+                        ["Organized Wiffleball Participation"],
+                    ),
+                ]
+            ),
+        ),
+        Case(
+            name="exercise-with-true-nonsense",
+            inputs="studies measuring exercise and blorpquantz",
+            # "exercise" should resolve; "blorpquantz" is a made-up word
+            # with no possible match. System should resolve exercise and
+            # either ignore or message about the unresolvable term.
+            expected_output=QueryModel(
+                mentions=[
+                    _m("exercise", Facet.MEASUREMENT, ["Physical Activity"]),
+                ]
+            ),
+        ),
     ],
 )
 
