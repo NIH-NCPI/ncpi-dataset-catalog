@@ -79,6 +79,89 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
             """
             return ctx.deps.get_focus_category_terms(category)
 
+        @_agent.tool
+        def get_consent_code_categories(
+            ctx: RunContext[ConceptIndex],
+        ) -> dict:
+            """Get the top-level consent code categories and modifiers.
+
+            Call this first for any consentCode mention. Returns base
+            codes (GRU, HMB, DS, etc.) with descriptions and study
+            counts, plus modifier definitions (IRB, NPU, etc.).
+
+            Args:
+                ctx: Run context with ConceptIndex dependency.
+
+            Returns:
+                Dict with 'base_codes' and 'modifiers' lists.
+            """
+            return ctx.deps.get_consent_code_categories()
+
+        @_agent.tool
+        def get_disease_specific_codes(
+            ctx: RunContext[ConceptIndex],
+        ) -> list[dict]:
+            """Get all disease-specific (DS-*) consent code categories.
+
+            Call this when the mention refers to a disease or condition.
+            Returns disease abbreviations with full names and study counts.
+
+            Args:
+                ctx: Run context with ConceptIndex dependency.
+
+            Returns:
+                Disease codes with abbreviations, names, and study counts.
+            """
+            return ctx.deps.get_disease_specific_codes()
+
+        @_agent.tool
+        def get_consent_codes_for_base(
+            ctx: RunContext[ConceptIndex],
+            base_code: str,
+            limit: int = 20,
+        ) -> list[dict]:
+            """Get all consent code variants for a base code prefix.
+
+            Call this to see all variants of a base code (e.g. all
+            GRU-* variants, or all DS-CVD-* variants with modifiers).
+
+            Args:
+                ctx: Run context with ConceptIndex dependency.
+                base_code: Base code prefix (e.g. "GRU", "HMB", "DS-CVD").
+                limit: Maximum results to return.
+
+            Returns:
+                Matching codes with study counts.
+            """
+            return ctx.deps.get_consent_codes_for_base(base_code, limit=limit)
+
+        @_agent.tool
+        def get_measurement_category_concepts(
+            ctx: RunContext[ConceptIndex],
+            top_level: str,
+            mid_level: str | None = None,
+        ) -> list[ConceptMatch]:
+            """Get measurement concepts in a hierarchy category.
+
+            Use this for measurement facet mentions. First identify the
+            top-level category from the list in the prompt (e.g.
+            "Cardiovascular"), then optionally drill into a mid-level
+            (e.g. "Blood Pressure") to see specific concepts.
+
+            Args:
+                ctx: Run context with ConceptIndex dependency.
+                top_level: Top-level category (e.g. "Cardiovascular").
+                mid_level: Optional mid-level subcategory (e.g. "Blood
+                          Pressure"). If omitted, returns all concepts
+                          in the top-level.
+
+            Returns:
+                Measurement concepts in the category, sorted by study count.
+            """
+            return ctx.deps.get_measurement_category_concepts(
+                top_level, mid_level
+            )
+
     return _agent
 
 

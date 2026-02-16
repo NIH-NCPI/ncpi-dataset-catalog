@@ -33,7 +33,9 @@ For these facets, extract the user's text and leave `values` empty. A resolve ag
 
 **Measurement** — phenotype variables, lab values, clinical measurements, survey instruments. Examples: blood pressure, BMI, cholesterol, smoking, sleep duration.
 
-**Consent Code** — GA4GH consent codes. Common patterns: GRU, HMB, DS-CVD, DS-DIAB, HMB-IRB, GRU-NPU. When you see these codes, extract them as consentCode mentions with the code as text.
+**Consent Code** — GA4GH data use consent codes that describe what research a dataset is approved for. Common patterns: GRU (general research use), HMB (health/medical/biomedical), DS-* (disease-specific), plus modifiers like IRB, NPU. When you see these codes, extract them as consentCode mentions.
+
+**Important:** A disease name is a **consentCode** (not focus) when the query describes what research the data is *consented for*, not what the data is *about*. Context clues: "consented for", "approved for", "data use", "research consented". Example: "diabetes datasets consented for Alzheimer's research" → focus="diabetes", consentCode="Alzheimer's". Also recognize semantic descriptions: "general research use" → consentCode, "health and medical" → consentCode, "not for profit" → consentCode.
 
 ## Instructions
 

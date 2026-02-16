@@ -198,6 +198,52 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             inputs=_mention("schizophrenia", Facet.FOCUS),
             expected_output=ResolveResult(values=["Schizophrenia"]),
         ),
+        # --- Consent code semantic resolution ---
+        Case(
+            name="consent-gru-direct",
+            inputs=_mention("GRU", Facet.CONSENT_CODE),
+            expected_output=ResolveResult(values=["GRU"]),
+        ),
+        Case(
+            name="consent-general-research",
+            inputs=_mention("general research use", Facet.CONSENT_CODE),
+            expected_output=ResolveResult(values=["GRU"]),
+        ),
+        Case(
+            name="consent-hmb-direct",
+            inputs=_mention("HMB", Facet.CONSENT_CODE),
+            expected_output=ResolveResult(values=["HMB"]),
+        ),
+        Case(
+            name="consent-health-medical",
+            inputs=_mention("health medical biomedical", Facet.CONSENT_CODE),
+            expected_output=ResolveResult(values=["HMB"]),
+        ),
+        Case(
+            name="consent-disease-specific-cvd",
+            inputs=_mention("cardiovascular disease specific", Facet.CONSENT_CODE),
+            expected_output=ResolveResult(values=["DS-CVD"]),
+        ),
+        Case(
+            name="consent-breast-cancer",
+            inputs=_mention("breast cancer research", Facet.CONSENT_CODE),
+            expected_output=ResolveResult(values=["DS-BRCA"]),
+        ),
+        Case(
+            name="consent-not-for-profit",
+            inputs=_mention("general research, not for profit", Facet.CONSENT_CODE),
+            expected_output=ResolveResult(values=["GRU-NPU"]),
+        ),
+        Case(
+            name="consent-hmb-irb",
+            inputs=_mention("HMB-IRB", Facet.CONSENT_CODE),
+            expected_output=ResolveResult(values=["HMB-IRB"]),
+        ),
+        Case(
+            name="consent-diabetes",
+            inputs=_mention("diabetes research", Facet.CONSENT_CODE),
+            expected_output=ResolveResult(values=["DS-DIAB"]),
+        ),
     ],
 )
 

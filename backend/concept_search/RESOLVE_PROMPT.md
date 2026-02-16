@@ -29,12 +29,34 @@ Biological Phenomena, Chemically-Induced Disorders, Environment and Public Healt
 4. If the first category doesn't have a good match, try a second category.
 5. If no category matches, fall back to `search_concepts(query=<text>, facet="focus")`.
 
-## Measurement Facet — Search with Rewrite
+## Measurement Facet — Category Drill-Down + Search
 
-For **measurement** mentions, use `search_concepts`:
+For **measurement** mentions, prefer `get_measurement_category_concepts` for category drill-down, with `search_concepts` as fallback:
+
+### Strategy A: Category Drill-Down (preferred)
+
+1. Read the mention text and identify which top-level measurement category it belongs to:
+
+**Measurement Categories:**
+Anthropometry, Behavioral & Lifestyle, Biomarkers & Proteins, Cardiovascular, Demographics, Dietary & Nutrition, Endocrine & Metabolic, Genetic & Genomic, Hematology, Imaging & Radiology, Immunology & Inflammation, Infectious Disease, Laboratory Tests, Medications & Treatment, Mental Health & Neurology, Metabolomics, Musculoskeletal, Oncology, Ophthalmology, Pulmonary & Respiratory, Renal & Urinary, Reproductive & Perinatal, Social & Environmental, Study Administration, Surgical & Procedural
+
+2. Call `get_measurement_category_concepts(top_level=<category>)` to see all mid-levels and concepts.
+3. If the top-level has many concepts, narrow with a mid-level:
+   `get_measurement_category_concepts(top_level=<category>, mid_level=<subcategory>)`
+4. Pick the best matching concept(s) from the results. Prefer concepts with higher study counts.
+
+**Examples:**
+- "blood pressure" → top_level="Cardiovascular", mid_level="Blood Pressure" → pick "Systolic Blood Pressure", "Diastolic Blood Pressure"
+- "BMI" → top_level="Anthropometry" → pick "Body Mass Index"
+- "smoking" → top_level="Behavioral & Lifestyle", mid_level="Smoking" → pick "Smoking Status"
+- "cholesterol" → top_level="Laboratory Tests", mid_level="Lipid Panel" → pick "Total Cholesterol"
+
+### Strategy B: Search with Rewrite (fallback)
+
+If category drill-down doesn't find a match, fall back to `search_concepts`:
 
 1. Call `search_concepts(query=<text>, facet="measurement")`.
-2. Evaluate results by study count. The measurement index has ~95K concepts including many overly specific singletons. A good match should have `study_count` ≥ 5. If all results have `study_count` of 1–2, treat them as poor matches and rewrite.
+2. Evaluate results by study count. A good match should have `study_count` ≥ 5. If all results have `study_count` of 1–2, treat them as poor matches and rewrite.
 3. If poor or no results, **rewrite the term** using medical knowledge and search again:
    - "blood sugar" → try "glucose" (lay term → clinical term)
    - "type one diabetes" → try "type 1 diabetes"
@@ -43,9 +65,32 @@ For **measurement** mentions, use `search_concepts`:
    - "BMI" → try "body mass index"
 4. You may retry up to 3 times. Compare across all searches and pick values with the highest study counts.
 
-## Consent Code Facet — Direct Search
+### Choosing a Strategy
 
-For **consentCode** mentions, use `search_concepts(query=<text>, facet="consentCode")`. Consent codes are standardized (GRU, HMB, DS-*, etc.) and usually match directly.
+- If you can identify a clear measurement category, use **Strategy A** first.
+- If the mention is ambiguous, a lay term, or doesn't fit a category, use **Strategy B**.
+- You can combine both: try category drill-down, then search if needed.
+
+## Consent Code Facet — Category Drill-Down
+
+For **consentCode** mentions, use context-driven drill-down:
+
+1. Call `get_consent_code_categories()` to see the base codes (GRU, HMB, DS, etc.) with descriptions, study counts, and modifier definitions.
+2. Use your understanding of the mention to pick the right base code:
+   - "general research use", "open access", "unrestricted" → GRU
+   - "health research", "biomedical only" → HMB
+   - Any disease name → DS (disease-specific)
+   - "not for profit" → look for NPU modifier on the right base
+3. If the mention refers to a disease, call `get_disease_specific_codes()` to see all DS-* disease categories with their full names.
+4. Optionally call `get_consent_codes_for_base(base_code)` to see all variants with modifiers (e.g., all GRU-* or DS-CVD-* codes).
+5. Return the broadest matching code unless the user specifies modifiers.
+
+**Examples:**
+- "general research use" → get categories → pick GRU
+- "breast cancer research" → get categories → see DS → get disease codes → pick DS-BRCA
+- "HMB-IRB" → direct code, return as-is
+- "cardiovascular disease, not for profit" → get disease codes → DS-CVD → get variants → DS-CVD-NPU-MDS or just DS-CVD
+- "open access no restrictions" → GRU (semantic match, "open access" = general research use)
 
 ## General Selection Rules
 

@@ -234,6 +234,37 @@ dataset = Dataset[str, QueryModel, QueryModel](
                 ]
             ),
         ),
+        # --- Consent code semantic resolution (full pipeline) ---
+        Case(
+            name="consent-semantic-general-research",
+            inputs="general research use studies with BMI",
+            expected_output=QueryModel(
+                mentions=[
+                    _m("general research use", Facet.CONSENT_CODE, ["GRU"]),
+                    _m("BMI", Facet.MEASUREMENT, ["Body Mass Index"]),
+                ]
+            ),
+        ),
+        Case(
+            name="consent-disease-alzheimers-typo",
+            inputs="I am interested in diabetes datasets consented for use with alzhimers research",
+            expected_output=QueryModel(
+                mentions=[
+                    _m("diabetes", Facet.FOCUS, ["Diabetes Mellitus"]),
+                    _m("alzhimers", Facet.CONSENT_CODE, ["DS-ALZ"]),
+                ]
+            ),
+        ),
+        Case(
+            name="consent-breast-cancer-wgs",
+            inputs="WGS datasets consented for breast cancer research",
+            expected_output=QueryModel(
+                mentions=[
+                    _m("WGS", Facet.DATA_TYPE, ["WGS"]),
+                    _m("breast cancer", Facet.CONSENT_CODE, ["DS-BRCA"]),
+                ]
+            ),
+        ),
     ],
 )
 
