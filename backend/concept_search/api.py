@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import os
+import sys
 import time
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
@@ -19,7 +21,19 @@ from .index import get_index
 from .models import Facet
 from .pipeline import run_pipeline
 
+# Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
+logging.basicConfig(
+    format="%(message)s",
+    level=logging.INFO,
+    stream=sys.stdout,
+)
 logger = logging.getLogger(__name__)
+
+
+def _log_json(**kwargs: object) -> None:
+    """Emit a structured JSON log line."""
+    logger.info(json.dumps(kwargs, default=str))
+
 
 # Load .env from the backend directory (parent of this package)
 _backend_dir = Path(__file__).resolve().parent.parent
@@ -29,11 +43,11 @@ load_dotenv(_backend_dir / ".env")
 @asynccontextmanager
 async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     """Preload the ConceptIndex at startup."""
-    logger.info("Preloading ConceptIndex...")
+    _log_json(event="index_loading")
     t0 = time.monotonic()
     get_index()
     elapsed = time.monotonic() - t0
-    logger.info("ConceptIndex loaded in %.1fs", elapsed)
+    _log_json(event="index_loaded", elapsed_s=round(elapsed, 1))
     yield
 
 
@@ -70,6 +84,7 @@ def _build_study_summary(study: dict) -> StudySummary:
 @app.post("/search", response_model=SearchResponse)
 async def search(request: SearchRequest) -> SearchResponse:
     """Run the concept search pipeline and return matching studies."""
+    _log_json(event="search_request", query=request.query)
     t_start = time.monotonic()
 
     # Run the 3-agent LLM pipeline
@@ -111,7 +126,7 @@ async def search(request: SearchRequest) -> SearchResponse:
     pipeline_ms = int((t_pipeline - t_start) * 1000)
     lookup_ms = int((t_lookup - t_pipeline) * 1000)
 
-    return SearchResponse(
+    response = SearchResponse(
         message=query_model.message,
         query=query_model,
         studies=[_build_study_summary(s) for s in studies],
@@ -122,6 +137,25 @@ async def search(request: SearchRequest) -> SearchResponse:
         ),
         total_studies=len(studies),
     )
+
+    _log_json(
+        event="search_response",
+        query=request.query,
+        mentions=[
+            {
+                "facet": m.facet.value,
+                "values": m.values,
+                "exclude": m.exclude,
+            }
+            for m in query_model.mentions
+        ],
+        message=query_model.message,
+        total_studies=len(studies),
+        pipeline_ms=pipeline_ms,
+        lookup_ms=lookup_ms,
+    )
+
+    return response
 
 
 @app.get("/health")
@@ -135,9 +169,13 @@ async def health() -> dict:
 
 
 @app.exception_handler(Exception)
-async def global_exception_handler(_request: object, exc: Exception) -> JSONResponse:
+async def global_exception_handler(request: object, exc: Exception) -> JSONResponse:
     """Return 500 with error detail for unhandled exceptions."""
-    logger.exception("Unhandled error: %s", exc)
+    _log_json(
+        event="search_error",
+        error=str(exc),
+        error_type=type(exc).__name__,
+    )
     return JSONResponse(
         content={"detail": str(exc)},
         status_code=500,

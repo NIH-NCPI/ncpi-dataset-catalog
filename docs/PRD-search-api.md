@@ -192,6 +192,42 @@ Recommendation: **Bake into the image** for Phase 1. The catalog rebuilds infreq
 3. Push image to ECR
 4. App Runner auto-deploys from ECR (via image tag update or auto-deployment)
 
+## Logging & Observability
+
+### Structured JSON Logging
+
+All log output is structured JSON written to stdout, which App Runner forwards to CloudWatch Logs automatically — no agent or sidecar needed.
+
+### Events Logged
+
+| Event | When | Fields |
+|---|---|---|
+| `index_loading` | Startup begins | — |
+| `index_loaded` | Index ready | `elapsed_s` |
+| `search_request` | Query received | `query` |
+| `search_response` | Response sent | `query`, `mentions` (facet/values/exclude), `message`, `total_studies`, `pipeline_ms`, `lookup_ms` |
+| `search_error` | Unhandled exception | `error`, `error_type` |
+
+The `search_response` event logs what the pipeline resolved (mentions with facet values) and timing, but **not** the full study list — `total_studies` count is sufficient and avoids log bloat.
+
+### What We Can Learn
+
+- **Popular queries** — what users are searching for, which concepts are most requested
+- **Resolution quality** — whether the pipeline produces mentions or returns clarification messages
+- **Latency profile** — pipeline vs lookup time, identifying slow queries
+- **Error patterns** — exception types and frequency
+
+### CloudWatch Integration
+
+App Runner streams stdout to CloudWatch Logs under `/aws/apprunner/<service-name>/`. Since each line is valid JSON, CloudWatch Logs Insights can query directly:
+
+```
+fields @timestamp, query, total_studies, pipeline_ms
+| filter event = "search_response"
+| sort @timestamp desc
+| limit 50
+```
+
 ## Open Questions (Phase 2)
 
 - **Authentication:** API key or JWT for frontend-to-API auth
