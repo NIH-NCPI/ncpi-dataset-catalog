@@ -53,6 +53,8 @@ class ConceptIndex:
         self._load_measurement_concepts(llm_dir)
         self._load_study_metadata(studies_path)
         self.load_focus_categories()
+        self.load_measurement_hierarchy()
+        self.load_consent_code_descriptions()
 
     def _load_measurement_concepts(self, llm_dir: Path) -> None:
         """Load concept names from per-study LLM classification JSON files."""
@@ -242,6 +244,175 @@ class ConceptIndex:
         return [
             ConceptMatch(facet=Facet.FOCUS, study_count=t["study_count"], value=t["term"])
             for t in terms
+        ]
+
+    def load_consent_code_descriptions(self) -> None:
+        """Load consent code description data for drill-down."""
+        desc_path = Path(__file__).parent / "consent_codes.json"
+        if not desc_path.exists():
+            self._consent_descriptions: dict = {}
+            return
+        with open(desc_path) as f:
+            self._consent_descriptions = json.load(f)
+
+    def get_consent_code_categories(self) -> dict:
+        """Return top-level consent code categories with descriptions and study counts.
+
+        Returns the base codes (GRU, HMB, DS, etc.) with their descriptions
+        and total study counts, plus the modifier definitions.
+        """
+        base_codes = self._consent_descriptions.get("base_codes", {})
+        modifiers = self._consent_descriptions.get("modifiers", {})
+
+        # Aggregate study counts by base code
+        base_counts: dict[str, int] = defaultdict(int)
+        for match in self._index[Facet.CONSENT_CODE].values():
+            base = match.value.split("-")[0]
+            base_counts[base] += match.study_count
+
+        categories = []
+        for code, description in base_codes.items():
+            categories.append({
+                "code": code,
+                "description": description,
+                "total_studies": base_counts.get(code, 0),
+            })
+        # Sort by study count
+        categories.sort(key=lambda x: -x["total_studies"])
+
+        return {
+            "base_codes": categories,
+            "modifiers": [
+                {"code": k, "description": v} for k, v in modifiers.items()
+            ],
+        }
+
+    def get_consent_codes_for_base(
+        self, base_code: str, limit: int = 20
+    ) -> list[dict]:
+        """Return all consent code variants for a base code.
+
+        Args:
+            base_code: The base code prefix (e.g. "GRU", "HMB", "DS-CVD").
+
+        Returns:
+            Matching codes with study counts, sorted by count.
+        """
+        prefix = base_code.lower()
+        results = []
+        for key, match in self._index[Facet.CONSENT_CODE].items():
+            # Match exact base or base- prefix
+            if key == prefix or key.startswith(prefix + "-"):
+                results.append({
+                    "code": match.value,
+                    "study_count": match.study_count,
+                })
+        results.sort(key=lambda x: -x["study_count"])
+        return results[:limit]
+
+    def get_disease_specific_codes(self) -> list[dict]:
+        """Return all DS-* disease abbreviations with descriptions and study counts.
+
+        Returns:
+            Disease codes with their full names and total study counts.
+        """
+        disease_abbrevs = self._consent_descriptions.get(
+            "disease_abbreviations", {}
+        )
+        # Aggregate counts per disease abbreviation
+        disease_counts: dict[str, int] = defaultdict(int)
+        for match in self._index[Facet.CONSENT_CODE].values():
+            code = match.value
+            if not code.startswith("DS-"):
+                continue
+            # Extract disease part (everything between DS- and first modifier)
+            modifiers = self._consent_descriptions.get("modifiers", {})
+            parts = code.split("-")[1:]  # drop "DS"
+            disease_parts = []
+            for part in parts:
+                if part in modifiers:
+                    break
+                disease_parts.append(part)
+            disease_key = "-".join(disease_parts)
+            if disease_key:
+                disease_counts[disease_key] += match.study_count
+
+        results = []
+        for abbrev, count in disease_counts.items():
+            results.append({
+                "abbreviation": abbrev,
+                "disease": disease_abbrevs.get(abbrev, abbrev),
+                "code_prefix": f"DS-{abbrev}",
+                "total_studies": count,
+            })
+        results.sort(key=lambda x: -x["total_studies"])
+        return results
+
+    def load_measurement_hierarchy(self) -> None:
+        """Load the LLM-built measurement concept hierarchy."""
+        hierarchy_path = self._resolve_hierarchy_path()
+        if not hierarchy_path.exists():
+            self._measurement_hierarchy: dict[str, dict[str, list[dict]]] = {}
+            return
+        with open(hierarchy_path) as f:
+            data = json.load(f)
+        self._measurement_hierarchy = data.get("hierarchy", {})
+
+    @staticmethod
+    def _resolve_hierarchy_path() -> Path:
+        """Resolve the path to concept-hierarchy.json."""
+        repo_root = Path(
+            os.environ.get(
+                "NCPI_REPO_ROOT", Path(__file__).resolve().parent.parent.parent
+            )
+        )
+        return Path(
+            os.environ.get(
+                "NCPI_CONCEPT_HIERARCHY_PATH",
+                repo_root
+                / "catalog-build"
+                / "classification"
+                / "output"
+                / "concept-hierarchy.json",
+            )
+        )
+
+    def list_measurement_categories(self) -> dict[str, list[str]]:
+        """Return top-level categories with their mid-level subcategories.
+
+        Returns:
+            Dict of top_level -> sorted list of mid_level names.
+        """
+        return {
+            tl: sorted(mids.keys())
+            for tl, mids in sorted(self._measurement_hierarchy.items())
+        }
+
+    def get_measurement_category_concepts(
+        self, top_level: str, mid_level: str | None = None
+    ) -> list[ConceptMatch]:
+        """Return measurement concepts in a category, sorted by study count.
+
+        Args:
+            top_level: Top-level category (e.g. "Cardiovascular").
+            mid_level: Optional mid-level subcategory (e.g. "Blood Pressure").
+                       If omitted, returns all concepts in the top-level.
+
+        Returns:
+            Measurement concepts as ConceptMatch objects.
+        """
+        tl_data = self._measurement_hierarchy.get(top_level, {})
+        if mid_level:
+            concepts = tl_data.get(mid_level, [])
+        else:
+            concepts = [c for mids in tl_data.values() for c in mids]
+        return [
+            ConceptMatch(
+                facet=Facet.MEASUREMENT,
+                study_count=c["study_count"],
+                value=c["concept"],
+            )
+            for c in concepts
         ]
 
     @property
