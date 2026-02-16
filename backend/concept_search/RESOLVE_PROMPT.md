@@ -70,6 +70,7 @@ If category drill-down doesn't find a match, fall back to `search_concepts`:
 - If you can identify a clear measurement category, use **Strategy A** first.
 - If the mention is ambiguous, a lay term, or doesn't fit a category, use **Strategy B**.
 - You can combine both: try category drill-down, then search if needed.
+- **Cross-category terms:** Some terms appear in multiple categories (e.g., "cholesterol" exists in Laboratory Tests, Metabolomics, Dietary & Nutrition, and Medications). When a term could fit multiple categories, try 2–3 categories and **pick the concept with the highest study count**. Set `message` to disambiguate: "Did you mean Total Cholesterol (93 studies), HDL Cholesterol (78 studies), or Dietary Cholesterol Intake (9 studies)?"
 
 ## Consent Code Facet — Category Drill-Down
 
