@@ -2,7 +2,7 @@
 
 ## Overview
 
-A Python API that accepts natural language queries about biomedical measurements and returns matching NCPI dataset studies. Powered by a Pydantic AI agent that translates free-text queries into structured concept lookups against an indexed concept database built from variable-level classifications.
+A Python API that accepts natural language queries about biomedical measurements and returns matching NCPI dataset studies. Three specialized agents handle extraction, resolution, and query structuring — then deterministic code executes the query against an in-memory index.
 
 ## Example Queries
 
@@ -12,27 +12,47 @@ A Python API that accepts natural language queries about biomedical measurements
 - _"What lipid measurements exist across all studies?"_
 - _"Does the Framingham Heart Study have sleep data?"_
 - _"Studies with BMI data"_ (agent resolves abbreviation)
-- _"Blood sugar studies"_ (agent maps lay term to Fasting Glucose, HbA1c, etc.)
+- _"Blood sugar studies"_ (agent maps lay term to Fasting Glucose, etc.)
+- _"GRU consented WGS from diabetic patients where vitamin K was measured"_ (multi-facet)
+- _"Studies with both heart disease and diabetes"_ (same-facet AND)
+- _"Echocardiography studies but not transesophageal"_ (exclusion)
 
 ## Problem
 
-The catalog has ~450K phenotype variables classified into standardized concept names. Researchers cannot currently search by what was measured — only by study-level metadata. This API bridges the gap: natural language in, matching studies out.
+The catalog has ~450K phenotype variables across ~2,900 studies, classified into ~95K concept names. Researchers cannot currently search by what was measured — only by study-level metadata (platform, disease focus, data type, etc.). This API bridges the gap: natural language in, matching studies out, across all facets.
 
 ## Design Principles
 
 ### 1. Let the LLM do what LLMs are good at
 
-The LLM's job is **natural language understanding** — the thing no search index can do. It understands that "blood sugar" means glucose, that "BMI" is Body Mass Index, that "juvenile Hispanics with type one diabetes" contains three separate constraints, and that "type one" is the word form of "1". Don't try to replicate this with fuzzy string matching, synonym lists, or keyword expansion. The LLM already knows medical vocabulary — give it tools to look up concepts and let it reason.
+The LLM's job is **natural language understanding** — the thing no search index can do. It understands that "blood sugar" means glucose, that "BMI" is Body Mass Index, that "juvenile Hispanics with type one diabetes" contains three separate constraints. Don't replicate this with fuzzy string matching or synonym lists.
 
-### 2. Let the LLM retry and ask for clarification
+### 2. Separation of concerns — three agents
 
-When a concept lookup fails, the LLM doesn't give up — it **rewrites the term** using its medical knowledge and tries again. "Type one diabetes" fails exact match → LLM rewrites to "Type 1 Diabetes Mellitus" → succeeds. "Autoimmune diabetes" fails → LLM tries "Type 1 Diabetes" → succeeds. If all rewrites fail, the LLM **asks the user**: _"I found 'primary adrenal insufficiency' (12 studies) and 'secondary adrenal insufficiency' (3 studies). Which did you mean?"_ This retry loop is the safety net that makes the system robust without requiring perfect synonym curation upfront.
+Each agent has one job:
 
-### 3. Separation of concerns
-
-**The LLM handles natural language understanding. The concept index handles grounding. The query logic is deterministic.**
+- **Extract Agent** — NLU only: parse query into raw mentions with facet guesses
+- **Resolve Agent** — grounding only: find canonical index values for each mention
+- **Structure Agent** — logic only: determine boolean relationships between resolved mentions
 
 The LLM never filters datasets directly. The concept index never interprets user intent. The query engine never guesses concept names.
+
+### 3. Let the resolve agent retry
+
+When a concept lookup fails, the resolve agent rewrites the term using medical knowledge and tries again. "Type one diabetes" fails → rewrites to "Type 1 Diabetes Mellitus" → succeeds. If all rewrites fail, the mention is included with an empty values list for the caller to handle.
+
+## Facets
+
+The NCPI catalog has these filterable facets:
+
+| Facet | Key | Values | Agent Behavior |
+|---|---|---|---|
+| **Platform** | `platform` | AnVIL, BDC, CRDC, KFDRC, dbGaP | Small enum — extract agent matches directly |
+| **Focus/Disease** | `focus` | ~950 MeSH terms | Resolve agent searches index |
+| **Data Type** | `dataType` | ~64 values (WGS, WXS, RNA-Seq, etc.) | Small enum — extract agent matches directly |
+| **Study Design** | `studyDesign` | ~15 values | Small enum — extract agent matches directly |
+| **Consent Code** | `consentCode` | ~840 codes (GRU, HMB, DS-*, etc.) | Extract agent recognizes standard codes |
+| **Measurement** | `measurement` | ~95K concept names | Resolve agent always searches index |
 
 ## Architecture
 
@@ -41,264 +61,197 @@ User NL query
      │
      ▼
 ┌──────────────────────────────────────┐
-│  LLM Agent Loop                      │
+│  Agent 1: EXTRACT                    │
+│  (Haiku, no tools)                   │
 │                                      │
-│  1. Extract concept mentions from NL │
-│     - Correct typos                  │
-│     - Normalize synonyms/abbrevs     │
-│     - Tag boolean logic (AND/OR/NOT) │
+│  Parse query into raw mentions       │
+│  - Identify distinct phrases         │
+│  - Guess facet for each mention      │
+│  - Correct typos, expand abbrevs     │
 │                                      │
-│  2. Resolve each mention via tool    │
-│     search_concepts("blood pressure")│
-│     → see what matched               │
-│                                      │
-│  3. If no match → rewrite & retry    │
-│     "type one diabetes" fails        │
-│     → try "Type 1 Diabetes"          │
-│     → try "Diabetes Mellitus"        │
-│                                      │
-│  4. If still stuck → ask user        │
-│     "Did you mean X or Y?"           │
-│                                      │
-│  Output: QueryModel (resolved terms) │
+│  Output: list[RawMention]            │
+│    [{text, facet}, ...]              │
 └──────────────┬───────────────────────┘
-               │ (LLM is done here)
+               │
+               ▼
+┌──────────────────────────────────────┐
+│  Agent 2: RESOLVE                    │
+│  (Haiku, has search_concepts tool)   │
+│                                      │
+│  For each raw mention:               │
+│  - search_concepts(text, facet)      │
+│  - If no match → rewrite & retry     │
+│  - Pick best canonical value(s)      │
+│                                      │
+│  Output: list[ResolvedMention]       │
+│    [{text, facet, values}, ...]      │
+└──────────────┬───────────────────────┘
+               │
+               ▼
+┌──────────────────────────────────────┐
+│  Agent 3: STRUCTURE                  │
+│  (Haiku, no tools)                   │
+│                                      │
+│  Given original query + resolved     │
+│  mentions, determine boolean logic:  │
+│  - "X and Y" → separate mentions     │
+│  - "X or Y" → merge into one mention │
+│  - "but not X" → exclude=true        │
+│                                      │
+│  Output: QueryModel                  │
+└──────────────┬───────────────────────┘
+               │ (LLMs are done here)
                ▼
 ┌──────────────────────────────────────┐
 │  Code: Study Lookup                  │
 │  (deterministic, no LLM)            │
 │                                      │
-│  Intersect resolved concepts         │
+│  Execute QueryModel against index    │
 │  → return matching studies           │
-│  → return directly to user           │
 └──────────────────────────────────────┘
 ```
 
-The LLM agent has tools to search the concept index — it needs to verify that its extracted terms actually resolve to real concepts. When they don't, it rewrites and retries. Once all mentions are resolved, it emits a `QueryModel`. Study data never flows through the LLM.
+## Query Model
 
-### The Hard Part: Mention Extraction
+### Boolean Semantics
 
-Parsing natural language into structured concept mentions is where the corner cases live:
+Two levels of boolean logic:
 
-- _"juvenile Hispanics with type one diabetes where insulin response was measured"_ → 3 mentions, not 1. "juvenile" is age, not "juvenile diabetes".
-- _"blood pressure and diabetes"_ → 2 mentions with AND
-- _"studies with BMI"_ → 1 mention, LLM normalizes abbreviation to "Body Mass Index"
-- _"blood sugar studies"_ → 1 mention, LLM translates lay term to "Glucose" or "Fasting Glucose"
-- _"echocardiography but not stress echo"_ → 1 AND, 1 NOT
-- _"lipid panel"_ → could expand to multiple mentions (LDL, HDL, Triglycerides) or stay as one umbrella — LLM checks what exists via `search_concepts`
+**Within a mention** — `values` are always **OR**. A mention with `values=["Total Cholesterol", "HDL Cholesterol"]` matches studies that have *any* of those.
 
-### Agent Tools
+**Between mentions** — always **AND**, unless `exclude=True` (NOT). Studies must satisfy every non-excluded mention. Excluded mentions subtract from the result.
 
-The LLM has concept lookup tools — but NOT study lookup tools:
+### Supported Query Complexity
 
-```python
-@agent.tool
-def search_concepts(query: str) -> list[ConceptMatch]:
-    """Search the concept index for matching concepts.
-    Returns concept names with study counts.
-    Used by the agent to verify that extracted terms
-    resolve to real concepts in the index."""
+| Level | Example | Supported |
+|---|---|---|
+| 1. Single facet, single value | `disease = Diabetes` | Yes |
+| 2. Single facet, OR within values | `dataType = (WGS OR WXS)` | Yes |
+| 3. Multiple facets, AND between | `(disease = Diabetes) AND (dataType = WGS)` | Yes |
+| 4. Multi-facet with OR within some | `(disease = Diabetes) AND (dataType = (WGS OR WXS))` | Yes |
+| 5. Same facet AND | `(disease = Diabetes) AND (disease = Heart Disease)` | Yes |
+| 6. NOT (exclusion) | `(measurement = Echo) AND NOT (measurement = TEE)` | Yes |
+| 7. Mixed | `(disease = Diabetes) AND (dataType = (WGS OR WXS)) AND NOT (platform = CRDC)` | Yes |
+| 8. OR between facets | `(disease = Diabetes) OR (measurement = Glucose)` | No — requires union of separate queries |
+| 9+ Nested groups | `((A AND B) OR (C AND D))` | No — requires expression tree model |
 
-@agent.tool
-def browse_concepts(prefix: str) -> list[ConceptSummary]:
-    """Browse concepts by prefix for exploration.
-    Helps the agent discover what concepts exist
-    when the user's phrasing doesn't match directly."""
-```
-
-The agent loop:
-1. Extract mentions from the query
-2. Call `search_concepts` for each mention to check resolution
-3. If a mention fails → rewrite using medical knowledge → retry `search_concepts`
-4. If still unresolved → ask the user for clarification
-5. Emit `QueryModel` with all resolved concept names
-
-### Output Model
+### Data Model
 
 ```python
+class RawMention(BaseModel):
+    """Output of the extract agent."""
+    text: str          # raw phrase from the query
+    facet: Facet       # guessed facet
+
 class ResolvedMention(BaseModel):
-    concepts: list[str]  # resolved concept name(s)
-    bool_op: str         # "AND" | "OR" | "NOT"
+    """Output of the resolve agent, input to the structure agent."""
+    original_text: str
+    facet: Facet
+    values: list[str]  # canonical value(s), OR within. Empty if unresolved.
+    exclude: bool      # True = NOT (exclude matching studies)
 
 class QueryModel(BaseModel):
+    """Final structured query. Non-excluded mentions are AND-ed."""
     mentions: list[ResolvedMention]
 ```
 
-Example: _"studies with blood pressure and diabetes"_ →
+### Examples
+
+_"studies with blood pressure and diabetes"_:
 ```
-mentions: [
-  {concepts: ["Systolic Blood Pressure", "Diastolic Blood Pressure"], bool_op: "AND"},
-  {concepts: ["Diabetes History"], bool_op: "AND"}
-]
+facet=measurement  exclude=false  values=[Systolic Blood Pressure, Diastolic Blood Pressure]
+facet=focus        exclude=false  values=[Diabetes Mellitus]
+```
+Studies need ≥1 blood pressure concept AND a diabetes focus.
+
+_"GRU consented WGS from diabetic patients where vitamin K was measured"_:
+```
+facet=consentCode  exclude=false  values=[GRU]
+facet=dataType     exclude=false  values=[WGS]
+facet=focus        exclude=false  values=[Diabetes Mellitus]
+facet=measurement  exclude=false  values=[Vitamin K Intake]
 ```
 
-The agent resolved "blood pressure" to both systolic and diastolic (via `search_concepts`), and "diabetes" to "Diabetes History".
+_"echocardiography studies but not transesophageal"_:
+```
+facet=measurement  exclude=false  values=[Echocardiography]
+facet=measurement  exclude=true   values=[Transesophageal Echocardiography]
+```
 
-### Study Lookup (code, no LLM)
+_"studies with both heart disease and diabetes"_:
+```
+facet=focus        exclude=false  values=[Cardiovascular Diseases]
+facet=focus        exclude=false  values=[Diabetes Mellitus]
+```
+Two separate focus mentions, both AND — study must match both.
 
-Code takes the `QueryModel`, intersects resolved concepts against the study index, and returns results directly to the user. The LLM never sees study data.
+_"studies with WGS or WXS data and cholesterol"_:
+```
+facet=dataType     exclude=false  values=[WGS, WXS]
+facet=measurement  exclude=false  values=[Total Cholesterol, HDL Cholesterol, LDL Cholesterol]
+```
+WGS/WXS are OR within one mention. Cholesterol concepts are OR within one mention. The two mentions are AND-ed.
 
 ## Concept Index
 
-Built from `output/llm-concepts/*.json`. Two lookup structures:
+Built from two sources:
 
-### concept → studies
+1. **Measurement concepts**: `catalog-build/classification/output/llm-concepts/*.json` — ~2,870 study files, ~95K unique concept names with study counts
+2. **Study metadata facets**: `catalog/ncpi-platform-studies.json` — ~2,944 studies with focus, dataType, studyDesign, consentCode, platform
 
-```json
-{
-  "Systolic Blood Pressure": {
-    "study_count": 342,
-    "variable_count": 4521,
-    "studies": [
-      {"study_id": "phs000007", "study_name": "Framingham Heart Study",
-       "table_count": 31, "variable_count": 124},
-      ...
-    ]
-  }
-}
-```
+Provides:
+- `search_concepts(query, facet?, limit?)` — case-insensitive substring search
+- `list_facet_values(facet)` — enumerate a facet's values
+- `get_studies_for_mentions(facet_values)` — deterministic study lookup
 
-### study → concepts
-
-```json
-{
-  "phs000007": {
-    "study_name": "Framingham Heart Study",
-    "concepts": ["Systolic Blood Pressure", "Diastolic Blood Pressure", ...],
-    "concept_count": 847,
-    "variable_count": 91702
-  }
-}
-```
-
-The concept vocabulary is small enough (estimated 1K-5K unique after normalization) to fit in memory and potentially in LLM context.
+The concept vocabulary is small enough for in-memory search. No vector DB or OpenSearch needed for Phase 1.
 
 ## Tech Stack
 
-- **FastAPI** — API framework
 - **Pydantic AI** — agent orchestration with typed tools
-- **Anthropic Claude** — LLM for planning and retry (Haiku for cost, Sonnet option)
+- **pydantic-evals** — eval harness for mention extraction
+- **Anthropic Claude** — Haiku for agents (fast, cheap), Sonnet for fallback
 - **In-memory index** — concept database loaded from JSON at startup
+- **FastAPI** — API framework (Phase 3)
 
-No OpenSearch, no vector DB, no embeddings for Phase 1. The concept vocabulary is small enough for exact/fuzzy string matching. Upgrade path to OpenSearch + k-NN exists per DESIGN.md if needed.
+## Testing: Eval Harness
 
-## Testing: Mention Extraction Evals
+Each eval case: NL query → expected QueryModel. Scoring uses recall (expected values ⊆ actual values). Extra values in actual are not penalized — the agent may reasonably expand concepts.
 
-The hard problem is mention extraction, so we test it directly using pydantic-evals — same pattern as the concept classification evals.
-
-The agent has tools, so eval cases test the full loop — NL query in, resolved `QueryModel` out. The agent should call `search_concepts`, handle misses, and emit resolved concept names.
-
-```python
-# Each eval case: NL query → expected resolved QueryModel
-mention_case(
-    "simple-and",
-    query="studies with blood pressure and diabetes",
-    expected=QueryModel(mentions=[
-        ResolvedMention(concepts=["Systolic Blood Pressure", "Diastolic Blood Pressure"], bool_op="AND"),
-        ResolvedMention(concepts=["Diabetes History"], bool_op="AND"),
-    ]),
-)
-
-mention_case(
-    "abbreviation",
-    query="studies with BMI data",
-    expected=QueryModel(mentions=[
-        ResolvedMention(concepts=["Body Mass Index"], bool_op="AND"),
-    ]),
-)
-
-mention_case(
-    "lay-term",
-    query="blood sugar studies",
-    expected=QueryModel(mentions=[
-        ResolvedMention(concepts=["Fasting Glucose", "Hemoglobin A1c"], bool_op="AND"),
-    ]),
-)
-
-mention_case(
-    "rewrite-needed",
-    query="type one diabetes studies",
-    # Agent tries "type one diabetes" → no match
-    # Rewrites to "Type 1 Diabetes" → matches
-    expected=QueryModel(mentions=[
-        ResolvedMention(concepts=["Type 1 Diabetes Mellitus"], bool_op="AND"),
-    ]),
-)
-
-mention_case(
-    "negation",
-    query="cardiac imaging but not stress echo",
-    expected=QueryModel(mentions=[
-        ResolvedMention(concepts=["Echocardiography"], bool_op="AND"),
-        ResolvedMention(concepts=["Stress Echocardiography"], bool_op="NOT"),
-    ]),
-)
-```
-
-Build the eval suite first, then iterate the prompt against it — same approach as variable concept classification.
-
-## API
-
-```
-POST /api/concept-search
-{
-  "query": "studies with systolic blood pressure and diabetes"
-}
-
-Response:
-{
-  "concepts_matched": [
-    {"concept": "Systolic Blood Pressure", "study_count": 342},
-    {"concept": "Diabetes History", "study_count": 156}
-  ],
-  "studies": [
-    {"study_id": "phs000007", "study_name": "Framingham Heart Study",
-     "matched_concepts": ["Systolic Blood Pressure", "Diabetes History"],
-     "variable_count": 187},
-    ...
-  ],
-  "total_studies": 47,
-  "explanation": "Found 47 studies measuring both."
-}
-```
+See `backend/concept_search/eval_mentions.py` for current cases.
 
 ## Phases
 
-### Phase 1: Mention Extraction Agent + Evals
+### Phase 1: Three-Agent Pipeline + Evals (current)
 
-- Build mention extraction agent with pydantic-evals test harness
-- Iterate prompt against eval cases until mention extraction is reliable
-- CLI: `python concept_search.py "studies with blood pressure"`
-- No API yet — focus on getting the LLM to reliably parse mentions
+- Build extract / resolve / structure agents
+- Eval harness with pydantic-evals
+- CLI: `python -m concept_search.cli "query"`
+- Iterate prompts against eval cases
 
-### Phase 2: Concept Index + End-to-End Pipeline
+### Phase 2: End-to-End Pipeline
 
-- Build concept index from classification output
-- Wire up: LLM mention extraction → concept resolution → study lookup
-- End-to-end CLI that returns actual study results
+- Wire agents together with deterministic controller
+- Study lookup returns actual results
+- End-to-end CLI with `--lookup` flag
 
 ### Phase 3: API Endpoint
 
 - FastAPI app wrapping the pipeline
 - Streaming responses
-- Query logging to identify common mention extraction failures
+- Query logging for failure analysis
 
 ### Phase 4: Enrichment
 
+- Concept hierarchy (is-a relations, e.g., "sleep data" → all sleep concepts)
 - UMLS CUI grounding per concept (synonym expansion)
 - Concept normalization (merge synonyms from classification)
-- LLM retry for failed concept resolution
 - Domain grouping (Cardiovascular, Pulmonary, Behavioral, etc.)
-
-## Dependencies
-
-- Variable-level concept classification output (complete or in progress)
-- Concept normalization pass (reduces synonym sprawl)
-- Anthropic API key for query-time LLM calls
 
 ## Open Questions
 
-1. **Concept count after normalization** — determines if full vocab fits in LLM context as system prompt
-2. **Query latency budget** — Haiku ~1s vs Sonnet ~3s per LLM call, 2-3 calls per query
+1. **Concept hierarchy** — "sleep data" currently expands to 20 individual sleep concepts. A hierarchy would let us model is-a relations and return the closure. Phase 4.
+2. **Query latency budget** — Haiku ~1s per agent call × 3 agents = ~3s. Acceptable?
 3. **Hosting** — separate Python service from the Next.js frontend
-4. **Synonym quality** — how much does the LLM retry rate drop after UMLS grounding?
+4. **95K concepts** — the classifier generates overly specific names for singleton variables. Normalization pass could reduce to ~5K useful concepts.
+5. **OR between facets** — not supported in Phase 1. How common is this query pattern?
