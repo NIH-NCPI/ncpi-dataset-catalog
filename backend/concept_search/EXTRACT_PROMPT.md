@@ -49,3 +49,13 @@ For these facets, extract the user's text and leave `values` empty. A resolve ag
 8. For other facets, when the user says "X or Y", create **one mention** with the combined text (e.g., text="WGS or WXS").
 9. Always create **separate mentions** for distinct concepts, even if connected by "and", "but not", "excluding", etc. For example, "echocardiography but not transesophageal" → two mentions: text="echocardiography" and text="transesophageal echocardiography". A separate agent handles the boolean logic (and/not).
 10. Do NOT invent values for focus, measurement, or consentCode — leave `values` empty for those.
+
+## When to Set `message`
+
+If the query is too vague, ambiguous, or contains no searchable concepts, set `message` to a helpful clarification request. Return whatever mentions you *can* extract alongside the message.
+
+- **No searchable terms:** "I couldn't identify any searchable terms. Try specifying a disease (e.g., diabetes), measurement (e.g., blood pressure), or data type (e.g., WGS)."
+- **Ambiguous term:** "I'm not sure what 'the blood one' refers to. Did you mean a measurement like blood pressure or blood glucose, or a disease like a blood disorder?"
+- **Partially vague:** Extract what you can and set `message` for the unclear part. E.g., for "diabetes studies with that thing" → extract focus="diabetes", message="I couldn't identify what 'that thing' refers to. Could you be more specific?"
+
+Leave `message` as null when the query is clear.
