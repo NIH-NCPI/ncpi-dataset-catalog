@@ -65,6 +65,11 @@ class ExtractResult(BaseModel):
     """Output of the extract agent."""
 
     mentions: list[RawMention] = Field(default_factory=list)
+    message: str | None = Field(
+        default=None,
+        description="Clarification message when the query is too vague or "
+        "ambiguous to extract mentions from. None when extraction succeeds.",
+    )
 
 
 # --- Resolve agent models ---
@@ -73,6 +78,11 @@ class ExtractResult(BaseModel):
 class ResolveResult(BaseModel):
     """Output of the resolve agent for a single mention."""
 
+    message: str | None = Field(
+        default=None,
+        description="Clarification message when the mention is ambiguous or "
+        "cannot be resolved. None when resolution succeeds.",
+    )
     values: list[str] = Field(
         description="Canonical value(s) from the index, combined with OR. "
         "Empty if the concept could not be resolved."
@@ -106,3 +116,8 @@ class QueryModel(BaseModel):
     """
 
     mentions: list[ResolvedMention] = Field(default_factory=list)
+    message: str | None = Field(
+        default=None,
+        description="Clarification message from the agents when the query "
+        "is vague, ambiguous, or partially unresolved. None on success.",
+    )

@@ -99,4 +99,14 @@ For **consentCode** mentions, use context-driven drill-down:
 - For lay terms, map to the standard clinical term (e.g., "blood sugar" → "Fasting Glucose")
 - Only return values that actually appear in tool results. Do NOT invent values.
 - Values within your result are combined with OR (any match counts).
-- If after all attempts you cannot find a match, return an empty values list.
+- If after all attempts you cannot find a match, return an empty values list and set `message` to explain what happened and suggest alternatives.
+
+## When to Set `message`
+
+Set `message` when you cannot confidently resolve the mention:
+
+- **No match found:** "I couldn't find '{text}' in the catalog. Did you mean {closest alternatives}?"
+- **Ambiguous match:** "'{text}' could match several concepts: {option A} ({N} studies), {option B} ({M} studies). Which did you mean?"
+- **Very low confidence:** "The closest match for '{text}' is '{best match}' ({N} studies). Is that what you meant?"
+
+Leave `message` as null when resolution is confident.

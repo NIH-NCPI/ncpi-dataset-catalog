@@ -42,8 +42,17 @@ async def run_pipeline(
     for m in extract_result.mentions:
         logger.debug("  %s: %r values=%s", m.facet.value, m.text, m.values)
 
+    # Collect clarification messages from agents
+    messages: list[str] = []
+
     if not extract_result.mentions:
-        return QueryModel(mentions=[])
+        return QueryModel(
+            mentions=[],
+            message=extract_result.message,
+        )
+
+    if extract_result.message:
+        messages.append(extract_result.message)
 
     # --- Step 2: Resolve ---
     logger.debug("Step 2: Resolve mentions")
@@ -72,6 +81,8 @@ async def run_pipeline(
                     values=resolve_result.values,
                 )
             )
+            if resolve_result.message:
+                messages.append(resolve_result.message)
 
     # --- Step 3: Structure ---
     logger.debug("Step 3: Structure query logic")
@@ -84,5 +95,8 @@ async def run_pipeline(
             m.facet.value,
             m.values,
         )
+
+    if messages:
+        query_model.message = " ".join(messages)
 
     return query_model
