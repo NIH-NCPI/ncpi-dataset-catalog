@@ -129,17 +129,52 @@ App Runner keeps one provisioned instance warm (no cold starts), provides auto-m
 
 ### Infrastructure (Terraform)
 
-Each environment gets identical Terraform with different variable values:
+Uses the existing [findable-tf](https://github.com/clevercanary/findable-tf) infrastructure repo with a new generic `app-runner/` module. Environment-specific config lives in [findable-tf-variables](https://github.com/clevercanary/findable-tf-variables).
 
+**Repos and issues:**
+- `findable-tf` — [#116](https://github.com/clevercanary/findable-tf/issues/116): Generic App Runner module
+- `findable-tf-variables` — [#21](https://github.com/clevercanary/findable-tf-variables/issues/21): NCPI search API tfvars
+
+**Resources created per App Runner service:**
 - **ECR repository** — stores the Docker image
 - **App Runner service** — pulls from ECR, runs the container
-  - 0.25 vCPU / 0.5 GB memory (sufficient for async I/O workload)
-  - Min 1 / Max 4 instances (auto-scaling based on concurrency)
-  - Health check on `GET /health`
-  - Environment variables: `ANTHROPIC_API_KEY` (from Secrets Manager), `CORS_ORIGINS`, `NCPI_REPO_ROOT`
-- **Secrets Manager secret** — stores the Anthropic API key
-- **IAM roles** — App Runner access role (ECR pull) + instance role (Secrets Manager read)
-- **S3 bucket or EFS** — data files (catalog JSON, LLM concepts, hierarchy)
+  - Configurable CPU/memory (default 0.25 vCPU / 0.5 GB)
+  - Auto-scaling: min 1 / max configurable instances, concurrency-based
+  - Configurable health check path
+  - Environment variables and secrets (from Secrets Manager)
+- **IAM access role** — allows App Runner to pull from ECR
+- **IAM instance role** — allows container to read from Secrets Manager
+- **Auto-scaling configuration** — concurrency-based scaling
+
+**Zero disruption to existing stacks:**
+- New `app_runner_services` variable defaults to `[]` — existing stacks ignore it
+- Static-site resources (CloudFront, S3, etc.) wrapped in conditionals via `enable_static_site` local
+- `moved` blocks handle state address changes transparently for existing stacks
+- Existing `terraform plan` shows zero changes
+
+**Module structure in findable-tf:**
+```
+findable-tf/
+  app-runner/            # NEW — generic App Runner module
+    main.tf              # ECR + App Runner service + auto-scaling
+    iam.tf               # Access role + instance role
+    variables.tf         # All configurable inputs
+    outputs.tf           # Service URL, ARN
+  main.tf                # Updated — conditional static-site + App Runner module
+  variables.tf           # Updated — app_runner_services variable added
+```
+
+**Variable files in findable-tf-variables:**
+```
+findable-tf-variables/
+  cc-excira/
+    ncpi-data-dev/              # Existing — static site (unchanged)
+    ncpi-data-prod/             # Existing — static site (unchanged)
+    ncpi-search-api-dev/        # NEW — App Runner for dev
+      terraform.tfvars
+    ncpi-search-api-prod/       # NEW — App Runner for prod
+      terraform.tfvars
+```
 
 ### Data File Strategy
 
@@ -156,26 +191,6 @@ Recommendation: **Bake into the image** for Phase 1. The catalog rebuilds infreq
 2. Build Docker image with current data files baked in
 3. Push image to ECR
 4. App Runner auto-deploys from ECR (via image tag update or auto-deployment)
-
-### Terraform Module Structure
-
-```
-terraform/
-  modules/
-    concept-search-api/
-      main.tf          # App Runner service, ECR repo
-      iam.tf           # Roles and policies
-      secrets.tf       # Secrets Manager
-      variables.tf     # Input variables
-      outputs.tf       # Service URL, ARNs
-  environments/
-    dev/
-      main.tf          # Module call with dev values
-      terraform.tfvars
-    prod/
-      main.tf          # Module call with prod values
-      terraform.tfvars
-```
 
 ## Open Questions (Phase 2)
 
