@@ -19,7 +19,8 @@ from __future__ import annotations
 
 from enum import Enum
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
+from pydantic.alias_generators import to_camel
 
 
 class Facet(str, Enum):
@@ -95,6 +96,8 @@ class ResolveResult(BaseModel):
 class ResolvedMention(BaseModel):
     """A fully resolved mention with boolean logic applied."""
 
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
     exclude: bool = Field(
         default=False,
         description="True to exclude matching studies (NOT). "
@@ -114,6 +117,8 @@ class QueryModel(BaseModel):
     All non-excluded mentions are AND-ed together.  Values within each
     mention are OR-ed.  Excluded mentions remove matching studies.
     """
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
     mentions: list[ResolvedMention] = Field(default_factory=list)
     message: str | None = Field(
