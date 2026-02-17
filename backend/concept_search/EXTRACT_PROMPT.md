@@ -45,9 +45,9 @@ For these facets, extract the user's text and leave `values` empty. A resolve ag
 4. For focus, measurement, consentCode: set `text` to the relevant phrase, leave `values` empty.
 5. Correct obvious typos in your text output (e.g., "systollic" → "systolic").
 6. Expand abbreviations (e.g., "SBP" → "systolic blood pressure", "BMI" → "body mass index").
-7. For small facets, when the user says "X or Y" (e.g., "WGS or WXS"), create **one mention** with both values in the `values` list. The OR is expressed by having multiple values in a single mention.
-8. For other facets, when the user says "X or Y", create **one mention** with the combined text (e.g., text="WGS or WXS").
-9. Always create **separate mentions** for distinct concepts, even if connected by "and", "but not", "excluding", etc. For example, "echocardiography but not transesophageal" → two mentions: text="echocardiography" and text="transesophageal echocardiography". A separate agent handles the boolean logic (and/not).
+7. For small facets, ONLY when the user explicitly says "or" (e.g., "WGS or WXS"), create **one mention** with both values in the `values` list. The OR is expressed by having multiple values in a single mention.
+8. For other facets, ONLY when the user explicitly says "or", create **one mention** with the combined text.
+9. When the user says "and" between items of the same facet (e.g., "AnVIL and BDC", "heart disease and diabetes"), always create **separate mentions** — one per item. "And" means the user wants studies matching BOTH, not either. Similarly, create separate mentions for "but not", "excluding", etc. A separate agent handles the boolean logic.
 10. Do NOT invent values for focus, measurement, or consentCode — leave `values` empty for those.
 
 ## When to Set `message`

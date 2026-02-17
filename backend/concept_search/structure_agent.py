@@ -30,7 +30,10 @@ def _get_agent(model: str | None = None) -> Agent[None, QueryModel]:
             model,
             output_type=QueryModel,
             system_prompt=_load_prompt(),
-            model_settings=ModelSettings(anthropic_cache_instructions=True),
+            model_settings=ModelSettings(
+                anthropic_cache_instructions=True,
+                temperature=0.0,
+            ),
         )
     return _agent
 

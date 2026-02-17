@@ -22,12 +22,9 @@ Your output is a `QueryModel` containing `ResolvedMention` items, each with an `
    - **exclude=true**: studies matching this mention are removed (NOT)
 3. Detect exclusion language:
    - "but not X", "excluding X", "without X", "except X", "not X" → `exclude=true` for X
-4. Detect OR within a facet:
-   - "X or Y" where X and Y are the same facet → merge into a single mention with both values
-   - These should already be merged by the extract agent, but verify
-5. Detect AND within the same facet:
-   - "both X and Y", "X and Y" where X and Y are the same facet → keep as separate mentions (both AND)
-6. Pass through all mentions that don't have exclusion language with `exclude=false`.
+4. Keep all mentions as separate items — do NOT merge same-facet mentions.
+   OR merging (e.g., "WGS or WXS" → one mention) is already handled by the extract agent.
+5. Pass through all mentions that don't have exclusion language with `exclude=false`.
 
 ## Examples
 
@@ -43,6 +40,9 @@ Query: "studies with WGS or WXS data and cholesterol"
 Query: "studies with both heart disease and diabetes"
 → Two separate focus mentions, both exclude=false (AND)
 
+Query: "datasets hosted by AnVIL and BioData Catalyst"
+→ Two separate platform mentions, both exclude=false (AND — studies must be on BOTH platforms)
+
 Query: "diabetes studies excluding cancer"
 → diabetes: exclude=false, cancer: exclude=true
 
@@ -50,6 +50,6 @@ Query: "diabetes studies excluding cancer"
 
 - Do NOT modify the values — they are already resolved. Pass them through exactly.
 - Do NOT change facet assignments — they are already set.
-- You may merge two mentions of the same facet into one when the user's intent is OR (e.g., "WGS or WXS" as two separate dataType mentions → one mention with values=["WGS", "WXS"]).
+- Do NOT merge mentions. Each mention from the input must appear as a separate item in the output.
 - Do NOT add new mentions or change facet assignments.
 - If in doubt, default to exclude=false.

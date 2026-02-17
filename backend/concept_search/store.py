@@ -23,15 +23,16 @@ class StudyStore(Protocol):
 
     Semantic contract:
 
-    - Within a facet, values are **OR-ed** (match *any*).
-    - Between facets, constraints are **AND-ed** (match *all*).
-    - Excluded facet values **subtract** matching studies from the result.
+    - Each constraint is a ``(facet, values)`` tuple.
+    - Within a constraint, values are **OR-ed** (match *any*).
+    - Between constraints, results are **AND-ed** (match *all*).
+    - Excluded constraints **subtract** matching studies from the result.
     """
 
     def query_studies(
         self,
-        include: dict[Facet, list[str]],
-        exclude: dict[Facet, list[str]] | None = None,
+        include: list[tuple[Facet, list[str]]],
+        exclude: list[tuple[Facet, list[str]]] | None = None,
     ) -> list[dict]:
         """Return studies matching *include* minus *exclude*."""
         ...
@@ -176,8 +177,8 @@ class DuckDBStore:
 
     def query_studies(
         self,
-        include: dict[Facet, list[str]],
-        exclude: dict[Facet, list[str]] | None = None,
+        include: list[tuple[Facet, list[str]]],
+        exclude: list[tuple[Facet, list[str]]] | None = None,
     ) -> list[dict]:
         """Query studies using SQL-based faceted search."""
         if not include:
@@ -186,8 +187,8 @@ class DuckDBStore:
         where_clauses: list[str] = []
         params: list[str] = []
 
-        # Include: AND between facets, OR within each facet
-        for facet, values in include.items():
+        # Include: each constraint is AND-ed; values within are OR-ed
+        for facet, values in include:
             if not values:
                 continue
             placeholders = ", ".join("?" for _ in values)
@@ -203,9 +204,9 @@ class DuckDBStore:
         if not where_clauses:
             return []
 
-        # Exclude: NOT IN for each excluded facet
+        # Exclude: each constraint subtracts matching studies
         if exclude:
-            for facet, values in exclude.items():
+            for facet, values in exclude:
                 if not values:
                     continue
                 placeholders = ", ".join("?" for _ in values)

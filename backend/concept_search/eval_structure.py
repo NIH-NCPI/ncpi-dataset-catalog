@@ -215,9 +215,9 @@ dataset = Dataset[StructureInput, QueryModel, QueryModel](
                 ]
             ),
         ),
-        # --- OR merge (if extract didn't catch it) ---
+        # --- Same facet passthrough (no merging) ---
         Case(
-            name="or-merge",
+            name="same-facet-no-merge",
             inputs=_input(
                 "studies with WGS or WXS data",
                 [
@@ -227,7 +227,8 @@ dataset = Dataset[StructureInput, QueryModel, QueryModel](
             ),
             expected_output=QueryModel(
                 mentions=[
-                    _m("WGS or WXS", Facet.DATA_TYPE, ["WGS", "WXS"]),
+                    _m("WGS", Facet.DATA_TYPE, ["WGS"]),
+                    _m("WXS", Facet.DATA_TYPE, ["WXS"]),
                 ]
             ),
         ),

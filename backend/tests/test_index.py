@@ -161,7 +161,7 @@ class TestORWithinFacet:
     def test_or_measurement(self, store: DuckDBStore) -> None:
         """Two measurement values — studies with either one match."""
         result = store.query_studies(
-            {Facet.MEASUREMENT: ["Systolic Blood Pressure", "HbA1c"]}
+            [(Facet.MEASUREMENT, ["Systolic Blood Pressure", "HbA1c"])]
         )
         # phs000001 has SBP, phs000002 has HbA1c, phs000003 has SBP
         assert _ids(result) == {"phs000001", "phs000002", "phs000003"}
@@ -169,7 +169,7 @@ class TestORWithinFacet:
     def test_or_platform(self, store: DuckDBStore) -> None:
         """Two platforms — studies on either platform match."""
         result = store.query_studies(
-            {Facet.PLATFORM: ["BDC", "CRDC"]}
+            [(Facet.PLATFORM, ["BDC", "CRDC"])]
         )
         # phs000001 BDC, phs000002 BDC, phs000004 AnVIL+BDC, phs000005 CRDC
         assert _ids(result) == {"phs000001", "phs000002", "phs000004", "phs000005"}
@@ -177,59 +177,36 @@ class TestORWithinFacet:
     def test_or_focus(self, store: DuckDBStore) -> None:
         """Two focus values — studies with either focus match."""
         result = store.query_studies(
-            {Facet.FOCUS: ["Cardiovascular", "Diabetes"]}
+            [(Facet.FOCUS, ["Cardiovascular", "Diabetes"])]
         )
         assert _ids(result) == {"phs000001", "phs000002", "phs000003"}
 
     def test_or_data_type(self, store: DuckDBStore) -> None:
         """Two data types — studies with either type match."""
         result = store.query_studies(
-            {Facet.DATA_TYPE: ["WGS", "RNA-Seq"]}
+            [(Facet.DATA_TYPE, ["WGS", "RNA-Seq"])]
         )
         # phs000001 WGS, phs000002 WGS+WES, phs000004 RNA-Seq, phs000005 WGS
         assert _ids(result) == {"phs000001", "phs000002", "phs000004", "phs000005"}
 
 
 # ---------------------------------------------------------------------------
-# AND within a single facet
+# AND within a single facet (same facet, separate constraints)
 # ---------------------------------------------------------------------------
 
 
-def _and_within_facet(
-    store: DuckDBStore,
-    facet: Facet,
-    values: list[str],
-) -> list[dict]:
-    """Intersect separate single-value lookups to get AND-within-facet.
-
-    The store OR-es values within a single call.  To require ALL values
-    (AND), we make one call per value and intersect the result sets.
-    """
-    result_ids: set[str] | None = None
-    all_studies: dict[str, dict] = {}
-    for value in values:
-        studies = store.query_studies({facet: [value]})
-        ids = set()
-        for s in studies:
-            ids.add(s["dbGapId"])
-            all_studies[s["dbGapId"]] = s
-        if result_ids is None:
-            result_ids = ids
-        else:
-            result_ids &= ids
-    if not result_ids:
-        return []
-    return [all_studies[sid] for sid in sorted(result_ids)]
-
-
 class TestANDWithinFacet:
-    """AND within a facet: studies must have ALL requested values."""
+    """AND within a facet: studies must have ALL requested values.
+
+    Each value is passed as a separate constraint tuple so they are AND-ed.
+    """
 
     def test_and_measurements_both_present(self, store: DuckDBStore) -> None:
         """Studies with BOTH SBP AND BMI."""
-        result = _and_within_facet(
-            store, Facet.MEASUREMENT, ["Systolic Blood Pressure", "BMI"]
-        )
+        result = store.query_studies([
+            (Facet.MEASUREMENT, ["Systolic Blood Pressure"]),
+            (Facet.MEASUREMENT, ["BMI"]),
+        ])
         # phs000001: SBP + BMI yes
         # phs000002: BMI only
         # phs000003: SBP only
@@ -237,36 +214,47 @@ class TestANDWithinFacet:
 
     def test_and_measurements_no_study_has_both(self, store: DuckDBStore) -> None:
         """No study has BOTH HbA1c AND Heart Rate."""
-        result = _and_within_facet(
-            store, Facet.MEASUREMENT, ["HbA1c", "Heart Rate"]
-        )
+        result = store.query_studies([
+            (Facet.MEASUREMENT, ["HbA1c"]),
+            (Facet.MEASUREMENT, ["Heart Rate"]),
+        ])
         assert result == []
 
     def test_and_measurements_three_values(self, store: DuckDBStore) -> None:
         """Studies with SBP AND DBP AND BMI — only phs000001."""
-        result = _and_within_facet(
-            store,
-            Facet.MEASUREMENT,
-            ["Systolic Blood Pressure", "Diastolic Blood Pressure", "BMI"],
-        )
+        result = store.query_studies([
+            (Facet.MEASUREMENT, ["Systolic Blood Pressure"]),
+            (Facet.MEASUREMENT, ["Diastolic Blood Pressure"]),
+            (Facet.MEASUREMENT, ["BMI"]),
+        ])
         assert _ids(result) == {"phs000001"}
 
     def test_and_data_types(self, store: DuckDBStore) -> None:
         """Studies with BOTH WGS AND WES — only phs000002."""
-        result = _and_within_facet(
-            store, Facet.DATA_TYPE, ["WGS", "WES"]
-        )
+        result = store.query_studies([
+            (Facet.DATA_TYPE, ["WGS"]),
+            (Facet.DATA_TYPE, ["WES"]),
+        ])
         assert _ids(result) == {"phs000002"}
 
+    def test_and_platforms(self, store: DuckDBStore) -> None:
+        """Studies on BOTH AnVIL AND BDC — only phs000004."""
+        result = store.query_studies([
+            (Facet.PLATFORM, ["AnVIL"]),
+            (Facet.PLATFORM, ["BDC"]),
+        ])
+        assert _ids(result) == {"phs000004"}
+
     def test_or_vs_and_within_measurement(self, store: DuckDBStore) -> None:
-        """Demonstrate that query_studies OR-es within a facet,
-        while _and_within_facet AND-es."""
+        """Demonstrate that one tuple OR-es values within a facet,
+        while separate tuples AND them."""
         or_result = store.query_studies(
-            {Facet.MEASUREMENT: ["Systolic Blood Pressure", "BMI"]}
+            [(Facet.MEASUREMENT, ["Systolic Blood Pressure", "BMI"])]
         )
-        and_result = _and_within_facet(
-            store, Facet.MEASUREMENT, ["Systolic Blood Pressure", "BMI"]
-        )
+        and_result = store.query_studies([
+            (Facet.MEASUREMENT, ["Systolic Blood Pressure"]),
+            (Facet.MEASUREMENT, ["BMI"]),
+        ])
         # OR: phs000001 (both), phs000002 (BMI), phs000003 (SBP)
         assert _ids(or_result) == {"phs000001", "phs000002", "phs000003"}
         # AND: only phs000001 (has both)
@@ -285,40 +273,40 @@ class TestANDBetweenFacets:
 
     def test_measurement_and_platform(self, store: DuckDBStore) -> None:
         """Blood pressure AND BDC — only studies satisfying both."""
-        result = store.query_studies({
-            Facet.MEASUREMENT: ["Systolic Blood Pressure"],
-            Facet.PLATFORM: ["BDC"],
-        })
+        result = store.query_studies([
+            (Facet.MEASUREMENT, ["Systolic Blood Pressure"]),
+            (Facet.PLATFORM, ["BDC"]),
+        ])
         # phs000001 has SBP + BDC; phs000003 has SBP but is AnVIL only
         assert _ids(result) == {"phs000001"}
 
     def test_focus_and_data_type(self, store: DuckDBStore) -> None:
         """Cancer focus AND WGS — only phs000005."""
-        result = store.query_studies({
-            Facet.FOCUS: ["Cancer"],
-            Facet.DATA_TYPE: ["WGS"],
-        })
+        result = store.query_studies([
+            (Facet.FOCUS, ["Cancer"]),
+            (Facet.DATA_TYPE, ["WGS"]),
+        ])
         # phs000004 is Cancer but RNA-Seq; phs000005 is Cancer + WGS
         assert _ids(result) == {"phs000005"}
 
     def test_three_facets(self, store: DuckDBStore) -> None:
         """Measurement AND platform AND focus — narrow intersection."""
-        result = store.query_studies({
-            Facet.MEASUREMENT: ["BMI"],
-            Facet.PLATFORM: ["BDC"],
-            Facet.FOCUS: ["Cardiovascular"],
-        })
+        result = store.query_studies([
+            (Facet.MEASUREMENT, ["BMI"]),
+            (Facet.PLATFORM, ["BDC"]),
+            (Facet.FOCUS, ["Cardiovascular"]),
+        ])
         # phs000001: BMI + BDC + Cardiovascular yes
         # phs000002: BMI + BDC + Diabetes no (wrong focus)
         assert _ids(result) == {"phs000001"}
 
     def test_and_empty_intersection(self, store: DuckDBStore) -> None:
         """No study satisfies all constraints — empty result."""
-        result = store.query_studies({
-            Facet.MEASUREMENT: ["Tumor Size"],
-            Facet.PLATFORM: ["BDC"],
-            Facet.FOCUS: ["Diabetes"],
-        })
+        result = store.query_studies([
+            (Facet.MEASUREMENT, ["Tumor Size"]),
+            (Facet.PLATFORM, ["BDC"]),
+            (Facet.FOCUS, ["Diabetes"]),
+        ])
         assert result == []
 
 
@@ -332,10 +320,10 @@ class TestORWithinANDBetween:
 
     def test_or_measurements_and_platform(self, store: DuckDBStore) -> None:
         """(SBP OR HbA1c) AND BDC."""
-        result = store.query_studies({
-            Facet.MEASUREMENT: ["Systolic Blood Pressure", "HbA1c"],
-            Facet.PLATFORM: ["BDC"],
-        })
+        result = store.query_studies([
+            (Facet.MEASUREMENT, ["Systolic Blood Pressure", "HbA1c"]),
+            (Facet.PLATFORM, ["BDC"]),
+        ])
         # phs000001: SBP + BDC yes
         # phs000002: HbA1c + BDC yes
         # phs000003: SBP + AnVIL no
@@ -343,20 +331,20 @@ class TestORWithinANDBetween:
 
     def test_or_platforms_and_focus(self, store: DuckDBStore) -> None:
         """Cancer AND (BDC OR CRDC)."""
-        result = store.query_studies({
-            Facet.FOCUS: ["Cancer"],
-            Facet.PLATFORM: ["BDC", "CRDC"],
-        })
+        result = store.query_studies([
+            (Facet.FOCUS, ["Cancer"]),
+            (Facet.PLATFORM, ["BDC", "CRDC"]),
+        ])
         # phs000004: Cancer + BDC yes
         # phs000005: Cancer + CRDC yes
         assert _ids(result) == {"phs000004", "phs000005"}
 
     def test_or_both_facets(self, store: DuckDBStore) -> None:
         """(SBP OR BMI) AND (BDC OR AnVIL)."""
-        result = store.query_studies({
-            Facet.MEASUREMENT: ["Systolic Blood Pressure", "BMI"],
-            Facet.PLATFORM: ["BDC", "AnVIL"],
-        })
+        result = store.query_studies([
+            (Facet.MEASUREMENT, ["Systolic Blood Pressure", "BMI"]),
+            (Facet.PLATFORM, ["BDC", "AnVIL"]),
+        ])
         # phs000001: SBP+BMI, BDC yes
         # phs000002: BMI, BDC yes
         # phs000003: SBP, AnVIL yes
@@ -375,8 +363,8 @@ class TestNOTExclude:
     def test_exclude_platform(self, store: DuckDBStore) -> None:
         """Blood pressure studies NOT on AnVIL."""
         result = store.query_studies(
-            include={Facet.MEASUREMENT: ["Systolic Blood Pressure"]},
-            exclude={Facet.PLATFORM: ["AnVIL"]},
+            include=[(Facet.MEASUREMENT, ["Systolic Blood Pressure"])],
+            exclude=[(Facet.PLATFORM, ["AnVIL"])],
         )
         # phs000001: SBP + BDC yes (not AnVIL)
         # phs000003: SBP + AnVIL no (excluded)
@@ -385,8 +373,8 @@ class TestNOTExclude:
     def test_exclude_focus(self, store: DuckDBStore) -> None:
         """BDC studies NOT Cancer."""
         result = store.query_studies(
-            include={Facet.PLATFORM: ["BDC"]},
-            exclude={Facet.FOCUS: ["Cancer"]},
+            include=[(Facet.PLATFORM, ["BDC"])],
+            exclude=[(Facet.FOCUS, ["Cancer"])],
         )
         # BDC: phs000001, phs000002, phs000004
         # phs000004 is Cancer -> excluded
@@ -395,8 +383,8 @@ class TestNOTExclude:
     def test_exclude_measurement(self, store: DuckDBStore) -> None:
         """Cancer studies NOT with Tumor Size."""
         result = store.query_studies(
-            include={Facet.FOCUS: ["Cancer"]},
-            exclude={Facet.MEASUREMENT: ["Tumor Size"]},
+            include=[(Facet.FOCUS, ["Cancer"])],
+            exclude=[(Facet.MEASUREMENT, ["Tumor Size"])],
         )
         # Cancer: phs000004, phs000005 — both have Tumor Size -> all excluded
         assert result == []
@@ -404,8 +392,8 @@ class TestNOTExclude:
     def test_exclude_no_overlap(self, store: DuckDBStore) -> None:
         """Exclude that doesn't overlap with includes — no effect."""
         result = store.query_studies(
-            include={Facet.FOCUS: ["Diabetes"]},
-            exclude={Facet.PLATFORM: ["CRDC"]},
+            include=[(Facet.FOCUS, ["Diabetes"])],
+            exclude=[(Facet.PLATFORM, ["CRDC"])],
         )
         # Diabetes: phs000002 (BDC) — CRDC exclude doesn't touch it
         assert _ids(result) == {"phs000002"}
@@ -413,8 +401,11 @@ class TestNOTExclude:
     def test_exclude_with_and(self, store: DuckDBStore) -> None:
         """(BMI AND BDC) NOT Cardiovascular."""
         result = store.query_studies(
-            include={Facet.MEASUREMENT: ["BMI"], Facet.PLATFORM: ["BDC"]},
-            exclude={Facet.FOCUS: ["Cardiovascular"]},
+            include=[
+                (Facet.MEASUREMENT, ["BMI"]),
+                (Facet.PLATFORM, ["BDC"]),
+            ],
+            exclude=[(Facet.FOCUS, ["Cardiovascular"])],
         )
         # BMI + BDC: phs000001, phs000002
         # phs000001 is Cardiovascular -> excluded
@@ -431,56 +422,56 @@ class TestCaseInsensitivity:
 
     def test_measurement_lowercase(self, store: DuckDBStore) -> None:
         result = store.query_studies(
-            {Facet.MEASUREMENT: ["systolic blood pressure"]}
+            [(Facet.MEASUREMENT, ["systolic blood pressure"])]
         )
         assert _ids(result) == {"phs000001", "phs000003"}
 
     def test_measurement_uppercase(self, store: DuckDBStore) -> None:
         result = store.query_studies(
-            {Facet.MEASUREMENT: ["SYSTOLIC BLOOD PRESSURE"]}
+            [(Facet.MEASUREMENT, ["SYSTOLIC BLOOD PRESSURE"])]
         )
         assert _ids(result) == {"phs000001", "phs000003"}
 
     def test_measurement_mixed_case(self, store: DuckDBStore) -> None:
         result = store.query_studies(
-            {Facet.MEASUREMENT: ["sYsToLiC bLoOd PrEsSuRe"]}
+            [(Facet.MEASUREMENT, ["sYsToLiC bLoOd PrEsSuRe"])]
         )
         assert _ids(result) == {"phs000001", "phs000003"}
 
     def test_platform_lowercase(self, store: DuckDBStore) -> None:
         result = store.query_studies(
-            {Facet.PLATFORM: ["bdc"]}
+            [(Facet.PLATFORM, ["bdc"])]
         )
         assert _ids(result) == {"phs000001", "phs000002", "phs000004"}
 
     def test_focus_mixed_case(self, store: DuckDBStore) -> None:
         result = store.query_studies(
-            {Facet.FOCUS: ["cAnCeR"]}
+            [(Facet.FOCUS, ["cAnCeR"])]
         )
         assert _ids(result) == {"phs000004", "phs000005"}
 
     def test_case_insensitive_and(self, store: DuckDBStore) -> None:
         """Case insensitivity works across AND-ed facets."""
-        result = store.query_studies({
-            Facet.MEASUREMENT: ["bmi"],
-            Facet.PLATFORM: ["anvil"],
-        })
+        result = store.query_studies([
+            (Facet.MEASUREMENT, ["bmi"]),
+            (Facet.PLATFORM, ["anvil"]),
+        ])
         # phs000001: BMI + BDC, phs000002: BMI + BDC — neither on AnVIL
         assert result == []
 
     def test_case_insensitive_or_and_combined(self, store: DuckDBStore) -> None:
         """Mixed case in OR values with AND between facets."""
-        result = store.query_studies({
-            Facet.MEASUREMENT: ["SYSTOLIC BLOOD PRESSURE", "hba1c"],
-            Facet.PLATFORM: ["bdc"],
-        })
+        result = store.query_studies([
+            (Facet.MEASUREMENT, ["SYSTOLIC BLOOD PRESSURE", "hba1c"]),
+            (Facet.PLATFORM, ["bdc"]),
+        ])
         assert _ids(result) == {"phs000001", "phs000002"}
 
     def test_case_insensitive_exclude(self, store: DuckDBStore) -> None:
         """Exclude matching is also case-insensitive."""
         result = store.query_studies(
-            include={Facet.PLATFORM: ["bdc"]},
-            exclude={Facet.FOCUS: ["CANCER"]},
+            include=[(Facet.PLATFORM, ["bdc"])],
+            exclude=[(Facet.FOCUS, ["CANCER"])],
         )
         assert _ids(result) == {"phs000001", "phs000002"}
 
@@ -495,32 +486,32 @@ class TestEdgeCases:
 
     def test_empty_facet_values(self, store: DuckDBStore) -> None:
         """Empty values list for a facet — should return nothing."""
-        result = store.query_studies({Facet.MEASUREMENT: []})
+        result = store.query_studies([(Facet.MEASUREMENT, [])])
         assert result == []
 
     def test_no_matching_value(self, store: DuckDBStore) -> None:
         """Value that doesn't exist in the store."""
         result = store.query_studies(
-            {Facet.MEASUREMENT: ["Nonexistent Concept"]}
+            [(Facet.MEASUREMENT, ["Nonexistent Concept"])]
         )
         assert result == []
 
-    def test_empty_dict(self, store: DuckDBStore) -> None:
-        """Empty include dict."""
-        result = store.query_studies({})
+    def test_empty_list(self, store: DuckDBStore) -> None:
+        """Empty include list."""
+        result = store.query_studies([])
         assert result == []
 
     def test_single_study_match(self, store: DuckDBStore) -> None:
         """Only one study has Fasting Glucose."""
         result = store.query_studies(
-            {Facet.MEASUREMENT: ["Fasting Glucose"]}
+            [(Facet.MEASUREMENT, ["Fasting Glucose"])]
         )
         assert _ids(result) == {"phs000002"}
 
     def test_results_sorted_by_id(self, store: DuckDBStore) -> None:
         """Results should be sorted by dbGapId."""
         result = store.query_studies(
-            {Facet.PLATFORM: ["BDC"]}
+            [(Facet.PLATFORM, ["BDC"])]
         )
         ids = [s["dbGapId"] for s in result]
         assert ids == sorted(ids)
@@ -532,7 +523,7 @@ class TestEdgeCases:
     def test_returned_study_has_full_data(self, store: DuckDBStore) -> None:
         """Returned study dicts contain the original fields."""
         result = store.query_studies(
-            {Facet.MEASUREMENT: ["Fasting Glucose"]}
+            [(Facet.MEASUREMENT, ["Fasting Glucose"])]
         )
         assert len(result) == 1
         study = result[0]
@@ -561,7 +552,7 @@ class TestDuckDBPersistence:
         assert loaded.study_count == store.study_count
         # Same query results
         result = loaded.query_studies(
-            {Facet.MEASUREMENT: ["Systolic Blood Pressure"]}
+            [(Facet.MEASUREMENT, ["Systolic Blood Pressure"])]
         )
         assert _ids(result) == {"phs000001", "phs000003"}
 
@@ -570,10 +561,10 @@ class TestDuckDBPersistence:
         db_file = tmp_path / "test.duckdb"
         store.save_to_file(db_file)
         loaded = DuckDBStore.load_from_file(db_file)
-        result = loaded.query_studies({
-            Facet.MEASUREMENT: ["BMI"],
-            Facet.PLATFORM: ["BDC"],
-        })
+        result = loaded.query_studies([
+            (Facet.MEASUREMENT, ["BMI"]),
+            (Facet.PLATFORM, ["BDC"]),
+        ])
         assert _ids(result) == {"phs000001", "phs000002"}
 
     def test_loaded_store_supports_exclude(self, store: DuckDBStore, tmp_path) -> None:
@@ -582,10 +573,23 @@ class TestDuckDBPersistence:
         store.save_to_file(db_file)
         loaded = DuckDBStore.load_from_file(db_file)
         result = loaded.query_studies(
-            include={Facet.PLATFORM: ["BDC"]},
-            exclude={Facet.FOCUS: ["Cancer"]},
+            include=[(Facet.PLATFORM, ["BDC"])],
+            exclude=[(Facet.FOCUS, ["Cancer"])],
         )
         assert _ids(result) == {"phs000001", "phs000002"}
+
+    def test_loaded_store_supports_same_facet_and(
+        self, store: DuckDBStore, tmp_path
+    ) -> None:
+        """Same-facet AND works on a loaded store."""
+        db_file = tmp_path / "test.duckdb"
+        store.save_to_file(db_file)
+        loaded = DuckDBStore.load_from_file(db_file)
+        result = loaded.query_studies([
+            (Facet.PLATFORM, ["AnVIL"]),
+            (Facet.PLATFORM, ["BDC"]),
+        ])
+        assert _ids(result) == {"phs000004"}
 
     def test_get_facet_value_counts(self, store: DuckDBStore) -> None:
         """get_facet_value_counts returns (facet, value, count) tuples."""

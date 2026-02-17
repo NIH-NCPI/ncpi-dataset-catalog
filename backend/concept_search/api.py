@@ -87,14 +87,18 @@ def _build_study_summary(study: dict) -> StudySummary:
 
 def _split_mentions(
     mentions: list[ResolvedMention],
-) -> tuple[dict[Facet, list[str]], dict[Facet, list[str]]]:
-    """Split mentions into include and exclude facet-value dicts."""
-    include: dict[Facet, list[str]] = {}
-    exclude: dict[Facet, list[str]] = {}
+) -> tuple[list[tuple[Facet, list[str]]], list[tuple[Facet, list[str]]]]:
+    """Split mentions into include and exclude constraint lists.
+
+    Each mention becomes its own constraint tuple (AND between mentions,
+    OR within a mention's values).
+    """
+    include: list[tuple[Facet, list[str]]] = []
+    exclude: list[tuple[Facet, list[str]]] = []
     for mention in mentions:
-        target = exclude if mention.exclude else include
         if mention.values:
-            target.setdefault(mention.facet, []).extend(mention.values)
+            target = exclude if mention.exclude else include
+            target.append((mention.facet, mention.values))
     return include, exclude
 
 

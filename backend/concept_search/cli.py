@@ -50,12 +50,12 @@ def main() -> None:
     if args.lookup and result.mentions:
         print("\n=== Study Lookup ===")
         index = get_index()
-        include: dict[Facet, list[str]] = {}
-        exclude: dict[Facet, list[str]] = {}
+        include: list[tuple[Facet, list[str]]] = []
+        exclude: list[tuple[Facet, list[str]]] = []
         for mention in result.mentions:
-            target = exclude if mention.exclude else include
             if mention.values:
-                target.setdefault(mention.facet, []).extend(mention.values)
+                target = exclude if mention.exclude else include
+                target.append((mention.facet, mention.values))
 
         studies = index.query_studies(include, exclude or None)
         print(f"Found {len(studies)} matching studies")

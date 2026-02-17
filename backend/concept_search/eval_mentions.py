@@ -265,6 +265,17 @@ dataset = Dataset[str, QueryModel, QueryModel](
                 ]
             ),
         ),
+        # --- Multi-platform ---
+        Case(
+            name="anvil-and-bdc",
+            inputs="datasets hosted by AnVIL and BioData Catalyst",
+            expected_output=QueryModel(
+                mentions=[
+                    _m("AnVIL", Facet.PLATFORM, ["AnVIL"]),
+                    _m("BioData Catalyst", Facet.PLATFORM, ["BDC"]),
+                ]
+            ),
+        ),
         # --- Obscure and nonsense terms ---
         Case(
             name="exercise-with-wiffelball",

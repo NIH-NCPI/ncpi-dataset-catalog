@@ -240,16 +240,17 @@ class ConceptIndex:
 
     def query_studies(
         self,
-        include: dict[Facet, list[str]],
-        exclude: dict[Facet, list[str]] | None = None,
+        include: list[tuple[Facet, list[str]]],
+        exclude: list[tuple[Facet, list[str]]] | None = None,
     ) -> list[dict]:
         """Find studies matching include constraints minus exclude.
 
         Delegates to the swappable ``StudyStore`` backend.
 
         Args:
-            include: Facet constraints to include (AND between, OR within).
-            exclude: Facet constraints to subtract from results.
+            include: Constraints to include. Each tuple is one AND
+                constraint; values within are OR-ed.
+            exclude: Constraints to subtract from results.
 
         Returns:
             Studies matching all constraints.
