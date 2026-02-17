@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 
 from .extract_agent import run_extract
@@ -54,13 +55,29 @@ async def run_pipeline(
     if extract_result.message:
         messages.append(extract_result.message)
 
-    # --- Step 2: Resolve ---
+    # --- Step 2: Resolve (parallel) ---
     logger.debug("Step 2: Resolve mentions")
     resolved: list[ResolvedMention] = []
-    for mention in extract_result.mentions:
+
+    # Separate pre-resolved (small facets) from those needing API calls
+    needs_resolve: list[tuple[int, object]] = []
+    for i, mention in enumerate(extract_result.mentions):
         if mention.facet in SMALL_FACETS and mention.values:
-            # Small facets already resolved by extract agent
             logger.debug("  %r: pre-resolved %s", mention.text, mention.values)
+        else:
+            needs_resolve.append((i, mention))
+
+    # Fire all resolve calls in parallel
+    resolve_results: dict[int, object] = {}
+    if needs_resolve:
+        coros = [run_resolve(m, index, model=model) for _, m in needs_resolve]
+        results = await asyncio.gather(*coros)
+        for (i, _), result in zip(needs_resolve, results):
+            resolve_results[i] = result
+
+    # Reassemble in original order
+    for i, mention in enumerate(extract_result.mentions):
+        if mention.facet in SMALL_FACETS and mention.values:
             resolved.append(
                 ResolvedMention(
                     facet=mention.facet,
@@ -69,8 +86,7 @@ async def run_pipeline(
                 )
             )
         else:
-            # Call resolve agent for this mention
-            resolve_result = await run_resolve(mention, index, model=model)
+            resolve_result = resolve_results[i]
             logger.debug(
                 "  %r: resolved to %s", mention.text, resolve_result.values
             )

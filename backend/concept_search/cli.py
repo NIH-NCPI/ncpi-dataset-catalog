@@ -50,15 +50,14 @@ def main() -> None:
     if args.lookup and result.mentions:
         print("\n=== Study Lookup ===")
         index = get_index()
-        # Build facet_values from non-excluded mentions
-        facet_values: dict[Facet, list[str]] = {}
+        include: dict[Facet, list[str]] = {}
+        exclude: dict[Facet, list[str]] = {}
         for mention in result.mentions:
-            if mention.exclude:
-                continue
+            target = exclude if mention.exclude else include
             if mention.values:
-                facet_values.setdefault(mention.facet, []).extend(mention.values)
+                target.setdefault(mention.facet, []).extend(mention.values)
 
-        studies = index.get_studies_for_mentions(facet_values)
+        studies = index.query_studies(include, exclude or None)
         print(f"Found {len(studies)} matching studies")
         for s in studies[:10]:
             print(f"  {s.get('dbGapId', '?'):12s} {s.get('title', '?')[:80]}")

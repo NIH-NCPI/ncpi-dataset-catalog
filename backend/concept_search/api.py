@@ -18,7 +18,7 @@ from fastapi.responses import JSONResponse
 
 from .api_models import SearchRequest, SearchResponse, SearchTiming, StudySummary
 from .index import get_index
-from .models import Facet
+from .models import Facet, ResolvedMention
 from .pipeline import run_pipeline
 
 # Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
@@ -81,6 +81,19 @@ def _build_study_summary(study: dict) -> StudySummary:
     )
 
 
+def _split_mentions(
+    mentions: list[ResolvedMention],
+) -> tuple[dict[Facet, list[str]], dict[Facet, list[str]]]:
+    """Split mentions into include and exclude facet-value dicts."""
+    include: dict[Facet, list[str]] = {}
+    exclude: dict[Facet, list[str]] = {}
+    for mention in mentions:
+        target = exclude if mention.exclude else include
+        if mention.values:
+            target.setdefault(mention.facet, []).extend(mention.values)
+    return include, exclude
+
+
 @app.post("/search", response_model=SearchResponse)
 async def search(request: SearchRequest) -> SearchResponse:
     """Run the concept search pipeline and return matching studies."""
@@ -96,30 +109,8 @@ async def search(request: SearchRequest) -> SearchResponse:
     studies: list[dict] = []
 
     if query_model.mentions:
-        # Build facet_values from non-excluded mentions
-        facet_values: dict[Facet, list[str]] = {}
-        for mention in query_model.mentions:
-            if mention.exclude:
-                continue
-            if mention.values:
-                facet_values.setdefault(mention.facet, []).extend(mention.values)
-
-        studies = index.get_studies_for_mentions(facet_values)
-
-        # Subtract studies matching excluded mentions
-        excluded_facet_values: dict[Facet, list[str]] = {}
-        for mention in query_model.mentions:
-            if not mention.exclude:
-                continue
-            if mention.values:
-                excluded_facet_values.setdefault(mention.facet, []).extend(
-                    mention.values
-                )
-
-        if excluded_facet_values:
-            excluded_studies = index.get_studies_for_mentions(excluded_facet_values)
-            excluded_ids = {s.get("dbGapId") for s in excluded_studies}
-            studies = [s for s in studies if s.get("dbGapId") not in excluded_ids]
+        include, exclude = _split_mentions(query_model.mentions)
+        studies = index.query_studies(include, exclude or None)
 
     t_lookup = time.monotonic()
 
