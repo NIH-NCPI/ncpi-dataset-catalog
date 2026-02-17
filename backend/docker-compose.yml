@@ -1,0 +1,18 @@
+services:
+  search-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:3000}
+      - NCPI_DUCKDB_CACHE_PATH=/cache/concept-search.duckdb
+      - NCPI_REPO_ROOT=/data
+    volumes:
+      - search-cache:/cache
+      - ../catalog:/data/catalog:ro
+      - ../catalog-build/classification/output/concept-hierarchy.json:/data/catalog-build/classification/output/concept-hierarchy.json:ro
+      - ../catalog-build/classification/output/llm-concepts:/data/catalog-build/classification/output/llm-concepts:ro
+
+volumes:
+  search-cache:

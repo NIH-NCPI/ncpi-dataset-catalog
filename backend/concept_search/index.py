@@ -3,11 +3,24 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 from collections import Counter, defaultdict
 from pathlib import Path
 
 from .models import ConceptMatch, Facet
+from .store import DuckDBStore, StudyStore
+
+logger = logging.getLogger(__name__)
+
+
+def _resolve_repo_root() -> Path:
+    """Resolve the repo root from NCPI_REPO_ROOT env var or relative to this file."""
+    return Path(
+        os.environ.get(
+            "NCPI_REPO_ROOT", Path(__file__).resolve().parent.parent.parent
+        )
+    )
 
 
 def _resolve_paths() -> tuple[Path, Path]:
@@ -16,11 +29,7 @@ def _resolve_paths() -> tuple[Path, Path]:
     Reads NCPI_REPO_ROOT, NCPI_LLM_CONCEPTS_DIR, NCPI_PLATFORM_STUDIES_PATH
     from environment, falling back to paths relative to this package.
     """
-    repo_root = Path(
-        os.environ.get(
-            "NCPI_REPO_ROOT", Path(__file__).resolve().parent.parent.parent
-        )
-    )
+    repo_root = _resolve_repo_root()
     llm_dir = Path(
         os.environ.get(
             "NCPI_LLM_CONCEPTS_DIR",
@@ -36,31 +45,76 @@ def _resolve_paths() -> tuple[Path, Path]:
     return llm_dir, studies_path
 
 
+def _resolve_cache_path() -> Path:
+    """Resolve the DuckDB cache file path."""
+    explicit = os.environ.get("NCPI_DUCKDB_CACHE_PATH")
+    if explicit:
+        return Path(explicit)
+    repo_root = _resolve_repo_root()
+    return repo_root / "catalog" / "concept-search.duckdb"
+
+
 class ConceptIndex:
     """In-memory index of facet values with study counts."""
 
-    def __init__(self) -> None:
+    def __init__(self, store: StudyStore | None = None) -> None:
         # facet -> {lowercase_value: ConceptMatch}
         self._index: dict[Facet, dict[str, ConceptMatch]] = {f: {} for f in Facet}
-        # study_id -> set of concept names (for measurement lookup)
-        self._study_concepts: dict[str, set[str]] = defaultdict(set)
-        # study_id -> study metadata dict
-        self._studies: dict[str, dict] = {}
+        # Swappable study store (DuckDB by default)
+        self.store: StudyStore = store or DuckDBStore.create_empty()
 
     def load(self) -> None:
-        """Load all data sources and build the index."""
-        llm_dir, studies_path = _resolve_paths()
-        self._load_measurement_concepts(llm_dir)
-        self._load_study_metadata(studies_path)
+        """Load data — from cached DuckDB file if available, else from JSON."""
+        cache_path = _resolve_cache_path()
+        if cache_path.exists():
+            logger.info("Loading from cached DuckDB: %s", cache_path)
+            self.store = DuckDBStore.load_from_file(str(cache_path))
+            self._rebuild_index_from_store()
+        else:
+            self._load_from_json()
+            # Save cache for next startup
+            if isinstance(self.store, DuckDBStore):
+                try:
+                    self.store.save_to_file(cache_path)
+                    logger.info("Saved DuckDB cache: %s", cache_path)
+                except OSError:
+                    logger.warning(
+                        "Could not save DuckDB cache to %s", cache_path
+                    )
+        # These are small JSON files bundled with the package — always load
         self.load_focus_categories()
         self.load_measurement_hierarchy()
         self.load_consent_code_descriptions()
+
+    def _load_from_json(self) -> None:
+        """Full build path: parse JSON data files and populate the store."""
+        llm_dir, studies_path = _resolve_paths()
+        self._load_measurement_concepts(llm_dir)
+        self._load_study_metadata(studies_path)
+        if isinstance(self.store, DuckDBStore):
+            self.store.finalize()
+
+    def _rebuild_index_from_store(self) -> None:
+        """Rebuild the in-memory _index from a loaded DuckDB store."""
+        if not isinstance(self.store, DuckDBStore):
+            return
+        for facet_str, value, count in self.store.get_facet_value_counts():
+            try:
+                facet = Facet(facet_str)
+            except ValueError:
+                continue
+            self._index[facet][value.lower()] = ConceptMatch(
+                facet=facet,
+                study_count=count,
+                value=value,
+            )
 
     def _load_measurement_concepts(self, llm_dir: Path) -> None:
         """Load concept names from per-study LLM classification JSON files."""
         if not llm_dir.exists():
             return
         concept_studies: dict[str, set[str]] = defaultdict(set)
+        study_concepts: dict[str, set[str]] = defaultdict(set)
         for path in sorted(llm_dir.glob("phs*.json")):
             with open(path) as f:
                 data = json.load(f)
@@ -70,7 +124,7 @@ class ConceptIndex:
                     concept = var.get("concept")
                     if concept:
                         concept_studies[concept].add(study_id)
-                        self._study_concepts[study_id].add(concept)
+                        study_concepts[study_id].add(concept)
         for concept, studies in concept_studies.items():
             key = concept.lower()
             self._index[Facet.MEASUREMENT][key] = ConceptMatch(
@@ -78,6 +132,15 @@ class ConceptIndex:
                 study_count=len(studies),
                 value=concept,
             )
+        # Batch-insert measurement facet values into the store
+        if isinstance(self.store, DuckDBStore):
+            facet_val = Facet.MEASUREMENT.value
+            rows = [
+                (sid, facet_val, concept, concept.lower())
+                for sid, concepts in study_concepts.items()
+                for concept in concepts
+            ]
+            self.store.load_facet_values_batch(rows)
 
     def _load_study_metadata(self, studies_path: Path) -> None:
         """Load study metadata and extract facet values."""
@@ -95,9 +158,13 @@ class ConceptIndex:
             Facet.PLATFORM: "platforms",
             Facet.STUDY_DESIGN: "studyDesigns",
         }
+        is_duckdb = isinstance(self.store, DuckDBStore)
+        study_rows: list[tuple[str, dict]] = []
+        facet_rows: list[tuple[str, str, str, str]] = []
         for study in studies_raw.values():
             dbgap_id = study.get("dbGapId", "")
-            self._studies[dbgap_id] = study
+            if is_duckdb:
+                study_rows.append((dbgap_id, study))
             for facet, field in facet_field_map.items():
                 raw = study.get(field)
                 if raw is None:
@@ -106,6 +173,11 @@ class ConceptIndex:
                 for v in values:
                     if v:
                         facet_counts[facet][v] += 1
+                        if is_duckdb:
+                            facet_rows.append((dbgap_id, facet.value, v, v.lower()))
+        if is_duckdb:
+            self.store.load_studies_batch(study_rows)
+            self.store.load_facet_values_batch(facet_rows)
 
         # Build index entries for non-measurement facets
         for facet, counts in facet_counts.items():
@@ -162,60 +234,23 @@ class ConceptIndex:
         values.sort(key=lambda m: m.study_count, reverse=True)
         return values
 
-    def get_studies_for_mentions(
-        self, facet_values: dict[Facet, list[str]]
+    def query_studies(
+        self,
+        include: dict[Facet, list[str]],
+        exclude: dict[Facet, list[str]] | None = None,
     ) -> list[dict]:
-        """Find studies matching all facet constraints (AND across facets).
+        """Find studies matching include constraints minus exclude.
+
+        Delegates to the swappable ``StudyStore`` backend.
 
         Args:
-            facet_values: Mapping of facet to list of required values.
+            include: Facet constraints to include (AND between, OR within).
+            exclude: Facet constraints to subtract from results.
 
         Returns:
             Studies matching all constraints.
         """
-        matching_ids: set[str] | None = None
-        facet_field_map: dict[Facet, str] = {
-            Facet.CONSENT_CODE: "consentCodes",
-            Facet.DATA_TYPE: "dataTypes",
-            Facet.FOCUS: "focus",
-            Facet.PLATFORM: "platforms",
-            Facet.STUDY_DESIGN: "studyDesigns",
-        }
-        for facet, values in facet_values.items():
-            if not values:
-                continue
-            values_lower = {v.lower() for v in values}
-            ids_for_facet: set[str] = set()
-            if facet == Facet.MEASUREMENT:
-                # Match studies that have any of the requested concepts
-                for sid, concepts in self._study_concepts.items():
-                    concepts_lower = {c.lower() for c in concepts}
-                    if values_lower & concepts_lower:
-                        ids_for_facet.add(sid)
-            else:
-                field = facet_field_map.get(facet)
-                if not field:
-                    continue
-                for sid, study in self._studies.items():
-                    raw = study.get(field)
-                    if raw is None:
-                        continue
-                    study_vals = raw if isinstance(raw, list) else [raw]
-                    study_vals_lower = {v.lower() for v in study_vals if v}
-                    if values_lower & study_vals_lower:
-                        ids_for_facet.add(sid)
-            if matching_ids is None:
-                matching_ids = ids_for_facet
-            else:
-                matching_ids &= ids_for_facet
-
-        if not matching_ids:
-            return []
-        return [
-            self._studies[sid]
-            for sid in sorted(matching_ids)
-            if sid in self._studies
-        ]
+        return self.store.query_studies(include, exclude)
 
     def load_focus_categories(self) -> None:
         """Load the MeSH-based focus category mapping."""
