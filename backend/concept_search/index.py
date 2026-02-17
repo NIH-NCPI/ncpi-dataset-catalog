@@ -62,6 +62,10 @@ class ConceptIndex:
         self._index: dict[Facet, dict[str, ConceptMatch]] = {f: {} for f in Facet}
         # Swappable study store (DuckDB by default)
         self.store: StudyStore = store or DuckDBStore.create_empty()
+        # Lazy-loaded supplementary data (populated by load())
+        self._consent_descriptions: dict = {}
+        self._focus_categories: dict[str, list[dict]] = {}
+        self._measurement_hierarchy: dict[str, dict[str, list[dict]]] = {}
 
     def load(self) -> None:
         """Load data — from cached DuckDB file if available, else from JSON."""

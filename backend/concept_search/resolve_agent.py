@@ -31,7 +31,11 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
             output_type=ResolveResult,
             system_prompt=_load_prompt(),
             deps_type=ConceptIndex,
-            model_settings=ModelSettings(temperature=0.2),
+            model_settings=ModelSettings(
+                anthropic_cache_instructions=True,
+                anthropic_cache_tool_definitions=True,
+                temperature=0.2,
+            ),
         )
 
         @_agent.tool

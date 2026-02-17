@@ -53,8 +53,12 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
 
 app = FastAPI(title="NCPI Concept Search API", lifespan=lifespan)
 
-# CORS — allow localhost:3000 (dev) plus any origins in CORS_ORIGINS env var
-_cors_origins = ["http://localhost:3000"]
+# CORS — allow known origins plus any extras in CORS_ORIGINS env var
+_cors_origins = [
+    "http://localhost:3000",
+    "https://ncpi-data.dev.clevercanary.com",
+    "https://ncpi-data.org",
+]
 _extra = os.environ.get("CORS_ORIGINS", "")
 if _extra:
     _cors_origins.extend(o.strip() for o in _extra.split(",") if o.strip())

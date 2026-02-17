@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from pydantic_ai import Agent
+from pydantic_ai.settings import ModelSettings
 
 from .models import ExtractResult
 
@@ -28,6 +29,7 @@ def _get_agent(model: str | None = None) -> Agent[None, ExtractResult]:
             model,
             output_type=ExtractResult,
             system_prompt=_load_prompt(),
+            model_settings=ModelSettings(anthropic_cache_instructions=True),
         )
     return _agent
 

@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from pydantic_ai import Agent
+from pydantic_ai.settings import ModelSettings
 
 from .models import QueryModel, ResolvedMention
 
@@ -29,6 +30,7 @@ def _get_agent(model: str | None = None) -> Agent[None, QueryModel]:
             model,
             output_type=QueryModel,
             system_prompt=_load_prompt(),
+            model_settings=ModelSettings(anthropic_cache_instructions=True),
         )
     return _agent
 

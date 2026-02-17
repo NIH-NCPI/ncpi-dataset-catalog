@@ -3,11 +3,19 @@ FROM python:3.13-slim
 WORKDIR /app
 
 # Install dependencies first for layer caching
-COPY pyproject.toml .
+COPY backend/pyproject.toml .
 RUN pip install --no-cache-dir .
 
 # Copy application code
-COPY concept_search/ concept_search/
+COPY backend/concept_search/ concept_search/
+
+# Copy catalog data (built by npm run build-ncpi-db)
+COPY catalog/ncpi-platform-studies.json catalog/ncpi-platform-studies.json
+COPY catalog-build/classification/output/llm-concepts/ catalog-build/classification/output/llm-concepts/
+
+# Writable directory for DuckDB cache
+RUN mkdir -p /cache
+ENV NCPI_DUCKDB_CACHE_PATH=/cache/concept-search.duckdb
 
 EXPOSE 8000
 
