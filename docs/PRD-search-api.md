@@ -87,11 +87,32 @@ Returns service health and index statistics.
 - `timing` reports wall-clock milliseconds for the LLM pipeline and the deterministic index lookup separately
 - `message` carries clarification text when the query is vague or partially unresolved (null on clean success)
 
+## Architecture: Pipeline Controller
+
+The three agents (extract, resolve, structure) are orchestrated by a deterministic controller in `pipeline.py`. The controller maximizes parallelism:
+
+```
+  Extract (sequential — must run first)
+     │
+     ├──── Resolve (parallel per mention, via asyncio.gather)
+     │         └── N concurrent Anthropic API calls
+     └──── Structure (parallel with resolve)
+               └── 1 Anthropic API call
+     │
+  Deterministic Merge (no LLM — zips resolved values onto exclude flags)
+```
+
+**Key insight:** Structure only needs `(facet, original_text)` from Extract to determine boolean logic / exclude flags — it doesn't need the resolved values. So it runs concurrently with Resolve. A deterministic merge step zips the actual resolved values onto the structure's exclude flags afterward.
+
+**Study lookup** is backed by a swappable `StudyStore` protocol. The current implementation uses DuckDB (in-memory SQL) with faceted search semantics: OR within a facet, AND between facets, NOT for excludes — all in a single SQL query. The protocol allows swapping in OpenSearch or another backend later.
+
+**DuckDB cache persistence:** On first startup, the index is built from JSON files (~111MB) and the DuckDB database is saved to disk. Subsequent startups load directly from the cached `.duckdb` file, reducing startup from ~3.4s to ~0.3s.
+
 ## Latency Expectations
 
-- **Pipeline:** ~3-5 seconds per query (dominated by Anthropic API round-trips: extract + 1-N resolve + structure)
-- **Index lookup:** <50ms (in-memory intersection)
-- **Index preload:** ~5 seconds at startup (111MB JSON)
+- **Pipeline:** ~4-5 seconds per query (extract ~1.5s, then resolve + structure in parallel ~3.5s)
+- **Index lookup:** <50ms (DuckDB SQL query)
+- **Index preload:** ~0.3s from DuckDB cache, ~3.4s cold build from JSON
 - **Health check:** <10ms
 
 ## Deployment Architecture
