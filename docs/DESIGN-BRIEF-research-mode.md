@@ -381,6 +381,8 @@ This keeps the user informed about what the system understood vs. what it droppe
 
 ## 7. Conversation Examples
 
+We want all three examples below mocked up as screens and included in the **clickable prototype** (Step 4) so we can feel how each flow works end to end.
+
 ### Example 1: Focused research question → results → study drill-down
 
 ```
@@ -536,7 +538,13 @@ Step-by-step breakdown. Each step is roughly a day of design work and produces a
 
 ### Step 4: Clickable prototype
 
-**Deliverable**: Figma prototype linking steps 1–3 into a walkthrough of Example 1 (focused question → results → study drill-down) and Example 2 (exploratory start → gradual slot filling). Note reusable components for other CC sites (BRC Analytics, AnVIL, HCA).
+**Deliverable**: A **clickable Figma prototype** (not static mocks) linking steps 1–3 into walkthroughs of all three conversation examples from section 7:
+
+1. **Example 1**: Focused question → PICOT fills → results → study drill-down → back to results
+2. **Example 2**: Exploratory start → gradual slot filling → results
+3. **Example 3**: Direct card editing → concept mapping → partial match / dimmed chips
+
+Note reusable components for other CC sites (BRC Analytics, AnVIL, HCA).
 
 ---
 
