@@ -94,6 +94,67 @@ This is the novel UI element. It's a structured, editable card that shows the us
 | **O**   | Outcome                 | Glycemic response (HbA1c, delta from baseline); Weight response (body weight, delta)            |
 | **T**   | Time                    | Longitudinal, baseline + follow-up at 3–12 months                                               |
 
+### Fields within each slot
+
+Each slot contains structured sub-fields. The card may display these as a single free-text summary, but the system parses them into these fields internally. Direct editing should allow the user to modify individual fields where practical.
+
+**P — Population**
+
+| Field                 | Example          | Notes                        |
+| --------------------- | ---------------- | ---------------------------- |
+| `condition_focus`     | Type 2 diabetes  | Maps to Focus/Disease facet  |
+| `age_range`           | Adults (18–65)   | Not yet filterable           |
+| `sex`                 | Both             | Not yet filterable           |
+| `ancestry`            | African American | Not yet filterable           |
+| `minimum_sample_size` | 1,000            | Filters on participant count |
+
+**I/E — Intervention / Exposure**
+
+| Field                | Example                                          | Notes                                   |
+| -------------------- | ------------------------------------------------ | --------------------------------------- |
+| `concept`            | Cigarette smoking                                | The exposure/intervention being studied |
+| `operationalization` | pack-years (primary), current/former/never (alt) | How it must be measured in the data     |
+
+Each operationalization entry has: `measurement` (variable name), `role` (primary / alternative), `threshold` (e.g., ">= 10 pack-years"), `optional` flag.
+
+**C — Comparator**
+
+| Field    | Example                | Notes                                                     |
+| -------- | ---------------------- | --------------------------------------------------------- |
+| `type`   | Smoking strata         | What dimension is being compared                          |
+| `levels` | never, former, current | The specific groups — requires variable-level granularity |
+
+**O — Outcome**
+
+| Field                | Example                                      | Notes                               |
+| -------------------- | -------------------------------------------- | ----------------------------------- |
+| `concept`            | Glycemic response                            | The outcome being measured          |
+| `operationalization` | HbA1c, delta from baseline, 3–6 month window | How it must be measured in the data |
+| `priority`           | Primary                                      | Primary / secondary / exploratory   |
+
+Each operationalization entry has: `measurement`, `delta` (change from baseline?), `time_window`.
+
+**T — Time**
+
+| Field                 | Example             | Notes                                      |
+| --------------------- | ------------------- | ------------------------------------------ |
+| `design_requirement`  | Longitudinal        | Longitudinal / cross-sectional / either    |
+| `timepoints_required` | Baseline, follow-up | Specific timepoints needed                 |
+| `minimum_follow_up`   | 6 months            | Minimum duration of longitudinal follow-up |
+
+See [SCHEMA-research-intent.md](SCHEMA-research-intent.md) for the full JSON schema with all field definitions, intent types, and domain modules.
+
+### Not a form
+
+These fields exist in the data model, but the card should **not** render as a form with labeled inputs. The challenge: we have structured data but want a conversational feel. Some principles:
+
+- **Start as prose, expand on interaction.** When a slot is first filled from chat, show it as a natural-language summary ("Adults with T2D, diverse ancestry, n > 1,000"). Only reveal the individual fields (condition, age, ancestry, sample size) when the user clicks to edit.
+- **Don't show empty field labels.** An unfilled slot says "What population are you studying?" — not "Condition: **_, Age: _**, Sex: **_, Ancestry: _**". The sub-fields only appear after the slot has content.
+- **Progressive disclosure.** The card starts compact (maybe just P visible) and grows as the conversation fills slots. A fully filled card with all 5 slots expanded is the end state, not the starting state.
+- **Editing is inline, not modal.** Clicking a slot expands it in place. The sub-fields appear as editable chips or inline text, not as a separate form dialog. Think of editing a tag in a note-taking app — light, fast, dismissible.
+- **The chat is always the primary input.** The card is a mirror of the conversation. Most users will fill it by chatting. Direct editing is a power-user shortcut, not the expected path.
+- **Use the field labels as gentle structure, not form labels.** Instead of "Condition Focus:" as a form label, consider lighter treatments like a subtle "condition" tag next to "Type 2 diabetes", or group fields visually without labeling each one.
+
 ### States
 
 Each slot can be in one of these states:
