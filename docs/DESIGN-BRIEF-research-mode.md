@@ -9,6 +9,8 @@
 
 The NCPI Dataset Catalog currently has ~2,944 studies from four NIH cloud platforms (AnVIL, BDC, CRDC, KFDRC). Today it's a browse-and-filter table with a facet sidebar on the left. We've built a chat-based search POC on a separate `/chat` page, but it's disconnected from the main site.
 
+**A key problem today**: the current `/chat` page gives no indication of what you can query by. It's a blank input with no hints about what dimensions are searchable (disease, data type, study design, platform, etc.) or what values exist. The facet sidebar on `/studies` communicates this well — you can see the categories and counts — but the chat interface offers nothing. Research Mode needs to solve this by actively showing the user what's queryable, through example queries, the PICOT card's placeholder prompts, and proactive system suggestions.
+
 We want to replace the browse-first experience with a **Research Mode** — a conversational interface where the user describes their research question and the system progressively builds a structured research plan, finds matching datasets, and eventually guides them into analysis workflows.
 
 ### Reference patterns
