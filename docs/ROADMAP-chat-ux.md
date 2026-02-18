@@ -231,11 +231,11 @@ Phase 1 (now)        Phase 2                      Phase 3              Phase 4
 
 ---
 
-## Design Briefs Needed
+## Design Briefs & Tickets
 
-| #   | Brief                             | Covers                                                                                                          |
-| --- | --------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| 1   | Home page                         | Home page, mode entry, example chips                                                                            |
-| 2   | About / methodology page          | About page                                                                                                      |
-| 3   | Research Mode layout + PICOT card | Two-panel layout, artifact transitions, PICOT card design, slot-filling UX, proactive prompts, chat persistence |
-| 4   | Table-header facet filtering      | Column filters, chip bar, chat+manual filter coexistence                                                        |
+| #   | Brief                             | Covers                                                                                                          | Status                                |
+| --- | --------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| 1   | Home page                         | Home page, mode entry, example chips                                                                            | cc-design #299 (Kaspars)              |
+| 2   | About / methodology page          | About page                                                                                                      | ncpi-dataset-catalog #179 (impl only) |
+| 3   | Research Mode layout + PICOT card | Two-panel layout, artifact transitions, PICOT card design, slot-filling UX, proactive prompts, chat persistence | cc-design #298 (Kaspars)              |
+| 4   | Table-header facet filtering      | Column filters, chip bar, chat+manual filter coexistence                                                        | Covered in #298 section 6             |
