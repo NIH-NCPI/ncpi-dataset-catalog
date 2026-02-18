@@ -86,6 +86,16 @@ These three numbers are the headline stats. Secondary details (65 data types, 15
 
 This section answers "is this worth my time?" in 2 seconds and establishes that this is a cross-platform catalog spanning the NCPI ecosystem and dbGaP.
 
+### How It Works (brief explainer)
+
+A short paragraph or 3–4 bullet points explaining what makes this different from a keyword search:
+
+- **Research intent-driven** — describe your research question in natural language and the system maps it to available data, metadata, demographics, and variables across the catalog
+- **Optimized for recall over precision** — we surface more potential matches rather than fewer, so you don't miss relevant datasets. You can always narrow from there.
+- **NCPI + dbGaP coverage** — searches across all four NCPI platforms and dbGaP study metadata, data types, study designs, consent codes, and (where available) variable-level annotations
+
+This sets expectations: the system will cast a wide net and help you refine, rather than giving you 3 exact results. It also signals that the depth of matching varies — some studies have rich variable metadata, others only have study-level annotations.
+
 ### Mode Entry Points
 
 Two clear paths below the hero:
