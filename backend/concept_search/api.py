@@ -66,8 +66,8 @@ if _extra:
 
 app.add_middleware(
     CORSMiddleware,
-    allow_headers=["*"],
-    allow_methods=["*"],
+    allow_headers=["Content-Type"],
+    allow_methods=["GET", "POST"],
     allow_origins=_cors_origins,
 )
 

@@ -1,2 +1,1 @@
-export const SEARCH_API_URL =
-  "https://ffbijgxxf2.us-east-1.awsapprunner.com/search";
+export const SEARCH_API_URL = process.env.NEXT_PUBLIC_SEARCH_API_URL ?? "";

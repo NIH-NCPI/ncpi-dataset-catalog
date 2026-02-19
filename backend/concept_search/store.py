@@ -168,8 +168,8 @@ class DuckDBStore:
                 "CREATE INDEX idx_sfv "
                 "ON study_facet_values (facet, value_lower)"
             )
-            self._conn.execute("USE memory")
         finally:
+            self._conn.execute("USE memory")
             self._conn.execute("DETACH export_db")
         os.rename(tmp, path)
 

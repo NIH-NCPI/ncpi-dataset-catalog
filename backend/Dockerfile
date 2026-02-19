@@ -2,9 +2,10 @@ FROM python:3.13-slim
 
 WORKDIR /app
 
-# Install dependencies first for layer caching
+# Install dependencies first (layer caching: only re-runs when deps change)
 COPY backend/pyproject.toml .
-RUN pip install --no-cache-dir .
+RUN pip install --no-cache-dir \
+    $(python -c "import tomllib; d=tomllib.load(open('pyproject.toml','rb')); print(' '.join(d['project']['dependencies']))")
 
 # Copy application code
 COPY backend/concept_search/ concept_search/
