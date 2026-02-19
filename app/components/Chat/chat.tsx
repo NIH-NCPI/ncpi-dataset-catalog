@@ -92,6 +92,7 @@ export const Chat = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
   const { dimensions } = useLayoutDimensions();
   const headerHeight = dimensions.header.height;
 
@@ -117,6 +118,11 @@ export const Chat = (): JSX.Element => {
     setMessages((prev) => [...prev, { text: query, type: "user" }]);
     setLoading(true);
 
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+    const timeout = setTimeout(() => controller.abort(), 90_000);
+
     try {
       if (!SEARCH_API_URL) {
         throw new Error("Search API URL is not configured.");
@@ -125,6 +131,7 @@ export const Chat = (): JSX.Element => {
         body: JSON.stringify({ query }),
         headers: { "Content-Type": "application/json" },
         method: "POST",
+        signal: controller.signal,
       });
       if (!res.ok) {
         throw new Error(`Search failed (${res.status})`);
@@ -132,11 +139,15 @@ export const Chat = (): JSX.Element => {
       const data: SearchResponse = await res.json();
       setMessages((prev) => [...prev, { response: data, type: "assistant" }]);
     } catch (err) {
+      if (controller.signal.aborted) return;
       const errorMessage =
         err instanceof Error ? err.message : "An unknown error occurred.";
       setMessages((prev) => [...prev, { error: errorMessage, type: "error" }]);
     } finally {
-      setLoading(false);
+      clearTimeout(timeout);
+      if (!controller.signal.aborted) {
+        setLoading(false);
+      }
     }
   }, [input, loading]);
 
