@@ -35,7 +35,7 @@ import { SEARCH_API_URL } from "./constants";
 interface Mention {
   exclude: boolean;
   facet: string;
-  original_text: string;
+  originalText: string;
   values: string[];
 }
 
@@ -239,7 +239,7 @@ function AssistantResponse({
       {mentions.length > 0 && (
         <SectionRow>
           <SectionLabel>Extracted mentions:</SectionLabel>
-          {mentions.map((m) => m.original_text).join(", ")}
+          {mentions.map((m) => m.originalText).join(", ")}
         </SectionRow>
       )}
 
