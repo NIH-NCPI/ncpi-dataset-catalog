@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 import os
@@ -18,7 +19,7 @@ from fastapi.responses import JSONResponse
 
 from .api_models import SearchRequest, SearchResponse, SearchTiming, StudySummary
 from .index import get_index
-from .models import Facet, ResolvedMention
+from .models import Facet, QueryModel, ResolvedMention
 from .pipeline import run_pipeline
 
 # Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
@@ -108,8 +109,24 @@ async def search(request: SearchRequest) -> SearchResponse:
     _log_json(event="search_request", query=request.query)
     t_start = time.monotonic()
 
-    # Run the 3-agent LLM pipeline
-    query_model = await run_pipeline(request.query)
+    # Run the 3-agent LLM pipeline (timeout guards against hanging LLM calls)
+    try:
+        query_model = await asyncio.wait_for(
+            run_pipeline(request.query), timeout=60.0
+        )
+    except TimeoutError:
+        _log_json(event="search_timeout", query=request.query)
+        return SearchResponse(
+            message="Search timed out — please try a simpler query.",
+            query=QueryModel(mentions=[]),
+            studies=[],
+            timing=SearchTiming(
+                lookup_ms=0,
+                pipeline_ms=int((time.monotonic() - t_start) * 1000),
+                total_ms=int((time.monotonic() - t_start) * 1000),
+            ),
+            total_studies=0,
+        )
     t_pipeline = time.monotonic()
 
     # Deterministic study lookup
@@ -176,7 +193,7 @@ async def global_exception_handler(request: object, exc: Exception) -> JSONRespo
         error_type=type(exc).__name__,
     )
     return JSONResponse(
-        content={"detail": str(exc)},
+        content={"detail": "Internal server error"},
         status_code=500,
     )
 

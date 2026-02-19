@@ -45,10 +45,10 @@ class DuckDBStore:
     subsequent startups skip JSON parsing entirely.
     """
 
-    def __init__(self, *, db_path: str = ":memory:") -> None:
+    def __init__(self, *, db_path: str = ":memory:", read_only: bool = False) -> None:
         import duckdb
 
-        self._conn = duckdb.connect(db_path)
+        self._conn = duckdb.connect(db_path, read_only=read_only)
 
     @classmethod
     def create_empty(cls) -> DuckDBStore:
@@ -60,7 +60,7 @@ class DuckDBStore:
     @classmethod
     def load_from_file(cls, path: str | Path) -> DuckDBStore:
         """Open a previously saved DuckDB file (read-only)."""
-        return cls(db_path=str(path))
+        return cls(db_path=str(path), read_only=True)
 
     # -- schema ---------------------------------------------------------------
 

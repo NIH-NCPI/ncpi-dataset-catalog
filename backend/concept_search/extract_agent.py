@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import threading
 from pathlib import Path
 
 from pydantic_ai import Agent
@@ -14,6 +15,7 @@ _DEFAULT_MODEL = "anthropic:claude-haiku-4-5-20251001"
 
 _agent: Agent[None, ExtractResult] | None = None
 _agent_model: str | None = None
+_lock = threading.Lock()
 
 
 def _load_prompt() -> str:
@@ -23,15 +25,16 @@ def _load_prompt() -> str:
 def _get_agent(model: str | None = None) -> Agent[None, ExtractResult]:
     global _agent, _agent_model  # noqa: PLW0603
     model = model or _DEFAULT_MODEL
-    if _agent is None or model != _agent_model:
-        _agent_model = model
-        _agent = Agent(
-            model,
-            output_type=ExtractResult,
-            system_prompt=_load_prompt(),
-            model_settings=ModelSettings(anthropic_cache_instructions=True),
-        )
-    return _agent
+    with _lock:
+        if _agent is None or model != _agent_model:
+            _agent_model = model
+            _agent = Agent(
+                model,
+                output_type=ExtractResult,
+                system_prompt=_load_prompt(),
+                model_settings=ModelSettings(anthropic_cache_instructions=True),
+            )
+        return _agent
 
 
 async def run_extract(query: str, model: str | None = None) -> ExtractResult:
