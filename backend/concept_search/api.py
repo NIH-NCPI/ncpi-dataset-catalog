@@ -54,6 +54,9 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
 
 app = FastAPI(title="NCPI Concept Search API", lifespan=lifespan)
 
+# Limit concurrent LLM pipeline calls to cap Anthropic API costs.
+_pipeline_semaphore = asyncio.Semaphore(5)
+
 # CORS — allow known origins plus any extras in CORS_ORIGINS env var
 _cors_origins = [
     "http://localhost:3000",
@@ -109,11 +112,12 @@ async def search(request: SearchRequest) -> SearchResponse:
     _log_json(event="search_request", query=request.query)
     t_start = time.monotonic()
 
-    # Run the 3-agent LLM pipeline (timeout guards against hanging LLM calls)
+    # Run the 3-agent LLM pipeline (semaphore + timeout)
     try:
-        query_model = await asyncio.wait_for(
-            run_pipeline(request.query), timeout=60.0
-        )
+        async with _pipeline_semaphore:
+            query_model = await asyncio.wait_for(
+                run_pipeline(request.query), timeout=60.0
+            )
     except TimeoutError:
         _log_json(event="search_timeout", query=request.query)
         return SearchResponse(
