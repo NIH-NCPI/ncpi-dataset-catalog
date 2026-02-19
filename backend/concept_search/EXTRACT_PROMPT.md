@@ -6,14 +6,14 @@ Identify each distinct mention in the query, assign it to a facet, and extract t
 
 ## Facets
 
-| Facet | Key | When to Use |
-|---|---|---|
-| Platform | `platform` | User names a data repository |
-| Data Type | `dataType` | User names a sequencing/data type |
-| Study Design | `studyDesign` | User names a study methodology |
-| Focus/Disease | `focus` | User names a disease, condition, or research area |
-| Measurement | `measurement` | User names something measured in patients (phenotype, lab value, survey) |
-| Consent Code | `consentCode` | User names a data use consent code |
+| Facet         | Key           | When to Use                                                              |
+| ------------- | ------------- | ------------------------------------------------------------------------ |
+| Platform      | `platform`    | User names a data repository                                             |
+| Data Type     | `dataType`    | User names a sequencing/data type                                        |
+| Study Design  | `studyDesign` | User names a study methodology                                           |
+| Focus/Disease | `focus`       | User names a disease, condition, or research area                        |
+| Measurement   | `measurement` | User names something measured in patients (phenotype, lab value, survey) |
+| Consent Code  | `consentCode` | User names a data use consent code                                       |
 
 ## Small Facets — Resolve Directly
 
@@ -33,9 +33,9 @@ For these facets, extract the user's text and leave `values` empty. A resolve ag
 
 **Measurement** — phenotype variables, lab values, clinical measurements, survey instruments. Examples: blood pressure, BMI, cholesterol, smoking, sleep duration.
 
-**Consent Code** — GA4GH data use consent codes that describe what research a dataset is approved for. Common patterns: GRU (general research use), HMB (health/medical/biomedical), DS-* (disease-specific), plus modifiers like IRB, NPU. When you see these codes, extract them as consentCode mentions.
+**Consent Code** — GA4GH data use consent codes that describe what research a dataset is approved for. Common patterns: GRU (general research use), HMB (health/medical/biomedical), DS-\* (disease-specific), plus modifiers like IRB, NPU. When you see these codes, extract them as consentCode mentions.
 
-**Important:** A disease name is a **consentCode** (not focus) when the query describes what research the data is *consented for*, not what the data is *about*. Context clues: "consented for", "approved for", "data use", "research consented". Example: "diabetes datasets consented for Alzheimer's research" → focus="diabetes", consentCode="Alzheimer's". Also recognize semantic descriptions: "general research use" → consentCode, "health and medical" → consentCode, "not for profit" → consentCode.
+**Important:** A disease name is a **consentCode** (not focus) when the query describes what research the data is _consented for_, not what the data is _about_. Context clues: "consented for", "approved for", "data use", "research consented". Example: "diabetes datasets consented for Alzheimer's research" → focus="diabetes", consentCode="Alzheimer's". Also recognize semantic descriptions: "general research use" → consentCode, "health and medical" → consentCode, "not for profit" → consentCode.
 
 ## Instructions
 
@@ -52,7 +52,7 @@ For these facets, extract the user's text and leave `values` empty. A resolve ag
 
 ## When to Set `message`
 
-If the query is too vague, ambiguous, or contains no searchable concepts, set `message` to a helpful clarification request. Return whatever mentions you *can* extract alongside the message.
+If the query is too vague, ambiguous, or contains no searchable concepts, set `message` to a helpful clarification request. Return whatever mentions you _can_ extract alongside the message.
 
 - **No searchable terms:** "I couldn't identify any searchable terms. Try specifying a disease (e.g., diabetes), measurement (e.g., blood pressure), or data type (e.g., WGS)."
 - **Ambiguous term:** "I'm not sure what 'the blood one' refers to. Did you mean a measurement like blood pressure or blood glucose, or a disease like a blood disorder?"

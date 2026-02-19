@@ -44,7 +44,7 @@ interface Study {
   dataTypes: string[];
   dbGapId: string;
   focus: string;
-  participantCount: number;
+  participantCount: number | null;
   platforms: string[];
   studyDesigns: string[];
   title: string;
@@ -90,7 +90,7 @@ export const Chat = (): JSX.Element => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
   const { dimensions } = useLayoutDimensions();
@@ -139,20 +139,22 @@ export const Chat = (): JSX.Element => {
       const data: SearchResponse = await res.json();
       setMessages((prev) => [...prev, { response: data, type: "assistant" }]);
     } catch (err) {
-      if (controller.signal.aborted) return;
-      const errorMessage =
-        err instanceof Error ? err.message : "An unknown error occurred.";
-      setMessages((prev) => [...prev, { error: errorMessage, type: "error" }]);
+      if (!controller.signal.aborted) {
+        const errorMessage =
+          err instanceof Error ? err.message : "An unknown error occurred.";
+        setMessages((prev) => [
+          ...prev,
+          { error: errorMessage, type: "error" },
+        ]);
+      }
     } finally {
       clearTimeout(timeout);
-      if (!controller.signal.aborted) {
-        setLoading(false);
-      }
+      setLoading(false);
     }
   }, [input, loading]);
 
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLInputElement>) => {
+    (e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
         handleSend();
@@ -279,7 +281,9 @@ function AssistantResponse({
                   <TableCell>{study.focus}</TableCell>
                   <TableCell>{study.dataTypes.join(", ")}</TableCell>
                   <TableCell>
-                    {study.participantCount.toLocaleString()}
+                    {study.participantCount != null
+                      ? study.participantCount.toLocaleString()
+                      : "—"}
                   </TableCell>
                   <TableCell>{study.studyDesigns.join(", ")}</TableCell>
                   <TableCell>{study.consentCodes.join(", ")}</TableCell>

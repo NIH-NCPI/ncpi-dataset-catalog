@@ -45,14 +45,14 @@ When a concept lookup fails, the resolve agent rewrites the term using medical k
 
 The NCPI catalog has these filterable facets:
 
-| Facet | Key | Values | Agent Behavior |
-|---|---|---|---|
-| **Platform** | `platform` | AnVIL, BDC, CRDC, KFDRC, dbGaP | Small enum — extract agent matches directly |
-| **Focus/Disease** | `focus` | ~950 MeSH terms | Resolve agent searches index |
-| **Data Type** | `dataType` | ~64 values (WGS, WXS, RNA-Seq, etc.) | Small enum — extract agent matches directly |
-| **Study Design** | `studyDesign` | ~15 values | Small enum — extract agent matches directly |
-| **Consent Code** | `consentCode` | ~840 codes (GRU, HMB, DS-*, etc.) | Extract agent recognizes standard codes |
-| **Measurement** | `measurement` | ~95K concept names | Resolve agent always searches index |
+| Facet             | Key           | Values                               | Agent Behavior                              |
+| ----------------- | ------------- | ------------------------------------ | ------------------------------------------- |
+| **Platform**      | `platform`    | AnVIL, BDC, CRDC, KFDRC, dbGaP       | Small enum — extract agent matches directly |
+| **Focus/Disease** | `focus`       | ~950 MeSH terms                      | Resolve agent searches index                |
+| **Data Type**     | `dataType`    | ~64 values (WGS, WXS, RNA-Seq, etc.) | Small enum — extract agent matches directly |
+| **Study Design**  | `studyDesign` | ~15 values                           | Small enum — extract agent matches directly |
+| **Consent Code**  | `consentCode` | ~840 codes (GRU, HMB, DS-\*, etc.)   | Extract agent recognizes standard codes     |
+| **Measurement**   | `measurement` | ~95K concept names                   | Resolve agent always searches index         |
 
 ## Architecture
 
@@ -117,23 +117,23 @@ User NL query
 
 Two levels of boolean logic:
 
-**Within a mention** — `values` are always **OR**. A mention with `values=["Total Cholesterol", "HDL Cholesterol"]` matches studies that have *any* of those.
+**Within a mention** — `values` are always **OR**. A mention with `values=["Total Cholesterol", "HDL Cholesterol"]` matches studies that have _any_ of those.
 
 **Between mentions** — always **AND**, unless `exclude=True` (NOT). Studies must satisfy every non-excluded mention. Excluded mentions subtract from the result.
 
 ### Supported Query Complexity
 
-| Level | Example | Supported |
-|---|---|---|
-| 1. Single facet, single value | `disease = Diabetes` | Yes |
-| 2. Single facet, OR within values | `dataType = (WGS OR WXS)` | Yes |
-| 3. Multiple facets, AND between | `(disease = Diabetes) AND (dataType = WGS)` | Yes |
-| 4. Multi-facet with OR within some | `(disease = Diabetes) AND (dataType = (WGS OR WXS))` | Yes |
-| 5. Same facet AND | `(disease = Diabetes) AND (disease = Heart Disease)` | Yes |
-| 6. NOT (exclusion) | `(measurement = Echo) AND NOT (measurement = TEE)` | Yes |
-| 7. Mixed | `(disease = Diabetes) AND (dataType = (WGS OR WXS)) AND NOT (platform = CRDC)` | Yes |
-| 8. OR between facets | `(disease = Diabetes) OR (measurement = Glucose)` | No — requires union of separate queries |
-| 9+ Nested groups | `((A AND B) OR (C AND D))` | No — requires expression tree model |
+| Level                              | Example                                                                        | Supported                               |
+| ---------------------------------- | ------------------------------------------------------------------------------ | --------------------------------------- |
+| 1. Single facet, single value      | `disease = Diabetes`                                                           | Yes                                     |
+| 2. Single facet, OR within values  | `dataType = (WGS OR WXS)`                                                      | Yes                                     |
+| 3. Multiple facets, AND between    | `(disease = Diabetes) AND (dataType = WGS)`                                    | Yes                                     |
+| 4. Multi-facet with OR within some | `(disease = Diabetes) AND (dataType = (WGS OR WXS))`                           | Yes                                     |
+| 5. Same facet AND                  | `(disease = Diabetes) AND (disease = Heart Disease)`                           | Yes                                     |
+| 6. NOT (exclusion)                 | `(measurement = Echo) AND NOT (measurement = TEE)`                             | Yes                                     |
+| 7. Mixed                           | `(disease = Diabetes) AND (dataType = (WGS OR WXS)) AND NOT (platform = CRDC)` | Yes                                     |
+| 8. OR between facets               | `(disease = Diabetes) OR (measurement = Glucose)`                              | No — requires union of separate queries |
+| 9+ Nested groups                   | `((A AND B) OR (C AND D))`                                                     | No — requires expression tree model     |
 
 ### Data Model
 
@@ -158,13 +158,16 @@ class QueryModel(BaseModel):
 ### Examples
 
 _"studies with blood pressure and diabetes"_:
+
 ```
 facet=measurement  exclude=false  values=[Systolic Blood Pressure, Diastolic Blood Pressure]
 facet=focus        exclude=false  values=[Diabetes Mellitus]
 ```
+
 Studies need ≥1 blood pressure concept AND a diabetes focus.
 
 _"GRU consented WGS from diabetic patients where vitamin K was measured"_:
+
 ```
 facet=consentCode  exclude=false  values=[GRU]
 facet=dataType     exclude=false  values=[WGS]
@@ -173,23 +176,28 @@ facet=measurement  exclude=false  values=[Vitamin K Intake]
 ```
 
 _"echocardiography studies but not transesophageal"_:
+
 ```
 facet=measurement  exclude=false  values=[Echocardiography]
 facet=measurement  exclude=true   values=[Transesophageal Echocardiography]
 ```
 
 _"studies with both heart disease and diabetes"_:
+
 ```
 facet=focus        exclude=false  values=[Cardiovascular Diseases]
 facet=focus        exclude=false  values=[Diabetes Mellitus]
 ```
+
 Two separate focus mentions, both AND — study must match both.
 
 _"studies with WGS or WXS data and cholesterol"_:
+
 ```
 facet=dataType     exclude=false  values=[WGS, WXS]
 facet=measurement  exclude=false  values=[Total Cholesterol, HDL Cholesterol, LDL Cholesterol]
 ```
+
 WGS/WXS are OR within one mention. Cholesterol concepts are OR within one mention. The two mentions are AND-ed.
 
 ## Concept Index
@@ -200,6 +208,7 @@ Built from two sources:
 2. **Study metadata facets**: `catalog/ncpi-platform-studies.json` — ~2,944 studies with focus, dataType, studyDesign, consentCode, platform
 
 Provides:
+
 - `search_concepts(query, facet?, limit?)` — case-insensitive substring search
 - `list_facet_values(facet)` — enumerate a facet's values
 - `get_studies_for_mentions(facet_values)` — deterministic study lookup
