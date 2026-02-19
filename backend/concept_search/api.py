@@ -118,16 +118,36 @@ async def search(request: SearchRequest) -> SearchResponse:
             query_model = await asyncio.wait_for(
                 run_pipeline(request.query), timeout=60.0
             )
-    except TimeoutError:
+    except (TimeoutError, asyncio.CancelledError):
         _log_json(event="search_timeout", query=request.query)
+        elapsed_ms = int((time.monotonic() - t_start) * 1000)
         return SearchResponse(
             message="Search timed out — please try a simpler query.",
             query=QueryModel(mentions=[]),
             studies=[],
             timing=SearchTiming(
                 lookup_ms=0,
-                pipeline_ms=int((time.monotonic() - t_start) * 1000),
-                total_ms=int((time.monotonic() - t_start) * 1000),
+                pipeline_ms=elapsed_ms,
+                total_ms=elapsed_ms,
+            ),
+            total_studies=0,
+        )
+    except Exception as exc:
+        _log_json(
+            event="search_pipeline_error",
+            query=request.query,
+            error=str(exc),
+            error_type=type(exc).__name__,
+        )
+        elapsed_ms = int((time.monotonic() - t_start) * 1000)
+        return SearchResponse(
+            message="Something went wrong — please try again.",
+            query=QueryModel(mentions=[]),
+            studies=[],
+            timing=SearchTiming(
+                lookup_ms=0,
+                pipeline_ms=elapsed_ms,
+                total_ms=elapsed_ms,
             ),
             total_studies=0,
         )

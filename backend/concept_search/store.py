@@ -162,7 +162,8 @@ class DuckDBStore:
                 "CREATE TABLE export_db.study_facet_values "
                 "AS SELECT * FROM study_facet_values"
             )
-            # Switch to attached DB to create index, then switch back
+            # DuckDB doesn't support schema-qualified CREATE INDEX names,
+            # so switch context to the attached DB for index creation.
             self._conn.execute("USE export_db")
             self._conn.execute(
                 "CREATE INDEX idx_sfv "
