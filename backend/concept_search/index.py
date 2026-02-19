@@ -70,21 +70,28 @@ class ConceptIndex:
     def load(self) -> None:
         """Load data — from cached DuckDB file if available, else from JSON."""
         cache_path = _resolve_cache_path()
-        if cache_path.exists():
-            logger.info("Loading from cached DuckDB: %s", cache_path)
-            self.store = DuckDBStore.load_from_file(str(cache_path))
-            self._rebuild_index_from_store()
-        else:
-            self._load_from_json()
-            # Save cache for next startup
-            if isinstance(self.store, DuckDBStore):
-                try:
-                    self.store.save_to_file(cache_path)
-                    logger.info("Saved DuckDB cache: %s", cache_path)
-                except OSError:
-                    logger.warning(
-                        "Could not save DuckDB cache to %s", cache_path
-                    )
+        lock_path = cache_path.with_suffix(".lock")
+
+        # Use a file lock so only one process builds the cache; others wait.
+        import filelock
+
+        lock = filelock.FileLock(lock_path, timeout=120)
+        with lock:
+            if cache_path.exists():
+                logger.info("Loading from cached DuckDB: %s", cache_path)
+                self.store = DuckDBStore.load_from_file(str(cache_path))
+                self._rebuild_index_from_store()
+            else:
+                self._load_from_json()
+                # Save cache for next startup
+                if isinstance(self.store, DuckDBStore):
+                    try:
+                        self.store.save_to_file(cache_path)
+                        logger.info("Saved DuckDB cache: %s", cache_path)
+                    except OSError:
+                        logger.warning(
+                            "Could not save DuckDB cache to %s", cache_path
+                        )
         # These are small JSON files bundled with the package — always load
         self.load_focus_categories()
         self.load_measurement_hierarchy()
