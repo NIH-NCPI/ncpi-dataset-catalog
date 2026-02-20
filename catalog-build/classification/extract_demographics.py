@@ -136,11 +136,10 @@ def find_subject_phenotypes(study_id: str) -> Path | None:
     study_dir = DBGAP_VARIABLES_DIR / study_id
     if not study_dir.is_dir():
         return None
-    for xml_path in study_dir.glob(
+    matches = sorted(study_dir.glob(
         f"{study_id}.*_Subject_Phenotypes.var_report.xml"
-    ):
-        return xml_path
-    return None
+    ))
+    return matches[-1] if matches else None
 
 
 def parse_subject_phenotypes(
@@ -250,8 +249,7 @@ def select_best_variable(
     """Select the best variable: highest n, then fewest nulls."""
     if not distributions:
         return None
-    distributions.sort(key=lambda d: (-d.n, d.nulls))
-    return distributions[0]
+    return sorted(distributions, key=lambda d: (-d.n, d.nulls))[0]
 
 
 def distribution_to_dict(dist: VariableDistribution) -> dict:
