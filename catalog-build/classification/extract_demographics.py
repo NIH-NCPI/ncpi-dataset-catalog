@@ -88,35 +88,44 @@ class VariableDistribution:
 # ---------------------------------------------------------------------------
 
 
-def load_computed_ancestry() -> dict[str, list[dict]]:
+def load_computed_ancestry() -> (
+    tuple[dict[str, list[dict]], dict[str, str]]
+):
     """Load genetically-inferred ancestry from the dbGaP advanced search CSV.
 
     Parses the 'Ancestry (computed)' column, which has the format:
         'Label (count), Label (count), ...'
 
-    Returns a dict mapping study_id (e.g., 'phs000209') to a list of
-    {'label': str, 'count': int} dicts sorted by count descending.
+    Returns (ancestry, study_names) where:
+      - ancestry maps study_id to category dicts sorted by count descending
+      - study_names maps study_id to study name from the CSV
     """
     ancestry: dict[str, list[dict]] = {}
+    study_names: dict[str, str] = {}
     if not DBGAP_CSV.exists():
-        return ancestry
+        return ancestry, study_names
 
     with open(DBGAP_CSV, newline="") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            raw = row.get("Ancestry (computed)", "").strip()
-            if not raw:
-                continue
             accession = row.get("accession", "")
             study_id = accession.split(".")[0]
             if not study_id:
+                continue
+
+            name = row.get("name", "").strip()
+            if name:
+                study_names[study_id] = name
+
+            raw = row.get("Ancestry (computed)", "").strip()
+            if not raw:
                 continue
 
             categories = parse_ancestry_string(raw)
             if categories:
                 ancestry[study_id] = categories
 
-    return ancestry
+    return ancestry, study_names
 
 
 def find_subject_phenotypes(study_id: str) -> Path | None:
@@ -261,6 +270,7 @@ def distribution_to_dict(dist: VariableDistribution) -> dict:
 def process_study(
     study_id: str,
     computed_ancestry: dict[str, list[dict]] | None = None,
+    csv_study_names: dict[str, str] | None = None,
 ) -> dict | None:
     """Process a single study and return its demographic profile."""
     xml_path = find_subject_phenotypes(study_id)
@@ -276,11 +286,19 @@ def process_study(
     if xml_path is not None:
         try:
             study_name, sex_dists, race_dists = parse_subject_phenotypes(xml_path)
-        except ET.ParseError:
-            pass
+        except ET.ParseError as exc:
+            print(
+                f"Warning: failed to parse Subject_Phenotypes XML for "
+                f"{study_id} at {xml_path}: {exc}",
+                file=sys.stderr,
+            )
         else:
             best_sex = select_best_variable(sex_dists)
             best_race = select_best_variable(race_dists)
+
+    # Fall back to CSV study name for ancestry-only studies
+    if not study_name:
+        study_name = (csv_study_names or {}).get(study_id, "")
 
     if best_sex is None and best_race is None and ancestry is None:
         return None
@@ -311,16 +329,23 @@ def main() -> None:
     args = parser.parse_args()
 
     print("Loading computed ancestry from dbGaP CSV...")
-    computed_ancestry = load_computed_ancestry()
+    computed_ancestry, csv_study_names = load_computed_ancestry()
     print(f"  {len(computed_ancestry)} studies with computed ancestry")
 
     if args.study:
-        result = process_study(args.study, computed_ancestry)
+        result = process_study(args.study, computed_ancestry, csv_study_names)
         if result is None:
             print(f"No demographic data found for {args.study}", file=sys.stderr)
             sys.exit(1)
         print(json.dumps({args.study: result}, indent=2))
         return
+
+    if not DBGAP_VARIABLES_DIR.is_dir():
+        print(
+            f"Error: dbGaP variables directory not found: {DBGAP_VARIABLES_DIR}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
     # Full pipeline: process all study directories
     study_ids = sorted(
@@ -341,7 +366,7 @@ def main() -> None:
         if i % 500 == 0:
             print(f"  {i}/{len(study_ids)}...")
 
-        result = process_study(study_id, computed_ancestry)
+        result = process_study(study_id, computed_ancestry, csv_study_names)
         if result is None:
             if find_subject_phenotypes(study_id) is None:
                 skipped_no_sp += 1

@@ -36,7 +36,7 @@ var_report.xml ────┤
 LLM (Haiku) ───────┘
 ```
 
-The pipeline has four major stages:
+The pipeline has five major stages:
 
 1. **Study discovery** — which studies exist and on which platforms
 2. **Metadata enrichment** — titles, descriptions, consent codes, participant
@@ -45,6 +45,8 @@ The pipeline has four major stages:
    Semantic Scholar
 4. **Variable classification** — 340K dbGaP variables mapped to ~12K concepts
    via LLM, organized into a searchable hierarchy
+5. **Demographic distributions** — per-study sex, race/ethnicity, and computed
+   ancestry extracted from dbGaP metadata
 
 ---
 
@@ -280,35 +282,48 @@ self-reported race/ethnicity since they measure different things.
 
 ### 5c. Output
 
-The pipeline produces `demographic-profiles.json` with three optional fields per
-study:
+The pipeline produces `demographic-profiles.json` with top-level metadata and a
+`studies` map. Each study entry has up to three optional fields:
 
 ```json
 {
-  "phs000424": {
-    "studyName": "GTEx",
-    "sex": {
-      "variableName": "SEX",
-      "n": 981,
-      "categories": [
-        { "label": "Male", "count": 654 },
-        { "label": "Female", "count": 327 }
-      ]
-    },
-    "raceEthnicity": {
-      "variableName": "RACE",
-      "n": 981,
-      "categories": [
-        { "label": "White", "count": 833 },
-        { "label": "Black or African American", "count": 124 }
-      ]
-    },
-    "computedAncestry": {
-      "n": 185,
-      "categories": [
-        { "label": "European", "count": 153 },
-        { "label": "African American", "count": 25 }
-      ]
+  "extractedAt": "2026-02-20T18:12:44.167195+00:00",
+  "stats": {
+    "totalStudies": 2782,
+    "studiesWithSex": 1212,
+    "studiesWithRaceEthnicity": 1064,
+    "studiesWithComputedAncestry": 462,
+    "totalWithDemographics": 1734
+  },
+  "studies": {
+    "phs000424": {
+      "studyName": "GTEx",
+      "sex": {
+        "variableName": "SEX",
+        "n": 981,
+        "categories": [
+          { "label": "Male", "count": 654 },
+          { "label": "Female", "count": 327 }
+        ]
+      },
+      "raceEthnicity": {
+        "variableName": "RACE",
+        "n": 981,
+        "categories": [
+          { "label": "White", "count": 833 },
+          { "label": "Black or African American", "count": 124 }
+        ]
+      },
+      "computedAncestry": {
+        "n": 185,
+        "categories": [
+          { "label": "European", "count": 153 },
+          { "label": "African American", "count": 25 },
+          { "label": "Hispanic1", "count": 3 },
+          { "label": "East Asian", "count": 2 },
+          { "label": "Hispanic2", "count": 2 }
+        ]
+      }
     }
   }
 }

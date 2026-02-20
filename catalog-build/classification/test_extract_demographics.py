@@ -467,7 +467,7 @@ class TestParseSubjectPhenotypes:
 
 class TestLoadComputedAncestry:
     def test_parses_csv(self, study_tree):
-        ancestry = ed.load_computed_ancestry()
+        ancestry, study_names = ed.load_computed_ancestry()
 
         assert "phs000001" in ancestry
         cats = ancestry["phs000001"]
@@ -476,23 +476,31 @@ class TestLoadComputedAncestry:
         assert cats[2] == {"count": 10, "label": "East Asian"}
 
     def test_ancestry_only_study(self, study_tree):
-        ancestry = ed.load_computed_ancestry()
+        ancestry, _ = ed.load_computed_ancestry()
         assert "phs000005" in ancestry
         assert ancestry["phs000005"][0] == {"count": 100, "label": "Hispanic2"}
 
     def test_skips_empty_ancestry(self, study_tree):
-        ancestry = ed.load_computed_ancestry()
+        ancestry, _ = ed.load_computed_ancestry()
         assert "phs000006" not in ancestry
+
+    def test_returns_study_names(self, study_tree):
+        _, study_names = ed.load_computed_ancestry()
+        assert study_names["phs000001"] == "Test Study Alpha"
+        assert study_names["phs000005"] == "Ancestry Only Study"
+        assert study_names["phs000006"] == "No Ancestry Study"
 
     def test_missing_csv_returns_empty(self, study_tree):
         ed.DBGAP_CSV = Path("/nonexistent/file.csv")
-        assert ed.load_computed_ancestry() == {}
+        ancestry, study_names = ed.load_computed_ancestry()
+        assert ancestry == {}
+        assert study_names == {}
 
 
 class TestProcessStudy:
     def test_full_result(self, study_tree):
-        ancestry = ed.load_computed_ancestry()
-        result = ed.process_study("phs000001", ancestry)
+        ancestry, csv_names = ed.load_computed_ancestry()
+        result = ed.process_study("phs000001", ancestry, csv_names)
 
         assert result is not None
         assert result["studyName"] == "Test Study Alpha"
@@ -501,18 +509,20 @@ class TestProcessStudy:
         assert result["raceEthnicity"]["variableName"] == "RACE"
         assert result["computedAncestry"]["n"] == 100
 
-    def test_ancestry_only(self, study_tree):
-        ancestry = ed.load_computed_ancestry()
-        result = ed.process_study("phs000005", ancestry)
+    def test_ancestry_only_has_study_name(self, study_tree):
+        """Ancestry-only studies should get their name from the CSV."""
+        ancestry, csv_names = ed.load_computed_ancestry()
+        result = ed.process_study("phs000005", ancestry, csv_names)
 
         assert result is not None
+        assert result["studyName"] == "Ancestry Only Study"
         assert "sex" not in result
         assert "raceEthnicity" not in result
         assert result["computedAncestry"]["n"] == 150
 
     def test_no_data_returns_none(self, study_tree):
-        ancestry = ed.load_computed_ancestry()
-        assert ed.process_study("phs000003", ancestry) is None
+        ancestry, csv_names = ed.load_computed_ancestry()
+        assert ed.process_study("phs000003", ancestry, csv_names) is None
 
     def test_missing_study_returns_none(self, study_tree):
         assert ed.process_study("phs999999") is None
