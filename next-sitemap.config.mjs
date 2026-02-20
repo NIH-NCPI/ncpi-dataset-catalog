@@ -15,7 +15,7 @@ const siteMapConfig = {
     policies: [
       {
         allow: isProd ? "/" : undefined,
-        disallow: isProd ? undefined : "/",
+        disallow: isProd ? "/chat" : "/",
         userAgent: "*",
       },
     ],

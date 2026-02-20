@@ -19,6 +19,9 @@ dev = [
     "pytest-asyncio",
 ]
 
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
 [project.scripts]
 concept-search = "concept_search.cli:main"
 concept-search-api = "concept_search.api:main"

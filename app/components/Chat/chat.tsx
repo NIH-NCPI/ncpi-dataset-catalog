@@ -133,6 +133,16 @@ export const Chat = (): JSX.Element => {
         method: "POST",
         signal: controller.signal,
       });
+      if (res.status === 429) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            error: "You're sending too many requests. Please wait a moment.",
+            type: "error",
+          },
+        ]);
+        return;
+      }
       if (!res.ok) {
         throw new Error(`Search failed (${res.status})`);
       }
