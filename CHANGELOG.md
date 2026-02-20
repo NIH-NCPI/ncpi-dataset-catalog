@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.9.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.8.0...v0.9.0) (2026-02-20)
+
+
+### Features
+
+* add platform deep links for BDC, CRDC, and KFDRC [#165](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/165) ([#166](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/166)) ([ebc913a](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/ebc913a884b0a74a4eae37d1c18fb4b4ca97b59c))
+* add Schema.org Dataset JSON-LD for Google Dataset Search ([#171](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/171)) ([7aa147c](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/7aa147cbc7078c70e3adfb07e41ccb2ce7075c18))
+* generate robots.txt to block dev site from search engines [#175](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/175) ([#176](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/176)) ([81c2c1f](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/81c2c1fb403b6d75e5757b714051b837d4d8dff1))
+* NLP search API, concept pipeline, and research mode design docs [#178](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/178) ([#180](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/180)) ([1702813](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/170281317eab4ab15d8f2f7fc5ef01eaf8721217))
+
+
+### Bug Fixes
+
+* add search API URL to dev site config ([#181](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/181)) ([67c2e8c](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/67c2e8c6343e31162c788c466da6506e3aca44dd))
+
 ## [0.8.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.7.0...v0.8.0) (2026-02-10)
 
 
