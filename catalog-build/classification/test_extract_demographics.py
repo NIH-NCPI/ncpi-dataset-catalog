@@ -1,8 +1,9 @@
 """Tests for extract_demographics.py."""
 
 import textwrap
-import xml.etree.ElementTree as ET
 from pathlib import Path
+
+from lxml import etree
 
 import pytest
 
@@ -317,7 +318,7 @@ class TestExtractDistribution:
     """Unit tests for extract_distribution using in-memory XML elements."""
 
     def _make_variable(self, xml_str):
-        return ET.fromstring(xml_str)
+        return etree.fromstring(xml_str)
 
     def test_extracts_enums(self):
         var = self._make_variable("""

@@ -11,15 +11,18 @@ Usage:
     python extract_demographics.py --study phs000209  # Single study
 """
 
+from __future__ import annotations
+
 import argparse
 import csv
 import json
 import re
 import sys
-import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
+
+from lxml import etree
 
 # ---------------------------------------------------------------------------
 # Paths (relative to this script's location)
@@ -105,7 +108,7 @@ def load_computed_ancestry() -> (
     if not DBGAP_CSV.exists():
         return ancestry, study_names
 
-    with open(DBGAP_CSV, newline="") as f:
+    with open(DBGAP_CSV, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             accession = row.get("accession", "")
@@ -149,7 +152,7 @@ def parse_subject_phenotypes(
 
     Returns (study_name, sex_distributions, race_distributions).
     """
-    tree = ET.parse(xml_path)
+    tree = etree.parse(xml_path)
     root = tree.getroot()
 
     # Extract metadata from the <data_table> root element
@@ -186,7 +189,7 @@ def parse_subject_phenotypes(
 
 
 def extract_distribution(
-    var_elem: ET.Element,
+    var_elem: etree._Element,
     var_name: str,
     var_id: str,
     dataset_id: str,
@@ -284,7 +287,7 @@ def process_study(
     if xml_path is not None:
         try:
             study_name, sex_dists, race_dists = parse_subject_phenotypes(xml_path)
-        except ET.ParseError as exc:
+        except etree.XMLSyntaxError as exc:
             print(
                 f"Warning: failed to parse Subject_Phenotypes XML for "
                 f"{study_id} at {xml_path}: {exc}",
@@ -393,7 +396,7 @@ def main() -> None:
     }
 
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with open(OUTPUT_FILE, "w") as f:
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(output, f, indent=2)
     print(f"\nWrote {OUTPUT_FILE}")
     print(f"  Total studies: {len(study_ids)}")
