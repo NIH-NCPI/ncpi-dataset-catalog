@@ -139,10 +139,17 @@ def find_subject_phenotypes(study_id: str) -> Path | None:
     study_dir = DBGAP_VARIABLES_DIR / study_id
     if not study_dir.is_dir():
         return None
-    matches = sorted(study_dir.glob(
+    matches = list(study_dir.glob(
         f"{study_id}.*_Subject_Phenotypes.var_report.xml"
     ))
-    return matches[-1] if matches else None
+    if not matches:
+        return None
+
+    def _extract_version(path: Path) -> int:
+        m = re.search(r"\.v(\d+)", path.name)
+        return int(m.group(1)) if m else -1
+
+    return max(matches, key=_extract_version)
 
 
 def parse_subject_phenotypes(
@@ -152,7 +159,7 @@ def parse_subject_phenotypes(
 
     Returns (study_name, sex_distributions, race_distributions).
     """
-    tree = etree.parse(xml_path)
+    tree = etree.parse(str(xml_path))
     root = tree.getroot()
 
     # Extract metadata from the <data_table> root element

@@ -292,6 +292,20 @@ class TestSelectBestVariable:
         )
         assert ed.select_best_variable([more_nulls, fewer_nulls]).name == "fewer_nulls"
 
+    def test_does_not_mutate_input_list(self):
+        first = ed.VariableDistribution(
+            categories=[], dataset_id="d", n=50, name="first",
+            nulls=0, table_name="t", variable_id="v1",
+        )
+        second = ed.VariableDistribution(
+            categories=[], dataset_id="d", n=200, name="second",
+            nulls=0, table_name="t", variable_id="v2",
+        )
+        dists = [first, second]
+        ed.select_best_variable(dists)
+        assert dists[0].name == "first"
+        assert dists[1].name == "second"
+
 
 class TestDistributionToDict:
     def test_output_keys(self):
@@ -421,6 +435,15 @@ class TestFindSubjectPhenotypes:
         path = ed.find_subject_phenotypes("phs000001")
         assert path.name.startswith("phs000001.")
 
+    def test_picks_highest_numeric_version(self, study_tree):
+        """v13 should beat v9 even though '9' > '1' lexicographically."""
+        study_dir = ed.DBGAP_VARIABLES_DIR / "phs000001"
+        (study_dir / "phs000001.v13.pht000123.v13.p1.Test_Subject_Phenotypes.var_report.xml").write_text(
+            SUBJECT_PHENOTYPES_XML
+        )
+        path = ed.find_subject_phenotypes("phs000001")
+        assert ".v13." in path.name
+
 
 class TestParseSubjectPhenotypes:
     def test_extracts_sex_and_race(self, study_tree):
@@ -527,3 +550,14 @@ class TestProcessStudy:
 
     def test_missing_study_returns_none(self, study_tree):
         assert ed.process_study("phs999999") is None
+
+    def test_malformed_xml_returns_none_with_warning(self, study_tree, capsys):
+        """Corrupt XML should log a warning and return None, not crash."""
+        study_dir = ed.DBGAP_VARIABLES_DIR / "phs000010"
+        study_dir.mkdir()
+        (study_dir / "phs000010.v1.pht000555.v1.p1.Bad_Subject_Phenotypes.var_report.xml").write_text(
+            "<data_table><broken"
+        )
+        result = ed.process_study("phs000010")
+        assert result is None
+        assert "Warning" in capsys.readouterr().err
