@@ -18,7 +18,7 @@ DEV_ECR_REPO = 708377107803.dkr.ecr.us-east-1.amazonaws.com/jso-ncpi-dataset-cat
 
 # Prod environment (update after first terraform apply-prod)
 PROD_AWS_PROFILE = ncpi-prod-deployer
-PROD_ECR_REPO = 708377107803.dkr.ecr.us-east-1.amazonaws.com/FIXME-run-terraform-apply-prod
+PROD_ECR_REPO = 701973344956.dkr.ecr.us-east-1.amazonaws.com/5wu-ncpi-dataset-catalog
 
 AWS_REGION = us-east-1
 

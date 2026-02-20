@@ -13,7 +13,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -21,6 +21,7 @@ from .api_models import SearchRequest, SearchResponse, SearchTiming, StudySummar
 from .index import get_index
 from .models import Facet, QueryModel, ResolvedMention
 from .pipeline import run_pipeline
+from .rate_limit import RateLimiter
 
 # Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
 logging.basicConfig(
@@ -41,6 +42,22 @@ _backend_dir = Path(__file__).resolve().parent.parent
 load_dotenv(_backend_dir / ".env")
 
 
+async def _cleanup_rate_limiter() -> None:
+    """Periodically purge expired rate-limit entries."""
+    while True:
+        await asyncio.sleep(300)
+        await _rate_limiter.cleanup()
+
+
+def _get_client_ip(fastapi_request: Request) -> str:
+    """Extract client IP, respecting X-Forwarded-For from App Runner."""
+    forwarded = fastapi_request.headers.get("x-forwarded-for")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    client = fastapi_request.client
+    return client.host if client else "unknown"
+
+
 @asynccontextmanager
 async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     """Preload the ConceptIndex at startup."""
@@ -49,13 +66,20 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     get_index()
     elapsed = time.monotonic() - t0
     _log_json(event="index_loaded", elapsed_s=round(elapsed, 1))
-    yield
+    cleanup_task = asyncio.create_task(_cleanup_rate_limiter())
+    try:
+        yield
+    finally:
+        cleanup_task.cancel()
 
 
 app = FastAPI(title="NCPI Concept Search API", lifespan=lifespan)
 
 # Limit concurrent LLM pipeline calls to cap Anthropic API costs.
 _pipeline_semaphore = asyncio.Semaphore(5)
+
+# Per-IP rate limiter (env-configurable, defaults 10 req / 60 s).
+_rate_limiter = RateLimiter()
 
 # CORS — allow known origins plus any extras in CORS_ORIGINS env var
 _cors_origins = [
@@ -107,8 +131,19 @@ def _split_mentions(
 
 
 @app.post("/search", response_model=SearchResponse)
-async def search(request: SearchRequest) -> SearchResponse:
+async def search(
+    request: SearchRequest, fastapi_request: Request
+) -> SearchResponse | JSONResponse:
     """Run the concept search pipeline and return matching studies."""
+    # 1. Rate limit check
+    client_ip = _get_client_ip(fastapi_request)
+    if not await _rate_limiter.is_allowed(client_ip):
+        _log_json(event="rate_limited", ip=client_ip, query=request.query)
+        return JSONResponse(
+            content={"detail": "Too many requests — please try again later."},
+            status_code=429,
+        )
+
     _log_json(event="search_request", query=request.query)
     t_start = time.monotonic()
 
