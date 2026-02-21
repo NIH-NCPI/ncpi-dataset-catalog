@@ -431,6 +431,84 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
                 mentions=[_rm("blood pressure", Facet.MEASUREMENT)],
             ),
         ),
+        # --- Consent eligibility detection ---
+        Case(
+            name="consent-eligibility-disease",
+            inputs="what datasets can I use for diabetes research?",
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("diabetes", Facet.FOCUS),
+                    _rm("diabetes", Facet.CONSENT_CODE),
+                ],
+            ),
+        ),
+        Case(
+            name="consent-for-profit",
+            inputs="for-profit cancer datasets",
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("cancer", Facet.FOCUS),
+                    _rm("for-profit cancer", Facet.CONSENT_CODE),
+                ],
+            ),
+        ),
+        Case(
+            name="consent-nonprofit-general",
+            inputs="what studies are available for general health research at a university?",
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("general health research", Facet.CONSENT_CODE),
+                ],
+            ),
+        ),
+        Case(
+            name="consent-explicit-code",
+            inputs="GRU studies with blood pressure data",
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("GRU", Facet.CONSENT_CODE),
+                    _rm("blood pressure", Facet.MEASUREMENT),
+                ],
+            ),
+        ),
+        Case(
+            name="consent-no-eligibility-cue",
+            inputs="diabetes studies on AnVIL",
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("diabetes", Facet.FOCUS),
+                    _rm("AnVIL", Facet.PLATFORM, ["AnVIL"]),
+                ],
+            ),
+        ),
+        Case(
+            name="consent-consented-for",
+            inputs="what datasets are consented for research on diabetes",
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("diabetes", Facet.FOCUS),
+                    _rm("diabetes", Facet.CONSENT_CODE),
+                ],
+            ),
+        ),
+        Case(
+            name="consent-approved-for",
+            inputs="studies approved for Alzheimer's research",
+            # "approved for" is a consent context cue — the disease describes
+            # what research is *consented for*, not what the study is *about*
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("Alzheimer's", Facet.CONSENT_CODE),
+                ],
+            ),
+        ),
     ],
 )
 

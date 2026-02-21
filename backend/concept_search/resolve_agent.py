@@ -8,6 +8,7 @@ from pathlib import Path
 from pydantic_ai import Agent, RunContext
 from pydantic_ai.settings import ModelSettings
 
+from .consent_logic import compute_eligible_codes, resolve_disease_name
 from .index import ConceptIndex
 from .models import ConceptMatch, RawMention, ResolveResult
 
@@ -141,6 +142,64 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                     Matching codes with study counts.
                 """
                 return ctx.deps.get_consent_codes_for_base(base_code, limit=limit)
+
+            @_agent.tool
+            def compute_consent_eligibility(
+                ctx: RunContext[ConceptIndex],
+                purpose: str = "general",
+                disease: str | None = None,
+                is_nonprofit: bool | None = None,
+                explicit_code: str | None = None,
+                disease_only: bool = False,
+            ) -> dict:
+                """Compute all consent codes eligible for a research use case.
+
+                Use this for consentCode mentions. Single tool call — handles
+                both explicit codes and eligibility use cases.
+
+                Two modes:
+                - **explicit_code**: prefix-matches a code (e.g. "GRU" →
+                  GRU, GRU-IRB, GRU-NPU).
+                - **purpose**: "general", "health", or "disease". GRU is
+                  always eligible; HMB for health/disease; DS-X when the
+                  user's disease matches X.
+
+                Args:
+                    ctx: Run context with ConceptIndex dependency.
+                    purpose: "general", "health", or "disease".
+                    disease: Disease name or abbreviation (e.g. "diabetes",
+                        "DIAB", "cancer", "CA", "type 1 diabetes", "T1D").
+                        Automatically resolved to the correct abbreviation.
+                    is_nonprofit: True or None includes all codes; False
+                        excludes codes with NPU modifier.
+                    explicit_code: Consent code to prefix-match (e.g. "GRU",
+                        "HMB", "DS-CVD"). Overrides purpose logic.
+                    disease_only: True when the user says "only",
+                        "specifically", or "disease-specific". Restricts
+                        results to DS-* codes only (excludes GRU, HMB, etc.).
+
+                Returns:
+                    Dict with 'eligible_codes' list and 'total_codes' count.
+                """
+                all_values = ctx.deps.list_facet_values("consentCode")
+                all_codes = [m.value for m in all_values]
+                # Resolve disease name to abbreviation if needed
+                resolved_disease = None
+                if disease:
+                    resolved_disease = resolve_disease_name(disease)
+                eligible = compute_eligible_codes(
+                    all_codes,
+                    purpose=purpose,
+                    disease=resolved_disease,
+                    is_nonprofit=is_nonprofit,
+                    explicit_code=explicit_code,
+                    disease_only=disease_only,
+                )
+                return {
+                    "eligible_codes": eligible,
+                    "resolved_disease": resolved_disease,
+                    "total_codes": len(all_codes),
+                }
 
             @_agent.tool
             def get_measurement_category_concepts(
