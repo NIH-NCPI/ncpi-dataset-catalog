@@ -895,54 +895,78 @@ class TestBuildStudySummary:
         assert summary.demographics is None
 
     def test_percent_computation(self) -> None:
-        """Percent values are correct in the response."""
-        study = {
-            "consentCodes": [],
-            "dataTypes": [],
-            "dbGapId": "phs000101",
-            "demographics": {
-                "sex": {
-                    "categories": [
-                        {"count": 60, "label": "Male", "percent": 60.0},
-                        {"count": 40, "label": "Female", "percent": 40.0},
-                    ],
-                    "n": 100,
+        """Percent is computed by _load_demographic_profiles, not passed through."""
+        from concept_search.index import _load_demographic_profiles
+
+        data = {
+            "studies": {
+                "phs000101": {
+                    "sex": {
+                        "n": 200,
+                        "categories": [
+                            {"label": "Male", "count": 120},
+                            {"label": "Female", "count": 80},
+                        ],
+                    },
                 },
             },
-            "focus": None,
-            "participantCount": 100,
-            "platforms": [],
-            "studyDesigns": [],
-            "title": "Pct Test",
         }
-        summary = _build_study_summary(study)
-        cats = summary.demographics.sex.categories
-        assert cats[0].percent == 60.0
-        assert cats[1].percent == 40.0
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".json", delete=False
+        ) as f:
+            json.dump(data, f)
+            tmp_path = f.name
+
+        mappings = _load_demographic_mappings()
+        with unittest.mock.patch(
+            "concept_search.index._resolve_demographics_path",
+            return_value=Path(tmp_path),
+        ):
+            demo_dict, _ = _load_demographic_profiles(mappings)
+
+        os.unlink(tmp_path)
+
+        cats = demo_dict["phs000101"]["sex"]["categories"]
+        male = next(c for c in cats if c["label"] == "Male")
+        female = next(c for c in cats if c["label"] == "Female")
+        assert male["percent"] == 60.0
+        assert female["percent"] == 40.0
 
     def test_zero_n_no_division_error(self) -> None:
-        """n=0 produces percent=0.0 without ZeroDivisionError."""
-        # This tests the normalization path where percent is pre-computed
-        study = {
-            "consentCodes": [],
-            "dataTypes": [],
-            "dbGapId": "phs000102",
-            "demographics": {
-                "sex": {
-                    "categories": [
-                        {"count": 0, "label": "Male", "percent": 0.0},
-                    ],
-                    "n": 0,
+        """n=0 produces percent=0.0 without ZeroDivisionError in the computation path."""
+        from concept_search.index import _load_demographic_profiles
+
+        data = {
+            "studies": {
+                "phs000102": {
+                    "sex": {
+                        "n": 0,
+                        "categories": [
+                            {"label": "Male", "count": 0},
+                        ],
+                    },
                 },
             },
-            "focus": None,
-            "participantCount": 0,
-            "platforms": [],
-            "studyDesigns": [],
-            "title": "Zero N",
         }
-        summary = _build_study_summary(study)
-        assert summary.demographics.sex.categories[0].percent == 0.0
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".json", delete=False
+        ) as f:
+            json.dump(data, f)
+            tmp_path = f.name
+
+        mappings = _load_demographic_mappings()
+        with unittest.mock.patch(
+            "concept_search.index._resolve_demographics_path",
+            return_value=Path(tmp_path),
+        ):
+            demo_dict, _ = _load_demographic_profiles(mappings)
+
+        os.unlink(tmp_path)
+
+        # n=0 and count=0: categories filtered out, no EAV rows, no crash
+        sex = demo_dict["phs000102"]["sex"]
+        assert sex["categories"] == []
+        assert sex["n"] == 0
 
     def test_all_three_dimensions(self) -> None:
         """StudySummary with sex, raceEthnicity, and computedAncestry."""
