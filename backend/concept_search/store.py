@@ -266,29 +266,34 @@ class DuckDBStore:
 
     def query_variables(
         self,
-        concepts: list[str],
+        concepts: list[str] | None = None,
         limit: int = 100,
         study_ids: set[str] | None = None,
     ) -> list[dict]:
-        """Return variables matching any of the given concept names.
+        """Return variables matching concept names and/or study IDs.
 
         Args:
-            concepts: Canonical concept names to match (OR-ed).
+            concepts: Canonical concept names to match (OR-ed). If None,
+                all concepts are included (filtered by study_ids).
             limit: Maximum number of variable rows to return.
             study_ids: If provided, restrict results to these studies.
 
         Returns:
             Variable dicts with study title joined from the studies table.
         """
-        if not concepts:
+        if not concepts and not study_ids:
             return []
-        concept_ph = ", ".join("?" for _ in concepts)
-        params: list[str] = [c.lower() for c in concepts]
-        where = f"v.concept_lower IN ({concept_ph})"
+        params: list[str] = []
+        clauses: list[str] = []
+        if concepts:
+            concept_ph = ", ".join("?" for _ in concepts)
+            clauses.append(f"v.concept_lower IN ({concept_ph})")
+            params.extend(c.lower() for c in concepts)
         if study_ids is not None:
             study_ph = ", ".join("?" for _ in study_ids)
-            where += f" AND v.study_id IN ({study_ph})"
+            clauses.append(f"v.study_id IN ({study_ph})")
             params.extend(study_ids)
+        where = " AND ".join(clauses)
         sql = (
             "SELECT v.concept, v.dataset_id, v.description, v.phv_id,"
             "  v.study_id, v.table_name, v.variable_name,"

@@ -294,7 +294,7 @@ async def search(
         include, exclude = _split_mentions(query_model.mentions)
         if intent == "auto":
             pass  # Ambiguous — return clarification message only
-        elif intent == "variable":
+        elif intent == "variable" and isinstance(index.store, DuckDBStore):
             # Collect resolved measurement concepts for variable lookup
             concepts = [
                 v
@@ -302,20 +302,20 @@ async def search(
                 if m.facet == Facet.MEASUREMENT and not m.exclude
                 for v in m.values
             ]
-            if concepts and isinstance(index.store, DuckDBStore):
-                # Apply study-level constraints (platform, dataType, etc.)
-                non_measurement = [
-                    c for c in include if c[0] != Facet.MEASUREMENT
-                ]
-                study_ids: set[str] | None = None
-                if non_measurement or exclude:
-                    matched = index.query_studies(
-                        non_measurement or include, exclude or None
-                    )
-                    study_ids = {s.get("dbGapId", "") for s in matched}
-                variable_rows = index.store.query_variables(
-                    concepts, study_ids=study_ids
+            # Apply study-level constraints (platform, dataType, etc.)
+            non_measurement = [
+                c for c in include if c[0] != Facet.MEASUREMENT
+            ]
+            study_ids: set[str] | None = None
+            if non_measurement or exclude:
+                matched = index.query_studies(
+                    non_measurement or include, exclude or None
                 )
+                study_ids = {s.get("dbGapId", "") for s in matched}
+            variable_rows = index.store.query_variables(
+                concepts=concepts or None,
+                study_ids=study_ids,
+            )
         else:
             studies = index.query_studies(include, exclude or None)
 
