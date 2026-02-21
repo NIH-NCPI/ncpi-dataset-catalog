@@ -14,7 +14,7 @@ import tempfile
 
 import pytest
 
-from concept_search.api import _build_demographics, _build_study_summary
+from concept_search.api import _build_study_summary
 from concept_search.index import _load_demographic_mappings, _normalize_categories
 from concept_search.models import Facet
 from concept_search.store import DuckDBStore, StudyStore

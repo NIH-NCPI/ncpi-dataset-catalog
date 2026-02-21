@@ -252,11 +252,11 @@ class ConceptIndex:
             Facet.RACE_ETHNICITY.value: Facet.RACE_ETHNICITY,
             Facet.SEX.value: Facet.SEX,
         }
-        seen: dict[tuple[str, str, str], bool] = {}
+        seen: set[tuple[str, str, str]] = set()
         for db_gap_id, facet_str, value, _ in demo_eav_rows:
             key = (db_gap_id, facet_str, value)
             if key not in seen:
-                seen[key] = True
+                seen.add(key)
                 facet = facet_val_map[facet_str]
                 demo_counts[facet][value] += 1
         for facet, counts in demo_counts.items():
