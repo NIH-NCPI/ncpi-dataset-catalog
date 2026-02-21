@@ -165,6 +165,8 @@ def _build_dbgap_variable_url(study_id: str, phv_id: str) -> str:
     Returns:
         Full URL to the variable page on dbGaP.
     """
+    if not phv_id:
+        return ""
     # Extract the numeric portion from the phv ID (strip "phv" prefix and version)
     phv_num = phv_id.split(".")[0].replace("phv", "")
     return (
@@ -290,7 +292,9 @@ async def search(
 
     if query_model.mentions:
         include, exclude = _split_mentions(query_model.mentions)
-        if intent == "variable":
+        if intent == "auto":
+            pass  # Ambiguous — return clarification message only
+        elif intent == "variable":
             # Collect resolved measurement concepts for variable lookup
             concepts = [
                 v

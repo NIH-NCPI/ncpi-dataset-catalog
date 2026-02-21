@@ -315,7 +315,7 @@ function AssistantResponse({
         </SectionRow>
       )}
 
-      {response.intent === "variable" ? (
+      {response.intent === "auto" ? null : response.intent === "variable" ? (
         <>
           <ResultCount>
             Found {response.totalVariables}{" "}
