@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.10.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.9.0...v0.10.0) (2026-02-21)
+
+
+### Features
+
+* add bot protection for chat search endpoint ([#184](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/184)) ([def292a](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/def292a79de8703ebe1aea9ded13d5074857ee21))
+* add variable-level search with intent detection ([#197](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/197)) ([ea821bf](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/ea821bfd42c28427a7b59be89eaf4b97e8325675))
+* extract and integrate demographics into search API ([#189](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/189)) ([cc71aea](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/cc71aea564c3c6f707167554e226a6bbfd2b49bb))
+* extract per-study demographic distributions from dbGaP ([#187](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/187)) ([3d910be](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/3d910be6fa3772b5603243fbcf2a0f82a7ce38b3))
+* up-arrow recalls previous query in chat input ([#193](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/193)) ([fb98c1d](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/fb98c1d1e9af0f7e3c9f9b6e059c70b102639090))
+
 ## [0.9.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.8.0...v0.9.0) (2026-02-20)
 
 
