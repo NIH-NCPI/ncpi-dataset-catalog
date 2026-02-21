@@ -118,7 +118,7 @@ export const Chat = (): JSX.Element => {
     if (!query || loading) return;
 
     setInput("");
-    setQueryHistory((prev) => [...prev, query]);
+    setQueryHistory((prev) => [...prev, query].slice(-50));
     historyIndexRef.current = -1;
     draftRef.current = "";
     setMessages((prev) => [...prev, { text: query, type: "user" }]);
@@ -192,7 +192,11 @@ export const Chat = (): JSX.Element => {
           historyIndexRef.current -= 1;
         }
         setInput(queryHistory[historyIndexRef.current]);
-      } else if (e.key === "ArrowDown" && historyIndexRef.current >= 0) {
+      } else if (
+        e.key === "ArrowDown" &&
+        historyIndexRef.current >= 0 &&
+        cursorAtStart
+      ) {
         e.preventDefault();
         if (historyIndexRef.current < queryHistory.length - 1) {
           historyIndexRef.current += 1;
