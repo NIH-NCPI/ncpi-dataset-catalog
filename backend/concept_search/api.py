@@ -303,7 +303,19 @@ async def search(
                 for v in m.values
             ]
             if concepts and isinstance(index.store, DuckDBStore):
-                variable_rows = index.store.query_variables(concepts)
+                # Apply study-level constraints (platform, dataType, etc.)
+                non_measurement = [
+                    c for c in include if c[0] != Facet.MEASUREMENT
+                ]
+                study_ids: set[str] | None = None
+                if non_measurement or exclude:
+                    matched = index.query_studies(
+                        non_measurement or include, exclude or None
+                    )
+                    study_ids = {s.get("dbGapId", "") for s in matched}
+                variable_rows = index.store.query_variables(
+                    concepts, study_ids=study_ids
+                )
         else:
             studies = index.query_studies(include, exclude or None)
 

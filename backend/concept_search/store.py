@@ -268,30 +268,37 @@ class DuckDBStore:
         self,
         concepts: list[str],
         limit: int = 100,
+        study_ids: set[str] | None = None,
     ) -> list[dict]:
         """Return variables matching any of the given concept names.
 
         Args:
             concepts: Canonical concept names to match (OR-ed).
             limit: Maximum number of variable rows to return.
+            study_ids: If provided, restrict results to these studies.
 
         Returns:
             Variable dicts with study title joined from the studies table.
         """
         if not concepts:
             return []
-        placeholders = ", ".join("?" for _ in concepts)
+        concept_ph = ", ".join("?" for _ in concepts)
+        params: list[str] = [c.lower() for c in concepts]
+        where = f"v.concept_lower IN ({concept_ph})"
+        if study_ids is not None:
+            study_ph = ", ".join("?" for _ in study_ids)
+            where += f" AND v.study_id IN ({study_ph})"
+            params.extend(study_ids)
         sql = (
             "SELECT v.concept, v.dataset_id, v.description, v.phv_id,"
             "  v.study_id, v.table_name, v.variable_name,"
             "  json_extract_string(s.raw_json, '$.title') AS study_title "
             "FROM variables v "
             "LEFT JOIN studies s ON v.study_id = s.db_gap_id "
-            f"WHERE v.concept_lower IN ({placeholders}) "  # noqa: S608
+            f"WHERE {where} "  # noqa: S608
             "ORDER BY v.concept, v.study_id, v.variable_name "
             f"LIMIT {limit}"
         )
-        params = [c.lower() for c in concepts]
         rows = self._conn.execute(sql, params).fetchall()
         cols = [
             "concept", "datasetId", "description", "phvId",
