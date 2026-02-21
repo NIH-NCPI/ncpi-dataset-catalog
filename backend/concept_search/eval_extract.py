@@ -399,6 +399,29 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
                 ],
             ),
         ),
+        # --- Intent detection: variable queries with study filters ---
+        Case(
+            name="intent-variable-with-platform",
+            inputs="what variables measure blood pressure on AnVIL?",
+            expected_output=ExtractResult(
+                intent="variable",
+                mentions=[
+                    _rm("blood pressure", Facet.MEASUREMENT),
+                    _rm("AnVIL", Facet.PLATFORM, ["AnVIL"]),
+                ],
+            ),
+        ),
+        Case(
+            name="intent-variable-with-datatype",
+            inputs="which variables capture BMI in WGS studies?",
+            expected_output=ExtractResult(
+                intent="variable",
+                mentions=[
+                    _rm("body mass index", Facet.MEASUREMENT),
+                    _rm("WGS", Facet.DATA_TYPE, ["WGS"]),
+                ],
+            ),
+        ),
         # --- Intent detection: ambiguous queries ---
         Case(
             name="intent-auto-ambiguous",
