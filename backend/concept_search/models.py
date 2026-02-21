@@ -26,17 +26,27 @@ from pydantic.alias_generators import to_camel
 class Facet(str, Enum):
     """Searchable facets in the NCPI catalog."""
 
+    COMPUTED_ANCESTRY = "computedAncestry"
     CONSENT_CODE = "consentCode"
     DATA_TYPE = "dataType"
     FOCUS = "focus"
     MEASUREMENT = "measurement"
     PLATFORM = "platform"
+    RACE_ETHNICITY = "raceEthnicity"
+    SEX = "sex"
     STUDY_DESIGN = "studyDesign"
 
 
 # Small facets whose full value lists fit in the extract agent's prompt.
 # The extract agent resolves these directly — no resolve agent call needed.
-SMALL_FACETS = {Facet.DATA_TYPE, Facet.PLATFORM, Facet.STUDY_DESIGN}
+SMALL_FACETS = {
+    Facet.COMPUTED_ANCESTRY,
+    Facet.DATA_TYPE,
+    Facet.PLATFORM,
+    Facet.RACE_ETHNICITY,
+    Facet.SEX,
+    Facet.STUDY_DESIGN,
+}
 
 
 class ConceptMatch(BaseModel):
@@ -58,7 +68,8 @@ class RawMention(BaseModel):
     values: list[str] = Field(
         default_factory=list,
         description="Pre-resolved values for small facets (platform, dataType, "
-        "studyDesign). Empty for facets that need the resolve agent.",
+        "studyDesign, sex, raceEthnicity, computedAncestry). "
+        "Empty for facets that need the resolve agent.",
     )
 
 

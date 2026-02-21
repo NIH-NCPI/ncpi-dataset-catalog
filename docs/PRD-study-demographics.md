@@ -1,17 +1,17 @@
-# PRD: Study-Level Demographics Extraction
+# PRD: Study-Level Demographics
 
-**Issue:** TBD
-**Status:** Draft
-**Date:** 2026-02-17
+**Issue:** #186 (extraction), #TBD (backend integration)
+**Status:** Phase 1 complete, Phase 2 in progress
+**Date:** 2026-02-17 (original), 2026-02-20 (updated)
 
 ## Problem
 
 The NCPI Dataset Catalog holds ~2,700 dbGaP studies. Researchers selecting
 studies for cross-platform analysis need to understand the demographic
-composition of each cohort — age distribution, sex/gender breakdown,
-race/ethnicity representation — before requesting access. Today, this
-information is buried inside individual `var_report.xml` files and is not
-surfaced in the catalog UI or search API.
+composition of each cohort — sex/gender breakdown, race/ethnicity
+representation — before requesting access. Today, this information is buried
+inside individual `var_report.xml` files and is not surfaced in the catalog UI
+or search API.
 
 ### What exists today
 
@@ -24,472 +24,349 @@ surfaced in the catalog UI or search API.
 
 ### Gap
 
-There is no pipeline step that extracts the actual value distributions from
-var_report.xml and rolls them up into per-study demographic profiles. A
-researcher cannot answer "which studies have >40% Hispanic participants?" or
-"what's the age range of the MESA cohort?" without manually downloading and
-inspecting XML.
+There is no pipeline step that extracts the actual value distributions and
+surfaces them in search results. A researcher cannot answer "which studies
+have >40% Hispanic participants?" or see sex breakdowns when comparing
+cohorts.
 
 ## Goals
 
-1. **Extract** demographic value distributions from var_report.xml for every
-   study that has classified demographic variables.
-2. **Normalize** the extracted values into a common schema (standardized
-   category labels, consistent age representations).
-3. **Store** per-study demographic profiles in a queryable format.
-4. **Surface** demographics in the search API so users can filter and compare
-   cohorts by population characteristics.
+1. **Extract** per-study sex and race/ethnicity distributions from dbGaP
+   metadata.
+2. **Surface** demographics in the search API so results include population
+   breakdowns.
+3. **Display** demographics on study detail pages.
 
-### Non-goals (for this phase)
+### Non-goals (this phase)
 
-- Participant-level data or re-identification risk — we only use aggregate
-  counts already published by dbGaP.
-- Building UI components — this PRD covers the backend pipeline and API only.
+- Participant-level data — we only use aggregate counts already published by
+  dbGaP.
+- Label normalization/harmonization — labels are stored verbatim from each
+  study's dbGaP submission. Harmonization is a future phase.
+- Age extraction — deferred due to ambiguity ("age at what?"). See Future
+  Work.
 
 ## Source Data
 
-### var_report.xml structure
+### Subject_Phenotypes var_report.xml (self-reported)
 
-Each variable in the XML carries its value distribution:
+dbGaP requires studies to submit a standardized **Subject_Phenotypes** table
+containing core demographic variables. Each variable carries its value
+distribution in `<enum>` elements:
 
 ```xml
-<!-- Enumerated variable (Sex) -->
 <variable var_name="SEX" calculated_type="enum_integer">
-  <description>SEX</description>
-  <total>
-    <subject_profile>
-      <sex>
-        <male>1638</male>
-        <female>2124</female>
-      </sex>
-    </subject_profile>
-    <stats>
-      <stat n="3762" nulls="0" />
-      <enum code="M" count="2124">Female</enum>
-      <enum code="F" count="1638">Male</enum>
-    </stats>
-  </total>
-</variable>
-
-<!-- Enumerated variable (Race) -->
-<variable var_name="RACE" calculated_type="enum_integer">
-  <description>RACE OR ETHNIC BACKGROUND</description>
-  <stats>
-    <enum code="1" count="3621">White - not of Hispanic origin</enum>
-    <enum code="2" count="119">Black - not of Hispanic origin</enum>
-    <enum code="3" count="10">Hispanic</enum>
-    <enum code="4" count="5">Asian or Pacific Islander</enum>
-    <enum code="5" count="7">Other</enum>
-    <stat n="3762" nulls="0" />
-  </stats>
-</variable>
-
-<!-- Continuous variable (Age) -->
-<variable var_name="AGE" calculated_type="continuous_integer">
-  <stats>
-    <stat n="6429" nulls="0" mean="62.1" stddev="10.2"
-          median="62" min="45" max="84" />
-  </stats>
+  <description>Biological SEX</description>
+  <total><stats>
+    <stat n="29" nulls="0"/>
+    <enum code="M" count="19">Male</enum>
+    <enum code="F" count="10">Female</enum>
+  </stats></total>
 </variable>
 ```
 
-Key observations:
+Available for ~1,986 studies. Variables are identified by **name pattern
+matching** — `sex`/`gender` for sex, `race`/`ethni` for race/ethnicity
+(case-insensitive).
 
-- **Enum variables** have `<enum code="..." count="N">Label</enum>` elements.
-- **Continuous variables** have `<stat>` with n, mean, stddev, median, min, max.
-- **subject_profile** sometimes provides a pre-computed sex breakdown for the
-  entire table (not just the variable), useful as a cross-check.
-- Null counts are reported, enabling completeness metrics.
+### Computed ancestry from dbGaP CSV (genotype-inferred)
 
-### TOPMed harmonized variable documentation (already available)
+The dbGaP Advanced Search CSV includes an `Ancestry (computed)` column for
+studies with genotype data — genetically-inferred ancestry groups computed by
+dbGaP. Format: `European (60), African American (30), East Asian (10)`.
 
-The TOPMed DCC has published per-study harmonization definitions for
-demographic variables in
-`catalog-build/source/harmonization-sources/topmed-harmonized/harmonized-variable-documentation/demographic/`.
-These provide a proven normalization framework we can adopt directly.
+Available for ~462 studies. Stored as a **separate field** from self-reported
+race/ethnicity since they measure different things.
 
-**Harmonized demographic variables:**
+### What we considered but didn't use
 
-| File                        | Canonical codes                                                  | UMLS CUI                   |
-| --------------------------- | ---------------------------------------------------------------- | -------------------------- |
-| `annotated_sex_1.json`      | `female`, `male`                                                 | C0017249 (Gender identity) |
-| `race_us_1.json`            | `AI_AN`, `Asian`, `Black`, `HI_PI`, `Multiple`, `Other`, `White` | C0034510 (Race)            |
-| `hispanic_or_latino_1.json` | `HL`, `notHL`, `both`                                            | C2741637 (Hispanic/Latino) |
-| `hispanic_subgroup_1.json`  | (sub-categories of Hispanic/Latino)                              | —                          |
+- **LLM concept classification** — The original plan was to use LLM-classified
+  concepts to find demographic variables across all study tables. We chose
+  Subject_Phenotypes instead because it's dbGaP's standardized table, simpler
+  to parse, and doesn't require LLM output. Trade-off: we get fewer studies
+  (1,212 with sex vs ~2,400 with LLM concepts) but higher confidence in
+  variable selection.
+- **TOPMed harmonized variables** — Covers only ~30 studies. Not worth the
+  complexity for v1. Could be used as validation data in the future.
+- **Age** — ~1,000 studies have an AGE variable in Subject_Phenotypes, but
+  "age at what?" is ambiguous (enrollment, diagnosis, sample collection).
+  Deferred.
 
-Each JSON file contains:
+## What's Built (Phase 1) — PR #187
 
-- **`encoded_values`** — the canonical code-to-label mapping
-- **`harmonization_units`** — per-study entries with:
-  - `component_study_variables` — the specific `phv` IDs used for that study
-  - `harmonization_function` — an R function mapping raw values to canonical codes
+### Extraction script
 
-**Example** (MESA Classic sex harmonization):
+`catalog-build/classification/extract_demographics.py`
 
-```json
-{
-  "name": "MESA_Classic",
-  "component_study_variables": ["phs000209.v13.pht001116.v10.phv00084446.v2"],
-  "harmonization_function": "... mutate(annotated_sex = ifelse(gender1 %in% 1, \"male\", \"female\")) ..."
-}
-```
+**Inputs:**
 
-This gives us two things for free:
+- `source/dbgap-variables/{studyId}/*_Subject_Phenotypes.var_report.xml`
+- `source/2026-01-27-dbgap-advanced-search.csv` (Ancestry column)
 
-1. **A canonical label schema** for sex, race, and ethnicity — no need to
-   invent our own normalization table.
-2. **A variable-to-study mapping** with the exact `phv` IDs that TOPMed used
-   for each study — we can use these as the "known good" primary variable when
-   available, falling back to the LLM-classified variables for studies not in
-   the TOPMed harmonization set.
+**Output:** `classification/output/demographic-profiles.json`
 
-**Coverage:** The harmonization covers ~30 TOPMed studies. The remaining
-~2,670 studies will rely on LLM-classified variables + label normalization
-against the TOPMed canonical codes.
+**How it works:**
 
-### TOPMed phenotype tags (concept definitions)
+1. For each study, finds the `*_Subject_Phenotypes.var_report.xml`
+2. Identifies sex and race/ethnicity variables by name pattern
+3. Extracts `<enum>` distributions (label, count, code)
+4. When multiple variables match, picks the one with highest `n`, then fewest
+   nulls
+5. Skips consent-group variants (`.c1`, `.c2`)
+6. Separately parses computed ancestry from the CSV
 
-`catalog-build/source/harmonization-sources/topmed-phenotype-tags.csv` defines
-the phenotype concepts with UMLS CUIs and detailed inclusion/exclusion
-instructions. The two demographic rows:
-
-- **Gender** (C0017249): "Self-reported sex or gender identity" — include all
-  self-reported sex/gender variables, exclude clinician-assigned or genetic sex.
-- **Race/ancestry/ethnicity** (C1830369): "Self-reported race, ancestry or
-  ethnicity" — include all self-reported race/ethnicity, exclude
-  genetically-determined ancestry (e.g., PCA-based).
-- **Age at enrollment/collection** (C0001779): Defined under "Supporting
-  phenotypes" — age at enrollment, blood draw, biosample collection, imaging.
-
-These definitions can guide the LLM concept classification when we re-run it
-with UMLS API access (see Open Questions).
-
-### LLM concept classification (already built)
-
-`catalog-build/classification/output/llm-concepts/{studyId}.json` maps each
-variable to a canonical concept:
+### Output schema
 
 ```json
 {
-  "name": "race1c",
-  "id": "phv00084444.v2.p3",
-  "description": "RACE / ETHNICITY",
-  "concept": "Race/Ethnicity"
-}
-```
-
-Relevant demographic concepts (from concept-hierarchy.json):
-
-| Category           | Top concepts                                                                                                    | Studies covered |
-| ------------------ | --------------------------------------------------------------------------------------------------------------- | --------------- |
-| **Sex/Gender**     | Sex (2,401), Gender Identity (5), Sex At Birth (<5)                                                             | ~2,423          |
-| **Age**            | Age (1,198), Age At Sample Collection (229), Age At Diagnosis (107), Age At Enrollment (78), Year Of Birth (43) | ~2,395          |
-| **Race/Ethnicity** | Race/Ethnicity (1,192), Ethnicity (258), Race (201), Hispanic Ethnicity (42)                                    | ~1,900          |
-| **Education**      | Education (221)                                                                                                 | 221             |
-| **Employment**     | Employment Status (71)                                                                                          | 71              |
-
-## Proposed Schema
-
-### DemographicProfile (per study)
-
-```python
-@dataclass
-class DemographicProfile:
-    db_gap_id: str
-
-    # Sex/Gender — from the variable with the highest n
-    sex: EnumDistribution | None
-
-    # Race/Ethnicity — from the variable with the highest n
-    race_ethnicity: EnumDistribution | None
-
-    # Age — from the variable with the highest n
-    age: ContinuousDistribution | None
-
-    # Metadata
-    source_table: str          # dataset/table the values came from
-    total_participants: int    # n from the chosen variable
-    extraction_date: str
-
-
-@dataclass
-class EnumDistribution:
-    """Counts for a categorical variable."""
-    variable_name: str
-    variable_id: str           # phv ID for provenance
-    n: int
-    nulls: int
-    categories: list[Category]
-
-
-@dataclass
-class Category:
-    label: str                 # Human-readable label from XML
-    count: int
-    code: str                  # Original enum code
-
-
-@dataclass
-class ContinuousDistribution:
-    """Summary stats for a numeric variable."""
-    variable_name: str
-    variable_id: str
-    n: int
-    nulls: int
-    mean: float | None
-    stddev: float | None
-    median: float | None
-    min: float | None
-    max: float | None
-    # Optional: age buckets if enum-coded
-    categories: list[Category] | None
-```
-
-### Variable selection heuristic
-
-Many studies have multiple age, sex, or race variables across different tables
-and visits. We need a deterministic rule for picking the "primary" variable:
-
-1. **Filter** to variables whose LLM-classified concept matches the target
-   demographic (e.g., concept == "Sex" for sex/gender).
-2. **Prefer** variables from the table with the highest total `n` (largest
-   participant set — likely the enrollment or baseline table).
-3. **Break ties** by preferring the variable with the fewest nulls.
-4. **Store provenance** (variable ID, table name) so the choice is auditable.
-
-### Label normalization (TOPMed-aligned)
-
-Use the TOPMed harmonized variable canonical codes as the target schema. Map
-raw XML enum labels to these codes:
-
-**Sex** (from `annotated_sex_1.json`):
-
-| Raw labels (examples)                                 | Canonical code | Display label |
-| ----------------------------------------------------- | -------------- | ------------- |
-| "Male", "M", "MALE", "male", "1" (when gender1)       | `male`         | Male          |
-| "Female", "F", "FEMALE", "female", "0" (when gender1) | `female`       | Female        |
-
-**Race** (from `race_us_1.json`):
-
-| Raw labels (examples)                                                                    | Canonical code | Display label                                       |
-| ---------------------------------------------------------------------------------------- | -------------- | --------------------------------------------------- |
-| "White - not of Hispanic origin", "WHITE, CAUCASIAN", "White"                            | `White`        | White or Caucasian                                  |
-| "Black - not of Hispanic origin", "BLACK, AFRICAN-AMERICAN", "Black or African American" | `Black`        | Black or African American                           |
-| "Asian", "CHINESE AMERICAN", "Asian or Pacific Islander"                                 | `Asian`        | Asian                                               |
-| "Native Hawaiian or Pacific Islander"                                                    | `HI_PI`        | Native Hawaiian or other Pacific Islander           |
-| "American Indian", "Alaska Native"                                                       | `AI_AN`        | American Indian, Alaskan Native, or Native American |
-| "More than one race"                                                                     | `Multiple`     | More than one race                                  |
-| "Other", "Hispanic" (when no race given)                                                 | `Other`        | Other race                                          |
-
-**Hispanic/Latino ethnicity** (from `hispanic_or_latino_1.json`):
-
-| Raw labels (examples)                        | Canonical code | Display label          |
-| -------------------------------------------- | -------------- | ---------------------- |
-| "Hispanic", "Hispanic or Latino", "HISPANIC" | `HL`           | Hispanic or Latino     |
-| "Not Hispanic or Latino", "NOT HISPANIC"     | `notHL`        | Not Hispanic or Latino |
-
-**Strategy — two tiers:**
-
-1. **TOPMed-harmonized studies (~30):** Use the `component_study_variables`
-   from the harmonization JSONs to identify the exact `phv` IDs. Apply the
-   known canonical mapping directly — these are already validated.
-2. **All other studies (~2,670):** Use LLM-classified concept + a lookup table
-   mapping the ~30 most common raw labels to TOPMed canonical codes. Log
-   unmapped labels for review. Do NOT use an LLM for normalization — it's a
-   straightforward lookup.
-
-## Pipeline Design
-
-### Step 1: Parse demographic distributions
-
-Extend or complement `parse_var_reports.py` to extract value distributions for
-variables classified as demographic concepts.
-
-**Input:**
-
-- `llm-concepts/{studyId}.json` — identifies which variables are demographic
-- `dbgap-variables/{studyId}/*.var_report.xml` — contains the distributions
-
-**Process:**
-
-1. **Build the TOPMed lookup.** Parse `demographic/annotated_sex_1.json`,
-   `race_us_1.json`, and `hispanic_or_latino_1.json` to create a map of
-   `studyId → {sex_phv, race_phv, ethnicity_phv}` for TOPMed-harmonized
-   studies. These are the "known good" variable selections.
-2. For each study, load its LLM concept file.
-3. Collect variables with concepts in the target set: {Sex, Age,
-   Race/Ethnicity, Ethnicity, Race, Hispanic Ethnicity, ...}.
-4. **Variable selection:**
-   - If the study has a TOPMed harmonization entry, prefer those `phv` IDs.
-   - Otherwise, apply the selection heuristic (highest n, fewest nulls).
-5. For each selected variable, locate it in the corresponding var_report.xml
-   by matching `phv` ID. Extract enum counts or continuous stats.
-6. Apply label normalization against TOPMed canonical codes.
-
-**Output:** `catalog-build/classification/output/demographic-profiles.json`
-
-```json
-{
-  "phs000209": {
-    "sex": {
-      "variableName": "gender1",
-      "variableId": "phv00084446.v2.p3",
-      "n": 6429,
-      "nulls": 0,
-      "categories": [
-        { "label": "Female", "count": 3369, "code": "0" },
-        { "label": "Male", "count": 3060, "code": "1" }
-      ]
-    },
-    "raceEthnicity": {
-      "variableName": "race1c",
-      "variableId": "phv00084444.v2.p3",
-      "n": 6429,
-      "nulls": 0,
-      "categories": [
-        { "label": "White", "count": 2527, "code": "1" },
-        { "label": "Chinese American", "count": 775, "code": "2" },
-        { "label": "Black or African American", "count": 1677, "code": "3" },
-        { "label": "Hispanic or Latino", "count": 1450, "code": "4" }
-      ]
-    },
-    "age": {
-      "variableName": "age1c",
-      "variableId": "phv00084442.v2.p3",
-      "n": 6429,
-      "nulls": 0,
-      "mean": 62.1,
-      "stddev": 10.2,
-      "median": 62.0,
-      "min": 45,
-      "max": 84,
-      "categories": null
-    },
-    "sourceTable": "pht001116.v10",
-    "totalParticipants": 6429,
-    "extractionDate": "2026-02-17"
+  "extractedAt": "2026-02-20T18:12:44.167195+00:00",
+  "stats": {
+    "totalStudies": 2782,
+    "studiesWithSex": 1212,
+    "studiesWithRaceEthnicity": 1064,
+    "studiesWithComputedAncestry": 462,
+    "totalWithDemographics": 1734
+  },
+  "studies": {
+    "phs000424": {
+      "studyName": "GTEx",
+      "sex": {
+        "variableName": "SEX",
+        "variableId": "phv00253006.v2.p2",
+        "datasetId": "pht004314.v3",
+        "tableName": "GTEx_Subject_Phenotypes",
+        "n": 981,
+        "nulls": 0,
+        "categories": [
+          { "label": "Male", "count": 654, "code": "1" },
+          { "label": "Female", "count": 327, "code": "2" }
+        ]
+      },
+      "raceEthnicity": {
+        "variableName": "RACE",
+        "variableId": "phv00253007.v1.p2",
+        "datasetId": "pht004314.v3",
+        "tableName": "GTEx_Subject_Phenotypes",
+        "n": 981,
+        "nulls": 0,
+        "categories": [
+          { "label": "White", "count": 833, "code": "3" },
+          { "label": "Black or African American", "count": 124, "code": "2" }
+        ]
+      },
+      "computedAncestry": {
+        "n": 185,
+        "categories": [
+          { "label": "European", "count": 153 },
+          { "label": "African American", "count": 25 },
+          { "label": "Hispanic1", "count": 3 }
+        ]
+      }
+    }
   }
 }
 ```
 
-### Step 2: Index in DuckDB
+**Key design decisions:**
 
-Add a `study_demographics` table (or embed in the existing `studies` JSON):
+- Labels are **verbatim from the study's dbGaP submission** — not harmonized.
+  One study may report `"FEMALE"`, another `"F"`, another `"Female"`.
+- Provenance fields (`variableId`, `datasetId`, `tableName`) are stored in the
+  extraction output for auditability but stripped from the API response.
+- Computed ancestry uses a fixed vocabulary from dbGaP (European, African
+  American, East Asian, Hispanic1, Hispanic2, South Asian, Other Asian or
+  Pacific Islander, African, Other).
 
-```sql
-CREATE TABLE study_demographics (
-    db_gap_id    VARCHAR PRIMARY KEY,
-    sex_json     VARCHAR,     -- JSON array of {label, count}
-    race_json    VARCHAR,     -- JSON array of {label, count}
-    age_json     VARCHAR,     -- JSON object {n, mean, median, min, max, ...}
-    total_n      INTEGER,
-    FOREIGN KEY (db_gap_id) REFERENCES studies(db_gap_id)
-);
+### Coverage
+
+| Dimension         | Studies | % of catalog |
+| ----------------- | ------- | ------------ |
+| Sex               | 1,212   | 43%          |
+| Race/Ethnicity    | 1,064   | 38%          |
+| Computed Ancestry | 462     | 17%          |
+| Any demographic   | 1,734   | 62%          |
+
+### Tests
+
+`catalog-build/classification/test_extract_demographics.py` — 66 tests
+covering unit tests (pure functions, in-memory XML parsing) and integration
+tests (filesystem fixtures with stub XML/CSV).
+
+## Phase 2: Backend Integration (Next)
+
+Load `demographic-profiles.json` into the search pipeline so search results
+include demographic distributions.
+
+### Approach
+
+Merge demographic data into each study's `raw_json` blob at DuckDB index
+build time, following the same pattern used for all other study fields. Strip
+provenance fields and pre-compute `percent` for the API response.
+
+### API response shape
+
+Add a `demographics` field to `StudySummary`:
+
+```json
+{
+  "dbGapId": "phs000424",
+  "demographics": {
+    "sex": {
+      "n": 981,
+      "categories": [
+        { "label": "Male", "count": 654, "percent": 66.7 },
+        { "label": "Female", "count": 327, "percent": 33.3 }
+      ]
+    },
+    "raceEthnicity": {
+      "n": 981,
+      "categories": [
+        { "label": "White", "count": 833, "percent": 84.9 },
+        { "label": "Black or African American", "count": 124, "percent": 12.6 }
+      ]
+    },
+    "computedAncestry": {
+      "n": 185,
+      "categories": [
+        { "label": "European", "count": 153, "percent": 82.7 },
+        { "label": "African American", "count": 25, "percent": 13.5 }
+      ]
+    }
+  },
+  "title": "GTEx",
+  ...
+}
 ```
 
-### Step 3: Expose via search API
+Studies without demographics: `"demographics": null`.
 
-Add a `demographics` field to the study summary response:
+### Files to modify
 
-```python
-class StudyDemographics(BaseModel):
-    sex: list[CategoryCount] | None
-    race_ethnicity: list[CategoryCount] | None
-    age: AgeSummary | None
-    total_participants: int | None
+- `backend/concept_search/api_models.py` — new models + field on StudySummary
+- `backend/concept_search/index.py` — load and merge demographics
+- `backend/concept_search/api.py` — extract demographics in study summary
+- `backend/tests/test_index.py` — tests for merge and round-trip
 
-class CategoryCount(BaseModel):
-    label: str
-    count: int
-    percent: float  # pre-computed for convenience
+## Phase 3: Frontend Display (Future)
 
-class AgeSummary(BaseModel):
-    n: int
-    mean: float | None
-    median: float | None
-    min: float | None
-    max: float | None
-```
+Surface demographics on study detail pages:
 
-New API capabilities:
+- Add demographic distribution charts/bars to the study detail side column
+- Show sex breakdown, race/ethnicity breakdown, computed ancestry when
+  available
+- Display in the study browse table as optional columns
 
-- **Search results** include demographic summaries for each study.
-- **Filter** by demographic criteria (future): e.g., "studies with >1000
-  female participants" or "median age > 60".
+This requires changes to:
 
-## Coverage Estimate
+- `catalog/ncpi-platform-studies.json` (merge demographics at catalog build
+  time)
+- Site config for study detail pages
+- New React components for distribution visualization
 
-Based on concept-hierarchy.json:
+## Phase 4: Label Harmonization (Future)
 
-| Dimension      | Studies with classified variables | Expected extraction rate                                |
-| -------------- | --------------------------------- | ------------------------------------------------------- |
-| Sex/Gender     | 2,423 / 2,700 (90%)               | High — enum variables with clear counts                 |
-| Age            | 2,395 / 2,700 (89%)               | High for continuous stats; some studies use age buckets |
-| Race/Ethnicity | 1,900 / 2,700 (70%)               | Medium-high — more label variation to normalize         |
-| All three      | ~1,800 (estimate)                 | Core demographic profile for ~67% of studies            |
+The current extraction stores labels verbatim. The scale of the problem varies
+dramatically by dimension:
+
+**Sex — mostly standardized.** 1,212 studies, 71 distinct labels, but 96.6%
+are just casing variants of Male/Female. A case-insensitive normalization
+handles nearly everything. ~41 studies use alternatives (Boy/Girl, Man/Woman)
+and ~27 have misclassified variables (survey questions about sexual interest
+that matched the `sex` name pattern).
+
+**Race/Ethnicity — severely fragmented.** 1,064 studies, **682 distinct
+labels**, with 71.7% appearing in only one study. The same concept can be
+expressed 20+ ways — "Black or African American" alone appears as "African
+American", "Black", "BLACK", "black", "Black/African American",
+"Black/AA", "African-American", "AfricanAmerican", "African_American",
+"African Am", etc. Studies freely mix race and ethnicity categories in the
+same variable (22.8% include both "White" and "Hispanic" as options).
+Country-specific labels ("Japanese", "Finnish", "Kuwaiti") and truncated
+strings ("Ameri", "Hawai") add further variation.
+
+**Computed Ancestry — perfectly standardized.** 9 labels from a fixed dbGaP
+vocabulary. No normalization needed.
+
+### The challenge
+
+Race/ethnicity harmonization is a substantial effort. The top 20 labels cover
+only 63.2% of occurrences; the top 50 cover 73.9%. A normalization table would
+need hundreds of entries to reach high coverage, plus fuzzy matching or LLM
+assistance for the long tail. This is one of the core problems the NCPI
+Dataset Catalog exists to solve — making inconsistent metadata across
+thousands of studies searchable and comparable.
+
+### Available resources
+
+- **TOPMed harmonized variable documentation** in
+  `catalog-build/source/harmonization-sources/topmed-harmonized/` provides
+  canonical codes for sex (`male`/`female`), race (7 categories), and
+  Hispanic/Latino ethnicity.
+- These cover ~30 TOPMed studies with exact `phv` IDs and R mapping functions.
+- The TOPMed race categories (White, Black, Asian, AI_AN, HI_PI, Multiple,
+  Other) provide a reasonable target taxonomy for normalization.
+
+### Approach
+
+1. **Sex:** Case-insensitive normalization to Male/Female/Unknown — handles
+   96.6% of studies. Small mapping table for the remaining ~40.
+2. **Race/Ethnicity:** Build a mapping table from the ~50 most common labels
+   to TOPMed canonical codes (covers ~74%). Use LLM or fuzzy matching for
+   the long tail (~490 rare labels). Store both raw and normalized labels.
+3. **Computed Ancestry:** No action needed — already standardized.
+4. Enable cross-study aggregation ("total female participants across all
+   selected studies")
+
+## Phase 5: Demographic Filtering (Future)
+
+Enable demographic-aware search queries:
+
+- "Studies with diverse populations"
+- "Pediatric cohorts" (requires age extraction)
+- "Studies with >500 female participants"
+- "Studies with >40% Hispanic participants"
+
+This could be implemented as:
+
+- Numeric filters on demographic counts/percentages
+- A new `demographic` facet in the search pipeline
+- NLP agent support for demographic queries
+
+## Phase 6: Age Extraction (Future)
+
+Age is available in Subject_Phenotypes for ~1,000 studies but presents
+challenges:
+
+- **Ambiguity:** "age at enrollment", "age at diagnosis", "age at sample
+  collection" are different things
+- **Format variation:** Some studies use continuous stats (mean, median, range),
+  others use age buckets (enum-coded)
+- **Multi-visit studies:** Age changes across visits
+
+Possible approach:
+
+- Extract continuous stats (n, mean, median, min, max) from the AGE variable
+- For enum-coded age, extract category counts
+- Label the dimension explicitly (e.g., "Age at enrollment" vs "Age") based
+  on variable description
 
 ## Risks & Mitigations
 
-| Risk                                                                              | Impact                                 | Mitigation                                                             |
-| --------------------------------------------------------------------------------- | -------------------------------------- | ---------------------------------------------------------------------- |
-| Variable selection picks wrong table (e.g., a subset table instead of enrollment) | Misleading counts                      | Prefer table with highest n; log choices for audit                     |
-| Label normalization misses edge cases                                             | Inconsistent categories across studies | Start with top-30 labels; log unmapped; iterate                        |
-| Some studies have demographics only in coded form without labels                  | Missing or opaque categories           | Fall back to raw code values; flag for manual review                   |
-| Consent-group variants (`.c1`, `.c2`) have different counts                       | Double-counting                        | Use deduplicated variables from existing parser (already handles this) |
-| Age variables encoded as enums (age buckets) vs continuous                        | Schema mismatch                        | Support both — `categories` for buckets, stats for continuous          |
+| Risk                                                  | Impact            | Mitigation                                                  |
+| ----------------------------------------------------- | ----------------- | ----------------------------------------------------------- |
+| Subject_Phenotypes not available for all studies      | 38% without sex   | Could fall back to LLM concept + all-table search in future |
+| Name pattern matching produces false positives        | Wrong variable    | Only matches in Subject_Phenotypes (small, standardized)    |
+| Verbatim labels inconsistent across studies           | Hard to compare   | Phase 4 harmonization; functional for per-study display now |
+| Variable selection picks subset table instead of full | Misleading counts | Highest-n heuristic naturally selects enrollment/baseline   |
+| Consent-group variants have different counts          | Double-counting   | `.c1`/`.c2` variants filtered out                           |
 
-## Open Questions
+## Decisions Log
 
-1. **Should we extract education, employment, and income** as secondary
-   demographics, or keep the scope to sex/age/race for v1?
-2. **How to handle multi-visit studies** (e.g., Framingham with 541 tables)?
-   For TOPMed-harmonized studies, the harmonization JSONs already specify which
-   table/variable to use. For others, the heuristic picks the table with the
-   highest n (typically baseline/enrollment). Is that sufficient?
-3. **Should demographic filters be a new facet** in the search API (e.g.,
-   `demographic` facet), or extend the existing `measurement` facet with
-   value-level filtering?
-4. **UMLS API key and concept re-classification.** The LLM concept
-   classification currently runs without UMLS grounding. Once we have a UMLS
-   API key, we should re-run classification for demographic variables
-   specifically, using the TOPMed phenotype tag CUIs (C0017249 for Gender,
-   C1830369 for Race/Ethnicity, C0001779 for Age) as anchors. This would
-   improve variable selection accuracy for non-TOPMed studies. Should we block
-   on this or ship v1 with LLM-only classification and iterate?
-5. **TOPMed harmonization coverage.** The harmonization JSONs cover ~30 studies.
-   Should we extend the same approach by creating new harmonization entries for
-   high-priority studies not in the TOPMed set, or is the LLM-based fallback
-   sufficient?
-
-## Implementation Phases
-
-### Phase 1: Extraction pipeline
-
-- Write `extract_demographics.py` in `catalog-build/classification/`
-- Parse TOPMed harmonization JSONs to build the "known good" variable map
-- For TOPMed studies, use specified `phv` IDs; for others, use LLM concepts +
-  selection heuristic
-- Extract distributions from var_report.xml, normalize labels to TOPMed codes
-- Output `demographic-profiles.json`
-- Validate against known studies (MESA, Framingham, AREDS) — cross-check
-  TOPMed-tier results against the R harmonization functions
-
-### Phase 2: Backend integration
-
-- Load `demographic-profiles.json` into DuckDB store
-- Add `demographics` field to study summary API response
-- Update search result serialization
-
-### Phase 3: Filtering (future)
-
-- Enable demographic-aware search queries ("studies with diverse populations",
-  "pediatric cohorts", "studies with >500 female participants")
-- Potentially add demographic facets to the extract/resolve pipeline
-
-### Phase 4: UMLS-grounded re-classification (future)
-
-- With UMLS API key, re-run demographic variable classification using TOPMed
-  phenotype tag CUIs as anchors
-- Improve variable selection accuracy for non-TOPMed studies
-- Potentially extend harmonization entries to high-priority studies beyond the
-  TOPMed ~30
+| Decision                                         | Date       | Rationale                                                           |
+| ------------------------------------------------ | ---------- | ------------------------------------------------------------------- |
+| Use Subject_Phenotypes instead of LLM+all-tables | 2026-02-20 | Simpler, more reliable, no LLM dependency. Trade: fewer studies.    |
+| Store labels verbatim (no harmonization)         | 2026-02-20 | Ship faster. Harmonization is a separate phase.                     |
+| Skip age extraction                              | 2026-02-20 | Too many "age at what?" variants to resolve cleanly.                |
+| Computed ancestry as separate field              | 2026-02-20 | Genotype-inferred ≠ self-reported. Different data, different field. |
+| Pre-compute percent in API response              | 2026-02-20 | Avoids every client doing the same division.                        |
+| Strip provenance from API, keep in extraction    | 2026-02-20 | API consumers need labels+counts; provenance is for auditing.       |

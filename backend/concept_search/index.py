@@ -6,6 +6,7 @@ import json
 import logging
 import os
 from collections import Counter, defaultdict
+from importlib.resources import files as pkg_files
 from pathlib import Path
 
 from .models import ConceptMatch, Facet
@@ -52,6 +53,136 @@ def _resolve_cache_path() -> Path:
         return Path(explicit)
     repo_root = _resolve_repo_root()
     return repo_root / "catalog" / "concept-search.duckdb"
+
+
+def _resolve_demographics_path() -> Path:
+    """Resolve the path to demographic-profiles.json."""
+    explicit = os.environ.get("NCPI_DEMOGRAPHIC_PROFILES_PATH")
+    if explicit:
+        return Path(explicit)
+    repo_root = _resolve_repo_root()
+    return (
+        repo_root
+        / "catalog-build"
+        / "classification"
+        / "output"
+        / "demographic-profiles.json"
+    )
+
+
+def _load_demographic_mappings() -> dict[str, dict[str, str]]:
+    """Load canonical label mappings from the bundled JSON file.
+
+    Returns a dict keyed by dimension (``"sex"``, ``"raceEthnicity"``).
+    Each value is a reverse-lookup dict mapping lowercase pattern → canonical label.
+    """
+    mapping_path = Path(str(pkg_files("concept_search"))) / "demographic_mappings.json"
+    with open(mapping_path) as f:
+        raw = json.load(f)
+    reverse: dict[str, dict[str, str]] = {}
+    for dimension, canonical_map in raw.items():
+        lookup: dict[str, str] = {}
+        for canonical, patterns in canonical_map.items():
+            for pattern in patterns:
+                lookup[pattern] = canonical
+        reverse[dimension] = lookup
+    return reverse
+
+
+def _normalize_categories(
+    categories: list[dict],
+    lookup: dict[str, str],
+    fallback: str,
+) -> list[dict]:
+    """Map verbatim categories to canonical labels, summing counts.
+
+    Args:
+        categories: Raw ``[{label, count, ...}]`` from the profile.
+        lookup: Lowercase pattern → canonical label mapping.
+        fallback: Canonical label for unmapped entries.
+
+    Returns:
+        Deduplicated ``[{label, count}]`` sorted by count descending.
+    """
+    merged: dict[str, int] = defaultdict(int)
+    for cat in categories:
+        verbatim = cat.get("label", "")
+        count = cat.get("count", 0)
+        canonical = lookup.get(verbatim.lower().strip(), fallback)
+        merged[canonical] += count
+    return sorted(
+        [{"count": c, "label": lbl} for lbl, c in merged.items()],
+        key=lambda x: -x["count"],
+    )
+
+
+def _load_demographic_profiles(
+    mappings: dict[str, dict[str, str]],
+) -> tuple[dict[str, dict], list[tuple[str, str, str, str]]]:
+    """Load and normalize demographic-profiles.json.
+
+    Args:
+        mappings: Reverse-lookup mappings from ``_load_demographic_mappings``.
+
+    Returns:
+        A tuple of:
+        - ``demographics_dict``: dbGapId → lean demographics dict for raw_json
+        - ``eav_rows``: ``(db_gap_id, facet, value, value_lower)`` tuples
+    """
+    path = _resolve_demographics_path()
+    if not path.exists():
+        return {}, []
+
+    with open(path) as f:
+        raw = json.load(f)
+    studies = raw.get("studies", {})
+
+    demographics_dict: dict[str, dict] = {}
+    eav_rows: list[tuple[str, str, str, str]] = []
+
+    sex_lookup = mappings.get("sex", {})
+    race_lookup = mappings.get("raceEthnicity", {})
+
+    dimension_config: list[tuple[str, str, dict[str, str], str]] = [
+        ("sex", Facet.SEX.value, sex_lookup, "Other/Unknown"),
+        ("raceEthnicity", Facet.RACE_ETHNICITY.value, race_lookup, "Other"),
+        ("computedAncestry", Facet.COMPUTED_ANCESTRY.value, {}, ""),
+    ]
+
+    for study_id, study_data in studies.items():
+        demo: dict = {}
+        for dim_key, facet_val, lookup, fallback in dimension_config:
+            dist = study_data.get(dim_key)
+            if not dist:
+                continue
+            n = dist.get("n", 0)
+            raw_cats = dist.get("categories", [])
+
+            # Normalize (sex/race) or pass through (computedAncestry)
+            if lookup:
+                cats = _normalize_categories(raw_cats, lookup, fallback)
+            else:
+                cats = sorted(
+                    [{"count": c.get("count", 0), "label": c.get("label", "")}
+                     for c in raw_cats],
+                    key=lambda x: -x["count"],
+                )
+
+            # Pre-compute percent
+            for cat in cats:
+                cat["percent"] = round(cat["count"] / n * 100, 1) if n > 0 else 0.0
+
+            demo[dim_key] = {"categories": cats, "n": n}
+
+            # EAV rows for each canonical label
+            for cat in cats:
+                label = cat["label"]
+                eav_rows.append((study_id, facet_val, label, label.lower()))
+
+        if demo:
+            demographics_dict[study_id] = demo
+
+    return demographics_dict, eav_rows
 
 
 class ConceptIndex:
@@ -101,7 +232,41 @@ class ConceptIndex:
         """Full build path: parse JSON data files and populate the store."""
         llm_dir, studies_path = _resolve_paths()
         self._load_measurement_concepts(llm_dir)
-        self._load_study_metadata(studies_path)
+
+        # Load and normalize demographic profiles
+        mappings = _load_demographic_mappings()
+        demographics_dict, demo_eav_rows = _load_demographic_profiles(mappings)
+
+        self._load_study_metadata(studies_path, demographics_dict)
+
+        # Insert demographic EAV rows and build index entries
+        if isinstance(self.store, DuckDBStore) and demo_eav_rows:
+            self.store.load_facet_values_batch(demo_eav_rows)
+        demo_counts: dict[Facet, Counter[str]] = {
+            Facet.COMPUTED_ANCESTRY: Counter(),
+            Facet.RACE_ETHNICITY: Counter(),
+            Facet.SEX: Counter(),
+        }
+        facet_val_map = {
+            Facet.COMPUTED_ANCESTRY.value: Facet.COMPUTED_ANCESTRY,
+            Facet.RACE_ETHNICITY.value: Facet.RACE_ETHNICITY,
+            Facet.SEX.value: Facet.SEX,
+        }
+        seen: dict[tuple[str, str, str], bool] = {}
+        for db_gap_id, facet_str, value, _ in demo_eav_rows:
+            key = (db_gap_id, facet_str, value)
+            if key not in seen:
+                seen[key] = True
+                facet = facet_val_map[facet_str]
+                demo_counts[facet][value] += 1
+        for facet, counts in demo_counts.items():
+            for value, count in counts.items():
+                self._index[facet][value.lower()] = ConceptMatch(
+                    facet=facet,
+                    study_count=count,
+                    value=value,
+                )
+
         if isinstance(self.store, DuckDBStore):
             self.store.finalize()
 
@@ -153,12 +318,24 @@ class ConceptIndex:
             ]
             self.store.load_facet_values_batch(rows)
 
-    def _load_study_metadata(self, studies_path: Path) -> None:
-        """Load study metadata and extract facet values."""
+    def _load_study_metadata(
+        self,
+        studies_path: Path,
+        demographics: dict[str, dict] | None = None,
+    ) -> None:
+        """Load study metadata and extract facet values.
+
+        Args:
+            studies_path: Path to ``ncpi-platform-studies.json``.
+            demographics: Optional dbGapId → lean demographics dict to merge
+                into each study's raw_json before storage.
+        """
         if not studies_path.exists():
             return
         with open(studies_path) as f:
             studies_raw = json.load(f)
+
+        demographics = demographics or {}
 
         # Count occurrences per facet value
         facet_counts: dict[Facet, Counter[str]] = {f: Counter() for f in Facet}
@@ -174,6 +351,10 @@ class ConceptIndex:
         facet_rows: list[tuple[str, str, str, str]] = []
         for study in studies_raw.values():
             dbgap_id = study.get("dbGapId", "")
+            # Merge demographics into study dict before storage
+            demo = demographics.get(dbgap_id)
+            if demo is not None:
+                study["demographics"] = demo
             if is_duckdb:
                 study_rows.append((dbgap_id, study))
             for facet, field in facet_field_map.items():

@@ -18,6 +18,35 @@ class SearchRequest(BaseModel):
     query: str = Field(..., min_length=1, max_length=1000)
 
 
+class DemographicCategory(BaseModel):
+    """A single category within a demographic distribution."""
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    count: int
+    label: str
+    percent: float
+
+
+class DemographicDistribution(BaseModel):
+    """Distribution of a single demographic dimension (sex, race, ancestry)."""
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    categories: list[DemographicCategory]
+    n: int
+
+
+class StudyDemographics(BaseModel):
+    """Demographic distributions for a study."""
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    computed_ancestry: DemographicDistribution | None = None
+    race_ethnicity: DemographicDistribution | None = None
+    sex: DemographicDistribution | None = None
+
+
 class StudySummary(BaseModel):
     """Lean study projection — strips description, publications, etc."""
 
@@ -26,6 +55,7 @@ class StudySummary(BaseModel):
     consent_codes: list[str]
     data_types: list[str]
     db_gap_id: str
+    demographics: StudyDemographics | None = None
     focus: str | None
     participant_count: int | None
     platforms: list[str]

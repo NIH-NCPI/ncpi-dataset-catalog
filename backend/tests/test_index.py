@@ -14,6 +14,8 @@ import tempfile
 
 import pytest
 
+from concept_search.api import _build_demographics, _build_study_summary
+from concept_search.index import _load_demographic_mappings, _normalize_categories
 from concept_search.models import Facet
 from concept_search.store import DuckDBStore, StudyStore
 
@@ -610,3 +612,327 @@ class TestDuckDBPersistence:
         assert "Systolic Blood Pressure" in values
         assert "BDC" in values
         assert "Cardiovascular" in values
+
+
+# ---------------------------------------------------------------------------
+# Demographics: normalization
+# ---------------------------------------------------------------------------
+
+
+class TestDemographicNormalization:
+    """Label normalization via _normalize_categories."""
+
+    def test_verbatim_female_normalizes(self) -> None:
+        """Verbatim 'FEMALE' → canonical 'Female'."""
+        mappings = _load_demographic_mappings()
+        cats = [{"count": 50, "label": "FEMALE"}]
+        result = _normalize_categories(cats, mappings["sex"], "Other/Unknown")
+        assert len(result) == 1
+        assert result[0]["label"] == "Female"
+        assert result[0]["count"] == 50
+
+    def test_multiple_verbatim_labels_summed(self) -> None:
+        """Multiple verbatim labels mapping to same canonical have counts summed."""
+        mappings = _load_demographic_mappings()
+        cats = [
+            {"count": 30, "label": "Female"},
+            {"count": 20, "label": "female"},
+            {"count": 10, "label": "FEMALE"},
+        ]
+        result = _normalize_categories(cats, mappings["sex"], "Other/Unknown")
+        female = [c for c in result if c["label"] == "Female"]
+        assert len(female) == 1
+        assert female[0]["count"] == 60
+
+    def test_unmapped_race_falls_back_to_other(self) -> None:
+        """An unmapped race/ethnicity label maps to 'Other'."""
+        mappings = _load_demographic_mappings()
+        cats = [{"count": 5, "label": "Martian"}]
+        result = _normalize_categories(cats, mappings["raceEthnicity"], "Other")
+        assert len(result) == 1
+        assert result[0]["label"] == "Other"
+        assert result[0]["count"] == 5
+
+    def test_black_normalizes_to_canonical(self) -> None:
+        """Verbatim 'Black' → 'Black or African American'."""
+        mappings = _load_demographic_mappings()
+        cats = [{"count": 100, "label": "Black"}]
+        result = _normalize_categories(cats, mappings["raceEthnicity"], "Other")
+        assert result[0]["label"] == "Black or African American"
+
+    def test_results_sorted_by_count_descending(self) -> None:
+        """Normalized results are sorted by count descending."""
+        mappings = _load_demographic_mappings()
+        cats = [
+            {"count": 10, "label": "Male"},
+            {"count": 50, "label": "Female"},
+            {"count": 5, "label": "Unknown"},
+        ]
+        result = _normalize_categories(cats, mappings["sex"], "Other/Unknown")
+        counts = [c["count"] for c in result]
+        assert counts == sorted(counts, reverse=True)
+
+
+# ---------------------------------------------------------------------------
+# Demographics: EAV in DuckDB store
+# ---------------------------------------------------------------------------
+
+
+def _build_store_with_demographics() -> DuckDBStore:
+    """Build a store with demographic facet values for testing."""
+    studies = [
+        {
+            "dbGapId": "phs000010",
+            "title": "Study 10",
+            "platforms": ["BDC"],
+            "demographics": {
+                "sex": {
+                    "categories": [
+                        {"count": 60, "label": "Female", "percent": 60.0},
+                        {"count": 40, "label": "Male", "percent": 40.0},
+                    ],
+                    "n": 100,
+                },
+            },
+        },
+        {
+            "dbGapId": "phs000011",
+            "title": "Study 11",
+            "platforms": ["AnVIL"],
+            "demographics": {
+                "sex": {
+                    "categories": [
+                        {"count": 80, "label": "Male", "percent": 80.0},
+                        {"count": 20, "label": "Female", "percent": 20.0},
+                    ],
+                    "n": 100,
+                },
+                "raceEthnicity": {
+                    "categories": [
+                        {"count": 70, "label": "White", "percent": 70.0},
+                        {
+                            "count": 30,
+                            "label": "Black or African American",
+                            "percent": 30.0,
+                        },
+                    ],
+                    "n": 100,
+                },
+            },
+        },
+        {
+            "dbGapId": "phs000012",
+            "title": "Study 12",
+            "platforms": ["BDC"],
+        },
+    ]
+
+    store = DuckDBStore.create_empty()
+    for study in studies:
+        sid = study["dbGapId"]
+        store.load_study(sid, study)
+        # Platform facet
+        for p in study.get("platforms", []):
+            store.load_facet_value(sid, Facet.PLATFORM, p)
+
+    # Demographic EAV rows
+    demo_rows = [
+        ("phs000010", "sex", "Female", "female"),
+        ("phs000010", "sex", "Male", "male"),
+        ("phs000011", "sex", "Male", "male"),
+        ("phs000011", "sex", "Female", "female"),
+        ("phs000011", "raceEthnicity", "White", "white"),
+        ("phs000011", "raceEthnicity", "Black or African American", "black or african american"),
+    ]
+    store.load_facet_values_batch(demo_rows)
+    store.finalize()
+    return store
+
+
+class TestDemographicSearch:
+    """Demographic facet values are searchable in DuckDB."""
+
+    @pytest.fixture
+    def demo_store(self) -> DuckDBStore:
+        return _build_store_with_demographics()
+
+    def test_sex_female_returns_correct_studies(self, demo_store: DuckDBStore) -> None:
+        """Searching sex=Female returns studies with female participants."""
+        result = demo_store.query_studies([(Facet.SEX, ["Female"])])
+        assert _ids(result) == {"phs000010", "phs000011"}
+
+    def test_race_ethnicity_search(self, demo_store: DuckDBStore) -> None:
+        """Searching raceEthnicity returns matching studies."""
+        result = demo_store.query_studies(
+            [(Facet.RACE_ETHNICITY, ["Black or African American"])]
+        )
+        assert _ids(result) == {"phs000011"}
+
+    def test_sex_and_platform_combined(self, demo_store: DuckDBStore) -> None:
+        """Demographic AND platform facets work together."""
+        result = demo_store.query_studies([
+            (Facet.SEX, ["Female"]),
+            (Facet.PLATFORM, ["BDC"]),
+        ])
+        # phs000010: Female + BDC ✓
+        # phs000011: Female + AnVIL ✗
+        assert _ids(result) == {"phs000010"}
+
+    def test_study_without_demographics_excluded(self, demo_store: DuckDBStore) -> None:
+        """Studies without demographics don't appear in demographic searches."""
+        result = demo_store.query_studies([(Facet.SEX, ["Male"])])
+        assert "phs000012" not in _ids(result)
+
+    def test_demographics_in_raw_json_roundtrip(self, demo_store: DuckDBStore) -> None:
+        """Demographics stored in raw_json survive DuckDB roundtrip."""
+        result = demo_store.query_studies([(Facet.PLATFORM, ["BDC"])])
+        study_10 = next(s for s in result if s["dbGapId"] == "phs000010")
+        assert "demographics" in study_10
+        assert study_10["demographics"]["sex"]["n"] == 100
+
+        study_12 = next(s for s in result if s["dbGapId"] == "phs000012")
+        assert "demographics" not in study_12
+
+
+# ---------------------------------------------------------------------------
+# Demographics: API response building
+# ---------------------------------------------------------------------------
+
+
+class TestBuildStudySummary:
+    """_build_study_summary produces correct StudyDemographics."""
+
+    def test_study_with_demographics(self) -> None:
+        """StudySummary includes demographics when present."""
+        study = {
+            "consentCodes": [],
+            "dataTypes": [],
+            "dbGapId": "phs000099",
+            "demographics": {
+                "sex": {
+                    "categories": [
+                        {"count": 60, "label": "Female", "percent": 60.0},
+                        {"count": 40, "label": "Male", "percent": 40.0},
+                    ],
+                    "n": 100,
+                },
+            },
+            "focus": None,
+            "participantCount": 100,
+            "platforms": ["BDC"],
+            "studyDesigns": [],
+            "title": "Test Study",
+        }
+        summary = _build_study_summary(study)
+        assert summary.demographics is not None
+        assert summary.demographics.sex is not None
+        assert summary.demographics.sex.n == 100
+        assert len(summary.demographics.sex.categories) == 2
+        assert summary.demographics.sex.categories[0].label == "Female"
+        assert summary.demographics.sex.categories[0].percent == 60.0
+        assert summary.demographics.race_ethnicity is None
+        assert summary.demographics.computed_ancestry is None
+
+    def test_study_without_demographics(self) -> None:
+        """StudySummary has demographics=None when no data."""
+        study = {
+            "consentCodes": [],
+            "dataTypes": [],
+            "dbGapId": "phs000100",
+            "focus": None,
+            "participantCount": 50,
+            "platforms": ["AnVIL"],
+            "studyDesigns": [],
+            "title": "No Demo Study",
+        }
+        summary = _build_study_summary(study)
+        assert summary.demographics is None
+
+    def test_percent_computation(self) -> None:
+        """Percent values are correct in the response."""
+        study = {
+            "consentCodes": [],
+            "dataTypes": [],
+            "dbGapId": "phs000101",
+            "demographics": {
+                "sex": {
+                    "categories": [
+                        {"count": 60, "label": "Male", "percent": 60.0},
+                        {"count": 40, "label": "Female", "percent": 40.0},
+                    ],
+                    "n": 100,
+                },
+            },
+            "focus": None,
+            "participantCount": 100,
+            "platforms": [],
+            "studyDesigns": [],
+            "title": "Pct Test",
+        }
+        summary = _build_study_summary(study)
+        cats = summary.demographics.sex.categories
+        assert cats[0].percent == 60.0
+        assert cats[1].percent == 40.0
+
+    def test_zero_n_no_division_error(self) -> None:
+        """n=0 produces percent=0.0 without ZeroDivisionError."""
+        # This tests the normalization path where percent is pre-computed
+        study = {
+            "consentCodes": [],
+            "dataTypes": [],
+            "dbGapId": "phs000102",
+            "demographics": {
+                "sex": {
+                    "categories": [
+                        {"count": 0, "label": "Male", "percent": 0.0},
+                    ],
+                    "n": 0,
+                },
+            },
+            "focus": None,
+            "participantCount": 0,
+            "platforms": [],
+            "studyDesigns": [],
+            "title": "Zero N",
+        }
+        summary = _build_study_summary(study)
+        assert summary.demographics.sex.categories[0].percent == 0.0
+
+    def test_all_three_dimensions(self) -> None:
+        """StudySummary with sex, raceEthnicity, and computedAncestry."""
+        study = {
+            "consentCodes": [],
+            "dataTypes": [],
+            "dbGapId": "phs000103",
+            "demographics": {
+                "computedAncestry": {
+                    "categories": [
+                        {"count": 80, "label": "European", "percent": 80.0},
+                        {"count": 20, "label": "African American", "percent": 20.0},
+                    ],
+                    "n": 100,
+                },
+                "raceEthnicity": {
+                    "categories": [
+                        {"count": 70, "label": "White", "percent": 70.0},
+                    ],
+                    "n": 100,
+                },
+                "sex": {
+                    "categories": [
+                        {"count": 50, "label": "Female", "percent": 50.0},
+                    ],
+                    "n": 100,
+                },
+            },
+            "focus": None,
+            "participantCount": 100,
+            "platforms": [],
+            "studyDesigns": [],
+            "title": "Full Demo",
+        }
+        summary = _build_study_summary(study)
+        assert summary.demographics.sex is not None
+        assert summary.demographics.race_ethnicity is not None
+        assert summary.demographics.computed_ancestry is not None
+        assert summary.demographics.computed_ancestry.categories[0].label == "European"

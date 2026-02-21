@@ -17,7 +17,15 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from .api_models import SearchRequest, SearchResponse, SearchTiming, StudySummary
+from .api_models import (
+    DemographicCategory,
+    DemographicDistribution,
+    SearchRequest,
+    SearchResponse,
+    SearchTiming,
+    StudyDemographics,
+    StudySummary,
+)
 from .index import get_index
 from .models import Facet, QueryModel, ResolvedMention
 from .pipeline import run_pipeline
@@ -99,12 +107,44 @@ app.add_middleware(
 )
 
 
+def _build_distribution(raw: dict) -> DemographicDistribution:
+    """Convert a raw demographics dimension dict to a model."""
+    return DemographicDistribution(
+        categories=[
+            DemographicCategory(
+                count=c["count"],
+                label=c["label"],
+                percent=c["percent"],
+            )
+            for c in raw.get("categories", [])
+        ],
+        n=raw.get("n", 0),
+    )
+
+
+def _build_demographics(study: dict) -> StudyDemographics | None:
+    """Build StudyDemographics from a study's ``demographics`` dict."""
+    demo = study.get("demographics")
+    if not demo:
+        return None
+    return StudyDemographics(
+        computed_ancestry=_build_distribution(demo["computedAncestry"])
+        if "computedAncestry" in demo
+        else None,
+        race_ethnicity=_build_distribution(demo["raceEthnicity"])
+        if "raceEthnicity" in demo
+        else None,
+        sex=_build_distribution(demo["sex"]) if "sex" in demo else None,
+    )
+
+
 def _build_study_summary(study: dict) -> StudySummary:
     """Project a full study dict into a lean StudySummary."""
     return StudySummary(
         consent_codes=study.get("consentCodes", []),
         data_types=study.get("dataTypes", []),
         db_gap_id=study.get("dbGapId", ""),
+        demographics=_build_demographics(study),
         focus=study.get("focus"),
         participant_count=study.get("participantCount"),
         platforms=study.get("platforms", []),

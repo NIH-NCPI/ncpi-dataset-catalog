@@ -133,7 +133,7 @@ class DuckDBStore:
             tmp = f.name
         try:
             self._conn.execute(
-                f"COPY {table} FROM '{tmp}' (FORMAT CSV)"  # noqa: S608
+                f"COPY {table} FROM '{tmp}' (FORMAT CSV, HEADER false)"  # noqa: S608
             )
         finally:
             os.unlink(tmp)
