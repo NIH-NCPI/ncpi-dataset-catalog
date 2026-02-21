@@ -150,7 +150,7 @@ def _load_demographic_profiles(
     ]
 
     for study_id, study_data in studies.items():
-        demo: dict = {}
+        demo: dict[str, dict] = {}
         for dim_key, facet_val, lookup, fallback in dimension_config:
             dist = study_data.get(dim_key)
             if not dist:

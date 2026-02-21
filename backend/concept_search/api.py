@@ -112,9 +112,9 @@ def _build_distribution(raw: dict) -> DemographicDistribution:
     return DemographicDistribution(
         categories=[
             DemographicCategory(
-                count=c["count"],
-                label=c["label"],
-                percent=c["percent"],
+                count=c.get("count", 0),
+                label=c.get("label", ""),
+                percent=c.get("percent", 0.0),
             )
             for c in raw.get("categories", [])
         ],
@@ -129,12 +129,12 @@ def _build_demographics(study: dict) -> StudyDemographics | None:
         return None
     return StudyDemographics(
         computed_ancestry=_build_distribution(demo["computedAncestry"])
-        if "computedAncestry" in demo
+        if demo.get("computedAncestry")
         else None,
         race_ethnicity=_build_distribution(demo["raceEthnicity"])
-        if "raceEthnicity" in demo
+        if demo.get("raceEthnicity")
         else None,
-        sex=_build_distribution(demo["sex"]) if "sex" in demo else None,
+        sex=_build_distribution(demo["sex"]) if demo.get("sex") else None,
     )
 
 
