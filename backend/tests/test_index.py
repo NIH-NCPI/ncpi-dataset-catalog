@@ -9,8 +9,11 @@ implementation (DuckDB today, OpenSearch tomorrow).
 
 from __future__ import annotations
 
+import json
 import os
 import tempfile
+import unittest.mock
+from pathlib import Path
 
 import pytest
 
@@ -671,6 +674,49 @@ class TestDemographicNormalization:
         result = _normalize_categories(cats, mappings["sex"], "Other/Unknown")
         counts = [c["count"] for c in result]
         assert counts == sorted(counts, reverse=True)
+
+    def test_zero_count_categories_excluded(self) -> None:
+        """Categories with count=0 are filtered out to avoid false positives."""
+        from concept_search.index import _load_demographic_profiles
+
+        data = {
+            "studies": {
+                "phs999999": {
+                    "sex": {
+                        "n": 100,
+                        "categories": [
+                            {"label": "Male", "count": 100},
+                            {"label": "Female", "count": 0},
+                        ],
+                    },
+                },
+            },
+        }
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".json", delete=False
+        ) as f:
+            json.dump(data, f)
+            tmp_path = f.name
+
+        mappings = _load_demographic_mappings()
+        with unittest.mock.patch(
+            "concept_search.index._resolve_demographics_path",
+            return_value=Path(tmp_path),
+        ):
+            demo_dict, eav_rows = _load_demographic_profiles(mappings)
+
+        os.unlink(tmp_path)
+
+        # Female with count=0 should be excluded from both
+        study_demo = demo_dict["phs999999"]["sex"]
+        labels = [c["label"] for c in study_demo["categories"]]
+        assert "Female" not in labels
+        assert "Male" in labels
+
+        # No EAV row for Female
+        eav_labels = [v for _, _, v, _ in eav_rows]
+        assert "Female" not in eav_labels
+        assert "Male" in eav_labels
 
 
 # ---------------------------------------------------------------------------

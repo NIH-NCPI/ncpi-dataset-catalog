@@ -1,6 +1,6 @@
 # PRD: Study-Level Demographics
 
-**Issue:** #186 (extraction), #TBD (backend integration)
+**Issue:** #186 (extraction), #188 (backend integration)
 **Status:** Phase 1 complete, Phase 2 in progress
 **Date:** 2026-02-17 (original), 2026-02-20 (updated)
 
@@ -41,8 +41,10 @@ cohorts.
 
 - Participant-level data — we only use aggregate counts already published by
   dbGaP.
-- Label normalization/harmonization — labels are stored verbatim from each
-  study's dbGaP submission. Harmonization is a future phase.
+- Label normalization in the extraction layer — extracted labels are stored
+  verbatim from each study's dbGaP submission. The search/API layer normalizes
+  via `demographic_mappings.json` and exposes canonical labels while preserving
+  the raw extracted values for auditing.
 - Age extraction — deferred due to ambiguity ("age at what?"). See Future
   Work.
 

@@ -76,15 +76,15 @@ def _load_demographic_mappings() -> dict[str, dict[str, str]]:
     Returns a dict keyed by dimension (``"sex"``, ``"raceEthnicity"``).
     Each value is a reverse-lookup dict mapping lowercase pattern → canonical label.
     """
-    mapping_path = Path(str(pkg_files("concept_search"))) / "demographic_mappings.json"
-    with open(mapping_path) as f:
+    resource = pkg_files("concept_search").joinpath("demographic_mappings.json")
+    with resource.open("r", encoding="utf-8") as f:
         raw = json.load(f)
     reverse: dict[str, dict[str, str]] = {}
     for dimension, canonical_map in raw.items():
         lookup: dict[str, str] = {}
         for canonical, patterns in canonical_map.items():
             for pattern in patterns:
-                lookup[pattern] = canonical
+                lookup[pattern.lower().strip()] = canonical
         reverse[dimension] = lookup
     return reverse
 
@@ -167,6 +167,10 @@ def _load_demographic_profiles(
                      for c in raw_cats],
                     key=lambda x: -x["count"],
                 )
+
+            # Drop categories with zero or negative counts to avoid
+            # false-positive EAV rows (e.g., sex=Female with count=0).
+            cats = [c for c in cats if c["count"] > 0 and c["label"]]
 
             # Pre-compute percent
             for cat in cats:
