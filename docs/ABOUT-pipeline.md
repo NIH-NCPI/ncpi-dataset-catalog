@@ -218,16 +218,26 @@ called `sbp5c`, `s1bp5`, or `rbrach5`.
 ### 4d. Search index and API
 
 The classified concepts are loaded into a DuckDB in-memory database as a
-faceted index. Each study has entries across six facets:
+faceted index. Each study has entries across nine facets:
 
-| Facet         | Source                     | Example values                          |
-| ------------- | -------------------------- | --------------------------------------- |
-| `measurement` | LLM concept classification | "Systolic Blood Pressure", "Sex", "BMI" |
-| `platform`    | Platform APIs              | "AnVIL", "BDC", "CRDC", "KFDRC"         |
-| `focus`       | dbGaP CSV                  | "Cardiovascular Disease", "Neoplasms"   |
-| `dataType`    | dbGaP CSV                  | "WGS", "SNP Genotypes (Array)"          |
-| `studyDesign` | dbGaP CSV                  | "Longitudinal Cohort", "Case-Control"   |
-| `consentCode` | dbGaP CSV                  | "GRU", "HMB", "DS-CA"                   |
+| Facet              | Source                     | Example values                          |
+| ------------------ | -------------------------- | --------------------------------------- |
+| `measurement`      | LLM concept classification | "Systolic Blood Pressure", "Sex", "BMI" |
+| `platform`         | Platform APIs              | "AnVIL", "BDC", "CRDC", "KFDRC"         |
+| `focus`            | dbGaP CSV                  | "Cardiovascular Disease", "Neoplasms"   |
+| `dataType`         | dbGaP CSV                  | "WGS", "SNP Genotypes (Array)"          |
+| `studyDesign`      | dbGaP CSV                  | "Longitudinal Cohort", "Case-Control"   |
+| `consentCode`      | dbGaP CSV                  | "GRU", "HMB", "DS-CA"                   |
+| `sex`              | Demographic profiles       | "Male", "Female", "Other/Unknown"       |
+| `raceEthnicity`    | Demographic profiles       | "White", "Black or African American"    |
+| `computedAncestry` | Demographic profiles       | "European", "East Asian"                |
+
+The three demographic facets come from the demographic distributions
+(section 5) after **label normalization** — verbatim labels like "FEMALE",
+"F", "female(46,XX)" are mapped to canonical categories ("Female") using a
+bundled mapping file (`demographic_mappings.json`). This lets researchers
+search for "female participants" and match studies regardless of how the
+original study reported sex. See section 5d for details.
 
 ### 4e. Natural language search
 
@@ -331,3 +341,46 @@ The pipeline produces `demographic-profiles.json` with top-level metadata and a
 
 Current coverage: **1,212 studies with sex**, **1,064 with race/ethnicity**,
 **462 with computed ancestry** (1,734 total with at least one).
+
+### 5d. Search integration
+
+The raw demographic labels in `demographic-profiles.json` are inconsistent —
+71 distinct sex labels (Male, MALE, M, Boy, female(46,XX)...) and 682
+distinct race/ethnicity labels across all studies. Without normalization, a
+search for "African American" would miss studies reporting "Black", "BLACK",
+or "Black/AA".
+
+The search API normalizes these on load using `demographic_mappings.json`, a
+bundled mapping file that maps each canonical category to a list of known
+verbatim label patterns:
+
+- **Sex** → 3 canonical categories (Male, Female, Other/Unknown) covering
+  ~38 patterns
+- **Race/Ethnicity** → 9 canonical categories (White, Black or African
+  American, Asian, Hispanic or Latino, etc.) covering ~60 patterns
+- **Computed Ancestry** → 9 fixed dbGaP labels, no normalization needed
+
+When multiple verbatim labels in one study map to the same canonical
+category, their counts are summed. The normalized categories are stored as
+searchable facet values in DuckDB (alongside measurement, platform, etc.)
+and embedded in each study's API response with pre-computed percentages:
+
+```json
+{
+  "demographics": {
+    "sex": {
+      "n": 981,
+      "categories": [
+        { "label": "Male", "count": 654, "percent": 66.7 },
+        { "label": "Female", "count": 327, "percent": 33.3 }
+      ]
+    }
+  }
+}
+```
+
+The demographic facets are "small facets" — the extract agent resolves them
+directly from the known canonical value lists (like platform or dataType),
+so a query like "studies with female participants and blood pressure" produces
+`sex=Female AND measurement=Systolic Blood Pressure` without needing the
+resolve agent.
