@@ -90,9 +90,12 @@ export const Chat = (): JSX.Element => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [queryHistory, setQueryHistory] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const historyIndexRef = useRef(-1);
+  const draftRef = useRef("");
   const { dimensions } = useLayoutDimensions();
   const headerHeight = dimensions.header.height;
 
@@ -115,6 +118,9 @@ export const Chat = (): JSX.Element => {
     if (!query || loading) return;
 
     setInput("");
+    setQueryHistory((prev) => [...prev, query].slice(-50));
+    historyIndexRef.current = -1;
+    draftRef.current = "";
     setMessages((prev) => [...prev, { text: query, type: "user" }]);
     setLoading(true);
 
@@ -168,9 +174,40 @@ export const Chat = (): JSX.Element => {
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
         handleSend();
+        return;
+      }
+
+      // Up/Down arrow: navigate query history when input is empty or
+      // cursor is at the very start (avoids interfering with multiline editing).
+      const el = e.currentTarget;
+      const cursorAtStart = el.selectionStart === 0 && el.selectionEnd === 0;
+
+      if (e.key === "ArrowUp" && (input === "" || cursorAtStart)) {
+        if (queryHistory.length === 0) return;
+        e.preventDefault();
+        if (historyIndexRef.current === -1) {
+          draftRef.current = input;
+          historyIndexRef.current = queryHistory.length - 1;
+        } else if (historyIndexRef.current > 0) {
+          historyIndexRef.current -= 1;
+        }
+        setInput(queryHistory[historyIndexRef.current]);
+      } else if (
+        e.key === "ArrowDown" &&
+        historyIndexRef.current >= 0 &&
+        cursorAtStart
+      ) {
+        e.preventDefault();
+        if (historyIndexRef.current < queryHistory.length - 1) {
+          historyIndexRef.current += 1;
+          setInput(queryHistory[historyIndexRef.current]);
+        } else {
+          historyIndexRef.current = -1;
+          setInput(draftRef.current);
+        }
       }
     },
-    [handleSend]
+    [handleSend, input, queryHistory]
   );
 
   return (
