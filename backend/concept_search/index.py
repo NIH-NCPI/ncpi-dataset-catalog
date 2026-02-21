@@ -290,21 +290,34 @@ class ConceptIndex:
             )
 
     def _load_measurement_concepts(self, llm_dir: Path) -> None:
-        """Load concept names from per-study LLM classification JSON files."""
+        """Load concept names and variable details from per-study LLM JSON."""
         if not llm_dir.exists():
             return
         concept_studies: dict[str, set[str]] = defaultdict(set)
         study_concepts: dict[str, set[str]] = defaultdict(set)
+        variable_rows: list[tuple[str, str, str, str, str, str, str, str]] = []
         for path in sorted(llm_dir.glob("phs*.json")):
             with open(path) as f:
                 data = json.load(f)
             study_id = data.get("studyId", path.stem)
             for table in data.get("tables", []):
+                dataset_id = table.get("datasetId", "")
+                table_name = table.get("tableName", "")
                 for var in table.get("variables", []):
                     concept = var.get("concept")
                     if concept:
                         concept_studies[concept].add(study_id)
                         study_concepts[study_id].add(concept)
+                        variable_rows.append((
+                            concept,
+                            concept.lower(),
+                            dataset_id,
+                            var.get("description", ""),
+                            var.get("id", ""),
+                            study_id,
+                            table_name,
+                            var.get("name", ""),
+                        ))
         for concept, studies in concept_studies.items():
             key = concept.lower()
             self._index[Facet.MEASUREMENT][key] = ConceptMatch(
@@ -312,7 +325,7 @@ class ConceptIndex:
                 study_count=len(studies),
                 value=concept,
             )
-        # Batch-insert measurement facet values into the store
+        # Batch-insert measurement facet values and variable rows into the store
         if isinstance(self.store, DuckDBStore):
             facet_val = Facet.MEASUREMENT.value
             rows = [
@@ -321,6 +334,8 @@ class ConceptIndex:
                 for concept in concepts
             ]
             self.store.load_facet_values_batch(rows)
+            self.store.load_variables_batch(variable_rows)
+            logger.info("Loaded %d variable rows", len(variable_rows))
 
     def _load_study_metadata(
         self,

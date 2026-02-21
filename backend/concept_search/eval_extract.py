@@ -31,7 +31,14 @@ class ExtractEvaluator(Evaluator[str, ExtractResult]):
         expected = ctx.expected_output
         actual = ctx.output
         if expected is None or not expected.mentions:
-            return {"extract_score": 1.0 if not actual.mentions else 0.0}
+            scores: dict[str, float] = {
+                "extract_score": 1.0 if not actual.mentions else 0.0,
+            }
+            if expected is not None:
+                scores["intent_score"] = (
+                    1.0 if actual.intent == expected.intent else 0.0
+                )
+            return scores
 
         matched = 0.0
         used_actual: set[int] = set()
@@ -51,9 +58,11 @@ class ExtractEvaluator(Evaluator[str, ExtractResult]):
                 matched += best_score
 
         total = len(expected.mentions)
-        return {
-            "extract_score": round(matched / total, 3) if total > 0 else 1.0
+        result: dict[str, float] = {
+            "extract_score": round(matched / total, 3) if total > 0 else 1.0,
+            "intent_score": 1.0 if actual.intent == expected.intent else 0.0,
         }
+        return result
 
 
 def _extract_similarity(expected: RawMention, actual: RawMention) -> float:
@@ -313,6 +322,113 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
                     ),
                     _rm("body mass index", Facet.MEASUREMENT),
                 ]
+            ),
+        ),
+        # --- Intent detection: variable queries ---
+        Case(
+            name="intent-variable-what-variables",
+            inputs="what variables measure chocolate consumption?",
+            expected_output=ExtractResult(
+                intent="variable",
+                mentions=[_rm("chocolate consumption", Facet.MEASUREMENT)],
+            ),
+        ),
+        Case(
+            name="intent-variable-which-variables",
+            inputs="which variables capture blood pressure?",
+            expected_output=ExtractResult(
+                intent="variable",
+                mentions=[_rm("blood pressure", Facet.MEASUREMENT)],
+            ),
+        ),
+        Case(
+            name="intent-variable-phenotype",
+            inputs="what phenotype variables exist for BMI?",
+            expected_output=ExtractResult(
+                intent="variable",
+                mentions=[_rm("body mass index", Facet.MEASUREMENT)],
+            ),
+        ),
+        Case(
+            name="intent-variable-what-is-measured",
+            inputs="what is measured for smoking?",
+            expected_output=ExtractResult(
+                intent="variable",
+                mentions=[_rm("smoking", Facet.MEASUREMENT)],
+            ),
+        ),
+        Case(
+            name="intent-variable-find-variables",
+            inputs="find variables related to dietary intake",
+            expected_output=ExtractResult(
+                intent="variable",
+                mentions=[_rm("dietary intake", Facet.MEASUREMENT)],
+            ),
+        ),
+        # --- Intent detection: study queries (should remain "study") ---
+        Case(
+            name="intent-study-datasets",
+            inputs="diabetes datasets on AnVIL",
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("diabetes", Facet.FOCUS),
+                    _rm("AnVIL", Facet.PLATFORM, ["AnVIL"]),
+                ],
+            ),
+        ),
+        Case(
+            name="intent-study-cohorts",
+            inputs="cancer cohorts with WGS data",
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("cancer", Facet.FOCUS),
+                    _rm("WGS", Facet.DATA_TYPE, ["WGS"]),
+                ],
+            ),
+        ),
+        Case(
+            name="intent-study-consent",
+            inputs="GRU consented studies with blood pressure",
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("GRU", Facet.CONSENT_CODE),
+                    _rm("blood pressure", Facet.MEASUREMENT),
+                ],
+            ),
+        ),
+        # --- Intent detection: variable queries with study filters ---
+        Case(
+            name="intent-variable-with-platform",
+            inputs="what variables measure blood pressure on AnVIL?",
+            expected_output=ExtractResult(
+                intent="variable",
+                mentions=[
+                    _rm("blood pressure", Facet.MEASUREMENT),
+                    _rm("AnVIL", Facet.PLATFORM, ["AnVIL"]),
+                ],
+            ),
+        ),
+        Case(
+            name="intent-variable-with-datatype",
+            inputs="which variables capture BMI in WGS studies?",
+            expected_output=ExtractResult(
+                intent="variable",
+                mentions=[
+                    _rm("body mass index", Facet.MEASUREMENT),
+                    _rm("WGS", Facet.DATA_TYPE, ["WGS"]),
+                ],
+            ),
+        ),
+        # --- Intent detection: ambiguous queries ---
+        Case(
+            name="intent-auto-ambiguous",
+            inputs="blood pressure",
+            expected_output=ExtractResult(
+                intent="auto",
+                mentions=[_rm("blood pressure", Facet.MEASUREMENT)],
             ),
         ),
     ],

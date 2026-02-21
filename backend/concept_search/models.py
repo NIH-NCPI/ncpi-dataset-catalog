@@ -18,9 +18,14 @@ subtract from the result set.
 from __future__ import annotations
 
 from enum import Enum
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
+
+
+# Valid query intent values.
+Intent = Literal["auto", "study", "variable"]
 
 
 class Facet(str, Enum):
@@ -76,6 +81,11 @@ class RawMention(BaseModel):
 class ExtractResult(BaseModel):
     """Output of the extract agent."""
 
+    intent: Intent = Field(
+        default="study",
+        description="Query intent: 'study' to search datasets, 'variable' to "
+        "search measured variables, 'auto' when ambiguous (ask user).",
+    )
     mentions: list[RawMention] = Field(default_factory=list)
     message: str | None = Field(
         default=None,
@@ -131,6 +141,10 @@ class QueryModel(BaseModel):
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
+    intent: Intent = Field(
+        default="study",
+        description="Query intent carried through from extract agent.",
+    )
     mentions: list[ResolvedMention] = Field(default_factory=list)
     message: str | None = Field(
         default=None,

@@ -5,8 +5,9 @@
 #   Prod: aws sso login --profile ncpi-prod-deployer
 #
 # Quick start:
-#   make deploy-dev     # build + push to dev
-#   make deploy-prod    # build + push to prod
+#   make start          # start local API server (rebuilds index if needed)
+#   make restart        # stop + start
+#   make stop           # stop running server
 
 # Image settings
 IMAGE_NAME = ncpi-search-api
@@ -21,23 +22,68 @@ PROD_AWS_PROFILE = ncpi-prod-deployer
 PROD_ECR_REPO = 701973344956.dkr.ecr.us-east-1.amazonaws.com/5wu-ncpi-dataset-catalog
 
 AWS_REGION = us-east-1
+PID_FILE = .server.pid
 
-.PHONY: help build push-dev push-prod deploy-dev deploy-prod
+.PHONY: help build push-dev push-prod deploy-dev deploy-prod \
+        start stop restart db-reload evals
 
 # Default target
 help:
-	@echo "NCPI Search API - Docker Build & Deploy"
+	@echo "NCPI Search API"
 	@echo ""
-	@echo "Available targets:"
-	@echo "  help          - Show this help message"
-	@echo "  build         - Build Docker image locally"
-	@echo "  push-dev      - Tag and push image to dev ECR"
-	@echo "  push-prod     - Tag and push image to prod ECR"
-	@echo "  deploy-dev    - Build + push to dev (all-in-one)"
-	@echo "  deploy-prod   - Build + push to prod (all-in-one)"
+	@echo "Local development:"
+	@echo "  start       - Start local API server on :8000 (background)"
+	@echo "  stop        - Stop running local server"
+	@echo "  restart     - Stop + start"
+	@echo "  db-reload   - Rebuild DuckDB index and restart server"
+	@echo "  evals       - Run extract agent evals"
 	@echo ""
-	@echo "Quick start:"
-	@echo "  make deploy-dev"
+	@echo "Docker deploy:"
+	@echo "  build       - Build Docker image locally"
+	@echo "  deploy-dev  - Build + push to dev ECR"
+	@echo "  deploy-prod - Build + push to prod ECR"
+
+# --- Local development -------------------------------------------------
+
+# Start API server in background
+start: stop
+	@echo "Starting API server on http://localhost:8000 ..."
+	@.venv/bin/python -m uvicorn concept_search.api:app \
+		--host 0.0.0.0 --port 8000 > .server.log 2>&1 & echo $$! > $(PID_FILE)
+	@sleep 2
+	@if kill -0 $$(cat $(PID_FILE)) 2>/dev/null; then \
+		echo "Server running (PID $$(cat $(PID_FILE))), log: backend/.server.log"; \
+	else \
+		echo "Server failed to start. Check backend/.server.log"; \
+		cat .server.log; \
+		rm -f $(PID_FILE); \
+		exit 1; \
+	fi
+
+# Stop running server
+stop:
+	@if [ -f $(PID_FILE) ]; then \
+		kill $$(cat $(PID_FILE)) 2>/dev/null && echo "Server stopped." || true; \
+		rm -f $(PID_FILE); \
+	fi
+	@lsof -ti :8000 | xargs kill 2>/dev/null || true
+
+# Stop + start
+restart: stop start
+
+# Rebuild DuckDB index and restart server
+db-reload: stop
+	@echo "Deleting cached DuckDB index..."
+	@rm -f ../catalog/concept-search.duckdb
+	@echo "Rebuilding index (this may take a moment)..."
+	@.venv/bin/python -c "from concept_search.index import get_index; idx = get_index(); print(f'Index rebuilt: {idx.store.study_count} studies')"
+	@$(MAKE) start
+
+# Run extract agent evals
+evals:
+	.venv/bin/python -m concept_search.eval_extract
+
+# --- Docker deploy ------------------------------------------------------
 
 # Build Docker image
 build:

@@ -79,6 +79,18 @@ class DuckDBStore:
             "  value_lower VARCHAR"
             ")"
         )
+        self._conn.execute(
+            "CREATE TABLE variables ("
+            "  concept VARCHAR,"
+            "  concept_lower VARCHAR,"
+            "  dataset_id VARCHAR,"
+            "  description VARCHAR,"
+            "  phv_id VARCHAR,"
+            "  study_id VARCHAR,"
+            "  table_name VARCHAR,"
+            "  variable_name VARCHAR"
+            ")"
+        )
 
     # -- bulk loading ---------------------------------------------------------
 
@@ -118,6 +130,18 @@ class DuckDBStore:
             return
         self._copy_csv("study_facet_values", rows)
 
+    def load_variables_batch(
+        self, rows: list[tuple[str, str, str, str, str, str, str, str]]
+    ) -> None:
+        """Batch-insert variable records via CSV COPY.
+
+        Each row is (concept, concept_lower, dataset_id, description,
+        phv_id, study_id, table_name, variable_name).
+        """
+        if not rows:
+            return
+        self._copy_csv("variables", rows)
+
     def _copy_csv(
         self, table: str, rows: list[tuple[str, ...]]
     ) -> None:
@@ -143,6 +167,9 @@ class DuckDBStore:
         self._conn.execute(
             "CREATE INDEX idx_sfv ON study_facet_values (facet, value_lower)"
         )
+        self._conn.execute(
+            "CREATE INDEX idx_var_concept ON variables (concept_lower)"
+        )
 
     # -- persistence ----------------------------------------------------------
 
@@ -162,12 +189,20 @@ class DuckDBStore:
                 "CREATE TABLE export_db.study_facet_values "
                 "AS SELECT * FROM study_facet_values"
             )
+            self._conn.execute(
+                "CREATE TABLE export_db.variables "
+                "AS SELECT * FROM variables"
+            )
             # DuckDB doesn't support schema-qualified CREATE INDEX names,
             # so switch context to the attached DB for index creation.
             self._conn.execute("USE export_db")
             self._conn.execute(
                 "CREATE INDEX idx_sfv "
                 "ON study_facet_values (facet, value_lower)"
+            )
+            self._conn.execute(
+                "CREATE INDEX idx_var_concept "
+                "ON variables (concept_lower)"
             )
         finally:
             self._conn.execute("USE memory")
@@ -228,6 +263,53 @@ class DuckDBStore:
 
         rows = self._conn.execute(sql, params).fetchall()
         return [json.loads(row[0]) for row in rows]
+
+    def query_variables(
+        self,
+        concepts: list[str] | None = None,
+        limit: int = 100,
+        study_ids: set[str] | None = None,
+    ) -> list[dict]:
+        """Return variables matching concept names and/or study IDs.
+
+        Args:
+            concepts: Canonical concept names to match (OR-ed). If None,
+                all concepts are included (filtered by study_ids).
+            limit: Maximum number of variable rows to return.
+            study_ids: If provided, restrict results to these studies.
+
+        Returns:
+            Variable dicts with study title joined from the studies table.
+        """
+        if not concepts and not study_ids:
+            return []
+        params: list[str] = []
+        clauses: list[str] = []
+        if concepts:
+            concept_ph = ", ".join("?" for _ in concepts)
+            clauses.append(f"v.concept_lower IN ({concept_ph})")
+            params.extend(c.lower() for c in concepts)
+        if study_ids is not None:
+            study_ph = ", ".join("?" for _ in study_ids)
+            clauses.append(f"v.study_id IN ({study_ph})")
+            params.extend(study_ids)
+        where = " AND ".join(clauses)
+        sql = (
+            "SELECT v.concept, v.dataset_id, v.description, v.phv_id,"
+            "  v.study_id, v.table_name, v.variable_name,"
+            "  json_extract_string(s.raw_json, '$.title') AS study_title "
+            "FROM variables v "
+            "LEFT JOIN studies s ON v.study_id = s.db_gap_id "
+            f"WHERE {where} "  # noqa: S608
+            "ORDER BY v.concept, v.study_id, v.variable_name "
+            f"LIMIT {limit}"
+        )
+        rows = self._conn.execute(sql, params).fetchall()
+        cols = [
+            "concept", "datasetId", "description", "phvId",
+            "studyId", "tableName", "variableName", "studyTitle",
+        ]
+        return [dict(zip(cols, row)) for row in rows]
 
     def get_facet_value_counts(self) -> list[tuple[str, str, int]]:
         """Return (facet, value, study_count) for all facet values.

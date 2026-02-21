@@ -50,7 +50,21 @@ interface Study {
   title: string;
 }
 
+interface Variable {
+  concept: string;
+  datasetId: string;
+  dbGapUrl: string;
+  description: string;
+  phvId: string;
+  studyId: string;
+  studyTitle: string;
+  studyUrl: string;
+  tableName: string;
+  variableName: string;
+}
+
 interface SearchResponse {
+  intent: "auto" | "study" | "variable";
   message: string | null;
   query: {
     mentions: Mention[];
@@ -63,6 +77,8 @@ interface SearchResponse {
     totalMs: number;
   };
   totalStudies: number;
+  totalVariables: number;
+  variables: Variable[];
 }
 
 interface UserMessage {
@@ -299,46 +315,100 @@ function AssistantResponse({
         </SectionRow>
       )}
 
-      <ResultCount>
-        Found {response.totalStudies}{" "}
-        {response.totalStudies === 1 ? "study" : "studies"} in {totalSeconds}s
-      </ResultCount>
-
-      {response.studies.length > 0 && (
-        <StudyTable>
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell>Title</TableCell>
-                <TableCell>dbGaP Id</TableCell>
-                <TableCell>Platform</TableCell>
-                <TableCell>Focus / Disease</TableCell>
-                <TableCell>Data Type</TableCell>
-                <TableCell>Participants</TableCell>
-                <TableCell>Study Design</TableCell>
-                <TableCell>Consent Code</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {response.studies.map((study, i) => (
-                <TableRow key={i}>
-                  <TableCell>{study.title}</TableCell>
-                  <TableCell>{study.dbGapId}</TableCell>
-                  <TableCell>{study.platforms.join(", ")}</TableCell>
-                  <TableCell>{study.focus}</TableCell>
-                  <TableCell>{study.dataTypes.join(", ")}</TableCell>
-                  <TableCell>
-                    {study.participantCount != null
-                      ? study.participantCount.toLocaleString()
-                      : "—"}
-                  </TableCell>
-                  <TableCell>{study.studyDesigns.join(", ")}</TableCell>
-                  <TableCell>{study.consentCodes.join(", ")}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </StudyTable>
+      {response.intent === "auto" ? null : response.intent === "variable" ? (
+        <>
+          <ResultCount>
+            Found {response.totalVariables}{" "}
+            {response.totalVariables === 1 ? "variable" : "variables"} in{" "}
+            {totalSeconds}s
+          </ResultCount>
+          {response.variables.length > 0 && (
+            <StudyTable>
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Concept</TableCell>
+                    <TableCell>Variable Name</TableCell>
+                    <TableCell>Description</TableCell>
+                    <TableCell>Study</TableCell>
+                    <TableCell>dbGaP</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {response.variables.map((v, i) => (
+                    <TableRow key={i}>
+                      <TableCell>{v.concept}</TableCell>
+                      <TableCell>{v.variableName}</TableCell>
+                      <TableCell>{v.description}</TableCell>
+                      <TableCell>
+                        <a
+                          href={v.studyUrl}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          {v.studyTitle || v.studyId}
+                        </a>
+                      </TableCell>
+                      <TableCell>
+                        <a
+                          href={v.dbGapUrl}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          {v.phvId}
+                        </a>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </StudyTable>
+          )}
+        </>
+      ) : (
+        <>
+          <ResultCount>
+            Found {response.totalStudies}{" "}
+            {response.totalStudies === 1 ? "study" : "studies"} in{" "}
+            {totalSeconds}s
+          </ResultCount>
+          {response.studies.length > 0 && (
+            <StudyTable>
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Title</TableCell>
+                    <TableCell>dbGaP Id</TableCell>
+                    <TableCell>Platform</TableCell>
+                    <TableCell>Focus / Disease</TableCell>
+                    <TableCell>Data Type</TableCell>
+                    <TableCell>Participants</TableCell>
+                    <TableCell>Study Design</TableCell>
+                    <TableCell>Consent Code</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {response.studies.map((study, i) => (
+                    <TableRow key={i}>
+                      <TableCell>{study.title}</TableCell>
+                      <TableCell>{study.dbGapId}</TableCell>
+                      <TableCell>{study.platforms.join(", ")}</TableCell>
+                      <TableCell>{study.focus}</TableCell>
+                      <TableCell>{study.dataTypes.join(", ")}</TableCell>
+                      <TableCell>
+                        {study.participantCount != null
+                          ? study.participantCount.toLocaleString()
+                          : "—"}
+                      </TableCell>
+                      <TableCell>{study.studyDesigns.join(", ")}</TableCell>
+                      <TableCell>{study.consentCodes.join(", ")}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </StudyTable>
+          )}
+        </>
       )}
     </AssistantBubble>
   );
