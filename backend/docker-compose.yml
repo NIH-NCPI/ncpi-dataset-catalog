@@ -14,6 +14,7 @@ services:
       - search-cache:/cache
       - ../catalog:/data/catalog:ro
       - ../catalog-build/classification/output/concept-hierarchy.json:/data/catalog-build/classification/output/concept-hierarchy.json:ro
+      - ../catalog-build/classification/output/demographic-profiles.json:/data/catalog-build/classification/output/demographic-profiles.json:ro
       - ../catalog-build/classification/output/llm-concepts:/data/catalog-build/classification/output/llm-concepts:ro
 
 volumes:

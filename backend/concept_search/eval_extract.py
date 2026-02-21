@@ -259,6 +259,62 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
                 ]
             ),
         ),
+        # --- Demographic facets ---
+        Case(
+            name="sex-female",
+            inputs="studies with female participants",
+            expected_output=ExtractResult(
+                mentions=[_rm("female", Facet.SEX, ["Female"])]
+            ),
+        ),
+        Case(
+            name="race-ethnicity",
+            inputs="African American cohorts with WGS",
+            expected_output=ExtractResult(
+                mentions=[
+                    _rm(
+                        "African American",
+                        Facet.RACE_ETHNICITY,
+                        ["Black or African American"],
+                    ),
+                    _rm("WGS", Facet.DATA_TYPE, ["WGS"]),
+                ]
+            ),
+        ),
+        Case(
+            name="computed-ancestry",
+            inputs="European ancestry diabetes studies",
+            expected_output=ExtractResult(
+                mentions=[
+                    _rm("European ancestry", Facet.COMPUTED_ANCESTRY, ["European"]),
+                    _rm("diabetes", Facet.FOCUS),
+                ]
+            ),
+        ),
+        Case(
+            name="sex-and-platform",
+            inputs="male participants on BDC",
+            expected_output=ExtractResult(
+                mentions=[
+                    _rm("male", Facet.SEX, ["Male"]),
+                    _rm("BDC", Facet.PLATFORM, ["BDC"]),
+                ]
+            ),
+        ),
+        Case(
+            name="hispanic-studies",
+            inputs="Hispanic or Latino cohorts with BMI data",
+            expected_output=ExtractResult(
+                mentions=[
+                    _rm(
+                        "Hispanic or Latino",
+                        Facet.RACE_ETHNICITY,
+                        ["Hispanic or Latino"],
+                    ),
+                    _rm("body mass index", Facet.MEASUREMENT),
+                ]
+            ),
+        ),
     ],
 )
 

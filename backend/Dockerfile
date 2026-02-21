@@ -14,10 +14,12 @@ COPY backend/concept_search/ concept_search/
 COPY catalog/ncpi-platform-studies.json catalog/ncpi-platform-studies.json
 COPY catalog-build/classification/output/llm-concepts/ catalog-build/classification/output/llm-concepts/
 COPY catalog-build/classification/output/concept-hierarchy.json catalog-build/classification/output/concept-hierarchy.json
+COPY catalog-build/classification/output/demographic-profiles.json catalog-build/classification/output/demographic-profiles.json
 
 # Writable directory for DuckDB cache
 RUN mkdir -p /cache
 ENV NCPI_DUCKDB_CACHE_PATH=/cache/concept-search.duckdb
+ENV NCPI_REPO_ROOT=/app
 
 EXPOSE 8000
 

@@ -307,6 +307,51 @@ dataset = Dataset[str, QueryModel, QueryModel](
                 ]
             ),
         ),
+        # --- Demographic facets ---
+        Case(
+            name="sex-female-measurement",
+            inputs="studies with female participants and blood pressure data",
+            # sex=Female is a small facet (resolved by extract agent directly).
+            # blood pressure goes through the resolve agent.
+            expected_output=QueryModel(
+                mentions=[
+                    _m("female", Facet.SEX, ["Female"]),
+                    _m(
+                        "blood pressure",
+                        Facet.MEASUREMENT,
+                        ["Systolic Blood Pressure"],
+                    ),
+                ]
+            ),
+        ),
+        Case(
+            name="race-ethnicity-platform",
+            inputs="African American cohorts on BDC",
+            expected_output=QueryModel(
+                mentions=[
+                    _m(
+                        "African American",
+                        Facet.RACE_ETHNICITY,
+                        ["Black or African American"],
+                    ),
+                    _m("BDC", Facet.PLATFORM, ["BDC"]),
+                ]
+            ),
+        ),
+        Case(
+            name="ancestry-focus",
+            inputs="European ancestry diabetes studies",
+            expected_output=QueryModel(
+                mentions=[
+                    _m(
+                        "European ancestry",
+                        Facet.COMPUTED_ANCESTRY,
+                        ["European"],
+                    ),
+                    _m("diabetes", Facet.FOCUS, ["Diabetes Mellitus"]),
+                ]
+            ),
+        ),
     ],
 )
 
