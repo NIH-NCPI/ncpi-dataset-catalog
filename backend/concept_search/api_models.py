@@ -9,7 +9,7 @@ from __future__ import annotations
 from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
 
-from .models import QueryModel
+from .models import Intent, QueryModel
 
 
 class SearchRequest(BaseModel):
@@ -73,13 +73,33 @@ class SearchTiming(BaseModel):
     total_ms: int
 
 
+class VariableResult(BaseModel):
+    """A single variable matching a concept query."""
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    concept: str
+    dataset_id: str
+    db_gap_url: str
+    description: str
+    phv_id: str
+    study_id: str
+    study_title: str
+    study_url: str
+    table_name: str
+    variable_name: str
+
+
 class SearchResponse(BaseModel):
     """Top-level response for POST /search."""
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
+    intent: Intent = "study"
     message: str | None
     query: QueryModel
-    studies: list[StudySummary]
+    studies: list[StudySummary] = Field(default_factory=list)
     timing: SearchTiming
-    total_studies: int
+    total_studies: int = 0
+    total_variables: int = 0
+    variables: list[VariableResult] = Field(default_factory=list)

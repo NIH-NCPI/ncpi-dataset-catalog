@@ -177,8 +177,12 @@ async def run_pipeline(
         len(extract_result.mentions),
     )
 
+    intent = extract_result.intent
+    logger.info("Intent: %s", intent)
+
     if not extract_result.mentions:
         return QueryModel(
+            intent=intent,
             mentions=[],
             message=extract_result.message,
         )
@@ -199,6 +203,7 @@ async def run_pipeline(
 
     # --- Step 3: Deterministic merge ---
     query_model = _merge(resolved, structure_result)
+    query_model.intent = intent
 
     for m in query_model.mentions:
         logger.debug(

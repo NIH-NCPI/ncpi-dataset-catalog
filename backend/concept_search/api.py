@@ -25,11 +25,13 @@ from .api_models import (
     SearchTiming,
     StudyDemographics,
     StudySummary,
+    VariableResult,
 )
 from .index import get_index
 from .models import Facet, QueryModel, ResolvedMention
 from .pipeline import run_pipeline
 from .rate_limit import RateLimiter
+from .store import DuckDBStore
 
 # Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
 logging.basicConfig(
@@ -153,6 +155,58 @@ def _build_study_summary(study: dict) -> StudySummary:
     )
 
 
+def _build_dbgap_variable_url(study_id: str, phv_id: str) -> str:
+    """Build a dbGaP variable page URL.
+
+    Args:
+        study_id: Study accession (e.g., "phs000007").
+        phv_id: Variable PHV ID (e.g., "phv00481718.v2.p1").
+
+    Returns:
+        Full URL to the variable page on dbGaP.
+    """
+    # Extract the numeric portion from the phv ID (strip "phv" prefix and version)
+    phv_num = phv_id.split(".")[0].replace("phv", "")
+    return (
+        f"https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/variable.cgi"
+        f"?study_id={study_id}&phv={phv_num}"
+    )
+
+
+def _build_dbgap_study_url(study_id: str) -> str:
+    """Build a dbGaP study page URL.
+
+    Args:
+        study_id: Study accession (e.g., "phs000007").
+
+    Returns:
+        Full URL to the study page on dbGaP.
+    """
+    return (
+        f"https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi"
+        f"?study_id={study_id}"
+    )
+
+
+def _build_variable_result(row: dict) -> VariableResult:
+    """Convert a raw variable dict from the store into a VariableResult."""
+    study_id = row.get("studyId", "")
+    return VariableResult(
+        concept=row.get("concept", ""),
+        dataset_id=row.get("datasetId", ""),
+        db_gap_url=_build_dbgap_variable_url(
+            study_id, row.get("phvId", "")
+        ),
+        description=row.get("description", ""),
+        phv_id=row.get("phvId", ""),
+        study_id=study_id,
+        study_title=row.get("studyTitle", ""),
+        study_url=_build_dbgap_study_url(study_id),
+        table_name=row.get("tableName", ""),
+        variable_name=row.get("variableName", ""),
+    )
+
+
 def _split_mentions(
     mentions: list[ResolvedMention],
 ) -> tuple[list[tuple[Facet, list[str]]], list[tuple[Facet, list[str]]]]:
@@ -228,13 +282,26 @@ async def search(
         )
     t_pipeline = time.monotonic()
 
-    # Deterministic study lookup
+    # Deterministic lookup — branch on intent
     index = get_index()
+    intent = query_model.intent
     studies: list[dict] = []
+    variable_rows: list[dict] = []
 
     if query_model.mentions:
         include, exclude = _split_mentions(query_model.mentions)
-        studies = index.query_studies(include, exclude or None)
+        if intent == "variable":
+            # Collect resolved measurement concepts for variable lookup
+            concepts = [
+                v
+                for m in query_model.mentions
+                if m.facet == Facet.MEASUREMENT and not m.exclude
+                for v in m.values
+            ]
+            if concepts and isinstance(index.store, DuckDBStore):
+                variable_rows = index.store.query_variables(concepts)
+        else:
+            studies = index.query_studies(include, exclude or None)
 
     t_lookup = time.monotonic()
 
@@ -242,6 +309,7 @@ async def search(
     lookup_ms = int((t_lookup - t_pipeline) * 1000)
 
     response = SearchResponse(
+        intent=intent,
         message=query_model.message,
         query=query_model,
         studies=[_build_study_summary(s) for s in studies],
@@ -251,10 +319,13 @@ async def search(
             total_ms=pipeline_ms + lookup_ms,
         ),
         total_studies=len(studies),
+        total_variables=len(variable_rows),
+        variables=[_build_variable_result(r) for r in variable_rows],
     )
 
     _log_json(
         event="search_response",
+        intent=intent,
         query=request.query,
         mentions=[
             {
@@ -266,6 +337,7 @@ async def search(
         ],
         message=query_model.message,
         total_studies=len(studies),
+        total_variables=len(variable_rows),
         pipeline_ms=pipeline_ms,
         lookup_ms=lookup_ms,
     )
