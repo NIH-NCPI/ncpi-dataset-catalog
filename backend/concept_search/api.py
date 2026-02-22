@@ -29,7 +29,7 @@ from .api_models import (
 )
 from .index import get_index
 from .models import Facet, QueryModel, ResolvedMention
-from .pipeline import run_pipeline
+from .pipeline import pipeline_cache, run_pipeline
 from .rate_limit import RateLimiter
 from .resolve_agent import resolve_cache
 from .store import DuckDBStore
@@ -368,6 +368,7 @@ async def health() -> dict:
     index = get_index()
     return {
         "indexStats": index.stats,
+        "pipelineCache": pipeline_cache.stats,
         "resolveCache": resolve_cache.stats,
         "status": "ok",
     }

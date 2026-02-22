@@ -14,8 +14,10 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import os
 import time
 
+from .cache import LRUCache
 from .extract_agent import run_extract
 from .index import ConceptIndex, get_index
 from .models import (
@@ -27,6 +29,12 @@ from .resolve_agent import run_resolve
 from .structure_agent import run_structure
 
 logger = logging.getLogger(__name__)
+
+pipeline_cache: LRUCache[str, QueryModel] = LRUCache(
+    name="pipeline_cache",
+    max_size=int(os.environ.get("PIPELINE_CACHE_MAX_SIZE", "10000")),
+    ttl_seconds=float(os.environ.get("PIPELINE_CACHE_TTL_SECONDS", "86400")),
+)
 
 
 # ---------------------------------------------------------------------------
@@ -149,12 +157,12 @@ def _merge(
 # Main pipeline
 # ---------------------------------------------------------------------------
 
-async def run_pipeline(
+async def _run_pipeline_uncached(
     query: str,
     index: ConceptIndex | None = None,
     model: str | None = None,
 ) -> QueryModel:
-    """Run the full 3-agent pipeline on a natural-language query.
+    """Run the full 3-agent pipeline (no caching).
 
     Args:
         query: The user's natural-language search query.
@@ -217,3 +225,27 @@ async def run_pipeline(
         query_model.message = " ".join(messages)
 
     return query_model
+
+
+async def run_pipeline(
+    query: str,
+    index: ConceptIndex | None = None,
+    model: str | None = None,
+) -> QueryModel:
+    """Run the full 3-agent pipeline on a natural-language query.
+
+    Results are cached by normalized query string. A cache hit skips
+    all three agents (extract, resolve, structure).
+
+    Args:
+        query: The user's natural-language search query.
+        index: ConceptIndex to use. If None, uses the shared singleton.
+        model: Override the model for all agents.
+
+    Returns:
+        Structured QueryModel with resolved mentions and boolean logic.
+    """
+    key = query.strip().lower()
+    return await pipeline_cache.get_or_compute(
+        key, lambda: _run_pipeline_uncached(query, index, model)
+    )
