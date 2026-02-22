@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import pytest
-
 from concept_search.consent_logic import (
     ParsedConsentCode,
     compute_eligible_codes,
@@ -363,3 +361,8 @@ class TestResolvDiseaseName:
         result = resolve_disease_name("cancer")
         # Should match "Cancer (all types)" → CA
         assert result == "CA"
+
+    def test_cardiovascular_prefers_shortest(self):
+        # "cardiovascular" matches multiple TSV entries (CCSD, CVD, etc.)
+        # Should prefer "Cardiovascular Disease" (CVD) over longer names
+        assert resolve_disease_name("cardiovascular") == "CVD"

@@ -37,8 +37,9 @@ if _DISEASE_TSV_PATH.exists():
         for row in reader:
             _DISEASE_ABBREVIATIONS[row["Disease abbrev"]] = row["Disease name"]
 else:
-    # Fallback to consent_codes.json if TSV not available
-    _DISEASE_ABBREVIATIONS = _data.get("disease_abbreviations", {})
+    raise FileNotFoundError(
+        f"Disease abbreviation mapping not found: {_DISEASE_TSV_PATH}"
+    )
 
 # Reverse map: lowercase disease name → abbreviation
 _DISEASE_NAME_TO_ABBREV: dict[str, str] = {
