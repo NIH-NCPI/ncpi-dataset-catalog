@@ -6,6 +6,7 @@ import asyncio
 import logging
 import time
 from dataclasses import dataclass, field
+from collections.abc import Awaitable, Callable
 from typing import Generic, TypeVar
 
 logger = logging.getLogger(__name__)
@@ -52,7 +53,7 @@ class LRUCache(Generic[K, V]):
     async def get_or_compute(
         self,
         key: K,
-        compute: asyncio.coroutines,
+        compute: Callable[[], Awaitable[V]],
     ) -> V:
         """Return a cached value or compute it.
 
