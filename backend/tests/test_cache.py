@@ -164,6 +164,47 @@ async def test_tuple_keys() -> None:
 
 
 @pytest.mark.asyncio()
+async def test_compute_exception_not_cached(cache: LRUCache[str, str]) -> None:
+    """Failed computes should not be cached, and retries should work."""
+
+    async def failing() -> str:
+        raise RuntimeError("boom")
+
+    with pytest.raises(RuntimeError, match="boom"):
+        await cache.get_or_compute("k", failing)
+
+    assert len(cache._cache) == 0
+    assert "k" not in cache._in_flight
+
+    # Retry should succeed
+    r = await cache.get_or_compute("k", lambda: _compute("ok"))
+    assert r == "ok"
+    assert len(cache._cache) == 1
+
+
+@pytest.mark.asyncio()
+async def test_in_flight_exception_propagates(cache: LRUCache[str, str]) -> None:
+    """When the owner fails, waiters should retry (not get a stale error)."""
+    call_count = 0
+
+    async def slow_fail() -> str:
+        nonlocal call_count
+        call_count += 1
+        await asyncio.sleep(0.05)
+        raise RuntimeError("boom")
+
+    results = await asyncio.gather(
+        cache.get_or_compute("k", slow_fail),
+        cache.get_or_compute("k", slow_fail),
+        return_exceptions=True,
+    )
+
+    # Owner fails; waiter falls through and also calls compute
+    assert all(isinstance(r, RuntimeError) for r in results)
+    assert len(cache._cache) == 0
+
+
+@pytest.mark.asyncio()
 async def test_clear_all() -> None:
     """clear_all() should clear all registered caches."""
     c1 = LRUCache[str, str](name="c1", max_size=10)

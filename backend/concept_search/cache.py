@@ -69,7 +69,7 @@ class LRUCache(Generic[K, V]):
             if entry and (time.monotonic() - entry.created) < self.ttl_seconds:
                 self.hits += 1
                 self._cache[key] = self._cache.pop(key)
-                logger.info("%s hit key=%s", self.name, key)
+                logger.debug("%s hit key=%s", self.name, key)
                 return entry.value
 
             event = self._in_flight.get(key)
@@ -84,28 +84,29 @@ class LRUCache(Generic[K, V]):
             await event.wait()
             async with self._lock:
                 entry = self._cache.get(key)
-                if entry:
+                if entry and (time.monotonic() - entry.created) < self.ttl_seconds:
                     self.hits += 1
                     self._cache[key] = self._cache.pop(key)
                     return entry.value
 
         self.misses += 1
-        logger.info("%s miss key=%s", self.name, key)
+        logger.debug("%s miss key=%s", self.name, key)
+        success = False
         try:
             value = await compute()
+            success = True
         finally:
             async with self._lock:
+                if success:
+                    if len(self._cache) >= self.max_size:
+                        oldest = next(iter(self._cache))
+                        del self._cache[oldest]
+                    self._cache[key] = _CacheEntry(
+                        created=time.monotonic(), value=value
+                    )
                 ev = self._in_flight.pop(key, None)
                 if ev is not None:
                     ev.set()
-
-        async with self._lock:
-            if len(self._cache) >= self.max_size:
-                oldest = next(iter(self._cache))
-                del self._cache[oldest]
-            self._cache[key] = _CacheEntry(
-                created=time.monotonic(), value=value
-            )
 
         return value
 
