@@ -7,11 +7,18 @@ for a given research purpose.
 
 from __future__ import annotations
 
+import csv
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
 _DATA_PATH = Path(__file__).parent / "consent_codes.json"
+_DISEASE_TSV_PATH = (
+    Path(__file__).resolve().parent.parent.parent
+    / "catalog-build"
+    / "common"
+    / "disease_abbrev_mapping.tsv"
+)
 
 # ---------------------------------------------------------------------------
 # Load reference data once at module level
@@ -21,7 +28,18 @@ _data: dict = json.loads(_DATA_PATH.read_text())
 _MODIFIERS: set[str] = set(_data.get("modifiers", {}))
 _BASE_CODES: set[str] = set(_data.get("base_codes", {}))
 _DISEASE_HIERARCHY: dict[str, list[str]] = _data.get("disease_hierarchy", {})
-_DISEASE_ABBREVIATIONS: dict[str, str] = _data.get("disease_abbreviations", {})
+
+# Disease abbreviations from the authoritative TSV maintained in catalog-build
+_DISEASE_ABBREVIATIONS: dict[str, str] = {}
+if _DISEASE_TSV_PATH.exists():
+    with _DISEASE_TSV_PATH.open() as f:
+        reader = csv.DictReader(f, delimiter="\t")
+        for row in reader:
+            _DISEASE_ABBREVIATIONS[row["Disease abbrev"]] = row["Disease name"]
+else:
+    # Fallback to consent_codes.json if TSV not available
+    _DISEASE_ABBREVIATIONS = _data.get("disease_abbreviations", {})
+
 # Reverse map: lowercase disease name → abbreviation
 _DISEASE_NAME_TO_ABBREV: dict[str, str] = {
     name.lower(): abbrev for abbrev, name in _DISEASE_ABBREVIATIONS.items()
@@ -127,11 +145,14 @@ def resolve_disease_name(name: str) -> str | None:
     lower = name.lower()
     if lower in _DISEASE_NAME_TO_ABBREV:
         return _DISEASE_NAME_TO_ABBREV[lower]
-    # Substring match: find abbreviation whose full name contains the query
+    # Substring match: find abbreviation whose full name contains the query.
+    # Prefer the shortest matching name (most specific match).
+    best: tuple[str, int] | None = None
     for full_name, abbrev in _DISEASE_NAME_TO_ABBREV.items():
         if lower in full_name or full_name in lower:
-            return abbrev
-    return None
+            if best is None or len(full_name) < best[1]:
+                best = (abbrev, len(full_name))
+    return best[0] if best else None
 
 
 def compute_eligible_codes(

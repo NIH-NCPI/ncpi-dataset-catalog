@@ -509,6 +509,20 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
                 ],
             ),
         ),
+        Case(
+            name="consent-nonprofit-disease-dual",
+            inputs="I'm a nonprofit studying cancer, what datasets are available?",
+            # Dual mention: cancer is the topic (focus) AND the consent
+            # eligibility context (nonprofit + disease). "what...available"
+            # is the eligibility cue.
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("cancer", Facet.FOCUS),
+                    _rm("nonprofit cancer", Facet.CONSENT_CODE),
+                ],
+            ),
+        ),
     ],
 )
 
