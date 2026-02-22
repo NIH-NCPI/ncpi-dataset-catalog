@@ -31,6 +31,7 @@ from .index import get_index
 from .models import Facet, QueryModel, ResolvedMention
 from .pipeline import run_pipeline
 from .rate_limit import RateLimiter
+from .resolve_agent import resolve_cache
 from .store import DuckDBStore
 
 # Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
@@ -367,6 +368,7 @@ async def health() -> dict:
     index = get_index()
     return {
         "indexStats": index.stats,
+        "resolveCache": resolve_cache.stats,
         "status": "ok",
     }
 
