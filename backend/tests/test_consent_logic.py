@@ -329,7 +329,7 @@ class TestPurposePath:
 # ---------------------------------------------------------------------------
 
 
-class TestResolvDiseaseName:
+class TestResolveDiseaseName:
     def test_abbreviation_direct(self):
         assert resolve_disease_name("DIAB") == "DIAB"
 
@@ -340,7 +340,7 @@ class TestResolvDiseaseName:
         assert resolve_disease_name("Diabetes") == "DIAB"
 
     def test_full_name_exact(self):
-        assert resolve_disease_name("Cancer (all types)") == "CA"
+        assert resolve_disease_name("Cancer") == "CA"
 
     def test_partial_name(self):
         assert resolve_disease_name("diabetes") == "DIAB"
@@ -359,10 +359,17 @@ class TestResolvDiseaseName:
 
     def test_cancer_substring(self):
         result = resolve_disease_name("cancer")
-        # Should match "Cancer (all types)" → CA
+        # Should match "Cancer" → CA
         assert result == "CA"
 
     def test_cardiovascular_prefers_shortest(self):
         # "cardiovascular" matches multiple TSV entries (CCSD, CVD, etc.)
         # Should prefer "Cardiovascular Disease" (CVD) over longer names
         assert resolve_disease_name("cardiovascular") == "CVD"
+
+    def test_possessive_alzheimers(self):
+        # "Alzheimer's" should strip possessive and match "Alzheimer Disease"
+        assert resolve_disease_name("Alzheimer's") == "ALZ"
+
+    def test_possessive_parkinsons(self):
+        assert resolve_disease_name("Parkinson's") == "PD"

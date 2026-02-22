@@ -146,11 +146,13 @@ def resolve_disease_name(name: str) -> str | None:
     lower = name.lower()
     if lower in _DISEASE_NAME_TO_ABBREV:
         return _DISEASE_NAME_TO_ABBREV[lower]
+    # Strip possessives ("Alzheimer's" → "alzheimer")
+    normalized = lower.rstrip("'s").rstrip("'")
     # Substring match: find abbreviation whose full name contains the query.
     # Prefer the shortest matching name (most specific match).
     best: tuple[str, int] | None = None
     for full_name, abbrev in _DISEASE_NAME_TO_ABBREV.items():
-        if lower in full_name or full_name in lower:
+        if normalized in full_name:
             if best is None or len(full_name) < best[1]:
                 best = (abbrev, len(full_name))
     return best[0] if best else None
