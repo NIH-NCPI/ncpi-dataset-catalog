@@ -9,19 +9,20 @@ from dotenv import load_dotenv
 from pydantic_evals import Case, Dataset
 from pydantic_evals.evaluators import Evaluator, EvaluatorContext
 
+from .consent_logic import compute_eligible_codes, resolve_disease_name
 from .index import get_index
 from .models import Facet, RawMention, ResolveResult
 from .resolve_agent import run_resolve
 
 
 class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
-    """Scores resolve agent output using recall on expected values.
+    """Scores resolve agent output using F1 on expected values.
 
     Matching logic:
     - Values are compared case-insensitively.
-    - Recall: all expected values must appear in actual.
-    - Extra values in actual are not penalized.
-    - Score 1.0 if expected has no values (just checks agent returns something).
+    - F1: harmonic mean of precision and recall. Penalizes both
+      missing expected values and spurious extra values.
+    - Score 1.0 if expected has no values and actual is also empty.
     """
 
     def evaluate(
@@ -30,7 +31,6 @@ class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
         expected = ctx.expected_output
         actual = ctx.output
         if expected is None or not expected.values:
-            # If we expect empty, score 1.0 if actual is also empty
             return {
                 "resolve_score": 1.0 if not actual.values else 0.0
             }
@@ -39,13 +39,45 @@ class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
         act_set = {v.lower() for v in actual.values}
         if not act_set:
             return {"resolve_score": 0.0}
-        hits = exp_set & act_set
-        return {"resolve_score": round(len(hits) / len(exp_set), 3)}
+        hits = len(exp_set & act_set)
+        precision = hits / len(act_set)
+        recall = hits / len(exp_set)
+        if precision + recall == 0:
+            return {"resolve_score": 0.0}
+        f1 = 2 * precision * recall / (precision + recall)
+        return {"resolve_score": round(f1, 3)}
 
 
 def _mention(text: str, facet: Facet) -> RawMention:
     """Build a raw mention input for the resolve agent."""
     return RawMention(facet=facet, text=text, values=[])
+
+
+# ---------------------------------------------------------------------------
+# Dynamic consent code expectations
+# ---------------------------------------------------------------------------
+
+def _consent_expected(**kwargs: object) -> ResolveResult:
+    """Compute expected consent code values deterministically.
+
+    Loads the index once, gets all consent codes, and calls
+    ``compute_eligible_codes`` with the given kwargs.  This keeps
+    expectations in sync with the actual catalog data.
+
+    Args:
+        **kwargs: Forwarded to ``compute_eligible_codes`` (after resolving
+            any ``disease`` name to an abbreviation).
+
+    Returns:
+        A :class:`ResolveResult` with sorted eligible codes.
+    """
+    index = get_index()
+    all_codes = [m.value for m in index.list_facet_values("consentCode")]
+    # Resolve disease name if provided
+    if "disease" in kwargs:
+        kwargs["disease"] = resolve_disease_name(str(kwargs["disease"]))
+    eligible = compute_eligible_codes(all_codes, **kwargs)  # type: ignore[arg-type]
+    return ResolveResult(values=sorted(eligible))
 
 
 dataset = Dataset[RawMention, ResolveResult, ResolveResult](
@@ -62,29 +94,23 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             inputs=_mention("systolic blood pressure", Facet.MEASUREMENT),
             expected_output=ResolveResult(values=["Systolic Blood Pressure"]),
         ),
-        Case(
-            name="direct-diabetes-focus",
-            inputs=_mention("diabetes", Facet.FOCUS),
-            expected_output=ResolveResult(values=["Diabetes Mellitus"]),
-        ),
-        Case(
-            name="direct-consent-gru",
-            inputs=_mention("GRU", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["GRU"]),
-        ),
+        # (diabetes/focus is tested as focus-diabetes below)
+        # (GRU direct match is tested as consent-gru-direct below)
         # --- Lay term rewrites ---
         Case(
             name="lay-blood-sugar",
             inputs=_mention("blood sugar", Facet.MEASUREMENT),
             # Agent should search "blood sugar", find low-count results,
-            # then rewrite to "glucose" and find Fasting Glucose (44 studies).
-            expected_output=ResolveResult(values=["Fasting Glucose"]),
+            # then rewrite to "glucose" and find glucose-related concepts.
+            expected_output=ResolveResult(
+                values=["Blood Glucose", "Fasting Glucose", "Glucose", "Serum Glucose"]
+            ),
         ),
         Case(
             name="lay-blood-pressure",
             inputs=_mention("blood pressure", Facet.MEASUREMENT),
             expected_output=ResolveResult(
-                values=["Systolic Blood Pressure"]
+                values=["Diastolic Blood Pressure", "Systolic Blood Pressure"]
             ),
         ),
         # --- Category expansion ---
@@ -92,24 +118,53 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             name="category-sleep",
             inputs=_mention("sleep", Facet.MEASUREMENT),
             # "sleep" is broad — agent should return multiple sleep concepts.
-            # Accept any result that includes Sleep Duration.
-            expected_output=ResolveResult(values=["Sleep Duration"]),
+            expected_output=ResolveResult(
+                values=[
+                    "Daytime Sleepiness",
+                    "Epworth Sleepiness Scale",
+                    "Excessive Daytime Sleepiness",
+                    "Obstructive Sleep Apnea History",
+                    "Oxygen Therapy Use During Sleep",
+                    "Sleep Apnea History",
+                    "Sleep Disorder History",
+                    "Sleep Disturbance",
+                    "Sleep Duration",
+                    "Sleep Efficiency",
+                    "Sleep Latency",
+                    "Sleep Maintenance Insomnia",
+                    "Sleep Medication Use",
+                    "Sleep Onset Difficulty",
+                    "Sleep Onset Insomnia",
+                    "Sleep Onset Latency",
+                    "Sleep Problems",
+                    "Sleep Quality",
+                    "Total Sleep Time",
+                    "Wake After Sleep Onset",
+                ]
+            ),
         ),
         Case(
             name="category-cholesterol",
             inputs=_mention("cholesterol", Facet.MEASUREMENT),
-            # "cholesterol" is ambiguous — Total, HDL, LDL, Dietary, etc.
+            # "cholesterol" is ambiguous — Total, HDL, LDL, Triglycerides.
             # Agent should return broad match and disambiguate via message.
-            expected_output=ResolveResult(values=["Total Cholesterol"]),
+            expected_output=ResolveResult(
+                values=["HDL Cholesterol", "LDL Cholesterol", "Total Cholesterol", "Triglycerides"]
+            ),
         ),
         Case(
             name="disambig-glucose",
             inputs=_mention("glucose", Facet.MEASUREMENT),
-            # "glucose" spans 5 categories: Endocrine (Fasting Glucose, 44),
-            # Lab Tests (Glucose, 38), Dietary (Glucose Intake, 5), etc.
-            # Agent should pick Fasting Glucose (highest count) and
-            # disambiguate — importantly NOT an example in the prompt.
-            expected_output=ResolveResult(values=["Fasting Glucose"]),
+            # "glucose" spans multiple categories — agent should return
+            # the main glucose-related measurement concepts.
+            expected_output=ResolveResult(
+                values=[
+                    "2-Hour Plasma Glucose",
+                    "Fasting Blood Glucose",
+                    "Fasting Glucose",
+                    "Postprandial Blood Glucose",
+                ]
+            ),
         ),
         # --- Medical synonym ---
         Case(
@@ -120,21 +175,26 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="synonym-smoking",
             inputs=_mention("smoking", Facet.MEASUREMENT),
-            expected_output=ResolveResult(values=["Smoking Status"]),
+            expected_output=ResolveResult(
+                values=["Current Smoking Status", "Smoking History", "Smoking Status"]
+            ),
         ),
         # --- Harder rewrites ---
         Case(
             name="rewrite-vitamin-k",
             inputs=_mention("vitamin K", Facet.MEASUREMENT),
-            expected_output=ResolveResult(values=["Vitamin K Intake"]),
+            expected_output=ResolveResult(
+                values=["Vitamin K Intake", "Vitamin K Supplementation"]
+            ),
         ),
         Case(
             name="rewrite-heart-disease",
             inputs=_mention("heart disease", Facet.FOCUS),
             # With category drill-down, agent sees full list and picks
-            # the broader "Cardiovascular Diseases" (81 studies) over
-            # "Heart Diseases" (4 studies). Both are valid.
-            expected_output=ResolveResult(values=["Cardiovascular Diseases"]),
+            # both broad and specific heart disease terms.
+            expected_output=ResolveResult(
+                values=["Cardiovascular Diseases", "Heart Diseases"]
+            ),
         ),
         # --- Focus/disease via category drill-down ---
         Case(
@@ -150,7 +210,14 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="focus-lung-cancer",
             inputs=_mention("lung cancer", Facet.FOCUS),
-            expected_output=ResolveResult(values=["Lung Neoplasms"]),
+            expected_output=ResolveResult(
+                values=[
+                    "Adenocarcinoma of Lung",
+                    "Carcinoma, Non-Small-Cell Lung",
+                    "Lung Neoplasms",
+                    "Small Cell Lung Carcinoma",
+                ]
+            ),
         ),
         Case(
             name="focus-diabetes",
@@ -209,127 +276,108 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             inputs=_mention("schizophrenia", Facet.FOCUS),
             expected_output=ResolveResult(values=["Schizophrenia"]),
         ),
-        # --- Consent code semantic resolution ---
+        # --- Consent code semantic resolution (dynamic expectations) ---
         Case(
             name="consent-gru-direct",
             inputs=_mention("GRU", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["GRU"]),
+            expected_output=_consent_expected(explicit_code="GRU"),
         ),
         Case(
             name="consent-general-research",
             inputs=_mention("general research use", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["GRU"]),
+            expected_output=_consent_expected(explicit_code="GRU"),
         ),
         Case(
             name="consent-hmb-direct",
             inputs=_mention("HMB", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["HMB"]),
+            expected_output=_consent_expected(explicit_code="HMB"),
         ),
         Case(
             name="consent-health-medical",
             inputs=_mention("health medical biomedical", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["HMB"]),
+            expected_output=_consent_expected(purpose="health"),
         ),
         Case(
             name="consent-disease-specific-cvd",
             inputs=_mention("cardiovascular disease specific", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["DS-CVD"]),
+            expected_output=_consent_expected(explicit_code="DS-CVD"),
         ),
         Case(
             name="consent-breast-cancer",
             inputs=_mention("breast cancer research", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["DS-BRCA"]),
+            expected_output=_consent_expected(purpose="disease", disease="BRCA"),
         ),
         Case(
             name="consent-not-for-profit",
             inputs=_mention("general research, not for profit", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["GRU-NPU"]),
+            expected_output=_consent_expected(purpose="general"),
         ),
         Case(
             name="consent-hmb-irb",
             inputs=_mention("HMB-IRB", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["HMB-IRB"]),
+            expected_output=_consent_expected(explicit_code="HMB-IRB"),
         ),
         Case(
             name="consent-diabetes",
             inputs=_mention("diabetes research", Facet.CONSENT_CODE),
-            # Eligibility: should return DS-DIAB-* codes (via compute_consent_eligibility)
-            expected_output=ResolveResult(values=["DS-DIAB-NPU"]),
+            expected_output=_consent_expected(purpose="disease", disease="DIAB"),
         ),
         # --- Consent eligibility resolution ---
         Case(
             name="consent-for-profit-cancer",
             inputs=_mention("for-profit cancer", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["DS-CA"]),
-        ),
-        Case(
-            name="consent-explicit-gru",
-            inputs=_mention("GRU", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["GRU", "GRU-IRB"]),
-        ),
-        Case(
-            name="consent-explicit-hmb",
-            inputs=_mention("HMB", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["HMB", "HMB-IRB"]),
+            expected_output=_consent_expected(purpose="disease", disease="CA", is_nonprofit=False),
         ),
         Case(
             name="consent-sub-disease",
             inputs=_mention("type 1 diabetes research consent", Facet.CONSENT_CODE),
-            # DS-T1D-IRB exists in the index
-            expected_output=ResolveResult(values=["DS-T1D-IRB"]),
+            expected_output=_consent_expected(purpose="disease", disease="T1D"),
         ),
         Case(
             name="consent-consented-diabetes",
             inputs=_mention("diabetes", Facet.CONSENT_CODE),
-            # Should include GRU (always eligible) and HMB (health/disease)
-            # plus DS-DIAB family — recall scoring checks all are present
-            expected_output=ResolveResult(
-                values=["GRU", "HMB", "DS-DIAB-NPU"]
-            ),
+            expected_output=_consent_expected(purpose="disease", disease="DIAB"),
         ),
         Case(
             name="consent-consented-alzheimers",
             inputs=_mention("Alzheimer's", Facet.CONSENT_CODE),
-            # GRU always eligible, HMB for disease research
-            expected_output=ResolveResult(values=["GRU", "HMB"]),
+            expected_output=_consent_expected(purpose="health"),
         ),
         Case(
             name="consent-disease-only-diabetes",
             inputs=_mention("diabetes only", Facet.CONSENT_CODE),
-            # "only" → disease_only=True, should return DS-DIAB* but NOT GRU/HMB
-            expected_output=ResolveResult(values=["DS-DIAB-NPU"]),
+            expected_output=_consent_expected(purpose="disease", disease="DIAB", disease_only=True),
         ),
         Case(
             name="consent-disease-only-cancer",
             inputs=_mention("specifically cancer", Facet.CONSENT_CODE),
-            # "specifically" → disease_only=True
-            expected_output=ResolveResult(values=["DS-CA"]),
+            expected_output=_consent_expected(purpose="disease", disease="CA", disease_only=True),
         ),
         # --- GRU vs HMB disambiguation ---
         Case(
             name="consent-social-science",
             inputs=_mention("social science behavioral genetics research", Facet.CONSENT_CODE),
-            # NOT health/medical → general purpose → GRU only
+            # NOT health/medical -> general purpose -> GRU only
             # HMB is restricted to health/medical/biomedical
-            expected_output=ResolveResult(values=["GRU"]),
+            expected_output=_consent_expected(purpose="general"),
         ),
         Case(
             name="consent-biomedical",
             inputs=_mention("biomedical research on aging", Facet.CONSENT_CODE),
-            # Explicitly biomedical → health purpose → GRU + HMB
-            expected_output=ResolveResult(values=["GRU", "HMB"]),
+            # Explicitly biomedical -> health purpose -> GRU + HMB
+            expected_output=_consent_expected(purpose="health"),
         ),
         Case(
             name="consent-for-profit-health",
             inputs=_mention("for-profit biomedical health research", Facet.CONSENT_CODE),
-            # Health purpose + for-profit → GRU + HMB minus NPU variants
-            expected_output=ResolveResult(values=["GRU", "HMB"]),
+            # Health purpose + for-profit -> GRU + HMB minus NPU variants
+            expected_output=_consent_expected(purpose="health", is_nonprofit=False),
         ),
         Case(
             name="consent-population-genetics",
             inputs=_mention("population genetics, not disease-related", Facet.CONSENT_CODE),
-            # Explicitly not disease/health → general → GRU only
-            expected_output=ResolveResult(values=["GRU"]),
+            # Explicitly not disease/health -> general -> GRU only
+            expected_output=_consent_expected(purpose="general"),
         ),
     ],
 )
