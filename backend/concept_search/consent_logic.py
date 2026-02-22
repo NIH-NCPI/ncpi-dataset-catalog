@@ -26,7 +26,6 @@ _DISEASE_TSV_PATH = (
 
 _data: dict = json.loads(_DATA_PATH.read_text())
 _MODIFIERS: set[str] = set(_data.get("modifiers", {}))
-_BASE_CODES: set[str] = set(_data.get("base_codes", {}))
 _DISEASE_HIERARCHY: dict[str, list[str]] = _data.get("disease_hierarchy", {})
 
 # Disease abbreviations from the authoritative TSV maintained in catalog-build
@@ -147,7 +146,7 @@ def resolve_disease_name(name: str) -> str | None:
     if lower in _DISEASE_NAME_TO_ABBREV:
         return _DISEASE_NAME_TO_ABBREV[lower]
     # Strip possessives ("Alzheimer's" → "alzheimer")
-    normalized = lower.rstrip("'s").rstrip("'")
+    normalized = lower.removesuffix("'s").removesuffix("'")
     # Substring match: find abbreviation whose full name contains the query.
     # Prefer the shortest matching name (most specific match).
     best: tuple[str, int] | None = None
@@ -255,4 +254,6 @@ def _is_eligible_by_purpose(
         code_diseases = expand_disease(parsed.disease)
         return bool(code_diseases & user_diseases)
 
+    # Other base codes (NPU, CADM, IRU) are restriction/modifier codes,
+    # not primary consent categories. They don't grant research use.
     return False
