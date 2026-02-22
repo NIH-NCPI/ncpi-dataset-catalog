@@ -38,7 +38,7 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 model_settings=ModelSettings(
                     anthropic_cache_instructions=True,
                     anthropic_cache_tool_definitions=True,
-                    temperature=0.2,
+                    temperature=0.0,
                 ),
             )
 
