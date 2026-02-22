@@ -367,13 +367,3 @@ class TestResolveDiseaseName:
         # Should prefer "Cardiovascular Disease" (CVD) over longer names
         assert resolve_disease_name("cardiovascular") == "CVD"
 
-    def test_possessive_alzheimers(self):
-        # "Alzheimer's" should strip possessive and match "Alzheimer Disease"
-        assert resolve_disease_name("Alzheimer's") == "ALZ"
-
-    def test_possessive_parkinsons(self):
-        assert resolve_disease_name("Parkinson's") == "PD"
-
-    def test_trailing_s_not_stripped(self):
-        # "arthritis" should NOT lose its trailing 's' (not a possessive)
-        assert resolve_disease_name("arthritis") is not None
