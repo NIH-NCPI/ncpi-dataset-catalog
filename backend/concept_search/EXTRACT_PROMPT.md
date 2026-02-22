@@ -85,6 +85,16 @@ For these facets, extract the user's text and leave `values` empty. A resolve ag
 
 **Important:** A disease name is a **consentCode** (not focus) when the query describes what research the data is _consented for_, not what the data is _about_. Context clues: "consented for", "approved for", "data use", "research consented". Example: "diabetes datasets consented for Alzheimer's research" → focus="diabetes", consentCode="Alzheimer's". Also recognize semantic descriptions: "general research use" → consentCode, "health and medical" → consentCode, "not for profit" → consentCode.
 
+**Eligibility language** — the following cue words signal the user is asking about what data they are _allowed to use_, which means consentCode: "what can I use", "what datasets can I use", "eligible for", "consented for", "approved for", "available for my research", "for-profit", "non-profit", "commercial use". When these cues are present, emit a **consentCode** mention in addition to any focus mention. Without these cues, disease mentions stay as `focus` only.
+
+Key rule: "diabetes studies" = focus only. "What diabetes datasets can I use?" = focus + consentCode (because "can I use" signals eligibility).
+
+**Dual mentions:** When eligibility cues appear alongside a disease, emit BOTH a focus mention (what the study is about) AND a consentCode mention (what the data is permitted for). Examples:
+
+- "I'm a nonprofit studying cancer, what's available?" → focus="cancer" + consentCode="nonprofit cancer"
+- "for-profit diabetes datasets" → focus="diabetes" + consentCode="for-profit diabetes"
+- "what datasets can I use for Alzheimer's research?" → focus="Alzheimer's" + consentCode="Alzheimer's"
+
 ## Instructions
 
 1. Determine the query **intent** (`"study"`, `"variable"`, or `"auto"`) — see "Query Intent" above.

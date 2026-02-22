@@ -253,7 +253,83 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="consent-diabetes",
             inputs=_mention("diabetes research", Facet.CONSENT_CODE),
-            expected_output=ResolveResult(values=["DS-DIAB"]),
+            # Eligibility: should return DS-DIAB-* codes (via compute_consent_eligibility)
+            expected_output=ResolveResult(values=["DS-DIAB-NPU"]),
+        ),
+        # --- Consent eligibility resolution ---
+        Case(
+            name="consent-for-profit-cancer",
+            inputs=_mention("for-profit cancer", Facet.CONSENT_CODE),
+            expected_output=ResolveResult(values=["DS-CA"]),
+        ),
+        Case(
+            name="consent-explicit-gru",
+            inputs=_mention("GRU", Facet.CONSENT_CODE),
+            expected_output=ResolveResult(values=["GRU", "GRU-IRB"]),
+        ),
+        Case(
+            name="consent-explicit-hmb",
+            inputs=_mention("HMB", Facet.CONSENT_CODE),
+            expected_output=ResolveResult(values=["HMB", "HMB-IRB"]),
+        ),
+        Case(
+            name="consent-sub-disease",
+            inputs=_mention("type 1 diabetes research consent", Facet.CONSENT_CODE),
+            # DS-T1D-IRB exists in the index
+            expected_output=ResolveResult(values=["DS-T1D-IRB"]),
+        ),
+        Case(
+            name="consent-consented-diabetes",
+            inputs=_mention("diabetes", Facet.CONSENT_CODE),
+            # Should include GRU (always eligible) and HMB (health/disease)
+            # plus DS-DIAB family — recall scoring checks all are present
+            expected_output=ResolveResult(
+                values=["GRU", "HMB", "DS-DIAB-NPU"]
+            ),
+        ),
+        Case(
+            name="consent-consented-alzheimers",
+            inputs=_mention("Alzheimer's", Facet.CONSENT_CODE),
+            # GRU always eligible, HMB for disease research
+            expected_output=ResolveResult(values=["GRU", "HMB"]),
+        ),
+        Case(
+            name="consent-disease-only-diabetes",
+            inputs=_mention("diabetes only", Facet.CONSENT_CODE),
+            # "only" → disease_only=True, should return DS-DIAB* but NOT GRU/HMB
+            expected_output=ResolveResult(values=["DS-DIAB-NPU"]),
+        ),
+        Case(
+            name="consent-disease-only-cancer",
+            inputs=_mention("specifically cancer", Facet.CONSENT_CODE),
+            # "specifically" → disease_only=True
+            expected_output=ResolveResult(values=["DS-CA"]),
+        ),
+        # --- GRU vs HMB disambiguation ---
+        Case(
+            name="consent-social-science",
+            inputs=_mention("social science behavioral genetics research", Facet.CONSENT_CODE),
+            # NOT health/medical → general purpose → GRU only
+            # HMB is restricted to health/medical/biomedical
+            expected_output=ResolveResult(values=["GRU"]),
+        ),
+        Case(
+            name="consent-biomedical",
+            inputs=_mention("biomedical research on aging", Facet.CONSENT_CODE),
+            # Explicitly biomedical → health purpose → GRU + HMB
+            expected_output=ResolveResult(values=["GRU", "HMB"]),
+        ),
+        Case(
+            name="consent-for-profit-health",
+            inputs=_mention("for-profit biomedical health research", Facet.CONSENT_CODE),
+            # Health purpose + for-profit → GRU + HMB minus NPU variants
+            expected_output=ResolveResult(values=["GRU", "HMB"]),
+        ),
+        Case(
+            name="consent-population-genetics",
+            inputs=_mention("population genetics, not disease-related", Facet.CONSENT_CODE),
+            # Explicitly not disease/health → general → GRU only
+            expected_output=ResolveResult(values=["GRU"]),
         ),
     ],
 )

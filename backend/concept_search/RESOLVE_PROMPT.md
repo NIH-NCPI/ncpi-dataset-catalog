@@ -74,27 +74,48 @@ If category drill-down doesn't find a match, fall back to `search_concepts`:
 - You can combine both: try category drill-down, then search if needed.
 - **Cross-category terms:** Some terms appear in multiple categories (e.g., "cholesterol" exists in Laboratory Tests, Metabolomics, Dietary & Nutrition, and Medications). When a term could fit multiple categories, try 2–3 categories and **pick the concept with the highest study count**. Set `message` to disambiguate: "Did you mean Total Cholesterol (93 studies), HDL Cholesterol (78 studies), or Dietary Cholesterol Intake (9 studies)?"
 
-## Consent Code Facet — Category Drill-Down
+## Consent Code Facet — Eligibility Resolution
 
-For **consentCode** mentions, use context-driven drill-down:
+For **consentCode** mentions, use one of two patterns:
 
-1. Call `get_consent_code_categories()` to see the base codes (GRU, HMB, DS, etc.) with descriptions, study counts, and modifier definitions.
-2. Use your understanding of the mention to pick the right base code:
-   - "general research use", "open access", "unrestricted" → GRU
-   - "health research", "biomedical only" → HMB
-   - Any disease name → DS (disease-specific)
-   - "not for profit" → look for NPU modifier on the right base
-3. If the mention refers to a disease, call `get_disease_specific_codes()` to see all DS-\* disease categories with their full names.
-4. Optionally call `get_consent_codes_for_base(base_code)` to see all variants with modifiers (e.g., all GRU-_ or DS-CVD-_ codes).
-5. Return the broadest matching code unless the user specifies modifiers.
+### Pattern A: Explicit Code
+
+When the mention text IS a consent code (e.g. "GRU", "HMB-IRB", "DS-CVD"):
+
+1. Call `compute_consent_eligibility(explicit_code=<the code>)` to get the code and all its modifier variants.
+2. Return ALL eligible codes from the result — these are combined with OR.
 
 **Examples:**
 
-- "general research use" → get categories → pick GRU
-- "breast cancer research" → get categories → see DS → get disease codes → pick DS-BRCA
-- "HMB-IRB" → direct code, return as-is
-- "cardiovascular disease, not for profit" → get disease codes → DS-CVD → get variants → DS-CVD-NPU-MDS or just DS-CVD
-- "open access no restrictions" → GRU (semantic match, "open access" = general research use)
+- "GRU" → `compute_consent_eligibility(explicit_code="GRU")` → returns GRU, GRU-IRB, GRU-NPU, etc.
+- "HMB-IRB" → `compute_consent_eligibility(explicit_code="HMB-IRB")` → returns just HMB-IRB
+- "DS-CVD" → `compute_consent_eligibility(explicit_code="DS-CVD")` → returns DS-CVD, DS-CVD-IRB, etc.
+
+### Pattern B: Eligibility / Use-Case
+
+When the mention describes a research use case or eligibility (e.g. "diabetes research", "for-profit cancer datasets", "general health research"):
+
+1. Determine **purpose**: "general" (unrestricted), "health" (health/medical/biomedical), or "disease" (specific disease).
+2. Determine **is_nonprofit**: False if mention says "for-profit" or "commercial"; True or None otherwise.
+3. Call `compute_consent_eligibility(purpose=..., disease=..., is_nonprofit=...)` — the disease parameter accepts full names ("diabetes", "cancer", "type 1 diabetes") or abbreviations ("DIAB", "CA", "T1D"). The tool resolves names automatically.
+4. Return ALL eligible codes from the result.
+
+**Examples:**
+
+- "diabetes research" → `compute_consent_eligibility(purpose="disease", disease="diabetes")` → returns GRU*, HMB*, DS-DIAB*, DS-T1D*, etc.
+- "for-profit cancer datasets" → `compute_consent_eligibility(purpose="disease", disease="cancer", is_nonprofit=False)` → returns codes without NPU modifier
+- "general health research at a university" → `compute_consent_eligibility(purpose="health")` → returns GRU* + HMB* + HMP + HR
+- "general research use" → `compute_consent_eligibility(explicit_code="GRU")`
+- "open access no restrictions" → `compute_consent_eligibility(explicit_code="GRU")`
+- "type 1 diabetes consent" → `compute_consent_eligibility(purpose="disease", disease="type 1 diabetes")`
+- "consented for diabetes only" → `compute_consent_eligibility(purpose="disease", disease="diabetes", disease_only=True)` → returns only DS-DIAB\* codes, not GRU/HMB
+- "specifically consented for cancer" → `compute_consent_eligibility(purpose="disease", disease="cancer", disease_only=True)`
+
+**disease_only flag:** Set `disease_only=True` when the user says "only", "specifically", "disease-specific", or otherwise indicates they want datasets with a disease-specific consent code — not all datasets that happen to be eligible. This excludes GRU, HMB, and other broad codes.
+
+### Exploration Tools (still available)
+
+You can still use `get_consent_code_categories()`, `get_disease_specific_codes()`, and `get_consent_codes_for_base()` to explore codes before calling `compute_consent_eligibility`.
 
 ## General Selection Rules
 
