@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+import os
 import threading
 from pathlib import Path
 
 from pydantic_ai import Agent, RunContext
 from pydantic_ai.settings import ModelSettings
 
+from .cache import LRUCache
 from .consent_logic import compute_eligible_codes, resolve_disease_name
 from .index import ConceptIndex
 from .models import ConceptMatch, RawMention, ResolveResult
@@ -18,6 +20,12 @@ _DEFAULT_MODEL = "anthropic:claude-haiku-4-5-20251001"
 _agent: Agent[ConceptIndex, ResolveResult] | None = None
 _agent_model: str | None = None
 _lock = threading.Lock()
+
+resolve_cache: LRUCache[tuple[str, str], ResolveResult] = LRUCache(
+    name="resolve_cache",
+    max_size=int(os.environ.get("RESOLVE_CACHE_MAX_SIZE", "10000")),
+    ttl_seconds=float(os.environ.get("RESOLVE_CACHE_TTL_SECONDS", "86400")),
+)
 
 
 def _load_prompt() -> str:
@@ -38,7 +46,7 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 model_settings=ModelSettings(
                     anthropic_cache_instructions=True,
                     anthropic_cache_tool_definitions=True,
-                    temperature=0.2,
+                    temperature=0.0,
                 ),
             )
 
@@ -231,12 +239,12 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
         return _agent
 
 
-async def run_resolve(
+async def _run_resolve_uncached(
     mention: RawMention,
     index: ConceptIndex,
     model: str | None = None,
 ) -> ResolveResult:
-    """Resolve a single raw mention to canonical index values.
+    """Call the LLM to resolve a mention (no caching).
 
     Args:
         mention: The raw mention to resolve.
@@ -250,3 +258,27 @@ async def run_resolve(
     prompt = f"Resolve this mention:\n- text: {mention.text}\n- facet: {mention.facet.value}"
     result = await agent.run(prompt, deps=index)
     return result.output
+
+
+async def run_resolve(
+    mention: RawMention,
+    index: ConceptIndex,
+    model: str | None = None,
+) -> ResolveResult:
+    """Resolve a single raw mention to canonical index values.
+
+    Results are cached by ``(facet, normalized_text)`` to avoid redundant
+    LLM calls for repeated mentions.
+
+    Args:
+        mention: The raw mention to resolve.
+        index: ConceptIndex to search against.
+        model: Override the model (default: Haiku).
+
+    Returns:
+        ResolveResult with canonical value(s).
+    """
+    key = (mention.facet.value, mention.text.strip().lower())
+    return await resolve_cache.get_or_compute(
+        key, lambda: _run_resolve_uncached(mention, index, model)
+    )
