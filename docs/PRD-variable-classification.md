@@ -387,37 +387,78 @@ The largest compressions come from:
 
 ### Overview
 
-Classification uses a three-step pipeline: LLM classification of every variable to a common medical term, normalization of those terms to UMLS concepts, and human review of the results.
+Classification matches variables against a curated, CUI-backed concept set rather than inventing concept names for every variable. This concept-first approach produces grounded results from the start and scales to 450K+ variables without concept proliferation.
 
 ```
+Curated concept set (TOPMed 65 + hand-picked UMLS expansions)
+  ↓ each concept has: CUI, name, description, matching instructions
+  ↓
 Source variables (from dbGaP var_report.xml)
-  ↓ Step 1: LLM classification — assign a medical concept to every variable
-  ↓ Step 2: UMLS normalization — map free-text concepts to UMLS CUIs
-  ↓ Step 3: Human review — audit, merge, and correct
+  ↓ Step 0: Pre-filter — remove admin/opaque/QC variables in code
+  ↓ Step 1: LLM matching — "which concept (if any) does this variable match?"
+  ↓ Step 2: Hierarchy generation — is_a generator builds mid-level groupings
+  ↓ Step 3: Iterative expansion — unmatched variables inform new CUI additions
   = per-study JSON files (versioned, cached, incrementally updateable)
 ```
 
-### Step 1: LLM Variable-Level Classification
+### Three-layer architecture
 
-Every variable in every dbGaP table is classified by an LLM (Claude Haiku) into a standardized medical concept name. The LLM receives one table at a time — the table name, description, and all variables with their descriptions — and returns a concept for each variable.
+| Layer                          | Source                                        | Purpose                                                    | Ontology-backed?              |
+| ------------------------------ | --------------------------------------------- | ---------------------------------------------------------- | ----------------------------- |
+| **Domain** (~30)               | PhenX research domains (hand-curated)         | Top-level browsing/navigation                              | PhenX alignment               |
+| **Mid-level** (variable depth) | LLM-generated via is_a generator              | Search resolution ("blood pressure" → finds leaf concepts) | No — search glue only         |
+| **Concept** (65+ expanding)    | TOPMed phenotype tags + hand-picked UMLS CUIs | Tags on variables; the searchable leaf layer               | Yes — every concept has a CUI |
 
-**Why per-variable, not per-table:** The original approach classified entire tables into a single measure (e.g. "this is an ECG table"). This works for single-procedure tables but fails for the majority of tables that mix variable types (e.g. blood pressure + demographics + admin fields in one table). Per-variable classification captures the actual content.
+The mid-level is generated, not curated. It adapts to the concept set: domains with many concepts (e.g. Cardiovascular) get 2-3 mid-levels; domains with few (e.g. Sleep) stay flat. The is_a generator already exists and can rebuild this layer whenever the leaf concept set changes.
 
-**Concept naming:** The LLM is instructed to use standard medical terminology as it would appear in MeSH, LOINC, or UMLS. Concept names are free-text in Title Case (e.g. "Systolic Blood Pressure", "Carotid Intima-Media Thickness", "Study Administration"). The prompt provides granularity guidance — concepts should identify the measurement or test, not the individual parameter or the broad category. See `catalog-build/classification/CONCEPT_PROMPT.md` for the full prompt.
+### Step 0: Pre-filter low-value variables
 
-**Granularity strategy: leaf concepts first.** Step 1 targets the most specific (leaf-level) concept that meaningfully describes each variable. Parent concepts and domain groupings are derived _after_ classification — either by walking up the UMLS hierarchy once concepts are mapped to CUIs, or via a separate grouping strategy (TBD). This bottom-up approach preserves maximum information: it is easy to roll up "Systolic Blood Pressure" into "Blood Pressure" or "Cardiovascular", but impossible to recover the distinction if the LLM only assigned "Blood Pressure" in the first place.
+Before any LLM call, code-level filters remove variables that will never produce useful catalog matches. This reduces the 450K variable set by ~11% and prevents noise from polluting results.
 
-**Batching:** Variables are sent in batches of up to 100 per API call (to fit within output token limits). Tables with more variables are split into multiple batches, each receiving the same table-level context. Tables within a study are classified concurrently (10 parallel calls). Studies are processed sequentially.
+**Tier 1 — Filter by variable name:** dbGaP standard infrastructure fields (`SUBJECT_ID`, `SAMPLE_ID`, `CONSENT`, `ANALYTE_TYPE`, `BODY_SITE`, `IS_TUMOR`, `SEQUENCING_CENTER`, etc.) appear across hundreds of studies with consistent meanings. A fixed set of ~40 known admin variable names catches ~36K variables (8%).
 
-**Incremental processing:** Results are cached as per-study JSON files in `output/llm-concepts/`. Running without flags skips studies that already have output. Re-run a study by deleting its file and running again.
+**Tier 2 — Filter by description pattern:** Regex rules catch instrument-specific junk that no concept should match:
 
-**Cost:** ~$0.001 per variable via Haiku (~$30 for all 450K variables across 2,870 studies). Dominated by output tokens (the LLM returns each variable name + concept as structured JSON).
+- Ultrasound coordinate/interface data (`X-COORD, INTERF 2 (LT COM CAR:OPT ANG)`)
+- Condition codes (`Cond code, interf 2 (left bifurcation)`)
+- Unidentified metabolomics features (`231.17513_2.9231 (Sample type: EDTA plasma)`)
+- SNOMED code input/output fields (`Medical complications SNOMED code 10 (1)`)
+- QC flags, plate/batch IDs, specimen date components
 
-**Script:** `catalog-build/classification/llm_concept_classify.py`
+**What we deliberately do NOT filter:** Short but valid descriptions (`"ASTHMA"`, `"LDL"`), self-referencing names that may be meaningful biochemical terms (`"Acetoacetate"`), and anything where the LLM might use table context to match.
+
+Filtered variables still appear in output JSON with a `"concept": null` marker and a `"filter_reason"` field, so the output remains complete.
+
+### Step 1: LLM concept matching
+
+The LLM receives a batch of variables plus the curated concept set and answers: _"Which of these concepts (if any) does each variable match?"_ This is a constrained matching task, not open-ended naming.
+
+**Concept set:** Starts with TOPMed's 65 phenotype tags, each carrying:
+
+- Concept name and UMLS CUI
+- Description (e.g. "Standing body height measurement")
+- Matching instructions written by TOPMed domain experts (e.g. "Include variables that represent a body height measurement, as measured when standing. Include all time points and all repeated measures...")
+
+Source: `catalog-build/source/harmonization-sources/topmed-phenotype-tags.csv`
+
+**Why match-to-set instead of classify-from-scratch:**
+
+- **No concept proliferation** — v1/v2 produced ~12K unique concept names, 80% singletons. Matching against 65 concepts eliminates this problem entirely.
+- **CUI-grounded from the start** — no post-hoc UMLS normalization step needed. Every matched variable inherits its concept's CUI.
+- **Faster** — the LLM checks membership in a small set rather than inventing names. Unmatched variables get `null` immediately, no "Needs Review" ambiguity.
+- **Deterministic quality** — the matching instructions define what counts as a match, not the LLM's imagination. Eval cases test matching accuracy, not naming creativity.
+
+**Batching:** Variables are sent in batches per table. The full concept set (65 entries with descriptions) fits in a single prompt. Tables within a study are classified concurrently.
+
+**Output per variable:** `{ concept_id, cui }` or `null` if no concept matches.
+
+**Cost estimate:** Much lower than v1/v2 because (a) pre-filtering removes ~11% of variables and (b) unmatched variables short-circuit quickly. Haiku pricing at ~$0.001/variable.
+
+**Script:** `catalog-build/classification/match_to_concepts.py` (replaces `classify_with_memory.py`)
 
 #### Output format
 
-Per-study file (`output/llm-concepts/{study_id}.json`):
+Per-study file (`output/concept-matches/{study_id}.json`):
 
 ```json
 {
@@ -425,20 +466,28 @@ Per-study file (`output/llm-concepts/{study_id}.json`):
   "studyName": "ARIC",
   "tables": [
     {
-      "tableName": "UBMDBF02",
-      "datasetId": "pht004209.v4",
-      "description": "...",
-      "concepts": ["Carotid Intima-Media Thickness", "Study Administration"],
+      "tableName": "SBPA",
+      "datasetId": "pht004063.v3",
+      "description": "Sitting Blood Pressure",
+      "matched_concepts": ["C2039694", "C2183311"],
       "variables": [
         {
-          "name": "LBIADA45",
-          "description": "Derived avg far wall thickness",
-          "concept": "Carotid Intima-Media Thickness"
+          "name": "SBPA21",
+          "description": "SITTING SYSTOLIC BLOOD PRESSURE",
+          "concept_cui": "C2039694",
+          "concept_name": "Resting arm systolic BP"
+        },
+        {
+          "name": "SBPA22",
+          "description": "SITTING DIASTOLIC BLOOD PRESSURE",
+          "concept_cui": "C2183311",
+          "concept_name": "Resting arm diastolic BP"
         },
         {
           "name": "SUBJECT_ID",
           "description": "Subject ID",
-          "concept": "Study Administration"
+          "concept_cui": null,
+          "filter_reason": "admin_name"
         }
       ]
     }
@@ -446,47 +495,37 @@ Per-study file (`output/llm-concepts/{study_id}.json`):
 }
 ```
 
-Each table carries both the per-variable concept assignments and a deduplicated `concepts` list (the union of its variables' concepts). Studies and the catalog inherit the union of their tables' concepts.
+### Step 2: Hierarchy generation
 
-#### Known limitations of Step 1
+After matching, the is_a generator builds a variable-depth mid-level hierarchy from the matched concept set. This layer exists only for search resolution — it helps the resolve agent map user queries like "blood pressure" to the specific leaf concepts "Resting arm systolic BP" and "Resting arm diastolic BP".
 
-- **Granularity inconsistency:** The LLM sometimes lumps (e.g. "Smoking Status" covers age-at-onset, cessation, and current status) and sometimes splits (e.g. "Systolic Blood Pressure" vs "Diastolic Blood Pressure"). Prompt tuning and normalization address this.
-- **Concept proliferation:** Initial runs produce ~10,000+ unique concept names, many of which are near-duplicates (e.g. "HDL Cholesterol" vs "High-Density Lipoprotein Cholesterol"). Normalization in Step 2 collapses these.
-- **Opaque variable names:** When descriptions are empty or cryptic, the LLM guesses from the variable name. These guesses are sometimes wrong. Human review in Step 3 catches these.
+The hierarchy is domain-aware: each leaf concept is assigned to a PhenX-aligned domain, and mid-levels are generated within domains. Domains with many concepts get deeper structure; domains with few stay flat.
 
-### Step 2: UMLS Normalization
+**Script:** `catalog-build/classification/build_concept_hierarchy.py` (existing, adapted for CUI-backed concept set)
 
-After LLM classification produces free-text concept names, the next step maps them to UMLS Concept Unique Identifiers (CUIs). This serves three purposes:
+### Step 3: Iterative concept expansion
 
-1. **Synonym collapse** — "HDL Cholesterol", "High-Density Lipoprotein Cholesterol", and "HDL-C" all map to one CUI (C2603387), eliminating near-duplicates automatically.
-2. **Cross-reference** — each CUI bridges to SNOMED CT, LOINC, MeSH, and ICD codes, enabling interoperability with other systems (TOPMed harmonization, PhenX protocols, clinical EHR data).
-3. **Granularity anchoring** — UMLS's hierarchical structure provides a principled way to choose the right level of specificity. If two concept names map to the same CUI, they are synonyms; if they map to parent-child CUIs, the more specific one is preferred.
+After the initial TOPMed-65 matching pass, many variables will be unmatched — particularly in domains TOPMed doesn't cover (ophthalmology, cancer, musculoskeletal, mental health, dietary, omics, study admin). The expansion loop adds new concepts:
 
-**Approach:** Use the UMLS API (requires a UMLS Terminology Services account and API key) to search for each unique concept name, retrieve candidate CUIs, and select the best match. The mapping is stored as a normalization file (`output/concept-normalization-map.json`) and applied to rewrite per-study files with canonical concept names.
+1. **Analyze unmatched variables** — cluster unmatched variables by domain and description patterns to identify common phenotypes not in the concept set (e.g. "Bone Mineral Density" appears in 50+ studies but has no TOPMed tag).
+2. **Pick candidate CUIs** — look up the phenotype in UMLS, select the appropriate CUI, write a description and matching instructions modeled on the TOPMed format.
+3. **Add to concept set** — the new CUI-backed concept joins the matching set.
+4. **Re-match unmatched only** — run the LLM matcher against only the still-unmatched variables with the expanded concept set.
+5. **Rebuild hierarchy** — re-run the is_a generator to incorporate new concepts.
 
-**Interim approach (before UMLS API access):** LLM-based synonym grouping (`--normalize` flag) asks the LLM to identify groups of concept names that are synonyms and pick a canonical form. This is a useful first pass but less reliable than UMLS lookup.
+Each round shrinks the unmatched pool. The concept set grows from 65 toward the ~160 measures defined in the taxonomy above, but every addition is a deliberate, CUI-backed choice — not LLM invention.
 
-**Target:** Collapse ~10,000 raw concept names down to ~500-1,000 canonical concepts, each with a UMLS CUI.
-
-### Step 3: Human Review
-
-After normalization, the concept inventory is reviewed to:
-
-1. **Fix misclassifications** — spot-check variables where the concept seems wrong (e.g. a pacemaker flag classified as "Pacemaker" instead of "Electrocardiography").
-2. **Merge remaining synonyms** — UMLS won't catch domain-specific groupings (e.g. should "Ankle-Brachial Index" be separate from "Blood Pressure" or merged?). These are judgment calls.
-3. **Set granularity policy** — decide which concepts are too broad or too specific for the browsing use case and adjust the prompt or normalization map accordingly.
-4. **Build the domain hierarchy** — assign each canonical concept to a domain (e.g. "Cardiovascular", "Pulmonary") for faceted browsing.
-
-Review results feed back as prompt refinements (Step 1) and normalization rules (Step 2), improving future runs.
+**Bootstrapping from v1/v2 output:** The existing concept bank from v1/v2 runs (12K+ concept names with study counts) provides a useful signal for step 1: high-frequency concepts that appear across many studies are strong candidates for UMLS lookup and addition to the curated set.
 
 ### Reproducibility
 
-Classification results are cached as versioned JSON files. The LLM is only invoked for new or re-run studies; existing results are stable. When the prompt or model is updated:
+Matching results are cached as versioned JSON files. The LLM is only invoked for new or re-run studies; existing results are stable. The concept set itself is versioned — adding a new CUI triggers re-matching only for previously-unmatched variables.
 
-1. Re-run classification on a representative sample
-2. Diff against previous output to assess drift
-3. If acceptable, re-run on the full corpus
-4. Commit the updated output files as a new version
+When the concept set is updated:
+
+1. Re-match unmatched variables against the new concepts only
+2. Rebuild the hierarchy
+3. Commit updated output files and concept set as a new version
 
 ## Variable Modifiers
 
@@ -613,14 +652,14 @@ Above individual CUIs, UMLS organizes its concepts into 134 **semantic types** a
 
 The 15 UMLS semantic groups are too coarse for our primary browsing UI (e.g., "Disorders" conflates cardiovascular disease, diabetes, cancer, and sleep apnea), but they could serve as a **super-domain grouping** for high-level faceted navigation if needed.
 
-### Adopted approach: custom domains + UMLS CUI identifiers
+### Adopted approach: PhenX domains + CUI-backed concepts (concept-first)
 
 Following the precedent set by TOPMed's phenotype tagging system:
 
-1. **Keep the custom ~30 domain / ~160 measure taxonomy** defined above. It covers the full scope of dbGaP data in a way no single formal ontology does.
-2. **Map each measure to a UMLS CUI** (Concept Unique Identifier). UMLS is the NIH meta-thesaurus that bridges SNOMED CT, LOINC, MeSH, and ICD simultaneously. TOPMed's 65 measures already carry CUI assignments that map directly onto ~60 of our ~160 measures — we extend the pattern to the remaining ~100.
-3. **Assign LOINC codes as secondary identifiers** where available. PhenX's 13,653 already-mapped dbGaP variables provide a head start, and the LOINC-SNOMED cooperative ontology bridges both systems.
-4. **Use PhenX domain names** where our domains overlap (~22 of 30 PhenX domains) to make the taxonomy familiar to researchers.
+1. **PhenX-aligned domains for browsing** (~30 domains). Use PhenX domain names where our domains overlap (~22 of 30 PhenX domains) to make the taxonomy familiar to researchers. Domains are the top-level navigation layer.
+2. **CUI-backed concepts as the leaf layer.** Start with TOPMed's 65 phenotype tags (each already carrying a UMLS CUI), then expand by hand-picking additional CUIs from UMLS for domains TOPMed doesn't cover. Every concept in the catalog has a CUI from day one — no post-hoc normalization.
+3. **LLM-generated mid-levels for search.** The is_a generator builds variable-depth groupings between domains and concepts. These exist only for search resolution and do not need ontology alignment.
+4. **Match variables to concepts, don't classify from scratch.** The LLM answers "which known concept does this variable match?" rather than inventing names. This eliminates concept proliferation (v1/v2 produced 12K+ concepts, 80% singletons) and guarantees every tagged variable is CUI-grounded.
 
 ### Why UMLS CUIs as the interoperability layer
 
@@ -646,39 +685,22 @@ Following the precedent set by TOPMed's phenotype tagging system:
 
 Full CUI assignments for all ~160 measures will be completed during Phase 1 of the classification pipeline.
 
-### UMLS Grounding Pipeline (post-classification)
+### UMLS infrastructure
 
-The v2 classifier (`classify_with_memory.py`) assigns human-readable concept names to variables using an LLM with a style guide that references UMLS preferred terms. Many dbGaP variable descriptions are opaque abbreviations (e.g., `X-COORD, INTERF 5 (LT COM CAR:PST ANG)`) that no string-based lookup could resolve — the LLM is the necessary translation layer. UMLS grounding happens _after_ classification, not instead of it.
+The concept-first approach requires UMLS for expanding beyond TOPMed's initial 65 concepts. When adding a new concept to the curated set, UMLS provides:
 
-#### Pipeline steps
+- **CUI lookup** — find the canonical identifier for a phenotype name
+- **Description generation** — pull preferred terms and definitions from linked vocabularies (SNOMED CT, LOINC, MeSH) to write matching instructions for new concepts
+- **Vocabulary crosswalks** — each CUI automatically bridges to SNOMED CT, LOINC, MeSH, and ICD codes
+- **Hierarchy validation** — MRREL parent/child relationships can validate or inform the is_a generator's mid-level groupings
 
-1. **LLM classification (existing v2 pipeline)** — assigns a concept name per variable (e.g., "Carotid Plaque"). No changes to this step.
-2. **UMLS grounding (new post-hoc step)** — for each unique concept name from step 1:
-   - **Exact match**: search MRCONSO `STR` for the concept name → CUI
-   - **Case-insensitive match**: fallback if exact fails
-   - **Semantic type filter**: use MRSTY to discard spurious matches (keep clinical/measurement types, drop geographic/administrative)
-   - **Output**: `{ concept, cui, umls_preferred_name, semantic_types, vocab_codes: { SNOMEDCT_US, LNC, MSH, ... } }` or flagged as unresolvable
-3. **CUI-based synonym collapse** — two LLM-assigned concepts that resolve to the same CUI are confirmed synonyms. This validates or replaces the LLM synonym detection in `reorganize_concepts.py`.
-4. **CUI-based hierarchy** — use MRREL parent/child relationships between resolved CUIs to inform (or replace) the LLM-generated is_a tree.
+#### Local database
 
-#### Infrastructure
-
-- **Local UMLS database**: UMLS Metathesaurus Full Subset loaded into SQLite (`catalog-build/source/umls/umls.db`). Loader script: `catalog-build/source/umls/load_umls.py`. Query CLI: `catalog-build/source/umls/query_umls.py`.
+- **UMLS Metathesaurus Full Subset** loaded into SQLite (`catalog-build/source/umls/umls.db`)
+- **Loader script**: `catalog-build/source/umls/load_umls.py`
+- **Query CLI**: `catalog-build/source/umls/query_umls.py`
 - **Key tables**: MRCONSO (names/codes), MRSTY (semantic types), MRREL (relationships), MRDEF (definitions)
 - **Data refresh**: UMLS releases twice yearly (May AA, November AB). Re-download and re-load as needed.
-
-#### Success metrics
-
-- **Match rate**: percentage of v2 concept names that exact-match to a UMLS CUI. Target: 70%+ without any classifier changes.
-- **Synonym validation**: percentage of LLM-detected synonyms confirmed by shared CUI.
-- **Hierarchy coverage**: percentage of is_a links that align with MRREL relationships.
-
-#### What this unlocks
-
-- Every concept grounded to an interoperability identifier (CUI) that bridges SNOMED CT, LOINC, MeSH, ICD-10
-- Vocabulary crosswalks attached to each concept for free
-- A confidence signal per concept: exact match > fuzzy match > no match
-- Potential to feed match failures back into the classifier prompt to improve naming
 
 ## Related Documents
 
