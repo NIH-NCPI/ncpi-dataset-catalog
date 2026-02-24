@@ -357,3 +357,60 @@ class TreeOnlyResult(BaseModel):
             List of root ConceptNode objects.
         """
         return build_tree_from_placements(self.concepts)
+
+
+# ---------------------------------------------------------------------------
+# V2 classification models — classify_with_memory.py
+# ---------------------------------------------------------------------------
+
+
+class ClassifiedVariable(BaseModel):
+    """LLM's concept assignment for a single variable (v2 pipeline)."""
+
+    concept: str = Field(description="Concept name in Title Case")
+    variable_name: str = Field(description="Exact variable name from input")
+
+    @model_validator(mode="after")
+    def check_title_case(self) -> ClassifiedVariable:
+        """Validate that concept name follows Title Case conventions.
+
+        Returns:
+            Self if valid.
+        """
+        if not _is_title_case(self.concept):
+            raise ValueError(
+                f"Concept '{self.concept}' must be Title Case "
+                f"(capitalize each word except prepositions/articles)."
+            )
+        return self
+
+
+class ClassifiedBatch(BaseModel):
+    """LLM output for a batch of variable classifications (v2 pipeline)."""
+
+    reasoning: str = Field(
+        description="Brief notes on bank reuse vs new concept names",
+    )
+    variables: list[ClassifiedVariable] = Field(
+        description="Concept assignment for each input variable",
+    )
+
+    @model_validator(mode="after")
+    def check_no_duplicate_variables(self) -> ClassifiedBatch:
+        """Reject duplicate variable names in the output.
+
+        Returns:
+            Self if valid.
+        """
+        seen: set[str] = set()
+        dupes: list[str] = []
+        for v in self.variables:
+            if v.variable_name in seen:
+                dupes.append(v.variable_name)
+            seen.add(v.variable_name)
+        if dupes:
+            raise ValueError(
+                f"Duplicate variable names in output: {dupes}. "
+                f"Each variable must appear exactly once."
+            )
+        return self

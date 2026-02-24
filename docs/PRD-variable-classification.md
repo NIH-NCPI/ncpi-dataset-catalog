@@ -646,6 +646,40 @@ Following the precedent set by TOPMed's phenotype tagging system:
 
 Full CUI assignments for all ~160 measures will be completed during Phase 1 of the classification pipeline.
 
+### UMLS Grounding Pipeline (post-classification)
+
+The v2 classifier (`classify_with_memory.py`) assigns human-readable concept names to variables using an LLM with a style guide that references UMLS preferred terms. Many dbGaP variable descriptions are opaque abbreviations (e.g., `X-COORD, INTERF 5 (LT COM CAR:PST ANG)`) that no string-based lookup could resolve — the LLM is the necessary translation layer. UMLS grounding happens _after_ classification, not instead of it.
+
+#### Pipeline steps
+
+1. **LLM classification (existing v2 pipeline)** — assigns a concept name per variable (e.g., "Carotid Plaque"). No changes to this step.
+2. **UMLS grounding (new post-hoc step)** — for each unique concept name from step 1:
+   - **Exact match**: search MRCONSO `STR` for the concept name → CUI
+   - **Case-insensitive match**: fallback if exact fails
+   - **Semantic type filter**: use MRSTY to discard spurious matches (keep clinical/measurement types, drop geographic/administrative)
+   - **Output**: `{ concept, cui, umls_preferred_name, semantic_types, vocab_codes: { SNOMEDCT_US, LNC, MSH, ... } }` or flagged as unresolvable
+3. **CUI-based synonym collapse** — two LLM-assigned concepts that resolve to the same CUI are confirmed synonyms. This validates or replaces the LLM synonym detection in `reorganize_concepts.py`.
+4. **CUI-based hierarchy** — use MRREL parent/child relationships between resolved CUIs to inform (or replace) the LLM-generated is_a tree.
+
+#### Infrastructure
+
+- **Local UMLS database**: UMLS Metathesaurus Full Subset loaded into SQLite (`catalog-build/source/umls/umls.db`). Loader script: `catalog-build/source/umls/load_umls.py`. Query CLI: `catalog-build/source/umls/query_umls.py`.
+- **Key tables**: MRCONSO (names/codes), MRSTY (semantic types), MRREL (relationships), MRDEF (definitions)
+- **Data refresh**: UMLS releases twice yearly (May AA, November AB). Re-download and re-load as needed.
+
+#### Success metrics
+
+- **Match rate**: percentage of v2 concept names that exact-match to a UMLS CUI. Target: 70%+ without any classifier changes.
+- **Synonym validation**: percentage of LLM-detected synonyms confirmed by shared CUI.
+- **Hierarchy coverage**: percentage of is_a links that align with MRREL relationships.
+
+#### What this unlocks
+
+- Every concept grounded to an interoperability identifier (CUI) that bridges SNOMED CT, LOINC, MeSH, ICD-10
+- Vocabulary crosswalks attached to each concept for free
+- A confidence signal per concept: exact match > fuzzy match > no match
+- Potential to feed match failures back into the classifier prompt to improve naming
+
 ## Related Documents
 
 - [PRD: Measure Database](./PRD-concept-database.md) — OpenSearch index design, data ingestion pipeline, search capabilities, and confidence tiers. This taxonomy provides the measure vocabulary for that system:
