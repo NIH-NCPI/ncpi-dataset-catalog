@@ -1,4 +1,4 @@
-"""Evals for classify_v3_topmed.py (v3 concept matching against vocabulary).
+"""Evals for concept matching classifier (v4 multi-table batching).
 
 Each eval case sends a single variable to the LLM with the full concept
 vocabulary (~94 concepts). Tests whether the model correctly matches to
@@ -35,7 +35,7 @@ for _proxy_var in ("ALL_PROXY", "all_proxy"):
 from pydantic_evals import Case, Dataset
 from pydantic_evals.evaluators import Evaluator, EvaluationReason, EvaluatorContext
 
-from classify_v3_topmed import (
+from classify_v4 import (
     MatchDeps,
     classify_batch,
     load_vocabulary,
@@ -154,16 +154,16 @@ async def classify_one_variable(inputs: VariableInput) -> str:
         variable_count=1,
         file_path="eval",
     )
+    # v4 classify_batch takes a list of (table, variables) pairs
     result, _, _ = await classify_batch(
         agent,
         valid_ids,
         inputs.study_id,
         inputs.study_name,
-        table,
-        table.variables,
+        [(table, table.variables)],
     )
-    if result.variables:
-        cid = result.variables[0].concept_id
+    if result.tables and result.tables[0].variables:
+        cid = result.tables[0].variables[0].concept_id
         return cid if cid is not None else "null"
     return "null"
 
