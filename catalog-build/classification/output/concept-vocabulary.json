@@ -1,0 +1,967 @@
+[
+  {
+    "concept_id": "cac_score",
+    "name": "CAC Score",
+    "description": "Coronary artery calcification (CAC) score using Agatston scoring of CT scan(s) of coronary arteries",
+    "cui": "C2825178",
+    "domain": "atherosclerosis",
+    "example_variables": [
+      "MD1CAC_S: CAC SCORE IN WHOLE HEART",
+      "cac_agatston_score: Coronary artery calcification score",
+      "CAC_S: Coronary artery calcium score (Agatston)"
+    ]
+  },
+  {
+    "concept_id": "cac_volume",
+    "name": "CAC Volume",
+    "description": "Coronary artery calcium volume using CT scan(s) of coronary arteries",
+    "cui": "C2825178",
+    "domain": "atherosclerosis",
+    "example_variables": [
+      "CAC_V: Coronary artery calcium volume",
+      "volpm1c: MEAN: TOTAL CALCIUM VOLUME, PHANTOM-ADJUSTED",
+      "volpmfc: MEAN: TOTAL CALCIUM VOLUME, PHANTOM-ADJUSTED"
+    ]
+  },
+  {
+    "concept_id": "carotid_plaque",
+    "name": "Carotid Plaque",
+    "description": "Presence or absence of carotid plaque.",
+    "cui": "C0751633",
+    "domain": "atherosclerosis",
+    "example_variables": [
+      "imt_anyplaque_baseline: Any presence of carotid plaque as measured by IMT at baseline visit",
+      "PLAQUE01: Plaque (with or without shadowing) in any carotid site",
+      "LMRPH141: YEAR 5 LESION MORPHOLOGY, RT SIDE"
+    ]
+  },
+  {
+    "concept_id": "carotid_stenosis",
+    "name": "Carotid Stenosis",
+    "description": "Extent of narrowing of the carotid artery.",
+    "cui": "C0007282",
+    "domain": "atherosclerosis",
+    "example_variables": [
+      "PSTEN141: YEAR 5 PERCENT STENOSIS, RT SIDE",
+      "PSTEN241: YEAR 5 PERCENT STENOSIS, LFT SIDE",
+      "PSTEN155: BL REREAD PERCENT STENOSIS, RT SIDE"
+    ]
+  },
+  {
+    "concept_id": "cimt",
+    "name": "CIMT",
+    "description": "Common carotid intima-media thickness, calculated as the mean of two values: mean of multiple thickness estimates from the left far wall and from the right far wall.",
+    "cui": "C1960466",
+    "domain": "atherosclerosis",
+    "example_variables": [
+      "imt_mean_farwall_cca_baseline: Carotid intima-media far wall thickness at baseline visit",
+      "LOPAAV45: Average far wall width, left common carotid: optimal angle",
+      "LANAAV45: Average far wall width, left common carotid: anterior angle"
+    ]
+  },
+  {
+    "concept_id": "cimt",
+    "name": "CIMT",
+    "description": "Common carotid intima-media thickness, calculated as the mean of four values: maximum of multiple thickness estimates from the left far wall, left near wall, right far wall, and right near wall.",
+    "cui": "C1960466",
+    "domain": "atherosclerosis",
+    "example_variables": [
+      "LOPAMX23: Maximum near wall width, left common carotid: optimal angle",
+      "LANAMX23: Maximum near wall width, left common carotid: anterior angle",
+      "LPOAMX23: Maximum near wall width, left common carotid: posterior angle"
+    ]
+  },
+  {
+    "concept_id": "angina_incident",
+    "name": "Angina Incident",
+    "description": "An indicator of whether a subject had an angina event (that was verified by adjudication or by medical professionals) during the follow-up period.",
+    "cui": "C0002962",
+    "domain": "atherosclerosis_events_incident",
+    "example_variables": [
+      "ANGINA: Angina",
+      "EVENT: Event Number",
+      "DATE: Date of Event"
+    ]
+  },
+  {
+    "concept_id": "cabg_incident",
+    "name": "CABG Incident",
+    "description": "An indicator of whether a subject had a coronary artery bypass graft (CABG) procedure (that was verified by adjudication or by medical professionals) during the follow-up period.",
+    "cui": "C0010055",
+    "domain": "atherosclerosis_events_incident",
+    "example_variables": [
+      "CABG: CABG",
+      "cvddate: Date of Cardiovascular Disease (CVD) Status"
+    ]
+  },
+  {
+    "concept_id": "cad_followup_start_age",
+    "name": "Cad Followup Start Age",
+    "description": "Age of subject at the start of the follow-up period during which atherosclerosis events were reviewed and adjudicated.",
+    "cui": null,
+    "domain": "atherosclerosis_events_incident",
+    "example_variables": [
+      "age1: Age at Exam 1",
+      "AGE: Age at screening"
+    ]
+  },
+  {
+    "concept_id": "chd_death_definite",
+    "name": "Chd Death Definite",
+    "description": "An indicator of whether the cause of death was determined by medical professionals or technicians to be \"definite\" coronary heart disease for subjects who died during the follow-up period.",
+    "cui": "C3844303",
+    "domain": "atherosclerosis_events_incident",
+    "example_variables": [
+      "DEATH: Death",
+      "DEATHCAUSE: Cause of Death",
+      "EVENT: Event Number"
+    ]
+  },
+  {
+    "concept_id": "chd_death_probable",
+    "name": "Chd Death Probable",
+    "description": "An indicator of whether the cause of death was determined by medical professionals or technicians to be \"probable\" or \"definite\" coronary heart disease for subjects who died during the follow-up period.",
+    "cui": "C3844302",
+    "domain": "atherosclerosis_events_incident",
+    "example_variables": [
+      "DEATH: Death",
+      "DEATHCAUSE: Cause of Death",
+      "EVENT: Event Number"
+    ]
+  },
+  {
+    "concept_id": "coronary_angioplasty_incident",
+    "name": "Coronary Angioplasty Incident",
+    "description": "An indicator of whether a subject had a coronary angioplasty procedure (that was verified by adjudication or by medical professionals) during the follow-up period.",
+    "cui": "C0002997",
+    "domain": "atherosclerosis_events_incident",
+    "example_variables": [
+      "PTCA: PTCA"
+    ]
+  },
+  {
+    "concept_id": "mi_incident",
+    "name": "Mi Incident",
+    "description": "An indicator of whether a subject had a myocardial infarction (MI) event (that was verified by adjudication or by medical professionals) during the follow-up period.",
+    "cui": "C0027051",
+    "domain": "atherosclerosis_events_incident",
+    "example_variables": [
+      "MI: Clinical MI",
+      "EVENT: Event Number",
+      "DATE: Date of Event"
+    ]
+  },
+  {
+    "concept_id": "pad_incident",
+    "name": "Pad Incident",
+    "description": "An indicator of whether a subject had peripheral arterial disease (that was verified by adjudication or by medical professionals) during the follow-up period.",
+    "cui": "C0085096",
+    "domain": "atherosclerosis_events_incident",
+    "example_variables": [
+      "PERIPH: PAD",
+      "EVENT: Event Number",
+      "DATE: Date of Event"
+    ]
+  },
+  {
+    "concept_id": "angina_prior",
+    "name": "Angina Prior",
+    "description": "An indicator of whether a subject had an angina event prior to the baseline visit.",
+    "cui": "C0002962",
+    "domain": "atherosclerosis_events_prior",
+    "example_variables": [
+      "Angina: Angina",
+      "ANGINA: Angina ever",
+      "ANBLMOD: ANG MODIFIED BL STAT"
+    ]
+  },
+  {
+    "concept_id": "cabg_prior",
+    "name": "CABG Prior",
+    "description": "An indicator of whether a subject had a coronary artery bypass graft (CABG) procedure prior to the start of the baseline visit.",
+    "cui": "C0010055",
+    "domain": "atherosclerosis_events_prior",
+    "example_variables": [
+      "CABG: Coronary artery bypass surgery (CABG)",
+      "PHEA07A: [Invasive procedures]. Have you ever had surgery on your heart, or on the arteries of your neck or legs, excluding surgery for vericose veins? Coronary bypass. Q7a",
+      "BPSSURBL: CORONARY BYPASS SURGERY AT BL"
+    ]
+  },
+  {
+    "concept_id": "coronary_angioplasty_prior",
+    "name": "Coronary Angioplasty Prior",
+    "description": "An indicator of whether a subject had a coronary angioplasty procedure prior to the start of the baseline visit.",
+    "cui": "C0002997",
+    "domain": "atherosclerosis_events_prior",
+    "example_variables": [
+      "PHEA09A: [Invasive procedures]. [Probe for type of procedure]. Angioplasty of coronary artery(ies)? Q9a",
+      "CORART: CORONARY ARTERY ANGIOPLASTY",
+      "MHXA54A: Q54a. F. Invasive procedures. Ever had angioplasty of coronary arteries? [Visit 1]"
+    ]
+  },
+  {
+    "concept_id": "coronary_revascularization_prior",
+    "name": "Coronary Revascularization Prior",
+    "description": "An indicator of whether a subject had a coronary revascularization procedure prior to the start of the baseline visit. This includes angioplasty, CABG, and other coronary revascularization procedures.",
+    "cui": "C0877341",
+    "domain": "atherosclerosis_events_prior",
+    "example_variables": [
+      "ARTERIES: Ever had coronary bypass surgery/angioplasty/or balloon dilation because arteries of the heart were blocked?"
+    ]
+  },
+  {
+    "concept_id": "mi_prior",
+    "name": "Mi Prior",
+    "description": "An indicator of whether a subject had a myocardial infarction (MI) prior to the start of the baseline visit.",
+    "cui": "C0027051",
+    "domain": "atherosclerosis_events_prior",
+    "example_variables": [
+      "PREVMI05: Prevalent MI from ECG or medical history",
+      "MIBLMOD: MI  MODIFIED BL STAT",
+      "HeartAttack: Heart attack (MI)"
+    ]
+  },
+  {
+    "concept_id": "pad_prior",
+    "name": "Pad Prior",
+    "description": "An indicator of whether a subject had peripheral arterial disease prior to the baseline visit.",
+    "cui": "C0085096",
+    "domain": "atherosclerosis_events_prior",
+    "example_variables": [
+      "PAD02: Peripheral artery disease visit 1, definition 2 - same for both genders",
+      "PAD: Peripheral arterial disease ever",
+      "ABTLEG: LEG ARTERY BYPASS"
+    ]
+  },
+  {
+    "concept_id": "bmi_baseline",
+    "name": "Bmi Baseline",
+    "description": "Body mass index calculated at baseline.",
+    "cui": "C1305855",
+    "domain": "baseline_common_covariates",
+    "example_variables": [
+      "BMI: Body Mass Index calculated from Height and Weight"
+    ]
+  },
+  {
+    "concept_id": "current_smoker_baseline",
+    "name": "Current Smoker Baseline",
+    "description": "Indicates whether subject currently smokes cigarettes.",
+    "cui": "C0337667",
+    "domain": "baseline_common_covariates",
+    "example_variables": [
+      "current_smoker_baseline: Current smoking status of participant at baseline visit",
+      "Current_smoke: Current Smoker",
+      "Current_Smoker: Current smoking status"
+    ]
+  },
+  {
+    "concept_id": "ever_smoker_baseline",
+    "name": "Ever Smoker Baseline",
+    "description": "Indicates whether subject ever regularly smoked cigarettes.",
+    "cui": "C1519384",
+    "domain": "baseline_common_covariates",
+    "example_variables": [
+      "ever_Smoker: Ever smoked",
+      "EVER_SMOKED_CIGARETTES: Answer to \"Have you ever smoked cigarettes?\"",
+      "EverSmokedCig: Have you ever smoked cigarettes?"
+    ]
+  },
+  {
+    "concept_id": "height_baseline",
+    "name": "Height Baseline",
+    "description": "Body height at baseline.",
+    "cui": "C0005890",
+    "domain": "baseline_common_covariates",
+    "example_variables": [
+      "height_baseline: Height at baseline visit",
+      "HEIGHT_CM: Subject height in cm",
+      "height: Subject's height"
+    ]
+  },
+  {
+    "concept_id": "weight_baseline",
+    "name": "Weight Baseline",
+    "description": "Body weight at baseline.",
+    "cui": "C0005910",
+    "domain": "baseline_common_covariates",
+    "example_variables": [
+      "weight_baseline: Weight at baseline visit",
+      "WEIGHT_KG: Subject weight in kg",
+      "weight: Subject's weight"
+    ]
+  },
+  {
+    "concept_id": "basophil_ncnc_bld",
+    "name": "Basophil (Number Concentration in Blood)",
+    "description": "Count by volume, or number concentration (ncnc), of basophils in the blood (bld).",
+    "cui": "C0942414",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "basophils_baseline: Basophils value at baseline visit",
+      "HMTA10: Basophils % Q10",
+      "HMTB10: Basophils %. Q10"
+    ]
+  },
+  {
+    "concept_id": "eosinophil_ncnc_bld",
+    "name": "Eosinophil (Number Concentration in Blood)",
+    "description": "Count by volume, or number concentration (ncnc), of eosinophils in the blood (bld).",
+    "cui": "C0942419",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "eosinophils_baseline: Eosinophils value at baseline visit",
+      "HMTA09: Eosinophils % Q9",
+      "HMTB09: Eosinophils %. Q9"
+    ]
+  },
+  {
+    "concept_id": "hematocrit_vfr_bld",
+    "name": "Hematocrit (Volume Fraction in Blood)",
+    "description": "Measurement of hematocrit, the fraction of volume (vfr) of blood (bld) that is composed of red blood cells.",
+    "cui": "C0803379",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "hematocrit_baseline: Hematocrit value at baseline visit",
+      "HEMATOCRIT: Hematocrit %",
+      "HMTA01: Hematocrit % (MAV). Q1"
+    ]
+  },
+  {
+    "concept_id": "hemoglobin_mcnc_bld",
+    "name": "Hemoglobin (Mass Concentration in Blood)",
+    "description": "Measurement of mass per volume, or mass concentration (mcnc), of hemoglobin in the blood (bld).",
+    "cui": "C0362923",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "hemoglobin_baseline: Hemoglobin value at baseline visit",
+      "HEMOGLOBIN: Hemoglobin G/DL",
+      "HMTA02: Hemoglobin g/dL (MAV). Q2"
+    ]
+  },
+  {
+    "concept_id": "lymphocyte_ncnc_bld",
+    "name": "Lymphocyte (Number Concentration in Blood)",
+    "description": "Count by volume, or number concentration (ncnc), of lymphocytes in the blood (bld).",
+    "cui": "C0942437",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "lymphocytes_baseline: Lymphocytes value at baseline visit",
+      "HMTA07: Lymphocytes % Q7",
+      "HMTB07: Lymphocytes %. Q7"
+    ]
+  },
+  {
+    "concept_id": "mch_entmass_rbc",
+    "name": "MCH Entmass RBC",
+    "description": "Measurement of the average mass (entmass) of hemoglobin per red blood cell(rbc), known as mean corpuscular hemoglobin (MCH).",
+    "cui": "C0945625",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "rbc5: RED BLOOD CELL (RBC) (x10E6/uL)",
+      "HMTC7: MCH. Q7",
+      "CBC9: Mean corpuscular hemoglobin, Mch"
+    ]
+  },
+  {
+    "concept_id": "mchc_mcnc_rbc",
+    "name": "MCHc Mcnc RBC",
+    "description": "Measurement of the mass concentration (mcnc) of hemoglobin in a given volume of packed red blood cells (rbc), known as mean corpuscular hemoglobin concentration (MCHC).",
+    "cui": "C0944134",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "B767: MCHC (MEAN CORPUSCULAR HEMOGLOBIN CONCENTRATION) (METPATH lab profile)",
+      "MCHC: Mean corpuscular hemoglobin concentration (sample type: whole blood)",
+      "hemoglobin_baseline: Hemoglobin value at baseline visit"
+    ]
+  },
+  {
+    "concept_id": "mcv_entvol_rbc",
+    "name": "MCV Entvol RBC",
+    "description": "Measurement of the average volume (entvol) of red blood cells (rbc), known as mean corpuscular volume (MCV).",
+    "cui": "C1114281",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "rbc5: RED BLOOD CELL (RBC) (x10E6/uL)",
+      "HMTB13: Mean corpuscular volume (MCV) (to nearest whole unit). Q13",
+      "HMTC6: MCV. Q6"
+    ]
+  },
+  {
+    "concept_id": "monocyte_ncnc_bld",
+    "name": "Monocyte (Number Concentration in Blood)",
+    "description": "Count by volume, or number concentration (ncnc), of monocytes in the blood (bld).",
+    "cui": "C0942446",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "monocytes_baseline: Monocytes value at baseline visit",
+      "HMTA08: Monocytes % Q8",
+      "HMTB08: Monocytes %. Q8"
+    ]
+  },
+  {
+    "concept_id": "neutrophil_ncnc_bld",
+    "name": "Neutrophil (Number Concentration in Blood)",
+    "description": "Count by volume, or number concentration (ncnc), of neutrophils in the blood (bld).",
+    "cui": "C0942461",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "neutrophils_baseline: Neutrophils value at baseline visit",
+      "HMTA05: Neutrophils % Q5",
+      "HMTB05: Neutrophils % Q5. Q5"
+    ]
+  },
+  {
+    "concept_id": "platelet_ncnc_bld",
+    "name": "Platelet (Number Concentration in Blood)",
+    "description": "Count by volume, or number concentration (ncnc), of platelets in the blood (bld).",
+    "cui": "C0942474",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "platelet_count_baseline: Platelet count at baseline visit",
+      "PLATELET: Platelet TH/CMM",
+      "HMTA04: Platelet count x1000/mm3 (MAV). Q4"
+    ]
+  },
+  {
+    "concept_id": "pmv_entvol_bld",
+    "name": "PMV (Volume per Entity in Blood)",
+    "description": "Measurement of the mean volume (entvol) of platelets in the blood (bld), known as mean platelet volume (MPV or PMV).",
+    "cui": "C0944136",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "CBC12: Mean platelet volume, Mpv",
+      "MPV: Mean platelet volume (sample type: whole blood)"
+    ]
+  },
+  {
+    "concept_id": "rbc_ncnc_bld",
+    "name": "RBC (Number Concentration in Blood)",
+    "description": "Count by volume, or number concentration (ncnc), of red blood cells in the blood (bld).",
+    "cui": "C0942422",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "rbc5: RED BLOOD CELL (RBC) (x10E6/uL)",
+      "CBC4: Red blood cell count, Rbc",
+      "B762: RBC (METPATH lab profile)"
+    ]
+  },
+  {
+    "concept_id": "rdw_ratio_rbc",
+    "name": "RDW Ratio RBC",
+    "description": "Measurement of the ratio of variation in width to the mean width of the red blood cell (rbc) volume distribution curve taken at +/- 1 CV, known as red cell distribution width (RDW).",
+    "cui": "C0362909",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "HMTC9: RBC distribution width. Q9",
+      "CBC11: Red cell distribution width, Rdw",
+      "RDW: Red cell distribution width (sample type: whole blood)"
+    ]
+  },
+  {
+    "concept_id": "wbc_ncnc_bld",
+    "name": "WBC (Number Concentration in Blood)",
+    "description": "Count by volume, or number concentration (ncnc), of white blood cells in the blood (bld).",
+    "cui": "C0945357",
+    "domain": "blood_cell_count",
+    "example_variables": [
+      "CBC3: White blood cell count, Wbc",
+      "B761: WBC (METPATH lab profile)",
+      "A05WBC: WHITE CELL COUNT (X 1000)"
+    ]
+  },
+  {
+    "concept_id": "antihypertensive_meds",
+    "name": "Antihypertensive Meds",
+    "description": "Indicator for use of antihypertensive medication at the time of blood pressure measurement.",
+    "cui": "C2054151",
+    "domain": "blood_pressure",
+    "example_variables": [
+      "xbpmeds: Meds: On specified BP medication",
+      "MED_ANTIHYPERT: Antihypertensives",
+      "meds_HYT: Taking any Anti-Hypertension Medication?"
+    ]
+  },
+  {
+    "concept_id": "bp_diastolic",
+    "name": "Blood Pressure - Diastolic",
+    "description": "Resting diastolic blood pressure from the upper arm in a clinical setting.",
+    "cui": "C2183311",
+    "domain": "blood_pressure",
+    "example_variables": [
+      "dbp: Mean Diastolic BP",
+      "SBPA6: Average Diastolic  (SBPA6)",
+      "SBPA14: Q14. D. First blood pressure measurement. Diastolic (first BP) [Visit 1]"
+    ]
+  },
+  {
+    "concept_id": "bp_systolic",
+    "name": "Blood Pressure - Systolic",
+    "description": "Resting systolic blood pressure from the upper arm in a clinical setting.",
+    "cui": "C2039694",
+    "domain": "blood_pressure",
+    "example_variables": [
+      "sbp: Mean Systolic BP",
+      "SBPA5: Average Systolic  (SBPA5)",
+      "SBPA13: Q13. D. First blood pressure measurement. Systolic (first BP) [Visit 1]"
+    ]
+  },
+  {
+    "concept_id": "annotated_sex",
+    "name": "Annotated Sex",
+    "description": "Subject sex, as recorded by the study.",
+    "cui": "C0017249",
+    "domain": "demographic",
+    "example_variables": [
+      "SEX: Sex of participant",
+      "male: Subject's Gender",
+      "GENDER: Sex (uncorrected from FTRA22)"
+    ]
+  },
+  {
+    "concept_id": "geographic_site",
+    "name": "Geographic Site",
+    "description": "Recruitment/field center, baseline clinic, or geographic region.",
+    "cui": "C2828208",
+    "domain": "demographic",
+    "example_variables": [
+      "site1c: SITE",
+      "sitefc: FIELD CENTER WHERE EXAMINED",
+      "CENTER_CARE: CENTER FOR CARE PROJECT"
+    ]
+  },
+  {
+    "concept_id": "hispanic_or_latino",
+    "name": "Hispanic or Latino Ethnicity",
+    "description": "Indicator of reported Hispanic or Latino ethnicity.",
+    "cui": "C2741637",
+    "domain": "demographic",
+    "example_variables": [
+      "Hispanic: Hispanic or Latino",
+      "hispanic: Hispanic or Latino",
+      "H700: WHICH OF THE FOLLOWING BEST DESCRIBES YOU - ETHNICITY HISPANIC OR LATINO"
+    ]
+  },
+  {
+    "concept_id": "hispanic_subgroup",
+    "name": "Hispanic Subgroup",
+    "description": "classification of Hispanic/Latino background for Hispanic/Latino subjects where country or region of origin information is available",
+    "cui": "C0804625",
+    "domain": "demographic",
+    "example_variables": [
+      "BKGRD1_C7: 7-level re-classification of Hispanic/Latino Background",
+      "hctryo1c: COUNTRY OR REGION OF HISPANIC ORIGIN",
+      "hctryofc: COUNTRY OR REGION OF HISPANIC ORIGIN"
+    ]
+  },
+  {
+    "concept_id": "race_us",
+    "name": "Race Us",
+    "description": "Reported race of participant according to the United States administrative definition of race.",
+    "cui": "C0034510",
+    "domain": "demographic",
+    "example_variables": [
+      "RACEGRP: Race (from FTRA23)",
+      "RACE: RACE (VERIFIED AT EXAM 2)",
+      "race: Race of participant"
+    ]
+  },
+  {
+    "concept_id": "subcohort",
+    "name": "Subcohort",
+    "description": "A distinct subgroup within a study, generally indicating subjects who share similar characteristics due to study design. Subjects may belong to only one subcohort.",
+    "cui": "C0599755",
+    "domain": "demographic",
+    "example_variables": [
+      "baseline_study: Phenotype study",
+      "PERSTAT: COHORT",
+      "idtype: Framingham Heart Study cohort identifier"
+    ]
+  },
+  {
+    "concept_id": "cd40",
+    "name": "Cd40",
+    "description": "Cluster of differentiation 40 ligand (CD40) concentration in blood.",
+    "cui": "C2825885",
+    "domain": "inflammation",
+    "example_variables": [
+      "cd40l1: CD40 LIGAND (pg/mL)"
+    ]
+  },
+  {
+    "concept_id": "crp",
+    "name": "CRP",
+    "description": "C-reactive protein (CRP) concentration in blood.",
+    "cui": "C0428528",
+    "domain": "inflammation",
+    "example_variables": [
+      "crp_baseline: CRP value at baseline visit",
+      "FL6CRPBN: RERUN CRP (uG/ml - BNII METHOD)",
+      "crpam: Crp am (ug/mL)"
+    ]
+  },
+  {
+    "concept_id": "eselectin",
+    "name": "Eselectin",
+    "description": "E-selectin concentration in blood.",
+    "cui": "C1316265",
+    "domain": "inflammation",
+    "example_variables": [
+      "eselect1: E-SELECTIN (ng/mL)"
+    ]
+  },
+  {
+    "concept_id": "icam1",
+    "name": "ICAM-1",
+    "description": "Intercellular adhesion molecule 1 (ICAM1) concentration in blood.",
+    "cui": "C4084871",
+    "domain": "inflammation",
+    "example_variables": [
+      "sICAM1: SICAM1",
+      "icam11M: EXCEPTIONAL MISSING ICAM11",
+      "ICAM1: BASELINE ICAM-1 -sample"
+    ]
+  },
+  {
+    "concept_id": "il10",
+    "name": "Il10",
+    "description": "Interleukin 10 (IL10) concentration in blood.",
+    "cui": "C0945416",
+    "domain": "inflammation",
+    "example_variables": [
+      "il10: IL-10 (pg/mL)",
+      "il10a1: INTERLEUKIN-10"
+    ]
+  },
+  {
+    "concept_id": "il18",
+    "name": "Il18",
+    "description": "Interleukin 18 (IL18) concentration in blood.",
+    "cui": "C1316287",
+    "domain": "inflammation",
+    "example_variables": []
+  },
+  {
+    "concept_id": "il1_beta",
+    "name": "Il1 Beta",
+    "description": "Interleukin 1 beta (IL1b) concentration in blood.",
+    "cui": "C0796820",
+    "domain": "inflammation",
+    "example_variables": [
+      "il1b: IL-1B (pg/mL)"
+    ]
+  },
+  {
+    "concept_id": "il6",
+    "name": "IL-6",
+    "description": "Interleukin 6 (IL6) concentration in blood.",
+    "cui": "C0942776",
+    "domain": "inflammation",
+    "example_variables": [
+      "FL6IL6: IL6 PG/ML",
+      "il6am: Il6 am (pg/mL)",
+      "IL6BL: IL-6 at baseline (pg/ml)"
+    ]
+  },
+  {
+    "concept_id": "isoprostane_8_epi_pgf2a",
+    "name": "Isoprostane 8 Epi Pgf2A",
+    "description": "Isoprostane 8-epi-prostaglandin F2 alpha (8-epi-PGF2a) concentration in urine.",
+    "cui": "C2700042",
+    "domain": "inflammation",
+    "example_variables": [
+      "idtype: Framingham Heart Study cohort identifier"
+    ]
+  },
+  {
+    "concept_id": "lppla2_act",
+    "name": "Lppla2 Act",
+    "description": "Activity of lipoprotein-associated phospholipase A2 (LP-PLA2), also known as platelet-activating factor acetylhydrolase, measured in blood.",
+    "cui": "C4531983",
+    "domain": "inflammation",
+    "example_variables": [
+      "LPPLA2AC: Baseline LP-PLA2 Activity (nmols/min/mL)",
+      "cam1a: LIPOPROTEIN-ASSOCIATED PHOSPHOLIPASE A2: ACTIVITY",
+      "idtype: Framingham Heart Study cohort identifier"
+    ]
+  },
+  {
+    "concept_id": "lppla2_mass",
+    "name": "Lppla2 Mass",
+    "description": "Mass of lipoprotein-associated phospholipase A2 (LP-PLA2), also known as platelet-activating factor acetylhydrolase, measured in blood.",
+    "cui": "C1543846",
+    "domain": "inflammation",
+    "example_variables": [
+      "LPPLA2: Baseline LP-PLA2 Mass (ng/ml)",
+      "plac1a: LIPOPROTEIN-ASSOCIATED PHOSPHOLIPASE A2: MASS",
+      "idtype: Framingham Heart Study cohort identifier"
+    ]
+  },
+  {
+    "concept_id": "mcp1",
+    "name": "Mcp1",
+    "description": "Monocyte chemoattractant protein-1 (MCP1), also known as C-C motif chemokine ligand 2, concentration in blood.",
+    "cui": "C0128897",
+    "domain": "inflammation",
+    "example_variables": [
+      "idtype: Framingham Heart Study cohort identifier"
+    ]
+  },
+  {
+    "concept_id": "mmp9",
+    "name": "Mmp9",
+    "description": "Matrix metalloproteinase 9 (MMP9) concentration in blood.",
+    "cui": "C2698028",
+    "domain": "inflammation",
+    "example_variables": [
+      "mmp91: MATRIX METALLOPROTEINASE 9 (ng/mL)"
+    ]
+  },
+  {
+    "concept_id": "mpo",
+    "name": "Mpo",
+    "description": "Myeloperoxidase (MPO) concentration in blood.",
+    "cui": "C2698399",
+    "domain": "inflammation",
+    "example_variables": []
+  },
+  {
+    "concept_id": "opg",
+    "name": "Opg",
+    "description": "Osteoprotegerin (OPG) concentration in blood.",
+    "cui": "C1262886",
+    "domain": "inflammation",
+    "example_variables": [
+      "idtype: Framingham Heart Study cohort identifier"
+    ]
+  },
+  {
+    "concept_id": "pselectin",
+    "name": "Pselectin",
+    "description": "P-selectin concentration in blood.",
+    "cui": "C3890352",
+    "domain": "inflammation",
+    "example_variables": [
+      "idtype: Framingham Heart Study cohort identifier"
+    ]
+  },
+  {
+    "concept_id": "tnfa",
+    "name": "Tnfa",
+    "description": "Tumor necrosis factor alpha (TNFa) concentration in blood.",
+    "cui": "C1168005",
+    "domain": "inflammation",
+    "example_variables": [
+      "tnfaam: TNFa AM (pg/mL) (new values)",
+      "tnfa3: TNFa (pg/mL)"
+    ]
+  },
+  {
+    "concept_id": "tnfa_r1",
+    "name": "Tnfa R1",
+    "description": "Tumor necrosis factor alpha receptor 1 (TNFa-R1) concentration in blood.",
+    "cui": "C4050424",
+    "domain": "inflammation",
+    "example_variables": [
+      "tnfri1: TUMOR NECROSIS FACTOR-A SOLUBLE RECEPTORS (pg/ml)"
+    ]
+  },
+  {
+    "concept_id": "tnfr2",
+    "name": "Tnfr2",
+    "description": "Tumor necrosis factor receptor 2 (TNFR2) concentration in blood.",
+    "cui": "C3897554",
+    "domain": "inflammation",
+    "example_variables": [
+      "idtype: Framingham Heart Study cohort identifier"
+    ]
+  },
+  {
+    "concept_id": "fasting_lipids",
+    "name": "Fasting Lipids",
+    "description": "Indicates whether participant fasted for at least eight hours prior to blood draw to measure lipids phenotypes.",
+    "cui": "C1976106",
+    "domain": "lipids",
+    "example_variables": [
+      "FASTING: Fasting at least 8 hours",
+      "FAST0802: Fasting time of 8 hours or more",
+      "G3A453: NUMBER OF HOURS FASTING"
+    ]
+  },
+  {
+    "concept_id": "hdl",
+    "name": "HDL",
+    "description": "Blood mass concentration of high-density lipoprotein cholesterol",
+    "cui": "C2603387",
+    "domain": "lipids",
+    "example_variables": [
+      "hdl_baseline: HDL value at baseline visit",
+      "HDL01: HDL cholesterol (recalibrated lipid)",
+      "AL1HDL: TOTAL HDL CHOLESTEROL (MG/DL)"
+    ]
+  },
+  {
+    "concept_id": "ldl",
+    "name": "LDL",
+    "description": "Blood mass concentration of low-density lipoprotein cholesterol",
+    "cui": "C2603388",
+    "domain": "lipids",
+    "example_variables": []
+  },
+  {
+    "concept_id": "lipid_lowering_medication",
+    "name": "Lipid Lowering Medication",
+    "description": "Indicates whether participant was taking any lipid-lowering medication at blood draw to measure lipids phenotypes",
+    "cui": "C2924556",
+    "domain": "lipids",
+    "example_variables": [
+      "LIPID06: Any lipid-lowering medication",
+      "meds_LIPIDS: Taking any Lipid Lowering Medication?",
+      "lipid1c: ANY LIPID-LOWERING MEDICATION"
+    ]
+  },
+  {
+    "concept_id": "total_cholesterol",
+    "name": "Total Cholesterol",
+    "description": "Blood mass concentration of total cholesterol",
+    "cui": "C0543421",
+    "domain": "lipids",
+    "example_variables": [
+      "totchol_baseline: Total cholesterol value at baseline visit",
+      "TCHSIU01: Total cholesterol in SI units",
+      "AL1CHOL: TOTAL CHOLESTEROL (MG/DL)"
+    ]
+  },
+  {
+    "concept_id": "triglycerides",
+    "name": "Triglycerides",
+    "description": "Blood mass concentration of triglycerides",
+    "cui": "C0428475",
+    "domain": "lipids",
+    "example_variables": [
+      "trigs_baseline: Triglycerides value at baseline visit",
+      "TRGSIU01: Total triglycerides In SI units",
+      "AL1NTRIG: TRIGLYCERIDES (MG/DL)"
+    ]
+  },
+  {
+    "concept_id": "sleep_duration",
+    "name": "Sleep Duration",
+    "description": "Usual amount of time slept per day.",
+    "cui": "C0424574",
+    "domain": "sleep",
+    "example_variables": [
+      "SLPDUR: Average sleep duration (hours)",
+      "RSE21: F. Sleep. Q21. Hours of sleep in past month",
+      "F67SLPHR: PAST MONTH AVG SLEEPING HOURS. Q 7"
+    ]
+  },
+  {
+    "concept_id": "vte_case_status",
+    "name": "VTE Case Status",
+    "description": "An indicator of whether a subject experienced a venous thromboembolism event (VTE) that was verified by adjudication or by medical professionals.",
+    "cui": "C1861172",
+    "domain": "vte",
+    "example_variables": [
+      "phenotype: Patient VTE case status",
+      "ccs: Case-control status",
+      "vt: Lite: VT case (through dec01)"
+    ]
+  },
+  {
+    "concept_id": "vte_followup_start_age",
+    "name": "VTE Followup Start Age",
+    "description": "Age of subject at the start of the follow up period during which venous thromboembolism (VTE) events were reviewed and adjudicated.",
+    "cui": null,
+    "domain": "vte",
+    "example_variables": [
+      "V1AGE01: Age at visit 1",
+      "AGEBL: CALCULATED AGE AT BASELINE",
+      "age1: Age at Exam 1"
+    ]
+  },
+  {
+    "concept_id": "vte_prior_history",
+    "name": "VTE Prior History",
+    "description": "An indicator of whether a subject had a venous thromboembolism (VTE) event prior to the start of the medical review process (including self-reported events).",
+    "cui": "C4540929",
+    "domain": "vte",
+    "example_variables": [
+      "priorvt: Prior VT",
+      "vtpehx01: LITE : Self-report of DVT or PE at baseline",
+      "idtype: Framingham Heart Study cohort identifier"
+    ]
+  },
+  {
+    "concept_id": "food_frequency_questionnaire",
+    "name": "Food Frequency Questionnaire",
+    "description": "Food frequency questionnaire (FFQ) data: frequency and quantity of specific food items consumed over a reference period. Includes individual food items, food groups, and serving counts.",
+    "cui": null,
+    "domain": "diet",
+    "example_variables": [
+      "APPLE: FFQ: FRESH APPLES OR PEARS (1)",
+      "FRIEDFOOD: FRIED/SAUTEED FOOD AT HOME (SERVINGS/WEEK)",
+      "ICECREAM: FFQ: ICE CREAM (1/2 CUP)"
+    ]
+  },
+  {
+    "concept_id": "nutrient_intake",
+    "name": "Nutrient Intake",
+    "description": "Computed nutrient intake values derived from dietary assessments: total calories, macronutrients (protein, fat, carbohydrates, fiber), micronutrients (vitamins, minerals), fatty acid profiles, and cholesterol intake.",
+    "cui": null,
+    "domain": "diet",
+    "example_variables": [
+      "DT_KCAL: DAILY DIETARY ESTIMATES OF CALORIES",
+      "nut_calor: Calories kcal",
+      "DT_SATFAT: SATURATED FAT (G)"
+    ]
+  },
+  {
+    "concept_id": "dietary_supplement_use",
+    "name": "Dietary Supplement Use",
+    "description": "Use of dietary supplements including multivitamins, individual vitamins (A, B, C, D, E), minerals (calcium, iron, zinc), fish oil, herbal supplements, and other over-the-counter nutritional supplements.",
+    "cui": null,
+    "domain": "diet",
+    "example_variables": [
+      "MULTIVCU: MULTIVITAMIN: CURRENTLY TAKING",
+      "VITCCURR: VITAMIN C MG: CURRENTLY TAKING",
+      "FISHOIL: FISH OIL/OMEGA 3 SUPPLEMENT"
+    ]
+  },
+  {
+    "concept_id": "diet_quality_score",
+    "name": "Diet Quality Score",
+    "description": "Composite dietary quality indices and scores: Healthy Eating Index (HEI), DASH diet score, Mediterranean diet score, Dietary Inflammatory Index, and other summary measures of overall diet quality.",
+    "cui": null,
+    "domain": "diet",
+    "example_variables": [
+      "HEI_TOTAL: Healthy Eating Index total score",
+      "DASH_SCORE: DASH diet score",
+      "MEDSCORE: Mediterranean diet score"
+    ]
+  },
+  {
+    "concept_id": "genetic_principal_components",
+    "name": "Genetic Principal Components",
+    "description": "Principal component analysis (PCA) eigenvectors computed from genome-wide genotype data to capture population structure and genetic ancestry. Typically PC1 through PC10 or PC20.",
+    "cui": null,
+    "domain": "ancestry",
+    "example_variables": [
+      "PC1: Genetic principal component 1",
+      "EV1: PCA eigenvector 1",
+      "pc5: Principal component 5: reveals a north-to-south cline within Europeans"
+    ]
+  },
+  {
+    "concept_id": "admixture_proportions",
+    "name": "Admixture Proportions",
+    "description": "Ancestry proportions estimated from admixture models (e.g., ADMIXTURE, STRUCTURE) showing the fraction of an individual's genome derived from each ancestral population (African, European, East Asian, South Asian, Native American).",
+    "cui": null,
+    "domain": "ancestry",
+    "example_variables": [
+      "AFR: Percent African calculated from ADMIXTURE algorithm",
+      "EUR: Percent European calculated from ADMIXTURE algorithm",
+      "ANCESTRY: Ancestry based on principal component analysis"
+    ]
+  }
+]
