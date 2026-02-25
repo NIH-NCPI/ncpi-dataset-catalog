@@ -97,12 +97,12 @@
   {
     "concept_id": "cad_followup_start_age",
     "name": "Cad Followup Start Age",
-    "description": "Age of subject at the start of the follow-up period during which atherosclerosis events were reviewed and adjudicated.",
+    "description": "Age of subject at the start of the cardiovascular disease (CAD/CHD) follow-up period during which atherosclerosis events were reviewed and adjudicated. Only match when context explicitly mentions cardiovascular follow-up or event surveillance — do NOT match generic enrollment or baseline age.",
     "cui": null,
     "domain": "atherosclerosis_events_incident",
     "example_variables": [
-      "age1: Age at Exam 1",
-      "AGE: Age at screening"
+      "AGEBL: Calculated age at baseline, start of cardiovascular follow-up",
+      "cad_followup_start_age: Age at start of CAD event surveillance"
     ]
   },
   {
@@ -962,6 +962,138 @@
       "AFR: Percent African calculated from ADMIXTURE algorithm",
       "EUR: Percent European calculated from ADMIXTURE algorithm",
       "ANCESTRY: Ancestry based on principal component analysis"
+    ]
+  },
+  {
+    "concept_id": "liver_function",
+    "name": "Liver Function",
+    "description": "Liver function tests and hepatic biomarkers: alanine aminotransferase (ALT/SGPT), aspartate aminotransferase (AST/SGOT), total and direct bilirubin, serum albumin, gamma-glutamyl transferase (GGT), alkaline phosphatase (ALP), and liver enzyme panels.",
+    "cui": null,
+    "domain": "liver",
+    "example_variables": [
+      "ALT: Alanine aminotransferase (U/L)",
+      "AST: Aspartate aminotransferase (U/L)",
+      "TBIL: Total bilirubin (mg/dL)"
+    ]
+  },
+  {
+    "concept_id": "ecg",
+    "name": "Electrocardiogram",
+    "description": "Electrocardiogram (ECG/EKG) measurements and findings: QT interval, PR interval, QRS duration, heart rhythm, ST segment changes, P/Q/R/S/T wave morphology, axis deviation, atrial fibrillation, arrhythmia detection, and 12-lead ECG data.",
+    "cui": null,
+    "domain": "cardiac",
+    "example_variables": [
+      "ECGQT: QT interval (ms)",
+      "ECGHR: Heart rate from ECG",
+      "AFIB: Atrial fibrillation on ECG"
+    ]
+  },
+  {
+    "concept_id": "kidney_function",
+    "name": "Kidney Function",
+    "description": "Kidney function tests and renal biomarkers: estimated glomerular filtration rate (eGFR), creatinine clearance, blood urea nitrogen (BUN), urine albumin-to-creatinine ratio (UACR), proteinuria, cystatin C, and dialysis status.",
+    "cui": null,
+    "domain": "renal",
+    "example_variables": [
+      "eGFR: Estimated glomerular filtration rate",
+      "BUN: Blood urea nitrogen (mg/dL)",
+      "UACR: Urine albumin to creatinine ratio"
+    ]
+  },
+  {
+    "concept_id": "heart_rate",
+    "name": "Heart Rate",
+    "description": "Resting heart rate or pulse rate measured in a clinical setting, from ECG, or by pulse oximetry. Includes resting, exercise, and recovery heart rate.",
+    "cui": null,
+    "domain": "cardiac",
+    "example_variables": [
+      "HR: Resting heart rate (bpm)",
+      "PULSE: Pulse rate",
+      "RHR: Resting heart rate from ECG"
+    ]
+  },
+  {
+    "concept_id": "cognition",
+    "name": "Cognition",
+    "description": "Cognitive and neuropsychological test results: Mini-Mental State Examination (MMSE), Montreal Cognitive Assessment (MoCA), Digit Symbol Substitution Test, Trail Making Test, word recall and word list memory, clock drawing test, verbal fluency, and global cognitive scores.",
+    "cui": null,
+    "domain": "neuropsych",
+    "example_variables": [
+      "MMSE: Mini-Mental State Examination total score",
+      "DSST: Digit Symbol Substitution Test score",
+      "WORDRECALL: Delayed word recall score"
+    ]
+  },
+  {
+    "concept_id": "hospitalization",
+    "name": "Hospitalization",
+    "description": "Healthcare utilization events: hospital admissions, emergency room visits, ICU stays, length of stay, discharge disposition, readmission, inpatient days, and overnight hospitalizations.",
+    "cui": null,
+    "domain": "healthcare_utilization",
+    "example_variables": [
+      "HOSP: Hospitalized in past year",
+      "LOS: Length of hospital stay (days)",
+      "ER_VISIT: Emergency room visit"
+    ]
+  },
+  {
+    "concept_id": "family_medical_history",
+    "name": "Family Medical History",
+    "description": "Family history of diseases and medical conditions: whether parents, siblings, or other relatives were diagnosed with specific conditions such as heart disease, cancer, diabetes, stroke, hypertension, or other heritable diseases.",
+    "cui": null,
+    "domain": "family_history",
+    "example_variables": [
+      "FH_MI: Family history of myocardial infarction",
+      "FH_DIABETES: Family history of diabetes",
+      "MOTHER_HTN: Mother had hypertension"
+    ]
+  },
+  {
+    "concept_id": "surgical_procedure",
+    "name": "Surgical Procedure",
+    "description": "Surgical procedures and operations: cataract surgery, joint replacement, appendectomy, tonsillectomy, organ transplant, biopsy, cardiac catheterization, and other invasive clinical procedures.",
+    "cui": null,
+    "domain": "procedures",
+    "example_variables": [
+      "CATARACT_SURG: Cataract surgery performed",
+      "KNEE_REPLACE: Total knee replacement",
+      "BIOPSY: Tissue biopsy performed"
+    ]
+  },
+  {
+    "concept_id": "diabetes_medication",
+    "name": "Diabetes Medication",
+    "description": "Use of antidiabetic and glucose-lowering medications: metformin, sulfonylureas (glipizide, glyburide), insulin therapy, thiazolidinediones, DPP-4 inhibitors, GLP-1 agonists, SGLT2 inhibitors, and oral hypoglycemic agents.",
+    "cui": null,
+    "domain": "medications",
+    "example_variables": [
+      "METFORMIN: Currently taking metformin",
+      "INSULIN_USE: Currently using insulin",
+      "SLF12: First generation sulfonylureas"
+    ]
+  },
+  {
+    "concept_id": "anticoagulant_medication",
+    "name": "Anticoagulant Medication",
+    "description": "Use of anticoagulant and blood-thinning medications: warfarin (Coumadin), heparin, enoxaparin (Lovenox), direct oral anticoagulants (DOACs: apixaban, rivaroxaban, dabigatran), and antiplatelet therapy (clopidogrel).",
+    "cui": null,
+    "domain": "medications",
+    "example_variables": [
+      "WARFARIN: Currently taking warfarin",
+      "ANTICOAG: On anticoagulant therapy",
+      "WARF1: Oral anticoagulants"
+    ]
+  },
+  {
+    "concept_id": "pain_medication",
+    "name": "Pain Medication",
+    "description": "Use of analgesic and pain relief medications: acetaminophen (Tylenol), NSAIDs (ibuprofen, naproxen), aspirin for pain, opioid analgesics (morphine, oxycodone, codeine, hydrocodone), and prescription pain medications.",
+    "cui": null,
+    "domain": "medications",
+    "example_variables": [
+      "ACETAMIN: Years ever taken acetaminophen/Tylenol",
+      "NSAID_USE: Currently taking NSAIDs",
+      "OPIOID: Prescription opioid use"
     ]
   }
 ]

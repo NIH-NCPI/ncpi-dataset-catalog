@@ -1,8 +1,8 @@
-"""Evals for classify_v3_topmed.py (v3 concept matching against TOPMed vocabulary).
+"""Evals for classify_v3_topmed.py (v3 concept matching against vocabulary).
 
-Each eval case sends a single variable to the LLM with the full 78-concept
-vocabulary. Tests whether the model correctly matches to the right concept_id
-or returns null for non-matching variables.
+Each eval case sends a single variable to the LLM with the full concept
+vocabulary (~94 concepts). Tests whether the model correctly matches to
+the right concept_id or returns null for non-matching variables.
 
 Test cases are derived from TOPMed ground truth (topmed-seed-concepts.json)
 component variables — domain experts confirmed these concept mappings.
@@ -95,6 +95,14 @@ DOMAIN_GROUPS: dict[str, set[str]] = {
         "pad_prior",
     },
     "vte": {"vte_case_status", "vte_followup_start_age", "vte_prior_history"},
+    "ecg": {"ecg", "heart_rate"},
+    "cognition": {"cognition"},
+    "liver_kidney": {"liver_function", "kidney_function"},
+    "hospitalization_surgery": {"hospitalization", "surgical_procedure"},
+    "family_history": {"family_medical_history"},
+    "medications_specific": {
+        "diabetes_medication", "anticoagulant_medication", "pain_medication",
+    },
 }
 
 # Build reverse lookup: concept_id → domain
@@ -698,7 +706,7 @@ CASES = [
         table_name="bmode_carotid",
         table_description="B-mode carotid ultrasound measurements",
     ),
-    # Disease-specific outside TOPMed domains
+    # Disease-specific outside vocabulary domains
     var_case(
         "neg-seizure-family-hx",
         "BioSisterHadSeizures1",
@@ -709,22 +717,23 @@ CASES = [
         table_name="pedigree",
         table_description="Family pedigree data",
     ),
+    # ── ECG ─────────────────────────────────────────────────────────────
     var_case(
-        "neg-ecg-specific",
+        "ecg-finding",
         "mcr665",
         "INTERMITTENT ABERRANT ATRIOVENTRICULAR CONDUCTION; BY VISUAL ANALYSIS",
-        "null",
+        "ecg",
         study_id="phs000209",
         study_name="MESA",
         table_name="MESA_Exam5Main",
         table_description="Exam 5 clinical measurements",
     ),
-    # Cognitive test — not in TOPMed 78 concepts
+    # ── Cognition ───────────────────────────────────────────────────────
     var_case(
-        "neg-cognition-test",
+        "cognition-digit-span",
         "DSF",
         "DIGIT SPAN FORWARD SCORE",
-        "null",
+        "cognition",
         study_id="phs000280",
         study_name="MESA",
         table_name="cognitive",
