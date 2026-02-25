@@ -212,29 +212,28 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
             @_agent.tool
             def get_measurement_category_concepts(
                 ctx: RunContext[ConceptIndex],
-                top_level: str,
-                mid_level: str | None = None,
+                keyword: str,
             ) -> list[ConceptMatch]:
-                """Get measurement concepts in a hierarchy category.
+                """Search measurement concepts by keyword.
 
-                Use this for measurement facet mentions. First identify the
-                top-level category from the list in the prompt (e.g.
-                "Cardiovascular"), then optionally drill into a mid-level
-                (e.g. "Blood Pressure") to see specific concepts.
+                Searches the index for concepts whose namespaced ID contains
+                the keyword. Use this for measurement facet mentions.
+
+                Examples:
+                  keyword="blood_pressure" → topmed:bp_systolic, topmed:bp_diastolic
+                  keyword="biomarkers" → ncpi:biomarkers and all concepts under it
+                  keyword="media" → phenx:media_use
+                  keyword="smoking" → phenx:..._smoking_status_..., topmed:current_smoker_baseline
 
                 Args:
                     ctx: Run context with ConceptIndex dependency.
-                    top_level: Top-level category (e.g. "Cardiovascular").
-                    mid_level: Optional mid-level subcategory (e.g. "Blood
-                              Pressure"). If omitted, returns all concepts
-                              in the top-level.
+                    keyword: Search term (e.g. "blood_pressure", "smoking",
+                             "cholesterol"). Spaces are converted to underscores.
 
                 Returns:
-                    Measurement concepts in the category, sorted by study count.
+                    Matching measurement concepts sorted by study count.
                 """
-                return ctx.deps.get_measurement_category_concepts(
-                    top_level, mid_level
-                )
+                return ctx.deps.get_measurement_category_concepts(keyword)
 
         return _agent
 

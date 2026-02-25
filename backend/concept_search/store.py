@@ -83,6 +83,8 @@ class DuckDBStore:
             "CREATE TABLE variables ("
             "  concept VARCHAR,"
             "  concept_lower VARCHAR,"
+            "  cui VARCHAR,"
+            "  concept_ids_closure VARCHAR,"
             "  dataset_id VARCHAR,"
             "  description VARCHAR,"
             "  phv_id VARCHAR,"
@@ -131,12 +133,12 @@ class DuckDBStore:
         self._copy_csv("study_facet_values", rows)
 
     def load_variables_batch(
-        self, rows: list[tuple[str, str, str, str, str, str, str, str]]
+        self, rows: list[tuple[str, str, str, str, str, str, str, str, str, str]]
     ) -> None:
         """Batch-insert variable records via CSV COPY.
 
-        Each row is (concept, concept_lower, dataset_id, description,
-        phv_id, study_id, table_name, variable_name).
+        Each row is (concept, concept_lower, cui, concept_ids_closure,
+        dataset_id, description, phv_id, study_id, table_name, variable_name).
         """
         if not rows:
             return
@@ -169,6 +171,9 @@ class DuckDBStore:
         )
         self._conn.execute(
             "CREATE INDEX idx_var_concept ON variables (concept_lower)"
+        )
+        self._conn.execute(
+            "CREATE INDEX idx_var_study ON variables (study_id)"
         )
 
     # -- persistence ----------------------------------------------------------
@@ -203,6 +208,10 @@ class DuckDBStore:
             self._conn.execute(
                 "CREATE INDEX idx_var_concept "
                 "ON variables (concept_lower)"
+            )
+            self._conn.execute(
+                "CREATE INDEX idx_var_study "
+                "ON variables (study_id)"
             )
         finally:
             self._conn.execute("USE memory")
@@ -267,10 +276,14 @@ class DuckDBStore:
     def query_variables(
         self,
         concepts: list[str] | None = None,
-        limit: int = 100,
+        limit: int = 500,
         study_ids: set[str] | None = None,
     ) -> list[dict]:
         """Return variables matching concept names and/or study IDs.
+
+        Searches against concept_ids_closure (JSON array of all ancestor
+        concept_ids) so that querying a parent concept returns variables
+        tagged with any descendant.
 
         Args:
             concepts: Canonical concept names to match (OR-ed). If None,
@@ -286,27 +299,34 @@ class DuckDBStore:
         params: list[str] = []
         clauses: list[str] = []
         if concepts:
-            concept_ph = ", ".join("?" for _ in concepts)
-            clauses.append(f"v.concept_lower IN ({concept_ph})")
-            params.extend(c.lower() for c in concepts)
+            # Search against ISA closure: a variable matches if any
+            # concept in its closure array matches any requested concept.
+            closure_clauses = []
+            for c in concepts:
+                closure_clauses.append(
+                    "list_contains("
+                    "from_json(v.concept_ids_closure, '[\"VARCHAR\"]'), ?)"
+                )
+                params.append(c.lower())
+            clauses.append(f"({' OR '.join(closure_clauses)})")
         if study_ids is not None:
             study_ph = ", ".join("?" for _ in study_ids)
             clauses.append(f"v.study_id IN ({study_ph})")
             params.extend(study_ids)
         where = " AND ".join(clauses)
         sql = (
-            "SELECT v.concept, v.dataset_id, v.description, v.phv_id,"
+            "SELECT v.concept, v.cui, v.dataset_id, v.description, v.phv_id,"
             "  v.study_id, v.table_name, v.variable_name,"
             "  json_extract_string(s.raw_json, '$.title') AS study_title "
             "FROM variables v "
             "LEFT JOIN studies s ON v.study_id = s.db_gap_id "
             f"WHERE {where} "  # noqa: S608
-            "ORDER BY v.concept, v.study_id, v.variable_name "
+            "ORDER BY v.study_id, v.concept, v.variable_name "
             f"LIMIT {limit}"
         )
         rows = self._conn.execute(sql, params).fetchall()
         cols = [
-            "concept", "datasetId", "description", "phvId",
+            "concept", "cui", "datasetId", "description", "phvId",
             "studyId", "tableName", "variableName", "studyTitle",
         ]
         return [dict(zip(cols, row)) for row in rows]

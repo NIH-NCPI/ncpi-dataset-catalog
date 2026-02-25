@@ -3,7 +3,9 @@
 Reads the 78 harmonized variable JSONs, cross-references component phv IDs
 against parsed-tables.json (75K dbGaP variables), and produces:
   - topmed-seed-concepts.json: full seed reference with component variables
+    (each tagged with role: measurement or covariate via R-code parsing)
   - concept-vocabulary.json: LLM matching vocabulary with example variables
+    (measurement-role variables only)
 """
 
 import json
@@ -75,6 +77,423 @@ def _phv_base(phv_id):
         Base ID like "phv00054139".
     """
     return phv_id.split(".")[0] if phv_id else ""
+
+
+# ---------------------------------------------------------------------------
+# R-code parsing: identify measurement vs covariate columns
+# ---------------------------------------------------------------------------
+
+# R built-ins and dplyr verbs to exclude from identifier extraction
+_R_NOISE = frozenset({
+    # R keywords / constants
+    "TRUE", "FALSE", "NA", "NULL", "NaN", "Inf", "T", "F",
+    "if", "else", "for", "while", "in", "function", "return",
+    # Type conversions
+    "as", "numeric", "integer", "character", "factor", "logical", "double",
+    # Common base R functions
+    "c", "abs", "mean", "sum", "max", "min", "length", "nrow", "ncol",
+    "round", "floor", "ceiling", "log", "exp", "sqrt",
+    "rowMeans", "colMeans", "rowSums", "cbind", "rbind", "ifelse",
+    "paste", "paste0", "which", "is", "na", "rm", "nchar",
+    "grepl", "gsub", "sub", "tolower", "toupper", "trimws",
+    "apply", "lapply", "sapply", "mapply", "do", "call",
+    "order", "sort", "unique", "duplicated", "match",
+    "matrix", "array", "list", "vector",
+    "stop", "warning", "message", "print", "cat",
+    "seq", "rep", "rev", "append",
+    # dplyr / tidyverse verbs
+    "select", "mutate", "filter", "transmute", "rename", "summarise",
+    "group_by", "ungroup", "arrange", "slice", "distinct", "pull",
+    "inner_join", "left_join", "right_join", "full_join", "anti_join",
+    "mutate_if", "mutate_at", "mutate_all", "vars", "funs",
+    # Data frame identifiers commonly used in harmonization code
+    "dataset", "dat", "dat1", "dat2", "dat3", "data", "df",
+    "source_data", "phen_list", "harmonized_data",
+    "tbl_df", "tibble", "data.frame",
+    # Always-excluded output columns
+    "topmed_subject_id",
+    # Packages
+    "dplyr", "magrittr", "plyr", "tidyr", "library", "require",
+})
+
+
+def _extract_expression_text(r_code, start):
+    """Extract text of an R expression starting at a given position.
+
+    Scans forward, tracking balanced parentheses/brackets, and stops at:
+    - A comma or closing delimiter at depth 0 (end of sub-expression)
+    - A newline at depth 0 where neither the current line ends with a
+      pipe operator nor the next non-comment line starts with one
+
+    Args:
+        r_code: Full R source code string.
+        start: Character position to start scanning from.
+
+    Returns:
+        Extracted expression text.
+    """
+    depth = 0
+    i = start
+    while i < len(r_code):
+        ch = r_code[i]
+        if ch in ("(", "[", "{"):
+            depth += 1
+        elif ch in (")", "]", "}"):
+            if depth == 0:
+                return r_code[start:i]
+            depth -= 1
+        elif ch == "," and depth == 0:
+            return r_code[start:i]
+        elif ch == "\n" and depth == 0:
+            # Find current line (from last newline to here)
+            prev_nl = r_code.rfind("\n", start, i)
+            line_start = (prev_nl + 1) if prev_nl != -1 else start
+            current_line = r_code[line_start:i].rstrip()
+            if current_line.endswith("%>%") or current_line.endswith("%<>%"):
+                i += 1
+                continue
+            # Check if next non-comment line starts with pipe
+            rest = r_code[i + 1:]
+            rest_stripped = rest.lstrip()
+            while rest_stripped.startswith("#"):
+                nl = rest_stripped.find("\n")
+                if nl == -1:
+                    break
+                rest_stripped = rest_stripped[nl + 1:].lstrip()
+            if rest_stripped.startswith("%>%") or rest_stripped.startswith("+"):
+                i += 1
+                continue
+            return r_code[start:i]
+        i += 1
+    return r_code[start:]
+
+
+def _extract_r_identifiers(text):
+    """Extract R identifiers from an expression, filtering out noise.
+
+    Args:
+        text: R expression text.
+
+    Returns:
+        Set of identifier strings that may be column names.
+    """
+    tokens = set(re.findall(r"\b([a-zA-Z][a-zA-Z0-9_.]*)\b", text))
+    return tokens - _R_NOISE
+
+
+def _extract_concept_assignment_idents(concept_id, r_code):
+    """Find identifiers in the RHS of assignments to concept_id.
+
+    Handles three R patterns:
+    - mutate/transmute: concept_id = <expr>
+    - Direct assignment: $concept_id <- <expr>
+    - Indexed assignment: $concept_id[...] <- <expr>
+
+    Args:
+        concept_id: The concept variable name (e.g. "cac_score").
+        r_code: Full R harmonization function source.
+
+    Returns:
+        Set of identifiers found in RHS expressions, or empty set.
+    """
+    idents = set()
+    esc = re.escape(concept_id)
+
+    # Pattern 1: concept_id = <expr> (in mutate/transmute/rename)
+    for m in re.finditer(rf"\b{esc}\s*=\s*", r_code):
+        rhs_text = _extract_expression_text(r_code, m.end())
+        idents.update(_extract_r_identifiers(rhs_text))
+
+    # Pattern 2: $concept_id <- <expr>
+    for m in re.finditer(rf"\${esc}\s*<-\s*", r_code):
+        rhs_text = _extract_expression_text(r_code, m.end())
+        idents.update(_extract_r_identifiers(rhs_text))
+
+    # Pattern 3: $concept_id[...] <- <expr>
+    for m in re.finditer(rf"\${esc}\s*\[.*?\]\s*<-\s*", r_code):
+        rhs_text = _extract_expression_text(r_code, m.end())
+        idents.update(_extract_r_identifiers(rhs_text))
+
+    # Pattern 4: names(X)[names(X) %in% "old_name"] <- "concept_id"
+    # Base R column rename: extract old_name from the %in% clause
+    for m in re.finditer(
+        rf'%in%\s*"(\w+)"[^"]*<-\s*"{esc}"', r_code
+    ):
+        idents.add(m.group(1))
+
+    return idents
+
+
+def _find_assignment_sources(ident, r_code):
+    """Find identifiers on the RHS of assignments to a given variable.
+
+    Args:
+        ident: Variable name to look for assignments to.
+        r_code: Full R source code.
+
+    Returns:
+        Set of identifiers found in RHS of assignments to ident.
+    """
+    sources = set()
+    esc = re.escape(ident)
+
+    # word boundary assignment: ident = <expr> or ident <- <expr>
+    for m in re.finditer(rf"\b{esc}\s*(?:<-|=)\s*", r_code):
+        rhs_text = _extract_expression_text(r_code, m.end())
+        sources.update(_extract_r_identifiers(rhs_text))
+
+    # $ prefix assignment: $ident <- <expr>
+    for m in re.finditer(rf"\${esc}\s*<-\s*", r_code):
+        rhs_text = _extract_expression_text(r_code, m.end())
+        sources.update(_extract_r_identifiers(rhs_text))
+
+    return sources
+
+
+def parse_measurement_columns(concept_id, r_code, known_var_names):
+    """Parse R harmonization code to identify measurement column names.
+
+    Traces from the concept assignment backward through intermediate
+    variables (up to 5 levels) to find which source columns (identified
+    by known_var_names from component phvs) feed into the concept.
+
+    Args:
+        concept_id: The concept variable name (e.g. "cac_score").
+        r_code: The R harmonization function source code.
+        known_var_names: Set of variable names from this unit's component phvs.
+
+    Returns:
+        Set of variable names identified as measurements, or None if
+        parsing fails (no concept assignment found or no matches).
+    """
+    if not r_code or not known_var_names:
+        return None
+
+    measurement_names = set()
+
+    # Step 1: Find identifiers directly used in the concept assignment
+    direct_idents = _extract_concept_assignment_idents(concept_id, r_code)
+
+    if direct_idents:
+        # Step 2: Check which known variable names appear directly
+        measurement_names = direct_idents & known_var_names
+
+        # Step 3: If no direct matches, trace through intermediate variables
+        if not measurement_names:
+            remaining = direct_idents - known_var_names
+            for _ in range(5):  # max 5 levels of indirection
+                if not remaining:
+                    break
+                next_idents = set()
+                for ident in remaining:
+                    upstream = _find_assignment_sources(ident, r_code)
+                    next_idents.update(upstream)
+
+                new_matches = next_idents & known_var_names
+                measurement_names.update(new_matches)
+
+                remaining = next_idents - known_var_names - measurement_names
+                if measurement_names:
+                    break
+
+    # Step 4: Broad scan fallback — find known names anywhere in the R code
+    # and classify based on whether they appear in age/covariate context
+    if not measurement_names:
+        measurement_names = _broad_scan_measurement_names(
+            concept_id, r_code, known_var_names
+        )
+
+    # Step 5: Pass-through detection — if a known variable name matches the
+    # concept_id exactly, it passes through the R code untouched as the
+    # measurement column (e.g. column "current_smoker_baseline" in a table
+    # where the concept is also "current_smoker_baseline")
+    if not measurement_names and concept_id in known_var_names:
+        measurement_names = {concept_id}
+
+    # Final filter: backward tracing can pick up covariates that are
+    # carried alongside measurements (e.g. age in a subset() call).
+    # Remove any names that appear in age/covariate assignment context.
+    if measurement_names:
+        covariate_names = _find_covariate_names(r_code, known_var_names)
+        measurement_names -= covariate_names
+
+    return measurement_names if measurement_names else None
+
+
+def _find_covariate_names(r_code, known_var_names):
+    """Identify known variable names that appear in age/covariate context.
+
+    Extracts specific identifiers from age-assignment patterns (rename,
+    mutate, names() rename) rather than broad context scanning.  This
+    avoids false positives where unrelated variable names happen to appear
+    in the same rename() call as an age assignment.
+
+    Args:
+        r_code: Full R harmonization function source.
+        known_var_names: Set of variable names from component phvs.
+
+    Returns:
+        Set of known variable names that are covariates.
+    """
+    covariate_names = set()
+
+    # Pattern 1: age = <identifier> (in mutate, transmute, or rename)
+    # Extracts only the RHS identifier, not surrounding context
+    for m in re.finditer(r"\bage\s*=\s*(\w+)", r_code):
+        ident = m.group(1)
+        if ident in known_var_names:
+            covariate_names.add(ident)
+
+    # Pattern 2: $age <- <expr>  (direct assignment)
+    for m in re.finditer(r"\$age\s*<-\s*", r_code):
+        rhs_text = _extract_expression_text(r_code, m.end())
+        for name in known_var_names:
+            if re.search(rf"\b{re.escape(name)}\b", rhs_text):
+                covariate_names.add(name)
+
+    # Pattern 3: names(X)[names(X) %in% "old_name"] <- "age"
+    # Extracts old_name from %in% clause when new name is "age"
+    for m in re.finditer(r'%in%\s*"(\w+)"[^"]*<-\s*"age"', r_code):
+        ident = m.group(1)
+        if ident in known_var_names:
+            covariate_names.add(ident)
+
+    # Pattern 4: subcohort = <identifier> (rename of subcohort covariate)
+    for m in re.finditer(r"\bsubcohort\s*=\s*(\w+)", r_code):
+        ident = m.group(1)
+        if ident in known_var_names:
+            covariate_names.add(ident)
+
+    return covariate_names
+
+
+def _broad_scan_measurement_names(concept_id, r_code, known_var_names):
+    """Fallback: scan entire R function for known variable names.
+
+    Finds all known variable names mentioned anywhere in the R code, then
+    classifies names in age-assignment context as covariates. The rest
+    are presumed measurements.
+
+    Args:
+        concept_id: The concept variable name.
+        r_code: Full R harmonization function source.
+        known_var_names: Set of variable names from component phvs.
+
+    Returns:
+        Set of measurement names, or None if scan finds nothing useful.
+    """
+    found_names = set()
+    for name in known_var_names:
+        if re.search(rf"\b{re.escape(name)}\b", r_code):
+            found_names.add(name)
+
+    if not found_names:
+        return None
+
+    covariate_names = _find_covariate_names(r_code, known_var_names)
+    measurement_names = found_names - covariate_names
+    return measurement_names if measurement_names else None
+
+
+def _heuristic_role(comp, concept_id):
+    """Fallback heuristic to classify a variable as measurement or covariate.
+
+    Used when R-code parsing fails or is unavailable for a harmonization
+    unit. Checks variable name and description for common covariate
+    patterns (age, date, consent).
+
+    Args:
+        comp: Component variable dict with variable_name, variable_description.
+        concept_id: The concept this variable is listed under.
+
+    Returns:
+        "measurement" or "covariate".
+    """
+    desc = (comp.get("variable_description") or "").lower()
+    name = (comp.get("variable_name") or "").lower()
+
+    # Age concepts are fine if the concept is actually about age
+    age_concepts = {"cad_followup_start_age", "vte_followup_start_age",
+                    "age_at_index"}
+
+    if concept_id not in age_concepts:
+        if any(p in desc for p in ("age at", "age when", "age of",
+                                   "calculated age")):
+            return "covariate"
+        if name in ("age1", "age2", "age3", "age_baseline", "agebl"):
+            return "covariate"
+
+    # Date/time covariates
+    if any(p in desc for p in ("date of test", "days since", "days from",
+                               "days enrollment", "number of days")):
+        return "covariate"
+    if name in ("studydat",):
+        return "covariate"
+
+    # Consent/admin covariates
+    if name == "consent" and concept_id not in ("subcohort",):
+        return "covariate"
+
+    return "measurement"
+
+
+def tag_variable_roles(concepts):
+    """Tag each component variable with role: measurement or covariate.
+
+    For each harmonization unit, parses the R code to identify which
+    source columns feed into the concept variable (measurements) vs
+    covariates (age, dates, etc.). Falls back to heuristic if parsing
+    fails.
+
+    Args:
+        concepts: List of concept dicts (mutated in place). Each must
+            have component_variables with variable_name set and
+            _unit_r_codes with per-unit R code.
+
+    Returns:
+        Tuple of (units_parsed, units_fallback) counts.
+    """
+    units_parsed = 0
+    units_fallback = 0
+
+    for concept in concepts:
+        concept_id = concept["concept_id"]
+        unit_r_codes = concept.get("_unit_r_codes", {})
+
+        # Group component variables by unit_name
+        by_unit = defaultdict(list)
+        for comp in concept["component_variables"]:
+            by_unit[comp.get("_unit_name", "")].append(comp)
+
+        for unit_name, unit_vars in by_unit.items():
+            r_code = unit_r_codes.get(unit_name, "")
+
+            # Build set of known variable names for this unit
+            unit_var_names = {
+                comp["variable_name"]
+                for comp in unit_vars
+                if comp.get("variable_name")
+            }
+
+            # Attempt R-code parsing
+            measurement_names = parse_measurement_columns(
+                concept_id, r_code, unit_var_names
+            )
+
+            if measurement_names is not None:
+                units_parsed += 1
+                for comp in unit_vars:
+                    name = comp.get("variable_name", "")
+                    comp["role"] = (
+                        "measurement" if name in measurement_names
+                        else "covariate"
+                    )
+            else:
+                units_fallback += 1
+                for comp in unit_vars:
+                    comp["role"] = _heuristic_role(comp, concept_id)
+
+    return units_parsed, units_fallback
 
 
 def build_phv_lookup(parsed_tables):
@@ -199,10 +618,14 @@ def extract_concepts():
                 cui = cv["id"]
                 break
 
-        # Extract component variables from all harmonization units
+        # Extract component variables from all harmonization units,
+        # storing per-unit R code for later role tagging
         component_variables = []
+        unit_r_codes = {}
         for unit in data.get("harmonization_units", []):
             study_name = unit["name"]
+            r_code = unit.get("harmonization_function", "")
+            unit_r_codes[study_name] = r_code
             for var_str in unit.get("component_study_variables", []):
                 parsed = parse_component_variable(var_str)
                 if parsed:
@@ -214,6 +637,7 @@ def extract_concepts():
                             "phs": parsed["phs"],
                             "pht": parsed["pht"],
                             "study_name": resolved_study,
+                            "_unit_name": study_name,
                         }
                     )
 
@@ -225,6 +649,7 @@ def extract_concepts():
                 "domain": domain,
                 "measurement_units": measurement_units,
                 "component_variables": component_variables,
+                "_unit_r_codes": unit_r_codes,
             }
         )
 
@@ -298,9 +723,9 @@ def _score_example_relevance(concept_id, variable_name, variable_description):
 def build_concept_vocabulary(concepts):
     """Build the LLM matching vocabulary from enriched seed concepts.
 
-    Selects 2-3 example variables per concept, preferring variables whose
-    names/descriptions are most relevant to the concept (not generic
-    covariates like age or visit).
+    Selects 2-3 example variables per concept. Expects component_variables
+    to contain only measurements (covariates already stripped by
+    _prepare_for_output).
 
     Args:
         concepts: List of enriched concept dicts.
@@ -310,7 +735,6 @@ def build_concept_vocabulary(concepts):
     """
     vocabulary = []
     for concept in concepts:
-        # Collect all resolved candidates
         candidates = []
         seen_names = set()
         for comp in concept["component_variables"]:
@@ -343,6 +767,27 @@ def build_concept_vocabulary(concepts):
     return vocabulary
 
 
+def _prepare_for_output(concepts):
+    """Strip covariates and internal fields before writing JSON output.
+
+    Only measurement-role variables are kept in component_variables.
+    The classifier receives measurements only and does not need to
+    know about roles.
+
+    Args:
+        concepts: List of concept dicts (mutated in place).
+    """
+    for concept in concepts:
+        concept.pop("_unit_r_codes", None)
+        concept["component_variables"] = [
+            comp for comp in concept["component_variables"]
+            if comp.get("role") == "measurement"
+        ]
+        for comp in concept["component_variables"]:
+            comp.pop("_unit_name", None)
+            comp.pop("role", None)
+
+
 def main():
     """Run the full extraction pipeline."""
     print("Step 1: Extracting concepts from harmonized variable JSONs...")
@@ -368,6 +813,29 @@ def main():
     matched, unmatched = enrich_with_parsed_tables(concepts, phv_lookup)
     print(f"  Matched: {matched}, Unmatched: {unmatched}")
 
+    print("\nStep 4: Tagging variable roles via R-code parsing...")
+    units_parsed, units_fallback = tag_variable_roles(concepts)
+    total_units = units_parsed + units_fallback
+    parse_rate = units_parsed / total_units * 100 if total_units > 0 else 0
+    print(f"  R-code parsed: {units_parsed}/{total_units} units ({parse_rate:.1f}%)")
+    print(f"  Heuristic fallback: {units_fallback} units")
+
+    # Count roles
+    n_measurement = sum(
+        1 for c in concepts for v in c["component_variables"]
+        if v.get("role") == "measurement"
+    )
+    n_covariate = sum(
+        1 for c in concepts for v in c["component_variables"]
+        if v.get("role") == "covariate"
+    )
+    concepts_with_measurement = sum(
+        1 for c in concepts
+        if any(v.get("role") == "measurement" for v in c["component_variables"])
+    )
+    print(f"  Measurements: {n_measurement}, Covariates: {n_covariate}")
+    print(f"  Concepts with >=1 measurement: {concepts_with_measurement}/{len(concepts)}")
+
     # Build stats
     stats = {
         "total_concepts": len(concepts),
@@ -375,7 +843,17 @@ def main():
         "total_studies": len(all_studies),
         "cross_reference_matched": matched,
         "cross_reference_unmatched": unmatched,
+        "role_tagging": {
+            "units_parsed_via_r_code": units_parsed,
+            "units_heuristic_fallback": units_fallback,
+            "parse_success_rate": round(parse_rate, 1),
+            "measurement_variables": n_measurement,
+            "covariate_variables": n_covariate,
+        },
     }
+
+    # Strip covariates and internal fields — only measurements go to output
+    _prepare_for_output(concepts)
 
     # Write seed concepts
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -384,8 +862,8 @@ def main():
         json.dump({"concepts": concepts, "stats": stats}, f, indent=2)
     print(f"\nWrote {seed_path}")
 
-    # Build and write concept vocabulary
-    print("\nStep 4: Building concept vocabulary for LLM matching...")
+    # Build and write concept vocabulary (measurement-role only for examples)
+    print("\nStep 5: Building concept vocabulary for LLM matching...")
     vocabulary = build_concept_vocabulary(concepts)
     vocab_path = OUTPUT_DIR / "concept-vocabulary.json"
     with open(vocab_path, "w") as f:
@@ -399,8 +877,11 @@ def main():
     print(f"\n--- Summary ---")
     print(f"Concepts: {len(concepts)}")
     print(f"Component variables: {total_components}")
+    print(f"  Measurements: {n_measurement}, Covariates: {n_covariate}")
     print(f"Studies: {len(all_studies)}")
     print(f"Cross-ref matched: {matched}/{total_components}")
+    print(f"R-code parse rate: {parse_rate:.1f}% ({units_parsed}/{total_units} units)")
+    print(f"Concepts with >=1 measurement: {concepts_with_measurement}/{len(concepts)}")
     print(f"Concepts with example variables: {concepts_with_examples}/{len(concepts)}")
 
 

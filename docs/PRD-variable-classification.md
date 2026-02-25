@@ -411,6 +411,41 @@ Source variables (from dbGaP var_report.xml)
 
 The mid-level is generated, not curated. It adapts to the concept set: domains with many concepts (e.g. Cardiovascular) get 2-3 mid-levels; domains with few (e.g. Sleep) stay flat. The is_a generator already exists and can rebuild this layer whenever the leaf concept set changes.
 
+### Ground truth extraction from TOPMed harmonized variables
+
+The 78 TOPMed harmonized variable JSONs define the starting concept set. Each JSON carries a UMLS CUI (from `controlled_vocabulary`) and lists `component_study_variables` — the raw dbGaP phv IDs used by the harmonization. However, each harmonization unit bundles **both** measurement variables and covariates (age, dates) in the same `component_study_variables` array with no explicit distinction.
+
+To separate measurements from covariates, we parse the R harmonization functions embedded in each JSON. The R code definitively assigns which raw columns map to the concept variable vs. covariates like `age`.
+
+**Extraction flow:**
+
+```
+Harmonized variable JSON (e.g. bp_systolic_1.json)
+  → controlled_vocabulary[source="UMLS"].id → CUI (e.g. C2039694)
+  → harmonization_units[].harmonization_function → R code
+  → R code parsing:
+      1. Find concept assignment: mutate(bp_systolic = ...) or $bp_systolic <- ...
+      2. Trace RHS identifiers back through intermediates (rename, mutate chains)
+      3. Match against known column names from component phv IDs
+  → Tagged component variables: each phv gets role="measurement" or role="covariate"
+```
+
+**R code patterns handled:**
+
+| Pattern               | Example                                                                                                  | Extraction                  |
+| --------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------- |
+| Simple mutate rename  | `mutate(cac_score = as.numeric(cac_agatston_score))`                                                     | `cac_agatston_score`        |
+| rowMeans of multiple  | `rowMeans(cbind(as.numeric(CA1), as.numeric(CA2)))`                                                      | `CA1`, `CA2`                |
+| Direct `$` assignment | `dataset$bp_systolic <- rowMeans(...)`                                                                   | trace through intermediates |
+| ifelse conditional    | `mutate(vte_case_status = ifelse(event %in% c(1,2), 1, NA))`                                             | `event`                     |
+| Intermediate chains   | `rename(sbp_2 = SBPA15)` then `sbp_2_RZ <- sbp_2 - zero_2` then `bp_systolic <- rowMeans(sbp_2_RZ, ...)` | traces back to `SBPA15`     |
+
+**Fallback:** Units where R parsing fails fall back to name/description heuristics (matching patterns like `age1`, `studydat`). Target: >90% of units parsed via R code.
+
+**Result:** `topmed-seed-concepts.json` with every component variable tagged. Only `role="measurement"` variables seed the ground truth lookup for cross-study classification. Covariates are excluded from propagation.
+
+**Script:** `catalog-build/classification/extract_topmed_seeds.py`
+
 ### Step 0: Pre-filter low-value variables
 
 Before any LLM call, code-level filters remove variables that will never produce useful catalog matches. This reduces the 450K variable set by ~11% and prevents noise from polluting results.
@@ -526,6 +561,87 @@ When the concept set is updated:
 1. Re-match unmatched variables against the new concepts only
 2. Rebuild the hierarchy
 3. Commit updated output files and concept set as a new version
+
+## Namespaced Concepts, ISA Closure, and PhenX Integration
+
+### Namespaced concept IDs
+
+All concept IDs carry a namespace prefix indicating their source vocabulary:
+
+| Prefix    | Source                                      | Example                 | Count |
+| --------- | ------------------------------------------- | ----------------------- | ----- |
+| `topmed:` | TOPMed harmonized variable phenotype tags   | `topmed:bp_systolic`    | 77    |
+| `phenx:`  | PhenX Toolkit protocols with dbGaP mappings | `phenx:spirometry`      | 181   |
+| `domain:` | Curated top-level domain groupings          | `domain:cardiovascular` | ~12   |
+
+This avoids collisions between vocabularies and makes the provenance of each classification explicit. The namespace is part of the concept_id stored in classification output and the DuckDB index.
+
+### ISA (is-a) closure-based search
+
+Concepts form a directed acyclic graph (DAG) via parent-child ISA relationships defined in `concept-isa.json`. For example:
+
+```
+topmed:bp_systolic   ──is-a──▶  phenx:blood_pressure  ──is-a──▶  domain:cardiovascular
+topmed:bp_diastolic  ──is-a──▶  phenx:blood_pressure  ──is-a──▶  domain:cardiovascular
+topmed:fev1          ──is-a──▶  phenx:spirometry       ──is-a──▶  domain:respiratory
+```
+
+At index-build time, each variable's ISA closure is computed by walking the graph upward from its most-specific concept. The closure is stored as a JSON array in the DuckDB `concept_ids_closure` column. Searching for a parent concept (e.g., `phenx:blood_pressure`) returns all variables tagged with any descendant (`topmed:bp_systolic`, `topmed:bp_diastolic`).
+
+This is **Option A (index-time expansion)** from the architecture evaluation: closure is computed once during indexing, not at query time. This keeps queries fast (simple `list_contains` check) at the cost of re-indexing when the ISA table changes.
+
+### PhenX integration
+
+PhenX provides ~181 standardized protocols with pre-mapped dbGaP variables from `Variable_cross_reference.xlsx`. These mappings are **ground truth** — they were curated by PhenX and dbGaP, not generated by an LLM.
+
+**Integration rules:**
+
+- If a variable already has a `topmed:` concept (from LLM classification), keep it — TOPMed concepts are more specific
+- If a variable has no concept and PhenX has a mapping, assign the PhenX concept with `source: "phenx_ground_truth"`
+- PhenX concepts participate in the ISA hierarchy as mid-level nodes between fine-grained TOPMed concepts and broad domain groupings
+
+**Coverage (v4 output):**
+
+- 19,960 variables with TOPMed concepts (from LLM classification)
+- ~6,600 additional variables with PhenX concepts (from ground-truth mappings)
+- 164 studies gain PhenX mappings
+
+### Combined vocabulary architecture
+
+```
+domain:cardiovascular                          ← browsing / top-level grouping
+  ├── phenx:blood_pressure                     ← PhenX mid-level (181 protocols)
+  │     ├── topmed:bp_systolic    (CUI: C2039694)  ← fine-grained TOPMed concept
+  │     ├── topmed:bp_diastolic   (CUI: C2183311)
+  │     └── topmed:antihypertensive_meds (CUI: C0003364)
+  ├── phenx:myocardial_infarction
+  │     ├── topmed:mi_incident
+  │     └── topmed:mi_prior
+  └── domain:atherosclerosis
+        ├── topmed:cac_score      (CUI: C2825178)
+        ├── topmed:cimt           (CUI: C1960466)
+        └── ...
+```
+
+### Pipeline scripts
+
+| Script                      | Input                                              | Output                          | LLM calls? |
+| --------------------------- | -------------------------------------------------- | ------------------------------- | ---------- |
+| `namespace_v3_output.py`    | `llm-concepts-v3/`                                 | `llm-concepts-v4/`              | No         |
+| `build_phenx_vocabulary.py` | PhenX source files                                 | `phenx-concept-vocabulary.json` | No         |
+| `inject_phenx_mappings.py`  | `llm-concepts-v4/` + Variable_cross_reference.xlsx | `llm-concepts-v4/` (updated)    | No         |
+
+Run all three with `make v4` in `catalog-build/classification/`.
+
+### Backend search flow
+
+```
+User query: "blood pressure"
+  → resolve agent finds phenx:blood_pressure in index
+  → DuckDB query: WHERE list_contains(concept_ids_closure, 'phenx:blood_pressure')
+  → returns variables tagged topmed:bp_systolic, topmed:bp_diastolic, etc.
+  → each result includes conceptId (namespaced) and cui
+```
 
 ## Variable Modifiers
 

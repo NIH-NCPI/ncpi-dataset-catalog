@@ -30,49 +30,42 @@ Biological Phenomena, Chemically-Induced Disorders, Environment and Public Healt
 4. If the first category doesn't have a good match, try a second category.
 5. If no category matches, fall back to `search_concepts(query=<text>, facet="focus")`.
 
-## Measurement Facet — Category Drill-Down + Search
+## Measurement Facet — Keyword Search
 
-For **measurement** mentions, prefer `get_measurement_category_concepts` for category drill-down, with `search_concepts` as fallback:
+For **measurement** mentions, use `get_measurement_category_concepts` to search by keyword, with `search_concepts` as fallback.
 
-### Strategy A: Category Drill-Down (preferred)
+Concepts are namespaced: `topmed:bp_systolic`, `phenx:spirometry`, `ncpi:biomarkers`. The keyword search matches against these IDs.
 
-1. Read the mention text and identify which top-level measurement category it belongs to:
+**NCPI Categories (top-level):**
+anthropometry, biomarkers, imaging, respiratory, disease_events, medications, substance_use, diet, exercise, sleep, demographics, race_ethnicity, ancestry, geography, socioeconomic, reproductive_health, environment, mental_health, general_health, study_admin
 
-**Measurement Categories:**
-Anthropometry, Behavioral & Lifestyle, Biomarkers & Proteins, Cardiovascular, Demographics, Dietary & Nutrition, Endocrine & Metabolic, Genetic & Genomic, Hematology, Imaging & Radiology, Immunology & Inflammation, Infectious Disease, Laboratory Tests, Medications & Treatment, Mental Health & Neurology, Metabolomics, Musculoskeletal, Oncology, Ophthalmology, Pulmonary & Respiratory, Renal & Urinary, Reproductive & Perinatal, Social & Environmental, Study Administration, Surgical & Procedural
+### Strategy A: Keyword Search (preferred)
 
-2. Call `get_measurement_category_concepts(top_level=<category>)` to see all mid-levels and concepts.
-3. If the top-level has many concepts, narrow with a mid-level:
-   `get_measurement_category_concepts(top_level=<category>, mid_level=<subcategory>)`
-4. Pick the best matching concept(s) from the results. Prefer concepts with higher study counts.
+1. Convert the mention to a keyword that would appear in a concept ID (use underscores, clinical terms).
+2. Call `get_measurement_category_concepts(keyword=<term>)`.
+3. If too many results, narrow with a more specific keyword. If too few, try synonyms.
+4. Pick the best matching concept(s). Prefer concepts with higher study counts.
 
 **Examples:**
 
-- "blood pressure" → top_level="Cardiovascular", mid_level="Blood Pressure" → pick "Systolic Blood Pressure", "Diastolic Blood Pressure"
-- "BMI" → top_level="Anthropometry" → pick "Body Mass Index"
-- "smoking" → top_level="Behavioral & Lifestyle", mid_level="Smoking" → pick "Smoking Status"
-- "cholesterol" → top_level="Laboratory Tests", mid_level="Lipid Panel" → pick "Total Cholesterol"
+- "blood pressure" → keyword="bp" → topmed:bp_systolic, topmed:bp_diastolic
+- "BMI" → keyword="bmi" → topmed:bmi_baseline, phenx:body_mass_index
+- "smoking" → keyword="smok" → phenx:..._smoking_status_..., topmed:current_smoker_baseline
+- "cholesterol" → keyword="cholesterol" → topmed:total_cholesterol, topmed:hdl, topmed:ldl
+- "media use" → keyword="media" → phenx:media_use
+- "depression" → keyword="depression" → phenx:depression_adult, phenx:depression_child
 
 ### Strategy B: Search with Rewrite (fallback)
 
-If category drill-down doesn't find a match, fall back to `search_concepts`:
+If keyword search doesn't find a match, fall back to `search_concepts`:
 
 1. Call `search_concepts(query=<text>, facet="measurement")`.
-2. Evaluate results by study count. A good match should have `study_count` ≥ 5. If all results have `study_count` of 1–2, treat them as poor matches and rewrite.
+2. Evaluate results by study count. A good match should have `study_count` ≥ 5.
 3. If poor or no results, **rewrite the term** using medical knowledge and search again:
-   - "blood sugar" → try "glucose" (lay term → clinical term)
-   - "type one diabetes" → try "type 1 diabetes"
-   - "heart attack" → try "myocardial infarction"
-   - "high blood pressure" → try "hypertension"
-   - "BMI" → try "body mass index"
-4. You may retry up to 3 times. Compare across all searches and pick values with the highest study counts.
-
-### Choosing a Strategy
-
-- If you can identify a clear measurement category, use **Strategy A** first.
-- If the mention is ambiguous, a lay term, or doesn't fit a category, use **Strategy B**.
-- You can combine both: try category drill-down, then search if needed.
-- **Cross-category terms:** Some terms appear in multiple categories (e.g., "cholesterol" exists in Laboratory Tests, Metabolomics, Dietary & Nutrition, and Medications). When a term could fit multiple categories, try 2–3 categories and **pick the concept with the highest study count**. Set `message` to disambiguate: "Did you mean Total Cholesterol (93 studies), HDL Cholesterol (78 studies), or Dietary Cholesterol Intake (9 studies)?"
+   - "blood sugar" → try "glucose"
+   - "heart attack" → try "myocardial_infarction"
+   - "high blood pressure" → try "bp"
+4. You may retry up to 3 times. Pick values with the highest study counts.
 
 ## Consent Code Facet — Eligibility Resolution
 
