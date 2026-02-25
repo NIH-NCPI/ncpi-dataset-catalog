@@ -627,13 +627,14 @@ async def classify_study(
     semaphore = asyncio.Semaphore(concurrency)
     tables_done = 0
     batches_done = 0
-    total_batches = sum(
-        max(1, -(-sum(
+    total_batches = 0
+    for t in sorted_tables:
+        llm_var_count = sum(
             1 for v in t.variables
             if _phv_number(v.get("id", "")) not in ground_truth
-        ) // VARS_PER_BATCH))
-        for t in sorted_tables
-    )
+        )
+        if llm_var_count > 0:
+            total_batches += -(-llm_var_count // VARS_PER_BATCH)
 
     def _on_batch_done() -> None:
         nonlocal batches_done
@@ -922,7 +923,7 @@ async def main() -> None:
         )
 
     print(
-        f"Processing {len(study_ids)} studies (largest first)",
+        f"Processing {len(study_ids)} studies (smallest first)",
         file=sys.stderr,
     )
 

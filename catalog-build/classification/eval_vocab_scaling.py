@@ -105,10 +105,6 @@ def load_distractors(
         "Histological Type", "Needs Review",
     }
     # Also build a set of words from real concept descriptions for fuzzy overlap
-    real_id_stems = set()
-    for cid in real_concept_ids:
-        # e.g. "bp_systolic" -> {"bp", "systolic"}
-        real_id_stems.update(cid.split("_"))
 
     distractors = []
     seen_ids = set(real_concept_ids)

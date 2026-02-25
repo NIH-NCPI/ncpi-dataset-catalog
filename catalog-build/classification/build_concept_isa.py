@@ -67,11 +67,26 @@ class IsaResult(BaseModel):
     )
 
     @model_validator(mode="after")
-    def validate_no_self_loops(self) -> IsaResult:
-        """Ensure no concept is its own parent."""
+    def validate_structure(self) -> IsaResult:
+        """Validate ISA constraints: no self-loops, single parent, correct layers."""
+        child_to_parents: dict[str, set[str]] = {}
         for r in self.relationships:
             if r.child == r.parent:
                 msg = f"Self-loop: {r.child}"
+                raise ValueError(msg)
+            if r.child.startswith(("topmed:", "phenx:")):
+                child_to_parents.setdefault(r.child, set()).add(r.parent)
+            if r.child.startswith("phenx:") and not r.parent.startswith("ncpi:"):
+                msg = (
+                    f"Invalid parent for PhenX concept {r.child}: "
+                    f"{r.parent} (expected ncpi:*)"
+                )
+                raise ValueError(msg)
+        for child, parents in child_to_parents.items():
+            if len(parents) > 1:
+                msg = (
+                    f"Multiple parents for {child}: {sorted(parents)}"
+                )
                 raise ValueError(msg)
         return self
 
