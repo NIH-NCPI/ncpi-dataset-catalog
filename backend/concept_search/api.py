@@ -194,8 +194,13 @@ def _build_dbgap_study_url(study_id: str) -> str:
 def _build_variable_result(row: dict) -> VariableResult:
     """Convert a raw variable dict from the store into a VariableResult."""
     study_id = row.get("studyId", "")
+    concept_id = row.get("concept", "")
+    # Derive display name from namespaced concept_id
+    display = concept_id.split(":", 1)[-1] if concept_id else ""
     return VariableResult(
-        concept=row.get("concept", ""),
+        concept=display,
+        concept_id=concept_id,
+        cui=row.get("cui") or None,
         dataset_id=row.get("datasetId", ""),
         db_gap_url=_build_dbgap_variable_url(
             study_id, row.get("phvId", "")

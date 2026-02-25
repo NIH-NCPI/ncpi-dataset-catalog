@@ -34,7 +34,7 @@ def _resolve_paths() -> tuple[Path, Path]:
     llm_dir = Path(
         os.environ.get(
             "NCPI_LLM_CONCEPTS_DIR",
-            repo_root / "catalog-build" / "classification" / "output" / "llm-concepts",
+            repo_root / "catalog-build" / "classification" / "output" / "llm-concepts-v4",
         )
     )
     studies_path = Path(
@@ -189,6 +189,69 @@ def _load_demographic_profiles(
     return demographics_dict, eav_rows
 
 
+def _resolve_isa_path() -> Path:
+    """Resolve the path to concept-isa.json."""
+    explicit = os.environ.get("NCPI_CONCEPT_ISA_PATH")
+    if explicit:
+        return Path(explicit)
+    repo_root = _resolve_repo_root()
+    return (
+        repo_root
+        / "catalog-build"
+        / "classification"
+        / "output"
+        / "concept-isa.json"
+    )
+
+
+def _load_isa_table() -> dict[str, list[str]]:
+    """Load ISA (is-a) child→parent relationships.
+
+    Returns:
+        Dict mapping child concept_id to list of parent concept_ids.
+    """
+    path = _resolve_isa_path()
+    if not path.exists():
+        return {}
+    with open(path) as f:
+        entries = json.load(f)
+    parents: dict[str, list[str]] = defaultdict(list)
+    for entry in entries:
+        child = entry["child"]
+        parent = entry["parent"]
+        parents[child].append(parent)
+    return dict(parents)
+
+
+def _compute_closure(
+    concept_id: str, isa_parents: dict[str, list[str]]
+) -> list[str]:
+    """Walk the ISA graph upward from a concept to compute its full closure.
+
+    The closure includes the concept itself plus all transitive ancestors.
+
+    Args:
+        concept_id: Starting concept (e.g., "topmed:bp_systolic").
+        isa_parents: Child → parent mapping from the ISA table.
+
+    Returns:
+        List of all concept_ids in the closure (self + ancestors).
+    """
+    closure: list[str] = []
+    visited: set[str] = set()
+    stack = [concept_id]
+    while stack:
+        current = stack.pop()
+        if current in visited:
+            continue
+        visited.add(current)
+        closure.append(current)
+        for parent in isa_parents.get(current, []):
+            if parent not in visited:
+                stack.append(parent)
+    return closure
+
+
 class ConceptIndex:
     """In-memory index of facet values with study counts."""
 
@@ -200,7 +263,6 @@ class ConceptIndex:
         # Lazy-loaded supplementary data (populated by load())
         self._consent_descriptions: dict = {}
         self._focus_categories: dict[str, list[dict]] = {}
-        self._measurement_hierarchy: dict[str, dict[str, list[dict]]] = {}
 
     def load(self) -> None:
         """Load data — from cached DuckDB file if available, else from JSON."""
@@ -229,7 +291,6 @@ class ConceptIndex:
                         )
         # These are small JSON files bundled with the package — always load
         self.load_focus_categories()
-        self.load_measurement_hierarchy()
         self.load_consent_code_descriptions()
 
     def _load_from_json(self) -> None:
@@ -290,12 +351,18 @@ class ConceptIndex:
             )
 
     def _load_measurement_concepts(self, llm_dir: Path) -> None:
-        """Load concept names and variable details from per-study LLM JSON."""
+        """Load concept names and variable details from per-study LLM JSON.
+
+        Reads v4 format with namespaced concept_ids (``topmed:``, ``phenx:``).
+        Computes ISA closure for each variable so that searching a parent
+        concept returns all descendant variables.
+        """
         if not llm_dir.exists():
             return
+        isa_parents = _load_isa_table()
         concept_studies: dict[str, set[str]] = defaultdict(set)
         study_concepts: dict[str, set[str]] = defaultdict(set)
-        variable_rows: list[tuple[str, str, str, str, str, str, str, str]] = []
+        variable_rows: list[tuple[str, str, str, str, str, str, str, str, str, str]] = []
         for path in sorted(llm_dir.glob("phs*.json")):
             with open(path) as f:
                 data = json.load(f)
@@ -304,13 +371,22 @@ class ConceptIndex:
                 dataset_id = table.get("datasetId", "")
                 table_name = table.get("tableName", "")
                 for var in table.get("variables", []):
-                    concept = var.get("concept")
+                    concept = var.get("concept_id")
                     if concept:
-                        concept_studies[concept].add(study_id)
+                        # Compute ISA closure (self + all ancestors)
+                        closure = _compute_closure(concept, isa_parents)
+                        closure_json = json.dumps(
+                            [c.lower() for c in closure]
+                        )
+                        # Track studies for ALL concepts in closure
+                        for ancestor in closure:
+                            concept_studies[ancestor].add(study_id)
                         study_concepts[study_id].add(concept)
                         variable_rows.append((
                             concept,
                             concept.lower(),
+                            var.get("cui", "") or "",
+                            closure_json,
                             dataset_id,
                             var.get("description", ""),
                             var.get("id", ""),
@@ -328,10 +404,12 @@ class ConceptIndex:
         # Batch-insert measurement facet values and variable rows into the store
         if isinstance(self.store, DuckDBStore):
             facet_val = Facet.MEASUREMENT.value
+            # Use concept_studies (already closure-expanded) to build facet
+            # rows — avoids recomputing closures.
             rows = [
                 (sid, facet_val, concept, concept.lower())
-                for sid, concepts in study_concepts.items()
-                for concept in concepts
+                for concept, sids in concept_studies.items()
+                for sid in sids
             ]
             self.store.load_facet_values_batch(rows)
             self.store.load_variables_batch(variable_rows)
@@ -595,72 +673,29 @@ class ConceptIndex:
         results.sort(key=lambda x: -x["total_studies"])
         return results
 
-    def load_measurement_hierarchy(self) -> None:
-        """Load the LLM-built measurement concept hierarchy."""
-        hierarchy_path = self._resolve_hierarchy_path()
-        if not hierarchy_path.exists():
-            self._measurement_hierarchy: dict[str, dict[str, list[dict]]] = {}
-            return
-        with open(hierarchy_path) as f:
-            data = json.load(f)
-        self._measurement_hierarchy = data.get("hierarchy", {})
-
-    @staticmethod
-    def _resolve_hierarchy_path() -> Path:
-        """Resolve the path to concept-hierarchy.json."""
-        repo_root = Path(
-            os.environ.get(
-                "NCPI_REPO_ROOT", Path(__file__).resolve().parent.parent.parent
-            )
-        )
-        return Path(
-            os.environ.get(
-                "NCPI_CONCEPT_HIERARCHY_PATH",
-                repo_root
-                / "catalog-build"
-                / "classification"
-                / "output"
-                / "concept-hierarchy.json",
-            )
-        )
-
-    def list_measurement_categories(self) -> dict[str, list[str]]:
-        """Return top-level categories with their mid-level subcategories.
-
-        Returns:
-            Dict of top_level -> sorted list of mid_level names.
-        """
-        return {
-            tl: sorted(mids.keys())
-            for tl, mids in sorted(self._measurement_hierarchy.items())
-        }
-
     def get_measurement_category_concepts(
-        self, top_level: str, mid_level: str | None = None
+        self, keyword: str
     ) -> list[ConceptMatch]:
-        """Return measurement concepts in a category, sorted by study count.
+        """Return measurement concepts matching a keyword, sorted by study count.
+
+        Searches the live measurement index keys for substring matches
+        against the keyword (converted to underscore slug form).
 
         Args:
-            top_level: Top-level category (e.g. "Cardiovascular").
-            mid_level: Optional mid-level subcategory (e.g. "Blood Pressure").
-                       If omitted, returns all concepts in the top-level.
+            keyword: Search term (e.g. "blood_pressure", "media",
+                     "biomarkers"). Spaces and hyphens are converted to
+                     underscores for matching against namespaced concept IDs.
 
         Returns:
             Measurement concepts as ConceptMatch objects.
         """
-        tl_data = self._measurement_hierarchy.get(top_level, {})
-        if mid_level:
-            concepts = tl_data.get(mid_level, [])
-        else:
-            concepts = [c for mids in tl_data.values() for c in mids]
-        return [
-            ConceptMatch(
-                facet=Facet.MEASUREMENT,
-                study_count=c["study_count"],
-                value=c["concept"],
-            )
-            for c in concepts
-        ]
+        slug = keyword.lower().replace(" ", "_").replace("-", "_")
+        results: list[ConceptMatch] = []
+        for key, match in self._index[Facet.MEASUREMENT].items():
+            if slug in key:
+                results.append(match)
+        results.sort(key=lambda m: m.study_count, reverse=True)
+        return results
 
     @property
     def stats(self) -> dict[str, int]:

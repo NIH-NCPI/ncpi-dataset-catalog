@@ -79,6 +79,8 @@ class VariableResult(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
     concept: str
+    concept_id: str
+    cui: str | None
     dataset_id: str
     db_gap_url: str
     description: str
