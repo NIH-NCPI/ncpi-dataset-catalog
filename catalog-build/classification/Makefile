@@ -51,7 +51,7 @@ classify-v3-study:
 
 # Run classifier evals
 evals:
-	$(VENV) eval_v3_topmed.py
+	$(VENV) eval_v4.py
 
 # Test accuracy at scaled vocabulary sizes (78, 200, 500 concepts)
 evals-scaling:

@@ -548,7 +548,7 @@ async def classify_study(
     study_id: str,
     tables: list[ParsedTable],
     ground_truth: dict[str, str],
-    concurrency: int,
+    semaphore: asyncio.Semaphore,
     on_batch_done: Callable[[], None] | None = None,
 ) -> dict:
     """Classify all tables in a study using multi-table batching.
@@ -559,14 +559,13 @@ async def classify_study(
         study_id: The study accession.
         tables: All tables for this study.
         ground_truth: phv -> concept_id lookup.
-        concurrency: Max concurrent batches.
+        semaphore: Shared semaphore for concurrency control across studies.
         on_batch_done: Optional callback after each batch completes.
 
     Returns:
         Study result dict.
     """
     study_name = tables[0].study_name if tables else study_id
-    semaphore = asyncio.Semaphore(concurrency)
 
     # 1. Separate ground truth vs LLM vars per table, build metadata lookup
     gt_by_table: dict[str, list[dict]] = {}
@@ -735,51 +734,42 @@ async def run_pipeline(
     concurrency: int,
     dry_run: bool = False,
 ) -> None:
-    """Run the v4 classification pipeline over studies.
+    """Run the v4 classification pipeline over studies in parallel.
+
+    Studies run concurrently, sharing a single semaphore that limits
+    total in-flight LLM calls across all studies.
 
     Args:
         tables_by_study: All tables grouped by study ID.
         study_ids: Ordered list of study IDs to process.
         vocab: Concept vocabulary.
         ground_truth: phv -> concept_id lookup.
-        concurrency: Max concurrent batches per study.
+        concurrency: Max concurrent LLM calls across all studies.
         dry_run: If True, only print what would run.
     """
     valid_concept_ids = {v["concept_id"] for v in vocab}
     agent = make_agent(vocab)
     total_studies = len(study_ids)
-    total_vars = 0
     start_time = time.time()
 
-    for i, study_id in enumerate(study_ids, 1):
-        tables = tables_by_study.get(study_id, [])
-        if not tables:
-            print(
-                f"  [{i}/{total_studies}] {study_id}: no tables, skipping",
-                file=sys.stderr,
+    # Shared semaphore controls total concurrent LLM calls across all studies
+    semaphore = asyncio.Semaphore(concurrency)
+    studies_done = 0
+    studies_total_vars = 0
+
+    if dry_run:
+        for i, study_id in enumerate(study_ids, 1):
+            tables = tables_by_study.get(study_id, [])
+            if not tables:
+                continue
+            output_path = V4_OUTPUT_DIR / f"{study_id}.json"
+            if output_path.exists():
+                continue
+            n_vars = sum(t.variable_count for t in tables)
+            gt_count = sum(
+                1 for t in tables for v in t.variables
+                if _phv_number(v.get("id", "")) in ground_truth
             )
-            continue
-
-        # Check if output already exists (resumability)
-        output_path = V4_OUTPUT_DIR / f"{study_id}.json"
-        if output_path.exists():
-            print(
-                f"  [{i}/{total_studies}] {study_id}: already done, skipping",
-                file=sys.stderr,
-            )
-            continue
-
-        n_vars = sum(t.variable_count for t in tables)
-        total_vars += n_vars
-
-        if dry_run:
-            gt_count = 0
-            for t in tables:
-                for v in t.variables:
-                    phv = v.get("id", "")
-                    if _phv_number(phv) in ground_truth:
-                        gt_count += 1
-            # Count how many LLM batches after packing
             llm_items: list[BatchItem] = []
             for t in tables:
                 llm_vars = [
@@ -797,10 +787,25 @@ async def run_pipeline(
                 f"— would classify",
                 file=sys.stderr,
             )
-            continue
+        return
+
+    async def _run_study(study_id: str) -> None:
+        nonlocal studies_done, studies_total_vars
+
+        tables = tables_by_study.get(study_id, [])
+        if not tables:
+            return
+
+        # Check if output already exists (resumability)
+        output_path = V4_OUTPUT_DIR / f"{study_id}.json"
+        if output_path.exists():
+            return
+
+        n_vars = sum(t.variable_count for t in tables)
+        studies_total_vars += n_vars
 
         print(
-            f"  [{i}/{total_studies}] {study_id} "
+            f"  {study_id} "
             f"({len(tables)} tables, {n_vars:,} vars)...",
             file=sys.stderr,
         )
@@ -808,13 +813,15 @@ async def run_pipeline(
         try:
             study_result = await classify_study(
                 agent, valid_concept_ids, study_id, tables,
-                ground_truth, concurrency,
+                ground_truth, semaphore,
             )
         except (ModelHTTPError, UnexpectedModelBehavior) as e:
-            print(f"    ERROR: {e} — skipping", file=sys.stderr)
-            continue
+            print(f"    {study_id} ERROR: {e} — skipping", file=sys.stderr)
+            return
 
         write_study_output(study_result, V4_OUTPUT_DIR)
+
+        studies_done += 1
 
         # Summary stats
         matched = sum(
@@ -823,15 +830,21 @@ async def run_pipeline(
             if v.get("concept_id") is not None
         )
         total = sum(len(t["variables"]) for t in study_result["tables"])
-        print(
-            f"    -> {matched}/{total} matched "
-            f"({matched/total*100:.1f}%)" if total > 0 else "    -> 0 vars",
-            file=sys.stderr,
-        )
+        elapsed = time.time() - start_time
+        rate = f"{studies_done / elapsed:.1f} studies/s" if elapsed > 0 else ""
+        if total > 0:
+            print(
+                f"    {study_id} -> {matched}/{total} matched "
+                f"({matched/total*100:.1f}%)  "
+                f"[{studies_done} done, {rate}]",
+                file=sys.stderr,
+            )
+
+    await asyncio.gather(*[_run_study(sid) for sid in study_ids])
 
     elapsed = time.time() - start_time
     print(
-        f"\nDone: {total_studies} studies, {total_vars:,} vars, "
+        f"\nDone: {studies_done} studies, {studies_total_vars:,} vars, "
         f"{elapsed:.0f}s elapsed",
         file=sys.stderr,
     )
