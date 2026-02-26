@@ -7,7 +7,7 @@
 
 VENV = ../../backend/.venv/bin/python3
 
-.PHONY: help seeds classify classify-study classify-v3 classify-v3-study evals evals-scaling summary summary-detail summary-studies namespace phenx-vocab phenx-inject isa hierarchy v4 subconcepts
+.PHONY: help seeds classify classify-study classify-v3 classify-v3-study evals evals-scaling summary summary-detail summary-studies namespace phenx-vocab phenx-inject isa hierarchy v4 subconcepts expand expand-dry-run expand-parents
 
 help:
 	@echo "Variable Classification Pipeline"
@@ -28,6 +28,8 @@ help:
 	@echo "  phenx-inject   - Inject PhenX ground-truth into v4 output"
 	@echo "  v4             - Full v4 pipeline: namespace + phenx-vocab + isa + phenx-inject"
 	@echo "  subconcepts    - Generate sub-concepts for broad concepts (e.g. FFQ)"
+	@echo "  expand         - Expand vocabulary with 14 new phenotype categories + sub-concepts"
+	@echo "  expand-parents - Add parent concepts only (no sub-concepts)"
 	@echo ""
 	@echo "  classify-v3    - Classify all studies with v3 (single-table, legacy)"
 
@@ -110,6 +112,18 @@ hierarchy:
 # Generate sub-concepts for broad concepts (requires ANTHROPIC_API_KEY)
 subconcepts:
 	$(VENV) build_subconcepts.py
+
+# Expand vocabulary: add 14 new parent concepts + sub-concepts (requires ANTHROPIC_API_KEY)
+expand:
+	$(VENV) expand_vocabulary.py
+
+# Dry-run: show prompts without calling LLM
+expand-dry-run:
+	$(VENV) expand_vocabulary.py --dry-run
+
+# Add parent concepts only, skip sub-concept generation
+expand-parents:
+	$(VENV) expand_vocabulary.py --parents-only
 
 # Full v4 pipeline: namespace → phenx-vocab → isa → phenx-inject
 v4: namespace phenx-vocab isa phenx-inject
