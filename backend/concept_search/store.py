@@ -284,6 +284,7 @@ class DuckDBStore:
         concepts: list[str] | None = None,
         limit: int = 500,
         study_ids: set[str] | None = None,
+        variable_names: set[str] | None = None,
     ) -> list[dict]:
         """Return variables matching concept names and/or study IDs.
 
@@ -296,6 +297,8 @@ class DuckDBStore:
                 all concepts are included (filtered by study_ids).
             limit: Maximum number of variable rows to return.
             study_ids: If provided, restrict results to these studies.
+            variable_names: If provided, restrict to these variable names
+                (case-insensitive).
 
         Returns:
             Variable dicts with study title joined from the studies table.
@@ -319,6 +322,10 @@ class DuckDBStore:
             study_ph = ", ".join("?" for _ in study_ids)
             clauses.append(f"v.study_id IN ({study_ph})")
             params.extend(study_ids)
+        if variable_names is not None:
+            var_ph = ", ".join("?" for _ in variable_names)
+            clauses.append(f"LOWER(v.variable_name) IN ({var_ph})")
+            params.extend(n.lower() for n in variable_names)
         where = " AND ".join(clauses)
         sql = (
             "SELECT v.concept, v.cui, v.dataset_id, v.description, v.phv_id,"
