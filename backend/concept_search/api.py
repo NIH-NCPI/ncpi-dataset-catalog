@@ -157,23 +157,21 @@ def _build_study_summary(study: dict) -> StudySummary:
 
 
 def _build_dbgap_variable_url(study_id: str, phv_id: str) -> str:
-    """Build a dbGaP variable page URL.
+    """Build a dbGaP URL for a variable.
+
+    dbGaP no longer supports deep links to individual variables, so
+    we link to the study page where the variable can be found.
 
     Args:
         study_id: Study accession (e.g., "phs000007").
         phv_id: Variable PHV ID (e.g., "phv00481718.v2.p1").
 
     Returns:
-        Full URL to the variable page on dbGaP.
+        URL to the study page on dbGaP, or empty string if no phv_id.
     """
     if not phv_id:
         return ""
-    # Extract the numeric portion from the phv ID (strip "phv" prefix and version)
-    phv_num = phv_id.split(".")[0].replace("phv", "")
-    return (
-        f"https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/variable.cgi"
-        f"?study_id={study_id}&phv={phv_num}"
-    )
+    return f"https://dbgap.ncbi.nlm.nih.gov/study/{study_id}"
 
 
 def _build_dbgap_study_url(study_id: str) -> str:
@@ -185,10 +183,7 @@ def _build_dbgap_study_url(study_id: str) -> str:
     Returns:
         Full URL to the study page on dbGaP.
     """
-    return (
-        f"https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi"
-        f"?study_id={study_id}"
-    )
+    return f"https://dbgap.ncbi.nlm.nih.gov/study/{study_id}"
 
 
 def _build_variable_result(row: dict) -> VariableResult:
@@ -312,36 +307,21 @@ async def search(
                 )
                 study_ids = {s.get("dbGapId", "") for s in matched}
 
-            # Split measurement mentions: those with matched_variables
-            # (leaf-level filter) vs. those without (return all).
-            filtered_concepts: list[str] = []
-            unfiltered_concepts: list[str] = []
-            matched_var_names: set[str] = set()
+            # Collect all measurement concepts across mentions.
+            # matched_variables is preserved in the query model for
+            # downstream use but does NOT restrict which variables are
+            # returned — ISA closure already provides the right scope.
+            all_concepts: list[str] = []
             for m in query_model.mentions:
                 if m.facet != Facet.MEASUREMENT or m.exclude:
                     continue
-                if m.matched_variables:
-                    filtered_concepts.extend(m.values)
-                    for mv in m.matched_variables:
-                        matched_var_names.add(mv.variable_name.lower())
-                else:
-                    unfiltered_concepts.extend(m.values)
+                all_concepts.extend(m.values)
 
-            # Query each group and combine
             variable_rows = []
-            if filtered_concepts:
-                rows = index.store.query_variables(
-                    concepts=filtered_concepts,
-                    study_ids=study_ids,
-                )
-                variable_rows.extend(
-                    r for r in rows
-                    if r.get("variableName", "").lower() in matched_var_names
-                )
-            if unfiltered_concepts:
+            if all_concepts:
                 variable_rows.extend(
                     index.store.query_variables(
-                        concepts=unfiltered_concepts,
+                        concepts=all_concepts,
                         study_ids=study_ids,
                     )
                 )
