@@ -61,6 +61,7 @@ DEBUG = False
 VARS_PER_BATCH = 100
 MAX_RETRIES = 5
 DEFAULT_CONCURRENCY = 10
+CONCEPT_NAMESPACE = "topmed"  # prefix added to output concept_ids
 
 
 # ---------------------------------------------------------------------------
@@ -584,7 +585,7 @@ async def classify_study(
                     "name": v["name"],
                     "id": v.get("id", ""),
                     "description": v.get("description", ""),
-                    "concept_id": ground_truth[phv_num],
+                    "concept_id": f"{CONCEPT_NAMESPACE}:{ground_truth[phv_num]}",
                     "confidence": "high",
                     "source": "ground_truth",
                 })
@@ -650,11 +651,16 @@ async def classify_study(
                 meta = meta_lookup.get(
                     (table_result.table_name, mv.variable_name), {}
                 )
+                namespaced_cid = (
+                    f"{CONCEPT_NAMESPACE}:{mv.concept_id}"
+                    if mv.concept_id is not None
+                    else None
+                )
                 llm_by_table[table_result.table_name].append({
                     "name": mv.variable_name,
                     "id": meta.get("id", ""),
                     "description": meta.get("description", ""),
-                    "concept_id": mv.concept_id,
+                    "concept_id": namespaced_cid,
                     "confidence": mv.confidence,
                     "source": "llm",
                 })
