@@ -204,23 +204,95 @@ def _resolve_isa_path() -> Path:
     )
 
 
-def _load_isa_table() -> dict[str, list[str]]:
+def _load_concept_descriptions() -> dict[str, dict]:
+    """Load concept names and descriptions from all vocabulary sources.
+
+    Merges TOPMed (concept-vocabulary.json), PhenX (phenx-concept-vocabulary.json),
+    and NCPI categories (ncpi-categories.json) into a single lookup keyed by
+    namespaced concept_id.
+
+    Returns:
+        Dict mapping concept_id → {"name": ..., "description": ...}.
+    """
+    repo_root = _resolve_repo_root()
+    vocab_dir = repo_root / "catalog-build" / "classification" / "output"
+
+    descriptions: dict[str, dict] = {}
+
+    # Build a set of known namespaced IDs from the ISA table so we can
+    # resolve bare concept_ids to their correct namespace.
+    isa_path = _resolve_isa_path()
+    known_ids: set[str] = set()
+    if isa_path.exists():
+        with open(isa_path) as f:
+            for entry in json.load(f):
+                known_ids.add(entry["child"])
+                known_ids.add(entry["parent"])
+
+    # TOPMed/catalog concepts (bare concept_id → resolve namespace via ISA)
+    topmed_path = vocab_dir / "concept-vocabulary.json"
+    if topmed_path.exists():
+        with open(topmed_path) as f:
+            for entry in json.load(f):
+                bare = entry.get("concept_id", "")
+                # Already namespaced?
+                if ":" in bare:
+                    cid = bare
+                else:
+                    # Check ISA for the correct namespace
+                    candidates = [k for k in known_ids if k.endswith(f":{bare}")]
+                    cid = candidates[0] if len(candidates) == 1 else f"topmed:{bare}"
+                descriptions[cid] = {
+                    "description": entry.get("description", ""),
+                    "name": entry.get("name", cid),
+                }
+
+    # PhenX concepts (already namespaced)
+    phenx_path = vocab_dir / "phenx-concept-vocabulary.json"
+    if phenx_path.exists():
+        with open(phenx_path) as f:
+            for entry in json.load(f):
+                cid = entry.get("concept_id", "")
+                descriptions[cid] = {
+                    "description": entry.get("description", ""),
+                    "name": entry.get("name", cid),
+                }
+
+    # NCPI categories (already namespaced)
+    ncpi_path = vocab_dir / "ncpi-categories.json"
+    if ncpi_path.exists():
+        with open(ncpi_path) as f:
+            for entry in json.load(f):
+                cid = entry.get("concept_id", "")
+                descriptions[cid] = {
+                    "description": entry.get("description", ""),
+                    "name": entry.get("name", cid),
+                }
+
+    return descriptions
+
+
+def _load_isa_table() -> tuple[dict[str, list[str]], dict[str, list[str]]]:
     """Load ISA (is-a) child→parent relationships.
 
     Returns:
-        Dict mapping child concept_id to list of parent concept_ids.
+        Tuple of:
+        - parents: child concept_id → list of parent concept_ids
+        - children: parent concept_id → list of child concept_ids
     """
     path = _resolve_isa_path()
     if not path.exists():
-        return {}
+        return {}, {}
     with open(path) as f:
         entries = json.load(f)
     parents: dict[str, list[str]] = defaultdict(list)
+    children: dict[str, list[str]] = defaultdict(list)
     for entry in entries:
         child = entry["child"]
         parent = entry["parent"]
         parents[child].append(parent)
-    return dict(parents)
+        children[parent].append(child)
+    return dict(parents), dict(children)
 
 
 def _compute_closure(
@@ -262,7 +334,9 @@ class ConceptIndex:
         self.store: StudyStore = store or DuckDBStore.create_empty()
         # Lazy-loaded supplementary data (populated by load())
         self._consent_descriptions: dict = {}
+        self._concept_descriptions: dict[str, dict] = {}
         self._focus_categories: dict[str, list[dict]] = {}
+        self._isa_children: dict[str, list[str]] = {}
 
     def load(self) -> None:
         """Load data — from cached DuckDB file if available, else from JSON."""
@@ -278,6 +352,8 @@ class ConceptIndex:
                 logger.info("Loading from cached DuckDB: %s", cache_path)
                 self.store = DuckDBStore.load_from_file(str(cache_path))
                 self._rebuild_index_from_store()
+                # Load ISA children for drill-down (not stored in DuckDB)
+                _, self._isa_children = _load_isa_table()
             else:
                 self._load_from_json()
                 # Save cache for next startup
@@ -292,6 +368,7 @@ class ConceptIndex:
         # These are small JSON files bundled with the package — always load
         self.load_focus_categories()
         self.load_consent_code_descriptions()
+        self._concept_descriptions = _load_concept_descriptions()
 
     def _load_from_json(self) -> None:
         """Full build path: parse JSON data files and populate the store."""
@@ -359,7 +436,7 @@ class ConceptIndex:
         """
         if not llm_dir.exists():
             return
-        isa_parents = _load_isa_table()
+        isa_parents, self._isa_children = _load_isa_table()
         concept_studies: dict[str, set[str]] = defaultdict(set)
         study_concepts: dict[str, set[str]] = defaultdict(set)
         variable_rows: list[tuple[str, str, str, str, str, str, str, str, str, str]] = []
@@ -696,6 +773,47 @@ class ConceptIndex:
                 results.append(match)
         results.sort(key=lambda m: m.study_count, reverse=True)
         return results
+
+    def get_concept_children(self, concept_id: str) -> list[dict]:
+        """Return direct child concepts with names, descriptions, and study counts.
+
+        Args:
+            concept_id: Parent concept to look up children for.
+
+        Returns:
+            Child concepts sorted by study count descending. Each dict has
+            concept_id, name, description, and study_count.
+        """
+        children = self._isa_children.get(concept_id, [])
+        results = []
+        for child_id in children:
+            desc = self._concept_descriptions.get(child_id, {})
+            match = self._index[Facet.MEASUREMENT].get(child_id.lower())
+            results.append({
+                "concept_id": child_id,
+                "description": desc.get("description", ""),
+                "name": desc.get("name", child_id),
+                "study_count": match.study_count if match else 0,
+            })
+        return sorted(results, key=lambda x: -x["study_count"])
+
+    def list_variables_for_concept(
+        self, concept_id: str, limit: int = 200
+    ) -> list[dict]:
+        """Return distinct variables under a concept with descriptions.
+
+        Delegates to the store's ``list_variables_for_concept`` method.
+
+        Args:
+            concept_id: Concept to list variables for.
+            limit: Maximum number of variables to return.
+
+        Returns:
+            Distinct (variable_name, description) dicts.
+        """
+        if isinstance(self.store, DuckDBStore):
+            return self.store.list_variables_for_concept(concept_id, limit=limit)
+        return []
 
     @property
     def stats(self) -> dict[str, int]:

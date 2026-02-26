@@ -5,7 +5,8 @@ import pytest
 from models import ParsedTable
 
 from classify_v4 import (
-    CONCEPT_NAMESPACE,
+    DEFAULT_NAMESPACE,
+    _namespace_concept_id,
     format_batch_prompt,
     pack_batches,
 )
@@ -149,14 +150,26 @@ class TestNamespacePrefix:
     """Tests that concept_ids get namespaced in output."""
 
     def test_namespace_constant(self):
-        """CONCEPT_NAMESPACE is set to topmed."""
-        assert CONCEPT_NAMESPACE == "topmed"
+        """DEFAULT_NAMESPACE is set to topmed."""
+        assert DEFAULT_NAMESPACE == "topmed"
 
     def test_namespace_format(self):
         """Namespaced concept_id follows 'namespace:bare_id' format."""
         bare_id = "bp_systolic"
-        namespaced = f"{CONCEPT_NAMESPACE}:{bare_id}"
+        namespaced = f"{DEFAULT_NAMESPACE}:{bare_id}"
         assert namespaced == "topmed:bp_systolic"
         assert ":" in namespaced
         assert namespaced.split(":")[0] == "topmed"
         assert namespaced.split(":")[1] == bare_id
+
+    def test_namespace_helper_bare_id(self):
+        """Bare IDs get topmed: prefix."""
+        assert _namespace_concept_id("bp_systolic") == "topmed:bp_systolic"
+
+    def test_namespace_helper_phenx_passthrough(self):
+        """PhenX IDs with existing prefix are passed through."""
+        assert _namespace_concept_id("phenx:spirometry") == "phenx:spirometry"
+
+    def test_namespace_helper_any_prefix_passthrough(self):
+        """Any existing namespace prefix is preserved."""
+        assert _namespace_concept_id("ncpi:biomarkers") == "ncpi:biomarkers"

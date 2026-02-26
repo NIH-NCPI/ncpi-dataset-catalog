@@ -97,7 +97,7 @@
   {
     "concept_id": "cad_followup_start_age",
     "name": "Cad Followup Start Age",
-    "description": "Age of subject at the start of the cardiovascular disease (CAD/CHD) follow-up period during which atherosclerosis events were reviewed and adjudicated. Only match when context explicitly mentions cardiovascular follow-up or event surveillance — do NOT match generic enrollment or baseline age.",
+    "description": "Age of subject at the start of the cardiovascular disease (CAD/CHD) follow-up period during which atherosclerosis events were reviewed and adjudicated. Only match when context explicitly mentions cardiovascular follow-up or event surveillance \u2014 do NOT match generic enrollment or baseline age.",
     "cui": null,
     "domain": "atherosclerosis_events_incident",
     "example_variables": [
@@ -1095,5 +1095,355 @@
       "NSAID_USE: Currently taking NSAIDs",
       "OPIOID: Prescription opioid use"
     ]
+  },
+  {
+    "concept_id": "ffq_alcoholic_beverages",
+    "cui": null,
+    "description": "All alcoholic drinks including beer, wine, liquor, and mixed drinks",
+    "domain": "diet",
+    "example_variables": [
+      "A06ALCOHOL",
+      "A06BVE0100",
+      "A06BVE0200",
+      "A06BVE0300",
+      "A06BVE0400"
+    ],
+    "name": "Alcoholic Beverages"
+  },
+  {
+    "concept_id": "ffq_non_alcoholic_beverages",
+    "cui": null,
+    "description": "All non-alcoholic drinks including soft drinks, juices, coffee, tea, and water",
+    "domain": "diet",
+    "example_variables": [
+      "A06BEVERAGES",
+      "A06BVA0100",
+      "A06BVA0200",
+      "A06BVA0300",
+      "A06BVA0400"
+    ],
+    "name": "Non-Alcoholic Beverages"
+  },
+  {
+    "concept_id": "ffq_dairy_products",
+    "cui": null,
+    "description": "All dairy products including milk, cheese, yogurt, cream, and dairy-based desserts",
+    "domain": "diet",
+    "example_variables": [
+      "A06DAIRY",
+      "A06DCF0100",
+      "A06DCL0100",
+      "A06DCN0100",
+      "A06DCR0100"
+    ],
+    "name": "Dairy Products"
+  },
+  {
+    "concept_id": "ffq_meat_poultry",
+    "cui": null,
+    "description": "All meat and poultry including beef, pork, lamb, chicken, turkey, and processed meats",
+    "domain": "diet",
+    "example_variables": [
+      "BACON",
+      "BACON25",
+      "BACON_FQ",
+      "BACON_SIZE",
+      "BEEF"
+    ],
+    "name": "Meat and Poultry"
+  },
+  {
+    "concept_id": "ffq_fish_seafood",
+    "cui": null,
+    "description": "All fish and seafood including fresh fish, canned fish, shellfish, and fried seafood",
+    "domain": "diet",
+    "example_variables": [
+      "A06FISH",
+      "B_FISH_FQ",
+      "B_FISH_SIZE",
+      "CAN_FISH_FQ",
+      "CAN_FISH_SIZE"
+    ],
+    "name": "Fish and Seafood"
+  },
+  {
+    "concept_id": "ffq_fruits",
+    "cui": null,
+    "description": "All fresh, canned, dried, and frozen fruits including citrus fruits, berries, and tropical fruits",
+    "domain": "diet",
+    "example_variables": [
+      "A_J",
+      "APPLE",
+      "APPLE25",
+      "APPLE_FQ",
+      "APPLE_SIZE"
+    ],
+    "name": "Fruits"
+  },
+  {
+    "concept_id": "ffq_vegetables",
+    "cui": null,
+    "description": "All vegetables including leafy greens, root vegetables, cruciferous vegetables, and starchy vegetables",
+    "domain": "diet",
+    "example_variables": [
+      "A06VEGETABLE",
+      "A06VEG0100",
+      "A06VEG0200",
+      "A06VEG0300",
+      "A06VEG0400"
+    ],
+    "name": "Vegetables"
+  },
+  {
+    "concept_id": "ffq_grains_cereals",
+    "cui": null,
+    "description": "All grain products including bread, cereals, rice, pasta, and baked goods",
+    "domain": "diet",
+    "example_variables": [
+      "A06GRAINS",
+      "A06GRO0100",
+      "A06GRR0100",
+      "A06GRR0200",
+      "A06GRR0300"
+    ],
+    "name": "Grains and Cereals"
+  },
+  {
+    "concept_id": "ffq_legumes_beans",
+    "cui": null,
+    "description": "All legumes including dried beans, peas, lentils, and soy products",
+    "domain": "diet",
+    "example_variables": [
+      "A06LEGUMES",
+      "BAKED_BEAN_FQ",
+      "BAKED_BEAN_SIZE",
+      "bean",
+      "BEANS"
+    ],
+    "name": "Legumes and Beans"
+  },
+  {
+    "concept_id": "ffq_nuts_seeds",
+    "cui": null,
+    "description": "All nuts, seeds, and nut butters including peanuts, tree nuts, and seed products",
+    "domain": "diet",
+    "example_variables": [
+      "A06NUTS",
+      "D06NUTS",
+      "DTI132",
+      "DTI133",
+      "FFD132"
+    ],
+    "name": "Nuts and Seeds"
+  },
+  {
+    "concept_id": "ffq_eggs",
+    "cui": null,
+    "description": "All egg products including whole eggs, egg whites, and egg substitutes",
+    "domain": "diet",
+    "example_variables": [
+      "A06EGG",
+      "D06EGG",
+      "DTI64",
+      "DTI65",
+      "EGG_FQ"
+    ],
+    "name": "Eggs"
+  },
+  {
+    "concept_id": "ffq_fats_oils",
+    "cui": null,
+    "description": "All added fats and oils including butter, margarine, cooking oils, and salad dressings",
+    "domain": "diet",
+    "example_variables": [
+      "A06FATS",
+      "A06FAF0100",
+      "A06FAR0100",
+      "A06FCF0100",
+      "A06FCL0100"
+    ],
+    "name": "Fats and Oils"
+  },
+  {
+    "concept_id": "ffq_sweets_desserts",
+    "cui": null,
+    "description": "All sweet foods including candy, chocolate, cakes, cookies, pies, and other desserts",
+    "domain": "diet",
+    "example_variables": [
+      "A06SUGAR",
+      "A06SWT0100",
+      "A06SWT0200",
+      "A06SWT0300",
+      "A06SWT0400"
+    ],
+    "name": "Sweets and Desserts"
+  },
+  {
+    "concept_id": "ffq_snack_foods",
+    "cui": null,
+    "description": "All snack foods including chips, crackers, popcorn, and other salty snacks",
+    "domain": "diet",
+    "example_variables": [
+      "CHIPS",
+      "CHIPS_FQ",
+      "CHIPS_SIZE",
+      "DDS4",
+      "DTI102"
+    ],
+    "name": "Snack Foods"
+  },
+  {
+    "concept_id": "ffq_condiments_seasonings",
+    "cui": null,
+    "description": "All condiments, seasonings, sauces, and flavor enhancers",
+    "domain": "diet",
+    "example_variables": [
+      "A06CONDIMENTS",
+      "A06MSC0300",
+      "A06MSC0400",
+      "A06MSC0500",
+      "A06MSC1200"
+    ],
+    "name": "Condiments and Seasonings"
+  },
+  {
+    "concept_id": "ffq_soups",
+    "cui": null,
+    "description": "All types of soups including broth-based, cream-based, and specialty soups",
+    "domain": "diet",
+    "example_variables": [
+      "BROTH",
+      "BROTH_SOUP_FQ",
+      "BROTH_SOUP_SIZE",
+      "CHOW",
+      "CHOWDER"
+    ],
+    "name": "Soups"
+  },
+  {
+    "concept_id": "ffq_mixed_dishes",
+    "cui": null,
+    "description": "Complex dishes combining multiple food groups including casseroles, ethnic dishes, and combination meals",
+    "domain": "diet",
+    "example_variables": [
+      "ARROZ_POLLO_FQ",
+      "ARROZ_POLLO_SIZE",
+      "BAO_FQ",
+      "BAO_SIZE",
+      "BBQSAND"
+    ],
+    "name": "Mixed Dishes"
+  },
+  {
+    "concept_id": "ffq_specialty_foods",
+    "cui": null,
+    "description": "Specialty and ethnic foods, baby foods, meal replacements, and other unique food items",
+    "domain": "diet",
+    "example_variables": [
+      "A06INGREDIANTS",
+      "A06MEALREPL",
+      "A06MSC0600",
+      "A06MSC0700",
+      "A06MSC0800"
+    ],
+    "name": "Specialty Foods"
+  },
+  {
+    "concept_id": "ffq_cooking_methods",
+    "cui": null,
+    "description": "Variables related to cooking methods, food preparation techniques, and doneness preferences",
+    "domain": "diet",
+    "example_variables": [
+      "BBQ_FQ",
+      "CHAR_BROIL_FQ",
+      "FAT_OF_MEAT_FQ",
+      "FFA",
+      "FFH"
+    ],
+    "name": "Cooking Methods and Food Preparation"
+  },
+  {
+    "concept_id": "ffq_meal_patterns",
+    "cui": null,
+    "description": "Variables related to meal frequency, eating patterns, dining locations, and food behaviors",
+    "domain": "diet",
+    "example_variables": [
+      "A06ASFRQ",
+      "A06ASNUM",
+      "A06BRFRQ",
+      "A06BRNUM",
+      "A06DIFRQ"
+    ],
+    "name": "Meal Patterns and Eating Behaviors"
+  },
+  {
+    "concept_id": "ffq_dietary_supplements",
+    "cui": null,
+    "description": "Variables related to vitamin supplements, fortified foods, and nutritional additives",
+    "domain": "diet",
+    "example_variables": [
+      "activeb",
+      "BRAN",
+      "FOLIC_ACID",
+      "IRON",
+      "KD"
+    ],
+    "name": "Dietary Supplements and Fortified Foods"
+  },
+  {
+    "concept_id": "ffq_food_shopping_access",
+    "cui": null,
+    "description": "Variables related to food shopping locations, food access, and food environment",
+    "domain": "diet",
+    "example_variables": [
+      "B19_L",
+      "B20_L",
+      "B21_L",
+      "B22_L",
+      "B23_L"
+    ],
+    "name": "Food Shopping and Access"
+  },
+  {
+    "concept_id": "ffq_dietary_patterns",
+    "cui": null,
+    "description": "Variables related to special diets, dietary restrictions, and overall dietary patterns",
+    "domain": "diet",
+    "example_variables": [
+      "COM48",
+      "COM49",
+      "diet_gluten_free",
+      "Diet_Highcalorictablefood",
+      "Diet_Ketogenicdiet"
+    ],
+    "name": "Dietary Patterns and Restrictions"
+  },
+  {
+    "concept_id": "ffq_infant_feeding",
+    "cui": null,
+    "description": "Variables related to infant feeding, breastfeeding, and child nutrition",
+    "domain": "diet",
+    "example_variables": [
+      "baby_breastfed",
+      "baby_breastfeeding_time",
+      "DSIE150",
+      "iffq2y_dairy",
+      "iffq2y_fried"
+    ],
+    "name": "Infant and Child Feeding"
+  },
+  {
+    "concept_id": "ffq_fast_food_restaurant",
+    "cui": null,
+    "description": "Variables related to fast food consumption, restaurant eating, and dining out patterns",
+    "domain": "diet",
+    "example_variables": [
+      "A06FFPL1",
+      "A06FFPL2",
+      "A06FFPL3",
+      "A06FFPL4",
+      "A06FFPL5"
+    ],
+    "name": "Fast Food and Restaurant Eating"
   }
 ]

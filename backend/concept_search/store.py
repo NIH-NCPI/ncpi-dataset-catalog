@@ -37,6 +37,12 @@ class StudyStore(Protocol):
         """Return studies matching *include* minus *exclude*."""
         ...
 
+    def list_variables_for_concept(
+        self, concept_id: str, limit: int = 200
+    ) -> list[dict]:
+        """Return distinct variables under a concept with descriptions."""
+        ...
+
 
 class DuckDBStore:
     """In-memory DuckDB implementation of ``StudyStore``.
@@ -330,6 +336,32 @@ class DuckDBStore:
             "studyId", "tableName", "variableName", "studyTitle",
         ]
         return [dict(zip(cols, row)) for row in rows]
+
+    def list_variables_for_concept(
+        self, concept_id: str, limit: int = 200
+    ) -> list[dict]:
+        """Return distinct variables under a concept with descriptions.
+
+        Searches against concept_ids_closure so that querying a parent concept
+        returns variables tagged with any descendant.
+
+        Args:
+            concept_id: Concept to list variables for.
+            limit: Maximum number of distinct variables to return.
+
+        Returns:
+            List of dicts with variable_name and description.
+        """
+        sql = (
+            "SELECT DISTINCT variable_name, description "
+            "FROM variables "
+            "WHERE list_contains("
+            'from_json(concept_ids_closure, \'["VARCHAR"]\'), ?) '  # noqa: S608
+            "ORDER BY variable_name "
+            f"LIMIT {limit}"
+        )
+        rows = self._conn.execute(sql, [concept_id.lower()]).fetchall()
+        return [{"description": row[1], "variable_name": row[0]} for row in rows]
 
     def get_facet_value_counts(self) -> list[tuple[str, str, int]]:
         """Return (facet, value, study_count) for all facet values.

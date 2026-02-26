@@ -11,7 +11,7 @@ from pydantic_evals.evaluators import Evaluator, EvaluatorContext
 
 from .consent_logic import compute_eligible_codes, resolve_disease_name
 from .index import get_index
-from .models import Facet, RawMention, ResolveResult
+from .models import Facet, MatchedVariable, RawMention, ResolveResult
 from .resolve_agent import run_resolve
 
 
@@ -23,6 +23,8 @@ class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
     - F1: harmonic mean of precision and recall. Penalizes both
       missing expected values and spurious extra values.
     - Score 1.0 if expected has no values and actual is also empty.
+    - When expected has matched_variables, checks that the agent
+      returned at least those variable names (recall-based).
     """
 
     def evaluate(
@@ -30,22 +32,37 @@ class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
     ) -> dict[str, float]:
         expected = ctx.expected_output
         actual = ctx.output
-        if expected is None or not expected.values:
-            return {
-                "resolve_score": 1.0 if not actual.values else 0.0
-            }
+        scores: dict[str, float] = {}
 
-        exp_set = {v.lower() for v in expected.values}
-        act_set = {v.lower() for v in actual.values}
-        if not act_set:
-            return {"resolve_score": 0.0}
-        hits = len(exp_set & act_set)
-        precision = hits / len(act_set)
-        recall = hits / len(exp_set)
-        if precision + recall == 0:
-            return {"resolve_score": 0.0}
-        f1 = 2 * precision * recall / (precision + recall)
-        return {"resolve_score": round(f1, 3)}
+        # Score values (concept IDs)
+        if expected is None or not expected.values:
+            scores["resolve_score"] = 1.0 if not actual.values else 0.0
+        else:
+            exp_set = {v.lower() for v in expected.values}
+            act_set = {v.lower() for v in actual.values}
+            if not act_set:
+                scores["resolve_score"] = 0.0
+            else:
+                hits = len(exp_set & act_set)
+                precision = hits / len(act_set)
+                recall = hits / len(exp_set)
+                if precision + recall == 0:
+                    scores["resolve_score"] = 0.0
+                else:
+                    f1 = 2 * precision * recall / (precision + recall)
+                    scores["resolve_score"] = round(f1, 3)
+
+        # Score matched_variables (recall: did the agent find the expected vars?)
+        if expected is not None and expected.matched_variables:
+            exp_vars = {v.variable_name.lower() for v in expected.matched_variables}
+            act_vars = {v.variable_name.lower() for v in actual.matched_variables}
+            if not act_vars:
+                scores["variables_score"] = 0.0
+            else:
+                recall = len(exp_vars & act_vars) / len(exp_vars)
+                scores["variables_score"] = round(recall, 3)
+
+        return scores
 
 
 def _mention(text: str, facet: Facet) -> RawMention:
@@ -83,109 +100,99 @@ def _consent_expected(**kwargs: object) -> ResolveResult:
 dataset = Dataset[RawMention, ResolveResult, ResolveResult](
     evaluators=[ResolveEvaluator()],
     cases=[
-        # --- Direct matches ---
+        # --- Direct matches (tree walk finds correct concept) ---
         Case(
             name="direct-bmi",
             inputs=_mention("body mass index", Facet.MEASUREMENT),
-            expected_output=ResolveResult(values=["Body Mass Index"]),
+            # Walk: anthropometry → phenx:body_mass_index
+            expected_output=ResolveResult(values=["phenx:body_mass_index"]),
         ),
         Case(
             name="direct-sbp",
             inputs=_mention("systolic blood pressure", Facet.MEASUREMENT),
-            expected_output=ResolveResult(values=["Systolic Blood Pressure"]),
+            # Walk: biomarkers → topmed:bp_systolic
+            expected_output=ResolveResult(values=["topmed:bp_systolic"]),
         ),
-        # (diabetes/focus is tested as focus-diabetes below)
-        # (GRU direct match is tested as consent-gru-direct below)
         # --- Lay term rewrites ---
         Case(
             name="lay-blood-sugar",
             inputs=_mention("blood sugar", Facet.MEASUREMENT),
-            # Agent should search "blood sugar", find low-count results,
-            # then rewrite to "glucose" and find glucose-related concepts.
+            # Walk: biomarkers → fasting glucose concept (lay→clinical mapping)
             expected_output=ResolveResult(
-                values=["Blood Glucose", "Fasting Glucose", "Glucose", "Serum Glucose"]
+                values=["phenx:fasting_plasma_glucose_blood_draw"]
             ),
         ),
         Case(
             name="lay-blood-pressure",
             inputs=_mention("blood pressure", Facet.MEASUREMENT),
+            # Walk: biomarkers → both systolic + diastolic
             expected_output=ResolveResult(
-                values=["Diastolic Blood Pressure", "Systolic Blood Pressure"]
+                values=["topmed:bp_diastolic", "topmed:bp_systolic"]
             ),
         ),
         # --- Category expansion ---
         Case(
             name="category-sleep",
             inputs=_mention("sleep", Facet.MEASUREMENT),
-            # "sleep" is broad — agent should return multiple sleep concepts.
-            expected_output=ResolveResult(
-                values=[
-                    "Daytime Sleepiness",
-                    "Epworth Sleepiness Scale",
-                    "Excessive Daytime Sleepiness",
-                    "Obstructive Sleep Apnea History",
-                    "Oxygen Therapy Use During Sleep",
-                    "Sleep Apnea History",
-                    "Sleep Disorder History",
-                    "Sleep Disturbance",
-                    "Sleep Duration",
-                    "Sleep Efficiency",
-                    "Sleep Latency",
-                    "Sleep Maintenance Insomnia",
-                    "Sleep Medication Use",
-                    "Sleep Onset Difficulty",
-                    "Sleep Onset Insomnia",
-                    "Sleep Onset Latency",
-                    "Sleep Problems",
-                    "Sleep Quality",
-                    "Total Sleep Time",
-                    "Wake After Sleep Onset",
-                ]
-            ),
+            # "sleep" maps directly to ncpi:sleep top-level category.
+            # ISA closure includes all children (sleep_duration, sleep_apnea).
+            expected_output=ResolveResult(values=["ncpi:sleep"]),
         ),
         Case(
             name="category-cholesterol",
             inputs=_mention("cholesterol", Facet.MEASUREMENT),
-            # "cholesterol" is ambiguous — Total, HDL, LDL, Triglycerides.
-            # Agent should return broad match and disambiguate via message.
+            # Walk: biomarkers → HDL, LDL, total cholesterol.
+            # Triglycerides are a separate lipid, may or may not be included.
             expected_output=ResolveResult(
-                values=["HDL Cholesterol", "LDL Cholesterol", "Total Cholesterol", "Triglycerides"]
+                values=[
+                    "topmed:hdl",
+                    "topmed:ldl",
+                    "topmed:total_cholesterol",
+                ]
             ),
         ),
         Case(
             name="disambig-glucose",
             inputs=_mention("glucose", Facet.MEASUREMENT),
-            # "glucose" spans multiple categories — agent should return
-            # the main glucose-related measurement concepts.
+            # Walk: biomarkers → fasting plasma glucose is the primary match.
             expected_output=ResolveResult(
-                values=[
-                    "2-Hour Plasma Glucose",
-                    "Fasting Blood Glucose",
-                    "Fasting Glucose",
-                    "Postprandial Blood Glucose",
-                ]
+                values=["phenx:fasting_plasma_glucose_blood_draw"]
             ),
         ),
-        # --- Medical synonym ---
+        # --- Concepts not in catalog (agent should report gracefully) ---
         Case(
-            name="synonym-echocardiography",
+            name="no-match-echocardiography",
             inputs=_mention("echocardiography", Facet.MEASUREMENT),
-            expected_output=ResolveResult(values=["Echocardiography"]),
+            # No echocardiography concept exists; agent returns empty with message.
+            expected_output=ResolveResult(values=[]),
         ),
+        # --- Substance use ---
         Case(
             name="synonym-smoking",
             inputs=_mention("smoking", Facet.MEASUREMENT),
+            # Walk: substance_use → returns tobacco/smoking-related concepts.
+            # "smoking" is broad, so agent returns multiple tobacco concepts.
+            # Must include the main smoking status concept; may include others.
             expected_output=ResolveResult(
-                values=["Current Smoking Status", "Smoking History", "Smoking Status"]
+                values=[
+                    "phenx:amount_type_and_frequency_of_recent_cigarette_use",
+                    "phenx:protocol_2_tobacco_30day_quantity_and_frequency_adult_protocol",
+                    "phenx:protocol_2_tobacco_age_of_initiation_of_use_adult_protocol",
+                    "phenx:protocol_2_tobacco_age_of_offset_of_use_adult_protocol",
+                    "phenx:protocol_2_tobacco_smoking_status_adult_protocol",
+                    "phenx:substance_abuse_and_dependence_past_year_tobacco",
+                    "phenx:tobacco_nicotine_dependence",
+                    "phenx:tobacco_noncigarette_product_use",
+                    "phenx:use_of_tobacco_products",
+                ]
             ),
         ),
-        # --- Harder rewrites ---
+        # --- Concepts not in catalog ---
         Case(
-            name="rewrite-vitamin-k",
+            name="no-match-vitamin-k",
             inputs=_mention("vitamin K", Facet.MEASUREMENT),
-            expected_output=ResolveResult(
-                values=["Vitamin K Intake", "Vitamin K Supplementation"]
-            ),
+            # No vitamin K specific concept; agent returns empty with message.
+            expected_output=ResolveResult(values=[]),
         ),
         Case(
             name="rewrite-heart-disease",
@@ -275,6 +282,51 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             name="focus-schizophrenia",
             inputs=_mention("schizophrenia", Facet.FOCUS),
             expected_output=ResolveResult(values=["Schizophrenia"]),
+        ),
+        # --- Tree-walk drill-down (concept hierarchy navigation) ---
+        Case(
+            name="walk-ffq-broad",
+            inputs=_mention("food frequency questionnaire", Facet.MEASUREMENT),
+            # Broad query should stop at the FFQ concept, not drill deeper.
+            expected_output=ResolveResult(
+                values=["topmed:food_frequency_questionnaire"]
+            ),
+        ),
+        Case(
+            name="walk-ffq-dairy",
+            inputs=_mention("dairy intake", Facet.MEASUREMENT),
+            # Should walk: diet → FFQ → ffq_dairy_products
+            expected_output=ResolveResult(
+                values=["ncpi:ffq_dairy_products"]
+            ),
+        ),
+        Case(
+            name="walk-ffq-fish",
+            inputs=_mention("fish and seafood consumption", Facet.MEASUREMENT),
+            # Should walk: diet → FFQ → ffq_fish_seafood
+            expected_output=ResolveResult(
+                values=["ncpi:ffq_fish_seafood"]
+            ),
+        ),
+        Case(
+            name="walk-ffq-leaf-with-variables",
+            inputs=_mention("chocolate consumption", Facet.MEASUREMENT),
+            # Should walk to ffq_sweets_desserts and return matching variables.
+            expected_output=ResolveResult(
+                values=["ncpi:ffq_sweets_desserts"],
+                matched_variables=[
+                    MatchedVariable(variable_name="CHOC", description="FFQ: CHOCOLATE"),
+                    MatchedVariable(variable_name="FFD118", description="CHOCOLATE"),
+                ],
+            ),
+        ),
+        Case(
+            name="walk-bp",
+            inputs=_mention("blood pressure", Facet.MEASUREMENT),
+            # Should walk: biomarkers → find bp_systolic + bp_diastolic
+            expected_output=ResolveResult(
+                values=["topmed:bp_systolic", "topmed:bp_diastolic"]
+            ),
         ),
         # --- Consent code semantic resolution (dynamic expectations) ---
         Case(

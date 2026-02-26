@@ -97,7 +97,7 @@ class LRUCache(Generic[K, V]):
             success = True
         finally:
             async with self._lock:
-                if success:
+                if success and self.max_size > 0:
                     if len(self._cache) >= self.max_size:
                         oldest = next(iter(self._cache))
                         del self._cache[oldest]

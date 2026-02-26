@@ -5,9 +5,9 @@
 #   export ANTHROPIC_API_KEY='...'
 #   or set in ../../.env
 
-VENV = ../../backend/.venv/bin/python
+VENV = ../../backend/.venv/bin/python3
 
-.PHONY: help seeds classify classify-study classify-v3 classify-v3-study evals evals-scaling summary summary-detail summary-studies namespace phenx-vocab phenx-inject isa hierarchy v4
+.PHONY: help seeds classify classify-study classify-v3 classify-v3-study evals evals-scaling summary summary-detail summary-studies namespace phenx-vocab phenx-inject isa hierarchy v4 subconcepts
 
 help:
 	@echo "Variable Classification Pipeline"
@@ -27,6 +27,7 @@ help:
 	@echo "  phenx-vocab    - Build PhenX concept vocabulary"
 	@echo "  phenx-inject   - Inject PhenX ground-truth into v4 output"
 	@echo "  v4             - Full v4 pipeline: namespace + phenx-vocab + isa + phenx-inject"
+	@echo "  subconcepts    - Generate sub-concepts for broad concepts (e.g. FFQ)"
 	@echo ""
 	@echo "  classify-v3    - Classify all studies with v3 (single-table, legacy)"
 
@@ -105,6 +106,10 @@ hierarchy:
 	   print()) \
 	  for c in cats \
 	]"
+
+# Generate sub-concepts for broad concepts (requires ANTHROPIC_API_KEY)
+subconcepts:
+	$(VENV) build_subconcepts.py
 
 # Full v4 pipeline: namespace → phenx-vocab → isa → phenx-inject
 v4: namespace phenx-vocab isa phenx-inject

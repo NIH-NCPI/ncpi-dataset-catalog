@@ -49,6 +49,7 @@ SCRIPT_DIR = Path(__file__).parent
 load_dotenv(SCRIPT_DIR.parents[1] / ".env")
 
 VOCAB_PATH = SCRIPT_DIR / "output" / "concept-vocabulary.json"
+PHENX_VOCAB_PATH = SCRIPT_DIR / "output" / "phenx-concept-vocabulary.json"
 SEED_PATH = SCRIPT_DIR / "output" / "topmed-seed-concepts.json"
 V4_OUTPUT_DIR = SCRIPT_DIR / "output" / "llm-concepts-v4"
 
@@ -61,7 +62,7 @@ DEBUG = False
 VARS_PER_BATCH = 100
 MAX_RETRIES = 5
 DEFAULT_CONCURRENCY = 10
-CONCEPT_NAMESPACE = "topmed"  # prefix added to output concept_ids
+DEFAULT_NAMESPACE = "topmed"  # prefix added to bare concept_ids in output
 
 
 # ---------------------------------------------------------------------------
@@ -70,11 +71,11 @@ CONCEPT_NAMESPACE = "topmed"  # prefix added to output concept_ids
 
 
 class MatchedVariable(BaseModel):
-    """LLM's concept match for a single variable."""
+    """LLM's concept match for a single variable (only matched vars returned)."""
 
     variable_name: str = Field(description="Exact variable name from input")
-    concept_id: str | None = Field(
-        description="concept_id from the vocabulary, or null if no match"
+    concept_id: str = Field(
+        description="concept_id from the vocabulary"
     )
     confidence: str = Field(description="high, medium, or low")
 
@@ -94,15 +95,16 @@ class MatchedTableResult(BaseModel):
 
     table_name: str = Field(description="Exact table name from input")
     variables: list[MatchedVariable] = Field(
-        description="One entry per input variable in this table"
+        description="Matched variables only (omit unmatched)"
     )
 
 
 class MatchedBatch(BaseModel):
-    """LLM output for a batch of tables with their variable matches."""
+    """LLM output: only tables/variables with concept matches (omit unmatched)."""
 
     tables: list[MatchedTableResult] = Field(
-        description="One entry per input table, preserving table order"
+        default_factory=list,
+        description="Tables with matched variables (omit tables with no matches)",
     )
 
     @model_validator(mode="after")
@@ -124,21 +126,61 @@ class MatchedBatch(BaseModel):
 
 
 # ---------------------------------------------------------------------------
+# Namespace helpers
+# ---------------------------------------------------------------------------
+
+
+def _namespace_concept_id(concept_id: str) -> str:
+    """Add namespace prefix to a concept_id if it doesn't already have one.
+
+    PhenX concepts already have 'phenx:' prefix. TOPMed concepts are bare
+    and get 'topmed:' added.
+
+    Args:
+        concept_id: Raw concept_id from vocabulary or ground truth.
+
+    Returns:
+        Namespaced concept_id.
+    """
+    if ":" in concept_id:
+        return concept_id
+    return f"{DEFAULT_NAMESPACE}:{concept_id}"
+
+
+# ---------------------------------------------------------------------------
 # Concept vocabulary
 # ---------------------------------------------------------------------------
 
 
-def load_vocabulary(path: Path) -> list[dict]:
-    """Load the concept vocabulary from JSON.
+def load_vocabulary(path: Path, phenx_path: Path | None = None) -> list[dict]:
+    """Load concept vocabularies (TOPMed + optional PhenX) and merge.
+
+    TOPMed concepts get their bare IDs preserved (namespace added at output time).
+    PhenX concepts already have 'phenx:' prefix in their concept_id.
 
     Args:
-        path: Path to concept-vocabulary.json.
+        path: Path to concept-vocabulary.json (TOPMed).
+        phenx_path: Optional path to phenx-concept-vocabulary.json.
 
     Returns:
         List of concept dicts with concept_id, name, description, etc.
     """
     with open(path) as f:
-        return json.load(f)
+        vocab = json.load(f)
+
+    if phenx_path and phenx_path.exists():
+        with open(phenx_path) as f:
+            phenx_vocab = json.load(f)
+        # PhenX entries already have phenx: prefix and description
+        # Normalize to same shape as TOPMed entries
+        for entry in phenx_vocab:
+            if "example_variables" not in entry:
+                entry["example_variables"] = []
+            if "cui" not in entry:
+                entry["cui"] = None
+        vocab.extend(phenx_vocab)
+
+    return vocab
 
 
 def format_vocab_for_prompt(vocab: list[dict]) -> str:
@@ -260,9 +302,9 @@ variables to a fixed vocabulary of {n_concepts} expert-curated concepts.
    the concepts below. Consider the variable name, description, AND the
    table context (name + description).
 
-2. Return the concept_id if there's a match, or null if the variable doesn't
-   fit any concept. It is EXPECTED that many variables will be null — only
-   match when you are confident.
+2. **ONLY return variables that match a concept.** Omit any variable that does
+   not match — unmatched variables are assumed null. It is EXPECTED that many
+   variables will be unmatched. Only match when you are confident.
 
 3. Use the table name and description as context — they tell you what instrument
    or procedure produced the data. But do NOT let the table name override what
@@ -273,18 +315,16 @@ variables to a fixed vocabulary of {n_concepts} expert-curated concepts.
    - "medium": The variable likely matches but there's some ambiguity
    - "low": The match is plausible but uncertain
 
-5. DO NOT invent concept_ids. Only use IDs from the vocabulary below, or null.
+5. DO NOT invent concept_ids. Only use IDs from the vocabulary below.
 
 6. Match based on what value the variable contains, not what it references.
-   "Age at BMI measurement" contains an age, not a BMI — it should get null
-   (unless there is an age concept it matches).
+   "Age at BMI measurement" contains an age, not a BMI — do not include it.
 
 7. The input may contain ONE or MULTIPLE tables. Return results grouped by
-   table_name, preserving the exact table names from the input.
+   table_name, preserving the exact table names from the input. Omit tables
+   where no variables matched.
 
 ## Concept Vocabulary ({n_concepts} concepts)
-
-Match each variable to ONE of these concepts, or null if none match.
 
 {vocab_section}
 """
@@ -319,10 +359,12 @@ def make_agent(vocab: list[dict]) -> Agent[MatchDeps, MatchedBatch]:
     )
 
     @agent.output_validator
-    async def validate_completeness(
+    async def validate_matches(
         ctx: RunContext[MatchDeps], result: MatchedBatch
     ) -> MatchedBatch:
-        """Ensure every input table and variable is present and concept_ids are valid.
+        """Validate returned matches: concept_ids are valid, variables exist in input.
+
+        Only matched variables are returned; unmatched are omitted from output.
 
         Args:
             ctx: Run context with input tables and valid concept_ids.
@@ -331,45 +373,33 @@ def make_agent(vocab: list[dict]) -> Agent[MatchDeps, MatchedBatch]:
         Returns:
             Validated result.
         """
-        output_tables = {t.table_name: t for t in result.tables}
-
-        # Check all expected tables are present
-        missing_tables = set(ctx.deps.input_tables.keys()) - set(output_tables.keys())
-        if missing_tables:
-            msg = f"Missing tables: {sorted(missing_tables)}"
-            print(f"    RETRY: {msg}", file=sys.stderr)
-            raise ModelRetry(msg)
-
-        # Check variables within each table
-        for table_name, expected_vars in ctx.deps.input_tables.items():
-            if table_name not in output_tables:
-                continue
-            output_vars = {v.variable_name for v in output_tables[table_name].variables}
-            missing = expected_vars - output_vars
-            if missing:
-                msg = (
-                    f"Missing {len(missing)} variables in table "
-                    f"'{table_name}': {sorted(missing)[:5]}"
-                )
-                print(f"    RETRY: {msg}", file=sys.stderr)
-                raise ModelRetry(msg)
-            extra = output_vars - expected_vars
-            if extra:
-                msg = (
-                    f"Extra variables in table '{table_name}' "
-                    f"not in input: {sorted(extra)[:5]}"
-                )
-                print(f"    RETRY: {msg}", file=sys.stderr)
-                raise ModelRetry(msg)
-
-        # Validate concept_ids against vocabulary
         for table_result in result.tables:
+            # Check table exists in input
+            if table_result.table_name not in ctx.deps.input_tables:
+                msg = (
+                    f"Table '{table_result.table_name}' not in input. "
+                    f"Valid tables: {sorted(ctx.deps.input_tables.keys())}"
+                )
+                print(f"    RETRY: {msg}", file=sys.stderr)
+                raise ModelRetry(msg)
+
+            expected_vars = ctx.deps.input_tables[table_result.table_name]
             for v in table_result.variables:
-                if v.concept_id is not None and v.concept_id not in ctx.deps.valid_concept_ids:
+                # Check variable exists in input table
+                if v.variable_name not in expected_vars:
+                    msg = (
+                        f"Variable '{v.variable_name}' not in input table "
+                        f"'{table_result.table_name}'"
+                    )
+                    print(f"    RETRY: {msg}", file=sys.stderr)
+                    raise ModelRetry(msg)
+
+                # Check concept_id is valid
+                if v.concept_id not in ctx.deps.valid_concept_ids:
                     msg = (
                         f"Invalid concept_id '{v.concept_id}' for variable "
                         f"'{v.variable_name}' in table '{table_result.table_name}'. "
-                        f"Must be one of the vocabulary concept_ids or null."
+                        f"Must be one of the vocabulary concept_ids."
                     )
                     print(f"    RETRY: {msg}", file=sys.stderr)
                     raise ModelRetry(msg)
@@ -584,7 +614,7 @@ async def classify_study(
                     "name": v["name"],
                     "id": v.get("id", ""),
                     "description": v.get("description", ""),
-                    "concept_id": f"{CONCEPT_NAMESPACE}:{ground_truth[phv_num]}",
+                    "concept_id": _namespace_concept_id(ground_truth[phv_num]),
                     "confidence": "high",
                     "source": "ground_truth",
                 })
@@ -623,9 +653,12 @@ async def classify_study(
                 on_batch_done()
             n_tables = len(batch)
             n_vars = sum(len(v) for _, v in batch)
+            n_matched = sum(
+                len(t.variables) for t in result[0].tables
+            )
             print(
                 f"    batch {batches_done}/{total_batches} "
-                f"({n_tables} tables, {n_vars} vars)",
+                f"({n_tables} tables, {n_vars} vars, {n_matched} matched)",
                 file=sys.stderr,
             )
             return result
@@ -637,8 +670,8 @@ async def classify_study(
             *[_run_batch(b) for b in batches],
         )
 
-    # 4. Demux LLM results back to per-table
-    llm_by_table: dict[str, list[dict]] = defaultdict(list)
+    # 4. Demux LLM matches back to per-table (only matched vars returned by LLM)
+    llm_matched: dict[str, dict[str, dict]] = defaultdict(dict)  # table -> var_name -> result
     total_in = 0
     total_out = 0
 
@@ -650,32 +683,47 @@ async def classify_study(
                 meta = meta_lookup.get(
                     (table_result.table_name, mv.variable_name), {}
                 )
-                namespaced_cid = (
-                    f"{CONCEPT_NAMESPACE}:{mv.concept_id}"
-                    if mv.concept_id is not None
-                    else None
-                )
-                llm_by_table[table_result.table_name].append({
+                llm_matched[table_result.table_name][mv.variable_name] = {
                     "name": mv.variable_name,
                     "id": meta.get("id", ""),
                     "description": meta.get("description", ""),
-                    "concept_id": namespaced_cid,
+                    "concept_id": _namespace_concept_id(mv.concept_id),
                     "confidence": mv.confidence,
                     "source": "llm",
-                })
+                }
 
-    # 5. Assemble per-table results (GT + LLM)
-    table_lookup = {t.table_name: t for t in tables}
+    # 5. Assemble per-table results (GT + LLM matched + unmatched)
     table_results = []
     total_gt = 0
-    total_llm = 0
+    total_llm_matched = 0
+    total_llm_unmatched = 0
 
     for table in sorted(tables, key=lambda t: t.variable_count, reverse=True):
         gt_vars_list = gt_by_table.get(table.table_name, [])
-        llm_vars_list = llm_by_table.get(table.table_name, [])
+        gt_names = {v["name"] for v in gt_vars_list}
+        matched_for_table = llm_matched.get(table.table_name, {})
+
+        # Build LLM variable list: matched + unmatched nulls
+        llm_vars_list = []
+        for v in table.variables:
+            if v["name"] in gt_names:
+                continue  # Already handled by ground truth
+            if v["name"] in matched_for_table:
+                llm_vars_list.append(matched_for_table[v["name"]])
+                total_llm_matched += 1
+            else:
+                llm_vars_list.append({
+                    "name": v["name"],
+                    "id": v.get("id", ""),
+                    "description": v.get("description", ""),
+                    "concept_id": None,
+                    "confidence": "high",
+                    "source": "llm",
+                })
+                total_llm_unmatched += 1
+
         all_vars = gt_vars_list + llm_vars_list
         total_gt += len(gt_vars_list)
-        total_llm += len(llm_vars_list)
 
         table_results.append({
             "tableName": table.table_name,
@@ -684,10 +732,19 @@ async def classify_study(
             "variables": all_vars,
         })
 
-    cost = total_in * 0.80 / 1e6 + total_out * 4 / 1e6
+    # Haiku 4.5: $0.80/M input, $0.08/M cached read, $4/M output
+    # System prompt (~8.5K tokens) is cached after first batch
+    n_batches = len(batches)
+    cached_tokens = n_batches * 8500
+    noncached_tokens = max(0, total_in - cached_tokens)
+    cost = (
+        cached_tokens * 0.08 / 1e6
+        + noncached_tokens * 0.80 / 1e6
+        + total_out * 4 / 1e6
+    )
     print(
         f"    tokens: {total_in:,} in / {total_out:,} out (${cost:.3f})"
-        f"  [gt={total_gt}, llm={total_llm}]",
+        f"  [gt={total_gt}, matched={total_llm_matched}, unmatched={total_llm_unmatched}]",
         file=sys.stderr,
     )
 
@@ -905,9 +962,14 @@ async def main() -> None:
     if not VOCAB_PATH.exists():
         print(f"ERROR: Vocabulary not found: {VOCAB_PATH}", file=sys.stderr)
         sys.exit(1)
-    vocab = load_vocabulary(VOCAB_PATH)
+    vocab = load_vocabulary(VOCAB_PATH, PHENX_VOCAB_PATH)
+    topmed_count = len({v["concept_id"] for v in vocab if ":" not in v["concept_id"]})
+    phenx_count = len({v["concept_id"] for v in vocab if v["concept_id"].startswith("phenx:")})
     n_concepts = len({v["concept_id"] for v in vocab})
-    print(f"Loaded {n_concepts} concepts from vocabulary", file=sys.stderr)
+    print(
+        f"Loaded {n_concepts} concepts ({topmed_count} TOPMed + {phenx_count} PhenX)",
+        file=sys.stderr,
+    )
 
     # Build ground truth lookup from seed data
     if SEED_PATH.exists():

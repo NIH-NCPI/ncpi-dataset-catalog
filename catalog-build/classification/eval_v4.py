@@ -41,6 +41,7 @@ from classify_v4 import (
     load_vocabulary,
     make_agent,
     VOCAB_PATH,
+    PHENX_VOCAB_PATH,
 )
 from models import ParsedTable
 
@@ -135,7 +136,7 @@ class VariableInput(BaseModel):
 
 async def classify_one_variable(inputs: VariableInput) -> str:
     """Classify a single variable and return its concept_id or 'null'."""
-    vocab = load_vocabulary(VOCAB_PATH)
+    vocab = load_vocabulary(VOCAB_PATH, PHENX_VOCAB_PATH)
     agent = make_agent(vocab)
     valid_ids = {v["concept_id"] for v in vocab}
 
@@ -162,9 +163,9 @@ async def classify_one_variable(inputs: VariableInput) -> str:
         inputs.study_name,
         [(table, table.variables)],
     )
+    # matches-only output: if tables/variables empty, it means no match (null)
     if result.tables and result.tables[0].variables:
-        cid = result.tables[0].variables[0].concept_id
-        return cid if cid is not None else "null"
+        return result.tables[0].variables[0].concept_id
     return "null"
 
 

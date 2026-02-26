@@ -97,9 +97,22 @@ class ExtractResult(BaseModel):
 # --- Resolve agent models ---
 
 
+class MatchedVariable(BaseModel):
+    """A specific variable that matched the user's query at a leaf concept."""
+
+    description: str = Field(description="Variable description from the dataset")
+    variable_name: str = Field(description="Variable name (e.g. 'A06SWT0100')")
+
+
 class ResolveResult(BaseModel):
     """Output of the resolve agent for a single mention."""
 
+    matched_variables: list[MatchedVariable] = Field(
+        default_factory=list,
+        description="Specific variables at a leaf concept whose descriptions "
+        "match the user's query. Populated when the agent drills down to "
+        "variable level. Empty when a concept-level match is sufficient.",
+    )
     message: str | None = Field(
         default=None,
         description="Clarification message when the mention is ambiguous or "
@@ -125,6 +138,12 @@ class ResolvedMention(BaseModel):
         "False (default) to require them (AND).",
     )
     facet: Facet
+    matched_variables: list[MatchedVariable] = Field(
+        default_factory=list,
+        description="Specific variables selected by the resolve agent at a "
+        "leaf concept. When non-empty, variable queries should filter to "
+        "only these variable names.",
+    )
     original_text: str = Field(description="The raw text from the user query")
     values: list[str] = Field(
         description="Resolved canonical value(s), combined with OR. "

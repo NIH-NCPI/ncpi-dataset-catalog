@@ -301,13 +301,6 @@ async def search(
         if intent == "auto":
             pass  # Ambiguous — return clarification message only
         elif intent == "variable" and isinstance(index.store, DuckDBStore):
-            # Collect resolved measurement concepts for variable lookup
-            concepts = [
-                v
-                for m in query_model.mentions
-                if m.facet == Facet.MEASUREMENT and not m.exclude
-                for v in m.values
-            ]
             # Apply study-level constraints (platform, dataType, etc.)
             non_measurement = [
                 c for c in include if c[0] != Facet.MEASUREMENT
@@ -318,10 +311,40 @@ async def search(
                     non_measurement or include, exclude or None
                 )
                 study_ids = {s.get("dbGapId", "") for s in matched}
-            variable_rows = index.store.query_variables(
-                concepts=concepts or None,
-                study_ids=study_ids,
-            )
+
+            # Split measurement mentions: those with matched_variables
+            # (leaf-level filter) vs. those without (return all).
+            filtered_concepts: list[str] = []
+            unfiltered_concepts: list[str] = []
+            matched_var_names: set[str] = set()
+            for m in query_model.mentions:
+                if m.facet != Facet.MEASUREMENT or m.exclude:
+                    continue
+                if m.matched_variables:
+                    filtered_concepts.extend(m.values)
+                    for mv in m.matched_variables:
+                        matched_var_names.add(mv.variable_name.lower())
+                else:
+                    unfiltered_concepts.extend(m.values)
+
+            # Query each group and combine
+            variable_rows = []
+            if filtered_concepts:
+                rows = index.store.query_variables(
+                    concepts=filtered_concepts,
+                    study_ids=study_ids,
+                )
+                variable_rows.extend(
+                    r for r in rows
+                    if r.get("variableName", "").lower() in matched_var_names
+                )
+            if unfiltered_concepts:
+                variable_rows.extend(
+                    index.store.query_variables(
+                        concepts=unfiltered_concepts,
+                        study_ids=study_ids,
+                    )
+                )
         else:
             studies = index.query_studies(include, exclude or None)
 
