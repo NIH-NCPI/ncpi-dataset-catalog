@@ -8,8 +8,7 @@ import {
 
 /**
  * Determines the current datasets view based on messages and status.
- * @param messages - Chat messages.
- * @param status - Chat status.
+ * @param state - Chat state.
  * @returns The view state with typed message when applicable.
  */
 export function getDatasetsView(state: ChatState): DatasetsView {
