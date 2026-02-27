@@ -52,9 +52,9 @@ CACHE_DIR = SCRIPT_DIR / "output" / "archetypes"
 DEFAULT_MIN_VARS = 200
 
 # Max unique pairs for the definition call (archetypes + assignments).
-# Sonnet 4 has 200K context; at ~22 tokens/pair plus output overhead,
-# 4,000 pairs uses ~110K tokens total — safe margin.
-BATCH_SIZE = 4000
+# Sonnet 4 has 200K context with 64K max output. At ~22 tokens/pair,
+# 3,000 pairs ≈ 66K input + 64K output = 130K total — safe margin.
+BATCH_SIZE = 3000
 
 # Max variables per assignment-only call. Output is ~12 tokens per variable
 # (compact dict format), so 2,000 * 12 ≈ 24K output tokens — fits in 32K.
@@ -338,9 +338,10 @@ async def _call_define_archetypes(
         system_prompt=SYSTEM_PROMPT,
         model_settings=AnthropicModelSettings(
             anthropic_cache_instructions=True,
-            max_tokens=32768,
+            max_tokens=64000,
             temperature=0.0,
         ),
+        output_retries=3,
     )
     result = await agent.run(build_user_prompt(concept_id, variables))
     return result.output
@@ -370,6 +371,7 @@ async def _call_assign_variables(
             max_tokens=32768,
             temperature=0.0,
         ),
+        output_retries=3,
     )
     prompt = build_assign_prompt(concept_id, archetypes, variables)
     result = await agent.run(prompt)
@@ -660,10 +662,22 @@ async def main_async(args: argparse.Namespace) -> None:
 
     # Process each concept
     results: dict[str, ArchetypeTree] = {}
+    failed: list[str] = []
     for concept_id in large:
-        tree = await generate_archetypes_for_concept(concept_id, dry_run=args.dry_run)
-        if tree:
-            results[concept_id] = tree
+        try:
+            tree = await generate_archetypes_for_concept(concept_id, dry_run=args.dry_run)
+            if tree:
+                results[concept_id] = tree
+        except Exception as exc:
+            print(f"\nERROR processing {concept_id}: {exc}")
+            failed.append(concept_id)
+
+    if failed:
+        print(f"\n{'=' * 60}")
+        print(f"FAILED concepts ({len(failed)}) — re-run to retry:")
+        for cid in failed:
+            print(f"  {cid}")
+        print(f"{'=' * 60}")
 
     if not args.dry_run:
         write_outputs(results)

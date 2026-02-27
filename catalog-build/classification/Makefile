@@ -90,26 +90,9 @@ phenx-inject:
 isa:
 	$(VENV) build_concept_isa.py
 
-# Dump ISA hierarchy as markdown
+# Dump ISA hierarchy as markdown with variable counts
 hierarchy:
-	@$(VENV) -c "\
-	import json; \
-	from collections import defaultdict; \
-	isa = json.load(open('output/concept-isa.json')); \
-	cats = json.load(open('output/ncpi-categories.json')); \
-	children_of = defaultdict(list); \
-	[children_of[r['parent']].append(r['child']) for r in isa]; \
-	[v.sort() for v in children_of.values()]; \
-	[\
-	  (print(f'## {c[\"name\"]} (\`{c[\"concept_id\"]}\`)'), print(), \
-	   [( \
-	     (print(f'- **{ch}**'), [print(f'  - {gc}') for gc in children_of.get(ch, [])]) \
-	     if children_of.get(ch) \
-	     else print(f'- {ch}') \
-	   ) for ch in children_of.get(c['concept_id'], ['*(empty)*'])], \
-	   print()) \
-	  for c in cats \
-	]"
+	@$(VENV) show_hierarchy.py
 
 # Generate sub-concepts for broad concepts (requires ANTHROPIC_API_KEY)
 subconcepts:
