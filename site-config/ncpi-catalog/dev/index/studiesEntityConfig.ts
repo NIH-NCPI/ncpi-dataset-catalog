@@ -21,6 +21,7 @@ import { mainColumn } from "../detail/study/overviewMainColumn";
 import { sideColumn } from "../detail/study/overviewSideColumn";
 import { publicationsMainColumn } from "../detail/study/publicationsMainColumn";
 import { top } from "../detail/study/top";
+import { variablesMainColumn } from "../detail/study/variablesMainColumn";
 
 /**
  * Entity config object responsible for config related to the /studies route.
@@ -40,6 +41,11 @@ export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
         label: "Selected Publications",
         mainColumn: publicationsMainColumn,
         route: "selected-publications",
+      },
+      {
+        label: "Variables",
+        mainColumn: variablesMainColumn,
+        route: "variables",
       },
     ],
     top: top,

@@ -33,6 +33,20 @@ export const buildPublications = (
 };
 
 /**
+ * Build props for Variables component from the given NCPI study.
+ * @param ncpiCatalogStudy - NCPI catalog study.
+ * @returns Model to be used as props for the Variables component.
+ */
+export const buildVariables = (
+  ncpiCatalogStudy: NCPICatalogStudy,
+): React.ComponentProps<typeof C.Variables> => {
+  return {
+    studyAccession: ncpiCatalogStudy.studyAccession,
+    variableSummary: ncpiCatalogStudy.variableSummary ?? null,
+  };
+};
+
+/**
  * Build props for ConsentCodesCell component from the given NCPI entity.
  * @param ncpiCatalogEntry - NCPI catalog entity.
  * @returns Model to be used as props for the ConsentCodesCell component.

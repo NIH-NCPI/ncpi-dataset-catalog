@@ -26,5 +26,6 @@ export { MarkdownRenderer } from "@databiosphere/findable-ui/lib/components/Mark
 export { ConsentCodeList } from "./Detail/components/ConsentCodeList/consentCodeList";
 export { ConsentTooltip } from "./Detail/components/ConsentTooltip/consentTooltip";
 export { Publications } from "./Detail/components/Publications/publications";
+export { Variables } from "./Detail/components/Variables/variables";
 export { ConsentCodesCell } from "./Index/components/ConsentCodesCell/consentCodesCell";
 export { LabelIconMenuItem } from "./Layout/components/Header/components/Content/components/Navigation/components/NavigationMenuItems/components/LabelIconMenuItem/labelIconMenuItem";

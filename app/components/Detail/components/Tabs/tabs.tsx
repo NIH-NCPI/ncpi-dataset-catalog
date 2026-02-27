@@ -5,14 +5,16 @@ import { NCPICatalogStudy } from "app/apis/catalog/ncpi-catalog/common/entities"
 import { StyledTabs } from "./tabs.styles";
 
 /**
- * Renders tabs for the study detail page, allowing navigation between the "Overview" and "Selected Publications" tabs.
+ * Renders tabs for the study detail page, allowing navigation between the "Overview", "Selected Publications", and "Variables" tabs.
  * The current tab is determined by the query parameters in the URL, and changing tabs updates the URL accordingly.
  * @param props - Component props.
  * @param props.publications - Array of publications associated with the study, used to display the count in the "Selected Publications" tab.
+ * @param props.variableSummary - Variable summary data, used to display the count in the "Variables" tab.
  * @returns Tabs element for the study detail page.
  */
 export const Tabs = ({
   publications,
+  variableSummary,
 }: NCPICatalogStudy): JSX.Element | null => {
   const { push, query } = useRouter();
   return (
@@ -24,6 +26,13 @@ export const Tabs = ({
           count: String(publications.length),
           label: "Selected Publications",
           value: "selected-publications",
+        },
+        {
+          count: variableSummary
+            ? variableSummary.totalVariables.toLocaleString()
+            : "0",
+          label: "Variables",
+          value: "variables",
         },
       ]}
       value={getTabValue(query)}

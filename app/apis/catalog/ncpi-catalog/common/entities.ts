@@ -17,6 +17,7 @@ export interface NCPIStudy extends DbGapStudy {
   consentLongNames: Record<string, string>;
   duosUrl: string | null;
   platforms: PLATFORM[];
+  variableSummary: VariableSummary | null;
 }
 
 export type DbGapId = string;
@@ -36,6 +37,25 @@ export interface NCPICatalogPlatform {
   title: string[];
 }
 
+export interface Variable {
+  description: string;
+  id: string;
+  name: string;
+}
+
+export interface VariableCategory {
+  categoryId: string;
+  categoryName: string;
+  totalCount: number;
+  variables?: Variable[];
+}
+
+export interface VariableSummary {
+  categories: VariableCategory[];
+  classifiedVariables: number;
+  totalVariables: number;
+}
+
 export interface NCPICatalogStudy {
   consentCode: string[];
   consentLongName: Record<string, string>;
@@ -51,4 +71,5 @@ export interface NCPICatalogStudy {
   studyDescription: string;
   studyDesign: string[];
   title: string;
+  variableSummary: VariableSummary | null;
 }
