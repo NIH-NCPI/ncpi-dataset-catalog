@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document defines a classification system for collapsing ~340,000+ dbGaP phenotype variables into ~150-200 searchable measures (following PhenX terminology: a "measure" is a standard way of capturing data on a characteristic of a study subject). The goal is to let researchers find studies by what was measured, without needing to know study-specific variable names.
+This document defines a classification system for collapsing ~425,000 dbGaP phenotype variables into ~6,700 searchable concepts organized in a 4-level hierarchy. The goal is to let researchers find studies by what was measured, without needing to know study-specific variable names. Currently 179K variables (42%) are classified across 2,944 studies.
 
 ## Example Queries
 
@@ -568,11 +568,11 @@ When the concept set is updated:
 
 All concept IDs carry a namespace prefix indicating their source vocabulary:
 
-| Prefix    | Source                                      | Example                 | Count |
-| --------- | ------------------------------------------- | ----------------------- | ----- |
-| `topmed:` | TOPMed harmonized variable phenotype tags   | `topmed:bp_systolic`    | 77    |
-| `phenx:`  | PhenX Toolkit protocols with dbGaP mappings | `phenx:spirometry`      | 181   |
-| `domain:` | Curated top-level domain groupings          | `domain:cardiovascular` | ~12   |
+| Prefix    | Source                                      | Example                        | Count  |
+| --------- | ------------------------------------------- | ------------------------------ | ------ |
+| `topmed:` | TOPMed harmonized variable phenotype tags   | `topmed:bp_systolic`           | ~360   |
+| `phenx:`  | PhenX Toolkit protocols with dbGaP mappings | `phenx:spirometry`             | ~210   |
+| `ncpi:`   | Generated archetypes (LLM-grouped)          | `ncpi:ecg_atrial_fibrillation` | ~6,300 |
 
 This avoids collisions between vocabularies and makes the provenance of each classification explicit. The namespace is part of the concept_id stored in classification output and the DuckDB index.
 
@@ -609,29 +609,39 @@ PhenX provides ~181 standardized protocols with pre-mapped dbGaP variables from 
 ### Combined vocabulary architecture
 
 ```
-domain:cardiovascular                          ← browsing / top-level grouping
-  ├── phenx:blood_pressure                     ← PhenX mid-level (181 protocols)
-  │     ├── topmed:bp_systolic    (CUI: C2039694)  ← fine-grained TOPMed concept
-  │     ├── topmed:bp_diastolic   (CUI: C2183311)
-  │     └── topmed:antihypertensive_meds (CUI: C0003364)
-  ├── phenx:myocardial_infarction
-  │     ├── topmed:mi_incident
-  │     └── topmed:mi_prior
-  └── domain:atherosclerosis
-        ├── topmed:cac_score      (CUI: C2825178)
-        ├── topmed:cimt           (CUI: C1960466)
-        └── ...
+ncpi:cardiovascular                            ← category (27 top-level)
+  ├── phenx:blood_pressure                     ← PhenX mid-level
+  │     ├── topmed:bp_systolic                 ← TOPMed concept
+  │     │     ├── ncpi:bp_systolic_resting_systolic_bp (632 vars)  ← archetype
+  │     │     └── ncpi:bp_systolic_ankle_brachial_systolic_bp (208 vars)
+  │     └── topmed:bp_diastolic
+  │           └── ncpi:bp_diastolic_resting_diastolic_bp (767 vars)
+  ├── topmed:ecg                               ← large concept (10,541 vars)
+  │     ├── ncpi:ecg_atrial_fibrillation (136 vars)   ← archetype
+  │     ├── ncpi:ecg_qt_interval (114 vars)
+  │     ├── ncpi:ecg_wave_amplitudes (2,015 vars)
+  │     └── ... (38 more archetypes)
+  └── phenx:myocardial_infarction
+        ├── topmed:mi_incident
+        └── topmed:mi_prior
 ```
+
+Max tree depth is 4 (category → concept → sub-concept → archetype). The full
+tree can be generated with `make hierarchy` in `catalog-build/classification/`.
 
 ### Pipeline scripts
 
-| Script                      | Input                                              | Output                          | LLM calls? |
-| --------------------------- | -------------------------------------------------- | ------------------------------- | ---------- |
-| `namespace_v3_output.py`    | `llm-concepts-v3/`                                 | `llm-concepts-v4/`              | No         |
-| `build_phenx_vocabulary.py` | PhenX source files                                 | `phenx-concept-vocabulary.json` | No         |
-| `inject_phenx_mappings.py`  | `llm-concepts-v4/` + Variable_cross_reference.xlsx | `llm-concepts-v4/` (updated)    | No         |
+| Script                      | Input                                              | Output                                     | LLM calls?   |
+| --------------------------- | -------------------------------------------------- | ------------------------------------------ | ------------ |
+| `classify_v4.py`            | var_report.xml + concept vocabulary                | `llm-concepts-v4/*.json`                   | Yes (Haiku)  |
+| `namespace_v3_output.py`    | `llm-concepts-v3/`                                 | `llm-concepts-v4/`                         | No           |
+| `build_phenx_vocabulary.py` | PhenX source files                                 | `phenx-concept-vocabulary.json`            | No           |
+| `inject_phenx_mappings.py`  | `llm-concepts-v4/` + Variable_cross_reference.xlsx | `llm-concepts-v4/` (updated)               | No           |
+| `expand_vocabulary.py`      | concept-vocabulary + unmatched vars                | concept-vocabulary.json + concept-isa.json | Yes (Sonnet) |
+| `build_archetypes.py`       | `llm-concepts-v4/` + concept vocab                 | vocab, ISA, re-tagged study JSONs          | Yes (Sonnet) |
+| `show_hierarchy.py`         | concept-isa.json + vocab + study JSONs             | markdown tree with var counts              | No           |
 
-Run all three with `make v4` in `catalog-build/classification/`.
+See `catalog-build/classification/README.md` for full build instructions.
 
 ### Backend search flow
 
