@@ -7,7 +7,7 @@
 
 VENV = ../../backend/.venv/bin/python3
 
-.PHONY: help seeds classify classify-study classify-v3 classify-v3-study evals evals-scaling summary summary-detail summary-studies namespace phenx-vocab phenx-inject isa hierarchy v4 subconcepts expand expand-dry-run expand-parents
+.PHONY: help seeds classify classify-study classify-v3 classify-v3-study evals evals-scaling summary summary-detail summary-studies namespace phenx-vocab phenx-inject isa hierarchy v4 subconcepts expand expand-dry-run expand-parents archetypes archetypes-dry-run archetypes-concept
 
 help:
 	@echo "Variable Classification Pipeline"
@@ -30,6 +30,8 @@ help:
 	@echo "  subconcepts    - Generate sub-concepts for broad concepts (e.g. FFQ)"
 	@echo "  expand         - Expand vocabulary with 14 new phenotype categories + sub-concepts"
 	@echo "  expand-parents - Add parent concepts only (no sub-concepts)"
+	@echo "  archetypes     - Generate archetypes for large concepts (>200 vars)"
+	@echo "  archetypes-dry-run - Show stats without calling LLM"
 	@echo ""
 	@echo "  classify-v3    - Classify all studies with v3 (single-table, legacy)"
 
@@ -124,6 +126,18 @@ expand-dry-run:
 # Add parent concepts only, skip sub-concept generation
 expand-parents:
 	$(VENV) expand_vocabulary.py --parents-only
+
+# Generate archetypes for large concepts (requires ANTHROPIC_API_KEY)
+archetypes:
+	$(VENV) build_archetypes.py
+
+# Dry-run: show archetype stats without calling LLM
+archetypes-dry-run:
+	$(VENV) build_archetypes.py --dry-run
+
+# Generate archetypes for a single concept: make archetypes-concept CONCEPT=topmed:ecg
+archetypes-concept:
+	$(VENV) build_archetypes.py --concept $(CONCEPT)
 
 # Full v4 pipeline: namespace → phenx-vocab → isa → phenx-inject
 v4: namespace phenx-vocab isa phenx-inject

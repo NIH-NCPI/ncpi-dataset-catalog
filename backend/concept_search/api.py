@@ -307,35 +307,20 @@ async def search(
                 )
                 study_ids = {s.get("dbGapId", "") for s in matched}
 
-            # Split measurement mentions: those with matched_variables
-            # get filtered to those specific variables via SQL IN list;
-            # those without return all variables for the concept.
-            filtered_concepts: list[str] = []
-            unfiltered_concepts: list[str] = []
-            matched_var_names: set[str] = set()
+            # Collect all measurement concepts and query variables
+            # via ISA closure (matched_variables are kept for display
+            # but not used as a SQL filter — the concept tag is enough).
+            all_concepts: list[str] = []
             for m in query_model.mentions:
                 if m.facet != Facet.MEASUREMENT or m.exclude:
                     continue
-                if m.matched_variables:
-                    filtered_concepts.extend(m.values)
-                    for mv in m.matched_variables:
-                        matched_var_names.add(mv.variable_name)
-                else:
-                    unfiltered_concepts.extend(m.values)
+                all_concepts.extend(m.values)
 
             variable_rows = []
-            if filtered_concepts:
+            if all_concepts:
                 variable_rows.extend(
                     index.store.query_variables(
-                        concepts=filtered_concepts,
-                        study_ids=study_ids,
-                        variable_names=matched_var_names,
-                    )
-                )
-            if unfiltered_concepts:
-                variable_rows.extend(
-                    index.store.query_variables(
-                        concepts=unfiltered_concepts,
+                        concepts=all_concepts,
                         study_ids=study_ids,
                     )
                 )
