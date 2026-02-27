@@ -6,8 +6,11 @@ import {
 } from "@databiosphere/findable-ui/lib/components/Table/components/TableToolbar2/tableToolbar2.styles";
 import { TableDownload } from "@databiosphere/findable-ui/lib/components/Table/components/TableFeatures/TableDownload/tableDownload";
 import { Divider } from "@mui/material";
+import { RowData } from "@tanstack/react-table";
 
-export const TableToolbar = ({ table }: Props): JSX.Element => {
+export const TableToolbar = <T extends RowData>({
+  table,
+}: Props<T>): JSX.Element => {
   return (
     <Fragment>
       <StyledToolbar>

@@ -2,7 +2,7 @@ import { JSX } from "react";
 import { getDatasetsView } from "./utils";
 import { STATUS } from "./types";
 import { Welcome } from "../Welcome/welcome";
-import { Props } from "../../artifact/types";
+import { Props } from "./types";
 import { StyledLoadingIcon, StyledRoundedPaper } from "./datasets.styles";
 import { SVG_ICON_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/svgIcon";
 import { Results } from "../Results/results";

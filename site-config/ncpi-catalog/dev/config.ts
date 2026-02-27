@@ -30,7 +30,7 @@ const config: SiteConfig = {
   ai: {
     enabled: true,
     prompt: {
-      inputPrefill: "Ask about datasets or variables",
+      inputPlaceholder: "Ask about datasets or variables",
       suggestions: [
         {
           label: "GLP-1 effect + smoking in T2D",

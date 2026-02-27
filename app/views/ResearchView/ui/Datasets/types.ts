@@ -1,5 +1,6 @@
 import {
   AssistantMessage,
+  ChatState,
   PromptMessage,
 } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
 import { Response } from "app/views/ResearchView/types/response";
@@ -9,6 +10,10 @@ export type DatasetsView =
   | { message: PromptMessage; status: STATUS.READY }
   | { status: STATUS.LOADING }
   | { status: STATUS.NOT_FOUND };
+
+export interface Props {
+  state: ChatState;
+}
 
 export enum STATUS {
   COMPLETE = "COMPLETE",
