@@ -208,28 +208,41 @@ The full tree can be generated with `make hierarchy` in `catalog-build/classific
 
 ### 4d. Archetype generation
 
-Many concepts have thousands of variables — the same measurement repeated
-across studies and time points. For example, ECG atrial fibrillation appears as
-`AFIB`, `ATRFIB21`, `ECGAFIB`, `afib_s1`, `ecg_af` across 40+ studies. These
-aren't distinct measurements.
+After classification and vocabulary expansion, 185 concepts still have >200
+variables each — too many for the resolve agent to browse and too coarse for
+specific queries. But the variables aren't distinct measurements. ECG atrial
+fibrillation appears as `AFIB`, `ATRFIB21`, `ECGAFIB`, `afib_s1`, `ecg_af`
+across 40+ studies, each repeated across visit tables. The 10,541 "ECG"
+variables represent roughly 40 distinct measurement types.
 
 The archetype pipeline (`build_archetypes.py`) groups semantically identical
 variables into canonical sub-concepts:
 
-1. **Discovery** — scans all study JSONs, identifies concepts with >200
-   variables (185 concepts, 152K variables)
-2. **LLM grouping** — sends deduplicated (name, description) pairs to Claude
-   Sonnet in batches, which returns 5-50 archetypes per concept with variable
-   assignments
-3. **Output** — appends archetype entries to `concept-vocabulary.json`, ISA
-   edges to `concept-isa.json`, and re-tags `concept_id` in the study JSONs
+1. **Discovery** — scans all 2,944 study JSONs, counts variables per concept,
+   identifies the 185 concepts exceeding 200 variables (152K variables total)
+2. **Deduplication** — collapses variable occurrences by (name, description)
+   to get unique measurement signatures. ECG's 10,541 occurrences reduce to
+   8,671 unique pairs.
+3. **LLM grouping** — sends deduplicated pairs to Claude Sonnet with
+   instructions to group by measurement type (not by study or naming
+   convention). For concepts that exceed the 200K context window, a two-pass
+   approach is used:
+   - **Pass 1 (define)**: first 3,000 pairs → Sonnet returns archetype
+     definitions (5-50 per concept)
+   - **Pass 2+ (assign)**: remaining pairs in batches of 2,000 → Sonnet
+     assigns each variable to an existing archetype
+4. **Output** — appends archetype entries to `concept-vocabulary.json`, ISA
+   edges to `concept-isa.json`, and re-tags `concept_id` in the study JSONs so
+   variables point to their archetype instead of the broad parent
 
-For concepts exceeding the context window, a two-pass approach is used: Pass 1
-defines archetypes from the first batch, Pass 2+ assigns remaining variables to
-those archetypes. Results are cached per-concept for resumability.
+All archetypes use the `ncpi:` namespace prefix (e.g.,
+`ncpi:ecg_atrial_fibrillation`) since they are our own groupings, not TOPMed
+harmonized concepts. ISA closure means a query at the parent level still
+returns all descendant variables — no information is lost.
 
+Results are cached per-concept in `output/archetypes/` for resumability.
 Current stats: **6,281 archetypes** across 185 concepts, **98K variables**
-assigned. Estimated Sonnet cost: ~$15-20 for a full run.
+assigned (~94% assignment rate). Estimated Sonnet cost: ~$15-20 for a full run.
 
 ### 4e. Vocabulary sources
 

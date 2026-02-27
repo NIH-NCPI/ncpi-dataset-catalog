@@ -552,6 +552,97 @@ Each round shrinks the unmatched pool. The concept set grows from 65 toward the 
 
 **Bootstrapping from v1/v2 output:** The existing concept bank from v1/v2 runs (12K+ concept names with study counts) provides a useful signal for step 1: high-frequency concepts that appear across many studies are strong candidates for UMLS lookup and addition to the curated set.
 
+### Step 4: Archetype generation
+
+After classification and vocabulary expansion, many concepts still have
+thousands of variables — far too many to display or for the resolve agent to
+curate. But these aren't thousands of _distinct_ measurements. They're the same
+measurement repeated across studies and time points with different names.
+
+For example, `topmed:ecg` has 10,541 variables. ECG atrial fibrillation alone
+appears as `AFIB`, `ATRFIB21`, `ECGAFIB`, `afib_s1`, `ecg_af`, `B269` across
+40+ studies, with each study repeating the variable across visit tables
+(`V1ECG`, `V2ECG`, `YR6`, `YR7`...).
+
+The archetype pipeline groups semantically identical variables into canonical
+sub-concepts ("archetypes"):
+
+```
+topmed:ecg (10,541 vars)
+  ├── ncpi:ecg_atrial_fibrillation (136 vars across 30 studies)
+  ├── ncpi:ecg_qt_interval (114 vars across 25 studies)
+  ├── ncpi:ecg_wave_amplitudes (2,015 vars)
+  ├── ncpi:ecg_minnesota_codes (852 vars)
+  └── ... (37 more archetypes)
+```
+
+#### Why archetypes
+
+1. **Resolve agent accuracy** — the agent's `list_variables_for_concept` tool
+   has a 200-variable limit. Without archetypes, 185 concepts exceed this,
+   making it impossible for the agent to see the full variable list and curate
+   `matchedVariables`. With archetypes, most leaf nodes are under 200.
+
+2. **Search specificity** — "ECG QT interval" should return QT-related
+   variables, not all 10,541 ECG variables. Archetypes let the resolve agent
+   drill to the right level.
+
+3. **ISA closure still works** — searching "ECG measurements" at the parent
+   level returns all descendant variables via transitive closure. No
+   information is lost.
+
+#### Algorithm
+
+For each concept with >200 variables:
+
+1. **Collect** all variables across all study JSONs for this concept
+2. **Deduplicate** by (name_lower, description_lower) — e.g., 10,541 variable
+   occurrences for ECG reduce to ~8,671 unique (name, description) pairs
+3. **Batch to LLM** — if unique pairs fit in one context window (<=3,000
+   pairs), send a single "define archetypes" call. If larger, use two passes:
+   - **Pass 1 (define)**: Send first 3,000 pairs, get archetype definitions
+   - **Pass 2+ (assign)**: Send remaining pairs in batches of 2,000 with the
+     archetype definitions, get assignments only (compact `dict[str, str]`
+     format)
+4. **Write outputs**:
+   - Append archetype entries to `concept-vocabulary.json` (with `ncpi:` prefix)
+   - Append ISA edges to `concept-isa.json` (archetype → parent)
+   - Re-tag `concept_id` in study JSONs so variables point to their archetype
+
+#### LLM prompt design
+
+The system prompt instructs Sonnet to:
+
+- Group by **measurement type**, not by study or naming convention
+- Treat visit/exam suffixes (V1, V2, `_s1`, `_ex03`) as timepoints of the
+  same measurement, not separate archetypes
+- Return 5-50 archetypes with short slugs, names, and descriptions
+- Assign **every** variable to exactly one archetype
+- Return variable names exactly as given (case-sensitive)
+
+The define call uses Pydantic structured output (`ArchetypeTree` model); the
+assign call uses a compact `dict[str, str]` model (`AssignmentBatch`) to
+minimize output tokens.
+
+#### Namespace convention
+
+All archetypes use the `ncpi:` prefix (these are our own groupings, not
+TOPMed harmonized concepts). The concept*id is formed as
+`ncpi:{parent_bare}*{archetype_slug}`, e.g., `ncpi:ecg_atrial_fibrillation`.
+
+#### Resumability and cost
+
+Results are cached per-concept in `output/archetypes/{concept_id}.json`. On
+restart, concepts with existing cache files are skipped. The full run processes
+185 concepts in ~30 minutes at a cost of ~$15-20 in Sonnet API calls.
+
+#### Unassigned variables
+
+Variables the LLM doesn't assign (~6% on average) keep their parent
+`concept_id`. The parent concept shrinks but retains a small remainder. These
+are typically edge cases — variables with ambiguous descriptions or unusual
+naming that don't cleanly fit any archetype.
+
 ### Reproducibility
 
 Matching results are cached as versioned JSON files. The LLM is only invoked for new or re-run studies; existing results are stable. The concept set itself is versioned — adding a new CUI triggers re-matching only for previously-unmatched variables.
@@ -560,7 +651,8 @@ When the concept set is updated:
 
 1. Re-match unmatched variables against the new concepts only
 2. Rebuild the hierarchy
-3. Commit updated output files and concept set as a new version
+3. Re-run archetypes for any concepts that grew above the 200-variable threshold
+4. Commit updated output files and concept set as a new version
 
 ## Namespaced Concepts, ISA Closure, and PhenX Integration
 
