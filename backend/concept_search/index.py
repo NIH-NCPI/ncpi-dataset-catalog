@@ -242,10 +242,13 @@ def _load_concept_descriptions() -> dict[str, dict]:
                     # Check ISA for the correct namespace
                     candidates = [k for k in known_ids if k.endswith(f":{bare}")]
                     cid = candidates[0] if len(candidates) == 1 else f"topmed:{bare}"
-                descriptions[cid] = {
+                desc_entry: dict[str, str] = {
                     "description": entry.get("description", ""),
                     "name": entry.get("name", cid),
                 }
+                if entry.get("type"):
+                    desc_entry["type"] = entry["type"]
+                descriptions[cid] = desc_entry
 
     # PhenX concepts (already namespaced)
     phenx_path = vocab_dir / "phenx-concept-vocabulary.json"
@@ -789,12 +792,15 @@ class ConceptIndex:
         for child_id in children:
             desc = self._concept_descriptions.get(child_id, {})
             match = self._index[Facet.MEASUREMENT].get(child_id.lower())
-            results.append({
+            entry: dict = {
                 "concept_id": child_id,
                 "description": desc.get("description", ""),
                 "name": desc.get("name", child_id),
                 "study_count": match.study_count if match else 0,
-            })
+            }
+            if desc.get("type"):
+                entry["type"] = desc["type"]
+            results.append(entry)
         return sorted(results, key=lambda x: -x["study_count"])
 
     def list_variables_for_concept(

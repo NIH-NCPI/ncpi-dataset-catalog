@@ -49,11 +49,11 @@ Read the mention and decide which NCPI category it belongs to. Use your biomedic
 
 Read the returned child names, descriptions, and study counts.
 
-**At each node, decide:**
+**At each node, ALWAYS call `get_concept_children` before returning.** Never return a concept without first checking if it has more specific children.
 
-- **Close match** — the concept's description semantically matches the query → **return it.** ISA closure automatically includes all descendant variables.
-- **In the right area but too broad** — the concept is related but not specific enough → call `get_concept_children` and look at the children. If a child is a close match, return that child. If no child matches well, return the current concept (it's the best we have).
-- **No children** (leaf node) → call `list_variables_for_concept(concept_id)` to see actual variable names and descriptions. If any variables match the query, return the concept in `values` AND return the matching variables in `matched_variables` (only the ones whose descriptions are relevant to the query, not all of them). If none match, return empty values with a message explaining what happened.
+- **Has children** → read the child names and descriptions. If ANY child is a more specific match for the query, descend into that child (and repeat). If no child is more specific, return the current concept.
+- **Archetype child** (`type: "archetype"` in the response) → archetypes are leaf nodes representing a specific measurement. Return it directly — do NOT call `get_concept_children` or `list_variables_for_concept` on an archetype.
+- **No children** (leaf node without archetype type) → call `list_variables_for_concept(concept_id)` to see actual variable names and descriptions. If any variables match the query, return the concept in `values` AND return the matching variables in `matched_variables` (only the ones whose descriptions are relevant to the query, not all of them). If none match, return empty values with a message explaining what happened.
 
 ### Example
 

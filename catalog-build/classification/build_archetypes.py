@@ -44,10 +44,11 @@ from pydantic_ai.providers.anthropic import AnthropicProvider
 SCRIPT_DIR = Path(__file__).parent
 load_dotenv(SCRIPT_DIR.parents[1] / ".env")
 
-LLM_DIR = SCRIPT_DIR / "output" / "llm-concepts-v4"
-VOCAB_PATH = SCRIPT_DIR / "output" / "concept-vocabulary.json"
-ISA_PATH = SCRIPT_DIR / "output" / "concept-isa.json"
-CACHE_DIR = SCRIPT_DIR / "output" / "archetypes"
+OUTPUT = SCRIPT_DIR / "output"
+LLM_DIR = OUTPUT / "llm-concepts-v4"
+VOCAB_PATH = OUTPUT / "concept-vocabulary.json"
+ISA_PATH = OUTPUT / "concept-isa.json"
+CACHE_DIR = OUTPUT / "archetypes"
 
 DEFAULT_MIN_VARS = 200
 
@@ -241,11 +242,19 @@ def discover_large_concepts(min_vars: int) -> dict[str, int]:
                 if cid:
                     counts[cid] = counts.get(cid, 0) + 1
 
-    # Filter to large concepts, exclude existing ncpi: archetypes/subconcepts
+    # Load vocab to check for archetype type tags
+    vocab_types: dict[str, str] = {}
+    if VOCAB_PATH.exists():
+        with open(VOCAB_PATH) as f:
+            for entry in json.load(f):
+                if entry.get("type"):
+                    vocab_types[entry["concept_id"]] = entry["type"]
+
+    # Filter to large concepts, skip existing archetypes
     large = {
         cid: count
         for cid, count in counts.items()
-        if count >= min_vars and not cid.startswith("ncpi:")
+        if count >= min_vars and vocab_types.get(cid) != "archetype"
     }
     return dict(sorted(large.items(), key=lambda x: -x[1]))
 
@@ -582,6 +591,7 @@ def write_outputs(
                     "domain": domain,
                     "example_variables": cat.variables[:5],
                     "name": cat.name,
+                    "type": "archetype",
                 })
                 existing_vocab_ids.add(full_id)
                 new_vocab_count += 1

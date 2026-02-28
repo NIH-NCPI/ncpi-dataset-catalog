@@ -242,8 +242,12 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
             ) -> list[dict]:
                 """Get child sub-concepts with names and descriptions.
 
-                Use after finding a broad concept to see if more specific
-                children exist. Empty list means leaf concept (no children).
+                ALWAYS call this before returning a concept. If a child is
+                a more specific match, return the child instead. Children
+                with type="archetype" are leaf nodes — return directly
+                without further drilling.
+
+                Empty list means leaf concept — safe to return.
 
                 Args:
                     ctx: Run context with ConceptIndex dependency.
