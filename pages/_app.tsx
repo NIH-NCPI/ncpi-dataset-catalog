@@ -32,6 +32,7 @@ import { BREAKPOINTS } from "../site-config/common/constants";
 import { ServicesProvider } from "@databiosphere/findable-ui/lib/providers/services/provider";
 import { DataDictionaryStateProvider } from "@databiosphere/findable-ui/lib/providers/dataDictionaryState/provider";
 import { ChatProvider } from "@databiosphere/findable-ui/lib/views/ResearchView/state/provider";
+import { useEntities } from "../app/services/workflows/hooks/UseEntities/hook";
 
 const FEATURE_FLAGS = Object.values(FEATURES);
 const SESSION_TIMEOUT = 15 * 60 * 1000; // 15 minutes
@@ -53,6 +54,9 @@ setFeatureFlags(FEATURE_FLAGS);
 function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
   // Set up the site configuration, layout and theme.
   const appConfig = config();
+  // Load entities into the in-memory cache.
+  const isEntitiesLoaded = useEntities();
+
   const { ai, analytics, layout, redirectRootToPath, themeOptions } = appConfig;
   const { gtmAuth, gtmId, gtmPreview } = analytics || {};
   const { floating, footer, header } = layout || {};
@@ -66,6 +70,8 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
       TagManager.initialize({ auth: gtmAuth, gtmId, preview: gtmPreview });
     }
   }, [gtmAuth, gtmId, gtmPreview]);
+
+  if (!isEntitiesLoaded) return <></>;
 
   return (
     <EmotionThemeProvider theme={theme}>
