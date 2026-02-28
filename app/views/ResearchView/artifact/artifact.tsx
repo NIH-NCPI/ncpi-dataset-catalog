@@ -8,6 +8,12 @@ import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/
 import { useAdapter } from "@databiosphere/findable-ui/lib/views/ResearchView/adapter/useAdapter";
 import { Tabs } from "../components/Tabs/tabs";
 
+/**
+ * Renders the artifact panel with tabs and content selector.
+ * @param props - Component props.
+ * @param props.researchType - Research type ("plan" or "datasets").
+ * @returns Artifact component.
+ */
 export const Artifact = ({ researchType }: Props): JSX.Element => {
   const { actions } = useAdapter();
   const { state } = useChatState();

@@ -11,6 +11,12 @@ import { TableToolbar } from "./components/TableToolbar/tableToolbar";
 import { RowData } from "@tanstack/react-table";
 import { GridTable } from "@databiosphere/findable-ui/lib/components/Table/table.styles";
 
+/**
+ * Renders a data table with toolbar, header, and virtualized body.
+ * @param props - Component props.
+ * @param props.table - Table instance from TanStack Table.
+ * @returns Table component.
+ */
 export const Table = <T extends RowData>({ table }: Props<T>): JSX.Element => {
   const { rows, scrollElementRef, virtualizer } = useVirtualization({
     rowDirection: ROW_DIRECTION.DEFAULT,

@@ -8,6 +8,12 @@ import { TableDownload } from "@databiosphere/findable-ui/lib/components/Table/c
 import { Divider } from "@mui/material";
 import { RowData } from "@tanstack/react-table";
 
+/**
+ * Renders the table toolbar with download functionality.
+ * @param props - Component props.
+ * @param props.table - Table instance from TanStack Table.
+ * @returns Table toolbar component.
+ */
 export const TableToolbar = <T extends RowData>({
   table,
 }: Props<T>): JSX.Element => {
