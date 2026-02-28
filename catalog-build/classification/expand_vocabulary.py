@@ -582,7 +582,7 @@ def collect_unclassified_variables(
         with open(path) as f:
             data = json.load(f)
         for table in data.get("tables", []):
-            table_name = table.get("table_name", "") or ""
+            table_name = table.get("tableName", "") or ""
             table_desc = table.get("description", "") or ""
             table_matches = (
                 parent.table_pattern

@@ -305,6 +305,11 @@ class DuckDBStore:
         """
         if not concepts and not study_ids:
             return []
+        # Empty set means "filter matched nothing" — no variables can match.
+        if study_ids is not None and not study_ids:
+            return []
+        if variable_names is not None and not variable_names:
+            return []
         params: list[str] = []
         clauses: list[str] = []
         if concepts:
@@ -327,6 +332,13 @@ class DuckDBStore:
             clauses.append(f"LOWER(v.variable_name) IN ({var_ph})")
             params.extend(n.lower() for n in variable_names)
         where = " AND ".join(clauses)
+        # Get total count before applying LIMIT.
+        count_sql = (
+            "SELECT COUNT(*) FROM variables v "
+            f"WHERE {where}"  # noqa: S608
+        )
+        total = self._conn.execute(count_sql, params).fetchone()[0]
+
         sql = (
             "SELECT v.concept, v.cui, v.dataset_id, v.description, v.phv_id,"
             "  v.study_id, v.table_name, v.variable_name,"
@@ -342,7 +354,7 @@ class DuckDBStore:
             "concept", "cui", "datasetId", "description", "phvId",
             "studyId", "tableName", "variableName", "studyTitle",
         ]
-        return [dict(zip(cols, row)) for row in rows]
+        return [dict(zip(cols, row)) for row in rows], total
 
     def list_variables_for_concept(
         self, concept_id: str, limit: int = 200

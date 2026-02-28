@@ -141,8 +141,8 @@ class ResolvedMention(BaseModel):
     matched_variables: list[MatchedVariable] = Field(
         default_factory=list,
         description="Specific variables selected by the resolve agent at a "
-        "leaf concept. When non-empty, variable queries should filter to "
-        "only these variable names.",
+        "leaf concept. Kept for display context in the API response but "
+        "not used as a SQL filter — variable queries use ISA closure only.",
     )
     original_text: str = Field(description="The raw text from the user query")
     values: list[str] = Field(

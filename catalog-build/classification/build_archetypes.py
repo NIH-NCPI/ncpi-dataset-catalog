@@ -529,6 +529,19 @@ def write_outputs(
     for entry in vocab:
         vocab_by_id[entry["concept_id"]] = entry
 
+    # Build ISA parent lookup for domain resolution
+    isa_parent: dict[str, str] = {}
+    for edge in isa:
+        isa_parent[edge["child"]] = edge["parent"]
+
+    # Load categories for root-level domain names
+    cats_path = OUTPUT / "ncpi-categories.json"
+    cat_domains: dict[str, str] = {}
+    if cats_path.exists():
+        cats = json.loads(cats_path.read_text())
+        for cat in cats:
+            cat_domains[cat["concept_id"]] = cat.get("name", "unknown").lower()
+
     new_vocab_count = 0
     new_isa_count = 0
 
@@ -538,10 +551,22 @@ def write_outputs(
     for concept_id, tree in results.items():
         prefix = concept_id_to_prefix(concept_id)
 
-        # Resolve parent domain
+        # Resolve parent domain: check vocab first, then walk ISA to category
         bare_parent = concept_id.split(":", 1)[-1] if ":" in concept_id else concept_id
         parent_entry = vocab_by_id.get(bare_parent) or vocab_by_id.get(concept_id)
-        domain = parent_entry["domain"] if parent_entry else "unknown"
+        if parent_entry and parent_entry.get("domain", "unknown") != "unknown":
+            domain = parent_entry["domain"]
+        else:
+            # Walk up ISA to find root category
+            domain = "unknown"
+            node = concept_id
+            seen: set[str] = set()
+            while node and node not in seen:
+                if node in cat_domains:
+                    domain = cat_domains[node]
+                    break
+                seen.add(node)
+                node = isa_parent.get(node, "")
 
         concept_retag: dict[str, str] = {}
 

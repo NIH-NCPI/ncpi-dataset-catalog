@@ -290,6 +290,7 @@ async def search(
     intent = query_model.intent
     studies: list[dict] = []
     variable_rows: list[dict] = []
+    total_variable_count = 0
 
     if query_model.mentions:
         include, exclude = _split_mentions(query_model.mentions)
@@ -316,14 +317,14 @@ async def search(
                     continue
                 all_concepts.extend(m.values)
 
-            variable_rows = []
             if all_concepts:
-                variable_rows.extend(
+                rows, total_variable_count = (
                     index.store.query_variables(
                         concepts=all_concepts,
                         study_ids=study_ids,
                     )
                 )
+                variable_rows.extend(rows)
         else:
             studies = index.query_studies(include, exclude or None)
 
@@ -343,7 +344,7 @@ async def search(
             total_ms=pipeline_ms + lookup_ms,
         ),
         total_studies=len(studies),
-        total_variables=len(variable_rows),
+        total_variables=total_variable_count,
         variables=[_build_variable_result(r) for r in variable_rows],
     )
 
