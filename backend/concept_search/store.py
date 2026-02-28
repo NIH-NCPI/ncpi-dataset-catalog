@@ -90,7 +90,7 @@ class DuckDBStore:
             "  concept VARCHAR,"
             "  concept_lower VARCHAR,"
             "  cui VARCHAR,"
-            "  concept_ids_closure VARCHAR,"
+            "  concept_ids_closure VARCHAR[],"
             "  dataset_id VARCHAR,"
             "  description VARCHAR,"
             "  phv_id VARCHAR,"
@@ -139,12 +139,18 @@ class DuckDBStore:
         self._copy_csv("study_facet_values", rows)
 
     def load_variables_batch(
-        self, rows: list[tuple[str, str, str, str, str, str, str, str, str, str]]
+        self,
+        rows: list[
+            tuple[str, str, str, str, str, str, str, str, str, str]
+        ],
     ) -> None:
         """Batch-insert variable records via CSV COPY.
 
-        Each row is (concept, concept_lower, cui, concept_ids_closure,
+        Each row is (concept, concept_lower, cui, concept_ids_closure_json,
         dataset_id, description, phv_id, study_id, table_name, variable_name).
+
+        DuckDB auto-casts JSON array strings to the native VARCHAR[] column
+        during CSV COPY.
         """
         if not rows:
             return
@@ -318,8 +324,7 @@ class DuckDBStore:
             closure_clauses = []
             for c in concepts:
                 closure_clauses.append(
-                    "list_contains("
-                    "from_json(v.concept_ids_closure, '[\"VARCHAR\"]'), ?)"
+                    "list_contains(v.concept_ids_closure, ?)"
                 )
                 params.append(c.lower())
             clauses.append(f"({' OR '.join(closure_clauses)})")
@@ -374,8 +379,7 @@ class DuckDBStore:
         sql = (
             "SELECT DISTINCT variable_name, description "
             "FROM variables "
-            "WHERE list_contains("
-            'from_json(concept_ids_closure, \'["VARCHAR"]\'), ?) '  # noqa: S608
+            "WHERE list_contains(concept_ids_closure, ?) "  # noqa: S608
             "ORDER BY variable_name "
             f"LIMIT {limit}"
         )
