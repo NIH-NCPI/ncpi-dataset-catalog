@@ -91,19 +91,20 @@ class ArchetypeTree(BaseModel):
     """LLM output: a tree of measurement archetypes."""
 
     categories: list[Archetype] = Field(
-        description="5-50 archetype categories with assigned variables"
+        default_factory=list,
+        description="Measurement archetypes with assigned variables. "
+        "Empty list if all variables measure the same thing.",
     )
 
     @model_validator(mode="after")
     def validate_tree(self) -> ArchetypeTree:
         """Check structural constraints."""
+        if not self.categories:
+            return self  # Empty = all variables are the same measurement
         ids = [c.concept_id for c in self.categories]
         if len(ids) != len(set(ids)):
             dupes = [x for x in ids if ids.count(x) > 1]
             msg = f"Duplicate concept_ids: {set(dupes)}"
-            raise ValueError(msg)
-        if len(self.categories) < 3:
-            msg = f"Too few categories: {len(self.categories)} (expected >= 3)"
             raise ValueError(msg)
         return self
 
@@ -139,6 +140,8 @@ Rules:
 - Assign EVERY variable to exactly one archetype
 - Return variable names EXACTLY as given (case-sensitive)
 - Aim for 5-50 archetypes. Merge tiny groups; split huge ones.
+- If ALL variables measure the same underlying thing (e.g., all are
+  "subject age"), return an EMPTY archetypes list — do not force splits.
 - Each archetype needs a short snake_case concept_id slug, a human-readable
   name, and a description specific enough for search matching.
 """
@@ -320,7 +323,7 @@ def _make_model() -> AnthropicModel:
         Configured AnthropicModel instance.
     """
     client = AsyncAnthropic(
-        timeout=httpx.Timeout(1800.0, connect=10.0)
+        timeout=httpx.Timeout(120.0, connect=10.0)
     )
     return AnthropicModel(
         MODEL,
@@ -350,7 +353,7 @@ async def _call_define_archetypes(
             max_tokens=64000,
             temperature=0.0,
         ),
-        output_retries=3,
+        output_retries=2,
     )
     result = await agent.run(build_user_prompt(concept_id, variables))
     return result.output
@@ -380,7 +383,7 @@ async def _call_assign_variables(
             max_tokens=32768,
             temperature=0.0,
         ),
-        output_retries=3,
+        output_retries=2,
     )
     prompt = build_assign_prompt(concept_id, archetypes, variables)
     result = await agent.run(prompt)
@@ -450,6 +453,15 @@ async def generate_archetypes_for_concept(
     print(f"\nPass 1: defining archetypes from {len(batch1):,} variables...")
     tree = await _call_define_archetypes(concept_id, batch1)
     print(f"Generated {len(tree.categories)} archetypes")
+
+    if not tree.categories:
+        print("LLM returned no archetypes — all variables are the same measurement.")
+        # Cache empty result so we skip on re-run
+        CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        with open(cache_file, "w") as f:
+            f.write(tree.model_dump_json(indent=2))
+        print(f"Cached empty result to {cache_file.name}")
+        return None
 
     # Pass 2+: Assign remaining variables in batches
     if needs_batching:
