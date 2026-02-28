@@ -37,7 +37,7 @@ function isEntityRoute(route: string): route is EntityRoute {
  */
 export async function loadEntities(config: SiteConfig): Promise<void> {
   for (const entity of config.entities) {
-    const { getId, route } = entity;
+    const { entityMapper, getId, route } = entity;
 
     if (!isEntityRoute(route)) continue;
 
@@ -50,7 +50,10 @@ export async function loadEntities(config: SiteConfig): Promise<void> {
     if (!getId) continue;
 
     // Fetch the entities.
-    const entities = await fetchEntities(apiRoute);
+    const rawEntities = await fetchEntities(apiRoute);
+
+    // Apply mapper if provided
+    const entities = entityMapper ? rawEntities.map(entityMapper) : rawEntities;
 
     const entityById = new Map<string, unknown>();
     for (const entity of entities) entityById.set(getId(entity), entity);
