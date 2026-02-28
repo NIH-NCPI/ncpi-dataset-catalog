@@ -3,7 +3,7 @@ import {
   ChatState,
   PromptMessage,
 } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
-import { Response } from "app/views/ResearchView/types/response";
+import { Response } from "../../types/response";
 
 export type DatasetsView =
   | { message: AssistantMessage<Response>; status: STATUS.COMPLETE }

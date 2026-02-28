@@ -1,11 +1,11 @@
+import { NCPICatalogStudy } from "../../apis/catalog/ncpi-catalog/common/entities";
 import { getEntities, getEntity } from "./query";
-import { Study } from "../../views/ResearchView/ui/Datasets/types/study";
 
 /**
  * Gets studies.
  * @returns Studies.
  */
-export function getStudies<T extends Study>(): T[] {
+export function getStudies<T extends NCPICatalogStudy>(): T[] {
   return getEntities<T>("studies");
 }
 
@@ -14,6 +14,6 @@ export function getStudies<T extends Study>(): T[] {
  * @param entityId - Entity id.
  * @returns Study.
  */
-export function getStudy<T extends Study>(entityId: string): T {
+export function getStudy<T extends NCPICatalogStudy>(entityId: string): T {
   return getEntity<T>("studies", entityId);
 }

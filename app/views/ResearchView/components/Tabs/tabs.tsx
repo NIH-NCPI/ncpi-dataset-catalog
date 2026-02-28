@@ -7,7 +7,8 @@ import { RESEARCH_TYPE } from "../../artifact/types";
 
 /**
  * Renders research view tabs.
- * @param researchType - Research type.
+ * @param props - Props.
+ * @param props.researchType - Research type.
  * @returns Research view tabs.
  */
 export const Tabs = ({ researchType }: Props): JSX.Element => {

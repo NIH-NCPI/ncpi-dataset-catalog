@@ -1,7 +1,8 @@
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
 import { useMemo } from "react";
 import { Response } from "../../../../types/response";
-import { isAssistantMessage } from "@databiosphere/findable-ui/lib/common/ai/guards/guards";
+import { isAssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards";
+import { AssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
 
 /**
  * Returns the count of studies or variables from the latest assistant message response.
@@ -15,8 +16,8 @@ export const useCount = (): { count: number } => {
     [state.messages]
   );
 
-  if (isAssistantMessage<Response>(message)) {
-    const { response } = message;
+  if (isAssistantMessage(message)) {
+    const { response } = message as AssistantMessage<Response>;
     const { totalStudies, totalVariables } = response || {};
 
     return { count: totalVariables || totalStudies };

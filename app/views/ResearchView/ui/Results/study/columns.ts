@@ -4,7 +4,7 @@ import {
   renderNTagCell,
   buildNTagProps,
 } from "../../../../../components/common/Table/components/NTagCell/utils";
-import { METADATA_KEY } from "app/components/Index/common/entities";
+import { METADATA_KEY } from "../../../../../components/Index/common/entities";
 import { renderTitle } from "./viewBuilder";
 
 const CONSENT_CODES: ColumnDef<Study> = {

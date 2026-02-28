@@ -25,9 +25,9 @@ export const Welcome = ({ message }: Props): JSX.Element => {
           color={TYPOGRAPHY_PROPS.COLOR.INK_LIGHT}
           variant={TYPOGRAPHY_PROPS.VARIANT.BODY_400}
         >
-          Describe what you're studying — I'll build a research plan and find
-          matching datasets across 2,944 studies from AnVIL, BDC, CRDC, and
-          KFDRC.
+          Describe what you&apos;re studying — I&apos;ll build a research plan
+          and find matching datasets across 2,944 studies from AnVIL, BDC, CRDC,
+          and KFDRC.
         </Typography>
       </Stack>
       <Chips message={message} />

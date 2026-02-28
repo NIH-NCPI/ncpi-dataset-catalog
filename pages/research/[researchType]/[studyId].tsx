@@ -6,6 +6,7 @@ import { StyledMain } from "../../../app/views/ResearchView/components/Main/main
 import { seedDatabase } from "../../../app/utils/seedDatabase";
 import { getEntities } from "../../[entityListType]/[...params]";
 import { config } from "../../../app/config/config";
+import { StudyDetailView } from "../../../app/views/StudyDetailView/studyDetailView";
 
 interface Params extends ParsedUrlQuery {
   researchType: string;
@@ -20,6 +21,10 @@ interface Study {
   dbGapId: string;
 }
 
+/**
+ * Gets static paths for the study detail view page.
+ * @returns Static paths for the study detail view page.
+ */
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const paths: GetStaticPathsResult<Params>["paths"] = [];
 
@@ -47,6 +52,13 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   return { fallback: false, paths };
 };
 
+/**
+ * Gets static props for the study detail view page.
+ * @param context - GetStaticProps context.
+ * @param context.params - Route parameters.
+ * @param context.params.studyId - Study ID.
+ * @returns Static props for the study detail view page.
+ */
 export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
@@ -57,8 +69,14 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   return { props: { studyId } };
 };
 
-const Page = ({ studyId }: Props): JSX.Element => {
-  return <div>Study: {studyId}</div>;
+/**
+ * Page component for the study detail view.
+ * @param props - Props.
+ * @param props.studyId - Study ID.
+ * @returns Study detail view page.
+ */
+const Page = (props: Props): JSX.Element => {
+  return <StudyDetailView {...props} />;
 };
 
 Page.Main = StyledMain;
