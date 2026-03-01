@@ -7,7 +7,7 @@
 
 VENV = ../../backend/.venv/bin/python3
 
-.PHONY: help seeds classify classify-study classify-v3 classify-v3-study evals evals-scaling summary summary-detail summary-studies namespace phenx-vocab phenx-inject isa hierarchy v4 subconcepts expand expand-dry-run expand-parents archetypes archetypes-dry-run archetypes-concept
+.PHONY: help seeds classify classify-study classify-v3 classify-v3-study evals evals-scaling evals-archetypes summary summary-detail summary-studies namespace phenx-vocab phenx-inject isa hierarchy v4 subconcepts expand expand-dry-run expand-parents archetypes archetypes-dry-run archetypes-concept reclassify reclassify-dry-run
 
 help:
 	@echo "Variable Classification Pipeline"
@@ -15,6 +15,7 @@ help:
 	@echo "  classify       - Classify all studies with v4 multi-table batching (resumable)"
 	@echo "  classify-study - Classify one study: make classify-study STUDY=phs000007"
 	@echo "  evals          - Run classifier evals"
+	@echo "  evals-archetypes - Run archetype rejection evals"
 	@echo "  evals-scaling  - Test accuracy at scaled vocabulary sizes"
 	@echo "  summary        - Summarize results grouped by NCPI category"
 	@echo "  summary-detail - Summary with example variables per concept"
@@ -32,6 +33,7 @@ help:
 	@echo "  expand-parents - Add parent concepts only (no sub-concepts)"
 	@echo "  archetypes     - Generate archetypes for large concepts (>200 vars)"
 	@echo "  archetypes-dry-run - Show stats without calling LLM"
+	@echo "  reclassify     - Re-classify studies with rejected variables"
 	@echo ""
 	@echo "  classify-v3    - Classify all studies with v3 (single-table, legacy)"
 
@@ -57,6 +59,10 @@ classify-v3-study:
 # Run classifier evals
 evals:
 	$(VENV) eval_v4.py
+
+# Run archetype rejection evals (tests _rejected mechanism)
+evals-archetypes:
+	$(VENV) eval_archetypes.py
 
 # Test accuracy at scaled vocabulary sizes (78, 200, 500 concepts)
 evals-scaling:
@@ -121,6 +127,15 @@ archetypes-dry-run:
 # Generate archetypes for a single concept: make archetypes-concept CONCEPT=topmed:ecg
 archetypes-concept:
 	$(VENV) build_archetypes.py --concept $(CONCEPT)
+
+# Re-classify rejected variables in affected studies (run after make archetypes)
+# Only processes variables with concept_id=null — does not touch existing matches
+reclassify:
+	$(VENV) reclassify_rejected.py
+
+# Dry-run: show how many null variables need reclassification
+reclassify-dry-run:
+	$(VENV) reclassify_rejected.py --dry-run
 
 # Full v4 pipeline: namespace → phenx-vocab → isa → phenx-inject
 v4: namespace phenx-vocab isa phenx-inject

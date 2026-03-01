@@ -136,7 +136,12 @@ class VariableInput(BaseModel):
 
 async def classify_one_variable(inputs: VariableInput) -> str:
     """Classify a single variable and return its concept_id or 'null'."""
-    vocab = load_vocabulary(VOCAB_PATH, PHENX_VOCAB_PATH)
+    # Exclude archetypes — they're sub-groupings, not classifier targets,
+    # and including them pushes the prompt past Haiku's 200K token limit.
+    vocab = [
+        v for v in load_vocabulary(VOCAB_PATH, PHENX_VOCAB_PATH)
+        if v.get("type") != "archetype"
+    ]
     agent = make_agent(vocab)
     valid_ids = {v["concept_id"] for v in vocab}
 
@@ -763,6 +768,120 @@ CASES = [
         study_name="ARIC",
         table_name="enrollment",
         table_description="Enrollment data",
+    ),
+    # ── Age misclassification cases ──────────────────────────────────────
+    # Generic age variables must NOT match disease-specific followup age
+    # concepts. These are the most common misclassification errors.
+    var_case(
+        "neg-age-generic-subject",
+        "age",
+        "Subject age at time of study",
+        "null",
+        study_id="phs000284",
+        study_name="Cleveland Family Study",
+        table_name="CFS_CARe_Subject_Phenotypes",
+        table_description="Subject phenotype data",
+    ),
+    var_case(
+        "neg-age-at-recruitment",
+        "Age",
+        "Age at recruitment",
+        "null",
+        study_id="phs000140",
+        study_name="T2D GWAS in African Americans",
+        table_name="CIDR_T2D_Case_Data",
+        table_description="Type 2 diabetes case data",
+    ),
+    var_case(
+        "neg-age-at-collection",
+        "AGE_AT_COLLECTION",
+        "Age at sample collection",
+        "null",
+        study_id="phs000200",
+        study_name="COPD",
+        table_name="Subject_Phenotypes",
+        table_description="Subject phenotype data",
+    ),
+    var_case(
+        "neg-age-at-blood-draw",
+        "AGE_AT_DRAW",
+        "Age at blood draw",
+        "null",
+        study_id="phs000280",
+        study_name="ARIC",
+        table_name="lab",
+        table_description="Laboratory specimen data",
+    ),
+    var_case(
+        "neg-age-baseline-copd",
+        "age_baseline",
+        "Age at baseline",
+        "null",
+        study_id="phs000179",
+        study_name="COPDGene",
+        table_name="COPDGene_Subject_Phenotypes",
+        table_description="Subject phenotype data",
+    ),
+    var_case(
+        "neg-age-at-visit",
+        "age_visit",
+        "Age at current visit",
+        "null",
+        study_id="phs000179",
+        study_name="COPDGene",
+        table_name="COPDGene_Subject_Phenotypes",
+        table_description="Subject phenotype data",
+    ),
+    var_case(
+        "neg-age-at-death",
+        "AGE_AT_DEATH",
+        "Age of subject at death",
+        "null",
+        study_id="phs000007",
+        study_name="Framingham Heart Study",
+        table_name="mortality",
+        table_description="Mortality data",
+    ),
+    var_case(
+        "neg-age-months",
+        "AGE_MONTHS",
+        "Age in months",
+        "null",
+        study_id="phs000001",
+        study_name="AREDS",
+        table_name="Subject",
+        table_description="Subject attributes",
+    ),
+    var_case(
+        "neg-enrollage",
+        "ENROLLAGE",
+        "AGE AT RANDOMIZATION",
+        "null",
+        study_id="phs000001",
+        study_name="AREDS",
+        table_name="genspecphenotype",
+        table_description="Genetic specimen phenotype data",
+    ),
+    var_case(
+        "neg-age-sampling",
+        "AGE_SAMPLING",
+        "Age at sampling",
+        "null",
+        study_id="phs000200",
+        study_name="COPD",
+        table_name="Subject_Phenotypes",
+        table_description="Subject phenotype data",
+    ),
+    # Positive: VTE followup start age in correct context
+    var_case(
+        "age-vte-followup",
+        "V1AGE01",
+        "Age at visit 1, start of VTE event adjudication period",
+        "vte_followup_start_age",
+        study_id="phs000289",
+        study_name="CCAF",
+        table_name="vte",
+        table_description="Venous thromboembolism event surveillance data",
     ),
 ]
 

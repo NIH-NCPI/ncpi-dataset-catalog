@@ -144,6 +144,14 @@ Rules:
   "subject age"), return an EMPTY archetypes list — do not force splits.
 - Each archetype needs a short snake_case concept_id slug, a human-readable
   name, and a description specific enough for search matching.
+
+REJECTION: If any variables are MISCLASSIFIED — they clearly don't belong
+to the parent concept — assign them to a special archetype with
+concept_id="_rejected", name="Rejected", description="Variables that do
+not belong to this parent concept". For example, generic "subject age" or
+"age at enrollment" variables under a disease-specific concept like
+"VTE Followup Start Age" should be rejected. Keep variables that are
+tangentially related; only reject clear mismatches.
 """
 
 ASSIGN_SYSTEM_PROMPT = """\
@@ -158,7 +166,29 @@ Rules:
 - Assign EVERY variable to exactly one archetype.
 - Return variable names EXACTLY as given (case-sensitive).
 - Use ONLY the concept_id slugs from the archetype list provided.
+- If a variable clearly doesn't belong to the parent concept, assign it
+  to "_rejected".
 """
+
+
+def _lookup_parent_info(concept_id: str) -> tuple[str, str]:
+    """Look up parent concept name and description from vocabulary.
+
+    Args:
+        concept_id: The concept_id to look up (e.g. "topmed:ecg").
+
+    Returns:
+        Tuple of (name, description). Falls back to concept_id if not found.
+    """
+    if not VOCAB_PATH.exists():
+        return concept_id, ""
+    with open(VOCAB_PATH) as f:
+        vocab = json.load(f)
+    bare = concept_id.split(":", 1)[-1] if ":" in concept_id else concept_id
+    for entry in vocab:
+        if entry["concept_id"] in (concept_id, bare):
+            return entry.get("name", concept_id), entry.get("description", "")
+    return concept_id, ""
 
 
 def build_user_prompt(
@@ -174,9 +204,12 @@ def build_user_prompt(
     Returns:
         Formatted user prompt string.
     """
+    parent_name, parent_desc = _lookup_parent_info(parent_concept)
     lines = [
-        f"## Parent concept: `{parent_concept}`\n",
-        f"Sort these {len(variables)} variables into 5-50 measurement archetypes.\n",
+        f"## Parent concept: `{parent_concept}`",
+        f"**{parent_name}**: {parent_desc}\n",
+        f"Sort these {len(variables)} variables into 5-50 measurement archetypes.",
+        "Reject any variables that clearly don't belong to this parent concept.\n",
         "## Variables\n",
     ]
     for v in variables:
@@ -185,7 +218,8 @@ def build_user_prompt(
         "\n\nProduce the archetype tree. Remember:\n"
         "- 5-50 archetypes, each a distinct measurement type\n"
         "- Every variable must be assigned to exactly one archetype\n"
-        "- Return variable names exactly as shown above"
+        "- Return variable names exactly as shown above\n"
+        "- Use _rejected for variables that don't belong to this parent concept"
     )
     return "\n".join(lines)
 
@@ -205,18 +239,24 @@ def build_assign_prompt(
     Returns:
         Formatted user prompt string.
     """
+    parent_name, parent_desc = _lookup_parent_info(parent_concept)
     lines = [
-        f"## Parent concept: `{parent_concept}`\n",
+        f"## Parent concept: `{parent_concept}`",
+        f"**{parent_name}**: {parent_desc}\n",
         "## Available archetypes\n",
     ]
     for a in archetypes:
         lines.append(f"- **{a.concept_id}**: {a.name} — {a.description}")
+    lines.append(
+        "\n- **_rejected**: Variables that don't belong to this parent concept"
+    )
     lines.append(f"\n## Variables to assign ({len(variables)})\n")
     for v in variables:
         lines.append(f"- **{v['name']}**: {v['description']}")
     lines.append(
         "\n\nAssign each variable to exactly one archetype from the list above.\n"
-        "Return variable names exactly as shown."
+        "Return variable names exactly as shown.\n"
+        "Use _rejected for variables that don't belong to this parent concept."
     )
     return "\n".join(lines)
 
@@ -316,14 +356,17 @@ def concept_id_to_prefix(concept_id: str) -> str:
     return f"ncpi:{bare}"
 
 
-def _make_model() -> AnthropicModel:
-    """Create an AnthropicModel with a long timeout.
+def _make_model(timeout: float = 300.0) -> AnthropicModel:
+    """Create an AnthropicModel with configurable timeout.
+
+    Args:
+        timeout: Request timeout in seconds. Default 300s (5 min).
 
     Returns:
         Configured AnthropicModel instance.
     """
     client = AsyncAnthropic(
-        timeout=httpx.Timeout(120.0, connect=10.0)
+        timeout=httpx.Timeout(timeout, connect=10.0)
     )
     return AnthropicModel(
         MODEL,
@@ -452,7 +495,11 @@ async def generate_archetypes_for_concept(
     batch1 = variables[:BATCH_SIZE]
     print(f"\nPass 1: defining archetypes from {len(batch1):,} variables...")
     tree = await _call_define_archetypes(concept_id, batch1)
-    print(f"Generated {len(tree.categories)} archetypes")
+    real_count = sum(1 for c in tree.categories if c.concept_id != "_rejected")
+    rejected_cat = next((c for c in tree.categories if c.concept_id == "_rejected"), None)
+    print(f"Generated {real_count} archetypes")
+    if rejected_cat:
+        print(f"Rejected {len(rejected_cat.variables)} misclassified variables")
 
     if not tree.categories:
         print("LLM returned no archetypes — all variables are the same measurement.")
@@ -476,8 +523,24 @@ async def generate_archetypes_for_concept(
             )
             # Merge assignments into the tree
             valid_ids = {c.concept_id for c in tree.categories}
+            valid_ids.add("_rejected")
             for vname, arch_id in assignments.items():
-                if arch_id in valid_ids:
+                if arch_id == "_rejected":
+                    # Find or create _rejected category
+                    rejected_cat = next(
+                        (c for c in tree.categories if c.concept_id == "_rejected"),
+                        None,
+                    )
+                    if not rejected_cat:
+                        rejected_cat = Archetype(
+                            concept_id="_rejected",
+                            name="Rejected",
+                            description="Variables that do not belong to this parent concept",
+                            variables=[],
+                        )
+                        tree.categories.append(rejected_cat)
+                    rejected_cat.variables.append(vname)
+                elif arch_id in valid_ids:
                     # Find the archetype and append
                     for cat in tree.categories:
                         if cat.concept_id == arch_id:
@@ -567,7 +630,9 @@ def write_outputs(
     new_isa_count = 0
 
     # Build global var -> archetype mapping for re-tagging
-    retag_map: dict[str, dict[str, str]] = {}  # concept_id -> {name_lower: full_archetype_id}
+    # Maps concept_id -> {name_lower: full_archetype_id}
+    # Special value None means "clear concept_id" (rejected variable)
+    retag_map: dict[str, dict[str, str | None]] = {}
 
     for concept_id, tree in results.items():
         prefix = concept_id_to_prefix(concept_id)
@@ -589,9 +654,15 @@ def write_outputs(
                 seen.add(node)
                 node = isa_parent.get(node, "")
 
-        concept_retag: dict[str, str] = {}
+        concept_retag: dict[str, str | None] = {}
 
         for cat in tree.categories:
+            # Handle rejected variables — clear their concept_id
+            if cat.concept_id == "_rejected":
+                for vname in cat.variables:
+                    concept_retag[vname.lower()] = None
+                continue
+
             full_id = f"{prefix}_{cat.concept_id}"
 
             # Vocab entry (stored with ncpi: prefix)
@@ -632,8 +703,10 @@ def write_outputs(
 
     # Re-tag study JSONs (single pass through all files)
     retag_total = 0
+    reject_total = 0
     files_modified = 0
     target_concepts = set(retag_map.keys())
+    affected_studies: set[str] = set()  # Studies with rejected variables
 
     for path in sorted(LLM_DIR.glob("phs*.json")):
         with open(path) as f:
@@ -645,9 +718,16 @@ def write_outputs(
                 if cid not in target_concepts:
                     continue
                 name = var.get("name", "")
-                new_id = retag_map[cid].get(name.lower())
-                if new_id:
-                    var["concept_id"] = new_id
+                lookup = retag_map[cid].get(name.lower())
+                if lookup is None and name.lower() in retag_map[cid]:
+                    # Rejected: clear concept_id, mark source for reclassifier
+                    var["concept_id"] = None
+                    var["source"] = "rejected"
+                    modified = True
+                    reject_total += 1
+                    affected_studies.add(path.stem)
+                elif lookup:
+                    var["concept_id"] = lookup
                     modified = True
                     retag_total += 1
         if modified:
@@ -656,6 +736,14 @@ def write_outputs(
             files_modified += 1
 
     print(f"Re-tagged {retag_total:,} variable occurrences in {files_modified} study files")
+    if reject_total:
+        print(f"Rejected {reject_total:,} misclassified variables "
+              f"in {len(affected_studies)} studies")
+        # Write affected studies to file for reclassification
+        reclassify_path = CACHE_DIR / "reclassify-studies.txt"
+        reclassify_path.write_text("\n".join(sorted(affected_studies)) + "\n")
+        print(f"Wrote {len(affected_studies)} study IDs to {reclassify_path}")
+        print("Run: make reclassify")
 
     # Summary
     print(f"\n{'=' * 60}")
@@ -663,9 +751,14 @@ def write_outputs(
     print(f"{'=' * 60}")
     for concept_id, tree in sorted(results.items()):
         prefix = concept_id_to_prefix(concept_id)
-        total_vars = sum(len(c.variables) for c in tree.categories)
-        print(f"\n{concept_id} -> {len(tree.categories)} archetypes ({total_vars} vars)")
-        for cat in sorted(tree.categories, key=lambda c: -len(c.variables)):
+        rejected = [c for c in tree.categories if c.concept_id == "_rejected"]
+        real = [c for c in tree.categories if c.concept_id != "_rejected"]
+        total_vars = sum(len(c.variables) for c in real)
+        reject_vars = sum(len(c.variables) for c in rejected)
+        print(f"\n{concept_id} -> {len(real)} archetypes ({total_vars} vars)")
+        if reject_vars:
+            print(f"  REJECTED: {reject_vars} misclassified variables")
+        for cat in sorted(real, key=lambda c: -len(c.variables)):
             print(f"  {prefix}_{cat.concept_id}: {cat.name} ({len(cat.variables)} vars)")
 
 

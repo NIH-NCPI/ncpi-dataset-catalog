@@ -320,7 +320,14 @@ variables to a fixed vocabulary of {n_concepts} expert-curated concepts.
 6. Match based on what value the variable contains, not what it references.
    "Age at BMI measurement" contains an age, not a BMI — do not include it.
 
-7. The input may contain ONE or MULTIPLE tables. Return results grouped by
+7. When the vocabulary contains both a broad general concept and a narrow
+   disease-specific concept, prefer the broad match. Only use the narrow
+   concept when the variable's description explicitly mentions that specific
+   context. Example: "Age at enrollment" → general age concept, NOT a
+   disease-specific follow-up start age. "Age at start of VTE event
+   adjudication" → VTE follow-up start age.
+
+8. The input may contain ONE or MULTIPLE tables. Return results grouped by
    table_name, preserving the exact table names from the input. Omit tables
    where no variables matched.
 
