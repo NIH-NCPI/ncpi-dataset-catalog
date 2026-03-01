@@ -79,7 +79,7 @@ DOMAIN_GROUPS: dict[str, set[str]] = {
     "demographic": {
         "annotated_sex", "race_us", "hispanic_or_latino",
         "hispanic_subgroup", "geographic_site", "subcohort",
-        "phenx:current_age",
+        "ncpi:subject_age", "phenx:current_age",
     },
     "baseline_covariates": {
         "bmi_baseline", "height_baseline", "weight_baseline",
@@ -621,31 +621,32 @@ CASES = [
         table_name="vte",
         table_description="Venous thromboembolism case-control data",
     ),
-    # ── Value vs reference (should return null) ─────────────────────────
-    # "Age at X measurement" contains an age, not X
+    # ── Age at measurement ──────────────────────────────────────────────
+    # "Age at X measurement" is an age variable, not an X variable.
+    # Should match ncpi:subject_age.
     var_case(
-        "neg-age-at-cac",
+        "age-at-cac-measurement",
         "ESP_AGE_AT_CAC",
         "Age in years at CAC Agatston score measurement",
-        "null",
+        "ncpi:subject_age",
         study_id="phs000401",
         study_name="FHS ESP HeartGO",
         table_name="HeartGO_FHS_LDLandEOMI_PhenotypeDataFile",
     ),
     var_case(
-        "neg-age-at-crp",
+        "age-at-crp-measurement",
         "ESP_AGE_AT_CRP",
         "Age in years at CRP measurement",
-        "null",
+        "ncpi:subject_age",
         study_id="phs000401",
         study_name="FHS ESP HeartGO",
         table_name="HeartGO_FHS_LDLandEOMI_PhenotypeDataFile",
     ),
     var_case(
-        "neg-age-at-hematocrit",
+        "age-at-hematocrit-measurement",
         "ESP_AGE_AT_HEMATOCRIT",
         "Age in years at hematocrit measurement",
-        "null",
+        "ncpi:subject_age",
         study_id="phs000401",
         study_name="FHS ESP HeartGO",
         table_name="HeartGO_FHS_LDLandEOMI_PhenotypeDataFile",
@@ -713,12 +714,15 @@ CASES = [
         table_name="bmode_carotid",
         table_description="B-mode carotid ultrasound measurements",
     ),
-    # Disease-specific outside vocabulary domains
+    # Family medical history — seizures aren't a specific concept but the
+    # variable IS family health history data. Classifier returns
+    # psychiatric_interview_family_history (an archetype) which is reasonable
+    # given the epilepsy/pedigree context.
     var_case(
-        "neg-seizure-family-hx",
+        "family-hx-seizures",
         "BioSisterHadSeizures1",
         "G (b): Biological Sisters. Has this sister ever had seizures? (1)",
-        "null",
+        "psychiatric_interview_family_history",
         study_id="phs000576",
         study_name="Epilepsy Phenome/Genome Project (EPGP)",
         table_name="pedigree",
@@ -764,22 +768,22 @@ CASES = [
         "age-enrollment",
         "AGE",
         "AGE AT ENROLLMENT",
-        "phenx:current_age",
+        "ncpi:subject_age",
         study_id="phs000280",
         study_name="ARIC",
         table_name="enrollment",
         table_description="Enrollment data",
     ),
     # ── Generic age variables ────────────────────────────────────────────
-    # Generic age variables should match phenx:current_age (or null), but
-    # must NOT match disease-specific followup age concepts like
+    # Generic age variables should match ncpi:subject_age (or phenx:current_age),
+    # but must NOT match disease-specific followup age concepts like
     # vte_followup_start_age or cad_followup_start_age.
-    # ConceptIdClose also accepts null via the demographic domain group.
+    # ConceptIdClose also accepts same-domain matches via the demographic group.
     var_case(
         "age-generic-subject",
         "age",
         "Subject age at time of study",
-        "phenx:current_age",
+        "ncpi:subject_age",
         study_id="phs000284",
         study_name="Cleveland Family Study",
         table_name="CFS_CARe_Subject_Phenotypes",
@@ -789,7 +793,7 @@ CASES = [
         "age-at-recruitment",
         "Age",
         "Age at recruitment",
-        "phenx:current_age",
+        "ncpi:subject_age",
         study_id="phs000140",
         study_name="T2D GWAS in African Americans",
         table_name="CIDR_T2D_Case_Data",
@@ -799,7 +803,7 @@ CASES = [
         "age-at-collection",
         "AGE_AT_COLLECTION",
         "Age at sample collection",
-        "phenx:current_age",
+        "ncpi:subject_age",
         study_id="phs000200",
         study_name="COPD",
         table_name="Subject_Phenotypes",
@@ -809,7 +813,7 @@ CASES = [
         "age-at-blood-draw",
         "AGE_AT_DRAW",
         "Age at blood draw",
-        "phenx:current_age",
+        "ncpi:subject_age",
         study_id="phs000280",
         study_name="ARIC",
         table_name="lab",
@@ -819,7 +823,7 @@ CASES = [
         "age-baseline-copd",
         "age_baseline",
         "Age at baseline",
-        "phenx:current_age",
+        "ncpi:subject_age",
         study_id="phs000179",
         study_name="COPDGene",
         table_name="COPDGene_Subject_Phenotypes",
@@ -829,7 +833,7 @@ CASES = [
         "age-at-visit",
         "age_visit",
         "Age at current visit",
-        "phenx:current_age",
+        "ncpi:subject_age",
         study_id="phs000179",
         study_name="COPDGene",
         table_name="COPDGene_Subject_Phenotypes",
@@ -839,7 +843,7 @@ CASES = [
         "age-at-death",
         "AGE_AT_DEATH",
         "Age of subject at death",
-        "phenx:current_age",
+        "ncpi:subject_age",
         study_id="phs000007",
         study_name="Framingham Heart Study",
         table_name="mortality",
@@ -849,7 +853,7 @@ CASES = [
         "age-months",
         "AGE_MONTHS",
         "Age in months",
-        "phenx:current_age",
+        "ncpi:subject_age",
         study_id="phs000001",
         study_name="AREDS",
         table_name="Subject",
@@ -859,7 +863,7 @@ CASES = [
         "age-enrollage",
         "ENROLLAGE",
         "AGE AT RANDOMIZATION",
-        "phenx:current_age",
+        "ncpi:subject_age",
         study_id="phs000001",
         study_name="AREDS",
         table_name="genspecphenotype",
@@ -869,7 +873,7 @@ CASES = [
         "age-sampling",
         "AGE_SAMPLING",
         "Age at sampling",
-        "phenx:current_age",
+        "ncpi:subject_age",
         study_id="phs000200",
         study_name="COPD",
         table_name="Subject_Phenotypes",
@@ -921,7 +925,10 @@ async def main() -> None:
         classify_v3_topmed.MODEL = args.model
         print(f"Model override: {args.model}", file=sys.stderr)
 
-    report = await dataset.evaluate(classify_one_variable)
+    report = await dataset.evaluate(
+        classify_one_variable,
+        max_concurrency=5,
+    )
     report.print(include_input=False, include_output=True, include_reasons=True)
 
 

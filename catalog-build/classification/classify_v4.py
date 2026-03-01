@@ -317,8 +317,11 @@ variables to a fixed vocabulary of {n_concepts} expert-curated concepts.
 
 5. DO NOT invent concept_ids. Only use IDs from the vocabulary below.
 
-6. Match based on what value the variable contains, not what it references.
-   "Age at BMI measurement" contains an age, not a BMI — do not include it.
+6. Match based on what value the variable STORES, not what it references.
+   When a description says "[measurement A] at/of [event B]", the variable's
+   value is A, not B — match it to A's concept, not B's.
+   Examples: "Age at BMI measurement" stores an age, not a BMI.
+   "Age at cholesterol test" stores an age, not a cholesterol value.
 
 7. When the vocabulary contains both a broad general concept and a narrow
    disease-specific concept, prefer the broad match. Only use the narrow
