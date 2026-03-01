@@ -209,7 +209,7 @@ function getCatalogs(
  * @param listParams - List params.
  * @returns entities response.
  */
-async function getEntities(
+export async function getEntities(
   entityConfig: EntityConfig,
   catalog?: string,
   listParams?: AzulListParams

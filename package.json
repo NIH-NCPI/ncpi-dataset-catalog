@@ -3,9 +3,9 @@
   "version": "0.10.0",
   "private": true,
   "scripts": {
-    "dev": "./scripts/dev.sh ncpi-catalog dev && ./scripts/set-version.sh dev && next dev",
-    "build:dev": "scripts/common-build.sh ncpi-catalog dev && ./scripts/set-version.sh && next build && npm run postbuild",
-    "build:prod": "./scripts/common-build.sh ncpi-catalog prod && ./scripts/set-version.sh && next build && npm run postbuild",
+    "dev": "./scripts/dev.sh ncpi-catalog dev && ./scripts/set-version.sh dev && ./scripts/sync-api.sh && next dev",
+    "build:dev": "scripts/common-build.sh ncpi-catalog dev && ./scripts/set-version.sh && ./scripts/sync-api.sh && next build && npm run postbuild",
+    "build:prod": "./scripts/common-build.sh ncpi-catalog prod && ./scripts/set-version.sh && ./scripts/sync-api.sh && next build && npm run postbuild",
     "postbuild": "next-sitemap --config next-sitemap.config.mjs",
     "start": "npx serve out",
     "lint": "next lint --dir .",
@@ -23,7 +23,7 @@
     "fetch-dbgap-selected-publications": "esrun catalog-build/fetch-dbgap-selected-publications.ts"
   },
   "dependencies": {
-    "@databiosphere/findable-ui": "^48.1.0",
+    "@databiosphere/findable-ui": "^49.1.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mdx-js/loader": "^3.0.1",
