@@ -14,6 +14,7 @@ import { LIST_ITEM_TEXT_PROPS, MENU_PROPS, SVG_ICON_PROPS } from "./constants";
 import { getRequestAccessOptions } from "./utils";
 
 export const RequestAccess = ({
+  className,
   ncpiCatalogStudy,
 }: Props): JSX.Element | null => {
   const options = getRequestAccessOptions(ncpiCatalogStudy);
@@ -22,7 +23,7 @@ export const RequestAccess = ({
   // If there is only one request access option, render a CallToActionButton.
   if (options.length === 1)
     return (
-      <Actions>
+      <Actions className={className}>
         <CallToActionButton
           callToAction={{ label: "Request Access", url: options[0].href }}
         />
@@ -30,7 +31,7 @@ export const RequestAccess = ({
     );
   // Otherwise, render a dropdown menu for multiple request access options.
   return (
-    <Actions>
+    <Actions className={className}>
       <StyledDropdownMenu
         {...MENU_PROPS}
         button={(props) => (
