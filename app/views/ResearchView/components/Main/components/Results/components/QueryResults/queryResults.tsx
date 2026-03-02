@@ -5,8 +5,7 @@ import { useTable } from "./hooks/UseTable/hook";
 import { getOptions } from "./utils";
 import { RowData, TableOptions } from "@tanstack/table-core";
 import { Filters } from "./components/Filters/filters";
-import { StyledStack } from "./queryResults.styles";
-import { Typography } from "@mui/material";
+import { StyledStack, StyledTitle } from "./queryResults.styles";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 
 /**
@@ -19,9 +18,9 @@ export const QueryResults = ({ message }: Props): JSX.Element => {
   const { table } = useTable(getOptions(message) as TableOptions<RowData>);
   return (
     <StyledStack gap={4} useFlexGap>
-      <Typography variant={TYPOGRAPHY_PROPS.VARIANT.HEADING_SMALL}>
+      <StyledTitle variant={TYPOGRAPHY_PROPS.VARIANT.HEADING_SMALL}>
         {message.response.totalStudies > 0 ? "Datasets" : "Variables"}
-      </Typography>
+      </StyledTitle>
       <Filters message={message} table={table} />
       <Table table={table} />
     </StyledStack>

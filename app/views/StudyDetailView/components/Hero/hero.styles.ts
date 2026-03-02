@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { RequestAccess } from "../../../../components/RequestAccess/requestAccess";
+import { Title } from "@databiosphere/findable-ui/lib/components/common/Title/title";
 
 export const StyledGrid = styled.div`
   align-items: flex-start;
@@ -11,4 +12,14 @@ export const StyledGrid = styled.div`
 
 export const StyledRequestAccess = styled(RequestAccess)`
   align-self: flex-start;
+  justify-self: flex-end;
+`;
+
+export const StyledTitle = styled(Title)`
+  && {
+    font-size: 20px;
+    letter-spacing: normal;
+    line-height: 28px;
+    padding: 4px 0;
+  }
 `;

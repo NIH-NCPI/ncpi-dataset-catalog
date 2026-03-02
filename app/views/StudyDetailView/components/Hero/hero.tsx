@@ -1,7 +1,6 @@
 import { JSX } from "react";
-import { StyledGrid, StyledRequestAccess } from "./hero.styles";
+import { StyledGrid, StyledRequestAccess, StyledTitle } from "./hero.styles";
 import { Props } from "./types";
-import { Title } from "@databiosphere/findable-ui/lib/components/common/Title/title";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { ICON_BUTTON_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/iconButton";
 import { IconButton, Stack } from "@mui/material";
@@ -36,9 +35,9 @@ export const Hero = ({ study }: Props): JSX.Element => {
             fontSize={SVG_ICON_PROPS.FONT_SIZE.SMALL}
           />
         </IconButton>
-        <Title variant={TYPOGRAPHY_PROPS.VARIANT.HEADING_SMALL} sx={{ py: 1 }}>
+        <StyledTitle variant={TYPOGRAPHY_PROPS.VARIANT.HEADING_SMALL}>
           {study.title}
-        </Title>
+        </StyledTitle>
       </Stack>
       <StyledRequestAccess ncpiCatalogStudy={study} />
     </StyledGrid>
