@@ -4,6 +4,8 @@ import { Table } from "../../components/Table/table";
 import { useTable } from "./hooks/UseTable/hook";
 import { getOptions } from "./utils";
 import { RowData, TableOptions } from "@tanstack/table-core";
+import { Filters } from "../../components/Filters/filters";
+import { StyledStack } from "./results.styles";
 
 /**
  * Component to render the results of a research query, displaying either studies or variables in a table format.
@@ -13,5 +15,10 @@ import { RowData, TableOptions } from "@tanstack/table-core";
  */
 export const Results = ({ message }: Props): JSX.Element => {
   const { table } = useTable(getOptions(message) as TableOptions<RowData>);
-  return <Table table={table} />;
+  return (
+    <StyledStack gap={4} useFlexGap>
+      <Filters message={message} table={table} />
+      <Table table={table} />
+    </StyledStack>
+  );
 };

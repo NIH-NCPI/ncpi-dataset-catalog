@@ -8,22 +8,22 @@ import { METADATA_KEY } from "../../../../../components/Index/common/entities";
 import { renderTitle } from "./viewBuilder";
 
 const CONSENT_CODES: ColumnDef<Study> = {
-  accessorKey: "consentCodes",
+  accessorKey: "consentCode",
   cell: renderNTagCell<Study>(
     buildNTagProps(METADATA_KEY.CONSENT_CODE, "consentCodes")
   ),
   header: "Consent Code",
-  id: "consentCodes",
+  id: "consentCode",
   meta: { width: { max: "1fr", min: "140px" } },
 };
 
 const DATA_TYPES: ColumnDef<Study> = {
-  accessorKey: "dataTypes",
+  accessorKey: "dataType",
   cell: renderNTagCell<Study>(
     buildNTagProps(METADATA_KEY.DATA_TYPE, "dataTypes")
   ),
   header: "Data Type",
-  id: "dataTypes",
+  id: "dataType",
   meta: { width: { max: "1fr", min: "140px" } },
 };
 
@@ -49,22 +49,22 @@ const PARTICIPANT_COUNT: ColumnDef<Study> = {
 };
 
 const PLATFORMS: ColumnDef<Study> = {
-  accessorKey: "platforms",
+  accessorKey: "platform",
   cell: renderNTagCell<Study>(
     buildNTagProps(METADATA_KEY.PLATFORM, "platforms")
   ),
   header: "Platform",
-  id: "platforms",
+  id: "platform",
   meta: { width: { max: "1fr", min: "120px" } },
 };
 
 const STUDY_DESIGNS: ColumnDef<Study> = {
-  accessorKey: "studyDesigns",
+  accessorKey: "studyDesign",
   cell: renderNTagCell<Study>(
     buildNTagProps(METADATA_KEY.STUDY_DESIGN, "studyDesigns")
   ),
   header: "Study Design",
-  id: "studyDesigns",
+  id: "studyDesign",
   meta: { width: { max: "1fr", min: "140px" } },
 };
 
