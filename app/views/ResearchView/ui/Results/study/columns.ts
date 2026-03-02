@@ -8,7 +8,7 @@ import { METADATA_KEY } from "../../../../../components/Index/common/entities";
 import { renderTitle } from "./viewBuilder";
 
 const CONSENT_CODES: ColumnDef<Study> = {
-  accessorKey: "consentCode",
+  accessorKey: "consentCodes",
   cell: renderNTagCell<Study>(
     buildNTagProps(METADATA_KEY.CONSENT_CODE, "consentCodes")
   ),
@@ -18,7 +18,7 @@ const CONSENT_CODES: ColumnDef<Study> = {
 };
 
 const DATA_TYPES: ColumnDef<Study> = {
-  accessorKey: "dataType",
+  accessorKey: "dataTypes",
   cell: renderNTagCell<Study>(
     buildNTagProps(METADATA_KEY.DATA_TYPE, "dataTypes")
   ),
@@ -49,7 +49,7 @@ const PARTICIPANT_COUNT: ColumnDef<Study> = {
 };
 
 const PLATFORMS: ColumnDef<Study> = {
-  accessorKey: "platform",
+  accessorKey: "platforms",
   cell: renderNTagCell<Study>(
     buildNTagProps(METADATA_KEY.PLATFORM, "platforms")
   ),
@@ -59,7 +59,7 @@ const PLATFORMS: ColumnDef<Study> = {
 };
 
 const STUDY_DESIGNS: ColumnDef<Study> = {
-  accessorKey: "studyDesign",
+  accessorKey: "studyDesigns",
   cell: renderNTagCell<Study>(
     buildNTagProps(METADATA_KEY.STUDY_DESIGN, "studyDesigns")
   ),
