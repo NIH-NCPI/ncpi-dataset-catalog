@@ -972,7 +972,10 @@ async def main() -> None:
     if not VOCAB_PATH.exists():
         print(f"ERROR: Vocabulary not found: {VOCAB_PATH}", file=sys.stderr)
         sys.exit(1)
-    vocab = load_vocabulary(VOCAB_PATH, PHENX_VOCAB_PATH)
+    vocab = [
+        v for v in load_vocabulary(VOCAB_PATH, PHENX_VOCAB_PATH)
+        if v.get("type") != "archetype"
+    ]
     topmed_count = len({v["concept_id"] for v in vocab if ":" not in v["concept_id"]})
     phenx_count = len({v["concept_id"] for v in vocab if v["concept_id"].startswith("phenx:")})
     n_concepts = len({v["concept_id"] for v in vocab})
