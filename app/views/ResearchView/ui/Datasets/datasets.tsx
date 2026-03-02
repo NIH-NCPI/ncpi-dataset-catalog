@@ -6,6 +6,8 @@ import { Props } from "./types";
 import { StyledLoadingIcon, StyledRoundedPaper } from "./datasets.styles";
 import { SVG_ICON_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/svgIcon";
 import { Results } from "../Results/results";
+import { Typography } from "@mui/material";
+import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 
 /**
  * Selects the appropriate datasets view based on chat state.
@@ -27,7 +29,9 @@ export const Datasets = ({ state }: Pick<Props, "state">): JSX.Element => {
     case STATUS.NOT_FOUND:
       return (
         <StyledRoundedPaper elevation={0}>
-          No datasets found.
+          <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_400}>
+            No results found.
+          </Typography>
         </StyledRoundedPaper>
       );
   }
