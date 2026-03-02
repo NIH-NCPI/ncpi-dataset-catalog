@@ -1,5 +1,5 @@
 import { ListItemTextProps } from "@mui/material";
-import { NCPICatalogStudy } from "app/apis/catalog/ncpi-catalog/common/entities";
+import { NCPICatalogStudy } from "../../apis/catalog/ncpi-catalog/common/entities";
 
 /**
  * Generates a list of request access menu options based on the provided study.

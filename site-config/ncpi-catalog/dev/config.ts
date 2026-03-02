@@ -27,6 +27,34 @@ const PORTAL_URL = "https://ncpi-acc.org"; // https://www.ncpi-acc.org/
 const SLOGAN = "NIH Cloud Platform Interoperability Effort";
 
 const config: SiteConfig = {
+  ai: {
+    enabled: true,
+    prompt: {
+      inputPlaceholder: "Ask about datasets or variables",
+      suggestions: [
+        {
+          label: "GLP-1 effect + smoking in T2D",
+          query:
+            "I'm studying whether smoking modifies the effect of GLP-1 agonists on glycemic control in T2D patients",
+          variant: "CHIP",
+        },
+        {
+          label: "WGS for cardiovascular outcomes",
+          query:
+            "I'm interested in whole genome sequencing data for cardiovascular outcomes",
+          variant: "CHIP",
+        },
+        {
+          label: "RNA-Seq in pancreatic cancer",
+          query: "I'm interested in RNA-Seq data for pancreatic cancer",
+          variant: "CHIP",
+        },
+      ],
+      text: "Hello! Describe your research question and I'll help you find matching datasets across 2,944 studies from AnVIL, BDC, CRDC, and KFDRC.",
+    },
+    routes: { research: "/research/datasets", search: "/studies" },
+    url: "https://ffbijgxxf2.us-east-1.awsapprunner.com/search",
+  },
   analytics: {
     gtmAuth: "hQW1TUjhQSW9j0XTXzshYA", // GTM environment-specific
     gtmId: "GTM-55VGZN8",
@@ -40,17 +68,17 @@ const config: SiteConfig = {
       {
         categoryConfigs: [
           {
-            enableChartView: false,
+            chart: { enable: false },
             key: NCPI_CATALOG_CATEGORY_KEY.PLATFORM,
             label: NCPI_CATALOG_CATEGORY_LABEL.PLATFORM,
           },
           {
-            enableChartView: false,
+            chart: { enable: false },
             key: NCPI_CATALOG_CATEGORY_KEY.TITLE,
             label: NCPI_CATALOG_CATEGORY_LABEL.TITLE,
           },
           {
-            enableChartView: false,
+            chart: { enable: false },
             key: NCPI_CATALOG_CATEGORY_KEY.DB_GAP_ID,
             label: NCPI_CATALOG_CATEGORY_LABEL.DB_GAP_ID,
           },
@@ -67,7 +95,7 @@ const config: SiteConfig = {
             label: NCPI_CATALOG_CATEGORY_LABEL.STUDY_DESIGN,
           },
           {
-            enableChartView: false,
+            chart: { enable: false },
             key: NCPI_CATALOG_CATEGORY_KEY.CONSENT_CODE,
             label: NCPI_CATALOG_CATEGORY_LABEL.CONSENT_CODE,
           },
