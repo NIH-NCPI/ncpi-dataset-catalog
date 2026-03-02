@@ -2,7 +2,7 @@ import { ComponentProps, JSX } from "react";
 import { StyledSectionTitle, StyledRoundedPaper } from "./access.styles";
 import { Divider, Stack } from "@mui/material";
 import { Links } from "@databiosphere/findable-ui/lib/components/Links/links";
-import { SectionContent } from "../../../../../EntityView/ui/SectionContent/sectionContent";
+import { SectionContent } from "../../../../../../../EntityView/ui/SectionContent/sectionContent";
 
 /**
  * Renders "applying for access" component.

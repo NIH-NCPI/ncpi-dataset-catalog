@@ -12,18 +12,17 @@ import { seedDatabase } from "../../../app/utils/seedDatabase";
 import { getEntities } from "../../[entityListType]/[...params]";
 import { config } from "../../../app/config/config";
 import { StudyDetailView } from "../../../app/views/StudyDetailView/studyDetailView";
+import { NCPICatalogStudy } from "../../../app/apis/catalog/ncpi-catalog/common/entities";
 
 interface Params extends ParsedUrlQuery {
   researchType: string;
-  studyId: string;
+  studyParams: string[];
 }
 
 interface Props {
+  researchType: string;
   studyId: string;
-}
-
-interface Study {
-  dbGapId: string;
+  subpath: string;
 }
 
 /**
@@ -41,14 +40,23 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
     const entities = await getEntities(entityConfig);
 
     for (const entity of entities.hits) {
-      const study = entity as Study;
+      const study = entity as NCPICatalogStudy;
 
       if (!study.dbGapId) continue;
 
+      // Overview subpath "".
       paths.push({
         params: {
           researchType: RESEARCH_TYPE.RESULTS,
-          studyId: study.dbGapId,
+          studyParams: [study.dbGapId],
+        },
+      });
+
+      // Selected publications subpath "selected-publications".
+      paths.push({
+        params: {
+          researchType: RESEARCH_TYPE.RESULTS,
+          studyParams: [study.dbGapId, "selected-publications"],
         },
       });
     }
@@ -65,17 +73,22 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 export const getStaticProps: GetStaticProps<Props, Params> = async (
   context: GetStaticPropsContext<Params>
 ) => {
-  const { studyId } = context.params || {};
+  const { researchType, studyParams } = context.params || {};
 
-  if (!studyId) return { notFound: true };
+  if (!researchType) return { notFound: true };
+  if (!studyParams || studyParams.length === 0) return { notFound: true };
 
-  return { props: { studyId } };
+  const [studyId, subpath = ""] = studyParams;
+
+  return { props: { researchType, studyId, subpath } };
 };
 
 /**
  * Page component for the study detail view.
  * @param props - Props.
+ * @param props.researchType - Research type for the study detail view ("results").
  * @param props.studyId - Study ID.
+ * @param props.subpath - Subpath for the study detail view.
  * @returns Study detail view page.
  */
 const Page = (props: Props): JSX.Element => {

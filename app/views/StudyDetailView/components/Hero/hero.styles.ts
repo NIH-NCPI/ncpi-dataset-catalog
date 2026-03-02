@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { RequestAccess } from "../../../../components/RequestAccess/requestAccess";
 import { Title } from "@databiosphere/findable-ui/lib/components/common/Title/title";
+import { Tabs } from "@mui/material";
 
 export const StyledGrid = styled.div`
   align-items: flex-start;
@@ -21,5 +22,13 @@ export const StyledTitle = styled(Title)`
     letter-spacing: normal;
     line-height: 28px;
     padding: 4px 0;
+  }
+`;
+
+export const StyledTabs = styled(Tabs)`
+  grid-column: 1 / -1;
+
+  .MuiTabs-scroller {
+    padding: 0;
   }
 `;
