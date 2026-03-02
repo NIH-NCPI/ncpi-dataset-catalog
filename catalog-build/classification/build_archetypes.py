@@ -54,8 +54,9 @@ DEFAULT_MIN_VARS = 200
 
 # Max unique pairs for the definition call (archetypes + assignments).
 # Sonnet 4 has 200K context with 64K max output. At ~22 tokens/pair,
-# 3,000 pairs ≈ 66K input + 64K output = 130K total — safe margin.
-BATCH_SIZE = 3000
+# 2,000 pairs ≈ 44K input + 64K output = 108K total — avoids timeouts
+# on very large concepts like subject_age (14K+ vars).
+BATCH_SIZE = 2000
 
 # Max variables per assignment-only call. Output is ~12 tokens per variable
 # (compact dict format), so 2,000 * 12 ≈ 24K output tokens — fits in 32K.
@@ -356,11 +357,11 @@ def concept_id_to_prefix(concept_id: str) -> str:
     return f"ncpi:{bare}"
 
 
-def _make_model(timeout: float = 300.0) -> AnthropicModel:
+def _make_model(timeout: float = 600.0) -> AnthropicModel:
     """Create an AnthropicModel with configurable timeout.
 
     Args:
-        timeout: Request timeout in seconds. Default 300s (5 min).
+        timeout: Request timeout in seconds. Default 600s (10 min).
 
     Returns:
         Configured AnthropicModel instance.
@@ -396,7 +397,7 @@ async def _call_define_archetypes(
             max_tokens=64000,
             temperature=0.0,
         ),
-        output_retries=2,
+        output_retries=4,
     )
     result = await agent.run(build_user_prompt(concept_id, variables))
     return result.output
@@ -423,10 +424,10 @@ async def _call_assign_variables(
         system_prompt=ASSIGN_SYSTEM_PROMPT,
         model_settings=AnthropicModelSettings(
             anthropic_cache_instructions=True,
-            max_tokens=32768,
+            max_tokens=64000,
             temperature=0.0,
         ),
-        output_retries=2,
+        output_retries=4,
     )
     prompt = build_assign_prompt(concept_id, archetypes, variables)
     result = await agent.run(prompt)
