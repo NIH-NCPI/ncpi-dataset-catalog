@@ -4,7 +4,7 @@ import {
   TableOptions,
   useReactTable,
 } from "@tanstack/react-table";
-import { CORE_OPTIONS } from "../../../../../../components/common/Table/options/core";
+import { CORE_OPTIONS } from "../../../../../../../../../../components/common/Table/options/core";
 
 /**
  * React hook to create and configure a table instance using TanStack Table.

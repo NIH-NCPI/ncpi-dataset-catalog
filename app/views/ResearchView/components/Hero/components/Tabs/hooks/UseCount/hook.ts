@@ -1,6 +1,6 @@
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
 import { useMemo } from "react";
-import { Response } from "../../../../types/response";
+import { Response } from "../../../../../../types/response";
 import { isAssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards";
 import { AssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
 

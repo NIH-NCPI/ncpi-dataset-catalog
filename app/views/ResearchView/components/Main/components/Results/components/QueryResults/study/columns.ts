@@ -1,10 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Study } from "../../Datasets/types/study";
+import { Study } from "../../../types/study";
 import {
   renderNTagCell,
   buildNTagProps,
-} from "../../../../../components/common/Table/components/NTagCell/utils";
-import { METADATA_KEY } from "../../../../../components/Index/common/entities";
+} from "../../../../../../../../../components/common/Table/components/NTagCell/utils";
+import { METADATA_KEY } from "../../../../../../../../../components/Index/common/entities";
 import { renderTitle } from "./viewBuilder";
 
 const CONSENT_CODES: ColumnDef<Study> = {

@@ -1,7 +1,7 @@
-import * as C from "../../../../../components";
+import * as C from "../../../../../../../../../components";
 import { CellContext } from "@tanstack/react-table";
 import { JSX } from "react";
-import { Variable } from "../../Datasets/types/variable";
+import { Variable } from "../../../types/variable";
 
 /**
  * Builds props for the dbGapUrl Link component.

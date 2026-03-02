@@ -21,7 +21,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return {
     fallback: false,
     paths: [
-      { params: { researchType: RESEARCH_TYPE.DATASETS } },
+      { params: { researchType: RESEARCH_TYPE.RESULTS } },
       { params: { researchType: RESEARCH_TYPE.PLAN } },
     ],
   };

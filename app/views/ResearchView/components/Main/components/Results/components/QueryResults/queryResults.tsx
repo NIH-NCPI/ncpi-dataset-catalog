@@ -1,11 +1,11 @@
 import { JSX } from "react";
 import { Props } from "./types";
-import { Table } from "../../components/Table/table";
+import { Table } from "./components/Table/table";
 import { useTable } from "./hooks/UseTable/hook";
 import { getOptions } from "./utils";
 import { RowData, TableOptions } from "@tanstack/table-core";
-import { Filters } from "../../components/Filters/filters";
-import { StyledStack } from "./results.styles";
+import { Filters } from "./components/Filters/filters";
+import { StyledStack } from "./queryResults.styles";
 import { Typography } from "@mui/material";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 
@@ -15,12 +15,12 @@ import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/m
  * @param props.message - The assistant message containing the response data.
  * @returns The rendered results component.
  */
-export const Results = ({ message }: Props): JSX.Element => {
+export const QueryResults = ({ message }: Props): JSX.Element => {
   const { table } = useTable(getOptions(message) as TableOptions<RowData>);
   return (
     <StyledStack gap={4} useFlexGap>
       <Typography variant={TYPOGRAPHY_PROPS.VARIANT.HEADING_SMALL}>
-        {message.response.totalStudies > 0 ? "Dataset" : "Variable"} Results
+        {message.response.totalStudies > 0 ? "Datasets" : "Variables"}
       </Typography>
       <Filters message={message} table={table} />
       <Table table={table} />

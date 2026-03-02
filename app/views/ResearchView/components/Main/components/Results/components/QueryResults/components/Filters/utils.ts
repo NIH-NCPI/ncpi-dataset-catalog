@@ -1,5 +1,5 @@
 import { AssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
-import { Response } from "../../types/response";
+import { Response } from "../../../../../../../../types/response";
 import { Filters } from "@databiosphere/findable-ui/lib/common/entities";
 import { RowData, Table } from "@tanstack/react-table";
 

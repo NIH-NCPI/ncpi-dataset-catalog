@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Variable } from "../../Datasets/types/variable";
+import { Variable } from "../../../types/variable";
 import { renderDbGapUrl, renderStudyTitle } from "./viewBuilder";
 
 const CONCEPT: ColumnDef<Variable> = {

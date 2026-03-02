@@ -1,6 +1,6 @@
 export const RESEARCH_TYPE = {
-  DATASETS: "datasets",
   PLAN: "plan",
+  RESULTS: "results",
 } as const;
 
 export type ResearchType = (typeof RESEARCH_TYPE)[keyof typeof RESEARCH_TYPE];

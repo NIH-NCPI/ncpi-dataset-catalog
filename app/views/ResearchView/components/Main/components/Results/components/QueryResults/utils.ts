@@ -1,10 +1,10 @@
 import { TableOptions } from "@tanstack/react-table";
 import { AssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
-import { Response } from "../../types/response";
-import { Study } from "../Datasets/types/study";
+import { Response } from "../../../../../../types/response";
 import { COLUMNS as STUDY_COLUMNS } from "./study/columns";
 import { COLUMNS as VARIABLE_COLUMNS } from "./variable/columns";
-import { Variable } from "../Datasets/types/variable";
+import { Study } from "../../types/study";
+import { Variable } from "../../types/variable";
 
 type StudyOptions = Omit<TableOptions<Study>, "getCoreRowModel">;
 type VariableOptions = Omit<TableOptions<Variable>, "getCoreRowModel">;

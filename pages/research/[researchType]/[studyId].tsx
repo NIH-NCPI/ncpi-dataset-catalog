@@ -47,7 +47,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 
       paths.push({
         params: {
-          researchType: RESEARCH_TYPE.DATASETS,
+          researchType: RESEARCH_TYPE.RESULTS,
           studyId: study.dbGapId,
         },
       });

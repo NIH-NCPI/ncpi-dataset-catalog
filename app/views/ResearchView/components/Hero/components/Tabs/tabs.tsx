@@ -3,7 +3,7 @@ import { useCount } from "./hooks/UseCount/hook";
 import { StyledTabs } from "./tabs.styles";
 import { Props } from "./types";
 import { Tab } from "@mui/material";
-import { RESEARCH_TYPE } from "../../artifact/types";
+import { RESEARCH_TYPE } from "../../../../artifact/types";
 
 /**
  * Renders research view tabs.
@@ -17,8 +17,8 @@ export const Tabs = ({ researchType }: Props): JSX.Element => {
   return (
     <StyledTabs value={researchType}>
       <Tab
-        label={renderTabLabel("Dataset Results", count)}
-        value={RESEARCH_TYPE.DATASETS}
+        label={renderTabLabel("Results", count)}
+        value={RESEARCH_TYPE.RESULTS}
       />
     </StyledTabs>
   );
@@ -27,7 +27,7 @@ export const Tabs = ({ researchType }: Props): JSX.Element => {
 /**
  * Renders a tab label, with an optional count.
  * @param label - Tab label.
- * @param count - Datasets count.
+ * @param count - Optional count to display.
  * @returns Tab label, with optional count.
  */
 function renderTabLabel(label: string, count?: number): string {
