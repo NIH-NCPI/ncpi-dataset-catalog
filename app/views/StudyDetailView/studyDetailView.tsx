@@ -35,7 +35,7 @@ export const StudyDetailView = (props: Props): JSX.Element => {
       <StyledGrid {...spacing}>
         <StyledContainer maxWidth={false}>
           <Hero study={study} {...props} />
-          <Main study={study} {...props} />
+          <Main study={study} subpath={props.subpath} />
           <Side study={study} subpath={props.subpath} />
         </StyledContainer>
       </StyledGrid>
