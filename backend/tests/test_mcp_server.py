@@ -201,11 +201,15 @@ def _patch_index(tmp_path: Path):
     cat_path = tmp_path / "ncpi-categories.json"
     cat_path.write_text(json.dumps(CATEGORIES))
 
+    import mcp_catalog.server as _srv
+
     with (
         unittest.mock.patch("mcp_catalog.server._get_index", return_value=index),
         unittest.mock.patch("mcp_catalog.server._CATEGORIES_PATH", cat_path),
     ):
+        _srv._categories_cache = None
         yield index
+        _srv._categories_cache = None
 
 
 # ---------------------------------------------------------------------------
