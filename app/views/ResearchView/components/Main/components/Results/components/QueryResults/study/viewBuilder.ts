@@ -12,6 +12,6 @@ import { ROUTES } from "../../../../../../../../../../routes/constants";
 export const renderTitle = (ctx: CellContext<Study, unknown>): JSX.Element => {
   return C.Link({
     label: ctx.row.original.title,
-    url: `${ROUTES.RESEARCH_DATASETS}/${ctx.row.original.dbGapId}`,
+    url: `${ROUTES.RESEARCH_STUDIES}/${ctx.row.original.dbGapId}`,
   });
 };

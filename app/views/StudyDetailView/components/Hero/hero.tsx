@@ -43,7 +43,7 @@ export const Hero = ({
           <IconButton
             color={ICON_BUTTON_PROPS.COLOR.SECONDARY}
             component={Link}
-            href={ROUTES.RESEARCH_DATASETS}
+            href={ROUTES.RESEARCH_STUDIES}
           >
             <BackArrowIcon
               color={SVG_ICON_PROPS.COLOR.INK_LIGHT}

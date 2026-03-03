@@ -19,7 +19,7 @@ export const QueryResults = ({ message }: Props): JSX.Element => {
   return (
     <StyledStack gap={4} useFlexGap>
       <StyledTitle variant={TYPOGRAPHY_PROPS.VARIANT.HEADING_SMALL}>
-        {message.response.totalStudies > 0 ? "Datasets" : "Variables"}
+        {message.response.totalStudies > 0 ? "Studies" : "Variables"}
       </StyledTitle>
       <Filters message={message} table={table} />
       <Table table={table} />
