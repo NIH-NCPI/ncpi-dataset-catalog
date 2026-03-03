@@ -319,10 +319,10 @@ async def search(
                     continue
                 all_concepts.extend(m.values)
 
-            if all_concepts:
+            if all_concepts or study_ids:
                 rows, total_variable_count = (
                     index.store.query_variables(
-                        concepts=all_concepts,
+                        concepts=all_concepts or None,
                         study_ids=study_ids,
                     )
                 )

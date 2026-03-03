@@ -387,14 +387,17 @@ class DuckDBStore:
         Returns:
             List of dicts with variable_name and description.
         """
+        safe_limit = max(1, min(int(limit), 1000))
         sql = (
             "SELECT DISTINCT variable_name, description "
             "FROM variables "
             "WHERE list_contains(concept_ids_closure, ?) "  # noqa: S608
             "ORDER BY variable_name "
-            f"LIMIT {limit}"
+            "LIMIT ?"
         )
-        rows = self._conn.execute(sql, [concept_id.lower()]).fetchall()
+        rows = self._conn.execute(
+            sql, [concept_id.lower(), safe_limit]
+        ).fetchall()
         return [{"description": row[1], "variable_name": row[0]} for row in rows]
 
     def get_facet_value_counts(self) -> list[tuple[str, str, int]]:

@@ -70,15 +70,15 @@ evals-scaling:
 
 # Summarize classification results grouped by NCPI category
 summary:
-	$(VENV) summarize_v3.py
+	$(VENV) summarize_v4.py
 
 # Summary with example variables per concept
 summary-detail:
-	$(VENV) summarize_v3.py --examples
+	$(VENV) summarize_v4.py --examples
 
 # Top studies by match count
 summary-studies:
-	$(VENV) summarize_v3.py --by-study
+	$(VENV) summarize_v4.py --by-study
 
 # Transform v3 output → v4 (namespace prefixes + CUI)
 namespace:

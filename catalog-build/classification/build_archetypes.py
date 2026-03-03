@@ -713,7 +713,12 @@ def write_outputs(
                 existing_isa_pairs.add(pair)
                 new_isa_count += 1
 
-            # Retag mapping
+            # Retag mapping — keyed by name_lower only.  The LLM output
+            # schema returns variable names without descriptions, so
+            # same-name variables within a concept get the same archetype.
+            # In practice, name collisions within a single concept are
+            # near-zero (e.g. two different "AGE" variables wouldn't both
+            # be classified to topmed:ecg).
             for vname in cat.variables:
                 concept_retag[vname.lower()] = full_id
 

@@ -349,6 +349,9 @@ async def generate_subconcepts(
                 if var.get("concept_id") != concept_id:
                     continue
                 name = var.get("name", "")
+                # Keyed by name_lower only (LLM returns names without
+                # descriptions).  Same-name collisions within a single
+                # concept are near-zero in practice.
                 new_id = var_to_subconcept.get(name.lower())
                 if new_id:
                     var["concept_id"] = new_id
