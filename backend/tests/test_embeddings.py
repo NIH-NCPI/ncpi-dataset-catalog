@@ -123,16 +123,27 @@ class TestEmbeddingPersistence:
         assert beta[1] == "Beta"
         assert beta[3] == "archetype"
 
-    def test_old_cache_without_embeddings_table(self, tmp_path) -> None:
-        """Loading a cache that lacks concept_embeddings raises cleanly."""
-        # Simulate an old cache by saving without the embeddings table
+    def test_empty_table_returns_empty(self, tmp_path) -> None:
+        """A store with no embeddings inserted returns an empty list."""
         store = DuckDBStore.create_empty()
         store.finalize()
-        db_file = tmp_path / "old.duckdb"
+        db_file = tmp_path / "empty.duckdb"
         store.save_to_file(db_file)
 
         loaded = DuckDBStore.load_from_file(db_file)
-        # The table exists (it's in the schema) so this is a no-op;
-        # the real old-cache scenario is tested via the index layer
         result = loaded.get_concept_embeddings()
         assert result == []
+
+    def test_old_cache_missing_table(self, tmp_path) -> None:
+        """Simulates a pre-embeddings cache file missing the table entirely."""
+        import duckdb
+
+        db_file = tmp_path / "old.duckdb"
+        conn = duckdb.connect(str(db_file))
+        conn.execute("CREATE TABLE studies (db_gap_id VARCHAR PRIMARY KEY, raw_json VARCHAR)")
+        conn.close()
+
+        conn = duckdb.connect(str(db_file), read_only=True)
+        with pytest.raises(duckdb.CatalogException):
+            conn.execute("SELECT * FROM concept_embeddings")
+        conn.close()

@@ -464,11 +464,7 @@ class ConceptIndex:
         Gracefully skips if sentence-transformers is not installed (e.g. in
         test environments).
         """
-        try:
-            from . import embeddings
-        except ImportError:
-            logger.warning("sentence-transformers not available — skipping embeddings")
-            return
+        from . import embeddings
 
         descs = self._ensure_concept_descriptions()
         if not descs:
@@ -490,7 +486,11 @@ class ConceptIndex:
             texts.append(f"{name}: {desc}" if desc else name)
 
         logger.info("Embedding %d concept nodes...", len(texts))
-        matrix = embeddings.embed_texts(texts)
+        try:
+            matrix = embeddings.embed_texts(texts)
+        except ImportError:
+            logger.warning("sentence-transformers not available — skipping embeddings")
+            return
         logger.info("Embedding complete: %s", matrix.shape)
 
         # Store in DuckDB

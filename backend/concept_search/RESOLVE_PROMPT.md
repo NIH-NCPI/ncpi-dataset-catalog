@@ -51,7 +51,7 @@ Read the returned names, descriptions, types, and similarity scores. **In most c
 
 ### Fallback
 
-If no embedding results match well (all similarities < 0.3), fall back to keyword search:
+If the embedding search returns no results (empty list) or no results match well (all similarities < 0.3), fall back to keyword search:
 
 1. Call `get_measurement_category_concepts(keyword=<term>)` — searches concept IDs by substring.
 2. If no results, rewrite the term using medical knowledge and retry.
