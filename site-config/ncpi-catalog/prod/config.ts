@@ -3,6 +3,8 @@ import devConfig from "../dev/config";
 
 const config: SiteConfig = {
   ...devConfig,
+  // Ternary required: devConfig.ai is typed as AiConfig | undefined,
+  // so TS needs the guard to narrow before spreading.
   ai: devConfig.ai
     ? {
         ...devConfig.ai,
