@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.11.0...v0.11.1) (2026-03-03)
+
+
+### Bug Fixes
+
+* extract medication mentions and speed up S3 deploys ([#219](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/219)) ([8fe8f80](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/8fe8f8008592f0b32770f59384b90ed48a7196dc))
+
 ## [0.11.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.10.0...v0.11.0) (2026-03-03)
 
 
