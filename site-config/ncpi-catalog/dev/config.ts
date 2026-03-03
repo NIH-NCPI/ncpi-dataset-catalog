@@ -33,9 +33,9 @@ const config: SiteConfig = {
       inputPlaceholder: "Ask about studies or variables",
       suggestions: [
         {
-          label: "GLP-1 effect + smoking in T2D",
+          label: "Smoking + BMI in heart disease",
           query:
-            "I'm studying whether smoking modifies the effect of GLP-1 agonists on glycemic control in T2D patients",
+            "I'm looking for smoking and BMI data in cardiovascular disease studies",
           variant: "CHIP",
         },
         {
