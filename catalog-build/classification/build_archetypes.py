@@ -300,6 +300,23 @@ def discover_large_concepts(min_vars: int) -> dict[str, int]:
         for cid, count in counts.items()
         if count >= min_vars and vocab_types.get(cid) != "archetype"
     }
+
+    # Also include concepts with existing cache files (may have dropped
+    # below threshold after re-tagging by a previous run)
+    if CACHE_DIR.exists():
+        for cache_file in CACHE_DIR.glob("*.json"):
+            stem = cache_file.stem  # e.g. "topmed_ecg"
+            # Reconstruct concept_id from filename
+            for ns in ("topmed:", "phenx:", "ncpi:"):
+                prefix = ns.replace(":", "_")
+                if stem.startswith(prefix):
+                    cid = ns + stem[len(prefix):]
+                    break
+            else:
+                cid = stem
+            if cid not in large:
+                large[cid] = counts.get(cid, 0)
+
     return dict(sorted(large.items(), key=lambda x: -x[1]))
 
 
@@ -600,11 +617,15 @@ def write_outputs(
         print("\nNo results to write.")
         return
 
-    # Load existing data
+    # Load existing data, stripping old archetype entries to avoid stale leftovers
     with open(VOCAB_PATH) as f:
-        vocab = json.load(f)
+        vocab = [e for e in json.load(f) if e.get("type") != "archetype"]
     with open(ISA_PATH) as f:
-        isa = json.load(f)
+        non_arch_ncpi = {"ncpi:subject_age", "ncpi:demographics"}
+        isa = [
+            e for e in json.load(f)
+            if not e["child"].startswith("ncpi:") or e["child"] in non_arch_ncpi
+        ]
 
     existing_vocab_ids = {e["concept_id"] for e in vocab}
     existing_isa_pairs = {(e["child"], e["parent"]) for e in isa}
