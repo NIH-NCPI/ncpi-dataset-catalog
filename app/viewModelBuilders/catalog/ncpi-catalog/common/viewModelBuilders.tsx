@@ -1,6 +1,6 @@
 import { stringifyValues } from "@databiosphere/findable-ui/lib/common/utils";
 import { Breadcrumb } from "@databiosphere/findable-ui/lib/components/common/Breadcrumbs/breadcrumbs";
-import { Key, Value } from "@databiosphere/findable-ui/lib/components/common/KeyValuePairs/keyValuePairs";
+import { Key, KeyValuePairsProps, Value } from "@databiosphere/findable-ui/lib/components/common/KeyValuePairs/keyValuePairs";
 import { ANCHOR_TARGET } from "@databiosphere/findable-ui/lib/components/Links/common/entities";
 import { ViewContext } from "@databiosphere/findable-ui/lib/config/entities";
 import React, { ReactElement } from "react";
@@ -14,10 +14,9 @@ import * as C from "../../../../components";
 import { METADATA_KEY } from "../../../../components/Index/common/entities";
 import { getPluralizedMetadataLabel } from "../../../../components/Index/common/indexTransformer";
 import { getPlatformUrl } from "../../../../utils/platformUrls";
-import { RequestAccess } from "app/components/RequestAccess/requestAccess";
-import { MDX_COMPONENTS } from "app/components/MarkdownRenderer/constants";
-import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
-import { Tabs } from "app/components/Detail/components/Tabs/tabs";
+import { RequestAccess } from "../../../../components/RequestAccess/requestAccess";
+import { MDX_COMPONENTS } from "../../../../components/MarkdownRenderer/constants";
+import { Tabs } from "../../../../components/Detail/components/Tabs/tabs";
 
 /**
  * Build props for Publications component from the given NCPI study.
@@ -267,7 +266,7 @@ export const buildStudyHero = (
  */
 export const buildStudySummary = (
   ncpiCatalogStudy: NCPICatalogStudy,
-): React.ComponentProps<typeof C.Details> => {
+): KeyValuePairsProps & { title: string } => {
   const {
     consentCode,
     consentLongName,

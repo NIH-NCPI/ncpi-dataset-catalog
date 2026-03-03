@@ -35,17 +35,17 @@ Set the `intent` field to one of:
 
 ## Facets
 
-| Facet             | Key                | When to Use                                                              |
-| ----------------- | ------------------ | ------------------------------------------------------------------------ |
-| Platform          | `platform`         | User names a data repository                                             |
-| Data Type         | `dataType`         | User names a sequencing/data type                                        |
-| Study Design      | `studyDesign`      | User names a study methodology                                           |
-| Focus/Disease     | `focus`            | User names a disease, condition, or research area                        |
-| Measurement       | `measurement`      | User names something measured in patients (phenotype, lab value, survey) |
-| Consent Code      | `consentCode`      | User names a data use consent code                                       |
-| Sex               | `sex`              | User filters by participant sex/gender                                   |
-| Race/Ethnicity    | `raceEthnicity`    | User filters by participant race or ethnicity                            |
-| Computed Ancestry | `computedAncestry` | User filters by genetically computed ancestry                            |
+| Facet             | Key                | When to Use                                                                 |
+| ----------------- | ------------------ | --------------------------------------------------------------------------- |
+| Platform          | `platform`         | User names a data repository                                                |
+| Data Type         | `dataType`         | User names a sequencing/data type                                           |
+| Study Design      | `studyDesign`      | User names a study methodology                                              |
+| Focus/Disease     | `focus`            | User names a disease, condition, or research area                           |
+| Measurement       | `measurement`      | User names something measured/recorded (phenotype, lab, medication, survey) |
+| Consent Code      | `consentCode`      | User names a data use consent code                                          |
+| Sex               | `sex`              | User filters by participant sex/gender                                      |
+| Race/Ethnicity    | `raceEthnicity`    | User filters by participant race or ethnicity                               |
+| Computed Ancestry | `computedAncestry` | User filters by genetically computed ancestry                               |
 
 ## Small Facets — Resolve Directly
 
@@ -79,7 +79,7 @@ For these facets, extract the user's text and leave `values` empty. A resolve ag
 
 **Focus/Disease** — diseases, conditions, research areas. Examples: diabetes, heart disease, cancer, ALS, asthma.
 
-**Measurement** — phenotype variables, lab values, clinical measurements, survey instruments. Examples: blood pressure, BMI, cholesterol, smoking, sleep duration.
+**Measurement** — phenotype variables, lab values, clinical measurements, survey instruments, medication/drug use. Examples: blood pressure, BMI, cholesterol, smoking, sleep duration.
 
 **Consent Code** — GA4GH data use consent codes that describe what research a dataset is approved for. Common patterns: GRU (general research use), HMB (health/medical/biomedical), DS-\* (disease-specific), plus modifiers like IRB, NPU. When you see these codes, extract them as consentCode mentions.
 

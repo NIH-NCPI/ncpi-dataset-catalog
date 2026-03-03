@@ -422,6 +422,16 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
                 ],
             ),
         ),
+        Case(
+            name="intent-variable-study-only",
+            inputs="what variables are in BDC studies?",
+            expected_output=ExtractResult(
+                intent="variable",
+                mentions=[
+                    _rm("BDC", Facet.PLATFORM, ["BDC"]),
+                ],
+            ),
+        ),
         # --- Intent detection: ambiguous queries ---
         Case(
             name="intent-auto-ambiguous",
@@ -520,6 +530,23 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
                 mentions=[
                     _rm("cancer", Facet.FOCUS),
                     _rm("nonprofit cancer", Facet.CONSENT_CODE),
+                ],
+            ),
+        ),
+        # --- Complex research questions ---
+        Case(
+            name="multi-measurement-research-question",
+            inputs="I'm studying whether smoking modifies the effect of GLP-1 agonists on glycemic control in T2D patients",
+            # Should extract all four concepts: the disease focus plus
+            # three distinct measurement domains (smoking, medication,
+            # glycemic outcome).
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("type 2 diabetes", Facet.FOCUS),
+                    _rm("smoking", Facet.MEASUREMENT),
+                    _rm("GLP-1 agonists", Facet.MEASUREMENT),
+                    _rm("glycemic control", Facet.MEASUREMENT),
                 ],
             ),
         ),

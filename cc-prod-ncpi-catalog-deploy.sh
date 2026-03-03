@@ -2,6 +2,12 @@
 # Set the script to exit immediately on error
 set -e
 
+# Preflight: ensure s5cmd is available
+if ! command -v s5cmd >/dev/null 2>&1; then
+  echo "Error: s5cmd is not installed. Install with: brew install peak/tap/s5cmd" >&2
+  exit 1
+fi
+
 echo \"Deleting ./out/\"
 rm -rf ./out
 
@@ -14,5 +20,5 @@ npm run build:prod
 export BUCKET=s3://bhy-ncpi-data.org
 export SRCDIR=out/
 
-aws s3 sync  $SRCDIR $BUCKET --delete  --profile ncpi-prod-deployer
+AWS_PROFILE=ncpi-prod-deployer s5cmd sync --delete "$SRCDIR" "$BUCKET"
 aws cloudfront create-invalidation --distribution-id ENV5LQ3SY9LXL --paths "/*" --profile ncpi-prod-deployer

@@ -19,7 +19,7 @@ A Python API that accepts natural language queries about biomedical measurements
 
 ## Problem
 
-The catalog has ~450K phenotype variables across ~2,900 studies, classified into ~95K concept names. Researchers cannot currently search by what was measured — only by study-level metadata (platform, disease focus, data type, etc.). This API bridges the gap: natural language in, matching studies out, across all facets.
+The catalog has ~425K phenotype variables across ~2,944 studies, classified into ~6,700 concepts (179K variables classified, 42.2%). Researchers cannot currently search by what was measured — only by study-level metadata (platform, disease focus, data type, etc.). This API bridges the gap: natural language in, matching studies out, across all facets.
 
 ## Design Principles
 
@@ -52,7 +52,7 @@ The NCPI catalog has these filterable facets:
 | **Data Type**     | `dataType`    | ~64 values (WGS, WXS, RNA-Seq, etc.) | Small enum — extract agent matches directly |
 | **Study Design**  | `studyDesign` | ~15 values                           | Small enum — extract agent matches directly |
 | **Consent Code**  | `consentCode` | ~840 codes (GRU, HMB, DS-\*, etc.)   | Extract agent recognizes standard codes     |
-| **Measurement**   | `measurement` | ~95K concept names                   | Resolve agent always searches index         |
+| **Measurement**   | `measurement` | ~6,700 concept names                 | Resolve agent searches index + ISA tree     |
 
 ## Architecture
 
@@ -204,7 +204,7 @@ WGS/WXS are OR within one mention. Cholesterol concepts are OR within one mentio
 
 Built from two sources:
 
-1. **Measurement concepts**: `catalog-build/classification/output/llm-concepts/*.json` — ~2,870 study files, ~95K unique concept names with study counts
+1. **Measurement concepts**: `catalog-build/classification/output/llm-concepts-v4/*.json` — ~2,944 study files, ~6,700 unique concepts organized in a 4-level ISA hierarchy
 2. **Study metadata facets**: `catalog/ncpi-platform-studies.json` — ~2,944 studies with focus, dataType, studyDesign, consentCode, platform
 
 Provides:
@@ -262,5 +262,5 @@ See `backend/concept_search/eval_mentions.py` for current cases.
 1. **Concept hierarchy** — "sleep data" currently expands to 20 individual sleep concepts. A hierarchy would let us model is-a relations and return the closure. Phase 4.
 2. **Query latency budget** — Haiku ~1s per agent call × 3 agents = ~3s. Acceptable?
 3. **Hosting** — separate Python service from the Next.js frontend
-4. **95K concepts** — the classifier generates overly specific names for singleton variables. Normalization pass could reduce to ~5K useful concepts.
+4. ~~**95K concepts**~~ — Resolved. Vocabulary normalization, PhenX integration, and archetype generation reduced the concept space to ~6,700 structured concepts with ISA closure.
 5. **OR between facets** — not supported in Phase 1. How common is this query pattern?

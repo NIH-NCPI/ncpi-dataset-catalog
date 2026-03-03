@@ -30,42 +30,45 @@ Biological Phenomena, Chemically-Induced Disorders, Environment and Public Healt
 4. If the first category doesn't have a good match, try a second category.
 5. If no category matches, fall back to `search_concepts(query=<text>, facet="focus")`.
 
-## Measurement Facet — Keyword Search
+## Measurement Facet — Tree Walk
 
-For **measurement** mentions, use `get_measurement_category_concepts` to search by keyword, with `search_concepts` as fallback.
+For **measurement** mentions, walk the concept hierarchy top-down to find the most specific matching concept.
 
-Concepts are namespaced: `topmed:bp_systolic`, `phenx:spirometry`, `ncpi:biomarkers`. The keyword search matches against these IDs.
+Concepts form a tree: `ncpi:*` (20 top-level categories) → `topmed:*`/`phenx:*` (mid-level) → `ncpi:ffq_*` etc. (leaf sub-concepts) → variables. At each level, concepts have names and descriptions. Your job: start at the top, descend by reading descriptions, stop when you've found the right specificity.
 
-**NCPI Categories (top-level):**
+**NCPI Categories (top-level, pick one to start):**
 anthropometry, biomarkers, imaging, respiratory, disease_events, medications, substance_use, diet, exercise, sleep, demographics, race_ethnicity, ancestry, geography, socioeconomic, reproductive_health, environment, mental_health, general_health, study_admin
 
-### Strategy A: Keyword Search (preferred)
+### Step 1: Pick the top-level category and get its children
 
-1. Convert the mention to a keyword that would appear in a concept ID (use underscores, clinical terms).
-2. Call `get_measurement_category_concepts(keyword=<term>)`.
-3. If too many results, narrow with a more specific keyword. If too few, try synonyms.
-4. Pick the best matching concept(s). Prefer concepts with higher study counts.
+Read the mention and decide which NCPI category it belongs to. Use your biomedical knowledge — don't search, just reason. Then **immediately** call `get_concept_children("ncpi:<category>")`.
 
-**Examples:**
+**Your first tool call for any measurement mention MUST be `get_concept_children`.** Do NOT call `get_measurement_category_concepts` or `search_concepts` first.
 
-- "blood pressure" → keyword="bp" → topmed:bp_systolic, topmed:bp_diastolic
-- "BMI" → keyword="bmi" → topmed:bmi_baseline, phenx:body_mass_index
-- "smoking" → keyword="smok" → phenx:..._smoking_status_..., topmed:current_smoker_baseline
-- "cholesterol" → keyword="cholesterol" → topmed:total_cholesterol, topmed:hdl, topmed:ldl
-- "media use" → keyword="media" → phenx:media_use
-- "depression" → keyword="depression" → phenx:depression_adult, phenx:depression_child
+### Step 2: Walk down the tree
 
-### Strategy B: Search with Rewrite (fallback)
+Read the returned child names, descriptions, and study counts.
 
-If keyword search doesn't find a match, fall back to `search_concepts`:
+**At each node, ALWAYS call `get_concept_children` before returning.** Never return a concept without first checking if it has more specific children.
 
-1. Call `search_concepts(query=<text>, facet="measurement")`.
-2. Evaluate results by study count. A good match should have `study_count` ≥ 5.
-3. If poor or no results, **rewrite the term** using medical knowledge and search again:
-   - "blood sugar" → try "glucose"
-   - "heart attack" → try "myocardial_infarction"
-   - "high blood pressure" → try "bp"
-4. You may retry up to 3 times. Pick values with the highest study counts.
+- **Has children** → read the child names and descriptions. If ANY child is a more specific match for the query, descend into that child (and repeat). If no child is more specific, return the current concept.
+- **Archetype child** (`type: "archetype"` in the response) → archetypes are leaf nodes representing a specific measurement. Return it directly — do NOT call `get_concept_children` or `list_variables_for_concept` on an archetype.
+- **No children** (leaf node without archetype type) → call `list_variables_for_concept(concept_id)` to see actual variable names and descriptions. If any variables match the query, return the concept in `values` AND return the matching variables in `matched_variables` (only the ones whose descriptions are relevant to the query, not all of them). If none match, return empty values with a message explaining what happened.
+
+### Example
+
+**"systolic blood pressure":**
+
+1. Reason: blood pressure is a vital sign / biomarker → `ncpi:biomarkers`
+2. `get_concept_children("ncpi:biomarkers")` → see `topmed:bp_systolic` — close match, return it
+
+### Fallback: Keyword Search
+
+If the tree walk fails (e.g., you pick the wrong top-level category, or no children match), fall back to keyword search:
+
+1. Call `get_measurement_category_concepts(keyword=<term>)` — searches concept IDs by substring.
+2. If no results, rewrite the term using medical knowledge and retry (e.g., "blood sugar" → "glucose", "heart attack" → "myocardial_infarction").
+3. If keyword search finds a concept, use `get_concept_children` to check if you should drill deeper before returning.
 
 ## Consent Code Facet — Eligibility Resolution
 

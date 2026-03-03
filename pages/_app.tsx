@@ -1,6 +1,6 @@
 import "@databiosphere/findable-ui";
 import { AzulEntitiesStaticResponse } from "@databiosphere/findable-ui/lib/apis/azul/common/entities";
-import { Error } from "@databiosphere/findable-ui/lib/components/Error/error";
+import { Error as DXError } from "@databiosphere/findable-ui/lib/components/Error/error";
 import { ErrorBoundary } from "@databiosphere/findable-ui/lib/components/ErrorBoundary";
 import { Head } from "@databiosphere/findable-ui/lib/components/Head/head";
 import { AppLayout } from "@databiosphere/findable-ui/lib/components/Layout/components/AppLayout/appLayout.styles";
@@ -31,6 +31,8 @@ import TagManager from "react-gtm-module";
 import { BREAKPOINTS } from "../site-config/common/constants";
 import { ServicesProvider } from "@databiosphere/findable-ui/lib/providers/services/provider";
 import { DataDictionaryStateProvider } from "@databiosphere/findable-ui/lib/providers/dataDictionaryState/provider";
+import { ChatProvider } from "@databiosphere/findable-ui/lib/views/ResearchView/state/provider";
+import { useEntities } from "../app/services/workflows/hooks/UseEntities/hook";
 
 const FEATURE_FLAGS = Object.values(FEATURES);
 const SESSION_TIMEOUT = 15 * 60 * 1000; // 15 minutes
@@ -52,12 +54,16 @@ setFeatureFlags(FEATURE_FLAGS);
 function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
   // Set up the site configuration, layout and theme.
   const appConfig = config();
-  const { analytics, layout, redirectRootToPath, themeOptions } = appConfig;
+  // Load entities into the in-memory cache.
+  const isEntitiesLoaded = useEntities();
+
+  const { ai, analytics, layout, redirectRootToPath, themeOptions } = appConfig;
   const { gtmAuth, gtmId, gtmPreview } = analytics || {};
   const { floating, footer, header } = layout || {};
   const theme = createAppTheme(themeOptions);
   const { entityListType, pageTitle } = pageProps as PageProps;
   const Main = Component.Main || DXMain;
+  const { url: aiUrl } = ai || {};
 
   // Initialize Google Tag Manager.
   useEffect(() => {
@@ -65,6 +71,10 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
       TagManager.initialize({ auth: gtmAuth, gtmId, preview: gtmPreview });
     }
   }, [gtmAuth, gtmId, gtmPreview]);
+
+  if (!isEntitiesLoaded) return <></>;
+
+  if (!aiUrl) throw new Error("AI URL is not defined in the configuration.");
 
   return (
     <EmotionThemeProvider theme={theme}>
@@ -91,33 +101,35 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
                     >
                       <Header {...header} />
                     </ThemeProvider>
-                    <ExploreStateProvider entityListType={entityListType}>
-                      <DataDictionaryStateProvider>
-                        <FileManifestStateProvider>
-                          <Main>
-                            <ErrorBoundary
-                              fallbackRender={({
-                                error,
-                                reset,
-                              }: {
-                                error: DataExplorerError;
-                                reset: () => void;
-                              }): JSX.Element => (
-                                <Error
-                                  errorMessage={error.message}
-                                  requestUrlMessage={error.requestUrlMessage}
-                                  rootPath={redirectRootToPath}
-                                  onReset={reset}
-                                />
-                              )}
-                            >
-                              <Component {...pageProps} />
-                              <Floating {...floating} />
-                            </ErrorBoundary>
-                          </Main>
-                        </FileManifestStateProvider>
-                      </DataDictionaryStateProvider>
-                    </ExploreStateProvider>
+                    <ChatProvider initialArgs={ai?.prompt} url={aiUrl}>
+                      <ExploreStateProvider entityListType={entityListType}>
+                        <DataDictionaryStateProvider>
+                          <FileManifestStateProvider>
+                            <Main>
+                              <ErrorBoundary
+                                fallbackRender={({
+                                  error,
+                                  reset,
+                                }: {
+                                  error: DataExplorerError;
+                                  reset: () => void;
+                                }): JSX.Element => (
+                                  <DXError
+                                    errorMessage={error.message}
+                                    requestUrlMessage={error.requestUrlMessage}
+                                    rootPath={redirectRootToPath}
+                                    onReset={reset}
+                                  />
+                                )}
+                              >
+                                <Component {...pageProps} />
+                                <Floating {...floating} />
+                              </ErrorBoundary>
+                            </Main>
+                          </FileManifestStateProvider>
+                        </DataDictionaryStateProvider>
+                      </ExploreStateProvider>
+                    </ChatProvider>
                     <Footer {...footer} />
                   </AppLayout>
                 </LayoutDimensionsProvider>

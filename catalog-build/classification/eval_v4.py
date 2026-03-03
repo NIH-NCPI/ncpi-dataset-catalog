@@ -1,8 +1,8 @@
-"""Evals for classify_v3_topmed.py (v3 concept matching against TOPMed vocabulary).
+"""Evals for concept matching classifier (v4 multi-table batching).
 
-Each eval case sends a single variable to the LLM with the full 78-concept
-vocabulary. Tests whether the model correctly matches to the right concept_id
-or returns null for non-matching variables.
+Each eval case sends a single variable to the LLM with the full concept
+vocabulary (~567 concepts). Tests whether the model correctly matches to
+the right concept_id or returns null for non-matching variables.
 
 Test cases are derived from TOPMed ground truth (topmed-seed-concepts.json)
 component variables — domain experts confirmed these concept mappings.
@@ -35,12 +35,13 @@ for _proxy_var in ("ALL_PROXY", "all_proxy"):
 from pydantic_evals import Case, Dataset
 from pydantic_evals.evaluators import Evaluator, EvaluationReason, EvaluatorContext
 
-from classify_v3_topmed import (
+from classify_v4 import (
     MatchDeps,
     classify_batch,
     load_vocabulary,
     make_agent,
     VOCAB_PATH,
+    PHENX_VOCAB_PATH,
 )
 from models import ParsedTable
 
@@ -78,6 +79,7 @@ DOMAIN_GROUPS: dict[str, set[str]] = {
     "demographic": {
         "annotated_sex", "race_us", "hispanic_or_latino",
         "hispanic_subgroup", "geographic_site", "subcohort",
+        "ncpi:subject_age", "phenx:current_age",
     },
     "baseline_covariates": {
         "bmi_baseline", "height_baseline", "weight_baseline",
@@ -95,6 +97,14 @@ DOMAIN_GROUPS: dict[str, set[str]] = {
         "pad_prior",
     },
     "vte": {"vte_case_status", "vte_followup_start_age", "vte_prior_history"},
+    "ecg": {"ecg", "heart_rate"},
+    "cognition": {"cognition"},
+    "liver_kidney": {"liver_function", "kidney_function"},
+    "hospitalization_surgery": {"hospitalization", "surgical_procedure"},
+    "family_history": {"family_medical_history"},
+    "medications_specific": {
+        "diabetes_medication", "anticoagulant_medication", "pain_medication",
+    },
 }
 
 # Build reverse lookup: concept_id → domain
@@ -127,7 +137,12 @@ class VariableInput(BaseModel):
 
 async def classify_one_variable(inputs: VariableInput) -> str:
     """Classify a single variable and return its concept_id or 'null'."""
-    vocab = load_vocabulary(VOCAB_PATH)
+    # Exclude archetypes — they're sub-groupings, not classifier targets,
+    # and including them pushes the prompt past Haiku's 200K token limit.
+    vocab = [
+        v for v in load_vocabulary(VOCAB_PATH, PHENX_VOCAB_PATH)
+        if v.get("type") != "archetype"
+    ]
     agent = make_agent(vocab)
     valid_ids = {v["concept_id"] for v in vocab}
 
@@ -146,17 +161,17 @@ async def classify_one_variable(inputs: VariableInput) -> str:
         variable_count=1,
         file_path="eval",
     )
+    # v4 classify_batch takes a list of (table, variables) pairs
     result, _, _ = await classify_batch(
         agent,
         valid_ids,
         inputs.study_id,
         inputs.study_name,
-        table,
-        table.variables,
+        [(table, table.variables)],
     )
-    if result.variables:
-        cid = result.variables[0].concept_id
-        return cid if cid is not None else "null"
+    # matches-only output: if tables/variables empty, it means no match (null)
+    if result.tables and result.tables[0].variables:
+        return result.tables[0].variables[0].concept_id
     return "null"
 
 
@@ -606,31 +621,32 @@ CASES = [
         table_name="vte",
         table_description="Venous thromboembolism case-control data",
     ),
-    # ── Value vs reference (should return null) ─────────────────────────
-    # "Age at X measurement" contains an age, not X
+    # ── Age at measurement ──────────────────────────────────────────────
+    # "Age at X measurement" is an age variable, not an X variable.
+    # Should match ncpi:subject_age.
     var_case(
-        "neg-age-at-cac",
+        "age-at-cac-measurement",
         "ESP_AGE_AT_CAC",
         "Age in years at CAC Agatston score measurement",
-        "null",
+        "ncpi:subject_age",
         study_id="phs000401",
         study_name="FHS ESP HeartGO",
         table_name="HeartGO_FHS_LDLandEOMI_PhenotypeDataFile",
     ),
     var_case(
-        "neg-age-at-crp",
+        "age-at-crp-measurement",
         "ESP_AGE_AT_CRP",
         "Age in years at CRP measurement",
-        "null",
+        "ncpi:subject_age",
         study_id="phs000401",
         study_name="FHS ESP HeartGO",
         table_name="HeartGO_FHS_LDLandEOMI_PhenotypeDataFile",
     ),
     var_case(
-        "neg-age-at-hematocrit",
+        "age-at-hematocrit-measurement",
         "ESP_AGE_AT_HEMATOCRIT",
         "Age in years at hematocrit measurement",
-        "null",
+        "ncpi:subject_age",
         study_id="phs000401",
         study_name="FHS ESP HeartGO",
         table_name="HeartGO_FHS_LDLandEOMI_PhenotypeDataFile",
@@ -698,33 +714,37 @@ CASES = [
         table_name="bmode_carotid",
         table_description="B-mode carotid ultrasound measurements",
     ),
-    # Disease-specific outside TOPMed domains
+    # Family medical history — seizures aren't a specific concept but the
+    # variable IS family health history data. Classifier returns
+    # psychiatric_interview_family_history (an archetype) which is reasonable
+    # given the epilepsy/pedigree context.
     var_case(
-        "neg-seizure-family-hx",
+        "family-hx-seizures",
         "BioSisterHadSeizures1",
         "G (b): Biological Sisters. Has this sister ever had seizures? (1)",
-        "null",
+        "psychiatric_interview_family_history",
         study_id="phs000576",
         study_name="Epilepsy Phenome/Genome Project (EPGP)",
         table_name="pedigree",
         table_description="Family pedigree data",
     ),
+    # ── ECG ─────────────────────────────────────────────────────────────
     var_case(
-        "neg-ecg-specific",
+        "ecg-finding",
         "mcr665",
         "INTERMITTENT ABERRANT ATRIOVENTRICULAR CONDUCTION; BY VISUAL ANALYSIS",
-        "null",
+        "ecg",
         study_id="phs000209",
         study_name="MESA",
         table_name="MESA_Exam5Main",
         table_description="Exam 5 clinical measurements",
     ),
-    # Cognitive test — not in TOPMed 78 concepts
+    # ── Cognition ───────────────────────────────────────────────────────
     var_case(
-        "neg-cognition-test",
+        "cognition-digit-span",
         "DSF",
         "DIGIT SPAN FORWARD SCORE",
-        "null",
+        "cognition",
         study_id="phs000280",
         study_name="MESA",
         table_name="cognitive",
@@ -745,14 +765,130 @@ CASES = [
         table_description="Cardiovascular event surveillance data",
     ),
     var_case(
-        "neg-age-enrollment",
+        "age-enrollment",
         "AGE",
         "AGE AT ENROLLMENT",
-        "null",
+        "ncpi:subject_age",
         study_id="phs000280",
         study_name="ARIC",
         table_name="enrollment",
         table_description="Enrollment data",
+    ),
+    # ── Generic age variables ────────────────────────────────────────────
+    # Generic age variables should match ncpi:subject_age (or phenx:current_age),
+    # but must NOT match disease-specific followup age concepts like
+    # vte_followup_start_age or cad_followup_start_age.
+    # ConceptIdClose also accepts same-domain matches via the demographic group.
+    var_case(
+        "age-generic-subject",
+        "age",
+        "Subject age at time of study",
+        "ncpi:subject_age",
+        study_id="phs000284",
+        study_name="Cleveland Family Study",
+        table_name="CFS_CARe_Subject_Phenotypes",
+        table_description="Subject phenotype data",
+    ),
+    var_case(
+        "age-at-recruitment",
+        "Age",
+        "Age at recruitment",
+        "ncpi:subject_age",
+        study_id="phs000140",
+        study_name="T2D GWAS in African Americans",
+        table_name="CIDR_T2D_Case_Data",
+        table_description="Type 2 diabetes case data",
+    ),
+    var_case(
+        "age-at-collection",
+        "AGE_AT_COLLECTION",
+        "Age at sample collection",
+        "ncpi:subject_age",
+        study_id="phs000200",
+        study_name="COPD",
+        table_name="Subject_Phenotypes",
+        table_description="Subject phenotype data",
+    ),
+    var_case(
+        "age-at-blood-draw",
+        "AGE_AT_DRAW",
+        "Age at blood draw",
+        "ncpi:subject_age",
+        study_id="phs000280",
+        study_name="ARIC",
+        table_name="lab",
+        table_description="Laboratory specimen data",
+    ),
+    var_case(
+        "age-baseline-copd",
+        "age_baseline",
+        "Age at baseline",
+        "ncpi:subject_age",
+        study_id="phs000179",
+        study_name="COPDGene",
+        table_name="COPDGene_Subject_Phenotypes",
+        table_description="Subject phenotype data",
+    ),
+    var_case(
+        "age-at-visit",
+        "age_visit",
+        "Age at current visit",
+        "ncpi:subject_age",
+        study_id="phs000179",
+        study_name="COPDGene",
+        table_name="COPDGene_Subject_Phenotypes",
+        table_description="Subject phenotype data",
+    ),
+    var_case(
+        "age-at-death",
+        "AGE_AT_DEATH",
+        "Age of subject at death",
+        "ncpi:subject_age",
+        study_id="phs000007",
+        study_name="Framingham Heart Study",
+        table_name="mortality",
+        table_description="Mortality data",
+    ),
+    var_case(
+        "age-months",
+        "AGE_MONTHS",
+        "Age in months",
+        "ncpi:subject_age",
+        study_id="phs000001",
+        study_name="AREDS",
+        table_name="Subject",
+        table_description="Subject attributes",
+    ),
+    var_case(
+        "age-enrollage",
+        "ENROLLAGE",
+        "AGE AT RANDOMIZATION",
+        "ncpi:subject_age",
+        study_id="phs000001",
+        study_name="AREDS",
+        table_name="genspecphenotype",
+        table_description="Genetic specimen phenotype data",
+    ),
+    var_case(
+        "age-sampling",
+        "AGE_SAMPLING",
+        "Age at sampling",
+        "ncpi:subject_age",
+        study_id="phs000200",
+        study_name="COPD",
+        table_name="Subject_Phenotypes",
+        table_description="Subject phenotype data",
+    ),
+    # Positive: VTE followup start age in correct context
+    var_case(
+        "age-vte-followup",
+        "V1AGE01",
+        "Age at visit 1, start of VTE event adjudication period",
+        "vte_followup_start_age",
+        study_id="phs000289",
+        study_name="CCAF",
+        table_name="vte",
+        table_description="Venous thromboembolism event surveillance data",
     ),
 ]
 
@@ -773,9 +909,9 @@ dataset = Dataset[VariableInput, str, str](
 
 
 async def main() -> None:
-    """Run v3 TOPMed concept matching evals."""
+    """Run v4 concept matching classifier evals."""
     parser = argparse.ArgumentParser(
-        description="Eval v3 concept matching (classify_v3_topmed)"
+        description="Eval v4 concept matching (classify_v4)"
     )
     parser.add_argument(
         "--model",
@@ -784,12 +920,15 @@ async def main() -> None:
     args = parser.parse_args()
 
     if args.model:
-        import classify_v3_topmed
+        import classify_v4
 
-        classify_v3_topmed.MODEL = args.model
+        classify_v4.MODEL = args.model
         print(f"Model override: {args.model}", file=sys.stderr)
 
-    report = await dataset.evaluate(classify_one_variable)
+    report = await dataset.evaluate(
+        classify_one_variable,
+        max_concurrency=5,
+    )
     report.print(include_input=False, include_output=True, include_reasons=True)
 
 

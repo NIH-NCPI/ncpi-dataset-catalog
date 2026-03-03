@@ -1,13 +1,13 @@
 # NCPI Dataset Catalog: How It Works
 
 This document describes how the catalog is built, from raw data sources through
-to the search API. Last verified against code: 2026-02-20.
+to the search API. Last verified against code: 2026-02-27.
 
 ## Motivation
 
 The NCPI Dataset Catalog exists to help researchers **discover** studies across
-NIH cloud platforms. The core challenge is that ~2,700 dbGaP studies contain
-~340,000 variables with inconsistent naming, no standard ontology, and metadata
+NIH cloud platforms. The core challenge is that ~2,944 dbGaP studies contain
+~425,000 variables with inconsistent naming, no standard ontology, and metadata
 scattered across CSV exports, FTP-hosted XML files, and platform APIs.
 
 Our classification strategy **prioritizes recall over precision**: we'd rather
@@ -33,7 +33,7 @@ Platform APIs ─────┤
 dbGaP FTP server ──┤──► catalog build ──► catalog JSON ──► DuckDB ──► search API
 Semantic Scholar ──┤
 var_report.xml ────┤
-LLM (Haiku) ───────┘
+LLM (Haiku/Sonnet) ┘
 ```
 
 The pipeline has five major stages:
@@ -43,8 +43,8 @@ The pipeline has five major stages:
    counts
 3. **Publication fetching** — PI-curated papers from dbGaP, resolved via
    Semantic Scholar
-4. **Variable classification** — 340K dbGaP variables mapped to ~12K concepts
-   via LLM, organized into a searchable hierarchy
+4. **Variable classification** — 425K dbGaP variables mapped to ~6,700 concepts
+   via LLM, organized into a 4-level searchable hierarchy
 5. **Demographic distributions** — per-study sex, race/ethnicity, and computed
    ancestry extracted from dbGaP metadata
 
@@ -159,63 +159,102 @@ iterations and debugging.
 
 ### 4c. Concept hierarchy
 
-The ~12,187 unique concept names are organized into a two-level hierarchy
-(27 top-level categories, ~580 mid-level subcategories):
+The vocabulary is organized into a 4-level hierarchy: 20 top-level categories,
+~580 mid-level concepts, and ~6,300 leaf archetypes. The hierarchy is stored as
+ISA (child → parent) edges in `concept-isa.json`, and DuckDB computes the
+transitive closure at index load time so that a query at any level returns all
+descendant variables.
 
 ```
-Top-level           Mid-level           Leaf concept (study count)
-─────────           ─────────           ──────────────────────────
+Category            Concept             Archetype (variable count)
+────────            ───────             ──────────────────────────
+
+Cardiovascular (31,785 vars)
+├── Blood Pressure
+│   ├── Systolic Blood Pressure
+│   │   ├── Resting Systolic BP (632)
+│   │   └── Ankle Brachial Systolic BP (208)
+│   └── Diastolic Blood Pressure
+│       └── Resting Diastolic BP (767)
+├── ECG (10,541 vars)
+│   ├── Atrial Fibrillation (136)
+│   ├── QT Interval (114)
+│   ├── Wave Amplitudes (2,015)
+│   ├── Minnesota Codes (852)
+│   └── ... (37 more archetypes)
+├── Lipids
+│   ├── HDL Cholesterol
+│   │   └── HDL Cholesterol Total (873)
+│   └── LDL Cholesterol
+│       └── LDL Cholesterol Direct (809)
+└── ...
 
 Demographics
 ├── Sex/Gender
-│   ├── Sex (2,401)
-│   ├── Gender Identity (5)
-│   └── Sex At Birth (2)
-├── Age
-│   ├── Age (1,198)
-│   ├── Age At Sample Collection (229)
-│   ├── Age At Enrollment (78)
-│   ├── Age At Diagnosis (107)               ← clinical, not demographic
-│   └── ... (~40 more age-at-X variants)
-├── Race/Ethnicity
-│   ├── Race/Ethnicity (1,192)
-│   ├── Ethnicity (258)
-│   ├── Race (201)
-│   └── Hispanic Ethnicity (42)
-├── Education
-│   ├── Education (111)
-│   └── Education Level (44)
-├── Social/Family Status
-│   └── Marital Status (66)
-└── Employment
-    └── Employment Status (40)
-
-Cardiovascular
-├── Blood Pressure
-│   ├── Systolic Blood Pressure (154)
-│   └── Diastolic Blood Pressure (148)
-├── Heart Rate
+│   ├── Annotated Sex
+│   │   └── Participant Sex/Gender (3,526)
 │   └── ...
+├── Race/Ethnicity
+│   └── ...
+└── ...
 ```
 
-For example, in MESA (phs000209) alone, the leaf concept "Systolic Blood
-Pressure" maps to all of these variables — different names, different tables,
-same concept:
+Searching "ECG QT interval" resolves to the archetype `ncpi:ecg_qt_interval`
+(114 variables across 25 studies). Searching "all ECG measurements" resolves to
+the parent `topmed:ecg` and ISA closure returns all 10,541 variables across all
+41 archetypes.
 
-```
-sbp5c    SEATED SYSTOLIC BLOOD PRESSURE (mmHg)       phv00175601.v1
-s1bp5    SEATED BP: SYSTOLIC 1ST READING (mmHg)      phv00175587.v1
-s2bp5    SEATED BP: SYSTOLIC 2ND READING (mmHg)      phv00175591.v1
-s3bp5    SEATED BP: SYSTOLIC 3RD READING (mmHg)      phv00175594.v1
-avgsys5  FORM: SYS BLOOD PRESSURE: AVERAGE           phv00175762.v1
-rbrach5  RIGHT BRACHIAL BP (mmHg)                    phv00174611.v1
-```
+The full tree can be generated with `make hierarchy` in `catalog-build/classification/`.
 
-This is the core value of the classification: a researcher searching for
-"systolic blood pressure" finds MESA regardless of whether the variable is
-called `sbp5c`, `s1bp5`, or `rbrach5`.
+### 4d. Archetype generation
 
-### 4d. Search index and API
+After classification and vocabulary expansion, 185 concepts still have >200
+variables each — too many for the resolve agent to browse and too coarse for
+specific queries. But the variables aren't distinct measurements. ECG atrial
+fibrillation appears as `AFIB`, `ATRFIB21`, `ECGAFIB`, `afib_s1`, `ecg_af`
+across 40+ studies, each repeated across visit tables. The 10,541 "ECG"
+variables represent roughly 40 distinct measurement types.
+
+The archetype pipeline (`build_archetypes.py`) groups semantically identical
+variables into canonical sub-concepts:
+
+1. **Discovery** — scans all 2,944 study JSONs, counts variables per concept,
+   identifies the 185 concepts exceeding 200 variables (152K variables total)
+2. **Deduplication** — collapses variable occurrences by (name, description)
+   to get unique measurement signatures. ECG's 10,541 occurrences reduce to
+   8,671 unique pairs.
+3. **LLM grouping** — sends deduplicated pairs to Claude Sonnet with
+   instructions to group by measurement type (not by study or naming
+   convention). For concepts that exceed the 200K context window, a two-pass
+   approach is used:
+   - **Pass 1 (define)**: first 3,000 pairs → Sonnet returns archetype
+     definitions (5-50 per concept)
+   - **Pass 2+ (assign)**: remaining pairs in batches of 2,000 → Sonnet
+     assigns each variable to an existing archetype
+4. **Output** — appends archetype entries to `concept-vocabulary.json`, ISA
+   edges to `concept-isa.json`, and re-tags `concept_id` in the study JSONs so
+   variables point to their archetype instead of the broad parent
+
+All archetypes use the `ncpi:` namespace prefix (e.g.,
+`ncpi:ecg_atrial_fibrillation`) since they are our own groupings, not TOPMed
+harmonized concepts. ISA closure means a query at the parent level still
+returns all descendant variables — no information is lost.
+
+Results are cached per-concept in `output/archetypes/` for resumability.
+Current stats: **6,281 archetypes** across 185 concepts, **98K variables**
+assigned (~94% assignment rate). Estimated Sonnet cost: ~$15-20 for a full run.
+
+### 4e. Vocabulary sources
+
+The concept vocabulary draws from three namespaces:
+
+| Prefix    | Source                      | Count  | Examples                                  |
+| --------- | --------------------------- | ------ | ----------------------------------------- |
+| `topmed:` | TOPMed harmonized variables | ~360   | `topmed:ecg`, `topmed:bp_systolic`        |
+| `phenx:`  | PhenX Toolkit measures      | ~210   | `phenx:fasting_plasma_glucose_blood_draw` |
+| `ncpi:`   | Generated archetypes        | ~6,300 | `ncpi:ecg_atrial_fibrillation`            |
+
+### 4f. Search index and API
 
 The classified concepts are loaded into a DuckDB in-memory database as a
 faceted index. Each study has entries across nine facets:
@@ -239,7 +278,7 @@ bundled mapping file (`demographic_mappings.json`). This lets researchers
 search for "female participants" and match studies regardless of how the
 original study reported sex. See section 5d for details.
 
-### 4e. Natural language search
+### 4g. Natural language search
 
 The search API accepts natural language queries and translates them into faceted
 DuckDB queries using three LLM agents:

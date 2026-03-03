@@ -235,6 +235,53 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 """
                 return ctx.deps.get_measurement_category_concepts(keyword)
 
+            @_agent.tool
+            def get_concept_children(
+                ctx: RunContext[ConceptIndex],
+                concept_id: str,
+            ) -> list[dict]:
+                """Get child sub-concepts with names and descriptions.
+
+                ALWAYS call this before returning a concept. If a child is
+                a more specific match, return the child instead. Children
+                with type="archetype" are leaf nodes — return directly
+                without further drilling.
+
+                Empty list means leaf concept — safe to return.
+
+                Args:
+                    ctx: Run context with ConceptIndex dependency.
+                    concept_id: Parent concept to look up children for
+                        (e.g. "topmed:food_frequency_questionnaire").
+
+                Returns:
+                    Child concepts with concept_id, name, description,
+                    and study_count, sorted by study count.
+                """
+                return ctx.deps.get_concept_children(concept_id)
+
+            @_agent.tool
+            def list_variables_for_concept(
+                ctx: RunContext[ConceptIndex],
+                concept_id: str,
+                limit: int = 200,
+            ) -> list[dict]:
+                """List distinct variables under a concept with descriptions.
+
+                Use at leaf concepts (no children) to verify that specific
+                variables match the user's query. Returns variable_name
+                and description.
+
+                Args:
+                    ctx: Run context with ConceptIndex dependency.
+                    concept_id: Concept to list variables for.
+                    limit: Maximum number of variables to return.
+
+                Returns:
+                    Distinct variables with variable_name and description.
+                """
+                return ctx.deps.list_variables_for_concept(concept_id, limit=limit)
+
         return _agent
 
 
