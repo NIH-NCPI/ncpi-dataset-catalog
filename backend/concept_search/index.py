@@ -491,6 +491,9 @@ class ConceptIndex:
         except ImportError:
             logger.warning("sentence-transformers not available — skipping embeddings")
             return
+        except Exception:
+            logger.exception("Failed to generate concept embeddings — skipping")
+            return
         logger.info("Embedding complete: %s", matrix.shape)
 
         # Store in DuckDB
