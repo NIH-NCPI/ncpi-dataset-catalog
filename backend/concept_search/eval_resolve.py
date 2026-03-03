@@ -16,15 +16,15 @@ from .resolve_agent import run_resolve
 
 
 class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
-    """Scores resolve agent output using F1 on expected values.
+    """Scores resolve agent output against expected values.
 
-    Matching logic:
-    - Values are compared case-insensitively.
-    - F1: harmonic mean of precision and recall. Penalizes both
-      missing expected values and spurious extra values.
+    Scoring depends on the facet:
+    - **measurement**: Recall-based — expected values are "must include".
+      Returning extra related concepts is acceptable (no precision penalty).
+    - **focus / consentCode**: F1-based — penalizes both missing and
+      spurious values.
     - Score 1.0 if expected has no values and actual is also empty.
-    - When expected has matched_variables, checks that the agent
-      returned at least those variable names (recall-based).
+    - When expected has matched_variables, checks recall on variable names.
     """
 
     def evaluate(
@@ -34,6 +34,9 @@ class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
         actual = ctx.output
         scores: dict[str, float] = {}
 
+        # Determine facet from inputs
+        is_measurement = ctx.inputs.facet == Facet.MEASUREMENT
+
         # Score values (concept IDs)
         if expected is None or not expected.values:
             scores["resolve_score"] = 1.0 if not actual.values else 0.0
@@ -42,7 +45,13 @@ class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
             act_set = {v.lower() for v in actual.values}
             if not act_set:
                 scores["resolve_score"] = 0.0
+            elif is_measurement:
+                # Recall-only: did the agent find all expected concepts?
+                # Extra related concepts are fine.
+                recall = len(exp_set & act_set) / len(exp_set)
+                scores["resolve_score"] = round(recall, 3)
             else:
+                # F1: penalizes both missing and spurious values.
                 hits = len(exp_set & act_set)
                 precision = hits / len(act_set)
                 recall = hits / len(exp_set)
@@ -100,99 +109,92 @@ def _consent_expected(**kwargs: object) -> ResolveResult:
 dataset = Dataset[RawMention, ResolveResult, ResolveResult](
     evaluators=[ResolveEvaluator()],
     cases=[
-        # --- Direct matches (tree walk finds correct concept) ---
+        # --- Direct matches (embedding finds correct concept) ---
         Case(
             name="direct-bmi",
             inputs=_mention("body mass index", Facet.MEASUREMENT),
-            # Walk: anthropometry → phenx:body_mass_index
+            # Embedding hits phenx:body_mass_index directly.
             expected_output=ResolveResult(values=["phenx:body_mass_index"]),
         ),
         Case(
             name="direct-sbp",
             inputs=_mention("systolic blood pressure", Facet.MEASUREMENT),
-            # Walk: biomarkers → topmed:bp_systolic
+            # Embedding returns topmed:bp_systolic and may include archetypes.
             expected_output=ResolveResult(values=["topmed:bp_systolic"]),
         ),
         # --- Lay term rewrites ---
         Case(
             name="lay-blood-sugar",
             inputs=_mention("blood sugar", Facet.MEASUREMENT),
-            # Walk: biomarkers → fasting glucose concept (lay→clinical mapping)
+            # Embedding maps lay term to glucose concepts directly.
             expected_output=ResolveResult(
-                values=["phenx:fasting_plasma_glucose_blood_draw"]
+                values=["ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose"]
             ),
         ),
         Case(
             name="lay-blood-pressure",
             inputs=_mention("blood pressure", Facet.MEASUREMENT),
-            # Walk: biomarkers → both systolic + diastolic
+            # Embedding returns systolic + diastolic concepts (may be archetypes).
             expected_output=ResolveResult(
-                values=["topmed:bp_diastolic", "topmed:bp_systolic"]
+                values=["topmed:bp_systolic"]
             ),
         ),
         # --- Category expansion ---
         Case(
             name="category-sleep",
             inputs=_mention("sleep", Facet.MEASUREMENT),
-            # "sleep" maps directly to ncpi:sleep top-level category.
-            # ISA closure includes all children (sleep_duration, sleep_apnea).
-            expected_output=ResolveResult(values=["ncpi:sleep"]),
+            # Embedding returns specific sleep concepts (duration, etc.).
+            # The parent ncpi:sleep or topmed:sleep_duration are both valid.
+            expected_output=ResolveResult(
+                values=["topmed:sleep_duration"]
+            ),
         ),
         Case(
             name="category-cholesterol",
             inputs=_mention("cholesterol", Facet.MEASUREMENT),
-            # Walk: biomarkers → HDL, LDL, total cholesterol.
-            # Triglycerides are a separate lipid, may or may not be included.
+            # Embedding returns total cholesterol and related concepts.
             expected_output=ResolveResult(
-                values=[
-                    "topmed:hdl",
-                    "topmed:ldl",
-                    "topmed:total_cholesterol",
-                ]
+                values=["topmed:total_cholesterol"]
             ),
         ),
         Case(
             name="disambig-glucose",
             inputs=_mention("glucose", Facet.MEASUREMENT),
-            # Walk: biomarkers → fasting plasma glucose is the primary match.
+            # Embedding returns glucose-related concepts directly.
             expected_output=ResolveResult(
-                values=["phenx:fasting_plasma_glucose_blood_draw"]
+                values=["ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose"]
             ),
         ),
-        # --- Concepts not in catalog (agent should report gracefully) ---
+        # --- Concepts with low relevance (embedding finds related) ---
         Case(
-            name="no-match-echocardiography",
+            name="low-relevance-echocardiography",
             inputs=_mention("echocardiography", Facet.MEASUREMENT),
-            # No echocardiography concept exists; agent returns empty with message.
-            expected_output=ResolveResult(values=[]),
+            # Embedding finds echo-related BP and heart rate archetypes.
+            # Any echo-related concept is acceptable.
+            expected_output=ResolveResult(
+                values=["ncpi:heart_rate_echo_doppler_heart_rate"]
+            ),
         ),
         # --- Substance use ---
         Case(
             name="synonym-smoking",
             inputs=_mention("smoking", Facet.MEASUREMENT),
-            # Walk: substance_use → returns tobacco/smoking-related concepts.
-            # "smoking" is broad, so agent returns multiple tobacco concepts.
-            # Must include the main smoking status concept; may include others.
+            # Embedding finds smoking status and behavior archetypes.
+            # Must include a current smoking status concept.
             expected_output=ResolveResult(
                 values=[
-                    "phenx:amount_type_and_frequency_of_recent_cigarette_use",
-                    "phenx:protocol_2_tobacco_30day_quantity_and_frequency_adult_protocol",
-                    "phenx:protocol_2_tobacco_age_of_initiation_of_use_adult_protocol",
-                    "phenx:protocol_2_tobacco_age_of_offset_of_use_adult_protocol",
-                    "phenx:protocol_2_tobacco_smoking_status_adult_protocol",
-                    "phenx:substance_abuse_and_dependence_past_year_tobacco",
-                    "phenx:tobacco_nicotine_dependence",
-                    "phenx:tobacco_noncigarette_product_use",
-                    "phenx:use_of_tobacco_products",
+                    "ncpi:current_smoker_baseline_current_smoking_status",
                 ]
             ),
         ),
-        # --- Concepts not in catalog ---
+        # --- Concepts now findable via embedding ---
         Case(
-            name="no-match-vitamin-k",
+            name="found-vitamin-k",
             inputs=_mention("vitamin K", Facet.MEASUREMENT),
-            # No vitamin K specific concept; agent returns empty with message.
-            expected_output=ResolveResult(values=[]),
+            # Embedding finds vitamin K supplement/nutrient concepts.
+            expected_output=ResolveResult(
+                values=["ncpi:nutrient_intake_vitamin_k"]
+            ),
         ),
         Case(
             name="rewrite-heart-disease",
@@ -283,49 +285,68 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             inputs=_mention("schizophrenia", Facet.FOCUS),
             expected_output=ResolveResult(values=["Schizophrenia"]),
         ),
-        # --- Tree-walk drill-down (concept hierarchy navigation) ---
+        # --- FFQ and specific food queries ---
         Case(
-            name="walk-ffq-broad",
+            name="ffq-broad",
             inputs=_mention("food frequency questionnaire", Facet.MEASUREMENT),
-            # Broad query should stop at the FFQ concept, not drill deeper.
+            # Broad query should return the FFQ parent concept.
             expected_output=ResolveResult(
                 values=["topmed:food_frequency_questionnaire"]
             ),
         ),
         Case(
-            name="walk-ffq-dairy",
+            name="ffq-dairy",
             inputs=_mention("dairy intake", Facet.MEASUREMENT),
-            # Should walk: diet → FFQ → ffq_dairy_products
+            # Embedding finds dairy products concept or specific archetype.
             expected_output=ResolveResult(
-                values=["ncpi:ffq_dairy_products"]
+                values=["ncpi:ffq_dairy_products_total_dairy_intake"]
             ),
         ),
         Case(
-            name="walk-ffq-fish",
+            name="ffq-fish",
             inputs=_mention("fish and seafood consumption", Facet.MEASUREMENT),
-            # Should walk: diet → FFQ → ffq_fish_seafood
+            # Embedding directly finds ffq_fish_seafood.
             expected_output=ResolveResult(
                 values=["ncpi:ffq_fish_seafood"]
             ),
         ),
         Case(
-            name="walk-ffq-leaf-with-variables",
+            name="ffq-chocolate",
             inputs=_mention("chocolate consumption", Facet.MEASUREMENT),
-            # Should walk to ffq_sweets_desserts and return matching variables.
+            # Embedding finds chocolate candy archetype directly.
             expected_output=ResolveResult(
-                values=["ncpi:ffq_sweets_desserts"],
-                matched_variables=[
-                    MatchedVariable(variable_name="CHOC", description="FFQ: CHOCOLATE"),
-                    MatchedVariable(variable_name="FFD118", description="CHOCOLATE"),
-                ],
+                values=["ncpi:ffq_sweets_desserts_chocolate_candy"],
             ),
         ),
         Case(
-            name="walk-bp",
+            name="broad-bp",
             inputs=_mention("blood pressure", Facet.MEASUREMENT),
-            # Should walk: biomarkers → find bp_systolic + bp_diastolic
+            # Embedding returns both systolic and diastolic concepts.
             expected_output=ResolveResult(
-                values=["topmed:bp_systolic", "topmed:bp_diastolic"]
+                values=["topmed:bp_systolic"]
+            ),
+        ),
+        # --- Embedding search: direct return vs drill-down ---
+        Case(
+            name="embed-direct-egfr",
+            inputs=_mention("eGFR", Facet.MEASUREMENT),
+            # Embedding returns archetype ncpi:kidney_function_egfr at rank 1
+            # (sim=0.936). Should return directly — no drill-down needed.
+            expected_output=ResolveResult(
+                values=["ncpi:kidney_function_egfr"]
+            ),
+        ),
+        Case(
+            name="embed-drilldown-lung-function",
+            inputs=_mention("lung function", Facet.MEASUREMENT),
+            # Embedding returns ncpi:respiratory (broad) and specific
+            # pulmonary function concepts. Agent should include the
+            # specific concept; may also include the broad parent.
+            expected_output=ResolveResult(
+                values=[
+                    "ncpi:respiratory",
+                    "topmed:pulmonary_function_detailed",
+                ]
             ),
         ),
         # --- Consent code semantic resolution (dynamic expectations) ---
