@@ -1,6 +1,5 @@
 import { useConfig } from "@databiosphere/findable-ui/lib/hooks/useConfig";
-import { FONT } from "@databiosphere/findable-ui/lib/styles/common/constants/font";
-import { PALETTE } from "@databiosphere/findable-ui/lib/styles/common/constants/palette";
+import { ContentView } from "@databiosphere/findable-ui/lib/views/ContentView/contentView";
 import styled from "@emotion/styled";
 import {
   Chip,
@@ -10,13 +9,14 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableHead,
   TableRow,
-  Typography,
 } from "@mui/material";
 import { JSX, useEffect, useState } from "react";
+import { GIT_HUB_REPO_URL } from "../../../site-config/common/constants";
+import { Content } from "../Layout/components/Content/content";
 
-const GIT_HUB_COMMIT_URL =
-  "https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit";
+const FETCH_TIMEOUT_MS = 15_000;
 
 interface CacheStats {
   hit_rate: number;
@@ -37,40 +37,6 @@ type FetchState =
   | { data: HealthResponse; status: "success" }
   | { error: string; status: "error" }
   | { status: "loading" };
-
-const PageContainer = styled.div`
-  margin: 0 auto;
-  max-width: 720px;
-  padding: 32px 16px;
-  width: 100%;
-`;
-
-const Section = styled.div`
-  margin-bottom: 24px;
-`;
-
-const SectionTitle = styled(Typography)`
-  font: ${FONT.BODY_500};
-  margin-bottom: 8px;
-`;
-
-const StyledTableContainer = styled(TableContainer)`
-  .MuiTable-root {
-    tr {
-      td {
-        border-bottom: 1px solid ${PALETTE.SMOKE_MAIN};
-        font: ${FONT.BODY_SMALL_400};
-        padding: 6px 8px;
-      }
-
-      td:first-of-type {
-        font: ${FONT.BODY_SMALL_500};
-        white-space: nowrap;
-        width: 200px;
-      }
-    }
-  }
-`;
 
 const CenterBox = styled.div`
   align-items: center;
@@ -112,10 +78,16 @@ function CacheSection({
   title: string;
 }): JSX.Element {
   return (
-    <Section>
-      <SectionTitle>{title}</SectionTitle>
-      <StyledTableContainer>
+    <>
+      <h2>{title}</h2>
+      <TableContainer>
         <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Metric</TableCell>
+              <TableCell>Value</TableCell>
+            </TableRow>
+          </TableHead>
           <TableBody>
             <TableRow>
               <TableCell>Hit Rate</TableCell>
@@ -135,8 +107,8 @@ function CacheSection({
             </TableRow>
           </TableBody>
         </Table>
-      </StyledTableContainer>
-    </Section>
+      </TableContainer>
+    </>
   );
 }
 
@@ -155,6 +127,7 @@ export const Status = (): JSX.Element => {
       return;
     }
     const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
     fetch(getHealthUrl(aiUrl), { signal: controller.signal })
       .then((res) => {
         if (!res.ok) throw new Error(`Health check failed (${res.status})`);
@@ -167,8 +140,14 @@ export const Status = (): JSX.Element => {
             error: err instanceof Error ? err.message : "Unknown error",
             status: "error",
           });
+        } else {
+          setState({
+            error: "Health check timed out.",
+            status: "error",
+          });
         }
-      });
+      })
+      .finally(() => clearTimeout(timeout));
     return (): void => controller.abort();
   }, [config.ai?.url]);
 
@@ -182,68 +161,87 @@ export const Status = (): JSX.Element => {
 
   if (state.status === "error") {
     return (
-      <PageContainer>
-        <Chip color="error" label={state.error} />
-      </PageContainer>
+      <ContentView
+        content={
+          <Content>
+            <h1>Status</h1>
+            <Chip color="error" label={state.error} />
+          </Content>
+        }
+      />
     );
   }
 
   const { data } = state;
 
   return (
-    <PageContainer>
-      <Section>
-        <SectionTitle>Service</SectionTitle>
-        <StyledTableContainer>
-          <Table size="small">
-            <TableBody>
-              <TableRow>
-                <TableCell>Status</TableCell>
-                <TableCell>
-                  <Chip
-                    color={data.status === "ok" ? "success" : "error"}
-                    label={data.status}
-                    size="small"
-                  />
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Git SHA</TableCell>
-                <TableCell>
-                  <MuiLink
-                    href={`${GIT_HUB_COMMIT_URL}/${data.gitSha}`}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {data.gitSha}
-                  </MuiLink>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </StyledTableContainer>
-      </Section>
+    <ContentView
+      content={
+        <Content>
+          <h1>Status</h1>
 
-      <Section>
-        <SectionTitle>Index Stats</SectionTitle>
-        <StyledTableContainer>
-          <Table size="small">
-            <TableBody>
-              {Object.entries(data.indexStats)
-                .sort(([a], [b]) => a.localeCompare(b))
-                .map(([key, value]) => (
-                  <TableRow key={key}>
-                    <TableCell>{key}</TableCell>
-                    <TableCell>{value.toLocaleString()}</TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </StyledTableContainer>
-      </Section>
+          <h2>Service</h2>
+          <TableContainer>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Property</TableCell>
+                  <TableCell>Value</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Status</TableCell>
+                  <TableCell>
+                    <Chip
+                      color={data.status === "ok" ? "success" : "error"}
+                      label={data.status}
+                      size="small"
+                    />
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Git SHA</TableCell>
+                  <TableCell>
+                    <MuiLink
+                      href={`${GIT_HUB_REPO_URL}/commit/${data.gitSha}`}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {data.gitSha}
+                    </MuiLink>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
 
-      <CacheSection cache={data.pipelineCache} title="Pipeline Cache" />
-      <CacheSection cache={data.resolveCache} title="Resolve Cache" />
-    </PageContainer>
+          <h2>Index Stats</h2>
+          <TableContainer>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Facet</TableCell>
+                  <TableCell>Count</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Object.entries(data.indexStats)
+                  .sort(([a], [b]) => a.localeCompare(b))
+                  .map(([key, value]) => (
+                    <TableRow key={key}>
+                      <TableCell>{key}</TableCell>
+                      <TableCell>{value.toLocaleString()}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          <CacheSection cache={data.pipelineCache} title="Pipeline Cache" />
+          <CacheSection cache={data.resolveCache} title="Resolve Cache" />
+        </Content>
+      }
+    />
   );
 };
