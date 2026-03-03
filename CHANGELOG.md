@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.11.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.10.0...v0.11.0) (2026-03-03)
+
+
+### Features
+
+* add consent code eligibility logic for search API ([#199](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/199)) ([bc8d7df](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/bc8d7df74cf6b7e532cd5cd538042bd652a97089))
+* add selected publications to research dataset study detail page ([#211](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/211)) ([#215](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/215)) ([901b4af](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/901b4af03b5037638cc63f58133de76026ad479a))
+* classify 438K dbGaP variables into concept hierarchy with archetypes [#204](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/204) ([#208](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/208)) ([ef52f6a](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/ef52f6a006cbf5e4ab025fa6f4b260ffeca885df))
+* create research datasets and dataset study pages ([#209](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/209)) ([#210](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/210)) ([1086f74](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/1086f7401f8a54f2d437fd6d4721c9cab24ecd3d))
+* MCP catalog discovery server, deploy fixes, and log tailing [#213](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/213) ([#217](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/217)) ([f7600a2](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/f7600a259416a5d8b85ad7ecce67a184934080bb))
+* resolve agent result cache ([#200](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/200)) ([#202](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/202)) ([604196d](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/604196de4d08a8da7f317690b501686558b00636))
+* the new chat feature should be under "studies" path, not "datasets" ([#216](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/216)) ([#218](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/218)) ([1353ff7](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/1353ff71506c0285b9cab9f45a231164584d3211))
+* UMLS concept pipeline with namespaced ISA hierarchy [#177](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/177) ([#203](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/203)) ([673cdcd](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/673cdcdf7ac76381929ed7d29794884fd885caa4))
+
+
+### Chores
+
+* remove unused Google Sign-In script ([#206](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/206)) ([2d8d6e8](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/2d8d6e827a0121d45f87d34ae106e9ad5266e8b9))
+
 ## [0.10.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.9.0...v0.10.0) (2026-02-21)
 
 
