@@ -24,10 +24,10 @@ export const StudyDetailView = (props: Props): JSX.Element => {
   const study = getStudy<NCPICatalogStudy>(props.studyId);
 
   useEffect(() => {
-    // Any new request in the chat will trigger a navigation to the research datasets page,
+    // Any new request in the chat will trigger a navigation to the research studies page,
     // where the user can view the results of their query.
     if (!state.status.loading) return;
-    Router.push(ROUTES.RESEARCH_DATASETS);
+    Router.push(ROUTES.RESEARCH_STUDIES);
   }, [state.status.loading]);
 
   return (
