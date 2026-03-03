@@ -291,7 +291,7 @@ class DuckDBStore:
         limit: int = 500,
         study_ids: set[str] | None = None,
         variable_names: set[str] | None = None,
-    ) -> list[dict]:
+    ) -> tuple[list[dict], int]:
         """Return variables matching concept names and/or study IDs.
 
         Searches against concept_ids_closure (JSON array of all ancestor

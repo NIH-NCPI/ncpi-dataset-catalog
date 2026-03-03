@@ -909,9 +909,9 @@ dataset = Dataset[VariableInput, str, str](
 
 
 async def main() -> None:
-    """Run v3 TOPMed concept matching evals."""
+    """Run v4 concept matching classifier evals."""
     parser = argparse.ArgumentParser(
-        description="Eval v3 concept matching (classify_v3_topmed)"
+        description="Eval v4 concept matching (classify_v4)"
     )
     parser.add_argument(
         "--model",
@@ -920,9 +920,9 @@ async def main() -> None:
     args = parser.parse_args()
 
     if args.model:
-        import classify_v3_topmed
+        import classify_v4
 
-        classify_v3_topmed.MODEL = args.model
+        classify_v4.MODEL = args.model
         print(f"Model override: {args.model}", file=sys.stderr)
 
     report = await dataset.evaluate(

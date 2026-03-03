@@ -619,13 +619,11 @@ def write_outputs(
 
     # Load existing data, stripping old archetype entries to avoid stale leftovers
     with open(VOCAB_PATH) as f:
-        vocab = [e for e in json.load(f) if e.get("type") != "archetype"]
+        all_vocab = json.load(f)
+    arch_ids = {e["concept_id"] for e in all_vocab if e.get("type") == "archetype"}
+    vocab = [e for e in all_vocab if e.get("type") != "archetype"]
     with open(ISA_PATH) as f:
-        non_arch_ncpi = {"ncpi:subject_age", "ncpi:demographics"}
-        isa = [
-            e for e in json.load(f)
-            if not e["child"].startswith("ncpi:") or e["child"] in non_arch_ncpi
-        ]
+        isa = [e for e in json.load(f) if e["child"] not in arch_ids]
 
     existing_vocab_ids = {e["concept_id"] for e in vocab}
     existing_isa_pairs = {(e["child"], e["parent"]) for e in isa}
