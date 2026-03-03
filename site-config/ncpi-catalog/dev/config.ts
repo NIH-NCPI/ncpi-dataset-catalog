@@ -141,6 +141,10 @@ const config: SiteConfig = {
       }),
       navLinks: [
         {
+          label: "Status",
+          url: "/status",
+        },
+        {
           label: "Feedback & Support",
           target: ANCHOR_TARGET.BLANK,
           url: "https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/new?template=feedback.md",
