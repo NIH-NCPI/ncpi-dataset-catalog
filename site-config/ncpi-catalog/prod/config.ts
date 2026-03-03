@@ -3,6 +3,14 @@ import devConfig from "../dev/config";
 
 const config: SiteConfig = {
   ...devConfig,
+  // Ternary required: devConfig.ai is typed as AiConfig | undefined,
+  // so TS needs the guard to narrow before spreading.
+  ai: devConfig.ai
+    ? {
+        ...devConfig.ai,
+        url: "https://prejcyhpmp.us-east-1.awsapprunner.com/search",
+      }
+    : undefined,
   browserURL: "https://ncpi-data.org",
 };
 
