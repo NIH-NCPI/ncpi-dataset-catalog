@@ -18,6 +18,7 @@ COPY catalog/ncpi-platform-studies.json catalog/ncpi-platform-studies.json
 COPY catalog-build/classification/output/llm-concepts-v4/ catalog-build/classification/output/llm-concepts-v4/
 COPY catalog-build/classification/output/concept-isa.json catalog-build/classification/output/concept-isa.json
 COPY catalog-build/classification/output/demographic-profiles.json catalog-build/classification/output/demographic-profiles.json
+COPY catalog-build/common/disease_abbrev_mapping.tsv /catalog-build/common/disease_abbrev_mapping.tsv
 
 # Writable directory for DuckDB cache
 RUN mkdir -p /cache
