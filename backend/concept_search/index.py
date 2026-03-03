@@ -445,10 +445,17 @@ class ConceptIndex:
         Uses the already-loaded ``_concept_descriptions`` dict. Each node is
         embedded as ``"name: description"``.  Results are stored in the DuckDB
         ``concept_embeddings`` table and cached in memory for KNN search.
-        """
-        from . import embeddings
 
-        descs = _load_concept_descriptions()
+        Gracefully skips if sentence-transformers is not installed (e.g. in
+        test environments).
+        """
+        try:
+            from . import embeddings
+        except Exception:
+            logger.warning("sentence-transformers not available — skipping embeddings")
+            return
+
+        descs = self._concept_descriptions
         if not descs:
             logger.warning("No concept descriptions found — skipping embeddings")
             return

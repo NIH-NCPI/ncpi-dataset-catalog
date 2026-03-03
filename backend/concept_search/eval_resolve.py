@@ -134,9 +134,9 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="lay-blood-pressure",
             inputs=_mention("blood pressure", Facet.MEASUREMENT),
-            # Embedding returns systolic + diastolic concepts (may be archetypes).
+            # Broad term — should include both systolic and diastolic siblings.
             expected_output=ResolveResult(
-                values=["topmed:bp_systolic"]
+                values=["topmed:bp_systolic", "topmed:bp_diastolic"]
             ),
         ),
         # --- Category expansion ---
@@ -152,7 +152,9 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="category-cholesterol",
             inputs=_mention("cholesterol", Facet.MEASUREMENT),
-            # Embedding returns total cholesterol and related concepts.
+            # Broad term — must include total cholesterol. Embedding results
+            # may return parent concepts (topmed:hdl) or their archetypes
+            # (ncpi:hdl_*); ISA closure covers the same variables either way.
             expected_output=ResolveResult(
                 values=["topmed:total_cholesterol"]
             ),
@@ -179,8 +181,9 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="synonym-smoking",
             inputs=_mention("smoking", Facet.MEASUREMENT),
-            # Embedding finds smoking status and behavior archetypes.
-            # Must include a current smoking status concept.
+            # Broad term — must include current smoking status. Embedding
+            # returns archetypes (ncpi:current_smoker_baseline_*) rather
+            # than parent concepts; ISA closure covers the same variables.
             expected_output=ResolveResult(
                 values=[
                     "ncpi:current_smoker_baseline_current_smoking_status",
@@ -219,6 +222,8 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="focus-lung-cancer",
             inputs=_mention("lung cancer", Facet.FOCUS),
+            # Focus has no ISA closure — subtypes must be explicit or
+            # studies tagged only with subtypes are missed (44 of 77).
             expected_output=ResolveResult(
                 values=[
                     "Adenocarcinoma of Lung",
@@ -321,9 +326,9 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="broad-bp",
             inputs=_mention("blood pressure", Facet.MEASUREMENT),
-            # Embedding returns both systolic and diastolic concepts.
+            # Broad term — should include both systolic and diastolic siblings.
             expected_output=ResolveResult(
-                values=["topmed:bp_systolic"]
+                values=["topmed:bp_systolic", "topmed:bp_diastolic"]
             ),
         ),
         # --- Embedding search: direct return vs drill-down ---
@@ -463,6 +468,11 @@ async def _run_task(inputs: RawMention) -> ResolveResult:
 
 async def run_evals() -> None:
     """Run the resolve eval dataset and print the report."""
+    # Eagerly load the embedding model before parallel eval runs
+    # to avoid concurrent model initialization (PyTorch meta tensor bug).
+    from .embeddings import get_model
+
+    get_model()
     report = await dataset.evaluate(_run_task)
     report.print()
 
