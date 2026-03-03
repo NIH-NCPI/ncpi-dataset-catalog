@@ -701,11 +701,28 @@ def _score_example_relevance(concept_id, variable_name, variable_description):
 
     # Penalize generic covariates that are not about the concept itself
     generic_terms = ("age", "visit", "exam", "consent", "gender", "sex", "race")
+    concept_lower = concept_id.lower()
+    concept_keywords = set(concept_lower.replace("_", " ").split())
     for term in generic_terms:
         if term in name_lower or desc_lower.startswith(term):
-            # Unless the concept is actually about that term
-            if term not in concept_id.lower():
+            if term not in concept_lower:
+                # Concept isn't about this term at all — penalize
                 return -1
+            # Concept IS about this term (e.g. "vte_followup_start_age" contains "age").
+            # For compound concepts (3+ keywords), the example should demonstrate the
+            # SPECIFIC kind, not just the generic term.  Require the variable to mention
+            # at least one distinguishing keyword from the concept_id.
+            # e.g. for vte_followup_start_age: need "vte" or "followup" in the description.
+            # For simple concepts (1-2 keywords like annotated_sex, race_us), the generic
+            # term IS the concept — no further check needed.
+            stop_words = {"at", "of", "in", "the", "and", "or", "to", "a"}
+            distinguishing = concept_keywords - {term} - stop_words
+            if len(distinguishing) >= 2:
+                has_distinguishing = any(
+                    kw in desc_lower or kw in name_lower for kw in distinguishing
+                )
+                if not has_distinguishing:
+                    return -1
 
     # Build keywords from concept_id: "bp_systolic" -> ["bp", "systolic"]
     keywords = concept_id.lower().replace("_", " ").split()
@@ -747,9 +764,9 @@ def build_concept_vocabulary(concepts):
                 candidates.append((score, vname, vdesc))
                 seen_names.add(vname)
 
-        # Sort by relevance score descending, pick top 3
+        # Sort by relevance score descending, pick top 3 with non-negative scores
         candidates.sort(key=lambda x: x[0], reverse=True)
-        examples = [f"{c[1]}: {c[2]}" for c in candidates[:3]]
+        examples = [f"{c[1]}: {c[2]}" for c in candidates[:3] if c[0] >= 0]
 
         vocabulary.append(
             {

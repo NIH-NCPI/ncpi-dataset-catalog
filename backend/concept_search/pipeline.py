@@ -85,6 +85,9 @@ async def _resolve_all(
             resolved.append(
                 ResolvedMention(
                     facet=mention.facet,
+                    matched_variables=[
+                        mv for mv in rr.matched_variables
+                    ] if rr.matched_variables else [],
                     original_text=mention.text,
                     values=rr.values,
                 )
@@ -145,6 +148,7 @@ def _merge(
             ResolvedMention(
                 exclude=exclude_flags.get(key, False),
                 facet=m.facet,
+                matched_variables=m.matched_variables,
                 original_text=m.original_text,
                 values=m.values,
             )

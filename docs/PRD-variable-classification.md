@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document defines a classification system for collapsing ~340,000+ dbGaP phenotype variables into ~150-200 searchable measures (following PhenX terminology: a "measure" is a standard way of capturing data on a characteristic of a study subject). The goal is to let researchers find studies by what was measured, without needing to know study-specific variable names.
+This document defines a classification system for collapsing ~425,000 dbGaP phenotype variables into ~6,700 searchable concepts organized in a 4-level hierarchy. The goal is to let researchers find studies by what was measured, without needing to know study-specific variable names. Currently 186K variables (42.5%) are classified across 2,864 studies.
 
 ## Example Queries
 
@@ -552,6 +552,97 @@ Each round shrinks the unmatched pool. The concept set grows from 65 toward the 
 
 **Bootstrapping from v1/v2 output:** The existing concept bank from v1/v2 runs (12K+ concept names with study counts) provides a useful signal for step 1: high-frequency concepts that appear across many studies are strong candidates for UMLS lookup and addition to the curated set.
 
+### Step 4: Archetype generation
+
+After classification and vocabulary expansion, many concepts still have
+thousands of variables — far too many to display or for the resolve agent to
+curate. But these aren't thousands of _distinct_ measurements. They're the same
+measurement repeated across studies and time points with different names.
+
+For example, `topmed:ecg` has 10,541 variables. ECG atrial fibrillation alone
+appears as `AFIB`, `ATRFIB21`, `ECGAFIB`, `afib_s1`, `ecg_af`, `B269` across
+40+ studies, with each study repeating the variable across visit tables
+(`V1ECG`, `V2ECG`, `YR6`, `YR7`...).
+
+The archetype pipeline groups semantically identical variables into canonical
+sub-concepts ("archetypes"):
+
+```
+topmed:ecg (10,541 vars)
+  ├── ncpi:ecg_atrial_fibrillation (136 vars across 30 studies)
+  ├── ncpi:ecg_qt_interval (114 vars across 25 studies)
+  ├── ncpi:ecg_wave_amplitudes (2,015 vars)
+  ├── ncpi:ecg_minnesota_codes (852 vars)
+  └── ... (37 more archetypes)
+```
+
+#### Why archetypes
+
+1. **Resolve agent accuracy** — the agent's `list_variables_for_concept` tool
+   has a 200-variable limit. Without archetypes, 185 concepts exceed this,
+   making it impossible for the agent to see the full variable list and curate
+   `matchedVariables`. With archetypes, most leaf nodes are under 200.
+
+2. **Search specificity** — "ECG QT interval" should return QT-related
+   variables, not all 10,541 ECG variables. Archetypes let the resolve agent
+   drill to the right level.
+
+3. **ISA closure still works** — searching "ECG measurements" at the parent
+   level returns all descendant variables via transitive closure. No
+   information is lost.
+
+#### Algorithm
+
+For each concept with >200 variables:
+
+1. **Collect** all variables across all study JSONs for this concept
+2. **Deduplicate** by (name_lower, description_lower) — e.g., 10,541 variable
+   occurrences for ECG reduce to ~8,671 unique (name, description) pairs
+3. **Batch to LLM** — if unique pairs fit in one context window (<=3,000
+   pairs), send a single "define archetypes" call. If larger, use two passes:
+   - **Pass 1 (define)**: Send first 3,000 pairs, get archetype definitions
+   - **Pass 2+ (assign)**: Send remaining pairs in batches of 2,000 with the
+     archetype definitions, get assignments only (compact `dict[str, str]`
+     format)
+4. **Write outputs**:
+   - Append archetype entries to `concept-vocabulary.json` (with `ncpi:` prefix)
+   - Append ISA edges to `concept-isa.json` (archetype → parent)
+   - Re-tag `concept_id` in study JSONs so variables point to their archetype
+
+#### LLM prompt design
+
+The system prompt instructs Sonnet to:
+
+- Group by **measurement type**, not by study or naming convention
+- Treat visit/exam suffixes (V1, V2, `_s1`, `_ex03`) as timepoints of the
+  same measurement, not separate archetypes
+- Return 5-50 archetypes with short slugs, names, and descriptions
+- Assign **every** variable to exactly one archetype
+- Return variable names exactly as given (case-sensitive)
+
+The define call uses Pydantic structured output (`ArchetypeTree` model); the
+assign call uses a compact `dict[str, str]` model (`AssignmentBatch`) to
+minimize output tokens.
+
+#### Namespace convention
+
+All archetypes use the `ncpi:` prefix (these are our own groupings, not
+TOPMed harmonized concepts). The concept*id is formed as
+`ncpi:{parent_bare}*{archetype_slug}`, e.g., `ncpi:ecg_atrial_fibrillation`.
+
+#### Resumability and cost
+
+Results are cached per-concept in `output/archetypes/{concept_id}.json`. On
+restart, concepts with existing cache files are skipped. The full run processes
+185 concepts in ~30 minutes at a cost of ~$15-20 in Sonnet API calls.
+
+#### Unassigned variables
+
+Variables the LLM doesn't assign (~6% on average) keep their parent
+`concept_id`. The parent concept shrinks but retains a small remainder. These
+are typically edge cases — variables with ambiguous descriptions or unusual
+naming that don't cleanly fit any archetype.
+
 ### Reproducibility
 
 Matching results are cached as versioned JSON files. The LLM is only invoked for new or re-run studies; existing results are stable. The concept set itself is versioned — adding a new CUI triggers re-matching only for previously-unmatched variables.
@@ -560,7 +651,8 @@ When the concept set is updated:
 
 1. Re-match unmatched variables against the new concepts only
 2. Rebuild the hierarchy
-3. Commit updated output files and concept set as a new version
+3. Re-run archetypes for any concepts that grew above the 200-variable threshold
+4. Commit updated output files and concept set as a new version
 
 ## Namespaced Concepts, ISA Closure, and PhenX Integration
 
@@ -568,11 +660,11 @@ When the concept set is updated:
 
 All concept IDs carry a namespace prefix indicating their source vocabulary:
 
-| Prefix    | Source                                      | Example                 | Count |
-| --------- | ------------------------------------------- | ----------------------- | ----- |
-| `topmed:` | TOPMed harmonized variable phenotype tags   | `topmed:bp_systolic`    | 77    |
-| `phenx:`  | PhenX Toolkit protocols with dbGaP mappings | `phenx:spirometry`      | 181   |
-| `domain:` | Curated top-level domain groupings          | `domain:cardiovascular` | ~12   |
+| Prefix    | Source                                      | Example                        | Count  |
+| --------- | ------------------------------------------- | ------------------------------ | ------ |
+| `topmed:` | TOPMed harmonized variable phenotype tags   | `topmed:bp_systolic`           | ~360   |
+| `phenx:`  | PhenX Toolkit protocols with dbGaP mappings | `phenx:spirometry`             | ~210   |
+| `ncpi:`   | Generated archetypes (LLM-grouped)          | `ncpi:ecg_atrial_fibrillation` | ~6,300 |
 
 This avoids collisions between vocabularies and makes the provenance of each classification explicit. The namespace is part of the concept_id stored in classification output and the DuckDB index.
 
@@ -609,29 +701,39 @@ PhenX provides ~181 standardized protocols with pre-mapped dbGaP variables from 
 ### Combined vocabulary architecture
 
 ```
-domain:cardiovascular                          ← browsing / top-level grouping
-  ├── phenx:blood_pressure                     ← PhenX mid-level (181 protocols)
-  │     ├── topmed:bp_systolic    (CUI: C2039694)  ← fine-grained TOPMed concept
-  │     ├── topmed:bp_diastolic   (CUI: C2183311)
-  │     └── topmed:antihypertensive_meds (CUI: C0003364)
-  ├── phenx:myocardial_infarction
-  │     ├── topmed:mi_incident
-  │     └── topmed:mi_prior
-  └── domain:atherosclerosis
-        ├── topmed:cac_score      (CUI: C2825178)
-        ├── topmed:cimt           (CUI: C1960466)
-        └── ...
+ncpi:cardiovascular                            ← category (20 top-level)
+  ├── phenx:blood_pressure                     ← PhenX mid-level
+  │     ├── topmed:bp_systolic                 ← TOPMed concept
+  │     │     ├── ncpi:bp_systolic_resting_systolic_bp (632 vars)  ← archetype
+  │     │     └── ncpi:bp_systolic_ankle_brachial_systolic_bp (208 vars)
+  │     └── topmed:bp_diastolic
+  │           └── ncpi:bp_diastolic_resting_diastolic_bp (767 vars)
+  ├── topmed:ecg                               ← large concept (10,541 vars)
+  │     ├── ncpi:ecg_atrial_fibrillation (136 vars)   ← archetype
+  │     ├── ncpi:ecg_qt_interval (114 vars)
+  │     ├── ncpi:ecg_wave_amplitudes (2,015 vars)
+  │     └── ... (38 more archetypes)
+  └── phenx:myocardial_infarction
+        ├── topmed:mi_incident
+        └── topmed:mi_prior
 ```
+
+Max tree depth is 4 (category → concept → sub-concept → archetype). The full
+tree can be generated with `make hierarchy` in `catalog-build/classification/`.
 
 ### Pipeline scripts
 
-| Script                      | Input                                              | Output                          | LLM calls? |
-| --------------------------- | -------------------------------------------------- | ------------------------------- | ---------- |
-| `namespace_v3_output.py`    | `llm-concepts-v3/`                                 | `llm-concepts-v4/`              | No         |
-| `build_phenx_vocabulary.py` | PhenX source files                                 | `phenx-concept-vocabulary.json` | No         |
-| `inject_phenx_mappings.py`  | `llm-concepts-v4/` + Variable_cross_reference.xlsx | `llm-concepts-v4/` (updated)    | No         |
+| Script                      | Input                                              | Output                                     | LLM calls?   |
+| --------------------------- | -------------------------------------------------- | ------------------------------------------ | ------------ |
+| `classify_v4.py`            | var_report.xml + concept vocabulary                | `llm-concepts-v4/*.json`                   | Yes (Haiku)  |
+| `namespace_v3_output.py`    | `llm-concepts-v3/`                                 | `llm-concepts-v4/`                         | No           |
+| `build_phenx_vocabulary.py` | PhenX source files                                 | `phenx-concept-vocabulary.json`            | No           |
+| `inject_phenx_mappings.py`  | `llm-concepts-v4/` + Variable_cross_reference.xlsx | `llm-concepts-v4/` (updated)               | No           |
+| `expand_vocabulary.py`      | concept-vocabulary + unmatched vars                | concept-vocabulary.json + concept-isa.json | Yes (Sonnet) |
+| `build_archetypes.py`       | `llm-concepts-v4/` + concept vocab                 | vocab, ISA, re-tagged study JSONs          | Yes (Sonnet) |
+| `show_hierarchy.py`         | concept-isa.json + vocab + study JSONs             | markdown tree with var counts              | No           |
 
-Run all three with `make v4` in `catalog-build/classification/`.
+See `catalog-build/classification/README.md` for full build instructions.
 
 ### Backend search flow
 

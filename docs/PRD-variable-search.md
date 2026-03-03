@@ -69,7 +69,7 @@ For variable search, the index must also store per-variable rows:
 | `table_name`    | `VARCHAR`    | `table.tableName`               |
 | `study_id`      | `VARCHAR` FK | `data.studyId`                  |
 
-**Estimated size**: ~75,000 rows (from concept-summary stats).
+**Estimated size**: ~179,000 rows (classified variables across ~6,700 concepts).
 
 The existing `study_facet_values` EAV table and concept index remain unchanged
 for study-level queries.

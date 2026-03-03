@@ -32,7 +32,6 @@ from .models import Facet, QueryModel, ResolvedMention
 from .pipeline import pipeline_cache, run_pipeline
 from .rate_limit import RateLimiter
 from .resolve_agent import resolve_cache
-from .store import DuckDBStore
 
 # Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
 logging.basicConfig(
@@ -157,23 +156,21 @@ def _build_study_summary(study: dict) -> StudySummary:
 
 
 def _build_dbgap_variable_url(study_id: str, phv_id: str) -> str:
-    """Build a dbGaP variable page URL.
+    """Build a dbGaP URL for a variable.
+
+    dbGaP no longer supports deep links to individual variables, so
+    we link to the study page where the variable can be found.
 
     Args:
         study_id: Study accession (e.g., "phs000007").
         phv_id: Variable PHV ID (e.g., "phv00481718.v2.p1").
 
     Returns:
-        Full URL to the variable page on dbGaP.
+        URL to the study page on dbGaP, or empty string if no phv_id.
     """
     if not phv_id:
         return ""
-    # Extract the numeric portion from the phv ID (strip "phv" prefix and version)
-    phv_num = phv_id.split(".")[0].replace("phv", "")
-    return (
-        f"https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/variable.cgi"
-        f"?study_id={study_id}&phv={phv_num}"
-    )
+    return f"https://dbgap.ncbi.nlm.nih.gov/study/{study_id}"
 
 
 def _build_dbgap_study_url(study_id: str) -> str:
@@ -185,10 +182,7 @@ def _build_dbgap_study_url(study_id: str) -> str:
     Returns:
         Full URL to the study page on dbGaP.
     """
-    return (
-        f"https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi"
-        f"?study_id={study_id}"
-    )
+    return f"https://dbgap.ncbi.nlm.nih.gov/study/{study_id}"
 
 
 def _build_variable_result(row: dict) -> VariableResult:
@@ -295,33 +289,44 @@ async def search(
     intent = query_model.intent
     studies: list[dict] = []
     variable_rows: list[dict] = []
+    total_variable_count = 0
 
     if query_model.mentions:
         include, exclude = _split_mentions(query_model.mentions)
         if intent == "auto":
             pass  # Ambiguous — return clarification message only
-        elif intent == "variable" and isinstance(index.store, DuckDBStore):
-            # Collect resolved measurement concepts for variable lookup
-            concepts = [
-                v
-                for m in query_model.mentions
-                if m.facet == Facet.MEASUREMENT and not m.exclude
-                for v in m.values
-            ]
+        elif intent == "variable":
             # Apply study-level constraints (platform, dataType, etc.)
             non_measurement = [
                 c for c in include if c[0] != Facet.MEASUREMENT
             ]
             study_ids: set[str] | None = None
-            if non_measurement or exclude:
+            if non_measurement:
                 matched = index.query_studies(
-                    non_measurement or include, exclude or None
+                    non_measurement, exclude or None
                 )
                 study_ids = {s.get("dbGapId", "") for s in matched}
-            variable_rows = index.store.query_variables(
-                concepts=concepts or None,
-                study_ids=study_ids,
-            )
+            elif exclude:
+                matched = index.query_studies([], exclude)
+                study_ids = {s.get("dbGapId", "") for s in matched}
+
+            # Collect all measurement concepts and query variables
+            # via ISA closure (matched_variables are kept for display
+            # but not used as a SQL filter — the concept tag is enough).
+            all_concepts: list[str] = []
+            for m in query_model.mentions:
+                if m.facet != Facet.MEASUREMENT or m.exclude:
+                    continue
+                all_concepts.extend(m.values)
+
+            if all_concepts or study_ids:
+                rows, total_variable_count = (
+                    index.store.query_variables(
+                        concepts=all_concepts or None,
+                        study_ids=study_ids,
+                    )
+                )
+                variable_rows.extend(rows)
         else:
             studies = index.query_studies(include, exclude or None)
 
@@ -341,7 +346,7 @@ async def search(
             total_ms=pipeline_ms + lookup_ms,
         ),
         total_studies=len(studies),
-        total_variables=len(variable_rows),
+        total_variables=total_variable_count,
         variables=[_build_variable_result(r) for r in variable_rows],
     )
 

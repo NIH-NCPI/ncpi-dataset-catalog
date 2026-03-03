@@ -37,6 +37,22 @@ class StudyStore(Protocol):
         """Return studies matching *include* minus *exclude*."""
         ...
 
+    def query_variables(
+        self,
+        concepts: list[str] | None = None,
+        limit: int = 500,
+        study_ids: set[str] | None = None,
+        variable_names: set[str] | None = None,
+    ) -> tuple[list[dict], int]:
+        """Return variables matching concepts and/or study constraints."""
+        ...
+
+    def list_variables_for_concept(
+        self, concept_id: str, limit: int = 200
+    ) -> list[dict]:
+        """Return distinct variables under a concept with descriptions."""
+        ...
+
 
 class DuckDBStore:
     """In-memory DuckDB implementation of ``StudyStore``.
@@ -84,7 +100,7 @@ class DuckDBStore:
             "  concept VARCHAR,"
             "  concept_lower VARCHAR,"
             "  cui VARCHAR,"
-            "  concept_ids_closure VARCHAR,"
+            "  concept_ids_closure VARCHAR[],"
             "  dataset_id VARCHAR,"
             "  description VARCHAR,"
             "  phv_id VARCHAR,"
@@ -133,12 +149,18 @@ class DuckDBStore:
         self._copy_csv("study_facet_values", rows)
 
     def load_variables_batch(
-        self, rows: list[tuple[str, str, str, str, str, str, str, str, str, str]]
+        self,
+        rows: list[
+            tuple[str, str, str, str, str, str, str, str, str, str]
+        ],
     ) -> None:
         """Batch-insert variable records via CSV COPY.
 
-        Each row is (concept, concept_lower, cui, concept_ids_closure,
+        Each row is (concept, concept_lower, cui, concept_ids_closure_json,
         dataset_id, description, phv_id, study_id, table_name, variable_name).
+
+        DuckDB auto-casts JSON array strings to the native VARCHAR[] column
+        during CSV COPY.
         """
         if not rows:
             return
@@ -226,7 +248,7 @@ class DuckDBStore:
         exclude: list[tuple[Facet, list[str]]] | None = None,
     ) -> list[dict]:
         """Query studies using SQL-based faceted search."""
-        if not include:
+        if not include and not exclude:
             return []
 
         where_clauses: list[str] = []
@@ -246,7 +268,7 @@ class DuckDBStore:
             params.append(facet.value)
             params.extend(v.lower() for v in values)
 
-        if not where_clauses:
+        if not where_clauses and not exclude:
             return []
 
         # Exclude: each constraint subtracts matching studies
@@ -278,24 +300,33 @@ class DuckDBStore:
         concepts: list[str] | None = None,
         limit: int = 500,
         study_ids: set[str] | None = None,
-    ) -> list[dict]:
+        variable_names: set[str] | None = None,
+    ) -> tuple[list[dict], int]:
         """Return variables matching concept names and/or study IDs.
 
-        Searches against concept_ids_closure (JSON array of all ancestor
-        concept_ids) so that querying a parent concept returns variables
-        tagged with any descendant.
+        Searches against concept_ids_closure (native VARCHAR[] of all
+        ancestor concept_ids) so that querying a parent concept returns
+        variables tagged with any descendant.
 
         Args:
             concepts: Canonical concept names to match (OR-ed). If None,
                 all concepts are included (filtered by study_ids).
             limit: Maximum number of variable rows to return.
             study_ids: If provided, restrict results to these studies.
+            variable_names: If provided, restrict to these variable names
+                (case-insensitive).
 
         Returns:
-            Variable dicts with study title joined from the studies table.
+            Tuple of (variable dicts, total count before LIMIT).
         """
+        empty: tuple[list[dict], int] = ([], 0)
         if not concepts and not study_ids:
-            return []
+            return empty
+        # Empty set means "filter matched nothing" — no variables can match.
+        if study_ids is not None and not study_ids:
+            return empty
+        if variable_names is not None and not variable_names:
+            return empty
         params: list[str] = []
         clauses: list[str] = []
         if concepts:
@@ -304,8 +335,7 @@ class DuckDBStore:
             closure_clauses = []
             for c in concepts:
                 closure_clauses.append(
-                    "list_contains("
-                    "from_json(v.concept_ids_closure, '[\"VARCHAR\"]'), ?)"
+                    "list_contains(v.concept_ids_closure, ?)"
                 )
                 params.append(c.lower())
             clauses.append(f"({' OR '.join(closure_clauses)})")
@@ -313,7 +343,18 @@ class DuckDBStore:
             study_ph = ", ".join("?" for _ in study_ids)
             clauses.append(f"v.study_id IN ({study_ph})")
             params.extend(study_ids)
+        if variable_names is not None:
+            var_ph = ", ".join("?" for _ in variable_names)
+            clauses.append(f"LOWER(v.variable_name) IN ({var_ph})")
+            params.extend(n.lower() for n in variable_names)
         where = " AND ".join(clauses)
+        # Get total count before applying LIMIT.
+        count_sql = (
+            "SELECT COUNT(*) FROM variables v "
+            f"WHERE {where}"  # noqa: S608
+        )
+        total = self._conn.execute(count_sql, params).fetchone()[0]
+
         sql = (
             "SELECT v.concept, v.cui, v.dataset_id, v.description, v.phv_id,"
             "  v.study_id, v.table_name, v.variable_name,"
@@ -329,7 +370,35 @@ class DuckDBStore:
             "concept", "cui", "datasetId", "description", "phvId",
             "studyId", "tableName", "variableName", "studyTitle",
         ]
-        return [dict(zip(cols, row)) for row in rows]
+        return [dict(zip(cols, row)) for row in rows], total
+
+    def list_variables_for_concept(
+        self, concept_id: str, limit: int = 200
+    ) -> list[dict]:
+        """Return distinct variables under a concept with descriptions.
+
+        Searches against concept_ids_closure so that querying a parent concept
+        returns variables tagged with any descendant.
+
+        Args:
+            concept_id: Concept to list variables for.
+            limit: Maximum number of distinct variables to return.
+
+        Returns:
+            List of dicts with variable_name and description.
+        """
+        safe_limit = max(1, min(int(limit), 1000))
+        sql = (
+            "SELECT DISTINCT variable_name, description "
+            "FROM variables "
+            "WHERE list_contains(concept_ids_closure, ?) "  # noqa: S608
+            "ORDER BY variable_name "
+            "LIMIT ?"
+        )
+        rows = self._conn.execute(
+            sql, [concept_id.lower(), safe_limit]
+        ).fetchall()
+        return [{"description": row[1], "variable_name": row[0]} for row in rows]
 
     def get_facet_value_counts(self) -> list[tuple[str, str, int]]:
         """Return (facet, value, study_count) for all facet values.
