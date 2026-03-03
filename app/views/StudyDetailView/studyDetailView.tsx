@@ -15,14 +15,13 @@ import { ROUTES } from "../../../routes/constants";
 /**
  * Renders the study detail view.
  * @param props - Props.
- * @param props.studyId - Study ID.
  * @returns Study detail view.
  */
-export const StudyDetailView = ({ studyId }: Props): JSX.Element => {
+export const StudyDetailView = (props: Props): JSX.Element => {
   const { spacing } = useLayoutSpacing();
   const { state } = useChatState();
 
-  const study = getStudy<NCPICatalogStudy>(studyId);
+  const study = getStudy<NCPICatalogStudy>(props.studyId);
 
   useEffect(() => {
     // Any new request in the chat will trigger a navigation to the research datasets page,
@@ -35,9 +34,9 @@ export const StudyDetailView = ({ studyId }: Props): JSX.Element => {
     <ResearchView>
       <StyledGrid {...spacing}>
         <StyledContainer maxWidth={false}>
-          <Hero study={study} />
-          <Main study={study} />
-          <Side study={study} />
+          <Hero study={study} {...props} />
+          <Main study={study} subpath={props.subpath} />
+          <Side study={study} subpath={props.subpath} />
         </StyledContainer>
       </StyledGrid>
     </ResearchView>

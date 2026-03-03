@@ -13,15 +13,21 @@ import { Props } from "./types";
 /**
  * Renders a list of publication cards with title, citation, and DOI link.
  * @param props - Component props.
+ * @param props.className - Optional class name for styling.
+ * @param props.Paper - Optional custom Paper component.
  * @param props.publications - Array of publications to display.
  * @returns Publications element.
  */
-export const Publications = ({ publications }: Props): JSX.Element => {
+export const Publications = ({
+  className,
+  Paper = FluidPaper,
+  publications,
+}: Props): JSX.Element => {
   return (
-    <StyledStack gap={4} useFlexGap>
+    <StyledStack className={className} gap={4} useFlexGap>
       {publications.length > 0 ? (
         publications.map((publication, i) => (
-          <FluidPaper key={`${publication.doi}-${i}`} elevation={0}>
+          <Paper key={`${publication.doi}-${i}`} elevation={0}>
             <Typography
               component="h4"
               variant={TYPOGRAPHY_PROPS.VARIANT.BODY_LARGE_500}
@@ -48,14 +54,14 @@ export const Publications = ({ publications }: Props): JSX.Element => {
                 </>
               )}
             </Typography>
-          </FluidPaper>
+          </Paper>
         ))
       ) : (
-        <FluidPaper elevation={0}>
+        <Paper elevation={0}>
           <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_400_2_LINES}>
             No selected publications.
           </Typography>
-        </FluidPaper>
+        </Paper>
       )}
     </StyledStack>
   );

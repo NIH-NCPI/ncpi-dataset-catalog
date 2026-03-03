@@ -2,4 +2,5 @@ import { NCPICatalogStudy } from "../../../../apis/catalog/ncpi-catalog/common/e
 
 export interface Props {
   study: NCPICatalogStudy;
+  subpath: string;
 }

@@ -12,12 +12,14 @@ import { Links } from "@databiosphere/findable-ui/lib/components/Links/links";
 import { StyledRoundedPaper } from "./side.styles";
 
 /**
- * Renders the side section of the study detail view.
+ * Renders the side section of the study detail view or null if a subpath is present.
  * @param props - Props.
  * @param props.study - Study.
+ * @param props.subpath - Subpath for the study detail view.
  * @returns Side section of the study detail view.
  */
-export const Side = ({ study }: Props): JSX.Element => {
+export const Side = ({ study, subpath }: Props): JSX.Element | null => {
+  if (subpath !== "") return null;
   return (
     <StyledRoundedPaper>
       <Section>
