@@ -236,6 +236,29 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 return ctx.deps.get_measurement_category_concepts(keyword)
 
             @_agent.tool
+            def search_concepts_by_embedding(
+                ctx: RunContext[ConceptIndex],
+                query: str,
+                top_k: int = 10,
+            ) -> list[dict]:
+                """Search concept and archetype nodes by semantic similarity.
+
+                Uses embedding KNN to find the most semantically similar
+                concepts. Works well for lay terms ("blood sugar" → glucose),
+                abbreviations ("eGFR"), and typos ("hematacrit").
+
+                Args:
+                    ctx: Run context with ConceptIndex dependency.
+                    query: Natural-language search query.
+                    top_k: Number of results to return (default 10).
+
+                Returns:
+                    Top-K concepts with concept_id, name, description, type,
+                    similarity score, and study_count.
+                """
+                return ctx.deps.search_concepts_by_embedding(query, top_k=top_k)
+
+            @_agent.tool
             def get_concept_children(
                 ctx: RunContext[ConceptIndex],
                 concept_id: str,
