@@ -37,6 +37,16 @@ class StudyStore(Protocol):
         """Return studies matching *include* minus *exclude*."""
         ...
 
+    def query_variables(
+        self,
+        concepts: list[str] | None = None,
+        limit: int = 500,
+        study_ids: set[str] | None = None,
+        variable_names: set[str] | None = None,
+    ) -> tuple[list[dict], int]:
+        """Return variables matching concepts and/or study constraints."""
+        ...
+
     def list_variables_for_concept(
         self, concept_id: str, limit: int = 200
     ) -> list[dict]:
@@ -238,7 +248,7 @@ class DuckDBStore:
         exclude: list[tuple[Facet, list[str]]] | None = None,
     ) -> list[dict]:
         """Query studies using SQL-based faceted search."""
-        if not include:
+        if not include and not exclude:
             return []
 
         where_clauses: list[str] = []
@@ -258,7 +268,7 @@ class DuckDBStore:
             params.append(facet.value)
             params.extend(v.lower() for v in values)
 
-        if not where_clauses:
+        if not where_clauses and not exclude:
             return []
 
         # Exclude: each constraint subtracts matching studies

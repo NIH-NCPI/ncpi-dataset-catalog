@@ -1,7 +1,7 @@
 """Evals for concept matching classifier (v4 multi-table batching).
 
 Each eval case sends a single variable to the LLM with the full concept
-vocabulary (~94 concepts). Tests whether the model correctly matches to
+vocabulary (~567 concepts). Tests whether the model correctly matches to
 the right concept_id or returns null for non-matching variables.
 
 Test cases are derived from TOPMed ground truth (topmed-seed-concepts.json)

@@ -32,7 +32,6 @@ from .models import Facet, QueryModel, ResolvedMention
 from .pipeline import pipeline_cache, run_pipeline
 from .rate_limit import RateLimiter
 from .resolve_agent import resolve_cache
-from .store import DuckDBStore
 
 # Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
 logging.basicConfig(
@@ -296,16 +295,19 @@ async def search(
         include, exclude = _split_mentions(query_model.mentions)
         if intent == "auto":
             pass  # Ambiguous — return clarification message only
-        elif intent == "variable" and isinstance(index.store, DuckDBStore):
+        elif intent == "variable":
             # Apply study-level constraints (platform, dataType, etc.)
             non_measurement = [
                 c for c in include if c[0] != Facet.MEASUREMENT
             ]
             study_ids: set[str] | None = None
-            if non_measurement or exclude:
+            if non_measurement:
                 matched = index.query_studies(
-                    non_measurement or include, exclude or None
+                    non_measurement, exclude or None
                 )
+                study_ids = {s.get("dbGapId", "") for s in matched}
+            elif exclude:
+                matched = index.query_studies([], exclude)
                 study_ids = {s.get("dbGapId", "") for s in matched}
 
             # Collect all measurement concepts and query variables
