@@ -9,6 +9,8 @@ from collections import Counter, defaultdict
 from importlib.resources import files as pkg_files
 from pathlib import Path
 
+import numpy as np
+
 from .models import ConceptMatch, Facet
 from .store import DuckDBStore, StudyStore
 
@@ -340,6 +342,9 @@ class ConceptIndex:
         self._concept_descriptions: dict[str, dict] = {}
         self._focus_categories: dict[str, list[dict]] = {}
         self._isa_children: dict[str, list[str]] = {}
+        # Embedding search data (populated during build or cache load)
+        self._embedding_nodes: list[dict] = []
+        self._embedding_matrix: np.ndarray | None = None
 
     def load(self) -> None:
         """Load data — from cached DuckDB file if available, else from JSON."""
@@ -371,7 +376,15 @@ class ConceptIndex:
         # These are small JSON files bundled with the package — always load
         self.load_focus_categories()
         self.load_consent_code_descriptions()
+        # Load concept descriptions before _build_concept_embeddings needs them
+        # (on cold build, _load_from_json calls _build_concept_embeddings)
         self._concept_descriptions = _load_concept_descriptions()
+
+    def _ensure_concept_descriptions(self) -> dict[str, dict]:
+        """Return concept descriptions, loading them if not yet available."""
+        if not self._concept_descriptions:
+            self._concept_descriptions = _load_concept_descriptions()
+        return self._concept_descriptions
 
     def _load_from_json(self) -> None:
         """Full build path: parse JSON data files and populate the store."""
@@ -415,6 +428,9 @@ class ConceptIndex:
         if isinstance(self.store, DuckDBStore):
             self.store.finalize()
 
+        # Build concept embeddings for semantic search
+        self._build_concept_embeddings()
+
     def _rebuild_index_from_store(self) -> None:
         """Rebuild the in-memory _index from a loaded DuckDB store."""
         if not isinstance(self.store, DuckDBStore):
@@ -429,6 +445,133 @@ class ConceptIndex:
                 study_count=count,
                 value=value,
             )
+        try:
+            self._load_embeddings_from_store()
+        except Exception as exc:
+            logger.warning(
+                "Could not load concept embeddings from cache "
+                "(may be an older cache file): %s",
+                exc,
+            )
+
+    def _build_concept_embeddings(self) -> None:
+        """Generate embeddings for all concept+archetype nodes and store them.
+
+        Uses the already-loaded ``_concept_descriptions`` dict. Each node is
+        embedded as ``"name: description"``.  Results are stored in the DuckDB
+        ``concept_embeddings`` table and cached in memory for KNN search.
+
+        Gracefully skips if sentence-transformers is not installed (e.g. in
+        test environments).
+        """
+        from . import embeddings
+
+        descs = self._ensure_concept_descriptions()
+        if not descs:
+            logger.warning("No concept descriptions found — skipping embeddings")
+            return
+
+        nodes: list[dict] = []
+        texts: list[str] = []
+        for cid, info in sorted(descs.items()):
+            name = info.get("name", cid)
+            desc = info.get("description", "")
+            node_type = info.get("type", "concept")
+            nodes.append({
+                "concept_id": cid,
+                "description": desc,
+                "name": name,
+                "type": node_type,
+            })
+            texts.append(f"{name}: {desc}" if desc else name)
+
+        logger.info("Embedding %d concept nodes...", len(texts))
+        try:
+            matrix = embeddings.embed_texts(texts)
+        except ImportError:
+            logger.warning("sentence-transformers not available — skipping embeddings")
+            return
+        except Exception:
+            logger.exception("Failed to generate concept embeddings — skipping")
+            return
+        logger.info("Embedding complete: %s", matrix.shape)
+
+        # Store in DuckDB
+        if isinstance(self.store, DuckDBStore):
+            rows = [
+                (n["concept_id"], n["name"], n["description"], n["type"],
+                 matrix[i].tolist())
+                for i, n in enumerate(nodes)
+            ]
+            self.store.load_concept_embeddings_batch(rows)
+
+        self._embedding_nodes = nodes
+        self._embedding_matrix = matrix
+
+    def _load_embeddings_from_store(self) -> None:
+        """Load concept embeddings from the DuckDB cache into memory."""
+        if not isinstance(self.store, DuckDBStore):
+            return
+        rows = self.store.get_concept_embeddings()
+        if not rows:
+            logger.info("No concept embeddings in cache")
+            return
+        nodes: list[dict] = []
+        vecs: list[list[float]] = []
+        for cid, name, desc, node_type, embedding in rows:
+            nodes.append({
+                "concept_id": cid,
+                "description": desc or "",
+                "name": name or cid,
+                "type": node_type or "concept",
+            })
+            vecs.append(embedding)
+        self._embedding_nodes = nodes
+        self._embedding_matrix = np.array(vecs, dtype=np.float32)
+        logger.info(
+            "Loaded %d concept embeddings from cache", len(nodes)
+        )
+
+    def search_concepts_by_embedding(
+        self, query: str, top_k: int = 10
+    ) -> list[dict]:
+        """KNN search against concept+archetype embeddings.
+
+        Args:
+            query: Natural-language query (e.g. "blood sugar", "eGFR").
+            top_k: Number of results to return.
+
+        Returns:
+            Top-K nodes with concept_id, name, description, type,
+            similarity, and study_count.
+        """
+        if self._embedding_matrix is None or len(self._embedding_nodes) == 0:
+            return []
+
+        try:
+            from . import embeddings
+            query_vec = embeddings.embed_query(query)
+            hits = embeddings.search_embeddings(
+                query_vec, self._embedding_matrix, top_k=top_k
+            )
+        except Exception:
+            logger.exception("Embedding search failed — returning empty")
+            return []
+
+        results: list[dict] = []
+        for idx, sim in hits:
+            node = self._embedding_nodes[idx]
+            cid = node["concept_id"]
+            match = self._index[Facet.MEASUREMENT].get(cid.lower())
+            results.append({
+                "concept_id": cid,
+                "description": node["description"],
+                "name": node["name"],
+                "similarity": round(sim, 4),
+                "study_count": match.study_count if match else 0,
+                "type": node["type"],
+            })
+        return results
 
     def _load_measurement_concepts(self, llm_dir: Path) -> None:
         """Load concept names and variable details from per-study LLM JSON.

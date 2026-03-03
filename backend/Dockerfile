@@ -6,9 +6,16 @@ ENV GIT_SHA=${GIT_SHA}
 WORKDIR /app
 
 # Install dependencies first (layer caching: only re-runs when deps change)
+# Install CPU-only PyTorch first — saves ~1.2 GB vs the full CUDA build
+# that sentence-transformers would otherwise pull in.
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+
 COPY backend/pyproject.toml .
 RUN pip install --no-cache-dir \
     $(python -c "import tomllib; d=tomllib.load(open('pyproject.toml','rb')); print(' '.join(d['project']['dependencies']))")
+
+# Pre-download embedding model so it's cached in the image
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('pritamdeka/S-PubMedBert-MS-MARCO')"
 
 # Copy application code
 COPY backend/concept_search/ concept_search/

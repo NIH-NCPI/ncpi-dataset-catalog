@@ -236,18 +236,44 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 return ctx.deps.get_measurement_category_concepts(keyword)
 
             @_agent.tool
+            def search_concepts_by_embedding(
+                ctx: RunContext[ConceptIndex],
+                query: str,
+                top_k: int = 10,
+            ) -> list[dict]:
+                """Search concept and archetype nodes by semantic similarity.
+
+                Uses embedding KNN to find the most semantically similar
+                concepts. Works well for lay terms ("blood sugar" → glucose),
+                abbreviations ("eGFR"), and typos ("hematacrit").
+
+                Args:
+                    ctx: Run context with ConceptIndex dependency.
+                    query: Natural-language search query.
+                    top_k: Number of results to return (default 10).
+
+                Returns:
+                    Top-K concepts with concept_id, name, description, type,
+                    similarity score, and study_count.
+                """
+                return ctx.deps.search_concepts_by_embedding(query, top_k=top_k)
+
+            @_agent.tool
             def get_concept_children(
                 ctx: RunContext[ConceptIndex],
                 concept_id: str,
             ) -> list[dict]:
                 """Get child sub-concepts with names and descriptions.
 
-                ALWAYS call this before returning a concept. If a child is
-                a more specific match, return the child instead. Children
-                with type="archetype" are leaf nodes — return directly
-                without further drilling.
+                Use this to drill into a broad top-level category when
+                embedding search returns a parent concept (e.g.
+                ncpi:biomarkers) and you need a more specific child.
+                For measurement, embedding search usually finds the right
+                concept directly — only call this when needed.
 
-                Empty list means leaf concept — safe to return.
+                Children with type="archetype" are leaf nodes — return
+                directly without further drilling. Empty list means leaf
+                concept — safe to return.
 
                 Args:
                     ctx: Run context with ConceptIndex dependency.
