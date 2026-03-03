@@ -109,6 +109,7 @@ const config: SiteConfig = {
     ],
     key: "ncpi-catalog",
   },
+  contentDir: "ncpi-catalog",
   dataDictionaries: [
     {
       dataDictionary: buildDataDictionary(dataDictionary),
@@ -160,6 +161,10 @@ const config: SiteConfig = {
         undefined,
         undefined,
         [
+          {
+            label: "About",
+            url: ROUTES.ABOUT,
+          },
           {
             label: "Data Dictionary",
             url: ROUTES.DATA_DICTIONARY,

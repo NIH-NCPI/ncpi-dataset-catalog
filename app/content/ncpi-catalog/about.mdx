@@ -1,0 +1,151 @@
+# About the NCPI Dataset Catalog
+
+The NCPI Dataset Catalog helps researchers **discover** studies across NIH cloud platforms. It builds on the rich metadata that dbGaP and NLM publish for ~2,944 studies — adding cross-platform search, measurement classification, and demographic faceting on top of ~425,000 variables.
+
+The catalog indexes studies from four platforms:
+
+- **AnVIL** — NHGRI's Genomic Data Science Analysis, Visualization, and Informatics Lab-Space
+- **BDC** — NHLBI BioData Catalyst
+- **CRDC** — NCI Cancer Research Data Commons
+- **KFDRC** — Kids First Data Resource Center
+
+Our classification strategy **prioritizes recall over precision**: we'd rather surface a study that might be relevant than miss one that is. A researcher searching for "blood pressure" should find every study that measured it, even if a few false positives slip in.
+
+**Key limitation:** All data in the catalog comes from dbGaP's publicly available metadata — variable names, descriptions, and per-variable aggregate statistics. There is no participant-level data, so we can only report distributions for individual variables independently. We can say "this study has 3,369 female participants" and "1,450 Hispanic participants," but not "how many Hispanic females" — cross-tabulations between variables require authorized access to the actual study data.
+
+## What You Can Search
+
+The catalog supports nine search facets:
+
+- **Measurement** — what a study measured (e.g., Systolic Blood Pressure, BMI, Smoking Status), derived from LLM classification of ~425,000 dbGaP variables
+- **Platform** — which NIH cloud platform(s) host the study (AnVIL, BDC, CRDC, KFDRC)
+- **Disease Focus** — the study's primary disease area (e.g., Cardiovascular Disease, Neoplasms)
+- **Data Type** — molecular data types available (e.g., WGS, WES, RNA-Seq, SNP Genotypes)
+- **Study Design** — how the study was structured (e.g., Longitudinal Cohort, Case-Control)
+- **Consent Code** — GA4GH consent categories controlling data use (e.g., GRU, HMB, DS-CA)
+- **Sex** — participant sex distribution (Male, Female, Other/Unknown)
+- **Race/Ethnicity** — self-reported race and ethnicity categories
+- **Computed Ancestry** — genetically-inferred ancestry groups computed by dbGaP
+
+### Natural-Language Search
+
+You can type research questions in plain English — for example, _"I'm looking for smoking and BMI data in cardiovascular disease studies"_ — and the catalog translates your query into faceted filters.
+
+The search API uses three LLM agents:
+
+1. **Extract** — parses your query into individual mentions with facet guesses
+2. **Resolve** — maps each mention to canonical concept values via index search (can rewrite terms, e.g., "blood sugar" becomes "Fasting Glucose")
+3. **Structure** — determines boolean logic (include/exclude flags)
+
+Mentions within a facet are OR-ed; across facets they're AND-ed (unless excluded).
+
+---
+
+## How It's Built
+
+The catalog is assembled by an automated pipeline with five stages: study discovery, metadata enrichment, publication fetching, variable classification, and demographic distributions.
+
+### 1. Study Discovery
+
+The master list of studies comes from a **dbGaP Advanced Search CSV export** (~3,264 studies with accession IDs, titles, descriptions, disease focus, study design, molecular data types, and consent codes). This CSV is refreshed periodically by downloading a new export from dbGaP.
+
+Each study is then tagged with the **platform(s)** that host it — AnVIL, BDC, CRDC, KFDRC, or dbGaP-only. Per-platform update scripts query each platform's API for their current study lists and merge the results into a single platform-to-study mapping (~3,266 entries, since some studies appear on multiple platforms).
+
+### 2. Metadata Enrichment
+
+For each study, the build process extracts structured fields from the dbGaP CSV:
+
+- **Participant count** — parsed from the "Study Content" column (e.g., "705 subjects" becomes 705)
+- **Consent codes** — parsed from the "Study Consent" column (e.g., "HMB-IRB-NPU --- Health/Medical..." becomes HMB-IRB-NPU)
+- **Data types** — from the "Study Molecular Data Type" column (e.g., "SNP Genotypes (Array), WGS")
+- **Disease focus** — from the "Study Disease/Focus" column
+- **Study design** — from the "Study Design" column
+- **Parent study** — extracted accession ID linking child studies to their parent
+
+dbGaP also publishes full study descriptions in GapExchange XML on its FTP server. The build **fetches these full descriptions** to supplement the CSV summary — picking the latest version and extracting the Description element, falling back to the CSV text if FTP is unavailable.
+
+Additional enrichment includes DUOS data-use URLs, GDC project IDs for CRDC studies, and decoded consent code descriptions. The result is a catalog of **~2,944 studies** with full metadata.
+
+### 3. Publication Fetching
+
+Each dbGaP study's GapExchange XML contains PI-curated publication references as PMID elements. The publication pipeline:
+
+1. **Fetches PMIDs from the FTP server** for every study in the catalog
+2. **Batch-resolves all PMIDs via the Semantic Scholar API** — retrieving title, authors, year, journal, DOI, and citation counts
+3. **Merges publications into the study catalog** in simplified form (first 3 authors + "et al.", sorted by citation count)
+
+### 4. Variable Classification
+
+This is the heart of the catalog's search capability. It maps ~340,000 dbGaP variables into canonical concepts so researchers can find studies by what they measured, not by arbitrary variable names.
+
+#### Parsing the XML
+
+dbGaP publishes var_report.xml files for each study — 14,416 XML files across 2,721 studies. Each file describes a dataset table and its variables: name, phv ID, and description. The parser extracts these fields and deduplicates across consent groups (.c1, .c2 suffixes), producing ~340,617 unique variables.
+
+#### LLM Concept Classification
+
+Each variable is classified by Claude Haiku into a canonical concept name based on its **name and description** from the var_report.xml. The LLM also receives the table name and study name for context.
+
+For example, given a batch of variables like "gender1: GENDER", "race1c: RACE / ETHNICITY", "bmi1c: BODY MASS INDEX", the LLM returns concept names: "Sex", "Race/Ethnicity", "Body Mass Index". The classification prompt instructs the LLM to use UMLS-style preferred names in Title Case at an appropriate level of granularity.
+
+Classification is incremental — results are cached per-study, so re-runs only process new or changed studies.
+
+#### Concept Hierarchy
+
+The vocabulary is organized into a **4-level hierarchy**: 20 top-level categories, ~580 mid-level concepts, and ~6,300 leaf archetypes. The hierarchy is stored as ISA (child-to-parent) edges, and DuckDB computes the transitive closure at index load time so that a query at any level returns all descendant variables.
+
+For example, searching "ECG QT interval" resolves to a specific archetype (114 variables across 25 studies), while searching "all ECG measurements" resolves to the parent concept and ISA closure returns all 10,541 variables across 41 archetypes.
+
+#### Archetype Generation
+
+After classification, 185 concepts still have more than 200 variables each — too coarse for specific queries. But the variables aren't distinct measurements: ECG atrial fibrillation appears as AFIB, ATRFIB21, ECGAFIB, afib_s1, ecg_af across 40+ studies. The 10,541 "ECG" variables represent roughly 40 distinct measurement types.
+
+The archetype pipeline groups semantically identical variables into canonical sub-concepts:
+
+1. **Discovery** — identifies the 185 concepts exceeding 200 variables (152K variables total)
+2. **Deduplication** — collapses variable occurrences by (name, description) to get unique measurement signatures
+3. **LLM grouping** — sends deduplicated pairs to Claude Sonnet to group by measurement type. For large concepts exceeding the context window, a two-pass approach defines archetypes from the first 3,000 pairs, then assigns remaining variables in batches
+4. **Output** — appends archetypes to the vocabulary and re-tags variables to point to their fine-grained archetype
+
+Current stats: **6,281 archetypes** across 185 concepts, **98K variables** assigned (~94% assignment rate).
+
+#### Vocabulary Sources
+
+The concept vocabulary draws from three namespaces:
+
+- **topmed:** — ~360 concepts from TOPMed harmonized variables (e.g., bp_systolic, ecg)
+- **phenx:** — ~210 concepts from PhenX Toolkit measures (e.g., fasting_plasma_glucose_blood_draw)
+- **ncpi:** — ~6,300 generated archetypes (e.g., ecg_atrial_fibrillation)
+
+### 5. Demographic Distributions
+
+The demographics pipeline extracts per-study sex and race/ethnicity distributions from two dbGaP data sources — no LLM involved, just direct parsing of structured metadata.
+
+#### Self-Reported Demographics
+
+dbGaP requires studies to submit a standardized **Subject_Phenotypes** table containing core demographic variables. The pipeline:
+
+1. Locates each study's Subject_Phenotypes var_report.xml (available for ~1,986 studies)
+2. Identifies sex and race/ethnicity variables by **name pattern** — matching variable names containing sex/gender or race/ethni (case-insensitive)
+3. Extracts enum distributions from the stats element — the category labels and counts that dbGaP pre-computes (e.g., Male=55, Female=45)
+4. When multiple matching variables exist, selects the one with the highest participant count, then fewest nulls
+
+Because each study team defines its own labels at submission time, the vocabulary varies across studies — one may report "FEMALE", another "F", another "Female".
+
+#### Computed Ancestry
+
+The dbGaP Advanced Search CSV includes an "Ancestry (computed)" column for studies with genotype data — genetically-inferred ancestry groups computed by dbGaP. This is available for **~462 studies** and stored separately from self-reported race/ethnicity since they measure different things.
+
+#### Label Normalization
+
+Because thousands of independent study teams each define their own labels, there are 71 distinct sex labels and 682 distinct race/ethnicity labels across all studies. Without normalization, a search for "African American" would miss studies reporting "Black", "BLACK", or "Black/AA".
+
+The search API normalizes these on load using a bundled mapping file:
+
+- **Sex** — 3 canonical categories (Male, Female, Other/Unknown) covering ~38 verbatim patterns
+- **Race/Ethnicity** — 9 canonical categories (White, Black or African American, Asian, Hispanic or Latino, etc.) covering ~60 patterns
+- **Computed Ancestry** — 9 fixed dbGaP labels, no normalization needed
+
+When multiple verbatim labels in one study map to the same canonical category, their counts are summed. This lets researchers search for "female participants" and match studies regardless of how the original study reported sex.
+
+Current coverage: **1,212 studies with sex data**, **1,064 with race/ethnicity**, **462 with computed ancestry** (1,734 total with at least one demographic field).
