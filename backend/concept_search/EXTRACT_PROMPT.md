@@ -79,7 +79,7 @@ For these facets, extract the user's text and leave `values` empty. A resolve ag
 
 **Focus/Disease** — diseases, conditions, research areas. Examples: diabetes, heart disease, cancer, ALS, asthma.
 
-**Measurement** — phenotype variables, lab values, clinical measurements, survey instruments. Examples: blood pressure, BMI, cholesterol, smoking, sleep duration.
+**Measurement** — phenotype variables, lab values, clinical measurements, survey instruments, medication/drug use. Examples: blood pressure, BMI, cholesterol, smoking, sleep duration.
 
 **Consent Code** — GA4GH data use consent codes that describe what research a dataset is approved for. Common patterns: GRU (general research use), HMB (health/medical/biomedical), DS-\* (disease-specific), plus modifiers like IRB, NPU. When you see these codes, extract them as consentCode mentions.
 
