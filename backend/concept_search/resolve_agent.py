@@ -265,12 +265,15 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
             ) -> list[dict]:
                 """Get child sub-concepts with names and descriptions.
 
-                ALWAYS call this before returning a concept. If a child is
-                a more specific match, return the child instead. Children
-                with type="archetype" are leaf nodes — return directly
-                without further drilling.
+                Use this to drill into a broad top-level category when
+                embedding search returns a parent concept (e.g.
+                ncpi:biomarkers) and you need a more specific child.
+                For measurement, embedding search usually finds the right
+                concept directly — only call this when needed.
 
-                Empty list means leaf concept — safe to return.
+                Children with type="archetype" are leaf nodes — return
+                directly without further drilling. Empty list means leaf
+                concept — safe to return.
 
                 Args:
                     ctx: Run context with ConceptIndex dependency.

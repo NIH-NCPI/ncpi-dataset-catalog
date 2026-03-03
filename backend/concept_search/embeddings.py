@@ -7,6 +7,7 @@ batch encoding, and cosine KNN search against concept embeddings.
 from __future__ import annotations
 
 import logging
+import threading
 
 import numpy as np
 
@@ -14,21 +15,27 @@ logger = logging.getLogger(__name__)
 
 _MODEL_NAME = "pritamdeka/S-PubMedBert-MS-MARCO"
 _model = None
+_model_lock = threading.Lock()
 
 
 def get_model():
     """Lazy-load S-PubMedBert-MS-MARCO (cached after first call).
+
+    Thread-safe: uses a lock to prevent concurrent initialization
+    (which can trigger PyTorch meta-tensor errors).
 
     Returns:
         A ``SentenceTransformer`` instance.
     """
     global _model  # noqa: PLW0603
     if _model is None:
-        from sentence_transformers import SentenceTransformer
+        with _model_lock:
+            if _model is None:
+                from sentence_transformers import SentenceTransformer
 
-        logger.info("Loading embedding model: %s", _MODEL_NAME)
-        _model = SentenceTransformer(_MODEL_NAME)
-        logger.info("Embedding model loaded")
+                logger.info("Loading embedding model: %s", _MODEL_NAME)
+                _model = SentenceTransformer(_MODEL_NAME)
+                logger.info("Embedding model loaded")
     return _model
 
 
@@ -87,6 +94,8 @@ def search_embeddings(
     """
     # Dot product on normalized vectors = cosine similarity
     similarities = node_vecs @ query_vec
+    if top_k <= 0 or len(similarities) == 0:
+        return []
     top_k = min(top_k, len(similarities))
     top_indices = np.argpartition(similarities, -top_k)[-top_k:]
     top_indices = top_indices[np.argsort(similarities[top_indices])[::-1]]

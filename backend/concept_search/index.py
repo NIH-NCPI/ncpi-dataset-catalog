@@ -376,7 +376,15 @@ class ConceptIndex:
         # These are small JSON files bundled with the package — always load
         self.load_focus_categories()
         self.load_consent_code_descriptions()
+        # Load concept descriptions before _build_concept_embeddings needs them
+        # (on cold build, _load_from_json calls _build_concept_embeddings)
         self._concept_descriptions = _load_concept_descriptions()
+
+    def _ensure_concept_descriptions(self) -> dict[str, dict]:
+        """Return concept descriptions, loading them if not yet available."""
+        if not self._concept_descriptions:
+            self._concept_descriptions = _load_concept_descriptions()
+        return self._concept_descriptions
 
     def _load_from_json(self) -> None:
         """Full build path: parse JSON data files and populate the store."""
@@ -437,7 +445,14 @@ class ConceptIndex:
                 study_count=count,
                 value=value,
             )
-        self._load_embeddings_from_store()
+        try:
+            self._load_embeddings_from_store()
+        except Exception as exc:
+            logger.warning(
+                "Could not load concept embeddings from cache "
+                "(may be an older cache file): %s",
+                exc,
+            )
 
     def _build_concept_embeddings(self) -> None:
         """Generate embeddings for all concept+archetype nodes and store them.
@@ -451,11 +466,11 @@ class ConceptIndex:
         """
         try:
             from . import embeddings
-        except Exception:
+        except ImportError:
             logger.warning("sentence-transformers not available — skipping embeddings")
             return
 
-        descs = self._concept_descriptions
+        descs = self._ensure_concept_descriptions()
         if not descs:
             logger.warning("No concept descriptions found — skipping embeddings")
             return
