@@ -47,6 +47,10 @@ class StudyStore(Protocol):
         """Return variables matching concepts and/or study constraints."""
         ...
 
+    def get_study(self, dbgap_id: str) -> dict | None:
+        """Return a single study by its dbGaP accession, or None."""
+        ...
+
     def list_variables_for_concept(
         self, concept_id: str, limit: int = 200
     ) -> list[dict]:
@@ -399,6 +403,14 @@ class DuckDBStore:
             sql, [concept_id.lower(), safe_limit]
         ).fetchall()
         return [{"description": row[1], "variable_name": row[0]} for row in rows]
+
+    def get_study(self, dbgap_id: str) -> dict | None:
+        """Return a single study by its dbGaP accession, or None."""
+        row = self._conn.execute(
+            "SELECT raw_json FROM studies WHERE db_gap_id = ?",
+            [dbgap_id],
+        ).fetchone()
+        return json.loads(row[0]) if row else None
 
     def get_facet_value_counts(self) -> list[tuple[str, str, int]]:
         """Return (facet, value, study_count) for all facet values.
