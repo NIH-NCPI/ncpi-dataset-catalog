@@ -160,7 +160,7 @@ make evals
 ## Hierarchy structure
 
 ```
-Category (27)                          ← top-level grouping
+Category (20)                          ← top-level grouping
   └─ Concept (~580)                    ← TOPMed/PhenX concept
        └─ Sub-concept (optional)       ← further grouping
             └─ Archetype (~6,300)      ← leaf node, groups identical variables

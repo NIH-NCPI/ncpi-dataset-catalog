@@ -617,11 +617,18 @@ def write_outputs(
         print("\nNo results to write.")
         return
 
-    # Load existing data, stripping old archetype entries to avoid stale leftovers
+    # Load existing data, stripping old archetype entries for concepts being
+    # processed. In single-concept mode, only strip that concept's archetypes;
+    # in full mode, strip all archetypes for a clean rebuild.
+    result_prefixes = {concept_id_to_prefix(cid) for cid in results}
     with open(VOCAB_PATH) as f:
         all_vocab = json.load(f)
-    arch_ids = {e["concept_id"] for e in all_vocab if e.get("type") == "archetype"}
-    vocab = [e for e in all_vocab if e.get("type") != "archetype"]
+    arch_ids = {
+        e["concept_id"] for e in all_vocab
+        if e.get("type") == "archetype"
+        and any(e["concept_id"].startswith(p + "_") for p in result_prefixes)
+    }
+    vocab = [e for e in all_vocab if e["concept_id"] not in arch_ids]
     with open(ISA_PATH) as f:
         isa = [e for e in json.load(f) if e["child"] not in arch_ids]
 

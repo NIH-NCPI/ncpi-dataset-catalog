@@ -701,7 +701,7 @@ PhenX provides ~181 standardized protocols with pre-mapped dbGaP variables from 
 ### Combined vocabulary architecture
 
 ```
-ncpi:cardiovascular                            ← category (27 top-level)
+ncpi:cardiovascular                            ← category (20 top-level)
   ├── phenx:blood_pressure                     ← PhenX mid-level
   │     ├── topmed:bp_systolic                 ← TOPMed concept
   │     │     ├── ncpi:bp_systolic_resting_systolic_bp (632 vars)  ← archetype

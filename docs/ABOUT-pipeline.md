@@ -159,7 +159,7 @@ iterations and debugging.
 
 ### 4c. Concept hierarchy
 
-The vocabulary is organized into a 4-level hierarchy: 27 top-level categories,
+The vocabulary is organized into a 4-level hierarchy: 20 top-level categories,
 ~580 mid-level concepts, and ~6,300 leaf archetypes. The hierarchy is stored as
 ISA (child → parent) edges in `concept-isa.json`, and DuckDB computes the
 transitive closure at index load time so that a query at any level returns all
