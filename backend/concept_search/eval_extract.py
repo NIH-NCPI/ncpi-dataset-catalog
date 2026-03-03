@@ -533,6 +533,23 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
                 ],
             ),
         ),
+        # --- Complex research questions ---
+        Case(
+            name="multi-measurement-research-question",
+            inputs="I'm studying whether smoking modifies the effect of GLP-1 agonists on glycemic control in T2D patients",
+            # Should extract all four concepts: the disease focus plus
+            # three distinct measurement domains (smoking, medication,
+            # glycemic outcome).
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[
+                    _rm("type 2 diabetes", Facet.FOCUS),
+                    _rm("smoking", Facet.MEASUREMENT),
+                    _rm("GLP-1 agonists", Facet.MEASUREMENT),
+                    _rm("glycemic control", Facet.MEASUREMENT),
+                ],
+            ),
+        ),
     ],
 )
 
