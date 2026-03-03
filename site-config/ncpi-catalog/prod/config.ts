@@ -3,6 +3,12 @@ import devConfig from "../dev/config";
 
 const config: SiteConfig = {
   ...devConfig,
+  ai: devConfig.ai
+    ? {
+        ...devConfig.ai,
+        url: "https://prejcyhpmp.us-east-1.awsapprunner.com/search",
+      }
+    : undefined,
   browserURL: "https://ncpi-data.org",
 };
 
