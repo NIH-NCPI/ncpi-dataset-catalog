@@ -1006,3 +1006,89 @@ class TestBuildStudySummary:
         assert summary.demographics.race_ethnicity is not None
         assert summary.demographics.computed_ancestry is not None
         assert summary.demographics.computed_ancestry.categories[0].label == "European"
+
+
+# ---------------------------------------------------------------------------
+# query_variables: concept and study-only queries
+# ---------------------------------------------------------------------------
+
+
+def _build_store_with_variables() -> DuckDBStore:
+    """Build a store with variable records for testing query_variables."""
+    import json
+
+    store = DuckDBStore.create_empty()
+    studies = [
+        _make_study("phs000001", platforms=["BDC"], focus="Cardiovascular"),
+        _make_study("phs000002", platforms=["AnVIL"], focus="Diabetes"),
+    ]
+    for study in studies:
+        sid = study["dbGapId"]
+        store.load_study(sid, study)
+        for v in (study.get("platforms") or []):
+            store.load_facet_value(sid, Facet.PLATFORM, v)
+        if study.get("focus"):
+            store.load_facet_value(sid, Facet.FOCUS, study["focus"])
+
+    # Load some variables
+    rows = [
+        # (concept, concept_lower, cui, closure_json, dataset_id,
+        #  description, phv_id, study_id, table_name, variable_name)
+        ("topmed:bp_systolic", "topmed:bp_systolic", "",
+         json.dumps(["topmed:bp_systolic"]),
+         "ds1", "Systolic BP", "phv001", "phs000001", "exam", "SBP"),
+        ("topmed:bp_diastolic", "topmed:bp_diastolic", "",
+         json.dumps(["topmed:bp_diastolic"]),
+         "ds1", "Diastolic BP", "phv002", "phs000001", "exam", "DBP"),
+        ("topmed:bmi", "topmed:bmi", "",
+         json.dumps(["topmed:bmi"]),
+         "ds2", "Body mass index", "phv003", "phs000002", "baseline", "BMI"),
+    ]
+    store.load_variables_batch(rows)
+    store.finalize()
+    return store
+
+
+@pytest.fixture
+def var_store() -> DuckDBStore:
+    """A DuckDBStore with variable records."""
+    return _build_store_with_variables()
+
+
+class TestQueryVariables:
+    """Tests for query_variables: concept, study, and combined queries."""
+
+    def test_by_concept(self, var_store: DuckDBStore) -> None:
+        """Query by concept returns matching variables."""
+        rows, total = var_store.query_variables(concepts=["topmed:bp_systolic"])
+        assert total == 1
+        assert rows[0]["variableName"] == "SBP"
+
+    def test_by_study_only(self, var_store: DuckDBStore) -> None:
+        """Query by study_ids only (no concepts) returns all study variables."""
+        rows, total = var_store.query_variables(
+            concepts=None, study_ids={"phs000001"}
+        )
+        assert total == 2
+        names = {r["variableName"] for r in rows}
+        assert names == {"SBP", "DBP"}
+
+    def test_by_concept_and_study(self, var_store: DuckDBStore) -> None:
+        """Query with both concept and study_ids intersects constraints."""
+        rows, total = var_store.query_variables(
+            concepts=["topmed:bmi"], study_ids={"phs000001"}
+        )
+        # BMI is in phs000002, not phs000001
+        assert total == 0
+
+    def test_empty_study_ids_returns_empty(self, var_store: DuckDBStore) -> None:
+        """Empty study_ids set means nothing matched — return empty."""
+        rows, total = var_store.query_variables(
+            concepts=["topmed:bp_systolic"], study_ids=set()
+        )
+        assert total == 0
+
+    def test_no_concepts_no_study_ids(self, var_store: DuckDBStore) -> None:
+        """Neither concepts nor study_ids — return empty."""
+        rows, total = var_store.query_variables()
+        assert total == 0

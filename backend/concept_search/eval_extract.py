@@ -422,6 +422,16 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
                 ],
             ),
         ),
+        Case(
+            name="intent-variable-study-only",
+            inputs="what variables are in BDC studies?",
+            expected_output=ExtractResult(
+                intent="variable",
+                mentions=[
+                    _rm("BDC", Facet.PLATFORM, ["BDC"]),
+                ],
+            ),
+        ),
         # --- Intent detection: ambiguous queries ---
         Case(
             name="intent-auto-ambiguous",
