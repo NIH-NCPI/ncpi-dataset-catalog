@@ -45,6 +45,16 @@ _CATEGORIES_PATH = (
     / "ncpi-categories.json"
 )
 
+_categories_cache: list[dict] | None = None
+
+
+def _get_categories() -> list[dict]:
+    global _categories_cache  # noqa: PLW0603
+    if _categories_cache is None:
+        with open(_CATEGORIES_PATH) as f:
+            _categories_cache = json.load(f)
+    return _categories_cache
+
 
 @mcp.tool()
 def browse_concepts() -> list[dict]:
@@ -55,8 +65,7 @@ def browse_concepts() -> list[dict]:
     catalog measures.
     """
     index = _get_index()
-    with open(_CATEGORIES_PATH) as f:
-        categories = json.load(f)
+    categories = _get_categories()
 
     measurement_idx = index._index[Facet.MEASUREMENT]
     results = []
