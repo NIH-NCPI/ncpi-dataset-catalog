@@ -30,7 +30,7 @@ const config: SiteConfig = {
   ai: {
     enabled: true,
     prompt: {
-      inputPlaceholder: "Ask about datasets or variables",
+      inputPlaceholder: "Ask about studies or variables",
       suggestions: [
         {
           label: "GLP-1 effect + smoking in T2D",
@@ -52,7 +52,7 @@ const config: SiteConfig = {
       ],
       text: "Hello! Describe your research question and I'll help you find matching datasets across 2,944 studies from AnVIL, BDC, CRDC, and KFDRC.",
     },
-    routes: { research: "/research/datasets", search: "/studies" },
+    routes: { research: "/research/studies", search: "/studies" },
     url: "https://ffbijgxxf2.us-east-1.awsapprunner.com/search",
   },
   analytics: {
