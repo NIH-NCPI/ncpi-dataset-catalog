@@ -217,11 +217,13 @@ export function buildVariableSummaryForStudy(
 
     // Include individual variables only for small studies
     if (showDetails) {
-      categoryEntry.variables = vars.map((v): Variable => ({
-        description: v.description,
-        id: v.id,
-        name: v.name,
-      }));
+      categoryEntry.variables = vars
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((v): Variable => ({
+          description: v.description,
+          id: v.id,
+          name: v.name,
+        }));
     }
 
     categoryList.push(categoryEntry);
