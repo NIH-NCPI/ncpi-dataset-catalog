@@ -6,6 +6,10 @@ ENV GIT_SHA=${GIT_SHA}
 WORKDIR /app
 
 # Install dependencies first (layer caching: only re-runs when deps change)
+# Install CPU-only PyTorch first — saves ~1.2 GB vs the full CUDA build
+# that sentence-transformers would otherwise pull in.
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+
 COPY backend/pyproject.toml .
 RUN pip install --no-cache-dir \
     $(python -c "import tomllib; d=tomllib.load(open('pyproject.toml','rb')); print(' '.join(d['project']['dependencies']))")
