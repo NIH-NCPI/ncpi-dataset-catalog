@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document defines a classification system for collapsing ~425,000 dbGaP phenotype variables into ~6,700 searchable concepts organized in a 4-level hierarchy. The goal is to let researchers find studies by what was measured, without needing to know study-specific variable names. Currently 179K variables (42%) are classified across 2,944 studies.
+This document defines a classification system for collapsing ~425,000 dbGaP phenotype variables into ~6,700 searchable concepts organized in a 4-level hierarchy. The goal is to let researchers find studies by what was measured, without needing to know study-specific variable names. Currently 186K variables (42.5%) are classified across 2,864 studies.
 
 ## Example Queries
 

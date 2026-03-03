@@ -304,9 +304,9 @@ class DuckDBStore:
     ) -> tuple[list[dict], int]:
         """Return variables matching concept names and/or study IDs.
 
-        Searches against concept_ids_closure (JSON array of all ancestor
-        concept_ids) so that querying a parent concept returns variables
-        tagged with any descendant.
+        Searches against concept_ids_closure (native VARCHAR[] of all
+        ancestor concept_ids) so that querying a parent concept returns
+        variables tagged with any descendant.
 
         Args:
             concepts: Canonical concept names to match (OR-ed). If None,
@@ -317,15 +317,16 @@ class DuckDBStore:
                 (case-insensitive).
 
         Returns:
-            Variable dicts with study title joined from the studies table.
+            Tuple of (variable dicts, total count before LIMIT).
         """
+        empty: tuple[list[dict], int] = ([], 0)
         if not concepts and not study_ids:
-            return []
+            return empty
         # Empty set means "filter matched nothing" — no variables can match.
         if study_ids is not None and not study_ids:
-            return []
+            return empty
         if variable_names is not None and not variable_names:
-            return []
+            return empty
         params: list[str] = []
         clauses: list[str] = []
         if concepts:
