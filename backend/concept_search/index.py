@@ -545,15 +545,18 @@ class ConceptIndex:
             Top-K nodes with concept_id, name, description, type,
             similarity, and study_count.
         """
-        from . import embeddings
-
         if self._embedding_matrix is None or len(self._embedding_nodes) == 0:
             return []
 
-        query_vec = embeddings.embed_query(query)
-        hits = embeddings.search_embeddings(
-            query_vec, self._embedding_matrix, top_k=top_k
-        )
+        try:
+            from . import embeddings
+            query_vec = embeddings.embed_query(query)
+            hits = embeddings.search_embeddings(
+                query_vec, self._embedding_matrix, top_k=top_k
+            )
+        except Exception:
+            logger.exception("Embedding search failed — returning empty")
+            return []
 
         results: list[dict] = []
         for idx, sim in hits:
