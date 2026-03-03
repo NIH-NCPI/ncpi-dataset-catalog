@@ -1,5 +1,8 @@
 FROM python:3.13-slim
 
+ARG GIT_SHA=unknown
+ENV GIT_SHA=${GIT_SHA}
+
 WORKDIR /app
 
 # Install dependencies first (layer caching: only re-runs when deps change)

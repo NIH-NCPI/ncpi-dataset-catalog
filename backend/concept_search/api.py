@@ -377,6 +377,7 @@ async def health() -> dict:
     """Return service health and index statistics."""
     index = get_index()
     return {
+        "gitSha": os.environ.get("GIT_SHA", "unknown"),
         "indexStats": index.stats,
         "pipelineCache": pipeline_cache.stats,
         "resolveCache": resolve_cache.stats,

@@ -85,10 +85,16 @@ evals:
 
 # --- Docker deploy ------------------------------------------------------
 
-# Build Docker image
+# Build Docker image (bakes in git SHA for /health endpoint)
 build:
+	@if [ -n "$$(git -C .. status --porcelain -uno)" ]; then \
+		echo "Error: uncommitted changes. Commit or stash before deploying."; \
+		exit 1; \
+	fi
 	@echo "Building Docker image..."
-	docker build --platform linux/amd64 -t $(IMAGE_NAME):$(IMAGE_TAG) -f Dockerfile ..
+	docker build --platform linux/amd64 \
+		--build-arg GIT_SHA=$$(git -C .. rev-parse --short HEAD) \
+		-t $(IMAGE_NAME):$(IMAGE_TAG) -f Dockerfile ..
 
 # Push to dev ECR
 push-dev:
