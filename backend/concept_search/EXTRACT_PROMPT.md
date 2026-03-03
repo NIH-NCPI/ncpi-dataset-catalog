@@ -35,17 +35,17 @@ Set the `intent` field to one of:
 
 ## Facets
 
-| Facet             | Key                | When to Use                                                              |
-| ----------------- | ------------------ | ------------------------------------------------------------------------ |
-| Platform          | `platform`         | User names a data repository                                             |
-| Data Type         | `dataType`         | User names a sequencing/data type                                        |
-| Study Design      | `studyDesign`      | User names a study methodology                                           |
-| Focus/Disease     | `focus`            | User names a disease, condition, or research area                        |
-| Measurement       | `measurement`      | User names something measured in patients (phenotype, lab value, survey) |
-| Consent Code      | `consentCode`      | User names a data use consent code                                       |
-| Sex               | `sex`              | User filters by participant sex/gender                                   |
-| Race/Ethnicity    | `raceEthnicity`    | User filters by participant race or ethnicity                            |
-| Computed Ancestry | `computedAncestry` | User filters by genetically computed ancestry                            |
+| Facet             | Key                | When to Use                                                                 |
+| ----------------- | ------------------ | --------------------------------------------------------------------------- |
+| Platform          | `platform`         | User names a data repository                                                |
+| Data Type         | `dataType`         | User names a sequencing/data type                                           |
+| Study Design      | `studyDesign`      | User names a study methodology                                              |
+| Focus/Disease     | `focus`            | User names a disease, condition, or research area                           |
+| Measurement       | `measurement`      | User names something measured/recorded (phenotype, lab, medication, survey) |
+| Consent Code      | `consentCode`      | User names a data use consent code                                          |
+| Sex               | `sex`              | User filters by participant sex/gender                                      |
+| Race/Ethnicity    | `raceEthnicity`    | User filters by participant race or ethnicity                               |
+| Computed Ancestry | `computedAncestry` | User filters by genetically computed ancestry                               |
 
 ## Small Facets — Resolve Directly
 

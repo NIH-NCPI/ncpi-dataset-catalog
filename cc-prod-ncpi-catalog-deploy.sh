@@ -2,6 +2,12 @@
 # Set the script to exit immediately on error
 set -e
 
+# Preflight: ensure s5cmd is available
+if ! command -v s5cmd >/dev/null 2>&1; then
+  echo "Error: s5cmd is not installed. Install with: brew install peak/tap/s5cmd" >&2
+  exit 1
+fi
+
 echo \"Deleting ./out/\"
 rm -rf ./out
 
