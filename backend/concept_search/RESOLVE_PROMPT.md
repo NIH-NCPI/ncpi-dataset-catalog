@@ -40,18 +40,14 @@ Call `search_concepts_by_embedding(query=<mention text>)` to get the top-10 sema
 
 **Your first tool call for any measurement mention MUST be `search_concepts_by_embedding`.**
 
-### Step 2: Pick the best match
+### Step 2: Pick the best match and return immediately
 
-Read the returned names, descriptions, types, and similarity scores.
+Read the returned names, descriptions, types, and similarity scores. **In most cases you can return directly from these results without any further tool calls.**
 
-- **Archetype match** (`type: "archetype"`): Return it directly — archetypes are leaf nodes representing a specific measurement.
-- **Base concept match** (`type: "concept"`): Consider whether to return it or drill deeper with `get_concept_children` to find a more specific sub-concept.
-- **Prefer the most specific concept** that accurately covers the mention.
-- If the user's term is broad (e.g. "blood pressure"), include related concepts (both systolic and diastolic).
-
-### Step 3: Verify specificity (when needed)
-
-If you picked a base concept (not an archetype), call `get_concept_children(concept_id)` to check if a child is a better match. If a child matches more specifically, return the child instead.
+- **Archetype match** (`type: "archetype"`): Return it directly — archetypes are leaf nodes.
+- **Specific concept match** (similarity > 0.85): Return it directly — no need to drill down.
+- If the user's term is broad (e.g. "blood pressure"), include multiple related concepts from the results (both systolic and diastolic).
+- **Only call `get_concept_children`** if the best match is a broad top-level category (e.g. `ncpi:biomarkers`) and you need to find a more specific child. This should be rare — the embedding results usually include specific concepts already.
 
 ### Fallback
 

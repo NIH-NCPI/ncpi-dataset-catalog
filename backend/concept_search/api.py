@@ -76,6 +76,9 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     get_index()
     elapsed = time.monotonic() - t0
     _log_json(event="index_loaded", elapsed_s=round(elapsed, 1))
+    # Eagerly load the embedding model so the first request isn't slow
+    from .embeddings import get_model
+    get_model()
     cleanup_task = asyncio.create_task(_cleanup_rate_limiter())
     try:
         yield
