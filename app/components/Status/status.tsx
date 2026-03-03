@@ -45,6 +45,12 @@ const CenterBox = styled.div`
   padding: 64px 0;
 `;
 
+const StatusContent = styled.div`
+  .MuiTableCell-root:first-of-type {
+    width: 200px;
+  }
+`;
+
 /**
  * Derives the health endpoint URL from the configured AI search URL.
  * @param aiUrl - The AI search URL from site config.
@@ -164,8 +170,10 @@ export const Status = (): JSX.Element => {
       <ContentView
         content={
           <Content>
-            <h1>Status</h1>
-            <Chip color="error" label={state.error} />
+            <StatusContent>
+              <h1>Status</h1>
+              <Chip color="error" label={state.error} />
+            </StatusContent>
           </Content>
         }
       />
@@ -178,68 +186,70 @@ export const Status = (): JSX.Element => {
     <ContentView
       content={
         <Content>
-          <h1>Status</h1>
+          <StatusContent>
+            <h1>Status</h1>
 
-          <h2>Service</h2>
-          <TableContainer>
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Property</TableCell>
-                  <TableCell>Value</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Status</TableCell>
-                  <TableCell>
-                    <Chip
-                      color={data.status === "ok" ? "success" : "error"}
-                      label={data.status}
-                      size="small"
-                    />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Git SHA</TableCell>
-                  <TableCell>
-                    <MuiLink
-                      href={`${GIT_HUB_REPO_URL}/commit/${data.gitSha}`}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {data.gitSha}
-                    </MuiLink>
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
+            <h2>Service</h2>
+            <TableContainer>
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Property</TableCell>
+                    <TableCell>Value</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Status</TableCell>
+                    <TableCell>
+                      <Chip
+                        color={data.status === "ok" ? "success" : "error"}
+                        label={data.status}
+                        size="small"
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Git SHA</TableCell>
+                    <TableCell>
+                      <MuiLink
+                        href={`${GIT_HUB_REPO_URL}/commit/${data.gitSha}`}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {data.gitSha}
+                      </MuiLink>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
 
-          <h2>Index Stats</h2>
-          <TableContainer>
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Facet</TableCell>
-                  <TableCell>Count</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Object.entries(data.indexStats)
-                  .sort(([a], [b]) => a.localeCompare(b))
-                  .map(([key, value]) => (
-                    <TableRow key={key}>
-                      <TableCell>{key}</TableCell>
-                      <TableCell>{value.toLocaleString()}</TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+            <h2>Index Stats</h2>
+            <TableContainer>
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Facet</TableCell>
+                    <TableCell>Count</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {Object.entries(data.indexStats)
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(([key, value]) => (
+                      <TableRow key={key}>
+                        <TableCell>{key}</TableCell>
+                        <TableCell>{value.toLocaleString()}</TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
 
-          <CacheSection cache={data.pipelineCache} title="Pipeline Cache" />
-          <CacheSection cache={data.resolveCache} title="Resolve Cache" />
+            <CacheSection cache={data.pipelineCache} title="Pipeline Cache" />
+            <CacheSection cache={data.resolveCache} title="Resolve Cache" />
+          </StatusContent>
         </Content>
       }
     />
