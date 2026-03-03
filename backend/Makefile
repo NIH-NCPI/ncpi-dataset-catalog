@@ -24,8 +24,12 @@ PROD_ECR_REPO = 701973344956.dkr.ecr.us-east-1.amazonaws.com/5wu-ncpi-dataset-ca
 AWS_REGION = us-east-1
 PID_FILE = .server.pid
 
+# CloudWatch log groups (App Runner pipes stdout here)
+DEV_LOG_GROUP = /aws/apprunner/jso-ncpi-dataset-catalog/59bf88e6efa543319f5c03df62cf0edd/application
+PROD_LOG_GROUP = /aws/apprunner/5wu-ncpi-dataset-catalog/d2f7c9715dbc4d6d9b4c3af33f8eefd3/application
+
 .PHONY: help build push-dev push-prod deploy-dev deploy-prod \
-        start stop restart db-reload evals
+        start stop restart db-reload evals logs-dev logs-prod
 
 # Default target
 help:
@@ -42,6 +46,10 @@ help:
 	@echo "  build       - Build Docker image locally"
 	@echo "  deploy-dev  - Build + push to dev ECR"
 	@echo "  deploy-prod - Build + push to prod ECR"
+	@echo ""
+	@echo "Logs:"
+	@echo "  logs-dev    - Tail dev search logs (Ctrl-C to stop)"
+	@echo "  logs-prod   - Tail prod search logs (Ctrl-C to stop)"
 
 # --- Local development -------------------------------------------------
 
@@ -121,3 +129,17 @@ deploy-dev: build push-dev
 # All-in-one: build + push to prod
 deploy-prod: build push-prod
 	@echo "Deploy to prod complete."
+
+# --- Logs -----------------------------------------------------------------
+
+# Tail dev search logs (Ctrl-C to stop)
+logs-dev:
+	aws logs tail "$(DEV_LOG_GROUP)" \
+		--follow --filter-pattern "search_" \
+		--profile $(DEV_AWS_PROFILE) --region $(AWS_REGION)
+
+# Tail prod search logs (Ctrl-C to stop)
+logs-prod:
+	aws logs tail "$(PROD_LOG_GROUP)" \
+		--follow --filter-pattern "search_" \
+		--profile $(PROD_AWS_PROFILE) --region $(AWS_REGION)
