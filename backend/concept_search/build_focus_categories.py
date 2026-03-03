@@ -1,9 +1,13 @@
-"""Build focus term → MeSH category mapping.
+"""Build focus term → MeSH category mapping and ISA hierarchy.
 
 Looks up each focus term in the MeSH API to get tree numbers,
 then groups by top-level MeSH disease category.
 
-Output: focus_categories.json
+Also computes parent→child ISA edges from MeSH tree numbers so that
+searching a parent focus term (e.g. "Pancreatic Neoplasms") returns
+studies tagged with any descendant term.
+
+Output: focus_categories.json, focus_isa.json
 """
 
 from __future__ import annotations
@@ -80,6 +84,7 @@ TREE_TO_CATEGORY = {
 }
 
 OUTPUT_PATH = Path(__file__).parent / "focus_categories.json"
+ISA_OUTPUT_PATH = Path(__file__).parent / "focus_isa.json"
 
 
 async def lookup_descriptor_uid(
@@ -154,8 +159,46 @@ async def process_term(
         }
 
 
+def _compute_isa_edges(results: list[dict]) -> list[dict]:
+    """Derive parent→child ISA edges from MeSH tree numbers.
+
+    For each focus term with tree numbers, walk up the tree to find
+    the nearest ancestor that is also a catalog focus term.  Handles
+    MeSH polyhierarchy (multiple tree numbers per term).
+
+    Args:
+        results: Output of ``process_term`` — each has ``term`` and ``tree_numbers``.
+
+    Returns:
+        List of ``{"child": ..., "parent": ...}`` edges (same format as concept-isa.json).
+    """
+    # Build reverse map: tree_number → focus term (only for terms in our catalog)
+    tree_to_term: dict[str, str] = {}
+    for r in results:
+        for tn in r["tree_numbers"]:
+            tree_to_term[tn] = r["term"]
+
+    edges: set[tuple[str, str]] = set()
+    for r in results:
+        child_term = r["term"]
+        for tn in r["tree_numbers"]:
+            # Walk up the tree: A.B.C.D → A.B.C → A.B → A
+            parts = tn.split(".")
+            for depth in range(len(parts) - 1, 0, -1):
+                ancestor_tn = ".".join(parts[:depth])
+                ancestor_term = tree_to_term.get(ancestor_tn)
+                if ancestor_term and ancestor_term != child_term:
+                    edges.add((child_term, ancestor_term))
+                    break  # nearest ancestor only
+
+    return sorted(
+        [{"child": c, "parent": p} for c, p in edges],
+        key=lambda e: (e["parent"], e["child"]),
+    )
+
+
 async def build_categories() -> None:
-    """Build the focus category mapping."""
+    """Build the focus category mapping and ISA hierarchy."""
     index = get_index()
     focus_values = index.list_facet_values("focus")
     print(f"Looking up {len(focus_values)} focus terms in MeSH...")
@@ -223,6 +266,12 @@ async def build_categories() -> None:
     print("\nCategories:")
     for key, terms in sorted(output["categories"].items()):
         print(f"  {key}: {len(terms)} terms")
+
+    # Build and write ISA edges from MeSH tree numbers
+    isa_edges = _compute_isa_edges(results)
+    ISA_OUTPUT_PATH.write_text(json.dumps(isa_edges, indent=2))
+    print(f"\nWrote {ISA_OUTPUT_PATH}")
+    print(f"  {len(isa_edges)} ISA edges")
 
 
 def main() -> None:

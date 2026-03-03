@@ -11,6 +11,8 @@ Your strategy depends on the facet.
 
 ## Focus Facet — Category Drill-Down
 
+Focus terms have **MeSH ISA closure**: returning a parent term automatically includes all studies tagged with any descendant term. For example, returning "Lung Neoplasms" also captures studies tagged "Adenocarcinoma of Lung", "Carcinoma, Non-Small-Cell Lung", etc. **Do NOT enumerate subtypes — return only the single best parent term.**
+
 For **focus** mentions, use the `get_focus_category_terms` tool:
 
 1. Read the mention text and identify which MeSH category it belongs to from this list:
@@ -22,10 +24,12 @@ Cardiovascular Diseases, Congenital and Hereditary Diseases, Digestive System Di
 Biological Phenomena, Chemically-Induced Disorders, Environment and Public Health, Genetics, Health Care, Health Occupations, Medical Techniques, Mental and Behavioral, Organisms, Populations, Population Characteristics, Social Sciences, Other
 
 2. Call `get_focus_category_terms(category=<category name>)` to see all terms in that category.
-3. Pick the best matching term(s) from the returned list. Match the user's intent:
-   - "cancer" → "Neoplasms" (top-level term)
-   - "breast cancer" → "Breast Neoplasms" (specific term)
-   - "heart disease" → "Cardiovascular Diseases" or "Heart Diseases" (pick the broader one if the user is general)
+3. Pick the **single best matching term** from the returned list. ISA closure handles subtypes automatically:
+   - "cancer" → "Neoplasms" (top-level — includes all cancer subtypes)
+   - "breast cancer" → "Breast Neoplasms" (includes subtypes like "Triple Negative Breast Neoplasms")
+   - "lung cancer" → "Lung Neoplasms" (includes Adenocarcinoma of Lung, Non-Small-Cell, Small Cell, etc.)
+   - "pancreatic cancer" → "Pancreatic Neoplasms" (includes Carcinoma Pancreatic Ductal, etc.)
+   - "heart disease" → "Heart Diseases" (broader terms like "Cardiovascular Diseases" are also valid if the user is very general)
    - "ALS" → "Amyotrophic Lateral Sclerosis"
 4. If the first category doesn't have a good match, try a second category.
 5. If no category matches, fall back to `search_concepts(query=<text>, facet="focus")`.
