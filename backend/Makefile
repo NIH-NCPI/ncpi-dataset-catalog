@@ -87,10 +87,11 @@ db-reload: stop
 	@.venv/bin/python -c "from concept_search.index import get_index; idx = get_index(); print(f'Index rebuilt: {idx.store.study_count} studies')"
 	@$(MAKE) start
 
-# Run extract + resolve agent evals
+# Run extract, resolve, and end-to-end pipeline evals
 evals:
 	.venv/bin/python -m concept_search.eval_extract
 	.venv/bin/python -m concept_search.eval_resolve
+	.venv/bin/python -m concept_search.eval_pipeline
 
 # --- Docker deploy ------------------------------------------------------
 
