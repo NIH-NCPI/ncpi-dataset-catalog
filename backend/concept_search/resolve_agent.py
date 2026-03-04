@@ -337,9 +337,13 @@ def _dedup_focus_values(values: list[str], index: ConceptIndex) -> list[str]:
     to_remove: set[str] = set()
     for v in values:
         # Walk down the ISA tree to collect all descendants
+        visited: set[str] = set()
         stack = list(isa_children.get(v, []))
         while stack:
             child = stack.pop()
+            if child in visited:
+                continue
+            visited.add(child)
             if child in value_set:
                 to_remove.add(child)
             stack.extend(isa_children.get(child, []))
