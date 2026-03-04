@@ -367,3 +367,574 @@ class TestResolveDiseaseName:
         # Should prefer "Cardiovascular Disease" (CVD) over longer names
         assert resolve_disease_name("cardiovascular") == "CVD"
 
+
+# ---------------------------------------------------------------------------
+# Extended fixture — larger realistic code list with mixed modifiers
+# ---------------------------------------------------------------------------
+
+EXTENDED_CODES = [
+    # GRU family
+    "GRU",
+    "GRU-IRB",
+    "GRU-NPU",
+    "GRU-IRB-NPU",
+    "GRU-IRB-PUB",
+    "GRU-PUB",
+    "GRU-COL",
+    # HMB family
+    "HMB",
+    "HMB-IRB",
+    "HMB-NPU",
+    "HMB-IRB-NPU",
+    "HMB-PUB",
+    "HMB-MDS",
+    "HMB-GSO",
+    "HMB-COL-NPU-GSO",
+    # HMP and HR
+    "HMP",
+    "HR",
+    # Disease-specific: cancer hierarchy
+    "DS-CA",
+    "DS-CA-IRB",
+    "DS-CA-NPU",
+    "DS-CA-MDS",
+    "DS-CA-IRB-NPU-GSO",
+    "DS-BRCA",
+    "DS-BRCA-MDS",
+    "DS-BRCA-NPU-MDS",
+    "DS-OVCA",
+    "DS-OVCA-NPU",
+    "DS-LC",
+    "DS-LC-NPU",
+    "DS-PC",
+    "DS-PC-MDS",
+    # Disease-specific: CVD hierarchy
+    "DS-CVD",
+    "DS-CVD-IRB",
+    "DS-CVD-NPU",
+    "DS-CVD-IRB-NPU-MDS",
+    "DS-AF-IRB-RD",
+    "DS-CHD",
+    "DS-STK-IRB-RD",
+    # Disease-specific: diabetes hierarchy
+    "DS-DIAB",
+    "DS-DIAB-IRB",
+    "DS-DIAB-NPU",
+    "DS-T1D",
+    "DS-T2D",
+    "DS-T2D-IRB-RD",
+    "DS-T1DR-IRB-RD",
+    "DS-IR",
+    "DS-IR-IRB",
+    # Disease-specific: other diseases (no hierarchy)
+    "DS-ASTHMA",
+    "DS-ASTHMA-IRB-COL",
+    "DS-COPD",
+    "DS-COPD-NPU",
+    "DS-SCD",
+    "DS-HIV-IRB",
+    # Other base codes
+    "NPU",
+    "CADM",
+    "IRU",
+]
+
+
+# ---------------------------------------------------------------------------
+# For-profit vs non-profit (NPU filtering)
+# ---------------------------------------------------------------------------
+
+
+class TestForProfitNonProfit:
+    """NPU modifier handling: for-profit orgs cannot use NPU-modified codes.
+
+    GA4GH DUO principle: profit status and base code eligibility are
+    independent axes.  The base code (GRU/HMB/DS) controls *what kind*
+    of research is permitted.  The NPU modifier controls *who* can access
+    the data.  A for-profit company can use HMB and DS data — the only
+    effect of is_nonprofit=False is excluding codes with the -NPU modifier.
+    """
+
+    def test_for_profit_pharma_cancer_research(self):
+        """GA4GH: a for-profit pharma company doing cancer research gets
+        GRU + HMB + HMP + HR + DS-CA (all minus -NPU variants).
+
+        Profit status only filters NPU — it does NOT restrict base codes.
+        """
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="CA", is_nonprofit=False
+        )
+        bases = {parse_consent_code(c).base for c in result}
+        # For-profit still gets all three base code families
+        assert "GRU" in bases, "For-profit can use GRU data"
+        assert "HMB" in bases, "For-profit can use HMB data (it's health research)"
+        assert "DS" in bases, "For-profit can use DS-CA data (disease matches)"
+        assert "HMP" in bases, "For-profit can use HMP data"
+        # Specific inclusions
+        assert "GRU" in result
+        assert "GRU-IRB" in result
+        assert "HMB" in result
+        assert "HMB-IRB" in result
+        assert "DS-CA" in result
+        assert "DS-CA-IRB" in result
+        assert "DS-BRCA" in result
+        # NPU variants excluded
+        assert "GRU-NPU" not in result
+        assert "HMB-NPU" not in result
+        assert "DS-CA-NPU" not in result
+        assert "DS-BRCA-NPU-MDS" not in result
+
+    def test_for_profit_vs_nonprofit_same_bases(self):
+        """For-profit and non-profit get the same base code families;
+        the only difference is NPU-modified codes are excluded for for-profit."""
+        for_profit = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="CA", is_nonprofit=False
+        )
+        nonprofit = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="CA", is_nonprofit=True
+        )
+        fp_bases = {parse_consent_code(c).base for c in for_profit}
+        np_bases = {parse_consent_code(c).base for c in nonprofit}
+        assert fp_bases == np_bases, (
+            f"Same base codes for both; only NPU variants differ. "
+            f"for-profit bases={fp_bases}, nonprofit bases={np_bases}"
+        )
+        # Non-profit has strictly more codes (the NPU variants)
+        assert set(for_profit).issubset(set(nonprofit))
+        assert len(nonprofit) > len(for_profit)
+
+    def test_for_profit_general_excludes_npu(self):
+        """For-profit + general purpose: GRU codes only, no -NPU variants."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="general", is_nonprofit=False
+        )
+        for code in result:
+            parsed = parse_consent_code(code)
+            assert "NPU" not in parsed.modifiers, f"NPU code {code} should be excluded for-profit"
+            assert parsed.base == "GRU", f"Only GRU expected for general purpose, got {code}"
+        assert "GRU" in result
+        assert "GRU-IRB" in result
+        assert "GRU-NPU" not in result
+        assert "GRU-IRB-NPU" not in result
+
+    def test_for_profit_health_excludes_npu(self):
+        """For-profit + health purpose: GRU + HMB families, no -NPU variants."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="health", is_nonprofit=False
+        )
+        for code in result:
+            parsed = parse_consent_code(code)
+            assert "NPU" not in parsed.modifiers, f"NPU code {code} excluded for-profit"
+        assert "GRU" in result
+        assert "HMB" in result
+        assert "HMB-IRB" in result
+        assert "GRU-NPU" not in result
+        assert "HMB-NPU" not in result
+        assert "HMB-IRB-NPU" not in result
+        assert "HMB-COL-NPU-GSO" not in result
+
+    def test_for_profit_disease_excludes_npu(self):
+        """For-profit + disease purpose: matching DS codes minus NPU variants."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="CA", is_nonprofit=False
+        )
+        for code in result:
+            parsed = parse_consent_code(code)
+            assert "NPU" not in parsed.modifiers, f"NPU code {code} excluded for-profit"
+        assert "DS-CA" in result
+        assert "DS-CA-IRB" in result
+        assert "DS-CA-NPU" not in result
+        assert "DS-CA-IRB-NPU-GSO" not in result
+        assert "DS-BRCA" in result
+        assert "DS-BRCA-NPU-MDS" not in result
+        assert "DS-OVCA-NPU" not in result
+        assert "DS-LC-NPU" not in result
+
+    def test_nonprofit_true_includes_npu(self):
+        """Non-profit (is_nonprofit=True) includes NPU codes."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="health", is_nonprofit=True
+        )
+        assert "GRU-NPU" in result
+        assert "HMB-NPU" in result
+        assert "HMB-IRB-NPU" in result
+
+    def test_nonprofit_none_includes_npu(self):
+        """Default (is_nonprofit=None) includes NPU codes."""
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="health")
+        assert "GRU-NPU" in result
+        assert "HMB-NPU" in result
+
+    def test_for_profit_explicit_code_excludes_npu(self):
+        """Explicit code path + for-profit still filters NPU."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, explicit_code="HMB", is_nonprofit=False
+        )
+        assert "HMB" in result
+        assert "HMB-IRB" in result
+        assert "HMB-PUB" in result
+        assert "HMB-NPU" not in result
+        assert "HMB-IRB-NPU" not in result
+        assert "HMB-COL-NPU-GSO" not in result
+
+
+# ---------------------------------------------------------------------------
+# GRU vs HMB hierarchy — general vs health/medical/biomedical
+# ---------------------------------------------------------------------------
+
+
+class TestGruHmbHierarchy:
+    """GRU (broadest) ⊇ HMB (health) ⊇ DS (disease-specific)."""
+
+    def test_general_is_gru_only(self):
+        """General research: only GRU codes are eligible (broadest consent)."""
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="general")
+        bases = {parse_consent_code(c).base for c in result}
+        assert bases == {"GRU"}
+
+    def test_health_adds_hmb_hmp_hr(self):
+        """Health research: GRU + HMB + HMP + HR, but not DS."""
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="health")
+        bases = {parse_consent_code(c).base for c in result}
+        assert "GRU" in bases
+        assert "HMB" in bases
+        assert "HMP" in bases
+        assert "HR" in bases
+        assert "DS" not in bases
+
+    def test_disease_adds_matching_ds(self):
+        """Disease research: GRU + HMB + HMP + HR + matching DS codes."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="DIAB"
+        )
+        bases = {parse_consent_code(c).base for c in result}
+        assert "GRU" in bases
+        assert "HMB" in bases
+        assert "DS" in bases
+        # Verify non-matching DS excluded
+        assert "DS-CA" not in result
+        assert "DS-CVD" not in result
+        assert "DS-ASTHMA" not in result
+
+    def test_general_subset_of_health(self):
+        """Every general-eligible code is also health-eligible."""
+        general = set(compute_eligible_codes(EXTENDED_CODES, purpose="general"))
+        health = set(compute_eligible_codes(EXTENDED_CODES, purpose="health"))
+        assert general.issubset(health), f"general not ⊆ health: {general - health}"
+
+    def test_health_subset_of_disease(self):
+        """Every health-eligible code is also disease-eligible (with a disease)."""
+        health = set(compute_eligible_codes(EXTENDED_CODES, purpose="health"))
+        disease = set(
+            compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="DIAB")
+        )
+        assert health.issubset(disease), f"health not ⊆ disease: {health - disease}"
+
+    def test_cadm_iru_never_eligible(self):
+        """CADM, IRU, standalone NPU are not primary consent → never eligible."""
+        for purpose in ("general", "health", "disease"):
+            kwargs = {"purpose": purpose}
+            if purpose == "disease":
+                kwargs["disease"] = "CA"
+            result = compute_eligible_codes(EXTENDED_CODES, **kwargs)
+            bases = {parse_consent_code(c).base for c in result}
+            assert "CADM" not in bases, f"CADM should not be eligible for {purpose}"
+            assert "IRU" not in bases, f"IRU should not be eligible for {purpose}"
+            # Standalone "NPU" (as base, not modifier) isn't a consent grant
+            assert "NPU" not in bases, f"NPU as base should not be eligible for {purpose}"
+
+
+# ---------------------------------------------------------------------------
+# Disease-specific codes — hierarchy expansion
+# ---------------------------------------------------------------------------
+
+
+class TestDiseaseHierarchy:
+    """DS codes and bidirectional disease hierarchy matching."""
+
+    def test_cancer_parent_matches_all_subcancers(self):
+        """Searching disease=CA includes DS-BRCA, DS-OVCA, DS-LC, DS-PC, etc."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="CA"
+        )
+        ds_codes = [c for c in result if c.startswith("DS-")]
+        ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
+        assert "CA" in ds_diseases
+        assert "BRCA" in ds_diseases
+        assert "OVCA" in ds_diseases
+        assert "LC" in ds_diseases
+        assert "PC" in ds_diseases
+        # Non-cancer DS codes excluded
+        assert "CVD" not in ds_diseases
+        assert "DIAB" not in ds_diseases
+
+    def test_subcancer_matches_parent(self):
+        """Searching disease=BRCA matches DS-BRCA and DS-CA (BRCA ∈ CA children)."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="BRCA"
+        )
+        ds_codes = [c for c in result if c.startswith("DS-")]
+        ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
+        assert "BRCA" in ds_diseases, "Direct match"
+        assert "CA" in ds_diseases, "Parent match (BRCA is child of CA)"
+        # Other cancer children should NOT match
+        assert "OVCA" not in ds_diseases
+        assert "LC" not in ds_diseases
+
+    def test_cvd_hierarchy(self):
+        """CVD parent matches AF, CHD, STK (those present in fixture)."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="CVD"
+        )
+        ds_codes = [c for c in result if c.startswith("DS-")]
+        ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
+        assert "CVD" in ds_diseases
+        assert "AF" in ds_diseases  # DS-AF-IRB-RD
+        assert "CHD" in ds_diseases  # DS-CHD
+        assert "STK" in ds_diseases  # DS-STK-IRB-RD
+
+    def test_diabetes_child_t1d_matches_parent(self):
+        """T1D (leaf) matches DS-T1D and DS-DIAB (parent)."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="T1D"
+        )
+        ds_codes = [c for c in result if c.startswith("DS-")]
+        ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
+        assert "T1D" in ds_diseases
+        assert "DIAB" in ds_diseases
+        # Other diabetes children NOT matched (T1D doesn't expand to T2D)
+        assert "T2D" not in ds_diseases
+
+    def test_diabetes_parent_matches_children_in_fixture(self):
+        """DIAB matches DS-DIAB, DS-T1D, DS-T2D, DS-T1DR, DS-IR (those in fixture)."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="DIAB"
+        )
+        ds_codes = [c for c in result if c.startswith("DS-")]
+        ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
+        assert "DIAB" in ds_diseases
+        assert "T1D" in ds_diseases
+        assert "T2D" in ds_diseases
+        assert "T1DR" in ds_diseases
+        assert "IR" in ds_diseases
+
+    def test_unrelated_diseases_excluded(self):
+        """Diabetes search excludes cancer and CVD."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="DIAB"
+        )
+        ds_codes = [c for c in result if c.startswith("DS-")]
+        ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
+        assert "CA" not in ds_diseases
+        assert "BRCA" not in ds_diseases
+        assert "CVD" not in ds_diseases
+        assert "ASTHMA" not in ds_diseases
+        assert "COPD" not in ds_diseases
+
+    def test_no_hierarchy_disease(self):
+        """Diseases with no hierarchy match only themselves."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="ASTHMA"
+        )
+        ds_codes = [c for c in result if c.startswith("DS-")]
+        ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
+        assert ds_diseases == {"ASTHMA"}
+
+
+# ---------------------------------------------------------------------------
+# IRB modifier handling
+# ---------------------------------------------------------------------------
+
+
+class TestIrbModifier:
+    """IRB is a requirement (requestor needs IRB approval), not a restriction.
+    IRB-modified codes should always be included when the base code is eligible."""
+
+    def test_irb_codes_included_general(self):
+        """GRU-IRB is eligible for general purpose (IRB is a requirement, not restriction)."""
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="general")
+        assert "GRU-IRB" in result
+        assert "GRU-IRB-PUB" in result
+
+    def test_irb_codes_included_health(self):
+        """HMB-IRB is eligible for health purpose."""
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="health")
+        assert "HMB-IRB" in result
+        assert "GRU-IRB" in result
+
+    def test_irb_codes_included_disease(self):
+        """DS-*-IRB codes are eligible when disease matches."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="CVD"
+        )
+        assert "DS-CVD-IRB" in result
+        assert "DS-CVD-IRB-NPU-MDS" in result
+        assert "DS-AF-IRB-RD" in result
+        assert "DS-STK-IRB-RD" in result
+
+    def test_irb_not_a_filter(self):
+        """IRB does not reduce the eligible set — codes with and without IRB appear."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="DIAB"
+        )
+        # Both plain and IRB variants
+        assert "DS-DIAB" in result
+        assert "DS-DIAB-IRB" in result
+        assert "DS-T2D" in result
+        assert "DS-T2D-IRB-RD" in result
+        assert "DS-IR" in result
+        assert "DS-IR-IRB" in result
+
+    def test_irb_npu_combined(self):
+        """Codes with both IRB and NPU: for-profit excludes them (NPU filter applies)."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="health", is_nonprofit=False
+        )
+        assert "HMB-IRB" in result  # IRB only — included
+        assert "HMB-IRB-NPU" not in result  # IRB + NPU — excluded (NPU)
+        assert "GRU-IRB-NPU" not in result  # IRB + NPU — excluded (NPU)
+
+    def test_irb_npu_combined_nonprofit(self):
+        """Non-profit org: codes with both IRB and NPU are included."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="health", is_nonprofit=True
+        )
+        assert "HMB-IRB-NPU" in result
+        assert "GRU-IRB-NPU" in result
+
+
+# ---------------------------------------------------------------------------
+# disease_only flag
+# ---------------------------------------------------------------------------
+
+
+class TestDiseaseOnlyFlag:
+    """disease_only=True restricts results to DS-* codes only."""
+
+    def test_disease_only_returns_only_ds(self):
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="CA", disease_only=True
+        )
+        for code in result:
+            assert code.startswith("DS-"), f"Expected DS-* only, got {code}"
+        assert len(result) > 0
+
+    def test_disease_only_excludes_gru_hmb(self):
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="CA", disease_only=True
+        )
+        assert "GRU" not in result
+        assert "HMB" not in result
+        assert "HMP" not in result
+        assert "HR" not in result
+
+    def test_disease_only_still_matches_hierarchy(self):
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="CA", disease_only=True
+        )
+        ds_diseases = {parse_consent_code(c).disease for c in result}
+        assert "CA" in ds_diseases
+        assert "BRCA" in ds_diseases
+        assert "OVCA" in ds_diseases
+
+    def test_disease_only_with_for_profit(self):
+        """disease_only + for-profit: DS-* only, minus NPU."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES,
+            purpose="disease",
+            disease="CA",
+            disease_only=True,
+            is_nonprofit=False,
+        )
+        for code in result:
+            assert code.startswith("DS-")
+            parsed = parse_consent_code(code)
+            assert "NPU" not in parsed.modifiers
+        assert "DS-CA" in result
+        assert "DS-CA-IRB" in result
+        assert "DS-CA-NPU" not in result
+        assert "DS-BRCA" in result
+        assert "DS-BRCA-NPU-MDS" not in result
+
+    def test_disease_only_without_disease_returns_empty_ds(self):
+        """disease_only=True with purpose='health' (no disease) → no DS codes match."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="health", disease_only=True
+        )
+        # disease_only filters to DS-* only, but purpose='health' without a disease
+        # won't match any DS codes (DS requires disease overlap)
+        assert result == []
+
+
+# ---------------------------------------------------------------------------
+# Edge cases and combined scenarios
+# ---------------------------------------------------------------------------
+
+
+class TestEdgeCases:
+    """Edge cases: empty input, unknown diseases, combined modifiers."""
+
+    def test_empty_code_list(self):
+        assert compute_eligible_codes([], purpose="general") == []
+        assert compute_eligible_codes([], purpose="health") == []
+        assert compute_eligible_codes([], purpose="disease", disease="CA") == []
+        assert compute_eligible_codes([], explicit_code="GRU") == []
+
+    def test_unknown_disease_no_hierarchy_match(self):
+        """Unknown disease (not in hierarchy) matches only exact DS-code."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="SCD"
+        )
+        ds_codes = [c for c in result if c.startswith("DS-")]
+        # SCD is not in any hierarchy, so only DS-SCD matches
+        ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
+        assert "SCD" in ds_diseases
+        assert len(ds_diseases) == 1
+
+    def test_disease_purpose_without_disease_returns_no_ds(self):
+        """purpose='disease' without a disease arg → GRU + HMB but no DS."""
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease")
+        bases = {parse_consent_code(c).base for c in result}
+        assert "GRU" in bases
+        assert "HMB" in bases
+        assert "DS" not in bases
+
+    def test_results_always_sorted(self):
+        """All paths produce sorted output."""
+        for purpose in ("general", "health", "disease"):
+            kwargs = {"purpose": purpose}
+            if purpose == "disease":
+                kwargs["disease"] = "CVD"
+            result = compute_eligible_codes(EXTENDED_CODES, **kwargs)
+            assert result == sorted(result), f"Not sorted for purpose={purpose}"
+
+    def test_multi_modifier_codes_preserved(self):
+        """Codes with many modifiers (IRB-NPU-MDS) are correctly handled."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="CVD"
+        )
+        assert "DS-CVD-IRB-NPU-MDS" in result
+
+    def test_multi_modifier_codes_npu_filtered(self):
+        """Multi-modifier with NPU excluded for for-profit."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, purpose="disease", disease="CVD", is_nonprofit=False
+        )
+        assert "DS-CVD-IRB-NPU-MDS" not in result
+        assert "DS-CVD-IRB" in result
+
+    def test_gso_modifier_not_a_filter(self):
+        """GSO (Genetic Studies Only) is a modifier, not a filter."""
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="health")
+        assert "HMB-GSO" in result
+        assert "HMB-COL-NPU-GSO" in result
+
+    def test_explicit_code_ignores_purpose(self):
+        """Explicit code path does not consider purpose at all."""
+        result = compute_eligible_codes(
+            EXTENDED_CODES, explicit_code="HMB", purpose="general"
+        )
+        # Even though purpose=general normally excludes HMB, explicit path ignores it
+        assert "HMB" in result
+        assert "HMB-IRB" in result
+
