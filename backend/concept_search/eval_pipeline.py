@@ -57,7 +57,7 @@ def _get_study_values(study: dict, field: str) -> set[str]:
         vals = {v.lower() for v in raw}
     else:
         vals = {str(raw).lower()}
-    # For consent codes, also include the base code (e.g. "GRU" from "GRU-IRB").
+    # For consent codes, also include the base code (e.g. "gru" from "gru-irb").
     if field == "consentCode":
         vals |= {v.split("-")[0] for v in vals}
     return vals
