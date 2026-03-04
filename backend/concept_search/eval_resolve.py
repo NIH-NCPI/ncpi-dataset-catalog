@@ -202,10 +202,10 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="rewrite-heart-disease",
             inputs=_mention("heart disease", Facet.FOCUS),
-            # With category drill-down, agent sees full list and picks
-            # both broad and specific heart disease terms.
+            # ISA closure means "Heart Diseases" already includes all
+            # subtypes; no need to also return "Cardiovascular Diseases".
             expected_output=ResolveResult(
-                values=["Cardiovascular Diseases", "Heart Diseases"]
+                values=["Heart Diseases"]
             ),
         ),
         # --- Focus/disease via category drill-down ---
@@ -222,15 +222,19 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="focus-lung-cancer",
             inputs=_mention("lung cancer", Facet.FOCUS),
-            # Focus has no ISA closure — subtypes must be explicit or
-            # studies tagged only with subtypes are missed (44 of 77).
+            # ISA closure expands "Lung Neoplasms" to include subtypes
+            # (Adenocarcinoma of Lung, Carcinoma Non-Small-Cell Lung, etc.)
             expected_output=ResolveResult(
-                values=[
-                    "Adenocarcinoma of Lung",
-                    "Carcinoma, Non-Small-Cell Lung",
-                    "Lung Neoplasms",
-                    "Small Cell Lung Carcinoma",
-                ]
+                values=["Lung Neoplasms"]
+            ),
+        ),
+        Case(
+            name="focus-pancreatic-cancer",
+            inputs=_mention("pancreatic cancer", Facet.FOCUS),
+            # ISA closure: "Pancreatic Neoplasms" includes descendants
+            # like "Carcinoma, Pancreatic Ductal".
+            expected_output=ResolveResult(
+                values=["Pancreatic Neoplasms"]
             ),
         ),
         Case(

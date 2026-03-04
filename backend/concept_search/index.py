@@ -206,6 +206,11 @@ def _resolve_isa_path() -> Path:
     )
 
 
+def _resolve_focus_isa_path() -> Path:
+    """Resolve the path to focus_isa.json (bundled with this package)."""
+    return Path(__file__).parent / "focus_isa.json"
+
+
 def _load_concept_descriptions() -> dict[str, dict]:
     """Load concept names and descriptions from all vocabulary sources.
 
@@ -277,15 +282,22 @@ def _load_concept_descriptions() -> dict[str, dict]:
     return descriptions
 
 
-def _load_isa_table() -> tuple[dict[str, list[str]], dict[str, list[str]]]:
+def _load_isa_table(
+    path: Path | None = None,
+) -> tuple[dict[str, list[str]], dict[str, list[str]]]:
     """Load ISA (is-a) child→parent relationships.
+
+    Args:
+        path: Path to a ``[{child, parent}]`` JSON file.  Falls back
+            to the concept-isa.json resolved via ``_resolve_isa_path()``.
 
     Returns:
         Tuple of:
         - parents: child concept_id → list of parent concept_ids
         - children: parent concept_id → list of child concept_ids
     """
-    path = _resolve_isa_path()
+    if path is None:
+        path = _resolve_isa_path()
     if not path.exists():
         return {}, {}
     with open(path) as f:
@@ -342,6 +354,7 @@ class ConceptIndex:
         self._concept_descriptions: dict[str, dict] = {}
         self._focus_categories: dict[str, list[dict]] = {}
         self._isa_children: dict[str, list[str]] = {}
+        self._focus_isa_children: dict[str, list[str]] = {}
         # Embedding search data (populated during build or cache load)
         self._embedding_nodes: list[dict] = []
         self._embedding_matrix: np.ndarray | None = None
@@ -362,6 +375,9 @@ class ConceptIndex:
                 self._rebuild_index_from_store()
                 # Load ISA children for drill-down (not stored in DuckDB)
                 _, self._isa_children = _load_isa_table()
+                _, self._focus_isa_children = _load_isa_table(
+                    _resolve_focus_isa_path()
+                )
             else:
                 self._load_from_json()
                 # Save cache for next startup
@@ -645,6 +661,9 @@ class ConceptIndex:
     ) -> None:
         """Load study metadata and extract facet values.
 
+        Expands focus terms using MeSH ISA hierarchy so that searching
+        a parent term also returns studies tagged with descendant terms.
+
         Args:
             studies_path: Path to ``ncpi-platform-studies.json``.
             demographics: Optional dbGapId → lean demographics dict to merge
@@ -656,6 +675,12 @@ class ConceptIndex:
             studies_raw = json.load(f)
 
         demographics = demographics or {}
+
+        # Load focus ISA hierarchy for ancestor expansion
+        focus_isa_path = _resolve_focus_isa_path()
+        focus_isa_parents, self._focus_isa_children = _load_isa_table(
+            focus_isa_path
+        )
 
         # Count occurrences per facet value
         facet_counts: dict[Facet, Counter[str]] = {f: Counter() for f in Facet}
@@ -669,6 +694,9 @@ class ConceptIndex:
         is_duckdb = isinstance(self.store, DuckDBStore)
         study_rows: list[tuple[str, dict]] = []
         facet_rows: list[tuple[str, str, str, str]] = []
+        # Track (dbgap_id, ancestor) pairs to avoid double-counting when
+        # multiple focus terms in the same study share a common ancestor.
+        seen_focus_ancestors: set[tuple[str, str]] = set()
         for study in studies_raw.values():
             dbgap_id = study.get("dbGapId", "")
             # Merge demographics into study dict before storage
@@ -687,6 +715,20 @@ class ConceptIndex:
                         facet_counts[facet][v] += 1
                         if is_duckdb:
                             facet_rows.append((dbgap_id, facet.value, v, v.lower()))
+                        # Expand focus terms with ISA ancestors
+                        if facet == Facet.FOCUS and focus_isa_parents:
+                            ancestors = _compute_closure(v, focus_isa_parents)
+                            for anc in ancestors:
+                                if anc != v:
+                                    key = (dbgap_id, anc)
+                                    if key in seen_focus_ancestors:
+                                        continue
+                                    seen_focus_ancestors.add(key)
+                                    facet_counts[facet][anc] += 1
+                                    if is_duckdb:
+                                        facet_rows.append(
+                                            (dbgap_id, facet.value, anc, anc.lower())
+                                        )
         if is_duckdb:
             self.store.load_studies_batch(study_rows)
             self.store.load_facet_values_batch(facet_rows)
