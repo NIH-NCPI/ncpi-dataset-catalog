@@ -12,7 +12,7 @@ from pydantic_ai.settings import ModelSettings
 from .cache import LRUCache
 from .consent_logic import compute_eligible_codes, resolve_disease_name
 from .index import ConceptIndex
-from .models import ConceptMatch, RawMention, ResolveResult
+from .models import ConceptMatch, Facet, RawMention, ResolveResult
 
 _PROMPT_PATH = Path(__file__).parent / "RESOLVE_PROMPT.md"
 _DEFAULT_MODEL = "anthropic:claude-haiku-4-5-20251001"
@@ -60,7 +60,7 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 """Search the concept index for matching values.
 
                 Use this for measurement and consentCode facets. For focus
-                facets, prefer get_focus_category_terms instead.
+                facets, prefer search_concepts_by_embedding with facet="focus".
 
                 Args:
                     ctx: Run context with ConceptIndex dependency.
@@ -236,18 +236,51 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 return ctx.deps.get_measurement_category_concepts(keyword)
 
             @_agent.tool
+            def search_concepts_by_embedding(
+                ctx: RunContext[ConceptIndex],
+                query: str,
+                top_k: int = 10,
+                facet: str = "measurement",
+            ) -> list[dict]:
+                """Search concept/archetype/focus nodes by semantic similarity.
+
+                Uses embedding KNN to find the most semantically similar
+                concepts. Works well for lay terms ("blood sugar" → glucose),
+                abbreviations ("eGFR"), and typos ("hematacrit").
+
+                For measurement mentions, use facet="measurement" (default).
+                For focus/disease mentions, pass facet="focus".
+
+                Args:
+                    ctx: Run context with ConceptIndex dependency.
+                    query: Natural-language search query.
+                    top_k: Number of results to return (default 10).
+                    facet: Facet filter — "measurement" (default) or "focus".
+
+                Returns:
+                    Top-K concepts with concept_id, name, description, type,
+                    similarity score, and study_count.
+                """
+                return ctx.deps.search_concepts_by_embedding(
+                    query, top_k=top_k, facet=facet
+                )
+
+            @_agent.tool
             def get_concept_children(
                 ctx: RunContext[ConceptIndex],
                 concept_id: str,
             ) -> list[dict]:
                 """Get child sub-concepts with names and descriptions.
 
-                ALWAYS call this before returning a concept. If a child is
-                a more specific match, return the child instead. Children
-                with type="archetype" are leaf nodes — return directly
-                without further drilling.
+                Use this to drill into a broad top-level category when
+                embedding search returns a parent concept (e.g.
+                ncpi:biomarkers) and you need a more specific child.
+                For measurement, embedding search usually finds the right
+                concept directly — only call this when needed.
 
-                Empty list means leaf concept — safe to return.
+                Children with type="archetype" are leaf nodes — return
+                directly without further drilling. Empty list means leaf
+                concept — safe to return.
 
                 Args:
                     ctx: Run context with ConceptIndex dependency.
@@ -285,6 +318,48 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
         return _agent
 
 
+def _dedup_focus_values(values: list[str], index: ConceptIndex) -> list[str]:
+    """Remove focus values that are descendants of other values in the list.
+
+    When ISA closure is active, returning a parent term already includes
+    all descendant studies.  This removes redundant children the LLM
+    may have included (e.g. "Adenocarcinoma of Lung" when "Lung Neoplasms"
+    is already present).
+
+    Args:
+        values: Resolved focus values from the agent.
+        index: ConceptIndex with ``_focus_isa_children``.
+
+    Returns:
+        Deduplicated values with descendants removed.
+    """
+    if len(values) <= 1:
+        return values
+    isa_children = getattr(index, "_focus_isa_children", {})
+    if not isa_children:
+        return values
+
+    # Build the full set of descendants for each value
+    value_set = set(values)
+    to_remove: set[str] = set()
+    for v in values:
+        # Walk down the ISA tree to collect all descendants
+        visited: set[str] = set()
+        stack = list(isa_children.get(v, []))
+        while stack:
+            child = stack.pop()
+            if child in visited:
+                continue
+            visited.add(child)
+            if child in value_set:
+                to_remove.add(child)
+            stack.extend(isa_children.get(child, []))
+
+    if not to_remove:
+        return values
+    return [v for v in values if v not in to_remove]
+
+
 async def _run_resolve_uncached(
     mention: RawMention,
     index: ConceptIndex,
@@ -303,7 +378,11 @@ async def _run_resolve_uncached(
     agent = _get_agent(model)
     prompt = f"Resolve this mention:\n- text: {mention.text}\n- facet: {mention.facet.value}"
     result = await agent.run(prompt, deps=index)
-    return result.output
+    output = result.output
+    # Cull descendant focus values — ISA closure makes them redundant
+    if mention.facet == Facet.FOCUS and output.values:
+        output.values = _dedup_focus_values(output.values, index)
+    return output
 
 
 async def run_resolve(

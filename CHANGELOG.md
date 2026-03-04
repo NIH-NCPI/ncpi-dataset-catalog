@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.11.1...v0.12.0) (2026-03-03)
+
+
+### Features
+
+* embedding vector search for measurement resolution ([#221](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/221)) ([05a804f](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/05a804f446af361d327f8c5b04a672d600af1939))
+
+
+### Bug Fixes
+
+* override ai.url in prod config to use prod backend ([#223](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/223)) ([10cac7c](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/10cac7cc12954beb9e64d1fcd53a108cee512b8f))
+
 ## [0.11.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.11.0...v0.11.1) (2026-03-03)
 
 

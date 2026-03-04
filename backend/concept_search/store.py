@@ -113,6 +113,16 @@ class DuckDBStore:
             "  variable_name VARCHAR"
             ")"
         )
+        self._conn.execute(
+            "CREATE TABLE concept_embeddings ("
+            "  concept_id VARCHAR PRIMARY KEY,"
+            "  name VARCHAR,"
+            "  description VARCHAR,"
+            "  type VARCHAR,"
+            "  embedding FLOAT[768],"
+            "  facet VARCHAR"
+            ")"
+        )
 
     # -- bulk loading ---------------------------------------------------------
 
@@ -170,6 +180,39 @@ class DuckDBStore:
             return
         self._copy_csv("variables", rows)
 
+    def load_concept_embeddings_batch(
+        self,
+        rows: list[tuple[str, str, str, str, list[float], str]],
+    ) -> None:
+        """Batch-insert concept embeddings via parameterized INSERT.
+
+        CSV COPY doesn't handle FLOAT[] well, so we use executemany.
+
+        Args:
+            rows: List of (concept_id, name, description, type, embedding, facet).
+        """
+        if not rows:
+            return
+        self._conn.executemany(
+            "INSERT INTO concept_embeddings VALUES (?, ?, ?, ?, ?, ?)",
+            rows,
+        )
+
+    def get_concept_embeddings(
+        self,
+    ) -> list[tuple[str, str, str, str, list[float], str]]:
+        """Load all concept embeddings from the store.
+
+        Returns:
+            List of (concept_id, name, description, type, embedding, facet).
+        """
+        rows = self._conn.execute(
+            "SELECT concept_id, name, description, type, embedding, facet "
+            "FROM concept_embeddings "
+            "ORDER BY concept_id"
+        ).fetchall()
+        return [(r[0], r[1], r[2], r[3], r[4], r[5] or "measurement") for r in rows]
+
     def _copy_csv(
         self, table: str, rows: list[tuple[str, ...]]
     ) -> None:
@@ -223,6 +266,10 @@ class DuckDBStore:
             self._conn.execute(
                 "CREATE TABLE export_db.variables "
                 "AS SELECT * FROM variables"
+            )
+            self._conn.execute(
+                "CREATE TABLE export_db.concept_embeddings "
+                "AS SELECT * FROM concept_embeddings"
             )
             # DuckDB doesn't support schema-qualified CREATE INDEX names,
             # so switch context to the attached DB for index creation.

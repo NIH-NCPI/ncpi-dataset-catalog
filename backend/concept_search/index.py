@@ -9,6 +9,8 @@ from collections import Counter, defaultdict
 from importlib.resources import files as pkg_files
 from pathlib import Path
 
+import numpy as np
+
 from .models import ConceptMatch, Facet
 from .store import DuckDBStore, StudyStore
 
@@ -204,6 +206,11 @@ def _resolve_isa_path() -> Path:
     )
 
 
+def _resolve_focus_isa_path() -> Path:
+    """Resolve the path to focus_isa.json (bundled with this package)."""
+    return Path(__file__).parent / "focus_isa.json"
+
+
 def _load_concept_descriptions() -> dict[str, dict]:
     """Load concept names and descriptions from all vocabulary sources.
 
@@ -275,15 +282,22 @@ def _load_concept_descriptions() -> dict[str, dict]:
     return descriptions
 
 
-def _load_isa_table() -> tuple[dict[str, list[str]], dict[str, list[str]]]:
+def _load_isa_table(
+    path: Path | None = None,
+) -> tuple[dict[str, list[str]], dict[str, list[str]]]:
     """Load ISA (is-a) child→parent relationships.
+
+    Args:
+        path: Path to a ``[{child, parent}]`` JSON file.  Falls back
+            to the concept-isa.json resolved via ``_resolve_isa_path()``.
 
     Returns:
         Tuple of:
         - parents: child concept_id → list of parent concept_ids
         - children: parent concept_id → list of child concept_ids
     """
-    path = _resolve_isa_path()
+    if path is None:
+        path = _resolve_isa_path()
     if not path.exists():
         return {}, {}
     with open(path) as f:
@@ -340,6 +354,10 @@ class ConceptIndex:
         self._concept_descriptions: dict[str, dict] = {}
         self._focus_categories: dict[str, list[dict]] = {}
         self._isa_children: dict[str, list[str]] = {}
+        self._focus_isa_children: dict[str, list[str]] = {}
+        # Embedding search data (populated during build or cache load)
+        self._embedding_nodes: list[dict] = []
+        self._embedding_matrix: np.ndarray | None = None
 
     def load(self) -> None:
         """Load data — from cached DuckDB file if available, else from JSON."""
@@ -357,6 +375,9 @@ class ConceptIndex:
                 self._rebuild_index_from_store()
                 # Load ISA children for drill-down (not stored in DuckDB)
                 _, self._isa_children = _load_isa_table()
+                _, self._focus_isa_children = _load_isa_table(
+                    _resolve_focus_isa_path()
+                )
             else:
                 self._load_from_json()
                 # Save cache for next startup
@@ -371,7 +392,15 @@ class ConceptIndex:
         # These are small JSON files bundled with the package — always load
         self.load_focus_categories()
         self.load_consent_code_descriptions()
+        # Load concept descriptions before _build_concept_embeddings needs them
+        # (on cold build, _load_from_json calls _build_concept_embeddings)
         self._concept_descriptions = _load_concept_descriptions()
+
+    def _ensure_concept_descriptions(self) -> dict[str, dict]:
+        """Return concept descriptions, loading them if not yet available."""
+        if not self._concept_descriptions:
+            self._concept_descriptions = _load_concept_descriptions()
+        return self._concept_descriptions
 
     def _load_from_json(self) -> None:
         """Full build path: parse JSON data files and populate the store."""
@@ -415,6 +444,9 @@ class ConceptIndex:
         if isinstance(self.store, DuckDBStore):
             self.store.finalize()
 
+        # Build concept embeddings for semantic search
+        self._build_concept_embeddings()
+
     def _rebuild_index_from_store(self) -> None:
         """Rebuild the in-memory _index from a loaded DuckDB store."""
         if not isinstance(self.store, DuckDBStore):
@@ -429,6 +461,181 @@ class ConceptIndex:
                 study_count=count,
                 value=value,
             )
+        try:
+            self._load_embeddings_from_store()
+        except Exception as exc:
+            logger.warning(
+                "Could not load concept embeddings from cache "
+                "(may be an older cache file): %s",
+                exc,
+            )
+
+    def _build_concept_embeddings(self) -> None:
+        """Generate embeddings for measurement and focus nodes, store them.
+
+        Measurement nodes come from ``_concept_descriptions``.  Focus nodes
+        come from ``self._index[Facet.FOCUS]``.  Each node is embedded as
+        ``"name: description"`` (measurements) or just the term name (focus).
+        Results are stored in the DuckDB ``concept_embeddings`` table and
+        cached in memory for KNN search.
+
+        Gracefully skips if sentence-transformers is not installed (e.g. in
+        test environments).
+        """
+        from . import embeddings
+
+        descs = self._ensure_concept_descriptions()
+
+        nodes: list[dict] = []
+        texts: list[str] = []
+
+        # Measurement nodes from concept descriptions
+        for cid, info in sorted(descs.items()):
+            name = info.get("name", cid)
+            desc = info.get("description", "")
+            node_type = info.get("type", "concept")
+            nodes.append({
+                "concept_id": cid,
+                "description": desc,
+                "facet": "measurement",
+                "name": name,
+                "type": node_type,
+            })
+            texts.append(f"{name}: {desc}" if desc else name)
+
+        # Focus nodes from the focus index
+        # concept_id = the canonical term name (e.g. "Heart Diseases") so
+        # that resolved values match the focus facet directly.
+        for _key, match in sorted(
+            self._index[Facet.FOCUS].items(), key=lambda x: x[0]
+        ):
+            nodes.append({
+                "concept_id": match.value,
+                "description": "",
+                "facet": "focus",
+                "name": match.value,
+                "type": "focus",
+            })
+            texts.append(match.value)
+
+        if not texts:
+            logger.warning("No concept/focus nodes found — skipping embeddings")
+            return
+
+        logger.info("Embedding %d nodes (measurement + focus)...", len(texts))
+        try:
+            matrix = embeddings.embed_texts(texts)
+        except ImportError:
+            logger.warning("sentence-transformers not available — skipping embeddings")
+            return
+        except Exception:
+            logger.exception("Failed to generate concept embeddings — skipping")
+            return
+        logger.info("Embedding complete: %s", matrix.shape)
+
+        # Store in DuckDB
+        if isinstance(self.store, DuckDBStore):
+            rows = [
+                (n["concept_id"], n["name"], n["description"], n["type"],
+                 matrix[i].tolist(), n["facet"])
+                for i, n in enumerate(nodes)
+            ]
+            self.store.load_concept_embeddings_batch(rows)
+
+        self._embedding_nodes = nodes
+        self._embedding_matrix = matrix
+
+    def _load_embeddings_from_store(self) -> None:
+        """Load concept embeddings from the DuckDB cache into memory."""
+        if not isinstance(self.store, DuckDBStore):
+            return
+        rows = self.store.get_concept_embeddings()
+        if not rows:
+            logger.info("No concept embeddings in cache")
+            return
+        nodes: list[dict] = []
+        vecs: list[list[float]] = []
+        for cid, name, desc, node_type, embedding, facet in rows:
+            nodes.append({
+                "concept_id": cid,
+                "description": desc or "",
+                "facet": facet or "measurement",
+                "name": name or cid,
+                "type": node_type or "concept",
+            })
+            vecs.append(embedding)
+        self._embedding_nodes = nodes
+        self._embedding_matrix = np.array(vecs, dtype=np.float32)
+        logger.info(
+            "Loaded %d concept embeddings from cache", len(nodes)
+        )
+
+    def search_concepts_by_embedding(
+        self, query: str, top_k: int = 10, facet: str | None = None
+    ) -> list[dict]:
+        """KNN search against concept/archetype/focus embeddings.
+
+        Args:
+            query: Natural-language query (e.g. "blood sugar", "eGFR").
+            top_k: Number of results to return.
+            facet: Optional facet filter ("measurement" or "focus").
+                If None, searches all embedded nodes (both measurement
+                and focus).
+
+        Returns:
+            Top-K nodes with concept_id, name, description, type,
+            similarity, and study_count.
+        """
+        if self._embedding_matrix is None or len(self._embedding_nodes) == 0:
+            return []
+
+        # Build search matrix — filter to facet sub-matrix before KNN
+        # so results are guaranteed correct (no missed true top-k).
+        if facet:
+            facet_indices = [
+                i for i, n in enumerate(self._embedding_nodes)
+                if n.get("facet", "measurement") == facet
+            ]
+            if not facet_indices:
+                return []
+            search_matrix = self._embedding_matrix[facet_indices]
+        else:
+            facet_indices = None
+            search_matrix = self._embedding_matrix
+
+        try:
+            from . import embeddings
+            query_vec = embeddings.embed_query(query)
+            hits = embeddings.search_embeddings(
+                query_vec, search_matrix, top_k=top_k
+            )
+        except Exception:
+            logger.exception("Embedding search failed — returning empty")
+            return []
+
+        results: list[dict] = []
+        for raw_idx, sim in hits:
+            # Map sub-matrix index back to full node list index
+            idx = facet_indices[raw_idx] if facet_indices is not None else raw_idx
+            node = self._embedding_nodes[idx]
+            node_facet = node.get("facet", "measurement")
+
+            cid = node["concept_id"]
+            # Look up study_count from the appropriate facet index
+            if node_facet == "focus":
+                # Focus nodes use the term name as the index key
+                match = self._index[Facet.FOCUS].get(node["name"].lower())
+            else:
+                match = self._index[Facet.MEASUREMENT].get(cid.lower())
+            results.append({
+                "concept_id": cid,
+                "description": node["description"],
+                "name": node["name"],
+                "similarity": round(sim, 4),
+                "study_count": match.study_count if match else 0,
+                "type": node["type"],
+            })
+        return results
 
     def _load_measurement_concepts(self, llm_dir: Path) -> None:
         """Load concept names and variable details from per-study LLM JSON.
@@ -502,6 +709,9 @@ class ConceptIndex:
     ) -> None:
         """Load study metadata and extract facet values.
 
+        Expands focus terms using MeSH ISA hierarchy so that searching
+        a parent term also returns studies tagged with descendant terms.
+
         Args:
             studies_path: Path to ``ncpi-platform-studies.json``.
             demographics: Optional dbGapId → lean demographics dict to merge
@@ -513,6 +723,12 @@ class ConceptIndex:
             studies_raw = json.load(f)
 
         demographics = demographics or {}
+
+        # Load focus ISA hierarchy for ancestor expansion
+        focus_isa_path = _resolve_focus_isa_path()
+        focus_isa_parents, self._focus_isa_children = _load_isa_table(
+            focus_isa_path
+        )
 
         # Count occurrences per facet value
         facet_counts: dict[Facet, Counter[str]] = {f: Counter() for f in Facet}
@@ -526,6 +742,9 @@ class ConceptIndex:
         is_duckdb = isinstance(self.store, DuckDBStore)
         study_rows: list[tuple[str, dict]] = []
         facet_rows: list[tuple[str, str, str, str]] = []
+        # Track (dbgap_id, ancestor) pairs to avoid double-counting when
+        # multiple focus terms in the same study share a common ancestor.
+        seen_focus_ancestors: set[tuple[str, str]] = set()
         for study in studies_raw.values():
             dbgap_id = study.get("dbGapId", "")
             # Merge demographics into study dict before storage
@@ -544,6 +763,20 @@ class ConceptIndex:
                         facet_counts[facet][v] += 1
                         if is_duckdb:
                             facet_rows.append((dbgap_id, facet.value, v, v.lower()))
+                        # Expand focus terms with ISA ancestors
+                        if facet == Facet.FOCUS and focus_isa_parents:
+                            ancestors = _compute_closure(v, focus_isa_parents)
+                            for anc in ancestors:
+                                if anc != v:
+                                    key = (dbgap_id, anc)
+                                    if key in seen_focus_ancestors:
+                                        continue
+                                    seen_focus_ancestors.add(key)
+                                    facet_counts[facet][anc] += 1
+                                    if is_duckdb:
+                                        facet_rows.append(
+                                            (dbgap_id, facet.value, anc, anc.lower())
+                                        )
         if is_duckdb:
             self.store.load_studies_batch(study_rows)
             self.store.load_facet_values_batch(facet_rows)

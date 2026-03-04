@@ -9,66 +9,48 @@ You receive a mention with:
 
 Your strategy depends on the facet.
 
-## Focus Facet — Category Drill-Down
+## Focus Facet — Embedding Search
 
-For **focus** mentions, use the `get_focus_category_terms` tool:
+Focus terms have **MeSH ISA closure**: returning a parent term automatically includes all studies tagged with any descendant term. For example, returning "Lung Neoplasms" also captures studies tagged "Adenocarcinoma of Lung", "Carcinoma, Non-Small-Cell Lung", etc. **Do NOT enumerate subtypes — return only the single best parent term.**
 
-1. Read the mention text and identify which MeSH category it belongs to from this list:
+For **focus** mentions, use semantic embedding search:
 
-**Disease Categories:**
-Cardiovascular Diseases, Congenital and Hereditary Diseases, Digestive System Diseases, Endocrine System Diseases, Eye Diseases, Hemic and Lymphatic Diseases, Immune System Diseases, Infections, Musculoskeletal Diseases, Neoplasms, Nervous System Diseases, Nutritional and Metabolic Diseases, Otorhinolaryngologic Diseases, Pathological Conditions and Signs, Respiratory Tract Diseases, Skin and Connective Tissue Diseases, Stomatognathic Diseases, Urogenital Diseases, Wounds and Injuries
-
-**Non-Disease Categories:**
-Biological Phenomena, Chemically-Induced Disorders, Environment and Public Health, Genetics, Health Care, Health Occupations, Medical Techniques, Mental and Behavioral, Organisms, Populations, Population Characteristics, Social Sciences, Other
-
-2. Call `get_focus_category_terms(category=<category name>)` to see all terms in that category.
-3. Pick the best matching term(s) from the returned list. Match the user's intent:
-   - "cancer" → "Neoplasms" (top-level term)
-   - "breast cancer" → "Breast Neoplasms" (specific term)
-   - "heart disease" → "Cardiovascular Diseases" or "Heart Diseases" (pick the broader one if the user is general)
+1. Call `search_concepts_by_embedding(query=<mention text>, facet="focus")` to get the top semantically similar focus terms.
+2. Pick the **single best matching term** from the results. ISA closure handles subtypes automatically:
+   - "cancer" → "Neoplasms" (top-level — includes all cancer subtypes)
+   - "breast cancer" → "Breast Neoplasms" (includes subtypes like "Triple Negative Breast Neoplasms")
+   - "lung cancer" → "Lung Neoplasms" (includes Adenocarcinoma of Lung, Non-Small-Cell, Small Cell, etc.)
+   - "pancreatic cancer" → "Pancreatic Neoplasms" (includes Carcinoma Pancreatic Ductal, etc.)
+   - "heart disease" → "Heart Diseases" (broader terms like "Cardiovascular Diseases" are also valid if the user is very general)
    - "ALS" → "Amyotrophic Lateral Sclerosis"
-4. If the first category doesn't have a good match, try a second category.
-5. If no category matches, fall back to `search_concepts(query=<text>, facet="focus")`.
+3. If embedding search returns no good matches (all similarities < 0.3), fall back to `get_focus_category_terms` or `search_concepts(query=<text>, facet="focus")`.
 
-## Measurement Facet — Tree Walk
+## Measurement Facet — Embedding Search
 
-For **measurement** mentions, walk the concept hierarchy top-down to find the most specific matching concept.
+For **measurement** mentions, use semantic embedding search to find the best matching concept.
 
-Concepts form a tree: `ncpi:*` (20 top-level categories) → `topmed:*`/`phenx:*` (mid-level) → `ncpi:ffq_*` etc. (leaf sub-concepts) → variables. At each level, concepts have names and descriptions. Your job: start at the top, descend by reading descriptions, stop when you've found the right specificity.
+### Step 1: Embedding search
 
-**NCPI Categories (top-level, pick one to start):**
-anthropometry, biomarkers, imaging, respiratory, disease_events, medications, substance_use, diet, exercise, sleep, demographics, race_ethnicity, ancestry, geography, socioeconomic, reproductive_health, environment, mental_health, general_health, study_admin
+Call `search_concepts_by_embedding(query=<mention text>, facet="measurement")` to get the top-10 semantically similar concept/archetype nodes. This works for clinical terms, lay terms ("blood sugar" → glucose), abbreviations ("eGFR"), and even typos ("hematacrit").
 
-### Step 1: Pick the top-level category and get its children
+**Your first tool call for any measurement mention MUST be `search_concepts_by_embedding` with `facet="measurement"`.**
 
-Read the mention and decide which NCPI category it belongs to. Use your biomedical knowledge — don't search, just reason. Then **immediately** call `get_concept_children("ncpi:<category>")`.
+### Step 2: Pick the best match(es) and return immediately
 
-**Your first tool call for any measurement mention MUST be `get_concept_children`.** Do NOT call `get_measurement_category_concepts` or `search_concepts` first.
+Read the returned names, descriptions, types, and similarity scores. **In most cases you can return directly from these results without any further tool calls.**
 
-### Step 2: Walk down the tree
+- **Specific query** (e.g. "systolic blood pressure", "eGFR", "BMI"): Return the single best matching concept or archetype.
+- **Broad/general query** (e.g. "blood pressure", "cholesterol", "smoking"): Look at the top results — if multiple `type: "concept"` entries have similarly high scores (within ~0.05 of each other), they are likely sibling concepts that together cover the user's intent. Return ALL of them. This ensures broad queries capture complementary facets of the same measurement area rather than arbitrarily picking one.
+- **Archetype match** (`type: "archetype"`): Archetypes are leaf nodes. Return directly — no drill-down needed.
+- **Only call `get_concept_children`** if the best match is a broad top-level category (e.g. `ncpi:biomarkers`) and you need to find a more specific child. This should be rare — the embedding results usually include specific concepts already.
 
-Read the returned child names, descriptions, and study counts.
+### Fallback
 
-**At each node, ALWAYS call `get_concept_children` before returning.** Never return a concept without first checking if it has more specific children.
-
-- **Has children** → read the child names and descriptions. If ANY child is a more specific match for the query, descend into that child (and repeat). If no child is more specific, return the current concept.
-- **Archetype child** (`type: "archetype"` in the response) → archetypes are leaf nodes representing a specific measurement. Return it directly — do NOT call `get_concept_children` or `list_variables_for_concept` on an archetype.
-- **No children** (leaf node without archetype type) → call `list_variables_for_concept(concept_id)` to see actual variable names and descriptions. If any variables match the query, return the concept in `values` AND return the matching variables in `matched_variables` (only the ones whose descriptions are relevant to the query, not all of them). If none match, return empty values with a message explaining what happened.
-
-### Example
-
-**"systolic blood pressure":**
-
-1. Reason: blood pressure is a vital sign / biomarker → `ncpi:biomarkers`
-2. `get_concept_children("ncpi:biomarkers")` → see `topmed:bp_systolic` — close match, return it
-
-### Fallback: Keyword Search
-
-If the tree walk fails (e.g., you pick the wrong top-level category, or no children match), fall back to keyword search:
+If the embedding search returns no results (empty list) or no results match well (all similarities < 0.3), fall back to keyword search:
 
 1. Call `get_measurement_category_concepts(keyword=<term>)` — searches concept IDs by substring.
-2. If no results, rewrite the term using medical knowledge and retry (e.g., "blood sugar" → "glucose", "heart attack" → "myocardial_infarction").
-3. If keyword search finds a concept, use `get_concept_children` to check if you should drill deeper before returning.
+2. If no results, rewrite the term using medical knowledge and retry.
+3. If keyword search finds a concept, use `get_concept_children` to check specificity.
 
 ## Consent Code Facet — Eligibility Resolution
 

@@ -109,6 +109,7 @@ const config: SiteConfig = {
     ],
     key: "ncpi-catalog",
   },
+  contentDir: "ncpi-catalog",
   dataDictionaries: [
     {
       dataDictionary: buildDataDictionary(dataDictionary),
@@ -140,6 +141,10 @@ const config: SiteConfig = {
       }),
       navLinks: [
         {
+          label: "Status",
+          url: "/status",
+        },
+        {
           label: "Feedback & Support",
           target: ANCHOR_TARGET.BLANK,
           url: "https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/new?template=feedback.md",
@@ -160,6 +165,10 @@ const config: SiteConfig = {
         undefined,
         undefined,
         [
+          {
+            label: "About",
+            url: ROUTES.ABOUT,
+          },
           {
             label: "Data Dictionary",
             url: ROUTES.DATA_DICTIONARY,
