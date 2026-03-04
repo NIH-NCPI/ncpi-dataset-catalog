@@ -694,6 +694,9 @@ class ConceptIndex:
         is_duckdb = isinstance(self.store, DuckDBStore)
         study_rows: list[tuple[str, dict]] = []
         facet_rows: list[tuple[str, str, str, str]] = []
+        # Track (dbgap_id, ancestor) pairs to avoid double-counting when
+        # multiple focus terms in the same study share a common ancestor.
+        seen_focus_ancestors: set[tuple[str, str]] = set()
         for study in studies_raw.values():
             dbgap_id = study.get("dbGapId", "")
             # Merge demographics into study dict before storage
@@ -717,6 +720,10 @@ class ConceptIndex:
                             ancestors = _compute_closure(v, focus_isa_parents)
                             for anc in ancestors:
                                 if anc != v:
+                                    key = (dbgap_id, anc)
+                                    if key in seen_focus_ancestors:
+                                        continue
+                                    seen_focus_ancestors.add(key)
                                     facet_counts[facet][anc] += 1
                                     if is_duckdb:
                                         facet_rows.append(

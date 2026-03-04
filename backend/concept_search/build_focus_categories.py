@@ -160,7 +160,7 @@ async def process_term(
 
 
 def _compute_isa_edges(results: list[dict]) -> list[dict]:
-    """Derive parent→child ISA edges from MeSH tree numbers.
+    """Derive child→parent ISA edges from MeSH tree numbers.
 
     For each focus term with tree numbers, walk up the tree to find
     the nearest ancestor that is also a catalog focus term.  Handles
