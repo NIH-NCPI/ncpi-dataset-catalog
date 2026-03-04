@@ -589,27 +589,36 @@ class ConceptIndex:
         if self._embedding_matrix is None or len(self._embedding_nodes) == 0:
             return []
 
-        # When facet filtering, request more results then filter post-KNN
-        raw_top_k = top_k * 3 if facet else top_k
+        # Build search matrix — filter to facet sub-matrix before KNN
+        # so results are guaranteed correct (no missed true top-k).
+        if facet:
+            facet_indices = [
+                i for i, n in enumerate(self._embedding_nodes)
+                if n.get("facet", "measurement") == facet
+            ]
+            if not facet_indices:
+                return []
+            search_matrix = self._embedding_matrix[facet_indices]
+        else:
+            facet_indices = None
+            search_matrix = self._embedding_matrix
 
         try:
             from . import embeddings
             query_vec = embeddings.embed_query(query)
             hits = embeddings.search_embeddings(
-                query_vec, self._embedding_matrix, top_k=raw_top_k
+                query_vec, search_matrix, top_k=top_k
             )
         except Exception:
             logger.exception("Embedding search failed — returning empty")
             return []
 
         results: list[dict] = []
-        for idx, sim in hits:
+        for raw_idx, sim in hits:
+            # Map sub-matrix index back to full node list index
+            idx = facet_indices[raw_idx] if facet_indices is not None else raw_idx
             node = self._embedding_nodes[idx]
             node_facet = node.get("facet", "measurement")
-
-            # Apply facet filter
-            if facet and node_facet != facet:
-                continue
 
             cid = node["concept_id"]
             # Look up study_count from the appropriate facet index
@@ -626,8 +635,6 @@ class ConceptIndex:
                 "study_count": match.study_count if match else 0,
                 "type": node["type"],
             })
-            if len(results) >= top_k:
-                break
         return results
 
     def _load_measurement_concepts(self, llm_dir: Path) -> None:
