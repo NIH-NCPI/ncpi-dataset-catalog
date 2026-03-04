@@ -24,6 +24,7 @@ function makeStudy(
     studyDescription: "<p>A <b>study</b> description.</p>",
     studyDesign: ["Case-Control"],
     title: "Test Study",
+    variableSummary: null,
     ...overrides,
   };
 }

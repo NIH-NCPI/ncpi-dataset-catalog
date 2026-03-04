@@ -20,6 +20,7 @@ export function NCPIStudyInputMapper(ncpiStudy: NCPIStudy): NCPICatalogStudy {
     studyDescription: ncpiStudy.description,
     studyDesign: ncpiStudy.studyDesigns,
     title: sanitizeString(ncpiStudy.title),
+    variableSummary: ncpiStudy.variableSummary ?? null,
   };
   return ncpiCatalogStudy;
 }

@@ -12,6 +12,7 @@ import {
   getMissingFtpStudies,
   initializeCSVCache,
 } from "./common/dbGapCSVandFTP";
+import { loadVariableSummaries } from "./build-variable-summary";
 import {
   dbgapCsvPath,
   DBGAP_CSV_FIELD_KEY,
@@ -95,6 +96,24 @@ async function buildCatalog(): Promise<void> {
   }
   console.log(
     `Attached GDC project IDs to ${studiesWithGdc} CRDC studies`
+  );
+
+  // Attach variable summaries to studies
+  const variableSummaries = loadVariableSummaries(
+    "catalog-build/classification/source"
+  );
+  let studiesWithVars = 0;
+  for (const study of ncpiPlatformStudies) {
+    const summary = variableSummaries.get(study.dbGapId);
+    if (summary) {
+      study.variableSummary = summary;
+      studiesWithVars++;
+    } else {
+      study.variableSummary = null;
+    }
+  }
+  console.log(
+    `Attached variable summaries to ${studiesWithVars} of ${ncpiPlatformStudies.length} studies`
   );
 
   const ncpiCatalogPlatforms = buildNCPICatalogPlatforms(ncpiPlatformStudies);
