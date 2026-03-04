@@ -25,10 +25,13 @@ COPY catalog/ncpi-platform-studies.json catalog/ncpi-platform-studies.json
 COPY catalog-build/classification/output/llm-concepts-v4/ catalog-build/classification/output/llm-concepts-v4/
 COPY catalog-build/classification/output/concept-isa.json catalog-build/classification/output/concept-isa.json
 COPY catalog-build/classification/output/demographic-profiles.json catalog-build/classification/output/demographic-profiles.json
+COPY catalog-build/classification/output/concept-vocabulary.json catalog-build/classification/output/concept-vocabulary.json
+COPY catalog-build/classification/output/phenx-concept-vocabulary.json catalog-build/classification/output/phenx-concept-vocabulary.json
+COPY catalog-build/classification/output/ncpi-categories.json catalog-build/classification/output/ncpi-categories.json
 COPY catalog-build/common/disease_abbrev_mapping.tsv /catalog-build/common/disease_abbrev_mapping.tsv
 
 # Build DuckDB cache at image build time so startup is fast.
-# This runs the full cold-build path (JSON parsing + embedding 953 nodes)
+# This runs the full cold-build path (JSON parsing + embedding all catalog nodes)
 # once during `docker build` instead of on every container start.
 RUN mkdir -p /cache
 ENV NCPI_DUCKDB_CACHE_PATH=/cache/concept-search.duckdb
