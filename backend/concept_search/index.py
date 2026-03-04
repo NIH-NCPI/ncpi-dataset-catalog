@@ -504,12 +504,13 @@ class ConceptIndex:
             texts.append(f"{name}: {desc}" if desc else name)
 
         # Focus nodes from the focus index
+        # concept_id = the canonical term name (e.g. "Heart Diseases") so
+        # that resolved values match the focus facet directly.
         for _key, match in sorted(
             self._index[Facet.FOCUS].items(), key=lambda x: x[0]
         ):
-            focus_id = f"focus:{match.value.lower().replace(' ', '_')}"
             nodes.append({
-                "concept_id": focus_id,
+                "concept_id": match.value,
                 "description": "",
                 "facet": "focus",
                 "name": match.value,
@@ -578,8 +579,8 @@ class ConceptIndex:
             query: Natural-language query (e.g. "blood sugar", "eGFR").
             top_k: Number of results to return.
             facet: Optional facet filter ("measurement" or "focus").
-                If None, searches all embedded nodes (measurement only
-                for backwards compatibility with existing callers).
+                If None, searches all embedded nodes (both measurement
+                and focus).
 
         Returns:
             Top-K nodes with concept_id, name, description, type,

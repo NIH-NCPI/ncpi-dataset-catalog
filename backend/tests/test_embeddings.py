@@ -187,7 +187,7 @@ class TestFacetFilteredSearch:
             {"concept_id": "topmed:bp_systolic", "name": "Systolic BP",
              "description": "Systolic blood pressure", "type": "concept",
              "facet": "measurement"},
-            {"concept_id": "focus:heart_failure", "name": "Heart Failure",
+            {"concept_id": "Heart Failure", "name": "Heart Failure",
              "description": "", "type": "focus", "facet": "focus"},
         ]
         # Two unit vectors: [1,0,0,0] and [0,1,0,0]
@@ -207,7 +207,7 @@ class TestFacetFilteredSearch:
                 "heart", top_k=10, facet="focus"
             )
             assert len(results) == 1
-            assert results[0]["concept_id"] == "focus:heart_failure"
+            assert results[0]["concept_id"] == "Heart Failure"
             assert results[0]["study_count"] == 42
         finally:
             if original is not None:
