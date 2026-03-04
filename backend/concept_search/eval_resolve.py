@@ -202,10 +202,10 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="rewrite-heart-disease",
             inputs=_mention("heart disease", Facet.FOCUS),
-            # With category drill-down, agent sees full list and picks
-            # both broad and specific heart disease terms.
+            # ISA closure means "Heart Diseases" already includes all
+            # subtypes; no need to also return "Cardiovascular Diseases".
             expected_output=ResolveResult(
-                values=["Cardiovascular Diseases", "Heart Diseases"]
+                values=["Heart Diseases"]
             ),
         ),
         # --- Focus/disease via category drill-down ---
