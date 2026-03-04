@@ -172,7 +172,12 @@ def _compute_isa_edges(results: list[dict]) -> list[dict]:
     Returns:
         List of ``{"child": ..., "parent": ...}`` edges (same format as concept-isa.json).
     """
-    # Build reverse map: tree_number → focus term (only for terms in our catalog)
+    # Build reverse map: tree_number → focus term (only for terms in our catalog).
+    # MeSH polyhierarchy means a term can appear in multiple branches, which
+    # can produce edges that look surprising (e.g. PCOS → Neoplasms via
+    # C04.182 hereditary neoplastic syndromes).  We trust MeSH's tree
+    # structure here — these edges are structurally correct per MeSH and
+    # the additional recall is worth the occasional counterintuitive link.
     tree_to_term: dict[str, str] = {}
     for r in results:
         for tn in r["tree_numbers"]:
