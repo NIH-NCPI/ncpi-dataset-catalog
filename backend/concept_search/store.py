@@ -409,7 +409,9 @@ class DuckDBStore:
         sql = (
             "SELECT v.concept, v.cui, v.dataset_id, v.description, v.phv_id,"
             "  v.study_id, v.table_name, v.variable_name,"
-            "  json_extract_string(s.raw_json, '$.title') AS study_title "
+            "  json_extract_string(s.raw_json, '$.title') AS study_title,"
+            "  json_extract_string(s.raw_json, '$.studyAccession')"
+            "    AS study_accession "
             "FROM variables v "
             "LEFT JOIN studies s ON v.study_id = s.db_gap_id "
             f"WHERE {where} "  # noqa: S608
@@ -420,6 +422,7 @@ class DuckDBStore:
         cols = [
             "concept", "cui", "datasetId", "description", "phvId",
             "studyId", "tableName", "variableName", "studyTitle",
+            "studyAccession",
         ]
         return [dict(zip(cols, row)) for row in rows], total
 

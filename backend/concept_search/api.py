@@ -163,22 +163,23 @@ def _build_study_summary(study: dict) -> StudySummary:
     )
 
 
-def _build_dbgap_variable_url(study_id: str, phv_id: str) -> str:
-    """Build a dbGaP URL for a variable.
-
-    dbGaP no longer supports deep links to individual variables, so
-    we link to the study page where the variable can be found.
+def _build_dbgap_variable_url(study_accession: str, phv_id: str) -> str:
+    """Build a dbGaP URL for a specific variable.
 
     Args:
-        study_id: Study accession (e.g., "phs000007").
+        study_accession: Versioned study accession (e.g., "phs000007.v1.p1").
         phv_id: Variable PHV ID (e.g., "phv00481718.v2.p1").
 
     Returns:
-        URL to the study page on dbGaP, or empty string if no phv_id.
+        Full URL to the variable page on dbGaP, or empty string if missing.
     """
-    if not phv_id:
+    if not phv_id or not study_accession:
         return ""
-    return f"https://dbgap.ncbi.nlm.nih.gov/study/{study_id}"
+    phv_num = phv_id.split(".")[0].replace("phv", "")
+    return (
+        "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/variable.cgi"
+        f"?study_id={study_accession}&phv={phv_num}"
+    )
 
 
 def _build_dbgap_study_url(study_id: str) -> str:
@@ -196,6 +197,7 @@ def _build_dbgap_study_url(study_id: str) -> str:
 def _build_variable_result(row: dict) -> VariableResult:
     """Convert a raw variable dict from the store into a VariableResult."""
     study_id = row.get("studyId", "")
+    study_accession = row.get("studyAccession", "")
     concept_id = row.get("concept", "")
     # Derive display name from namespaced concept_id
     display = concept_id.split(":", 1)[-1] if concept_id else ""
@@ -205,7 +207,7 @@ def _build_variable_result(row: dict) -> VariableResult:
         cui=row.get("cui") or None,
         dataset_id=row.get("datasetId", ""),
         db_gap_url=_build_dbgap_variable_url(
-            study_id, row.get("phvId", "")
+            study_accession, row.get("phvId", "")
         ),
         description=row.get("description", ""),
         phv_id=row.get("phvId", ""),
