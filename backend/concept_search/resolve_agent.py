@@ -57,10 +57,12 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 facet: str | None = None,
                 limit: int = 20,
             ) -> list[ConceptMatch]:
-                """Search the concept index for matching values.
+                """Search the concept index by keyword substring match.
 
-                Use this for measurement and consentCode facets. For focus
-                facets, prefer search_concepts_by_embedding with facet="focus".
+                Use this for consentCode, dataType, studyDesign, and platform
+                facets. For measurement and focus facets, prefer
+                search_concepts_by_embedding which handles lay terms,
+                abbreviations, and typos via semantic similarity.
 
                 Args:
                     ctx: Run context with ConceptIndex dependency.
@@ -242,14 +244,16 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 top_k: int = 10,
                 facet: str = "measurement",
             ) -> list[dict]:
-                """Search concept/archetype/focus nodes by semantic similarity.
+                """Search concepts by semantic similarity — preferred for
+                measurement and focus facets.
 
                 Uses embedding KNN to find the most semantically similar
-                concepts. Works well for lay terms ("blood sugar" → glucose),
+                concepts. Handles lay terms ("blood sugar" → glucose),
                 abbreviations ("eGFR"), and typos ("hematacrit").
 
-                For measurement mentions, use facet="measurement" (default).
-                For focus/disease mentions, pass facet="focus".
+                ALWAYS try this first for measurement and focus mentions.
+                Use facet="measurement" (default) for measurements,
+                facet="focus" for diseases/conditions.
 
                 Args:
                     ctx: Run context with ConceptIndex dependency.

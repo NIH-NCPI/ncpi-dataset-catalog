@@ -54,8 +54,13 @@ def _get_study_values(study: dict, field: str) -> set[str]:
     if raw is None:
         return set()
     if isinstance(raw, list):
-        return {v.lower() for v in raw}
-    return {str(raw).lower()}
+        vals = {v.lower() for v in raw}
+    else:
+        vals = {str(raw).lower()}
+    # For consent codes, also include the base code (e.g. "gru" from "gru-irb").
+    if field == "consentCode":
+        vals |= {v.split("-")[0] for v in vals}
+    return vals
 
 
 class PipelineEvaluator(Evaluator[str, PipelineOutput]):
@@ -132,7 +137,12 @@ dataset = Dataset[str, PipelineOutput, StudyExpectation](
             expected_output=StudyExpectation(
                 min_studies=1,
                 all_have={"dataType": ["WGS"]},
-                any_have={"focus": ["Diabetes Mellitus", "Type 2 Diabetes"]},
+                any_have={"focus": [
+                    "Diabetes Mellitus",
+                    "Diabetes Mellitus, Type 1",
+                    "Diabetes Mellitus, Type 2",
+                    "Diabetic Retinopathy",
+                ]},
             ),
         ),
         Case(
