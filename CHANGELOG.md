@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.13.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.12.0...v0.13.0) (2026-03-04)
+
+
+### Features
+
+* add About page to header navigation ([#228](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/228)) ([0b06f56](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/0b06f5652a307b7c0f7eb88d9e55260ad5194768))
+* add API health status page with footer link ([#229](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/229)) ([14e9bc9](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/14e9bc9c4f8ae375e27f9c67422293017f8736e1))
+* add MeSH ISA hierarchy for focus/disease facet ([#230](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/230)) ([54b0fd9](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/54b0fd9b9dc3894fa603c535dda9346cc315a01b))
+* add variables tab to study detail page ([#207](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/207)) ([abb2802](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/abb2802c39726fb5cd15ad9d765bc272818a98ac))
+* embedding vector search for focus/disease resolution ([#236](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/236)) ([d529815](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/d529815a706e6c3765f111dd7e1a6bb047172f1b))
+
+
+### Bug Fixes
+
+* bake DuckDB cache into Docker image to fix cold-start timeout ([#239](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/239)) ([51f0370](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/51f03703d661f2acaa1445a22d0126d5d031945a))
+
+
+### Chores
+
+* rebuild catalog with publications ([#240](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/240)) ([52f1520](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/52f152059d021a9b32e387708943a94e2b4c3332))
+* update findable to latest, add tracking to research mode ([#232](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/232)) ([#234](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/234)) ([9401d5d](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/9401d5d1deddd4b6fb6a9e0826c54c631b52b148))
+
+
+### Tests
+
+* expand consent eligibility coverage for GA4GH DUO rules ([#237](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/237)) ([ea431fc](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/ea431fc6002e61a75c53a34edfb4e47215a70611))
+
 ## [0.12.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.11.1...v0.12.0) (2026-03-03)
 
 
