@@ -13,7 +13,6 @@ import {
   TableRow,
 } from "@mui/material";
 import { JSX, useEffect, useState } from "react";
-import { GIT_HUB_REPO_URL } from "../../../site-config/common/constants";
 import { Content } from "../Layout/components/Content/content";
 
 const FETCH_TIMEOUT_MS = 15_000;
@@ -132,29 +131,40 @@ export const Status = (): JSX.Element => {
       setState({ error: "AI service URL is not configured.", status: "error" });
       return;
     }
+    let isMounted = true;
+    let didTimeout = false;
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+    const timeout = setTimeout(() => {
+      didTimeout = true;
+      controller.abort();
+    }, FETCH_TIMEOUT_MS);
     fetch(getHealthUrl(aiUrl), { signal: controller.signal })
       .then((res) => {
         if (!res.ok) throw new Error(`Health check failed (${res.status})`);
         return res.json();
       })
-      .then((data: HealthResponse) => setState({ data, status: "success" }))
+      .then((data: HealthResponse) => {
+        if (isMounted) setState({ data, status: "success" });
+      })
       .catch((err) => {
-        if (!controller.signal.aborted) {
-          setState({
-            error: err instanceof Error ? err.message : "Unknown error",
-            status: "error",
-          });
-        } else {
-          setState({
-            error: "Health check timed out.",
-            status: "error",
-          });
+        if (!isMounted) return;
+        if (controller.signal.aborted) {
+          if (didTimeout) {
+            setState({ error: "Health check timed out.", status: "error" });
+          }
+          return;
         }
+        setState({
+          error: err instanceof Error ? err.message : "Unknown error",
+          status: "error",
+        });
       })
       .finally(() => clearTimeout(timeout));
-    return (): void => controller.abort();
+    return (): void => {
+      isMounted = false;
+      clearTimeout(timeout);
+      controller.abort();
+    };
   }, [config.ai?.url]);
 
   if (state.status === "loading") {
@@ -213,7 +223,7 @@ export const Status = (): JSX.Element => {
                     <TableCell>Git SHA</TableCell>
                     <TableCell>
                       <MuiLink
-                        href={`${GIT_HUB_REPO_URL}/commit/${data.gitSha}`}
+                        href={`${config.gitHubUrl}/commit/${data.gitSha}`}
                         rel="noopener noreferrer"
                         target="_blank"
                       >
