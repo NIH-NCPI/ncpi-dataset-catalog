@@ -14,6 +14,11 @@ const summaries = loadVariableSummaries(
   "catalog-build/classification/output"
 );
 
+if (summaries.size === 0) {
+  console.error("No variable summaries loaded — aborting to avoid wiping existing data.");
+  process.exit(1);
+}
+
 let patched = 0;
 for (const study of Object.values(studies) as Record<string, unknown>[]) {
   const id = study.dbGapId as string;
@@ -21,8 +26,6 @@ for (const study of Object.values(studies) as Record<string, unknown>[]) {
   if (summary) {
     study.variableSummary = summary;
     patched++;
-  } else {
-    study.variableSummary = null;
   }
 }
 
