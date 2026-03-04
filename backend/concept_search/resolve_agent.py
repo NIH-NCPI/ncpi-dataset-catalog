@@ -240,7 +240,7 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 ctx: RunContext[ConceptIndex],
                 query: str,
                 top_k: int = 10,
-                facet: str | None = None,
+                facet: str = "measurement",
             ) -> list[dict]:
                 """Search concept/archetype/focus nodes by semantic similarity.
 
@@ -248,15 +248,14 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 concepts. Works well for lay terms ("blood sugar" → glucose),
                 abbreviations ("eGFR"), and typos ("hematacrit").
 
-                For measurement mentions, omit facet or pass facet="measurement".
+                For measurement mentions, use facet="measurement" (default).
                 For focus/disease mentions, pass facet="focus".
 
                 Args:
                     ctx: Run context with ConceptIndex dependency.
                     query: Natural-language search query.
                     top_k: Number of results to return (default 10).
-                    facet: Optional facet filter — "measurement" or "focus".
-                        Omit to search all embedded nodes.
+                    facet: Facet filter — "measurement" (default) or "focus".
 
                 Returns:
                     Top-K concepts with concept_id, name, description, type,
