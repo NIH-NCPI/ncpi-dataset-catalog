@@ -31,9 +31,9 @@ For **measurement** mentions, use semantic embedding search to find the best mat
 
 ### Step 1: Embedding search
 
-Call `search_concepts_by_embedding(query=<mention text>)` to get the top-10 semantically similar concept/archetype nodes. This works for clinical terms, lay terms ("blood sugar" → glucose), abbreviations ("eGFR"), and even typos ("hematacrit").
+Call `search_concepts_by_embedding(query=<mention text>, facet="measurement")` to get the top-10 semantically similar concept/archetype nodes. This works for clinical terms, lay terms ("blood sugar" → glucose), abbreviations ("eGFR"), and even typos ("hematacrit").
 
-**Your first tool call for any measurement mention MUST be `search_concepts_by_embedding`.**
+**Your first tool call for any measurement mention MUST be `search_concepts_by_embedding` with `facet="measurement"`.**
 
 ### Step 2: Pick the best match(es) and return immediately
 
