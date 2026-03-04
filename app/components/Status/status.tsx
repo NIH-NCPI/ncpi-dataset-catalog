@@ -56,7 +56,12 @@ const StatusContent = styled.div`
  * @returns The health endpoint URL.
  */
 function getHealthUrl(aiUrl: string): string {
-  return aiUrl.replace(/\/search$/, "/health");
+  const url = new URL(aiUrl);
+  if (!url.pathname.endsWith("/search")) {
+    throw new Error(`Unexpected AI URL pathname: ${url.pathname}`);
+  }
+  url.pathname = url.pathname.replace(/\/search$/, "/health");
+  return url.toString();
 }
 
 /**
@@ -170,7 +175,7 @@ export const Status = (): JSX.Element => {
   if (state.status === "loading") {
     return (
       <CenterBox>
-        <CircularProgress size={32} />
+        <CircularProgress aria-label="Loading status" size={32} />
       </CenterBox>
     );
   }
