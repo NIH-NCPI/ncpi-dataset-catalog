@@ -59,6 +59,14 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
           studyParams: [study.dbGapId, "selected-publications"],
         },
       });
+
+      // Variables subpath "variables".
+      paths.push({
+        params: {
+          researchType: RESEARCH_TYPE.RESULTS,
+          studyParams: [study.dbGapId, "variables"],
+        },
+      });
     }
   }
 
