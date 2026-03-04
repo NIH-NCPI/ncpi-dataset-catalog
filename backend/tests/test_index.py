@@ -1092,3 +1092,40 @@ class TestQueryVariables:
         """Neither concepts nor study_ids — return empty."""
         rows, total = var_store.query_variables()
         assert total == 0
+
+
+# ---------------------------------------------------------------------------
+# _build_dbgap_variable_url
+# ---------------------------------------------------------------------------
+
+class TestBuildDbgapVariableUrl:
+    """Unit tests for _build_dbgap_variable_url."""
+
+    def test_builds_deep_link(self) -> None:
+        """Constructs variable.cgi URL with versioned accession and phv number."""
+        from concept_search.api import _build_dbgap_variable_url
+
+        url = _build_dbgap_variable_url("phs000220.v2.p2", "phv00481718.v2.p1")
+        assert url == (
+            "https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/variable.cgi"
+            "?study_id=phs000220.v2.p2&phv=00481718"
+        )
+
+    def test_empty_phv_id(self) -> None:
+        """Returns empty string when phv_id is missing."""
+        from concept_search.api import _build_dbgap_variable_url
+
+        assert _build_dbgap_variable_url("phs000220.v2.p2", "") == ""
+
+    def test_empty_study_accession(self) -> None:
+        """Returns empty string when study_accession is missing."""
+        from concept_search.api import _build_dbgap_variable_url
+
+        assert _build_dbgap_variable_url("", "phv00481718.v2.p1") == ""
+
+    def test_phv_without_version(self) -> None:
+        """Handles phv_id without version suffix."""
+        from concept_search.api import _build_dbgap_variable_url
+
+        url = _build_dbgap_variable_url("phs000007.v1.p1", "phv00000001")
+        assert "&phv=00000001" in url
