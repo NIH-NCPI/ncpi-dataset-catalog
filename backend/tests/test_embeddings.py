@@ -77,14 +77,14 @@ class TestSearchEmbeddings:
 class TestEmbeddingPersistence:
     """concept_embeddings table: insert, read back, and save/load."""
 
-    def _sample_rows(self) -> list[tuple[str, str, str, str, list[float]]]:
+    def _sample_rows(self) -> list[tuple[str, str, str, str, list[float], str]]:
         """Two synthetic embedding rows with 768-D vectors (matching schema)."""
         rng = np.random.default_rng(42)
         vec_a = rng.standard_normal(768).astype(np.float32).tolist()
         vec_b = rng.standard_normal(768).astype(np.float32).tolist()
         return [
-            ("concept:a", "Alpha", "First concept", "concept", vec_a),
-            ("concept:b", "Beta", "Second concept", "archetype", vec_b),
+            ("concept:a", "Alpha", "First concept", "concept", vec_a, "measurement"),
+            ("concept:b", "Beta", "Second concept", "archetype", vec_b, "measurement"),
         ]
 
     def test_insert_and_read(self) -> None:
@@ -122,6 +122,7 @@ class TestEmbeddingPersistence:
         beta = next(r for r in result if r[0] == "concept:b")
         assert beta[1] == "Beta"
         assert beta[3] == "archetype"
+        assert beta[5] == "measurement"
 
     def test_empty_table_returns_empty(self, tmp_path) -> None:
         """A store with no embeddings inserted returns an empty list."""
@@ -133,6 +134,20 @@ class TestEmbeddingPersistence:
         loaded = DuckDBStore.load_from_file(db_file)
         result = loaded.get_concept_embeddings()
         assert result == []
+
+    def test_facet_column_roundtrip(self) -> None:
+        """Facet column round-trips through insert and read."""
+        store = DuckDBStore.create_empty()
+        rng = np.random.default_rng(99)
+        vec = rng.standard_normal(768).astype(np.float32).tolist()
+        rows = [
+            ("m:a", "Meas A", "desc", "concept", vec, "measurement"),
+            ("f:a", "Focus A", "", "focus", vec, "focus"),
+        ]
+        store.load_concept_embeddings_batch(rows)
+        result = store.get_concept_embeddings()
+        facets = {r[0]: r[5] for r in result}
+        assert facets == {"f:a": "focus", "m:a": "measurement"}
 
     def test_old_cache_missing_table(self, tmp_path) -> None:
         """Simulates a pre-embeddings cache file missing the table entirely."""
@@ -147,3 +162,82 @@ class TestEmbeddingPersistence:
         with pytest.raises(duckdb.CatalogException):
             conn.execute("SELECT * FROM concept_embeddings")
         conn.close()
+
+
+# ---------------------------------------------------------------------------
+# Facet-filtered embedding search (ConceptIndex level)
+# ---------------------------------------------------------------------------
+
+
+class TestFacetFilteredSearch:
+    """Verify that facet filtering returns only nodes of the requested facet."""
+
+    def test_facet_filter_focus_only(self) -> None:
+        """Facet='focus' excludes measurement nodes from results."""
+        from concept_search.index import ConceptIndex
+        from concept_search.models import ConceptMatch, Facet
+
+        idx = ConceptIndex()
+        # Populate focus index with a term so study_count lookup works
+        idx._index[Facet.FOCUS]["heart failure"] = ConceptMatch(
+            facet=Facet.FOCUS, study_count=42, value="Heart Failure"
+        )
+        # Build synthetic embedding nodes: one measurement, one focus
+        idx._embedding_nodes = [
+            {"concept_id": "topmed:bp_systolic", "name": "Systolic BP",
+             "description": "Systolic blood pressure", "type": "concept",
+             "facet": "measurement"},
+            {"concept_id": "focus:heart_failure", "name": "Heart Failure",
+             "description": "", "type": "focus", "facet": "focus"},
+        ]
+        # Two unit vectors: [1,0,0,0] and [0,1,0,0]
+        idx._embedding_matrix = np.array([
+            [1.0, 0.0, 0.0, 0.0],
+            [0.0, 1.0, 0.0, 0.0],
+        ], dtype=np.float32)
+
+        # Mock embed_query to return a vector that matches both equally
+        import concept_search.embeddings as emb_mod
+        original = getattr(emb_mod, "embed_query", None)
+        emb_mod.embed_query = lambda q: np.array(
+            [0.7, 0.7, 0.0, 0.0], dtype=np.float32
+        )
+        try:
+            results = idx.search_concepts_by_embedding(
+                "heart", top_k=10, facet="focus"
+            )
+            assert len(results) == 1
+            assert results[0]["concept_id"] == "focus:heart_failure"
+            assert results[0]["study_count"] == 42
+        finally:
+            if original is not None:
+                emb_mod.embed_query = original
+
+    def test_no_facet_returns_all(self) -> None:
+        """No facet filter returns nodes of all facets."""
+        from concept_search.index import ConceptIndex
+        from concept_search.models import Facet
+
+        idx = ConceptIndex()
+        idx._embedding_nodes = [
+            {"concept_id": "m:a", "name": "A", "description": "",
+             "type": "concept", "facet": "measurement"},
+            {"concept_id": "f:a", "name": "B", "description": "",
+             "type": "focus", "facet": "focus"},
+        ]
+        idx._embedding_matrix = np.array([
+            [1.0, 0.0, 0.0, 0.0],
+            [0.0, 1.0, 0.0, 0.0],
+        ], dtype=np.float32)
+
+        import concept_search.embeddings as emb_mod
+        original = getattr(emb_mod, "embed_query", None)
+        emb_mod.embed_query = lambda q: np.array(
+            [0.7, 0.7, 0.0, 0.0], dtype=np.float32
+        )
+        try:
+            results = idx.search_concepts_by_embedding("test", top_k=10)
+            assert len(results) == 2
+        finally:
+            if original is not None:
+                emb_mod.embed_query = original

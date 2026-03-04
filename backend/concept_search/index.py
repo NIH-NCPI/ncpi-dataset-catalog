@@ -471,11 +471,13 @@ class ConceptIndex:
             )
 
     def _build_concept_embeddings(self) -> None:
-        """Generate embeddings for all concept+archetype nodes and store them.
+        """Generate embeddings for measurement and focus nodes, store them.
 
-        Uses the already-loaded ``_concept_descriptions`` dict. Each node is
-        embedded as ``"name: description"``.  Results are stored in the DuckDB
-        ``concept_embeddings`` table and cached in memory for KNN search.
+        Measurement nodes come from ``_concept_descriptions``.  Focus nodes
+        come from ``self._index[Facet.FOCUS]``.  Each node is embedded as
+        ``"name: description"`` (measurements) or just the term name (focus).
+        Results are stored in the DuckDB ``concept_embeddings`` table and
+        cached in memory for KNN search.
 
         Gracefully skips if sentence-transformers is not installed (e.g. in
         test environments).
@@ -483,12 +485,11 @@ class ConceptIndex:
         from . import embeddings
 
         descs = self._ensure_concept_descriptions()
-        if not descs:
-            logger.warning("No concept descriptions found — skipping embeddings")
-            return
 
         nodes: list[dict] = []
         texts: list[str] = []
+
+        # Measurement nodes from concept descriptions
         for cid, info in sorted(descs.items()):
             name = info.get("name", cid)
             desc = info.get("description", "")
@@ -496,12 +497,31 @@ class ConceptIndex:
             nodes.append({
                 "concept_id": cid,
                 "description": desc,
+                "facet": "measurement",
                 "name": name,
                 "type": node_type,
             })
             texts.append(f"{name}: {desc}" if desc else name)
 
-        logger.info("Embedding %d concept nodes...", len(texts))
+        # Focus nodes from the focus index
+        for _key, match in sorted(
+            self._index[Facet.FOCUS].items(), key=lambda x: x[0]
+        ):
+            focus_id = f"focus:{match.value.lower().replace(' ', '_')}"
+            nodes.append({
+                "concept_id": focus_id,
+                "description": "",
+                "facet": "focus",
+                "name": match.value,
+                "type": "focus",
+            })
+            texts.append(match.value)
+
+        if not texts:
+            logger.warning("No concept/focus nodes found — skipping embeddings")
+            return
+
+        logger.info("Embedding %d nodes (measurement + focus)...", len(texts))
         try:
             matrix = embeddings.embed_texts(texts)
         except ImportError:
@@ -516,7 +536,7 @@ class ConceptIndex:
         if isinstance(self.store, DuckDBStore):
             rows = [
                 (n["concept_id"], n["name"], n["description"], n["type"],
-                 matrix[i].tolist())
+                 matrix[i].tolist(), n["facet"])
                 for i, n in enumerate(nodes)
             ]
             self.store.load_concept_embeddings_batch(rows)
@@ -534,10 +554,11 @@ class ConceptIndex:
             return
         nodes: list[dict] = []
         vecs: list[list[float]] = []
-        for cid, name, desc, node_type, embedding in rows:
+        for cid, name, desc, node_type, embedding, facet in rows:
             nodes.append({
                 "concept_id": cid,
                 "description": desc or "",
+                "facet": facet or "measurement",
                 "name": name or cid,
                 "type": node_type or "concept",
             })
@@ -549,13 +570,16 @@ class ConceptIndex:
         )
 
     def search_concepts_by_embedding(
-        self, query: str, top_k: int = 10
+        self, query: str, top_k: int = 10, facet: str | None = None
     ) -> list[dict]:
-        """KNN search against concept+archetype embeddings.
+        """KNN search against concept/archetype/focus embeddings.
 
         Args:
             query: Natural-language query (e.g. "blood sugar", "eGFR").
             top_k: Number of results to return.
+            facet: Optional facet filter ("measurement" or "focus").
+                If None, searches all embedded nodes (measurement only
+                for backwards compatibility with existing callers).
 
         Returns:
             Top-K nodes with concept_id, name, description, type,
@@ -564,11 +588,14 @@ class ConceptIndex:
         if self._embedding_matrix is None or len(self._embedding_nodes) == 0:
             return []
 
+        # When facet filtering, request more results then filter post-KNN
+        raw_top_k = top_k * 3 if facet else top_k
+
         try:
             from . import embeddings
             query_vec = embeddings.embed_query(query)
             hits = embeddings.search_embeddings(
-                query_vec, self._embedding_matrix, top_k=top_k
+                query_vec, self._embedding_matrix, top_k=raw_top_k
             )
         except Exception:
             logger.exception("Embedding search failed — returning empty")
@@ -577,8 +604,19 @@ class ConceptIndex:
         results: list[dict] = []
         for idx, sim in hits:
             node = self._embedding_nodes[idx]
+            node_facet = node.get("facet", "measurement")
+
+            # Apply facet filter
+            if facet and node_facet != facet:
+                continue
+
             cid = node["concept_id"]
-            match = self._index[Facet.MEASUREMENT].get(cid.lower())
+            # Look up study_count from the appropriate facet index
+            if node_facet == "focus":
+                # Focus nodes use the term name as the index key
+                match = self._index[Facet.FOCUS].get(node["name"].lower())
+            else:
+                match = self._index[Facet.MEASUREMENT].get(cid.lower())
             results.append({
                 "concept_id": cid,
                 "description": node["description"],
@@ -587,6 +625,8 @@ class ConceptIndex:
                 "study_count": match.study_count if match else 0,
                 "type": node["type"],
             })
+            if len(results) >= top_k:
+                break
         return results
 
     def _load_measurement_concepts(self, llm_dir: Path) -> None:
