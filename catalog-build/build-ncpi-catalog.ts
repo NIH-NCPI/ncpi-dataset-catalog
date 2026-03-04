@@ -100,7 +100,7 @@ async function buildCatalog(): Promise<void> {
 
   // Attach variable summaries to studies
   const variableSummaries = loadVariableSummaries(
-    "catalog-build/classification/source"
+    "catalog-build/classification/output"
   );
   let studiesWithVars = 0;
   for (const study of ncpiPlatformStudies) {
