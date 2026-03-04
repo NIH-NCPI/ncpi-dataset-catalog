@@ -457,7 +457,7 @@ class TestForProfitNonProfit:
 
     def test_for_profit_pharma_cancer_research(self):
         """GA4GH: a for-profit pharma company doing cancer research gets
-        GRU + HMB + DS-CA (all minus -NPU variants).
+        GRU + HMB + HMP + HR + DS-CA (all minus -NPU variants).
 
         Profit status only filters NPU — it does NOT restrict base codes.
         """
@@ -641,9 +641,7 @@ class TestGruHmbHierarchy:
             assert "CADM" not in bases, f"CADM should not be eligible for {purpose}"
             assert "IRU" not in bases, f"IRU should not be eligible for {purpose}"
             # Standalone "NPU" (as base, not modifier) isn't a consent grant
-            assert "NPU" not in bases or not any(
-                parse_consent_code(c).base == "NPU" for c in result
-            ), f"NPU as base should not be eligible for {purpose}"
+            assert "NPU" not in bases, f"NPU as base should not be eligible for {purpose}"
 
 
 # ---------------------------------------------------------------------------
@@ -684,7 +682,7 @@ class TestDiseaseHierarchy:
         assert "LC" not in ds_diseases
 
     def test_cvd_hierarchy(self):
-        """CVD parent matches AF, HF, MI, PAD, STK, CHD."""
+        """CVD parent matches AF, CHD, STK (those present in fixture)."""
         result = compute_eligible_codes(
             EXTENDED_CODES, purpose="disease", disease="CVD"
         )
@@ -707,8 +705,8 @@ class TestDiseaseHierarchy:
         # Other diabetes children NOT matched (T1D doesn't expand to T2D)
         assert "T2D" not in ds_diseases
 
-    def test_diabetes_parent_matches_all_children(self):
-        """DIAB matches DS-DIAB, DS-T1D, DS-T2D, DS-T1DR, DS-IR."""
+    def test_diabetes_parent_matches_children_in_fixture(self):
+        """DIAB matches DS-DIAB, DS-T1D, DS-T2D, DS-T1DR, DS-IR (those in fixture)."""
         result = compute_eligible_codes(
             EXTENDED_CODES, purpose="disease", disease="DIAB"
         )
