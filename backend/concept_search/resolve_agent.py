@@ -60,7 +60,7 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 """Search the concept index for matching values.
 
                 Use this for measurement and consentCode facets. For focus
-                facets, prefer get_focus_category_terms instead.
+                facets, prefer search_concepts_by_embedding with facet="focus".
 
                 Args:
                     ctx: Run context with ConceptIndex dependency.
@@ -240,23 +240,30 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                 ctx: RunContext[ConceptIndex],
                 query: str,
                 top_k: int = 10,
+                facet: str = "measurement",
             ) -> list[dict]:
-                """Search concept and archetype nodes by semantic similarity.
+                """Search concept/archetype/focus nodes by semantic similarity.
 
                 Uses embedding KNN to find the most semantically similar
                 concepts. Works well for lay terms ("blood sugar" → glucose),
                 abbreviations ("eGFR"), and typos ("hematacrit").
 
+                For measurement mentions, use facet="measurement" (default).
+                For focus/disease mentions, pass facet="focus".
+
                 Args:
                     ctx: Run context with ConceptIndex dependency.
                     query: Natural-language search query.
                     top_k: Number of results to return (default 10).
+                    facet: Facet filter — "measurement" (default) or "focus".
 
                 Returns:
                     Top-K concepts with concept_id, name, description, type,
                     similarity score, and study_count.
                 """
-                return ctx.deps.search_concepts_by_embedding(query, top_k=top_k)
+                return ctx.deps.search_concepts_by_embedding(
+                    query, top_k=top_k, facet=facet
+                )
 
             @_agent.tool
             def get_concept_children(

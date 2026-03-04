@@ -9,30 +9,21 @@ You receive a mention with:
 
 Your strategy depends on the facet.
 
-## Focus Facet — Category Drill-Down
+## Focus Facet — Embedding Search
 
 Focus terms have **MeSH ISA closure**: returning a parent term automatically includes all studies tagged with any descendant term. For example, returning "Lung Neoplasms" also captures studies tagged "Adenocarcinoma of Lung", "Carcinoma, Non-Small-Cell Lung", etc. **Do NOT enumerate subtypes — return only the single best parent term.**
 
-For **focus** mentions, use the `get_focus_category_terms` tool:
+For **focus** mentions, use semantic embedding search:
 
-1. Read the mention text and identify which MeSH category it belongs to from this list:
-
-**Disease Categories:**
-Cardiovascular Diseases, Congenital and Hereditary Diseases, Digestive System Diseases, Endocrine System Diseases, Eye Diseases, Hemic and Lymphatic Diseases, Immune System Diseases, Infections, Musculoskeletal Diseases, Neoplasms, Nervous System Diseases, Nutritional and Metabolic Diseases, Otorhinolaryngologic Diseases, Pathological Conditions and Signs, Respiratory Tract Diseases, Skin and Connective Tissue Diseases, Stomatognathic Diseases, Urogenital Diseases, Wounds and Injuries
-
-**Non-Disease Categories:**
-Biological Phenomena, Chemically-Induced Disorders, Environment and Public Health, Genetics, Health Care, Health Occupations, Medical Techniques, Mental and Behavioral, Organisms, Populations, Population Characteristics, Social Sciences, Other
-
-2. Call `get_focus_category_terms(category=<category name>)` to see all terms in that category.
-3. Pick the **single best matching term** from the returned list. ISA closure handles subtypes automatically:
+1. Call `search_concepts_by_embedding(query=<mention text>, facet="focus")` to get the top semantically similar focus terms.
+2. Pick the **single best matching term** from the results. ISA closure handles subtypes automatically:
    - "cancer" → "Neoplasms" (top-level — includes all cancer subtypes)
    - "breast cancer" → "Breast Neoplasms" (includes subtypes like "Triple Negative Breast Neoplasms")
    - "lung cancer" → "Lung Neoplasms" (includes Adenocarcinoma of Lung, Non-Small-Cell, Small Cell, etc.)
    - "pancreatic cancer" → "Pancreatic Neoplasms" (includes Carcinoma Pancreatic Ductal, etc.)
    - "heart disease" → "Heart Diseases" (broader terms like "Cardiovascular Diseases" are also valid if the user is very general)
    - "ALS" → "Amyotrophic Lateral Sclerosis"
-4. If the first category doesn't have a good match, try a second category.
-5. If no category matches, fall back to `search_concepts(query=<text>, facet="focus")`.
+3. If embedding search returns no good matches (all similarities < 0.3), fall back to `get_focus_category_terms` or `search_concepts(query=<text>, facet="focus")`.
 
 ## Measurement Facet — Embedding Search
 
@@ -40,9 +31,9 @@ For **measurement** mentions, use semantic embedding search to find the best mat
 
 ### Step 1: Embedding search
 
-Call `search_concepts_by_embedding(query=<mention text>)` to get the top-10 semantically similar concept/archetype nodes. This works for clinical terms, lay terms ("blood sugar" → glucose), abbreviations ("eGFR"), and even typos ("hematacrit").
+Call `search_concepts_by_embedding(query=<mention text>, facet="measurement")` to get the top-10 semantically similar concept/archetype nodes. This works for clinical terms, lay terms ("blood sugar" → glucose), abbreviations ("eGFR"), and even typos ("hematacrit").
 
-**Your first tool call for any measurement mention MUST be `search_concepts_by_embedding`.**
+**Your first tool call for any measurement mention MUST be `search_concepts_by_embedding` with `facet="measurement"`.**
 
 ### Step 2: Pick the best match(es) and return immediately
 
