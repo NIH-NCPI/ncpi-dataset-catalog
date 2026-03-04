@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.13.0...v0.13.1) (2026-03-04)
+
+
+### Bug Fixes
+
+* correct variable summary source path ([#241](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/241)) ([e5cc665](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/e5cc665ff6d5fcaa8f1aaac21f1b09d3f6b68c39))
+
 ## [0.13.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.12.0...v0.13.0) (2026-03-04)
 
 
