@@ -31,7 +31,7 @@ import {
   StudyTable,
   UserBubble,
 } from "./chat.styles";
-import { getSearchApiUrl } from "./constants";
+import { getSearchApiUrl } from "../../utils/searchApiUrl";
 
 interface Mention {
   exclude: boolean;

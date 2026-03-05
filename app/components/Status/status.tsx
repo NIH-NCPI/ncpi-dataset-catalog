@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { JSX, useEffect, useState } from "react";
-import { getSearchApiUrl } from "../Chat/constants";
+import { getSearchApiUrl } from "../../utils/searchApiUrl";
 import { Content } from "../Layout/components/Content/content";
 
 const FETCH_TIMEOUT_MS = 15_000;
@@ -135,7 +135,11 @@ export const Status = (): JSX.Element => {
 
   useEffect(() => {
     if (!searchApiUrl) {
-      setState({ error: "AI service URL is not configured.", status: "error" });
+      setState({
+        error:
+          "Search API URL is not configured. Set NEXT_PUBLIC_SEARCH_API_URL or config.ai.url.",
+        status: "error",
+      });
       return;
     }
     let isMounted = true;
