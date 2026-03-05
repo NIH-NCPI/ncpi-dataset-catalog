@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.14.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.13.1...v0.14.0) (2026-03-05)
+
+
+### Features
+
+* add Variables tab to research section study detail ([#246](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/246)) ([c940922](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/c94092277df7f8f78b2d451cb0990c56dc307798))
+
+
+### Bug Fixes
+
+* deep-link to specific dbGaP variable from research view ([#247](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/247)) ([6dff704](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/6dff704589d0eac4a679080511d83169c3e7b139))
+
 ## [0.13.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.13.0...v0.13.1) (2026-03-04)
 
 
