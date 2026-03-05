@@ -57,13 +57,21 @@ export const Hero = ({
         <StyledRequestAccess ncpiCatalogStudy={study} />
       </StyledGrid>
       <StyledTabs
-        onChange={(_, v) =>
-          Router.push({ query: { researchType, studyParams: [studyId, v] } })
-        }
+        onChange={(_, v) => {
+          const studyParams = v ? [studyId, v] : [studyId];
+          Router.push({ query: { researchType, studyParams } });
+        }}
         value={subpath}
       >
         <Tab label="Overview" value="" />
-        <Tab label="Selected Publications" value="selected-publications" />
+        <Tab
+          label={`Selected Publications (${(study.publications ?? []).length})`}
+          value="selected-publications"
+        />
+        <Tab
+          label={`Variables (${(study.variableSummary?.totalVariables ?? 0).toLocaleString()})`}
+          value="variables"
+        />
       </StyledTabs>
     </Fragment>
   );
