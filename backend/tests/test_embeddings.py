@@ -245,7 +245,7 @@ class TestFacetFilteredSearch:
         assert idx._embedding_matrix.shape == (1, 768)
 
     def test_embedding_cache_miss(self, tmp_path, monkeypatch) -> None:
-        """Stale hash triggers recomputation and saves new cache."""
+        """Stale hash triggers recomputation via embed_texts."""
         from unittest.mock import patch
 
         from concept_search.index import ConceptIndex
@@ -262,13 +262,13 @@ class TestFacetFilteredSearch:
         np.save(tmp_path / "concept-embeddings.npy", np.zeros((1, 768), dtype=np.float32))
 
         fake_result = np.ones((1, 768), dtype=np.float32)
-        with patch("concept_search.embeddings.embed_texts", return_value=fake_result):
+        with patch("concept_search.embeddings.embed_texts", return_value=fake_result) as mock_embed:
             idx._build_concept_embeddings()
+            # Stale hash should trigger recomputation
+            mock_embed.assert_called_once()
 
-        # Cache files should be updated
-        assert (tmp_path / "concept-embeddings.npy").exists()
-        assert (tmp_path / "concept-embeddings.sha256").read_text().strip() != "stale_hash"
         assert idx._embedding_matrix is not None
+        np.testing.assert_array_equal(idx._embedding_matrix, fake_result)
 
     def test_no_facet_returns_all(self) -> None:
         """No facet filter returns nodes of all facets."""

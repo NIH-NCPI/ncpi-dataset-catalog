@@ -543,16 +543,29 @@ class ConceptIndex:
         hash_path = cache_dir / "concept-embeddings.sha256"
 
         if npy_path.exists() and hash_path.exists():
-            cached_hash = hash_path.read_text().strip()
-            if cached_hash == text_hash:
-                logger.info(
-                    "Embedding cache hit (%d nodes, hash %s…) — skipping model load",
-                    len(texts),
-                    text_hash[:12],
+            try:
+                cached_hash = hash_path.read_text().strip()
+                if cached_hash == text_hash:
+                    matrix = np.load(npy_path)
+                    if matrix.ndim == 2 and matrix.shape[0] == len(nodes):
+                        logger.info(
+                            "Embedding cache hit (%d nodes, hash %s…) "
+                            "— skipping model load",
+                            len(texts),
+                            text_hash[:12],
+                        )
+                        self._store_embeddings(nodes, matrix)
+                        return
+                    logger.warning(
+                        "Embedding cache shape mismatch — expected %d rows, "
+                        "got %s; recomputing",
+                        len(nodes),
+                        matrix.shape,
+                    )
+            except (OSError, ValueError) as exc:
+                logger.warning(
+                    "Failed to read embedding cache: %s — recomputing", exc
                 )
-                matrix = np.load(npy_path)
-                self._store_embeddings(nodes, matrix)
-                return
 
         logger.info("Embedding %d nodes (measurement + focus)...", len(texts))
         try:
@@ -565,11 +578,15 @@ class ConceptIndex:
             return
         logger.info("Embedding complete: %s", matrix.shape)
 
-        # Save cache for next time
+        # Save cache — write to temp files then atomically replace
         try:
             cache_dir.mkdir(parents=True, exist_ok=True)
-            np.save(npy_path, matrix)
-            hash_path.write_text(text_hash + "\n")
+            tmp_npy = npy_path.parent / (npy_path.name + ".tmp")
+            tmp_hash = hash_path.parent / (hash_path.name + ".tmp")
+            np.save(tmp_npy, matrix)
+            tmp_hash.write_text(text_hash + "\n")
+            os.replace(tmp_npy, npy_path)
+            os.replace(tmp_hash, hash_path)
             logger.info("Saved embedding cache: %s", npy_path)
         except OSError:
             logger.warning("Could not save embedding cache to %s", cache_dir)
