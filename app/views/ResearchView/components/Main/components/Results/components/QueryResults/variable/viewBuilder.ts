@@ -2,6 +2,7 @@ import * as C from "../../../../../../../../../components";
 import { CellContext } from "@tanstack/react-table";
 import { JSX } from "react";
 import { Variable } from "../../../types/variable";
+import { ROUTES } from "../../../../../../../../../../routes/constants";
 
 /**
  * Builds props for the dbGapUrl Link component.
@@ -27,6 +28,6 @@ export const renderStudyTitle = (
 ): JSX.Element => {
   return C.Link({
     label: ctx.row.original.studyTitle ?? ctx.row.original.studyId,
-    url: ctx.row.original.studyUrl,
+    url: `${ROUTES.RESEARCH_STUDIES}/${ctx.row.original.studyId}`,
   });
 };

@@ -21,7 +21,7 @@ const DESCRIPTION: ColumnDef<Variable> = {
   accessorKey: "description",
   header: "Description",
   id: "description",
-  meta: { width: { max: "1fr", min: "140px" } },
+  meta: { width: { max: "3fr", min: "200px" } },
 };
 
 const STUDY_TITLE: ColumnDef<Variable> = {
@@ -36,7 +36,7 @@ const VARIABLE_NAME: ColumnDef<Variable> = {
   accessorKey: "variableName",
   header: "Variable Name",
   id: "variableName",
-  meta: { width: { max: "2fr", min: "160px" } },
+  meta: { width: { max: "1fr", min: "140px" } },
 };
 
 export const COLUMNS: ColumnDef<Variable>[] = [
