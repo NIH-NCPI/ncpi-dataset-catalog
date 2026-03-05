@@ -546,8 +546,9 @@ class ConceptIndex:
             try:
                 cached_hash = hash_path.read_text().strip()
                 if cached_hash == text_hash:
-                    matrix = np.load(npy_path)
-                    if matrix.ndim == 2 and matrix.shape[0] == len(nodes):
+                    matrix = np.load(npy_path, allow_pickle=False)
+                    expected = (len(nodes), 768)
+                    if matrix.shape == expected:
                         logger.info(
                             "Embedding cache hit (%d nodes, hash %s…) "
                             "— skipping model load",
@@ -583,7 +584,8 @@ class ConceptIndex:
             cache_dir.mkdir(parents=True, exist_ok=True)
             tmp_npy = npy_path.parent / (npy_path.name + ".tmp")
             tmp_hash = hash_path.parent / (hash_path.name + ".tmp")
-            np.save(tmp_npy, matrix)
+            with open(tmp_npy, "wb") as f:
+                np.save(f, matrix)
             tmp_hash.write_text(text_hash + "\n")
             os.replace(tmp_npy, npy_path)
             os.replace(tmp_hash, hash_path)
