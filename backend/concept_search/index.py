@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import os
@@ -55,6 +56,15 @@ def _resolve_cache_path() -> Path:
         return Path(explicit)
     repo_root = _resolve_repo_root()
     return repo_root / "catalog" / "concept-search.duckdb"
+
+
+def _resolve_embedding_cache_dir() -> Path:
+    """Resolve the directory for cached embedding .npy files."""
+    explicit = os.environ.get("NCPI_EMBEDDING_CACHE_DIR")
+    if explicit:
+        return Path(explicit)
+    repo_root = _resolve_repo_root()
+    return repo_root / "catalog-build" / "classification" / "output"
 
 
 def _resolve_demographics_path() -> Path:
@@ -479,6 +489,10 @@ class ConceptIndex:
         Results are stored in the DuckDB ``concept_embeddings`` table and
         cached in memory for KNN search.
 
+        Uses a content hash of the input texts to skip recomputation when
+        the underlying vocabulary hasn't changed.  Cached embeddings are
+        stored as ``.npy`` + ``.sha256`` files alongside the concept vocabulary.
+
         Gracefully skips if sentence-transformers is not installed (e.g. in
         test environments).
         """
@@ -522,6 +536,24 @@ class ConceptIndex:
             logger.warning("No concept/focus nodes found — skipping embeddings")
             return
 
+        # Check content hash against cached embeddings
+        text_hash = hashlib.sha256("\n".join(texts).encode()).hexdigest()
+        cache_dir = _resolve_embedding_cache_dir()
+        npy_path = cache_dir / "concept-embeddings.npy"
+        hash_path = cache_dir / "concept-embeddings.sha256"
+
+        if npy_path.exists() and hash_path.exists():
+            cached_hash = hash_path.read_text().strip()
+            if cached_hash == text_hash:
+                logger.info(
+                    "Embedding cache hit (%d nodes, hash %s…) — skipping model load",
+                    len(texts),
+                    text_hash[:12],
+                )
+                matrix = np.load(npy_path)
+                self._store_embeddings(nodes, matrix)
+                return
+
         logger.info("Embedding %d nodes (measurement + focus)...", len(texts))
         try:
             matrix = embeddings.embed_texts(texts)
@@ -533,7 +565,26 @@ class ConceptIndex:
             return
         logger.info("Embedding complete: %s", matrix.shape)
 
-        # Store in DuckDB
+        # Save cache for next time
+        try:
+            cache_dir.mkdir(parents=True, exist_ok=True)
+            np.save(npy_path, matrix)
+            hash_path.write_text(text_hash + "\n")
+            logger.info("Saved embedding cache: %s", npy_path)
+        except OSError:
+            logger.warning("Could not save embedding cache to %s", cache_dir)
+
+        self._store_embeddings(nodes, matrix)
+
+    def _store_embeddings(
+        self, nodes: list[dict], matrix: np.ndarray
+    ) -> None:
+        """Store embedding nodes and matrix in DuckDB and memory.
+
+        Args:
+            nodes: Node metadata dicts.
+            matrix: (N, 768) embedding matrix.
+        """
         if isinstance(self.store, DuckDBStore):
             rows = [
                 (n["concept_id"], n["name"], n["description"], n["type"],

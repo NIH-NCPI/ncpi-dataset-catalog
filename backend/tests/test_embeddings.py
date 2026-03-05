@@ -213,6 +213,63 @@ class TestFacetFilteredSearch:
             if original is not None:
                 emb_mod.embed_query = original
 
+    def test_embedding_cache_hit(self, tmp_path, monkeypatch) -> None:
+        """Cached .npy + matching hash skips embed_texts entirely."""
+        import hashlib
+        from unittest.mock import patch
+
+        from concept_search.index import ConceptIndex
+
+        idx = ConceptIndex()
+        # Minimal concept description so there's at least one node
+        idx._concept_descriptions = {
+            "topmed:bp": {"description": "Blood pressure", "name": "BP"},
+        }
+
+        # Point embedding cache dir at tmp_path
+        monkeypatch.setenv("NCPI_EMBEDDING_CACHE_DIR", str(tmp_path))
+
+        # Pre-populate cache with a matching hash and fake .npy
+        texts = ["BP: Blood pressure"]  # matches what _build would produce
+        text_hash = hashlib.sha256("\n".join(texts).encode()).hexdigest()
+        fake_matrix = np.random.default_rng(0).standard_normal((1, 768)).astype(np.float32)
+        np.save(tmp_path / "concept-embeddings.npy", fake_matrix)
+        (tmp_path / "concept-embeddings.sha256").write_text(text_hash + "\n")
+
+        # embed_texts should NOT be called — cache hit
+        with patch("concept_search.embeddings.embed_texts") as mock_embed:
+            idx._build_concept_embeddings()
+            mock_embed.assert_not_called()
+
+        assert idx._embedding_matrix is not None
+        assert idx._embedding_matrix.shape == (1, 768)
+
+    def test_embedding_cache_miss(self, tmp_path, monkeypatch) -> None:
+        """Stale hash triggers recomputation and saves new cache."""
+        from unittest.mock import patch
+
+        from concept_search.index import ConceptIndex
+
+        idx = ConceptIndex()
+        idx._concept_descriptions = {
+            "topmed:bp": {"description": "Blood pressure", "name": "BP"},
+        }
+
+        monkeypatch.setenv("NCPI_EMBEDDING_CACHE_DIR", str(tmp_path))
+
+        # Write a stale hash
+        (tmp_path / "concept-embeddings.sha256").write_text("stale_hash\n")
+        np.save(tmp_path / "concept-embeddings.npy", np.zeros((1, 768), dtype=np.float32))
+
+        fake_result = np.ones((1, 768), dtype=np.float32)
+        with patch("concept_search.embeddings.embed_texts", return_value=fake_result):
+            idx._build_concept_embeddings()
+
+        # Cache files should be updated
+        assert (tmp_path / "concept-embeddings.npy").exists()
+        assert (tmp_path / "concept-embeddings.sha256").read_text().strip() != "stale_hash"
+        assert idx._embedding_matrix is not None
+
     def test_no_facet_returns_all(self) -> None:
         """No facet filter returns nodes of all facets."""
         from concept_search.index import ConceptIndex
