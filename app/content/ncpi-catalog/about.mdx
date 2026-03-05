@@ -2,16 +2,33 @@
 
 The NCPI Dataset Catalog helps researchers **discover** studies across NIH cloud platforms. It builds on the rich metadata that dbGaP and NLM publish for ~2,944 studies — adding cross-platform search, measurement classification, and demographic faceting on top of ~425,000 variables.
 
-The catalog indexes studies from four platforms:
+The catalog indexes studies from four NIH cloud platforms and from dbGaP:
 
 - **AnVIL** — NHGRI's Genomic Data Science Analysis, Visualization, and Informatics Lab-Space
 - **BDC** — NHLBI BioData Catalyst
 - **CRDC** — NCI Cancer Research Data Commons
 - **KFDRC** — Kids First Data Resource Center
+- **dbGaP** — NCBI's Database of Genotypes and Phenotypes
+
+## Classification Philosophy
 
 Our classification strategy **prioritizes recall over precision**: we'd rather surface a study that might be relevant than miss one that is. A researcher searching for "blood pressure" should find every study that measured it, even if a few false positives slip in.
 
-**Key limitation:** All data in the catalog comes from dbGaP's publicly available metadata — variable names, descriptions, and per-variable aggregate statistics. There is no participant-level data, so we can only report distributions for individual variables independently. We can say "this study has 3,369 female participants" and "1,450 Hispanic participants," but not "how many Hispanic females" — cross-tabulations between variables require authorized access to the actual study data.
+## Aggregate Data Only — No Subject-Level Information
+
+All data in the catalog comes from dbGaP's publicly available metadata — variable names, descriptions, and per-variable aggregate statistics. There is no participant-level data, so we can only report distributions for individual variables independently. We can say "this study has 3,369 female participants" and "1,450 Hispanic participants," but not "how many Hispanic females" — cross-tabulations between variables require authorized access to the actual study data.
+
+## Applying for Study Access
+
+To work with subject-level data, researchers can apply for authorized access through [dbGaP](https://dbgap.ncbi.nlm.nih.gov/) or the Broad Institute's [DUOS](https://duos.broadinstitute.org/) system.
+
+## What's on a Study Page
+
+Each study detail page includes:
+
+- **Study description** — the full description from dbGaP
+- **Selected publications** — PI-curated references with title, authors, journal, DOI, and citation count, resolved via the Semantic Scholar API
+- **Measured variables** — linked directly to their dbGaP records (phv IDs) so researchers can drill into the authoritative source data
 
 ## What You Can Search
 
@@ -96,6 +113,22 @@ The vocabulary is organized into a **4-level hierarchy**: 20 top-level categorie
 
 For example, searching "ECG QT interval" resolves to a specific archetype (114 variables across 25 studies), while searching "all ECG measurements" resolves to the parent concept and ISA closure returns all 10,541 variables across 41 archetypes.
 
+#### Embedding-Based Concept Search
+
+The Resolve agent needs to map free-text mentions (e.g., "blood sugar") to canonical concepts (e.g., "Fasting Glucose"). Keyword matching alone misses synonyms and paraphrases, so the search index also supports **semantic similarity search** using vector embeddings.
+
+At index build time, every concept and focus term label is encoded into a 768-dimensional vector. At query time, the user's mention is encoded the same way, and the index finds the closest concepts by **cosine similarity** (implemented as a dot product on L2-normalized vectors). This lets the Resolve agent find relevant concepts even when the wording doesn't overlap — "blood sugar" matches "Fasting Glucose" because the model understands they refer to the same measurement.
+
+The embedding model is [**S-PubMedBert-MS-MARCO**](https://huggingface.co/pritamdeka/S-PubMedBert-MS-MARCO), loaded via the **sentence-transformers** Python library. We chose this model for two reasons: its **PubMedBERT** pretraining gives it strong biomedical vocabulary understanding (it knows that "MI" means myocardial infarction, not "Michigan"), and its **MS MARCO** fine-tuning optimizes it for retrieval — matching short queries against longer descriptions. Embeddings are cached in DuckDB so they only need to be computed once per catalog rebuild.
+
+#### Disease Focus Hierarchy via MeSH
+
+The catalog's disease/focus facet uses the **Medical Subject Headings (MeSH)** controlled vocabulary from the National Library of Medicine to organize ~800 study focus terms into a browsable hierarchy.
+
+Each focus term from the dbGaP CSV is looked up against the NLM MeSH API ([https://id.nlm.nih.gov/mesh](https://id.nlm.nih.gov/mesh)) to retrieve its **tree numbers** — positional codes that encode where a term sits in MeSH's hierarchy (e.g., Diabetes Mellitus is C18.452.394, under Nutritional and Metabolic Diseases → Metabolic Diseases). The top-level tree prefix (e.g., C14) maps to one of ~20 consolidated disease categories like "Cardiovascular Diseases" or "Neoplasms."
+
+From the tree numbers, the build process derives **ISA (child→parent) edges** by walking up each tree number to find the nearest ancestor that is also a catalog focus term. MeSH is a **polyhierarchy** — a single term can appear in multiple branches (e.g., a genetic cancer syndrome has tree numbers under both Neoplasms and Congenital Diseases) — so a term may have parents in more than one category. The resulting ISA graph lets the search index compute transitive closure: selecting "Pancreatic Neoplasms" automatically returns studies tagged with any descendant term like "Pancreatic Ductal Adenocarcinoma."
+
 #### Archetype Generation
 
 After classification, 185 concepts still have more than 200 variables each — too coarse for specific queries. But the variables aren't distinct measurements: ECG atrial fibrillation appears as AFIB, ATRFIB21, ECGAFIB, afib_s1, ecg_af across 40+ studies. The 10,541 "ECG" variables represent roughly 40 distinct measurement types.
@@ -149,3 +182,9 @@ The search API normalizes these on load using a bundled mapping file:
 When multiple verbatim labels in one study map to the same canonical category, their counts are summed. This lets researchers search for "female participants" and match studies regardless of how the original study reported sex.
 
 Current coverage: **1,212 studies with sex data**, **1,064 with race/ethnicity**, **462 with computed ancestry** (1,734 total with at least one demographic field).
+
+---
+
+## Feedback
+
+For questions, comments, or feedback, please email [dave@clevercanary.com](mailto:dave@clevercanary.com).
