@@ -149,7 +149,17 @@ export const Status = (): JSX.Element => {
       didTimeout = true;
       controller.abort();
     }, FETCH_TIMEOUT_MS);
-    fetch(getHealthUrl(searchApiUrl), { signal: controller.signal })
+    let healthUrl: string;
+    try {
+      healthUrl = getHealthUrl(searchApiUrl);
+    } catch (err) {
+      setState({
+        error: err instanceof Error ? err.message : "Invalid search API URL.",
+        status: "error",
+      });
+      return;
+    }
+    fetch(healthUrl, { signal: controller.signal })
       .then((res) => {
         if (!res.ok) throw new Error(`Health check failed (${res.status})`);
         return res.json();

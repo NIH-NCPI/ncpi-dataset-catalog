@@ -150,7 +150,9 @@ export const Chat = (): JSX.Element => {
 
     try {
       if (!searchApiUrl) {
-        throw new Error("Search API URL is not configured.");
+        throw new Error(
+          "Search API URL is not configured. Set NEXT_PUBLIC_SEARCH_API_URL or config.ai.url."
+        );
       }
       const res = await fetch(searchApiUrl, {
         body: JSON.stringify({ query }),
