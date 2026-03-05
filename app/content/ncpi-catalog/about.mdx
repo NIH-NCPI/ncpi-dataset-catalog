@@ -2,7 +2,7 @@
 
 The NCPI Dataset Catalog helps researchers **discover** studies across NIH cloud platforms. It builds on the rich metadata that dbGaP and NLM publish for ~2,944 studies — adding cross-platform search, measurement classification, and demographic faceting on top of ~425,000 variables.
 
-The catalog indexes studies from four NIH cloud platforms plus dbGaP:
+The catalog indexes studies from four NIH cloud platforms and from dbGaP:
 
 - **AnVIL** — NHGRI's Genomic Data Science Analysis, Visualization, and Informatics Lab-Space
 - **BDC** — NHLBI BioData Catalyst
@@ -125,7 +125,7 @@ The embedding model is [**S-PubMedBert-MS-MARCO**](https://huggingface.co/pritam
 
 The catalog's disease/focus facet uses the **Medical Subject Headings (MeSH)** controlled vocabulary from the National Library of Medicine to organize ~800 study focus terms into a browsable hierarchy.
 
-Each focus term from the dbGaP CSV is looked up against the NLM MeSH API (`id.nlm.nih.gov/mesh`) to retrieve its **tree numbers** — positional codes that encode where a term sits in MeSH's hierarchy (e.g., Diabetes Mellitus is C18.452.394, under Nutritional and Metabolic Diseases → Metabolic Diseases). The top-level tree prefix (e.g., C14) maps to one of ~20 consolidated disease categories like "Cardiovascular Diseases" or "Neoplasms."
+Each focus term from the dbGaP CSV is looked up against the NLM MeSH API ([https://id.nlm.nih.gov/mesh](https://id.nlm.nih.gov/mesh)) to retrieve its **tree numbers** — positional codes that encode where a term sits in MeSH's hierarchy (e.g., Diabetes Mellitus is C18.452.394, under Nutritional and Metabolic Diseases → Metabolic Diseases). The top-level tree prefix (e.g., C14) maps to one of ~20 consolidated disease categories like "Cardiovascular Diseases" or "Neoplasms."
 
 From the tree numbers, the build process derives **ISA (child→parent) edges** by walking up each tree number to find the nearest ancestor that is also a catalog focus term. MeSH is a **polyhierarchy** — a single term can appear in multiple branches (e.g., a genetic cancer syndrome has tree numbers under both Neoplasms and Congenital Diseases) — so a term may have parents in more than one category. The resulting ISA graph lets the search index compute transitive closure: selecting "Pancreatic Neoplasms" automatically returns studies tagged with any descendant term like "Pancreatic Ductal Adenocarcinoma."
 
