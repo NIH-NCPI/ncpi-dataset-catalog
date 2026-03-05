@@ -13,6 +13,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { JSX, useEffect, useState } from "react";
+import { getSearchApiUrl } from "../Chat/constants";
 import { Content } from "../Layout/components/Content/content";
 
 const FETCH_TIMEOUT_MS = 15_000;
@@ -130,9 +131,10 @@ export const Status = (): JSX.Element => {
   const { config } = useConfig();
   const [state, setState] = useState<FetchState>({ status: "loading" });
 
+  const searchApiUrl = getSearchApiUrl(config.ai?.url);
+
   useEffect(() => {
-    const aiUrl = config.ai?.url;
-    if (!aiUrl) {
+    if (!searchApiUrl) {
       setState({ error: "AI service URL is not configured.", status: "error" });
       return;
     }
@@ -143,7 +145,7 @@ export const Status = (): JSX.Element => {
       didTimeout = true;
       controller.abort();
     }, FETCH_TIMEOUT_MS);
-    fetch(getHealthUrl(aiUrl), { signal: controller.signal })
+    fetch(getHealthUrl(searchApiUrl), { signal: controller.signal })
       .then((res) => {
         if (!res.ok) throw new Error(`Health check failed (${res.status})`);
         return res.json();
@@ -170,7 +172,7 @@ export const Status = (): JSX.Element => {
       clearTimeout(timeout);
       controller.abort();
     };
-  }, [config.ai?.url]);
+  }, [searchApiUrl]);
 
   if (state.status === "loading") {
     return (

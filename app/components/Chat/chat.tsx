@@ -1,3 +1,4 @@
+import { useConfig } from "@databiosphere/findable-ui/lib/hooks/useConfig";
 import { useLayoutDimensions } from "@databiosphere/findable-ui/lib/providers/layoutDimensions/hook";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import {
@@ -30,7 +31,7 @@ import {
   StudyTable,
   UserBubble,
 } from "./chat.styles";
-import { SEARCH_API_URL } from "./constants";
+import { getSearchApiUrl } from "./constants";
 
 interface Mention {
   exclude: boolean;
@@ -103,6 +104,7 @@ type Message = AssistantMessage | ErrorMessage | UserMessage;
  * @returns Chat UI element.
  */
 export const Chat = (): JSX.Element => {
+  const { config } = useConfig();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -114,6 +116,7 @@ export const Chat = (): JSX.Element => {
   const draftRef = useRef("");
   const { dimensions } = useLayoutDimensions();
   const headerHeight = dimensions.header.height;
+  const searchApiUrl = getSearchApiUrl(config.ai?.url);
 
   // Auto-scroll to bottom on new messages.
   useEffect(() => {
@@ -146,10 +149,10 @@ export const Chat = (): JSX.Element => {
     const timeout = setTimeout(() => controller.abort(), 90_000);
 
     try {
-      if (!SEARCH_API_URL) {
+      if (!searchApiUrl) {
         throw new Error("Search API URL is not configured.");
       }
-      const res = await fetch(SEARCH_API_URL, {
+      const res = await fetch(searchApiUrl, {
         body: JSON.stringify({ query }),
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -183,7 +186,7 @@ export const Chat = (): JSX.Element => {
       clearTimeout(timeout);
       setLoading(false);
     }
-  }, [input, loading]);
+  }, [input, loading, searchApiUrl]);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
