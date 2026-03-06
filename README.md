@@ -21,6 +21,16 @@ npm run dev
 
 The site will be available at http://localhost:3000.
 
+### Local backend override
+
+To point the AI search UI at a local backend, create a `.env.local` file in the project root (this file is gitignored):
+
+```bash
+NEXT_PUBLIC_SEARCH_API_URL='http://localhost:8000/search'
+```
+
+This overrides the deployed URL configured in `site-config/`. If the env var is not set, the app falls back to the `ai.url` value from the site config.
+
 ## Building the Site
 
 ```bash

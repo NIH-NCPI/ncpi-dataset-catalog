@@ -13,6 +13,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { JSX, useEffect, useState } from "react";
+import { getSearchApiUrl } from "../../utils/searchApiUrl";
 import { Content } from "../Layout/components/Content/content";
 
 const FETCH_TIMEOUT_MS = 15_000;
@@ -130,10 +131,15 @@ export const Status = (): JSX.Element => {
   const { config } = useConfig();
   const [state, setState] = useState<FetchState>({ status: "loading" });
 
+  const searchApiUrl = getSearchApiUrl(config.ai?.url);
+
   useEffect(() => {
-    const aiUrl = config.ai?.url;
-    if (!aiUrl) {
-      setState({ error: "AI service URL is not configured.", status: "error" });
+    if (!searchApiUrl) {
+      setState({
+        error:
+          "Search API URL is not configured. Set NEXT_PUBLIC_SEARCH_API_URL or config.ai.url.",
+        status: "error",
+      });
       return;
     }
     let isMounted = true;
@@ -143,7 +149,17 @@ export const Status = (): JSX.Element => {
       didTimeout = true;
       controller.abort();
     }, FETCH_TIMEOUT_MS);
-    fetch(getHealthUrl(aiUrl), { signal: controller.signal })
+    let healthUrl: string;
+    try {
+      healthUrl = getHealthUrl(searchApiUrl);
+    } catch (err) {
+      setState({
+        error: err instanceof Error ? err.message : "Invalid search API URL.",
+        status: "error",
+      });
+      return;
+    }
+    fetch(healthUrl, { signal: controller.signal })
       .then((res) => {
         if (!res.ok) throw new Error(`Health check failed (${res.status})`);
         return res.json();
@@ -170,7 +186,7 @@ export const Status = (): JSX.Element => {
       clearTimeout(timeout);
       controller.abort();
     };
-  }, [config.ai?.url]);
+  }, [searchApiUrl]);
 
   if (state.status === "loading") {
     return (
