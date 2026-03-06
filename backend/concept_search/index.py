@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import os
@@ -55,6 +56,15 @@ def _resolve_cache_path() -> Path:
         return Path(explicit)
     repo_root = _resolve_repo_root()
     return repo_root / "catalog" / "concept-search.duckdb"
+
+
+def _resolve_embedding_cache_dir() -> Path:
+    """Resolve the directory for cached embedding .npy files."""
+    explicit = os.environ.get("NCPI_EMBEDDING_CACHE_DIR")
+    if explicit:
+        return Path(explicit)
+    repo_root = _resolve_repo_root()
+    return repo_root / "catalog-build" / "classification" / "output"
 
 
 def _resolve_demographics_path() -> Path:
@@ -479,6 +489,10 @@ class ConceptIndex:
         Results are stored in the DuckDB ``concept_embeddings`` table and
         cached in memory for KNN search.
 
+        Uses a content hash of the input texts to skip recomputation when
+        the underlying vocabulary hasn't changed.  Cached embeddings are
+        stored as ``.npy`` + ``.sha256`` files alongside the concept vocabulary.
+
         Gracefully skips if sentence-transformers is not installed (e.g. in
         test environments).
         """
@@ -522,6 +536,38 @@ class ConceptIndex:
             logger.warning("No concept/focus nodes found — skipping embeddings")
             return
 
+        # Check content hash against cached embeddings
+        text_hash = hashlib.sha256("\n".join(texts).encode()).hexdigest()
+        cache_dir = _resolve_embedding_cache_dir()
+        npy_path = cache_dir / "concept-embeddings.npy"
+        hash_path = cache_dir / "concept-embeddings.sha256"
+
+        if npy_path.exists() and hash_path.exists():
+            try:
+                cached_hash = hash_path.read_text().strip()
+                if cached_hash == text_hash:
+                    matrix = np.load(npy_path, allow_pickle=False)
+                    expected = (len(nodes), 768)
+                    if matrix.shape == expected:
+                        logger.info(
+                            "Embedding cache hit (%d nodes, hash %s…) "
+                            "— skipping model load",
+                            len(texts),
+                            text_hash[:12],
+                        )
+                        self._store_embeddings(nodes, matrix)
+                        return
+                    logger.warning(
+                        "Embedding cache shape mismatch — expected %d rows, "
+                        "got %s; recomputing",
+                        len(nodes),
+                        matrix.shape,
+                    )
+            except (OSError, ValueError) as exc:
+                logger.warning(
+                    "Failed to read embedding cache: %s — recomputing", exc
+                )
+
         logger.info("Embedding %d nodes (measurement + focus)...", len(texts))
         try:
             matrix = embeddings.embed_texts(texts)
@@ -533,7 +579,31 @@ class ConceptIndex:
             return
         logger.info("Embedding complete: %s", matrix.shape)
 
-        # Store in DuckDB
+        # Save cache — write to temp files then atomically replace
+        try:
+            cache_dir.mkdir(parents=True, exist_ok=True)
+            tmp_npy = npy_path.parent / (npy_path.name + ".tmp")
+            tmp_hash = hash_path.parent / (hash_path.name + ".tmp")
+            with open(tmp_npy, "wb") as f:
+                np.save(f, matrix)
+            tmp_hash.write_text(text_hash + "\n")
+            os.replace(tmp_npy, npy_path)
+            os.replace(tmp_hash, hash_path)
+            logger.info("Saved embedding cache: %s", npy_path)
+        except OSError:
+            logger.warning("Could not save embedding cache to %s", cache_dir)
+
+        self._store_embeddings(nodes, matrix)
+
+    def _store_embeddings(
+        self, nodes: list[dict], matrix: np.ndarray
+    ) -> None:
+        """Store embedding nodes and matrix in DuckDB and memory.
+
+        Args:
+            nodes: Node metadata dicts.
+            matrix: (N, 768) embedding matrix.
+        """
         if isinstance(self.store, DuckDBStore):
             rows = [
                 (n["concept_id"], n["name"], n["description"], n["type"],
