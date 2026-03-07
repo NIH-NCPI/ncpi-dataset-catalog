@@ -1,0 +1,52 @@
+{
+  "studyId": "phs003548",
+  "studyName": "Heart Failure Network - Nitrate's Effect on Activity Tolerance in Heart Failure with Preserved Ejection Fraction (HFN NEAT-BioLINCC)",
+  "tables": [
+    {
+      "tableName": "BioLINCC_HFN_NEAT_Subject",
+      "datasetId": "pht014296.v1",
+      "description": "This subject consent data table contains subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "Consent",
+          "id": "phv00536168.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATNUMB",
+          "id": "phv00536167.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BioLINCC_HFN_NEAT_Sample",
+      "datasetId": "pht014297.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "PATNUMB",
+          "id": "phv00536169.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_ID",
+          "id": "phv00536170.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

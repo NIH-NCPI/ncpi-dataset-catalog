@@ -1,0 +1,281 @@
+{
+  "studyId": "phs001961",
+  "studyName": "LungMAP: Molecular Atlas of Lung Development - Human Lung Tissue",
+  "tables": [
+    {
+      "tableName": "LungMAP_Sample_Attributes",
+      "datasetId": "pht011030.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "ASSAY_NAME",
+          "id": "phv00482863.v2.p1",
+          "description": "Molecular omics profilng methodology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BARCODE_ID",
+          "id": "phv00482861.v2.p1",
+          "description": "Molecular barcode or unique identifier associated with the biological specimen",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BATCH_ID",
+          "id": "phv00482869.v2.p1",
+          "description": "(OPTIONAL) Batch ID/assay specific (study specific)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLUSTER_ID",
+          "id": "phv00482868.v2.p1",
+          "description": "(OPTIONAL) Cell population ID (study specific)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ONTOLOGY_ID",
+          "id": "phv00482872.v2.p1",
+          "description": "(OPTIONAL) Ontology ID associated with the cell-type or biospecimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLATFORM_ID",
+          "id": "phv00482864.v2.p1",
+          "description": "Technological platform named (versioned)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROTOCOL_ID",
+          "id": "phv00482865.v2.p1",
+          "description": "Experimental protocol URL",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REPORTED_CELL_LINEAGE",
+          "id": "phv00482871.v2.p1",
+          "description": "(OPTIONAL) Study or coordinating center cell lineage notation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REPORTED_CELL_TYPE",
+          "id": "phv00482870.v2.p1",
+          "description": "(OPTIONAL) Study or coordinating center reported cell type notation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REPORTED_PLOT_COORDINATE_X",
+          "id": "phv00482873.v2.p1",
+          "description": "(OPTIONAL) Study or coordinating center dimensionality reduction X (e.g., UMAP, T-SNE) or PC1 coordinate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REPORTED_PLOT_COORDINATE_Y",
+          "id": "phv00482874.v2.p1",
+          "description": "(OPTIONAL) Study or coordinating center dimensionality reduction Y (e.g., UMAP, T-SNE) or PC2 coordinate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00482867.v2.p1",
+          "description": "Clinical or animal sample identifier (Tissue Core - BRINDL or study specific)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_PROTOCOL",
+          "id": "phv00482866.v2.p1",
+          "description": "(OPTIONAL) Sequencing or omics profiling technological platform",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY_ID",
+          "id": "phv00482862.v2.p1",
+          "description": "Study acccession number (LungMAP.net, GEO)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LungMAP_Subject_Phenotypes",
+      "datasetId": "pht011029.v1",
+      "description": "This subject phenotypes data table includes age, sex, body weight, race, cause and type of death, gestational age and corrected gestational age at birth, and body weight percentile.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00482852.v1.p1",
+          "description": "Age of subject",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_WEIGHT",
+          "id": "phv00482854.v1.p1",
+          "description": "Measured body weight of sample",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CAUSE_OF_DEATH",
+          "id": "phv00482856.v1.p1",
+          "description": "Cause of subject's death",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CGA",
+          "id": "phv00482858.v1.p1",
+          "description": "Corrected gestational age is the gestational age at birth + the amount of time the infant lived. It is a measure of prematurity relating only to tissue collection from infants under 1 year. For instance, if a child who has a GA of 35 weeks at birth lives for 5 days, the CGA is 35 weeks and 5 days. This is also sometimes called postmenstrual age (PMA).",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GA_AT_BIRTH",
+          "id": "phv00482857.v1.p1",
+          "description": "Gestational age at birth refers to the duration of the pregnancy and is calculated from the first day of the mother's last menstrual period. Full term is approximately 40 weeks.",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00482855.v1.p1",
+          "description": "Reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00482853.v1.p1",
+          "description": "Reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00482851.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TYPE_OF_DEATH",
+          "id": "phv00482860.v1.p1",
+          "description": "Type of death, if known",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT_PERCENTILE",
+          "id": "phv00482859.v1.p1",
+          "description": "Percentile for their body weight",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LungMAP_Subject",
+      "datasetId": "pht011027.v3",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00482848.v3.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00482847.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LungMAP_Sample",
+      "datasetId": "pht011028.v3",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00482850.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00482849.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LungMAP_GEO",
+      "datasetId": "pht011145.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00487879.v2.p1",
+          "description": "GEO accession ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00487878.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

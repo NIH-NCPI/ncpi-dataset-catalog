@@ -1,0 +1,242 @@
+{
+  "studyId": "phs003591",
+  "studyName": "Genomics Analysis Reveals Molecular Patterns of Tumorigenesis in HPV-Associated and HPV-Independent Sinonasal Squamous Cell Carcinoma",
+  "tables": [
+    {
+      "tableName": "HPV_SSC_Sample_Attributes",
+      "datasetId": "pht014575.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin, analyte type, tumor status, collection year, anatomic site of primary tumor, primary tumor diagnosis and HPV status, tumor grade, tumor stage, clinical treatment, and margin status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00540995.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "ANATOMIC_SITE_OF_PRIMARY_TUMOR",
+          "id": "phv00540998.v1.p1",
+          "description": "Anatomic site of primary tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00540994.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLINICAL_TREATMENT",
+          "id": "phv00541002.v1.p1",
+          "description": "Primary treatment - Surgery (endoscopic, open, or endonasal assisted followed by margin status), X-ray therapy (adjuvant vs. definitive, number of Gy, intensity-modulated radiation therapy vs. proton), immunotherapy (with agent), chemotherapy (with agents)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00540996.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MARGIN_STATUS",
+          "id": "phv00541003.v1.p1",
+          "description": "Margin status; For definitive chemoradiotherapy - complete vs. partial response vs. no response",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_surgical_margins",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_DIAGNOSIS",
+          "id": "phv00540999.v1.p1",
+          "description": "Diagnosis of primary tumor and HPV association status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_cancer_type_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00540993.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_GRADE",
+          "id": "phv00541000.v1.p1",
+          "description": "Tumor grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00541001.v1.p1",
+          "description": "Tumor stage - AJCC 8",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEAR_OF_COLLECTION",
+          "id": "phv00540997.v1.p1",
+          "description": "Year in which the sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HPV_SSC_Subject_Phenotypes",
+      "datasetId": "pht014574.v1",
+      "description": "This subject phenotypes data table reports each subject's age, race, gender, presence or recurrence of metastases, follow-up duration, survival status at last follow-up, history of cancer, smoking history, and environmental exposure history.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00540984.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXPOSURE_HISTORY",
+          "id": "phv00540992.v1.p1",
+          "description": "Wood dust, leather, other occupational exposure",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FOLLOW_UP_DURATION",
+          "id": "phv00540988.v1.p1",
+          "description": "Follow-up Duration",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00540986.v1.p1",
+          "description": "Self-reported gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTORY_OF_CANCER",
+          "id": "phv00540990.v1.p1",
+          "description": "History of other cancers",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_general_cancer_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00540985.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RECURRENCE_METASTASES",
+          "id": "phv00540987.v1.p1",
+          "description": "\"No\" if no metastases present. \"Yes\" if metastases were present at time of presentation (whether recurrence was local or regional and how long after diagnosis metastases appeared are also indicated).",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKING_HISTORY",
+          "id": "phv00540991.v1.p1",
+          "description": "Smoking history. If yes, indicates pack years (py) or time from quitting  in years.",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "STATUS_AT_LAST_FOLLOW_UP",
+          "id": "phv00540989.v1.p1",
+          "description": "Survival status at last follow-up (Alive/Dead)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00540983.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HPV_SSC_Subject",
+      "datasetId": "pht014572.v1",
+      "description": "This subject consent data table reports each subject's subject ID, consent, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00540979.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00540980.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00540978.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HPV_SSC_Sample",
+      "datasetId": "pht014573.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00540982.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00540981.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

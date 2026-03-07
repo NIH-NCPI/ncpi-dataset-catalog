@@ -1,0 +1,297 @@
+{
+  "studyId": "phs002039",
+  "studyName": "scRNA-Seq Analysis of Influenza Infected Upper Airway Patient Samples",
+  "tables": [
+    {
+      "tableName": "IAV_IBV_Sample_Attributes_SC",
+      "datasetId": "pht010272.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "Celltype",
+          "id": "phv00430992.v1.p1",
+          "description": "Celltype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Donor",
+          "id": "phv00430990.v1.p1",
+          "description": "Donor, same to the subjectID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Infection",
+          "id": "phv00430986.v1.p1",
+          "description": "Infection either by IAV or IBV, or healthy control (HC)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00430983.v1.p1",
+          "description": "Cell name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UMI_sum",
+          "id": "phv00430984.v1.p1",
+          "description": "Library size for each cell",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cell_state_new",
+          "id": "phv00430995.v1.p1",
+          "description": "Cellular infection states determined by ZINB model and SVM classifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "metacluster",
+          "id": "phv00430991.v1.p1",
+          "description": "Metacluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pred_infection",
+          "id": "phv00430994.v1.p1",
+          "description": "Infection status predicted by ZINB model, selected donors only",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "size_factor",
+          "id": "phv00430989.v1.p1",
+          "description": "Size factor determined by scran normalization method",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "vload",
+          "id": "phv00430985.v1.p1",
+          "description": "Viral load: calculated as viral raw counts divided by library size",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "vload_counts",
+          "id": "phv00430993.v1.p1",
+          "description": "Viral transcript raw counts",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "vload_state_new",
+          "id": "phv00430996.v1.p1",
+          "description": "Viral load states determined by ZINB model and SVM classifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "x",
+          "id": "phv00430987.v1.p1",
+          "description": "TSNE coordinate: x axis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "y",
+          "id": "phv00430988.v1.p1",
+          "description": "TSNE coordinate: y axis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IAV_IBV_Subject_Phenotypes",
+      "datasetId": "pht010271.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00430977.v1.p1",
+          "description": "Case control status of the subject for influenza infection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00430979.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSTIC_TEST",
+          "id": "phv00430982.v1.p1",
+          "description": "Diagnostic test based on rapid antigen test (RAT) and respiratory virus panel (RVP)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RECENT_VACCINATION",
+          "id": "phv00430980.v1.p1",
+          "description": "Subject recent flu vaccination history",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLING_TIME",
+          "id": "phv00430981.v1.p1",
+          "description": "Number of days prior to sample collection in which the subject experienced symptoms",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00430978.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00430976.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IAV_IBV_Sample_Attributes",
+      "datasetId": "pht010273.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00430999.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00430998.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DATA_TYPE",
+          "id": "phv00431000.v1.p1",
+          "description": "Data type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FLOWCELL_BATCH",
+          "id": "phv00431002.v1.p1",
+          "description": "Flowcell number when pooled for sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00430997.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00431001.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_PLATFORM",
+          "id": "phv00431003.v1.p1",
+          "description": "Sequencing platform",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IAV_IBV_Subject",
+      "datasetId": "pht010269.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00430973.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00430972.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IAV_IBV_Sample",
+      "datasetId": "pht010270.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00430975.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00430974.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

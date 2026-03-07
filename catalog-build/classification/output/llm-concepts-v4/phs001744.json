@@ -1,0 +1,186 @@
+{
+  "studyId": "phs001744",
+  "studyName": "Hepatocellular Carcinoma (HCC) GWAS",
+  "tables": [
+    {
+      "tableName": "CIDR_HCC_Subject_Phenotypes",
+      "datasetId": "pht008572.v1",
+      "description": "Subject ID, race, sex, age, status outcome, participated institution, first degree family history of liver cancer or any cancer, and affection status of participants with or without hepatocellular carcinoma and involved in the \"Genome-Wide Association Study of HCC in Non-Asian USA Population\" project.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00396774.v1.p1",
+          "description": "Age of HCC patient at diagnosis or of control at recruitment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396773.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample.Plate",
+          "id": "phv00435271.v1.p1",
+          "description": "Sample plate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Site",
+          "id": "phv00396777.v1.p1",
+          "description": "Recruitment sites",
+          "concept_id": "ncpi:geographic_site_recruitment_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Status",
+          "id": "phv00396780.v1.p1",
+          "description": "Disease status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00396776.v1.p1",
+          "description": "Race of the participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00396775.v1.p1",
+          "description": "Gender of the participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex.annot",
+          "id": "phv00435270.v1.p1",
+          "description": "Gender as specified in pedigree file",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_HCC_Sample_Attributes",
+      "datasetId": "pht008573.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, DNA class, extraction method for DNA, and tumor status of samples obtained from participants with or without hepatocellular carcinoma and involved in the \"Genome-Wide Association Study of HCC in Non-Asian USA Population\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00396784.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00396783.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00435272.v1.p1",
+          "description": "Histological type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00396787.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00396782.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_HCC_Subject",
+      "datasetId": "pht008570.v1",
+      "description": "Subject ID, subject source, source subject ID, consent group, and affection status of participants with or without hepatocellular carcinoma and involved in the \"Genome-Wide Association Study of HCC in Non-Asian USA Population\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00396764.v1.p1",
+          "description": "Consent group as determined by Institution Certification",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00435269.v1.p1",
+          "description": "Source subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396763.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00396765.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_HCC_Sample",
+      "datasetId": "pht008571.v1",
+      "description": "Subject ID, sample ID, sample source, source sample ID, and sample use variable obtained from participants with or without hepatocellular carcinoma and involved in the \"Genome-Wide Association Study of HCC in Non-Asian USA Population\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00396769.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396768.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

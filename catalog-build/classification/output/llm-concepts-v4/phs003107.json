@@ -1,0 +1,210 @@
+{
+  "studyId": "phs003107",
+  "studyName": "Testicular Cancer Consortium WES",
+  "tables": [
+    {
+      "tableName": "TGCT_WES_Subject_Phenotypes",
+      "datasetId": "pht013541.v1",
+      "description": "This subject phenotypes data table contains self-reported ethnicity, whether subject has greater than 90% European ancestry, family history of testicular germ cell cancer (TGCT), status for bilateral TGCT, laterality of TGCT, status for cryptorchidism, age at first TGCT diagnosis, and TGCT histology.",
+      "variables": [
+        {
+          "name": ">90% EUR Genetic Ancestry",
+          "id": "phv00530139.v1.p1",
+          "description": "Indicates whether or not the subject has greater than 90% European ancestry",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age at 1st TGCT",
+          "id": "phv00530136.v1.p1",
+          "description": "Age at which subject had first testicular germ cell tumor diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Bilateral",
+          "id": "phv00530134.v1.p1",
+          "description": "Subject had bilateral testicular germ cell tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Cryptorchidism",
+          "id": "phv00530135.v1.p1",
+          "description": "Subject had undescended testicles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00530132.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Family history of TGCT",
+          "id": "phv00530133.v1.p1",
+          "description": "Family history of testicular germ cell tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histology TGCT",
+          "id": "phv00530138.v1.p1",
+          "description": "Indicates the histological components of the subject's testicular germ cell tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Laterality",
+          "id": "phv00530137.v1.p1",
+          "description": "Indicates the laterality of the subject's testicular germ cell tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00530131.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TGCT_WES_Sample_Attributes",
+      "datasetId": "pht013542.v1",
+      "description": "This sample attributes table includes body site, analyte type, tumor status, histological type, and collection age.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00530142.v1.p1",
+          "description": "Analyte type of the cancer tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00530141.v1.p1",
+          "description": "Body site of the cancer tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION AGE",
+          "id": "phv00530145.v1.p1",
+          "description": "Age of subject when sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00530144.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00530143.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00530140.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TGCT_WES_Subject",
+      "datasetId": "pht013539.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, biological sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00530125.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00530126.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00530128.v1.p1",
+          "description": "Subject ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00530127.v1.p1",
+          "description": "Source repository from where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00530124.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TGCT_WES_Sample",
+      "datasetId": "pht013540.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00530130.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00530129.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

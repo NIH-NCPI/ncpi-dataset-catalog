@@ -1,0 +1,122 @@
+{
+  "studyId": "phs001854",
+  "studyName": "Human Pilocytic Astrocytoma Single Cell RNA Sequencing",
+  "tables": [
+    {
+      "tableName": "BRAF_PA_Sample_Attributes",
+      "datasetId": "pht009254.v1",
+      "description": "This sample attributes table informs of sample analyte type, presence or absence of cellular molecular markers, classification of a single cell, histopathologic diagnosis of the tumor, and location where tumor was resected.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00412834.v1.p1",
+          "description": "Sample content analyzed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS",
+          "id": "phv00412839.v1.p1",
+          "description": "Histopathologic diagnosis of the tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LOCATION",
+          "id": "phv00412840.v1.p1",
+          "description": "Location of tumor resection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00412833.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRAF_PA_Subject_Phenotypes",
+      "datasetId": "pht009253.v1",
+      "description": "This subject phenotype table informs of subject's sex and age at enrollment.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00412832.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00412831.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00412830.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRAF_PA_Subject",
+      "datasetId": "pht009251.v1",
+      "description": "This subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00412827.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00412826.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRAF_PA_Sample",
+      "datasetId": "pht009252.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00412829.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00412828.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

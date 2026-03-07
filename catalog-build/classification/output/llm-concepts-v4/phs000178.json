@@ -1,0 +1,91 @@
+{
+  "studyId": "phs000178",
+  "studyName": "The Cancer Genome Atlas (TCGA)",
+  "tables": [
+    {
+      "tableName": "TCGA_Subject",
+      "datasetId": "pht000804.v9",
+      "description": "The subject consent file includes all TCGA subject IDs, consent group information, and affection status.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00221983.v2.p8",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00073563.v8.p8",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00073562.v8.p8",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TCGA_Sample",
+      "datasetId": "pht000805.v10",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00073564.v9.p8",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY",
+          "id": "phv00170984.v5.p8",
+          "description": "DbGaP substudy accession",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00073565.v9.p8",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TCGA_Subject_Phenotypes",
+      "datasetId": "pht007516.v1",
+      "description": "The subject phenotype table includes subject's sex.",
+      "variables": [
+        {
+          "name": "SEX",
+          "id": "phv00354519.v1.p8",
+          "description": "Subject's Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00354518.v1.p8",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

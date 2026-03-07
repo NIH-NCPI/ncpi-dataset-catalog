@@ -1,0 +1,186 @@
+{
+  "studyId": "phs001679",
+  "studyName": "TRanscriptomic ANalySis of left ventriCulaR gene Expression (TRANSCRibE)",
+  "tables": [
+    {
+      "tableName": "TRANSCRibE_Subject_Phenotypes",
+      "datasetId": "pht011851.v1",
+      "description": "This subject phenotypes data table includes age, height, ethnicity, sex, diabetes mellitus status, coronary artery disease status, and time of aortic cross-clamping surgery.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00495893.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AXC_TIME",
+          "id": "phv00495897.v1.p1",
+          "description": "Time of Aortic Cross-Clamping surgery",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CAD",
+          "id": "phv00495898.v1.p1",
+          "description": "Coronary Artery Disease",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_coronary_heart_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DM",
+          "id": "phv00495899.v1.p1",
+          "description": "Diabetes Mellitus",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00495895.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT",
+          "id": "phv00495894.v1.p1",
+          "description": "Height measured at enrollment",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00495896.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495892.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TRANSCRibE_Sample_Attributes",
+      "datasetId": "pht011852.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, cell or tissue type, and genotyping and sequencing centers.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00495902.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00495901.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00495904.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00495903.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00495900.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00495905.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TRANSCRibE_Subject",
+      "datasetId": "pht011849.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, and subject's biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00495888.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00495889.v1.p1",
+          "description": "Biological Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495887.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TRANSCRibE_Sample",
+      "datasetId": "pht011850.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00495891.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495890.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

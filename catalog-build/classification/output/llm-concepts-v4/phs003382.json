@@ -1,0 +1,186 @@
+{
+  "studyId": "phs003382",
+  "studyName": "PCPT and SELECT Cohorts: Core Infrastructure Support for Cancer Research",
+  "tables": [
+    {
+      "tableName": "PCPT_SELECT_Subject_Phenotypes",
+      "datasetId": "pht014380.v1",
+      "description": "This subject phenotypes data table reports each subject's study ID, age at registration, race, ethnicity, prostate cancer status, age at diagnosis, family history of prostate cancer, and treatment arm.",
+      "variables": [
+        {
+          "name": "AGE_BL",
+          "id": "phv00536725.v1.p1",
+          "description": "Age at study registration",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_DX",
+          "id": "phv00536729.v1.p1",
+          "description": "Age at prostate cancer diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMHX",
+          "id": "phv00536730.v1.p1",
+          "description": "History of prostate cancer in a 1st degree relative",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISPANIC",
+          "id": "phv00536727.v1.p1",
+          "description": "Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCA",
+          "id": "phv00536728.v1.p1",
+          "description": "Prostate Cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_prostate_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACECODE",
+          "id": "phv00536726.v1.p1",
+          "description": "RACE",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDYID",
+          "id": "phv00536724.v1.p1",
+          "description": "Study ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536723.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRT",
+          "id": "phv00536731.v1.p1",
+          "description": "Treatment Arm",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PCPT_SELECT_Sample_Attributes",
+      "datasetId": "pht014381.v1",
+      "description": "This sample attributes data table reports each sample's histological type, body site of origin, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00536735.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00536734.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00536733.v1.p1",
+          "description": "Histological Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00536736.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00536732.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PCPT_SELECT_Subject",
+      "datasetId": "pht014378.v1",
+      "description": "This subject consent data table reports each subject's subject ID, consent, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00536719.v1.p1",
+          "description": "Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00536720.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536718.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PCPT_SELECT_Sample",
+      "datasetId": "pht014379.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00536722.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536721.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

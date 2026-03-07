@@ -1,0 +1,397 @@
+{
+  "studyId": "phs001442",
+  "studyName": "The Environmental Determinants of Diabetes in the Young Study (TEDDY)",
+  "tables": [
+    {
+      "tableName": "TEDDY_Cohort_Sample_Attributes",
+      "datasetId": "pht010304.v3",
+      "description": "This sample attributes table includes the body site, collection interval, analyte type, tumor status, histological type, genotyping center, and sequencing center.",
+      "variables": [
+        {
+          "name": "Analyte_type",
+          "id": "phv00431110.v3.p3",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Body_Site",
+          "id": "phv00431108.v3.p3",
+          "description": "The body part from which the sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histological_type",
+          "id": "phv00431109.v3.p3",
+          "description": "Sample type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sequencing_Center",
+          "id": "phv00431113.v3.p3",
+          "description": "Sequencing Center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "collinterval",
+          "id": "phv00431107.v3.p3",
+          "description": "Collection interval = Visit Month at which the sample was collected (approximate age in months of subject at sample collection)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genotyping_center",
+          "id": "phv00431111.v3.p3",
+          "description": "Genotyping Center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "is_tumor",
+          "id": "phv00431112.v3.p3",
+          "description": "Indicates tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_id",
+          "id": "phv00431106.v3.p3",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TEDDY_Cohort_Pedigree",
+      "datasetId": "pht008327.v4",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, sex of subjects, and monozygotic twin IDs.",
+      "variables": [
+        {
+          "name": "family_id",
+          "id": "phv00394956.v4.p3",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "father_id",
+          "id": "phv00394959.v4.p3",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mother_id",
+          "id": "phv00394958.v4.p3",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mz_twin_id",
+          "id": "phv00394961.v4.p3",
+          "description": "MZ_Twin_ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00394960.v4.p3",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00394957.v4.p3",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TEDDY_Cohort_Subject",
+      "datasetId": "pht008326.v4",
+      "description": "The subject consent data table contains subject IDs,  consent group information, biological sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "consent",
+          "id": "phv00394952.v4.p3",
+          "description": "Consent Group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00480691.v3.p3",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "source_subject_id",
+          "id": "phv00394954.v4.p3",
+          "description": "Source subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00394951.v4.p3",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_source",
+          "id": "phv00394953.v4.p3",
+          "description": "Name of the third party institute that corresponds to the Subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TEDDY_Cohort_casecntrl_ialist1",
+      "datasetId": "pht010299.v1",
+      "description": "This case-control table for  islet autoantibody contains indicator for 1:1 matched case-control subjects, age in days at time of diagnosis, and case-control outcome.",
+      "variables": [
+        {
+          "name": "CASE_IND",
+          "id": "phv00431087.v1.p3",
+          "description": "Indicator For Matched IA Case-Control Subjects",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case_endptage",
+          "id": "phv00431088.v1.p3",
+          "description": "Age In Days At Date Of Persistent Confirmed Autoantibody Positivity For Case",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "outcome",
+          "id": "phv00431089.v1.p3",
+          "description": "IA Case-Control Outcome",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00431086.v1.p3",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TEDDY_Cohort_casecntrl_ialist3",
+      "datasetId": "pht010300.v1",
+      "description": "This case-control table for  islet autoantibody contains indicator for 1:3 matched case-control subjects, age in days at time of diagnosis, and case-control outcome.",
+      "variables": [
+        {
+          "name": "CASE_IND",
+          "id": "phv00431091.v1.p3",
+          "description": "Indicator For Matched IA Case-Control Subjects",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case_endptage",
+          "id": "phv00431092.v1.p3",
+          "description": "Age In Days At Date Of Persistent Confirmed Autoantibody Positivity For Case",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "outcome",
+          "id": "phv00431093.v1.p3",
+          "description": "IA Case-Control Outcome",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00431090.v1.p3",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TEDDY_Cohort_casecntrl_t1dlist1",
+      "datasetId": "pht010301.v1",
+      "description": "This case-control table for type 1 diabetes contains indicator for 1:1 matched case-control subjects, age in days at time of diagnosis, and case-control outcome.",
+      "variables": [
+        {
+          "name": "CASE_IND",
+          "id": "phv00431095.v1.p3",
+          "description": "Indicator For Matched T1D Case-Control Subjects",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case_endptage",
+          "id": "phv00431096.v1.p3",
+          "description": "Age In Days At Date Of T1D Diagnosis For Case",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "outcome",
+          "id": "phv00431097.v1.p3",
+          "description": "T1D Case-Control Outcome",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00431094.v1.p3",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TEDDY_Cohort_casecntrl_t1dlist3",
+      "datasetId": "pht010302.v1",
+      "description": "This case-control table for type 1 diabetes contains indicator for 1:3 matched case-control subjects, age in days at time of diagnosis, and case-control outcome.",
+      "variables": [
+        {
+          "name": "CASE_IND",
+          "id": "phv00431099.v1.p3",
+          "description": "Indicator For Matched T1D Case-Control Subjects",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case_endptage",
+          "id": "phv00431100.v1.p3",
+          "description": "Age In Days At Date Of T1D Diagnosis For Case",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "outcome",
+          "id": "phv00431101.v1.p3",
+          "description": "T1D Case-Control Outcome",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00431098.v1.p3",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TEDDY_Cohort_maskid_mapping",
+      "datasetId": "pht010303.v1",
+      "description": "This maskid mapping data table contains original subject identifiers used for phs001037 ImmunoChip SNP Array data,  phs001443 Microbiome data, and phs001037 Gene Expression Microarray data. Consolidated data from these studies is available in versions 2 and 3 of phs001442.",
+      "variables": [
+        {
+          "name": "phs001037_subject_id",
+          "id": "phv00431103.v1.p3",
+          "description": "Original subject identifier used for phs001037 ImmunoChip SNP Array data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "phs001443_subject_id",
+          "id": "phv00431104.v1.p3",
+          "description": "Original subject identifier used for phs001443 Microbiome data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "phs001562_subject_id",
+          "id": "phv00431105.v1.p3",
+          "description": "Original subject identifier used for phs001037 Gene Expression Microarray data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00431102.v1.p3",
+          "description": "Current dbGaP subject identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TEDDY_Cohort_Sample",
+      "datasetId": "pht008328.v4",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "sample_id",
+          "id": "phv00394964.v4.p3",
+          "description": "Unique Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00394963.v4.p3",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

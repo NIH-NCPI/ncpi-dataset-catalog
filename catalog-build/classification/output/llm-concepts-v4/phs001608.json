@@ -1,0 +1,561 @@
+{
+  "studyId": "phs001608",
+  "studyName": "NHLBI TOPMed: Outcome Modifying Genes in Sickle Cell Disease (OMG)",
+  "tables": [
+    {
+      "tableName": "TOPMed_WGS_OMG_SCD_Subject_Phenotypes",
+      "datasetId": "pht009735.v1",
+      "description": "This subject phenotype table includes subject's sex, age, weight, height, systolic and diastolic blood pressure, hemoglobin diagnosis, hydroxyurea use, pre-hydroxyurea levels and current levels for hemoglobin, hematocrit, red blood cells, white blood cells, platelets, mean corpuscular volume, mean corpuscular hemoglobin and concentrations, and reticulocytes.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00421701.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00421709.v1.p1",
+          "description": "Age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bp_diastol",
+          "id": "phv00421706.v1.p1",
+          "description": "Diastolic blood pressure",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_miscellaneous",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bp_systol",
+          "id": "phv00421705.v1.p1",
+          "description": "Systolic blood pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_generic_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "c_hct_ave",
+          "id": "phv00421711.v1.p1",
+          "description": "Current hematocrit - average of up to 3 baseline values; patient had not been transfused for 3 months prior",
+          "concept_id": "topmed:hematocrit_vfr_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "c_hgb_ave",
+          "id": "phv00421710.v1.p1",
+          "description": "Current hemoglobin level - average of up to 3 baseline values; patient had not been transfused for 3 months prior",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "c_mch_ave",
+          "id": "phv00421716.v1.p1",
+          "description": "Current mean corpuscular hemoglobin - average of up to 3 baseline values; patient had not been transfused for 3 months prior",
+          "concept_id": "topmed:mch_entmass_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "c_mchc_ave",
+          "id": "phv00421717.v1.p1",
+          "description": "Current mean corpuscular hemoglobin concentration - average of up to 3 baseline values; patient had not been transfused for 3 months prior",
+          "concept_id": "topmed:mchc_mcnc_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "c_mcv_ave",
+          "id": "phv00421715.v1.p1",
+          "description": "Current mean corpuscular volume - average of up to 3 baseline values; patient had not been transfused for 3 months prior",
+          "concept_id": "topmed:mcv_entvol_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "c_platelets_ave",
+          "id": "phv00421714.v1.p1",
+          "description": "Current platelet count - average of up to 3 baseline values; patient had not been transfused for 3 months prior",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "c_rbc_ave",
+          "id": "phv00421712.v1.p1",
+          "description": "Current red blood cell count - average of up to 3 baseline values; patient had not been transfused for 3 months prior",
+          "concept_id": "topmed:rbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "c_retic_ave",
+          "id": "phv00421718.v1.p1",
+          "description": "Current reticulocyte percentage - average of up to 3 baseline values; patient had not been transfused for 3 months prior",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "c_wbc_ave",
+          "id": "phv00421713.v1.p1",
+          "description": "Current white blood cell count - average of up to 3 baseline values; patient had not been transfused for 3 months prior",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cm_height",
+          "id": "phv00421704.v1.p1",
+          "description": "Height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hb_diagnosis",
+          "id": "phv00421707.v1.p1",
+          "description": "Hemoglobin diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hu",
+          "id": "phv00421708.v1.p1",
+          "description": "Current Hydroxyurea use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "kg_weight",
+          "id": "phv00421703.v1.p1",
+          "description": "Weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p_hct_ave",
+          "id": "phv00421720.v1.p1",
+          "description": "Pre-hydroxyurea hematocrit (for those currently on HU) - average of up to 3 baseline values; patient had not been transfused for 3 months",
+          "concept_id": "topmed:hematocrit_vfr_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p_hgb_ave",
+          "id": "phv00421719.v1.p1",
+          "description": "Pre-hydroxyurea hemoglobin level (for those currently on HU) - average of up to 3 baseline values; patient had not been transfused for 3 months",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p_mch_ave",
+          "id": "phv00421725.v1.p1",
+          "description": "Pre-hydroxyurea mean corpuscular hemoglobin (for those currently on HU) - average of up to 3 baseline values; patient had not been transfused for 3 months",
+          "concept_id": "topmed:mch_entmass_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p_mchc_ave",
+          "id": "phv00421726.v1.p1",
+          "description": "Pre-hydroxyurea mean corpuscular hemoglobin concentration (for those currently on HU) - average of up to 3 baseline values; patient had not been transfused for 3 months",
+          "concept_id": "topmed:mchc_mcnc_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p_mcv_ave",
+          "id": "phv00421724.v1.p1",
+          "description": "Pre-hydroxyurea mean corpuscular volume (for those currently on HU) - average of up to 3 baseline values; patient had not been transfused for 3 months",
+          "concept_id": "topmed:mcv_entvol_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p_platelets_ave",
+          "id": "phv00421723.v1.p1",
+          "description": "Pre-hydroxyurea platelet count (for those currently on HU) - average of up to 3 baseline values; patient had not been transfused for 3 months",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p_rbc_ave",
+          "id": "phv00421721.v1.p1",
+          "description": "Pre-hydroxyurea red blood cell count (for those currently on HU) - average of up to 3 baseline values; patient had not been transfused for 3 months",
+          "concept_id": "topmed:rbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p_retic_ave",
+          "id": "phv00421727.v1.p1",
+          "description": "Pre-hydroxyurea reticulocyte percentage (for those currently on HU) - average of up to 3 baseline values; patient had not been transfused for 3 months",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p_wbc_ave",
+          "id": "phv00421722.v1.p1",
+          "description": "Pre-hydroxyurea white blood cell count (for those currently on HU) - average of up to 3 baseline values; patient had not been transfused for 3 months",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00421702.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "OMG_SCD_medicationData",
+      "datasetId": "pht011585.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493781.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "antibiotics",
+          "id": "phv00493793.v1.p1",
+          "description": "Chronic use of antibiotics",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_current_antibiotic_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "antidepressants",
+          "id": "phv00493803.v1.p1",
+          "description": "Chronic use of anti-depressants",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_antidepressants_general_antidepressants",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bld_prs_meds",
+          "id": "phv00493796.v1.p1",
+          "description": "Chronic use of blood pressure medications",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_general_hypertension_medication_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bronchodilators",
+          "id": "phv00493804.v1.p1",
+          "description": "Chronic use of bronchodilators",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_short_acting_bronchodilators",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "demerol",
+          "id": "phv00493790.v1.p1",
+          "description": "Daily Demerol use at home for pain",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_opioid_analgesics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "desferol",
+          "id": "phv00493795.v1.p1",
+          "description": "Chronic use of Desferol",
+          "concept_id": "ncpi:concomitant_medication_specific_drug_names_blood_modifying",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "dilaudid",
+          "id": "phv00493789.v1.p1",
+          "description": "Daily Dilaudid use at home for pain",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_opioid_analgesics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diuretics",
+          "id": "phv00493797.v1.p1",
+          "description": "Chronic use of diuretics",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_diuretics_any_diuretic",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "erythropoietin",
+          "id": "phv00493792.v1.p1",
+          "description": "Chronic use of Erythropoietin",
+          "concept_id": "ncpi:concomitant_medication_specific_drug_names_blood_modifying",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "fent_patch",
+          "id": "phv00493785.v1.p1",
+          "description": "Daily Fentanyl patch at home for pain",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_opioid_analgesics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "heart_meds",
+          "id": "phv00493799.v1.p1",
+          "description": "Chronic use of heart medications",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_general_cardiac_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hormones",
+          "id": "phv00493801.v1.p1",
+          "description": "Chronic use of hormones",
+          "concept_id": "ncpi:concomitant_medication_hormone_reproductive_medications_general_hormone_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "insulin",
+          "id": "phv00493798.v1.p1",
+          "description": "Chronic use of insulin",
+          "concept_id": "ncpi:concomitant_medication_diabetes_medications_insulin_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "methadone",
+          "id": "phv00493784.v1.p1",
+          "description": "Daily Methadone use at home for pain",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_opioid_analgesics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "migraine_meds",
+          "id": "phv00493800.v1.p1",
+          "description": "Chronic use of migraine medications",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_pain_medication_assessment",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "morphine",
+          "id": "phv00493791.v1.p1",
+          "description": "Daily Morphine use at home for pain",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_opioid_analgesics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ms_contin",
+          "id": "phv00493782.v1.p1",
+          "description": "Daily MS Contin use at home for pain",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_opioid_analgesics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "oxycodone",
+          "id": "phv00493788.v1.p1",
+          "description": "Daily Oxycodone use at home for pain",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_opioid_analgesics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "oxycontin",
+          "id": "phv00493783.v1.p1",
+          "description": "Daily Oxycontin use at home for pain",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_opioid_analgesics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "percocet",
+          "id": "phv00493787.v1.p1",
+          "description": "Daily Percocet at home for pain",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_opioid_analgesics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tylenol",
+          "id": "phv00493786.v1.p1",
+          "description": "Daily Tylenol with codeine at home for pain",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_opioid_analgesics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ulcer_meds",
+          "id": "phv00493802.v1.p1",
+          "description": "Chronic use of ulcer medications",
+          "concept_id": "ncpi:concomitant_medication_gastrointestinal_medications_antiulcer_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "vitamins",
+          "id": "phv00493794.v1.p1",
+          "description": "Chronic use of vitamins (including folate)",
+          "concept_id": "ncpi:concomitant_medication_vitamins_supplements_medications_multivitamins",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_OMG_SCD_Sample_Attributes",
+      "datasetId": "pht009736.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, histological type, sequencing center, funding source, TOPMed phase, study name, and project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00421730.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00421729.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00421734.v1.p1",
+          "description": "Project funding source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00421732.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00421731.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00421728.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00421733.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00421737.v1.p1",
+          "description": "TOPMed-assigned short study name (1:1 with TOPMed phs number)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00421735.v1.p1",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00421736.v1.p1",
+          "description": "TOPMed Project that funded sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_OMG_SCD_Subject",
+      "datasetId": "pht009733.v1",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00421698.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00421697.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_OMG_SCD_Sample",
+      "datasetId": "pht009734.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00421700.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00421699.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

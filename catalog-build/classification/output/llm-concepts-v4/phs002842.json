@@ -1,0 +1,234 @@
+{
+  "studyId": "phs002842",
+  "studyName": "Gene Expression in an African American Schizophrenia Dataset",
+  "tables": [
+    {
+      "tableName": "SCZ_Gene_Expression_AA_Sample_Attributes",
+      "datasetId": "pht012288.v1",
+      "description": "Sample ID, LCL cell count, body site where sample was obtained, analyte type, tumor status of sample, and histological type of sample obtained from participants with or without schizophrenia and involved in the \"Gene Expression in an African American Schizophrenia Dataset\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00503694.v1.p1",
+          "description": "Analyte Type - all samples are RNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ATP_PER_CELL_COUNT",
+          "id": "phv00503692.v1.p1",
+          "description": "ATP level adjusted by number of cells reflecting energy status of LCLs for sample - positive number with values from ATP average of duplicate luminescence readings from ATP assay, corrected for concentration of cells by dividing by cell count (see PMIDs 26022996, 28418402, and 3011591 for further details) for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00503693.v1.p1",
+          "description": "Body site where sample was collected - all are LCLs made from peripheral blood",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CELL_COUNT",
+          "id": "phv00503691.v1.p1",
+          "description": "LCL cell count at harvest reflecting growth rate for sample - positive number with values from viable cell count at harvest x10^6 (24 hrs after 0.250 x 10^6 cells/ml) (see PMIDs 26022996, 28418402, and 3011591 for further details) for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXPRESSION_RNAseq_BATCH",
+          "id": "phv00503690.v1.p1",
+          "description": "RNAseq batch (1-4) in which sample was RNAsequenced",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXPRESSION_SERVICE",
+          "id": "phv00503689.v1.p1",
+          "description": "Name of the service provider which ran the RNAseq - UMGC = University of Minnesota Genomics Center (formerly BMGC = Biomedical Genomics Center)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00503696.v1.p1",
+          "description": "Cell or tissue type or subtype of sample -- all RNA samples from LCLs",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00503695.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00503688.v1.p1",
+          "description": "Sample ID - sample ID incorporates MGS prefix, then RUCDR ID (SOURCE_SUBJECT_ID), and also wave-tech-sample - namely growing wave number or letters (with the \"w\"",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SCZ_Gene_Expression_AA_Subject",
+      "datasetId": "pht012285.v1",
+      "description": "Subject ID, consent group, sex, subject source, source subject ID, subject source 2, and source subject ID 2 of participants with or without schizophrenia and involved in the \"Gene Expression in an African American Schizophrenia Dataset\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00503673.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00503674.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00503676.v1.p1",
+          "description": "Subject ID used in the Source Repository - also known as DNA_ID, the ID number assigned by the RUCDR to this subject DNA specimens and LCLs (lymphoblastoid cell lines)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID2",
+          "id": "phv00503678.v1.p1",
+          "description": "Submitted_subject_ID for GAIN2 (dbGaP study ID phs000021) vs. NIMH_nonGAIN_Schizophrenia (dbGaP study ID phs000167)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00503672.v1.p1",
+          "description": "De-identified Subject ID - also known as the GAIN/nonGAIN ID, this is the 5 digit ID you will find in GAIN and nonGAIN data (i.e., GWAS data deposited into dbGaP). GAIN is dbGaP study ID phs000021; nonGAIN is dbGaP study ID phs000167.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00503675.v1.p1",
+          "description": "Source repository where subjects originate -- all from RUCDR (Rutgers University Cell and DNA Repository)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE2",
+          "id": "phv00503677.v1.p1",
+          "description": "Name of dbGaP GWAS for subject - GAIN2 = GAIN = dbGaP study ID phs000021 - NIMH_nonGAIN_Schizophrenia = nonGAIN = dbGaP study ID phs000167",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SCZ_Gene_Expression_AA_Subject_Phenotypes",
+      "datasetId": "pht012287.v1",
+      "description": "Subject ID, affection status, race, age, principal component 1 of 2, principal component 2 of 2, and EBV load (viral load) of LCL of participants with or without schizophrenia and involved in the \"Gene Expression in an African American Schizophrenia Dataset\" project.",
+      "variables": [
+        {
+          "name": "AA_PC_1",
+          "id": "phv00503685.v1.p1",
+          "description": "AA PC (principal component 1 of 2)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_african_ancestry_pcs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AA_PC_2",
+          "id": "phv00503686.v1.p1",
+          "description": "AA PC (principal component 2 of 2)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_african_ancestry_pcs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00503682.v1.p1",
+          "description": "Case control status of the subject for schizophrenia",
+          "concept_id": "ncpi:psychiatric_interview_mood_disorders_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00503684.v1.p1",
+          "description": "Subject age at sample collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EBV_LOAD",
+          "id": "phv00503687.v1.p1",
+          "description": "EBV load (viral load) of LCL",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00503683.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00503681.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SCZ_Gene_Expression_AA_Sample",
+      "datasetId": "pht012286.v1",
+      "description": "Subject ID and sample ID of participants with or without schizophrenia and involved in the \"Gene Expression in an African American Schizophrenia Dataset\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00503680.v1.p1",
+          "description": "Sample ID - sample ID incorporates MGS prefix, then RUCDR ID (SOURCE_SUBJECT_ID), and also wave-tech-sample - namely growing wave number or letters (with the \"w\"",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00503679.v1.p1",
+          "description": "De-identified subject ID - also known as the GAIN/nonGAIN ID, this is the 5 digit ID you will find in GAIN and nonGAIN data (i.e., GWAS data deposited into dbGaP). GAIN is dbGaP study ID phs000021; nonGAIN is dbGaP study ID phs000167.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

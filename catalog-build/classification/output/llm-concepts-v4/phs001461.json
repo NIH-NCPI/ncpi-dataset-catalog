@@ -1,0 +1,162 @@
+{
+  "studyId": "phs001461",
+  "studyName": "Temporal and Clonal Progression in Pediatric Ependymoma",
+  "tables": [
+    {
+      "tableName": "Pediatric_Ependymoma_Sample_Attributes",
+      "datasetId": "pht007122.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, collection type in months, histological type of tumor, tumor status, and tumor treatment of participant with ependymoma and involved in the \"Temporal and Clonal Progression in Pediatric Ependymoma\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00328380.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00328379.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_TIME_MONTHS",
+          "id": "phv00328383.v1.p1",
+          "description": "Time the sample was collected after initial diagnosis and resection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00328382.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00328381.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00328378.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00328384.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Pediatric_Ependymoma_Subject",
+      "datasetId": "pht007119.v1",
+      "description": "Subject ID, consent group, and affection status of participant with ependymoma and involved in the \"Temporal and Clonal Progression in Pediatric Ependymoma\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00328371.v1.p1",
+          "description": "Case or control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00328370.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00328369.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Pediatric_Ependymoma_Sample",
+      "datasetId": "pht007120.v1",
+      "description": "Subject ID, sample ID, and sample use of participant with ependymoma and involved in the \"Temporal and Clonal Progression in Pediatric Ependymoma\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00328373.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00328374.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00328372.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Pediatric_Ependymoma_Subject_Phenotypes",
+      "datasetId": "pht007121.v1",
+      "description": "Subject ID, gender, and age onset of participant with ependymoma and involved in the \"Temporal and Clonal Progression in Pediatric Ependymoma\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00328375.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_onset",
+          "id": "phv00328377.v1.p1",
+          "description": "Disease onset age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00328376.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "studyId": "phs001781",
+  "studyName": "Proteogenomic Landscape of Squamous Cell Lung Cancer",
+  "tables": [
+    {
+      "tableName": "SCC_Sample_Attributes",
+      "datasetId": "pht008862.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00404765.v1.p1",
+          "description": "Tumor status of sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00404758.v1.p1",
+          "description": "De-identified sample ID.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ajcc_7_m",
+          "id": "phv00404764.v1.p1",
+          "description": "Characteristics of metastases.",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_m_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ajcc_7_n",
+          "id": "phv00404763.v1.p1",
+          "description": "Characteristics of lymph nodes.",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ajcc_7_t",
+          "id": "phv00404762.v1.p1",
+          "description": "Characteristics of primary tumor.",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "grade_differentiation",
+          "id": "phv00404760.v1.p1",
+          "description": "Describes the tumor's resemblance to normal tissue. Well differentiated (Grade I) is the most like normal tissue, and undifferentiated (Grade IV) is the least like normal tissue.",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "histology",
+          "id": "phv00404759.v1.p1",
+          "description": "Code for the histologic type of cancer.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "laterality",
+          "id": "phv00404761.v1.p1",
+          "description": "A designation for the side of the body on which the tumor or cancer first developed.",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_laterality",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SCC_Subject_Phenotypes",
+      "datasetId": "pht008861.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404753.v1.p1",
+          "description": "De-identified patient ID.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00404757.v1.p1",
+          "description": "Records the age of the patient in complete years at his or her last birthday before diagnosis.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00404755.v1.p1",
+          "description": "Identifies patients of Spanish or Hispanic origin.",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00404754.v1.p1",
+          "description": "Sex of the patient.",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00404756.v1.p1",
+          "description": "Identifies the primary race of the patient.",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SCC_Sample",
+      "datasetId": "pht008860.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00404751.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00404752.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404750.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SCC_Subject",
+      "datasetId": "pht008859.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00404749.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404748.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

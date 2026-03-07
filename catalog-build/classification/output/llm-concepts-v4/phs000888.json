@@ -1,0 +1,3480 @@
+{
+  "studyId": "phs000888",
+  "studyName": "eMERGE Network Imputed GWAS for 41 phenotypes",
+  "tables": [
+    {
+      "tableName": "Geisinger_AAA_Static",
+      "datasetId": "pht005590.v1",
+      "description": "Dataset includes case/control status for and size of abdominal aortic aneurism, plus case/control status of  n=46  co-morbidities, including cerebro-vascular disease, coronary stenosis, emphysema, thrombocytopenia, unintentional weight loss, etc., and informs about use of medication (e.g. oral steroids, diuretics, anti-psychotics, anti-platelet, dyslipidimia medication), and smoking status.",
+      "variables": [
+        {
+          "name": "AAA_Size",
+          "id": "phv00265106.v1.p1",
+          "description": "AAA size",
+          "concept_id": "ncpi:pad_incident_abdominal_aortic_aneurysm",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age_At_Enrollment",
+          "id": "phv00265100.v1.p1",
+          "description": "Age at time of diagnosis for cases, at time of enrollment in biobank for controls",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Alcoholism",
+          "id": "phv00265136.v1.p1",
+          "description": "Flag indicating Alcoholism. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_alcohol_use_disorder",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Anemia",
+          "id": "phv00265152.v1.p1",
+          "description": "Flag indicating Anemia. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_anemia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Anorexia",
+          "id": "phv00265138.v1.p1",
+          "description": "Flag indicating Anorexia. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "topmed:psychiatric_interview_eating_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Anti-Psychotic_Meds_Use",
+          "id": "phv00265156.v1.p1",
+          "description": "Flag indicating Anti-Psychotic med use. At >= 2 indications of use.  Indications >= 180 days apart.",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_antipsychotics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Anticoagulent_Meds_Use",
+          "id": "phv00265128.v1.p1",
+          "description": "Flag indicating Anticoagulant med use. At >= 2 indications of use. Indications >= 180 days apart.",
+          "concept_id": "ncpi:anticoagulant_medication_general_anticoagulant_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Antihypertension_Meds_Use",
+          "id": "phv00265129.v1.p1",
+          "description": "Flag indicating Antihypertension med use. At >= 2 indications of use. Indications >= 180 days apart.",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_general_hypertension_medication_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Antiplatelet_Meds_Use",
+          "id": "phv00265132.v1.p1",
+          "description": "Flag indicating Antiplatelet med use. At >= 2 indications of use. Indications >= 180 days apart.",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_antiplatelet_agents",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Aplastic_Anemia",
+          "id": "phv00265121.v1.p1",
+          "description": "Flag indicating Aplastic Anemia. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_anemia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Benign_Neoplasms",
+          "id": "phv00265108.v1.p1",
+          "description": "Flag indicating Benign Neoplasm. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_related_events",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "COPD",
+          "id": "phv00265114.v1.p1",
+          "description": "Flag indicating COPD. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_copd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CVA",
+          "id": "phv00265116.v1.p1",
+          "description": "Flag indicating CVA. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_stroke_cerebrovascular_diagnosis_stroke_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Case_Control",
+          "id": "phv00265099.v1.p1",
+          "description": "Case - control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Cerebrovascular_Disease",
+          "id": "phv00265109.v1.p1",
+          "description": "Flag indicating Cerebrovascular Disease. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_stroke_cerebrovascular",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Chronic_Diarrhea",
+          "id": "phv00265143.v1.p1",
+          "description": "Flag indicating Chronic Diarrhea. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_diarrhea",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Chronic_Liver_Disease_Cirrhosis",
+          "id": "phv00265147.v1.p1",
+          "description": "Flag indicating Chronic liver disease/Cirrhosis. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Clotting_Time_INR",
+          "id": "phv00265107.v1.p1",
+          "description": "Pretreatment INR (International Normalized Ratio)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "Coronary_Stenosis",
+          "id": "phv00265110.v1.p1",
+          "description": "Flag indicating Coronary Stenosis. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "topmed:carotid_stenosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Decade_of_Birth",
+          "id": "phv00265101.v1.p1",
+          "description": "Decade of birth of participant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Dementia",
+          "id": "phv00265140.v1.p1",
+          "description": "Flag indicating Dementia. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_alzheimers_dementia_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes_Meds_Use",
+          "id": "phv00265133.v1.p1",
+          "description": "Flag indicating Diabetes med use. At >= 2 indications of use. Indications >= 180 days apart.",
+          "concept_id": "ncpi:concomitant_medication_diabetes_medications_diabetes_treatment_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes_Mellitus",
+          "id": "phv00265105.v1.p1",
+          "description": "Flag indicating result of T2DM algorithm (Northwestern)",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diseases_Of_White_Blood_Cells",
+          "id": "phv00265153.v1.p1",
+          "description": "Flag indicating Diseases of the White Blood Cells .Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_hematologic_disease_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diuretics_Meds_Use",
+          "id": "phv00265155.v1.p1",
+          "description": "Flag indicating Diuretics med use. At >= 2 indications of use.  Indications >= 180 days apart.",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_diuretics_any_diuretic",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Dyslipidemia_Meds_Use",
+          "id": "phv00265131.v1.p1",
+          "description": "Flag indicating Dyslipidemia med use. At >= 2 indications of use. Indications >= 180 days apart.",
+          "concept_id": "ncpi:lipid_lowering_medication_hyperlipidemia_treatment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Dysphagia",
+          "id": "phv00265149.v1.p1",
+          "description": "Flag indicating Dysphagia. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_dysphagia_swallowing",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Emphysema",
+          "id": "phv00265115.v1.p1",
+          "description": "Flag indicating Emphysema. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_emphysema",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "End_Stage_Kidney_Disease",
+          "id": "phv00265148.v1.p1",
+          "description": "Flag indicating End stage kidney disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_end_stage_renal_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HIV",
+          "id": "phv00265123.v1.p1",
+          "description": "Flag indicating HIV. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hiv_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Heart_Failure",
+          "id": "phv00265113.v1.p1",
+          "description": "Flag indicating Heart Failure. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_heart_failure",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hepatitis_B",
+          "id": "phv00265124.v1.p1",
+          "description": "Flag indicating Hepatitis B. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hepatitis_b",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hepatitis_C",
+          "id": "phv00265125.v1.p1",
+          "description": "Flag indicating Hepatitis C. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hepatitis_c",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hodgkins_Disease",
+          "id": "phv00265119.v1.p1",
+          "description": "Flag indicating Hodgkin's Disease. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hyperthyroidism",
+          "id": "phv00265142.v1.p1",
+          "description": "Flag indicating Hyperthyroidism. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_hyperthyroidism_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Inflammatory_Bowel_Disease",
+          "id": "phv00265146.v1.p1",
+          "description": "Flag indicating Inflammatory bowel disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_inflammatory_bowel_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Kidney_Disease",
+          "id": "phv00265111.v1.p1",
+          "description": "Flag indicating Kidney Disease. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_general_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Lactose_Intolerance",
+          "id": "phv00265145.v1.p1",
+          "description": "Flag indicating Lactose Intolerance. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_lactose_intolerance",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Leukemia",
+          "id": "phv00265117.v1.p1",
+          "description": "Flag indicating Leukemia. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Liver_Failure",
+          "id": "phv00265122.v1.p1",
+          "description": "Flag indicating Liver Failure. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Lymphoma",
+          "id": "phv00265118.v1.p1",
+          "description": "Flag indicating Lymphoma. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Malabsorption_Celiac_Disease",
+          "id": "phv00265144.v1.p1",
+          "description": "Flag indicating Malabsorption/ Celiac Disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_celiac_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Myeloma",
+          "id": "phv00265120.v1.p1",
+          "description": "Flag indicating Myeloma. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Oral_Steroid_Meds_Use",
+          "id": "phv00265157.v1.p1",
+          "description": "Flag indicating  oral steroid med use. At >= 2 indications of use.    Indications >= 180 days apart.",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_glucocorticoids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PAD",
+          "id": "phv00265104.v1.p1",
+          "description": "Flag indicating result of PAD algorithm (Mayo)",
+          "concept_id": "ncpi:pad_incident_pad_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Pancreatitis",
+          "id": "phv00265151.v1.p1",
+          "description": "Flag indicating Pancreatitis. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_pancreatitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Parkinsons_Disease",
+          "id": "phv00265137.v1.p1",
+          "description": "Flag indicating Parkinson's Disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_parkinsons_disease_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Parvovirus",
+          "id": "phv00265126.v1.p1",
+          "description": "Flag indicating Parvovirus. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_childhood_infections",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Protein_Calorie_Malnutrition",
+          "id": "phv00265135.v1.p1",
+          "description": "Flag indicating Protein Calorie Malnutrition. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "topmed:disease_diagnosis_gastrointestinal_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Pulmonary_Disease",
+          "id": "phv00265112.v1.p1",
+          "description": "Flag indicating Pulmonary Disease. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_lung_disease_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Pulmonary_Meds_Use",
+          "id": "phv00265130.v1.p1",
+          "description": "Flag indicating Pulmonary med use. At >= 2 indications of use. Indications >= 180 days apart.",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_general_respiratory_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Rheumatoid_Arthritis",
+          "id": "phv00265154.v1.p1",
+          "description": "Flag indicating Rheumatoid Arthritis. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_rheumatoid_arthritis_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEVERE_Depression",
+          "id": "phv00265141.v1.p1",
+          "description": "Flag indicating SEVERE Depression. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:depression_anxiety_screening_clinical_depression_episodes_depression_diagnosis_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLE_Lupus",
+          "id": "phv00265150.v1.p1",
+          "description": "Flag indicating SLE/lupus. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_lupus_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265098.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking_Status",
+          "id": "phv00265103.v1.p1",
+          "description": "Flag indicating smoking status.  (Passive smoking is \"ever\")",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TB",
+          "id": "phv00265139.v1.p1",
+          "description": "Flag indicating TB. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_tuberculosis_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Thrombocytopenia",
+          "id": "phv00265127.v1.p1",
+          "description": "Flag indicating Thrombocytopenia. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_thrombocytopenia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Unintentional_Weight_Loss_Causes",
+          "id": "phv00265134.v1.p1",
+          "description": "Flag indicating Unintentional Weight Loss Causes. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_obesity_weight_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Year_Birth",
+          "id": "phv00265102.v1.p1",
+          "description": "Birth year",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eMERGE_Imputed_Subject_Phenotypes",
+      "datasetId": "pht004678.v1",
+      "description": "The dataset provides information about presence/absence of medical diagnoses, including AAA, ADHD, AMD, appendicitis, asthma and n=34 other case/control statuses.",
+      "variables": [
+        {
+          "name": "CASE_CONTROL_AAA",
+          "id": "phv00225967.v1.p1",
+          "description": "Case - control status: Abdominal Aortic Aneurysm",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_ACEI",
+          "id": "phv00225968.v1.p1",
+          "description": "Case - control status: Ace-I Cough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_ADHD",
+          "id": "phv00225969.v1.p1",
+          "description": "Case - control status: Attention Deficit Hyperactivity Disorder",
+          "concept_id": "topmed:disease_diagnosis_psychiatric_mental_health",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_AMD",
+          "id": "phv00225970.v1.p1",
+          "description": "Case - control status: Age-related macular disease",
+          "concept_id": "ncpi:ophthalmology_amd_drusen_amd_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_APPENDICITIS",
+          "id": "phv00225971.v1.p1",
+          "description": "Case - control status: Appendicitis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_ASTHMA",
+          "id": "phv00225972.v1.p1",
+          "description": "Case - control status: Asthma",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_ATOPICDERMATITIS",
+          "id": "phv00225973.v1.p1",
+          "description": "Case - control status: Atopic Dermatitis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_AUTISM",
+          "id": "phv00225974.v1.p1",
+          "description": "Case - control status: Autism",
+          "concept_id": "topmed:disease_diagnosis_autism_developmental_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_BPH",
+          "id": "phv00225975.v1.p1",
+          "description": "Case - control status: Benign Prostatic Hyperplasia",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_CAAD",
+          "id": "phv00225976.v1.p1",
+          "description": "Case - control status: Carotid artery disease as a Quantitative Measure",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_CAMRSA",
+          "id": "phv00225977.v1.p1",
+          "description": "Case - control status: caMRSA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_CATARACT",
+          "id": "phv00225978.v1.p1",
+          "description": "Case - control status: Cataract",
+          "concept_id": "ncpi:ophthalmology_cataract_lens_cataract_diagnosis_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_CDIFF",
+          "id": "phv00225979.v1.p1",
+          "description": "Case - control status: Clostridium difficile colitis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_CHILDHOODOBESITY",
+          "id": "phv00225980.v1.p1",
+          "description": "Case - control status: Childhood Obesity",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_CKD",
+          "id": "phv00225981.v1.p1",
+          "description": "Case - control status: Chronic kidney disease",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_CKD_T2D",
+          "id": "phv00225982.v1.p1",
+          "description": "Case - control status: Chronic kidney disease and type 2 diabetes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_CKD_T2D_HTN",
+          "id": "phv00225983.v1.p1",
+          "description": "Case - control status: Chronic kidney disease, type 2 diabetes and hypertension",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_COLONPOLYPS",
+          "id": "phv00225984.v1.p1",
+          "description": "Case - control status: Colon polyps",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_CRF",
+          "id": "phv00225985.v1.p1",
+          "description": "Case - control status: Cardiorespiratory fitness",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_DEMENTIA",
+          "id": "phv00225986.v1.p1",
+          "description": "Case - control status: Dementia phenotype",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_alzheimers_dementia_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_DIV",
+          "id": "phv00225987.v1.p1",
+          "description": "Case - control status: Diverticulosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_DR",
+          "id": "phv00225988.v1.p1",
+          "description": "Case - control status: Diabetic retinopathy",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_diabetic_retinopathy_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_EXTREMEOBESITY",
+          "id": "phv00225989.v1.p1",
+          "description": "Case - control status: Extreme obesity",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_GERD",
+          "id": "phv00225990.v1.p1",
+          "description": "Case - control status: Gastroesophageal reflux disease",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_gastroesophageal_reflux_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_GLAUCOMA",
+          "id": "phv00225991.v1.p1",
+          "description": "Case - control status: Glaucoma",
+          "concept_id": "topmed:ophthalmology_glaucoma_optic_disc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_HEIGHT",
+          "id": "phv00225992.v1.p1",
+          "description": "Case - control status: Height",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_HF",
+          "id": "phv00225993.v1.p1",
+          "description": "Case - control status: Heart failure",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_heart_failure",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_HYPOTHYROIDISM",
+          "id": "phv00225994.v1.p1",
+          "description": "Case - control status: Hypothyroidism",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_hypothyroidism_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_LIPIDS",
+          "id": "phv00225995.v1.p1",
+          "description": "Case - control status: Lipids",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_OCULARHTN",
+          "id": "phv00225996.v1.p1",
+          "description": "Case - control status: Ocular hypertension",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_PAD",
+          "id": "phv00225997.v1.p1",
+          "description": "Case - control status: Peripheral arterial disease",
+          "concept_id": "ncpi:pad_incident_pad_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_QRS",
+          "id": "phv00225998.v1.p1",
+          "description": "Case - control status: QRS phenotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_RBC",
+          "id": "phv00225999.v1.p1",
+          "description": "Case - control status: Red blood cell indices phenotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_REMISSIONDIABETES",
+          "id": "phv00226000.v1.p1",
+          "description": "Case - control status: Remission of diabetes after ROUX-EN-Y",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_RESHYP",
+          "id": "phv00226001.v1.p1",
+          "description": "Case - control status: Resistant hypertension phenotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_STATINSMACE",
+          "id": "phv00226002.v1.p1",
+          "description": "Case - control status: MACE (Major Adverse Cardiac Events) on Statins",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_T2D",
+          "id": "phv00226003.v1.p1",
+          "description": "Case - control status: Type 2 diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_VTE",
+          "id": "phv00226004.v1.p1",
+          "description": "Case - control status: Venous thromboembolism",
+          "concept_id": "topmed:vte_case_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_WBC",
+          "id": "phv00226005.v1.p1",
+          "description": "Case - control status: White blood cell indices phenotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_ZOSTER",
+          "id": "phv00226006.v1.p1",
+          "description": "Case - control status: Zoster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DECADE_BIRTH",
+          "id": "phv00225963.v1.p1",
+          "description": "Decade of birth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00225965.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00225966.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00225962.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00225961.v1.p1",
+          "description": "De-identified Subject- eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEAR_BIRTH",
+          "id": "phv00225964.v1.p1",
+          "description": "Year of Birth for Pediatrics",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Geisinger_exObesity",
+      "datasetId": "pht005591.v1",
+      "description": "Dataset includes data of case/control status for extreme obesity, T2D, and n=28 co-morbidities including alcoholism, depression, thyroid disorder, etc., smoking status, height/weight data, and use of steroids, anti-psychotic drugs, and smoking status.",
+      "variables": [
+        {
+          "name": "Age_At_Most_Recent_BMI",
+          "id": "phv00265159.v1.p1",
+          "description": "At the time of most recent BMI for cases and controls",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Alcohol_use",
+          "id": "phv00265165.v1.p1",
+          "description": "Flag indicating alcohol use.",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_alcohol_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Anti_Psychotic_Use",
+          "id": "phv00265196.v1.p1",
+          "description": "Flag indicating Anti-Psychotic med use. Only for cases, at >= 2 indications of use.  Indications are during or before most recent valid BMI.  Indications >= 180 days apart. From the algorithm.",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_antipsychotics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Case_Control",
+          "id": "phv00265160.v1.p1",
+          "description": "Case control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes_NU_DMalgorithm",
+          "id": "phv00265166.v1.p1",
+          "description": "Result of T2DM algorithm (Northwestern)",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ExOb_Subtype",
+          "id": "phv00265161.v1.p1",
+          "description": "Subtype of case or control from algorithm",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Alcoholism",
+          "id": "phv00265168.v1.p1",
+          "description": "Flag indicating Alcoholism. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_alcohol_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Anorexia",
+          "id": "phv00265170.v1.p1",
+          "description": "Flag indicating Anorexia. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "topmed:psychiatric_interview_eating_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_COPD",
+          "id": "phv00265174.v1.p1",
+          "description": "Flag indicating COPD. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_copd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_CVA",
+          "id": "phv00265179.v1.p1",
+          "description": "Flag indicating CVA. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_stroke_cerebrovascular_diagnosis_stroke_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Chronic_Diarrhea",
+          "id": "phv00265180.v1.p1",
+          "description": "Flag indicating Chronic Diarrhea. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_diarrhea",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Chronic_liver_disease",
+          "id": "phv00265194.v1.p1",
+          "description": "Flag indicating Chronic liver disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Chronic_liver_disease_Cirrhosis",
+          "id": "phv00265184.v1.p1",
+          "description": "Flag indicating Chronic liver disease/ Cirrhosis. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Dementia",
+          "id": "phv00265176.v1.p1",
+          "description": "Flag indicating Dementia. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "topmed:disease_diagnosis_neurological_movement_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Diabetes",
+          "id": "phv00265191.v1.p1",
+          "description": "Flag indicating Diabetes. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Digestive_system_symptoms",
+          "id": "phv00265195.v1.p1",
+          "description": "Flag indicating Digestive system symptoms. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Dysphagia",
+          "id": "phv00265186.v1.p1",
+          "description": "Flag indicating Dysphagia. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_dysphagia_swallowing",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Emphysema",
+          "id": "phv00265175.v1.p1",
+          "description": "Flag indicating Emphysema. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_emphysema",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_End_stage_kidney_disease",
+          "id": "phv00265185.v1.p1",
+          "description": "Flag indicating End stage kidney disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_end_stage_renal_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_General_Symptoms",
+          "id": "phv00265192.v1.p1",
+          "description": "Flag indicating General Symptoms. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_HIV",
+          "id": "phv00265172.v1.p1",
+          "description": "Flag indicating HIV. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hiv_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Heart_Failure",
+          "id": "phv00265173.v1.p1",
+          "description": "Flag indicating Heart Failure. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_heart_failure",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Hyperthyroidism",
+          "id": "phv00265178.v1.p1",
+          "description": "Flag indicating Hyperthyroidism. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_hyperthyroidism_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Inflammatory_bowel_disease",
+          "id": "phv00265183.v1.p1",
+          "description": "Flag indicating Inflammatory bowel disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_inflammatory_bowel_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Lactose_Intolerance",
+          "id": "phv00265182.v1.p1",
+          "description": "Flag indicating Lactose Intolerance. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_lactose_intolerance",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Malabsorption_Celiac_Disease",
+          "id": "phv00265181.v1.p1",
+          "description": "Flag indicating Malabsorption/ Celiac Disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_celiac_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Nondependent_drug_use",
+          "id": "phv00265190.v1.p1",
+          "description": "Flag indicating Nondependent drug use. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_substance_use_consequences",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Nutrition_Metabolism_Symptoms",
+          "id": "phv00265189.v1.p1",
+          "description": "Flag indicating Nutrition Metabolism Symptoms. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Pancreatitis",
+          "id": "phv00265188.v1.p1",
+          "description": "Flag indicating Pancreatitis. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_pancreatitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Parkinsons_Disease",
+          "id": "phv00265169.v1.p1",
+          "description": "Flag indicating Parkinson's Disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_parkinsons_disease_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Protein_Calorie_Malnutrition",
+          "id": "phv00265167.v1.p1",
+          "description": "Flag indicating Protein Calorie Malnutrition. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "topmed:disease_diagnosis_gastrointestinal_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Has_SEVERE_Depression",
+          "id": "phv00265177.v1.p1",
+          "description": "Flag indicating SEVERE Depression. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:depression_anxiety_screening_clinical_depression_episodes_depression_diagnosis_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_SLE_lupus",
+          "id": "phv00265187.v1.p1",
+          "description": "Flag indicating SLE/lupus. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_lupus_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_TB",
+          "id": "phv00265171.v1.p1",
+          "description": "Flag indicating TB. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_tuberculosis_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Has_Thyroid_disorders",
+          "id": "phv00265193.v1.p1",
+          "description": "Flag indicating Thyroid disorders. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_general_thyroid_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Height_Median",
+          "id": "phv00265162.v1.p1",
+          "description": "Median height used in algorithm",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Oral_Steroid_Use",
+          "id": "phv00265197.v1.p1",
+          "description": "Flag indicating  oral steroid med use. Only for cases, at >= 2 indications of use.  Indications are during or before most recent valid BMI.  Indications >= 180 days apart. From the algorithm.",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_glucocorticoids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265158.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking_Status",
+          "id": "phv00265164.v1.p1",
+          "description": "Flag indicating smoking status.  (Passive is ever)",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Weight_Most_Recent_BMI",
+          "id": "phv00265163.v1.p1",
+          "description": "Most recent weight used in algorithm",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "colonPolyp_colonoscopy_data_all_expected_sites",
+      "datasetId": "pht005575.v1",
+      "description": "Description of colonoscopy results including presence of anatomical location of polyps (n=24 variables), and age at colonoscopy.",
+      "variables": [
+        {
+          "name": "Age_at_Colonoscopy",
+          "id": "phv00264973.v1.p1",
+          "description": "Age when had colonoscopy",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00264972.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "adenoma_left",
+          "id": "phv00264996.v1.p1",
+          "description": "Number of colon polyps of type adenoma (subtype not otherwise specified) found on the left side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "adenoma_na",
+          "id": "phv00264998.v1.p1",
+          "description": "Number of colon polyps of type adenoma (subtype not otherwise specified) found on an unspecified side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "adenoma_right",
+          "id": "phv00264997.v1.p1",
+          "description": "Number of colon polyps of type adenoma (subtype not otherwise specified) found on the right side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "carcinoma_NA",
+          "id": "phv00264980.v1.p1",
+          "description": "Number of colon polyps of type carcinoma found on an unspecified side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "carcinoma_left",
+          "id": "phv00264978.v1.p1",
+          "description": "Number of colon polyps of type carcinoma found on the left side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "carcinoma_right",
+          "id": "phv00264979.v1.p1",
+          "description": "Number of colon polyps of type carcinoma found on the right side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "colonoscopy_visit_ID",
+          "id": "phv00264974.v1.p1",
+          "description": "A unique number assigned to this colonoscopy to differentiate it from other colonoscopies that may have occurred at the same age",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hamartoma_NA",
+          "id": "phv00264983.v1.p1",
+          "description": "Number of colon polyps of type hamartoma found on an unspecified side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hamartoma_left",
+          "id": "phv00264981.v1.p1",
+          "description": "Number of colon polyps of type hamartoma found on the left side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hamartoma_right",
+          "id": "phv00264982.v1.p1",
+          "description": "Number of colon polyps of type hamartoma found on the right side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hyperplastic_NA",
+          "id": "phv00264977.v1.p1",
+          "description": "Number of colon polyps of type hyperplastic found on an unspecified side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hyperplastic_left",
+          "id": "phv00264975.v1.p1",
+          "description": "Number of colon polyps of type hyperplastic found on the left side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hyperplastic_right",
+          "id": "phv00264976.v1.p1",
+          "description": "Number of colon polyps of type hyperplastic found on the right side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "inflammatory_NA",
+          "id": "phv00264986.v1.p1",
+          "description": "Number of colon polyps of type inflammatory found on an unspecified side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "inflammatory_left",
+          "id": "phv00264984.v1.p1",
+          "description": "Number of colon polyps of type inflammatory found on the left side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "inflammatory_right",
+          "id": "phv00264985.v1.p1",
+          "description": "Number of colon polyps of type inflammatory found on the right side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "juvenile_NA",
+          "id": "phv00264989.v1.p1",
+          "description": "Number of colon polyps of type juvenile found on an unspecified side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "juvenile_left",
+          "id": "phv00264987.v1.p1",
+          "description": "Number of colon polyps of type juvenile found on the left side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "juvenile_right",
+          "id": "phv00264988.v1.p1",
+          "description": "Number of colon polyps of type juvenile found on the right side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "serrated_NA",
+          "id": "phv00264992.v1.p1",
+          "description": "Number of colon polyps of type serrated found on an unspecified side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "serrated_left",
+          "id": "phv00264990.v1.p1",
+          "description": "Number of colon polyps of type serrated found on the left side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "serrated_right",
+          "id": "phv00264991.v1.p1",
+          "description": "Number of colon polyps of type serrated found on the right side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tubular_NA",
+          "id": "phv00264995.v1.p1",
+          "description": "Number of colon polyps of type tubular found on an unspecified side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tubular_left",
+          "id": "phv00264993.v1.p1",
+          "description": "Number of colon polyps of type tubular found on the left side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tubular_right",
+          "id": "phv00264994.v1.p1",
+          "description": "Number of colon polyps of type tubular found on the right side of the colon",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MergedSetII_Phenotype_Marshfield_AMD",
+      "datasetId": "pht005584.v1",
+      "description": "Dataset includes HDL/LDL/triglyceride/total cholesterol values and age of testing, blood pressure measurements, BMI and smoking status data.",
+      "variables": [
+        {
+          "name": "AGE_at_AMD",
+          "id": "phv00265037.v1.p1",
+          "description": "Age at earliest AMD diagnosis in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_at_Drusen",
+          "id": "phv00265038.v1.p1",
+          "description": "Age at earliest Drusen diagnosis in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_at_last_eye_exam",
+          "id": "phv00265045.v1.p1",
+          "description": "Age at most recent eye exam in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AMD_Drusen_group",
+          "id": "phv00265036.v1.p1",
+          "description": "AMD Drusen group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_BMI",
+          "id": "phv00265041.v1.p1",
+          "description": "Age at Body Mass Index closest to reference date",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_BMI_maximum",
+          "id": "phv00265042.v1.p1",
+          "description": "Age at Body Mass Index (maximum)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_BMI_median",
+          "id": "phv00265043.v1.p1",
+          "description": "Age at Body Mass Index (median)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_HDL_cholesterol_median",
+          "id": "phv00265044.v1.p1",
+          "description": "Age at HDL cholesterol (median)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_LDL_cholesterol_median",
+          "id": "phv00265046.v1.p1",
+          "description": "Age at LDL cholesterol (median)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_blood_pressure_maximum",
+          "id": "phv00265039.v1.p1",
+          "description": "Age at blood pressure (maximum)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_blood_pressure_median",
+          "id": "phv00265040.v1.p1",
+          "description": "Age at blood pressure (median)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_total_cholesterol_median",
+          "id": "phv00265047.v1.p1",
+          "description": "Age at total cholesterol (median)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_triglycerides_median",
+          "id": "phv00265048.v1.p1",
+          "description": "Age at triglycerides (median)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00265049.v1.p1",
+          "description": "Body Mass Index closest to reference date",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_maximum",
+          "id": "phv00265050.v1.p1",
+          "description": "Body Mass Index (maximum)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_median",
+          "id": "phv00265051.v1.p1",
+          "description": "Body Mass Index (median)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Diastolic_blood_pressure_maximum",
+          "id": "phv00265052.v1.p1",
+          "description": "Diastolic blood pressure (maximum)",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_statistical_measures",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Diastolic_blood_pressure_median",
+          "id": "phv00265053.v1.p1",
+          "description": "Diastolic blood pressure (median)",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_statistical_measures",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HDL_cholesterol_median",
+          "id": "phv00265054.v1.p1",
+          "description": "HDL cholesterol (median)",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL_cholesterol_median",
+          "id": "phv00265055.v1.p1",
+          "description": "LDL cholesterol (median)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_aggregated",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265034.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking_status",
+          "id": "phv00265035.v1.p1",
+          "description": "Smoking status",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Systolic_blood_pressure_maximum",
+          "id": "phv00265056.v1.p1",
+          "description": "Systolic blood pressure (maximum)",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_maximum_systolic_bp",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Systolic_blood_pressure_median",
+          "id": "phv00265057.v1.p1",
+          "description": "Systolic blood pressure (median)",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_median_systolic_bp",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Total_cholesterol_median",
+          "id": "phv00265058.v1.p1",
+          "description": "Total cholesterol (median)",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Triglycerides_median",
+          "id": "phv00265059.v1.p1",
+          "description": "Triglycerides (median)",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_standard_units_total_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ACEiCough",
+      "datasetId": "pht005571.v1",
+      "description": "Dataset includes information about co-morbidities of asthma, bronchitis, bronchiectasis, COPD, emphysema, allergic alveolitis,  GERD, and smoking status of participants.",
+      "variables": [
+        {
+          "name": "AGE_at_ACEicough",
+          "id": "phv00264937.v1.p1",
+          "description": "Age at ACEi cough diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Allergic_alveolitis",
+          "id": "phv00264945.v1.p1",
+          "description": "Flag indicating subject has post-nasal drip ICD9s (495.X) ever",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Asthma",
+          "id": "phv00264938.v1.p1",
+          "description": "Asthma History Ind-2 Yes/No indicator to ask whether there is a history of asthma ICD9s (see list) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_diagnosis_ever",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Bronchiectasis",
+          "id": "phv00264944.v1.p1",
+          "description": "Flag indicating subject has asthma ICD9s (494.X) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_bronchiectasis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Bronchitis",
+          "id": "phv00264941.v1.p1",
+          "description": "Flag indicating subject has Bronchitis ICD9s (490) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_bronchitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COPD",
+          "id": "phv00264946.v1.p1",
+          "description": "Flag indicating subject has COPD ICD9s (496=Chronic airway obstruction, not elsewhere classified) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_copd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Case_Control",
+          "id": "phv00264936.v1.p1",
+          "description": "Case - control status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Chronic_Bronchitis",
+          "id": "phv00264942.v1.p1",
+          "description": "Flag indicating subject has Chronic Bronchitis ICD9s (491.X) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_chronic_bronchitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Emphysema",
+          "id": "phv00264943.v1.p1",
+          "description": "Flag indicating subject has Emphysema ICD9s (492.X) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_emphysema",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GERD",
+          "id": "phv00264940.v1.p1",
+          "description": "Flag indicating subject has GERD ICD9s (530.11, 530.81) ever",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_gastroesophageal_reflux_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Post_Nasal_Drip",
+          "id": "phv00264939.v1.p1",
+          "description": "Flag indicating subject has post-nasal drip ICD9s (461.X, 473.X) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_nasal_sinus_symptoms",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00264935.v1.p1",
+          "description": "Deidentified eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking_Status",
+          "id": "phv00264947.v1.p1",
+          "description": "Flag indicating smoking status - just ever (=4)  or never (=1)",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Diverticulosis_data_all_adult_sites",
+      "datasetId": "pht005586.v1",
+      "description": "Dataset informs about case/control and age of diagnosis of diverticulitis/diverticulosis, BMI data at last colonoscopy, and smoking status.",
+      "variables": [
+        {
+          "name": "AGE_ENROLLMENT",
+          "id": "phv00265077.v1.p1",
+          "description": "Age at Enrollment in DNA biorepository",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_FIRST_DIAGNOSIS",
+          "id": "phv00265073.v1.p1",
+          "description": "Age at first diagnosis of phenotype",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_LAST_COLONOSCOPY",
+          "id": "phv00265072.v1.p1",
+          "description": "Age at last colonoscopy",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_AT_1ST_DIAGNOSIS",
+          "id": "phv00265075.v1.p1",
+          "description": "Subject's Body Mass Index closest to time of diagnosis of phenotype (for cases)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_AT_LAST_COLONOSCOPY",
+          "id": "phv00265074.v1.p1",
+          "description": "Subject's Body Mass Index closest to time of last colonoscopy",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL",
+          "id": "phv00265069.v1.p1",
+          "description": "Case - control status: case if has diverticulois, control if not",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIVERTICULITIS",
+          "id": "phv00265071.v1.p1",
+          "description": "\"Yes or no\" if the patient has been diagnosed with diverticulitis, either positively noted during an imaging test or by diagnosis code (see list of codes in comments)",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_diverticular_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIVERTICULOSIS",
+          "id": "phv00265070.v1.p1",
+          "description": "\"Yes or no\" if the patient has been diagnosed with diverticulosis, positively noted during an imaging test;  also yes if diagnosed with diverticulitis",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_diverticular_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKING_STATUS",
+          "id": "phv00265076.v1.p1",
+          "description": "Self-reported smoking or smoking status as recorded in the EMR",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265068.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BPH_submission",
+      "datasetId": "pht005573.v1",
+      "description": "Dataset includes values case/control status of BPH, and for high/low PSA values (Prostate-Specific Antigen, n=4 variables), BMI data, and smoking status.",
+      "variables": [
+        {
+          "name": "AGE_AT_BMI",
+          "id": "phv00264958.v1.p1",
+          "description": "Age (years) at BMI_at_1st_diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_High_PSA",
+          "id": "phv00264961.v1.p1",
+          "description": "Age at date at the highest PSA result",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_Low_PSA",
+          "id": "phv00264963.v1.p1",
+          "description": "Age at date at the lowest PSA result",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_AT_1ST_DIAGNOSIS",
+          "id": "phv00264957.v1.p1",
+          "description": "Subject's Body Mass Index closest to first BPH-related ICD-9 code date (for cases) or most recent BMI value (for controls)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL",
+          "id": "phv00264956.v1.p1",
+          "description": "Case or Control as defined in the algorithm",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "High_PSA",
+          "id": "phv00264960.v1.p1",
+          "description": "Highest Result of PSA (prostate specific antigen) lab test",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Low_PSA",
+          "id": "phv00264962.v1.p1",
+          "description": "Lowest Result of PSA (prostate specific antigen) lab test",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKING_STATUS",
+          "id": "phv00264959.v1.p1",
+          "description": "Flag indicating smoking status",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00264955.v1.p1",
+          "description": "Deidentified ID where the first two digits denote the origination site of the samples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Geisinger_AAA_Labs",
+      "datasetId": "pht005589.v1",
+      "description": "Dataset includes HbA1c, HDL, LDL, total cholesterol, platelet and blood coagulation data.",
+      "variables": [
+        {
+          "name": "HDL",
+          "id": "phv00265092.v1.p1",
+          "description": "A value which captures the amount of High Density Lipoprotein (HDL) Cholesterol in the blood measured in milligrams per deciliter (mg/dL). High Density Lipoprotein (HDL) Cholesterol, the \"good\" cholesterol synthesized in the liver, which mediates reverse cholesterol transport.",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HbA1c",
+          "id": "phv00265094.v1.p1",
+          "description": "HbA1c value",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INR",
+          "id": "phv00265096.v1.p1",
+          "description": "A value which captures the ratio of a patient's prothrombin time to a normal (control) sample, raised to the power of the ISI value for the analytical system being used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL",
+          "id": "phv00265093.v1.p1",
+          "description": "A value which captures the amount of Low Density Lipoprotein (LDL) Cholesterol in the blood measured in milligrams per deciliter (mg/dL). Low Density Lipoprotein (LDL) Cholesterol is associated with atherosclerosis, myocardial infarctions and strokes.",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Observation_Age",
+          "id": "phv00265090.v1.p1",
+          "description": "Age when clinical event recorded in record",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Platelets",
+          "id": "phv00265095.v1.p1",
+          "description": "A value which captures the amount of Platlet levels. Exclude platelet values taken <= 10 days after CPT codes: 36430-36460, 86960, 86999",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265089.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Serum_Total_Cholesterol",
+          "id": "phv00265091.v1.p1",
+          "description": "A value which captures the amount of Total Cholesterol in the blood measured in milligrams per deciliter (mg/dL).",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Visit_Number",
+          "id": "phv00265097.v1.p1",
+          "description": "A database generated unique key created for weight, height, BMI repeated values",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "caMRSA_data_all_expected_sites",
+      "datasetId": "pht005574.v1",
+      "description": "Dataset informs about case/control status, and history of dialysis, MRSA (Methicillin-Resistant Staphylococcus Aureus) and stay in hospital/nursing home facility.",
+      "variables": [
+        {
+          "name": "Age_Infection",
+          "id": "phv00264967.v1.p1",
+          "description": "Age (in years) at time of the first qualifying infection for cases (blank for controls)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_Last_Visit",
+          "id": "phv00264968.v1.p1",
+          "description": "Age (in years) at time of last continuous enrollment visit for controls (blank for cases)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Case_Control",
+          "id": "phv00264965.v1.p1",
+          "description": "Case - Control Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Case_control_type",
+          "id": "phv00264966.v1.p1",
+          "description": "For cases: whether a case meets gold or silver standard definition; else control or NA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "History_Dialysis",
+          "id": "phv00264970.v1.p1",
+          "description": "Indicate if patient was  on dialysis in the year before MRSA Dx (cases only, leave blank for controls)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "History_MRSA",
+          "id": "phv00264969.v1.p1",
+          "description": "Indicate if patient  ever had ANY TYPE of MRSA infection prior to caMRSA (community-associated Methicillin-Resistant Staphylococcus Aureus) infection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NH_in_prior_yr",
+          "id": "phv00264971.v1.p1",
+          "description": "Indicate if patient had a prior stay in a long term care facility/nursing home in the last year before MRSA infection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00264964.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MergedSetII_Phenotype_Marshfield_Glaucoma_OHT",
+      "datasetId": "pht005585.v1",
+      "description": "Dataset informs about age of intraocular hypertension, glaucoma, narrow-angle glaucoma diagnosis, and use of treatments (beta-blocker, glaucoma surgery, IOP medication).",
+      "variables": [
+        {
+          "name": "AGE_at_IOP_meds",
+          "id": "phv00265064.v1.p1",
+          "description": "Age at earliest Intra-ocular pressure lowering medications where route is ophthalmic (if applicable). See IOP lowering med list tab.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_at_OHT",
+          "id": "phv00265061.v1.p1",
+          "description": "Age at earliest Ocular Hypertension diagnosis in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_at_beta_blocker",
+          "id": "phv00265067.v1.p1",
+          "description": "Age at first systemic beta blocker (if applicable). See table of Systemic beta-blocker medications.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_at_glaucoma",
+          "id": "phv00265062.v1.p1",
+          "description": "Age at earliest open-angle Glaucoma diagnosis in years (if applicable)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_at_glaucoma_surgery",
+          "id": "phv00265065.v1.p1",
+          "description": "Age at earliest open-angle Glaucoma surgery procedure in years (if applicable)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_at_last_eye_exam",
+          "id": "phv00265066.v1.p1",
+          "description": "Age at most recent eye exam in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_at_narrow_angle_glaucoma",
+          "id": "phv00265063.v1.p1",
+          "description": "Age at earliest narrow-angle Glaucoma diagnosis in years (if applicable)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265060.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EMERGEII_BMI_merged",
+      "datasetId": "pht004680.v1",
+      "description": "The dataset provides data of repeat BMI/height/weight measurements and age of observation.",
+      "variables": [
+        {
+          "name": "AGE_OBSERVATION",
+          "id": "phv00226017.v1.p1",
+          "description": "Age when clinical event was recorded in record",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_MASS_INDEX",
+          "id": "phv00226016.v1.p1",
+          "description": "Subject's BMI over time",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT",
+          "id": "phv00226015.v1.p1",
+          "description": "Subject's height at enrollment",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00226013.v1.p1",
+          "description": "De-identified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VISIT_NUMBER",
+          "id": "phv00226019.v1.p1",
+          "description": "A database generated unique key created for weight, height, BMI repeated values",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00226014.v1.p1",
+          "description": "Subject's weight at enrollment",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEAR_OBSERVATION",
+          "id": "phv00226018.v1.p1",
+          "description": "Year when clinical event was recorded in record",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AMI",
+      "datasetId": "pht005572.v1",
+      "description": "Acute Myocardial Infarct - dataset includes data about presence/absence of diabetes/ hypertension, MI, MACE (Major Adverse Cardiac Events), and smoking status.",
+      "variables": [
+        {
+          "name": "DIABETES",
+          "id": "phv00264952.v1.p1",
+          "description": "If the patient has been diagnosed with T2DM previously, use the T2DM algorithm to determine",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HTN",
+          "id": "phv00264953.v1.p1",
+          "description": "If the patient has been diagnosed with HTN previously (defined as ICD 401-405 + HTN meds)",
+          "concept_id": "ncpi:antihypertensive_meds_hypertension_treatment_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MACE",
+          "id": "phv00264949.v1.p1",
+          "description": "Case/Control Status for MACE (Major Adverse Cardiac Events)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MI",
+          "id": "phv00264950.v1.p1",
+          "description": "Case/Control Status for MI",
+          "concept_id": "ncpi:mi_incident_mi_incident_status_mi_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_MACE",
+          "id": "phv00264951.v1.p1",
+          "description": "If the patient has a previous MACE",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKING",
+          "id": "phv00264954.v1.p1",
+          "description": "Smoking status",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00264948.v1.p1",
+          "description": "Deidentified ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "emerge2_obesity_bmi",
+      "datasetId": "pht005581.v1",
+      "description": "Dataset with height/weight data in obesity.",
+      "variables": [
+        {
+          "name": "Age1",
+          "id": "phv00265020.v1.p1",
+          "description": "Age at time of first qualifing height/weight measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age2",
+          "id": "phv00265023.v1.p1",
+          "description": "Age at time of second qualifing height/weight measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "H1",
+          "id": "phv00265018.v1.p1",
+          "description": "Height of first qualifying height/weight measurement. NOTE: two measurements of >= 99th percentile (BMI) are needed on different calendar days.  H1/W1 and H2/W2 should be the latest two qualifying measurements.",
+          "concept_id": "ncpi:height_baseline_height_qualifying_measurements",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "H2",
+          "id": "phv00265021.v1.p1",
+          "description": "Height of second qualifying height/weight measurement",
+          "concept_id": "ncpi:height_baseline_height_qualifying_measurements",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265017.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "W1",
+          "id": "phv00265019.v1.p1",
+          "description": "Weight of first qualifying height/weight measurement",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "W2",
+          "id": "phv00265022.v1.p1",
+          "description": "Weight of second qualifying height/weight measurement",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "emerge2_obesity_med",
+      "datasetId": "pht005583.v1",
+      "description": "Obesity - Steroids - prescription age, duration of intake, prescription of ADHD or atypical anti-psychotic medication.",
+      "variables": [
+        {
+          "name": "ADHD",
+          "id": "phv00265033.v1.p1",
+          "description": "Flag indicating medication is on the list of ADHD medications (Control)",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_stimulants_adhd_meds",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age_Drug",
+          "id": "phv00265028.v1.p1",
+          "description": "Age of Drug prescription",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Atypical_Anti",
+          "id": "phv00265032.v1.p1",
+          "description": "Flag indicating medication is on the list of Atypical AntiPsychotics (Case)",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_antipsychotics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Drug_code",
+          "id": "phv00265029.v1.p1",
+          "description": "The Name of the Drug listed in the medication sheet or corresponding Drug_Code variable in the RxNorm terminology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265027.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Steroid",
+          "id": "phv00265030.v1.p1",
+          "description": "Flag indicating medication is a steroid",
+          "concept_id": "ncpi:concomitant_medication_specific_drug_names_corticosteroids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Steroid_Dur",
+          "id": "phv00265031.v1.p1",
+          "description": "If medication is a steroid, indicate total number of days taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EMERGEII_LABS_MERGED",
+      "datasetId": "pht004679.v1",
+      "description": "The dataset includes data of HDL/LDL/Triglycerides, and age of testing.",
+      "variables": [
+        {
+          "name": "AGE_OBSERVATION",
+          "id": "phv00226010.v1.p1",
+          "description": "Age when clinical event recorded in record",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LAB_NAME",
+          "id": "phv00226008.v1.p1",
+          "description": "LDL, HDL, Triglycerides",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LAB_VALUE",
+          "id": "phv00226009.v1.p1",
+          "description": "Values for LDL, HDL, Triglycerides",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00226007.v1.p1",
+          "description": "De-identified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VISIT_NUMBER",
+          "id": "phv00226012.v1.p1",
+          "description": "A database generated unique key created for repeated values",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEAR_OBSERVATION",
+          "id": "phv00226011.v1.p1",
+          "description": "Year when clinical event was recorded in record",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "07aAsthma_hx_labs",
+      "datasetId": "pht005558.v1",
+      "description": "CPT (Current Procedural Terminology) code, wheal flare test result and age.",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264892.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264893.v1.p1",
+          "description": "Subject age in days at date associated to laboratory measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "allergen",
+          "id": "phv00264895.v1.p1",
+          "description": "Name of allergen",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cpt",
+          "id": "phv00264894.v1.p1",
+          "description": "CPT (Current Procedural Terminology) code for test",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ige",
+          "id": "phv00264896.v1.p1",
+          "description": "Serum Immunoglobulin E",
+          "concept_id": "phenx:immunoglobulin_e_total_and_specific",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wheal_flare",
+          "id": "phv00264897.v1.p1",
+          "description": "Skin prick test result",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "11aAtopic_dermatitis_Labs",
+      "datasetId": "pht005562.v1",
+      "description": "CPT (Current Procedural Terminology) code, wheal flare test result and age.",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264906.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264907.v1.p1",
+          "description": "Subject age in days at date associated to laboratory measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "allergen",
+          "id": "phv00264909.v1.p1",
+          "description": "Name of allergen",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cpt",
+          "id": "phv00264908.v1.p1",
+          "description": "CPT code for test",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ige",
+          "id": "phv00264910.v1.p1",
+          "description": "Serum Immunoglobulin E",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wheal_flare",
+          "id": "phv00264911.v1.p1",
+          "description": "Skin prick test result",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Geisinger_AAA_BMI",
+      "datasetId": "pht005587.v1",
+      "description": "Abdominal aortic aneurism and BMI/height/weight data.",
+      "variables": [
+        {
+          "name": "Body_Mass_Index",
+          "id": "phv00265080.v1.p1",
+          "description": "Imputed BMI based on plus or minus 6-months time period",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Height",
+          "id": "phv00265081.v1.p1",
+          "description": "Subject Height in cm over time",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Observation_Age",
+          "id": "phv00265079.v1.p1",
+          "description": "Age when clinical event recorded in record",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265078.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Visit_Number",
+          "id": "phv00265083.v1.p1",
+          "description": "A database generated unique key created for weight, height, BMI repeated values",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Weight",
+          "id": "phv00265082.v1.p1",
+          "description": "Subject Weight in kilograms over time",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eMERGE_Imputed_Sample",
+      "datasetId": "pht004677.v1",
+      "description": "Subject - Sample Mapping",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00225957.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00225960.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00225958.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00225959.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00225956.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Geisinger_AAA_BP",
+      "datasetId": "pht005588.v1",
+      "description": "Abdominal aortic aneurism and blood pressure data.",
+      "variables": [
+        {
+          "name": "Diastolic_blood_pressure",
+          "id": "phv00265087.v1.p1",
+          "description": "Diastolic blood pressure",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_miscellaneous",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Observation_Age",
+          "id": "phv00265085.v1.p1",
+          "description": "Age when clinical event recorded in record",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265084.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Systolic_blood_pressure",
+          "id": "phv00265086.v1.p1",
+          "description": "Systolic blood pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_generic_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Visit_Number",
+          "id": "phv00265088.v1.p1",
+          "description": "A database generated unique key created for weight, height, BMI repeated values",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eMERGE_Imputed_Subject",
+      "datasetId": "pht004676.v1",
+      "description": "Subject - Consent - Affection Status Information",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00225953.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJID",
+          "id": "phv00225955.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00225952.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJ_SOURCE",
+          "id": "phv00225954.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "02aADHD_hx_meds",
+      "datasetId": "pht005553.v1",
+      "description": "ADHD - drug name and code (n=2 variables)",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264877.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264878.v1.p1",
+          "description": "Subject age in days at date associated with ADHD prescription",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "drug_code",
+          "id": "phv00264880.v1.p1",
+          "description": "RxNorm Identifier in Generic Level for subject's Medication",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "drug_name",
+          "id": "phv00264879.v1.p1",
+          "description": "The Name of the Drug corresponding to the Drug_Code variable in the RxNorm terminology",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_other_psychotropic_medications",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "17aGERD_meds",
+      "datasetId": "pht005568.v1",
+      "description": "GERD - Medication name/code/age at prescription",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264925.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264926.v1.p1",
+          "description": "Subject age in days at date associated with GERD prescription",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "drug_code",
+          "id": "phv00264927.v1.p1",
+          "description": "RxNorm Identifier in Generic Level for subject's Medication",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "drug_name",
+          "id": "phv00264928.v1.p1",
+          "description": "The Name of the Drug corresponding to the Drug_Code variable in the RxNorm terminology",
+          "concept_id": "ncpi:concomitant_medication_gastrointestinal_medications_general_gi_medications",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "emerge2_appendicitis_historydisease",
+      "datasetId": "pht005577.v1",
+      "description": "CPT (Current Procedural Terminology) and ICD9 codes of appendicitis in addition to drug name/code (n=4 variables)",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00265005.v1.p1",
+          "description": "Age at first instance and each instance of ICD9 code",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CPT_Code",
+          "id": "phv00265004.v1.p1",
+          "description": "CPT (Current Procedural Terminology) code used to record procedure such as appendectomy (See CPT codes sheet)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ICD9_Code",
+          "id": "phv00265003.v1.p1",
+          "description": "ICD 9 code used to record disease (See ICD9 codes sheet)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265002.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "emerge2_appendicitis_med",
+      "datasetId": "pht005578.v1",
+      "description": "Appendicitis - Medication name/code/age at prescription",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00265009.v1.p1",
+          "description": "Subject age in days at date associated with Systemic Antibiotics prescription",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Drug_Code",
+          "id": "phv00265007.v1.p1",
+          "description": "RxNorm Identifier in Generic Level for subject's Medication",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Drug_Name",
+          "id": "phv00265008.v1.p1",
+          "description": "The Name of the Drug corresponding to the Drug_Code variable in the RxNorm terminology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265006.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "emerge2_autism_historydisease",
+      "datasetId": "pht005580.v1",
+      "description": "ICD9 code (n=1 variable) - AUTISM",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00265014.v1.p1",
+          "description": "Age in days at diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ICD9_Dx",
+          "id": "phv00265015.v1.p1",
+          "description": "ICD9 code of diagnosis (for cases-'case inclusion', for controls-'case exclusion')",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265013.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Visit",
+          "id": "phv00265016.v1.p1",
+          "description": "A database generated unique key created for repeated values",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "01aADHD_hx",
+      "datasetId": "pht005552.v1",
+      "description": "ICD9 codes to capture ADHD diagnosed subjects (n=1 variable)",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264874.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264875.v1.p1",
+          "description": "Subject age in days at date associated with diagnosis code for ADHD",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "icd9_code",
+          "id": "phv00264876.v1.p1",
+          "description": "ICD 9 codes used to record ADHD",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "03aADHD_hx_other_conditions",
+      "datasetId": "pht005554.v1",
+      "description": "ICD9 codes to capture ADHD diagnosed subjects (n=1 variable)",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264881.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264882.v1.p1",
+          "description": "Subject age in days at date associated with diagnosis code for any other psychiatric condition",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "icd9_code",
+          "id": "phv00264883.v1.p1",
+          "description": "ICD 9 code used to record other psychiatric  diseases",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "05aAsthma_hx_asthma_allergy",
+      "datasetId": "pht005556.v1",
+      "description": "ICD9 codes (n=1 variable) - Asthma/Allergy",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264886.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264887.v1.p1",
+          "description": "Subject age in days at date associated with diagnosis code for asthma or allergic conjunctivitis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "icd9_code",
+          "id": "phv00264888.v1.p1",
+          "description": "ICD 9 code used to record asthma or relevant allergy diagnoses.  <b>Note: Chronic allergic rhinoconjunctivitis is captured too.</b>",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "06aAsthma_hx_asthma_exacerbation",
+      "datasetId": "pht005557.v1",
+      "description": "ICD9 code (n=1 variable) for asthma with acute exacerbation.",
+      "variables": [
+        {
+          "name": "Asthma_exacerbations",
+          "id": "phv00264891.v1.p1",
+          "description": "ICD9 code to record asthma with acute exacerbation=493.*2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00264889.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264890.v1.p1",
+          "description": "Subject age in days at date associated with the event",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "08aAsthma_hx_meds",
+      "datasetId": "pht005559.v1",
+      "description": "Asthma - drug code (n=1 variable)",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264898.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264899.v1.p1",
+          "description": "Subject age in days at date associated with asthma prescription",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "drug_code",
+          "id": "phv00264900.v1.p1",
+          "description": "The Name of the Drug corresponding to the Drug_Code variable in the RxNorm terminology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "09aAtopic_dermatitis_hx",
+      "datasetId": "pht005560.v1",
+      "description": "ICD9 codes (n=1 variable) - Atopic Dermatitis",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264901.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264902.v1.p1",
+          "description": "Subject age in days at date associated with diagnosis code for atopic dermatitis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "icd9_code",
+          "id": "phv00264903.v1.p1",
+          "description": "ICD 9 code used to record atopic dermatitis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "12aAtopic_dermatitis_meds",
+      "datasetId": "pht005563.v1",
+      "description": "Atopic Dermatitis - age and drug code",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264912.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264913.v1.p1",
+          "description": "Subject's age in days at date associated with atopic dermatitis prescription",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "drug_code",
+          "id": "phv00264914.v1.p1",
+          "description": "The Name of the Drug corresponding to the Drug_Code variable in the RxNorm terminology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "13aAtopic_dermatitis_related_conditions",
+      "datasetId": "pht005564.v1",
+      "description": "ICD9 codes  used - other than atopic dermatitis",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264915.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264916.v1.p1",
+          "description": "Subject age in days at date associated with atopic dermatitis prescription",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "icd9_code",
+          "id": "phv00264917.v1.p1",
+          "description": "ICD9 codes included",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "14aGERD_hx",
+      "datasetId": "pht005565.v1",
+      "description": "ICD9 code (n=1 variable) - GERD",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264918.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264919.v1.p1",
+          "description": "Subject age in days at date associated with diagnosis code for GERD",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gerd_icd9",
+          "id": "phv00264920.v1.p1",
+          "description": "ICD 9 code(s) used to record GERD",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "18aGERD_other_conditions",
+      "datasetId": "pht005569.v1",
+      "description": "ICD9 code (n=1 variable) included other than GERD",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264929.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264930.v1.p1",
+          "description": "Subject age in days at date associated with diagnosis code for any other  condition",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gerd_icd9",
+          "id": "phv00264931.v1.p1",
+          "description": "ICD 9 code used to record other diseases",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "19aGERD_procedures_surgeries",
+      "datasetId": "pht005570.v1",
+      "description": "GERD - Surgery/Age",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264932.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264933.v1.p1",
+          "description": "Subject age in days at date associated with GERD prescription",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cpt_code",
+          "id": "phv00264934.v1.p1",
+          "description": "CPT (Current Procedural Terminology) for surgeries/procedures",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "emerge2_appendicitis_featuresdisease",
+      "datasetId": "pht005576.v1",
+      "description": "CUI (Concept Unique Identifier) codes/counts - Appendicitis (n=2 variables)",
+      "variables": [
+        {
+          "name": "CUI",
+          "id": "phv00265000.v1.p1",
+          "description": "CUIs that represent features in the text of the clinical note; list one non-zero entry per line; '-' before the CUI signifies negated.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CUI_Ct",
+          "id": "phv00265001.v1.p1",
+          "description": "Count of CUIs in the patient's record",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00264999.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "emerge2_autism_featuresdisease",
+      "datasetId": "pht005579.v1",
+      "description": "CUI (Concept Unique Identifier) codes/counts - Autism",
+      "variables": [
+        {
+          "name": "CUI",
+          "id": "phv00265011.v1.p1",
+          "description": "CUIs that represent features in the text of the clinical note; list one non-zero entry per line; '-' before the CUI signifies negated.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CUI_Ct",
+          "id": "phv00265012.v1.p1",
+          "description": "Count of CUIs in the patient's record",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265010.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "emerge2_obesity_historydisease",
+      "datasetId": "pht005582.v1",
+      "description": "ICD9 code (n=1 variable) - Obesity",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00265026.v1.p1",
+          "description": "Age at first instance and each instance of ICD9 code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ICD9_Code",
+          "id": "phv00265025.v1.p1",
+          "description": "ICD 9 code used to record disease which may contribute to overweight (cases) or underweight (controls)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00265024.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eMERGE_Imputed_Sample_Attributes",
+      "datasetId": "pht004681.v1",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00226021.v1.p1",
+          "description": "Analyte type used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00226020.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "04aADHD_hx_visits",
+      "datasetId": "pht005555.v1",
+      "description": "ADHD - office visit age (n=1 variable).",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264884.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264885.v1.p1",
+          "description": "Subject age in days at date of ANY in-person visit",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "10aAtopic_dermatitis_hx_visits",
+      "datasetId": "pht005561.v1",
+      "description": "Atopic Dermatitis - visit age and drug code",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264904.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264905.v1.p1",
+          "description": "Subject age in days at date of ANY in-person visit",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "15aGERD_hx_visits_A",
+      "datasetId": "pht005566.v1",
+      "description": "GERD - Age at visit - A (large dataset was split into two datasets)",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264921.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264922.v1.p1",
+          "description": "Subject age in days at date of ANY in-person visit",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "16aGERD_hx_visits_B",
+      "datasetId": "pht005567.v1",
+      "description": "GERD - Age at visit - B (large dataset was split into two datasets)",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00264923.v1.p1",
+          "description": "Deidentified subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264924.v1.p1",
+          "description": "Subject age in days at date of ANY in-person visit",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

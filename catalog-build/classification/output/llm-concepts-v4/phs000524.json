@@ -1,0 +1,1354 @@
+{
+  "studyId": "phs000524",
+  "studyName": "Chronic Renal Insufficiency Cohort (CRIC) - GWAS",
+  "tables": [
+    {
+      "tableName": "CRIC_GWAS_Subject_Phenotypes",
+      "datasetId": "pht002918.v2",
+      "description": "The subject phenotype data table includes self-reported medical history (asthma, arthritis, COPD, MI/prior revascularization, PVD, CHF, stroke, any CVD, and atrial fibrillation/heart arrythmia), family history (CAD and renal disease), anthropometric measurements (height, weight, BMI, BSA, and waist), blood pressure and pulse measures (systolic/diastolic, MAP, pulse, ankle brachial indices), CO2 measurement, lipid data, diabetes screening, eGFR, serum lab measurements, CBC measurements, urine lab measurements, Becks and MMSE scores, smoking status, alcohol use, medications, and medication indicators.",
+      "variables": [
+        {
+          "name": "ACEARB",
+          "id": "phv00173273.v2.p2",
+          "description": "Medication Indicator: ACE Inhibitors or ARBs",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_ace_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ACE_INH",
+          "id": "phv00173193.v2.p2",
+          "description": "Medication Indicator: ACE Inhibitors",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_ace_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ACTIVE_VITD",
+          "id": "phv00173212.v2.p2",
+          "description": "Medication Indicator: Active Vitamin D",
+          "concept_id": "ncpi:concomitant_medication_vitamins_supplements_medications_vitamin_d",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AFIB",
+          "id": "phv00173250.v2.p2",
+          "description": "Atrial fibrillation or heart arrhythmia (Yes/Not Yes)",
+          "concept_id": "ncpi:ecg_atrial_fibrillation",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_INTEGER",
+          "id": "phv00173242.v2.p2",
+          "description": "Age (years) rounded down to the nearest integer",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALANINE_AMINOTRANSFE",
+          "id": "phv00173178.v2.p2",
+          "description": "Alanine Aminotransfe (U/L)",
+          "concept_id": "ncpi:liver_function_alanine_aminotransferase_alt_standard_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALBUMINURIA",
+          "id": "phv00543745.v1.p2",
+          "description": "Urine Albumin (4 Levels)",
+          "concept_id": "ncpi:kidney_function_urine_albumin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALCOH_USE",
+          "id": "phv00173251.v2.p2",
+          "description": "Alcohol Use (MedHX)",
+          "concept_id": "phenx:alcohol_lifetime_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ALKALINE_PHOSPHATASE",
+          "id": "phv00173180.v2.p2",
+          "description": "Alkaline Phosphatase (U/L)",
+          "concept_id": "ncpi:liver_function_alkaline_phosphatase",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALLOPURINOL",
+          "id": "phv00173229.v2.p2",
+          "description": "Medication Indicator: Allopurinol",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_antigout_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ALPHA2AG",
+          "id": "phv00173194.v2.p2",
+          "description": "Medication Indicator: Alpha 2 Agonists",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_central_acting_agents",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALPHABLK",
+          "id": "phv00173195.v2.p2",
+          "description": "Medication Indicator: Alpha Blockers",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_alpha_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALPHA_GLUCO_INH",
+          "id": "phv00173215.v2.p2",
+          "description": "Medication Indicator: Alpha Glucosidase Inhibitors",
+          "concept_id": "ncpi:concomitant_medication_diabetes_medications_alpha_glucosidase_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANGIOBLK",
+          "id": "phv00173196.v2.p2",
+          "description": "Medication Indicator: Angiotensin Receptor Blockers",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_angiotensin_receptor_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANTIDEPRESSANT",
+          "id": "phv00173233.v2.p2",
+          "description": "Medication Indicator: Antidepressants",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_antidepressants_general_antidepressants",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANTIDIABETES",
+          "id": "phv00173197.v2.p2",
+          "description": "Medication Indicator: Anti-Diabetes",
+          "concept_id": "ncpi:diabetes_medication_general_diabetes_medication_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANTIEPILEPTICS",
+          "id": "phv00173227.v2.p2",
+          "description": "Medication Indicator: Anti-Epileptics",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_anticonvulsants_seizure_meds_anticonvulsant_indicators",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANTIPLATELET",
+          "id": "phv00173198.v2.p2",
+          "description": "Medication Indicator: Antiplatelet Drugs",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_antiplatelet_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ANTI_ACIDOSIS",
+          "id": "phv00173226.v2.p2",
+          "description": "Medication Indicator: Anti-Acidosis",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "ANXIOLYTICS",
+          "id": "phv00173199.v2.p2",
+          "description": "Medication Indicator: Anxiolytics",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_anxiolytics_sedatives",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANYCVD",
+          "id": "phv00173249.v2.p2",
+          "description": "Cardio-Vascular Disease (Yes/Not Yes)",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_other_circulatory_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ARTHRITIS",
+          "id": "phv00173277.v2.p2",
+          "description": "History of Rheumatoid Arthritis",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_general_arthritis_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ASPARTATE_AMINOTRANS",
+          "id": "phv00173181.v2.p2",
+          "description": "Aspartate Aminotrans (U/L)",
+          "concept_id": "ncpi:liver_function_aspartate_aminotransferase",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ASPIRIN",
+          "id": "phv00173234.v2.p2",
+          "description": "Medication Indicator: Aspirin",
+          "concept_id": "ncpi:pain_medication_aspirin_use_aspirin_duration",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ASTHMA",
+          "id": "phv00173276.v2.p2",
+          "description": "History of Asthma or Reactive Airway Disease",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_diagnosis_ever",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BECKS_SCORE",
+          "id": "phv00173274.v2.p2",
+          "description": "Beck's Depression Index",
+          "concept_id": "ncpi:depression_anxiety_screening_beck_depression",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BETABLK",
+          "id": "phv00173200.v2.p2",
+          "description": "Medication Indicator: Beta Blockers",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_beta_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BIGUANIDE",
+          "id": "phv00173214.v2.p2",
+          "description": "Medication Indicator: Biguanides",
+          "concept_id": "ncpi:concomitant_medication_diabetes_medications_biguanides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BILESEQUESTRANTS",
+          "id": "phv00173231.v2.p2",
+          "description": "Medication Indicator: Bilesequestrants",
+          "concept_id": "ncpi:concomitant_medication_gastrointestinal_medications_bile_acid_sequestrants",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BISPHOSPHONATES",
+          "id": "phv00173224.v2.p2",
+          "description": "Medication Indicator: Bisphosphonates",
+          "concept_id": "topmed:concomitant_medication_bone_joint_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BLACK",
+          "id": "phv00173284.v2.p2",
+          "description": "Black Race (Y/N)",
+          "concept_id": "ncpi:race_us_black_african_american_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00173257.v2.p2",
+          "description": "Body Mass Index (kg/m^2)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BONERI",
+          "id": "phv00173223.v2.p2",
+          "description": "Medication Indicator: Bone Reabsorption Inhibitors",
+          "concept_id": "topmed:concomitant_medication_bone_joint_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BSA",
+          "id": "phv00173258.v2.p2",
+          "description": "Calculated BSA (md^2)",
+          "concept_id": "phenx:body_mass_index",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CABLK",
+          "id": "phv00173201.v2.p2",
+          "description": "Medication Indicator: Calcium Channel Blockers",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_calcium_channel_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CALCIFEROLS",
+          "id": "phv00173237.v2.p2",
+          "description": "Medication Indicator: Calciferols",
+          "concept_id": "ncpi:concomitant_medication_vitamins_supplements_medications_vitamin_d",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CALCIUM",
+          "id": "phv00173182.v2.p2",
+          "description": "Calcium (mg/dL)",
+          "concept_id": "ncpi:concomitant_medication_vitamins_supplements_medications_calcium_supplements",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "CALC_PHOSBINDERS1",
+          "id": "phv00173235.v2.p2",
+          "description": "Medication Indicator: Calcium-Containing Phosphate Binders",
+          "concept_id": "topmed:concomitant_medication_kidney_urinary_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CBCHEMOGLOBIN",
+          "id": "phv00173264.v2.p2",
+          "description": "CBC Hemoglobin (g/dL)",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CCID",
+          "id": "phv00173279.v2.p2",
+          "description": "CCID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CCIDSITE",
+          "id": "phv00543728.v1.p2",
+          "description": "CRIC Clinical Center-Site",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHF",
+          "id": "phv00173247.v2.p2",
+          "description": "Congestive Heart Failure (Yes/Not Yes)",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_heart_failure",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CHLORIDE",
+          "id": "phv00173183.v2.p2",
+          "description": "Chloride (mmol/L)",
+          "concept_id": "topmed:concomitant_medication_kidney_urinary_medications",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "CO2",
+          "id": "phv00173240.v2.p2",
+          "description": "CO2 (mmol/L)",
+          "concept_id": "ncpi:kidney_function_electrolytes_bicarbonate",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "COPD",
+          "id": "phv00173278.v2.p2",
+          "description": "History of Chronic Obstructive Pulmonary Disease (emphysema)",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_copd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CORONARY",
+          "id": "phv00173202.v2.p2",
+          "description": "Medication Indicator: Coronary Vasodilators",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_angina_chest_pain_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CREATININE_SERUM",
+          "id": "phv00173192.v2.p2",
+          "description": "Creatinine Serum (mg/dL)",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DAYS_THISVISIT",
+          "id": "phv00543742.v1.p2",
+          "description": "Days from baseline visit to this visit date",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETES",
+          "id": "phv00543752.v1.p2",
+          "description": "Diabetic Status",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETES_AT_BASELINE",
+          "id": "phv00173288.v2.p2",
+          "description": "Diabetes at baseline",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIASTOLIC",
+          "id": "phv00173261.v2.p2",
+          "description": "Diastolic BP (mmHg)",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_baseline_enrollment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIGOXIN",
+          "id": "phv00173230.v2.p2",
+          "description": "Medication Indicator: Digoxin",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_cardiac_glycosides_digitalis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIURETIC",
+          "id": "phv00173203.v2.p2",
+          "description": "Medication Indicator: Diuretics (all)",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_diuretics_any_diuretic",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DPP4",
+          "id": "phv00173218.v2.p2",
+          "description": "Medication Indicator: DPP4 Inhibitors",
+          "concept_id": "ncpi:concomitant_medication_diabetes_medications_dpp4_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EDU_CAT_1",
+          "id": "phv00173286.v2.p2",
+          "description": "Education Category (7-level)",
+          "concept_id": "phenx:current_educational_attainment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EGFR_CKD_EPI",
+          "id": "phv00543747.v1.p2",
+          "description": "EGFR - CKD EPI Equation (ml/min/1.73m^2)",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_ckd_epi_creatinine",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EGFR_CRIC",
+          "id": "phv00543753.v1.p2",
+          "description": "EGFR - CRIC Equation (ml/min/1.73m^2)",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_other_equations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EGFR_ROCHE",
+          "id": "phv00173270.v2.p2",
+          "description": "EGFR - ROCHE or MDRD Equation (ml/min/1.73m^2)",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_mdrd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ERYTHROSTIM",
+          "id": "phv00173239.v2.p2",
+          "description": "Medication Indicator: Erythropoiesis stimulating",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "FAMILYCAD",
+          "id": "phv00173289.v2.p2",
+          "description": "Family History of CAD (Yes/Not Yes)",
+          "concept_id": "ncpi:family_medical_history_cardiovascular_disease_family_history_coronary_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMILYRD",
+          "id": "phv00173290.v2.p2",
+          "description": "Family History of Renal Disease (Yes/Not Yes)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "FASTING",
+          "id": "phv00173241.v2.p2",
+          "description": "Fasting before blood draw(y/n)",
+          "concept_id": "topmed:fasting_lipids",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GLUCOSE",
+          "id": "phv00173184.v2.p2",
+          "description": "Glucose (mg/dL)",
+          "concept_id": "ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL",
+          "id": "phv00173175.v2.p2",
+          "description": "High-density Lipoprotein (mg/dL)",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT",
+          "id": "phv00173255.v2.p2",
+          "description": "Height (cm)",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEMATOCRIT",
+          "id": "phv00173265.v2.p2",
+          "description": "CBC Hematocrit(%)",
+          "concept_id": "topmed:hematocrit_vfr_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEMOGLOBIN_A1C",
+          "id": "phv00543731.v1.p2",
+          "description": "Hemoglobin A1C (%)",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEPARIN",
+          "id": "phv00173228.v2.p2",
+          "description": "Medication Indicator: Heparins",
+          "concept_id": "ncpi:anticoagulant_medication_heparin_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISPANIC",
+          "id": "phv00173281.v2.p2",
+          "description": "Hispanic (y/n)",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HVY_MET",
+          "id": "phv00543750.v1.p2",
+          "description": "Activities with MET scores >=6",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HYPERTENSION",
+          "id": "phv00543743.v1.p2",
+          "description": "Hypertension (y/n)",
+          "concept_id": "phenx:personal_and_family_history_of_respiratory_symptomsdiseases_adult_protocol",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "INCOME_CAT_1",
+          "id": "phv00173285.v2.p2",
+          "description": "Household Income Category (4-level)",
+          "concept_id": "phenx:annual_family_income",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INSULIN",
+          "id": "phv00173204.v2.p2",
+          "description": "Medication Indicator: Insulin",
+          "concept_id": "ncpi:concomitant_medication_diabetes_medications_insulin_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "KDQOL_BURDEN",
+          "id": "phv00543737.v1.p2",
+          "description": "KDQOL: Burden of Kidney Disease",
+          "concept_id": "ncpi:current_quality_of_life_kidney_disease_specific_qol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "KDQOL_EFFECTS",
+          "id": "phv00543739.v1.p2",
+          "description": "KDQOL: Effects of Kidney Disease",
+          "concept_id": "ncpi:current_quality_of_life_kidney_disease_specific_qol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "KDQOL_SYMPTOMS",
+          "id": "phv00543738.v1.p2",
+          "description": "KDQOL: Symptoms/Problems List",
+          "concept_id": "ncpi:current_quality_of_life_kidney_disease_specific_qol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "KSPARE_DIURETIC",
+          "id": "phv00173205.v2.p2",
+          "description": "Medication Indicator: Potassium Sparing Diuretics",
+          "concept_id": "topmed:concomitant_medication_kidney_urinary_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL",
+          "id": "phv00173176.v2.p2",
+          "description": "Low-density Lipoprotein (mg/dL)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LEFTABI",
+          "id": "phv00173253.v2.p2",
+          "description": "Left Ankle Brachial Index",
+          "concept_id": "phenx:exposure_at_work_and_in_daily_life",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "LIGHT_MET",
+          "id": "phv00543748.v1.p2",
+          "description": "Activities with MET scores of < 3",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIPID",
+          "id": "phv00173206.v2.p2",
+          "description": "Medication Indicator: Lipid-Lowering Drugs",
+          "concept_id": "ncpi:lipid_lowering_medication_general_lipid_lowering_medication",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LOOP_DIURETIC",
+          "id": "phv00173207.v2.p2",
+          "description": "Medication Indicator: Loop Diuretics",
+          "concept_id": "topmed:concomitant_medication_kidney_urinary_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LOWABI",
+          "id": "phv00173254.v2.p2",
+          "description": "Lowest Ankle Brachial Index",
+          "concept_id": "phenx:exposure_at_work_and_in_daily_life",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "MAGNESIUM",
+          "id": "phv00173185.v2.p2",
+          "description": "Magnesium (mg/dL)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "MAP",
+          "id": "phv00173262.v2.p2",
+          "description": "Mean Arterial Pressure",
+          "concept_id": "ncpi:bp_systolic_mean_arterial_pressure",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MARSTAT2",
+          "id": "phv00173287.v2.p2",
+          "description": "Marital Status Category (3-level)",
+          "concept_id": "phenx:current_marital_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEGLITINIDE",
+          "id": "phv00173217.v2.p2",
+          "description": "Medication Indicator: Meglitinides",
+          "concept_id": "ncpi:concomitant_medication_diabetes_medications_meglitinides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MIREVASC",
+          "id": "phv00173245.v2.p2",
+          "description": "MI/Prior revascularization (Yes/Not Yes)",
+          "concept_id": "ncpi:mi_prior_coronary_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MMSE_SCORE",
+          "id": "phv00173275.v2.p2",
+          "description": "Total score of Modified Mini Mental State Exam: Score",
+          "concept_id": "ncpi:cognition_three_mse",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MODHVY_MET",
+          "id": "phv00543751.v1.p2",
+          "description": "Activities with Met scores >=3",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOD_MET",
+          "id": "phv00543749.v1.p2",
+          "description": "Activities with MET scores of 3 - < 6",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NBPCLASS",
+          "id": "phv00173272.v2.p2",
+          "description": "# Anti-HT Drug Classes Capped at 4",
+          "concept_id": "ncpi:antihypertensive_meds_antihypertensive_medication_count",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NBPDRUGS",
+          "id": "phv00173271.v2.p2",
+          "description": "# Anti-HT Drug Classes",
+          "concept_id": "ncpi:antihypertensive_meds_antihypertensive_medication_count",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NON_CALC_PHOSBINDERS",
+          "id": "phv00173232.v2.p2",
+          "description": "Medication Indicator: Non-Calcium-Containing Phosphate Binders",
+          "concept_id": "topmed:concomitant_medication_kidney_urinary_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NON_SEL_SRI",
+          "id": "phv00173208.v2.p2",
+          "description": "Medication Indicator: Non-Selective SRIs",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_antidepressants_other_antidepressants",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NSAID",
+          "id": "phv00173221.v2.p2",
+          "description": "Medication Indicator: NSAIDs",
+          "concept_id": "ncpi:pain_medication_nsaid_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OTHER_LIPID",
+          "id": "phv00173220.v2.p2",
+          "description": "Medication Indicator: Lipid-Lowering Drugs (not statins)",
+          "concept_id": "ncpi:lipid_lowering_medication_miscellaneous_lipid_drugs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCR_24HRURINE",
+          "id": "phv00543744.v1.p2",
+          "description": "Urinary Protein to Creatinine Ratio from 24-Hr Urine Test",
+          "concept_id": "ncpi:kidney_function_proteinuria",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCR_SPOT",
+          "id": "phv00543754.v1.p2",
+          "description": "Urine Protein/Creatinine Ratio from spot sample",
+          "concept_id": "ncpi:kidney_function_proteinuria",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCR_URINE_COMBINED",
+          "id": "phv00543755.v1.p2",
+          "description": "Urine Protein/Creatinine Ratio, 24Hour and Spot measure combined",
+          "concept_id": "ncpi:kidney_function_proteinuria",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHOSPHATE_CALIBRATED",
+          "id": "phv00543741.v1.p2",
+          "description": "Calibrated Phosphate (mg/dL)",
+          "concept_id": "ncpi:kidney_function_electrolytes_phosphorus",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "POTASSIUM",
+          "id": "phv00173187.v2.p2",
+          "description": "Potassium (mmol/L)",
+          "concept_id": "ncpi:kidney_function_electrolytes_potassium",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PREDNISONE",
+          "id": "phv00173236.v2.p2",
+          "description": "Medication Indicator: Prednisone",
+          "concept_id": "ncpi:concomitant_medication_specific_drug_names_corticosteroids",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PULSE",
+          "id": "phv00173263.v2.p2",
+          "description": "Seated pulse measure (beats/min)",
+          "concept_id": "ncpi:heart_rate_resting_heart_rate",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PVD",
+          "id": "phv00173246.v2.p2",
+          "description": "Peripheral Vascular Disease (Yes/Not Yes)",
+          "concept_id": "ncpi:pad_incident_peripheral_vascular_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_CAT_1",
+          "id": "phv00543729.v1.p2",
+          "description": "Race (3 Levels)",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_ETHNICITY",
+          "id": "phv00543730.v1.p2",
+          "description": "Race Ethnicity (3 Levels)",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_ETHNICITY_CAT2",
+          "id": "phv00173282.v2.p2",
+          "description": "Race Ethnicity (4 Levels)",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RIGHTABI",
+          "id": "phv00173252.v2.p2",
+          "description": "Right Ankle Brachial Index",
+          "concept_id": "ncpi:pad_incident_ankle_brachial_index",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SA_ALLC_ESRD",
+          "id": "phv00543762.v1.p2",
+          "description": "SurvAn ESRD",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SA_ALLC_TIME_ESRD",
+          "id": "phv00543763.v1.p2",
+          "description": "SurvAn Time to dial/txp (years)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SA_CHF_D",
+          "id": "phv00543756.v1.p2",
+          "description": "CHF Definite Status",
+          "concept_id": "topmed:chd_death_definite",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "SA_CVDCOMP3",
+          "id": "phv00543760.v1.p2",
+          "description": "CHF(def/prob), MI(def/prob/poss), Stroke(def/prob) Composite Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SA_DEATH",
+          "id": "phv00543758.v1.p2",
+          "description": "Death Status",
+          "concept_id": "topmed:chd_death_definite",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "SCR_ROCHE",
+          "id": "phv00173269.v2.p2",
+          "description": "Roche Adjusted Serum Creatinine (mg/dL)",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SERMS",
+          "id": "phv00173225.v2.p2",
+          "description": "Medication Indicator: SERMs",
+          "concept_id": "ncpi:concomitant_medication_hormone_reproductive_medications_anti_estrogen_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SERUM_ALBUMIN",
+          "id": "phv00173179.v2.p2",
+          "description": "Serum Albumin (g/dL)",
+          "concept_id": "ncpi:liver_function_serum_albumin_serum_albumin_level",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SERUM_UREA_NITROGEN",
+          "id": "phv00173191.v2.p2",
+          "description": "Serum Urea Nitrogen (mg/dL)",
+          "concept_id": "ncpi:kidney_function_bun",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00173280.v2.p2",
+          "description": "Sex (1=Male, 2=Female)",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKE100",
+          "id": "phv00173243.v2.p2",
+          "description": "Smoked 100 Cigarettes",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_smoked_100_cigarettes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKENOW",
+          "id": "phv00173244.v2.p2",
+          "description": "Current Smoker",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SODIUM",
+          "id": "phv00173188.v2.p2",
+          "description": "Sodium (mmol/L)",
+          "concept_id": "ncpi:kidney_function_electrolytes_sodium",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SSRI",
+          "id": "phv00173209.v2.p2",
+          "description": "Medication Indicator: Selective SRIs",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_antidepressants_ssri_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STATINS",
+          "id": "phv00173219.v2.p2",
+          "description": "Medication Indicator: Statins",
+          "concept_id": "ncpi:lipid_lowering_medication_statins",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STEROIDS",
+          "id": "phv00173222.v2.p2",
+          "description": "Medication Indicator: Steroids",
+          "concept_id": "ncpi:concomitant_medication_specific_drug_names_corticosteroids",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STROKE",
+          "id": "phv00173248.v2.p2",
+          "description": "Stroke (Yes/Not Yes)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00173172.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SULFONYLUREA",
+          "id": "phv00173213.v2.p2",
+          "description": "Medication Indicator: Sulfonylureas",
+          "concept_id": "ncpi:diabetes_medication_sulfonylureas",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SYSTOLIC",
+          "id": "phv00173260.v2.p2",
+          "description": "Systolic BP (mmHg)",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_generic_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TC",
+          "id": "phv00173174.v2.p2",
+          "description": "Total Cholesterol",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TG",
+          "id": "phv00173173.v2.p2",
+          "description": "Triglycerides",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "THIAZ_DIURETIC",
+          "id": "phv00173210.v2.p2",
+          "description": "Medication Indicator: Thiazide Diuretics",
+          "concept_id": "topmed:concomitant_medication_kidney_urinary_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIME_CHF_D",
+          "id": "phv00543757.v1.p2",
+          "description": "Time to CHF Definite (yrs)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIME_CVDCOMP3",
+          "id": "phv00543761.v1.p2",
+          "description": "Time to CHF(def/prob), MI(def/prob/poss), Stroke(def/prob) Composite (yrs)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIME_DEATH",
+          "id": "phv00543759.v1.p2",
+          "description": "Time to death (yrs)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOTAL_BILIRUBIN",
+          "id": "phv00173189.v2.p2",
+          "description": "Total Bilirubin (mg/dL)",
+          "concept_id": "ncpi:liver_function_total_bilirubin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOTAL_MED",
+          "id": "phv00543740.v1.p2",
+          "description": "Total number of different medications",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOTAL_PROTEIN",
+          "id": "phv00173190.v2.p2",
+          "description": "Total Protein (g/dL)",
+          "concept_id": "ncpi:liver_function_total_protein",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TZD",
+          "id": "phv00173216.v2.p2",
+          "description": "Medication Indicator: Thiazolidinediones",
+          "concept_id": "ncpi:diabetes_medication_thiazolidinediones",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UACRATIO",
+          "id": "phv00543746.v1.p2",
+          "description": "UAlb/UCreat ug/mg",
+          "concept_id": "ncpi:kidney_function_albumin_creatinine_ratio",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UALBUMIN24H",
+          "id": "phv00173267.v2.p2",
+          "description": "24H Urine Albumin (g/24H)",
+          "concept_id": "ncpi:kidney_function_urine_albumin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UCREATININE24H",
+          "id": "phv00173268.v2.p2",
+          "description": "24H Urine Creatinine (g/24H)",
+          "concept_id": "ncpi:kidney_function_urine_creatinine",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UPROTEIN24H",
+          "id": "phv00173266.v2.p2",
+          "description": "24H Urine Protein (g/24H)",
+          "concept_id": "ncpi:kidney_function_proteinuria",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "URINE_ALBUMIN",
+          "id": "phv00543734.v1.p2",
+          "description": "Urine Albumin Concentration (mg/L)",
+          "concept_id": "ncpi:kidney_function_urine_albumin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "URINE_CREATININE",
+          "id": "phv00543735.v1.p2",
+          "description": "Urine Creatinine Concentration from 24-Hour Urine (mg/dL)",
+          "concept_id": "ncpi:kidney_function_urine_creatinine",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "URINE_CREATININE_R",
+          "id": "phv00543736.v1.p2",
+          "description": "Urine Creatinine Concentration from Random-Spot Urine (mg/dL)",
+          "concept_id": "ncpi:kidney_function_urine_creatinine",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "URINE_PROTEIN_MG_DL",
+          "id": "phv00543732.v1.p2",
+          "description": "Urine Protein Concentration from 24-Hour Urine (mg/dL)",
+          "concept_id": "ncpi:kidney_function_proteinuria",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UTP_SELECTED_R",
+          "id": "phv00543733.v1.p2",
+          "description": "Urine Protein Concentration from Random-Spot Urine (mg/dL)",
+          "concept_id": "ncpi:kidney_function_proteinuria",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VASODIL",
+          "id": "phv00173211.v2.p2",
+          "description": "Medication Indicator: Vasodilators",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_vasodilators_peripheral",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VLDL",
+          "id": "phv00173177.v2.p2",
+          "description": "Very low-density Lipoprotein (mg/dL)",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "VNUM",
+          "id": "phv00543727.v1.p2",
+          "description": "Visit number, 3=year 0(baseline),5=year 1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WAIST",
+          "id": "phv00173259.v2.p2",
+          "description": "Waist Circumference (cm)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00173256.v2.p2",
+          "description": "Weight (kg)",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WHITE",
+          "id": "phv00173283.v2.p2",
+          "description": "White Race (Y/N)",
+          "concept_id": "ncpi:race_us_white_race",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CRIC_GWAS_Sample_Attributes",
+      "datasetId": "pht002919.v2",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, histological type, and sample collection age.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00173293.v2.p2",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00173292.v2.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00543764.v1.p2",
+          "description": "Age sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00173295.v2.p2",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00173294.v2.p2",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00173291.v2.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CRIC_GWAS_Subject",
+      "datasetId": "pht002916.v2",
+      "description": "The subject consent data table includes subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00173169.v2.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00543726.v1.p2",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00173168.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CRIC_GWAS_Sample",
+      "datasetId": "pht002917.v2",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00173171.v2.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00173170.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "studyId": "phs001105",
+  "studyName": "NHGRI-Mayo Clinic Whole Genome Sequencing of Aggressive Prostate Tumors",
+  "tables": [
+    {
+      "tableName": "Aggressive_Prostate_Tumors_Subject_Phenotypes",
+      "datasetId": "pht006838.v1",
+      "description": "This subject phenotype table contains subject IDs, family history of prostate cancer, ages at diagnosis and at surgery, prostate specific antigen (PSA) at diagnosis, treatment prior to surgey, lymphadenectomy, pathology Gleason score, pathology primary and secondary Gleason grades, total number of lymph nodes examined, number of positive lymph nodes, and estimated tumor volume (cc).",
+      "variables": [
+        {
+          "name": "# Pos. L. Nodes",
+          "id": "phv00313254.v1.p1",
+          "description": "# Pos. L. Nodes",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_lymph_node_examination",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age at Surgery",
+          "id": "phv00313248.v1.p1",
+          "description": "Age at Surgery",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age at diagnosis",
+          "id": "phv00313245.v1.p1",
+          "description": "Age at Diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Est. Tumor vol(cc)",
+          "id": "phv00313255.v1.p1",
+          "description": "Est. Tumor vol. (cc)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Family history",
+          "id": "phv00313244.v1.p1",
+          "description": "Family History of Prostate Cancer",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Lymphadenectomy",
+          "id": "phv00313249.v1.p1",
+          "description": "Lymphadenectomy",
+          "concept_id": "ncpi:surgical_procedure_lymph_node_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PSA at Daignosis (or closest)",
+          "id": "phv00313246.v1.p1",
+          "description": "Earliest prostate specific antigen (PSA)",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_psa_levels",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Path Gleason Score",
+          "id": "phv00313250.v1.p1",
+          "description": "Path Gleason Score",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Path Primary Gleason Grade",
+          "id": "phv00313251.v1.p1",
+          "description": "Path Primary Gleason Grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Path Secondary Gleason Grade",
+          "id": "phv00313252.v1.p1",
+          "description": "Path Secondary Gleason Grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00313243.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Total # L. Nodes Exam",
+          "id": "phv00313253.v1.p1",
+          "description": "Total # L. Nodes Exam",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_lymph_node_examination",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Treatment Prior to Surgery",
+          "id": "phv00313247.v1.p1",
+          "description": "Treatment Before Sample Collection",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_history",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Aggressive_Prostate_Tumors_Sample_Attributes",
+      "datasetId": "pht006839.v1",
+      "description": "This sample attributes table contains sample IDs, analyte type, body site where sample was collected, tumor status, primary metastatic tumor, primary tumor location, DNA isolation method, sequencing platform, chemistry version, and name of the center which conducted genotyping.",
+      "variables": [
+        {
+          "name": "Analyte",
+          "id": "phv00313257.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Body Site",
+          "id": "phv00313258.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Chemistry Version",
+          "id": "phv00313264.v1.p1",
+          "description": "Illumina Sequencing Chemistry Version",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DNA Isolation Method",
+          "id": "phv00313262.v1.p1",
+          "description": "DNA Isolation Method",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Is Tumor",
+          "id": "phv00313259.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_tumor_status_variables",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary Metastatic Tumor",
+          "id": "phv00313260.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary Tumor Location",
+          "id": "phv00313261.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00313256.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sequencing Center",
+          "id": "phv00313265.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sequencing Platform",
+          "id": "phv00313263.v1.p1",
+          "description": "Sequencing Platform",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Aggressive_Prostate_Tumors_Subject",
+      "datasetId": "pht006836.v1",
+      "description": "The subject consent file includes subject IDs, consent information, subject aliases, and affection status of the subject for prostate tumor.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00313236.v1.p1",
+          "description": "Case control status of the subject for prostate tumor",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00313234.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00313237.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00313233.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00313235.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Aggressive_Prostate_Tumors_Sample",
+      "datasetId": "pht006837.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00313239.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00313240.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00313242.v1.p1",
+          "description": "Sample Use. Seq_DNA_SNP_CNV: SNP and CNV genotypes derived from sequence data; Seq_DNA_WholeGenome: Whole genome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00313241.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00313238.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

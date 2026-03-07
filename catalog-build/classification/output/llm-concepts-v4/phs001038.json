@@ -1,0 +1,338 @@
+{
+  "studyId": "phs001038",
+  "studyName": "DNA Methylation Inhibitors in Immunotherapy",
+  "tables": [
+    {
+      "tableName": "Melanoma_DNMTi_Immunotherapy_Subject_Phenotypes",
+      "datasetId": "pht005208.v1",
+      "description": "This subject phenotype table contains subject ID, patient's cohort and age, alive during last assessment, gender, number of prior therapies, clinical benefit, tumor location and largest dimension, biopsy type, primary melanoma type, ipilimumab dose, drug treatment, response duration, serum lactate dehydrogenase, BRAF or NRAS gene mutations, overall survival, and biopsy status before and after treatment.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00258344.v1.p1",
+          "description": "Patient's age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Alive",
+          "id": "phv00258345.v1.p1",
+          "description": "Alive during last assessment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BRAF/NRAS status",
+          "id": "phv00258358.v1.p1",
+          "description": "BRAF(GeneID: 673)/NRAS(GeneID: 4893) mutations",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Biopsy pre or post ipi",
+          "id": "phv00258360.v1.p1",
+          "description": "Biopsy status before and after Ipilimumab treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Biopsy type",
+          "id": "phv00258351.v1.p1",
+          "description": "Biopsy type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Clinical_Benefit",
+          "id": "phv00258348.v1.p1",
+          "description": "Long time clinical benefit",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Cohort",
+          "id": "phv00258343.v1.p1",
+          "description": "Patient's cohort in current study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Drug",
+          "id": "phv00258355.v1.p1",
+          "description": "Drug of treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ipi_dosing",
+          "id": "phv00258354.v1.p1",
+          "description": "Ipilimumab dose",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDH (normal less than 246)",
+          "id": "phv00258357.v1.p1",
+          "description": "Serum lactate dehydrogenase",
+          "concept_id": "ncpi:liver_function_lactate_dehydrogenase",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Largest Dimension (cm)",
+          "id": "phv00258350.v1.p1",
+          "description": "Largest dimension of tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OS_yr",
+          "id": "phv00258359.v1.p1",
+          "description": "Overall survival",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary Melanoma type",
+          "id": "phv00258352.v1.p1",
+          "description": "Primary melanoma type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Priors",
+          "id": "phv00258347.v1.p1",
+          "description": "Number of prior therapies (cytotoxic or IL-2)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Response duration (weeks)",
+          "id": "phv00258356.v1.p1",
+          "description": "Response duration in weeks",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258342.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00258346.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Site",
+          "id": "phv00258349.v1.p1",
+          "description": "Location of tumor in study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Melanoma_DNMTi_Immunotherapy_Sample_Attributes",
+      "datasetId": "pht005209.v1",
+      "description": "This sample attributes table contains sample ID, body site where tumor sample was collected, analyte type, tumor status, histological type, primary metastatic tumor, tumor stage and treatment, and names of the center which conducted genotyping and sequencing.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00258363.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00258362.v1.p1",
+          "description": "Location of tumor in study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXPRESSION_ANALYSIS_CENTER",
+          "id": "phv00258369.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00258365.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00258364.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00258366.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258361.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00258370.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00258367.v1.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00258368.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Melanoma_DNMTi_Immunotherapy_Subject",
+      "datasetId": "pht005206.v1",
+      "description": "The subject consent file includes subject IDs, consent information, subject aliases and case control status of the subject. All subjects are patients with melanoma who were treated with ipilimumab or tremelimumab.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00258336.v1.p1",
+          "description": "Case control status of the subject. All subjects are patients with melanoma who were treated with ipilimumab or tremelimumab.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00258333.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00258335.v1.p1",
+          "description": "Subject ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258332.v1.p1",
+          "description": "Subject  ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00258334.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Melanoma_DNMTi_Immunotherapy_Sample",
+      "datasetId": "pht005207.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258338.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00258339.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00258341.v1.p1",
+          "description": "Sample use. Seq_RNA: Whole transcriptome sequencing; Seq_RNA_Expression: Expression levels derived from RNA sequences",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00258340.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258337.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

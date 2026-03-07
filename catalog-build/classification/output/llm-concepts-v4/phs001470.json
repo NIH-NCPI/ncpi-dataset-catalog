@@ -1,0 +1,417 @@
+{
+  "studyId": "phs001470",
+  "studyName": "Study of Women's Health Across the Nation (SWAN) Repository",
+  "tables": [
+    {
+      "tableName": "CIDR_SWAN_Phenotypes_Baseline",
+      "datasetId": "pht008167.v1",
+      "description": "This baseline subject phenotype data table includes ethnicity, education, and baseline assessments of age, BMI, hot flash, night sweats, vaginal dryness, waking up during night, anxiety/nervousness, feeling blue, menstruation (n=3 variables), smoking, estradiol and other hormone use, and FSH levels.",
+      "variables": [
+        {
+          "name": "FEELBLU0",
+          "id": "phv00389034.v1.p1",
+          "description": "Felt blue/depressed frequency past 2 weeks at baseline",
+          "concept_id": "ncpi:depression_anxiety_screening_brief_mood_screening",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NRVOUS0",
+          "id": "phv00389033.v1.p1",
+          "description": "Nervous/tense frequency past 2 weeks at baseline",
+          "concept_id": "ncpi:depression_anxiety_screening_gad_anxiety",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00389023.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VAGINDR0",
+          "id": "phv00389031.v1.p1",
+          "description": "Vaginal dryness frequency past 2 weeks at baseline",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_vaginal_symptoms",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WAKEUP0",
+          "id": "phv00389032.v1.p1",
+          "description": "Wake up during night frequency past 2 weeks at baseline",
+          "concept_id": "ncpi:polysomnography_sleep_symptoms_nighttime_awakenings",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "age0",
+          "id": "phv00389024.v1.p1",
+          "description": "Age at baseline",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_fmp",
+          "id": "phv00389038.v1.p1",
+          "description": "Age at final menstrual period",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_menopause_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_fmp_flag",
+          "id": "phv00389039.v1.p1",
+          "description": "Flag for age at final menstrual period variable",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bmi0",
+          "id": "phv00389026.v1.p1",
+          "description": "BMI at baseline",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "e20",
+          "id": "phv00389035.v1.p1",
+          "description": "Estradiol at baseline",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "educ",
+          "id": "phv00389028.v1.p1",
+          "description": "Education level",
+          "concept_id": "phenx:current_educational_attainment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnic",
+          "id": "phv00389025.v1.p1",
+          "description": "Race/ethnicity",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fsh0",
+          "id": "phv00389036.v1.p1",
+          "description": "FSH at baseline",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "horm0",
+          "id": "phv00389040.v1.p1",
+          "description": "Hormone user at baseline",
+          "concept_id": "ncpi:concomitant_medication_hormone_reproductive_medications_general_hormone_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hotflas0",
+          "id": "phv00389029.v1.p1",
+          "description": "Hot flash frequency past 2 weeks at baseline",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_hot_flashes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "niteswe0",
+          "id": "phv00389030.v1.p1",
+          "description": "Night sweat frequency past 2 weeks at baseline",
+          "concept_id": "ncpi:polysomnography_sleep_symptoms_night_sweats",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "smoking0",
+          "id": "phv00389027.v1.p1",
+          "description": "Smoking status at baseline",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "status0",
+          "id": "phv00389037.v1.p1",
+          "description": "Menopausal status at baseline",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_menopause_status",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_SWAN_Phenotypes_Long",
+      "datasetId": "pht008168.v1",
+      "description": "This longitudinal subject phenotype data table includes visit number, and longitudinal assessments of age, BMI, hot flash, night sweats, vaginal dryness, waking up during night, anxiety/nervousness, feeling blue, menopause, smoking, estradiol and other hormone use, and FSH levels.",
+      "variables": [
+        {
+          "name": "AGECONT",
+          "id": "phv00389043.v1.p1",
+          "description": "Age at visit",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00389044.v1.p1",
+          "description": "Body mass index at visit",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "E2",
+          "id": "phv00389053.v1.p1",
+          "description": "Estradiol at visit",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "FEELBLU",
+          "id": "phv00389047.v1.p1",
+          "description": "Frequency of feeling blue/depressed past 2 weeks",
+          "concept_id": "ncpi:depression_anxiety_screening_brief_mood_screening",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FSH",
+          "id": "phv00389052.v1.p1",
+          "description": "FSH at visit",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "HOTFLAS",
+          "id": "phv00389049.v1.p1",
+          "description": "Frequency of hot flashes past 2 weeks",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_hot_flashes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NITESWE",
+          "id": "phv00389045.v1.p1",
+          "description": "Frequency of night sweats past 2 weeks",
+          "concept_id": "ncpi:polysomnography_sleep_symptoms_night_sweats",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NRVOUS",
+          "id": "phv00389048.v1.p1",
+          "description": "Frequency of feeling nervous/tense past 2 weeks",
+          "concept_id": "ncpi:depression_anxiety_screening_gad_anxiety",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKER",
+          "id": "phv00389051.v1.p1",
+          "description": "Smoking status at visit",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00389041.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VAGINDR",
+          "id": "phv00389046.v1.p1",
+          "description": "Frequency of vaginal dryness past 2 weeks",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_vaginal_symptoms",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "VISIT",
+          "id": "phv00389042.v1.p1",
+          "description": "Study visit",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WAKEUP",
+          "id": "phv00389050.v1.p1",
+          "description": "Frequency of waking up during night past 2 weeks",
+          "concept_id": "ncpi:polysomnography_sleep_symptoms_nighttime_awakenings",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "hrmuser",
+          "id": "phv00389054.v1.p1",
+          "description": "Used hormones (including birth controll pills) since last visit",
+          "concept_id": "ncpi:concomitant_medication_hormone_reproductive_medications_general_hormone_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mstatus",
+          "id": "phv00389055.v1.p1",
+          "description": "Menopausal status at visit",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_menopause_status",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_SWAN_Sample_Attributes",
+      "datasetId": "pht008169.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, histological type, analyte type, tumor status, and genotyping center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00389059.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00389057.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00389061.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00389058.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00389060.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00389056.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_SWAN_Subject",
+      "datasetId": "pht008165.v1",
+      "description": "The subject consent data table includes subject IDs, consent group information, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00389016.v1.p1",
+          "description": "Consent code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00389018.v1.p1",
+          "description": "Subject ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00389015.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00389017.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_SWAN_Sample",
+      "datasetId": "pht008166.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and sample aliases. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00389020.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00389021.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00389022.v1.p1",
+          "description": "Sample ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00389019.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

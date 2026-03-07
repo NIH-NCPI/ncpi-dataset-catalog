@@ -1,0 +1,170 @@
+{
+  "studyId": "phs000932",
+  "studyName": "Somatic Reference Standard for Cancer Sequencing",
+  "tables": [
+    {
+      "tableName": "COLO_Sample_Attributes",
+      "datasetId": "pht004888.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, histological type, primary tumor location, and sequencing center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00252305.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00252304.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00252307.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00252306.v1.p1",
+          "description": "Is the sample tumor",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00252308.v1.p1",
+          "description": "Location where original tumor was collected",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00252303.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00252309.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "COLO_Subject_Phenotypes",
+      "datasetId": "pht004887.v1",
+      "description": "This subject phenotype table includes subject age at biopsy, gender, and race.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00252300.v1.p1",
+          "description": "Age at biopsy",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00252302.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00252301.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252299.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "COLO_Subject",
+      "datasetId": "pht004885.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, and subject source.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00252294.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252293.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00252295.v1.p1",
+          "description": "Source of subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "COLO_Sample",
+      "datasetId": "pht004886.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00252297.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00252298.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252296.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

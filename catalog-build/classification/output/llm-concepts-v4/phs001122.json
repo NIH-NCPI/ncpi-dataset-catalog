@@ -1,0 +1,361 @@
+{
+  "studyId": "phs001122",
+  "studyName": "GWAS of Neonatal Brain Volume",
+  "tables": [
+    {
+      "tableName": "Neonatal_Brain_Sample_Attributes",
+      "datasetId": "pht008641.v1",
+      "description": "This sample attribute table contains sample ID, SNP call rate, plate number, group, container ID, micronic position, tube ID, trinean concentration, dish QC value, body site, array type, analyte type, tumor status, and name of the center which conducted genotyping.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00397374.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Array_type",
+          "id": "phv00397373.v1.p1",
+          "description": "Type of array",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00397372.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": "phenx:current_address",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "CallRate",
+          "id": "phv00397364.v1.p1",
+          "description": "The percentage of the genotype SNP call",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Container.ID",
+          "id": "phv00397367.v1.p1",
+          "description": "Container ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DishQC",
+          "id": "phv00397371.v1.p1",
+          "description": "DishQC value in the genotype array",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00397376.v1.p1",
+          "description": "Genotyping center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Group",
+          "id": "phv00397366.v1.p1",
+          "description": "Subject Group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00397375.v1.p1",
+          "description": "Is the sample a tumor sample?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Micronic.Position",
+          "id": "phv00397368.v1.p1",
+          "description": "Micronic position",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Plate",
+          "id": "phv00397365.v1.p1",
+          "description": "Plate number in the array",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00397363.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Trinean.Concentration",
+          "id": "phv00397370.v1.p1",
+          "description": "Trinean concentration",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tube.ID",
+          "id": "phv00397369.v1.p1",
+          "description": "Tube ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Neonatal_Brain_Subject_Phenotypes",
+      "datasetId": "pht008640.v1",
+      "description": "This subject phenotype table contains subject ID, birth weight, gestational age at birth, scanner trio, gender, age at MRI, genotypic principal components 1-3, white and grey matters, intracranial volume, and total cerebrospinal fluid.",
+      "variables": [
+        {
+          "name": "Age.at.MRI",
+          "id": "phv00397355.v1.p1",
+          "description": "Days of MRI after birth",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Birth.Weight.gr.",
+          "id": "phv00397351.v1.p1",
+          "description": "Birth weight",
+          "concept_id": "ncpi:weight_baseline_birth_weight",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GM",
+          "id": "phv00397360.v1.p1",
+          "description": "Grey matter",
+          "concept_id": "ncpi:brain_neuroimaging_cortical_volume_total_cortical_volume",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gender",
+          "id": "phv00397354.v1.p1",
+          "description": "1:Male; 2:Female",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gestational.Age.at.Birth",
+          "id": "phv00397352.v1.p1",
+          "description": "Gestational age at birth",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ICV",
+          "id": "phv00397361.v1.p1",
+          "description": "Intracranial volume",
+          "concept_id": "topmed:brain_neuroimaging_total_brain_volumes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00397350.v1.p1",
+          "description": "ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ScannerTrio",
+          "id": "phv00397353.v1.p1",
+          "description": "1=MRI is done in Trio scanner; 0=MRI done in Allegra Scanner",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tot_CSF",
+          "id": "phv00397362.v1.p1",
+          "description": "Total cerebrospinal fluid",
+          "concept_id": "topmed:brain_neuroimaging_ventricular_csf",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WM",
+          "id": "phv00397359.v1.p1",
+          "description": "White matter",
+          "concept_id": "topmed:brain_neuroimaging_white_matter_volume",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gPC1",
+          "id": "phv00397356.v1.p1",
+          "description": "Genotypic principal component 1",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gPC2",
+          "id": "phv00397357.v1.p1",
+          "description": "Genotypic principal component 2",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_2",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gPC3",
+          "id": "phv00397358.v1.p1",
+          "description": "Genotypic principal component 3",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_3",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Neonatal_Brain_Pedigree",
+      "datasetId": "pht008638.v1",
+      "description": "The subject pedigree table contains family ID, subject ID, mother ID, father ID, sex, twin ID, and relatedness status.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00397338.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00397341.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00397340.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RELATED_STATUS",
+          "id": "phv00397344.v1.p1",
+          "description": "Relatedness status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00397342.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00397339.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TWIN_ID",
+          "id": "phv00397343.v1.p1",
+          "description": "Twin ID for monozygotic twins or multiples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Neonatal_Brain_Subject",
+      "datasetId": "pht008637.v1",
+      "description": "The subject consent file includes subject ID, consent information, sex, and subject source.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00397335.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00483259.v1.p1",
+          "description": "Biological sex of subjects",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00397334.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00483260.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Neonatal_Brain_Sample",
+      "datasetId": "pht008639.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00397346.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00397345.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

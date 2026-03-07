@@ -1,0 +1,202 @@
+{
+  "studyId": "phs000558",
+  "studyName": "Glaucoma Exome Sequencing",
+  "tables": [
+    {
+      "tableName": "NEIGHBOR_POAG_Subject_Phenotypes",
+      "datasetId": "pht006230.v1",
+      "description": "(Glaucoma) Phenotype Data",
+      "variables": [
+        {
+          "name": "GON_VF",
+          "id": "phv00283741.v1.p1",
+          "description": "Glaucomatous optic neuropathy confirmed by visual field  1:Yes, 2:No, 999: Missing",
+          "concept_id": "topmed:ophthalmology_glaucoma_optic_disc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IOP>21",
+          "id": "phv00283742.v1.p1",
+          "description": "Untreated IOP OD or OS >= 21  1: Yes, 2: No, 999: Missing",
+          "concept_id": "topmed:ophthalmology_intraocular_pressure",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00283738.v1.p1",
+          "description": "Whole exome sequencing de-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "agedxc>30",
+          "id": "phv00283747.v1.p1",
+          "description": "Age at glaucoma diagnosis >= 30 years old  1: Yes, 2: No, 999: Missing",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "caco",
+          "id": "phv00283739.v1.p1",
+          "description": "Case (Glaucoma) or control status  1: Control, 2: Case, 999: Other",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "dmhx",
+          "id": "phv00283745.v1.p1",
+          "description": "Report of ever diabetes mellitus  1: Yes, 2: No, 999:  Missing",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00283740.v1.p1",
+          "description": "Gender  1: Male, 2: Female, 999: Missing",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "htnhx",
+          "id": "phv00283746.v1.p1",
+          "description": "Report of ever systemic hypertension  1: Yes, 2: No, 999: Missing",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypertension_hypertension_diagnosis_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "probes",
+          "id": "phv00283748.v1.p1",
+          "description": "Exome capture probes applied to DNA during library preparation V2:Nimblegen v2, V3:Nimblegen v3, 999: Missing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "spheq<-3.00",
+          "id": "phv00283744.v1.p1",
+          "description": "Spherical equivalent OD or OS <= -3.00 from distance refraction at time closest to DNA collection. (If pt is pseudophakic  use phakic refraction)  1: Yes, 2: No, 999: Missing",
+          "concept_id": "topmed:ophthalmology_refractive_error",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "vCDR>0.8",
+          "id": "phv00283743.v1.p1",
+          "description": "Vertical cup disc ratio OD or OS >=0.8  (range 0.0-1.0)  1: Yes, 2: No, 999: Missing",
+          "concept_id": "topmed:ophthalmology_glaucoma_optic_disc",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NEIGHBOR_POAG_Sample_Attributes",
+      "datasetId": "pht006231.v1",
+      "description": "Sample attribute information, including body site where samples were collected.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00283751.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00283750.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00283749.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00283752.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NEIGHBOR_POAG_Subject",
+      "datasetId": "pht006228.v1",
+      "description": "Subject - Consent - Affection Status Information",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00283734.v1.p1",
+          "description": "Case - control status of the subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00283733.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00283732.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NEIGHBOR_POAG_Sample",
+      "datasetId": "pht006229.v1",
+      "description": "Subject - Sample Mapping - Sample Use information",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00283736.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00283737.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00283735.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,265 @@
+{
+  "studyId": "phs000254",
+  "studyName": "ARRA - NHLBI Lung Cohorts Sequencing Project",
+  "tables": [
+    {
+      "tableName": "ESP_LungGO_CF_FEV_Data",
+      "datasetId": "pht002226.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00159428.v2.p1",
+          "description": "Deidentified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00159433.v2.p1",
+          "description": "Age of subject at measurement, rounded to nearest year",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case_cont",
+          "id": "phv00159430.v2.p1",
+          "description": "Case or control",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "date",
+          "id": "phv00159431.v2.p1",
+          "description": "Date of FEV measurement on subject (year)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fev1",
+          "id": "phv00159435.v2.p1",
+          "description": "Forced Expiratory Volume (liters) in 1 sec (max of 3 trials)",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fev1_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ht",
+          "id": "phv00159432.v2.p1",
+          "description": "Height (cm) of subject on FEV measurement date",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "observation_number",
+          "id": "phv00159429.v2.p1",
+          "description": "1st, 2nd, 3rd, etc. observation of a particular subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pft_pheno",
+          "id": "phv00174035.v1.p1",
+          "description": "Mild or severe",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00159434.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ESP_LungGO_CF_PA_Culture_Data",
+      "datasetId": "pht002227.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "PaPos",
+          "id": "phv00159441.v2.p1",
+          "description": "Pseudomonas culture status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00159436.v2.p1",
+          "description": "Deidentified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00159439.v2.p1",
+          "description": "Age of subject at culture, rounded to nearest year.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case_cont",
+          "id": "phv00159438.v2.p1",
+          "description": "Case or control",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "culture_number",
+          "id": "phv00159437.v2.p1",
+          "description": "1st, 2nd, 3rd, etc. culture taken for a particular subject.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00159440.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ESP_LungGO_CF_Subject",
+      "datasetId": "pht002224.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00159423.v2.p1",
+          "description": "Case or control",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_case_control_status",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00159420.v2.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJID",
+          "id": "phv00159422.v2.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00159419.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJ_SOURCE",
+          "id": "phv00159421.v2.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ESP_LungGO_CF_Sample",
+      "datasetId": "pht002225.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00159425.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00174034.v1.p1",
+          "description": "Subject's sample use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00159426.v2.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00159427.v2.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00159424.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ESP_LungGO_CF_Sample_Attributes",
+      "datasetId": "pht003002.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00174038.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00174037.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00174036.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

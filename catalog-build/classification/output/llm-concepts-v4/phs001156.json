@@ -1,0 +1,186 @@
+{
+  "studyId": "phs001156",
+  "studyName": "The EVE Asthma Genetics Consortium: Building Upon GWAS",
+  "tables": [
+    {
+      "tableName": "EVE_Subject_Phenotype",
+      "datasetId": "pht007050.v1",
+      "description": "This subject phenotype data table includes subject's gender, race (n=2 variables), asthma status, age of asthma onset and diagnosis, allergy symptoms, skin test results for any aeroallergen, and food allergy diagnosis.",
+      "variables": [
+        {
+          "name": "AgeOnset",
+          "id": "phv00325532.v1.p1",
+          "description": "Asthma symptom onset?",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AgeOnset_Doc_dx",
+          "id": "phv00325533.v1.p1",
+          "description": "Doc diagnosed asthma",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Allergies",
+          "id": "phv00325534.v1.p1",
+          "description": "Allergy symptoms?",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_allergies_allergic_reactions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Asthma",
+          "id": "phv00325528.v1.p1",
+          "description": "Asthma Case?",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_diagnosis_ever",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gender",
+          "id": "phv00325529.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00325530.v1.p1",
+          "description": "Subject Ethnicity",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race_Specify",
+          "id": "phv00325531.v1.p1",
+          "description": "Subject Ethnicity (specify)",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00325526.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Spt_AnyAeroallergen",
+          "id": "phv00325535.v1.p1",
+          "description": "Skin test positive for any aeroallergen",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Designation",
+          "id": "phv00325527.v1.p1",
+          "description": "Corresponding Study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "food_allergy_Doc_dx",
+          "id": "phv00325536.v1.p1",
+          "description": "Doc diagnosed allergy to foods?",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_allergies_allergic_reactions",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EVE_Sample",
+      "datasetId": "pht007049.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00325524.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00325525.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00325523.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EVE_Sample_Attributes",
+      "datasetId": "pht007051.v1",
+      "description": "This sample attributes data table includes analyte typ and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00325538.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00325539.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00325537.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EVE_Subject",
+      "datasetId": "pht007048.v1",
+      "description": "This subject consent data table includes subjects IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00325522.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00325521.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

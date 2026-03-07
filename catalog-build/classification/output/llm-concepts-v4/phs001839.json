@@ -1,0 +1,186 @@
+{
+  "studyId": "phs001839",
+  "studyName": "Deep Sequencing of 3 Cancer Cell Lines on 2 Sequencing Platforms",
+  "tables": [
+    {
+      "tableName": "Deep_Seq_Cancers_Sample_Attributes",
+      "datasetId": "pht009358.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, histological type of sample, tumor status of sample, primary or metastatic tumor, primary location of tumor, and sequence center of participants with cancer and involved in the \"Deep Sequencing of 3 Cancer Cell Lines on 2 Sequencing Platforms (Illumina HiSeqX and NovaSeq)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00417367.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00417366.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00417369.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00417368.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00417370.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00417371.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00417365.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00417372.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Deep_Seq_Cancers_Subject_Phenotypes",
+      "datasetId": "pht009357.v1",
+      "description": "Subject ID, age, race, sex, and affection status of participants with cancer and involved in the \"Deep Sequencing of 3 Cancer Cell Lines on 2 Sequencing Platforms (Illumina HiSeqX and NovaSeq)\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00417361.v1.p1",
+          "description": "Case status of the subject for",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00417364.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00417363.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00417362.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00417360.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Deep_Seq_Cancers_Subject",
+      "datasetId": "pht009355.v1",
+      "description": "Subject ID, subject source, source subject ID, and consent group of participants with cancer and involved in the \"Deep Sequencing of 3 Cancer Cell Lines on 2 Sequencing Platforms (Illumina HiSeqX and NovaSeq)\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00417355.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00417357.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00417354.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00417356.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Deep_Seq_Cancers_Sample",
+      "datasetId": "pht009356.v1",
+      "description": "Subject ID and sample ID of  participants with cancer and involved in the \"Deep Sequencing of 3 Cancer Cell Lines on 2 Sequencing Platforms (Illumina HiSeqX and NovaSeq)\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00417359.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00417358.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "studyId": "phs000480",
+  "studyName": "Familial Breast Cancer Study (FBCS)",
+  "tables": [
+    {
+      "tableName": "FBCS_Subject",
+      "datasetId": "pht002904.v1",
+      "description": "Subject ID, subject source, subject source ID, consent group, and affection status of participants with breast or ovarian cancer and involved in the \"Identification of Cancer Predisposition Genes in Breast Cancer Families\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00173109.v1.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00173106.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00173108.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00173105.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00173107.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "FBCS_Pedigree",
+      "datasetId": "pht002905.v1",
+      "description": "Subject ID, family ID, mother ID, father ID, and sex of participants with or without breast cancer and involved in the \"Identification of Cancer Predisposition Genes in Breast Cancer Families\" project.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00173110.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00173112.v1.p1",
+          "description": "Father's subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00173113.v1.p1",
+          "description": "Mother's subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00173114.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00173111.v1.p1",
+          "description": "Unique subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "FBCS_Sample",
+      "datasetId": "pht002906.v1",
+      "description": "Sample ID, subject ID, sample source, sample source ID, and sample use variables obtained from participants with breast or ovarian cancer and involved in the \"Identification of Cancer Predisposition Genes in Breast Cancer Families\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00173116.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00173117.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00173119.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00173118.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00173115.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "FBCS_Sample_Attributes",
+      "datasetId": "pht002908.v1",
+      "description": "Sample ID, analyte type, body site where samples were obtained from participants, tumor status of sample, histological type of sample, primary tumor, metastasis or transformed cell line, primary tumor location, type of tumor treatment, stage and grade of tumor obtained from participants with breast or ovarian cancer and involved in the \"Identification of Cancer Predisposition Genes in Breast Cancer Families\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00173126.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00173125.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00173128.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00173127.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00173124.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "FBCS_Subject_Phenotypes",
+      "datasetId": "pht002907.v1",
+      "description": "Subject ID, ethnicity, age at breast cancer or ovarian cancer diagnosis of participants with breast or ovarian cancer and involved in the \"Identification of Cancer Predisposition Genes in Breast Cancer Families\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00173120.v1.p1",
+          "description": "De-identified unique subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "agebrcan1",
+          "id": "phv00173121.v1.p1",
+          "description": "Age of breast cancer diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_breast_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ageovca",
+          "id": "phv00173122.v1.p1",
+          "description": "Age of ovarian cancer diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_ovarian_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00173123.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

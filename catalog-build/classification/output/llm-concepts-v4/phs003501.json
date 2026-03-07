@@ -1,0 +1,210 @@
+{
+  "studyId": "phs003501",
+  "studyName": "Systems Analysis of Single-Cell Heterogeneity Underlying Glioma Drug Resistance",
+  "tables": [
+    {
+      "tableName": "Glioma_Drug_Resistance_Sample_Attributes",
+      "datasetId": "pht014307.v1",
+      "description": "This sample attributes table includes body site, analyte type, histological type, metastasis/primary tumor/derived cell line status, primary tumor location, tumor stage, tumor grade, treatment type, treatment time, and sample replicate number.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00536202.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00536201.v1.p1",
+          "description": "Body site where tumor was collected from which samples were derived",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GSC_TREATMENT",
+          "id": "phv00536209.v1.p1",
+          "description": "Type of treatment for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00536204.v1.p1",
+          "description": "Cell or tissue type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00536203.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00536205.v1.p1",
+          "description": "Primary tumor, metastasis, or derived cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00536206.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REPLICATE",
+          "id": "phv00536211.v1.p1",
+          "description": "Sample replicate number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00536200.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00536697.v1.p1",
+          "description": "Type of sample used for analysis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TREATMENT_TIME",
+          "id": "phv00536210.v1.p1",
+          "description": "Treatment time for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_GRADE",
+          "id": "phv00536208.v1.p1",
+          "description": "Tumor grade of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00536207.v1.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Glioma_Drug_Resistance_Subject_Phenotypes",
+      "datasetId": "pht014306.v1",
+      "description": "This subject phenotypes dataset includes case control status of the subject for glioblastoma multiforme, status for somatic mutation in IDH1, and methylation status of the MGMT protein.",
+      "variables": [
+        {
+          "name": "CASE_CONTROL_STATUS",
+          "id": "phv00536197.v1.p1",
+          "description": "Case control status of the subject for glioblastoma multiforme",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IDH1",
+          "id": "phv00536198.v1.p1",
+          "description": "Somatic mutation in IDH1 (Entrez GeneID: 3417)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MGMT",
+          "id": "phv00536199.v1.p1",
+          "description": "Methylation status of MGMT protein (Entrez GeneID: 4255)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536196.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Glioma_Drug_Resistance_Subject",
+      "datasetId": "pht014304.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00536192.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00536193.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536191.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Glioma_Drug_Resistance_Sample",
+      "datasetId": "pht014305.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00536195.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536194.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

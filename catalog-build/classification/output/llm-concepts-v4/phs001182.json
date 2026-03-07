@@ -1,0 +1,186 @@
+{
+  "studyId": "phs001182",
+  "studyName": "Somatic Mutation Load in Clones of Single Human Cells",
+  "tables": [
+    {
+      "tableName": "Somatic_Mutation_Load_Clone_Cells_Sample_Attributes",
+      "datasetId": "pht005723.v2",
+      "description": "This sample attributes table includes the body site where sample was collected, analyte type, tumor status, histological type, genotyping center, and sequencing center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00266140.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00266139.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00266143.v2.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00266142.v2.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00266141.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266138.v2.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00266144.v2.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Somatic_Mutation_Load_Clone_Cells_Subject",
+      "datasetId": "pht005720.v2",
+      "description": "This subject consent data table contains subject IDs,  consent group information, subject aliases, and affection status.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00266125.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00266127.v2.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266124.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00266126.v2.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Somatic_Mutation_Load_Clone_Cells_Sample",
+      "datasetId": "pht005721.v2",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266130.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00266131.v2.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00266132.v2.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266129.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Somatic_Mutation_Load_Clone_Cells_Subject_Phenotypes",
+      "datasetId": "pht005722.v2",
+      "description": "This subject phenotypes data table includes subject's sex, race, and age.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266134.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00266137.v2.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00266136.v2.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00266135.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

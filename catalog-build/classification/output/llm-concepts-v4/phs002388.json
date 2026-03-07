@@ -1,0 +1,210 @@
+{
+  "studyId": "phs002388",
+  "studyName": "Genomic and Transcriptomic Markers Associated with Response to Immune Checkpoint Blockade",
+  "tables": [
+    {
+      "tableName": "NEOPS_Subject_Phenotypes",
+      "datasetId": "pht011341.v1",
+      "description": "This subject phenotypes data table includes case control status of the subject with respect to stage III or stage IV melanoma, self-reported race, age at enrollment, primary tumor site of origin, tumor stage at treatment start, therapy type administered, response to therapy, length of progression free survival, disease progression event, SHERPA-predicted neoantigen burden(with and without filtering for deleterious alterations to the antigen presentation machinery), and tumor mutational burden.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00492079.v1.p1",
+          "description": "Case control status of the subject with respect to stage III or stage IV melanoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00492081.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASE_ORIGIN",
+          "id": "phv00492082.v1.p1",
+          "description": "Primary tumor site of origin",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NBS_MB",
+          "id": "phv00492088.v1.p1",
+          "description": "SHERPA-predicted neoantigen burden per megabase",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_tumor_mutational_burden",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NEOPS_MB",
+          "id": "phv00492090.v1.p1",
+          "description": "SHERPA-predicted neoantigen burden per megabase with additional filtering accounting for deleterious alterations to the antigen presentation machinery",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_tumor_mutational_burden",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PD1_THERAPY",
+          "id": "phv00492084.v1.p1",
+          "description": "Therapy type administered to subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_immunotherapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PFS",
+          "id": "phv00492086.v1.p1",
+          "description": "Length of progression free survival",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_progression_free_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROGRESSION_EVENT",
+          "id": "phv00492087.v1.p1",
+          "description": "Disease progression event",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00492080.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RESPONSE",
+          "id": "phv00492085.v1.p1",
+          "description": "Subject response to therapy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_treatment_response",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492078.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TMB",
+          "id": "phv00492089.v1.p1",
+          "description": "Tumor mutational burden",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_tumor_mutational_burden",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE_AT_TREATMENT",
+          "id": "phv00492083.v1.p1",
+          "description": "Tumor stage at treatment start",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NEOPS_Sample_Attributes",
+      "datasetId": "pht011342.v1",
+      "description": "This sample attributes table includes analyte type, tumor status, and histological type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00492092.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00492094.v1.p1",
+          "description": "Histological type",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00492093.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492091.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NEOPS_Subject",
+      "datasetId": "pht011339.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00492074.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492075.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492073.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NEOPS_Sample",
+      "datasetId": "pht011340.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492077.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492076.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

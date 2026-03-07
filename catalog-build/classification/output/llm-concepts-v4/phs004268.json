@@ -1,0 +1,186 @@
+{
+  "studyId": "phs004268",
+  "studyName": "Cetuximab and Nivolumab in Recurrent/Metastatic Head and Neck Cancer",
+  "tables": [
+    {
+      "tableName": "Cetuximab_Nivolumab_HNSCC_Sample_Attributes",
+      "datasetId": "pht016321.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin, analyte type, tumor status, histological type, subject's age at collection, status as primary tumor or metastasis, primary tumor location, tumor treatment, HPV (P16) status, and collection timepoint.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00570664.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00570663.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00570667.v1.p1",
+          "description": "Age sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_TIMEPOINT",
+          "id": "phv00570672.v1.p1",
+          "description": "Type sample collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00570666.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00570665.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "P16_STATUS",
+          "id": "phv00570671.v1.p1",
+          "description": "HPV status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00570668.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00570669.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00570662.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00570670.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Cetuximab_Nivolumab_HNSCC_Subject",
+      "datasetId": "pht016318.v1",
+      "description": "This subject consent data table reports each subject's subject ID, consent, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00570655.v1.p1",
+          "description": "Registered consent groups (Data Use Limitations (DUL)) as determined by submitters' Institutional Review Boards (IRB) or equivalent body",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00570656.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00570654.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Cetuximab_Nivolumab_HNSCC_Subject_Phenotypes",
+      "datasetId": "pht016320.v1",
+      "description": "This subject phenotypes data table reports each subject's self-reported age and self-reported race.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00570660.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00570661.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00570659.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Cetuximab_Nivolumab_HNSCC_Sample",
+      "datasetId": "pht016319.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00570658.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00570657.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

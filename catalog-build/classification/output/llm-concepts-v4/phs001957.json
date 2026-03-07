@@ -1,0 +1,83 @@
+{
+  "studyId": "phs001957",
+  "studyName": "Investigation of Human DNA Replication Timing Variation by Whole Genome Sequencing",
+  "tables": [
+    {
+      "tableName": "DNA_Replication_Timing_Sample_Attributes",
+      "datasetId": "pht009840.v2",
+      "description": "This sample attributes data table contains cell type and analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00426585.v2.p1",
+          "description": "Type of analyte",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CELL_TYPE",
+          "id": "phv00426584.v2.p1",
+          "description": "Type of cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00426583.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DNA_Replication_Timing_Subject",
+      "datasetId": "pht009838.v2",
+      "description": "This subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00426580.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426579.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DNA_Replication_Timing_Sample",
+      "datasetId": "pht009839.v2",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00426582.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426581.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

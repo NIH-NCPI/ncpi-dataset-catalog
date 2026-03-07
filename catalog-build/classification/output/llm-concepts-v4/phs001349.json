@@ -1,0 +1,250 @@
+{
+  "studyId": "phs001349",
+  "studyName": "Identification of 22 Novel Loci Associated with Susceptibility to Testicular Germ Cell Tumors",
+  "tables": [
+    {
+      "tableName": "TGCT_Sample_Attributes",
+      "datasetId": "pht010330.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, histological type, tumor status, case/control status for Testicular Germ Cell Tumors (TGCT), histology and side of first and second TGCT cases, family history of TGCT (n=4 variables), and medical history of cryptorchidism (n=2 variables).",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00431299.v1.p1",
+          "description": "The analyte type of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00431298.v1.p1",
+          "description": "The collection site of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_FIRST_HISTOLOGY",
+          "id": "phv00431287.v1.p1",
+          "description": "Histology of first tumor diagnosis (EGCT or TGCT)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_FIRST_SIDE",
+          "id": "phv00431288.v1.p1",
+          "description": "CASE: Did your first TGCT arise in left or right testis?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_SECOND_TGCT",
+          "id": "phv00431289.v1.p1",
+          "description": "CASE: Did you have a subsequent TGCT dx? (1=Yes,0=No)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_cancer_site_specific_variables",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_SECOND_TGCT_HISTOLOGY",
+          "id": "phv00431290.v1.p1",
+          "description": "CASE: Histology of second TGCT",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_SECOND_TGCT_SIDE",
+          "id": "phv00431291.v1.p1",
+          "description": "CASE: Did your second TGCT arise in left or right testis?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMHX_EVER_1DEG",
+          "id": "phv00431292.v1.p1",
+          "description": "FAMHX: ever had 1st degree relative diagnosed with TGCT",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMHX_EVER_2DEG",
+          "id": "phv00431294.v1.p1",
+          "description": "FAMHX: ever had 2nd degree relative diagnosed with TGCT",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMHX_REL_1DEG",
+          "id": "phv00431293.v1.p1",
+          "description": "FAMHX: 1st degree relative with TGCT",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMHX_REL_2DEG",
+          "id": "phv00431295.v1.p1",
+          "description": "FAMHX: 2nd degree relative with TGCT",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00431300.v1.p1",
+          "description": "Histological type of the sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00431301.v1.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEDHX_CRYPT",
+          "id": "phv00431296.v1.p1",
+          "description": "MEDHX: cryptorchidism",
+          "concept_id": "ncpi:disease_diagnosis_genitourinary_disorders_cryptorchidism",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEDHX_CRYPT_TYPE",
+          "id": "phv00431297.v1.p1",
+          "description": "MEDHX: cryptorchidism laterality",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Phenotype",
+          "id": "phv00431286.v1.p1",
+          "description": "Case/control status for TCGT",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00431285.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TGCT_Subject_Phenotypes",
+      "datasetId": "pht010329.v1",
+      "description": "This subject phenotypes data table includes subject's sex, race, ethnicity, race from PCA, and affection status for Testicular Germ Cell Tumors (TGCT).",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00431281.v1.p1",
+          "description": "Case control status of the subject for TGCT",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00431283.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_HISPANIC",
+          "id": "phv00431284.v1.p1",
+          "description": "Self-reported race, hispanic",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_PCA",
+          "id": "phv00483561.v1.p1",
+          "description": "Race determined by PCA",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00431282.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431280.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TGCT_Subject",
+      "datasetId": "pht010327.v1",
+      "description": "This subject consent data table includes subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00431277.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431276.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TGCT_Sample",
+      "datasetId": "pht010328.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and sample aliases. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00431279.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431278.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

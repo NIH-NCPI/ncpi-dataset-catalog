@@ -1,0 +1,162 @@
+{
+  "studyId": "phs003640",
+  "studyName": "The Somatic Mutational Landscape of Thyroid Cancer in Patients with Germline PTEN Mutations",
+  "tables": [
+    {
+      "tableName": "Thyroid_Cancer_PHTS_Sample_Attributes",
+      "datasetId": "pht014620.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin, analyte type, tumor status, status as cancer, benign, or normal tissue, and histological type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00541217.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00541216.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CANCER_BENIGN_NORMAL",
+          "id": "phv00541219.v1.p1",
+          "description": "Cancer, benign, or normal sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00541220.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00541218.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00541215.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Thyroid_Cancer_PHTS_Subject_Phenotypes",
+      "datasetId": "pht014619.v1",
+      "description": "This subject phenotypes data table reports each subject's self-reported race, age at time of thyroidectomy, AJCC stage, and germline PTEN variant.",
+      "variables": [
+        {
+          "name": "AGE_SURGERY",
+          "id": "phv00541212.v1.p1",
+          "description": "Age at time of thyroidectomy",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AJCC_STAGE",
+          "id": "phv00541213.v1.p1",
+          "description": "American Joint Committee on Cancer (AJCC) 7th edition overall stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PTEN_GERMLINE",
+          "id": "phv00541214.v1.p1",
+          "description": "Germline PTEN variant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00541211.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00541210.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Thyroid_Cancer_PHTS_Subject",
+      "datasetId": "pht014617.v1",
+      "description": "This subject consent data table reports each subject's subject ID, consent, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00541206.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00541207.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00541205.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Thyroid_Cancer_PHTS_Sample",
+      "datasetId": "pht014618.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00541209.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00541208.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

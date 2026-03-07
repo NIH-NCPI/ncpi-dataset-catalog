@@ -1,0 +1,52 @@
+{
+  "studyId": "phs003637",
+  "studyName": "Sleep Heart Health Study (SHHS-BioLINCC)",
+  "tables": [
+    {
+      "tableName": "BioLINCC_SHHS_Subject",
+      "datasetId": "pht014602.v1",
+      "description": "This subject consent data table contains subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00541153.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PPTIDU",
+          "id": "phv00541152.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BioLINCC_SHHS_Sample",
+      "datasetId": "pht014603.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "PPTIDU",
+          "id": "phv00541154.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00541155.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

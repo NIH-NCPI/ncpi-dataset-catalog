@@ -1,0 +1,178 @@
+{
+  "studyId": "phs003655",
+  "studyName": "Efficacy and Immune Effects of Anakinra Prophylaxis for Neurologic Toxicity and Cytokine Release Syndrome in Patients with Lymphoma Receiving Axicabtagene Ciloleucel",
+  "tables": [
+    {
+      "tableName": "Anakinra_CRS_NT_Lymphoma_Sample_Attributes",
+      "datasetId": "pht014979.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin, analyte type, tumor status, time of CAR infusion, sample sorting strategy, and name of sequencing center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00543420.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00543419.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00543421.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00543418.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00543424.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SORTING_STRATEGY",
+          "id": "phv00543423.v1.p1",
+          "description": "Indicates cells sorted from sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIMEPOINT",
+          "id": "phv00543422.v1.p1",
+          "description": "Timing of CAR infusion, day of or 7 days post CAR infusion",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Anakinra_CRS_NT_Lymphoma_Subject_Phenotypes",
+      "datasetId": "pht014978.v1",
+      "description": "This subject phenotypes data table reports each subject's self-reported sex, age of disease onset, treatment, and case control status for lymphoma.",
+      "variables": [
+        {
+          "name": "AGE_ONSET",
+          "id": "phv00543415.v1.p1",
+          "description": "Disease onset age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASE",
+          "id": "phv00543417.v1.p1",
+          "description": "Case control status of the subject for lymphoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_primary_disease_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00543414.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00543413.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TREATMENT",
+          "id": "phv00543416.v1.p1",
+          "description": "Disease treatment received by subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Anakinra_CRS_NT_Lymphoma_Subject",
+      "datasetId": "pht014976.v1",
+      "description": "This subject consent data table reports each subject's subject ID, consent, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00543409.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POOLED_SUBJECT_ID",
+          "id": "phv00556277.v1.p1",
+          "description": "ID of th e subject pool in which the subject has been included",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00543410.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00543408.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Anakinra_CRS_NT_Lymphoma_Sample",
+      "datasetId": "pht014977.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00543412.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00543411.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "studyId": "phs003136",
+  "studyName": "African American Adolescent Idiopathic Scoliosis Whole Genome and Whole Exome Study",
+  "tables": [
+    {
+      "tableName": "AA_AIS_Subject_Phenotypes",
+      "datasetId": "pht013171.v1",
+      "description": "This subject phenotypes data table contains case control status for adolescent idiopathic scoliosis, self-reported race, and maximum curvature.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00527989.v1.p1",
+          "description": "Case control status of the subject for adolescent idiopathic scoliosis",
+          "concept_id": "topmed:disease_diagnosis_autism_developmental_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MAX_CURVE",
+          "id": "phv00527991.v1.p1",
+          "description": "Maximum curvature",
+          "concept_id": "topmed:bone_musculoskeletal_spinal_deformity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00527990.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00527988.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AA_AIS_Sample_Attributes",
+      "datasetId": "pht013172.v1",
+      "description": "This sample attributes table includes body site, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00527994.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00527993.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00527995.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00527992.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AA_AIS_Subject",
+      "datasetId": "pht013169.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00527984.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00527985.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00527983.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AA_AIS_Sample",
+      "datasetId": "pht013170.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00527987.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00527986.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

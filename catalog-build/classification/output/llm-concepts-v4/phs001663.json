@@ -1,0 +1,170 @@
+{
+  "studyId": "phs001663",
+  "studyName": "Genomic Analysis of CNS Cancer",
+  "tables": [
+    {
+      "tableName": "GBM_POLE_Deficiency_Sample_Attributes",
+      "datasetId": "pht008403.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, histological type, collection time, tumor treatment, detailed tumor location, and tumor type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00395556.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00395555.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_TIME_MONTHS",
+          "id": "phv00395559.v1.p1",
+          "description": "Time the sample was collected after initial diagnosis and resection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00395558.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00395557.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00395554.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_DETAILED_LOCATION",
+          "id": "phv00397042.v1.p1",
+          "description": "Detailed CNS location of tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00395560.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TYPE",
+          "id": "phv00397043.v1.p1",
+          "description": "Primary or metastatic",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GBM_POLE_Deficiency_Subject",
+      "datasetId": "pht008401.v1",
+      "description": "The subject consent data table includes subject IDs, consent information, and affection status for glioblastoma.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00395551.v1.p1",
+          "description": "Case control status of the subject for gliobastoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00395550.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00395549.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GBM_POLE_Deficiency_Subject_Phenotypes",
+      "datasetId": "pht008614.v1",
+      "description": "The subject phenotype data table includes subject's sex and age of disease onset.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00397039.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_onset",
+          "id": "phv00397041.v1.p1",
+          "description": "Disease onset age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00397040.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GBM_POLE_Deficiency_Sample",
+      "datasetId": "pht008402.v1",
+      "description": "The subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00395553.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00395552.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

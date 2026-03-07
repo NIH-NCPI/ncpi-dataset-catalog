@@ -1,0 +1,162 @@
+{
+  "studyId": "phs001858",
+  "studyName": "Germline Variants of Clinical Cancer Specimens",
+  "tables": [
+    {
+      "tableName": "Advanced_Cancer_Sample_Attributes",
+      "datasetId": "pht009374.v1",
+      "description": "This sample attributes table includes analyte type, tumor status, sample type, histological type, histological subtype, and sequencing panel.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00417424.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_SUBTYPE",
+          "id": "phv00417428.v1.p1",
+          "description": "Cancer subtype. Not applicable for normal samples.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00417427.v1.p1",
+          "description": "Cancer type. Not applicable for normal samples.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE_MERGED",
+          "id": "phv00420424.v1.p1",
+          "description": "Cancer type mapped to consensus oncotree codes. Not applicable for normal samples.",
+          "concept_id": "topmed:cancer_diagnosis_cancer_registry_codes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00417425.v1.p1",
+          "description": "Is sample derived from tumor",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MSI_STATUS",
+          "id": "phv00420425.v1.p1",
+          "description": "Microsatellite instability status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_mismatch_repair_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00417423.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00417426.v1.p1",
+          "description": "Sample type collected. Primary or metastatic for tumor.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_PANEL",
+          "id": "phv00417429.v1.p1",
+          "description": "IMPACT panel version. Manufacturer's name of target panel based on genes covered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Advanced_Cancer_Subject_Phenotypes",
+      "datasetId": "pht009373.v1",
+      "description": "This subject phenotype data table includes subject's sex.",
+      "variables": [
+        {
+          "name": "AGE_AT_DIAGNOSIS",
+          "id": "phv00420423.v1.p1",
+          "description": "Age at diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_lung_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00417422.v1.p1",
+          "description": "Subject sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00417421.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Advanced_Cancer_Subject",
+      "datasetId": "pht009371.v1",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00417418.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00417417.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Advanced_Cancer_Sample",
+      "datasetId": "pht009372.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00417420.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00417419.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

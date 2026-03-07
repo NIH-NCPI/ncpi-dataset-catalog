@@ -1,0 +1,257 @@
+{
+  "studyId": "phs001413",
+  "studyName": "Large Scale Genotyping of Psychiatric Disorders",
+  "tables": [
+    {
+      "tableName": "PGC_Psychiatric_Disorders_Subject_Phenotypes",
+      "datasetId": "pht008887.v1",
+      "description": "This subject phenotype table contains subject ID, sex, primary disease, analysis category, site where genotyping occurred, call rate, and race.",
+      "variables": [
+        {
+          "name": "ANALYSIS_CAT",
+          "id": "phv00404915.v1.p1",
+          "description": "Analysis Category",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CALL_RATE",
+          "id": "phv00404917.v1.p1",
+          "description": "Illumina GenCall call rate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_DISEASE",
+          "id": "phv00404914.v1.p1",
+          "description": "Primary Disease of participant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00404918.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00404913.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SITE",
+          "id": "phv00404916.v1.p1",
+          "description": "Site where genotyping occurred",
+          "concept_id": "ncpi:geographic_site_recruitment_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00404912.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PGC_Psychiatric_Disorders_Sample_Attributes",
+      "datasetId": "pht008888.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, histological type, cohort ID, QC pass, and filter.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00404921.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00404920.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COHORT_ID",
+          "id": "phv00404923.v1.p1",
+          "description": "Cohort identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FILTER",
+          "id": "phv00404925.v1.p1",
+          "description": "Sample status of call merging and QC process",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00404922.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "QC_PASS",
+          "id": "phv00404924.v1.p1",
+          "description": "Samples that passed QC process",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00404919.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PGC_Psychiatric_Disorders_Pedigree",
+      "datasetId": "pht008885.v1",
+      "description": "The subject pedigree table contains family ID, subject ID, mother ID, father ID, sex, and subject relationship.",
+      "variables": [
+        {
+          "name": "FAMID",
+          "id": "phv00404900.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00404902.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00404903.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RELATIONSHIP_NOTES",
+          "id": "phv00404905.v1.p1",
+          "description": "Relatedness",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00404904.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00404901.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PGC_Psychiatric_Disorders_Subject",
+      "datasetId": "pht008884.v1",
+      "description": "The subject consent file includes subject ID, consent information, case control status of the subject for psychiatric disorders, and subject aliases.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00404897.v1.p1",
+          "description": "Case Control status of the subject for psychiatric disorders",
+          "concept_id": "topmed:psychiatric_interview_diagnostic_codes_classifications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00404896.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00404899.v1.p1",
+          "description": "Submitted subject_ID of other dbGaP study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00404898.v1.p1",
+          "description": "Repository name in the Sample Status Report of other dbGaP study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00404895.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PGC_Psychiatric_Disorders_Sample",
+      "datasetId": "pht008886.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00404907.v1.p1",
+          "description": "Site Participant ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00404906.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

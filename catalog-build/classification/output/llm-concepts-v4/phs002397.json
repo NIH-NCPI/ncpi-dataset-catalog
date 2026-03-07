@@ -1,0 +1,163 @@
+{
+  "studyId": "phs002397",
+  "studyName": "Trisomy 21 Dosage Compensation Map (T21DoCoMap)",
+  "tables": [
+    {
+      "tableName": "T21_DC_Map_Sample_Attributes",
+      "datasetId": "pht014384.v1",
+      "description": "This sample attributes data table reports each sample's cell line ID, analyte type, molecular analyte, cell type, differentiation round if applicable, doxycycline status at collection, doxycycline start date (weeks) relative to experiment start, doxycycline end date (weeks) relative to experiment start, and collection timepoint relative to experiment start (weeks).",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00536747.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CELL_LINE_ID",
+          "id": "phv00536746.v1.p1",
+          "description": "Cell line ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CELL_TYPE",
+          "id": "phv00536749.v1.p1",
+          "description": "Cell type at collection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_TIME",
+          "id": "phv00536754.v1.p1",
+          "description": "Collection timepoint relative to experiment start (in weeks). For neural diff (ND) relative to differentiation start.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DIFF_ROUND",
+          "id": "phv00536750.v1.p1",
+          "description": "Differentiation Round (ND) or \"none\"  for undifferentiated iPSC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DOX_END",
+          "id": "phv00536753.v1.p1",
+          "description": "Dox end relative to experiment start (in weeks) or N/A for nodox. For neural diff (ND) relative to differentiation start.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DOX_START",
+          "id": "phv00536752.v1.p1",
+          "description": "Dox start relative to experiment start (in weeks) or N/A for nodox. For neural diff (ND) relative to differentiation start.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DOX_STATUS",
+          "id": "phv00536751.v1.p1",
+          "description": "Dox treatment ongoing at time of collection?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOLECULAR_ANALYTE",
+          "id": "phv00536748.v1.p1",
+          "description": "Molecular analyte",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00536745.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T21_DC_Map_Subject",
+      "datasetId": "pht014382.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, biological sex, and subject aliases to map subjects to public repositories.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00536738.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00536739.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00536741.v1.p1",
+          "description": "The Subject ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536737.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00536740.v1.p1",
+          "description": "Source repository where the subject originates",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T21_DC_Map_Sample",
+      "datasetId": "pht014383.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00536743.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536742.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

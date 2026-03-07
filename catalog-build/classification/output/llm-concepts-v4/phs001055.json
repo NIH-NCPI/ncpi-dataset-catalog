@@ -1,0 +1,193 @@
+{
+  "studyId": "phs001055",
+  "studyName": "Whole Genome Study for De Novo Mutation Rates",
+  "tables": [
+    {
+      "tableName": "DeNovo_Mutation_Rates_Pedigree",
+      "datasetId": "pht005912.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, sex of subjects, and twin IDs for monozygotic twins.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00273235.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00273238.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00273237.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00273239.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273236.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TWIN_ID",
+          "id": "phv00273240.v1.p1",
+          "description": "Twin ID for monozygotic twins and multiples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DeNovo_Mutation_Rates_Sample_Attributes",
+      "datasetId": "pht005915.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, and sequencing center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00273249.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00273248.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00273250.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273247.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00273251.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DeNovo_Mutation_Rates_Sample",
+      "datasetId": "pht005913.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample source and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273242.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00273243.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00273244.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273241.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DeNovo_Mutation_Rates_Subject",
+      "datasetId": "pht005911.v1",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00273234.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273233.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DeNovo_Mutation_Rates_Subject_Phenotypes",
+      "datasetId": "pht005914.v1",
+      "description": "This subject phenotype table includes age of mother and father at proband's conception.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273245.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00273246.v1.p1",
+          "description": "Subject age at proband's conception",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

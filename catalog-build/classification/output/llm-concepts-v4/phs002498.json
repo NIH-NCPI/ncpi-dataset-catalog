@@ -1,0 +1,154 @@
+{
+  "studyId": "phs002498",
+  "studyName": "Integrative Genomic and Transcriptomic Analyses of Refractory Multiple Myeloma",
+  "tables": [
+    {
+      "tableName": "RRMM_Sample_Attributes",
+      "datasetId": "pht011468.v1",
+      "description": "This sample attributes table contains sample IDs, body site where sample was collected, analyte type, tumor status, histological type, age when sample was collected, primary tumor, metastasis, or transformed cell line, tumor location, and tumor treatment.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00492774.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00492773.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00492777.v1.p1",
+          "description": "Age sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00492776.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00492775.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00492778.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00492779.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492772.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00492780.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RRMM_Subject",
+      "datasetId": "pht011465.v1",
+      "description": "This subject consent data table contains subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00492767.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492766.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RRMM_Sample",
+      "datasetId": "pht011466.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492769.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492768.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RRMM_Subject_Phenotypes",
+      "datasetId": "pht011467.v1",
+      "description": "This subject phenotypes data table contains subject IDs and case control status of the subject for Multiple Myeloma (MM). All subjects are MM patients.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00492771.v1.p1",
+          "description": "Case control status of the subject for Multiple Myeloma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492770.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

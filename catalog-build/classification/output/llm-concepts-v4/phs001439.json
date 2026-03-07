@@ -1,0 +1,162 @@
+{
+  "studyId": "phs001439",
+  "studyName": "University of Utah Pelvic Organ Prolapse Disorder Study",
+  "tables": [
+    {
+      "tableName": "POP_Subject_Phenotypes",
+      "datasetId": "pht006816.v1",
+      "description": "This subject phenotype table includes subjects' age, race, ethnicity, and status of pelvic organ prolapse, stress urinary incontinence, and overactive bladder diagnosis.",
+      "variables": [
+        {
+          "name": "Ethnicity",
+          "id": "phv00313096.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "OAB",
+          "id": "phv00313099.v1.p1",
+          "description": "Overactive bladder diagnosis status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POP",
+          "id": "phv00313097.v1.p1",
+          "description": "Pelvic organ prolapse diagnosis status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00313095.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00313093.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUI",
+          "id": "phv00313098.v1.p1",
+          "description": "Stress urinary incontinence diagnosis status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00313094.v1.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "POP_Sample_Attributes",
+      "datasetId": "pht006817.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "Analyte type",
+          "id": "phv00313102.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Body site",
+          "id": "phv00313101.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Is_tumor",
+          "id": "phv00313103.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00313100.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "POP_Sample",
+      "datasetId": "pht006815.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00313092.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00313104.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00313091.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "POP_Subject",
+      "datasetId": "pht006814.v1",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00313090.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00313089.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

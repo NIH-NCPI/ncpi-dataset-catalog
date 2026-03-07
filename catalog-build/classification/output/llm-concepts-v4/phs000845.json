@@ -1,0 +1,178 @@
+{
+  "studyId": "phs000845",
+  "studyName": "Genomic Factors Involved in Chromosome Rearrangements",
+  "tables": [
+    {
+      "tableName": "Chromosome_Rearrangements_Sample_Attributes",
+      "datasetId": "pht004397.v1",
+      "description": "This sample attributes data table includes sequencing center, CNV region, average genome coverage, average CNV coverage, ploidy call for CNV region, body site were sample was collected, analyte type, tumor status, and chromothripsis status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00221076.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "AVG_CNV_COVERAGE",
+          "id": "phv00221073.v1.p1",
+          "description": "The mean, for the CNV region 2K windows, reported in the avgNormalizedCoverage data column from the sequencing center file, cnvDetailsDiploidBeta.tsv",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AVG_GENOME_COVERAGE",
+          "id": "phv00221072.v1.p1",
+          "description": "The mean of all (genome-wide) 2K windows reported in the avgNormalizedCoverage data column from the sequencing center file, cnvDetailsDiploidBeta.tsv",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00221075.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CNV_REGION",
+          "id": "phv00221071.v1.p1",
+          "description": "Genomic coordinates for region of copy number variation identified in the sequencing center file, cnvDetailsDiploidBeta.tsv, based on 2K window length",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_CHROMOTHRIPSIS",
+          "id": "phv00226583.v1.p1",
+          "description": "Chromothripsis status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00221077.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLOIDY_CALL",
+          "id": "phv00221074.v1.p1",
+          "description": "Ploidy call for CNV region reported by sequencing center file, cnvDetailsDiploidBeta.tsv",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00221070.v1.p1",
+          "description": "De-identified Sample ID from sequencing center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00221069.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00221068.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Chromosome_Rearrangements_Subject",
+      "datasetId": "pht004394.v1",
+      "description": "This subject consent data table includes subject IDs, consent group information, and subject's sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00221059.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00508197.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00221058.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Chromosome_Rearrangements_Sample",
+      "datasetId": "pht004395.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00221064.v1.p1",
+          "description": "Sample ID used by sequencing center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00221063.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Chromosome_Rearrangements_Subject_Phenotypes",
+      "datasetId": "pht004396.v1",
+      "description": "This subject phenotypes data table includes affection status. All subjects have chromosomal rearrangements.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00508198.v1.p1",
+          "description": "Case control status of the subject. All subjects have chromosomal rearrangements.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00221066.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

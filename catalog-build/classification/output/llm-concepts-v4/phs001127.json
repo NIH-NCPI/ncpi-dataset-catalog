@@ -1,0 +1,170 @@
+{
+  "studyId": "phs001127",
+  "studyName": "Genomic Analysis of Paired Endometrial Cancer Primaries and Metastases",
+  "tables": [
+    {
+      "tableName": "Endometrial_Cancer_Primaries_Metastases_Subject_Phenotypes",
+      "datasetId": "pht005527.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "Age_Pr.Treatment",
+          "id": "phv00264744.v1.p1",
+          "description": "Age of patient prior to treatment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diagnosis",
+          "id": "phv00264743.v1.p1",
+          "description": "Primary diagnosis of patient",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_primary_disease_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histological_Type",
+          "id": "phv00264746.v1.p1",
+          "description": "Classification of the tumor by histologic analysis (detailed subtype)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histological_Type_2xgroups",
+          "id": "phv00264747.v1.p1",
+          "description": "Classification of the tumor into one of two groups Endometrioid Endometrial Carcinoma (NEEC) or Non-Endometrioid Endometrial Carcinoma (NEEC) by histologic analysis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histological_grade",
+          "id": "phv00264748.v1.p1",
+          "description": "The FIGO grade of the tumor by histologic analysis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary _Treatment",
+          "id": "phv00264745.v1.p1",
+          "description": "Primary treatment of patient after diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00264742.v1.p1",
+          "description": "Unique participant identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Endometrial_Cancer_Primaries_Metastases_Sample_Attributes",
+      "datasetId": "pht005528.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_Type",
+          "id": "phv00264753.v1.p1",
+          "description": "Molecular analyte",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00264749.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample Type",
+          "id": "phv00264750.v1.p1",
+          "description": "Indicates the Tumor / Normal status of a sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Tissue_Location",
+          "id": "phv00264752.v1.p1",
+          "description": "Indicates the tissue source off the DNA sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tumor Type",
+          "id": "phv00264751.v1.p1",
+          "description": "Indicates primary or secondary tumor",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Endometrial_Cancer_Primaries_Metastases_Sample",
+      "datasetId": "pht005526.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00264740.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00264741.v1.p1",
+          "description": "Use of samples. Array_SNP: SNP genotypes obtained using standard or custom microarrays; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00264739.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Endometrial_Cancer_Primaries_Metastases_Subject",
+      "datasetId": "pht005525.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00264738.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00264737.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

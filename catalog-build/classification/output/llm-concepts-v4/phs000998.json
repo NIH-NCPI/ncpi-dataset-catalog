@@ -1,0 +1,233 @@
+{
+  "studyId": "phs000998",
+  "studyName": "Transcriptome Profile of Endothelial Cells in PAH Patients vs Controls",
+  "tables": [
+    {
+      "tableName": "iPSC_Pulmonary_Hypertension_Sample_Attributes",
+      "datasetId": "pht005057.v2",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, tumor status, histological type, and name of the center which conducted sequencing.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00253443.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00253442.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": "ncpi:ffq_food_shopping_access",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00253445.v2.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00253444.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253441.v2.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00253446.v2.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "iPSC_Pulmonary_Hypertension_Pedigree",
+      "datasetId": "pht005474.v1",
+      "description": "The subject pedigree table contains family ID, subject ID, mother ID, father ID, sex and twin ID.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00262117.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00262120.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00262119.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00262118.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TWIN_ID",
+          "id": "phv00262122.v1.p1",
+          "description": "Twin ID for monozygotic twins or multiples. A TWIN_ID is not provided for dizygotic twins or multiples.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00262121.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "iPSC_Pulmonary_Hypertension_Subject",
+      "datasetId": "pht005054.v2",
+      "description": "The subject consent file includes subject IDs, consent information, subject aliases, and affection status for pulmonary hypertension.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00253431.v2.p1",
+          "description": "Case control status for pulmonary hypertension",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_otitis_media",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00253428.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00253430.v2.p1",
+          "description": "Subject ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253427.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00253429.v2.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "iPSC_Pulmonary_Hypertension_Subject_Phenotypes",
+      "datasetId": "pht005056.v2",
+      "description": "This subject phenotype table contains subject ID, sex, race, and age of the subject.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253437.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00253440.v2.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mutant",
+          "id": "phv00435303.v1.p1",
+          "description": "Bone morphogenetic protein receptor type 2 (BMPR2) mutant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00253439.v2.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00253438.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "iPSC_Pulmonary_Hypertension_Sample",
+      "datasetId": "pht005055.v2",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253433.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253432.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

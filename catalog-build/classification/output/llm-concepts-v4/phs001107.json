@@ -1,0 +1,298 @@
+{
+  "studyId": "phs001107",
+  "studyName": "Patient-Specific Factors Influence Somatic Variations in VHL Tumors",
+  "tables": [
+    {
+      "tableName": "VHL_Renal_Tumors_Sample_Attributes",
+      "datasetId": "pht005491.v1",
+      "description": "This sample attributes table contains sample IDs, manuscript patient IDs, sample type, sequencing WGS coverage, estimated tumor purity using method outlined in publication, shorthand sample ID used in publication text and figures, tumor location and measurements (n=4 variables; length, width, depth and Fuhrman grade) ,  name of the center which conducted sequencing, and analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00262222.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COVERAGE",
+          "id": "phv00262213.v1.p1",
+          "description": "Sequencing WGS coverage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EST_PURITY",
+          "id": "phv00262214.v1.p1",
+          "description": "Estimated tumor purity using method outlined in publication",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FUHRMAN_GRADE",
+          "id": "phv00262219.v1.p1",
+          "description": "Fuhrman grade of tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MANUSCRIPT_PATIENT_ID",
+          "id": "phv00262211.v1.p1",
+          "description": "De-identified Patient ID used in the manuscript",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00262220.v1.p1",
+          "description": "Location of tumor in body",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_FIGURE_ID",
+          "id": "phv00262215.v1.p1",
+          "description": "Shorthand sample ID used in publication text and figures",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00262210.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00262212.v1.p1",
+          "description": "Sample Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00262221.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_DEPTH_CM",
+          "id": "phv00262218.v1.p1",
+          "description": "Tumor depth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_LENGTH_CM",
+          "id": "phv00262216.v1.p1",
+          "description": "Tumor length",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_WIDTH_CM",
+          "id": "phv00262217.v1.p1",
+          "description": "Tumor width",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VHL_Renal_Tumors_Subject_Phenotypes",
+      "datasetId": "pht005490.v1",
+      "description": "This subject phenotype table contains subject IDs, sex, age, germline VHL mutation, known other kidney surgeries, self-reported smoking habits, estimated lifetime smoking exposure rank, BMI of the subject, number of tumors/cysts sequenced in this study, and whether or not an adjacent normal kidney sample was also sequenced .",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00262200.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "adj_normal_sample",
+          "id": "phv00262209.v1.p1",
+          "description": "Whether or not an adjacent normal kidney sample was also sequenced",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_surgery",
+          "id": "phv00262202.v1.p1",
+          "description": "Age of participant at time of surgery",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bmi",
+          "id": "phv00262207.v1.p1",
+          "description": "Participant's Body Mass Index (BMI)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "est_smoking_exposure",
+          "id": "phv00262206.v1.p1",
+          "description": "Estimated lifetime smoking exposure rank",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "germline_vhl_mutation",
+          "id": "phv00262203.v1.p1",
+          "description": "Participant's germline VHL mutation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "num_tumors_seq",
+          "id": "phv00262208.v1.p1",
+          "description": "Number of tumors/cysts sequenced in this study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "number_of_surgeries",
+          "id": "phv00262204.v1.p1",
+          "description": "Participant's known other kidney surgeries",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00262201.v1.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smoking_status",
+          "id": "phv00262205.v1.p1",
+          "description": "Participant's self-reported smoking habits",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VHL_Renal_Tumors_Subject",
+      "datasetId": "pht005488.v1",
+      "description": "The subject consent file includes subject IDs, consent information, subject aliases, and renal tumor case control status of the subject. All subjects are VHL patients.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00262194.v1.p1",
+          "description": "Renal tumor case control status of the subject. All subjects are VHL patients.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00262191.v1.p1",
+          "description": "Consent status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00262193.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00262190.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00262192.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VHL_Renal_Tumors_Sample",
+      "datasetId": "pht005489.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00262196.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00262197.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00262199.v1.p1",
+          "description": "Sample use. Seq_DNA_SNP: SNP genotypes derived from sequence data; Seq_DNA_WholeGenome: Whole genome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00262198.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00262195.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

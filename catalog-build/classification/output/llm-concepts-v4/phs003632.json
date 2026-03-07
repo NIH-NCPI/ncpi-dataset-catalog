@@ -1,0 +1,401 @@
+{
+  "studyId": "phs003632",
+  "studyName": "Whole Exome Sequencing and RNA Sequencing of High Grade Serous Ovarian Cancer in Black and White Patients",
+  "tables": [
+    {
+      "tableName": "6a_SampleAttributes",
+      "datasetId": "pht014798.v1",
+      "description": "This sample attributes data table reports each sample's study of origin, genomic source, full file ID, reference RNA sequencing ID, RNA resequencing status, low quality status, status being either from the pilot study or the full study, Way pipeline use, RNA-seq Kmeans clusters 2, 3, and 4, NMF clusters 2, 3, and 4, Kmeans cluster for RNA-seq mapped to TCGA subtype names, resequencing status for tumor samples, measures of coverage, concordance between tumor and germline, and status as being from tumor or germline.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00542311.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "clusterk2_kmeans",
+          "id": "phv00542320.v1.p1",
+          "description": "Kmeans, K=2 cluster for RNA-Seq",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "clusterk2_nmf",
+          "id": "phv00542323.v1.p1",
+          "description": "NMF, K=2 cluster for RNA-Seq",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "clusterk3_kmeans",
+          "id": "phv00542321.v1.p1",
+          "description": "Kmeans, K=3 cluster for RNA-Seq",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "clusterk3_nmf",
+          "id": "phv00542324.v1.p1",
+          "description": "NMF, K=3 cluster for RNA-Seq",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "clusterk4_kmeans",
+          "id": "phv00542322.v1.p1",
+          "description": "Kmeans, K=4 cluster for RNA-Seq",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "clusterk4_kmeans_tcga_names",
+          "id": "phv00542326.v1.p1",
+          "description": "Kmeans, K=4 cluster for RNA-Seq mapped to TCGA subtype names",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "clusterk4_nmf",
+          "id": "phv00542325.v1.p1",
+          "description": "NMF, K=4 cluster for RNA-Seq",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "file_id_noR",
+          "id": "phv00542314.v1.p1",
+          "description": "Full file id",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genomic_type",
+          "id": "phv00542313.v1.p1",
+          "description": "Genomic source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ran_in_way_pipeline",
+          "id": "phv00542319.v1.p1",
+          "description": "Whether this sample was used in the Way pipeline",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rna_low_qual",
+          "id": "phv00542317.v1.p1",
+          "description": "Whether the RNA sample was low quality",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rna_resequenced",
+          "id": "phv00542316.v1.p1",
+          "description": "Whether the RNA sample was resquenced",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rna_sequencing_id",
+          "id": "phv00542315.v1.p1",
+          "description": "Reference RNA sequencing ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rna_version",
+          "id": "phv00542318.v1.p1",
+          "description": "Whether the RNA sample was in the pilot stufy or the full study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "study",
+          "id": "phv00542312.v1.p1",
+          "description": "SchildkrautB or SchildkrautW study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wes_concordance.check",
+          "id": "phv00542330.v1.p1",
+          "description": "Concordance between tumor and germline pair. Indicator that samples may have been switched.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wes_coverage.at.0.9.of.target.bps",
+          "id": "phv00542328.v1.p1",
+          "description": "Better measure of coverage, calculated by asking what fraction of target BPs have 0x, 1x, 2x or more coverage. Stop when it hits 0.9.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wes_coverage.at.0.95.of.target.bps",
+          "id": "phv00542329.v1.p1",
+          "description": "Better measure of coverage, calculated by asking what fraction of target BPs have 0x, 1x, 2x or more coverage. Stop when it hits 0.95.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wes_ori.or.new",
+          "id": "phv00542327.v1.p1",
+          "description": "Whether the tumor sample was resequenced",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wes_source",
+          "id": "phv00542331.v1.p1",
+          "description": "Whether the sample was germline or tumor.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HGSC_Black_White_Subject",
+      "datasetId": "pht014795.v1",
+      "description": "This subject consent data table reports each subject's subject ID, consent, biological sex, and aliases to IDs for subjects appearing in other dbGaP studies.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00542292.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00542293.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00542295.v1.p1",
+          "description": "Subject ID in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID2",
+          "id": "phv00542297.v1.p1",
+          "description": "Subject ID in the additional repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID3",
+          "id": "phv00542299.v1.p1",
+          "description": "Subject ID in the additional repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00542291.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00542294.v1.p1",
+          "description": "Original source repository of subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE2",
+          "id": "phv00542296.v1.p1",
+          "description": "Additional repository of subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE3",
+          "id": "phv00542298.v1.p1",
+          "description": "Additional repository of subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HGSC_Black_White_Subject_Phenotypes",
+      "datasetId": "pht014797.v1",
+      "description": "This subject phenotypes data table reports each subject's race, FIGO/SEER summary stage, BMI, age at diagnosis, FIGO stage, neoadjuvant treatment, debulking status with CA125 level where residual disease is unknown, and tissue source.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00542302.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "agecat",
+          "id": "phv00542306.v1.p1",
+          "description": "Age at diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bmicat",
+          "id": "phv00542305.v1.p1",
+          "description": "BMI, kg/m2",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "debulking",
+          "id": "phv00542309.v1.p1",
+          "description": "Debulking status, incorporating CA125 levels where residual disease is unknown",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "figo_seer_summary_stage",
+          "id": "phv00542304.v1.p1",
+          "description": "FIGO/SEER summary stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "neoadj",
+          "id": "phv00542308.v1.p1",
+          "description": "Neoadjuvant treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00542303.v1.p1",
+          "description": "Self reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t1stage",
+          "id": "phv00542307.v1.p1",
+          "description": "FIGO stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tsiorig",
+          "id": "phv00542310.v1.p1",
+          "description": "Tissue source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HGSC_Black_White_Sample_Attributes",
+      "datasetId": "pht014799.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00542334.v1.p1",
+          "description": "RNA or DNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00542333.v1.p1",
+          "description": "Tissue origin",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00542335.v1.p1",
+          "description": "Whether or not sample is from tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00542332.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HGSC_Black_White_Sample",
+      "datasetId": "pht014796.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00542301.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00542300.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

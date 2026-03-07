@@ -1,0 +1,266 @@
+{
+  "studyId": "phs002050",
+  "studyName": "OICR: Molecular Pathological Epidemiology of Colorectal Cancer",
+  "tables": [
+    {
+      "tableName": "OICR_CRC_Subject_Phenotypes",
+      "datasetId": "pht010359.v1",
+      "description": "This subject phenotypes data table informs of the study in which the subject participated, subject's case-control status for colorectal, colon, colon proximal, and rectal cancer, site of the tumor, subject's age at study recruitment, subject's age at diagnosis, subject's sex, race, and ethnicity, subject's family history of colorectal cancer, subject's highest level of education completed, subject's smoking status and amount, subject's height,  weight, and BMI, whether the subject is taking NSAIDs, whether the subject is on hormone therapy, subject's level of physical activity, whether the subject has type 2 diabetes, subject's total energy  consumption, whether the subject consumed alcohol at recruitment, and subject's daily dietary calcium, folate, meat, fiber, vegetable, and fruit intake levels.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00432442.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_diag",
+          "id": "phv00432451.v1.p1",
+          "description": "Age at diagnosis (cases)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_recr",
+          "id": "phv00432450.v1.p1",
+          "description": "Age at recruitment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "casecl_Crs_Frst",
+          "id": "phv00432445.v1.p1",
+          "description": "Colon cancer - Case/Control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_colorectal_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "casecl_dist_Frst",
+          "id": "phv00432447.v1.p1",
+          "description": "Colon distal cancer - Case/Control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_colorectal_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "casecl_prox_Frst",
+          "id": "phv00432446.v1.p1",
+          "description": "Colon proximal cancer - Case/Control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_colorectal_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "caseclrt_Crs_Frst",
+          "id": "phv00432444.v1.p1",
+          "description": "Colorectal cancer - Case/Control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_colorectal_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "casert_Crs_Frst",
+          "id": "phv00432448.v1.p1",
+          "description": "Rectal cancer - Case/Control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_colorectal_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00432454.v1.p1",
+          "description": "Hispanic or Latino?",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "famhx1",
+          "id": "phv00432455.v1.p1",
+          "description": "Family history of colorectal cancer?",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gecco_study",
+          "id": "phv00432443.v1.p1",
+          "description": "Study name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00432453.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00432452.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "siteclrt",
+          "id": "phv00432449.v1.p1",
+          "description": "Site of tumour (ICD-10 codes)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "OICR_CRC_Sample_Attributes",
+      "datasetId": "pht010360.v1",
+      "description": "This sample attributes data table informs of body site where sample was collected, sample analyte type, sample tumor status, primary tumor location if sample is a tumor, whether the sample is a primary tumor, metastatic tumor, or transformed cell line, sample's tumor stage, and name of the center that conducted sequencing.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00432484.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00432483.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00432485.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00432486.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00432487.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00432482.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00432489.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00432488.v1.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "OICR_CRC_Subject",
+      "datasetId": "pht010357.v1",
+      "description": "This subject consent data table contains subject IDs, consent group,  repository where subjects originated, and ID assigned to the subject by the repository.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00432437.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00437207.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00432439.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00432436.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00432438.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "OICR_CRC_Sample",
+      "datasetId": "pht010358.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00432441.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00432440.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

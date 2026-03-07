@@ -1,0 +1,186 @@
+{
+  "studyId": "phs000870",
+  "studyName": "Characterization of Human Transcriptome by Computational and HTS Approaches",
+  "tables": [
+    {
+      "tableName": "Alternative_Splicing_Sample_Attributes",
+      "datasetId": "pht004550.v1",
+      "description": "This sample attributes table includes sample IDs, body site where sample was collected, analyte type, tumor status, histological type, sequencing type, and sequencing center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00224906.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00224905.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00224908.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00224907.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00224904.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00224910.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_TYPE",
+          "id": "phv00224909.v1.p1",
+          "description": "Type of sequencing performed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Alternative_Splicing_Subject_Phenotypes",
+      "datasetId": "pht004549.v1",
+      "description": "This subject phenotype table includes age, gender, race, diagnosis of participant, and post-mortem interval.",
+      "variables": [
+        {
+          "name": "PMI",
+          "id": "phv00224903.v1.p1",
+          "description": "Post-mortem Interval",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00224898.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00224899.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diagnosis",
+          "id": "phv00224902.v1.p1",
+          "description": "Diagnosis of participant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00224900.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00224901.v1.p1",
+          "description": "Race of participant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Alternative_Splicing_Subject",
+      "datasetId": "pht004547.v1",
+      "description": "The subject consent data table contains subject IDs, consent information, and affection status for all subjects from unrelated healthy individules.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00224894.v1.p1",
+          "description": "Case control status of the subject. All subjects are unrelated healthy individuals.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00224893.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00224892.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Alternative_Splicing_Sample",
+      "datasetId": "pht004548.v1",
+      "description": "The subject sample mapping data table contains mapping of study subject IDs to sample IDs. dbGaP samples are defined as the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00224896.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00224897.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00224895.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

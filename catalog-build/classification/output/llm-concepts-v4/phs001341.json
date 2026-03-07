@@ -1,0 +1,265 @@
+{
+  "studyId": "phs001341",
+  "studyName": "NextGen Consortium: iPS Derived Hepatocytes Study (PhLiPS Study)",
+  "tables": [
+    {
+      "tableName": "PhLiPS_Subject_Phenotypes",
+      "datasetId": "pht006246.v1",
+      "description": "This subject phenotype data table includes the subject's sex, self-reported ethnicity, age at sampling, total cholesterol, HDL-C, triglycerides, LDL-C, and FACS staining for differentiation assessment.",
+      "variables": [
+        {
+          "name": "Calculated_LDL-C",
+          "id": "phv00283872.v1.p1",
+          "description": "Blood lipid level - LDL-C",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_calculated",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FACS_Tra-1-60_and_SSEA-4_positive",
+          "id": "phv00283873.v1.p1",
+          "description": "FACS staining for differentiation assessment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL-C",
+          "id": "phv00283870.v1.p1",
+          "description": "Blood lipid level - HDL-C",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00283865.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Total_cholesterol",
+          "id": "phv00283869.v1.p1",
+          "description": "Blood lipid level - TC",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Triglycerides",
+          "id": "phv00283871.v1.p1",
+          "description": "Blood lipid level - TG",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_sampling",
+          "id": "phv00283868.v1.p1",
+          "description": "Subject's age at sampling",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "self-reported_ethnicity",
+          "id": "phv00283867.v1.p1",
+          "description": "Self-reported ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00283866.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PhLiPS_Sample_Attributes",
+      "datasetId": "pht006863.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, histological type, tumor status, genotyping center, and sequencing center.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00313417.v1.p1",
+          "description": "Sample ID for each cell type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00313416.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "analyte_type",
+          "id": "phv00313419.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "body_site",
+          "id": "phv00313418.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genotyping_center",
+          "id": "phv00313422.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "histological_type",
+          "id": "phv00313420.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "is_tumor",
+          "id": "phv00313421.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sequencing_center",
+          "id": "phv00313423.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PhLiPS_Pedigree",
+      "datasetId": "pht007171.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00328799.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00328801.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00328802.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00328803.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00328800.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PhLiPS_Subject",
+      "datasetId": "pht006244.v1",
+      "description": "The subject consent data table contains patient IDs, consent group information, and affection status of subject for cardiovascular disease or lipoprotein metabolism disorders.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00283859.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "affection_status",
+          "id": "phv00283861.v1.p1",
+          "description": "Case control status of the subject for cardiovascular disease or lipoprotein metabolism disorders",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "consent",
+          "id": "phv00283860.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PhLiPS_Sample",
+      "datasetId": "pht006245.v1",
+      "description": "This subject sample mapping data table includes a mapping of study patient IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00283863.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00283864.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00283862.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

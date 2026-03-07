@@ -1,0 +1,170 @@
+{
+  "studyId": "phs003090",
+  "studyName": "Advancing Precision Oncology in a Humanized, Fully Autologous Mouse Model",
+  "tables": [
+    {
+      "tableName": "Humanized_Autologous_Mouse_Subject_Phenotypes",
+      "datasetId": "pht013010.v1",
+      "description": "This subject phenotypes data table reports each subject's ethnicity, race, age, prior treatment status, and metastatic nature of their disease.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00525855.v1.p1",
+          "description": "Age of participant",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00525853.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "METASTASIS",
+          "id": "phv00525857.v1.p1",
+          "description": "Whether the cancer sample corresponds to a primary melanoma tumor identified at diagnosis, or a subsequent metastatic tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_TREATMENT",
+          "id": "phv00525856.v1.p1",
+          "description": "Whether the patient had prior treatment at time of sample collection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00525854.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00525852.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Humanized_Autologous_Mouse_Sample_Attributes",
+      "datasetId": "pht013011.v1",
+      "description": "This sample attributes data table reports each sample's tumor status, type of biopsy, analyte type, body site of origin, and environmental origin (whether patient's tissue, xenograft, or cell culture).",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00525861.v1.p1",
+          "description": "The analyte type of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BIOPSY_SPECIMEN",
+          "id": "phv00525860.v1.p1",
+          "description": "The type of biopsy specimen",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00525862.v1.p1",
+          "description": "The collection site of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ENVIRONMENT",
+          "id": "phv00525863.v1.p1",
+          "description": "Environment sample was obtained from (e.g. patient, in vitro culture, xenograft in non-humanized mouse, xenograft in humanized mouse)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00525859.v1.p1",
+          "description": "The tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00525858.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Humanized_Autologous_Mouse_Subject",
+      "datasetId": "pht013008.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, and biological sex",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00525848.v1.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00525849.v1.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00525847.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Humanized_Autologous_Mouse_Sample",
+      "datasetId": "pht013009.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00525851.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00525850.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

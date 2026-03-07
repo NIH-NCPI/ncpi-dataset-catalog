@@ -1,0 +1,169 @@
+{
+  "studyId": "phs002443",
+  "studyName": "Molecular Signatures of DCIS to Invasive Progression for Basal-Like Breast Cancers: An Integrated Mouse Model and Human Tumor Study",
+  "tables": [
+    {
+      "tableName": "DCIS_TNBC_Sample_Attributes",
+      "datasetId": "pht011289.v1",
+      "description": "This sample attributes table contains sample IDs, body site where sample was collected, analyte type, tumor status, histological type, estrogen receptor status, and molecular subtype.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00491594.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00491593.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "ESTROGEN_STATUS",
+          "id": "phv00491597.v1.p1",
+          "description": "Estrogen receptor status by immunohistochemistry",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00491596.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00491595.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PAM50_MOLECULAR_SUBTYPE",
+          "id": "phv00491598.v1.p1",
+          "description": "Molecular subtype based on NanoString PAM50 research-based assay",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_molecular_subtypes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00491592.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DCIS_TNBC_Subject",
+      "datasetId": "pht011286.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00491586.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00491587.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491585.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DCIS_TNBC_Sample",
+      "datasetId": "pht011287.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00491589.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491588.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DCIS_TNBC_Subject_Phenotypes",
+      "datasetId": "pht011288.v1",
+      "description": "This subject phenotype table contains subject IDs and case control status of the subject for Breast Cancer.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00491591.v1.p1",
+          "description": "Case control status of the subject for Breast Cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491590.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DCIS_TNBC_GEO",
+      "datasetId": "pht011739.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00495174.v1.p1",
+          "description": "GEO accession ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00495173.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

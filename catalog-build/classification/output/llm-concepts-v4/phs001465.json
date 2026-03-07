@@ -1,0 +1,386 @@
+{
+  "studyId": "phs001465",
+  "studyName": "Multiregion Sequencing of Localized Prostate Cancer",
+  "tables": [
+    {
+      "tableName": "Localized_Prostate_Cancer_Subject_Phenotypes",
+      "datasetId": "pht006958.v1",
+      "description": "This subject phenotype data table includes ethnicity, age at surgery, pathologic stage and category, TMN stage group, Gleason grade and scores, tumor volume, surgical margin status, nodes examined and involved, source of germline sample, number of regions examined for positive lymph nodes, prostate and seminal vesicles, time of biochemical recurrence, and whether adjuvant or salvage therapy was given.",
+      "variables": [
+        {
+          "name": "PSA",
+          "id": "phv00318292.v1.p1",
+          "description": "Prostate Specific Antigen (PSA) level measured before prostatectomy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00318288.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "additional_therapy",
+          "id": "phv00318307.v1.p1",
+          "description": "Whether adjuvant or salvage therapy was given",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_adjuvant_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_surgery",
+          "id": "phv00318290.v1.p1",
+          "description": "Age at the time of surgery",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00318291.v1.p1",
+          "description": "Self-described ethnicity of subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "germline_sample",
+          "id": "phv00318303.v1.p1",
+          "description": "Source of the germline sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "grade_group",
+          "id": "phv00318297.v1.p1",
+          "description": "Grade group",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lymph_node_regions",
+          "id": "phv00318305.v1.p1",
+          "description": "Number of regions examined from positive lymph nodes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "nodes_examined",
+          "id": "phv00318300.v1.p1",
+          "description": "Number of lymph nodes removed at prostatectomy",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_lymph_node_examination",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "nodes_involved",
+          "id": "phv00318301.v1.p1",
+          "description": "Number of lymph nodes with prostate cancer",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_lymph_node_examination",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pathologic_stage",
+          "id": "phv00318293.v1.p1",
+          "description": "Pathologic stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "primary_Gleason_grade",
+          "id": "phv00318294.v1.p1",
+          "description": "Primary Gleason grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prostate_or_SV_regions",
+          "id": "phv00318304.v1.p1",
+          "description": "Number of tumor regions examined from the prostate or seminal vesicles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "secondary_Gleason_score",
+          "id": "phv00318295.v1.p1",
+          "description": "Secondary Gleason grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "stage_category",
+          "id": "phv00318289.v1.p1",
+          "description": "Category of pathological stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "stage_group",
+          "id": "phv00318302.v1.p1",
+          "description": "TNM prognostic stage groups AJCC UICC 2017",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "surgical_margin",
+          "id": "phv00318299.v1.p1",
+          "description": "Whether the surgical margin was positive or negative",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_surgical_margins",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tertiary_Gleason_score",
+          "id": "phv00318296.v1.p1",
+          "description": "Tertiary Gleason grade, if applicable",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "time_to_recurrence",
+          "id": "phv00318306.v1.p1",
+          "description": "Time to biochemical recurrence",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tumor_volume",
+          "id": "phv00318298.v1.p1",
+          "description": "Percent of prostate involved with tumor",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Localized_Prostate_Cancer_Sample_Attributes",
+      "datasetId": "pht006959.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, tumor status, histogical type, primary tumor or synchronous lymph node metastasis, primary tumor location, tumor stage, grade, treatment, and sequencing center and type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00318310.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00318309.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00318312.v1.p1",
+          "description": "Tissue type of tumor",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00318311.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00318313.v1.p1",
+          "description": "Primary tumor or synchronous lymph node metastasis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00318314.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00318308.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00318318.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_TYPE",
+          "id": "phv00318319.v1.p1",
+          "description": "Type of sequencing conducted",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_GRADE_GROUP",
+          "id": "phv00318316.v1.p1",
+          "description": "Tumor grade group",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00318315.v1.p1",
+          "description": "TNM prognostic stage group AJCC UICC 2017",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00318317.v1.p1",
+          "description": "Type of tumor treatment for buject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Localized_Prostate_Cancer_Subject",
+      "datasetId": "pht006956.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information including disease and limitation modifier, subject aliases, and affection status for locally advanced or localized prostate cancer.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00318280.v1.p1",
+          "description": "Case control status of the subject for locally advanced or localized prostate cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00318277.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASE",
+          "id": "phv00318281.v1.p1",
+          "description": "Specified disease to which data use must be related",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIMITATION_MODIFIER",
+          "id": "phv00318282.v1.p1",
+          "description": "Data use limitation modifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00318279.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00318276.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00318278.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Localized_Prostate_Cancer_Sample",
+      "datasetId": "pht006957.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00318284.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00318285.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00318287.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00318286.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00318283.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

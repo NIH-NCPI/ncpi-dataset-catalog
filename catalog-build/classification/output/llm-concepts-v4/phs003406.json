@@ -1,0 +1,186 @@
+{
+  "studyId": "phs003406",
+  "studyName": "Immunogenetics of BCG Vaccination and Pediatric Tuberculosis",
+  "tables": [
+    {
+      "tableName": "BCG_Vaccination_Peds_TB_Sample_Attributes",
+      "datasetId": "pht014267.v1",
+      "description": "This sample attributes data table reports each sample's sequencing batch, plate position, dataset type, body site of origin, analyte type, tumor status, and quality filters used for inclusion in analyses.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00536063.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BATCH",
+          "id": "phv00536059.v1.p1",
+          "description": "Sequencing batch identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00536062.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DATASET",
+          "id": "phv00536061.v1.p1",
+          "description": "Data set type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00536064.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PASS_FILTER",
+          "id": "phv00536065.v1.p1",
+          "description": "Donor and sample quality filters for inclusion in analysis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLATE",
+          "id": "phv00536060.v1.p1",
+          "description": "Plate position formatted as plate#_well#",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00536058.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BCG_Vaccination_Peds_TB_Subject_Phenotypes",
+      "datasetId": "pht014266.v1",
+      "description": "This subject phenotypes data table reports each subject's sex, age, race, case control status for TB, and TB status.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00536054.v1.p1",
+          "description": "Age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL",
+          "id": "phv00536056.v1.p1",
+          "description": "Case-control classification for TB disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00536055.v1.p1",
+          "description": "Self-idenified race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00536053.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536052.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TB_STATUS",
+          "id": "phv00536057.v1.p1",
+          "description": "TB definitions used to determine CASE_CONTROL",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BCG_Vaccination_Peds_TB_Subject",
+      "datasetId": "pht014264.v1",
+      "description": "This subject consent data table reports each subject's subject ID, consent, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00536048.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00536049.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536047.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BCG_Vaccination_Peds_TB_Sample",
+      "datasetId": "pht014265.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00536051.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536050.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

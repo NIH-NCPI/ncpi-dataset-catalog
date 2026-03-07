@@ -1,0 +1,185 @@
+{
+  "studyId": "phs001521",
+  "studyName": "Immunoprotective Mechanisms and Microbiota Interplay in Salmonella Typhi Infection",
+  "tables": [
+    {
+      "tableName": "Microbiota_S_Typhi_Sample_Attributes",
+      "datasetId": "pht007723.v1",
+      "description": "This sample attributes table contains sample IDs, sample names used in RNAseq analysis and 16S rRNA seq analysis, vaccine, symptom, sample collection time point, whole transcriptome sequencing, and 16S rRNA sequencing.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00367490.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Seq_RNA",
+          "id": "phv00367496.v1.p1",
+          "description": "Whole transcriptome sequencing data available",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Seq_rRNA_16S",
+          "id": "phv00367497.v1.p1",
+          "description": "16S rRNA sequencing data available",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_name_16s",
+          "id": "phv00367492.v1.p1",
+          "description": "Sample name used in 16S rRNA seq analysis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_name_rnaseq",
+          "id": "phv00367491.v1.p1",
+          "description": "Sample name used in RNAseq analysis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "study_timept",
+          "id": "phv00367495.v1.p1",
+          "description": "Sample collection time point",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "symptom",
+          "id": "phv00367494.v1.p1",
+          "description": "Clinical symptom after challenge",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "vaccine",
+          "id": "phv00367493.v1.p1",
+          "description": "Vaccine received",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Microbiota_S_Typhi_Subject_Phenotypes",
+      "datasetId": "pht007722.v1",
+      "description": "This subject phenotype table contains subject IDs, subject, enrollment age, and gender.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00367486.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_enroll",
+          "id": "phv00367488.v1.p1",
+          "description": "Enrollment age (year) of participant",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00367489.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject",
+          "id": "phv00367487.v1.p1",
+          "description": "Blinded Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Microbiota_S_Typhi_Subject",
+      "datasetId": "pht007720.v1",
+      "description": "The subject consent file includes subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00367482.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00367481.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Microbiota_S_Typhi_Sample",
+      "datasetId": "pht007721.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00367483.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00367484.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Microbiota_S_Typhi_SRA",
+      "datasetId": "pht007736.v1",
+      "description": "This table includes sample IDs and SRA accessions.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00367671.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SRA_accession",
+          "id": "phv00367672.v1.p1",
+          "description": "SRA submission numbers",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

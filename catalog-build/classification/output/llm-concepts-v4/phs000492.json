@@ -1,0 +1,208 @@
+{
+  "studyId": "phs000492",
+  "studyName": "Genetics of Human Developmental Brain Disorders",
+  "tables": [
+    {
+      "tableName": "Developmental_Brain_Disorders_Sample_Attributes",
+      "datasetId": "pht002710.v4",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, histological type, and type of sample preservation prior to DNA or RNA extraction.",
+      "variables": [
+        {
+          "name": "ANALYTE",
+          "id": "phv00168108.v4.p3",
+          "description": "Analyte: DNA or RNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00304821.v3.p3",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00304822.v3.p3",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRESERVATION",
+          "id": "phv00304824.v3.p3",
+          "description": "Sample preservation prior to DNA or RNA extraction",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00168107.v4.p3",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Developmental_Brain_Disorders_Pedigree",
+      "datasetId": "pht006605.v3",
+      "description": "The pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and sex of subjects.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00304815.v3.p3",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00304818.v3.p3",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00304817.v3.p3",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00304819.v3.p3",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00304816.v3.p3",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Developmental_Brain_Disorders_Subject",
+      "datasetId": "pht002707.v4",
+      "description": "The subject consent data table contains subject IDs, consent group information, and subject's sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00168101.v4.p3",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00528217.v1.p3",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00168099.v4.p3",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Developmental_Brain_Disorders_Subject_Phenotypes",
+      "datasetId": "pht002709.v4",
+      "description": "This subject phenotype table includes subject's sex and affection status for developmental brain malformations.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00304820.v3.p3",
+          "description": "Case control status of the subject for developmental brain malformations",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00168106.v4.p3",
+          "description": "Sex of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00168105.v4.p3",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Developmental_Brain_Disorders_Sample",
+      "datasetId": "pht002708.v4",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00168103.v4.p3",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00168102.v4.p3",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Developmental_Brain_Disorders_Trace",
+      "datasetId": "pht006688.v1",
+      "description": "The sample trace mapping data table includes a mapping of sample IDs to corresponding NCBI Trace accessions.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00308289.v1.p3",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRACE_ID",
+          "id": "phv00308290.v1.p3",
+          "description": "Trace ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

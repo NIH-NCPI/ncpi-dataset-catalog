@@ -1,0 +1,162 @@
+{
+  "studyId": "phs001044",
+  "studyName": "Breast Cancer Risk Pathways",
+  "tables": [
+    {
+      "tableName": "Breast_Cancer_Risk_Pathways_Subject_Phenotypes",
+      "datasetId": "pht005274.v1",
+      "description": "This subject phenotype table contains subject ID, whether the subject had developed cancer, age when blood sample was collected, mutated gene, and gene expression identifier.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258933.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00258935.v1.p1",
+          "description": "Age when blood sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "developed_cancer",
+          "id": "phv00258934.v1.p1",
+          "description": "Whether the subject had developed cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_general_cancer_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gene_expression_id",
+          "id": "phv00258937.v1.p1",
+          "description": "Identifier that indicates sample ID for gene-expression data in GEO",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mutated_gene",
+          "id": "phv00258936.v1.p1",
+          "description": "Gene in which a known pathogenic variant had been identified",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_germline_mutations",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Cancer_Risk_Pathways_Sample_Attributes",
+      "datasetId": "pht005275.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, tumor status, and histological type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00258940.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00258939.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00258942.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00258941.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258938.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Cancer_Risk_Pathways_Subject",
+      "datasetId": "pht005272.v1",
+      "description": "The subject consent file includes subject ID, consent information, and case control status for breast cancer.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00258929.v1.p1",
+          "description": "Case control status for breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00258928.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258927.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Cancer_Risk_Pathways_Sample",
+      "datasetId": "pht005273.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258931.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00258932.v1.p1",
+          "description": "Sample use. Seq_DNA_SNP_CNV: SNP and CNV genotypes derived from sequence data; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258930.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

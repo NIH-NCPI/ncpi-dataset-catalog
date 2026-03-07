@@ -1,0 +1,108 @@
+{
+  "studyId": "phs001128",
+  "studyName": "Physicians' Health Study (PHS)",
+  "tables": [
+    {
+      "tableName": "GECCO_PHS_Subject_Phenotypes",
+      "datasetId": "pht005740.v1",
+      "description": "Subject ID, age, race, gender, family history of colorectal cancer, and cancer site of participants with or without colorectal cancer and involved in the \"Physician's Health Study (PHS)\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266229.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cagebq",
+          "id": "phv00266231.v1.p1",
+          "description": "Age, calculated age, birth to enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dem_race",
+          "id": "phv00266233.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "famcolon",
+          "id": "phv00266230.v1.p1",
+          "description": "Family history of colorectal cancer",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00266234.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "site",
+          "id": "phv00266232.v1.p1",
+          "description": "Cancer site, ICD-9",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GECCO_PHS_Sample_Attributes",
+      "datasetId": "pht005741.v1",
+      "description": "Sample ID, analyte type, body site and histological type of sample, and tumor status of samples obtained from participants with or without colorectal cancer and involved in the the \"Physician's Health Study (PHS)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00266237.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00266236.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00266238.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00266239.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266235.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

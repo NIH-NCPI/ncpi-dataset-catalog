@@ -1,0 +1,162 @@
+{
+  "studyId": "phs002019",
+  "studyName": "WES and RNA-Seq Analysis in Paired Sun-Exposed Epidermis and SCCIS Samples",
+  "tables": [
+    {
+      "tableName": "SCCIS_Sample_Attributes",
+      "datasetId": "pht010175.v1",
+      "description": "This sample attributes table contains sample ID, body site, analyte type, tumor status, histological type, primary or metastatic tumor, primary tumor location, and name of the centers which conducted genotyping and sequencing.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00430524.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00430523.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00430529.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00430526.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00430525.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00430527.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00430528.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00430522.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00430530.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SCCIS_Subject_Phenotypes",
+      "datasetId": "pht010174.v1",
+      "description": "This subject phenotype table contains subject ID, affection status of the subject for squamous cell carcinoma in situ (SCCIS), and race.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00430520.v1.p1",
+          "description": "Case control status of the subject for squamous cell carcinoma in situ (SCCIS)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00430521.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00430519.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SCCIS_Subject",
+      "datasetId": "pht010172.v1",
+      "description": "The subject consent file includes subject ID and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00430516.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00430515.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SCCIS_Sample",
+      "datasetId": "pht010173.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00430518.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00430517.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "studyId": "phs001434",
+  "studyName": "NHLBI TOPMed: Defining the Time-Dependent Genetic and Transcriptomic Responses to Cardiac Injury Among Patients with Arrhythmias",
+  "tables": [
+    {
+      "tableName": "TOPMed_WGS_miRhythm_Subject_Phenotypes",
+      "datasetId": "pht009858.v1",
+      "description": "This subject phenotypes data table includes atrial fibrillation status, age at diagnosis, sex, race, ethnicity, height, weight, status at enrollment (n=8 variables; age, hypertension, diabetes, heart failure, myocardial infarction, valvular heart disease, left atrium (LA) size by echocardiogram, and left ventricular ejection fraction (LVEF) by echocardiogram), and ejection fraction (EF) ever <50%.",
+      "variables": [
+        {
+          "name": "EF_ever_50",
+          "id": "phv00426803.v1.p1",
+          "description": "EF ever <50%",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LA_size_echo",
+          "id": "phv00426801.v1.p1",
+          "description": "LA size by echo (closest to enrollment)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LVEF_echo",
+          "id": "phv00426802.v1.p1",
+          "description": "LVEF by echo (closest to enrollment)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426787.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "af_status",
+          "id": "phv00426788.v1.p1",
+          "description": "AF status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00426789.v1.p1",
+          "description": "Age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_diagnosis",
+          "id": "phv00426790.v1.p1",
+          "description": "Age at AF diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diabetes",
+          "id": "phv00426797.v1.p1",
+          "description": "Diabetes at enrollment",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00426793.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "heart_failure",
+          "id": "phv00426798.v1.p1",
+          "description": "Heart failure at enrollment",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_heart_failure",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "height",
+          "id": "phv00426794.v1.p1",
+          "description": "Subject's height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hypertension",
+          "id": "phv00426796.v1.p1",
+          "description": "Hypertension at enrollment",
+          "concept_id": "ncpi:bp_systolic_hypertension_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "myocardial_infarction",
+          "id": "phv00426799.v1.p1",
+          "description": "Myocardial infarction at enrollment",
+          "concept_id": "ncpi:mi_prior_self_reported_mi_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00426792.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00426791.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "valvular_heart_disease",
+          "id": "phv00426800.v1.p1",
+          "description": "Valvular heart disease at enrollment",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_valvular_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "weight",
+          "id": "phv00426795.v1.p1",
+          "description": "Subject's weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_miRhythm_Sample_Attributes",
+      "datasetId": "pht009859.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, sequencing center, funding source, TOPMed phase, project, and study name.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00426806.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00426805.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00426809.v1.p1",
+          "description": "Project funding source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00426807.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00426804.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00426808.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00426812.v1.p1",
+          "description": "TOPMed-assigned short study name (1:1 with TOPMed phs number)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00426810.v1.p1",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00426811.v1.p1",
+          "description": "TOPMed Project that funded sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_miRhythm_Subject",
+      "datasetId": "pht009856.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00426783.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00572184.v1.p1",
+          "description": "Sex/gender of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426782.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_miRhythm_Sample",
+      "datasetId": "pht009857.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00426786.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426785.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

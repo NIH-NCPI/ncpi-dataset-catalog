@@ -1,0 +1,562 @@
+{
+  "studyId": "phs001734",
+  "studyName": "Youth Drug Abuse, ADHD and Related Disorders",
+  "tables": [
+    {
+      "tableName": "Drug_Abuse_ADHD_Subject_Phenotypes",
+      "datasetId": "pht008825.v1",
+      "description": "This subject phenotype table contains subject IDs, affection status of the subject for ADHD or drug abuse, sex, race, age, disorders of alcohol, marijuana, or tobacco use, scores of six candidate genes (COMY, DRD2, DRD4, MAOA, SLC6A3/DAT1, and SLC6A4/5-HTTLPR), and ten principal components of ethnic ancestry.",
+      "variables": [
+        {
+          "name": "@5HTTLPR",
+          "id": "phv00404433.v1.p1",
+          "description": "Original 5-HTTLPR candidate gene score (long vs. short risk allele)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "@5HTTLPR_add",
+          "id": "phv00404440.v1.p1",
+          "description": "Additive coding of risk allele for 5-HTTLPR candidate gene,  0-1-2, 2 indicates the highest risk, 0 lowest risk",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "AGE1stTOB",
+          "id": "phv00404420.v1.p1",
+          "description": "Age first used tobacco",
+          "concept_id": "phenx:substances_age_of_first_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALCHIWATERAGE29",
+          "id": "phv00404416.v1.p1",
+          "description": "Age of hiwater symptoms PRIOR TO AGE 30 (youngest age if hiwater occurred multiple times)",
+          "concept_id": "phenx:alcohol_age_of_first_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALCHIWATERSYMCOU29",
+          "id": "phv00404415.v1.p1",
+          "description": "Highest number of endorsed symptoms for alcohol use disorder PRIOR TO AGE 30",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_alcohol_use_disorder",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Affection_Status",
+          "id": "phv00404411.v1.p1",
+          "description": "Case control status of the subject for ADHD or drug abuse",
+          "concept_id": "topmed:psychiatric_interview_diagnostic_codes_classifications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "COMT",
+          "id": "phv00404434.v1.p1",
+          "description": "Original COMT snp score",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "COMT_add",
+          "id": "phv00404441.v1.p1",
+          "description": "Additive coding of risk allele for COMT snp,  0-1-2, 2 indicates the highest risk, 0 lowest risk",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "DAT1",
+          "id": "phv00404431.v1.p1",
+          "description": "Original DRD4 candidate gene score",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "DAT1_2",
+          "id": "phv00404432.v1.p1",
+          "description": "Original DAT1 candidate gene score recoded into long vs. short risk risk allele",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "DAT1_add",
+          "id": "phv00404439.v1.p1",
+          "description": "Additive coding of risk allele for DAT1 candidate gene, 0-1-2, 2 indicates the highest risk, 0 lowest risk",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "DRD2",
+          "id": "phv00404435.v1.p1",
+          "description": "Original DRD2 snp score",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "DRD2_add",
+          "id": "phv00404442.v1.p1",
+          "description": "Additive coding of risk allele for DRD2 snp, 0-1-2, 2 indicates the highest risk, 0 lowest risk",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "DRD4",
+          "id": "phv00404429.v1.p1",
+          "description": "Original DRD4 candidate gene score",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "DRD4_2",
+          "id": "phv00404430.v1.p1",
+          "description": "Original DRD4 candidate gene score recodedinto long vs. short risk risk allele",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "DRD4_add",
+          "id": "phv00404438.v1.p1",
+          "description": "Additive coding of risk allele for DRD4 candidate gene, 0-1-2, 2 indicates highest risk, 0 lowest risk",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "Gen_Risk",
+          "id": "phv00404443.v1.p1",
+          "description": "Summed score of the 6 candidate genes (MAOA_add2, DRD4_add, DATA1_add, @5HTTLPR_add, COMT_add, DRD2_add)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "MAOA",
+          "id": "phv00404427.v1.p1",
+          "description": "Original MAOA candidate gene score",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "MAOA_2",
+          "id": "phv00404428.v1.p1",
+          "description": "Original MAOA candidate gene score recoded into long vs. short risk risk allele",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "MAOA_add",
+          "id": "phv00404436.v1.p1",
+          "description": "Additive coding of risk allele for MAOA candidate gene 0-1-2, 2 indicates highest risk, 0 lowest risk",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "MAOA_add2",
+          "id": "phv00404437.v1.p1",
+          "description": "Additive coding of risk allele for MAOA candidate gene, 0-2, excluding heterozygous females, 2 indicates highest risk, 0 lowest risk",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "MJHIWATERAGE29",
+          "id": "phv00404418.v1.p1",
+          "description": "Age of hiwater symptoms PRIOR TO AGE 30 (youngest age if hiwater occurred multiple times)",
+          "concept_id": "phenx:substances_age_of_first_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MJHIWATERSYMCOU29",
+          "id": "phv00404417.v1.p1",
+          "description": "Highest number of endorsed symptoms for marijuana use disorder PRIOR TO AGE 30",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_cannabis_use_disorder",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PC1",
+          "id": "phv00404446.v1.p1",
+          "description": "First of ten principal components of ethnic ancestry",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC10",
+          "id": "phv00404455.v1.p1",
+          "description": "Tenth of ten principal components of ethnic ancestry",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_10",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC2",
+          "id": "phv00404447.v1.p1",
+          "description": "Second of ten principal components of ethnic ancestry",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_2",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC3",
+          "id": "phv00404448.v1.p1",
+          "description": "Third of ten principal components of ethnic ancestry",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_3",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC4",
+          "id": "phv00404449.v1.p1",
+          "description": "Fourth of ten principal components of ethnic ancestry",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_4",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC5",
+          "id": "phv00404450.v1.p1",
+          "description": "Fifth of ten principal components of ethnic ancestry",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_5",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC6",
+          "id": "phv00404451.v1.p1",
+          "description": "Sixth of ten principal components of ethnic ancestry",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_6",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC7",
+          "id": "phv00404452.v1.p1",
+          "description": "Seventh of ten principal components of ethnic ancestry",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_7",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC8",
+          "id": "phv00404453.v1.p1",
+          "description": "Eighth of ten principal components of ethnic ancestry",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_8",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC9",
+          "id": "phv00404454.v1.p1",
+          "description": "Nineth of ten principal components of ethnic ancestry",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_9",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PEIDEVIANTBEHAV",
+          "id": "phv00404423.v1.p1",
+          "description": "Pei-i scale Deviant Behavior.  Past year.",
+          "concept_id": "ncpi:psychiatric_interview_conduct_antisocial_disorders_deviant_behavior_scale",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00404412.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404410.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOBSYMCOU",
+          "id": "phv00404421.v1.p1",
+          "description": "Symptom count for tobacco use disorder IN PAST 12 MONTHS",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_nicotine_tobacco_use_disorder",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TOBSYMCOUprior",
+          "id": "phv00404422.v1.p1",
+          "description": "Symptom count for lifetime tobacco use disorder prior to past year",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_nicotine_tobacco_use_disorder",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TOBUSE",
+          "id": "phv00404419.v1.p1",
+          "description": "Have you ever used tobacco?",
+          "concept_id": "phenx:use_of_tobacco_products",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00404414.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_evuse",
+          "id": "phv00404424.v1.p1",
+          "description": "Alcohol ever used",
+          "concept_id": "phenx:alcohol_lifetime_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnic",
+          "id": "phv00404445.v1.p1",
+          "description": "Participant ethnicity inferred from genotypes",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "gen_risk_missing",
+          "id": "phv00404444.v1.p1",
+          "description": "The number of missing candidate gene scores, if missing more than 1, than missing on Gen_Risk",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mj_evuse",
+          "id": "phv00404425.v1.p1",
+          "description": "Cannabis ever used",
+          "concept_id": "phenx:substances_lifetime_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc10_newx100",
+          "id": "phv00404465.v1.p1",
+          "description": "Tenth of ten principal components of ethnic ancestry *100 (to use as covariates in candidate gene analyses)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_10",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc1_newx100",
+          "id": "phv00404456.v1.p1",
+          "description": "First of ten principal components of ethnic ancestry*100 (to use as covariates in candidate gene analyses)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc2_newx100",
+          "id": "phv00404457.v1.p1",
+          "description": "Second of ten principal components of ethnic ancestry*100 (to use as covariates in candidate gene analyses)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_2",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc3_newx100",
+          "id": "phv00404458.v1.p1",
+          "description": "Third of ten principal components of ethnic ancestry*100 (to use as covariates in candidate gene analyses)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_3",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc4_newx100",
+          "id": "phv00404459.v1.p1",
+          "description": "Fourth of ten principal components of ethnic ancestry*100 (to use as covariates in candidate gene analyses)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_4",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc5_newx100",
+          "id": "phv00404460.v1.p1",
+          "description": "Fifth of ten principal components of ethnic ancestry *100 (to use as covariates in candidate gene analyses)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_5",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc6_newx100",
+          "id": "phv00404461.v1.p1",
+          "description": "Sixth of ten principal components of ethnic ancestry *100 (to use as covariates in candidate gene analyses)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_6",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc7_newx100",
+          "id": "phv00404462.v1.p1",
+          "description": "Seventh of ten principal components of ethnic ancestry*100 (to use as covariates in candidate gene analyses)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_7",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc8_newx100",
+          "id": "phv00404463.v1.p1",
+          "description": "Eighth of ten principal components of ethnic ancestry*100 (to use as covariates in candidate gene analyses)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_8",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc9_newx100",
+          "id": "phv00404464.v1.p1",
+          "description": "Nineth of ten principal components of ethnic ancestry *100 (to use as covariates in candidate gene analyses)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_9",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00404413.v1.p1",
+          "description": "Participant self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tob_evuse",
+          "id": "phv00404426.v1.p1",
+          "description": "Nicotine ever used",
+          "concept_id": "phenx:use_of_tobacco_products",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Drug_Abuse_ADHD_Sample_Attributes",
+      "datasetId": "pht008826.v1",
+      "description": "This sample attributes table contains sample IDs, body site, histological type, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00404469.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00404467.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00404468.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00404470.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00404466.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Drug_Abuse_ADHD_Sample",
+      "datasetId": "pht008824.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00404408.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00404409.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404407.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Drug_Abuse_ADHD_Subject",
+      "datasetId": "pht008823.v1",
+      "description": "The subject consent file includes subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00404406.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404405.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

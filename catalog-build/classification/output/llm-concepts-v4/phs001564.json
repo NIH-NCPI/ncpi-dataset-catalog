@@ -1,0 +1,274 @@
+{
+  "studyId": "phs001564",
+  "studyName": "Structure and Diversity of Urinary Cell-Free DNA Informative of Host-Pathogen Interactions in Human Urinary Tract Infection",
+  "tables": [
+    {
+      "tableName": "Urinary_cfDNA_Sample_Attributes",
+      "datasetId": "pht007992.v4",
+      "description": "This sample attributes table contains sample IDs, sample collection day after transplantation, infection status, sample collection method, bacterial culture, bacteria identification in urine, qPCR for BK polyomavirus, number of BK polyomavirus fragments determined by qPCR, sequencing center, platform and read lengths, body site where sample was collected, analyte type, tumor status, subject category, sample type based on fluid from which DNA was extracted, and IBIS platform to identify bacteria.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00417786.v3.p1",
+          "description": "Analyte Type",
+          "concept_id": "topmed:proteomics_panel_sample_metadata",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BACTERIAL_CULTURE",
+          "id": "phv00378373.v4.p1",
+          "description": "Was a bacterial culture performed on the sample?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BK_QPCR",
+          "id": "phv00378375.v4.p1",
+          "description": "Was a qPCR assay for BK polyomavirus genes performed?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BK_QPCR_COPYNUMBER",
+          "id": "phv00378376.v4.p1",
+          "description": "Number of BK polyomavirus fragments determined by qPCR assay.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00417785.v3.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "COLLECTION_DAY",
+          "id": "phv00378370.v4.p1",
+          "description": "Day after transplantation on which urine sample was collected (negative numbers refer to days before transplant)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_METHOD",
+          "id": "phv00378372.v4.p1",
+          "description": "Method by which clinicians collected patient sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IBIS_BACTERIAL_USED",
+          "id": "phv00426931.v2.p1",
+          "description": "Was IBIS platform used to identify bacteria",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IDENTIFICATION",
+          "id": "phv00378374.v4.p1",
+          "description": "Bacteria determined >10,000 CFU in urine culture.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00417787.v3.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00378369.v4.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00426930.v2.p1",
+          "description": "Describes fluid from which DNA was extracted",
+          "concept_id": "topmed:proteomics_panel_sample_metadata",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00378377.v4.p1",
+          "description": "Location where sequencing was performed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_PLATFORM",
+          "id": "phv00378378.v4.p1",
+          "description": "Brand and model of next-generation sequencing platform",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_READ_LENGTHS",
+          "id": "phv00378379.v4.p1",
+          "description": "Description of length of raw-data reads",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STATUS",
+          "id": "phv00378371.v4.p1",
+          "description": "Infection status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_TYPE",
+          "id": "phv00426929.v2.p1",
+          "description": "Characterizes subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Urinary_cfDNA_Subject_Phenotypes",
+      "datasetId": "pht007991.v4",
+      "description": "This subject phenotype table contains subject IDs, donor sex, recipient sex, fetal sex, broad sample category based on infection status, narrow sample cateogy based on infection diagnosis, and case control status of the subject for opportunistic infections.",
+      "variables": [
+        {
+          "name": "CLINICAL_DIAGNOSIS",
+          "id": "phv00378368.v4.p1",
+          "description": "Narrow sample cateogy based on infection diagnosis of clinician",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONDITION",
+          "id": "phv00537278.v1.p1",
+          "description": "Condition of the subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DONOR_SEX",
+          "id": "phv00378365.v4.p1",
+          "description": "Sex of patient donating kidney in the case of renal transplant",
+          "concept_id": "ncpi:annotated_sex_donor_sex",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FETAL_SEX",
+          "id": "phv00426928.v2.p1",
+          "description": "Sex of fetus in the case of pregnancy",
+          "concept_id": "ncpi:annotated_sex_baby_sex",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MeSH_PHENOTYPE",
+          "id": "phv00378367.v4.p1",
+          "description": "Broad sample category based on infection status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RECIPIENT_SEX",
+          "id": "phv00378366.v4.p1",
+          "description": "Sex of patient receiving kidney  in the case of renal transplant",
+          "concept_id": "ncpi:annotated_sex_recipient_sex",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00378364.v4.p1",
+          "description": "De-identified patient identification number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Urinary_cfDNA_Subject",
+      "datasetId": "pht007989.v4",
+      "description": "The subject consent file includes subject IDs, consent information, subject source, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00378357.v4.p1",
+          "description": "Conseny group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00508396.v1.p1",
+          "description": "Patient sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00378356.v4.p1",
+          "description": "Patient Identification number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00378358.v4.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Urinary_cfDNA_Sample",
+      "datasetId": "pht007990.v4",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00378361.v4.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00378360.v4.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "studyId": "phs000262",
+  "studyName": "The Role of the Gut Microbiota in Ulcerative Colitis",
+  "tables": [
+    {
+      "tableName": "HMP_Gut_Ulcerative_Colitis_Sample_Attributes",
+      "datasetId": "pht006262.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, histological type of sample, inflammation status, tumor status of sample, paucities disease activity index, sequence center, and visit of participants with or without ulcerative colitis and involved in the \"Ulcerative Colitis Human Microbiome Project (UCHMP)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00284737.v1.p2",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00284736.v1.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00284739.v1.p2",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_INFLAMED",
+          "id": "phv00284738.v1.p2",
+          "description": "Inflammation status",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00284744.v1.p2",
+          "description": "Tumor status of samples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PDAI",
+          "id": "phv00284740.v1.p2",
+          "description": "Pouchitis disease activity index",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_pouchitis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00284735.v1.p2",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00284741.v1.p2",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "patient",
+          "id": "phv00284742.v1.p2",
+          "description": "Patient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "visit",
+          "id": "phv00284743.v1.p2",
+          "description": "Visit",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HMP_Gut_Ulcerative_Colitis_Subject_Phenotypes",
+      "datasetId": "pht006261.v1",
+      "description": "Subject ID, age, race, gender, post-IPAA paucities, and tobacco usage by participants with or without ulcerative colitis and involved in the \"Ulcerative Colitis Human Microbiome Project (UCHMP)\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00284729.v1.p2",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00284730.v1.p2",
+          "description": "Age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "outcome",
+          "id": "phv00284734.v1.p2",
+          "description": "Post-IPAA pouchitis",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_pouchitis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00284732.v1.p2",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00284731.v1.p2",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smoker",
+          "id": "phv00284733.v1.p2",
+          "description": "Tobacco usage",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HMP_Gut_Ulcerative_Colitis_Subject",
+      "datasetId": "pht001279.v3",
+      "description": "Subject ID, consent group, subject source, source subject ID, and affection status of participants with or without ulcerative colitis and involved in the \"Ulcerative Colitis Human Microbiome Project (UCHMP)\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00091152.v3.p2",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_inflammatory_bowel_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00091149.v3.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00091151.v3.p2",
+          "description": "Subject ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00091148.v3.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00091150.v3.p2",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HMP_Gut_Ulcerative_Colitis_Sample",
+      "datasetId": "pht001280.v3",
+      "description": "Subject ID, sample ID, sample source, source sample ID, and sample use of participants with or without ulcerative colitis and involved in the \"Ulcerative Colitis Human Microbiome Project (UCHMP)\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00091154.v3.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00091155.v3.p2",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00284728.v1.p2",
+          "description": "Sample use. Seq_Metagenomic: Metagenome sequencing; Seq_rRNA_16S: 16S rRNA sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00091156.v3.p2",
+          "description": "Sample ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00091153.v3.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

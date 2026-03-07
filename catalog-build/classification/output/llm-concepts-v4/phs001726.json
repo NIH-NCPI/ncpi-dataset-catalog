@@ -1,0 +1,647 @@
+{
+  "studyId": "phs001726",
+  "studyName": "NHLBI TOPMed: Childhood Asthma Management Program (CAMP)",
+  "tables": [
+    {
+      "tableName": "TOPMed_CAMP_Methylation_Sample_Attributes",
+      "datasetId": "pht014484.v1",
+      "description": "This sample attributes table includes samples with methylomic data, body site where sample was collected, analyte type, histological type, tumor status, sample well and container, Uberon ID and term, assay lab, primary biosample ID and type, age at collection and year, analyte information (n=4 variables; isolation lab, ID, type, isolation year), Illumina chip barcode and assay position, number of SNPs, decode and extract dates, and fraction of CpG sites which pass a detection p-value threshold of 0.05 and 0.01.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00537333.v1.p1",
+          "description": "Analyte to be measured from the submitted sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_collection",
+          "id": "phv00537341.v1.p1",
+          "description": "Subject age at time of primary biosample collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_isolated",
+          "id": "phv00537345.v1.p1",
+          "description": "Type of analyte isolated from primary biosample or derived material",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_isolation_lab",
+          "id": "phv00537343.v1.p1",
+          "description": "Laboratory performing the analyte isolation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_isolation_year",
+          "id": "phv00537346.v1.p1",
+          "description": "Year that analyte was isolated",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_sample_ID",
+          "id": "phv00537344.v1.p1",
+          "description": "Identifier for analyte isolated from primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Assay_lab",
+          "id": "phv00537338.v1.p1",
+          "description": "Assay lab to which the samples were sent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00537332.v1.p1",
+          "description": "Anatomical site at which biosample was taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Barcode",
+          "id": "phv00537347.v1.p1",
+          "description": "Illumina chip Sentrix barcode",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_year",
+          "id": "phv00537342.v1.p1",
+          "description": "Year that primary biosample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00537334.v1.p1",
+          "description": "Primary biosample type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00537335.v1.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_biosample_ID",
+          "id": "phv00537339.v1.p1",
+          "description": "ID for primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_biosample_type",
+          "id": "phv00537340.v1.p1",
+          "description": "Type of primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RowCol",
+          "id": "phv00537348.v1.p1",
+          "description": "Illumina chip assay position",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00537329.v1.p1",
+          "description": "DNA methylation sample identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UBERON_ID",
+          "id": "phv00537336.v1.p1",
+          "description": "UBERON ontology identifier for type of primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UBERON_Term",
+          "id": "phv00537337.v1.p1",
+          "description": "UBERON ontology term for type of primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "decodeDate",
+          "id": "phv00537350.v1.p1",
+          "description": "Earliest date shown for 'AutoDecode' action in the .idat 'RunInfo' table. Presumably related to the chip manufacturing date.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "extractDate",
+          "id": "phv00537351.v1.p1",
+          "description": "Earliest date shown for 'Scan', 'Register' and 'Extract' actions in the .idat 'RunInfo' table. Presumably date when the chip was scanned after hybridization, extension and staining.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "nSNPsRead",
+          "id": "phv00537349.v1.p1",
+          "description": "Value reported as 'nSNPsRead' in Illumina .idat file header",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p.0.01",
+          "id": "phv00537353.v1.p1",
+          "description": "Fraction of CpG sites which pass a detection p-value threshold of 0.01",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p.0.05",
+          "id": "phv00537352.v1.p1",
+          "description": "Fraction of CpG sites which pass a detection p-value threshold of 0.05",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_container_ID",
+          "id": "phv00537331.v1.p1",
+          "description": "Sample plate for shipping samples to assay center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_well",
+          "id": "phv00537330.v1.p1",
+          "description": "Well of the sample shipment container",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CAMP_Metabolomics_Sample_Attributes",
+      "datasetId": "pht014483.v1",
+      "description": "This sample attributes table includes samples with metabolomic data, body site where sample was collected, analyte type, histological type, tumor status, sample information (n=3 variables; type, well, container), Uberon ID and term, assay lab, primary biosample ID and type, age at collection and year, and analyte information (n=4 variables; isolation lab, ID, type, isolation year).",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00537315.v1.p1",
+          "description": "Analyte to be measured from the submitted sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_collection",
+          "id": "phv00537323.v1.p1",
+          "description": "Subject age at time of primary biosample collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_isolated",
+          "id": "phv00537327.v1.p1",
+          "description": "Type of analyte isolated from primary biosample or derived material",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_isolation_lab",
+          "id": "phv00537325.v1.p1",
+          "description": "Name of laboratory performing the analyte isolation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_isolation_year",
+          "id": "phv00537328.v1.p1",
+          "description": "Year that analyte was isolated",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_sample_ID",
+          "id": "phv00537326.v1.p1",
+          "description": "Identifier for analyte isolated from primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Assay_lab",
+          "id": "phv00537320.v1.p1",
+          "description": "Assay lab to which the samples were sent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00537314.v1.p1",
+          "description": "Anatomical site at which biosample was taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_year",
+          "id": "phv00537324.v1.p1",
+          "description": "Year that primary biosample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00537316.v1.p1",
+          "description": "Primary biosample type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00537317.v1.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_biosample_ID",
+          "id": "phv00537321.v1.p1",
+          "description": "ID for primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_biosample_type",
+          "id": "phv00537322.v1.p1",
+          "description": "Type of primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00537310.v1.p1",
+          "description": "Metabolomics sample identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_type",
+          "id": "phv00537311.v1.p1",
+          "description": "Identifier indicating study or control samples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UBERON_ID",
+          "id": "phv00537318.v1.p1",
+          "description": "UBERON ontology identifier for type of primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UBERON_Term",
+          "id": "phv00537319.v1.p1",
+          "description": "UBERON ontology term for type of primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_container_ID",
+          "id": "phv00537313.v1.p1",
+          "description": "Sample plate for shipping samples to assay center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_well",
+          "id": "phv00537312.v1.p1",
+          "description": "Well of the sample shipment container",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CAMP_Subject_Phenotypes",
+      "datasetId": "pht009836.v2",
+      "description": "This subject phenotypes data table includes subject's asthma status, gender, age, race, height, weight, BMI, and smoking status (n=3 variables; ever, current, and former).",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426559.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00426561.v2.p1",
+          "description": "Age (for children) at randomization",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "asthma",
+          "id": "phv00493726.v1.p1",
+          "description": "Case control status of the subject for asthma",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_diagnosis_ever",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bmi",
+          "id": "phv00426566.v2.p1",
+          "description": "BMI",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "current_smoker",
+          "id": "phv00426568.v2.p1",
+          "description": "Current smoking status",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ever_smoker",
+          "id": "phv00426567.v2.p1",
+          "description": "Ever smoked",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "former_smoker",
+          "id": "phv00426569.v2.p1",
+          "description": "Former smoking status",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_former_smoker",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00426560.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "height",
+          "id": "phv00426564.v2.p1",
+          "description": "Height  in cm",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00426562.v2.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "weight",
+          "id": "phv00426565.v2.p1",
+          "description": "Weight in kg",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CAMP_WGS_Sample_Attributes",
+      "datasetId": "pht009837.v1",
+      "description": "This sample attributes table includes samples with whole genome sequencing (WGS) data, body site where sample was collected, analyte type, tumor status, sequencing center, funding source, TOPMed phase, project, and study name.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00426572.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00426571.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00426575.v1.p1",
+          "description": "Project funding source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00426573.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00426570.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00426574.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00426578.v1.p1",
+          "description": "TOPMed-assigned short study name (1:1 with TOPMed phs number)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00426576.v1.p1",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00426577.v1.p1",
+          "description": "TOPMed Project that funded sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CAMP_Pedigree",
+      "datasetId": "pht011573.v1",
+      "description": "The pedigree data table includes family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and subject's sex.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00493721.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00493724.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00493723.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00493725.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493722.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CAMP_Subject",
+      "datasetId": "pht009834.v3",
+      "description": "The subject consent data table contains subject IDs, consent group information, and subject's sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00426555.v3.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00493720.v2.p1",
+          "description": "Gender of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426554.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CAMP_Sample",
+      "datasetId": "pht009835.v3",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00426558.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426557.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

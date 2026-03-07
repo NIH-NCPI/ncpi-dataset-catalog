@@ -1,0 +1,218 @@
+{
+  "studyId": "phs002419",
+  "studyName": "Integrative Molecular Characterization of Breast Cancer",
+  "tables": [
+    {
+      "tableName": "BC_Sample_Attributes",
+      "datasetId": "pht011265.v2",
+      "description": "This sample attributes table contains sample IDs, analyte type, tumor status, histological type, primary tumor, metastasis, or transformed cell line, and primary tumor location.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00491478.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00542915.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00491480.v2.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00491479.v2.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00491481.v2.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00491482.v2.p1",
+          "description": "Primary tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00491477.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TREATMENT_ARM",
+          "id": "phv00542914.v1.p1",
+          "description": "Treatment regimen undergone",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TREATMENT_TIMEPOINT",
+          "id": "phv00542913.v1.p1",
+          "description": "Timepoint of treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_GRADE",
+          "id": "phv00542911.v1.p1",
+          "description": "Tumor grade of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00542912.v1.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BC_Subject_Phenotypes",
+      "datasetId": "pht011264.v2",
+      "description": "This subject phenotype table contains subject IDs, disease onset age, race, case control status of the subject for breast cancer, ethnicity, cancer stage, and molecular type of breast cancer.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00491476.v2.p1",
+          "description": "Case control status of the subject for breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_ONSET",
+          "id": "phv00491474.v2.p1",
+          "description": "Disease onset age",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_breast_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00542908.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MOLECULAR_TYPE",
+          "id": "phv00542910.v1.p1",
+          "description": "Molecular type of Breast Cancer",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_molecular_subtype",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00491475.v2.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE",
+          "id": "phv00542909.v1.p1",
+          "description": "Cancer stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491473.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BC_Subject",
+      "datasetId": "pht011262.v2",
+      "description": "The subject consent file includes subject IDs, consent information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00491469.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00491470.v2.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491468.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BC_Sample",
+      "datasetId": "pht011263.v2",
+      "description": "This subject sample mapping data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00491472.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491471.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

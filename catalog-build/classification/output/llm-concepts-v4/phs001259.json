@@ -1,0 +1,146 @@
+{
+  "studyId": "phs001259",
+  "studyName": "CCDG CVD: VIRGO - Variation in Recover-Role of Gender on Outcomes of Young Acute Myocardial Infarction (AMI) Patients",
+  "tables": [
+    {
+      "tableName": "VIRGO_AMI_Subject_Phenotypes",
+      "datasetId": "pht006089.v1",
+      "description": "This subject phenotype table contains subject IDs and sex.",
+      "variables": [
+        {
+          "name": "Ethnicity",
+          "id": "phv00395219.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Primary Disease",
+          "id": "phv00395217.v1.p1",
+          "description": "Case control status of participant for myocardial infarction",
+          "concept_id": "ncpi:mi_incident_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00395218.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00278168.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00278169.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VIRGO_AMI_Sample_Attributes",
+      "datasetId": "pht006090.v1",
+      "description": "This sample attributes table contains sample IDs, analyte type, body site, and name of the center which conducted sequencing.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00278171.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Body Site",
+          "id": "phv00278172.v1.p1",
+          "description": "Origin of sample",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00278170.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sequencing Center",
+          "id": "phv00278173.v1.p1",
+          "description": "Where sequencing was taken place",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VIRGO_AMI_Sample",
+      "datasetId": "pht006088.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00278166.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00278167.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00278165.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VIRGO_AMI_Subject",
+      "datasetId": "pht006087.v1",
+      "description": "The subject consent file includes subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00278164.v1.p1",
+          "description": "Consent status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00278163.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

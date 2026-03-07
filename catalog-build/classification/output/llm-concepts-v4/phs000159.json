@@ -1,0 +1,162 @@
+{
+  "studyId": "phs000159",
+  "studyName": "Genomics of Acute Myeloid Leukemia",
+  "tables": [
+    {
+      "tableName": "AML_Sample_Attributes",
+      "datasetId": "pht002460.v13",
+      "description": "This sample attributes table includes sample type, body site where the sample was extracted, analyte type (DNA/RNA), tumor status, and alternate IDs from TCGA.",
+      "variables": [
+        {
+          "name": "ALTERNATE_ID",
+          "id": "phv00498513.v4.p5",
+          "description": "Alternate sample id",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00163912.v13.p5",
+          "description": "Type of analyte: DNA, RNA",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00163910.v13.p5",
+          "description": "ID used to determine the type of sample: tumor, normal",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00201978.v10.p5",
+          "description": "Is the sample malignant: yes, no, unknown",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00163909.v13.p5",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TISSUE",
+          "id": "phv00163911.v13.p5",
+          "description": "Location from the body",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AML_Subject_Phenotypes",
+      "datasetId": "pht000817.v11",
+      "description": "The subject phenotype data table includes subject's sex, race, ethnicity, and affection status for leukemia.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00489876.v5.p5",
+          "description": "Case control status of the subject for Leukemia",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00073674.v10.p5",
+          "description": "Subject ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00073675.v10.p5",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00073670.v10.p5",
+          "description": "Subject sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00073668.v11.p5",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AML_Subject",
+      "datasetId": "pht000818.v15",
+      "description": "This subject consent data table includes subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00073712.v15.p5",
+          "description": "Consent usage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00489875.v5.p5",
+          "description": "Subject sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00073711.v15.p5",
+          "description": "Deidentified Subject's ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AML_Sample",
+      "datasetId": "pht000819.v15",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00073714.v15.p5",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00073713.v15.p5",
+          "description": "Deidentified Subject's ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,985 @@
+{
+  "studyId": "phs000672",
+  "studyName": "NIDCR Sj\ufffdgren's International Collaborative Clinical Alliance (SICCA)",
+  "tables": [
+    {
+      "tableName": "SICCA_Subject_Phenotypes",
+      "datasetId": "pht004794.v1",
+      "description": "The dataset provides information about the medical history of participants, including self-reported and physicion-confirmed diagnoses, laboratory test results (including antibody testing for SS-A/SS-B, Antinuclear Antibody, Rheumatoid Factor, and IgG and Complement Component 3/4 testing), dryness determination for eyes, mouth, size observations of parotid/salivary glands, psychological measurements describing health/psychological impact of symptoms and depression score, and socio-demographic information with description of grandparents' ethnicity.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226845.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00226846.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "aecg",
+          "id": "phv00226889.v1.p1",
+          "description": "Meets American European classification for primary Sj&#246;gren&#39;s Syndrome",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_censored",
+          "id": "phv00226941.v1.p1",
+          "description": "Censored age at study visit with ages > 89 changed to 89",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "agess",
+          "id": "phv00226852.v1.p1",
+          "description": "Self reported Age of Sj&#246;gren&#39;s syndrome onset at screening",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ana",
+          "id": "phv00226858.v1.p1",
+          "description": "Antinuclear Antibody (ANA) result",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_antinuclear_antibodies",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "anatiter",
+          "id": "phv00226859.v1.p1",
+          "description": "Antinuclear Antibody Titer result",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_antinuclear_antibodies",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "antichol",
+          "id": "phv00226888.v1.p1",
+          "description": "Anticholinergic drug use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "antihepc",
+          "id": "phv00226863.v1.p1",
+          "description": "Anti-Hepatitis C result",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hepatitis_c",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "arttears",
+          "id": "phv00226886.v1.p1",
+          "description": "How often artificial tears used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "c3",
+          "id": "phv00226861.v1.p1",
+          "description": "Complement Component 3 (C3) result",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_complement_levels",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "c4",
+          "id": "phv00226862.v1.p1",
+          "description": "Complement Component 4 (C4) result",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_complement_levels",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "cigday",
+          "id": "phv00226881.v1.p1",
+          "description": "Cigarettes smoked per day",
+          "concept_id": "ncpi:current_smoker_baseline_cigarettes_per_day",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "collection_phase",
+          "id": "phv00226847.v1.p1",
+          "description": "2 different sets of subjects genotyped in 2011 and 2013. The marker set versions for the phases are different.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "depscore",
+          "id": "phv00226882.v1.p1",
+          "description": "PHQ-9 Depression Severity",
+          "concept_id": "topmed:depression_anxiety_screening_cesd_total_scores",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dryeye",
+          "id": "phv00226885.v1.p1",
+          "description": "Dry eye symptoms",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_skin_conditions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "drymouth",
+          "id": "phv00226883.v1.p1",
+          "description": "Dry mouth symptoms",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_dental_oral_health",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_c_am",
+          "id": "phv00226928.v1.p1",
+          "description": "Grandparents Origin - Central American",
+          "concept_id": "topmed:hispanic_subgroup",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_c_eu",
+          "id": "phv00226918.v1.p1",
+          "description": "Grandparents Origin - Central European",
+          "concept_id": "ncpi:race_us_european_ancestry",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_ca",
+          "id": "phv00226929.v1.p1",
+          "description": "Grandparents Origin - Caribbean",
+          "concept_id": "ncpi:race_us_geographic_ancestry",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_ch_h",
+          "id": "phv00226932.v1.p1",
+          "description": "Grandparents Origin - Chinese Han",
+          "concept_id": "ncpi:race_us_asian_race",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_ch_n",
+          "id": "phv00226933.v1.p1",
+          "description": "Grandparents Origin - Chinese Non-Han",
+          "concept_id": "ncpi:race_us_asian_race",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_e_eu",
+          "id": "phv00226920.v1.p1",
+          "description": "Grandparents Origin - Eastern European",
+          "concept_id": "ncpi:race_us_european_ancestry",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_e_me",
+          "id": "phv00226922.v1.p1",
+          "description": "Grandparents Origin - East Mediterranean",
+          "concept_id": "ncpi:race_us_geographic_ancestry",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_fi",
+          "id": "phv00226936.v1.p1",
+          "description": "Grandparents Origin - Filipino",
+          "concept_id": "ncpi:race_us_asian_race",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_in",
+          "id": "phv00226938.v1.p1",
+          "description": "Grandparents Origin - Indian sub-continent",
+          "concept_id": "ncpi:race_us_asian_race",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_ja",
+          "id": "phv00226934.v1.p1",
+          "description": "Grandparents Origin - Japanese",
+          "concept_id": "ncpi:race_us_asian_race",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_ko",
+          "id": "phv00226935.v1.p1",
+          "description": "Grandparents Origin - Korean",
+          "concept_id": "ncpi:race_us_asian_race",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_l_in",
+          "id": "phv00226931.v1.p1",
+          "description": "Grandparents Origin - Latin American Indian",
+          "concept_id": "ncpi:race_us_american_indian_alaska_native_race",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_m_ea",
+          "id": "phv00226921.v1.p1",
+          "description": "Grandparents Origin - Middle Eastern",
+          "concept_id": "ncpi:race_us_middle_eastern_ancestry",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_me",
+          "id": "phv00226927.v1.p1",
+          "description": "Grandparents Origin - Mexican",
+          "concept_id": "topmed:hispanic_subgroup",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_n_af",
+          "id": "phv00226923.v1.p1",
+          "description": "Grandparents Origin - North African",
+          "concept_id": "ncpi:race_us_geographic_ancestry",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_n_am",
+          "id": "phv00226925.v1.p1",
+          "description": "Grandparents Origin - North American",
+          "concept_id": "ncpi:race_us_geographic_ancestry",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_n_eu",
+          "id": "phv00226917.v1.p1",
+          "description": "Grandparents Origin - Northern European",
+          "concept_id": "ncpi:race_us_european_ancestry",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_n_in",
+          "id": "phv00226926.v1.p1",
+          "description": "Grandparents Origin - North American Indian",
+          "concept_id": "ncpi:race_us_american_indian_alaska_native_race",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_oth",
+          "id": "phv00226939.v1.p1",
+          "description": "Grandparents Origin - Other",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_s_af",
+          "id": "phv00226924.v1.p1",
+          "description": "Grandparents Origin - Subsaharan African",
+          "concept_id": "ncpi:race_us_geographic_ancestry",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_s_am",
+          "id": "phv00226930.v1.p1",
+          "description": "Grandparents Origin - South American",
+          "concept_id": "ncpi:race_us_geographic_ancestry",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_s_as",
+          "id": "phv00226937.v1.p1",
+          "description": "Grandparents Origin - South-East Asian",
+          "concept_id": "ncpi:race_us_asian_race",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "eth2_s_eu",
+          "id": "phv00226919.v1.p1",
+          "description": "Grandparents Origin - Southern European",
+          "concept_id": "ncpi:race_us_european_ancestry",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "famstatus",
+          "id": "phv00226848.v1.p1",
+          "description": "Family Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "focus",
+          "id": "phv00226870.v1.p1",
+          "description": "Focus score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fs",
+          "id": "phv00226871.v1.p1",
+          "description": "Focus score >=1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fscalc",
+          "id": "phv00226869.v1.p1",
+          "description": "Labial Salivary gland large enough to support focus score calculation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "griteye",
+          "id": "phv00226887.v1.p1",
+          "description": "Gritty or scratchy sensation in eye during last week",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "igg",
+          "id": "phv00226860.v1.p1",
+          "description": "Immunoglobulin G (IgG) result",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_immunoglobulin_levels",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "kidney",
+          "id": "phv00226914.v1.p1",
+          "description": "Physician confirmed Kidney disease",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_general_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "liqmouth",
+          "id": "phv00226884.v1.p1",
+          "description": "Need liquids for swallowing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "liver",
+          "id": "phv00226913.v1.p1",
+          "description": "Physician confirmed Liver disease",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lparenlg",
+          "id": "phv00226867.v1.p1",
+          "description": "Left Parotid Gland enlargement",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lsgdx",
+          "id": "phv00226868.v1.p1",
+          "description": "Labial Salivary Gland biopsy diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lymphoma",
+          "id": "phv00226915.v1.p1",
+          "description": "Physician confirmed Lymphoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_blood_cancer_leukemia_lymphoma",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "oss",
+          "id": "phv00226874.v1.p1",
+          "description": "Max Ocular SICCA score  >= 3",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ossl",
+          "id": "phv00226873.v1.p1",
+          "description": "Ocular SICCA score - left eye",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ossr",
+          "id": "phv00226872.v1.p1",
+          "description": "Ocular SICCA score - right eye",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "otherctd",
+          "id": "phv00226906.v1.p1",
+          "description": "Physician confirmed Scleroderma or Other Connective Tissue disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othersys",
+          "id": "phv00226916.v1.p1",
+          "description": "Physician confirmed Other Systemic disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ptstatus",
+          "id": "phv00226850.v1.p1",
+          "description": "Participation status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ra",
+          "id": "phv00226904.v1.p1",
+          "description": "Physician confirmed Rheumatoid Arthritis",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_rheumatoid_arthritis_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00226851.v1.p1",
+          "description": "Self-reported ethnicity of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rf",
+          "id": "phv00226857.v1.p1",
+          "description": "Rheumatoid Factor result",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_rheumatoid_factor",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "rparenlg",
+          "id": "phv00226866.v1.p1",
+          "description": "Right Parotid Gland enlargement",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sch",
+          "id": "phv00226879.v1.p1",
+          "description": "Mean of Schirmer1 test <= 5 mm in 5 minutes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "self_aorild",
+          "id": "phv00226911.v1.p1",
+          "description": "Self reported Autoimmune or Interstitial Lung disease",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_pulmonary_fibrosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "self_kid",
+          "id": "phv00226909.v1.p1",
+          "description": "Self reported Kidney disease",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_general_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "self_liv",
+          "id": "phv00226908.v1.p1",
+          "description": "Self reported Liver disease",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "self_lymph",
+          "id": "phv00226910.v1.p1",
+          "description": "Self reported Lymphoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_blood_cancer_leukemia_lymphoma",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "self_ra",
+          "id": "phv00226902.v1.p1",
+          "description": "Self reported Rheumatoid Arthritis",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_rheumatoid_arthritis_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "self_sle",
+          "id": "phv00226903.v1.p1",
+          "description": "Self reported Systemic Lupus Erythematosus",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_lupus_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "self_thy",
+          "id": "phv00226907.v1.p1",
+          "description": "Self reported Thyroid disease",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_general_thyroid_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sf12v2_1",
+          "id": "phv00226890.v1.p1",
+          "description": "SF-12v2 Health Survey - General Health",
+          "concept_id": "topmed:depression_anxiety_screening_sf12_depression_items",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sf12v2_10",
+          "id": "phv00226899.v1.p1",
+          "description": "SF-12v2 Health Survey - Have a lot of energy in past 4 weeks",
+          "concept_id": "topmed:depression_anxiety_screening_sf12_depression_items",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sf12v2_11",
+          "id": "phv00226900.v1.p1",
+          "description": "SF-12v2 Health Survey - Felt downhearted and depressed in past 4 weeks",
+          "concept_id": "topmed:depression_anxiety_screening_sf12_depression_items",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sf12v2_12",
+          "id": "phv00226901.v1.p1",
+          "description": "SF-12v2 Health Survey - How much physical or emotional health interfered with social activities in past 4 weeks",
+          "concept_id": "topmed:depression_anxiety_screening_emotional_work_limitations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sf12v2_2",
+          "id": "phv00226891.v1.p1",
+          "description": "SF-12v2 Health Survey - Health limits moderate activities",
+          "concept_id": "topmed:depression_anxiety_screening_sf12_depression_items",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sf12v2_3",
+          "id": "phv00226892.v1.p1",
+          "description": "SF-12v2 Health Survey - Health limits climbing stairs",
+          "concept_id": "topmed:depression_anxiety_screening_sf12_depression_items",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sf12v2_4",
+          "id": "phv00226893.v1.p1",
+          "description": "SF-12v2 Health Survey - Accomplished less as result of physical health in past 4 weeks",
+          "concept_id": "topmed:depression_anxiety_screening_emotional_work_limitations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sf12v2_5",
+          "id": "phv00226894.v1.p1",
+          "description": "SF-12v2 Health Survey - Physical health limited kind of work in past 4 weeks",
+          "concept_id": "topmed:depression_anxiety_screening_emotional_work_limitations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sf12v2_6",
+          "id": "phv00226895.v1.p1",
+          "description": "SF-12v2 Health Survey - Accomplished less as result of emotional problems in past 4 weeks",
+          "concept_id": "topmed:depression_anxiety_screening_emotional_work_limitations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sf12v2_7",
+          "id": "phv00226896.v1.p1",
+          "description": "SF-12v2 Health Survey - Did work less carefully than usual as result of emotional problems in past 4 weeks",
+          "concept_id": "topmed:depression_anxiety_screening_emotional_work_limitations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sf12v2_8",
+          "id": "phv00226897.v1.p1",
+          "description": "SF-12v2 Health Survey - How much pain interfered with normal work in past 4 weeks",
+          "concept_id": "topmed:depression_anxiety_screening_emotional_work_limitations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sf12v2_9",
+          "id": "phv00226898.v1.p1",
+          "description": "SF-12v2 Health Survey - Felt calm and peaceful in past 4 weeks",
+          "concept_id": "topmed:depression_anxiety_screening_sf12_depression_items",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "site",
+          "id": "phv00226849.v1.p1",
+          "description": "Recruitment site",
+          "concept_id": "ncpi:geographic_site_recruitment_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sle",
+          "id": "phv00226905.v1.p1",
+          "description": "Physician confirmed Systemic Lupus Erythematosus",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_lupus_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smoker",
+          "id": "phv00226880.v1.p1",
+          "description": "Cigarette use",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ssa",
+          "id": "phv00226853.v1.p1",
+          "description": "Anti-SS-A result",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_autoimmune_antibodies",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ssab",
+          "id": "phv00226855.v1.p1",
+          "description": "Result of Anti-SS-A or Anti-SS-B",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_autoimmune_antibodies",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ssanb",
+          "id": "phv00226856.v1.p1",
+          "description": "Result of Anti-SS-A and Anti-SS-B",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_autoimmune_antibodies",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ssb",
+          "id": "phv00226854.v1.p1",
+          "description": "Anti-SS-B result",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_autoimmune_antibodies",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sscase",
+          "id": "phv00226940.v1.p1",
+          "description": "Meets American College of Rheumatology classification criteria for Sj&#246;gren&#39;s syndrome 2012 (see: <a href=\"http://www.ncbi.nlm.nih.gov/pubmed/22563590\">PMID: 22563590</a>)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subjecttype",
+          "id": "phv00226942.v1.p1",
+          "description": "Study subject type, with Sj&#246;gren&#39;s Syndrome classification according to <a href=\"http://www.ncbi.nlm.nih.gov/pubmed/22563590\">2012 American College of Rheumatology</a> criteria",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tbul",
+          "id": "phv00226876.v1.p1",
+          "description": "Tear Break-Up time - left eye  >= 10 seconds",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tbul_time",
+          "id": "phv00226878.v1.p1",
+          "description": "Tear Break-Up Time - left eye if less than 10 seconds",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tbur",
+          "id": "phv00226875.v1.p1",
+          "description": "Tear Break-Up time - right eye  >= 10 seconds",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tbur_time",
+          "id": "phv00226877.v1.p1",
+          "description": "Tear Break-Up time - right eye if less than 10 seconds",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "thyroid",
+          "id": "phv00226912.v1.p1",
+          "description": "Physician confirmed Thyroid disease",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_general_thyroid_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "uws",
+          "id": "phv00226864.v1.p1",
+          "description": "Unstimulated whole salivary flow rate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "uwslt5",
+          "id": "phv00226865.v1.p1",
+          "description": "Unstimulated whole salivary flow rate < 0.5 ml/5 min",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SICCA_Pedigree",
+      "datasetId": "pht004792.v1",
+      "description": "Pedigree Information",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00226834.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00226836.v1.p1",
+          "description": "Father ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00226837.v1.p1",
+          "description": "Mother ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00226838.v1.p1",
+          "description": "Subject's sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226835.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TWIN_ID",
+          "id": "phv00226839.v1.p1",
+          "description": "Subjects are twins",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SICCA_Sample",
+      "datasetId": "pht004793.v1",
+      "description": "Subject - Sample Mapping",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00226841.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00226843.v1.p1",
+          "description": "Coriell for HapMap samples, source repository for investigator controls, blank otherwise.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00226842.v1.p1",
+          "description": "Sample Use. Array_SNP: SNP genotypes obtained using standard or custom microarrays; Imputation_SNP: Imputed SNP genotypes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00226844.v1.p1",
+          "description": "Coriell ID for HapMap samples, repository ID for investigator controls, blank otherwise.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226840.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SICCA_Sample_Attributes",
+      "datasetId": "pht004795.v1",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00226945.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00226944.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00226946.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00226947.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00226943.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SICCA_Subject",
+      "datasetId": "pht004791.v1",
+      "description": "Subject - Consent - Affection Status",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00226831.v1.p1",
+          "description": "Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00226833.v1.p1",
+          "description": "Coriell ID for HapMap subjects, repository ID for investigator controls, blank otherwise.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226830.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00226832.v1.p1",
+          "description": "Coriell for HapMap subjects,  source repository for investigator controls, blank otherwise.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

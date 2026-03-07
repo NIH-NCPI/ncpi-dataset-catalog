@@ -1,0 +1,186 @@
+{
+  "studyId": "phs001791",
+  "studyName": "A Multimodal Atlas of Human Brain Cell Types",
+  "tables": [
+    {
+      "tableName": "Brain_Cell_Types_Sample_Attributes",
+      "datasetId": "pht008855.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00404728.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00404727.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00404730.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00404729.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00404726.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "batch",
+          "id": "phv00404734.v1.p1",
+          "description": "Processing batch (BCH1-BCH9)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cortical_layer",
+          "id": "phv00404731.v1.p1",
+          "description": "Cortical area targeted for sampling",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "facs_sort_criteria",
+          "id": "phv00404732.v1.p1",
+          "description": "Gating criteria used to select cells for FACS sorting",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "well",
+          "id": "phv00404733.v1.p1",
+          "description": "Location of sample in 256 well plate for processing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Brain_Cell_Types_Subject",
+      "datasetId": "pht008852.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00404717.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00404719.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404716.v1.p1",
+          "description": "Subject ID. CONTROL=water, ERCC-only, 1ph UHR, and 10pg UHR, where UHR is Universal Human Reference (https://www.thermofisher.com/order/catalog/product/QS0639).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00404718.v1.p1",
+          "description": "Source repository where subjects are linked",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Brain_Cell_Types_Subject_Phenotypes",
+      "datasetId": "pht008854.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404722.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00404724.v1.p1",
+          "description": "Age of donor in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hemisphere",
+          "id": "phv00404725.v1.p1",
+          "description": "Brain hemisphere of dissected cells",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00404723.v1.p1",
+          "description": "Sex of donor",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Brain_Cell_Types_Sample",
+      "datasetId": "pht008853.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00404721.v1.p1",
+          "description": "Sample ID. CONTROL=water, ERCC-only, 1ph UHR, and 10pg UHR, where UHR is Universal Human Reference (https://www.thermofisher.com/order/catalog/product/QS0639).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404720.v1.p1",
+          "description": "Subject ID. CONTROL=water, ERCC-only, 1ph UHR, and 10pg UHR, where UHR is Universal Human Reference (https://www.thermofisher.com/order/catalog/product/QS0639).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

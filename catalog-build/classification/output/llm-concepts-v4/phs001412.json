@@ -1,0 +1,473 @@
+{
+  "studyId": "phs001412",
+  "studyName": "NHLBI TOPMed: Diabetes Heart Study (DHS) African American Coronary Artery Calcification (AA CAC)",
+  "tables": [
+    {
+      "tableName": "TOPMed_WGS_DHS_Subject_Phenotypes",
+      "datasetId": "pht006746.v1",
+      "description": "This subject phenotypes data table includes subject's age, sex and race, diabetes status (n=2 variables), anthropometric measurements (n=3 variables; height, weight, BMI), blood pressure (n=2 variables; systolic and diastolic), plaque in artery (n=3 variables; coronary, carotid, and abdominal), intima-media thickness, subcutaneous and visceral adipose tissue (n=3 variables), HA1bc and glucose measurements, EGFR, ACR, CRP, cholesterol levels (n=4 variables; cholesterol, HDL, LDL, and triglycerides), and medications (n=2 variables; hypertension and lipid).",
+      "variables": [
+        {
+          "name": "HEIGHT",
+          "id": "phv00310030.v1.p1",
+          "description": "Height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00310019.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00310017.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00310029.v1.p1",
+          "description": "Weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "ACR",
+          "id": "phv00310028.v1.p1",
+          "description": "Albumin creatinine ratio",
+          "concept_id": "ncpi:kidney_function_albumin_creatinine_ratio",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00310016.v1.p1",
+          "description": "Age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AORTA_130",
+          "id": "phv00310023.v1.p1",
+          "description": "Abdominal aortic calcified plaque using the agatston score with a 130 HU threshold",
+          "concept_id": "ncpi:cac_score_abdominal_aorta_calcium",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AVECAC_130",
+          "id": "phv00310021.v1.p1",
+          "description": "Coronary artery calcified plaque using the agatston score with a 130 HU threshold",
+          "concept_id": "ncpi:cac_score_coronary_artery_calcium_presence",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AVECAROTID_130",
+          "id": "phv00310022.v1.p1",
+          "description": "Carotid artery calcified plaque using the agatston score with a 130 HU threshold",
+          "concept_id": "ncpi:carotid_plaque_carotid_calcified_plaque",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00310018.v1.p1",
+          "description": "Body mass index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHOL",
+          "id": "phv00310038.v1.p1",
+          "description": "Cholesterol",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CRP",
+          "id": "phv00310042.v1.p1",
+          "description": "C-reactive protein",
+          "concept_id": "topmed:crp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DBP",
+          "id": "phv00310035.v1.p1",
+          "description": "Diastolic blood pressure",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_device_specific",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETES",
+          "id": "phv00310020.v1.p1",
+          "description": "Diabetes status at sample collection",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DURATION",
+          "id": "phv00310024.v1.p1",
+          "description": "Years with diagnosed diabetes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EGFR",
+          "id": "phv00310027.v1.p1",
+          "description": "Estimated glomelular filtration rate",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_generic",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GLUCOSE",
+          "id": "phv00310026.v1.p1",
+          "description": "Glucose",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_glucose_levels",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HBA1C",
+          "id": "phv00310025.v1.p1",
+          "description": "Hemoglobin A1c",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_hemoglobin_a1c",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL",
+          "id": "phv00310039.v1.p1",
+          "description": "High density lipoprotein cholesterol",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HYP_MED",
+          "id": "phv00310036.v1.p1",
+          "description": "Taking hypertension medication",
+          "concept_id": "ncpi:antihypertensive_meds_current_antihypertensive_use_current_antihypertensive_use_current_antihypertensive_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IMT",
+          "id": "phv00310037.v1.p1",
+          "description": "Intima-media thickness",
+          "concept_id": "ncpi:cimt_carotid_imt_phenotypes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL",
+          "id": "phv00310040.v1.p1",
+          "description": "Low density lipoprotein cholesterol",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIPID_MED",
+          "id": "phv00400173.v1.p1",
+          "description": "Taking lipid medication",
+          "concept_id": "ncpi:lipid_lowering_medication_general_lipid_lowering_medication",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PULSE",
+          "id": "phv00400174.v1.p1",
+          "description": "Resting heart rate",
+          "concept_id": "ncpi:heart_rate_resting_heart_rate",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAT",
+          "id": "phv00310032.v1.p1",
+          "description": "Subcutaneous adipose tissue",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SBP",
+          "id": "phv00310034.v1.p1",
+          "description": "Systolic blood pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_closeout_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00310015.v1.p1",
+          "description": "Unique sample id",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRIG",
+          "id": "phv00310041.v1.p1",
+          "description": "Triglycerides",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_standard_units_total_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VAT",
+          "id": "phv00310031.v1.p1",
+          "description": "Visceral adipose tissue",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VSR",
+          "id": "phv00310033.v1.p1",
+          "description": "Visceral-subcutaneous ratio",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_DHS_Sample_Attributes",
+      "datasetId": "pht006747.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, histological type, tumor status, genotyping and sequencing centers, funding source, TOPMed phase, project, and study name.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00310045.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00310044.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00400175.v1.p1",
+          "description": "Project funding source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00310048.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00310047.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00310046.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00310043.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00310049.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00400178.v1.p1",
+          "description": "TOPMed-assigned short study name (1:1 with TOPMed phs number)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00400176.v1.p1",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00400177.v1.p1",
+          "description": "TOPMed Project that funded sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_DHS_Pedigree",
+      "datasetId": "pht006744.v2",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, sex of subjects, and QC notes.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00310007.v2.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00310009.v2.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00310010.v2.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NOTES",
+          "id": "phv00400172.v2.p1",
+          "description": "QC Notes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00310011.v2.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00310008.v2.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_DHS_Subject",
+      "datasetId": "pht006743.v2",
+      "description": "The subject consent data table contains subject IDs, consent group information, subject aliases, and affection status for diabetes.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00310005.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": "ncpi:subcohort_consent_group",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00310006.v2.p1",
+          "description": "Case control status of the subject for diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00400171.v2.p1",
+          "description": "Subject ID used in the SUBJECT_SOURCE repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00310004.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00400170.v2.p1",
+          "description": "Repository name for dbGaP study also containing this individual",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_DHS_Sample",
+      "datasetId": "pht006745.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00310013.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00310012.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,410 @@
+{
+  "studyId": "phs003016",
+  "studyName": "Coagulation and Fibrinolysis in a Pediatric Insulin Titration Trial",
+  "tables": [
+    {
+      "tableName": "CAF_PINT_Subject_Phenotypes",
+      "datasetId": "pht013447.v1",
+      "description": "This subject phenotypes data table reports each subject's HALF_PINT treatment group, race, AGE at ICU admission, primary reason for ICU admission, height at ICU admission, actual weight at ICU admission, type of invasive mechanical ventilation at randomization, primary reason for initiation of mechanical ventilation,  oxygenation index (OI) on the day of initiation of mechanical ventilation, oxygen saturation index (OSI) on the day of initiation of mechanical ventilation, Pediatric Acute Respiratory Distress Syndrome (PARDS) based on OI or OSI on the day of initiation of mechanical ventilation, tracheostomy status for overnight/sleep prior to illness that led to ICU admission, status of ionotropic support for hypotension at randomization, primary reason for hypotension, pediatric risk of mortality (PRISM) III-12 score, risk of death in the ICU based on PRISM III-12 score, status for positive culture drawn within 72 hrs preceeding randomization and 24 hrs post, site of positive culture, organism of positive culture, location of hospital discharge assessed at day 90, viability status on or before day 90, average daily insulin doasage, time weighted glucose average (mg/dL), ICU-free days through day 28, ICU days through day 28, ventilator-free days through day 28, ventilator days through day 28, hospital-free days through day 28, hospital days through day 28, hospital mortality at day 28, maximum pediatric logistic organ dysfunction (PELOD) score, maximum daily vasoactive ionotrope score, ICU length of stay for survivors, multiple organ dysfunction (MODS) group, and status of sepsis.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00529586.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ageyrs",
+          "id": "phv00529590.v1.p1",
+          "description": "Age at ICU admission in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "avginsdose",
+          "id": "phv00529610.v1.p1",
+          "description": "Average daily insulin dose (units/kg/day)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "death28",
+          "id": "phv00529618.v1.p1",
+          "description": "Whether or not the patient was deceased on or before day 28 (Hospital mortality at day 28)",
+          "concept_id": "topmed:chd_death_definite",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "death90",
+          "id": "phv00529609.v1.p1",
+          "description": "Whether or not the patient was deceased on or before day 90 (Hospital mortality at day 90)",
+          "concept_id": "topmed:chd_death_definite",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "ethnic",
+          "id": "phv00529589.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "hospdays28",
+          "id": "phv00529617.v1.p1",
+          "description": "Hospital days through day 28",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hospdisloc",
+          "id": "phv00529608.v1.p1",
+          "description": "Location of hospital discharge (assessed at day 90)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hospfreedays",
+          "id": "phv00529616.v1.p1",
+          "description": "Hospital-free days through day 28",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ht",
+          "id": "phv00529592.v1.p1",
+          "description": "Height at ICU admission (cm)",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "hypotcons",
+          "id": "phv00529601.v1.p1",
+          "description": "Whether or not the patient received ionotropic support for hypotension at randomization (Recoded for 7 patients 8/12/20)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "icudays28",
+          "id": "phv00529613.v1.p1",
+          "description": "ICU days through day 28",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "icufreedays",
+          "id": "phv00529612.v1.p1",
+          "description": "ICU-free days through day 28",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "iculos",
+          "id": "phv00529621.v1.p1",
+          "description": "ICU length of stay for survivors (from randomization to date/time of physical ICU discharge)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "intubvent",
+          "id": "phv00529594.v1.p1",
+          "description": "Type of invasive mechanical ventilation at randomization",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "maxpelod",
+          "id": "phv00529619.v1.p1",
+          "description": "Maximum Pediatric Logistic Organ Dysfunction (PELOD) score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "maxvis",
+          "id": "phv00529620.v1.p1",
+          "description": "Maximum daily vasoactive-ionotrope score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "modsgroup",
+          "id": "phv00529622.v1.p1",
+          "description": "Multiple Organ Dysfunction (MODS) group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "noninv",
+          "id": "phv00529599.v1.p1",
+          "description": "Whether or not the patient was on non-invasive ventilation that provided at least 5 cm H2O prior to illness that led to ICU admission",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "oifm03",
+          "id": "phv00529596.v1.p1",
+          "description": "Oxygenation index (OI) on the day of initiation of mechanical ventilation (if mechanically ventilated)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "osifm03",
+          "id": "phv00529597.v1.p1",
+          "description": "Oxygen saturation index (OSI) on the day of initiation of mechanical ventilation (if mechanically ventilated)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pardsfm03",
+          "id": "phv00529598.v1.p1",
+          "description": "Pediatric Acute Respiratory Distress Syndrome (PARDS) based on OI or OSI on the day of initiation of mechanical ventilation (if mechanically ventilated)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "poscult",
+          "id": "phv00529605.v1.p1",
+          "description": "Whether or not a positive culture was drawn within 72 hours preceding randomization and 24 hours post randomization",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "poscultorg",
+          "id": "phv00529607.v1.p1",
+          "description": "If positive culture drawn, organism",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "poscultsite",
+          "id": "phv00529606.v1.p1",
+          "description": "If positive culture drawn, site",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "primaryadm",
+          "id": "phv00529591.v1.p1",
+          "description": "Primary reason for ICU admission",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "primaryhypot",
+          "id": "phv00529602.v1.p1",
+          "description": "Primary reason for hypotension, If receiving ionotropic support (Recoded for 4 patients 8/12/20)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "primarymv",
+          "id": "phv00529595.v1.p1",
+          "description": "Primary reason for initiation of mechanical ventilation (if mechanically ventilated)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prismrom",
+          "id": "phv00529604.v1.p1",
+          "description": "Risk of death in the ICU according to PRISM III-12 score (%)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prismscore",
+          "id": "phv00529603.v1.p1",
+          "description": "Pediatric Risk of Mortality (PRISM) III-12 score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00529588.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sepsis",
+          "id": "phv00529623.v1.p1",
+          "description": "Status of sepsis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tgc",
+          "id": "phv00529587.v1.p1",
+          "description": "HALF-PINT treatment group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "twbga",
+          "id": "phv00529611.v1.p1",
+          "description": "Time-weighted glucose average (mg/dL)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ventdays28",
+          "id": "phv00529615.v1.p1",
+          "description": "Ventilator days through day 28",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ventfreedays",
+          "id": "phv00529614.v1.p1",
+          "description": "Ventilator-free days through day 28",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ventnight",
+          "id": "phv00529600.v1.p1",
+          "description": "Whether or not the patient was supported with ventilation via tracheostomy overnight/during sleep prior to illness that led to ICU admission",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wt",
+          "id": "phv00529593.v1.p1",
+          "description": "Actual (not dosing) weight at ICU admission (kg)",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CAF_PINT_Sample_Attributes",
+      "datasetId": "pht013448.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin, analyte type, tumor status, and subject age at collection.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00529626.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00529625.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00529627.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00529624.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CAF_PINT_Subject",
+      "datasetId": "pht013445.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00529582.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00529583.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00529581.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CAF_PINT_Sample",
+      "datasetId": "pht013446.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00529585.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00529584.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

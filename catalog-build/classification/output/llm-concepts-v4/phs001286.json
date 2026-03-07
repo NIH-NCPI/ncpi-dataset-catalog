@@ -1,0 +1,154 @@
+{
+  "studyId": "phs001286",
+  "studyName": "The Prostate, Lung, Colon, Ovary Screening Trial (PLCO)",
+  "tables": [
+    {
+      "tableName": "PLCO_Sample_Attributes",
+      "datasetId": "pht007890.v3",
+      "description": "This sample attributes data table reports each sample's histological type, body site of origin, analyte type, tumor status, and array platform for genotyping.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00375741.v3.p2",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Array_Platform",
+          "id": "phv00375743.v3.p2",
+          "description": "The array platform the sample was genotyped on",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00375740.v3.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00375739.v3.p2",
+          "description": "Histological Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00375742.v3.p2",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00375738.v3.p2",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PLCO_Subject",
+      "datasetId": "pht007887.v3",
+      "description": "This subject consent data table reports each subject's subject ID, consent, biological sex, and aliases to subject IDs used in other dbGaP studies.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00375732.v2.p2",
+          "description": "Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00494767.v1.p2",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00556899.v1.p2",
+          "description": "Subject ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00375731.v2.p2",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00556898.v1.p2",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PLCO_Sample",
+      "datasetId": "pht007888.v3",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to individual sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00375734.v3.p2",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00375733.v3.p2",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PLCO_Subject_Phenotypes",
+      "datasetId": "pht007889.v2",
+      "description": "This subject phenotypes data table reports each subject's sex.",
+      "variables": [
+        {
+          "name": "SEX",
+          "id": "phv00375737.v2.p2",
+          "description": "Gender of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00375736.v2.p2",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "studyId": "phs001046",
+  "studyName": "Genomic Architecture of Progression and Treatment Response in AMD",
+  "tables": [
+    {
+      "tableName": "progression_treatment_extremes_pheno",
+      "datasetId": "pht005295.v1",
+      "description": "Phenotype Data (IncludingTreatment Response/Progression Rate)",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00259034.v1.p1",
+          "description": "Age at baseline exam",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHENO_STATUS",
+          "id": "phv00259030.v1.p1",
+          "description": "AMD Case/control status",
+          "concept_id": "ncpi:ophthalmology_amd_drusen_amd_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PROGRESSION_STATUS",
+          "id": "phv00259032.v1.p1",
+          "description": "Progression rate status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00259035.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY",
+          "id": "phv00259031.v1.p1",
+          "description": "Progression or treatment dataset",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259029.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TREATMENT_STATUS",
+          "id": "phv00259033.v1.p1",
+          "description": "Treatment response status (both eyes where available)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AMD_Progression_Treatment_Response_Sample",
+      "datasetId": "pht005294.v1",
+      "description": "Subject - Sample Mapping - Sample Use Information",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00259027.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00386908.v1.p1",
+          "description": "Sample source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00259028.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00386909.v1.p1",
+          "description": "Sample ID at source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259026.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AMD_Progression_Treatment_Response_Sample_Attributes",
+      "datasetId": "pht005298.v1",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00259046.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00259045.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00259047.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00259044.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00259048.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "risk_extremes_pheno",
+      "datasetId": "pht005296.v1",
+      "description": "Phenotype Data (AMD Areds Grade 5/Age/Gender)",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00259038.v1.p1",
+          "description": "Age at qualifying exam (eyes determined to be > AREDS grade 5 bilaterally)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHENO_STATUS",
+          "id": "phv00259037.v1.p1",
+          "description": "Phenotype (AMD status)",
+          "concept_id": "ncpi:ophthalmology_amd_drusen_amd_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00259039.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259036.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "exome_chip_pheno",
+      "datasetId": "pht005297.v1",
+      "description": "Phenotype Data (AMD Status/Age/Gender)",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00259042.v1.p1",
+          "description": "Age at most recent exam",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHENO_STATUS",
+          "id": "phv00259041.v1.p1",
+          "description": "Phenotype (AMD status)",
+          "concept_id": "ncpi:ophthalmology_amd_drusen_amd_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00259043.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259040.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AMD_Progression_Treatment_Response_Subject",
+      "datasetId": "pht005293.v1",
+      "description": "Subject - Consent Information",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00259025.v1.p1",
+          "description": "Case (AMD) - control status of the subject",
+          "concept_id": "ncpi:ophthalmology_amd_drusen_amd_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00259024.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259023.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

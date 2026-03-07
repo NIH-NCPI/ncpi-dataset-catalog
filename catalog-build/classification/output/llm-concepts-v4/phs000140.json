@@ -1,0 +1,450 @@
+{
+  "studyId": "phs000140",
+  "studyName": "A Whole Genome Association Search for Type 2 Diabetes Genes in African Americans",
+  "tables": [
+    {
+      "tableName": "CIDR_T2D_Case_Data",
+      "datasetId": "pht000630.v2",
+      "description": "Subject ID, race, age, gender, BMI, consent form(s) signed by participants, age of type 2 diabetes Mellitus diagnosis, age of end stage renal disease diagnosis, age of hypertension diagnosis, duration of type 2 diabetes Mellitus since diagnosis, individual has reported that he/she is on dialysis, individual has reported hypertension, individual has diabetic retinopathy reported by ophthalmologist or laser treatment with photocoagulation, HBA1C, pc1, pc2, pc3, pc4, pc5, pc6, pc7, pc8, pc9, and pc10 of participants with T2D and involved in the \"A Whole Genome Association Search for Type 2 Diabetes Genes in African Americans\" project.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00066339.v1.p1",
+          "description": "Age at recruitment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00066341.v1.p1",
+          "description": "Body Mass Index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Consent",
+          "id": "phv00066342.v1.p1",
+          "description": "Consent form(s) signed by participant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Duration T2DM",
+          "id": "phv00066346.v1.p1",
+          "description": "Duration of T2DM (Type 2 Diabetes Mellitus) since diagnosis",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_duration",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ESRD",
+          "id": "phv00066347.v1.p1",
+          "description": "Individual has reported that he/she is on dialysis",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_end_stage_renal_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESRD Age of Onset",
+          "id": "phv00066344.v1.p1",
+          "description": "Age of ESRD (End Stage Renal Disease) diagnosis, start of dialysis",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_end_stage_renal_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gender",
+          "id": "phv00066340.v1.p1",
+          "description": "Gender of participant has been confirmed with genotyping: 1 = Male, 2 = Female",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HBA1C",
+          "id": "phv00066350.v1.p1",
+          "description": "Hemoglobin1AC, test",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_hemoglobin_a1c",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HTN",
+          "id": "phv00066348.v1.p1",
+          "description": "Individual has self reported hypertension (yes, no, unknown)",
+          "concept_id": "ncpi:antihypertensive_meds_hypertension_treatment_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HTN Age of Onset",
+          "id": "phv00066345.v1.p1",
+          "description": "Age of hypertension diagnosis",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypertension_hypertension_age_onset",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00066338.v1.p1",
+          "description": "Race, ethnicity of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Retinopathy",
+          "id": "phv00066349.v1.p1",
+          "description": "Individual has diabetic retinopathy reported by ophthalmologist or laser treatment with photocoagulation",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_diabetic_retinopathy_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00066337.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2DM Age of Onset",
+          "id": "phv00066343.v1.p1",
+          "description": "Age of T2DM (Type 2 Diabetes Mellitus) diagnosis",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_age_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc1",
+          "id": "phv00076433.v1.p1",
+          "description": "Principal component 1: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc10",
+          "id": "phv00076442.v1.p1",
+          "description": "Principal component 10: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_10",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc2",
+          "id": "phv00076434.v1.p1",
+          "description": "Principal component 2: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_2",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc3",
+          "id": "phv00076435.v1.p1",
+          "description": "Principal component 3: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_3",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc4",
+          "id": "phv00076436.v1.p1",
+          "description": "Principal component 4: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_4",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc5",
+          "id": "phv00076437.v1.p1",
+          "description": "Principal component 5: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_5",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc6",
+          "id": "phv00076438.v1.p1",
+          "description": "Principal component 6: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_6",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc7",
+          "id": "phv00076439.v1.p1",
+          "description": "Principal component 7: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_7",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc8",
+          "id": "phv00076440.v1.p1",
+          "description": "Principal component 8: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_8",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc9",
+          "id": "phv00076441.v1.p1",
+          "description": "Principal component 9: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_9",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_T2D_Control_Data",
+      "datasetId": "pht000631.v2",
+      "description": "Subject ID, race, age, gender, BMI, fasting blood sugar, consent form(s) signed by participant, participant is fasting when he has not had anything to eat or drink 12 hours prior to blood draw, pc1, pc2, pc3, pc4, pc5, pc6, pc7, pc8, pc9, and pc10 of participants without T2D and involved in the \"A Whole Genome Association Search for Type 2 Diabetes Genes in African Americans\" project.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00066353.v1.p1",
+          "description": "Age at recruitment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00066355.v1.p1",
+          "description": "Body Mass Index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Consent",
+          "id": "phv00066357.v1.p1",
+          "description": "Consent form(s) signed by participant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FBS",
+          "id": "phv00066356.v1.p1",
+          "description": "Fasting Blood Sugar",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_glucose_levels",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Fasting status",
+          "id": "phv00066358.v1.p1",
+          "description": "Participant is fasting when he has not had anything to eat or drink 12 hours prior to blood draw.",
+          "concept_id": "topmed:fasting_lipids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Gender",
+          "id": "phv00066354.v1.p1",
+          "description": "Gender of participant has been confirmed with genotyping: 1 = Male, 2 = Female",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00066352.v1.p1",
+          "description": "Race, ethnicity of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00066351.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc1",
+          "id": "phv00076443.v1.p1",
+          "description": "Principal component 1: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc10",
+          "id": "phv00076452.v1.p1",
+          "description": "Principal component 10: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_10",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc2",
+          "id": "phv00076444.v1.p1",
+          "description": "Principal component 2: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_2",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc3",
+          "id": "phv00076445.v1.p1",
+          "description": "Principal component 3: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_3",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc4",
+          "id": "phv00076446.v1.p1",
+          "description": "Principal component 4: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_4",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc5",
+          "id": "phv00076447.v1.p1",
+          "description": "Principal component 5: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_5",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc6",
+          "id": "phv00076448.v1.p1",
+          "description": "Principal component 6: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_6",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc7",
+          "id": "phv00076449.v1.p1",
+          "description": "Principal component 7: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_7",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc8",
+          "id": "phv00076450.v1.p1",
+          "description": "Principal component 8: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_8",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pc9",
+          "id": "phv00076451.v1.p1",
+          "description": "Principal component 9: a mathematical tool commonly used in statistical analysis. It seeks to identify an orthogonal coordinate system that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables called principal components (PC). This method allows for the separation of individuals on the basis of differences in their properties and can also be used to evaluate the properties that contribute the most to these separations. The principal components are ordered in terms of the amount of variation in the dataset that they explain such that the first PC explains the largest fraction of the total variance, and so on. There exist a number of methods to determine the number of PC to be retained for a specific analysis. However, none of them uniformly dominates the others. Following a practice largely adopted in the field, we present the first 10 PC computed on this dataset.",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_9",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_T2D_Pedigree",
+      "datasetId": "pht000911.v2",
+      "description": "Subject ID, family ID, mother ID, father ID, gender, and monozygotic tween ID of participants with of without T2D and involved in the \"A Whole Genome Association Search for Type 2 Diabetes Genes in African Americans\" project.",
+      "variables": [
+        {
+          "name": "FAMID",
+          "id": "phv00076455.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00076458.v1.p1",
+          "description": "Father's subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00076457.v1.p1",
+          "description": "Mother's subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MZ_TWIN_ID",
+          "id": "phv00076460.v2.p1",
+          "description": "Twin ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00076459.v1.p1",
+          "description": "Sex",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00076456.v1.p1",
+          "description": "Unique subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_T2D_Sample_Attributes",
+      "datasetId": "pht005640.v1",
+      "description": "Sample ID, analyte type, body site, and tumor status of participants with or without T2D and involved in the \"A Whole Genome Association Search for Type 2 Diabetes Genes in African Americans\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00265634.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00265633.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00265635.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00265632.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

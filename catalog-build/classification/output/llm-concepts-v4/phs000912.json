@@ -1,0 +1,218 @@
+{
+  "studyId": "phs000912",
+  "studyName": "San Francisco Bay Area Latina Breast Cancer Study",
+  "tables": [
+    {
+      "tableName": "Breast_Cancer_Latina_Subject_Phenotypes",
+      "datasetId": "pht004732.v1",
+      "description": "Subject ID, case or control status, bilateral breast cancer, age at diagnosis, gender, histological type and grade at diagnosis, status of estrogen and progesterone receptor of breast tumor of participants with or without breast cancer and involved in the \"San Francisco Bay Area Latina Breast Cancer Study\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226546.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "agedx",
+          "id": "phv00226549.v1.p1",
+          "description": "Age at diagnosis for cases, age at ascertainment for controls",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bilat",
+          "id": "phv00226548.v1.p1",
+          "description": "Bilateral breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_breast_cancer",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "case_status",
+          "id": "phv00226547.v1.p1",
+          "description": "Case-control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "er",
+          "id": "phv00226554.v1.p1",
+          "description": "Estrogen receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "histgrad",
+          "id": "phv00226552.v1.p1",
+          "description": "Histological grade at diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "histtype",
+          "id": "phv00226553.v1.p1",
+          "description": "Histological type",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pr",
+          "id": "phv00226555.v1.p1",
+          "description": "Progesterone receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_progesterone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00226550.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sumstage",
+          "id": "phv00226551.v1.p1",
+          "description": "Stage at diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Cancer_Latina_Sample_Attributes",
+      "datasetId": "pht004733.v1",
+      "description": "Sample ID, body site where sample was obtained, analyte type, genotyping center, source repository where subject originate, and subject ID used in the source repository of participants with or without breast cancer and involved in the \"San Francisco Bay Area Latina Breast Cancer Study\" project.",
+      "variables": [
+        {
+          "name": "Analyte Type",
+          "id": "phv00226558.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Body Site",
+          "id": "phv00226557.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Genotyping_Center",
+          "id": "phv00226559.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00226560.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Institution Collected",
+          "id": "phv00226562.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00226556.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Source Study",
+          "id": "phv00226561.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Cancer_Latina_Subject",
+      "datasetId": "pht004730.v1",
+      "description": "Subject ID, consent group, and case or control status of participants with or without breast cancer and involved in the \"San Francisco Bay Area Latina Breast Cancer Study\" project.",
+      "variables": [
+        {
+          "name": "Consent",
+          "id": "phv00226541.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226540.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case_status",
+          "id": "phv00226542.v1.p1",
+          "description": "Case or control status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Cancer_Latina_Sample",
+      "datasetId": "pht004731.v1",
+      "description": "Subject ID, sample ID, and sample use variable obtained from participants with or without breast cancer and involved in the \"San Francisco Bay Area Latina Breast Cancer Study\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00226544.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00226545.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226543.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

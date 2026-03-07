@@ -1,0 +1,378 @@
+{
+  "studyId": "phs002803",
+  "studyName": "A Phase II Clinical Trial of the PARP Inhibitor Talazoparib in BRCA1 and BRCA2 Wild-Type Patients",
+  "tables": [
+    {
+      "tableName": "TBB_Sample_Attributes",
+      "datasetId": "pht011934.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, sequencing type, histological type, tumor status, primary or metastic tumor type, diagnosis year, collection year, homologous recombination deficiency (HRD) score and test success, adjuvant chemotherapy status and delivery (n=4 variables), platinum-based therapy (n=3 variables; adjuvant, metastatic, or any prior therapy), and line of metastatic therapy delivered (n=8 variables).",
+      "variables": [
+        {
+          "name": "ADJ_PLATINUM",
+          "id": "phv00496285.v1.p1",
+          "description": "Did patient receive platinum-based therapy in adjuvant setting?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_platinum_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00496271.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANY_PRIOR_PLATINUM",
+          "id": "phv00496287.v1.p1",
+          "description": "Did patient receive any platinum-based therapy in any setting prior to enrollment?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_platinum_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00496270.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_DATE",
+          "id": "phv00496278.v1.p1",
+          "description": "Date the sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS_DATE",
+          "id": "phv00496277.v1.p1",
+          "description": "Date patient was diagnosed with cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_cancer_diagnosis_dates",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HAD_PRIOR_ADJ_THERAPY",
+          "id": "phv00496281.v1.p1",
+          "description": "Adjuvant chemotherapy or hormonal therapy was delivered",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_adjuvant_therapy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00496274.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HRD_SCORE",
+          "id": "phv00496280.v1.p1",
+          "description": "Homologous Recombination Deficiency score",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_hrd_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HRD_TESTED",
+          "id": "phv00496279.v1.p1",
+          "description": "Was specimen tested for successfully HRD",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_hrd_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00496273.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "METASTATIC_PLATINUM",
+          "id": "phv00496286.v1.p1",
+          "description": "Did patient receive platinum-based therapy in metastatic setting?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_platinum_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00496275.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00496276.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_ADJ_SYSTEMIC_THERAPY_1",
+          "id": "phv00496282.v1.p1",
+          "description": "First line of adjuvant therapy delivered",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_adjuvant_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_ADJ_SYSTEMIC_THERAPY_2",
+          "id": "phv00496283.v1.p1",
+          "description": "Second line of adjuvant therapy delivered",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_adjuvant_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_ADJ_SYSTEMIC_THERAPY_3",
+          "id": "phv00496284.v1.p1",
+          "description": "Third line of adjuvant therapy delivered",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_adjuvant_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_SYSTEMIC_METASTATIC_THERAPY_1",
+          "id": "phv00496288.v1.p1",
+          "description": "FIrst line of metastatic therapy delivered",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_systemic_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_SYSTEMIC_METASTATIC_THERAPY_2",
+          "id": "phv00496289.v1.p1",
+          "description": "Second line of metastatic therapy delivered",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_systemic_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_SYSTEMIC_METASTATIC_THERAPY_3",
+          "id": "phv00496290.v1.p1",
+          "description": "Third line of metastatic therapy delivered",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_systemic_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_SYSTEMIC_METASTATIC_THERAPY_4",
+          "id": "phv00496291.v1.p1",
+          "description": "Fourth line of metastatic therapy delivered",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_systemic_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_SYSTEMIC_METASTATIC_THERAPY_5",
+          "id": "phv00496292.v1.p1",
+          "description": "Fifth line of metastatic therapy delivered",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_systemic_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_SYSTEMIC_METASTATIC_THERAPY_6",
+          "id": "phv00496293.v1.p1",
+          "description": "Sixth line of metastatic therapy delivered",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_systemic_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_SYSTEMIC_METASTATIC_THERAPY_7",
+          "id": "phv00496294.v1.p1",
+          "description": "Seventh line of metastatic therapy delivered",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_systemic_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_SYSTEMIC_METASTATIC_THERAPY_8",
+          "id": "phv00496295.v1.p1",
+          "description": "Eight line of metastatic therapy delivered",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_systemic_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00496269.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQ_TYPE",
+          "id": "phv00496272.v1.p1",
+          "description": "Type of sequencing performed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TBB_Subject_Phenotypes",
+      "datasetId": "pht011933.v1",
+      "description": "This subject phenotypes data table includes subject's race, age, germline or tumor mutation used for study enrollment, tumor type, RECIST classication of best response and change in tumor measurements, homologous recombination deficiency (HRD) scores on primary and metastatic tumors, and time to progression and response to trial therapy.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00496260.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BEST_CHANGE_SLD",
+          "id": "phv00496264.v1.p1",
+          "description": "Percent change in sum of longest diameter (SLD) tumor measurements by RECIST",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_tumor_measurement_change",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BEST_RESPONSE",
+          "id": "phv00496263.v1.p1",
+          "description": "RECIST classification of best response to talazoparib therapy on trial",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_treatment_response",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HRD_SCORE_METS",
+          "id": "phv00496266.v1.p1",
+          "description": "Homologous Recombination Deficiency score on metastatic tumor",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_hrd_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HRD_SCORE_PRIMARY",
+          "id": "phv00496265.v1.p1",
+          "description": "Homologous Recombination Deficiency score on primary tumor",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_hrd_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MUTATION",
+          "id": "phv00496261.v1.p1",
+          "description": "Germline or tumor mutation used for study enrollment",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_germline_mutations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00496259.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00496258.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIME_TO_RESPONSE",
+          "id": "phv00496268.v1.p1",
+          "description": "Time to response on trial therapy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_follow_up_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TTP",
+          "id": "phv00496267.v1.p1",
+          "description": "Time to progression on trial therapy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_progression_free_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TYPE",
+          "id": "phv00496262.v1.p1",
+          "description": "Tissue of origin of tumor",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_tumor_classification",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TBB_Subject",
+      "datasetId": "pht011931.v1",
+      "description": "The subject consent data table includes subject IDs and consent group information, and subject's biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00496254.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00496255.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00496253.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TBB_Sample",
+      "datasetId": "pht011932.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00496257.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00496256.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

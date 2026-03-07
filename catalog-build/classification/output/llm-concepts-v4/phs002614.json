@@ -1,0 +1,114 @@
+{
+  "studyId": "phs002614",
+  "studyName": "Multi-Omic Investigation of Beckwith-Wiedemann Syndrome Hepatoblastoma",
+  "tables": [
+    {
+      "tableName": "BWS_HB_Subject",
+      "datasetId": "pht011588.v2",
+      "description": "This subject consent data table includes subject IDs, consent information, and subject's biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00493810.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00493811.v2.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493809.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BWS_HB_Sample_Attributes",
+      "datasetId": "pht011591.v2",
+      "description": "This sample attributes data table includes body site where sample was collected and tumor status. The analyte type for all samples is DNA/RNA.",
+      "variables": [
+        {
+          "name": "BODY_SITE",
+          "id": "phv00493817.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00493818.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00493816.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BWS_HB_Sample",
+      "datasetId": "pht011589.v2",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00493813.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493812.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BWS_HB_Subject_Phenotypes",
+      "datasetId": "pht011590.v2",
+      "description": "This subject phenotypes data table includes affection status for Beckwith-Wiedemann Syndrome (BWS).",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00493815.v2.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493814.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

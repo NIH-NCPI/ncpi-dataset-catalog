@@ -1,0 +1,186 @@
+{
+  "studyId": "phs001336",
+  "studyName": "ECLS Survival in Pediatric HCT Recipient with Presumed Cardiac GVHD",
+  "tables": [
+    {
+      "tableName": "ECLS_HCT_GVHD_Subject_Phenotypes",
+      "datasetId": "pht006206.v1",
+      "description": "This subject phenotype data table includes the patient's sex, race, disease onset age, hematopoietic cellular transplant (HCT) indication and type, cell source, and number of HLA matches.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00282798.v1.p1",
+          "description": "Disease onset age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Cell_Source",
+          "id": "phv00282803.v1.p1",
+          "description": "How was the cellular transfusion mobilized from the donor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HCT_Indication",
+          "id": "phv00282801.v1.p1",
+          "description": "Reason for undergoing hematopoietic cellular transplantation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HCT_Type",
+          "id": "phv00282802.v1.p1",
+          "description": "Type of hematopoietic cellular transplant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_Match",
+          "id": "phv00282804.v1.p1",
+          "description": "Number of human leukocyte antigen alleles matched between donor and recipient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PatientID",
+          "id": "phv00282797.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00282800.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00282799.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ECLS_HCT_GVHD_Sample_Attributes",
+      "datasetId": "pht006207.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, and sequencing center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00282807.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00282806.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00282808.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00282805.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00282809.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ECLS_HCT_GVHD_Subject",
+      "datasetId": "pht006204.v1",
+      "description": "The subject consent data table contains patient IDs, consent group information, and affection status.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00282793.v1.p1",
+          "description": "Case control status of the subject for hypodiploid pre-B acute lymphoblastic leukemia status post matched unrelated donor allogeneic hematopoietic stem cell transplant complicated by fulminant myocarditis on day +75",
+          "concept_id": "ncpi:disease_diagnosis_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00282792.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PatientID",
+          "id": "phv00282791.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ECLS_HCT_GVHD_Sample",
+      "datasetId": "pht006205.v1",
+      "description": "This subject sample mapping data table includes a mapping of study patient IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "PatientID",
+          "id": "phv00282794.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00282795.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00282796.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

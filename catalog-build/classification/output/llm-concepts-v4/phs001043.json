@@ -1,0 +1,346 @@
+{
+  "studyId": "phs001043",
+  "studyName": "GWAS of Breast Events with Adjuvant Aromatase Inhibitors",
+  "tables": [
+    {
+      "tableName": "Adjuvant_Aromatase_Inhibitors_Breast_Cancer_Subject_Phenotypes",
+      "datasetId": "pht005315.v1",
+      "description": "The dataset provides data about the length of the Breast Cancer Free Interval (BCFI), tumor characteristics prior to resection (e.g. estrogen/progesterone positive, lymph node status, T-/N-stage values, type of treatment used [e.g. adjuvant anastrozole or exemestane, celocoxib, herceptin, bisphonate]), bone frailty, MSK (musculoskeletal) event and basic sociodemographic data, including self-reported and genotype-based race data.",
+      "variables": [
+        {
+          "name": "BMI",
+          "id": "phv00259416.v1.p1",
+          "description": "Body mass index at baseline",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "N_Stage__Pathologic",
+          "id": "phv00259421.v1.p1",
+          "description": "Pathologic N stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RIKENcohort",
+          "id": "phv00259409.v1.p1",
+          "description": "Status indicator of MSK event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Receptor_Status__ER",
+          "id": "phv00259422.v1.p1",
+          "description": "Estrogen receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_hormone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Receptor_Status__PgR",
+          "id": "phv00259423.v1.p1",
+          "description": "Progesterone receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_hormone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259406.v1.p1",
+          "description": "Unique patient identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T_Stage__Pathologic",
+          "id": "phv00259420.v1.p1",
+          "description": "Pathologic T stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00259417.v1.p1",
+          "description": "Age at randomization",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bisphophonate_use",
+          "id": "phv00259425.v1.p1",
+          "description": "Bisphonate use (minimum of 30 days prior to recurrence)",
+          "concept_id": "topmed:bone_musculoskeletal_osteoporosis_bone_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "breastevent",
+          "id": "phv00259429.v1.p1",
+          "description": "Event code for disease free survival analysis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_breast_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "breastevent_survtime",
+          "id": "phv00259430.v1.p1",
+          "description": "Time from randomization to breast event for cases, and time from randomization to last follow-up for non-cases.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "cohort_900",
+          "id": "phv00259408.v1.p1",
+          "description": "Status Indicator of inclusion in 900 patient Cohort",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "contralateral",
+          "id": "phv00259428.v1.p1",
+          "description": "Type of breast event - contralateral",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_breast_cancer",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "distant",
+          "id": "phv00259427.v1.p1",
+          "description": "Type of breast event - distant",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_breast_cancer",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "eventtype",
+          "id": "phv00259432.v1.p1",
+          "description": "Type of breast event (cases only)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_breast_cancer",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "frailty",
+          "id": "phv00259407.v1.p1",
+          "description": "Status Indicator of having Fracture",
+          "concept_id": "ncpi:bone_musculoskeletal_fractures_breaks_other_fractures",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "length_of_trial_endocrine_therap",
+          "id": "phv00259424.v1.p1",
+          "description": "Length of time on endocrine therapy trial (in months)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_hormone_therapy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "local_regional",
+          "id": "phv00259426.v1.p1",
+          "description": "Type of breast event - local/regional",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_breast_cancer",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "mango_1_allo2_cd",
+          "id": "phv00259410.v1.p1",
+          "description": "Treatment status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "perf_st",
+          "id": "phv00259419.v1.p1",
+          "description": "ECOG (Eastern Cooperative Oncology Group) performance score",
+          "concept_id": "topmed:cancer_diagnosis_cancer_clinical_data",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00259418.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "stra_aspin_1n",
+          "id": "phv00259414.v1.p1",
+          "description": "Stratification factor: aspirin use",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_aspirin_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "stra_celecox_1",
+          "id": "phv00259413.v1.p1",
+          "description": "Stratification factor: celocoxib use",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_cox2_inhibitors",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "stra_chem_1",
+          "id": "phv00259412.v1.p1",
+          "description": "Stratification factor: adjuvant chemotherapy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_adjuvant_therapy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "stra_hercep_1",
+          "id": "phv00259415.v1.p1",
+          "description": "Stratification factor: herceptin use",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_hormone_therapy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "stra_nod_1",
+          "id": "phv00259411.v1.p1",
+          "description": "Stratification factor: lymph node status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "structure_race",
+          "id": "phv00259433.v1.p1",
+          "description": "Genotypic race",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "tnmstage",
+          "id": "phv00259431.v1.p1",
+          "description": "TNM stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Adjuvant_Aromatase_Inhibitors_Breast_Cancer_Sample_Attributes",
+      "datasetId": "pht005316.v1",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00259436.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00259435.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00259439.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00259438.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00259437.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00259434.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Adjuvant_Aromatase_Inhibitors_Breast_Cancer_Sample",
+      "datasetId": "pht005314.v1",
+      "description": "Subject - Sample Mapping - Sample Use Information",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00259404.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00259405.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259403.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Adjuvant_Aromatase_Inhibitors_Breast_Cancer_Subject",
+      "datasetId": "pht005313.v1",
+      "description": "Subject - Consent - Affection Status Information (Cases defined as patients with BCFI event - Controls defined as patients without BCFI event).",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00259401.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259400.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,424 @@
+{
+  "studyId": "phs000145",
+  "studyName": "POPRES: Population Reference Sample",
+  "tables": [
+    {
+      "tableName": "POPRES_v1_v2_Subject_Phenotypes",
+      "datasetId": "pht000659.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00066601.v2.p2",
+          "description": "Age of Subject",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BATCH",
+          "id": "phv00066602.v2.p2",
+          "description": "Genotyping batch in which data was generated",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COUNTRY_FATHER",
+          "id": "phv00066603.v2.p2",
+          "description": "Country for Father",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COUNTRY_MGF",
+          "id": "phv00066604.v2.p2",
+          "description": "Country for Maternal Grandfather",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COUNTRY_MGM",
+          "id": "phv00066605.v2.p2",
+          "description": "Country for Maternal Grandmother",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COUNTRY_MOTHER",
+          "id": "phv00066606.v2.p2",
+          "description": "Country for Mother",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COUNTRY_PGF",
+          "id": "phv00066607.v2.p2",
+          "description": "Country for Paternal Grandfather",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COUNTRY_PGM",
+          "id": "phv00066608.v2.p2",
+          "description": "Country for Paternal Grandmother",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COUNTRY_SELF",
+          "id": "phv00066609.v2.p2",
+          "description": "Country for Subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GROUPING_COLLECTION",
+          "id": "phv00066610.v2.p2",
+          "description": "Owning collection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GROUPING_CONTINENTAL_ORIGIN",
+          "id": "phv00066611.v2.p2",
+          "description": "Continental Origin for Subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GROUPING_PCA_LABEL1",
+          "id": "phv00066612.v2.p2",
+          "description": "Level 1 tag used in PCA plots.  1) For UCSF, this variable contains a full description of reported ethnicity.  \"UCSF Other\" is used for any subject without reported ethnicity.  2) For LOLIPOP Indian Asians, this variable contains reported language.  \"IndianAsian\" if none reported. 3) For all other subjects (except Duke Genetics of Memory subjects), if grandparental country data exists and is in agreement, grandparental country. If grandparental country data exists and is not in agreement, literal \"Mixed\".  Otherwise,  COUNTRY_SELF.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GROUPING_PCA_LABEL2",
+          "id": "phv00066613.v2.p2",
+          "description": "Level 2 tag used in PCA plots.  Reflects region.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POPRES_GENDER",
+          "id": "phv00066614.v2.p2",
+          "description": "Gender used by POPRES.  Reported if exists, else inferred from sex linked data if successfully genotyped.",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POPRES_GENDER_INFERRED",
+          "id": "phv00066616.v2.p2",
+          "description": "Is POPRES gender inferred from sex linked data? NA when POPRES_GENDER is Unknown.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_LANGUAGE",
+          "id": "phv00066615.v2.p2",
+          "description": "Primary Language for Subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STATUS_OVERALL",
+          "id": "phv00066617.v2.p2",
+          "description": "Overall QC status for the subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STATUS_PASSED_QC1",
+          "id": "phv00066618.v2.p2",
+          "description": "Sample passed 1st round of QC?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STATUS_PASSED_QC2",
+          "id": "phv00066619.v2.p2",
+          "description": "Sample passed 2nd round of QC?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00066600.v2.p2",
+          "description": "POPRES Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "POPRES_PC_Scores",
+      "datasetId": "pht000660.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "PC1",
+          "id": "phv00066621.v2.p2",
+          "description": "Principal Component 1: distinguishes between Africans from non-Africans",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC2",
+          "id": "phv00066622.v2.p2",
+          "description": "Principal Component 2: distinguishes East Asians from Africans and Europeans, with South Asians and Mexicans at intermediate values",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_2",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC3",
+          "id": "phv00066623.v2.p2",
+          "description": "Principal Component 3: distinguishes South Asians from East Asians",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_3",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC4",
+          "id": "phv00066624.v2.p2",
+          "description": "Principal Component 4: distinguishes Mexicans from non-Mexicans",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_4",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC5",
+          "id": "phv00066625.v2.p2",
+          "description": "Principal Component 5: reveals a north-to-south cline within Europeans",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_5",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC6",
+          "id": "phv00066626.v2.p2",
+          "description": "Principal Component 6: distinguishes the African Americans from the HapMap Africans",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_6",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC7",
+          "id": "phv00066627.v2.p2",
+          "description": "Principal Component 7: separates the three East Asian populations (Japan, HapMap CHB, Taiwan)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_7",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00066620.v2.p2",
+          "description": "POPRES Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "POPRES_Sample",
+      "datasetId": "pht000662.v3",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00066633.v3.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00173961.v1.p2",
+          "description": "Sample Use. SNP_Array: SNP genotypes obtained using standard or custom microarrays; SNP_Sequence: SNP genotypes derived from sequence data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00066634.v3.p2",
+          "description": "Samples were obtained from Coriell",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00066635.v3.p2",
+          "description": "Coriell Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00066632.v3.p2",
+          "description": "POPRES Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "POPRES_v3_Subject_Phenotypes",
+      "datasetId": "pht002998.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "COUNTRY_SELF",
+          "id": "phv00190414.v1.p2",
+          "description": "Indicates the country where the subject was born.",
+          "concept_id": "ncpi:geographic_site_country_origin",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "EUROPEAN_LABEL",
+          "id": "phv00173963.v2.p2",
+          "description": "The geographic label for a sampled individual was based upon the self-reported labels attributed to 1) the four grandparents, 2) two grandparents and one parent, 3) the two parents, or 4) the individual, based upon data availability. Conflicting labels of ancestors resulted in an attribution to a higher level label.  Europe was divided the four regions UN Northern, UN Western, UN Southern and UN Eastern Europe as defined in the UN geo-scheme for Europe.  Those 4 groups were then further subdivided based on sampling of 500 individuals as follows:  UN Northern into North-Western Europe (Great Britain & Ireland) and Northern Europe which includes all other UN Northern countries but Finland.  UN Western Europe was split into Western Europe (Belgium, France, Luxembourg, and the Netherlands) and Central Europe(Austria, Germany, and Switzerland). Finally, UN Southern Europe was split into South-WesternEurope (Spain, Portugal, and Andorra) and South-Eastern Europe (all others).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ORIGIN_LABEL",
+          "id": "phv00190413.v1.p2",
+          "description": "Based on this information, we first attributed a best-guess geographic label to each of the family members based on the following rules: 1) missing data was ignored; 2) if ethnicity conflicted with birthplace or first language data, only ethnicity was considered; 3) if birthplace and first language disagreed, a higher level container label was chosen (e.g. an individual who was born in France but reported his first language to be Norwegian was labeled European); and 4) white individuals born in the US or Canada were attributed according to the first language information alone, if other than English.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00173962.v2.p2",
+          "description": "POPRES Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WORLD_LABEL",
+          "id": "phv00173964.v2.p2",
+          "description": "Labels defined as follows:  African American: self identified as African ancestry from Jamaica or Grenada, European: self identified as European ancestry from UN Northern, UN Western, UN Southern, UN Eastern or a mixture of these  4 groups, Hispanic: self identified Hispanic from Colombia, Guyana, or  Uruguay, Southern Asia: self identified as origin from Afghanistan, India, Nepal, Pakistan or Sri Lanka, Western Asia: self identified as origin from Iraq, Jordan, Qatar, Turkey or Yemen and Other: Ancestry missing, incomplete or with small numbers from regions other than those specified",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PORPES_Sample_Attributes",
+      "datasetId": "pht002999.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00173967.v1.p2",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00173966.v1.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00173969.v1.p2",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00173968.v1.p2",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00173965.v1.p2",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "POPRES_Subject",
+      "datasetId": "pht000661.v3",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00066629.v3.p2",
+          "description": "Consent group as determined by the Data Access Committee (DAC)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJID",
+          "id": "phv00066631.v3.p2",
+          "description": "Coriell Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00066628.v3.p2",
+          "description": "POPRES Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJ_SOURCE",
+          "id": "phv00066630.v3.p2",
+          "description": "Coriell",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "studyId": "phs001700",
+  "studyName": "Exome Sequencing of Large Multiethnic Population of Moyamoya Patients",
+  "tables": [
+    {
+      "tableName": "Moyamoya_Subject_Phenotypes",
+      "datasetId": "pht008502.v1",
+      "description": "This subject phenotype table contains subject IDs, age, ethnicity, gender, height, and blood type.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00396354.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Blood Type",
+          "id": "phv00396358.v1.p1",
+          "description": "Blood group of Participant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00396355.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Gender",
+          "id": "phv00396356.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Height",
+          "id": "phv00396357.v1.p1",
+          "description": "Height measured at enrollment",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396353.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Moyamoya_Subject",
+      "datasetId": "pht008500.v1",
+      "description": "The subject consent file includes subject IDs, subject source, consent information, and case control status of the subject for Moyamoya Disease.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00396348.v1.p1",
+          "description": "Case control status for Moyamoya Disease",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_alzheimers_dementia_diagnosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00396347.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396345.v1.p1",
+          "description": "Subject Identification",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00396346.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Moyamoya_Sample",
+      "datasetId": "pht008501.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample source and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00396350.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00396351.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396349.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Moyamoya_Sample_Attributes",
+      "datasetId": "pht008503.v1",
+      "description": "This sample attributes table contains sample IDs, body site, and analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00396361.v1.p1",
+          "description": "Product that was used for analysis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00396360.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00396359.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

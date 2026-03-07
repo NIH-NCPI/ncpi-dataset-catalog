@@ -1,0 +1,796 @@
+{
+  "studyId": "phs000403",
+  "studyName": "NHLBI GO-ESP: Heart Cohorts Exome Sequencing Project (MESA)",
+  "tables": [
+    {
+      "tableName": "MESA_ESP_HeartGO_Subject_Phenotypes",
+      "datasetId": "pht003102.v1",
+      "description": "The subject phenotype data table includes sociodemography (n=2 variables; self-reported race and sex), medical history (n=4 variables; gout, asthma, epmphysema, and family history of stroke), baseline observations (n=18 variables; age, MI, Framingham CHD probability, bmi, T2 diabetes, anthropometric measures, stroke, menopause status, hormone replacement, and atrial fibrillation status), follow-up observations (n=5 variables; MI and stroke status), EKG measures (n=13 variables), lung function measures (n=3 variables), blood pressure measures (n=4 variables), heart measures (n=9 variables; CAC Agatston scores IMT values, angioplasty, CABG, and PAD status), lipid and cholesterol measures (n=5 variables), urine measures (n=4 variables), blood coagulation factors (n=6 variables), glucose measures (n=2 variables), serum proteins (n=8 variables; cystatin C, creatinine, CRP, and ICAM), smoking status (n=2 variables), and ESP cohort, phenotype, study site, sequence center, and target capture used in sequencing.",
+      "variables": [
+        {
+          "name": "ESP_ABI_resids_from_CARe",
+          "id": "phv00178082.v1.p3",
+          "description": "Residuals for ankle brachial index (ABI), calculated in CARe",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_Cohort",
+          "id": "phv00178021.v1.p3",
+          "description": "Cohort name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_afib_baseline",
+          "id": "phv00178060.v1.p3",
+          "description": "Atrial fibrillation at baseline (0/1)",
+          "concept_id": "ncpi:ecg_atrial_fibrillation",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_ABI",
+          "id": "phv00178083.v1.p3",
+          "description": "Age in years at ABI measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_cac",
+          "id": "phv00178074.v1.p3",
+          "description": "Age in years at CAC Agatston score measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_crp",
+          "id": "phv00178070.v1.p3",
+          "description": "Age in years at CRP measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_ekg",
+          "id": "phv00178096.v1.p3",
+          "description": "Age in years at EKG measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_factorviii",
+          "id": "phv00178066.v1.p3",
+          "description": "Age in years at Factor VIII measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_fibrinogen",
+          "id": "phv00178064.v1.p3",
+          "description": "Age in years at Fibrinogen measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_icam1",
+          "id": "phv00178072.v1.p3",
+          "description": "Age in years at ICAM1 measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_imt",
+          "id": "phv00178078.v1.p3",
+          "description": "Age in years at IMT measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_menopause",
+          "id": "phv00178057.v1.p3",
+          "description": "AGE IN YEARS AT MENOPAUSE",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_serum_creatinine",
+          "id": "phv00178104.v1.p3",
+          "description": "Age at serum creatinine measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_serum_cystatinc",
+          "id": "phv00178102.v1.p3",
+          "description": "Age in years at serum cystatin c measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_urinary_albumin",
+          "id": "phv00178098.v1.p3",
+          "description": "Age in years at urinary albumin measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_urinary_creatinine",
+          "id": "phv00178100.v1.p3",
+          "description": "Age in years at urinary creatinine measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_at_vwf",
+          "id": "phv00178068.v1.p3",
+          "description": "Age in years at visit of hemostatic factors measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_age_baseline",
+          "id": "phv00178028.v1.p3",
+          "description": "Age in years at baseline",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_angioplasty_baseline",
+          "id": "phv00178079.v1.p3",
+          "description": "BASELINE ANGIOPLASTY STATUS (0/1)",
+          "concept_id": "topmed:coronary_angioplasty_prior",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_asthma_ever",
+          "id": "phv00178106.v1.p3",
+          "description": "Asthma ever diagnosed (0/1), assessed at baseline visit (only for HeartGO and WHISP)",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_diagnosis_ever",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_avblock2_at_ekg",
+          "id": "phv00178089.v1.p3",
+          "description": "SECOND DEGREE AV BLOCK",
+          "concept_id": "ncpi:ecg_av_block",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_avblock3_at_ekg",
+          "id": "phv00178090.v1.p3",
+          "description": "THIRD DEGREE AV BLOCK",
+          "concept_id": "ncpi:ecg_av_block",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_beta_blockers_ekg",
+          "id": "phv00178095.v1.p3",
+          "description": "Betablockers, for EKG group.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_bmi_baseline",
+          "id": "phv00178033.v1.p3",
+          "description": "Baseline BMI in kg/m2",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_cabg_baseline",
+          "id": "phv00178080.v1.p3",
+          "description": "BASELINE CABG STATUS (0/1)",
+          "concept_id": "topmed:cabg_prior",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_cac_agatston_score",
+          "id": "phv00178073.v1.p3",
+          "description": "Coronary artery calcium Agatston total score",
+          "concept_id": "ncpi:cac_score_coronary_artery_calcium_total",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_crp",
+          "id": "phv00178069.v1.p3",
+          "description": "C-reactive protein level in mg/L at designated visit (may not be baseline)",
+          "concept_id": "topmed:crp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_current_smoker_baseline",
+          "id": "phv00178054.v1.p3",
+          "description": "Current smoking status at baseline (0/1)",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_dbp_baseline",
+          "id": "phv00178046.v1.p3",
+          "description": "Diastolic blood pressure at baseline (avg. of 2 measurements), in mm Hg",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_baseline_enrollment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_digoxin_ekg",
+          "id": "phv00178092.v1.p3",
+          "description": "Digoxin, for EKG group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_dihydro_calc_chan_block",
+          "id": "phv00178093.v1.p3",
+          "description": "Dihydropyridine calcium channel blockers",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_ekg_hr",
+          "id": "phv00178087.v1.p3",
+          "description": "HR interval from EKG at designated visit (may not be baseline)",
+          "concept_id": "ncpi:heart_rate_resting_heart_rate",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_ekg_pr",
+          "id": "phv00178086.v1.p3",
+          "description": "PR interval from EKG at designated visit (may not be baseline)",
+          "concept_id": "ncpi:ecg_pr_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_ekg_qrs",
+          "id": "phv00178084.v1.p3",
+          "description": "QRS interval from EKG at designated visit (may not be baseline)",
+          "concept_id": "ncpi:ecg_qrs_interval_qrs_duration_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_ekg_qt",
+          "id": "phv00178085.v1.p3",
+          "description": "QT interval from EKG at designated visit (may not be baseline)",
+          "concept_id": "ncpi:ecg_qt_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_emphysema_ever",
+          "id": "phv00178107.v1.p3",
+          "description": "Emphysema ever diagnosed (0/1), assessed at baseline visit (only for HeartGO and WHISP)",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_emphysema",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_factorviii",
+          "id": "phv00178065.v1.p3",
+          "description": "Factor VIII level in % at designated visit (may not be baseline)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_fastglucose_baseline",
+          "id": "phv00178061.v1.p3",
+          "description": "Blood fasting insulin at baseline in uU/mL.  (Note that there are some extreme outliers)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_fastinsulin_baseline",
+          "id": "phv00178062.v1.p3",
+          "description": "Blood fasting glucose at baseline in mg/dL",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_fev1_first_avail_visit",
+          "id": "phv00178108.v1.p3",
+          "description": "FEV1 measurement at the first available visit (only for HeartGO)",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fev1_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_fibrinogen",
+          "id": "phv00178063.v1.p3",
+          "description": "Fibrinogen level in mg/dL at first designated visit (may not be baseline)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_former_smoker_baseline",
+          "id": "phv00178055.v1.p3",
+          "description": "Former smoking status at baseline (0/1)",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_former_smoker",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_frs_chdprob_baseline",
+          "id": "phv00178032.v1.p3",
+          "description": "Framingham Risk Score predicted prob. calculated at baseline (was not calculated for those with baseline history of MI)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_fvc_first_avail_visit",
+          "id": "phv00178109.v1.p3",
+          "description": "FVC measurement at the first available visit (only for HeartGO)",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fvc_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_gout",
+          "id": "phv00178105.v1.p3",
+          "description": "May be MD-reported, self-reported, or abstracted from patients taking allopurinol.  Ever had gout through study.",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_gout_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_hdl_baseline",
+          "id": "phv00178041.v1.p3",
+          "description": "HDL level in mg/dL at baseline",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_height_baseline",
+          "id": "phv00178039.v1.p3",
+          "description": "Standing height in cm at baseline",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_hormone_replacement_baseline",
+          "id": "phv00178059.v1.p3",
+          "description": "Indicator (0/1) for current use of hormone replacement therapy",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_hormone_replacement_therapy_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_htn_med_baseline",
+          "id": "phv00178048.v1.p3",
+          "description": "Hypertension med status (any) at baseline (0/1)",
+          "concept_id": "ncpi:antihypertensive_meds_hypertension_treatment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_htn_status_baseline",
+          "id": "phv00178047.v1.p3",
+          "description": "Physician diagnosed hypertension status at baseline (0/1)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_icam1",
+          "id": "phv00178071.v1.p3",
+          "description": "ICAM1 level in ng/mL at designated visit (may not be baseline)",
+          "concept_id": "topmed:icam1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_imt_anyplaque",
+          "id": "phv00178077.v1.p3",
+          "description": "Presence of any plaque, as determined by IMT at designated visit (may not be baseline).",
+          "concept_id": "ncpi:carotid_plaque_carotid_plaque_presence",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_imt_meanmean_farwall_cca",
+          "id": "phv00178075.v1.p3",
+          "description": "Average far wall thickness of the right and left common carotid mean IMT values, using as many views as are available for a given study",
+          "concept_id": "ncpi:cimt_common_carotid_imt",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_imt_meanmean_farwall_ica",
+          "id": "phv00178076.v1.p3",
+          "description": "Average far wall thickness of the right and left internal carotid maximum IMT values, using as many views as are available for a given study",
+          "concept_id": "ncpi:cimt_internal_carotid_imt",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_inc_stroke_subtype",
+          "id": "phv00178052.v1.p3",
+          "description": "Incident stroke subtype.  Subtype is available only on a subset of samples, so will be missing for some with non-missing age at incident stroke",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_ldl_baseline",
+          "id": "phv00178040.v1.p3",
+          "description": "Baseline calculated LDL in mg/dL (missing where trigs>400)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_calculated",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_lipid_med_baseline",
+          "id": "phv00178044.v1.p3",
+          "description": "Any lipid lowering med (statin or other) at baseline",
+          "concept_id": "ncpi:lipid_lowering_medication_general_lipid_lowering_medication",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_lung_function_visit",
+          "id": "phv00178110.v1.p3",
+          "description": "The visit that lung function measurements were taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_menopause_status_baseline",
+          "id": "phv00178056.v1.p3",
+          "description": "BASELINE MENOPAUSE STATUS",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_menopause_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_mi_baseline",
+          "id": "phv00178029.v1.p3",
+          "description": "MI status at baseline (0/1)",
+          "concept_id": "ncpi:mi_prior_mi_history_composite",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_mi_during_followup",
+          "id": "phv00178030.v1.p3",
+          "description": "0/1 to indicate that an MI occurred during study follow up.  0 if no MI during study follow up.  1 if an adjudicated MI occurred during study follow up (even if baseline MI status was 1).",
+          "concept_id": "ncpi:mi_incident_mi_incident_status_incident_mi_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_mi_tte_or_censor",
+          "id": "phv00178031.v1.p3",
+          "description": "Time to event variable for MI.  Time (in days) from start of study to MI for event that occurred during study follow up; and follow up time for those that did not have an MI during study follow up.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_nondihydro_calc_chan_block",
+          "id": "phv00178094.v1.p3",
+          "description": "Non-dihydropyridine calcium channel blockers, for EKG group.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_pacer_ekg",
+          "id": "phv00178091.v1.p3",
+          "description": "PACER AT EKG",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_pad",
+          "id": "phv00178081.v1.p3",
+          "description": "BASELINE PERIPHERAL ARTERY DISEASE STATUS (0/1)",
+          "concept_id": "ncpi:pad_prior_pad_diagnosis_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_phenotype",
+          "id": "phv00178022.v1.p3",
+          "description": "ESP Phenotype group (phenotype that the sample was selected to be sequenced for)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_race_selfreport",
+          "id": "phv00178025.v1.p3",
+          "description": "Self report race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_sbp_baseline",
+          "id": "phv00178045.v1.p3",
+          "description": "Systolic blood pressure at baseline (avg. of 2 measurements), in mm Hg",
+          "concept_id": "ncpi:bp_systolic_baseline_esp_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_serum_creatinine",
+          "id": "phv00178103.v1.p3",
+          "description": "Serum creatinine in mg/dL",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_serum_cystatinc",
+          "id": "phv00178101.v1.p3",
+          "description": "Raw cystatin C (mg/L)",
+          "concept_id": "ncpi:kidney_function_cystatin_c",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_sex_selfreport",
+          "id": "phv00178026.v1.p3",
+          "description": "Values: Male; Female",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_stroke_baseline",
+          "id": "phv00178049.v1.p3",
+          "description": "Stroke status at baseline (0/1)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_stroke_during_followup",
+          "id": "phv00178050.v1.p3",
+          "description": "0/1 to indicate that a stroke occurred during study follow up.  0 if no stroke during study follow up.  1 if an adjudicated stroke occurred during study follow up (even if baseline stroke status was 1).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_stroke_famhx_baseline",
+          "id": "phv00178053.v1.p3",
+          "description": "Family history (first degree relatives) of stroke at baseline (0/1)",
+          "concept_id": "ncpi:family_medical_history_stroke_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_stroke_tte_or_censor",
+          "id": "phv00178051.v1.p3",
+          "description": "Time to event variable for stroke.  Time (in days) from start of study to stroke for event that occurred during study follow up; and follow up time for those that did not have an stroke during study follow up.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_study_site_or_subcohort",
+          "id": "phv00178027.v1.p3",
+          "description": "Clinic or field center within cohort",
+          "concept_id": "ncpi:geographic_site_recruitment_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_surgical_menopause",
+          "id": "phv00178058.v1.p3",
+          "description": "Indicator (0/1) for surgically induced menopause",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_menopause_type_cause",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_t2d_med_baseline",
+          "id": "phv00178035.v1.p3",
+          "description": "Baseline Type 2 diabetes medication status (0/1)",
+          "concept_id": "ncpi:diabetes_medication_general_diabetes_medication_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_t2diabetes_baseline",
+          "id": "phv00178034.v1.p3",
+          "description": "Diabetes status at baseline (0/1)",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type2_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_totchol_baseline",
+          "id": "phv00178043.v1.p3",
+          "description": "Total cholesterol at baseline in mg/dL",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_trigs_baseline",
+          "id": "phv00178042.v1.p3",
+          "description": "Triglycerides at baseline in mg/dL",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_standard_units_total_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_urinary_albumin",
+          "id": "phv00178097.v1.p3",
+          "description": "Raw urinary albumin.  Note: these are in original study units and not harmonized across studies)",
+          "concept_id": "ncpi:kidney_function_urine_albumin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_urinary_creatinine",
+          "id": "phv00178099.v1.p3",
+          "description": "Raw urinary creatinine in mg/dL",
+          "concept_id": "ncpi:kidney_function_urine_creatinine",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_vwf",
+          "id": "phv00178067.v1.p3",
+          "description": "VWF level in % at designated visit (may not be baseline)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_waist_baseline",
+          "id": "phv00178037.v1.p3",
+          "description": "Waist in cm at baseline",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_weight_baseline",
+          "id": "phv00178036.v1.p3",
+          "description": "Weight in kg at baseline",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_whr_baseline",
+          "id": "phv00178038.v1.p3",
+          "description": "Waist to hip ratio at baseline",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_wpw_at_ekg",
+          "id": "phv00178088.v1.p3",
+          "description": "WOLFF-PARKINSON-WHITE PATTERN",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00178020.v1.p3",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sequence_center",
+          "id": "phv00178023.v1.p3",
+          "description": "Indicates where the sample was sequence at",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Target",
+          "id": "phv00178024.v1.p3",
+          "description": "Indicates target capture used in sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MESA_ESP_HeartGO_Sample_Attributes",
+      "datasetId": "pht003103.v1",
+      "description": "The sample attributes data table includes MESA ESP HeartGO sample IDs, sample analyte type (DNA), body site (blood) where samples were collected, and tumor status, ESP vcf IDs, ESP phenotypes.",
+      "variables": [
+        {
+          "name": "Analyte_type",
+          "id": "phv00178115.v1.p3",
+          "description": "Type of analyte",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Body_site",
+          "id": "phv00178114.v1.p3",
+          "description": "Body site or tissue that sample is from",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP6800vcf_id",
+          "id": "phv00178112.v1.p3",
+          "description": "Sample ID for the ESP6800 vcf file",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_phenotype",
+          "id": "phv00178113.v1.p3",
+          "description": "ESP Phenotype group (phenotype that the sample was selected to be sequenced for)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Is_tumor",
+          "id": "phv00178116.v1.p3",
+          "description": "Indicator of whether sample from tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00178111.v1.p3",
+          "description": "Sample ID (for individual vcf files from sequencing sites)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

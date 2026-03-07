@@ -1,0 +1,250 @@
+{
+  "studyId": "phs001689",
+  "studyName": "Multiethnic Cohort Adiposity Phenotype Study (MEC-APS)",
+  "tables": [
+    {
+      "tableName": "MEC_APS_Subject_Phenotypes",
+      "datasetId": "pht011671.v1",
+      "description": "Subject ID, age at clinic visit in 5 years intervals, BMI, ethnicity, sex, total fat mass, visceral fat area, pancreatic fat, and non-alcoholic fatty pancreatic disease of participants with or without adiposity and involved in the \"Multiethnic Cohort Adiposity Phenotype Study (MEC-APS)\" project.",
+      "variables": [
+        {
+          "name": "OMRI_NAFPD_5",
+          "id": "phv00494791.v1.p1",
+          "description": "MRI: Non-alcoholic fatty pancreatic disease >5% pancreatic fat and <30g/d alcohol in men, <20g/d in women",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OMRI_fatty_panc_corr_5",
+          "id": "phv00494790.v1.p1",
+          "description": "MRI: Fatty pancreas using >5% cutpoint",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OMRI_pct_panc_fat",
+          "id": "phv00494788.v1.p1",
+          "description": "MRI: %Pancreatic fat",
+          "concept_id": "topmed:lung_ct_imaging_non_lung_measurements",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "OMRI_pct_panc_fat_corr",
+          "id": "phv00494789.v1.p1",
+          "description": "MRI, Corrected: %Pancreatic Fat",
+          "concept_id": "topmed:lung_ct_imaging_non_lung_measurements",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494781.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_cat",
+          "id": "phv00494782.v1.p1",
+          "description": "Age at clinic visit in 5 yr intervals (Less of equal to 50, less of equal to55, etc)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "newqi_cat",
+          "id": "phv00494783.v1.p1",
+          "description": "BMI (Quetelet index) at clinic visit less than 18.5, 18.5-25, 25.01-30, greater than 30",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "odxa_fat_tot_corr",
+          "id": "phv00494786.v1.p1",
+          "description": "Total fat mass",
+          "concept_id": "ncpi:bone_musculoskeletal_bone_density_dexa_body_composition_fat",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "omri_viscfat_avg_corr",
+          "id": "phv00494787.v1.p1",
+          "description": "Visceral fat area",
+          "concept_id": "topmed:lung_ct_imaging_non_lung_measurements",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "q1_eth",
+          "id": "phv00494784.v1.p1",
+          "description": "Ethnicity for 5 groups",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "q1_sex",
+          "id": "phv00494785.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MEC_APS_Subject",
+      "datasetId": "pht011669.v1",
+      "description": "Subject ID, consent group, sex, subject source, and source subject IDs of participants with or without adiposity and involved in the \"Multiethnic Cohort Adiposity Phenotype Study (MEC-APS)\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00494770.v1.p1",
+          "description": "Consent group as determined by MEC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00494771.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00494773.v1.p1",
+          "description": "Source subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID2",
+          "id": "phv00494775.v1.p1",
+          "description": "Source subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID3",
+          "id": "phv00494777.v1.p1",
+          "description": "Source subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494769.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00494772.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE2",
+          "id": "phv00494774.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE3",
+          "id": "phv00494776.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MEC_APS_Sample_Attributes",
+      "datasetId": "pht011672.v1",
+      "description": "Sample ID, body site where sample was obtained, analyte type, and tumor status of sample obtained from participants with or without adiposity and involved in the \"Multiethnic Cohort Adiposity Phenotype Study (MEC-APS)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00494794.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00494793.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00494795.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00494792.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MEC_APS_Sample",
+      "datasetId": "pht011670.v1",
+      "description": "Subject ID, sample ID, and sample use of participants with or without adiposity and involved in the \"Multiethnic Cohort Adiposity Phenotype Study (MEC-APS)\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00494779.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00494780.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494778.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,642 @@
+{
+  "studyId": "phs001918",
+  "studyName": "STAMPEED: Whole Genome Association Analysis of Hematopoietic Cell Transplant (HCT) Outcomes",
+  "tables": [
+    {
+      "tableName": "STAMPEED_HCT_Sample_Attributes",
+      "datasetId": "pht010050.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00428448.v1.p1",
+          "description": "Unique identifier for each sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00428469.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ant.excl",
+          "id": "phv00493898.v1.p1",
+          "description": "TRUE for samples that received active drug in clinical trials and recommend exclusion from analysis of delant endpoint (antigenemia)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cohort",
+          "id": "phv00428453.v1.p1",
+          "description": "Cohort sample was genotyped in: cohort 1 (c1) or cohort 2 (2a, 2b, 2c)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "d.age",
+          "id": "phv00428451.v1.p1",
+          "description": "Donor age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dayant",
+          "id": "phv00493897.v1.p1",
+          "description": "For delant==0 last observed time before which no event had occurred or until a competing risk occurred. For delant==1 time until event had occurred.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "daycgvh",
+          "id": "phv00493912.v1.p1",
+          "description": "Days until chronic GVHD or until censoring or a competing risk event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "daycmv",
+          "id": "phv00493900.v1.p1",
+          "description": "For delcmv==0 last observed time before which no event had occurred or until a competing risk occurred. For delcmv==1 time until event had occurred.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "daygut2",
+          "id": "phv00493910.v1.p1",
+          "description": "Days until acute GVHD stage 2-4 or until censoring or a competing risk event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "daygvh2",
+          "id": "phv00493904.v1.p1",
+          "description": "Days until acute GVHD grade 2-4 or until censoring or a competing risk event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "daygvh2b",
+          "id": "phv00493906.v1.p1",
+          "description": "Days until acute GVHD grade 2b-4 or until censoring or a competing risk event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "daygvh3",
+          "id": "phv00493908.v1.p1",
+          "description": "Days until acute GVHD grade 3-4 or until censoring or a competing risk event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "daynrm",
+          "id": "phv00428471.v1.p1",
+          "description": "Days survived without relapse or until censoring or a competing risk event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dayrel",
+          "id": "phv00493914.v1.p1",
+          "description": "Days until relapse or until censoring or a competing risk event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dayrrm",
+          "id": "phv00428473.v1.p1",
+          "description": "Days survived until relapse related event or until censoring or a competing risk event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "daysur",
+          "id": "phv00428475.v1.p1",
+          "description": "Days survived or until censoring or a competing risk event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delant",
+          "id": "phv00493896.v1.p1",
+          "description": "Any antigenemia (ANT/AG), PCR positive cases vs no. Competing risk of death set to 0.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delcgvh",
+          "id": "phv00493911.v1.p1",
+          "description": "Chronic GVHD. One means event and zero means censored or competing risk event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delcmv",
+          "id": "phv00493899.v1.p1",
+          "description": "Any CMV disease (virus in an organ with symptoms) vs no disease. Competing risk of death set to 0.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delgut2",
+          "id": "phv00493909.v1.p1",
+          "description": "Acute GVHD gut stage 2-4. One means event and zero means censored or competing risk event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delgvh2",
+          "id": "phv00493903.v1.p1",
+          "description": "Acute GVHD grade 2-4. One means event and zero means censored or competing risk event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delgvh2b",
+          "id": "phv00493905.v1.p1",
+          "description": "Acute GVHD grade 2b-4. One means event and zero means censored or competing risk event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delgvh3",
+          "id": "phv00493907.v1.p1",
+          "description": "Acute GVHD grade 3-4. One means event and zero means censored or competing risk event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delnrm",
+          "id": "phv00428470.v1.p1",
+          "description": "Non-relapse mortality (NRM). One means event and zero means censored or competing risk event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delrel",
+          "id": "phv00493913.v1.p1",
+          "description": "Relapse. One means event and zero means censored or competing risk event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delrrm",
+          "id": "phv00428472.v1.p1",
+          "description": "Relapse mortality (RRM). One means event and zero means censored or competing risk event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delsur",
+          "id": "phv00428474.v1.p1",
+          "description": "Overall survival (OS). One means event and zero means censored or competing risk event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dna.source",
+          "id": "phv00428455.v1.p1",
+          "description": "Source of DNA, either cell line (B-LCL) or blood (Native)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dnrExpRel",
+          "id": "phv00428464.v1.p1",
+          "description": "Computed donor recipient relationship from PC-Relate - Deg2 (second-degree relative), Deg2 (third-degree relative), FS (full sibling), Other (relative of unknown relationship), PO (parent offspring), U (unrelated)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dnrRel",
+          "id": "phv00428465.v1.p1",
+          "description": "Annotated donor recipient relationship from transplant records confirmed by PC-Relate genetic calculations",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "doncmv",
+          "id": "phv00493902.v1.p1",
+          "description": "Donor sero-postive (+) or sero-negative (-) for CMV",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dxgroup",
+          "id": "phv00428458.v1.p1",
+          "description": "Recipient disease type - ALL (acute lymphoblastic leukemia), ANL (acute non-lymphoblastic leukemia, primarily acute myeloid leukemia), CLL (chronic lymphocytic leukemia), CML (chronic myeloid leukemia), HD (hodgkin disease), MDS (myelodysplastic syndromes), MM (multiple myeloma), NHL (non-hodgkin's lymphoma)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ftom",
+          "id": "phv00428457.v1.p1",
+          "description": "Female donor to male recipient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "inclgvh2",
+          "id": "phv00493915.v1.p1",
+          "description": "This variable is 1 for patients who did NOT receive Anti-thymocyte globulin (ATG) and post-treatment cytoxan and 0 otherwise.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "kc",
+          "id": "phv00428463.v1.p1",
+          "description": "Kinship coefficient between recipient and donor when genotypes for both were available calculated using PC-Relate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "missing.e2.auto",
+          "id": "phv00428454.v1.p1",
+          "description": "Fraction of autosomal genotype calls missing over all autosomal snps with missing.n1 < 0.05",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "n.10.match",
+          "id": "phv00428466.v1.p1",
+          "description": "Number of HLA-A, B, C, DRB1, DQB1 alleles that match between recipient and donor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "n.16.match",
+          "id": "phv00428467.v1.p1",
+          "description": "Number of HLA-A, B, C, DRB1, DQB1, DQA1, DPB1, DPA1 alleles that match between recipient and donor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p.age",
+          "id": "phv00428450.v1.p1",
+          "description": "Recipient age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pairID",
+          "id": "phv00428449.v1.p1",
+          "description": "Identifier for each recipient/donor pair where both samples have genotype data. Missing for singletons.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "patcmv",
+          "id": "phv00493901.v1.p1",
+          "description": "Recipient sero-postive (+) or sero-negative (-) for CMV",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pbsc",
+          "id": "phv00428456.v1.p1",
+          "description": "One for peripheral blood stem cell (pbsc) donor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "plate",
+          "id": "phv00428452.v1.p1",
+          "description": "Genotyping plate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "preptype",
+          "id": "phv00428461.v1.p1",
+          "description": "MyeloAblative (MA) and Non-MyeloAblative (NMA) conditioning prior to transplant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "riskgrp",
+          "id": "phv00428459.v1.p1",
+          "description": "General classification of risk of relapse/mortality after transplant. The ordering of the categories 1-3 equals low-high risk.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tbi900",
+          "id": "phv00428460.v1.p1",
+          "description": "Dose of TBI during conditioning was >= 900 cGy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tpID",
+          "id": "phv00428468.v1.p1",
+          "description": "Transplant identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "yeartx",
+          "id": "phv00428462.v1.p1",
+          "description": "Year of transplant",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "STAMPEED_HCT_Subject_Phenotypes",
+      "datasetId": "pht010049.v1",
+      "description": "The subject phenotype data table includes computed characteristics of each person including HLA alleles and ancestry information.",
+      "variables": [
+        {
+          "name": "HLA_A_Allele1",
+          "id": "phv00428432.v1.p1",
+          "description": "Historical typing for HLA-A alleles informed by HIBAG imputed HLA-A alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_A_Allele2",
+          "id": "phv00428433.v1.p1",
+          "description": "Historical typing for HLA-A alleles informed by HIBAG imputed HLA-A alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_B_Allele1",
+          "id": "phv00428434.v1.p1",
+          "description": "Historical typing for HLA-B alleles informed by HIBAG imputed HLA-B alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_B_Allele2",
+          "id": "phv00428435.v1.p1",
+          "description": "Historical typing for HLA-B alleles informed by HIBAG imputed HLA-B alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_C_Allele1",
+          "id": "phv00428436.v1.p1",
+          "description": "Historical typing for HLA-C alleles informed by HIBAG imputed HLA-C alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_C_Allele2",
+          "id": "phv00428437.v1.p1",
+          "description": "Historical typing for HLA-C alleles informed by HIBAG imputed HLA-C alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_DPA1_Allele1",
+          "id": "phv00428446.v1.p1",
+          "description": "NGS DPA1 typing for mostly cohort 1 samples and historical typing for mostly cohort 2 samples informed by HIBAG imputed DPA1 alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_DPA1_Allele2",
+          "id": "phv00428447.v1.p1",
+          "description": "NGS DPA1 typing for mostly cohort 1 samples and historical typing for mostly cohort 2 samples informed by HIBAG imputed DPA1 alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_DPB1_Allele1",
+          "id": "phv00428444.v1.p1",
+          "description": "NGS DPB1 typing for mostly cohort 1 samples and historical typing for mostly cohort 2 samples informed by HIBAG imputed DPB1 alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_DPB1_Allele2",
+          "id": "phv00428445.v1.p1",
+          "description": "NGS DPB1 typing for mostly cohort 1 samples and historical typing for mostly cohort 2 samples informed by HIBAG imputed DPB1 alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_DQA1_Allele1",
+          "id": "phv00428442.v1.p1",
+          "description": "NGS DQA1 typing for mostly cohort 1 samples and historical typing for mostly cohort 2 samples informed by HIBAG imputed DQA1 alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_DQA1_Allele2",
+          "id": "phv00428443.v1.p1",
+          "description": "NGS DQA1 typing for mostly cohort 1 samples and historical typing for mostly cohort 2 samples informed by HIBAG imputed DQA1 alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_DQB1_Allele1",
+          "id": "phv00428440.v1.p1",
+          "description": "Historical typing for HLA-DQB1 alleles informed by HIBAG imputed HLA-DQB1 alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_DQB1_Allele2",
+          "id": "phv00428441.v1.p1",
+          "description": "Historical typing for HLA-DQB1 alleles informed by HIBAG imputed HLA-DQB1 alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_DRB1_Allele1",
+          "id": "phv00428438.v1.p1",
+          "description": "Historical typing for HLA-DRB1 alleles informed by HIBAG imputed HLA-DRB1 alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLA_DRB1_Allele2",
+          "id": "phv00428439.v1.p1",
+          "description": "Historical typing for HLA-DRB1 alleles informed by HIBAG imputed HLA-DRB1 alleles",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00428431.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "comment.kary",
+          "id": "phv00428428.v1.p1",
+          "description": "Primarily identifying chromosomal anomaly",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "double.donor",
+          "id": "phv00428424.v1.p1",
+          "description": "TRUE to identify donors who donated to more than one recipient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "filter.X",
+          "id": "phv00428427.v1.p1",
+          "description": "Whether to filter the X chromosome due to abnormal karyotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "karyotype",
+          "id": "phv00428426.v1.p1",
+          "description": "Sex chromosome karyotype if abnormal",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race.mcd",
+          "id": "phv00428429.v1.p1",
+          "description": "Minimum covariance determinant defined genetic analysis group for all samples",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "race.s",
+          "id": "phv00428430.v1.p1",
+          "description": "Self-identified race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00428425.v1.p1",
+          "description": "Genetic sex coded as M=male and F=female",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "STAMPEED_HCT_Subject",
+      "datasetId": "pht010047.v1",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00428421.v1.p1",
+          "description": "Consent group as determined by FHCRC IRB",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00428420.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "STAMPEED_HCT_Sample",
+      "datasetId": "pht010048.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00428423.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00428422.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

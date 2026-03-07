@@ -1,0 +1,114 @@
+{
+  "studyId": "phs000917",
+  "studyName": "MIGen_ExS: PROMIS",
+  "tables": [
+    {
+      "tableName": "MIGen_Exome_PROMIS_Subject",
+      "datasetId": "pht004738.v1",
+      "description": "This subject consent file contains subject IDs, consent group information, and affection status. Eligible cases were individuals age 30-80 who presented to the emergency department of a participating recruitment center in Pakistan with clinical symptoms consistent with a myocardial infarction (MI), ECG changes consistent with MI, elevated troponin levels consistent with MI, and no prior history of cardiovascular disease. Controls were individuals of Pakistani descent who did not have a self-reported history of cardiovascular disease.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00226574.v1.p1",
+          "description": "Case control status of the subject. Eligible cases were individuals age 30-80 who presented to the emergency department of a participating recruitment center in Pakistan with clinical symptoms consistent with a myocardial infarction (MI), ECG changes consistent with MI, elevated troponin levels consistent with MI, and no prior history of cardiovascular disease. Controls were individuals of Pakistani descent who did not have a self-reported history of cardiovascular disease.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00226575.v1.p1",
+          "description": "Consent status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00226573.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MIGen_Exome_PROMIS_Sample",
+      "datasetId": "pht004739.v1",
+      "description": "This subject sample mapping file contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00226577.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00226578.v1.p1",
+          "description": "Type of data submitted. Seq_DNA_SNP_CNV: SNP and CNV genotypes derived from sequence data; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00226576.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MIGen_Exome_PROMIS_Subject_Phenotypes",
+      "datasetId": "pht004740.v1",
+      "description": "This subject phenotype data table contains gender of participants.",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00226579.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00226580.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MIGen_Exome_PROMIS_Sample_Attributes",
+      "datasetId": "pht004741.v1",
+      "description": "This sample attributes data table includes sample analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00226582.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00226581.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

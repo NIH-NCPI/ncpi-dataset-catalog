@@ -1,0 +1,250 @@
+{
+  "studyId": "phs001265",
+  "studyName": "DRIVE Breast Cancer OncoArray Genotypes",
+  "tables": [
+    {
+      "tableName": "OncoArray_DRIVE_Subject_Phenotypes",
+      "datasetId": "pht006340.v1",
+      "description": "This subject phenotype table contains subject ID, BCAC acronym for study, country that the sample is located, case control status of the subject for breast cancer, gender, age at interview, age at diagnosis, estrogen receptor status of index tumor, and source of data on estrogen receptor status of index tumor.",
+      "variables": [
+        {
+          "name": "ER_statusIndex",
+          "id": "phv00292705.v1.p1",
+          "description": "Estrogen receptor status of index tumour",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_hormone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ER_statusIndex_source",
+          "id": "phv00292706.v1.p1",
+          "description": "Source of data on ER status of index tumour",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_diag_index",
+          "id": "phv00292704.v1.p1",
+          "description": "Age at diagnosis of indexed breast cancer for cases",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_breast_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_int",
+          "id": "phv00292703.v1.p1",
+          "description": "Age at interview/questionnaire for controls and cases",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00292702.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex_by_geno",
+          "id": "phv00301405.v1.p1",
+          "description": "Gender of participant detected by genotype data",
+          "concept_id": "ncpi:annotated_sex_participant_sex_genetically_determined_sex",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "status",
+          "id": "phv00292701.v1.p1",
+          "description": "Case-control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "study",
+          "id": "phv00292699.v1.p1",
+          "description": "BCAC acronym for study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "study_country",
+          "id": "phv00292700.v1.p1",
+          "description": "Country that the sample is located",
+          "concept_id": "ncpi:geographic_site_country_origin",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "subject_ID",
+          "id": "phv00292698.v1.p1",
+          "description": "BCAC unique subject identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "OncoArray_DRIVE_Subject",
+      "datasetId": "pht006338.v1",
+      "description": "The subject consent file includes subject IDs, consent information, limitation of data use, subject aliases, and affection status of the subject for breast cancer.",
+      "variables": [
+        {
+          "name": "affection_status",
+          "id": "phv00292692.v1.p1",
+          "description": "Affection status of the subject for breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "consent",
+          "id": "phv00292688.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "data_use_limitations",
+          "id": "phv00292689.v1.p1",
+          "description": "Limitation of data use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "source_subject_ID",
+          "id": "phv00292691.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_ID",
+          "id": "phv00292687.v1.p1",
+          "description": "BCAC unique sample identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_source",
+          "id": "phv00292690.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "OncoArray_DRIVE_Sample_Attributes",
+      "datasetId": "pht006341.v1",
+      "description": "This sample attributes table contains sample ID, analyte type, body site where tumor sample was collected, tumor status, histological type, and name of the center which conducted genotyping.",
+      "variables": [
+        {
+          "name": "analyte_type",
+          "id": "phv00292708.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "body_site",
+          "id": "phv00292709.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genotyping_center",
+          "id": "phv00292712.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "histological_type",
+          "id": "phv00292711.v1.p1",
+          "description": "Tissue behaviour of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "is_tumor",
+          "id": "phv00292710.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sample_ID",
+          "id": "phv00292707.v1.p1",
+          "description": "Sample unique identifier in genotyping dataset",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "OncoArray_DRIVE_Sample",
+      "datasetId": "pht006339.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00292697.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_ID",
+          "id": "phv00292694.v1.p1",
+          "description": "Sample ID in genotype data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_source",
+          "id": "phv00292695.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "source_sample_ID",
+          "id": "phv00292696.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_ID",
+          "id": "phv00292693.v1.p1",
+          "description": "BCAC unique sample identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "studyId": "phs003629",
+  "studyName": "Pre-Existing Skin-Resident CD8 and gammadelta T Cell Circuits Mediate Immune Response in Merkel Cell Carcinoma and Predict Immunotherapy Efficacy",
+  "tables": [
+    {
+      "tableName": "MCC_CD8_T_Cell_Circuits_Subject_Phenotypes",
+      "datasetId": "pht014543.v1",
+      "description": "This subject phenotypes data table reports each subject's age, sex, Merkel cell polyoma virus status, immunosuppression status, tumor stage, prior treatment status, immune checkpoint blockade therapy response, and overall survival.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00537735.v1.p1",
+          "description": "Age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ICB_Response",
+          "id": "phv00537741.v1.p1",
+          "description": "Immune checkpoint blockade (ICB) therapy response",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Immunosuppressed",
+          "id": "phv00537738.v1.p1",
+          "description": "Immunosuppression status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Overall_Survival",
+          "id": "phv00537742.v1.p1",
+          "description": "Survial time",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00537734.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00537736.v1.p1",
+          "description": "Sex at enrollment",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Stage",
+          "id": "phv00537739.v1.p1",
+          "description": "Stage of tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Treatment.Naive",
+          "id": "phv00537740.v1.p1",
+          "description": "Whether or not subject is treatment naive",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Virus",
+          "id": "phv00537737.v1.p1",
+          "description": "Merkel cell carcinoma polyoma virus status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MCC_CD8_T_Cell_Circuits_Sample_Attributes",
+      "datasetId": "pht014544.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin, tissue type, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00537746.v1.p1",
+          "description": "The analyte type of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HASH_TAG",
+          "id": "phv00541277.v1.p1",
+          "description": "Hash tag sequence for multiuplexed samples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00537747.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00537743.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tissue",
+          "id": "phv00537745.v1.p1",
+          "description": "The tissue type of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MCC_CD8_T_Cell_Circuits_Subject",
+      "datasetId": "pht014541.v1",
+      "description": "This subject consent data table reports each subject's subject ID, consent, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00537730.v1.p1",
+          "description": "Consent group as determined",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POOLING",
+          "id": "phv00541276.v1.p1",
+          "description": "SUBJECT_IDs of subjects included in the pool",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00537731.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00537729.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MCC_CD8_T_Cell_Circuits_Sample",
+      "datasetId": "pht014542.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00537733.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00537732.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,474 @@
+{
+  "studyId": "phs003790",
+  "studyName": "Chicago Infant Mortality Study",
+  "tables": [
+    {
+      "tableName": "CIMS_Subject_Phenotypes",
+      "datasetId": "pht015382.v1",
+      "description": "This subject phenotypes data table reports each subject's sex, age at death, whether death was suspicious, time found after death, final diagnostic group, case-control status for SIDS, race, hispanic ethnicity, post-mortem interval, last weight, birthweight, birth length, maternal drug use and smoking history during pregnancy, exposure to smoke, softness of sleep surface, pillow use, co-sleeping status, gestational age at birth, maternal age at birth, paternal age at birth, breastfeeding history and whether breastfed until death, history of formula consumption, age at first formula feeding, age when ceased formula feeding, status eating solid foods, age at first feeding of solid foods, crown-heel length, crown-rump length, head circumference, thymus weight, right lung weight, left lung weight, combined lung weight, heart weight, liver weight, spleen weight, left and right kidney weights, and brain weight.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00556087.v1.p1",
+          "description": "Age at death",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANYDRUG",
+          "id": "phv00556098.v1.p1",
+          "description": "Any drug use during pregnancy",
+          "concept_id": "topmed:pregnancy_reproductive_maternal_exposures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTB016",
+          "id": "phv00556117.v1.p1",
+          "description": "Crown-Heel Length in cm",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "AUTB017",
+          "id": "phv00556118.v1.p1",
+          "description": "Crown-Rump Length in cm",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "AUTB018",
+          "id": "phv00556119.v1.p1",
+          "description": "Head Circumference in cm",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "AUTB019",
+          "id": "phv00556120.v1.p1",
+          "description": "Chest Circumference in cm",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTB065",
+          "id": "phv00556121.v1.p1",
+          "description": "Thymus weight (g)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTB089L",
+          "id": "phv00556123.v1.p1",
+          "description": "Left Lung weight (g)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTB089R",
+          "id": "phv00556122.v1.p1",
+          "description": "Right Lung weight (g)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTB090",
+          "id": "phv00556124.v1.p1",
+          "description": "Combined Lung weight (g)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTB097",
+          "id": "phv00556125.v1.p1",
+          "description": "Heart weight (g)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTB109",
+          "id": "phv00556126.v1.p1",
+          "description": "Liver weight (g)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTB112",
+          "id": "phv00556127.v1.p1",
+          "description": "Spleen weight (g)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTB117L",
+          "id": "phv00556129.v1.p1",
+          "description": "Left Kidney weight (g)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTB117R",
+          "id": "phv00556128.v1.p1",
+          "description": "Right Kidney weight (g)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTB118",
+          "id": "phv00556130.v1.p1",
+          "description": "Combined Kidney weight (g)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTB129",
+          "id": "phv00556131.v1.p1",
+          "description": "Brain weight (g)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BREAST",
+          "id": "phv00556109.v1.p1",
+          "description": "Ever breastfed",
+          "concept_id": "topmed:pregnancy_reproductive_breastfeeding",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BRSTNOW",
+          "id": "phv00556110.v1.p1",
+          "description": "Still breast-feeding up to the time of death",
+          "concept_id": "topmed:pregnancy_reproductive_breastfeeding",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BWEIGHT",
+          "id": "phv00556096.v1.p1",
+          "description": "Birthweight in pounds",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_birth_weight",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL",
+          "id": "phv00556091.v1.p1",
+          "description": "Defines if sample is from a case (SIDS determined) or control group (other cause of death)",
+          "concept_id": "topmed:vte_case_status",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "CO_SLEEP",
+          "id": "phv00556105.v1.p1",
+          "description": "Co-sleeping (sharing the sleep surface)",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_infant_sleep_safety",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "DSIE149A",
+          "id": "phv00556111.v1.p1",
+          "description": "Age breastfeeding stopped in days",
+          "concept_id": "topmed:pregnancy_reproductive_breastfeeding",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DSIE150",
+          "id": "phv00556112.v1.p1",
+          "description": "Infant ever given formula",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_infant_feeding",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DSIE152A",
+          "id": "phv00556113.v1.p1",
+          "description": "Age of first formula feeding in days",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_infant_feeding",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DSIE154",
+          "id": "phv00556114.v1.p1",
+          "description": "Age when formula feeding stopped In months",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_infant_feeding",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DSIE161",
+          "id": "phv00556115.v1.p1",
+          "description": "Eating solid foods",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_infant_feeding",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "DSIE162",
+          "id": "phv00556116.v1.p1",
+          "description": "Age of first solid food In months",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_infant_feeding",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "DXGROUP",
+          "id": "phv00556090.v1.p1",
+          "description": "Final diagnostic group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXPOSED",
+          "id": "phv00556102.v1.p1",
+          "description": "Child exposed to smoke",
+          "concept_id": "topmed:pregnancy_reproductive_maternal_exposures",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GSTAGE",
+          "id": "phv00556106.v1.p1",
+          "description": "Gestational age",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISPANIC",
+          "id": "phv00556093.v1.p1",
+          "description": "Ethnicity of child",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LAST_WEIGHT",
+          "id": "phv00556095.v1.p1",
+          "description": "Last weight of child",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LENGTH",
+          "id": "phv00556097.v1.p1",
+          "description": "Birth length in centimeters",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_birth_length",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MATAGE",
+          "id": "phv00556107.v1.p1",
+          "description": "Maternal age at this birth",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATAGE",
+          "id": "phv00556108.v1.p1",
+          "description": "Age of father at this birth",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PILLOW",
+          "id": "phv00556104.v1.p1",
+          "description": "Pillow use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PMI",
+          "id": "phv00556094.v1.p1",
+          "description": "Post-mortem interval, hours since death to autopsy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00556092.v1.p1",
+          "description": "Race of child",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00556086.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMKPH",
+          "id": "phv00556101.v1.p1",
+          "description": "Number of person-hrs pregnancy exposed",
+          "concept_id": "topmed:pregnancy_reproductive_maternal_exposures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKAMT",
+          "id": "phv00556100.v1.p1",
+          "description": "Amount smoked during pregnancy",
+          "concept_id": "topmed:pregnancy_reproductive_maternal_exposures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKPRG",
+          "id": "phv00556099.v1.p1",
+          "description": "Any smoking during pregnancy",
+          "concept_id": "topmed:pregnancy_reproductive_maternal_exposures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOFT_SURFACE",
+          "id": "phv00556103.v1.p1",
+          "description": "Softness of the sleep surface",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00556085.v1.p1",
+          "description": "CIMS study number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUSP",
+          "id": "phv00556088.v1.p1",
+          "description": "Suspicious death",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIMEFND",
+          "id": "phv00556089.v1.p1",
+          "description": "Time found, expressed in 24 hour time",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIMS_Subject",
+      "datasetId": "pht015380.v1",
+      "description": "This subject consent data table reports each subject's subject ID, consent, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00556081.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00556082.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00556080.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIMS_Sample_Attributes",
+      "datasetId": "pht015383.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin and analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00556134.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00556133.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00556132.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIMS_Sample",
+      "datasetId": "pht015381.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to individual sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00556084.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00556083.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

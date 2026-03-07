@@ -1,0 +1,194 @@
+{
+  "studyId": "phs001783",
+  "studyName": "Exome Recapture and Sequencing of Prospectively Characterized Clinical Specimens From Cancer Patients",
+  "tables": [
+    {
+      "tableName": "Clinical_Specimens_Sample_Attributes",
+      "datasetId": "pht008822.v8",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, tumor status, sample type, histological type, histological subtype, and sequencing panel.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00404399.v8.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00404398.v8.p1",
+          "description": "Anatomical site from which sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_SUBTYPE",
+          "id": "phv00404403.v8.p1",
+          "description": "Cancer subtype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00404402.v8.p1",
+          "description": "Cancer type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00404400.v8.p1",
+          "description": "Is sample derived from tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00404397.v8.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00404401.v8.p1",
+          "description": "Sample type collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_PANEL",
+          "id": "phv00404404.v8.p1",
+          "description": "Exome capture panel",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Clinical_Specimens_Subject",
+      "datasetId": "pht008819.v8",
+      "description": "The subject consent file includes subject ID, consent information, biological sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00404392.v8.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492145.v7.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00498619.v6.p1",
+          "description": "Subject ID used in the first Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID2",
+          "id": "phv00536423.v2.p1",
+          "description": "Subject ID used in the second existing Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404391.v8.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00498618.v6.p1",
+          "description": "Source repository where subjects first originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE2",
+          "id": "phv00536422.v2.p1",
+          "description": "Second existing repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Clinical_Specimens_Subject_Phenotypes",
+      "datasetId": "pht008821.v8",
+      "description": "This subject phenotype table contains subject ID, race, and cancer type. All subjects are cancer patients.",
+      "variables": [
+        {
+          "name": "CANCER_TYPE",
+          "id": "phv00498620.v6.p1",
+          "description": "Cancer type",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_cancer_type_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00492146.v7.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404395.v8.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Clinical_Specimens_Sample",
+      "datasetId": "pht008820.v8",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00404394.v8.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404393.v8.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

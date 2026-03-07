@@ -1,0 +1,210 @@
+{
+  "studyId": "phs002197",
+  "studyName": "Single Cell and Tissue Level Functional Genomics Analysis of Astrocyte-Related Mechanisms in Taupathy",
+  "tables": [
+    {
+      "tableName": "Taupathy_Sample_Attributes",
+      "datasetId": "pht010611.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, tumor status, histological type, collection age, library ID and batch, RNA integrity number (RIN), number of nuclei submitted, and library type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00436949.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00436948.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00436952.v1.p1",
+          "description": "Age sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00436951.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INPUT_CELL_COUNT",
+          "id": "phv00436955.v1.p1",
+          "description": "Number of nuclei submitted",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00436950.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIBRARY_BATCH",
+          "id": "phv00436953.v1.p1",
+          "description": "Sample preparation and library synthesis batch",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIBRARY_TYPE",
+          "id": "phv00436956.v1.p1",
+          "description": "Single nuclear sequencing library kit type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RIN",
+          "id": "phv00436954.v1.p1",
+          "description": "RNA integrity number",
+          "concept_id": "topmed:lung_ct_imaging_scan_technical_parameters",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00436947.v1.p1",
+          "description": "Sample ID that is unique for each single nuclear sequencing library",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Taupathy_Subject_Phenotypes",
+      "datasetId": "pht010610.v1",
+      "description": "This subject phenotypes data table includes subject's age, clinical diagnosis, neuropathological diagnosis, brain bank where samples originated and where they were distributed, and post-mortem interval (PMI).",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00436945.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BBANK_FINAL",
+          "id": "phv00436942.v1.p1",
+          "description": "Brain bank where samples were collected, characterized and distrubuted for this study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BBANK_ORIGIN",
+          "id": "phv00436941.v1.p1",
+          "description": "Brain bank where sample were originally procured",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLINICAL",
+          "id": "phv00436943.v1.p1",
+          "description": "Clinical diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NPDX",
+          "id": "phv00436944.v1.p1",
+          "description": "Neuropathological diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PMI",
+          "id": "phv00436946.v1.p1",
+          "description": "Sample post-mortem interval",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00436940.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Taupathy_Subject",
+      "datasetId": "pht010608.v1",
+      "description": "This subject consent data table includes subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00436936.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00436937.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00436935.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Taupathy_Sample",
+      "datasetId": "pht010609.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and sample aliases. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00436939.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00436938.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

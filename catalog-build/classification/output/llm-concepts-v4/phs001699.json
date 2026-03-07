@@ -1,0 +1,178 @@
+{
+  "studyId": "phs001699",
+  "studyName": "Germline DNA Methylation Associated with Breast Cancer Predisposition",
+  "tables": [
+    {
+      "tableName": "BC_Epigenetic_Heritability_Subject_Phenotypes",
+      "datasetId": "pht008399.v1",
+      "description": "Subject ID, affection status, age, known deleterious mutations in cancer genes (carrier), and chemotherapy of participants with or without breast cancer and involved in the \"Germline DNA Methylation Associated with Breast Cancer Predisposition\" project.",
+      "variables": [
+        {
+          "name": "AFFECTATION_STATUS",
+          "id": "phv00395541.v1.p1",
+          "description": "Case-control status for cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00395540.v1.p1",
+          "description": "Age of the patient at sample collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHEMO_COLLECTION",
+          "id": "phv00395538.v1.p1",
+          "description": "Was patient currently undergoing chemotherapy at the time of collection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHEMO_PRIOR",
+          "id": "phv00395539.v1.p1",
+          "description": "Did patient have chemotherapy prior to sample collection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MUT_GENE",
+          "id": "phv00395542.v1.p1",
+          "description": "Known deleterious mutations in cancer genes (carrier)",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_germline_mutations",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00395537.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BC_Epigenetic_Heritability_Sample_Attributes",
+      "datasetId": "pht008400.v1",
+      "description": "Sample ID, affection status, analyte type, body site where sample was obtained, histological type of sample, and tumor status of samples obtained from participants with or without breast cancer and involved in the \"Germline DNA Methylation Associated with Breast Cancer Predisposition\" project.",
+      "variables": [
+        {
+          "name": "AFFECTATION_STATUS",
+          "id": "phv00395548.v1.p1",
+          "description": "Case/Control/Other status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00395545.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00395544.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00395547.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00395546.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00395543.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BC_Epigenetic_Heritability_Subject",
+      "datasetId": "pht008397.v1",
+      "description": "Subject ID, consent group, and affection status of participants with or without breast cancer and involved in the \"Germline DNA Methylation Associated with Breast Cancer Predisposition\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00395533.v1.p1",
+          "description": "Case control status of the subject for cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00395532.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00395531.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BC_Epigenetic_Heritability_Sample",
+      "datasetId": "pht008398.v1",
+      "description": "Subject ID, sample ID, and sample use variable of participants with or without breast cancer and involved in the \"Germline DNA Methylation Associated with Breast Cancer Predisposition\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00395535.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00395536.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00395534.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

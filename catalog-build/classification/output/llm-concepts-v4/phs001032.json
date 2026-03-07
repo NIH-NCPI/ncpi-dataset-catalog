@@ -1,0 +1,345 @@
+{
+  "studyId": "phs001032",
+  "studyName": "NHLBI TOPMed: The Vanderbilt Atrial Fibrillation Registry (VU_AF)",
+  "tables": [
+    {
+      "tableName": "TOPMed_WGS_VUH_AF_Subject_Phenotypes",
+      "datasetId": "pht005675.v3",
+      "description": "This subject phenotype data table includes atrial fibrillation (AF) status, age at enrollment and AF diagnosis, sex, race, ethnicity, height, and weight. At enrollment, hypertension, diabetes, heart failure, myocardial infarction, and valvular heart disease (n=2 variables) statuses were determined. Additionally, LA size and LVEF measurements were determined.",
+      "variables": [
+        {
+          "name": "ethnicity",
+          "id": "phv00265809.v2.p2",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "height",
+          "id": "phv00265810.v2.p2",
+          "description": "Subject's height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "race",
+          "id": "phv00265808.v2.p2",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "sex",
+          "id": "phv00265807.v2.p2",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "weight",
+          "id": "phv00265811.v2.p2",
+          "description": "Subject's weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "LA_size_echo",
+          "id": "phv00265818.v2.p2",
+          "description": "LA size by echo (closest to enrollment)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "LVEF_echo",
+          "id": "phv00265819.v2.p2",
+          "description": "LVEF by echo (closest to enrollment)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00265803.v2.p2",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "af_status",
+          "id": "phv00265804.v2.p2",
+          "description": "AF status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00265805.v2.p2",
+          "description": "Age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_diagnosis",
+          "id": "phv00265806.v2.p2",
+          "description": "Age at AF diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diabetes",
+          "id": "phv00265813.v2.p2",
+          "description": "Diabetes at enrollment",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "heart_failure",
+          "id": "phv00265814.v2.p2",
+          "description": "Heart failure at enrollment",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_heart_failure",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "hypertension",
+          "id": "phv00265812.v2.p2",
+          "description": "Hypertension at enrollment",
+          "concept_id": "ncpi:antihypertensive_meds_hypertension_treatment_status",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "myocardial_infarction",
+          "id": "phv00265815.v2.p2",
+          "description": "Myocardial infarction at enrollment",
+          "concept_id": "ncpi:mi_prior_self_reported_mi_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "valvular_heart_disease",
+          "id": "phv00265816.v2.p2",
+          "description": "Valvular heart disease at enrollment",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_valvular_heart_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "valvular_heart_disease_specify",
+          "id": "phv00265817.v2.p2",
+          "description": "Valvular heart disease specify",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_VUH_AF_Sample_Attributes",
+      "datasetId": "pht005100.v2",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, sequencing center, funding source, TOPMed phase, project, and study name.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00253685.v2.p2",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00253684.v2.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00328576.v1.p2",
+          "description": "Funding Source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00253686.v2.p2",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253683.v2.p2",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00328575.v1.p2",
+          "description": "SEQUENCING CENTER",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00328579.v1.p2",
+          "description": "Study Name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00328577.v1.p2",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00328578.v1.p2",
+          "description": "TOPMed Project",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_VUH_AF_Subject",
+      "datasetId": "pht005098.v2",
+      "description": "The subject consent data table contains subject IDs, consent group information, subject aliases, and affection status for atrial fibrillation (AF).",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00253678.v2.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": "ncpi:subcohort_consent_group",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00253679.v2.p2",
+          "description": "Case control status of the subject for atrial fibrillation (AF)",
+          "concept_id": "topmed:vte_case_status",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00328569.v1.p2",
+          "description": "Subject source ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253677.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00328568.v1.p2",
+          "description": "Subject source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_VUH_AF_Pedigree",
+      "datasetId": "pht007135.v1",
+      "description": "The pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and subject's sex.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00328570.v1.p2",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00328573.v1.p2",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00328572.v1.p2",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00328574.v1.p2",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00328571.v1.p2",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_VUH_AF_Sample",
+      "datasetId": "pht005099.v3",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253681.v2.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253680.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

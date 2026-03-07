@@ -1,0 +1,233 @@
+{
+  "studyId": "phs001935",
+  "studyName": "Clinical and Laboratory Analysis of Familial Cancer",
+  "tables": [
+    {
+      "tableName": "GAPPS_Subject_Phenotypes",
+      "datasetId": "pht009769.v1",
+      "description": "This subject phenotypes data table includes subject  sex, ancestry, gastric adenocarcinoma affection status and age of onset, gastric polyposis affection status and age of onset,  APC gene variant presence, and gastrectomy history.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00426586.v1.p1",
+          "description": "Case control status of the subject for either gastric adenocaricnoma or gastric polyposis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "APC_VARIANT",
+          "id": "phv00424066.v1.p1",
+          "description": "Identified APC gene variant",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_apc_mutations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GASTRIC_ADENOCARCINOMA_AFFECTION_STATUS",
+          "id": "phv00424060.v1.p1",
+          "description": "Case control status of the subject for gastric adenocarcinoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_gastrointestinal_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GASTRIC_ADENOCARCINOMA_AGE_ONSET",
+          "id": "phv00424064.v1.p1",
+          "description": "Gastric adenocarcinoma  onset age",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_stomach_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GASTRIC_POLYPOSIS_AFFECTION_STATUS",
+          "id": "phv00424061.v1.p1",
+          "description": "Case control status of the subject for gastric polyposis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_gastrointestinal_cancer",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GASTRIC_POLYPOSIS_AGE_ONSET",
+          "id": "phv00424065.v1.p1",
+          "description": "Gastric polyposis onset age",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_stomach_cancer_diagnosis_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00424063.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RISK_REDUCING_GASTRECTOMY",
+          "id": "phv00424067.v1.p1",
+          "description": "Gastrectromy performed to reduce gastric adenocarcinoma risk",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00424062.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00424059.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GAPPS_Pedigree",
+      "datasetId": "pht009767.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and subject's sex.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00424052.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00424055.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00424054.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00424056.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00424053.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GAPPS_Sample_Attributes",
+      "datasetId": "pht009770.v1",
+      "description": "This sample attributes table includes the body site where sample was collected, analyte type, tumor status, and sequencing center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00424070.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00424069.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00424071.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00424068.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00424072.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GAPPS_Subject",
+      "datasetId": "pht009766.v1",
+      "description": "This subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00424051.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00424050.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GAPPS_Sample",
+      "datasetId": "pht009768.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00424058.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00424057.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1297 @@
+{
+  "studyId": "phs001218",
+  "studyName": "NHLBI TOPMed: Genetic Study of Atherosclerosis Risk (GeneSTAR)",
+  "tables": [
+    {
+      "tableName": "TOPMed_WGS_GeneSTAR_Subject_Phenotypes",
+      "datasetId": "pht007766.v1",
+      "description": "This subject phenotypes data table includes study visit, anthropometric measurements (n=4 variables; height, BMI, waist, and hip), blood pressure (n=6 variables; systolic, diastolic, and ankle-brachial), medications (n=4 variables; blood pressure, hypertension, diabetes, and lipid), blood measurements (n=99 variables; cholesterol, blood factors, rbc, wbc, whole blood, platelet rich plasma, aggregation for epinephrine or ADP, inflammatory markers), urinary creatinine, menstruation and menopause status (n=3 variables), CT measurements (n=2 variables), food intake, carbon monoxide exposure, and smoking status (n=7 variables).",
+      "variables": [
+        {
+          "name": "BMI",
+          "id": "phv00369272.v1.p1",
+          "description": "Body mass index (calculated as weight (kg) / height (m) ^2 )",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "EVERSMOK",
+          "id": "phv00369296.v1.p1",
+          "description": "Ever smoked cigarettes",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "HT",
+          "id": "phv00369271.v1.p1",
+          "description": "Height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00369270.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00369269.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "SMOKENOW",
+          "id": "phv00369293.v1.p1",
+          "description": "Current smoking",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "VISIT",
+          "id": "phv00369267.v1.p1",
+          "description": "Study visit",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00369268.v1.p1",
+          "description": "Age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BPRX",
+          "id": "phv00369279.v1.p1",
+          "description": "Blood pressure medication",
+          "concept_id": "ncpi:antihypertensive_meds_current_antihypertensive_use_current_antihypertensive_use_current_antihypertensive_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CCIMT",
+          "id": "phv00369394.v1.p1",
+          "description": "Common carotid IMT",
+          "concept_id": "ncpi:cimt_common_carotid_imt",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CIGSDAY",
+          "id": "phv00369294.v1.p1",
+          "description": "Cigarettes per day",
+          "concept_id": "ncpi:current_smoker_baseline_cigarettes_per_day",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CO",
+          "id": "phv00369292.v1.p1",
+          "description": "Exhaled carbon monoxide",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CRP",
+          "id": "phv00369397.v1.p1",
+          "description": "C-reactive protein",
+          "concept_id": "topmed:crp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CTCALCIUM",
+          "id": "phv00369392.v1.p1",
+          "description": "Coronary calcium Agatston score",
+          "concept_id": "ncpi:cac_score_coronary_artery_calcium_total",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CTSCANNER",
+          "id": "phv00369393.v1.p1",
+          "description": "CT scanner protocol used to assess coronary calcium",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DBP",
+          "id": "phv00369278.v1.p1",
+          "description": "Diastolic blood pressure (average of 4 measurements)",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_device_specific",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DBPAVE",
+          "id": "phv00369276.v1.p1",
+          "description": "Diastolic blood pressure (average of 3 measurements)",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_average_multiple",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETIC",
+          "id": "phv00369282.v1.p1",
+          "description": "Diabetes (measured glucose > 125 mg/dl and/or current hypoglycemic oral medication or insulin)",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABRX",
+          "id": "phv00369281.v1.p1",
+          "description": "Diabetes medication",
+          "concept_id": "ncpi:diabetes_medication_general_diabetes_medication_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FIBRINOGEN",
+          "id": "phv00369290.v1.p1",
+          "description": "Fibrinogen",
+          "concept_id": "ncpi:proteomics_panel_complement_coagulation_fibrinogen_fibrin",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GLUC",
+          "id": "phv00369284.v1.p1",
+          "description": "Glucose",
+          "concept_id": "ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GRANNO",
+          "id": "phv00369314.v1.p1",
+          "description": "Granulocyte number",
+          "concept_id": "topmed:neutrophil_ncnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GRANPCT",
+          "id": "phv00369315.v1.p1",
+          "description": "Granulocyte percent",
+          "concept_id": "topmed:neutrophil_ncnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HBPORRX",
+          "id": "phv00369280.v1.p1",
+          "description": "Hypertension (measured blood pressure >= 140/90mmHg and/or current antihypertensive medication)",
+          "concept_id": "ncpi:antihypertensive_meds_hypertension_treatment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HCT",
+          "id": "phv00369302.v1.p1",
+          "description": "Hematocrit",
+          "concept_id": "topmed:hematocrit_vfr_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL",
+          "id": "phv00369288.v1.p1",
+          "description": "HDL cholesterol",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HGB",
+          "id": "phv00369301.v1.p1",
+          "description": "Hemoglobin",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HIP",
+          "id": "phv00369274.v1.p1",
+          "description": "Hip circumference",
+          "concept_id": "phenx:hip_circumference_hip_circumference_v1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IL6",
+          "id": "phv00369398.v1.p1",
+          "description": "Interleukin 6",
+          "concept_id": "topmed:il6",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INSUL",
+          "id": "phv00369285.v1.p1",
+          "description": "Insulin",
+          "concept_id": "phenx:fasting_serum_insulin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LABI",
+          "id": "phv00369396.v1.p1",
+          "description": "Left ankle-brachial index",
+          "concept_id": "phenx:myocardial_infarction",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "LASTINTAKE",
+          "id": "phv00397439.v1.p1",
+          "description": "Most recent food or beverage intake",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL",
+          "id": "phv00369289.v1.p1",
+          "description": "LDL cholesterol (calculated using Friedewald formula)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIPRX",
+          "id": "phv00369283.v1.p1",
+          "description": "Lipid medication",
+          "concept_id": "ncpi:lipid_lowering_medication_general_lipid_lowering_medication",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LYMPHNO",
+          "id": "phv00369310.v1.p1",
+          "description": "Lymphocyte number",
+          "concept_id": "topmed:lymphocyte_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LYMPHPCT",
+          "id": "phv00369311.v1.p1",
+          "description": "Lymphocyte percent",
+          "concept_id": "topmed:lymphocyte_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MCH",
+          "id": "phv00369306.v1.p1",
+          "description": "Mean corpuscular hemoglobin",
+          "concept_id": "topmed:mch_entmass_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MCHC",
+          "id": "phv00369307.v1.p1",
+          "description": "Mean corpuscular hemoglobin concentration",
+          "concept_id": "topmed:mchc_mcnc_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MCP1",
+          "id": "phv00369399.v1.p1",
+          "description": "Monocyte chemoattractant protein 1",
+          "concept_id": "topmed:mcp1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MCV",
+          "id": "phv00369305.v1.p1",
+          "description": "Mean corpuscular volume",
+          "concept_id": "topmed:mcv_entvol_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MMP9",
+          "id": "phv00369400.v1.p1",
+          "description": "Matrix metalloproteinase 9",
+          "concept_id": "topmed:mmp9",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MONONO",
+          "id": "phv00369312.v1.p1",
+          "description": "Monocyte number",
+          "concept_id": "topmed:monocyte_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MONOPCT",
+          "id": "phv00369313.v1.p1",
+          "description": "Monocyte percent",
+          "concept_id": "topmed:monocyte_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MPV",
+          "id": "phv00369309.v1.p1",
+          "description": "Mean platelet volume",
+          "concept_id": "topmed:pmv_entvol_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCT",
+          "id": "phv00369316.v1.p1",
+          "description": "Platecrit",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PDW",
+          "id": "phv00369317.v1.p1",
+          "description": "Platelet distribution width",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PLT",
+          "id": "phv00369303.v1.p1",
+          "description": "Platelet count",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RABI",
+          "id": "phv00369395.v1.p1",
+          "description": "Right ankle-brachial index",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RBC",
+          "id": "phv00369304.v1.p1",
+          "description": "Red blood cell count",
+          "concept_id": "topmed:rbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RDW",
+          "id": "phv00369308.v1.p1",
+          "description": "Red blood cell distribution width",
+          "concept_id": "topmed:rdw_ratio_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SBP",
+          "id": "phv00369277.v1.p1",
+          "description": "Diastolic blood pressure (average of 4 measurements)",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_closeout_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SBPAVE",
+          "id": "phv00369275.v1.p1",
+          "description": "Systolic blood pressure (average of 3 measurements)",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_average_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKAGE",
+          "id": "phv00369299.v1.p1",
+          "description": "Age began to smoke",
+          "concept_id": "phenx:protocol_2_tobacco_age_of_initiation_of_use_adult_protocol",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKMAX",
+          "id": "phv00369298.v1.p1",
+          "description": "Maximum daily number of cigarettes",
+          "concept_id": "phenx:protocol_2_tobacco_30day_quantity_and_frequency_adult_protocol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKWK",
+          "id": "phv00369295.v1.p1",
+          "description": "Days per week smoke",
+          "concept_id": "phenx:protocol_2_tobacco_30day_quantity_and_frequency_adult_protocol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00369266.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TC",
+          "id": "phv00369286.v1.p1",
+          "description": "Total cholesterol",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TG",
+          "id": "phv00369287.v1.p1",
+          "description": "Triglycerides",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VWF",
+          "id": "phv00369291.v1.p1",
+          "description": "Von Willebrand Factor",
+          "concept_id": "ncpi:proteomics_panel_complement_coagulation_von_willebrand_factor",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WBC",
+          "id": "phv00369300.v1.p1",
+          "description": "White blood cell count",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WHYSTER",
+          "id": "phv00369389.v1.p1",
+          "description": "Ever had hysterectomy",
+          "concept_id": "ncpi:pregnancy_reproductive_hysterectomy_surgery_hysterectomy_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WHYSTEROV",
+          "id": "phv00369390.v1.p1",
+          "description": "Both ovaries removed",
+          "concept_id": "ncpi:pregnancy_reproductive_hysterectomy_surgery_ovary_removal_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WNMENOPAUSE",
+          "id": "phv00369391.v1.p1",
+          "description": "Natural menopause",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_menopause_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WST",
+          "id": "phv00369273.v1.p1",
+          "description": "Waist circumference",
+          "concept_id": "phenx:waist_circumference_waist_circumference_nhanes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YRSSMOK",
+          "id": "phv00369297.v1.p1",
+          "description": "Years since stopped smoking cigarettes",
+          "concept_id": "phenx:protocol_2_tobacco_age_of_offset_of_use_adult_protocol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "atpcaa",
+          "id": "phv00369318.v1.p1",
+          "description": "Whole Blood: ATP Release Arachidonic Acid 0.5 mM corrected for platelet count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "atpcadp",
+          "id": "phv00369319.v1.p1",
+          "description": "Whole Blood: ATP ADP (adenosine diphosphate) 10 uM corrected for platelet count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "atpcc1",
+          "id": "phv00369320.v1.p1",
+          "description": "Whole Blood: ATP Release Collagen 1 ug/ml Aggregation corrected for platelet count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "atpcc5",
+          "id": "phv00369321.v1.p1",
+          "description": "Whole Blood: ATP Release Collagen 5 ug/ml Aggregation corrected for platelet count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pfact",
+          "id": "phv00369322.v1.p1",
+          "description": "PFA-100: Collagen/Epinephrine Closure Time",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpaa1",
+          "id": "phv00369339.v1.p1",
+          "description": "Platelet Rich Plasma: Arachidonic Acid 1 mM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpaa1_6",
+          "id": "phv00369340.v1.p1",
+          "description": "Platelet Rich Plasma: Arachidonic Acid 1.6 mM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpaa_5",
+          "id": "phv00369338.v1.p1",
+          "description": "Platelet Rich Plasma: Arachidonic Acid 0.5 mM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpaadp10",
+          "id": "phv00369342.v1.p1",
+          "description": "Platelet Rich Plasma: ADP 10 uM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpaadp2",
+          "id": "phv00369341.v1.p1",
+          "description": "Platelet Rich Plasma: ADP 2 uM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpac1",
+          "id": "phv00369345.v1.p1",
+          "description": "Platelet Rich Plasma: Collagen 1 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpac10",
+          "id": "phv00369348.v1.p1",
+          "description": "Platelet Rich Plasma: Collagen 10 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpac2",
+          "id": "phv00369346.v1.p1",
+          "description": "Platelet Rich Plasma: Collagen 2 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpac20",
+          "id": "phv00369349.v1.p1",
+          "description": "Platelet Rich Plasma: Collagen 20 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpac5",
+          "id": "phv00369347.v1.p1",
+          "description": "Platelet Rich Plasma: Collagen 5 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpac_25",
+          "id": "phv00369343.v1.p1",
+          "description": "Platelet Rich Plasma: Collagen 0.25 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpac_5",
+          "id": "phv00369344.v1.p1",
+          "description": "Platelet Rich Plasma: Collagen 0.5 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpae10",
+          "id": "phv00369352.v1.p1",
+          "description": "Platelet Rich Plasma: Epinephrine 10 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpae2",
+          "id": "phv00369351.v1.p1",
+          "description": "Platelet Rich Plasma: Epinephrine 2 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpcec50",
+          "id": "phv00369350.v1.p1",
+          "description": "Platelet Rich Plasma: Collagen EC50",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prplaa1",
+          "id": "phv00369368.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time AA 1 mM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prplaa1_6",
+          "id": "phv00369369.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time AA 1.6 mM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prplaa_5",
+          "id": "phv00369367.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time AA 0.5 mM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpladp10",
+          "id": "phv00369371.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time ADP 10 uM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpladp2",
+          "id": "phv00369370.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time ADP 2 uM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prplc1",
+          "id": "phv00369374.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time Collagen 1 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prplc10",
+          "id": "phv00369377.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time Collagen 10 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prplc2",
+          "id": "phv00369375.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time Collagen 2 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prplc20",
+          "id": "phv00369378.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time Collagen 20 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prplc5",
+          "id": "phv00369376.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time Collagen 5 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prplc_25",
+          "id": "phv00369372.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time Collagen 0.25 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prplc_5",
+          "id": "phv00369373.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time Collagen 0.5 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prple10",
+          "id": "phv00369380.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time Epinephrine 10 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prple2",
+          "id": "phv00369379.v1.p1",
+          "description": "Platelet Rich Plasma: Lag Time Epinephrine 2 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpraadp10",
+          "id": "phv00369384.v1.p1",
+          "description": "PRP: Reversible Aggregation for ADP 10 uM",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpraadp2",
+          "id": "phv00369383.v1.p1",
+          "description": "PRP: Reversible Aggregation for ADP 2 uM",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsaa1",
+          "id": "phv00369354.v1.p1",
+          "description": "Platelet Rich Plasma: Slope AA 1 mM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsaa1_6",
+          "id": "phv00369355.v1.p1",
+          "description": "Platelet Rich Plasma: Slope AA 1.6 mM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsaa_5",
+          "id": "phv00369353.v1.p1",
+          "description": "Platelet Rich Plasma: Slope AA 0.5 mM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsadp10",
+          "id": "phv00369357.v1.p1",
+          "description": "Platelet Rich Plasma: Slope ADP 10 uM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsadp2",
+          "id": "phv00369356.v1.p1",
+          "description": "Platelet Rich Plasma: Slope ADP 2 uM Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsae10",
+          "id": "phv00369382.v1.p1",
+          "description": "PRP: Secondary Aggregation for Epinephrine 10 ug/ml",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsae2",
+          "id": "phv00369381.v1.p1",
+          "description": "PRP: Secondary Aggregation for Epinephrine 2 ug/ml",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsc1",
+          "id": "phv00369360.v1.p1",
+          "description": "Platelet Rich Plasma: Slope Collagen 1 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsc10",
+          "id": "phv00369363.v1.p1",
+          "description": "Platelet Rich Plasma: Slope Collagen 10 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsc2",
+          "id": "phv00369361.v1.p1",
+          "description": "Platelet Rich Plasma: Slope Collagen 2 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsc20",
+          "id": "phv00369364.v1.p1",
+          "description": "Platelet Rich Plasma: Slope Collagen 20 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsc5",
+          "id": "phv00369362.v1.p1",
+          "description": "Platelet Rich Plasma: Slope Collagen 5 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsc_25",
+          "id": "phv00369358.v1.p1",
+          "description": "Platelet Rich Plasma: Slope Collagen 0.25 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpsc_5",
+          "id": "phv00369359.v1.p1",
+          "description": "Platelet Rich Plasma: Slope Collagen 0.5 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpse10",
+          "id": "phv00369366.v1.p1",
+          "description": "Platelet Rich Plasma: Slope Epinephrine 10 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prpse2",
+          "id": "phv00369365.v1.p1",
+          "description": "Platelet Rich Plasma: Slope Epinephrine 2 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "utxbcr",
+          "id": "phv00369388.v1.p1",
+          "description": "Urine thromboxane B2 adjusted for urinary creatinine",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wbaaa",
+          "id": "phv00369326.v1.p1",
+          "description": "Whole Blood: Arachidonic Acid 0.5 mM",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wbaaaasa",
+          "id": "phv00369327.v1.p1",
+          "description": "Whole Blood: Arachidonic Acid 0.5 mM + ASA 20 mM",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wbaadp",
+          "id": "phv00369325.v1.p1",
+          "description": "Whole Blood: ADP (adenosine diphosphate) 10 uM",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wbac1",
+          "id": "phv00369323.v1.p1",
+          "description": "Whole Blood: Collagen 1 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wbac5",
+          "id": "phv00369324.v1.p1",
+          "description": "Whole Blood: Collagen 5 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wblaa",
+          "id": "phv00369336.v1.p1",
+          "description": "Whole Blood: Lag Time Arachidonic Acid 0.5 mM",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wblaaasa",
+          "id": "phv00369337.v1.p1",
+          "description": "Whole Blood: Lag Time Arachidonic Acid 0.5 mM + ASA 20 mM",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wbladp",
+          "id": "phv00369335.v1.p1",
+          "description": "Whole Blood: Lag Time ADP (adenosine diphosphate) 10 uM",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wblc1",
+          "id": "phv00369333.v1.p1",
+          "description": "Whole Blood: Lag Time Collagen 1 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wblc5",
+          "id": "phv00369334.v1.p1",
+          "description": "Whole Blood: Lag Time Collagen 5 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wbsaa",
+          "id": "phv00369331.v1.p1",
+          "description": "Whole Blood: Slope Arachidonic Acid 0.5 mM",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wbsaaasa",
+          "id": "phv00369332.v1.p1",
+          "description": "Whole Blood: Slope Arachidonic Acid 0.5 mM + ASA 20 mM",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wbsadp",
+          "id": "phv00369330.v1.p1",
+          "description": "Whole Blood: Slope ADP (adenosine diphosphate) 10 uM",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wbsc1",
+          "id": "phv00369328.v1.p1",
+          "description": "Whole Blood: Slope Collagen 1 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wbsc5",
+          "id": "phv00369329.v1.p1",
+          "description": "Whole Blood: Slope Collagen 5 ug/ml Aggregation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wcolc12hete",
+          "id": "phv00369385.v1.p1",
+          "description": "Whole Blood: collagen 12 (S) HETE (corrected for platelet count)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wcolcbtg",
+          "id": "phv00369386.v1.p1",
+          "description": "Whole Blood: beta-thromboglobulin collagen alpha granule release  (corrected for platelet count)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wcolctxbc",
+          "id": "phv00369387.v1.p1",
+          "description": "Whole Blood: collagen thromboxane B2 (corrected for platelet count)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_GeneSTAR_Sample_Attributes",
+      "datasetId": "pht005960.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, sequencing center, funding source, TOPMed phase, project, and study name.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00273459.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00273458.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00397440.v1.p1",
+          "description": "Project funding source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00273460.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273457.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00273461.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00397443.v1.p1",
+          "description": "TOPMed-assigned short study name (1:1 with TOPMed phs number)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00397441.v1.p1",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00397442.v1.p1",
+          "description": "TOPMed Project that funded sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_GeneSTAR_Pedigree",
+      "datasetId": "pht005958.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, sex of subjects, and twin IDs for monozygotic twins.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00273448.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00273450.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00273451.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MZ_TWIN_ID",
+          "id": "phv00273453.v1.p1",
+          "description": "Twin ID for monozygotic twins",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00273452.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273449.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_GeneSTAR_Subject",
+      "datasetId": "pht005957.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00273447.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00397438.v1.p1",
+          "description": "Subject ID used in the SUBJECT_SOURCE repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273446.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00397437.v1.p1",
+          "description": "Repository name for dbGaP study also containing this individual",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_GeneSTAR_Sample",
+      "datasetId": "pht005959.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273455.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273454.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

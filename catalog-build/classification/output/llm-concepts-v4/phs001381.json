@@ -1,0 +1,378 @@
+{
+  "studyId": "phs001381",
+  "studyName": "Gut Microbiome and Types of Colorectal Polyps",
+  "tables": [
+    {
+      "tableName": "Gut_Microbiome_Colorectal_Polyps_Subject_Phenotypes",
+      "datasetId": "pht006568.v1",
+      "description": "Subject ID, study, sex, race, age, familial polyposis, participant Crohn disease, ulcerative colitis, and gastrointestinal cancer, colonoscopy, anastomosis, carcinoid, inflammatory bowel disease, polyp(s), blood in stool or rectal bleeding, normal/non-polyp histology, sessile serrated adenoma(s), tubular adenoma(s), and tubulovillous adenoma of participants with or without colorectal polyps and involved in the \"Gut Microbiome and Types of Colorectal Polyps\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00302177.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "add_astomosis",
+          "id": "phv00302208.v1.p1",
+          "description": "Additional finding at colonoscopy was previous anastomosis",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "add_carc",
+          "id": "phv00302207.v1.p1",
+          "description": "Additional finding at colonoscopy was carcinoid tumor",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_appendix_cancer",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "add_ibd",
+          "id": "phv00302206.v1.p1",
+          "description": "Additional finding at colonoscopy was inflammatory bowel disease",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_inflammatory_bowel_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00302179.v1.p1",
+          "description": "Age of subject",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "antib",
+          "id": "phv00302190.v1.p1",
+          "description": "Antibiotic use in previous 30 days from stool collection",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_recent_antibiotic_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ascen",
+          "id": "phv00302192.v1.p1",
+          "description": "Presence of polyp(s) in ascending colon at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bmi",
+          "id": "phv00302180.v1.p1",
+          "description": "Body mass index of subject",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cecum",
+          "id": "phv00302191.v1.p1",
+          "description": "Presence of polyp(s) in cecum at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "desc",
+          "id": "phv00302196.v1.p1",
+          "description": "Presence of polyp(s) in descending colon at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dr_crohn",
+          "id": "phv00302205.v1.p1",
+          "description": "Self-reported Crohn disease",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_crohns_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dr_fpolyp",
+          "id": "phv00302209.v1.p1",
+          "description": "Self-reported familial polyposis",
+          "concept_id": "topmed:cancer_diagnosis_family_cancer_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "dr_ulc",
+          "id": "phv00302204.v1.p1",
+          "description": "Self-reported ulcerative colitis",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_ulcerative_colitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hepflex",
+          "id": "phv00302193.v1.p1",
+          "description": "Presence of polyp(s) in hepatic flexure at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hyper",
+          "id": "phv00302188.v1.p1",
+          "description": "Presence of hyperplastic polyp(s) at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ind_blood",
+          "id": "phv00302200.v1.p1",
+          "description": "Indication for colonoscopy was blood in stool or rectal bleeding",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_gastrointestinal_bleeding",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ind_can",
+          "id": "phv00302203.v1.p1",
+          "description": "Indication for colonoscopy was personal history of gastrointestinal cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_specific_cancer_types",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ind_inf_disease",
+          "id": "phv00302202.v1.p1",
+          "description": "Indication for colonoscopy was inflammatory bowel disease, colitis, or other related conditions",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_inflammatory_bowel_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "normal",
+          "id": "phv00302185.v1.p1",
+          "description": "Presence of normal/non-polyp histology polyp(s) at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "other_hist",
+          "id": "phv00302189.v1.p1",
+          "description": "Presence of polyp with unclassified histology at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "poly_his",
+          "id": "phv00302210.v1.p1",
+          "description": "History of colorectal polyps other than study colonoscopy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_colorectal_cancer",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00302181.v1.p1",
+          "description": "Race of subject",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rec",
+          "id": "phv00302198.v1.p1",
+          "description": "Presence of polyp(s) in rectum at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00302178.v1.p1",
+          "description": "Gender of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sig",
+          "id": "phv00302197.v1.p1",
+          "description": "Presence of polyp(s) in sigmoid colon at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "splenflex",
+          "id": "phv00302195.v1.p1",
+          "description": "Presence of polyp(s) in splenic flexure at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ssa",
+          "id": "phv00302186.v1.p1",
+          "description": "Presence of sessile serrated adenoma(s) at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ssa_dysplasia",
+          "id": "phv00302187.v1.p1",
+          "description": "Presence of sessile serrated adenoma(s) with dysplasia at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "study",
+          "id": "phv00302182.v1.p1",
+          "description": "Study in which the subject participated",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ta",
+          "id": "phv00302183.v1.p1",
+          "description": "Presence of tubular adenoma(s) at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tasize",
+          "id": "phv00302201.v1.p1",
+          "description": "Size of any tubular adenomas at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "time_days",
+          "id": "phv00302199.v1.p1",
+          "description": "Days from stool collection to colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "transv",
+          "id": "phv00302194.v1.p1",
+          "description": "Presence of polyp(s) in transverse colon at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tva",
+          "id": "phv00302184.v1.p1",
+          "description": "Presence of tubulovillous adenoma(s) at colonoscopy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Gut_Microbiome_Colorectal_Polyps_Sample_Attributes",
+      "datasetId": "pht006569.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, and tumor status of participants with or without colorectal polyps and involved in the \"Gut Microbiome and Types of Colorectal Polyps\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00302213.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00302212.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00302214.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00302211.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Gut_Microbiome_Colorectal_Polyps_Sample",
+      "datasetId": "pht006567.v1",
+      "description": "Subject ID, sample ID, and sample use variable obtained from participants with or without colorectal polyps and involved in the \"Gut Microbiome and Types of Colorectal Polyps\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00302175.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00302176.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00302174.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Gut_Microbiome_Colorectal_Polyps_Subject",
+      "datasetId": "pht006566.v1",
+      "description": "Subject ID and consent group participants with or without colorectal polyps and involved in the \"Gut Microbiome and Types of Colorectal Polyps\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00302173.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00302172.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

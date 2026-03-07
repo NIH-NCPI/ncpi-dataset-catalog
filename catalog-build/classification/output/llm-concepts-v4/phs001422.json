@@ -1,0 +1,194 @@
+{
+  "studyId": "phs001422",
+  "studyName": "GEnomics and Transcriptomics of Human INsulinoma (GETHIN)",
+  "tables": [
+    {
+      "tableName": "GETHIN_Subject_Phenotypes",
+      "datasetId": "pht006760.v2",
+      "description": "This subject phenotype table contains subject IDs, age, sex, diameter of the insulinoma, malignancy, lowest blood sugar levels, and percentage of tumor cells positive for Ki67.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00481605.v1.p1",
+          "description": "Case (Insulinoma) vs control (Beta Cells) status for all subjects",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age",
+          "id": "phv00310106.v2.p1",
+          "description": "Age of individual at the time surgery",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diam",
+          "id": "phv00310108.v2.p1",
+          "description": "Largest Diameter of the Insulinoma",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ki67",
+          "id": "phv00310111.v2.p1",
+          "description": "Percentage of tumor cells positive for Ki67",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_ki67_proliferation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Lowest_BS",
+          "id": "phv00310110.v2.p1",
+          "description": "Lowest blood suger levels",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "Malignancy",
+          "id": "phv00310109.v2.p1",
+          "description": "Malignancy status of the insulinoma from the subject, i.e. benign vs. malignant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00310105.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00310107.v2.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GETHIN_Sample_Attributes",
+      "datasetId": "pht006761.v2",
+      "description": "This sample attributes table contains sample IDs, body site where sample was collected, analyte type, tumor status, histological type, and name of the center which conducted sequencing.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00310114.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00310113.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00310116.v2.p1",
+          "description": "Cell or tissue type of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00310115.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00310112.v2.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00310117.v2.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GETHIN_Subject",
+      "datasetId": "pht006758.v2",
+      "description": "The subject consent file includes subject IDs, consent information, and subject source.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00310099.v2.p1",
+          "description": "Consent group determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00310098.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00310100.v2.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GETHIN_Sample",
+      "datasetId": "pht006759.v2",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample source.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00310102.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00310103.v2.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00310101.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

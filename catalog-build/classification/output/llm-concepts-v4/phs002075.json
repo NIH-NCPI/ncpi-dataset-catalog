@@ -1,0 +1,146 @@
+{
+  "studyId": "phs002075",
+  "studyName": "Transcriptomic Signatures of Placenta Accreta and Placenta Previa",
+  "tables": [
+    {
+      "tableName": "Chorioamniotic_Membranes_Sample_Attributes",
+      "datasetId": "pht010460.v1",
+      "description": "This sample attributes table includes the body site where sample was collected, gestational age at time of delivery, status (for spontaneous pre-term birth, placenta previa, or placenta accreta), analyte type, histological type, and sequencing center.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00435215.v1.p1",
+          "description": "Status of the sample for spontaneous pre-term birth, placenta previa, or placenta accreta",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_preeclampsia_eclampsia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00435213.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00435212.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GESTATIONAL_AGE",
+          "id": "phv00435216.v1.p1",
+          "description": "Gestational age at time of delivery",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00435214.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00435211.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00435217.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Chorioamniotic_Membranes_Subject",
+      "datasetId": "pht010457.v1",
+      "description": "This subject consent data table contains subject IDs,  consent group information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00435205.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00435206.v1.p1",
+          "description": "Sex of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435204.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Chorioamniotic_Membranes_Sample",
+      "datasetId": "pht010458.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00435208.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435207.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Chorioamniotic_Membranes_Subject_Phenotypes",
+      "datasetId": "pht010459.v1",
+      "description": "This subject phenotypes data table includes subject sex.",
+      "variables": [
+        {
+          "name": "SEX",
+          "id": "phv00435210.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435209.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

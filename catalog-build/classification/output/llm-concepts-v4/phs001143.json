@@ -1,0 +1,473 @@
+{
+  "studyId": "phs001143",
+  "studyName": "NHLBI TOPMed: The Genetics and Epidemiology of Asthma in Barbados",
+  "tables": [
+    {
+      "tableName": "TOPMed_WGS_BAGS_Subject_Phenotypes",
+      "datasetId": "pht005905.v3",
+      "description": "This subject phenotype table includes age, sex, and affection status for asthma. Additional variables have been added: smoking status (n=9 variables; includes mother and father smoking status), asthma age of onset, allergic rhinitis, weight, height, IgE measurements (n=3 variables), phadiatop measurements, spirometry measurements (n=3 variables), bronchodilator pills/inhalers/nebulizer (n=6 variables), steroid pills/inhalers (n=4 variables), and cromolyn inhalers (n=2 variables).",
+      "variables": [
+        {
+          "name": "CURRENT_SMOKING",
+          "id": "phv00375341.v1.p1",
+          "description": "Answer to \"Are you smoking now?\"",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "EVER_SMOKED_CIGARETTES",
+          "id": "phv00375339.v1.p1",
+          "description": "Answer to \"Have you ever smoked cigarettes?\"",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "HEIGHT_CM",
+          "id": "phv00375338.v2.p1",
+          "description": "Subject height in cm",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00273212.v2.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "WEIGHT_KG",
+          "id": "phv00375337.v2.p1",
+          "description": "Subject weight in kg",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00273213.v2.p1",
+          "description": "Case control status of the subject for asthma",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_otitis_media",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00273211.v2.p1",
+          "description": "Subject age at health questionnaire administration and lung function measurement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_IGE",
+          "id": "phv00375318.v1.p1",
+          "description": "Age of subject when sample used for total serum IgE measurement was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_ONSET_ASTHMA",
+          "id": "phv00375320.v1.p1",
+          "description": "Age of asthma onset",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_age_onset",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_START_SMOKING",
+          "id": "phv00375340.v1.p1",
+          "description": "Answer to \"At what age did you start smoking?\"",
+          "concept_id": "phenx:protocol_2_tobacco_age_of_initiation_of_use_adult_protocol",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_STOPPED_SMOKING",
+          "id": "phv00375342.v1.p1",
+          "description": "Answer to \"At what age did you stop smoking?\"",
+          "concept_id": "phenx:protocol_2_tobacco_age_of_offset_of_use_adult_protocol",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALLERGIC_RHINITIS",
+          "id": "phv00375321.v1.p1",
+          "description": "Self-reported allergic rhinitis based on health questionnaire",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_allergies_allergic_reactions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BRONCHODILATOR_INHALERS",
+          "id": "phv00375326.v1.p1",
+          "description": "Bronchodilator inhalers (current use according to health questionnaire)",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_short_acting_bronchodilators",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BRONCHODILATOR_INHALERS_RELIEF",
+          "id": "phv00375327.v1.p1",
+          "description": "Relief from bronchodilator inhalers",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_short_acting_bronchodilators",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BRONCHODILATOR_NEBULIZER",
+          "id": "phv00375332.v1.p1",
+          "description": "Bronchodilator by nebulizer (current use according to health questionnaire)",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_short_acting_bronchodilators",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BRONCHODILATOR_NEBULIZER_RELIEF",
+          "id": "phv00375333.v1.p1",
+          "description": "Relief from bronchodilator by nebulizer",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_short_acting_bronchodilators",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BRONCHODILATOR_PILLS",
+          "id": "phv00375322.v1.p1",
+          "description": "Bronchodilator pills, capsules, or liquids (current use according to health questionnaire)",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_short_acting_bronchodilators",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BRONCHODILATOR_PILLS_RELIEF",
+          "id": "phv00375323.v1.p1",
+          "description": "Relief from bronchodilator pills, capsules, or liquids",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_short_acting_bronchodilators",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CROMOLYN_INHALERS",
+          "id": "phv00375330.v1.p1",
+          "description": "Cromolyn inhalers (current use according to health questionnaire)",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_cromolyn_mast_cell_stabilizers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CROMOLYN_INHALERS_RELIEF",
+          "id": "phv00375331.v1.p1",
+          "description": "Relief from cromolyn inhalers",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_cromolyn_mast_cell_stabilizers",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DAILY_NR_CIGARETTES",
+          "id": "phv00375343.v1.p1",
+          "description": "Answer to \"On average, during the years that you have smoked, how many cigarettes did you smoke daily?\"",
+          "concept_id": "phenx:protocol_2_tobacco_30day_quantity_and_frequency_adult_protocol",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EVER_SMOKED_CIGARS",
+          "id": "phv00375344.v1.p1",
+          "description": "Answer to \"Have you ever smoked cigars?\"",
+          "concept_id": "phenx:use_of_tobacco_products",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EVER_SMOKED_PIPE",
+          "id": "phv00375345.v1.p1",
+          "description": "Answer to \"Have you ever smoked a pipe?\"",
+          "concept_id": "phenx:use_of_tobacco_products",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER_SMOKED",
+          "id": "phv00375347.v1.p1",
+          "description": "Answer to \"Did your father smoke when you were a baby?\"",
+          "concept_id": "ncpi:family_medical_history_smoking_family_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FEV1_FVC",
+          "id": "phv00375336.v1.p1",
+          "description": "FEV1/FVC (pre-bronchodilator)",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fev1_fvc_ratio",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FEV1_PREBD",
+          "id": "phv00375334.v1.p1",
+          "description": "FEV1 = Forced Expiratory Volume 1 (pre-bronchodilator)",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fev1_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FVC_PREBD",
+          "id": "phv00375335.v1.p1",
+          "description": "FVC = Forced Vital Capacity (pre-bronchodilator)",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fvc_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IGE_BATCH",
+          "id": "phv00375317.v1.p1",
+          "description": "Batch in which total serum IgE and phadiatop measurements were run",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LOG10_IGE_NG_ML",
+          "id": "phv00375316.v2.p1",
+          "description": "Log10 (Total serum IgE in ng/ml)",
+          "concept_id": "phenx:immunoglobulin_e_total_and_specific",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER_SMOKED",
+          "id": "phv00375346.v1.p1",
+          "description": "Answer to \"Did your mother smoke when you were a baby?\"",
+          "concept_id": "ncpi:family_medical_history_smoking_family_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RAW_PHADIATOP_PAU_L",
+          "id": "phv00375319.v1.p1",
+          "description": "Phadiatop measurements in PAU/L",
+          "concept_id": "phenx:immunoglobulin_e_total_and_specific",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "STEROID_INHALERS",
+          "id": "phv00375328.v1.p1",
+          "description": "Steroid inhalers (current use according to health questionnaire)",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_inhaled_corticosteroids",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STEROID_INHALERS_RELIEF",
+          "id": "phv00375329.v1.p1",
+          "description": "Relief from steroid inhalers",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_inhaled_corticosteroids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "STEROID_PILLS",
+          "id": "phv00375324.v1.p1",
+          "description": "Steroid/prednisone pills (current use according to health questionnaire)",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_oral_systemic_steroids",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STEROID_PILLS_RELIEF",
+          "id": "phv00375325.v1.p1",
+          "description": "Relief from steroid/prednisone pills",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_oral_systemic_steroids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273210.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_BAGS_Sample_Attributes",
+      "datasetId": "pht005906.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, sequencing center, funding source, TOPMed phase and name of project, and study name provided to dbGaP.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00273215.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00273216.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00283978.v1.p1",
+          "description": "Funding source for sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273214.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00273218.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00283981.v1.p1",
+          "description": "Study name in dbGaP",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00283979.v1.p1",
+          "description": "Phase of TOPMed study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00283980.v1.p1",
+          "description": "Name of TOPMed project",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_BAGS_Pedigree",
+      "datasetId": "pht005903.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, sex of subjects, and status of unannotated second degree relationships.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00273202.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00273205.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00273204.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00273206.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273203.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UNANNOTATED_DEG2",
+          "id": "phv00283977.v1.p1",
+          "description": "Semicolon delimited string of SUBJECT_IDs that a subject is related to at a 2nd degree level, but the exact relationship is unknown",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_BAGS_Subject",
+      "datasetId": "pht005902.v1",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00273200.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273199.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_BAGS_Sample",
+      "datasetId": "pht005904.v2",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273208.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273207.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

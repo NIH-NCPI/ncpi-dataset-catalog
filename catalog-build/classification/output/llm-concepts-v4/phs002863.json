@@ -1,0 +1,210 @@
+{
+  "studyId": "phs002863",
+  "studyName": "Genome-Wide Association Study of Heparin-Induced Thrombocytopenia",
+  "tables": [
+    {
+      "tableName": "HIT_Subject_Phenotypes",
+      "datasetId": "pht013616.v1",
+      "description": "This subject phenotypes data table reports each subject's sex, age,cohort., optical density from ELISA for IgG, optical density from ELISA for IgA, optical density from ELISA for IgM, heparin-induced platelet activation status, history of cardiopulmonry bypass, serotonin release assay, presence of unfractionated heparin in heparin dosage, and antibody positivity status based on optiocal density for IgG.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00530502.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANTIBODY_POSITIVE",
+          "id": "phv00530832.v1.p1",
+          "description": "PF4/heparin antibody positivity status based off of PF4/heparin-specific IgG optical density (OD_IGG)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COHORT",
+          "id": "phv00530503.v1.p1",
+          "description": "Distinguishing where cohort was recruited from",
+          "concept_id": "ncpi:subcohort_study_cohort_assignment_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CPB",
+          "id": "phv00530508.v1.p1",
+          "description": "Undergone a cardiopulmonary bypass (CPB)",
+          "concept_id": "ncpi:surgical_procedure_surgical_devices",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HIPA_STATUS",
+          "id": "phv00530507.v1.p1",
+          "description": "Heparin-induced platelet activation status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OD_IGA",
+          "id": "phv00530505.v1.p1",
+          "description": "Optical density value as measured via ELISA for immunoglobulin A",
+          "concept_id": "topmed:proteomics_panel_immunoglobulins",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OD_IGG",
+          "id": "phv00530504.v1.p1",
+          "description": "Optical density value as measured via ELISA for immunoglobulin G",
+          "concept_id": "topmed:proteomics_panel_immunoglobulins",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OD_IGM",
+          "id": "phv00530506.v1.p1",
+          "description": "Optical density value as measured via ELISA for immunoglobulin M",
+          "concept_id": "topmed:proteomics_panel_immunoglobulins",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00530501.v1.p1",
+          "description": "Self-reported gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SRA",
+          "id": "phv00530509.v1.p1",
+          "description": "Serotonin release assay (SRA)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00530500.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UFH",
+          "id": "phv00530510.v1.p1",
+          "description": "Presence of unfractionated heparin (UFH) in heparin dosage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HIT_Subject",
+      "datasetId": "pht013614.v1",
+      "description": "This subject consent data table includes subject IDs, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "COHORT",
+          "id": "phv00530497.v1.p1",
+          "description": "Hospital from which subject was recruited",
+          "concept_id": "ncpi:subcohort_study_cohort_assignment_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00530495.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00530496.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00530494.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HIT_Sample_Attributes",
+      "datasetId": "pht013617.v1",
+      "description": "This sample attributes data table includes each sample's body site of origin, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00530513.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00530512.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00530514.v1.p1",
+          "description": "Tumor status of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00530511.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HIT_Sample",
+      "datasetId": "pht013615.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00530499.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00530498.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

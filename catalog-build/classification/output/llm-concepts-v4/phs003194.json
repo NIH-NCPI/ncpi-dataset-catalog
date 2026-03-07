@@ -1,0 +1,329 @@
+{
+  "studyId": "phs003194",
+  "studyName": "Maternal and Developmental Risks from Environmental and Social Stressors (MADRES) Center for Environmental Health Disparities",
+  "tables": [
+    {
+      "tableName": "MADRES_Subject_Phenotypes",
+      "datasetId": "pht013565.v1",
+      "description": "This subject phenotypes data table reports each subject's sex, status as mother or fetus, maternal age standardized at 12 weeks, preferred language, education level, race/ethnicity, nativity, fetal sex, gestational age at birth, birthweight, smoking status during pregnancy, pre-pregnancy BMI, annual household income, status for preexisting diabetes, status for gestational diabetes, and status for preeclampsia/eclampsia.",
+      "variables": [
+        {
+          "name": "GA",
+          "id": "phv00530249.v1.p1",
+          "description": "Gestational age at birth",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GDM",
+          "id": "phv00530255.v1.p1",
+          "description": "Indicator for gestational diabetes mellitus (GDM)",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_gestational_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00530241.v1.p1",
+          "description": "Subject sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00530240.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "birthweight",
+          "id": "phv00530250.v1.p1",
+          "description": "Weight at birth",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_birth_weight",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fetal_sex",
+          "id": "phv00530248.v1.p1",
+          "description": "Baby's sex",
+          "concept_id": "ncpi:annotated_sex_baby_sex",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mat_edu",
+          "id": "phv00530245.v1.p1",
+          "description": "Level of maternal education",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mat_income",
+          "id": "phv00530253.v1.p1",
+          "description": "Total annual household income",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mat_language",
+          "id": "phv00530244.v1.p1",
+          "description": "Preferred language",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mat_pre_bmi",
+          "id": "phv00530252.v1.p1",
+          "description": "Maternal pre-pregnancy BMI",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mat_preg_smoke",
+          "id": "phv00530251.v1.p1",
+          "description": "Smoking during pregnancy",
+          "concept_id": "topmed:pregnancy_reproductive_maternal_exposures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mat_stdage",
+          "id": "phv00530243.v1.p1",
+          "description": "Maternal age, standardized at 12 weeks of pregnancy, using maternal birthdate, child birthdate, and gestational age at birth",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mother_baby_flag",
+          "id": "phv00530242.v1.p1",
+          "description": "Indicator for mother or baby sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "nativity",
+          "id": "phv00530247.v1.p1",
+          "description": "Participant born in US or elsewhere",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "preEE",
+          "id": "phv00530256.v1.p1",
+          "description": "Indicator for preeclampsia/eclampsia (preE)",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_preeclampsia_eclampsia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "preEx_diabetes",
+          "id": "phv00530254.v1.p1",
+          "description": "Indicator for pre-exisiting diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race_ethnicity",
+          "id": "phv00530246.v1.p1",
+          "description": "Participant race/ethnicity",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MADRES_Sample_Attributes",
+      "datasetId": "pht013566.v1",
+      "description": "This sample attributes data table reports each sample's approximate trimester at collection, dilution for miRNA/Nanostring processing, time between collection and start of processing, tumor status, analyte type, body site of origin, collection tube type type, and gestational age at collection.",
+      "variables": [
+        {
+          "name": "GA_sample",
+          "id": "phv00530265.v1.p1",
+          "description": "Gestational age at time of sample collection",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_ID",
+          "id": "phv00530257.v1.p1",
+          "description": "Unique sample identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "analyte_type",
+          "id": "phv00530262.v1.p1",
+          "description": "Epigenetic analysis performed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "body_site",
+          "id": "phv00530263.v1.p1",
+          "description": "Body site of collection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dilution",
+          "id": "phv00530259.v1.p1",
+          "description": "Dilution of miRNA/Nanostring sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "is_tumor",
+          "id": "phv00530261.v1.p1",
+          "description": "Whether sample is tumor or not",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_lag",
+          "id": "phv00530260.v1.p1",
+          "description": "Time between sample collection and start of processing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "time",
+          "id": "phv00530258.v1.p1",
+          "description": "Approx trimester of collection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tube_type",
+          "id": "phv00530264.v1.p1",
+          "description": "BD tube type for sample collection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MADRES_Pedigree",
+      "datasetId": "pht013563.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and sex of subjects.",
+      "variables": [
+        {
+          "name": "Family_ID",
+          "id": "phv00530233.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Father",
+          "id": "phv00530235.v1.p1",
+          "description": "Father ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Mother",
+          "id": "phv00530236.v1.p1",
+          "description": "Mother ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00530237.v1.p1",
+          "description": "Subject Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00530234.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MADRES_Subject",
+      "datasetId": "pht013562.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "Consent",
+          "id": "phv00530231.v1.p1",
+          "description": "Subject Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00530232.v1.p1",
+          "description": "Subject Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00530230.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MADRES_Sample",
+      "datasetId": "pht013564.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "Sample_ID",
+          "id": "phv00530239.v1.p1",
+          "description": "Unique sample identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00530238.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

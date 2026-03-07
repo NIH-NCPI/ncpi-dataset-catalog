@@ -1,0 +1,210 @@
+{
+  "studyId": "phs002612",
+  "studyName": "Immunogenomics of Malignant Brain Tumors",
+  "tables": [
+    {
+      "tableName": "Immunogenomics_Brain_Tumors_Subject_Phenotypes",
+      "datasetId": "pht011679.v1",
+      "description": "This subject phenotype table includes subject's race and ethnicity, age, MGMT gene methylation status, prior treatment, metastasis, tumor type, IDH1 status, regions profiled, and whether tumor exhibited hypermutated phenotype.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00494821.v1.p1",
+          "description": "Age of participant",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00494819.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HYPERMUTATOR",
+          "id": "phv00494828.v1.p1",
+          "description": "Whether the tumor exhibits a hypermutated phenotype. This status applies to the patient case and was not assessed for individual tumor region samples.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IDH1_STATUS",
+          "id": "phv00494826.v1.p1",
+          "description": "IDH1 gene mutation status obtained for each patient tumor. This status applies to the patient case and was not assessed for individual tumor region samples.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "METASTASIS",
+          "id": "phv00494824.v1.p1",
+          "description": "Whether the brain tumor is a primary brain tumor, or a metastasis from another location. This status applies equally to all tumor region samples obtained from each patient.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MGMT_STATUS",
+          "id": "phv00494822.v1.p1",
+          "description": "A genetic finding indicating that DNA methylation in the promoter region of the MGMT gene has been detected in the patient's tumor. This status was not assessed for individual tumor region samples.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_TREATMENT",
+          "id": "phv00494823.v1.p1",
+          "description": "Whether the patient had prior treatment at time of sample collection.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00494820.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REGIONS_PROFILED",
+          "id": "phv00494827.v1.p1",
+          "description": "Number of regions of tumor profiled for spatial heterogeneity from each individual patient.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494818.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TYPE",
+          "id": "phv00494825.v1.p1",
+          "description": "Tumor type of sample obtained from each patient. This type applies equally to all tumor region samples obtained from each patient.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Immunogenomics_Brain_Tumors_Sample_Attributes",
+      "datasetId": "pht011680.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, and type of biopsy specimen.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00494832.v1.p1",
+          "description": "The analyte type of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BIOPSY_SPECIMEN",
+          "id": "phv00494831.v1.p1",
+          "description": "The type of biopsy specimen",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00494833.v1.p1",
+          "description": "The collection site of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00494830.v1.p1",
+          "description": "The tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00494829.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Immunogenomics_Brain_Tumors_Subject",
+      "datasetId": "pht011677.v1",
+      "description": "The subject consent data table includes subject IDs, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00494813.v1.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00494814.v1.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494812.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Immunogenomics_Brain_Tumors_Sample",
+      "datasetId": "pht011678.v1",
+      "description": "This subject sample mapping data table contains mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. Also included is a secondary sample ID.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00494816.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SECONDARY_SAMPLE_ID",
+          "id": "phv00494817.v1.p1",
+          "description": "Secondary sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494815.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

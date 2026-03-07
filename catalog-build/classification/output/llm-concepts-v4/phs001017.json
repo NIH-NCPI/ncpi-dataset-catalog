@@ -1,0 +1,146 @@
+{
+  "studyId": "phs001017",
+  "studyName": "Breast Cancer Susceptibility",
+  "tables": [
+    {
+      "tableName": "Breast_Cancer_Susceptibility_Sample_Attributes",
+      "datasetId": "pht005077.v1",
+      "description": "Sample ID, histological type of sample, analyte type, tissue where sample was obtained, and tumor status of participants with breast cancer and involved in the \"Breast Cancer Susceptibility\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00253548.v1.p1",
+          "description": "Sample nucleic acid type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00253547.v1.p1",
+          "description": "Type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00253550.v1.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253546.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TISSUE",
+          "id": "phv00253549.v1.p1",
+          "description": "Tissue from which analyte was extracted",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Cancer_Susceptibility_Subject",
+      "datasetId": "pht005074.v1",
+      "description": "Subject DI, consent group, and affection status of participants with breast cancer and involved in the \"Breast Cancer Susceptibility\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00253538.v1.p1",
+          "description": "Allowable research use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00482356.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253537.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Cancer_Susceptibility_Sample",
+      "datasetId": "pht005075.v1",
+      "description": "Subject ID, sample ID, and sample use variable obtained from participants with breast cancer and involved in the \"Breast Cancer Susceptibility\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253541.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00253542.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253540.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Cancer_Susceptibility_Subject_Phenotypes",
+      "datasetId": "pht005076.v1",
+      "description": "Subject ID, sex, and race of participants with breast cancer and involved in the \"Breast Cancer Susceptibility\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00492144.v1.p1",
+          "description": "Does subject has a breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00253545.v1.p1",
+          "description": "Race of subject",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253543.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

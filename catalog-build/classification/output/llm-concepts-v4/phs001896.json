@@ -1,0 +1,241 @@
+{
+  "studyId": "phs001896",
+  "studyName": "Etiologic Studies of Macular Degeneration",
+  "tables": [
+    {
+      "tableName": "CIDR_Etiologic_AMD_Subject_Phenotypes",
+      "datasetId": "pht012647.v1",
+      "description": "This adult subject phenotype table contains subject IDs, age, sex, ethnicity, race, smoking history, case control status of the subject for advanced Age-related Macular Degeneration (AMD), and AMD stage.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00508668.v1.p1",
+          "description": "Case control status of the subject for advanced Age-related Macular Degeneration (AMD)",
+          "concept_id": "ncpi:ophthalmology_amd_drusen_amd_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00508663.v1.p1",
+          "description": "Age at the time of exam",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00508665.v1.p1",
+          "description": "Hispanic ethinicty",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00508666.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00508664.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKING",
+          "id": "phv00508667.v1.p1",
+          "description": "History of smoking",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE",
+          "id": "phv00508669.v1.p1",
+          "description": "Stage of advanced age-related macular degeneration",
+          "concept_id": "ncpi:ophthalmology_amd_drusen_advanced_amd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00508662.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_Etiologic_AMD_Subject",
+      "datasetId": "pht012644.v1",
+      "description": "The subject consent file includes subject IDs, consent information, sex, and subject alias.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00508653.v1.p1",
+          "description": "Type of Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00508654.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00527565.v1.p1",
+          "description": "Submitted subject ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00508652.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00527564.v1.p1",
+          "description": "Repository name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_Etiologic_AMD_Pedigree",
+      "datasetId": "pht012645.v1",
+      "description": "The subject pedigree table contains family ID, subject ID, father ID, mother ID, and sex.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00508655.v1.p1",
+          "description": "Family ID of subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER_ID",
+          "id": "phv00508657.v1.p1",
+          "description": "Father ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER_ID",
+          "id": "phv00508658.v1.p1",
+          "description": "Mother ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00508659.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00508656.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_Etiologic_AMD_Sample_Attributes",
+      "datasetId": "pht012648.v1",
+      "description": "This sample attributes table contains sample IDs, analyte type, name of the center which conducted genotyping, body site where sample was collected, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00508671.v1.p1",
+          "description": "Sample type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00508673.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00508674.v1.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00508670.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00508672.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_Etiologic_AMD_Sample",
+      "datasetId": "pht012646.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00508661.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00508660.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

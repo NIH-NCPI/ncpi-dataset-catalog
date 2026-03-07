@@ -1,0 +1,225 @@
+{
+  "studyId": "phs001673",
+  "studyName": "ADAGESIII: Contribution of Genotype to Glaucoma Phenotype in African Americans",
+  "tables": [
+    {
+      "tableName": "ADAGESIII_Subject_Phenotypes",
+      "datasetId": "pht008512.v1",
+      "description": "This subject phenotype table contains subject IDs, affection status of the subject for Glaucoma, race, age, mean deviation of left and right eyes, worse mean deviation of eyes from measurements, and sex.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00396399.v1.p1",
+          "description": "Case control status of the subject for GLAUCOMA",
+          "concept_id": "topmed:ophthalmology_glaucoma_optic_disc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00396401.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MD_L",
+          "id": "phv00396402.v1.p1",
+          "description": "Mean Deviation of left eye",
+          "concept_id": "ncpi:ophthalmology_visual_acuity_visual_field_defects",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MD_R",
+          "id": "phv00396403.v1.p1",
+          "description": "Mean Deviation of right eye",
+          "concept_id": "ncpi:ophthalmology_visual_acuity_visual_field_defects",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MD_WorseEye",
+          "id": "phv00396404.v1.p1",
+          "description": "Worse Mean Deviation of eyes from measurements",
+          "concept_id": "ncpi:ophthalmology_visual_acuity_visual_field_defects",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00396400.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00396405.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396398.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ADAGESIII_Pedigree",
+      "datasetId": "pht008510.v1",
+      "description": "The subject pedigree table contains family ID, subject ID, mother ID, father ID, and sex.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00396389.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00396392.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00396391.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00396393.v1.p1",
+          "description": "Sex",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396390.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ADAGESIII_Sample",
+      "datasetId": "pht008511.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample source and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00396395.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00396396.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00396397.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396394.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ADAGESIII_Subject",
+      "datasetId": "pht008509.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and subject source.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00396387.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396386.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00396388.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ADAGESIII_Sample_Attributes",
+      "datasetId": "pht008513.v1",
+      "description": "This sample attributes table contains sample IDs, analyte type, and name of the center which conducted genotyping.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00396407.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00396408.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00396406.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

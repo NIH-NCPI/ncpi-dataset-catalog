@@ -1,0 +1,225 @@
+{
+  "studyId": "phs001082",
+  "studyName": "T Cell Responses to Varicella Zoster Virus",
+  "tables": [
+    {
+      "tableName": "VZV_TCell_Subject_Phenotypes",
+      "datasetId": "pht005381.v1",
+      "description": "This subject phenotype table includes sex and age of subjects, occurance of herpes zoster, and detection of HSV1, HSV2, and CMV.",
+      "variables": [
+        {
+          "name": "CMV",
+          "id": "phv00259884.v1.p1",
+          "description": "Detection of cytomegalovirus infection",
+          "concept_id": "phenx:assay_for_cytokine_panel_12",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "HSV1",
+          "id": "phv00259882.v1.p1",
+          "description": "Detection of herpes simplex virus-1 infection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HSV2",
+          "id": "phv00259883.v1.p1",
+          "description": "Detection of herpes simplex virus-2 infection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259878.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Zoster",
+          "id": "phv00259881.v1.p1",
+          "description": "Occurance of herpes zoster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00259880.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00259879.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VZV_TCell_Pedigree",
+      "datasetId": "pht005380.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, sex of subjects, and twin IDs.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00259872.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00259875.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00259874.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00259876.v1.p1",
+          "description": "Sex",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259873.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TWIN_ID",
+          "id": "phv00259877.v1.p1",
+          "description": "Twin ID for monozygotic twins or multiples. A TWINID is not provided for dizygotic twins or multiples.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VZV_TCell_Sample_Attributes",
+      "datasetId": "pht005382.v1",
+      "description": "This sample attributes table includes tissue type, analyte type, histological type, and day sample was collected.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00259887.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00259888.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00259885.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TAKEN_DATE",
+          "id": "phv00259889.v1.p1",
+          "description": "Day sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TISSUE_TYPE",
+          "id": "phv00259886.v1.p1",
+          "description": "Tissue source of cells",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VZV_TCell_Sample",
+      "datasetId": "pht005379.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00259870.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00259871.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259869.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VZV_TCell_Subject",
+      "datasetId": "pht005378.v1",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00259868.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259867.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

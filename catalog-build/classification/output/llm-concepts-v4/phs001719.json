@@ -1,0 +1,154 @@
+{
+  "studyId": "phs001719",
+  "studyName": "Longitudinal Multi-Omics Profiling of Prediabetes",
+  "tables": [
+    {
+      "tableName": "Prediabetes_Subject_Phenotypes",
+      "datasetId": "pht008919.v1",
+      "description": "This subject phenotype table contains subject ID, insulin resistance status, steady-state plasma glucose test value, fasting plasma glucose, gender, race, age, and body mass index.",
+      "variables": [
+        {
+          "name": "AGE_TAG",
+          "id": "phv00405221.v1.p1",
+          "description": "Age of subject at time of study start",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00405222.v1.p1",
+          "description": "Body mass index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FPG",
+          "id": "phv00405218.v1.p1",
+          "description": "Fasting plasma glucose",
+          "concept_id": "ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00405219.v1.p1",
+          "description": "Subjects Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INSULIN_RESISTANCE_STATUS",
+          "id": "phv00405216.v1.p1",
+          "description": "Insulin resistance status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_CODE",
+          "id": "phv00405220.v1.p1",
+          "description": "Subjects recorded Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RAND_PATIENT_ID",
+          "id": "phv00405215.v1.p1",
+          "description": "Randomized Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SSPG",
+          "id": "phv00405217.v1.p1",
+          "description": "Steady-state plasma glucose test value",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Prediabetes_Sample_Attributes",
+      "datasetId": "pht008920.v1",
+      "description": "This sample attributes table contains sample ID, body site, and analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00405225.v1.p1",
+          "description": "The analyte type of the sample (ex. DNA, RNA)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00405224.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_ID",
+          "id": "phv00405223.v1.p1",
+          "description": "Sample identification ID, each subject has one sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Prediabetes_Subject",
+      "datasetId": "pht008917.v1",
+      "description": "The subject consent file includes subject ID and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00405212.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RAND_PATIENT_ID",
+          "id": "phv00405211.v1.p1",
+          "description": "Randomized Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Prediabetes_Sample",
+      "datasetId": "pht008918.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "RAND_PATIENT_ID",
+          "id": "phv00405213.v1.p1",
+          "description": "Randomized Patient Idenitifer",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_ID",
+          "id": "phv00405214.v1.p1",
+          "description": "Sample identification ID, each subject has one sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

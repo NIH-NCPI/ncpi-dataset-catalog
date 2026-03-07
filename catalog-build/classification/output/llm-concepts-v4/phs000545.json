@@ -1,0 +1,330 @@
+{
+  "studyId": "phs000545",
+  "studyName": "Predicting Chemotherapy-Induced Mucositis with Genetic and Clinical Factors",
+  "tables": [
+    {
+      "tableName": "Chemotherapy_Induced_Mucositis_Subject_Phenotypes",
+      "datasetId": "pht003764.v1",
+      "description": "Subject ID, age, type of cancer, BMI, body surface area, weight, gender, race, hematocrit, hemoglobin, GFR, creatinine, albumin, c-reactive protein, Melphelan dose, beta-microglobulin, myeloma isotype, mucositis grade, and CMV of participants involved in the \"Predicting Chemotherapy-Induced Mucositis with Genetic and Clinical Factors\" project.",
+      "variables": [
+        {
+          "name": "PublicID",
+          "id": "phv00200918.v1.p1",
+          "description": "De-identified ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00200919.v1.p1",
+          "description": "Age at treatment (years)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alb",
+          "id": "phv00200931.v1.p1",
+          "description": "Albumin (g/dL)",
+          "concept_id": "ncpi:liver_function_serum_albumin_serum_albumin_level",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "b2m",
+          "id": "phv00200934.v1.p1",
+          "description": "Beta-microglobulin",
+          "concept_id": "ncpi:proteomics_panel_specific_named_proteins",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "bmi",
+          "id": "phv00200921.v1.p1",
+          "description": "Body Mass Index (kg/m**2)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bsa",
+          "id": "phv00200922.v1.p1",
+          "description": "Body surface area (m**2)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cancertype",
+          "id": "phv00200920.v1.p1",
+          "description": "Type of cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_cancer_type_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case_control_lowerGI",
+          "id": "phv00200942.v1.p1",
+          "description": "Lower GI mucositis case control",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_cancer_site_specific_variables",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "case_control_upperGI",
+          "id": "phv00200941.v1.p1",
+          "description": "Upper GI mucositis case control",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_cancer_site_specific_variables",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "cdiff",
+          "id": "phv00200938.v1.p1",
+          "description": "Presence of C. difficile",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cmv_rea",
+          "id": "phv00200939.v1.p1",
+          "description": "CMV reactive",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_cytomegalovirus",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "cmv_sero",
+          "id": "phv00200940.v1.p1",
+          "description": "CMV serostatus",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_cytomegalovirus",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "cr",
+          "id": "phv00200929.v1.p1",
+          "description": "Serum creatinine (mg/dL)",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "crcl",
+          "id": "phv00200930.v1.p1",
+          "description": "Creatinine Clearance (ml/min)",
+          "concept_id": "ncpi:kidney_function_creatinine_clearance",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "crp",
+          "id": "phv00200932.v1.p1",
+          "description": "C-reactive protein (mg/L)",
+          "concept_id": "topmed:crp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "est_gfr",
+          "id": "phv00200928.v1.p1",
+          "description": "Estimated GFR (ml/min)",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_generic",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00200924.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hb",
+          "id": "phv00200927.v1.p1",
+          "description": "Hemoglobin (g/dL)",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hct",
+          "id": "phv00200926.v1.p1",
+          "description": "Hematocrit (%)",
+          "concept_id": "topmed:hematocrit_vfr_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "isotype",
+          "id": "phv00200935.v1.p1",
+          "description": "Myeloma Isotype",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "lgr",
+          "id": "phv00200937.v1.p1",
+          "description": "Lower GI mucositis grade",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mg_kg",
+          "id": "phv00200933.v1.p1",
+          "description": "Melphelan dose (mg/kg)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00200925.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ugr",
+          "id": "phv00200936.v1.p1",
+          "description": "Upper GI mucositis grade",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wt_kg",
+          "id": "phv00200923.v1.p1",
+          "description": "Weight (kgs)",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Chemotherapy_Induced_Mucositis_Sample",
+      "datasetId": "pht003763.v1",
+      "description": "Subject ID, sample ID, sample source, sample source ID, and sample use variable associated with participants involved in the \"Predicting Chemotherapy-Induced Mucositis with Genetic and Clinical Factors\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00200917.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "publicid",
+          "id": "phv00200913.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "samp_source",
+          "id": "phv00200915.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sampid",
+          "id": "phv00200914.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "source_sampid",
+          "id": "phv00200916.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Chemotherapy_Induced_Mucositis_Sample_Attributes",
+      "datasetId": "pht003765.v1",
+      "description": "Subject ID, body site where sample was obtained, histological type of sample, analyte type, and tumor status of sample obtained from participants involved in the \"Predicting Chemotherapy-Induced Mucositis with Genetic and Clinical Factors\" project.",
+      "variables": [
+        {
+          "name": "analyte_type",
+          "id": "phv00200946.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "body_site",
+          "id": "phv00200944.v1.p1",
+          "description": "Body site",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "histological_type",
+          "id": "phv00200945.v1.p1",
+          "description": "Histological type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "is_tumor",
+          "id": "phv00200947.v1.p1",
+          "description": "Tumor type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "publicid",
+          "id": "phv00200943.v1.p1",
+          "description": "De-identified patient ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Chemotherapy_Induced_Mucositis_Subject",
+      "datasetId": "pht003762.v1",
+      "description": "Subject ID and consent group of participants involved in the \"Predicting Chemotherapy-Induced Mucositis with Genetic and Clinical Factors\" project.",
+      "variables": [
+        {
+          "name": "consent",
+          "id": "phv00200912.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "publicid",
+          "id": "phv00200911.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

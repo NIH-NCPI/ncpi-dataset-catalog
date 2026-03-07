@@ -1,0 +1,170 @@
+{
+  "studyId": "phs002728",
+  "studyName": "RNA-Seq of PBMC's from rUTI Patients and Healthy Controls",
+  "tables": [
+    {
+      "tableName": "rUTI_PBMC_Sample_Attributes",
+      "datasetId": "pht011820.v1",
+      "description": "This sample attributes table includes event status associated with sample (baseline or UTI), body site, analyte type, histological type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00495782.v1.p1",
+          "description": "ANALYTE_TYPE",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00495781.v1.p1",
+          "description": "BODY_SITE",
+          "concept_id": "ncpi:ffq_food_shopping_access",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Event",
+          "id": "phv00495780.v1.p1",
+          "description": "Event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00495783.v1.p1",
+          "description": "HISTOLOGICAL_TYPE",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00495784.v1.p1",
+          "description": "IS_TUMOR",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00495778.v1.p1",
+          "description": "SAMPLE_ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495779.v1.p1",
+          "description": "SUBJECT_ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "rUTI_PBMC_Subject_Phenotypes",
+      "datasetId": "pht011819.v1",
+      "description": "This subject phenotypes data table includes status for recurrent urinary tract infections, UTI status during study, collection age range, and race.",
+      "variables": [
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00495776.v1.p1",
+          "description": "COLLECTION_AGE",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Group",
+          "id": "phv00495774.v1.p1",
+          "description": "Group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Had_UTI",
+          "id": "phv00495775.v1.p1",
+          "description": "Had_UTI",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00495777.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495773.v1.p1",
+          "description": "SUBJECT_ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "rUTI_PBMC_Subject",
+      "datasetId": "pht011817.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00495769.v1.p1",
+          "description": "CONSENT",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00495770.v1.p1",
+          "description": "SEX",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495768.v1.p1",
+          "description": "SUBJECT_ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "rUTI_PBMC_Sample",
+      "datasetId": "pht011818.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00495772.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495771.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

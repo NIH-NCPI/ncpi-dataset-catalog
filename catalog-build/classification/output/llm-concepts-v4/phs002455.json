@@ -1,0 +1,217 @@
+{
+  "studyId": "phs002455",
+  "studyName": "Dissecting Autoimmune Cellular and Molecular Networks in Vitiligo",
+  "tables": [
+    {
+      "tableName": "Vitiligo_Suction_Blister_Biopsies_Sample_Attributes",
+      "datasetId": "pht011441.v1",
+      "description": "This sample attributes table includes the skin type assayed, emulsion collected via scRNA-seq, cell barcode format in processed UMI table, tissue type, and analyte type.",
+      "variables": [
+        {
+          "name": "ALIQUOT",
+          "id": "phv00492650.v1.p1",
+          "description": "The emulsion collected via scRNA-seq. For a given patient, we may collect more than one discrete blister sample. For example, we may get two distinct lesional samples from a single vitiligo patient.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00492653.v1.p1",
+          "description": "The sampled analyte.",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00492652.v1.p1",
+          "description": "The sampled tissue type.",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "CELL_BARCODE",
+          "id": "phv00493285.v1.p1",
+          "description": "The format of the cell barcode in the processed UMI table.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492648.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SKIN",
+          "id": "phv00492649.v1.p1",
+          "description": "The skin type assayed. For a healthy patient, H was sampled. For a vitiligo patient, NL and L was sampled.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493284.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Vitiligo_Suction_Blister_Biopsies_Pedigree",
+      "datasetId": "pht011438.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and sex of subjects.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00492636.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00492638.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00492639.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492640.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492637.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Vitiligo_Suction_Blister_Biopsies_Subject_Phenotypes",
+      "datasetId": "pht011440.v1",
+      "description": "This subject phenotypes data table includes case control status of the subject for vitiligo, self-reported race, age at enrollment, and duration of symptoms for vitiligo.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00492644.v1.p1",
+          "description": "Case control status of the subject for vitiligo",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00492646.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DURATION",
+          "id": "phv00492647.v1.p1",
+          "description": "Duration of symptoms for Vitiligo Patients",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00492645.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492643.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Vitiligo_Suction_Blister_Biopsies_Subject",
+      "datasetId": "pht011437.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00492634.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492635.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492633.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Vitiligo_Suction_Blister_Biopsies_Sample",
+      "datasetId": "pht011439.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492642.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492641.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

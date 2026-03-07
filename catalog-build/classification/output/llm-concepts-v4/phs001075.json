@@ -1,0 +1,122 @@
+{
+  "studyId": "phs001075",
+  "studyName": "Sequencing to Guide Cancer Care (CanSeq)",
+  "tables": [
+    {
+      "tableName": "CSER_CanSeq_Subject",
+      "datasetId": "pht006108.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "AFFECTION STATUS",
+          "id": "phv00278299.v1.p1",
+          "description": "Affection status of subject for lung cancer or colon cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00278298.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00278297.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CSER_CanSeq_Sample",
+      "datasetId": "pht006109.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00278301.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00278302.v1.p1",
+          "description": "Data types being uploaded. Seq_DNA_SNP_MAF_Sum: Samples were used to generate aggregate mutation annotation file (.maf); Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00278300.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CSER_CanSeq_Sample_Attributes",
+      "datasetId": "pht006111.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00278307.v1.p1",
+          "description": "Molecular analyte",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00278305.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample Type",
+          "id": "phv00278306.v1.p1",
+          "description": "Indicates the Tumor / Normal status of a sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CSER_CanSeq_Subject_Phenotypes",
+      "datasetId": "pht006110.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "Primary Disease",
+          "id": "phv00278304.v1.p1",
+          "description": "The main disease for which the participant has been asked to donate a sample for this study",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_cancer_type_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00278303.v1.p1",
+          "description": "Unique Participant Identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

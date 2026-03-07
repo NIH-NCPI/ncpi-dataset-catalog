@@ -1,0 +1,257 @@
+{
+  "studyId": "phs001919",
+  "studyName": "PAK4 Inhibition Improves PD-1 Blockade Immunotherapy",
+  "tables": [
+    {
+      "tableName": "Melanoma_Anti_PD_1_Subject_Phenotypes",
+      "datasetId": "pht009593.v1",
+      "description": "This subject phenotypes table informs of subject's age at start of therapy, sex, TNM staging at start of therapy, therapy administered, overall response as determined by RECIST 1.1 criteria, and overall survival.",
+      "variables": [
+        {
+          "name": "Biopsy 1 ID",
+          "id": "phv00427375.v1.p1",
+          "description": "Sample_ID of biopsy 1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Biopsy 2 ID",
+          "id": "phv00427377.v1.p1",
+          "description": "Sample_ID of biopsy 2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Biopsy 3 ID",
+          "id": "phv00427379.v1.p1",
+          "description": "Sample_ID of biopsy 3",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Response by biopsy 1",
+          "id": "phv00427374.v1.p1",
+          "description": "Response as determined by changes in biopsy 1 size",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Response by biopsy 2",
+          "id": "phv00427376.v1.p1",
+          "description": "Response as determined by changes in biopsy 2 size",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Response by biopsy 3",
+          "id": "phv00427378.v1.p1",
+          "description": "Response as determined by changes in biopsy 3 size",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420541.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00420542.v1.p1",
+          "description": "Subject age at thearpy start",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "disease_status",
+          "id": "phv00420544.v1.p1",
+          "description": "TNM Staging at therapy start",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "orr",
+          "id": "phv00420546.v1.p1",
+          "description": "Overall Response by RECIST 1.1 criteria",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_treatment_response",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "os",
+          "id": "phv00420547.v1.p1",
+          "description": "Overal Survival",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00420543.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment",
+          "id": "phv00420545.v1.p1",
+          "description": "Therapy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Melanoma_Anti_PD_1_Sample_Attributes",
+      "datasetId": "pht009595.v1",
+      "description": "This sample attributes table informs of body site where sample was collected, sample's analyte type, sample's tumor status, cell or tissue type of the sample, whether the sample is derived from primary or metastatic tumor, sample's preservation method, and name of the sequencing center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00420552.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00420551.v1.p1",
+          "description": "Anatomycal tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00420554.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00420553.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PRESERVATION_METHOD",
+          "id": "phv00420556.v1.p1",
+          "description": "Sample preservation method",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00420555.v1.p1",
+          "description": "Primary or metastatic tumor",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420550.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00420557.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Melanoma_Anti_PD_1_Subject",
+      "datasetId": "pht009591.v1",
+      "description": "This subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00420538.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420537.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Melanoma_Anti_PD_1_Sample",
+      "datasetId": "pht009592.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420540.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420539.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Melanoma_Anti_PD_1_GEO",
+      "datasetId": "pht009594.v1",
+      "description": "This data table includes a mapping of study sample IDs to NCBI Gene Expression Omnibus (GEO) sample acccesions.",
+      "variables": [
+        {
+          "name": "GEO Sample_ID",
+          "id": "phv00420549.v1.p1",
+          "description": "Sample ID listed in GEO",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_ID",
+          "id": "phv00420548.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

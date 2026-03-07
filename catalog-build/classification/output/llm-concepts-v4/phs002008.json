@@ -1,0 +1,169 @@
+{
+  "studyId": "phs002008",
+  "studyName": "The Epigenomic Atlas of Early Human Craniofacial Development",
+  "tables": [
+    {
+      "tableName": "Orofacial_Enhancers_Sample_Attributes",
+      "datasetId": "pht010203.v1",
+      "description": "This sample attributes table includes the body site where sample was collected, analyte type, tumor  status, karyotyping center, and sequencing center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00430622.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00430621.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00430623.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "KARYOTYPING_CENTER",
+          "id": "phv00430624.v1.p1",
+          "description": "Name of the center which conducted karyotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00430620.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00430625.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Orofacial_Enhancers_Subject_Phenotypes",
+      "datasetId": "pht010201.v1",
+      "description": "This subject phenotypes data table includes developmental stage of embryo, sex as determined by karyotype, and sex as determined from karyotype.",
+      "variables": [
+        {
+          "name": "CARNEGIE_STAGE",
+          "id": "phv00430615.v1.p1",
+          "description": "Developmental stage as assessed by HDBR; CS= Carnegie Stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "KARYOTYPE",
+          "id": "phv00430616.v1.p1",
+          "description": "Karyotype if known",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00430617.v1.p1",
+          "description": "As determined from karyotype",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00430614.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Orofacial_Enhancers_Subject",
+      "datasetId": "pht010199.v1",
+      "description": "This subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00430611.v1.p1",
+          "description": "Consent group as determined by HDBR",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00430610.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Orofacial_Enhancers_Sample",
+      "datasetId": "pht010200.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00430613.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00430612.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Orofacial_Enhancers_GEO",
+      "datasetId": "pht010202.v1",
+      "description": "This GEO mapping data table includes a mapping of sample IDs to GEO accession IDs.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00430619.v1.p1",
+          "description": "GEO accession ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00430618.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

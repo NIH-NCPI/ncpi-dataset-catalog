@@ -1,0 +1,250 @@
+{
+  "studyId": "phs002305",
+  "studyName": "Washington University PDX Development and Trial Center",
+  "tables": [
+    {
+      "tableName": "WashU_PDX_Sample_Attributes",
+      "datasetId": "pht011526.v1",
+      "description": "This sample attributes table includes sample type (human tumor, human normal, or PDX model), passage of PDX model, experimental strategy, analyte type, tumor status, body site, sample aliases, and sequence run details.",
+      "variables": [
+        {
+          "name": "ALTERNATIVE_MODEL_ID",
+          "id": "phv00493048.v1.p1",
+          "description": "Alternative PDX model ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00493056.v1.p1",
+          "description": "Analyte type of the sample (ex. DNA, RNA)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00493058.v1.p1",
+          "description": "Collection site of the sample",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "CAPTURE_KIT",
+          "id": "phv00493052.v1.p1",
+          "description": "Capture kit",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHECKSUM",
+          "id": "phv00493055.v1.p1",
+          "description": "MD5 checksum",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DATA_FORMAT",
+          "id": "phv00493044.v1.p1",
+          "description": "Data format of sequence file",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXPERIMENTAL_STRATEGY",
+          "id": "phv00493050.v1.p1",
+          "description": "Experimental strategy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FILENAME",
+          "id": "phv00493043.v1.p1",
+          "description": "Name of sequence file",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FILESIZE",
+          "id": "phv00493054.v1.p1",
+          "description": "Size of file (bytes)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00493057.v1.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MODEL_ID",
+          "id": "phv00493047.v1.p1",
+          "description": "PDX model ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PAIRED_END",
+          "id": "phv00493051.v1.p1",
+          "description": "Paired end",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PASSAGE",
+          "id": "phv00493046.v1.p1",
+          "description": "Passage of PDX model",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLATFORM",
+          "id": "phv00493053.v1.p1",
+          "description": "Sequencing platform",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00493042.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00493045.v1.p1",
+          "description": "Sample type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493049.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WashU_PDX_Subject_Phenotypes",
+      "datasetId": "pht011525.v1",
+      "description": "This subject phenotypes data table includes self-reported sex, age range at primary diagnosis, disease description, and disease code.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00493039.v1.p1",
+          "description": "Age range at primary diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASE_CODE",
+          "id": "phv00493041.v1.p1",
+          "description": "CTEP Simplified Disease Classification v1.0 (MedDRA v10.0): MedDRA code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASE_DESCRIPTION",
+          "id": "phv00493040.v1.p1",
+          "description": "CTEP Simplified Disease Classification v1.0 (MedDRA v10.0): CTEP category, short name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00493038.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493037.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WashU_PDX_Subject",
+      "datasetId": "pht011523.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00493033.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00493034.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493032.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WashU_PDX_Sample",
+      "datasetId": "pht011524.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00493036.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493035.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

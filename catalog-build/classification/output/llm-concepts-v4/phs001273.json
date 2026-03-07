@@ -1,0 +1,194 @@
+{
+  "studyId": "phs001273",
+  "studyName": "Oncoarray Consortium - Lung Cancer Studies",
+  "tables": [
+    {
+      "tableName": "OncoArray_Lung_Cancer_Subject_Phenotypes",
+      "datasetId": "pht006173.v3",
+      "description": "This subject phenotype table contains subject IDs, age, disease, histology information, packyear category, smoking status, inferred ancestry, and sample status in analysis.",
+      "variables": [
+        {
+          "name": "age_category",
+          "id": "phv00282571.v3.p2",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "analysis",
+          "id": "phv00503482.v1.p2",
+          "description": "If this samples was used in the association analysis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ancestry_inferred",
+          "id": "phv00395392.v2.p2",
+          "description": "Race of participant inferred using principal component analysis",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "disease",
+          "id": "phv00282572.v3.p2",
+          "description": "Disease status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_primary_disease_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "group_histo",
+          "id": "phv00282575.v3.p2",
+          "description": "Histology information",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "packyear_category",
+          "id": "phv00282576.v3.p2",
+          "description": "Categorized product of number of packs per day and number of years smoked",
+          "concept_id": "phenx:protocol_2_tobacco_smoking_status_adult_protocol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "subject_ID",
+          "id": "phv00282570.v3.p2",
+          "description": "De-identified Subject ID, CIDR subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "typesmok",
+          "id": "phv00282577.v3.p2",
+          "description": "Smoking Status",
+          "concept_id": "phenx:protocol_2_tobacco_smoking_status_adult_protocol",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "OncoArray_Lung_Cancer_Subject",
+      "datasetId": "pht006171.v3",
+      "description": "The subject consent file includes subject IDs, consent information, sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00503481.v1.p2",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00282565.v3.p2",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "consent",
+          "id": "phv00282564.v3.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00503480.v1.p2",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_ID",
+          "id": "phv00282563.v3.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "OncoArray_Lung_Cancer_Sample_Attributes",
+      "datasetId": "pht006174.v3",
+      "description": "This sample attributes table contains sample IDs, body site where the sample is collected, analyte type, tumor subtype, and tumor status.",
+      "variables": [
+        {
+          "name": "analyte_type",
+          "id": "phv00282581.v3.p2",
+          "description": "The analyte type of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "body_site",
+          "id": "phv00282580.v3.p2",
+          "description": "The body part from which the sample is collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "group_histo",
+          "id": "phv00282582.v3.p2",
+          "description": "Tumor subtype of samples",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "is_tumor",
+          "id": "phv00282583.v3.p2",
+          "description": "The tumor status of the sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sample_ID",
+          "id": "phv00282579.v3.p2",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "OncoArray_Lung_Cancer_Sample",
+      "datasetId": "pht006172.v4",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "sample_ID",
+          "id": "phv00282567.v3.p2",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_ID",
+          "id": "phv00282566.v3.p2",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

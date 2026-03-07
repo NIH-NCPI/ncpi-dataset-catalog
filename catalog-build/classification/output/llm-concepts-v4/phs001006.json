@@ -1,0 +1,242 @@
+{
+  "studyId": "phs001006",
+  "studyName": "Intra-Lesion Heterogeneity and Clonality of Lobular Carcinomas In Situ",
+  "tables": [
+    {
+      "tableName": "Lobular_Carcinomas_Sample_Attributes",
+      "datasetId": "pht006004.v1",
+      "description": "This sample attributes table contains sample IDs, body site where sample was collected, analyte type, tumor status, histological type, laterality of the breast, quadrant of the breast, estrogen receptor status, progesterone receptor status, HER2 status, and name of the center which conducted sequencing.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00273686.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00273685.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": "ncpi:ffq_food_shopping_access",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "ESTROGEN_RECEPTOR_STATUS",
+          "id": "phv00273691.v1.p1",
+          "description": "Estrogen receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HER2_STATUS",
+          "id": "phv00273693.v1.p1",
+          "description": "HER2 status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_her2_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00273688.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00273687.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LATERALITY",
+          "id": "phv00273689.v1.p1",
+          "description": "Laterality of the breast",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROGESTERONE_RECEPTOR_STATUS",
+          "id": "phv00273692.v1.p1",
+          "description": "Progesterone receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_progesterone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "QUADRANT_BREAST",
+          "id": "phv00273690.v1.p1",
+          "description": "Quadrant of the breast",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273684.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00273694.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Lobular_Carcinomas_Subject_Phenotypes",
+      "datasetId": "pht006003.v1",
+      "description": "This subject phenotype table contains subject ID, age, sex, type of surgery, year of surgery, stage of disease, adjuvant therapy, year of last follow-up, and status at last follow-up.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273675.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "adjuvant_therapy",
+          "id": "phv00273681.v1.p1",
+          "description": "Adjuvant therapy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_adjuvant_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_diagnosis",
+          "id": "phv00273676.v1.p1",
+          "description": "Age at diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_general_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "last_fu_status",
+          "id": "phv00273683.v1.p1",
+          "description": "Status at last follow-up",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_disease_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "last_fu_year",
+          "id": "phv00273682.v1.p1",
+          "description": "Year of last follow-up",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_follow_up_time",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00273677.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "stage",
+          "id": "phv00273680.v1.p1",
+          "description": "Stage of disease",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "surgery",
+          "id": "phv00273678.v1.p1",
+          "description": "Type of surgery",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "surgery_year",
+          "id": "phv00273679.v1.p1",
+          "description": "Year of surgery",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_surgery",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Lobular_Carcinomas_Subject",
+      "datasetId": "pht006001.v1",
+      "description": "The subject consent file includes subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00389138.v1.p1",
+          "description": "Case control status of the subject for lobular or ductal carcinomas",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00273671.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273670.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Lobular_Carcinomas_Sample",
+      "datasetId": "pht006002.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273673.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00273674.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273672.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

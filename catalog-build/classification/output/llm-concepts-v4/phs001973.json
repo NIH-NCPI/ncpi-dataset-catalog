@@ -1,0 +1,3747 @@
+{
+  "studyId": "phs001973",
+  "studyName": "Genomic Characterization CS-MATCH-0007 Arm Z1A",
+  "tables": [
+    {
+      "tableName": "CS_MATCH_0007_Arm_Z1A_Subject_Phenotypes",
+      "datasetId": "pht010775.v1",
+      "description": "This subject phenotypes data table contains subject IDs, study in which the subject participated in, demographic information such as subject's race, ethnicity, and gender, diagnostic information such as subject's overall response, treatment follow up information such as adverse events experienced by the subject, and other information such as the number of treatment cycles received by the subject.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00479608.v1.p1",
+          "description": "Unique blinded ID for each patient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Site",
+          "id": "phv00479610.v1.p1",
+          "description": "The arm of EAY131 treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study ID",
+          "id": "phv00479609.v1.p1",
+          "description": "Study name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case.disease_type",
+          "id": "phv00479611.v1.p1",
+          "description": "The type of malignant disease, as categorized by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O).",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_cancer_type_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case.index_date",
+          "id": "phv00479612.v1.p1",
+          "description": "The reference or anchor date used when for date obfuscation, where a single date is obscurred by creating one or more date ranges in relation to this date.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case.primary_site",
+          "id": "phv00479613.v1.p1",
+          "description": "The primary site of disease, as categorized by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O).",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "demographic.age_is_obfuscated",
+          "id": "phv00479614.v1.p1",
+          "description": "The age or other properties related to the patient's age have been modified for compliance reasons.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "demographic.cause_of_death",
+          "id": "phv00479615.v1.p1",
+          "description": "Cause of death",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "demographic.days_to_birth",
+          "id": "phv00479616.v1.p1",
+          "description": "Patient age at study entry in days",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "demographic.days_to_death",
+          "id": "phv00479617.v1.p1",
+          "description": "Number of days between the date used for index and the date from a person's date of death represented as a calculated number of days",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "demographic.ethnicity",
+          "id": "phv00479618.v1.p1",
+          "description": "Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "demographic.gender",
+          "id": "phv00479619.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "demographic.race",
+          "id": "phv00479620.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "demographic.vital_status",
+          "id": "phv00479621.v1.p1",
+          "description": "The survival state of the person registered on the protocol.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "diagnosis.age_at_diagnosis",
+          "id": "phv00479622.v1.p1",
+          "description": "Age at the time of diagnosis expressed in number of days since birth.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diagnosis.best_overall_response",
+          "id": "phv00479623.v1.p1",
+          "description": "The best improvement achieved throughout the entire course of protocol treatment.",
+          "concept_id": "topmed:cancer_diagnosis_cancer_outcomes_survival",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "diagnosis.days_to_diagnosis",
+          "id": "phv00479624.v1.p1",
+          "description": "Number of days between the date used for index and the date the patient was diagnosed with the malignant disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diagnosis.metastasis_at_diagnosis",
+          "id": "phv00479625.v1.p1",
+          "description": "The presence or absence of metastatic disease present at diagnosis.",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_m_stage",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "diagnosis.morphology",
+          "id": "phv00479626.v1.p1",
+          "description": "Histology of neoplasm at study entry as categorized by the third edition of the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O-3).",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diagnosis.primary_diagnosis",
+          "id": "phv00479627.v1.p1",
+          "description": "The patient's histologic diagnosis, as described by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O).",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_cancer_type_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diagnosis.prior_treatment",
+          "id": "phv00479628.v1.p1",
+          "description": "A yes/no/unknown/not applicable indicator related to the administration of therapeutic agents received before the body specimen was collected.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_therapeutic_agents",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "diagnosis.site_of_resection_or_biopsy",
+          "id": "phv00479629.v1.p1",
+          "description": "The anatomic site of the resection or biopsy of the patient's malignant disease, as described by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O).",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "diagnosis.tissue_or_organ_of_origin",
+          "id": "phv00479630.v1.p1",
+          "description": "The anatomic site of origin, of the patient's malignant disease, as described by the World Health Organization's (WHO) International Classification of Diseases for Oncology (ICD-O)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "exposure.tobacco_smoking_status",
+          "id": "phv00479631.v1.p1",
+          "description": "Smoking history at study entry",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up.body_surface_area",
+          "id": "phv00479632.v1.p1",
+          "description": "The 2-dimensional extent of the body surface relating height to weight.",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up.days_to_follow_up",
+          "id": "phv00479633.v1.p1",
+          "description": "Number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up.ecog_performance_status",
+          "id": "phv00479634.v1.p1",
+          "description": "ECOG Performance Status at study entry (integer values 0 to 5: only 0 and 1 are eligible)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up.height",
+          "id": "phv00479635.v1.p1",
+          "description": "The height of the patient in centimeters.",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up.progression_or_recurrence_type",
+          "id": "phv00479636.v1.p1",
+          "description": "The text term used to describe the type of progressive or recurrent disease or relapsed disease.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up.recist_targeted_regions_number",
+          "id": "phv00479637.v1.p1",
+          "description": "The number of baseline target lesions as described by the Response Evaluation Criteria in Solid Tumours (RECIST) criteria.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up.recist_targeted_regions_sum",
+          "id": "phv00479638.v1.p1",
+          "description": "The sum of baseline target lesions, as described by the Response Evaluation Criteria in Solid Tumours (RECIST) criteria.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up.weight",
+          "id": "phv00479639.v1.p1",
+          "description": "Patient weight in kilograms",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up10.adverse_event",
+          "id": "phv00479695.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up10.adverse_event_grade",
+          "id": "phv00479696.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up10.days_to_adverse_event",
+          "id": "phv00479697.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up10.days_to_follow_up",
+          "id": "phv00479698.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up10.days_to_progression",
+          "id": "phv00479699.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up10.progression_or_recurrence",
+          "id": "phv00479700.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up10.progression_or_recurrence_anatomic_site",
+          "id": "phv00479701.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up11.adverse_event",
+          "id": "phv00479702.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up11.adverse_event_grade",
+          "id": "phv00479703.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up11.days_to_adverse_event",
+          "id": "phv00479704.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up11.days_to_follow_up",
+          "id": "phv00479705.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up11.days_to_progression",
+          "id": "phv00479706.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up11.progression_or_recurrence",
+          "id": "phv00479707.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up11.progression_or_recurrence_anatomic_site",
+          "id": "phv00479708.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up12.adverse_event",
+          "id": "phv00479709.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up12.adverse_event_grade",
+          "id": "phv00479710.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up12.days_to_adverse_event",
+          "id": "phv00479711.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up12.days_to_follow_up",
+          "id": "phv00479712.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up12.days_to_progression",
+          "id": "phv00479713.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up12.progression_or_recurrence",
+          "id": "phv00479714.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up12.progression_or_recurrence_anatomic_site",
+          "id": "phv00479715.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up13.adverse_event",
+          "id": "phv00479716.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up13.adverse_event_grade",
+          "id": "phv00479717.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up13.days_to_adverse_event",
+          "id": "phv00479718.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up13.days_to_follow_up",
+          "id": "phv00479719.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up13.days_to_progression",
+          "id": "phv00479720.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up13.progression_or_recurrence",
+          "id": "phv00479721.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up13.progression_or_recurrence_anatomic_site",
+          "id": "phv00479722.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up14.adverse_event",
+          "id": "phv00479723.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up14.adverse_event_grade",
+          "id": "phv00479724.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up14.days_to_adverse_event",
+          "id": "phv00479725.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up14.days_to_follow_up",
+          "id": "phv00479726.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up14.days_to_progression",
+          "id": "phv00479727.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up14.progression_or_recurrence",
+          "id": "phv00479728.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up14.progression_or_recurrence_anatomic_site",
+          "id": "phv00479729.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up15.adverse_event",
+          "id": "phv00479730.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up15.adverse_event_grade",
+          "id": "phv00479731.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up15.days_to_adverse_event",
+          "id": "phv00479732.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up15.days_to_follow_up",
+          "id": "phv00479733.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up15.days_to_progression",
+          "id": "phv00479734.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up15.progression_or_recurrence",
+          "id": "phv00479735.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up15.progression_or_recurrence_anatomic_site",
+          "id": "phv00479736.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up16.adverse_event",
+          "id": "phv00479737.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up16.adverse_event_grade",
+          "id": "phv00479738.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up16.days_to_adverse_event",
+          "id": "phv00479739.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up16.days_to_follow_up",
+          "id": "phv00479740.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up16.days_to_progression",
+          "id": "phv00479741.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up16.progression_or_recurrence",
+          "id": "phv00479742.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up16.progression_or_recurrence_anatomic_site",
+          "id": "phv00479743.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up17.adverse_event",
+          "id": "phv00479744.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up17.adverse_event_grade",
+          "id": "phv00479745.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up17.days_to_adverse_event",
+          "id": "phv00479746.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up17.days_to_follow_up",
+          "id": "phv00479747.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up17.progression_or_recurrence",
+          "id": "phv00479748.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up17.progression_or_recurrence_anatomic_site",
+          "id": "phv00479749.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up18.adverse_event",
+          "id": "phv00479750.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up18.adverse_event_grade",
+          "id": "phv00479751.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up18.days_to_adverse_event",
+          "id": "phv00479752.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up18.days_to_follow_up",
+          "id": "phv00479753.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up18.progression_or_recurrence",
+          "id": "phv00479754.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up18.progression_or_recurrence_anatomic_site",
+          "id": "phv00479755.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up19.adverse_event",
+          "id": "phv00479756.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up19.adverse_event_grade",
+          "id": "phv00479757.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up19.days_to_adverse_event",
+          "id": "phv00479758.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up19.days_to_follow_up",
+          "id": "phv00479759.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up19.days_to_progression",
+          "id": "phv00479760.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up19.progression_or_recurrence",
+          "id": "phv00479761.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up19.progression_or_recurrence_anatomic_site",
+          "id": "phv00479762.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up2.adverse_event",
+          "id": "phv00479640.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up2.adverse_event_grade",
+          "id": "phv00479641.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up2.days_to_adverse_event",
+          "id": "phv00479642.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up2.days_to_follow_up",
+          "id": "phv00479643.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up2.days_to_progression",
+          "id": "phv00479644.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up2.progression_or_recurrence",
+          "id": "phv00479645.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up20.adverse_event",
+          "id": "phv00479763.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up20.adverse_event_grade",
+          "id": "phv00479764.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up20.days_to_adverse_event",
+          "id": "phv00479765.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up20.days_to_follow_up",
+          "id": "phv00479766.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up20.days_to_progression",
+          "id": "phv00479767.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up20.progression_or_recurrence",
+          "id": "phv00479768.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up20.progression_or_recurrence_anatomic_site",
+          "id": "phv00479769.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up21.adverse_event",
+          "id": "phv00479770.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up21.adverse_event_grade",
+          "id": "phv00479771.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up21.days_to_adverse_event",
+          "id": "phv00479772.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up21.days_to_follow_up",
+          "id": "phv00479773.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up21.days_to_progression",
+          "id": "phv00479774.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up21.progression_or_recurrence",
+          "id": "phv00479775.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up21.progression_or_recurrence_anatomic_site",
+          "id": "phv00479776.v1.p1",
+          "description": "The anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up22.adverse_event",
+          "id": "phv00479777.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up22.adverse_event_grade",
+          "id": "phv00479778.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up22.days_to_adverse_event",
+          "id": "phv00479779.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up22.days_to_follow_up",
+          "id": "phv00479780.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up22.progression_or_recurrence",
+          "id": "phv00479781.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up22.progression_or_recurrence_anatomic_site",
+          "id": "phv00479782.v1.p1",
+          "description": "The anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up23.adverse_event",
+          "id": "phv00479783.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up23.adverse_event_grade",
+          "id": "phv00479784.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up23.days_to_adverse_event",
+          "id": "phv00479785.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up23.days_to_follow_up",
+          "id": "phv00479786.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up23.days_to_progression",
+          "id": "phv00479787.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up23.progression_or_recurrence",
+          "id": "phv00479788.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up23.progression_or_recurrence_anatomic_site",
+          "id": "phv00479789.v1.p1",
+          "description": "The anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up24.adverse_event",
+          "id": "phv00479790.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up24.adverse_event_grade",
+          "id": "phv00479791.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up24.days_to_adverse_event",
+          "id": "phv00479792.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up24.days_to_follow_up",
+          "id": "phv00479793.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up24.days_to_progression",
+          "id": "phv00479794.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up24.progression_or_recurrence",
+          "id": "phv00479795.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up24.progression_or_recurrence_anatomic_site",
+          "id": "phv00479796.v1.p1",
+          "description": "The anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up25.adverse_event",
+          "id": "phv00479797.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up25.adverse_event_grade",
+          "id": "phv00479798.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up25.days_to_adverse_event",
+          "id": "phv00479799.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up25.days_to_follow_up",
+          "id": "phv00479800.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up25.progression_or_recurrence",
+          "id": "phv00479801.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up25.progression_or_recurrence_anatomic_site",
+          "id": "phv00479802.v1.p1",
+          "description": "The anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up26.adverse_event",
+          "id": "phv00479803.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up26.adverse_event_grade",
+          "id": "phv00479804.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up26.days_to_adverse_event",
+          "id": "phv00479805.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up26.days_to_follow_up",
+          "id": "phv00479806.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up26.progression_or_recurrence",
+          "id": "phv00479807.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up26.progression_or_recurrence_anatomic_site",
+          "id": "phv00479808.v1.p1",
+          "description": "The anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up27.adverse_event",
+          "id": "phv00479809.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up27.adverse_event_grade",
+          "id": "phv00479810.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up27.days_to_adverse_event",
+          "id": "phv00479811.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up27.days_to_follow_up",
+          "id": "phv00479812.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up28.adverse_event",
+          "id": "phv00479813.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up28.adverse_event_grade",
+          "id": "phv00479814.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up28.days_to_adverse_event",
+          "id": "phv00479815.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up28.days_to_follow_up",
+          "id": "phv00479816.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up29.adverse_event",
+          "id": "phv00479817.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up29.adverse_event_grade",
+          "id": "phv00479818.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up29.days_to_adverse_event",
+          "id": "phv00479819.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up29.days_to_follow_up",
+          "id": "phv00479820.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up3.adverse_event",
+          "id": "phv00479646.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up3.adverse_event_grade",
+          "id": "phv00479647.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up3.days_to_adverse_event",
+          "id": "phv00479648.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up3.days_to_follow_up",
+          "id": "phv00479649.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up3.days_to_progression",
+          "id": "phv00479650.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up3.progression_or_recurrence",
+          "id": "phv00479651.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up3.progression_or_recurrence_anatomic_site",
+          "id": "phv00479652.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up30.adverse_event",
+          "id": "phv00479821.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up30.adverse_event_grade",
+          "id": "phv00479822.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up30.days_to_adverse_event",
+          "id": "phv00479823.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up30.days_to_follow_up",
+          "id": "phv00479824.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up31.adverse_event",
+          "id": "phv00479825.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up31.adverse_event_grade",
+          "id": "phv00479826.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up31.days_to_adverse_event",
+          "id": "phv00479827.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up31.days_to_follow_up",
+          "id": "phv00479828.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up32.adverse_event",
+          "id": "phv00479829.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up32.adverse_event_grade",
+          "id": "phv00479830.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up32.days_to_adverse_event",
+          "id": "phv00479831.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up32.days_to_follow_up",
+          "id": "phv00479832.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up33.adverse_event",
+          "id": "phv00479833.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up33.adverse_event_grade",
+          "id": "phv00479834.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up33.days_to_adverse_event",
+          "id": "phv00479835.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up33.days_to_follow_up",
+          "id": "phv00479836.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up33.days_to_progression",
+          "id": "phv00479837.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up33.progression_or_recurrence",
+          "id": "phv00479838.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up34.adverse_event",
+          "id": "phv00479839.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up34.adverse_event_grade",
+          "id": "phv00479840.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up34.days_to_adverse_event",
+          "id": "phv00479841.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up34.days_to_follow_up",
+          "id": "phv00479842.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up34.progression_or_recurrence",
+          "id": "phv00479843.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up34.progression_or_recurrence_anatomic_site",
+          "id": "phv00479844.v1.p1",
+          "description": "The anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up35.adverse_event",
+          "id": "phv00479845.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up35.adverse_event_grade",
+          "id": "phv00479846.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up35.days_to_adverse_event",
+          "id": "phv00479847.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up35.days_to_follow_up",
+          "id": "phv00479848.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up35.progression_or_recurrence",
+          "id": "phv00479849.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up35.progression_or_recurrence_anatomic_site",
+          "id": "phv00479850.v1.p1",
+          "description": "The anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up36.adverse_event",
+          "id": "phv00479851.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up36.adverse_event_grade",
+          "id": "phv00479852.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up36.days_to_adverse_event",
+          "id": "phv00479853.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up36.days_to_follow_up",
+          "id": "phv00479854.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up36.progression_or_recurrence",
+          "id": "phv00479855.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up36.progression_or_recurrence_anatomic_site",
+          "id": "phv00479856.v1.p1",
+          "description": "The anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up37.adverse_event",
+          "id": "phv00479857.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up37.adverse_event_grade",
+          "id": "phv00479858.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up37.days_to_adverse_event",
+          "id": "phv00479859.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up37.days_to_follow_up",
+          "id": "phv00479860.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up38.adverse_event",
+          "id": "phv00479861.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up38.adverse_event_grade",
+          "id": "phv00479862.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up38.days_to_adverse_event",
+          "id": "phv00479863.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up38.days_to_follow_up",
+          "id": "phv00479864.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up39.adverse_event",
+          "id": "phv00479865.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up39.adverse_event_grade",
+          "id": "phv00479866.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up39.days_to_adverse_event",
+          "id": "phv00479867.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up39.days_to_follow_up",
+          "id": "phv00479868.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up4.adverse_event",
+          "id": "phv00479653.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up4.adverse_event_grade",
+          "id": "phv00479654.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up4.days_to_adverse_event",
+          "id": "phv00479655.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up4.days_to_follow_up",
+          "id": "phv00479656.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up4.days_to_progression",
+          "id": "phv00479657.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up4.progression_or_recurrence",
+          "id": "phv00479658.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up4.progression_or_recurrence_anatomic_site",
+          "id": "phv00479659.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up40.adverse_event",
+          "id": "phv00479869.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up40.adverse_event_grade",
+          "id": "phv00479870.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up40.days_to_adverse_event",
+          "id": "phv00479871.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up40.days_to_follow_up",
+          "id": "phv00479872.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up41.adverse_event",
+          "id": "phv00479873.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up41.adverse_event_grade",
+          "id": "phv00479874.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up41.days_to_adverse_event",
+          "id": "phv00479875.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up41.days_to_follow_up",
+          "id": "phv00479876.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up41.days_to_progression",
+          "id": "phv00479877.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up41.progression_or_recurrence",
+          "id": "phv00479878.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up42.adverse_event",
+          "id": "phv00479879.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up42.adverse_event_grade",
+          "id": "phv00479880.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up42.days_to_adverse_event",
+          "id": "phv00479881.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up42.days_to_follow_up",
+          "id": "phv00479882.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up42.progression_or_recurrence",
+          "id": "phv00479883.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up42.progression_or_recurrence_anatomic_site",
+          "id": "phv00479884.v1.p1",
+          "description": "The anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up43.adverse_event",
+          "id": "phv00479885.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up43.adverse_event_grade",
+          "id": "phv00479886.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up43.days_to_adverse_event",
+          "id": "phv00479887.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up43.days_to_follow_up",
+          "id": "phv00479888.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up43.progression_or_recurrence",
+          "id": "phv00479889.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up43.progression_or_recurrence_anatomic_site",
+          "id": "phv00479890.v1.p1",
+          "description": "The anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up44.adverse_event",
+          "id": "phv00479891.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up44.adverse_event_grade",
+          "id": "phv00479892.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up44.days_to_adverse_event",
+          "id": "phv00479893.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up44.days_to_follow_up",
+          "id": "phv00479894.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up45.adverse_event",
+          "id": "phv00479895.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up45.adverse_event_grade",
+          "id": "phv00479896.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up45.days_to_adverse_event",
+          "id": "phv00479897.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up45.days_to_follow_up",
+          "id": "phv00479898.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up46.adverse_event",
+          "id": "phv00479899.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up46.adverse_event_grade",
+          "id": "phv00479900.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up46.days_to_adverse_event",
+          "id": "phv00479901.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up46.days_to_follow_up",
+          "id": "phv00479902.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up47.adverse_event",
+          "id": "phv00479903.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up47.adverse_event_grade",
+          "id": "phv00479904.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up47.days_to_adverse_event",
+          "id": "phv00479905.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up47.days_to_follow_up",
+          "id": "phv00479906.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up48.adverse_event",
+          "id": "phv00479907.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up48.adverse_event_grade",
+          "id": "phv00479908.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up48.days_to_adverse_event",
+          "id": "phv00479909.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up48.days_to_follow_up",
+          "id": "phv00479910.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up49.adverse_event",
+          "id": "phv00479911.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up49.adverse_event_grade",
+          "id": "phv00479912.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up49.days_to_adverse_event",
+          "id": "phv00479913.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up49.days_to_follow_up",
+          "id": "phv00479914.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up5.adverse_event",
+          "id": "phv00479660.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up5.adverse_event_grade",
+          "id": "phv00479661.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up5.days_to_adverse_event",
+          "id": "phv00479662.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up5.days_to_follow_up",
+          "id": "phv00479663.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up5.days_to_progression",
+          "id": "phv00479664.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up5.progression_or_recurrence",
+          "id": "phv00479665.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up5.progression_or_recurrence_anatomic_site",
+          "id": "phv00479666.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up50.adverse_event",
+          "id": "phv00479915.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up50.adverse_event_grade",
+          "id": "phv00479916.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up50.days_to_adverse_event",
+          "id": "phv00479917.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up50.days_to_follow_up",
+          "id": "phv00479918.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up51.adverse_event",
+          "id": "phv00479919.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up51.adverse_event_grade",
+          "id": "phv00479920.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up51.days_to_adverse_event",
+          "id": "phv00479921.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up51.days_to_follow_up",
+          "id": "phv00479922.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up52.adverse_event",
+          "id": "phv00479923.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up52.adverse_event_grade",
+          "id": "phv00479924.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up52.days_to_adverse_event",
+          "id": "phv00479925.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up52.days_to_follow_up",
+          "id": "phv00479926.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up53.adverse_event",
+          "id": "phv00479927.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up53.adverse_event_grade",
+          "id": "phv00479928.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up53.days_to_adverse_event",
+          "id": "phv00479929.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up53.days_to_follow_up",
+          "id": "phv00479930.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up54.adverse_event",
+          "id": "phv00479931.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up54.adverse_event_grade",
+          "id": "phv00479932.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up54.days_to_adverse_event",
+          "id": "phv00479933.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up54.days_to_follow_up",
+          "id": "phv00479934.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up55.days_to_follow_up",
+          "id": "phv00479935.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up55.days_to_progression",
+          "id": "phv00479936.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up55.progression_or_recurrence",
+          "id": "phv00479937.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up56.days_to_follow_up",
+          "id": "phv00479938.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up56.progression_or_recurrence",
+          "id": "phv00479939.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up56.progression_or_recurrence_anatomic_site",
+          "id": "phv00479940.v1.p1",
+          "description": "The anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up6.adverse_event",
+          "id": "phv00479667.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up6.adverse_event_grade",
+          "id": "phv00479668.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up6.days_to_adverse_event",
+          "id": "phv00479669.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up6.days_to_follow_up",
+          "id": "phv00479670.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up6.days_to_progression",
+          "id": "phv00479671.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up6.progression_or_recurrence",
+          "id": "phv00479672.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up6.progression_or_recurrence_anatomic_site",
+          "id": "phv00479673.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up7.adverse_event",
+          "id": "phv00479674.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up7.adverse_event_grade",
+          "id": "phv00479675.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up7.days_to_adverse_event",
+          "id": "phv00479676.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up7.days_to_follow_up",
+          "id": "phv00479677.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up7.days_to_progression",
+          "id": "phv00479678.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up7.progression_or_recurrence",
+          "id": "phv00479679.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up7.progression_or_recurrence_anatomic_site",
+          "id": "phv00479680.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up8.adverse_event",
+          "id": "phv00479681.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up8.adverse_event_grade",
+          "id": "phv00479682.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up8.days_to_adverse_event",
+          "id": "phv00479683.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up8.days_to_follow_up",
+          "id": "phv00479684.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up8.days_to_progression",
+          "id": "phv00479685.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up8.progression_or_recurrence",
+          "id": "phv00479686.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up8.progression_or_recurrence_anatomic_site",
+          "id": "phv00479687.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up9.adverse_event",
+          "id": "phv00479688.v1.p1",
+          "description": "The Common Terminology Criteria for Adverse Events low level term name for an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up9.adverse_event_grade",
+          "id": "phv00479689.v1.p1",
+          "description": "The intensity/severity of  an adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up9.days_to_adverse_event",
+          "id": "phv00479690.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's adverse event.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up9.days_to_follow_up",
+          "id": "phv00479691.v1.p1",
+          "description": "The number of days between the date used for index and the date of the patient's follow-up appointment or contact.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up9.days_to_progression",
+          "id": "phv00479692.v1.p1",
+          "description": "The number of days between the date used for index and the date the patient's disease progressed.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up9.progression_or_recurrence",
+          "id": "phv00479693.v1.p1",
+          "description": "An indicator to identify whether a patient has had a new tumor event after initial treatment.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up9.progression_or_recurrence_anatomic_site",
+          "id": "phv00479694.v1.p1",
+          "description": "The text term used to describe the anatomic site of the progressive or recurrent disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment.days_to_treatment_end",
+          "id": "phv00479941.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment.days_to_treatment_start",
+          "id": "phv00479942.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment.number_of_cycles",
+          "id": "phv00479943.v1.p1",
+          "description": "The number of cycles of a specific treatment or regimen the patient received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment.reason_treatment_ended",
+          "id": "phv00479944.v1.p1",
+          "description": "The reason a specific treatment or regimen ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment.therapeutic_agents",
+          "id": "phv00479945.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment.treatment_or_therapy",
+          "id": "phv00479946.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment.treatment_outcome",
+          "id": "phv00479947.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment.treatment_type",
+          "id": "phv00479948.v1.p1",
+          "description": "The kind of treatment administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment10.days_to_treatment_end",
+          "id": "phv00479989.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment10.days_to_treatment_start",
+          "id": "phv00479990.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment10.therapeutic_agents",
+          "id": "phv00479991.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment10.treatment_or_therapy",
+          "id": "phv00479992.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment10.treatment_outcome",
+          "id": "phv00479993.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment11.days_to_treatment_end",
+          "id": "phv00479994.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment11.days_to_treatment_start",
+          "id": "phv00479995.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment11.therapeutic_agents",
+          "id": "phv00479996.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment11.treatment_or_therapy",
+          "id": "phv00479997.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment11.treatment_outcome",
+          "id": "phv00479998.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment12.days_to_treatment_end",
+          "id": "phv00479999.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment12.days_to_treatment_start",
+          "id": "phv00480000.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment12.therapeutic_agents",
+          "id": "phv00480001.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment12.treatment_or_therapy",
+          "id": "phv00480002.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment12.treatment_outcome",
+          "id": "phv00480003.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment13.days_to_treatment_end",
+          "id": "phv00480004.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment13.days_to_treatment_start",
+          "id": "phv00480005.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment13.therapeutic_agents",
+          "id": "phv00480006.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment13.treatment_or_therapy",
+          "id": "phv00480007.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment13.treatment_outcome",
+          "id": "phv00480008.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment14.days_to_treatment_end",
+          "id": "phv00480009.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment14.days_to_treatment_start",
+          "id": "phv00480010.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment14.therapeutic_agents",
+          "id": "phv00480011.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment14.treatment_or_therapy",
+          "id": "phv00480012.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment14.treatment_outcome",
+          "id": "phv00480013.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment15.days_to_treatment_end",
+          "id": "phv00480014.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment15.days_to_treatment_start",
+          "id": "phv00480015.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment15.therapeutic_agents",
+          "id": "phv00480016.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment15.treatment_or_therapy",
+          "id": "phv00480017.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment15.treatment_outcome",
+          "id": "phv00480018.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment16.days_to_treatment_end",
+          "id": "phv00480019.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment16.days_to_treatment_start",
+          "id": "phv00480020.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment16.therapeutic_agents",
+          "id": "phv00480021.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment16.treatment_or_therapy",
+          "id": "phv00480022.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment16.treatment_outcome",
+          "id": "phv00480023.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment17.days_to_treatment_end",
+          "id": "phv00480024.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment17.days_to_treatment_start",
+          "id": "phv00480025.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment17.therapeutic_agents",
+          "id": "phv00480026.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment17.treatment_or_therapy",
+          "id": "phv00480027.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment17.treatment_outcome",
+          "id": "phv00480028.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment18.days_to_treatment_end",
+          "id": "phv00480029.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment18.days_to_treatment_start",
+          "id": "phv00480030.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment18.therapeutic_agents",
+          "id": "phv00480031.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment18.treatment_or_therapy",
+          "id": "phv00480032.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment18.treatment_outcome",
+          "id": "phv00480033.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment19.days_to_treatment_end",
+          "id": "phv00480034.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment19.days_to_treatment_start",
+          "id": "phv00480035.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment19.therapeutic_agents",
+          "id": "phv00480036.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment19.treatment_or_therapy",
+          "id": "phv00480037.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment19.treatment_outcome",
+          "id": "phv00480038.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment2.days_to_treatment_end",
+          "id": "phv00479949.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment2.days_to_treatment_start",
+          "id": "phv00479950.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment2.therapeutic_agents",
+          "id": "phv00479951.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment2.treatment_or_therapy",
+          "id": "phv00479952.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment2.treatment_outcome",
+          "id": "phv00479953.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment20.days_to_treatment_end",
+          "id": "phv00480039.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment20.days_to_treatment_start",
+          "id": "phv00480040.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment20.therapeutic_agents",
+          "id": "phv00480041.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment20.treatment_or_therapy",
+          "id": "phv00480042.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment20.treatment_outcome",
+          "id": "phv00480043.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment21.days_to_treatment_end",
+          "id": "phv00480044.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment21.days_to_treatment_start",
+          "id": "phv00480045.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment21.therapeutic_agents",
+          "id": "phv00480046.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment21.treatment_or_therapy",
+          "id": "phv00480047.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment21.treatment_outcome",
+          "id": "phv00480048.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment22.days_to_treatment_end",
+          "id": "phv00480049.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment22.days_to_treatment_start",
+          "id": "phv00480050.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment22.therapeutic_agents",
+          "id": "phv00480051.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment22.treatment_or_therapy",
+          "id": "phv00480052.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment22.treatment_outcome",
+          "id": "phv00480053.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment23.days_to_treatment_end",
+          "id": "phv00480054.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment23.days_to_treatment_start",
+          "id": "phv00480055.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment23.therapeutic_agents",
+          "id": "phv00480056.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment23.treatment_or_therapy",
+          "id": "phv00480057.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment23.treatment_outcome",
+          "id": "phv00480058.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment24.days_to_treatment_end",
+          "id": "phv00480059.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment24.days_to_treatment_start",
+          "id": "phv00480060.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment24.therapeutic_agents",
+          "id": "phv00480061.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment24.treatment_or_therapy",
+          "id": "phv00480062.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment24.treatment_outcome",
+          "id": "phv00480063.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment25.days_to_treatment_end",
+          "id": "phv00480064.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment25.days_to_treatment_start",
+          "id": "phv00480065.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment25.therapeutic_agents",
+          "id": "phv00480066.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment25.treatment_or_therapy",
+          "id": "phv00480067.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment25.treatment_outcome",
+          "id": "phv00480068.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment3.days_to_treatment_end",
+          "id": "phv00479954.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment3.days_to_treatment_start",
+          "id": "phv00479955.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment3.therapeutic_agents",
+          "id": "phv00479956.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": "ncpi:concomitant_medication_medication_names_therapeutic_agents",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment3.treatment_or_therapy",
+          "id": "phv00479957.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment3.treatment_outcome",
+          "id": "phv00479958.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment4.days_to_treatment_end",
+          "id": "phv00479959.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment4.days_to_treatment_start",
+          "id": "phv00479960.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment4.therapeutic_agents",
+          "id": "phv00479961.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": "ncpi:concomitant_medication_medication_names_therapeutic_agents",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment4.treatment_or_therapy",
+          "id": "phv00479962.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment4.treatment_outcome",
+          "id": "phv00479963.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment5.days_to_treatment_end",
+          "id": "phv00479964.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment5.days_to_treatment_start",
+          "id": "phv00479965.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment5.therapeutic_agents",
+          "id": "phv00479966.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": "ncpi:concomitant_medication_medication_names_therapeutic_agents",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment5.treatment_or_therapy",
+          "id": "phv00479967.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment5.treatment_outcome",
+          "id": "phv00479968.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment6.days_to_treatment_end",
+          "id": "phv00479969.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment6.days_to_treatment_start",
+          "id": "phv00479970.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment6.therapeutic_agents",
+          "id": "phv00479971.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": "ncpi:concomitant_medication_medication_names_therapeutic_agents",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment6.treatment_or_therapy",
+          "id": "phv00479972.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment6.treatment_outcome",
+          "id": "phv00479973.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment7.days_to_treatment_end",
+          "id": "phv00479974.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment7.days_to_treatment_start",
+          "id": "phv00479975.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment7.therapeutic_agents",
+          "id": "phv00479976.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": "ncpi:concomitant_medication_medication_names_therapeutic_agents",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment7.treatment_or_therapy",
+          "id": "phv00479977.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment7.treatment_outcome",
+          "id": "phv00479978.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment8.days_to_treatment_end",
+          "id": "phv00479979.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment8.days_to_treatment_start",
+          "id": "phv00479980.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment8.therapeutic_agents",
+          "id": "phv00479981.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": "ncpi:concomitant_medication_medication_names_therapeutic_agents",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment8.treatment_or_therapy",
+          "id": "phv00479982.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment8.treatment_outcome",
+          "id": "phv00479983.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment9.days_to_treatment_end",
+          "id": "phv00479984.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment ended.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment9.days_to_treatment_start",
+          "id": "phv00479985.v1.p1",
+          "description": "The number of days between the date used for index and the date the treatment started.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment9.therapeutic_agents",
+          "id": "phv00479986.v1.p1",
+          "description": "The individual agent(s) used as part of a treatment regimen.",
+          "concept_id": "ncpi:concomitant_medication_medication_names_therapeutic_agents",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment9.treatment_or_therapy",
+          "id": "phv00479987.v1.p1",
+          "description": "An indicator related to the administration of therapeutic agents received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment9.treatment_outcome",
+          "id": "phv00479988.v1.p1",
+          "description": "The patient's final outcome after the treatment was administered.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CS_MATCH_0007_Arm_Z1A_Subject",
+      "datasetId": "pht009845.v1",
+      "description": "This subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00426645.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426644.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CS_MATCH_0007_Arm_Z1A_Sample",
+      "datasetId": "pht009846.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00426647.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426646.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

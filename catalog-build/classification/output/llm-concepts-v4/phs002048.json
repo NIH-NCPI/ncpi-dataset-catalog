@@ -1,0 +1,570 @@
+{
+  "studyId": "phs002048",
+  "studyName": "Mapping Systemic Lupus Erythematosus heterogeneity at the single cell level",
+  "tables": [
+    {
+      "tableName": "SLE_Subject_Phenotypes",
+      "datasetId": "pht010316.v1",
+      "description": "This subject phenotypes data table informs of subject's case or control status for Systemic Lupus Erythematosus (SLE), self-reported sex, race, ethnicity, and age, whether the subject is healthy or has SLE, the batch in which the subject samples were sequenced, the year when subject provided blood sample, subject's Systemic Lupus Erythematosus Disease Activity Index (SLEDAI score), subject's preliminary criteria of global flare for childhood-onset SLE from the MD provider. It also containsfrom SLEDAI 2K Assessment form: arthritis score, rash score, proteinuria score, hematuria score, urinary casts score (points), pyuriva score, increased DNA binding score, low complement score, fever score, pleurisy, vasculitis score, alopecia score, Leukopenia score; whether Mycophenolic acid drug, oral steroid, methotrexate drug, and /or plaquenil are present in the subject's blood sample, subject's history of nephritis, the presence or absence of proliferative nephritis and membranous nephritis in the subject, subject's nephrology class, subject's numerous variables based on Nephrology class, subject's erythrocyte sedimentation rate, subject's whole blood cell count, subject's red blood cell count, subject's monocyte percentage, neutrophil percentage, lymphocyte percentage, hemoglobin levels, hematocrit, platelet count, neutrophil count, lymphocyte count, creatinine level, albumin level, double stranded DNA ratio and level, complement C3 and C4 level, Alanine Transaminase level, Aspartate Aminotransferase level, Aldosterone level, and Lactate dehydrogenase level, presence or absence of muscular skeletal rash or arthritis in the subject, from SLEDAI score in the subject: presence or absence of proteinuria, casts, pyuria, hematuria, presence or absence of dsDNA and low complement.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00431179.v1.p1",
+          "description": "Case or control status of the subject for Systemic Lupus Erythematosus",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00431183.v1.p1",
+          "description": "Self-reported age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALBUMIN",
+          "id": "phv00431223.v1.p1",
+          "description": "Albumin levels (g/dL)",
+          "concept_id": "ncpi:liver_function_serum_albumin_serum_albumin_level",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ALD",
+          "id": "phv00431230.v1.p1",
+          "description": "Aldosterone hormone level (U/L)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALOPECIA",
+          "id": "phv00431200.v1.p1",
+          "description": "Alopecia score from SLEDAI 2K Assessment form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALT",
+          "id": "phv00431228.v1.p1",
+          "description": "Alanine Transaminase level (U/L)",
+          "concept_id": "ncpi:liver_function_alanine_aminotransferase_alt_standard_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ARTHRITIS",
+          "id": "phv00431189.v1.p1",
+          "description": "Arthritis score from SLEDAI 2K Assessment form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AST",
+          "id": "phv00431229.v1.p1",
+          "description": "Aspartate Aminotransferase level (U/L)",
+          "concept_id": "ncpi:liver_function_aspartate_aminotransferase",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BATCH",
+          "id": "phv00431185.v1.p1",
+          "description": "10X runs (8 samples at the time)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "C3",
+          "id": "phv00431226.v1.p1",
+          "description": "Complement component 3",
+          "concept_id": "ncpi:proteomics_panel_complement_coagulation_complement_c3_fragments",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "C4",
+          "id": "phv00431227.v1.p1",
+          "description": "Complement component 4",
+          "concept_id": "ncpi:proteomics_panel_complement_coagulation_complement_c2_c4",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_YEAR",
+          "id": "phv00431186.v1.p1",
+          "description": "Year of blood samples collection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CREATININE",
+          "id": "phv00431222.v1.p1",
+          "description": "Creatinine levels (mg/dL)",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DSDNA_LEVEL",
+          "id": "phv00431225.v1.p1",
+          "description": "Double Stranded DNA level",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DSDNA_RATIO",
+          "id": "phv00431224.v1.p1",
+          "description": "Double Stranded DNA ratio",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESR",
+          "id": "phv00431211.v1.p1",
+          "description": "Erythrocyte Sedimentation Rate (mm/hour)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00431182.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FEVER",
+          "id": "phv00431197.v1.p1",
+          "description": "Fever score from SLEDAI 2K Assessment form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GROUP",
+          "id": "phv00431184.v1.p1",
+          "description": "Healthy (childhood or adult) vs. SLE (Childhood or adult)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HCT",
+          "id": "phv00431218.v1.p1",
+          "description": "Hematocrit percentage",
+          "concept_id": "topmed:hematocrit_vfr_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEMATURIA",
+          "id": "phv00431192.v1.p1",
+          "description": "Hematuria score from SLEDAI 2K Assessment form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HGB",
+          "id": "phv00431217.v1.p1",
+          "description": "Hemoglobin (g/dL)",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "KIDNEY",
+          "id": "phv00431233.v1.p1",
+          "description": "Presence or absence of proteinuria, casts, pyuria, hematuria from SLEDAI score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDH",
+          "id": "phv00431231.v1.p1",
+          "description": "Lactate dehydrogenase level (U/L)",
+          "concept_id": "ncpi:liver_function_lactate_dehydrogenase",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "LEUKOPENIA",
+          "id": "phv00431201.v1.p1",
+          "description": "Leukopenia score from SLEDAI 2K Assessment form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LOW_COM",
+          "id": "phv00431196.v1.p1",
+          "description": "Low complement score from SLEDAI 2K Assessment form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LYMPHOCYTE_PER",
+          "id": "phv00431216.v1.p1",
+          "description": "Lymphocyte percentage",
+          "concept_id": "topmed:lymphocyte_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LYM_ABS",
+          "id": "phv00431221.v1.p1",
+          "description": "Lymphocyte absolute number (cells/ul)",
+          "concept_id": "topmed:lymphocyte_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MDG",
+          "id": "phv00431188.v1.p1",
+          "description": "MD-Global: preliminary criteria of global flare for childhood-onset SLE from the MD provider",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEMB_NEPH",
+          "id": "phv00431208.v1.p1",
+          "description": "Membranous nephritis when Nephrology class = 5",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MMF",
+          "id": "phv00431202.v1.p1",
+          "description": "Mycophenolic acid drug",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MONOCYTE_PER",
+          "id": "phv00431214.v1.p1",
+          "description": "Monocyte percentage",
+          "concept_id": "topmed:monocyte_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MSK",
+          "id": "phv00431232.v1.p1",
+          "description": "Presence or absence of muscular skeletal (Rash, arthritis) from SLEDAI score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MTX",
+          "id": "phv00431204.v1.p1",
+          "description": "Methotrexate drug",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NEPHROLOGY_CLASS",
+          "id": "phv00431209.v1.p1",
+          "description": "Nephrology classification of lupus nephritis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NEPH_ALL",
+          "id": "phv00431206.v1.p1",
+          "description": "Nephritis history",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NEPH_CLASS",
+          "id": "phv00431210.v1.p1",
+          "description": "Numerous varibales based on Nephrology class",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NEUTROPHIL_PER",
+          "id": "phv00431215.v1.p1",
+          "description": "Neutrophil percentage",
+          "concept_id": "topmed:neutrophil_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NEU_ABS",
+          "id": "phv00431220.v1.p1",
+          "description": "Neutrophil absolute number (cells/ul)",
+          "concept_id": "topmed:neutrophil_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OS",
+          "id": "phv00431203.v1.p1",
+          "description": "Oral Steroid",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLAQUENIL",
+          "id": "phv00431205.v1.p1",
+          "description": "Drug",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLATELETS",
+          "id": "phv00431219.v1.p1",
+          "description": "Platelets count (Thousand/uL)",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLEURISY",
+          "id": "phv00431198.v1.p1",
+          "description": "Pleurisy score from SLEDAI 2K Assessment form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROLIFERATIVE_NEPH",
+          "id": "phv00431207.v1.p1",
+          "description": "Proliferative nephritis when Nephrology class= 3 or 4",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROTEINURIA",
+          "id": "phv00431191.v1.p1",
+          "description": "Proteinuria score from SLEDAI 2K Assessment form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PYURIA",
+          "id": "phv00431194.v1.p1",
+          "description": "Pyuriva score from SLEDAI 2K Assessment form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00431181.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RASH",
+          "id": "phv00431190.v1.p1",
+          "description": "Rash score from SLEDAI 2K Assessment form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RBC",
+          "id": "phv00431213.v1.p1",
+          "description": "Red Blood Cells count (Million/uL)",
+          "concept_id": "topmed:rbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SERUM",
+          "id": "phv00431234.v1.p1",
+          "description": "Presence or  absence of dsDNA, low complement from SLEDAI score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00431180.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLEDAI",
+          "id": "phv00431187.v1.p1",
+          "description": "SLEDAI score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431178.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "URINARY_CASTS",
+          "id": "phv00431193.v1.p1",
+          "description": "Urinary casts score from SLEDAI 2K Assessment form (points)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VASCULITIS",
+          "id": "phv00431199.v1.p1",
+          "description": "Vasculitis score from SLEDAI 2K Assessment form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WBC",
+          "id": "phv00431212.v1.p1",
+          "description": "Whole Blood Cells count (Thousand/uL)",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dsDNA_SCORE",
+          "id": "phv00431195.v1.p1",
+          "description": "Increased DNA binding score from SLEDAI 2K Assessment form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SLE_Sample_Attributes",
+      "datasetId": "pht010317.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "AGGREGATED_MATRIX_ID",
+          "id": "phv00483114.v1.p1",
+          "description": "Number assigned to the samples in the aggregated matrix",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00431237.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00431236.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00431239.v2.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00431238.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00431235.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SLE_Subject",
+      "datasetId": "pht010314.v1",
+      "description": "This subject consent data table contains subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00431175.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431174.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SLE_Sample",
+      "datasetId": "pht010315.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00431177.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431176.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

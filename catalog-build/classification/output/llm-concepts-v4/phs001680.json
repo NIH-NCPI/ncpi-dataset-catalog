@@ -1,0 +1,193 @@
+{
+  "studyId": "phs001680",
+  "studyName": "T Cell States Associated with Response to Checkpoint Blockade in Melanoma",
+  "tables": [
+    {
+      "tableName": "T_Cell_States_Melanoma_Sample_Attributes",
+      "datasetId": "pht008916.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, histological type of sample, tumor status of sample, sequencing center, and tumor treatment of participants with or without melanoma and involved in the \"Defining T cell States Associated with Response to Checkpoint Immunotherapy in Melanoma\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00405206.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00405205.v1.p1",
+          "description": "Location from where sample was obtained",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00405208.v1.p1",
+          "description": "Sample histology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00405207.v1.p1",
+          "description": "Sample represents a tumor sample or not",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00405204.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00405210.v1.p1",
+          "description": "Sequencing center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00405209.v1.p1",
+          "description": "Tumor treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T_Cell_States_Melanoma_Subject_Phenotypes",
+      "datasetId": "pht008915.v1",
+      "description": "Subject ID, age, sex, and race of participants with or without melanoma and involved in the \"Defining T cell States Associated with Response to Checkpoint Immunotherapy in Melanoma\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00405200.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00405203.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00405202.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00405201.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T_Cell_States_Melanoma_Subject",
+      "datasetId": "pht008912.v1",
+      "description": "Subject ID, consent group, and affection status of participants with or without melanoma and involved in the \"Defining T cell States Associated with Response to Checkpoint Immunotherapy in Melanoma\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00405194.v1.p1",
+          "description": "Affection status (Melanoma)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00405193.v1.p1",
+          "description": "Consent group for data-sharing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00405192.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T_Cell_States_Melanoma_Sample",
+      "datasetId": "pht008913.v1",
+      "description": "Subject ID, sample ID, and sample use variable of participants with or without melanoma and involved in the \"Defining T cell States Associated with Response to Checkpoint Immunotherapy in Melanoma\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00405196.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00405197.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00405195.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T_Cell_States_Melanoma_GEO",
+      "datasetId": "pht008914.v1",
+      "description": "Sample ID and GEO accession ID of participants with or without melanoma and involved in the \"Defining T cell States Associated with Response to Checkpoint Immunotherapy in Melanoma\" project.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00405199.v1.p1",
+          "description": "GEO accession ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00405198.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

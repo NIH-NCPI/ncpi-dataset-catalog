@@ -1,0 +1,241 @@
+{
+  "studyId": "phs000428",
+  "studyName": "Health and Retirement Study (HRS)",
+  "tables": [
+    {
+      "tableName": "HRS_Subject_Phenotypes",
+      "datasetId": "pht002614.v2",
+      "description": "Subject ID, age groups, gender, race [African American], year of saliva collection, and DNA source of participants involved in the \"Health and Retirement Study (HRS)\" project.",
+      "variables": [
+        {
+          "name": "DNA_Source",
+          "id": "phv00167520.v2.p2",
+          "description": "Source of DNA sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00167514.v2.p2",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "agegrp",
+          "id": "phv00167515.v2.p2",
+          "description": "Age group at collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "black",
+          "id": "phv00167517.v2.p2",
+          "description": "Self-identified African-American race",
+          "concept_id": "ncpi:race_us_black_african_american_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "colyear",
+          "id": "phv00167519.v2.p2",
+          "description": "Year of Saliva Collection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00167516.v2.p2",
+          "description": "Gender of respondent",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "totrec",
+          "id": "phv00167518.v2.p2",
+          "description": "Total recall score (masked)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HRS_Sample",
+      "datasetId": "pht002613.v2",
+      "description": "Subject ID, sample ID, sample source, and source sample ID of participants involved in the \"Health and Retirement Study (HRS)\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00167512.v2.p2",
+          "description": "SAMPID as local scan identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00253315.v1.p2",
+          "description": "'Coriell' for HapMap samples, NA otherwise",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00167513.v2.p2",
+          "description": "Sample use. Array_SNP: SNP genotypes obtained using standard or custom microarrays; Imputation_SNP_CNV: Imputed SNP and CNV genotypes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00253316.v1.p2",
+          "description": "Coriell ID for HapMap samples, NA otherwise",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00167511.v2.p2",
+          "description": "SUBJID as local subject identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HRS_Sample_Attributes",
+      "datasetId": "pht005037.v1",
+      "description": "Sample ID, body site where sample was obtained, analyte type, histological type of sample, and tumor status of sample obtained from participants involved in the \"Health and Retirement Study (HRS)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00253323.v1.p2",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00253322.v1.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00253324.v1.p2",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00253325.v1.p2",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253321.v1.p2",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HRS_Subject",
+      "datasetId": "pht002612.v2",
+      "description": "Subject ID, consent group, subject source, and source subject ID of participants involved in the \"Health and Retirement Study (HRS)\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00167510.v2.p2",
+          "description": "Subject consent group.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00253314.v1.p2",
+          "description": "Coriell ID for HapMap samples, NA otherwise",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00167509.v2.p2",
+          "description": "SUBJID as local subject identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00253313.v1.p2",
+          "description": "'Coriell' for HapMap samples, NA otherwise",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Version_Mapping_Phase12_NoHapMap",
+      "datasetId": "pht005036.v1",
+      "description": "Sample IDs released in version 1, subject IDs released in version 2, sample IDs associated with version 2, subject IDs associated with version 2 of participants involved in the \"Health and Retirement Study (HRS)\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID_v1",
+          "id": "phv00253317.v1.p2",
+          "description": "Sample IDs released in the version 1 of the phs000428",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID_v2",
+          "id": "phv00253319.v1.p2",
+          "description": "Sample IDs associated with version 2 of the phs000428",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID_v1",
+          "id": "phv00253318.v1.p2",
+          "description": "Subject IDs released in the version 1 of the phs000428",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID_v2",
+          "id": "phv00253320.v1.p2",
+          "description": "Subject IDs associated with version 2 of the phs000428",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

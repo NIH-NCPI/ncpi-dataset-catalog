@@ -1,0 +1,490 @@
+{
+  "studyId": "phs001972",
+  "studyName": "NHLBI Recipient Epidemiology Donor Evaluation Study (REDS)-III - Brazil Sickle Cell Disease Cohort (REDS-BSCDC)",
+  "tables": [
+    {
+      "tableName": "REDS_BSCDC_Subject_Phenotypes",
+      "datasetId": "pht009843.v1",
+      "description": "This subject phenotype data table includes subject's sociodemography (n= 6 variables; gender, age, working status, monthy income, education, and marital status), hemo center, smoking and alcohol history, RBC transfusion, medications (n=9 variables; hydroxycarbamide/hydroxyurea, prophylactic antibiotics, analgesics, antidepressants, antihypertensives, deferasirox, desferoxamine, deferiprone, and ACE inhibitor), surgeries (n=3 variables; splenectomy, cholecystectomy, and hip replacement), hospitalizations (n=3 variables; admission, due to vasoocclusive event (VOE) and acute chest syndrome (ACS)), priapism (n=2 variables), sickle cell disease genotype, blood measurements (n=6 variables; bilirubin, %HbF, hemoglobin, leukocyte (leucocyte), and platelet count), pulmonary hypertension, leg ulcers, VOE pain episodes, ACS, ischemic and hemorrhagic stroke, splenic sequestration, bacteremia, and chronic renal failure.",
+      "variables": [
+        {
+          "name": "Hemocenter",
+          "id": "phv00426593.v1.p1",
+          "description": "Hemo center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCDtype",
+          "id": "phv00426619.v1.p1",
+          "description": "SCD genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426591.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "aceinhibitor",
+          "id": "phv00426607.v1.p1",
+          "description": "ACE inhibitor",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_ace_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "acs",
+          "id": "phv00426629.v1.p1",
+          "description": "Acute chest",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "actual_chronic_transfusion",
+          "id": "phv00426598.v1.p1",
+          "description": "RBC transfusion",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "age",
+          "id": "phv00426594.v1.p1",
+          "description": "Age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alcohol_ever",
+          "id": "phv00426597.v1.p1",
+          "description": "Alcohol (ever and current)",
+          "concept_id": "phenx:alcohol_lifetime_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "analgesics_30d",
+          "id": "phv00426601.v1.p1",
+          "description": "Analgesics for 30+ days",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_general_analgesics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "antidepressants",
+          "id": "phv00426602.v1.p1",
+          "description": "Antidepressants",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_antidepressants_general_antidepressants",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "antihipert",
+          "id": "phv00426603.v1.p1",
+          "description": "Antihypertensives",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_general_hypertension_medication_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "avascular_necrosis",
+          "id": "phv00426630.v1.p1",
+          "description": "Avascular necrosis",
+          "concept_id": "ncpi:bone_musculoskeletal_musculoskeletal_general_avascular_necrosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "bacteremia",
+          "id": "phv00426634.v1.p1",
+          "description": "Bacteremia",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_bacteremia_sepsis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "billirubin",
+          "id": "phv00426620.v1.p1",
+          "description": "Billirubin",
+          "concept_id": "ncpi:liver_function_total_bilirubin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "billirubin_direct",
+          "id": "phv00426622.v1.p1",
+          "description": "Direct bilirubin",
+          "concept_id": "ncpi:liver_function_direct_bilirubin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cholecystectomy",
+          "id": "phv00426609.v1.p1",
+          "description": "Cholecystectomy",
+          "concept_id": "ncpi:surgical_procedure_gastrointestinal_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "chronic_renal_failure",
+          "id": "phv00426635.v1.p1",
+          "description": "Chronic renal failure",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_chronic_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "deferasirox",
+          "id": "phv00426604.v1.p1",
+          "description": "Deferasirox",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_iron_chelation_therapy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "deferiprone",
+          "id": "phv00426606.v1.p1",
+          "description": "Deferiprone",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_iron_chelation_therapy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "desferoxamine",
+          "id": "phv00426605.v1.p1",
+          "description": "Desferoxamine",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_iron_chelation_therapy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "education",
+          "id": "phv00426617.v1.p1",
+          "description": "Highest school grade completed",
+          "concept_id": "phenx:current_educational_attainment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00426592.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hbf",
+          "id": "phv00426621.v1.p1",
+          "description": "%HbF",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "hemoglobin",
+          "id": "phv00426624.v1.p1",
+          "description": "Hemoglobin",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hemorrhagic_stroke",
+          "id": "phv00426632.v1.p1",
+          "description": "Hemorrhagic stroke",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_stroke_cerebrovascular_diagnosis_hemorrhagic_stroke",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "hip_replacement",
+          "id": "phv00426610.v1.p1",
+          "description": "Hip replacement",
+          "concept_id": "topmed:bone_musculoskeletal_joint_replacement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hospital_admin_acs_last_year",
+          "id": "phv00426613.v1.p1",
+          "description": "Acute chest syndrome (ACS) hospitalization in past year",
+          "concept_id": "ncpi:hospitalization_hospital_admissions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hospital_admin_last_year",
+          "id": "phv00426611.v1.p1",
+          "description": "Hospital admission in past year",
+          "concept_id": "ncpi:hospitalization_hospital_admissions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hospital_admin_pain_last_year",
+          "id": "phv00426612.v1.p1",
+          "description": "Vaso-occlusive event (VOE) hospitalization in past year",
+          "concept_id": "ncpi:hospitalization_hospital_admissions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hydroxyurea",
+          "id": "phv00426599.v1.p1",
+          "description": "Hydroxycarbamide/Hydroxyurea",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_sickle_cell_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "income_monthly",
+          "id": "phv00426616.v1.p1",
+          "description": "Monthly income of family",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ischemic_stroke",
+          "id": "phv00426631.v1.p1",
+          "description": "Ischemic stroke",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_stroke_cerebrovascular_diagnosis_ischemic_stroke",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "leg_ulcers",
+          "id": "phv00426627.v1.p1",
+          "description": "Leg ulcers",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_vascular_circulatory",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "leucocyte",
+          "id": "phv00426623.v1.p1",
+          "description": "Leucocyte",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "martial",
+          "id": "phv00426618.v1.p1",
+          "description": "Marital Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pain_episodes",
+          "id": "phv00426628.v1.p1",
+          "description": "VOE pain episodes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "platelet",
+          "id": "phv00426625.v1.p1",
+          "description": "Platelet count",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "priapism",
+          "id": "phv00426614.v1.p1",
+          "description": "Priapism",
+          "concept_id": "ncpi:disease_diagnosis_genitourinary_disorders_priapism",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "priapism_year",
+          "id": "phv00426615.v1.p1",
+          "description": "Priapism Year",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prophyla_antib",
+          "id": "phv00426600.v1.p1",
+          "description": "Prophylactic antibiotics",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_preoperative_antibiotics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pulmonary_hypertension",
+          "id": "phv00426626.v1.p1",
+          "description": "Pulmonary hypertension",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_pulmonary_hypertension",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "smoking_ever",
+          "id": "phv00426596.v1.p1",
+          "description": "Smoking history (Ever and current)",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "splenectomy",
+          "id": "phv00426608.v1.p1",
+          "description": "Splenectomy",
+          "concept_id": "ncpi:surgical_procedure_spleen_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "splenic_sequestration",
+          "id": "phv00426633.v1.p1",
+          "description": "Splenic sequestration",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_lymphatic_immune",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "working",
+          "id": "phv00426595.v1.p1",
+          "description": "Working yes/no",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "REDS_BSCDC_Sample_Attributes",
+      "datasetId": "pht009844.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, histological type, genotyping center, box number and location.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00426638.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00426637.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Box_Location",
+          "id": "phv00426643.v1.p1",
+          "description": "Box location",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Box_Number",
+          "id": "phv00426642.v1.p1",
+          "description": "Box number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00426641.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00426640.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00426639.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00426636.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "REDS_BSCDC_Subject",
+      "datasetId": "pht009841.v1",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00426588.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426587.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "REDS_BSCDC_Sample",
+      "datasetId": "pht009842.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00426590.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426589.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

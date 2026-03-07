@@ -1,0 +1,170 @@
+{
+  "studyId": "phs001414",
+  "studyName": "Genetics of Eating Disorders",
+  "tables": [
+    {
+      "tableName": "Eating_Disorders_Subject_Phenotypes",
+      "datasetId": "pht014951.v1",
+      "description": "This subject phenotype table contains subject ID, primary and secondary diagnoses, gender, lowest BMI, age at disease onset, and race.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00543256.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_onset",
+          "id": "phv00543261.v1.p1",
+          "description": "Age of onset",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00543259.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lowest_bmi",
+          "id": "phv00543260.v1.p1",
+          "description": "Lowest BMI of participant",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "primary_diagnosis",
+          "id": "phv00543257.v1.p1",
+          "description": "Primary diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00543262.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "secondary_diagnosis",
+          "id": "phv00543258.v1.p1",
+          "description": "Secondary diagnosis; NOS=not otherwise specified, MDD=major depressive disorder, OCD=obsessive-compulsive disorder, and GAD=generalized anxiety disorder",
+          "concept_id": "ncpi:depression_anxiety_screening_medical_history_psychiatric",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Eating_Disorders_Sample_Attributes",
+      "datasetId": "pht014952.v1",
+      "description": "This sample attributes table contains sample ID, body site where samplewas collected, analyte type, tumor status, and histological type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00543265.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00543264.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00543267.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00543266.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00543263.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Eating_Disorders_Subject",
+      "datasetId": "pht014949.v1",
+      "description": "The subject consent file includes subject ID, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00543252.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00543253.v1.p1",
+          "description": "Subject biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00543251.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Eating_Disorders_Sample",
+      "datasetId": "pht014950.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00543255.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00543254.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

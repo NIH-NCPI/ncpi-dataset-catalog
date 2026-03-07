@@ -1,0 +1,210 @@
+{
+  "studyId": "phs002688",
+  "studyName": "CIDR Estrogen Receptor Negative Breast Cancer in African American Women: DNA Methylation, Reproductive Events, and Mammary Epithelial Cell Populations",
+  "tables": [
+    {
+      "tableName": "CIDR_ERNeg_BC_AA_Subject_Phenotypes",
+      "datasetId": "pht012070.v1",
+      "description": "This subject phenotypes data table includes case control status of subject for breast cancer, sex, age, cancer stage at diagnosis, and statuses for estrogen receptor, progesterone receptor, human epidermal growth factor receptor.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00498224.v1.p1",
+          "description": "Case age at diagnsois or control age at study participation",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL",
+          "id": "phv00498222.v1.p1",
+          "description": "Is the participant a case or control for breast cancer?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ERSTAT",
+          "id": "phv00498225.v1.p1",
+          "description": "Estrogen Receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HER2STAT",
+          "id": "phv00498227.v1.p1",
+          "description": "Human Epidermal Growth Factor Receptor 2 status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_her2_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRSTAT",
+          "id": "phv00498226.v1.p1",
+          "description": "Progesterone Receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_progesterone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_NAME",
+          "id": "phv00498220.v1.p1",
+          "description": "Unique ID for the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00498223.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE",
+          "id": "phv00498228.v1.p1",
+          "description": "Breast cancer stage at diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00498221.v1.p1",
+          "description": "Unique ID for the subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ERNeg_BC_AA_Subject",
+      "datasetId": "pht012068.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, biological sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00498212.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00498213.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00498215.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID2",
+          "id": "phv00498217.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00498214.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE2",
+          "id": "phv00498216.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00498211.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ERNeg_BC_AA_Sample_Attributes",
+      "datasetId": "pht012071.v1",
+      "description": "This sample attributes table includes body site, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00498231.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00498230.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00498232.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00498229.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ERNeg_BC_AA_Sample",
+      "datasetId": "pht012069.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00498219.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00498218.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

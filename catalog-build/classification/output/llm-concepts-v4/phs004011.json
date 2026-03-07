@@ -1,0 +1,52 @@
+{
+  "studyId": "phs004011",
+  "studyName": "INfluenza Vaccine to Effectively Stop Cardio Thoracic Events and Decompensated Heart Failure (INVESTED)",
+  "tables": [
+    {
+      "tableName": "INVESTED_Subject",
+      "datasetId": "pht015814.v1",
+      "description": "This subject consent data table includes subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "consent",
+          "id": "phv00559145.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ranpt",
+          "id": "phv00560481.v1.p1",
+          "description": "Randomized ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "INVESTED_Sample",
+      "datasetId": "pht015815.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and sample aliases. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "ranpt",
+          "id": "phv00559147.v1.p1",
+          "description": "Randomized ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sampid",
+          "id": "phv00560482.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

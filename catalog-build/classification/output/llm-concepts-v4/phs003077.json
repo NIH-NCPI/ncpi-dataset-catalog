@@ -1,0 +1,226 @@
+{
+  "studyId": "phs003077",
+  "studyName": "Retinoblastoma Aqueous Humor Liquid Biopsy Repository",
+  "tables": [
+    {
+      "tableName": "RB_AH_Sample_Attributes",
+      "datasetId": "pht013045.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, tumor stage based on IIRC and AJCC, primary tumor treatment, timing of sample extractions, eye enucleation and any high risk pathologic features, and metastatic disease status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00526051.v1.p1",
+          "description": "Analyte Type (DNA)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00526050.v1.p1",
+          "description": "Body site where sample was collected (right or left eye)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EYE_ENUCLEATED",
+          "id": "phv00526057.v1.p1",
+          "description": "Was the eye enucleated? Y/N",
+          "concept_id": "ncpi:surgical_procedure_eye_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HIGH_RISK_PATHOLOGIC_FEATURES",
+          "id": "phv00526058.v1.p1",
+          "description": "At enucleation, high risk features: massive choroidal invasion, pre-laminar invasion, post-laminar invasion, extra-scleral invision, anterior segment invasion",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_treatment_response",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00526052.v1.p1",
+          "description": "Tumor information from aqueous humor liquid biopsy or tumor from enucleated eye",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "METASTATIC_DISEASE",
+          "id": "phv00526059.v1.p1",
+          "description": "The patient developed metastatic disease? Y/N",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_metastatic_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00526049.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIMING_SAMPLE",
+          "id": "phv00526056.v1.p1",
+          "description": "Timing of sample extraction during therapy: Diagnosis (DX), end of course of systemic chemotherapy (END CEV), end of course of Intra-arterial chemotherapy (END IAC), intravitreal injections (listed in order as IvitC-A, B, C), at the time of a recurrence, at the time of primary enucleation (PE) or secondary enucleation (ES), At the time of Avastin injection (labelled in order A, B, C)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_PRIMARY_TREATMENT",
+          "id": "phv00526055.v1.p1",
+          "description": "Type of tumor treatment for sample (systemic chemotherapy, intra-arterial chemotherapy, enucleation)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE_AJCC",
+          "id": "phv00526054.v1.p1",
+          "description": "Tumor stage of sample based on AJCC RB classification as Mallipatna, A. C. et al. in AJCC Cancer Staging Manual, 8th ed. (eds Mahul B. Amin et al.) Ch. 68, 819-831 (Springer, 2017).",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE_IIRC",
+          "id": "phv00526053.v1.p1",
+          "description": "Tumor stage of sample based on IIRC RB classification as A-E as in A. Linn Murphree. Intraocular Retinoblastoma: the case for a new group classification. Ophthalmol Clin North Am. 2005 Mar; 18(1):41-53. PMID: 15763190",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RB_AH_Subject_Phenotypes",
+      "datasetId": "pht013044.v1",
+      "description": "This subject phenotype table includes subject's gender, race, ethnicity, affection status for retinoblastoma type, RB1 mutation status, age at diagnosis, and duration of follow-up.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00526043.v1.p1",
+          "description": "Affection status for unilateral or bilateral retinoblastoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_Dx",
+          "id": "phv00526045.v1.p1",
+          "description": "Age at Diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_general_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00526048.v1.p1",
+          "description": "Ethnicity",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Follow_Up",
+          "id": "phv00526046.v1.p1",
+          "description": "Follow up as of November 2022 in months",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GERMLINE RB1 MTN",
+          "id": "phv00526044.v1.p1",
+          "description": "RB1 mutation detected in the peripheral blood, germline disease (Y/N)",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_germline_mutations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gender",
+          "id": "phv00526042.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00526047.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00526041.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RB_AH_Subject",
+      "datasetId": "pht013042.v1",
+      "description": "The subject consent data table includes subject IDs, consent information, and subject's biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00526037.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00526038.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00526036.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RB_AH_Sample",
+      "datasetId": "pht013043.v1",
+      "description": "This subject sample mapping data table contains mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00526040.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00526039.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

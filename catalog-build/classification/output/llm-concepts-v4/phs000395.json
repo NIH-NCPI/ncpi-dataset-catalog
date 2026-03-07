@@ -1,0 +1,274 @@
+{
+  "studyId": "phs000395",
+  "studyName": "CPMCRI Breast Health Cohort",
+  "tables": [
+    {
+      "tableName": "CIDR_Mammographic_Density_Subject_Phenotypes",
+      "datasetId": "pht002363.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00162736.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00162743.v1.p1",
+          "description": "Participant's age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age1stb",
+          "id": "phv00162742.v1.p1",
+          "description": "Age at birth of 1st child",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_count_history_age_first_pregnancy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "bmi",
+          "id": "phv00162746.v1.p1",
+          "description": "Participant's BMI (body mass index)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dens_ext",
+          "id": "phv00162751.v1.p1",
+          "description": "Case / control status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dense_volume_l",
+          "id": "phv00162740.v1.p1",
+          "description": "Total density of fibroglandular tissue measured in the right breast",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dense_volume_r",
+          "id": "phv00162739.v1.p1",
+          "description": "Total density of fibroglandular tissue measured in the left breast",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "densevol_avg",
+          "id": "phv00162749.v1.p1",
+          "description": "The average volumetric density between left and right breasts (if either left or right is missing, then the value available is taken as the average)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "height",
+          "id": "phv00162744.v1.p1",
+          "description": "Participant's height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hrt",
+          "id": "phv00162741.v1.p1",
+          "description": "Hormone replacement therapy",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_hormone_replacement_therapy_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00162747.v1.p1",
+          "description": "Participant's race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sxa_avg",
+          "id": "phv00162748.v1.p1",
+          "description": "The average % dense volume between left and right breasts (if either left or right is missing, then the value available is taken as the average).  The % density is the volume of dense tissue out of the total volume of the breast as calculated by the sxa method.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sxa_resid",
+          "id": "phv00162750.v1.p1",
+          "description": "Age and BMI adjusted breast density calculated by regression betwee square-root transformed sxa_avg vs. age and BMI. The sxa_resid represent the residuals of this regression.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sxaresult_l",
+          "id": "phv00162738.v1.p1",
+          "description": "Percent density of left breast.  The % density is the volume of dense tissue out of the total volume of the breast as calculated by the sxa method.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sxaresult_r",
+          "id": "phv00162737.v1.p1",
+          "description": "Percent density of right breast. The % density is the volume of dense tissue out of the total volume of the breast as calculated by the sxa method.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "weight",
+          "id": "phv00162745.v1.p1",
+          "description": "Participant's weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_Mammographic_Density_Sample",
+      "datasetId": "pht002362.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00162735.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00171465.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00171463.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00171464.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00162734.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_Mammographic_Density_Sample_Attributes",
+      "datasetId": "pht002364.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00162754.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00162753.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00162756.v1.p1",
+          "description": "Not applicable",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00162755.v1.p1",
+          "description": "Not applicable",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLEID",
+          "id": "phv00162752.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_Mammographic_Density_Subject",
+      "datasetId": "pht002361.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00162733.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJID",
+          "id": "phv00171462.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00162732.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJ_SOURCE",
+          "id": "phv00171461.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,306 @@
+{
+  "studyId": "phs003945",
+  "studyName": "Women's Environmental Cancer and Radiation Epidemiology (WECARE) Study",
+  "tables": [
+    {
+      "tableName": "WECARE_Subject_Phenotypes",
+      "datasetId": "pht015864.v1",
+      "description": "This subject phenotypes data table includes unilateral/contralateral breast cancer diagnosis, race/ethnicity, first breast cancer details (age at 1st diagnosis, diagnosis year, cancer stage, histology, tumor grade, radiotherapy, chemotherapy, hormone therapy, tamoxifen use), and medical/lifestyle history (family history of breast cancer, pregnancy history, age at menarche, menopausal status, age at menopause, body-mass index, alcohol history, smoking history, hormone replacement therapy, time between first and second breast cancer diagnosis, estrogen receptor status, progesterone receptor status).",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00559367.v1.p1",
+          "description": "Unilateral/Contralateral breast cancer diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_CAT_BC1",
+          "id": "phv00559369.v1.p1",
+          "description": "Age at 1st breast cancer diagnoses",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALCOHOL",
+          "id": "phv00559376.v1.p1",
+          "description": "Alcohol History  (by reference date)",
+          "concept_id": "phenx:alcohol_lifetime_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AT_RISK_CAT",
+          "id": "phv00559380.v1.p1",
+          "description": "At risk period defined as time between 1st & 2nd cancers/reference date",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_CAT_BC1",
+          "id": "phv00559375.v1.p1",
+          "description": "Body Mass Index at or prior to 1st breast cancer diagnosis",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CHEMO_BC1",
+          "id": "phv00559387.v1.p1",
+          "description": "Chemotherapy ever/never for 1st breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_chemotherapy_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DX_YEAR_CAT_BC1",
+          "id": "phv00559379.v1.p1",
+          "description": "Diagnosis year of 1st breast cancer",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ER_BC1",
+          "id": "phv00559382.v1.p1",
+          "description": "Estrogen receptor status of 1st breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FH_BC",
+          "id": "phv00559370.v1.p1",
+          "description": "1st degree family history of breast cancer",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FTP_AGE_CAT_BC1",
+          "id": "phv00559371.v1.p1",
+          "description": "Age at 1st full term pregnancy at 1st breast cancer diagnosis",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_count_history_age_first_pregnancy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FTP_NUM_CAT_BC1",
+          "id": "phv00559372.v1.p1",
+          "description": "Number of full-term pregnancies at 1st breast cancer diagnosis",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_count_history_live_births",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GRADE_BC1",
+          "id": "phv00559385.v1.p1",
+          "description": "Tumor grade of 1st breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGY_BC1",
+          "id": "phv00559384.v1.p1",
+          "description": "Histology of 1st breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HORMONE_BC1",
+          "id": "phv00559388.v1.p1",
+          "description": "Hormone Therapy ever/never  for the 1st breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_hormone_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HRT",
+          "id": "phv00559378.v1.p1",
+          "description": "Hormone Replacement Therapy (by reference date)",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_hormone_replacement_therapy_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MENARCHE_AGE_CAT",
+          "id": "phv00568550.v1.p1",
+          "description": "Age at menarche",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_age_at_menarche",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MENO_AGE_CAT_BC1",
+          "id": "phv00559390.v1.p1",
+          "description": "Age at Menopause 2 yrs prior to 1st breast cancer diagnosis",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_menopause_status_categories",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MENO_STATUS_BC1",
+          "id": "phv00559374.v1.p1",
+          "description": "Menopausal status 2 yr prior to 1st breast cancer diagnosis",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_menopause_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PR_BC1",
+          "id": "phv00559383.v1.p1",
+          "description": "Progesterone receptor statusof 1st breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_progesterone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_CAT",
+          "id": "phv00559368.v1.p1",
+          "description": "Race/Ethnicity",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RT_BC1",
+          "id": "phv00559386.v1.p1",
+          "description": "Radiotherapy for the 1st breast cancer diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_radiation_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKING",
+          "id": "phv00559377.v1.p1",
+          "description": "Smoking History  (by reference date)",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE1",
+          "id": "phv00559381.v1.p1",
+          "description": "Stage of 1st breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID_MAIN",
+          "id": "phv00559366.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TMX_BC1",
+          "id": "phv00559389.v1.p1",
+          "description": "Use of Tamoxifen Even/Never for the 1st breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_hormone_therapy",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WECARE_Sample_Attributes",
+      "datasetId": "pht015865.v1",
+      "description": "This sample attributes table includes body site, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00559393.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00559392.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00559394.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00559391.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WECARE_Subject",
+      "datasetId": "pht015862.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00559362.v1.p1",
+          "description": "Registered consent groups (Data Use Limitations (DUL)) as determined by submitters' Institutional Review Boards (IRB) or equivalent body.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00559363.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID_MAIN",
+          "id": "phv00559361.v1.p1",
+          "description": "Subject ID for WECARE main study dbGaP posting",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WECARE_Sample",
+      "datasetId": "pht015863.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00559365.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID_MAIN",
+          "id": "phv00559364.v1.p1",
+          "description": "Subject ID for WECARE main study dbGaP posting",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

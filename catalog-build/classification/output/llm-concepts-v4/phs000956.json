@@ -1,0 +1,633 @@
+{
+  "studyId": "phs000956",
+  "studyName": "NHLBI TOPMed: Genetics of Cardiometabolic Health in the Amish",
+  "tables": [
+    {
+      "tableName": "TOPMed_WGS_Amish_Subject_Phenotypes",
+      "datasetId": "pht005002.v1",
+      "description": "This subject phenotype table includes subject's sex, age at blood draw, and phenotype study (Amish Family HAPI Heart Study, Amish Family Longevity Study, and Amish Family Wellness Study). The variables collected at baseline visit are anthropometric measures (n=5; weight, height, bmi, whr, and waist), age, myocardial infarction, T2D, stroke, pregnancy status, CAC score and age, IMT thickness and plaque, EKG measures (n=4; QRS, QT, PR, and heart rate), inflammatory markers (n=4, fibrinogen, CRP, IL-6, Lpa), blood pressure (n=2, SBP and DBP), fasting insulin and glucose measures, blood measurements (n=10; WBC, hemoglobin, hematocrit, RBC, and platelets), metabolic measures (n=5; creatine, LDL, HDL, triglycerides, and total cholesterol), lung capacity (n=2; FVC and FEV), medications (n=3; hypertension, T2D, and lipid), and smoking status.",
+      "variables": [
+        {
+          "name": "SEX",
+          "id": "phv00252975.v1.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "baseline_study",
+          "id": "phv00252974.v1.p1",
+          "description": "Phenotype study",
+          "concept_id": "ncpi:subcohort_sub_study_origin",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "basophils_baseline",
+          "id": "phv00253015.v1.p1",
+          "description": "Basophils value at baseline visit",
+          "concept_id": "topmed:basophil_ncnc_bld",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "cac_agatston_score",
+          "id": "phv00252986.v1.p1",
+          "description": "Coronary artery calcification score",
+          "concept_id": "ncpi:cac_score_coronary_artery_calcium_total",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "crp_baseline",
+          "id": "phv00252992.v1.p1",
+          "description": "CRP value at baseline visit",
+          "concept_id": "topmed:crp",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "current_smoker_baseline",
+          "id": "phv00252990.v1.p1",
+          "description": "Current smoking status of participant at baseline visit",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "dbp_baseline",
+          "id": "phv00252996.v1.p1",
+          "description": "Diastolic blood pressure at baseline visit",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_baseline_enrollment",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "eosinophils_baseline",
+          "id": "phv00253014.v1.p1",
+          "description": "Eosinophils value at baseline visit",
+          "concept_id": "topmed:eosinophil_ncnc_bld",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "hdl_baseline",
+          "id": "phv00253018.v1.p1",
+          "description": "HDL value at baseline visit",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "height_baseline",
+          "id": "phv00252982.v1.p1",
+          "description": "Height at baseline visit",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "htn_med_baseline",
+          "id": "phv00252997.v1.p1",
+          "description": "Taking medication for hypertension at baseline visit",
+          "concept_id": "ncpi:antihypertensive_meds_current_antihypertensive_use_current_antihypertensive_use_current_antihypertensive_use",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "imt_anyplaque_baseline",
+          "id": "phv00252989.v1.p1",
+          "description": "Any presence of carotid plaque as measured by IMT at baseline visit",
+          "concept_id": "ncpi:carotid_plaque_carotid_plaque_presence",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "imt_mean_farwall_cca_baseline",
+          "id": "phv00252988.v1.p1",
+          "description": "Carotid intima-media far wall thickness at baseline visit",
+          "concept_id": "ncpi:cimt_common_carotid_imt",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "lipid_med_baseline",
+          "id": "phv00253021.v1.p1",
+          "description": "Taking medication for hypercholesterolemia at baseline visit",
+          "concept_id": "ncpi:lipid_lowering_medication_general_lipid_lowering_medication",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "lymphocytes_baseline",
+          "id": "phv00253013.v1.p1",
+          "description": "Lymphocytes value at baseline visit",
+          "concept_id": "topmed:lymphocyte_ncnc_bld",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "mi_baseline",
+          "id": "phv00252984.v1.p1",
+          "description": "Self report heart attack at baseline visit",
+          "concept_id": "ncpi:mi_prior_mi_history_composite",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "monocytes_baseline",
+          "id": "phv00253012.v1.p1",
+          "description": "Monocytes value at baseline visit",
+          "concept_id": "topmed:monocyte_ncnc_bld",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "neutrophils_baseline",
+          "id": "phv00253011.v1.p1",
+          "description": "Neutrophils value at baseline visit",
+          "concept_id": "topmed:neutrophil_ncnc_bld",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "platelet_count_baseline",
+          "id": "phv00253009.v1.p1",
+          "description": "Platelet count at baseline visit",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "sbp_baseline",
+          "id": "phv00252995.v1.p1",
+          "description": "Systolic blood pressure at baseline visit",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_baseline_systolic_bp",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "totchol_baseline",
+          "id": "phv00253020.v1.p1",
+          "description": "Total cholesterol value at baseline visit",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_baseline",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "trigs_baseline",
+          "id": "phv00253019.v1.p1",
+          "description": "Triglycerides value at baseline visit",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_standard_units_total_triglycerides",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "weight_baseline",
+          "id": "phv00252979.v1.p1",
+          "description": "Weight at baseline visit",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "white_blood_cell_count_baseline",
+          "id": "phv00253006.v1.p1",
+          "description": "White blood cell count value at baseline visit",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252973.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_dna",
+          "id": "phv00252977.v1.p1",
+          "description": "Age at blood draw",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_baseline",
+          "id": "phv00252976.v1.p1",
+          "description": "Age at baseline study",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bmi_baseline",
+          "id": "phv00252983.v1.p1",
+          "description": "Body mass index at baseline visit",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cac_score_age",
+          "id": "phv00252987.v1.p1",
+          "description": "Age when CAC score was obtained",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "creatinine_baseline",
+          "id": "phv00253016.v1.p1",
+          "description": "Serum creatinine value at baseline visit",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ekg_hr_baseline",
+          "id": "phv00253005.v1.p1",
+          "description": "Heart rate measured by electrocardiogram at baseline visit",
+          "concept_id": "ncpi:heart_rate_resting_heart_rate",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ekg_pr_baseline",
+          "id": "phv00253004.v1.p1",
+          "description": "PR interval measured by electrocardiogram at baseline visit",
+          "concept_id": "ncpi:ecg_pr_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ekg_qrs_baseline",
+          "id": "phv00253002.v1.p1",
+          "description": "QRS duration measured by electrocardiogram at baseline visit",
+          "concept_id": "ncpi:ecg_qrs_interval_qrs_duration_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ekg_qt_baseline",
+          "id": "phv00253003.v1.p1",
+          "description": "QT interval measured by electrocardiogram at baseline visit",
+          "concept_id": "ncpi:ecg_qt_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fastglucose_baseline",
+          "id": "phv00253001.v1.p1",
+          "description": "Fasting glucose value at baseline visit",
+          "concept_id": "ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fastinsulin_baseline",
+          "id": "phv00253000.v1.p1",
+          "description": "Fasting insulin value at baseline visit",
+          "concept_id": "phenx:fasting_serum_insulin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fev1_pre_bd_baseline",
+          "id": "phv00253023.v1.p1",
+          "description": "Forced expiratory volume in 1 second measured by spirometry at baseline visit",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fev1_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fibrinogen_baseline",
+          "id": "phv00252991.v1.p1",
+          "description": "Fibrinogen value at baseline visit",
+          "concept_id": "ncpi:proteomics_panel_complement_coagulation_fibrinogen_fibrin",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "fvc_pre_bd_baseline",
+          "id": "phv00253022.v1.p1",
+          "description": "Forced vital capacity measured by spirometry at baseline visit",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fvc_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hematocrit_baseline",
+          "id": "phv00253008.v1.p1",
+          "description": "Hematocrit value at baseline visit",
+          "concept_id": "topmed:hematocrit_vfr_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hemoglobin_baseline",
+          "id": "phv00253007.v1.p1",
+          "description": "Hemoglobin value at baseline visit",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "il6_baseline",
+          "id": "phv00252993.v1.p1",
+          "description": "IL6 value at baseline visit",
+          "concept_id": "topmed:il6",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ldl_baseline",
+          "id": "phv00253017.v1.p1",
+          "description": "LDL value as calculated by Friedewald equation at baseline visit",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_calculated",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lpa_baseline",
+          "id": "phv00252994.v1.p1",
+          "description": "Lipoprotein A value at baseline visit",
+          "concept_id": "topmed:proteomics_panel_lipoproteins_lipid_metabolism",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pregnant_baseline",
+          "id": "phv00252978.v1.p1",
+          "description": "Pregnant at baseline visit",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "red_blood_cell_count_baseline",
+          "id": "phv00253010.v1.p1",
+          "description": "Red blood cell count value at baseline visit",
+          "concept_id": "topmed:rbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "stroke_baseline",
+          "id": "phv00252985.v1.p1",
+          "description": "Self report stroke at baseline visit",
+          "concept_id": "ncpi:disease_diagnosis_stroke_tia",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "t2d_med_baseline",
+          "id": "phv00252999.v1.p1",
+          "description": "Taking medication for type 2 diabetes at baseline visit",
+          "concept_id": "ncpi:diabetes_medication_general_diabetes_medication_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2diabetes_baseline",
+          "id": "phv00252998.v1.p1",
+          "description": "Has Type 2 diabetes based on medication, self-report, fasting glucose at baseline visit",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type2_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "waist_baseline",
+          "id": "phv00252980.v1.p1",
+          "description": "Waist circumference at baseline visit",
+          "concept_id": "phenx:waist_circumference_waist_circumference_ncfs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "whr_baseline",
+          "id": "phv00252981.v1.p1",
+          "description": "Waist hip ratio at baseline visit",
+          "concept_id": "phenx:waist_circumference_waist_circumference_ncfs",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_Amish_Sample_Attributes",
+      "datasetId": "pht005003.v2",
+      "description": "This sample attributes table includes body site where sample was collected, histological type, analyte type, tumor status, sequencing center, funding source, TOPMed phase, study name, and project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00253026.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00253025.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00282734.v1.p1",
+          "description": "Funding for WGS - TOPMed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00253027.v2.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00253028.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253024.v2.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00282733.v1.p1",
+          "description": "Sequencing center where whole genome sequencing took place - BROAD",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00282737.v1.p1",
+          "description": "Name of dbGaP study - Amish",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00282735.v1.p1",
+          "description": "Phase of TOPMed - Phase 1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00282736.v1.p1",
+          "description": "Name of TOPMed project - Amish",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_Amish_Pedigree",
+      "datasetId": "pht005768.v2",
+      "description": "The pedigree data table shows family relationships through family IDs, subject IDs, father IDs, mother IDs, twin IDs, gender, and second degree relationships.",
+      "variables": [
+        {
+          "name": "DEGREE2",
+          "id": "phv00266365.v2.p1",
+          "description": "Individual has unidentified second degree relationship with at least one other pedigree that is not represented in the pedigree information given.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00266359.v2.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00266361.v2.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00266362.v2.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MZTWIN",
+          "id": "phv00266364.v2.p1",
+          "description": "Twin ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00266363.v2.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266360.v2.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_Amish_Subject",
+      "datasetId": "pht005000.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00252969.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00259064.v1.p1",
+          "description": "Previous dbGaP submission Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252968.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00259063.v1.p1",
+          "description": "Subject also included in previous dbGaP submission",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_Amish_Sample",
+      "datasetId": "pht005001.v3",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00252971.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252970.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

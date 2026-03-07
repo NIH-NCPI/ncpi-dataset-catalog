@@ -1,0 +1,304 @@
+{
+  "studyId": "phs002579",
+  "studyName": "Immune Response to Life-Threatening Respiratory Infections in Children and Young Adults",
+  "tables": [
+    {
+      "tableName": "Respiratory_Infections_SARS_CoV2_Clinical_Data",
+      "datasetId": "pht011649.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "COLL_O2",
+          "id": "phv00494144.v1.p1",
+          "description": "Subject receiving supplemental oxygen at the time of sample collection",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_oxygen_therapy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "COLL_SUPP",
+          "id": "phv00494145.v1.p1",
+          "description": "Type of respiratory support subject receiving at the time of sample collection",
+          "concept_id": "topmed:lung_ct_imaging_respiratory_interventions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HOSP_LOS",
+          "id": "phv00494143.v1.p1",
+          "description": "Duration of hospital admission",
+          "concept_id": "ncpi:hospitalization_length_of_stay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ICU_ADMIT",
+          "id": "phv00494141.v1.p1",
+          "description": "Subject required admission to the intensive care unit during their illness",
+          "concept_id": "ncpi:hospitalization_icu_admissions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ICU_LOS",
+          "id": "phv00494142.v1.p1",
+          "description": "Duration of intensive care unit admission",
+          "concept_id": "ncpi:hospitalization_length_of_stay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OXY_DUR",
+          "id": "phv00494149.v1.p1",
+          "description": "Duration of supplemental oxygen received",
+          "concept_id": "topmed:lung_ct_imaging_respiratory_interventions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PEAK_O2",
+          "id": "phv00494146.v1.p1",
+          "description": "Subject received supplemental oxygen at anytime during hospital admission",
+          "concept_id": "topmed:lung_ct_imaging_respiratory_interventions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PEAK_SUPP",
+          "id": "phv00494147.v1.p1",
+          "description": "Highest level of respiratory support a subject received during hospitalization",
+          "concept_id": "topmed:lung_ct_imaging_respiratory_interventions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRESENTATION",
+          "id": "phv00494139.v1.p1",
+          "description": "Predominant clinical symptoms at enrollment",
+          "concept_id": "ncpi:lung_ct_imaging_respiratory_clinical_conditions_clinical_presentation",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494137.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUPP_DUR",
+          "id": "phv00494148.v1.p1",
+          "description": "Duration of any respiratory support received",
+          "concept_id": "topmed:lung_ct_imaging_respiratory_interventions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SYMPT_DUR",
+          "id": "phv00494140.v1.p1",
+          "description": "Time from self/parent reported symptom onset to collection of nasal scraping",
+          "concept_id": "ncpi:lung_ct_imaging_respiratory_clinical_conditions_respiratory_onset_timing",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "VIRUS_STATUS",
+          "id": "phv00494138.v1.p1",
+          "description": "Virus subject is infected with or uninfected status",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hiv_viral_load",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Respiratory_Infections_SARS_CoV2_Pedigree",
+      "datasetId": "pht011646.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00494125.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00494127.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00494128.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00494129.v1.p1",
+          "description": "Biological Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494126.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Respiratory_Infections_SARS_CoV2_Subject_Phenotypes",
+      "datasetId": "pht011648.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00494133.v1.p1",
+          "description": "Subject Age at Sample Collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00494136.v1.p1",
+          "description": "Self or parent reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00494135.v1.p1",
+          "description": "Self or parent reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00494134.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494132.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Respiratory_Infections_SARS_CoV2_Sample_Attributes",
+      "datasetId": "pht011650.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00494152.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00494151.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00494153.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00494150.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Respiratory_Infections_SARS_CoV2_Subject_Consent",
+      "datasetId": "pht011645.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00494123.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00494124.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494122.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Respiratory_Infections_SARS_CoV2_Sample",
+      "datasetId": "pht011647.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00494131.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494130.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

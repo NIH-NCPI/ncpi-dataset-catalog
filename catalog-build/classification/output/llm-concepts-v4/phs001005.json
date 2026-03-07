@@ -1,0 +1,138 @@
+{
+  "studyId": "phs001005",
+  "studyName": "Antigen Discovery in Melanoma",
+  "tables": [
+    {
+      "tableName": "Neoantigens_Stage3_Melanoma_Sample_Attributes",
+      "datasetId": "pht005041.v2",
+      "description": "Sample ID, histological type, analyte type, body site where sample was obtained, tumor status of sample, and year when sample was collected from participants with melanoma and involved in the \"Identification of Putative Neoantigens in Stage III Melanoma\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00253336.v2.p1",
+          "description": "Sample nucleic acid type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00253337.v2.p1",
+          "description": "Body site from which sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00253335.v2.p1",
+          "description": "Type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00253338.v2.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253334.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_YEAR",
+          "id": "phv00253339.v2.p1",
+          "description": "Year the sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Neoantigens_Stage3_Melanoma_Subject",
+      "datasetId": "pht005038.v2",
+      "description": "Subject ID, consent group, and affection status of participants with melanoma and involved in the \"Identification of Putative Neoantigens in Stage III Melanoma\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00253328.v2.p1",
+          "description": "Has subject been diagnosed with melanoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00253327.v2.p1",
+          "description": "Allowable research use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253326.v2.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Neoantigens_Stage3_Melanoma_Sample",
+      "datasetId": "pht005039.v2",
+      "description": "Subject ID, sample ID, and sample use variable obtained from participants with melanoma and involved in the \"Identification of Putative Neoantigens in Stage III Melanoma\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253330.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253329.v2.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Neoantigens_Stage3_Melanoma_Subject_Phenotypes",
+      "datasetId": "pht005040.v2",
+      "description": "Subject ID and gender of participants with melanoma and involved in the \"Identification of Putative Neoantigens in Stage III Melanoma\" project.",
+      "variables": [
+        {
+          "name": "GENDER",
+          "id": "phv00253333.v2.p1",
+          "description": "Sex of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253332.v2.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

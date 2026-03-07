@@ -1,0 +1,186 @@
+{
+  "studyId": "phs002291",
+  "studyName": "Whole Transcriptome Sequencing of Human Tumor Cells and Hematopoietic Stem and Progenitor Cells During Aging and Bone Marrow Disorders",
+  "tables": [
+    {
+      "tableName": "HSPCs_Aging_MBM_Sample_Attributes",
+      "datasetId": "pht010803.v1",
+      "description": "This sample attributes table contains sample IDs, analyte type, body site where sample was collected, hematological diagnosis, type of tumor treatment, name of the center which conducted sequencing, sample run, and paired-end read IDs.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00480684.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00480685.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CANCER_TREATMENT",
+          "id": "phv00480687.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS",
+          "id": "phv00480686.v1.p1",
+          "description": "Hematological diagnosis at time of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00480683.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_RUN_ID",
+          "id": "phv00480689.v1.p1",
+          "description": "Sample Run",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00480688.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HSPCs_Aging_MBM_Subject_Phenotypes",
+      "datasetId": "pht010802.v1",
+      "description": "This subject phenotype table contains subject IDs, age, light chain dominance, cancer karyotype, amplification status of chromosome 1q, and other cytogenetic details.",
+      "variables": [
+        {
+          "name": "1Q_AMPLIFICATION_STATUS",
+          "id": "phv00480681.v1.p1",
+          "description": "Amplification status of chromosome 1q",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00480678.v1.p1",
+          "description": "Subject age at time of sample",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "KARYOTYPE",
+          "id": "phv00480680.v1.p1",
+          "description": "Cancer Karyotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIGHT_CHAIN",
+          "id": "phv00480679.v1.p1",
+          "description": "Light chain dominance",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OTHER_CYTOGENETICS",
+          "id": "phv00480682.v1.p1",
+          "description": "Other cytogenetic details",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00480677.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HSPCs_Aging_MBM_Subject",
+      "datasetId": "pht010800.v1",
+      "description": "The subject consent file includes subject IDs, consent information, subject source, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00480672.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00480674.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00480671.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00480673.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HSPCs_Aging_MBM_Sample",
+      "datasetId": "pht010801.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00480676.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00480675.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

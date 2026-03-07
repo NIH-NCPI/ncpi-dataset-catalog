@@ -1,0 +1,178 @@
+{
+  "studyId": "phs000205",
+  "studyName": "International Standards for Cytogenomic Arrays",
+  "tables": [
+    {
+      "tableName": "ISCA_Subject_Phenotypes",
+      "datasetId": "pht001431.v6",
+      "description": "Subject ID, gender, postnatal age in months, prenatal age in weeks, diagnosis, and family history of disease of participants involved in the \"International Standards for Cytogenomic Arrays\" project.",
+      "variables": [
+        {
+          "name": "HPO_terms",
+          "id": "phv00174142.v2.p2",
+          "description": "HPO terms",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Postnatal_age_in_months",
+          "id": "phv00174140.v2.p2",
+          "description": "Postnatal age in months (ND=No Data)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Prenatal_age_in_weeks",
+          "id": "phv00174141.v2.p2",
+          "description": "Prenatal age in weeks",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00098561.v6.p2",
+          "description": "De-identified subject's ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00098562.v6.p2",
+          "description": "Sex (M=Male, F=Female, ND=No Data)",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "family_history",
+          "id": "phv00262101.v1.p2",
+          "description": "Family history",
+          "concept_id": "ncpi:family_medical_history_inflammatory_bowel_disease_family_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "referring_diagnosis",
+          "id": "phv00098564.v6.p2",
+          "description": "Diagnosis or phenotype which motivated cytogenetic testing. Human Phenotype Ontology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ISCA_Sample_Attributes",
+      "datasetId": "pht003014.v2",
+      "description": "Sample ID, body site where sample was collected, analyte type, tumor status, samples obtained from prenatal or postnatal subjects, and karyotype of participants involved in the \"International Standards for Cytogenomic Arrays\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00174145.v2.p2",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00174144.v2.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00174146.v2.p2",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "KARYOTYPE",
+          "id": "phv00262102.v1.p2",
+          "description": "Karyotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRENATAL_POSTNATAL",
+          "id": "phv00174148.v2.p2",
+          "description": "Samples obtained from prenatal or postnatal subjects",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00174143.v2.p2",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ISCA_Sample",
+      "datasetId": "pht001430.v6",
+      "description": "Subject ID, sample ID, and sample use variable obtained from participants involved in the \"International Standards for Cytogenomic Arrays\" project.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00098560.v6.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00169022.v3.p2",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00098559.v6.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ISCA_Subject",
+      "datasetId": "pht001429.v6",
+      "description": "Subject ID and consent group of participants involved in the \"International Standards for Cytogenomic Arrays\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00098558.v6.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00098557.v6.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

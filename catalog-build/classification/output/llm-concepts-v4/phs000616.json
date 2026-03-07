@@ -1,0 +1,329 @@
+{
+  "studyId": "phs000616",
+  "studyName": "CIP: Obesity-Diabetes Familial Risk",
+  "tables": [
+    {
+      "tableName": "VIVA_LA_FAMILIA_Subject_Phenotypes",
+      "datasetId": "pht003371.v2",
+      "description": "The subject phenotype data table includes age, gender, obesity status, anthropometric measures (n=7 variables; weight, height, BMI, BMI Z, waist, fat mass, and % fat), and lipids and cholesterol measures (n=5 variables; insulin, triglycerides, total cholesterol, HDL, and LDL).",
+      "variables": [
+        {
+          "name": "%Fat",
+          "id": "phv00191163.v2.p2",
+          "description": "Subject's fat mass percent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age",
+          "id": "phv00191154.v2.p2",
+          "description": "Age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00191159.v2.p2",
+          "description": "Subject's body mass index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI Z",
+          "id": "phv00191160.v2.p2",
+          "description": "Subject's body mass index z-score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Deidentified_Ego",
+          "id": "phv00191153.v2.p2",
+          "description": "Deidentified Subject_Ego",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Fat Mass",
+          "id": "phv00191162.v2.p2",
+          "description": "Subject's fat mass",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gender",
+          "id": "phv00191155.v2.p2",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL",
+          "id": "phv00191167.v2.p2",
+          "description": "Subject's serum high density lipoproteins",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Height",
+          "id": "phv00191158.v2.p2",
+          "description": "Subject's height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Insulin",
+          "id": "phv00191164.v2.p2",
+          "description": "Subject's serum insulin",
+          "concept_id": "phenx:fasting_serum_insulin",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "LDL",
+          "id": "phv00191168.v2.p2",
+          "description": "Subject's serum low density lipoproteins",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Obese",
+          "id": "phv00191156.v2.p2",
+          "description": "Obesity status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Total Cholesterol",
+          "id": "phv00191166.v2.p2",
+          "description": "Subject's serum cholesterol",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Triglycerides",
+          "id": "phv00191165.v2.p2",
+          "description": "Subject's serum triglycerides",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Waist",
+          "id": "phv00191161.v2.p2",
+          "description": "Subject's waist circumference",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Weight",
+          "id": "phv00191157.v2.p2",
+          "description": "Subject's weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VIVA_LA_FAMILIA_Sample",
+      "datasetId": "pht003370.v2",
+      "description": "This subject sample mapping file includes a mapping of study subject IDs to sample IDs and sample use. Additionally, each sample is marked as having been used for an Illumina 1M chip, Illumina 2.5M chip, exome sequencing batch 1, and/or exome sequencing batch 2.",
+      "variables": [
+        {
+          "name": "Deidentified_Ego",
+          "id": "phv00191146.v2.p2",
+          "description": "Subject Deidentified_Ego ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00191147.v2.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00191148.v2.p2",
+          "description": "SNP array or whole exome sequencing. Array_SNP: SNP genotypes obtained using standard or custom microarrays; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SID_1M",
+          "id": "phv00191149.v2.p2",
+          "description": "Sample ID Illumina 1M chip",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SID_2_5M",
+          "id": "phv00191150.v2.p2",
+          "description": "Sample ID Illumina 2.5 M chip",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SID_seq1",
+          "id": "phv00191151.v2.p2",
+          "description": "Sample ID exome sequencing batch 1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SID_seq2",
+          "id": "phv00191152.v2.p2",
+          "description": "Sample ID exome sequencing batch 2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VIVA_LA_FAMILIA_Pedigree",
+      "datasetId": "pht003369.v2",
+      "description": "This pedigree data table shows family relationships through family IDs, subject IDs, father IDs, mother IDs, monozygotic twin IDs, and gender.",
+      "variables": [
+        {
+          "name": "Deidentified_Ego",
+          "id": "phv00191141.v2.p2",
+          "description": "Subject Deidentified_Ego",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00191140.v2.p2",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00191143.v2.p2",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00191142.v2.p2",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MZ_ID",
+          "id": "phv00191145.v2.p2",
+          "description": "Monozygotic Twin ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00191144.v2.p2",
+          "description": "Sex",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VIVA_LA_FAMILIA_Sample_Attributes",
+      "datasetId": "pht003372.v2",
+      "description": "The sample attributes data table includes sample type, body site where sample was extracted, sample analyte type and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00191171.v2.p2",
+          "description": "Analyte type (DNA)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00191170.v2.p2",
+          "description": "Sample site (Whole blood)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00191172.v2.p2",
+          "description": "Tumor status (NA)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00191169.v2.p2",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VIVA_LA_FAMILIA_Subject",
+      "datasetId": "pht003368.v2",
+      "description": "This subject consent file includes subject IDs, consent group information, and affection status for childhood obesity.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00191139.v2.p2",
+          "description": "Case control status of the subject. Obese is defined as overweight proband between the ages 4-19 y, using a bivariate ascertainment scheme (i.e., obese >= 95th percentile for BMI (2000 CDC Growth Reference) and >= 85th percentile for FM (CNRC body composition reference database).",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00191138.v2.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Deidentified_Ego",
+          "id": "phv00191137.v2.p2",
+          "description": "De-identified Subject_Ego",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

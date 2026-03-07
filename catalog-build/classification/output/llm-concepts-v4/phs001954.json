@@ -1,0 +1,178 @@
+{
+  "studyId": "phs001954",
+  "studyName": "International Cancer Proteogenome Consortium (ICPC): Proteogenomics of Early Stage Lung Adenocarcinoma in Taiwan",
+  "tables": [
+    {
+      "tableName": "ICPC_LUAD_Taiwan_Sample_Attributes",
+      "datasetId": "pht009799.v2",
+      "description": "This sample attributes table includes body site, analyte type, tumor status, are at sample collection, tumor location in lungs, and tumor histology.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00424246.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00424245.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00534364.v1.p1",
+          "description": "Age sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00424247.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00424244.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_LATERALITY",
+          "id": "phv00534365.v1.p1",
+          "description": "Location of tumor in lungs",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TISSUE_TYPE",
+          "id": "phv00424248.v2.p1",
+          "description": "Histology of tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ICPC_LUAD_Taiwan_Subject_Phenotypes",
+      "datasetId": "pht009798.v2",
+      "description": "The subject phenotypes dataset file includes age,  gender, tumor stage, smoking status, and type of EGFR mutation in tumor.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00424242.v2.p1",
+          "description": "Age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EGFR_MUTATION_INFO",
+          "id": "phv00534363.v1.p1",
+          "description": "Type of EGFR mutation in tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00424243.v2.p1",
+          "description": "Patient's gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKING",
+          "id": "phv00534362.v1.p1",
+          "description": "Smoking status of subject",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE",
+          "id": "phv00534361.v1.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00424240.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ICPC_LUAD_Taiwan_Subject",
+      "datasetId": "pht009796.v2",
+      "description": "The subject consent dataset contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00424237.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00534360.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00424236.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ICPC_LUAD_Taiwan_Sample",
+      "datasetId": "pht009797.v2",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00424239.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00424238.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "studyId": "phs001939",
+  "studyName": "Count Me In (CMI): The Metastatic Prostate Cancer (MPC) Project (CMI-MPCproject)",
+  "tables": [
+    {
+      "tableName": "CMI_MPCproject_Subject",
+      "datasetId": "pht009664.v2",
+      "description": "The subject consent file includes subject IDs, consent information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00421071.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492876.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00421070.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CMI_MPCproject_Subject_Phenotypes",
+      "datasetId": "pht009666.v2",
+      "description": "This subject phenotype table includes subject ID, primary disease, and race.",
+      "variables": [
+        {
+          "name": "PRIMARY_DISEASE",
+          "id": "phv00421076.v2.p1",
+          "description": "The prostate cancer for which the participant has been asked to donate a sample for study",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_primary_disease_diagnosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00421077.v2.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00421074.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CMI_MPCproject_Sample_Attributes",
+      "datasetId": "pht009667.v3",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00421080.v3.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00421079.v3.p1",
+          "description": "Indicates the Tumor / Normal status of a sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00421078.v3.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CMI_MPCproject_Sample",
+      "datasetId": "pht009665.v3",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00421073.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00421072.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

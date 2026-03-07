@@ -1,0 +1,146 @@
+{
+  "studyId": "phs002820",
+  "studyName": "Cancer Risk Estimates Related to Susceptibility Genes (CARRIERS)",
+  "tables": [
+    {
+      "tableName": "CARRIERS_Subject_Phenotypes",
+      "datasetId": "pht012104.v1",
+      "description": "This subject phenotypes data table includes case/control status, self-reported ethnicity, age of disease onset, and estrogen receptor status of first breast cancer.",
+      "variables": [
+        {
+          "name": "AgeDiag",
+          "id": "phv00498365.v1.p1",
+          "description": "Disease onset age",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_general_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ER_status1",
+          "id": "phv00498366.v1.p1",
+          "description": "ER Status of first breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_hormone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00498364.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498362.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Status",
+          "id": "phv00498363.v1.p1",
+          "description": "Case control status of the subject for breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CARRIERS_Sample_Attributes",
+      "datasetId": "pht012105.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00498369.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00498368.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00498370.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00498367.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CARRIERS_Subject",
+      "datasetId": "pht012102.v1",
+      "description": "This subject consent data table includes subject IDs, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00498358.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00498359.v1.p1",
+          "description": "Subject sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498357.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CARRIERS_Sample",
+      "datasetId": "pht012103.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00498361.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498360.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

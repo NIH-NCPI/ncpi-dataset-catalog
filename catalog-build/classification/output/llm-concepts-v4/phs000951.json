@@ -1,0 +1,592 @@
+{
+  "studyId": "phs000951",
+  "studyName": "NHLBI TOPMed: Genetic Epidemiology of COPD (COPDGene)",
+  "tables": [
+    {
+      "tableName": "TOPMed_COPDGene_RNASeq_Sample_Attributes",
+      "datasetId": "pht014702.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_ISOLATION_BATCH_ID",
+          "id": "phv00541695.v1.p5",
+          "description": "Batch ID created by the multiomics core",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_ISOLATION_LAB",
+          "id": "phv00541697.v1.p5",
+          "description": "Name of the omics center to which the samples were isolated",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_ISOLATION_YEAR",
+          "id": "phv00541696.v1.p5",
+          "description": "Year sample was isolated for analysis my multiomics core",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_SAMPLE_ID",
+          "id": "phv00541694.v1.p5",
+          "description": "Sample ID created by the multiomics core",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00541691.v1.p5",
+          "description": "Type of TOPMed omics that was used for analysis; \"DNA\", RNA\", Protein\", \"Metabolites\"",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ASSAY_LAB",
+          "id": "phv00541700.v1.p5",
+          "description": "Name of the omics center to which the samples were sent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00541686.v1.p5",
+          "description": "Anatomical site at which biosample was taken, e.g. \"Nasal epithelium\", \"Venous Blood\"",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00541683.v1.p5",
+          "description": "Subject's age in years at time collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_VISIT",
+          "id": "phv00541685.v1.p5",
+          "description": "Study visit when the primary biosample was collected (relevant for longitudianal studies with multiple waves of clinic visits).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_YEAR",
+          "id": "phv00541684.v1.p5",
+          "description": "Subject's age in years at time of tissue collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00541689.v1.p5",
+          "description": "Cell or tissue subtype derived from the Primary biosample, or if no subfractionation was done, the primary biosample type; e.g. plasma for proteins and metabolites; PBMC, T-cell, or monocyte for RNA; blood buffy coat for DNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00541690.v1.p5",
+          "description": "Tumor status of the sample.  For non-cancer studies, all values should be \"no\".  For cancer studies, values should be \"yes\" or \"no\".  (NCBI Biosample characteristic)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_BIOSAMPLE_ID",
+          "id": "phv00541692.v1.p5",
+          "description": "De-identified biorepository ID for the tissue sample that was collected.  Relevant when multiple biosamples may have been taken from the same subject at different times; also relevant when multiple analytes were extracted from the same primary biosample (e.g. blood draw); identifier must be anonymized (de-identified)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_BIOSAMPLE_TYPE",
+          "id": "phv00541693.v1.p5",
+          "description": "Type of primary biosample, e.g. \"venous blood\", \"lung epithelium\"; be as specific as possible",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_CONTAINER_ID",
+          "id": "phv00541698.v1.p5",
+          "description": "Identifier for sample plate, box or other container used for shipping samples to the assay center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00541682.v1.p5",
+          "description": "TOPMed identifier for each sample aliquot sent to the assay center.  MUST use TOPMed identifiers - TOR (RNA), TOP (protein), TOM (metabolite), TOE (DNA for methylation assay)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_WELL_ID",
+          "id": "phv00541699.v1.p5",
+          "description": "Identifier for well, tube, or other subdivision of the sample shipping container",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UBERON_ID",
+          "id": "phv00541687.v1.p5",
+          "description": "UBERON ontology identifier for type of primary biosample; value is \"0013756\"  for venous blood, https://www.ebi.ac.uk/ols/ontologies/uberon for others",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UBERON_Term",
+          "id": "phv00541688.v1.p5",
+          "description": "UBERON ontology term for type of primary biosample, e.g. \"venous blood\", https://www.ebi.ac.uk/ols/ontologies/uberon for others",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_COPDGene_Methylation_Sample_Attributes",
+      "datasetId": "pht014703.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00541711.v1.p5",
+          "description": "Type of omics assay to be performed, generally one of the following four values: \"RNA\", \"DNA\", \"protein\", or \"metabolite\"",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_collection",
+          "id": "phv00541702.v1.p5",
+          "description": "Subject's age in years at time of tissue collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00541707.v1.p5",
+          "description": "Anatomical site at which biosample was taken, e.g. \"arm vein\", \"lung\", \"inner oral cavity\"",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Barcode",
+          "id": "phv00541713.v1.p5",
+          "description": "Illumina chip Sentrix barcode",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00541710.v1.p5",
+          "description": "Cell or tissue subtype derived from the Primary biosample, or if no subfractionation was done, the primary biosample type; e.g. plasma for proteins and metabolites; PBMC, T-cell, or monocyte for RNA; blood buffy coat for DNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00541706.v1.p5",
+          "description": "Tumor status of the sample.  For non-cancer studies, all values should be \"no\".  For cancer studies, values should be \"yes\" or \"no\".  (NCBI Biosample characteristic)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Omics_assay_lab",
+          "id": "phv00541712.v1.p5",
+          "description": "Name of the omics center to which the samples were sent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_biosample_type",
+          "id": "phv00541705.v1.p5",
+          "description": "Type of primary biosample, e.g. \"venous blood\", \"lung epithelium\"; be as specific as possible",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00541701.v1.p5",
+          "description": "TOPMed identifier for each sample aliquot sent to the assay center.  MUST use TOPMed identifiers - TOR (RNA), TOP (protein), TOM (metabolite), TOE (DNA for methylation assay)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UBERON_ID",
+          "id": "phv00541708.v1.p5",
+          "description": "UBERON ontology identifier for type of primary biosample; value is \"0013756\"  for venous blood, https://www.ebi.ac.uk/ols/ontologies/uberon for others",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UBERON_Term",
+          "id": "phv00541709.v1.p5",
+          "description": "UBERON ontology term for type of primary biosample, e.g. \"venous blood\", https://www.ebi.ac.uk/ols/ontologies/uberon for others",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "collection_year",
+          "id": "phv00541704.v1.p5",
+          "description": "Year in which primary biosample was collected (informative for storage time)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "collectionphase",
+          "id": "phv00541703.v1.p5",
+          "description": "Study visit when the primary biosample was collected (relevant for longitudianal studies with multiple waves of clinic visits).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "decodeDate",
+          "id": "phv00541715.v1.p5",
+          "description": "Earliest date shown for 'AutoDecode' action in the .idat 'RunInfo' table.  Presumably related to the chip manufacturing date.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "extractDate",
+          "id": "phv00541716.v1.p5",
+          "description": "Earliest date shown for 'Scan', 'Register' and 'Extract' actions in the .idat 'RunInfo' table.  Presumably date when the chip was scanned after hybridization, extension and staining.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "nSNPsRead",
+          "id": "phv00541714.v1.p5",
+          "description": "Value reported as 'nSNPsRead' in Illumina .idat file header",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p.0.01",
+          "id": "phv00541718.v1.p5",
+          "description": "Fraction of CpG sites which pass a detection p-value threshold of 0.01",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p.0.05",
+          "id": "phv00541717.v1.p5",
+          "description": "Fraction of CpG sites which pass a detection p-value threshold of 0.05",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_COPDGene_Metabolomics_Sample_Attributes",
+      "datasetId": "pht014704.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00541725.v1.p5",
+          "description": "Type of omics assay to be performed, generally one of the following four values: \"RNA\", \"DNA\", \"protein\", or \"metabolite\"",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00541724.v1.p5",
+          "description": "Anatomical site at which biosample was taken, e.g. \"arm vein\", \"lung\", \"inner oral cavity\"",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_visit",
+          "id": "phv00541723.v1.p5",
+          "description": "Study visit when the primary biosample was collected (relevant for longitudianal studies with multiple waves of clinic visits).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_year",
+          "id": "phv00541722.v1.p5",
+          "description": "Year in which primary biosample was collected (informative for storage time)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00541726.v1.p5",
+          "description": "Cell or tissue subtype derived from the Primary biosample, or if no subfractionation was done, the primary biosample type; e.g. plasma for proteins and metabolites; PBMC, T-cell, or monocyte for RNA; blood buffy coat for DNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00541727.v1.p5",
+          "description": "Tumor status of the sample.  For non-cancer studies, all values should be \"no\".  For cancer studies, values should be \"yes\" or \"no\".  (NCBI Biosample characteristic)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Omics_assay_lab",
+          "id": "phv00541730.v1.p5",
+          "description": "Name of the omics center to which the samples were sent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_biosample_ID",
+          "id": "phv00541731.v1.p5",
+          "description": "De-identified biorepository ID for the tissue sample that was collected.  Relevant when multiple biosamples may have been taken from the same subject at different times; also relevant when multiple analytes were extracted from the same primary biosample (e.g. blood draw); identifier must be anonymized (de-identified)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_biosample_type",
+          "id": "phv00541732.v1.p5",
+          "description": "Type of primary biosample, e.g. \"venous blood\", \"lung epithelium\"; be as specific as possible",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00541719.v1.p5",
+          "description": "TOPMed identifier for each sample aliquot sent to the assay center.  MUST use TOPMed identifiers - TOR (RNA), TOP (protein), TOM (metabolite), TOE (DNA for methylation assay)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_container_ID",
+          "id": "phv00541733.v1.p5",
+          "description": "Identifier for sample plate, box or other container used for shipping samples to the assay center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_type",
+          "id": "phv00541720.v1.p5",
+          "description": "Identifier of experiemtnal material: COPDGene, pooled-control-samples, nist-1950-controls",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_well_ID",
+          "id": "phv00541734.v1.p5",
+          "description": "Identifier for well, tube, or other subdivision of the sample shipping container",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UBERON_ID",
+          "id": "phv00541728.v1.p5",
+          "description": "UBERON ontology identifier for type of primary biosample; value is \"0013756\"  for venous blood, https://www.ebi.ac.uk/ols/ontologies/uberon for others",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UBERON_Term",
+          "id": "phv00541729.v1.p5",
+          "description": "UBERON ontology term for type of primary biosample, e.g. \"venous blood\", https://www.ebi.ac.uk/ols/ontologies/uberon for others",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_collection",
+          "id": "phv00541721.v1.p5",
+          "description": "Subject's age in years at time of tissue collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_COPDGene_WGS_Sample_Attributes",
+      "datasetId": "pht005052.v6",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00253407.v6.p5",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00253406.v6.p5",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00290088.v5.p5",
+          "description": "Funding Source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00253409.v6.p5",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00253408.v6.p5",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253405.v6.p5",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00253410.v6.p5",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00290091.v5.p5",
+          "description": "TOPMed Participating Study Name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00290089.v5.p5",
+          "description": "TOPMed Phase for Whole Genome Sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00290090.v5.p5",
+          "description": "TOPMed Project",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_COPDGene_Subject",
+      "datasetId": "pht005050.v6",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00253400.v6.p5",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00493778.v2.p5",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253399.v6.p5",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_COPDGene_Sample",
+      "datasetId": "pht005051.v6",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253403.v6.p5",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253402.v6.p5",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

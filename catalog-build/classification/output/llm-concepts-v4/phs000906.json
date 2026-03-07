@@ -1,0 +1,407 @@
+{
+  "studyId": "phs000906",
+  "studyName": "eMERGE Network PGx Cohort",
+  "tables": [
+    {
+      "tableName": "eMERGE_PGx_Subject_Phenotypes",
+      "datasetId": "pht007149.v1",
+      "description": "Phenotype Data (Median Height/Weight/BMI)",
+      "variables": [
+        {
+          "name": "DECADE_BIRTH",
+          "id": "phv00328640.v1.p1",
+          "description": "Decade of birth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00328642.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MEDIAN_BMI",
+          "id": "phv00328646.v1.p1",
+          "description": "Median BMI for BMIs taken for Age greater than or equal to 21 - exclude extremes (listed to the right)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEDIAN_HEIGHT",
+          "id": "phv00328645.v1.p1",
+          "description": "Subject's height in centimeters median value, calculated using measures collected after the age of 21",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEDIAN_WEIGHT",
+          "id": "phv00328644.v1.p1",
+          "description": "Subject's weight in kilograms median value, calculated using measures collected after the age of 21",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00328643.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00328639.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00328638.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEAR_BIRTH",
+          "id": "phv00328641.v1.p1",
+          "description": "Year of Birth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ECG",
+      "datasetId": "pht007147.v1",
+      "description": "Phenotype Data (ECG)",
+      "variables": [
+        {
+          "name": "AGE_AT_ECG",
+          "id": "phv00328623.v1.p1",
+          "description": "Age at ECG",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ECG_HR",
+          "id": "phv00328627.v1.p1",
+          "description": "Heart rate",
+          "concept_id": "ncpi:heart_rate_resting_heart_rate",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ECG_PR_INTERVAL",
+          "id": "phv00328628.v1.p1",
+          "description": "PR Interval duration",
+          "concept_id": "ncpi:ecg_pr_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ECG_QRS_DURATION",
+          "id": "phv00328624.v1.p1",
+          "description": "QRS duration",
+          "concept_id": "ncpi:ecg_qrs_interval_qrs_duration_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ECG_QTC_BAZETT",
+          "id": "phv00328626.v1.p1",
+          "description": "QT interval, corrected for HR",
+          "concept_id": "ncpi:ecg_qt_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ECG_QT_INTERVAL",
+          "id": "phv00328625.v1.p1",
+          "description": "QT interval duration",
+          "concept_id": "ncpi:ecg_qt_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00328622.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VISIT_NUMBER",
+          "id": "phv00328629.v1.p1",
+          "description": "A database generated unique key created for repeated values",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LABS",
+      "datasetId": "pht007148.v1",
+      "description": "Phenotype Data (Lipids)",
+      "variables": [
+        {
+          "name": "AGE_AT_LIPIDS",
+          "id": "phv00328631.v1.p1",
+          "description": "Age (years) at lipid lab",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL",
+          "id": "phv00328635.v1.p1",
+          "description": "A value measured which captures the amount of High Density Lipoprotein (HDL) Cholesterol in the blood measured in milligrams per deciliter (mg/dL); short name = HDL-C",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL",
+          "id": "phv00328634.v1.p1",
+          "description": "A value measured which captures the amount of Low Density Lipoprotein (LDL) Cholesterol in the blood measured in milligrams per deciliter (mg/dL); short name = LDL-C",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ON_STATINS_AT_TIME_OF_LAB",
+          "id": "phv00328632.v1.p1",
+          "description": "Ever on statins from measurement of lipids - 60 days to measurement of lipids",
+          "concept_id": "ncpi:lipid_lowering_medication_statins",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SERUM_TOTAL_CHOLESTEROL",
+          "id": "phv00328633.v1.p1",
+          "description": "A value measured which captures the amount of Total Cholesterol in the blood measured in milligrams per deciliter (mg/dL); short name = Cho-RF and Chol",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00328630.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRIGLYCERIDE",
+          "id": "phv00328636.v1.p1",
+          "description": "A value measured which captures the amount of Triglycerides in the blood measured in milligrams per deciliter (mg/dL); short name = Trigs",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "VISIT_NUMBER",
+          "id": "phv00328637.v1.p1",
+          "description": "A database generated unique key created for repeated values",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eMERGE_PGx_Sample",
+      "datasetId": "pht007145.v1",
+      "description": "Subject - Sample Mapping - Sample Use",
+      "variables": [
+        {
+          "name": "BATCH",
+          "id": "phv00328613.v1.p1",
+          "description": "Batch Sample was included in",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00328610.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00328614.v1.p1",
+          "description": "Sample use. Seq_DNA_SNP: SNP genotypes derived from sequence data; Seq_DNA_Target: Custom targeted DNA sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00328611.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00328615.v1.p1",
+          "description": "Sequencing center for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00328612.v1.p1",
+          "description": "Sample ID used in the Source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00328609.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BMI_ALL",
+      "datasetId": "pht007146.v1",
+      "description": "Phenotype Data (BMI)",
+      "variables": [
+        {
+          "name": "AGE_OBSERVATION",
+          "id": "phv00328620.v1.p1",
+          "description": "Age when clinical event recorded in record",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_MASS_INDEX",
+          "id": "phv00328619.v1.p1",
+          "description": "Subject's BMI over time",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT",
+          "id": "phv00328618.v1.p1",
+          "description": "Subject's height at enrollment",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00328616.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VISIT_NUMBER",
+          "id": "phv00328621.v1.p1",
+          "description": "A database generated unique key created for weight, height, BMI repeated values",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00328617.v1.p1",
+          "description": "Subject's weight at enrollment",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eMERGE_PGx_Subject",
+      "datasetId": "pht007144.v1",
+      "description": "Subject - Consent Information",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00328606.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJID",
+          "id": "phv00328608.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00328605.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJ_SOURCE",
+          "id": "phv00328607.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eMERGE_PGx_Sample_Attributes",
+      "datasetId": "pht007150.v1",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00328648.v1.p1",
+          "description": "Analyte type used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00328647.v1.p1",
+          "description": "Sampid",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

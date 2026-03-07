@@ -1,0 +1,242 @@
+{
+  "studyId": "phs001180",
+  "studyName": "Genes-Environments and Admixture in Latino Asthmatics (GALA II) Study",
+  "tables": [
+    {
+      "tableName": "GALAII_Subject_Phenotypes",
+      "datasetId": "pht006991.v1",
+      "description": "This subject phenotype data table includes subject's age, sex, ethnicity, BMI, affection status, smoking status, asthma that required hospitalization, steroid used to control asthma, bronchodilator response, NO2 and PM25 air pollution measurements.",
+      "variables": [
+        {
+          "name": "BMI",
+          "id": "phv00320633.v1.p1",
+          "description": "Body Mass Index calculated from Height and Weight",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00320631.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "smoke_current",
+          "id": "phv00320635.v1.p1",
+          "description": "Does participant currently smoke at least 1 cig per day?",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00320630.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Affection_Status",
+          "id": "phv00320634.v1.p1",
+          "description": "Case or Control",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00320632.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00320629.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "asthma_hospital_12mo",
+          "id": "phv00320636.v1.p1",
+          "description": "In the last 12 months, has participant been hospitalized because of asthma?",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_hospitalization",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "delta1",
+          "id": "phv00320638.v1.p1",
+          "description": "Bronchodilator Response after 4 puffs of Proventil HFA Albuterol",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_flow_rates_bronchodilator_response",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "no2_lifetime",
+          "id": "phv00320639.v1.p1",
+          "description": "NO2 Air Pollution measurement lifetime average",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pm25_lifetime",
+          "id": "phv00320640.v1.p1",
+          "description": "PM25 Air Pollution measurement lifetime average",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "steroids_12mo",
+          "id": "phv00320637.v1.p1",
+          "description": "In the last 12 months, has participant been prescribed oral steroids (such as prednisone pills or prelone liquid) to help control asthma?",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_oral_systemic_steroids",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GALAII_Pedigree",
+      "datasetId": "pht006989.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, subject's sex, and twin IDs for monozygotic twins.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00320618.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER_ID",
+          "id": "phv00320621.v1.p1",
+          "description": "Father Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER_ID",
+          "id": "phv00320620.v1.p1",
+          "description": "Mother Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00320622.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00320619.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TWIN_ID",
+          "id": "phv00320623.v1.p1",
+          "description": "Twin ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GALAII_Subject",
+      "datasetId": "pht006988.v1",
+      "description": "This subject consent data table includes subjects IDs, consent information, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00320615.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00320617.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00320614.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00320616.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GALAII_Sample",
+      "datasetId": "pht006990.v2",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs, both of which are T1DGC Analytic IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample source and substudy (phs) accession that the sample belongs to.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00320625.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00320626.v1.p1",
+          "description": "Source repository where samples were genotyped",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY",
+          "id": "phv00320628.v2.p1",
+          "description": "DbGaP substudy accession",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00320624.v1.p1",
+          "description": "Subject ID of Phenotype Data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

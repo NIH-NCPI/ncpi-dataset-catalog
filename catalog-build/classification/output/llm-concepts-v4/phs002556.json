@@ -1,0 +1,146 @@
+{
+  "studyId": "phs002556",
+  "studyName": "Genomic Features of Lung Adenocarcinoma from Individuals with <= 10 Pack-Year Smoking History",
+  "tables": [
+    {
+      "tableName": "Lung_Adenocarcinoma_Smoking_Sample_Attributes",
+      "datasetId": "pht011491.v1",
+      "description": "This sample attributes table includes analyte type, tumor status, tumor stage, and oncogenic driver.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00492887.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00492888.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ONCOGENIC_DRIVER",
+          "id": "phv00492890.v1.p1",
+          "description": "Oncogenic driver identified in sample",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_oncogenic_drivers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492886.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00492889.v1.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Lung_Adenocarcinoma_Smoking_Subject_Phenotypes",
+      "datasetId": "pht011490.v1",
+      "description": "This subject phenotypes data table includes age at diagnosis, self-reported race, and pack-year smoking history.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00492883.v1.p1",
+          "description": "Age at diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_general_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00492884.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKING_HISTORY",
+          "id": "phv00492885.v1.p1",
+          "description": "Pack-year smoking history",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492882.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Lung_Adenocarcinoma_Smoking_Subject",
+      "datasetId": "pht011488.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00492878.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492879.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492877.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Lung_Adenocarcinoma_Smoking_Sample",
+      "datasetId": "pht011489.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492881.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492880.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

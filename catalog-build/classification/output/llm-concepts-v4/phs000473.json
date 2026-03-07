@@ -1,0 +1,186 @@
+{
+  "studyId": "phs000473",
+  "studyName": "Sweden-Schizophrenia Population-Based Case-Control Exome Sequencing",
+  "tables": [
+    {
+      "tableName": "Schizophrenia_Swedish_Subject_Phenotypes",
+      "datasetId": "pht002600.v2",
+      "description": "Subject ID, sex, primary disease of participant, analysis category [case or control], sequencing site, and samples meeting 80% of targets of participants with or without schizophrenia and involved in the \"Sweden-Schizophrenia Population-Based Case-Control Exome Sequencing\" project.",
+      "variables": [
+        {
+          "name": "ANALYSIS_CAT",
+          "id": "phv00167463.v2.p2",
+          "description": "Analysis category",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Coverage_Pass",
+          "id": "phv00169020.v2.p2",
+          "description": "Samples meeting 80% of targets at 20X coverage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_DISEASE",
+          "id": "phv00167462.v2.p2",
+          "description": "Primary disease of participant",
+          "concept_id": "ncpi:psychiatric_interview_mood_disorders_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00167461.v2.p2",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SITE",
+          "id": "phv00167464.v2.p2",
+          "description": "Site where sequencing occurred",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00167460.v2.p2",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Schizophrenia_Swedish_Sample",
+      "datasetId": "pht002599.v2",
+      "description": "Subject ID, sample ID, sample source, source sample ID, and sample use variable obtained from participants with or without schizophrenia and involved in the \"Sweden-Schizophrenia Population-Based Case-Control Exome Sequencing\" project.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00167456.v2.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00167459.v2.p2",
+          "description": "Sample use. Seq_DNA_SNP_CNV: SNP and CNV genotypes derived from sequence data; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00167457.v2.p2",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00167458.v2.p2",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00167455.v2.p2",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Schizophrenia_Swedish_Sample_Attributes",
+      "datasetId": "pht002601.v2",
+      "description": "Sample ID, body site where sample was obtained, analyte type, histological type of sample, and tumor status of sample obtained from participants with or without schizophrenia and involved in the \"Sweden-Schizophrenia Population-Based Case-Control Exome Sequencing\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00167468.v2.p2",
+          "description": "Analyte type - all samples are RNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00167467.v2.p2",
+          "description": "Body site where sample was collected - all are LCLs made from peripheral blood",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00167470.v2.p2",
+          "description": "Histological type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00253772.v1.p2",
+          "description": "Tumor status of samples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00167466.v2.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Schizophrenia_Swedish_Subject",
+      "datasetId": "pht002597.v2",
+      "description": "Subject ID, consent group, and affection status of participants with or without schizophrenia and involved in the \"Sweden-Schizophrenia Population-Based Case-Control Exome Sequencing\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00167449.v2.p2",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:psychiatric_interview_mood_disorders_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00167448.v2.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00167447.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

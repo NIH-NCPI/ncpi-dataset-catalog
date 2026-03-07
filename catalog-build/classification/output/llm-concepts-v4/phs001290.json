@@ -1,0 +1,330 @@
+{
+  "studyId": "phs001290",
+  "studyName": "CIDR: NCI Genome Wide Predictors of Survival in Colorectal Cancer",
+  "tables": [
+    {
+      "tableName": "CIDR_CRC_Survival_Subject_Phenotypes",
+      "datasetId": "pht010334.v1",
+      "description": "Subject ID, ethnicity, height, weight, race, age at diagnosis, cause of mortality, tumor site [colon of rectal], diarrhea, nausea or vomiting, neuropathy,  neutropenia, and rush across all cycles of treatment, examined lymph nodes, histology grade of tumor, T stage, and disease stage of participants with colorectal cancer and involved in the \"CIDR: NCI Genome Wide Predictors of Survival in Colorectal Cancer\" project.",
+      "variables": [
+        {
+          "name": "Diarrhea_bin",
+          "id": "phv00431336.v1.p1",
+          "description": "Whether the patients experienced grade 3+ Diarrhea across all cycles of treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT",
+          "id": "phv00431339.v1.p1",
+          "description": "Height (cm) at Baseline",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HistGrade",
+          "id": "phv00431348.v1.p1",
+          "description": "Histology Grade",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NauseaVomit_bin",
+          "id": "phv00431335.v1.p1",
+          "description": "Whether the patients experienced grade 3+ nausea or vomiting across all cycles of treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Neuropathy_bin",
+          "id": "phv00431338.v1.p1",
+          "description": "Whether the patients experienced grade 3+ neuropathy across all cycles of treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Neutropenia_bin",
+          "id": "phv00431337.v1.p1",
+          "description": "Whether the patients experienced grade 3+ neutropenia across all cycles of treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NodesExamined",
+          "id": "phv00431346.v1.p1",
+          "description": "Number of Examined lymph nodes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NodesPositive_cat",
+          "id": "phv00431343.v1.p1",
+          "description": "Positive nodes, i.e.,  nodal status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Rash_bin",
+          "id": "phv00431334.v1.p1",
+          "description": "Whether the patients experienced grade 3+ Rash across all cycles of treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431326.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tstage",
+          "id": "phv00431342.v1.p1",
+          "description": "T stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00431340.v1.p1",
+          "description": "Weight (kg) at Baseline",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_dx",
+          "id": "phv00431331.v1.p1",
+          "description": "Age at CRC diagnoses",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "anydeath",
+          "id": "phv00431332.v1.p1",
+          "description": "All cause mortality",
+          "concept_id": "topmed:chd_death_definite",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "cancer_site_sum1",
+          "id": "phv00431344.v1.p1",
+          "description": "Tumor site summary: colon vs.rectal",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cancer_site_sum2",
+          "id": "phv00431345.v1.p1",
+          "description": "Tumor Site summary: proximal/distal/rectal",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00431330.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00431329.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00431328.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "stage2",
+          "id": "phv00431341.v1.p1",
+          "description": "Disease stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "study",
+          "id": "phv00431327.v1.p1",
+          "description": "Participant study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "time_surv",
+          "id": "phv00431333.v1.p1",
+          "description": "Time to event or censoring",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "trx",
+          "id": "phv00431347.v1.p1",
+          "description": "Treatment Arm",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_CRC_Survival_Sample_Attributes",
+      "datasetId": "pht010335.v1",
+      "description": "Sample ID, body site where sample was obtained, genotyping center, histological type of sample, tumor status of sample, primary tumor location, tumor grade and stage, and tumor treatment of participants with colorectal cancer and involved in the \"CIDR: NCI Genome Wide Predictors of Survival in Colorectal Cancer\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00431351.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00431350.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00431358.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00431353.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00431352.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00431354.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00431349.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_GRADE",
+          "id": "phv00431356.v1.p1",
+          "description": "Tumor grade of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00431355.v1.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00431357.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_CRC_Survival_Subject",
+      "datasetId": "pht010332.v1",
+      "description": "Subject ID and consent group of participants with colorectal cancer and involved in the \"CIDR: NCI Genome Wide Predictors of Survival in Colorectal Cancer\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00431323.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431322.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_CRC_Survival_Sample",
+      "datasetId": "pht010333.v1",
+      "description": "Subject ID and sample ID of participants with colorectal cancer and involved in the \"CIDR: NCI Genome Wide Predictors of Survival in Colorectal Cancer\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00431325.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431324.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

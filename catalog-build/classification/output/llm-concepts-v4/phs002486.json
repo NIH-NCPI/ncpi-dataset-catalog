@@ -1,0 +1,242 @@
+{
+  "studyId": "phs002486",
+  "studyName": "Nivolumab and Tumor Infiltrating Lymphocytes (TIL) in Advanced Non-Small Cell Lung Cancer",
+  "tables": [
+    {
+      "tableName": "Nivolumab_TIL_NSCLC_Sample_Attributes",
+      "datasetId": "pht011472.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00492805.v2.p1",
+          "description": "Type of sequencing for this sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00492798.v2.p1",
+          "description": "Body site where sample was collected; LN=lymph_node",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00492801.v2.p1",
+          "description": "Age sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00492800.v2.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00492799.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATIENT_ID",
+          "id": "phv00492797.v2.p1",
+          "description": "Patient ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00492802.v2.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492796.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00492806.v2.p1",
+          "description": "Type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00492803.v2.p1",
+          "description": "Tumor stage of sample by AJCC version 7",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00492804.v2.p1",
+          "description": "Indicates the historical record of therapy received by a lung cancer patient prior to tumor resection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Nivolumab_TIL_NSCLC_Subject_Phenotypes",
+      "datasetId": "pht011471.v1",
+      "description": "This subject phenotypes data table contains subject IDs, case control status of the subject for metastatic non-small cell lung cancer (All subjects are lung cancer patients), race, age, smoking pack years, oncogenes, PDL1 status, tumor site, tumor infiltrating lymphocytes (TIL) infusion, and prior therapy.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00492787.v1.p1",
+          "description": "Case control status of the subject for metastatic non-small cell lung cancer",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00492789.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ONCOGENE",
+          "id": "phv00492791.v1.p1",
+          "description": "Driver oncogene inferred from baseline clinical NGS sequencing of tumor DNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PDL1_Status",
+          "id": "phv00492792.v1.p1",
+          "description": "Baseline percentage PD-L1 tumor proportion score (TPS) immunohistochemistry as assessed by clinical pathologist using 22C3 antibody methodology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Prior_therapy",
+          "id": "phv00492795.v1.p1",
+          "description": "Indicates the historical record of therapy received by a lung cancer patient prior to tumor resection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00492788.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKING_PACKYEARS",
+          "id": "phv00492790.v1.p1",
+          "description": "A pack year is defined as twenty cigarettes smoked everyday for one year, over a subject's lifetime.",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492786.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIL_Infusion",
+          "id": "phv00492794.v1.p1",
+          "description": "Indicates whether patient ultimately received the TIL infusion product or not",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tumor_Site",
+          "id": "phv00492793.v1.p1",
+          "description": "Location of metastasis resected (harvested) for genomics and TIL (tumor-infiltrating lymphocytes)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Nivolumab_TIL_NSCLC_Subject",
+      "datasetId": "pht011469.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00492782.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492783.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492781.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Nivolumab_TIL_NSCLC_Sample",
+      "datasetId": "pht011470.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492785.v2.p1",
+          "description": "Sample ID for sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492784.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

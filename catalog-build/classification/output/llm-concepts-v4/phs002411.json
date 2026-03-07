@@ -1,0 +1,194 @@
+{
+  "studyId": "phs002411",
+  "studyName": "Genome Instability in Mammary Cells of Pathogenic BRCA1/2 Mutation Carriers",
+  "tables": [
+    {
+      "tableName": "BRCA1_BRCA2_Subject_Phenotypes",
+      "datasetId": "pht011241.v1",
+      "description": "This subject phenotypes data table informs of subject's self-reported sex, self-reported race, age at study enrollment, carrier status for BRCA1/2 mutations, diagnosis of early onset breast cancer, body mass index, height at enrollment, weight, and co-morbidities.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00491098.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00491101.v1.p1",
+          "description": "Body mass index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CARRIER_STATUS",
+          "id": "phv00491099.v1.p1",
+          "description": "Carrier control status of the subject for pathogenic BRCA1/2 mutant carrier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Co_Morbidities",
+          "id": "phv00491104.v1.p1",
+          "description": "Other diseases besides breast cancer",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS",
+          "id": "phv00491100.v1.p1",
+          "description": "Dianosis of early onset breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_primary_disease_diagnosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT",
+          "id": "phv00491102.v1.p1",
+          "description": "Height measured at enrollment",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00491097.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00491096.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491095.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00491103.v1.p1",
+          "description": "Subject's weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRCA1_BRCA2_Sample_Attributes",
+      "datasetId": "pht011242.v1",
+      "description": "This data table informs of body site where sample was collected, sample analyte type, sample tumor status, and sample cell or tissue type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00491107.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00491106.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00491109.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00491108.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00491105.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRCA1_BRCA2_Subject",
+      "datasetId": "pht011239.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, and subject's biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00491091.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00491092.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491090.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRCA1_BRCA2_Sample",
+      "datasetId": "pht011240.v1",
+      "description": "This data table contains mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00491094.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491093.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

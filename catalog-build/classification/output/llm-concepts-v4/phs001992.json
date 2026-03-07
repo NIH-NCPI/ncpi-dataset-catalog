@@ -1,0 +1,68 @@
+{
+  "studyId": "phs001992",
+  "studyName": "Reference Haplotypes for Complement Component 4 (C4) Gene Variation",
+  "tables": [
+    {
+      "tableName": "C4_Imputation_Subject",
+      "datasetId": "pht010283.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, source repository in which the subjects were pulled, and the ID assigned to the subject by the source repository.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00431038.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00431040.v1.p1",
+          "description": "Subject ID used in the Source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431037.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00431039.v1.p1",
+          "description": "Source where subjects originate.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "C4_Imputation_Sample",
+      "datasetId": "pht010284.v1",
+      "description": "This data table contains mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. Note that samples in this study may have been used in phs001020.v2.p1 and phs001413.v1.p1. To identify overlapping samples, please also request access to phs001020.v2.p1 and phs001413.v1.p1 and compare the SUBJECT_IDs in this study with those in phs001020.v2.p1 and phs001413.v1.p1.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00431042.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431041.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

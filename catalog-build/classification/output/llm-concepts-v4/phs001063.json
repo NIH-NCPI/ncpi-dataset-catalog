@@ -1,0 +1,194 @@
+{
+  "studyId": "phs001063",
+  "studyName": "Genomic Characterization of PDX Models for Breast Cancer Brain Metastases",
+  "tables": [
+    {
+      "tableName": "HER2_Positive_Breast_Cancer_Sample_Attributes",
+      "datasetId": "pht005292.v1",
+      "description": "This sample attributes table contains sample ID, analyte type, whether the sample is tumor or from PDX, histological type, brain metastases HER2 status, brain metastases ER status, brain metastases PR status, and patient information before surgery on target therapy, chemotherapy, hormone therapy and radiation.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00259011.v1.p1",
+          "description": "Sample content analyzed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Brain_met_ER",
+          "id": "phv00259016.v1.p1",
+          "description": "Brain metastases ER status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Brain_met_HER2",
+          "id": "phv00259015.v1.p1",
+          "description": "Brain metastases HER2 status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_her2_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Brain_met_PR",
+          "id": "phv00259017.v1.p1",
+          "description": "Brain metastases PR status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_progesterone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00259014.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hormone therapy",
+          "id": "phv00259020.v1.p1",
+          "description": "Patient hormone therapy information before surgery",
+          "concept_id": "ncpi:concomitant_medication_hormone_reproductive_medications_general_hormone_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_PDX",
+          "id": "phv00259013.v1.p1",
+          "description": "Whether the sample is from patient-derived xenograft (PDX)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00259012.v1.p1",
+          "description": "Whether the sample is tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Radiation",
+          "id": "phv00259021.v1.p1",
+          "description": "Patient radiation information before surgery",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_radiation_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00259010.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "chemotherapy",
+          "id": "phv00259019.v1.p1",
+          "description": "Patient chemotherapy information before surgery",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_chemotherapy_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "target_therapy",
+          "id": "phv00259018.v1.p1",
+          "description": "Patient target therapy information before surgery",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_targeted_therapy",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HER2_Positive_Breast_Cancer_Sample",
+      "datasetId": "pht005290.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00259005.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00259006.v1.p1",
+          "description": "Method in which sample was analyzed. Seq_DNA_SNP: SNP genotypes derived from sequence data; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00259004.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HER2_Positive_Breast_Cancer_Subject_Phenotypes",
+      "datasetId": "pht005291.v1",
+      "description": "This subject phenotype table contains subject ID, gender, and disease onset surgery age.",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00259007.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_surgery",
+          "id": "phv00259009.v1.p1",
+          "description": "Age at surgical resection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00259008.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HER2_Positive_Breast_Cancer_Subject",
+      "datasetId": "pht005289.v1",
+      "description": "The subject consent file includes subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00259003.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00259002.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

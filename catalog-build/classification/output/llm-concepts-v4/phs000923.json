@@ -1,0 +1,114 @@
+{
+  "studyId": "phs000923",
+  "studyName": "Molecular Characterization of Germ Cell Tumors",
+  "tables": [
+    {
+      "tableName": "Germ_Cell_Tumors_Sample",
+      "datasetId": "pht005493.v1",
+      "description": "The subject sample mapping data table contains a mapping of study subject IDs to sample IDs. dbGaP samples are defined as the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00262226.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00262227.v1.p1",
+          "description": "Type of data submitted. Seq_DNA_SNP_MAF_Sum: Samples were used to generate aggregate mutation annotation file (.maf); Seq_DNA_WholeExome: Whole exome sequencing; Seq_RNA: Whole transcriptome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00262225.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Germ_Cell_Tumors_Sample_Attributes",
+      "datasetId": "pht005495.v1",
+      "description": "This sample attributes table includes sample IDs, sample type, and analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00262232.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00262230.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample Type",
+          "id": "phv00262231.v1.p1",
+          "description": "Indicates the Tumor / Normal status of a sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Germ_Cell_Tumors_Subject",
+      "datasetId": "pht005492.v1",
+      "description": "The subject consent data table contains subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00262224.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00262223.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Germ_Cell_Tumors_Subject_Phenotypes",
+      "datasetId": "pht005494.v1",
+      "description": "This subject phenotype table includes subject IDs and gender of participant.",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00262228.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00262229.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

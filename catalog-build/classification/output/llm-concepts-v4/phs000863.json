@@ -1,0 +1,170 @@
+{
+  "studyId": "phs000863",
+  "studyName": "NCI GWAS of Renal Cell Carcinoma in African Americans",
+  "tables": [
+    {
+      "tableName": "RCC_AA_Subject_Phenotypes",
+      "datasetId": "pht004744.v1",
+      "description": "Subject ID, study center, case or control, gender, age groups, and population structure principal component of participants with or without renal cell carcinoma and involved in the \"National Cancer Institute (NCI) Genome-Wide Association Study (GWAS) of Renal Cell Carcinoma in African Americans\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00226592.v1.p1",
+          "description": "Case or control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_GROUP",
+          "id": "phv00226594.v1.p1",
+          "description": "Subject age groups",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CENTER",
+          "id": "phv00226591.v1.p1",
+          "description": "Study center",
+          "concept_id": "ncpi:geographic_site_recruitment_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EV4",
+          "id": "phv00226595.v1.p1",
+          "description": "Population structure principle component (ie., eigenvalue) that is significantly associated with AFFECTION_STATUS",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_4",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00226593.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226590.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RCC_AA_Sample_Attributes",
+      "datasetId": "pht004745.v1",
+      "description": "Sample ID, histological type of sample, body site where each sample was obtained, analyte type, and tumor status of sample obtained from participants with or without renal cell carcinoma and involved in the \"National Cancer Institute (NCI) Genome-Wide Association Study (GWAS) of Renal Cell Carcinoma in African Americans\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00226599.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00226598.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00226597.v1.p1",
+          "description": "Histological type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00226600.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00226596.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RCC_AA_Subject",
+      "datasetId": "pht004742.v1",
+      "description": "Subject ID, consent group, and affection status of participants with or without renal cell carcinoma and involved in the \"National Cancer Institute (NCI) Genome-Wide Association Study (GWAS) of Renal Cell Carcinoma in African Americans\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00226586.v1.p1",
+          "description": "Case or control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00226585.v1.p1",
+          "description": "Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226584.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RCC_AA_Sample",
+      "datasetId": "pht004743.v1",
+      "description": "Subject ID, sample ID, and sample use variable obtained from participants with or without renal cell carcinoma and involved in the \"National Cancer Institute (NCI) Genome-Wide Association Study (GWAS) of Renal Cell Carcinoma in African Americans\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00226588.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00226589.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226587.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

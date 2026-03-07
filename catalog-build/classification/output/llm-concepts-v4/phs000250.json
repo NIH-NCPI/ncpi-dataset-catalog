@@ -1,0 +1,283 @@
+{
+  "studyId": "phs000250",
+  "studyName": "CALGB 80303: Genome-Wide Association Study of Advanced Pancreatic Cancer Patients",
+  "tables": [
+    {
+      "tableName": "CALGB_80303_Subject_Phenotypes",
+      "datasetId": "pht002188.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "Analysis",
+          "id": "phv00159032.v1.p1",
+          "description": "Index of the samples for the association analysis. This variable indicates whether the sample is qualified for the association analysis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GeneticEuropean",
+          "id": "phv00159033.v1.p1",
+          "description": "Index of the genetic European samples. This variable indicates whether the sample is qualified for the association analysis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00159010.v1.p1",
+          "description": "De-identified subject ID.  This variable can be used to merge the phenotype data with the genomic data.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_dec",
+          "id": "phv00159011.v1.p1",
+          "description": "Age decade. This variable quantifies the age of the patient (in decades) at the time of registration.  For example, a patient who is 40-49 years of age at the time of registration would have a value of 4, and a patient who is 50-59 years of age at the tim",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "anc",
+          "id": "phv00159020.v1.p1",
+          "description": "Pre-study neutrophil count. This variable is the absolute neutrophil count prior to treatment.  Units are 1000/micro liter.",
+          "concept_id": "topmed:neutrophil_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "arm",
+          "id": "phv00159017.v1.p1",
+          "description": "Treatment received. This variable indicates whether the patients receive placebo or bevacizumab.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cycles",
+          "id": "phv00159029.v1.p1",
+          "description": "Cycles of therapy. This is the total number of cycles the patient received protocol therapy.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dzext",
+          "id": "phv00159012.v1.p1",
+          "description": "Extent of disease. This variable is the absolute neutrophil count prior to treatment.  Units are 1000/micro liter.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "maxanc",
+          "id": "phv00159023.v1.p1",
+          "description": "Max neutropenia grade. This variable is the maximum reported grade of \"Neutrophils/granulocytes (ANC/AGC)\" adverse events that were possibly, probably or definitely related to treatment. Events reported for all cycles and follow-up are included.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "maxhtn",
+          "id": "phv00159024.v1.p1",
+          "description": "Max hypertension. This variable is the maximum reported grade of \"Hypertension\" adverse events that were possibly, probably or definitely related to treatment. Events reported for all cycles and follow-up are included.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "maxprot",
+          "id": "phv00159025.v1.p1",
+          "description": "Max proteinuria. This variable is the maximum reported grade of \"Proteinuria\" adverse events that were possibly, probably or definitely related to treatment. Events reported for all cycles and follow-up are included.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "osevent",
+          "id": "phv00159019.v1.p1",
+          "description": "Censor variable for overall survival. This is a censoring variable that can be used in a survival analysis to indicate death due to any cause.  It is paired with ostime. Patients who were dead when the clinical database was frozen are coded as 1. All othe",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ostime",
+          "id": "phv00159018.v1.p1",
+          "description": "Overall survival (months). This variable quantifies time of death (due to any cause) starting from the time of registration.  It is measured in months. For patients who were still alive, at the time of the locking of the clinical database, this variable q",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pd",
+          "id": "phv00159026.v1.p1",
+          "description": "Did patient Progress. This variable indicates if a patient has progressed. Patients who progressed prior to the time the clinical database was frozen are coded as 1. All other patients are coded as 0. This variable can be used with the variable osevent in",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_progression_free_survival_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pfs",
+          "id": "phv00159027.v1.p1",
+          "description": "Progression free survival (months). This variable quantifies time of failure (death or progression) starting from the time of registration.  It is measured in months. For patients who were still alive and progression free at the time the clinical database",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_progression_free_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "priorrt",
+          "id": "phv00159015.v1.p1",
+          "description": "Prior radio therapy. This variable indicates if the patient was administered radiotherapy prior to protocol therapy.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ps",
+          "id": "phv00159016.v1.p1",
+          "description": "The Eastern Cooperative Oncology Group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00159014.v1.p1",
+          "description": "Race. This variable is the self reported race of the patient at the time of registration.  Patients who report more than one race are categorized as having multiple races.",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "response",
+          "id": "phv00159028.v1.p1",
+          "description": "Best objective response. This variable indicates the best overall response to protocol therapy either during treatment or in follow-up. Criteria for response, progression and relapse are consistent with Response Evaluation Criteria In Solid Tumors",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_treatment_response",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00159013.v1.p1",
+          "description": "Gender. This variable indicates the self reported gender of the patient at the time of registration.",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "totalgem",
+          "id": "phv00159030.v1.p1",
+          "description": "Total dosage of gemcitabine over all cycles. This is the cumulative dose of gemcitabine over all cycles of therapy. Units are in mg.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "totbev",
+          "id": "phv00159031.v1.p1",
+          "description": "Total dosage of bevacizumab over all cycles. This is the cumulative dose of bevacizamab over all cycles of therapy. Units are in mg.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "urine24",
+          "id": "phv00159021.v1.p1",
+          "description": "Pre-study Protein from 24 hr urine collection - required is dipstick is &ge;1+. This variable indicates the total protein from a 24 hour urine collection.  The test is administered prior to protocol therapy, but is only required for patients who had p",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "urinedip",
+          "id": "phv00159022.v1.p1",
+          "description": "Pre-study urine dipstick result (lab test). This variable indicates the urine dipstick result of a patient prior to protocol therapy.  Acceptable values are 0, 1+, 2+, 3+, and 4+.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CALGB_80303_Subject",
+      "datasetId": "pht002186.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00159003.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJID",
+          "id": "phv00159005.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00159002.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJ_SOURCE",
+          "id": "phv00159004.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CALGB_80303_Sample",
+      "datasetId": "pht002187.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00159007.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00159008.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00159009.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00159006.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

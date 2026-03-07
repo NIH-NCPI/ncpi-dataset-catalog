@@ -1,0 +1,306 @@
+{
+  "studyId": "phs001534",
+  "studyName": "Pathways Study",
+  "tables": [
+    {
+      "tableName": "Pathways_Subject_Phenotypes",
+      "datasetId": "pht008520.v1",
+      "description": "Subject ID, ethnicity, race, age, BMI, death, DNA, recurrence, tumor characteristics, breast surgery, chemotherapy, hormone and radiation treatment of participants with or without breast cancer and involved in the \"Pathways Study\" project.",
+      "variables": [
+        {
+          "name": "AGE_DX",
+          "id": "phv00396458.v1.p1",
+          "description": "Participant age at diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AJCC_STG",
+          "id": "phv00396462.v1.p1",
+          "description": "AJCC Tumor Stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BL_BMI_EMR",
+          "id": "phv00396461.v1.p1",
+          "description": "Participant BMI at diagnosis",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BREAST_SURGERY",
+          "id": "phv00396466.v1.p1",
+          "description": "Surgery type",
+          "concept_id": "ncpi:surgical_procedure_breast_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Chemo",
+          "id": "phv00396467.v1.p1",
+          "description": "Chemotherapy status",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_chemotherapy_general_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DNA_Extraction",
+          "id": "phv00396475.v1.p1",
+          "description": "DNA extraction method",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DNA_Source",
+          "id": "phv00396476.v1.p1",
+          "description": "DNA Source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Death",
+          "id": "phv00396470.v1.p1",
+          "description": "Confirmed death",
+          "concept_id": "topmed:chd_death_definite",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "DeathBC",
+          "id": "phv00396472.v1.p1",
+          "description": "Breast cancer contributes to death",
+          "concept_id": "topmed:chd_death_definite",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "DeathYrs",
+          "id": "phv00396471.v1.p1",
+          "description": "Time from diagnosis to death (years)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ER",
+          "id": "phv00396463.v1.p1",
+          "description": "Estrogen receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00396459.v1.p1",
+          "description": "Participant ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HER2",
+          "id": "phv00396465.v1.p1",
+          "description": "Her2/Neu status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_her2_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hormone",
+          "id": "phv00396468.v1.p1",
+          "description": "Hormone therapy status",
+          "concept_id": "ncpi:concomitant_medication_hormone_reproductive_medications_general_hormone_therapy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PR",
+          "id": "phv00396464.v1.p1",
+          "description": "Progesterone receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_progesterone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00396460.v1.p1",
+          "description": "Participant race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Radiation",
+          "id": "phv00396469.v1.p1",
+          "description": "Radiation therapy status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_radiation_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Recur",
+          "id": "phv00396473.v1.p1",
+          "description": "Confirmed recurrence",
+          "concept_id": "ncpi:mi_incident_event_outcomes",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "RecurYrs",
+          "id": "phv00396474.v1.p1",
+          "description": "Time from diagnosis to recurrence (years)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396457.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Pathways_Sample",
+      "datasetId": "pht008519.v1",
+      "description": "Subject ID, sample ID, sample source, source sample ID, and sample use variable of participants with or without breast cancer and involved in the \"Pathways Study\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00396453.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00396455.v1.p1",
+          "description": "Sample source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00396454.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00396456.v1.p1",
+          "description": "Source sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396452.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Pathways_Sample_Attributes",
+      "datasetId": "pht008521.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, histological type, and tumor status of sample of participants with or without breast cancer and involved in the \"Pathways Study\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00396480.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00396478.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00396479.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00396481.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00396477.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Pathways_Subject",
+      "datasetId": "pht008518.v1",
+      "description": "Subject ID, subject source, source subject ID, and consent group of participants with or without breast cancer and involved in the \"Pathways Study\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00396449.v1.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00396451.v1.p1",
+          "description": "Source subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396448.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00396450.v1.p1",
+          "description": "Subject source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

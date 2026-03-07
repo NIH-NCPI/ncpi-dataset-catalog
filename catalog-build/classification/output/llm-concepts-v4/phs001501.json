@@ -1,0 +1,218 @@
+{
+  "studyId": "phs001501",
+  "studyName": "Impact of Race and Genetic Factors on Beta Blocker Effectiveness in HF",
+  "tables": [
+    {
+      "tableName": "Race_Genetics_BetaBlocker_Subject_Phenotypes",
+      "datasetId": "pht007227.v1",
+      "description": "Subject ID, age, ethnicity, race, sex, angiotensin II receptor blockers, beta blocker, systolic pressure, mean beta blocker, COPD, creatinine, ejection fraction (%) per echocardiogram, and ACE inhibitor used by participants with or without heart failure and involved in the \"Impact of Race and Genetic Factors on Beta Blocker Effectiveness in Heart Failure\" project.",
+      "variables": [
+        {
+          "name": "ACE_use",
+          "id": "phv00334312.v1.p1",
+          "description": "ACE inhibitor use",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_ace_inhibitors_arb",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ARB_use",
+          "id": "phv00334313.v1.p1",
+          "description": "Angiotensin II receptor blockers use",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_angiotensin_receptor_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BB_use",
+          "id": "phv00334314.v1.p1",
+          "description": "Beta Blocker use",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_beta_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Creatinine_baseline_rslt",
+          "id": "phv00334315.v1.p1",
+          "description": "Creatinine result",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00334305.v1.p1",
+          "description": "Self-identified race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00334303.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00334309.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_enrollmt",
+          "id": "phv00334304.v1.p1",
+          "description": "Age in years at the time of enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bp_sys",
+          "id": "phv00334310.v1.p1",
+          "description": "Systolic pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_generic_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cma_exp_bb_mean",
+          "id": "phv00334307.v1.p1",
+          "description": "Mean beta blocker exposure metric",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cmrb_copd",
+          "id": "phv00334311.v1.p1",
+          "description": "Chronic Obstructive Pulmonary Disease",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_copd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ech_ef",
+          "id": "phv00334308.v1.p1",
+          "description": "Ejection fraction (%) per echocardiogram",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00334306.v1.p1",
+          "description": "Self-identified ethnicity (Hispanic vs. non-Hispanic)",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Race_Genetics_BetaBlocker_Sample_Attributes",
+      "datasetId": "pht007228.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, histological type of sample, and tumor status of sample obtained from participants with or without heart failure and involved in the \"Impact of Race and Genetic Factors on Beta Blocker Effectiveness in Heart Failure\" project.",
+      "variables": [
+        {
+          "name": "Histological_type",
+          "id": "phv00334319.v1.p1",
+          "description": "The type of sample, cell, or tissue type or subtype of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00334316.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "analyte_type",
+          "id": "phv00334318.v1.p1",
+          "description": "The analyte type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "body_site",
+          "id": "phv00334317.v1.p1",
+          "description": "The body part from which the sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "is_tumor",
+          "id": "phv00334320.v1.p1",
+          "description": "The tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Race_Genetics_BetaBlocker_Sample",
+      "datasetId": "pht007226.v1",
+      "description": "Subject ID, sample ID, and sample use variable associated with participants with or without heart failure and involved in the \"Impact of Race and Genetic Factors on Beta Blocker Effectiveness in Heart Failure\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00334301.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00334302.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00334300.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Race_Genetics_BetaBlocker_Subject",
+      "datasetId": "pht007225.v1",
+      "description": "Subject ID and consent group of participants with or without heart failure and involved in the \"Impact of Race and Genetic Factors on Beta Blocker Effectiveness in Heart Failure\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00334299.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00334298.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

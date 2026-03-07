@@ -1,0 +1,210 @@
+{
+  "studyId": "phs001339",
+  "studyName": "Developmental Mechanisms of Human Congenital Heart Disease",
+  "tables": [
+    {
+      "tableName": "22q11_2_Deletion_Syndrome_Subject_Phenotypes",
+      "datasetId": "pht006788.v1",
+      "description": "This subject phenotype table contains subject IDs, 22q11.2 deletion syndrome, sex, self-reported race, ethinicity, heart anomaly, persistent truncus arteriosus, and tetralogy of fallot.",
+      "variables": [
+        {
+          "name": "22q11.2DS",
+          "id": "phv00312975.v1.p1",
+          "description": "22q11.2 deletion syndrome (DiGeorge syndrome/velo-cardio-facial syndrome)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00312978.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEART_ANOMALY",
+          "id": "phv00312979.v1.p1",
+          "description": "Intracardiac or aortic arch anomaly",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PTA",
+          "id": "phv00312980.v1.p1",
+          "description": "Persistent truncus arteriosus",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SELF_REPORT_RACE",
+          "id": "phv00312977.v1.p1",
+          "description": "Race of participant reported by the subject",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00312976.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00312974.v1.p1",
+          "description": "De-identified subject identification",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOF",
+          "id": "phv00312981.v1.p1",
+          "description": "Tetralogy of Fallot",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "22q11_2_Deletion_Syndrome_Sample_Attributes",
+      "datasetId": "pht006789.v1",
+      "description": "This sample attributes table contains sample IDs, body site, cell line, analyte type, genetic data type, and proband.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00312985.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00312983.v1.p1",
+          "description": "Body site where sample was taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CELL_LINE",
+          "id": "phv00312984.v1.p1",
+          "description": "DNA derived from cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENETIC_DATA_TYPE",
+          "id": "phv00312986.v1.p1",
+          "description": "Affymetrix",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROBAND",
+          "id": "phv00312987.v1.p1",
+          "description": "Subject with 22q11.2DS",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00312982.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "22q11_2_Deletion_Syndrome_Subject",
+      "datasetId": "pht006786.v1",
+      "description": "The subject consent file includes subject IDs, consent information, subject aliases, and case control status of the subject for cardiac defect and/or aortic arch anomaly.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00312968.v1.p1",
+          "description": "22q11DS case control status of the subject for cardiac defect and/or aortic arch anomaly",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00312966.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00312965.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00312967.v1.p1",
+          "description": "Source clinical research site where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "22q11_2_Deletion_Syndrome_Sample",
+      "datasetId": "pht006787.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "AFFYMETRIX_6_CEL_FILE_ID",
+          "id": "phv00312972.v1.p1",
+          "description": "Affymetrix 6.0 cel file ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00312970.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00312971.v1.p1",
+          "description": "Source research site where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00312969.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

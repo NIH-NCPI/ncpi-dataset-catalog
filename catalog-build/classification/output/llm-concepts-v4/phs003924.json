@@ -1,0 +1,1095 @@
+{
+  "studyId": "phs003924",
+  "studyName": "Comparison Across Multiple Types of Sleep Deprivation",
+  "tables": [
+    {
+      "tableName": "NTBtiming",
+      "datasetId": "pht015637.v1",
+      "description": "This subject phenotypes data table reports numerous metrics from each subject's neurobehavioral test timepoints including visual analog scale responses, TRACK assay, STROOP assay with all four colors or selected colors, PEERS ratings, matrix reasoning tasks,  Karolinska Sleepiness Scale measurements, Digit Symbol Substitution Test (DSST) trials, and Balloon Analog Risk Test (BART) trials.",
+      "variables": [
+        {
+          "name": "BART_Adj_Mean_Pmps",
+          "id": "phv00557330.v1.p1",
+          "description": "Bart adjusted mean pumps for successful trials that ended with collect rather than popping the balloon in the Balloon Analog Risk Test (BART)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BART_Risk_score",
+          "id": "phv00557329.v1.p1",
+          "description": "BART Risk Score calculated as (sum of TRIAL_PUMP) / (sum  of (BURST_AT - 1)), where Trial_Pump are the pumps attempted and BURST_AT is when the balloon will burst in the Balloon Analog Risk Test (BART)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONDITION_GROUP",
+          "id": "phv00557287.v1.p1",
+          "description": "Study condition group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CUMULATIVE_WAKE_HOURS",
+          "id": "phv00557286.v1.p1",
+          "description": "Cumulative hours the subject has been awake at the time of sample collection, i.e., cumulative hours of wakefulness since the last time in bed sleep episdoe.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CVS_RT0divbyCorr0",
+          "id": "phv00557328.v1.p1",
+          "description": "An adjusted response time, calculated as RT_0 / CORRTR_0, i.e. the average reaction time of copy trials divided by the number of correct copy trials on the Comparative Visual Search (CVS) assay.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CVS_RT1divbyCorr1",
+          "id": "phv00557327.v1.p1",
+          "description": "An adjusted response time, calculated as RT_1 / CORRTR_1, i.e. the average reaction time of mirror trials divided by the number of correct mirror trials on the Comparative Visual Search (CVS) assay.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DSST_CORRECT",
+          "id": "phv00557326.v1.p1",
+          "description": "Total number of correct responses on the Digit Symbol Substitution Test (DSST).",
+          "concept_id": "ncpi:cognition_digit_symbol_substitution",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DSST_PERCENT",
+          "id": "phv00557325.v1.p1",
+          "description": "Percentage of correct responses on the Digit Symbol Substitution Test (DSST), i.e., the number of correct responses divided by the total number of responses, expressed as a percentage",
+          "concept_id": "ncpi:cognition_digit_symbol_substitution",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Face_RECALL_FACES_CORR",
+          "id": "phv00557324.v1.p1",
+          "description": "This is the number of correct faces on the FACE assay",
+          "concept_id": "ncpi:cognition_visual_memory",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Face_RECALL_PERCENTCOR",
+          "id": "phv00557323.v1.p1",
+          "description": "This is the percentage of correct faces on the FACE assay",
+          "concept_id": "ncpi:cognition_visual_memory",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HOURS_INTO_STUDY",
+          "id": "phv00557282.v1.p1",
+          "description": "Cumulative number of hours since midnight Relative Clock Hour at the outset of study day 3",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "KSS_After_SCALE",
+          "id": "phv00557322.v1.p1",
+          "description": "This is the final self rating of the Karolinska Sleepiness Scale. Scale values range from 1-9, with anchor words for 1 (extremely alert), 3 (alert), 5 (neithere alert nor sleepy), 7 (sleepy - but no difficulty remaining awake), and 9 (extremely sleepy - fighting sleep).",
+          "concept_id": "ncpi:sleep_duration_daytime_sleepiness",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "KSS_Before_SCALE",
+          "id": "phv00557321.v1.p1",
+          "description": "This is the initial self rating of the Karolinska Sleepiness Scale. Scale values range from 1-9, with anchor words for 1 (extremely alert), 3 (alert), 5 (neithere alert nor sleepy), 7 (sleepy - but no difficulty remaining awake), and 9 (extremely sleepy - fighting sleep).",
+          "concept_id": "ncpi:sleep_duration_daytime_sleepiness",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MRT_Sum_ADV_COR",
+          "id": "phv00557320.v1.p1",
+          "description": "This is the overall number of correct advanced trials in the matrix reasoning task",
+          "concept_id": "ncpi:cognition_matrix_reasoning",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MRT_Sum_BEGIN_COR",
+          "id": "phv00557319.v1.p1",
+          "description": "This is the overall number of correct beginner trials in the matrix reasoning task",
+          "concept_id": "ncpi:cognition_matrix_reasoning",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MRT_Sum_CORRECT",
+          "id": "phv00557318.v1.p1",
+          "description": "This is the overall number of correct answers in the matrix reasoning task",
+          "concept_id": "ncpi:cognition_matrix_reasoning",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MRT_Sum_EXP_COR",
+          "id": "phv00557317.v1.p1",
+          "description": "This is the overall number of correct expert trials in the matrix reasoning task",
+          "concept_id": "ncpi:cognition_matrix_reasoning",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MRT_Sum_INT_COR",
+          "id": "phv00557316.v1.p1",
+          "description": "This is the overall number of correct intermediate trials in the matrix reasoning task",
+          "concept_id": "ncpi:cognition_matrix_reasoning",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NTB_TIMEPOINT",
+          "id": "phv00557283.v1.p1",
+          "description": "Timepoint for neurobehavioral test battery",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PEERSCL_BETTER",
+          "id": "phv00557314.v1.p1",
+          "description": "This is a self-rating of performing better on the second PEERS session, on a scale from 0-100. A score of 100 on PEERS scales means: Extremely Good (for PERFORM), An Extreme Effort (for EFFORT), and Yes I Could Have Done Much Better (for BETTER).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PEERSCL_EFFORT",
+          "id": "phv00557315.v1.p1",
+          "description": "This is a self-rating of performance effort on the second PEERS session, on a scale from 0-100. A score of 100 on PEERS scales means: Extremely Good (for PERFORM), An Extreme Effort (for EFFORT), and Yes I Could Have Done Much Better (for BETTER).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PEERSCL_PERFORM",
+          "id": "phv00557313.v1.p1",
+          "description": "This is a self-rating of performance on the second PEERS session, on a scale from 0-100. A score of 100 on PEERS scales means: Extremely Good (for PERFORM), An Extreme Effort (for EFFORT), and Yes I Could Have Done Much Better (for BETTER).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "P_PEERSCL_EFFORT",
+          "id": "phv00557312.v1.p1",
+          "description": "This is a self-rating of performance effort on the first or Pre PEERS session, on a scale from 0-100. A score of 100 on PEERS scales means: Extremely Good (for PERFORM), An Extreme Effort (for EFFORT), and Yes I Could Have Done Much Better (for BETTER).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "P_PEERSCL_PERFORM",
+          "id": "phv00557311.v1.p1",
+          "description": "This is a self-rating of performance on the first or Pre PEERS session, on a scale from 0-100. A score of 100 on PEERS scales means: Extremely Good (for PERFORM), An Extreme Effort (for EFFORT), and Yes I Could Have Done Much Better (for BETTER).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RELATIVE_CLOCK_HOUR",
+          "id": "phv00557285.v1.p1",
+          "description": "Time of sample collection expressed as Relative Clock Hours",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_BLUEYELLOW_FAC_M_RT",
+          "id": "phv00557310.v1.p1",
+          "description": "This is the mean reaction time for facilitated trials on trials with only blue and yellow colors.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_BLUEYELLOW_FAC_PERCCR",
+          "id": "phv00557309.v1.p1",
+          "description": "This is the percent correct on facilitated trials on trials with only blue and yellow colors.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_BLUEYELLOW_INH_M_RT",
+          "id": "phv00557308.v1.p1",
+          "description": "This is the mean reaction time for inhibited trials on trials with only blue and yellow colors.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_BLUEYELLOW_INH_PERCCR",
+          "id": "phv00557307.v1.p1",
+          "description": "This is the percent correct on inhibited trials on trials with only blue and yellow colors.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_BLUEYELLOW_NEU_M_RT",
+          "id": "phv00557306.v1.p1",
+          "description": "This is the mean reaction time for neutral trials on trials with only blue and yellow colors.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_BLUEYELLOW_NEU_PERCCR",
+          "id": "phv00557305.v1.p1",
+          "description": "This is the percent correct on neutral trials on trials with only blue and yellow colors.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_BLUEYELLOW_OV_CORRECT",
+          "id": "phv00557304.v1.p1",
+          "description": "This is the integer count of the overall number of correct responses on trials with only blue and yellow colors.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_RESCUE_FAC_M_RT",
+          "id": "phv00557303.v1.p1",
+          "description": "Mean reaction time for facilitated trials for the STROOP assay with all four colors",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_RESCUE_FAC_PERCCR",
+          "id": "phv00557302.v1.p1",
+          "description": "Percent correct on facilitated trials for the STROOP assay with all four colors",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_RESCUE_INH_M_RT",
+          "id": "phv00557301.v1.p1",
+          "description": "Mean reaction time for inhibited trials for the STROOP assay with all four colors",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_RESCUE_INH_PERCCR",
+          "id": "phv00557300.v1.p1",
+          "description": "Percent correct on inhibited trials for the STROOP assay with all four colors",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_RESCUE_NEU_M_RT",
+          "id": "phv00557299.v1.p1",
+          "description": "Mean reaction time for neutral trials for the STROOP assay with all four colors",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_RESCUE_NEU_PERCCR",
+          "id": "phv00557298.v1.p1",
+          "description": "Percent correct on neutral trials for the STROOP assay with all four colors",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SCWORD_RESCUE_OV_CORRECT",
+          "id": "phv00557297.v1.p1",
+          "description": "Integer count of the overall number of correct responses for the STROOP assay with all four colors",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY_DAY",
+          "id": "phv00557284.v1.p1",
+          "description": "Day in the study when sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00557280.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_NTB_TIMEPOINT",
+          "id": "phv00557281.v1.p1",
+          "description": "Subject and neurobehavioral test battery timepoint",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRKALL_TOTAL_LOSS",
+          "id": "phv00557296.v1.p1",
+          "description": "Count of the sum total of right and left losses in the unstable TRACK assay",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VAS_ALERT",
+          "id": "phv00557295.v1.p1",
+          "description": "Visual analog scale  response from 0 to 100, 100 being more Alert. The scale is presented as a 100-mm bar that the participant marks with a cursor. The score is determined as the distance from the anchor word to the cursor.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VAS_CALM",
+          "id": "phv00557294.v1.p1",
+          "description": "Visual analog scale  response from 0 to 100, 100 being more CALM. The scale is presented as a 100-mm bar that the participant marks with a cursor. The score is determined as the distance from the anchor word to the cursor.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VAS_CLEARHEADE",
+          "id": "phv00557293.v1.p1",
+          "description": "Visual analog scale  response from 0 to 100, 100 being more Clear Headed. The scale is presented as a 100-mm bar that the participant marks with a cursor. The score is determined as the distance from the anchor word to the cursor.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VAS_SAD",
+          "id": "phv00557292.v1.p1",
+          "description": "Visual analog scale  response from 0 to 100, 100 being more Sad. The scale is presented as a 100-mm bar that the participant marks with a cursor. The score is determined as the distance from the anchor word to the cursor.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VAS_UNMOTIVATE",
+          "id": "phv00557291.v1.p1",
+          "description": "Visual analog scale response from 0 to 100, 100 being more Unmotivated. The scale is presented as a 100-mm bar that the participant marks with a cursor. The score is determined as the distance from the anchor word to the cursor.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VPVTALL_IALL_MEAN",
+          "id": "phv00557290.v1.p1",
+          "description": "Mean average of 1000/RT, where RT is the reaction time on the psychomotor vigilance test.",
+          "concept_id": "ncpi:cognition_vigilance_attention",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "VPVTALL_LAPSES",
+          "id": "phv00557289.v1.p1",
+          "description": "Count of the number of times a response was greater than 500 milliseconds during the session",
+          "concept_id": "ncpi:cognition_vigilance_attention",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "VPVTALL_LAPSE_TRAN",
+          "id": "phv00557288.v1.p1",
+          "description": "Transformation of psychomotor vigilance lapses calculated as LAPSE_TRAN = SQRT(LAPSES) + SQRT(LAPSES + 1)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PSG",
+      "datasetId": "pht015638.v1",
+      "description": "This subject phenotypes data table reports several metrics from each subject's sleep studies.",
+      "variables": [
+        {
+          "name": "CONDITION_GROUP",
+          "id": "phv00557334.v1.p1",
+          "description": "Study condition group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONDITION_GROUP_SEGMENT",
+          "id": "phv00557333.v1.p1",
+          "description": "Condition group and polysomnography (PSG) segment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LAST_EPOCH_SLEEP",
+          "id": "phv00557344.v1.p1",
+          "description": "Epoch number of last epoch scored as sleep, based on 30 second epochs",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIGHTS_ON_EPOCH",
+          "id": "phv00557338.v1.p1",
+          "description": "Lights On Epoch Number, based on 30 second epochs",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIGHTS_OUT_EPOCH",
+          "id": "phv00557337.v1.p1",
+          "description": "Lights Out Epoch Number, based on 30 second epochs",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MVT",
+          "id": "phv00557351.v1.p1",
+          "description": "Movement Time, minutes",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_movement_time",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MVT_Percent",
+          "id": "phv00557352.v1.p1",
+          "description": "Movement Time, percent of SPD",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_movement_time",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "REM",
+          "id": "phv00557359.v1.p1",
+          "description": "REM, minutes",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_rem_sleep_duration",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REM_PERCENT",
+          "id": "phv00557360.v1.p1",
+          "description": "REM, percent of SPD",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_rem_sleep_percentage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEGMENT",
+          "id": "phv00557335.v1.p1",
+          "description": "Segment in sleep study, indication of baseline, first recovery, or second recovery night",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLEEP_EFFICIENCY",
+          "id": "phv00557340.v1.p1",
+          "description": "Percentage=[(TST-(Wake+MVT+Undefined))/TST]",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_sleep_efficiency",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLEEP_LATENCY",
+          "id": "phv00557341.v1.p1",
+          "description": "Sleep onset defined as first three consecutive epochs of sleep, time since LightsOut in minutes",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_sleep_latency",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLEEP_PERIOD_NUMBER",
+          "id": "phv00557336.v1.p1",
+          "description": "Sleep period number as it occurs in protocol, with numbers indicating the consecutive counts of inpatient time in bed sleep opportunities",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SPD",
+          "id": "phv00557339.v1.p1",
+          "description": "Sleep Period Duration, minutes, (LightsOn_Epoch-LightsOutEpoch+1)/2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SPT",
+          "id": "phv00557342.v1.p1",
+          "description": "Sleep Period Time, minutes, = SPD - Sleep_Latency - WASF",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE1",
+          "id": "phv00557345.v1.p1",
+          "description": "Sleep scored Stage N1, minutes",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_stage1_sleep_duration",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE1_Percent",
+          "id": "phv00557346.v1.p1",
+          "description": "Sleep scored Stage N1, percent of SPD",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_stage1_sleep_percentage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE2",
+          "id": "phv00557347.v1.p1",
+          "description": "Sleep scored Stage N2, minutes",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_stage2_sleep_duration",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE2_Percent",
+          "id": "phv00557348.v1.p1",
+          "description": "Sleep scored Stage N2, percent of SPD",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_stage2_sleep_percentage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE3",
+          "id": "phv00557349.v1.p1",
+          "description": "Sleep scored Stage N3 (Slow Wave Sleep), minutes",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_stage34_sleep_duration",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE3_Percent",
+          "id": "phv00557350.v1.p1",
+          "description": "Sleep scored Stage N3 (Slow Wave Sleep), percent of SPD",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_stage34_sleep_percentage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00557331.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SEGMENT",
+          "id": "phv00557332.v1.p1",
+          "description": "Subject and polysomnography (PSG) segment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TST",
+          "id": "phv00557343.v1.p1",
+          "description": "Total Sleep Time within sleep onset to sleep offset, minutes",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_total_sleep_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UNDEFINED",
+          "id": "phv00557353.v1.p1",
+          "description": "Undefined, minutes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UNDEFINED_Percent",
+          "id": "phv00557354.v1.p1",
+          "description": "Undefines, percent of SPD",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WAKE",
+          "id": "phv00557355.v1.p1",
+          "description": "Wake, minutes",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_wake_duration",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WAKE_PERCENT",
+          "id": "phv00557356.v1.p1",
+          "description": "Wake, percent of SPD",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_wake_percentage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WASF",
+          "id": "phv00557358.v1.p1",
+          "description": "Wake after Sleep Offset, minutes, =(LightsOut_Epoch - Last_Epoch_Sleep)/2",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_wake_after_sleep_offset",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WASO",
+          "id": "phv00557357.v1.p1",
+          "description": "Wake After Sleep Onset, minutes",
+          "concept_id": "ncpi:polysomnography_sleep_architecture_wake_after_sleep_onset",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SleepEstPSQ",
+      "datasetId": "pht015639.v1",
+      "description": "This subject phenotypes data table reports several metrics from each subject's self assessment of their sleep quality.",
+      "variables": [
+        {
+          "name": "ANXIOUS",
+          "id": "phv00557375.v1.p1",
+          "description": "Response from requesting subject to mark a line at a point which most accurately represents how anxious the subject feels at this very moment, based on a 100mm visual analog scale anchored with words at 0 ofExtremely calm and at 100 of Extremely agitated.",
+          "concept_id": "phenx:perceived_stress",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "COLOR_D",
+          "id": "phv00557383.v1.p1",
+          "description": "Response to question:  Did you dream in color last night?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONDITION_GROUP",
+          "id": "phv00557363.v1.p1",
+          "description": "Study condition group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DREAMT",
+          "id": "phv00557376.v1.p1",
+          "description": "Response to question:  How much do you think you dreamt last night (independent of how much you remember)?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EMOTION_D",
+          "id": "phv00557378.v1.p1",
+          "description": "Response to question:  How emotional were your dreams last night?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HOSTIL_D",
+          "id": "phv00557381.v1.p1",
+          "description": "Response to question:  How much violence or hostility was contained in your dreams last night?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INFL_Q_SLP",
+          "id": "phv00557385.v1.p1",
+          "description": "Response to question:  How much do you feel your experiences during the two hours or so prior to the time you went to bed influenced the quality of your sleep?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NAWAKEN",
+          "id": "phv00557365.v1.p1",
+          "description": "Response to question:  How many times did you wake up during the night?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "N_DREAMS",
+          "id": "phv00557377.v1.p1",
+          "description": "Response to question:  How many different dreams can you specifically remember having?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHY_ACT_D",
+          "id": "phv00557382.v1.p1",
+          "description": "Response to question:  How much physical activity was there in your dreams last night?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLEASANT_D",
+          "id": "phv00557380.v1.p1",
+          "description": "Response to question:  How pleasant were your dreams last night?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REFRES_NOW",
+          "id": "phv00557373.v1.p1",
+          "description": "Response to question:  How refreshed do you feel right now?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SESSION",
+          "id": "phv00557364.v1.p1",
+          "description": "Consecutive count indicating the corresponding sleep period number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLEEPY_NOW",
+          "id": "phv00557372.v1.p1",
+          "description": "Response to question:  How sleepy do you feel right now?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLPLENGTH",
+          "id": "phv00557368.v1.p1",
+          "description": "Sum total of SLPLENHRS plus SLPLENMINS",
+          "concept_id": "topmed:sleep_duration",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLPLENHRS",
+          "id": "phv00557366.v1.p1",
+          "description": "Response to question:  How much sleep do you think you got last night?",
+          "concept_id": "ncpi:sleep_duration_sleep_duration_hours",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLPLENMINS",
+          "id": "phv00557367.v1.p1",
+          "description": "Response to question:  How much sleep do you think you got last night?",
+          "concept_id": "ncpi:sleep_duration_sleep_duration_minutes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLP_QUALIT",
+          "id": "phv00557371.v1.p1",
+          "description": "Response to question:  How would you evaluate your sleep last night?",
+          "concept_id": "ncpi:polysomnography_sleep_symptoms_sleep_quality_rating",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SLP_SOUND",
+          "id": "phv00557370.v1.p1",
+          "description": "Response to question:  How sound do you think your sleep was last night?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00557361.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SLEEP_ESTIMATE_SEGMENT",
+          "id": "phv00557362.v1.p1",
+          "description": "Subject and sleep estimate segment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TECH_WAKUP",
+          "id": "phv00557369.v1.p1",
+          "description": "Response to question:  Did your final awakening in the morning occur when the Laboratory personnel came in to awaken you?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TENSE_NOW",
+          "id": "phv00557374.v1.p1",
+          "description": "Response to question:  How tense do you feel right now?",
+          "concept_id": "phenx:perceived_stress",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "THINK_SLP",
+          "id": "phv00557384.v1.p1",
+          "description": "Response to question:  Apart from dreaming, were you thinking in your sleep?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VIVID_D",
+          "id": "phv00557379.v1.p1",
+          "description": "Response to question:  How vivid were your dreams last night?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Sleep_Deprivation_Sample_Attributes",
+      "datasetId": "pht015640.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin, analyte type, tumor status, facility performing RNA extraction on sample, cumulative study hours since midnight starting on day 3, relative clock hour for time of sample collection, collection day, subject's cumulative hours of wakefulness since sample collection, and study condition group.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00557388.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00557387.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONDITION_GROUP",
+          "id": "phv00557395.v1.p1",
+          "description": "Study condition group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CUMULATIVE_WAKE_HOURS",
+          "id": "phv00557394.v1.p1",
+          "description": "Cumulative hours the subject has been awake at the time of sample collection, i.e., cumulative hours of wakefulness since the last time in bed sleep episode.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXTRACTED",
+          "id": "phv00557390.v1.p1",
+          "description": "Facility performing RNA extraction on sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HOURS_INTO_STUDY",
+          "id": "phv00557391.v1.p1",
+          "description": "Cumulative number of hours since midnight Relative Clock Hour at the outset of study day 3",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00557389.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RELATIVE_CLOCK_HOUR",
+          "id": "phv00557393.v1.p1",
+          "description": "Time of sample collection expressed as Relative Clock Hours",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00557386.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY_DAY",
+          "id": "phv00557392.v1.p1",
+          "description": "Day in the study when sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Sleep_Deprivation_Subject_Phenotypes",
+      "datasetId": "pht015636.v1",
+      "description": "This subject phenotypes data table reports each subject's alternate subject ID, study condition group, age, sex, race, ethnicity, height, and weight.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00557274.v1.p1",
+          "description": "Subject's age in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALTERNATE_SUBJECT_ID",
+          "id": "phv00557272.v1.p1",
+          "description": "Alternate subject code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONDITION_GROUP",
+          "id": "phv00557273.v1.p1",
+          "description": "Subject's study condition group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00557277.v1.p1",
+          "description": "Subject's self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT",
+          "id": "phv00557278.v1.p1",
+          "description": "Subject's height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00557276.v1.p1",
+          "description": "Subject's self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00557275.v1.p1",
+          "description": "Subject's sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00557271.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00557279.v1.p1",
+          "description": "Subject's weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Sleep_Deprivation_Subject",
+      "datasetId": "pht015634.v1",
+      "description": "This subject consent data table reports each subject's subject ID, consent, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00557267.v1.p1",
+          "description": "Registered consent groups (Data Use Limitations (DUL)) as determined by submitters' Institutional Review Boards (IRB) or equivalent body.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00557268.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00557266.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Sleep_Deprivation_Sample",
+      "datasetId": "pht015635.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to individual sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00557270.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00557269.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

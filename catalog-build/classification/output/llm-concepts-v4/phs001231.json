@@ -1,0 +1,330 @@
+{
+  "studyId": "phs001231",
+  "studyName": "NeuroLINCS",
+  "tables": [
+    {
+      "tableName": "NeuroLINCS_ALS_SMA_Sample_Attributes",
+      "datasetId": "pht006182.v2",
+      "description": "This sample attributes table contains sample IDs, subject IDs, histological type, IPS (Induced Pluripotent Stem Cell ) passage number, antibody markers, sample source, sequencing information (n=9 variables: analyte type, RNA integrity number, library prep kit, fragment size, sequencing type, strand, sequencing cycle number, sequencing platform, sequencing center which conducted sequencing), tumor status, days cells were differentiated into motor neurons, protocol, and cell markers .",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00282634.v2.p1",
+          "description": "The analyte type of the sample (ex. DNA and RNA)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "CELL_MARKERS",
+          "id": "phv00301410.v1.p1",
+          "description": "Antibody markers used to classify induced Pluripotent Stem Cell lines or motor neuron cell lines",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FRAGMENT_SIZE",
+          "id": "phv00282637.v2.p1",
+          "description": "The size of the actual fragments submitted for sequencing after library size-selection.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00282630.v2.p1",
+          "description": "Cell type samples were made from",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IMN_DAYS_DIFFERENTIATION",
+          "id": "phv00301408.v1.p1",
+          "description": "How many days cells were differentiated into motor neurons",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IPS_PASSAGE_NUMBER",
+          "id": "phv00282631.v2.p1",
+          "description": "Induced Pluripotent Stem Cell line Passage number used for assay",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00282643.v2.p1",
+          "description": "The tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIBRARY_PREP_KIT",
+          "id": "phv00282636.v2.p1",
+          "description": "Kit used to prepare the library for sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROTOCOL",
+          "id": "phv00301409.v1.p1",
+          "description": "Protocol used by Cedars-Sinai Stem Cell Core Facility",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RIN_VALUE",
+          "id": "phv00282635.v2.p1",
+          "description": "RNA integrity number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00282628.v2.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00282633.v2.p1",
+          "description": "Source Institution where samples originated",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00282642.v2.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQ_CYCLE_NUMBER",
+          "id": "phv00282640.v2.p1",
+          "description": "Number of sequencing cycles used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQ_PLATFORM",
+          "id": "phv00282641.v2.p1",
+          "description": "Company and instrument model used for sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQ_TYPE",
+          "id": "phv00282638.v2.p1",
+          "description": "Defines the sequencing strategy. Paired-end sequences inserts in both directions, single-end sequences from one direction",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STRAND",
+          "id": "phv00282639.v2.p1",
+          "description": "Defines if a particular strand is sequenced",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00282629.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NeuroLINCS_ALS_SMA_Subject_Phenotypes",
+      "datasetId": "pht006181.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00282627.v2.p1",
+          "description": "Subject age at sampling",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS",
+          "id": "phv00282626.v2.p1",
+          "description": "Clinical diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS_DETAIL",
+          "id": "phv00374953.v1.p1",
+          "description": "Gene mutated or subtype of disease diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00282622.v2.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00282621.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE",
+          "id": "phv00282624.v2.p1",
+          "description": "Institution or repository from where the cell linewas obtained",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_ID",
+          "id": "phv00282625.v2.p1",
+          "description": "ID of source line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_TISSUE",
+          "id": "phv00282623.v2.p1",
+          "description": "Type of tissue",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00282620.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NeuroLINCS_ALS_SMA_Subject",
+      "datasetId": "pht006179.v1",
+      "description": "The subject consent file includes subject IDs, consent information, subject aliases, and case control status of the subject for Amyotrophic Lateral Sclerosis (ALS) and Spinal Muscular Atrophy (SMA) disease.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00282614.v1.p1",
+          "description": "Case control status of the subject for ALS or SMA disease",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_case_control_status",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00282611.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00282613.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00282610.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00282612.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NeuroLINCS_ALS_SMA_Sample",
+      "datasetId": "pht006180.v2",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use and sample aliases.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00282616.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00282618.v2.p1",
+          "description": "Source of iPS cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00282617.v2.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00282619.v2.p1",
+          "description": "Sample ID used in center generating iPSC lines",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00282615.v2.p1",
+          "description": "IPS cell line name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

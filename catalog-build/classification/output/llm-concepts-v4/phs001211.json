@@ -1,0 +1,290 @@
+{
+  "studyId": "phs001211",
+  "studyName": "NHLBI TOPMed - NHGRI CCDG: Atherosclerosis Risk in Communities (ARIC)",
+  "tables": [
+    {
+      "tableName": "TOPMed_ARIC_Methylation_Sample_Attributes",
+      "datasetId": "pht014675.v1",
+      "description": "This sample attributes table for methylation samples includes primary biosample type, analyte type, tumor status, body site, histological type, collection details (n=3 variables; collection year, age at collection, collection visit), processing details (n=4 variables; barcode, SNPs read, decode date, extract date), and fraction of CpG sites that pass detection p-value thresholds (p.0.05, p.0.01).",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00541544.v1.p4",
+          "description": "Type of omics assay to be performed, generally one of the following four values: \"RNA\", \"DNA\", \"protein\", or \"metabolite\"",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_collection",
+          "id": "phv00541537.v1.p4",
+          "description": "Subject's age in years at time of tissue collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00541542.v1.p4",
+          "description": "Anatomical site at which biosample was taken, e.g. \"arm vein\", \"lung\", \"inner oral cavity\"",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "Barcode",
+          "id": "phv00541545.v1.p4",
+          "description": "Illumina chip Sentrix barcode",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_visit",
+          "id": "phv00541538.v1.p4",
+          "description": "Study visit when the primary biosample was collected (relevant for longitudianal studies with multiple waves of clinic visits).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_year",
+          "id": "phv00541539.v1.p4",
+          "description": "Year in which primary biosample was collected (informative for storage time)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00541543.v1.p4",
+          "description": "Cell or tissue subtype derived from the Primary biosample, or if no subfractionation was done, the primary biosample type; e.g. plasma for proteins and metabolites; PBMC, T-cell, or monocyte for RNA; blood buffy coat for DNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00541541.v1.p4",
+          "description": "Tumor status of the sample.  For non-cancer studies, all values should be \"no\".  For cancer studies, values should be \"yes\" or \"no\".  (NCBI Biosample characteristic)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_biosample_type",
+          "id": "phv00541540.v1.p4",
+          "description": "Type of primary biosample, e.g. \"venous blood\", \"lung epithelium\"; be as specific as possible",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00541536.v1.p4",
+          "description": "TOPMed identifier for each sample aliquot sent to the assay center.  MUST use TOPMed identifiers - TOR (RNA), TOP (protein), TOM (metabolite), TOE (DNA for methylation assay)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "decodeDate",
+          "id": "phv00541547.v1.p4",
+          "description": "Earliest date shown for 'AutoDecode' action in the .idat 'RunInfo' table.  Presumably related to the chip manufacturing date.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "extractDate",
+          "id": "phv00541548.v1.p4",
+          "description": "Earliest date shown for 'Scan', 'Register' and 'Extract' actions in the .idat 'RunInfo' table.  Presumably date when the chip was scanned after hybridization, extension and staining.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "nSNPsRead",
+          "id": "phv00541546.v1.p4",
+          "description": "Value reported as 'nSNPsRead' in Illumina .idat file header",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p.0.01",
+          "id": "phv00541550.v1.p4",
+          "description": "Fraction of CpG sites which pass a detection p-value threshold of 0.01",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p.0.05",
+          "id": "phv00541549.v1.p4",
+          "description": "Fraction of CpG sites which pass a detection p-value threshold of 0.05",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_ARIC_WGS_Sample_Attributes",
+      "datasetId": "pht005757.v4",
+      "description": "This sample attributes data table for WGS samples includes body site where sample was collected, analyte type, tumor status, sequencing center, funding source, TOPMed phase, project and study name, venous thrombus embolism group, cardiovascular disease group, and sample aliases.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00266310.v3.p4",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00266309.v3.p4",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CCDG_SAMPLE_ID",
+          "id": "phv00493319.v1.p4",
+          "description": "De-identified CCDG Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00397012.v2.p4",
+          "description": "Project funding source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IN_CVD",
+          "id": "phv00397017.v2.p4",
+          "description": "Cardiovascular disease group",
+          "concept_id": "ncpi:mi_incident_cardiovascular_categories",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00266311.v3.p4",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266308.v3.p4",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00397011.v2.p4",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00397015.v2.p4",
+          "description": "TOPMed-assigned short study name (1:1 with TOPMed phs number)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00397013.v2.p4",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00397014.v2.p4",
+          "description": "TOPMed Project that funded sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VTE_TYPE",
+          "id": "phv00397016.v2.p4",
+          "description": "Venous thrombus embolism group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_ARIC_Subject",
+      "datasetId": "pht005754.v5",
+      "description": "This subject consent data table contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00266298.v4.p4",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00541535.v1.p4",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266297.v4.p4",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_ARIC_Sample",
+      "datasetId": "pht005755.v5",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266300.v4.p4",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266299.v4.p4",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

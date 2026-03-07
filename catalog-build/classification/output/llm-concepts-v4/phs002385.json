@@ -1,0 +1,52 @@
+{
+  "studyId": "phs002385",
+  "studyName": "Hematopoietic Cell Transplant for Sickle Cell Disease (HCT for SCD)",
+  "tables": [
+    {
+      "tableName": "CIBMTR_HCTforSCD_Subject",
+      "datasetId": "pht011243.v1",
+      "description": "This subject consent data table includes subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00491111.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491110.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIBMTR_HCTforSCD_Sample",
+      "datasetId": "pht011244.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and sample aliases. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00491113.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491112.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

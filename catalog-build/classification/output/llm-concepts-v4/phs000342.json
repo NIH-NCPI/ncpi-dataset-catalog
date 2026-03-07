@@ -1,0 +1,279 @@
+{
+  "studyId": "phs000342",
+  "studyName": "NHLBI Framingham SNP Health Association Resource (SHARe)",
+  "tables": [
+    {
+      "tableName": "Framingham_SHARe_Sample_Attributes",
+      "datasetId": "pht002946.v10",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00173528.v9.p16",
+          "description": "Analyte type - all DNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00173526.v9.p16",
+          "description": "Body site - values include blood, cell line, or serum",
+          "concept_id": "ncpi:ffq_food_shopping_access",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00173523.v9.p16",
+          "description": "Sample ID - SHARe genotyped sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WGA",
+          "id": "phv00173527.v9.p16",
+          "description": "This has a value of 1 in cases where DNA was amplified. A subset of the blood samples were amplified for SHARe; none for OMNI5.0; all serum samples were amplified in SHARe.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "high_flag",
+          "id": "phv00173525.v9.p16",
+          "description": "Value equals 1 for the unique sample to be used (useful if multiple samples from the same subject are present) in the original SHARe genotyping; value equals 2 for the unique samples with OMNI5.0 chip genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "plate_well",
+          "id": "phv00173524.v9.p16",
+          "description": "The well designation in AFFYMETRIX and Illumina production manifests",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "FHS_SomaLogic_Sample_Attributes",
+      "datasetId": "pht014403.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00536847.v2.p16",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00536846.v2.p16",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXAM",
+          "id": "phv00536849.v2.p16",
+          "description": "Exam from which sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00536848.v2.p16",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00536845.v2.p16",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "FHS_ApoE_Sample_Attributes",
+      "datasetId": "pht012372.v3",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00504353.v3.p16",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00504352.v3.p16",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00504354.v3.p16",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00504351.v3.p16",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "FHS_Brain_GSA_Sample_Attributes",
+      "datasetId": "pht012373.v1",
+      "description": "The FHS Brain GSA sample attributes data table includes sample IDs, body site where sample was collected, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00504357.v1.p16",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00504356.v1.p16",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00504358.v1.p16",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00504355.v1.p16",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "FHS_MxP_Q500_Sample_Attributes",
+      "datasetId": "pht014404.v1",
+      "description": "The FHS MxP Q500 assay sample attributes data table includes sample IDs, body site where sample was collected, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00536852.v1.p16",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00536851.v1.p16",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00536853.v1.p16",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00536850.v1.p16",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "dna_draw_data",
+      "datasetId": "pht010778.v4",
+      "description": null,
+      "variables": [
+        {
+          "name": "DAYS_POSTEX1_OF_DNA_DRAW",
+          "id": "phv00480075.v4.p16",
+          "description": "NUMBER OF DAYS BETWEEN EXAM1 AND DNA DRAW DATE",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "IDTYPE",
+          "id": "phv00480074.v4.p16",
+          "description": "Framingham Heart Study cohort identifier",
+          "concept_id": "ncpi:subcohort_study_cohort_assignment_framingham_cohort_identifier",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "shareid",
+          "id": "phv00480073.v4.p16",
+          "description": "Unique study participant identification number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Framingham_SHARe_Subject_Phenotypes",
+      "datasetId": "pht004418.v7",
+      "description": null,
+      "variables": [
+        {
+          "name": "ADD_DIAB_SNPS",
+          "id": "phv00221187.v7.p16",
+          "description": "Genotypes of  rare variants in genomic regions associated with risk of type 2 diabetes (T2D) or diabetes related quantitative traits that are not part of extant genotyped or imputed GWAS data in Framingham Heart Study cohorts",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "shareid",
+          "id": "phv00221186.v7.p16",
+          "description": "SHARe ID number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

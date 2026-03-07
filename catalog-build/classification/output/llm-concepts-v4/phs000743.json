@@ -1,0 +1,601 @@
+{
+  "studyId": "phs000743",
+  "studyName": "METSIM (METabolic Syndrome In Men) Study",
+  "tables": [
+    {
+      "tableName": "METSIM_Subject_Phenotypes",
+      "datasetId": "pht005603.v3",
+      "description": "This subject phenotype table contains subject ID, sex, age at diabetes onset, fasting plasma glucose from Oral Glucose Tolerance Test (OGTT), serum C-peptide, 120 min plasma glucose from OGTT, blood GHbA1C, serum Glutamic Acid Decarboxylase (GAD) antibodies, creatinine, plasma adiponectin, total cholesterol, LDL cholesterol, HDL cholesterol, total triglycerides, height, weight, body mass index, hip circumference, waist circumference, use of diabetes medication, use of blood pressure medication, use of lipid medication, consortium name, T2D-GENES cohort name, age at METSIM baseline visit, type of diabetes, glucose tolerance according to WHO 1997, OGTT fasting plasma insulin, OGTT 120 min plasma insulin, systolic blood pressure, and diastolic blood pressure.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00265269.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "aoo",
+          "id": "phv00265273.v2.p1",
+          "description": "Age of onset of diabetes",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "bmi",
+          "id": "phv00265289.v3.p1",
+          "description": "Body mass index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bpmeds",
+          "id": "phv00265295.v2.p1",
+          "description": "Use of blood pressure medication",
+          "concept_id": "ncpi:antihypertensive_meds_current_antihypertensive_use_current_antihypertensive_use_current_antihypertensive_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "chol",
+          "id": "phv00265283.v2.p1",
+          "description": "Total cholesterol",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cohort",
+          "id": "phv00265298.v2.p1",
+          "description": "T2D-GENES cohort name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "consortium",
+          "id": "phv00265297.v2.p1",
+          "description": "Consortium name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cpep_fast",
+          "id": "phv00265276.v2.p1",
+          "description": "Serum C-peptide",
+          "concept_id": "phenx:fasting_serum_insulin",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "dbp",
+          "id": "phv00435312.v2.p1",
+          "description": "Diastolic blood pressure",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_device_specific",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diabmeds",
+          "id": "phv00265294.v2.p1",
+          "description": "Use of diabetes medication",
+          "concept_id": "ncpi:diabetes_medication_general_diabetes_medication_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dmtype",
+          "id": "phv00435307.v1.p1",
+          "description": "Type of diabetes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gltol6_1",
+          "id": "phv00435308.v1.p1",
+          "description": "Glucose tolerance according to WHO 1997",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "glu_2h",
+          "id": "phv00265277.v2.p1",
+          "description": "OGTT 120 min plasma glucose",
+          "concept_id": "phenx:oral_glucose_tolerance_test",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "glu_fast",
+          "id": "phv00265274.v2.p1",
+          "description": "OGTT fasting plasma glucose",
+          "concept_id": "ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hba1c",
+          "id": "phv00265279.v3.p1",
+          "description": "Blood GHbA1C",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hdl",
+          "id": "phv00265285.v2.p1",
+          "description": "HDL cholesterol",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "height",
+          "id": "phv00265287.v2.p1",
+          "description": "Height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hip",
+          "id": "phv00265290.v2.p1",
+          "description": "Hip circumference",
+          "concept_id": "phenx:hip_circumference_hip_circumference_v1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ins_2h",
+          "id": "phv00435310.v1.p1",
+          "description": "OGTT 120 min plasma insulin",
+          "concept_id": "phenx:oral_glucose_tolerance_test",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ins_fast",
+          "id": "phv00435309.v1.p1",
+          "description": "OGTT fasting plasma insulin",
+          "concept_id": "phenx:fasting_serum_insulin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ldl",
+          "id": "phv00265284.v2.p1",
+          "description": "LDL cholesterol",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lipidmeds",
+          "id": "phv00265296.v2.p1",
+          "description": "Use of lipid medication",
+          "concept_id": "ncpi:lipid_lowering_medication_general_lipid_lowering_medication",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p_adipon",
+          "id": "phv00265282.v2.p1",
+          "description": "Plasma adiponectin",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "s_gadab",
+          "id": "phv00265280.v2.p1",
+          "description": "Serum GAD antibodies",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "s_krea",
+          "id": "phv00265281.v2.p1",
+          "description": "Creatinine",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sbp",
+          "id": "phv00435311.v2.p1",
+          "description": "Systolic blood pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_closeout_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00265270.v2.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "studyage",
+          "id": "phv00435306.v2.p1",
+          "description": "Age at METSIM baseline visit",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tg",
+          "id": "phv00265286.v2.p1",
+          "description": "Total triglycerides",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "waist",
+          "id": "phv00265291.v2.p1",
+          "description": "Waist circumference",
+          "concept_id": "phenx:waist_circumference_waist_circumference_ncfs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "weight",
+          "id": "phv00265288.v2.p1",
+          "description": "Weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "METSIM_Biopsy",
+      "datasetId": "pht016131.v1",
+      "description": "This subject phenotype table contains subject ID, biopsy number, time between biopsies, time difference between examination and biopsy, age at examination date, body mass index, waist circumference, hip circumference, waist/hip ratio, fat mass from bioimpedance, whole blood GHbA1C, fasting plasma glucose from Oral Glucose Tolerance Test (OGTT), 120 min plasma glucose from OGTT, fasting plasma insulin from OGTT, Matsuda index, total triglycerides, total cholesterol, LDL cholesterol, HDL cholesterol, alanine aminotransferase, creatinine, systolic blood pressure, and diastolic blood pressure.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00565301.v1.p1",
+          "description": "Age at examination date",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00565302.v1.p1",
+          "description": "Body Mass Index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "B_GHbA1C",
+          "id": "phv00565307.v1.p1",
+          "description": "Whole Blood GHbA1c",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Biopsy_Number",
+          "id": "phv00565298.v1.p1",
+          "description": "Biopsy number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DBP",
+          "id": "phv00565319.v1.p1",
+          "description": "Diastolic blood pressure",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_device_specific",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Difference_Biopsy_and_Visit",
+          "id": "phv00565300.v1.p1",
+          "description": "Time difference between examination and biopsy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "P_gl0",
+          "id": "phv00565308.v1.p1",
+          "description": "Fasting plasma glucose from OGTT (Oral Glucose Tolerance Test)",
+          "concept_id": "ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "P_gl120",
+          "id": "phv00565309.v1.p1",
+          "description": "120 min plasma glucose from OGTT (Oral Glucose Tolerance Test)",
+          "concept_id": "phenx:oral_glucose_tolerance_test",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "P_ins0",
+          "id": "phv00565310.v1.p1",
+          "description": "Fasting plasma insulin from OGTT (Oral Glucose Tolerance Test)",
+          "concept_id": "phenx:fasting_serum_insulin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SBP",
+          "id": "phv00565318.v1.p1",
+          "description": "Systolic blood pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_closeout_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00565297.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "S_alat",
+          "id": "phv00565316.v1.p1",
+          "description": "Alanine aminotransferase",
+          "concept_id": "ncpi:liver_function_alanine_aminotransferase_alt_standard_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "S_hdlc",
+          "id": "phv00565315.v1.p1",
+          "description": "HDL cholesterol",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "S_krea",
+          "id": "phv00565317.v1.p1",
+          "description": "Creatinine",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "S_ldlc",
+          "id": "phv00565313.v1.p1",
+          "description": "LDL cholesterol",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "S_totalc",
+          "id": "phv00565314.v1.p1",
+          "description": "Total cholesterol",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "S_tottg",
+          "id": "phv00565312.v1.p1",
+          "description": "Total triglycerides",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_standard_units_total_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Time_between_Biopsies",
+          "id": "phv00565299.v1.p1",
+          "description": "Time since previous biopsy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WHR",
+          "id": "phv00565305.v1.p1",
+          "description": "Waist/hip ratio",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fatmass",
+          "id": "phv00565306.v1.p1",
+          "description": "Fat mass from Bioimpedance",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hip",
+          "id": "phv00565304.v1.p1",
+          "description": "Hip circumference",
+          "concept_id": "phenx:hip_circumference_hip_circumference_v1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "matsuda",
+          "id": "phv00565311.v1.p1",
+          "description": "Matsuda index (ISIcomp)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "waist",
+          "id": "phv00565303.v1.p1",
+          "description": "Waist circumference",
+          "concept_id": "phenx:waist_circumference_waist_circumference_ncfs",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "METSIM_Subject",
+      "datasetId": "pht004820.v3",
+      "description": "The subject consent file includes subject ID, consent information, sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00251851.v3.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00543159.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00409060.v2.p1",
+          "description": "Source subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID2",
+          "id": "phv00543161.v1.p1",
+          "description": "Source subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00251850.v3.p1",
+          "description": "Deidentified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00409059.v2.p1",
+          "description": "Subject source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE2",
+          "id": "phv00543160.v1.p1",
+          "description": "Subject source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "METSIM_Pedigree",
+      "datasetId": "pht010809.v2",
+      "description": "The subject pedigree table contains family ID, subject ID, father ID, mother ID, biological sex, and monozygotic twin ID.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00480715.v2.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00480717.v2.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00480718.v2.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00480719.v2.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00480716.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TWIN_ID",
+          "id": "phv00480720.v2.p1",
+          "description": "Twin ID for monozygotic twins and multiples. An MZ_TWIN_ID is not provided for dizygotic twins or multiples.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "METSIM_Sample",
+      "datasetId": "pht004822.v4",
+      "description": "This subject sample mapping data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. This table also includes substudy accessions.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00251859.v4.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY",
+          "id": "phv00251860.v4.p1",
+          "description": "Study accession",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00251858.v4.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

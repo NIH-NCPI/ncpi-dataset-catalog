@@ -1,0 +1,210 @@
+{
+  "studyId": "phs000487",
+  "studyName": "Functionally Active Copy Number Variants Associated with Prostate Cancer Risk",
+  "tables": [
+    {
+      "tableName": "Prostate_Cancer_Risk_Subject_Phenotypes",
+      "datasetId": "pht002925.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "Age.At.Diagnosis",
+          "id": "phv00173338.v1.p1",
+          "description": "Individual age at time of diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age.imputed",
+          "id": "phv00173339.v1.p1",
+          "description": "Indicates individuals where age was imputed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Aggressive.Phenotype.D'AmicoCriteria",
+          "id": "phv00173342.v1.p1",
+          "description": "Significance of the disease based upon D'Amico criteria",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_molecular_subtype",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CaseControl",
+          "id": "phv00173337.v1.p1",
+          "description": "Flag that indicates Case and Control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gleason.Score",
+          "id": "phv00173341.v1.p1",
+          "description": "Gleason Score",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PSA.categorical.ng.ml",
+          "id": "phv00173340.v1.p1",
+          "description": "Level of prostate specific antigen (PSA)",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_psa_levels",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00173336.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Prostate_Cancer_Risk_Subject",
+      "datasetId": "pht002923.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00173330.v1.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00173327.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJID",
+          "id": "phv00173329.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00173326.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJ_SOURCE",
+          "id": "phv00173328.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Prostate_Cancer_Risk_Sample",
+      "datasetId": "pht002924.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00173332.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00173335.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00173333.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00173334.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00173331.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Prostate_Cancer_Risk_Sample_Attributes",
+      "datasetId": "pht003118.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00179085.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00179084.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00179087.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00179086.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00179083.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

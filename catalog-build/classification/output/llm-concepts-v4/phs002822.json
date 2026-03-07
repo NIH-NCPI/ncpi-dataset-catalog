@@ -1,0 +1,402 @@
+{
+  "studyId": "phs002822",
+  "studyName": "SU2C-MARK Lung Cancer Consortium - Checkpoint Blockade Response Project",
+  "tables": [
+    {
+      "tableName": "SU2C_MARK_Subject_Phenotypes",
+      "datasetId": "pht012388.v1",
+      "description": "This subject phenotypes data table includes whole exome sample cohorts (n=3 variables), RNA-Seq sample cohorts (n=3 variables), institution, harmonized tumor and normal sample IDs (n=3 variables), tumor RNA-Seq sample quality, age at cancer diagnosis, sex, race, smoking status and quantity, tumor histology and details, initial tumor stage and substage, tumor PD-L1 tumor proportion score (TPS) value and description, local PD-L1 antibody clone, clinical driver identified by targeted sequencing, targeted sequencing platform, PD-L1 diagnosis, treatment given (n=5 variables), progression-free survival (PFS) event and days, best overall response (BOR) (n=2 variables), and overall survival (OS) event and days.",
+      "variables": [
+        {
+          "name": "ADVANCED_DIAGNOSIS_DATE",
+          "id": "phv00504455.v1.p1",
+          "description": "Date of advanced diagnosis relative to PD-(L)1 treatment start",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGENT_PD1",
+          "id": "phv00504457.v1.p1",
+          "description": "PD-(L)1 agent received",
+          "concept_id": "ncpi:concomitant_medication_biological_agents",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGENT_PD1_CATEGORY",
+          "id": "phv00504458.v1.p1",
+          "description": "PD-(L)1 agent category",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_immunotherapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLINICAL_DRIVER",
+          "id": "phv00504453.v1.p1",
+          "description": "Clinical driver identified by targeted sequencing",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_oncogenic_drivers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HARMONIZED_BOR_RECIST",
+          "id": "phv00504464.v1.p1",
+          "description": "RECISTv1.1 measurement corresponding to best overall response (BOR) (e.g., 1 = 100%)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_treatment_response",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HARMONIZED_CONFIRMED_BOR",
+          "id": "phv00504463.v1.p1",
+          "description": "Confirmed best overall response (BOR)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_treatment_response",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HARMONIZED_OS_DAYS",
+          "id": "phv00504466.v1.p1",
+          "description": "Overall survival (OS) in days",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "HARMONIZED_OS_EVENT",
+          "id": "phv00504465.v1.p1",
+          "description": "Overall survival (OS) event",
+          "concept_id": "topmed:chd_death_definite",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "HARMONIZED_PFS_DAYS",
+          "id": "phv00504462.v1.p1",
+          "description": "Progression-free survival (PFS) in days",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "HARMONIZED_PFS_EVENT",
+          "id": "phv00504461.v1.p1",
+          "description": "Progression-free survival (PFS) event",
+          "concept_id": "ncpi:mi_incident_event_outcomes",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "HARMONIZED_SU2C_RNA_TUMOR_SAMPLE_ID_V2",
+          "id": "phv00504439.v1.p1",
+          "description": "Tumor RNA-Seq Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HARMONIZED_SU2C_WES_NORMAL_SAMPLE_ID_V2",
+          "id": "phv00504438.v1.p1",
+          "description": "Normal exome Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HARMONIZED_SU2C_WES_TUMOR_SAMPLE_ID_V2",
+          "id": "phv00504437.v1.p1",
+          "description": "Tumor exome Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGY_DETAIL",
+          "id": "phv00504447.v1.p1",
+          "description": "Tumor histology detail",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGY_HARMONIZED",
+          "id": "phv00504446.v1.p1",
+          "description": "Tumor histology",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INITIAL_STAGE",
+          "id": "phv00504448.v1.p1",
+          "description": "Initial tumor stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INITIAL_STAGE_SUBSTAGE",
+          "id": "phv00504449.v1.p1",
+          "description": "Initial tumor substage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INSTITUTION",
+          "id": "phv00504436.v1.p1",
+          "description": "Institution",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LINE_OF_THERAPY",
+          "id": "phv00504456.v1.p1",
+          "description": "Line of therapy that PD-(L)1 agent was given",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LOCAL_ANTIBODY_CLONE",
+          "id": "phv00504452.v1.p1",
+          "description": "Local PDL1 antibody clone",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATIENT_AGE_AT_DIAGNOSIS",
+          "id": "phv00504441.v1.p1",
+          "description": "Patient age at cancer diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATIENT_RACE",
+          "id": "phv00504443.v1.p1",
+          "description": "Patient race",
+          "concept_id": "topmed:race_us",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATIENT_SEX",
+          "id": "phv00504442.v1.p1",
+          "description": "Patient sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATIENT_SMOKING_PACK_YEARS_HARMONIZED",
+          "id": "phv00504445.v1.p1",
+          "description": "Patient smoking pack years",
+          "concept_id": "ncpi:ever_smoker_baseline_pack_years",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PATIENT_SMOKING_STATUS",
+          "id": "phv00504444.v1.p1",
+          "description": "Patient smoking status",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PDL1_TPS",
+          "id": "phv00504450.v1.p1",
+          "description": "Tumor PDL1 Tumor Proportion Score (TPS) value",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_pdl1_expression",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PDL1_TPS_DESCRIPTION",
+          "id": "phv00504451.v1.p1",
+          "description": "Tumor PDL1 Tumor Proportion Score (TPS) description",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_treatment_response",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRE-TREATMENT_RNA_SAMPLE_QC",
+          "id": "phv00504440.v1.p1",
+          "description": "Tumor RNA-Seq sample quality",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_PLATINUM",
+          "id": "phv00504459.v1.p1",
+          "description": "Platinum treatment prior to PD-(L)1 agent",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_platinum_compounds",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_TKI",
+          "id": "phv00504460.v1.p1",
+          "description": "Tyrosine kinase inhibitor (TKI) prior to PD-(L)1 agent",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_targeted_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RNA_ALL",
+          "id": "phv00504435.v1.p1",
+          "description": "RNA-Seq sample available",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RNA_COHORT_1",
+          "id": "phv00504433.v1.p1",
+          "description": "RNA-Seq sample in cohort 1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RNA_COHORT_2",
+          "id": "phv00504434.v1.p1",
+          "description": "RNA-Seq sample in cohort 2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_PLATFORM",
+          "id": "phv00504454.v1.p1",
+          "description": "Targeted sequencing platform",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00504429.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WES_ALL",
+          "id": "phv00504432.v1.p1",
+          "description": "Exome sample available",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WES_COHORT_1",
+          "id": "phv00504430.v1.p1",
+          "description": "Exome sample in cohort 1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WES_COHORT_2",
+          "id": "phv00504431.v1.p1",
+          "description": "Exome sample in cohort 2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SU2C_MARK_Subject",
+      "datasetId": "pht012386.v1",
+      "description": "This subject consent data table includes subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00504425.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00504426.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00504424.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SU2C_MARK_Sample_Attributes",
+      "datasetId": "pht012389.v1",
+      "description": "This sample attributes data table includes analyte type and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00504468.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00504469.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00504467.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SU2C_MARK_Sample",
+      "datasetId": "pht012387.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00504428.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00504427.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

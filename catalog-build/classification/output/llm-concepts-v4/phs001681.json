@@ -1,0 +1,108 @@
+{
+  "studyId": "phs001681",
+  "studyName": "Transdisciplinary Research Into Cancer of the Lung (TRICL) - Affymetrix",
+  "tables": [
+    {
+      "tableName": "TRICL_AffyAxiomArray_Sample_Attributes",
+      "datasetId": "pht009910.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00427143.v1.p1",
+          "description": "The analyte type of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00427142.v1.p1",
+          "description": "The body part from which the sample is collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00427145.v1.p1",
+          "description": "The tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00427141.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "group_histo",
+          "id": "phv00427144.v1.p1",
+          "description": "Tumor subtype of samples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "site",
+          "id": "phv00427146.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TRICL_AffyAxiomArray_Subject_Phenotypes",
+      "datasetId": "pht009909.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00427136.v1.p1",
+          "description": "De-identified subject ID, CIDR subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00427137.v1.p1",
+          "description": "Numeric subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "disease",
+          "id": "phv00427138.v1.p1",
+          "description": "Disease status: 0=Subjects without cancer; 1=Subjects with lung cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_primary_disease_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00427139.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "typesmok",
+          "id": "phv00427140.v1.p1",
+          "description": "Smoking Status. 1, never smokers; 2, ex-smokers (time since stop smoking <=2 yr); 3, current smokers; 4=ever smokers; -9=missing.",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_tobacco_use_general",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

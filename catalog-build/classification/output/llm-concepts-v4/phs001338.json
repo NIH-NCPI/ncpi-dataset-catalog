@@ -1,0 +1,130 @@
+{
+  "studyId": "phs001338",
+  "studyName": "Tibetan Population History and High Altitude Adaptation Study",
+  "tables": [
+    {
+      "tableName": "Tibetan_High_Altitude_Adaptation_Sample_Attributes",
+      "datasetId": "pht006365.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, tumor status, and Complete Genomics (CG) sequencing version.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00293193.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00293192.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00293194.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00293191.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_VERSION",
+          "id": "phv00293195.v1.p1",
+          "description": "CG sequencing version",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Tibetan_High_Altitude_Adaptation_Sample",
+      "datasetId": "pht006363.v1",
+      "description": "This subject sample mapping file contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00293187.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00293188.v1.p1",
+          "description": "Sample use. Seq_DNA_SNP_CNV: SNP and CNV genotypes derived from sequence data; Seq_DNA_WholeGenome: Whole genome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00293186.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Tibetan_High_Altitude_Adaptation_Subject",
+      "datasetId": "pht006362.v1",
+      "description": "This subject consent file includes subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00293185.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00293184.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Tibetan_High_Altitude_Adaptation_Subject_Phenotypes",
+      "datasetId": "pht006364.v1",
+      "description": "This subject phenotype data table includes subject's population. All subjects are from the Tibetan Plateau.",
+      "variables": [
+        {
+          "name": "Population",
+          "id": "phv00293190.v1.p1",
+          "description": "Population",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00293189.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

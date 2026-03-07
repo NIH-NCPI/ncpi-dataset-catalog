@@ -1,0 +1,108 @@
+{
+  "studyId": "phs001113",
+  "studyName": "Darmkrebs: Chancen der Verhutung durch Screening (DACHS)",
+  "tables": [
+    {
+      "tableName": "GECCO_DACHS_Subject_Phenotypes",
+      "datasetId": "pht005730.v1",
+      "description": "Subject ID, age, race, gender, family history of colorectal cancer, and cancer site of participants with or without colorectal cancer and involved in the \"Darmkrebs: Chancen der Verhutung durch Screening (DACHS)\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266174.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cagebq",
+          "id": "phv00266176.v1.p1",
+          "description": "Age, calculated age, birth to enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dem_race",
+          "id": "phv00266178.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "famcolon",
+          "id": "phv00266175.v1.p1",
+          "description": "Family history of colorectal cancer",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00266179.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "site",
+          "id": "phv00266177.v1.p1",
+          "description": "Cancer site, ICD-9",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GECCO_DACHS_Sample_Attributes",
+      "datasetId": "pht005731.v1",
+      "description": "Sample ID, analyte type, body site and histological type of sample, and tumor status of participants with or without colorectal cancer and involved in the \"Darmkrebs: Chancen der Verhutung durch Screening (DACHS)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00266182.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00266181.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00266183.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00266184.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266180.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

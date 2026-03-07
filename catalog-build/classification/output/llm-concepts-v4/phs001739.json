@@ -1,0 +1,234 @@
+{
+  "studyId": "phs001739",
+  "studyName": "Role of the Cervico-Vaginal Microbiome in Spontaneous Preterm Birth",
+  "tables": [
+    {
+      "tableName": "sPTB_Subject_Phenotypes",
+      "datasetId": "pht008795.v1",
+      "description": "This subject phenotypes data table includes visit number, race of participant (n=2 variables), spontaneous preterm birth (sPTB), labor, delivery, and parity statuses, vaginal microbiota community state type, history of preterm birth, number of samples per subject, and gestational age at delivery (n=3 variables).",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404273.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cst",
+          "id": "phv00404280.v1.p1",
+          "description": "Vaginal Microbiota Community state type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delGA",
+          "id": "phv00404284.v1.p1",
+          "description": "Gestational age at delivery",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delStatus",
+          "id": "phv00404279.v1.p1",
+          "description": "Delivery status in character",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delStatus <32w",
+          "id": "phv00404286.v1.p1",
+          "description": "Gestational age at delivery less than 32 weeks",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delStatus <34w",
+          "id": "phv00404285.v1.p1",
+          "description": "Gestational age at delivery less than 34 weeks",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "delStatus.n",
+          "id": "phv00404278.v1.p1",
+          "description": "Spontaneous Preterm Birth or Term delivery  for participant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hxPTB",
+          "id": "phv00404282.v1.p1",
+          "description": "History of  Preterm Birth",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_gestational_age_term",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "nSamples",
+          "id": "phv00404283.v1.p1",
+          "description": "Number of samples per subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "nullip",
+          "id": "phv00404281.v1.p1",
+          "description": "Parity status of participant",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_count_history_pregnancy_outcomes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00404275.v1.p1",
+          "description": "Ethnicity of Participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "raceChar",
+          "id": "phv00404277.v1.p1",
+          "description": "Race in character",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sPTB",
+          "id": "phv00404276.v1.p1",
+          "description": "Spontaneous Preterm Birth status of participant",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_gestational_age_term",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "visit",
+          "id": "phv00404274.v1.p1",
+          "description": "Visit number (1/2/3)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "sPTB_Sample_Attributes",
+      "datasetId": "pht008796.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, histological type, bacterial load, and total number of 16S rRNA gene sequences for each sample.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00404289.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00404288.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": "topmed:pregnancy_reproductive",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00404291.v1.p1",
+          "description": "Histological Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00404290.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00404287.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Total Sequences",
+          "id": "phv00404293.v1.p1",
+          "description": "Total number of 16S rRNA gene sequences for each sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bacterialLoad",
+          "id": "phv00404292.v1.p1",
+          "description": "Bacterial load (total abundance) estimated using 16S rRNA gene qPCR",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "sPTB_Subject",
+      "datasetId": "pht008793.v1",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00404270.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404269.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "sPTB_Sample",
+      "datasetId": "pht008794.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00404272.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404271.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "studyId": "phs000908",
+  "studyName": "Identification of Rare Variants in PD through Whole Exome Sequencing",
+  "tables": [
+    {
+      "tableName": "PD_Rare_Variants_Subject_Phenotypes",
+      "datasetId": "pht004708.v1",
+      "description": "This subject phenotype table contains de-identified subject ID, onset age for cases, race, ethnicity, exam age for controls and subject gender.",
+      "variables": [
+        {
+          "name": "Age_Exam_Controls",
+          "id": "phv00226217.v1.p1",
+          "description": "Age of exam for controls",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_Onset",
+          "id": "phv00226213.v1.p1",
+          "description": "Age of onset for cases",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00226215.v1.p1",
+          "description": "Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00226214.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226212.v1.p1",
+          "description": "Unique, de-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00226218.v1.p1",
+          "description": "Subject gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PD_Rare_Variants_Pedigree",
+      "datasetId": "pht004706.v1",
+      "description": "This pedigree table includes de-identified family ID, subject ID, father ID, mother ID and subject gender.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00226204.v1.p1",
+          "description": "Unique, de-identified Family or Pedigree ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00226206.v1.p1",
+          "description": "Unique, de-identified Father ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00226207.v1.p1",
+          "description": "Unique, de-identified Mother ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00226208.v1.p1",
+          "description": "Subject gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226205.v1.p1",
+          "description": "Unique, de-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PD_Rare_Variants_Sample_Attributes",
+      "datasetId": "pht004709.v1",
+      "description": "This sample attributes table contains de-identified sample ID, body site where sample was collected, analyte type, tumor status and capture kit.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00226221.v1.p1",
+          "description": "Analyte type of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00226220.v1.p1",
+          "description": "Body part from which sample is collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CAPTURE_KIT",
+          "id": "phv00226223.v1.p1",
+          "description": "Whole exome sequencing capture method",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00226222.v1.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00226219.v1.p1",
+          "description": "Unique, de-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PD_Rare_Variants_Subject",
+      "datasetId": "pht004705.v1",
+      "description": "The subject consent file includes de-identified subject IDs, consent information, and case control status for Parkinson disease.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00226203.v1.p1",
+          "description": "Case control status for Parkinson disease",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_alzheimers_dementia_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00226202.v1.p1",
+          "description": "Subject consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226201.v1.p1",
+          "description": "Unique, de-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PD_Rare_Variants_Sample",
+      "datasetId": "pht004707.v1",
+      "description": "This subject sample mapping data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00226210.v1.p1",
+          "description": "Unique, de-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00226211.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226209.v1.p1",
+          "description": "Unique, de-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

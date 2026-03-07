@@ -1,0 +1,282 @@
+{
+  "studyId": "phs000615",
+  "studyName": "NINDS Stroke Genetics Network (SiGN)",
+  "tables": [
+    {
+      "tableName": "IschemicStroke_Subject_Phenotypes",
+      "datasetId": "pht003307.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00202403.v1.p1",
+          "description": "Case/control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CAD",
+          "id": "phv00190679.v1.p1",
+          "description": "Coronary artery disease defined as 'yes' for the presence of an MI, CABG or stent, 'no', otherwise.",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "CCSevidence",
+          "id": "phv00190668.v1.p1",
+          "description": "The CCS evidence designation as described by Ay, H. et al. An evidence-based causative classification system for acute ischemic stroke. Ann Neurol 58, 688-697 <a href=\"http://www.ncbi.nlm.nih.gov/pubmed/16240340\">(PMID: 16240340)</a>",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CCStype",
+          "id": "phv00190667.v1.p1",
+          "description": "The CCS classification assignment as described by Ay, H. et al. An evidence-based causative classification system for acute ischemic stroke. Ann Neurol 58, 688-697 <a href=\"http://www.ncbi.nlm.nih.gov/pubmed/16240340\">(PMID: 16240340)</a>",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOAST",
+          "id": "phv00190671.v1.p1",
+          "description": "The TOAST subtype classification for cases only.  TOAST classification as defined by Adams et. al., Stroke 1993;24;35-41; <a href=\"http://www.ncbi.nlm.nih.gov/pubmed/7678184\">(PMID: 7678184)</a>. Options 6, 7, and 8 were used whenever possible rather than option 5 if the amount of detail was known.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00190673.v1.p1",
+          "description": "Age at first stroke for cases; age at enrollment for controls",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "atrialFibrillation",
+          "id": "phv00190678.v1.p1",
+          "description": "Has a doctor ever told you that you have atrial fibrillation?",
+          "concept_id": "ncpi:ecg_atrial_fibrillation",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "diabetesMellitus",
+          "id": "phv00190677.v1.p1",
+          "description": "Has a doctor ever told you that you have diabetes mellitus?",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00190675.v1.p1",
+          "description": "Self reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "firstStroke",
+          "id": "phv00190669.v1.p1",
+          "description": "Is the index stroke event the first stroke for the individual? An index stroke is the stroke that was used to qualify the individual for the study.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00190672.v1.p1",
+          "description": "Self reported gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hypertension",
+          "id": "phv00190676.v1.p1",
+          "description": "Has a doctor ever told you that you have hypertension or high blood pressure?",
+          "concept_id": "ncpi:bp_systolic_hypertension_status",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "numberOfStrokes",
+          "id": "phv00190670.v1.p1",
+          "description": "For cases, the number of strokes.  If the index event is the first stroke, enter 1.   For controls enter 0. Leave blank if unknown. According to the WHO definition and/or a focal area of infarction seen on CT or MRI imaging with symptoms that correlate. Silent infarction and TIA will not count.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00190674.v1.p1",
+          "description": "Self reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smokingStatus",
+          "id": "phv00190680.v1.p1",
+          "description": "'CURRENT' defined as cigarette smoking within last 30 days, 'FORMER' defined as more than 100 cigarettes in one's lifetime but no smoking within the last 30 days; 'NEVER' defined as less than 100 cigarettes smoked in one's lifetime.",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "studyID",
+          "id": "phv00190666.v1.p1",
+          "description": "Identifier of source study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00190665.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IschemicStroke_Sample",
+      "datasetId": "pht003306.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00190663.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00202401.v1.p1",
+          "description": "Coriell for HapMap samples, HRS for HRS investigator controls, blank otherwise",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00190664.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00202402.v1.p1",
+          "description": "Coriell for HapMap samples, HRS for HRS investigator controls, blank otherwise",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00190662.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IschemicStroke_Sample_Attributes",
+      "datasetId": "pht003308.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00190683.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00190682.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00202404.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00190684.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00190681.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IschemicStroke_Subject",
+      "datasetId": "pht003305.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00190660.v1.p1",
+          "description": "Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00202400.v1.p1",
+          "description": "Coriell ID for HapMap samples (subjects), HRS subject ID for HRS investigator controls, blank otherwise",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00190659.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00202399.v1.p1",
+          "description": "Coriell for HapMap samples (subjects), HRS for HRS investigator controls, blank otherwise",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

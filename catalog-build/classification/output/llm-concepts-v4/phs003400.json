@@ -1,0 +1,169 @@
+{
+  "studyId": "phs003400",
+  "studyName": "Dysregulation of Naive T Cell Quiescence during Aging",
+  "tables": [
+    {
+      "tableName": "TEA_Seq_Aging_Sample_Attributes",
+      "datasetId": "pht013826.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin, analyte type, tumor status, hashtag oligo sequence, and histological type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00532363.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00532362.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HASHTAG_SEQUENCE",
+          "id": "phv00532365.v1.p1",
+          "description": "The sequence of hash oligo for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00532366.v1.p1",
+          "description": "The source of cells",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00532364.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00532361.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TEA_Seq_Aging_Subject",
+      "datasetId": "pht013822.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00532352.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00532353.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00532351.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TEA_Seq_Aging_Sample",
+      "datasetId": "pht013823.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and to pooled sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "POOLED_SAMPLE_ID",
+          "id": "phv00532356.v1.p1",
+          "description": "Pooled Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00532355.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00532354.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TEA_Seq_Aging_GEO",
+      "datasetId": "pht013824.v1",
+      "description": "This sample GEO mapping data table maps sample IDs to corresponding GEO accession numbers.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00532358.v1.p1",
+          "description": "GEO Accession",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00532357.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TEA_Seq_Aging_Subject_Phenotypes",
+      "datasetId": "pht013825.v1",
+      "description": "This subject phenotypes data table reports each subject's age at enrollment.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00532360.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00532359.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

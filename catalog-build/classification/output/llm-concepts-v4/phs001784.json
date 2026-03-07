@@ -1,0 +1,202 @@
+{
+  "studyId": "phs001784",
+  "studyName": "Functional Genomics and Molecular Imaging of Liver Disease and Cancer",
+  "tables": [
+    {
+      "tableName": "HCC_Imaging_Subject_Phenotypes",
+      "datasetId": "pht009002.v1",
+      "description": "This subject phenotypes data table includes demographic information (age, ancestry, and gender),  hepatocellular carcinoma status and prognosis (serum alpha fetoprotein level, tumor size, and detection of microvascular invasion), liver disease status (Child-Pugh score and fluorocholine uptake on PET/CT), number of follow-up days from surgery, and censored survival status at follow up.",
+      "variables": [
+        {
+          "name": "AFP",
+          "id": "phv00407033.v1.p1",
+          "description": "Serum alpha fetoprotein level",
+          "concept_id": "ncpi:liver_function_alpha_fetoprotein",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age",
+          "id": "phv00407027.v1.p1",
+          "description": "Age at treatment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CP_Score",
+          "id": "phv00407034.v1.p1",
+          "description": "Child-Pugh Score",
+          "concept_id": "ncpi:liver_function_liver_disease_scores",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MVI",
+          "id": "phv00407035.v1.p1",
+          "description": "Microvascular invasion detected in specimen",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00407026.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "censored_1",
+          "id": "phv00407028.v1.p1",
+          "description": "Censored survival status at follow_up",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_follow_up_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "censoring_days",
+          "id": "phv00407029.v1.p1",
+          "description": "Number of follow-up days from surgery",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fch_uptake",
+          "id": "phv00407030.v1.p1",
+          "description": "Fluorocholine uptake on PET/CT",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00407031.v1.p1",
+          "description": "Sex of patient",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tumor_size",
+          "id": "phv00407036.v1.p1",
+          "description": "Tumor size (greater or less than 4 cm)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HCC_Imaging_Sample_Attributes",
+      "datasetId": "pht009003.v1",
+      "description": "This sample attributes table includes the body site where samples were collected, analyte type, histological type, and tumor status (primary, metastatic, or transformed cell line).",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00407039.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00407038.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00407041.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00407040.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00407042.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00407037.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HCC_Imaging_Subject",
+      "datasetId": "pht009000.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, and affection status with respect to hepatocellular carcinoma.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00407023.v1.p1",
+          "description": "Case control status of the subject for hepatocellular carcinoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00407022.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00407021.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HCC_Imaging_Sample",
+      "datasetId": "pht009001.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00407025.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00407024.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

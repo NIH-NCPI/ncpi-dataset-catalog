@@ -1,0 +1,305 @@
+{
+  "studyId": "phs000921",
+  "studyName": "NHLBI TOPMed: Study of African Americans, Asthma, Genes and Environment (SAGE)",
+  "tables": [
+    {
+      "tableName": "TOPMed_SAGE_Subject_Phenotypes",
+      "datasetId": "pht004883.v4",
+      "description": "This subject phenotype table includes subject age, gender, race, BMI, affection status for asthma, smoking status, hospitalization due to asthma, steroid treatment, bronchodilator response after treatment, NO2 and PM25 air pollution measurement in lifetime average, and previously assigned TOPMed subject ID.",
+      "variables": [
+        {
+          "name": "BMI",
+          "id": "phv00252286.v4.p2",
+          "description": "Body Mass index calculated from Height and Weight",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "SMOKE_CURRENT",
+          "id": "phv00347787.v3.p2",
+          "description": "Does participant currently smoke at least 1 cig per day?",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00252287.v4.p2",
+          "description": "Case or Control status for asthma",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_otitis_media",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00252283.v4.p2",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ASTHMA_HOSP_12MO",
+          "id": "phv00347788.v3.p2",
+          "description": "In the last 12 months, has participant been hospitalized because of asthma?",
+          "concept_id": "ncpi:hospitalization_hospital_admissions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00541825.v1.p2",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PRIOR_SUBJECT_ID",
+          "id": "phv00494765.v1.p2",
+          "description": "Previously assigned TOPMed subject identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STEROID_12MO",
+          "id": "phv00347789.v3.p2",
+          "description": "In the last 12 months, has participant been prescribed oral steroids (such as prednisone pills or prelone liquid) to help control asthma?",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_oral_systemic_steroids",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252282.v4.p2",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "deltaFEV1",
+          "id": "phv00347790.v3.p2",
+          "description": "Bronchodilator response after 4 puffs of Proventil HFA Albuterol",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_bronchodilator_response_fev1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "no2_lifetime",
+          "id": "phv00347791.v3.p2",
+          "description": "No2 Air Pollution measurement lifetime average",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pm25_lifetime",
+          "id": "phv00347792.v3.p2",
+          "description": "Pm25 Air Pollution measurement lifetime average",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_SAGE_WGS_Sample_Attributes",
+      "datasetId": "pht004884.v4",
+      "description": "The whole genome sequencing (WGS) sample attributes table includes body site where sample was collected, analyte type, tumor status, sequencing center, funding source, TOPMed phase, project, study name, and age at sample collection.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00252290.v4.p2",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00252289.v4.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FUNDING_SOURCE",
+          "id": "phv00347793.v3.p2",
+          "description": "Funding provided for sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00252291.v4.p2",
+          "description": "Tumor Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00252288.v4.p2",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00252292.v4.p2",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_PHASE",
+          "id": "phv00347794.v3.p2",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_PROJECT",
+          "id": "phv00347795.v3.p2",
+          "description": "Type of project in the TOPMed Group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_collection",
+          "id": "phv00494766.v1.p2",
+          "description": "Age at collection of sample",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_SAGE_RNASeq_Sample_Attributes",
+      "datasetId": "pht014721.v1",
+      "description": "The RNASeq sample attributes table includes body site where sample was collected, analyte type, tumor status, sequencing center, funding source, and age at sample collection.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00541830.v1.p2",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00541829.v1.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FUNDING_SOURCE",
+          "id": "phv00541833.v1.p2",
+          "description": "Funding provided for sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00541831.v1.p2",
+          "description": "Tumor Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00541828.v1.p2",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00541832.v1.p2",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_collection",
+          "id": "phv00541834.v1.p2",
+          "description": "Age at collection of sample",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_SAGE_Subject",
+      "datasetId": "pht004881.v5",
+      "description": "The subject consent data table includes subject IDs, consent group information, sex of subjects, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00252275.v4.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": "ncpi:subcohort_consent_group",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00494762.v1.p2",
+          "description": "Sex/gender of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252274.v4.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_SAGE_Sample",
+      "datasetId": "pht004882.v4",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00252279.v4.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252278.v4.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

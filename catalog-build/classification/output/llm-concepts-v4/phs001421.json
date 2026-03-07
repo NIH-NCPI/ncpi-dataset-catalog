@@ -1,0 +1,250 @@
+{
+  "studyId": "phs001421",
+  "studyName": "Whole Exome Sequencing and Methylation Profiling of Uveal Melanoma",
+  "tables": [
+    {
+      "tableName": "Uveal_Melanoma_Pathogenesis_Subject_Phenotypes",
+      "datasetId": "pht007027.v1",
+      "description": "This subject phenotype table contains subject IDs, sex, eye affected by uveal melanoma, whether the tumor involved the ciliary body, the largest tumor basal diameter, thickness of the tumor, whether the tumor invaded extraocular structures, gene expression class, initial treatment, age at the first day of treatment, metastatic status, and whether the subject died of melanoma related causes.",
+      "variables": [
+        {
+          "name": "Age_at_initial_treatment",
+          "id": "phv00323607.v1.p1",
+          "description": "Age of the subject on the first day of treatment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Extraocular_Invasion",
+          "id": "phv00323604.v1.p1",
+          "description": "Whether the subject's tumor invaded extraocular structures",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Eye",
+          "id": "phv00323599.v1.p1",
+          "description": "The eye affected by uveal melanoma",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Initial_Treatment",
+          "id": "phv00323606.v1.p1",
+          "description": "Initial treatment of patients on presentation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Involves_Ciliary_Body",
+          "id": "phv00323600.v1.p1",
+          "description": "Whether the tumor involved the ciliary body",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LBD",
+          "id": "phv00323602.v1.p1",
+          "description": "The largest tumor basal diameter",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Melanoma_specific_morality",
+          "id": "phv00323609.v1.p1",
+          "description": "Whether the subject died of melanoma related causes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Metastasis",
+          "id": "phv00323608.v1.p1",
+          "description": "Metastatic status of the uveal meloma tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Molecular_Class",
+          "id": "phv00323605.v1.p1",
+          "description": "Gene Expression Class of the subject. Class 1 is low risk of metastasis, and Class 2 is high risk.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Predom_CB",
+          "id": "phv00323601.v1.p1",
+          "description": "Whether the tumor involved primarily the ciliary body",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00323597.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00323598.v1.p1",
+          "description": "Gender of the participant.",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Thickness",
+          "id": "phv00323603.v1.p1",
+          "description": "The thickness of the tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Uveal_Melanoma_Pathogenesis_Subject",
+      "datasetId": "pht007025.v1",
+      "description": "The subject consent file includes subject IDs, consent information, subject aliases, and case control status of the subject for uveal melanoma.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00323591.v1.p1",
+          "description": "Presence or Absence of Uveal Melanoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00323588.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00323590.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00323587.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00323589.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Uveal_Melanoma_Pathogenesis_Sample",
+      "datasetId": "pht007026.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00323593.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00323594.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00323596.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00323595.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00323592.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Uveal_Melanoma_Pathogenesis_Sample_Attributes",
+      "datasetId": "pht007028.v1",
+      "description": "This sample attributes table contains sample IDs, body type, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00323612.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00323611.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00323613.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00323610.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

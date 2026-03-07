@@ -1,0 +1,625 @@
+{
+  "studyId": "phs000472",
+  "studyName": "Estrogen Receptor Positive Breast Cancer: Aromatase Inhibitor Response Study",
+  "tables": [
+    {
+      "tableName": "BRC77_Subject_Phenotypes",
+      "datasetId": "pht002595.v2",
+      "description": "The subject phenotype data table includes age of enrollment (n=1 variable), tumor pathology (n=10 variables; baseline breast cancer luminal subtype, tumor shape, grade, maximum dimension, number of positive nodes, pathological tumor and node stage, and general comments), PEPI RFS score (n=2 variables), WHO clinical response (n=1 variable) and breast cancer biomarkers (n=15 variables; ER+, Ki-67, and Her2).",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00167413.v1.p1",
+          "description": "Age at enrollment to study",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_ER",
+          "id": "phv00167424.v1.p1",
+          "description": "Baseline ER level",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_Grade",
+          "id": "phv00167421.v1.p1",
+          "description": "Baseline Grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_Grade2",
+          "id": "phv00167422.v1.p1",
+          "description": "Baseline Grade (transformed)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_Grade3",
+          "id": "phv00167423.v1.p1",
+          "description": "Baseline Grade (transformed)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_HER2_level",
+          "id": "phv00167419.v1.p1",
+          "description": "Baseline Her2 level",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_her2_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_Ki67",
+          "id": "phv00167425.v1.p1",
+          "description": "Baseline Ki67 level",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_ki67_proliferation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_Lobular_Ductal",
+          "id": "phv00167420.v1.p1",
+          "description": "Tumor shape",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_morphology_features",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_Luminal_Type",
+          "id": "phv00167414.v1.p1",
+          "description": "Breast cancer luminal A/B subtype",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_molecular_subtype",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Clinical_Response",
+          "id": "phv00167440.v1.p1",
+          "description": "WHO clinical response",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_treatment_response",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ER_2wk",
+          "id": "phv00167433.v1.p1",
+          "description": "ER level at 2 Week",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ER_4wk",
+          "id": "phv00167434.v1.p1",
+          "description": "ER level at 4 Week",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ER_Change",
+          "id": "phv00167437.v1.p1",
+          "description": "ER arithmetic change between end of treatment and baseline",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ER_End.of.Treatment",
+          "id": "phv00167436.v1.p1",
+          "description": "ER level at end of treatment (latest among 2 week 4 week or at Surgery)",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ER_Surg",
+          "id": "phv00167435.v1.p1",
+          "description": "ER level at Surgery",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ki67_2wk",
+          "id": "phv00167426.v1.p1",
+          "description": "Ki67 level at 2 Week",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_ki67_proliferation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ki67_4wk",
+          "id": "phv00167427.v1.p1",
+          "description": "Ki67 level at 4 Week",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_ki67_proliferation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ki67_Change",
+          "id": "phv00167430.v1.p1",
+          "description": "Ki67 arithmetic change between end of treatment and baseline",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_ki67_proliferation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ki67_End.of.Treatment",
+          "id": "phv00167429.v1.p1",
+          "description": "Ki67 level at end of treatment (latest among 2 week 4 week or at Surgery)",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_ki67_proliferation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ki67_PercentageChange",
+          "id": "phv00167431.v1.p1",
+          "description": "Ki67 percentage change between end of treatment and baseline",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_ki67_proliferation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ki67_Surg",
+          "id": "phv00167428.v1.p1",
+          "description": "Ki67 level at Surgery",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_ki67_proliferation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PEPI_Score",
+          "id": "phv00167438.v1.p1",
+          "description": "PEPI RFS score based on Matthew Ellis JNCI 2008 paper; PMID: 18812550 (https://www.ncbi.nlm.nih.gov/pubmed/18812550)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_prognostic_scores",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PEPI_Zero",
+          "id": "phv00167439.v1.p1",
+          "description": "Indicator for PEPI being 0",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Responder_Ki67",
+          "id": "phv00167432.v1.p1",
+          "description": "Responder based on Ki67 at end of treatment",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_treatment_response",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SubjID",
+          "id": "phv00167408.v2.p1",
+          "description": "Deidentified Patient ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "aCGH_id",
+          "id": "phv00167411.v1.p1",
+          "description": "ACGH ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cohort",
+          "id": "phv00167409.v1.p1",
+          "description": "POL / Z1031 A or B",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "comment",
+          "id": "phv00167412.v1.p1",
+          "description": "General comments from pathology report",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gex_id",
+          "id": "phv00167410.v1.p1",
+          "description": "Gene expression array ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "maxsxdim",
+          "id": "phv00167415.v1.p1",
+          "description": "Size of  tumor maximum dimension",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pathN",
+          "id": "phv00167418.v1.p1",
+          "description": "Pathological Node stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pathT",
+          "id": "phv00167417.v1.p1",
+          "description": "Pathological Tumor stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "posnodes",
+          "id": "phv00167416.v1.p1",
+          "description": "Number of positive nodes",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_lymph_node_examination",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRC77_Pre_Post_Subject_Phenotypes",
+      "datasetId": "pht006830.v1",
+      "description": "The pre- and post-subject phenotype data table includes age, sequence of events (n=9 variables; event and recurrence of event, adverse event, follow-up time, survival status, and cause of death), surgical status (n=2 variables), tumor pathology (n=6 variables; baseline tumor type and grade, number of positive nodes, node and tumor stage, and tumor dimension), PEPI RFS score (n=2 variables), and breast cancer biomarkers (n=6 variables; Allred ER+ score and Ki-67).",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00313199.v1.p1",
+          "description": "Age in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_Allred_ER",
+          "id": "phv00313181.v1.p1",
+          "description": "Baseline Allred ER score",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_Grade",
+          "id": "phv00313198.v1.p1",
+          "description": "I vs. II vs. III by WHO criterion",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_Lobular_Ductal",
+          "id": "phv00313197.v1.p1",
+          "description": "Baseline tumor type",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_morphology_features",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EOT ki67",
+          "id": "phv00313179.v1.p1",
+          "description": "End of treatment ki67 level",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_ki67_proliferation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EOT_Allred_ER",
+          "id": "phv00313182.v1.p1",
+          "description": "End of treatment Allred ER score",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PEPI_Score",
+          "id": "phv00313184.v1.p1",
+          "description": "PEPI RFS score based on Matthew Ellis JNCI 2008 paper; PMID: 18812550 (https://www.ncbi.nlm.nih.gov/pubmed/18812550)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_prognostic_scores",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SubjID",
+          "id": "phv00313177.v1.p1",
+          "description": "McDonnell Genome Institute subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Surgical ki67",
+          "id": "phv00313180.v1.p1",
+          "description": "Ki67 level at surgery",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_ki67_proliferation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Surgical_Allred_ER",
+          "id": "phv00313183.v1.p1",
+          "description": "Allred ER score at surgery",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "adevent",
+          "id": "phv00313194.v1.p1",
+          "description": "Binary variable for adverse event occurrence",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "baseline_ki67",
+          "id": "phv00313178.v1.p1",
+          "description": "Baseline Ki67 level",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_ki67_proliferation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cause_of_death",
+          "id": "phv00313196.v1.p1",
+          "description": "Cause of death",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_cause_of_death",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cdeathf",
+          "id": "phv00313203.v1.p1",
+          "description": "Full cause of death",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dfs_stat",
+          "id": "phv00313200.v1.p1",
+          "description": "Disease-free survival status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_disease_free_survival",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dfsevent",
+          "id": "phv00313201.v1.p1",
+          "description": "Recurrence event interrupting disease-free status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_disease_free_survival",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dfstxt",
+          "id": "phv00313202.v1.p1",
+          "description": "Description of recurrence event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "event_site",
+          "id": "phv00313193.v1.p1",
+          "description": "Site of recurrence",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fu_time",
+          "id": "phv00313195.v1.p1",
+          "description": "Patient follow-up time",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "maxsxdim",
+          "id": "phv00313188.v1.p1",
+          "description": "Size of tumor maximum dimension",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pathN",
+          "id": "phv00313187.v1.p1",
+          "description": "Pathological Node stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pathT",
+          "id": "phv00313189.v1.p1",
+          "description": "Pathological Tumor stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "patient_id",
+          "id": "phv00313176.v1.p1",
+          "description": "De-identified patient ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pepizero",
+          "id": "phv00313185.v1.p1",
+          "description": "Indicator for a PEPI value of 0",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "posnodes",
+          "id": "phv00313186.v1.p1",
+          "description": "Number of positive nodes",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_lymph_node_examination",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "post_sx_evaluation",
+          "id": "phv00313191.v1.p1",
+          "description": "Was there a post-surgical evaluation?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sxperf",
+          "id": "phv00313190.v1.p1",
+          "description": "Was surgery performed?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "type_of_event",
+          "id": "phv00313192.v1.p1",
+          "description": "Description of recurrence event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRC77_Sample_Attributes",
+      "datasetId": "pht002596.v2",
+      "description": "The sample attributes data table includes sample type, body site where sample was extracted, sample analyte type, histological type, and time of tumor sample collection.",
+      "variables": [
+        {
+          "name": "AnalyteType",
+          "id": "phv00167445.v2.p1",
+          "description": "Sample nucleic acid type",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_sample_characteristics",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BodySite",
+          "id": "phv00167444.v2.p1",
+          "description": "Body site from which sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HistologicalType",
+          "id": "phv00167446.v2.p1",
+          "description": "Type of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "IsTumor",
+          "id": "phv00167443.v2.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SampID",
+          "id": "phv00167442.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Timepoint",
+          "id": "phv00313204.v1.p1",
+          "description": "Time of sample collection (tumor)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRC77_Subject",
+      "datasetId": "pht002593.v2",
+      "description": "The subject consent data table contains subject IDs, consent group information, and affection status for estrogen receptor positive (ER+) breast cancer.",
+      "variables": [
+        {
+          "name": "Affection_Status",
+          "id": "phv00167405.v2.p1",
+          "description": "Affection status of the subject for estrogen receptor positive (ER+) breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Consent",
+          "id": "phv00167404.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SubjID",
+          "id": "phv00167403.v2.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRC77_Sample",
+      "datasetId": "pht002594.v2",
+      "description": "The subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00167808.v2.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SampID",
+          "id": "phv00167407.v2.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SubjID",
+          "id": "phv00167406.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

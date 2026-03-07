@@ -1,0 +1,225 @@
+{
+  "studyId": "phs001848",
+  "studyName": "Human PI3Kgamma Deficiency with Immunodeficiency and Tissue Immunopathology",
+  "tables": [
+    {
+      "tableName": "PIK3CG_Subject_Phenotypes",
+      "datasetId": "pht009206.v1",
+      "description": "This subject phenotype table includes subject's sex and diagnosis criteria (n=6 variables; immunodeficiency, immunopathology, antibody defects, cytopenias, lung disease, and gut disease).",
+      "variables": [
+        {
+          "name": "Antibody defects",
+          "id": "phv00412599.v1.p1",
+          "description": "Diagnosis criteria - Antibody defects",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Cytopenias",
+          "id": "phv00412600.v1.p1",
+          "description": "Diagnosis criteria - Cytopenias",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gut disease",
+          "id": "phv00412602.v1.p1",
+          "description": "Diagnosis criteria - Gut disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Immunodeficiency",
+          "id": "phv00412597.v1.p1",
+          "description": "Diagnosis criteria - Immunodeficiency",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Immunopathology",
+          "id": "phv00412598.v1.p1",
+          "description": "Diagnosis criteria - Immunopathology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Lung disease",
+          "id": "phv00412601.v1.p1",
+          "description": "Diagnosis criteria - Lung disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00412595.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00412596.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PIK3CG_Pedigree",
+      "datasetId": "pht009204.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and sex of subjects.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00412588.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00412591.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00412590.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00412592.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00412589.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PIK3CG_Sample_Attributes",
+      "datasetId": "pht009207.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, and genotyping center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00412605.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00412604.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00412607.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00412606.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00412603.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PIK3CG_Subject",
+      "datasetId": "pht009203.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, and affection status for PIK3CG mutations.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00412587.v1.p1",
+          "description": "Case control status of the subject for PIK3CG mutations",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00412586.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00412585.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PIK3CG_Sample",
+      "datasetId": "pht009205.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00412594.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00412593.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

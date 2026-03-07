@@ -1,0 +1,218 @@
+{
+  "studyId": "phs003609",
+  "studyName": "Virginia PrIMeD Study",
+  "tables": [
+    {
+      "tableName": "VA_PrIMeD_Subject_Phenotypes",
+      "datasetId": "pht014785.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00542185.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTO_COND",
+          "id": "phv00542189.v1.p1",
+          "description": "Please select all of the autoimmune conditions diagnosed among your child's blood relatives:",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTO_COND_4_TEXT",
+          "id": "phv00542190.v1.p1",
+          "description": "If response in AUTO_COND is Other, specify",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AUTO_HIST",
+          "id": "phv00542188.v1.p1",
+          "description": "Does your child have a family history of autoimmune disease, other than type 1 diabetes?",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_family_history_autoimmune",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DKA",
+          "id": "phv00542194.v1.p1",
+          "description": "Has your child ever had diabetic ketoacidosis (DKA)?",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GRS",
+          "id": "phv00542197.v1.p1",
+          "description": "Genetic risk score",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "GRS_HLA",
+          "id": "phv00542195.v1.p1",
+          "description": "Component of the T1D Genetic Risk Score (T1D GRS) that is due to 26 SNPs in the HLA region in Table  T1D_GRS_data (aubmitted) SNPs rs6906897 (chr6:29415636) through rs9469341 (chr6:33035877)",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "GnonHLA",
+          "id": "phv00542196.v1.p1",
+          "description": "Component of the T1D Genetic Risk Score (T1D GRS) that is due to SNPs that are not in the HLA region",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00542186.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Risk",
+          "id": "phv00542198.v1.p1",
+          "description": "Derived Genetic risk based on Genetic risk score (GRS)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00542184.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1D_DIAG",
+          "id": "phv00542191.v1.p1",
+          "description": "Has your child ever been diagnosed with type 1 diabetes?",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type1_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1D_DIAG_AGE",
+          "id": "phv00542192.v1.p1",
+          "description": "At what age was your child diagnosed with diabetes?",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1D_HIST",
+          "id": "phv00542187.v1.p1",
+          "description": "Does the child have a family history of Type 1 diabetes?",
+          "concept_id": "ncpi:family_medical_history_diabetes_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1D_HOSP",
+          "id": "phv00542193.v1.p1",
+          "description": "Has your child ever been hospitalized for type 1 diabetes?",
+          "concept_id": "ncpi:hospitalization_disease_specific_hospitalizations",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VA_PrIMeD_Subject",
+      "datasetId": "pht014783.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00542180.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00542181.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00542179.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VA_PrIMeD_Sample_Attributes",
+      "datasetId": "pht014786.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00542201.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00542200.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00542199.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VA_PrIMeD_Sample",
+      "datasetId": "pht014784.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00542183.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00542182.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

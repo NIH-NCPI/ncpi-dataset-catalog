@@ -1,0 +1,434 @@
+{
+  "studyId": "phs002501",
+  "studyName": "Diabetic Retinopathy Genomics Study (DRGen) - Genetic Biomarkers of Diabetic Retinopathy",
+  "tables": [
+    {
+      "tableName": "DRGEN_DME_Subject_Phenotypes",
+      "datasetId": "pht012655.v1",
+      "description": "This subject phenotypes data table includes each subject's age, sex, race/ethnicity, type of diabetes, duration of diabetes, insulin, HbA1C, Ace inhibitor use, calcium channel blocker use, beta blocker use, BMI, systolic BP, diastolic BP, total cholesterol, LDL, HDL, triglycerides, glomerular filtration rate, baseline central retinal thickness, final central retinal thickness, change in central retinal thickness, anti-VEGF drug used, and treatment response.",
+      "variables": [
+        {
+          "name": "ACEinh",
+          "id": "phv00508705.v1.p1",
+          "description": "Whether or not the subject used an ACE Inhibitor",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_ace_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Additional_Disorders",
+          "id": "phv00528342.v1.p1",
+          "description": "Presence of other disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age",
+          "id": "phv00508698.v1.p1",
+          "description": "Subject age at enrollment in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Anti-VEGF_Drug",
+          "id": "phv00508719.v1.p1",
+          "description": "Whether the subject took Avastin or Eylea",
+          "concept_id": "topmed:ophthalmology_ocular_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00508708.v1.p1",
+          "description": "Body mass index (BMI) at enrollment",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BetaBlock",
+          "id": "phv00508707.v1.p1",
+          "description": "Whether or not the subject used beta blockers",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_beta_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Blood_Creatinine",
+          "id": "phv00528352.v1.p1",
+          "description": "Blood creatinine level (mg/dL)",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Blood_Urea",
+          "id": "phv00528354.v1.p1",
+          "description": "Blood urea level (mg/dL)",
+          "concept_id": "ncpi:kidney_function_bun",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CRT_Baseline",
+          "id": "phv00508716.v1.p1",
+          "description": "Baseline central retinal thickness (in micrometers) before the start of anti-VEGF therapy",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_retinal_thickening",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CRT_Change",
+          "id": "phv00508718.v1.p1",
+          "description": "Percentage change in central retinal thickness (in micrometers) three months after anti-VEGF therapy",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_retinal_thickening",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CRT_Final",
+          "id": "phv00508717.v1.p1",
+          "description": "Central retinal thickness (in micrometers) after three months of the start of anti-VEGF therapy",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_retinal_thickening",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CVD",
+          "id": "phv00528351.v1.p1",
+          "description": "Whether or not the patint has a cardiovascular disorder",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_general_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CalciumChan",
+          "id": "phv00508706.v1.p1",
+          "description": "Whether or not the subject used calcium channel blockers",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_calcium_channel_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Cancer_History",
+          "id": "phv00528347.v1.p1",
+          "description": "Whether or not the patient has been diagnosed with a cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_general_cancer_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DM_Duration",
+          "id": "phv00508702.v1.p1",
+          "description": "Duration of diabetes in years",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_duration",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DR_Phenotype",
+          "id": "phv00528343.v1.p1",
+          "description": "Diabeteic retinopathy status",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_diabetic_retinopathy_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes_Type",
+          "id": "phv00508701.v1.p1",
+          "description": "T1D or T2D",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_type_classification",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diastolic_BP",
+          "id": "phv00508710.v1.p1",
+          "description": "Diastolic blood pressure at enrollment (mmHg)",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_statistical_measures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESRD_Dialysis",
+          "id": "phv00528355.v1.p1",
+          "description": "Whether or not the patient undergoes dialysis or got diagnosed with end-stage renal disease (ESRD)",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_end_stage_renal_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Family_History_Diabetes",
+          "id": "phv00528344.v1.p1",
+          "description": "Whether or not a family member has diabetes",
+          "concept_id": "ncpi:family_medical_history_diabetes_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GFR",
+          "id": "phv00508715.v1.p1",
+          "description": "Most recent glomerular filtration rate (ml/min)",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_other_equations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL",
+          "id": "phv00508713.v1.p1",
+          "description": "HDL cholesterol (mg/dL) at a single time point",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL_2Y_AVG",
+          "id": "phv00528340.v1.p1",
+          "description": "Two year average of  HDL cholesterol (mg/dL)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HbA1C",
+          "id": "phv00508704.v1.p1",
+          "description": "Single time point for glycated hemoglobin within 3 months (percentage)",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hypertension",
+          "id": "phv00528345.v1.p1",
+          "description": "Whether or not the patient has been diagnosed with hypertension",
+          "concept_id": "ncpi:disease_diagnosis_hypertension",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Insulin",
+          "id": "phv00508703.v1.p1",
+          "description": "Whether or not the subject used exogenous insulin therapy",
+          "concept_id": "ncpi:diabetes_medication_insulin_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL",
+          "id": "phv00508712.v1.p1",
+          "description": "LDL cholesterol (mg/dL) at a single time point",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL_2Y_AVG",
+          "id": "phv00528339.v1.p1",
+          "description": "Two year average of LDL cholesterol (mg/dL)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Nephropathy",
+          "id": "phv00528349.v1.p1",
+          "description": "Whether or not the patient has been diagnosed with nephropathy",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_diabetic_nephropathy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Neuropathy",
+          "id": "phv00528350.v1.p1",
+          "description": "Whether or not the patient has been diagnosed with neuropathy",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_peripheral_neuropathy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Ocular_Treatment",
+          "id": "phv00528348.v1.p1",
+          "description": "Whether or not the patient has been treated for an ocular condition",
+          "concept_id": "ncpi:ophthalmology_laser_surgery_treatment_other_ocular_surgery",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Race/Ethnicity",
+          "id": "phv00508700.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Response_to_VEGF_Treatment",
+          "id": "phv00508720.v1.p1",
+          "description": "Whether subject's response to anti-VEGF therapy was good or poor",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_treatment_response",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00508697.v1.p1",
+          "description": "Participant ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00508699.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking_History",
+          "id": "phv00528346.v1.p1",
+          "description": "Smoker or non-smoker",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Systolic_BP",
+          "id": "phv00508709.v1.p1",
+          "description": "Systolic blood pressure at enrollment (mmHg)",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_median_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Total_Cholesterol",
+          "id": "phv00508711.v1.p1",
+          "description": "Total cholesterol (mg/dL) at a single time point",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Total_Cholesterol_2Y_AVG",
+          "id": "phv00528338.v1.p1",
+          "description": "Two year average of total cholesterol (mg/dL)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Triglyceride_2Y_AVG",
+          "id": "phv00528341.v1.p1",
+          "description": "Two year average of triglyceride level (mg/dL)",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_standard_units_total_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Urine_Creatinine",
+          "id": "phv00528353.v1.p1",
+          "description": "Urine creatinine level (mg/dL)",
+          "concept_id": "ncpi:kidney_function_urine_creatinine",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DRGEN_DME_Sample_Attributes",
+      "datasetId": "pht012656.v1",
+      "description": "This sample attributes data table includes sample body site origin, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00508723.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00508722.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00508724.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00508721.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DRGEN_DME_Subject",
+      "datasetId": "pht012653.v1",
+      "description": "This subject consent data table includes subject IDs, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00508693.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00508694.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00508692.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DRGEN_DME_Sample",
+      "datasetId": "pht012654.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and pooled sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. Samples that were pooled were only pooled once.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00508696.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00508695.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

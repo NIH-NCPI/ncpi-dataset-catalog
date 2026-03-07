@@ -1,0 +1,281 @@
+{
+  "studyId": "phs001207",
+  "studyName": "NHLBI TOPMed: African American Sarcoidosis Genetics Resource",
+  "tables": [
+    {
+      "tableName": "TOPMed_WGS_AA_Sarcoidosis_Subject_Phenotypes",
+      "datasetId": "pht005793.v3",
+      "description": "This subject phenotypes data table includes sex, race, sarcoidosis status, respiratory function test (n=5 variables; FEV1 at diagnosis, FEV1 %, FVC at diagnosis, FVC %, and FEV1/FVC), and scadding stage at first and follow-up chest x-ray.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266723.v3.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "blfevprd",
+          "id": "phv00492318.v1.p1",
+          "description": "Fev1 at dx pft (L/min)",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fev1_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "blfvcprd",
+          "id": "phv00492320.v1.p1",
+          "description": "Fvc at dx pft (L/min)",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fvc_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "blperfev",
+          "id": "phv00492319.v1.p1",
+          "description": "Fev1 % predicted at dx pft",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fev1_percent_predicted",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "blperfvc",
+          "id": "phv00492321.v1.p1",
+          "description": "Fvc % predicted at dx pft",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fvc_percent_predicted",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "blratio1",
+          "id": "phv00492322.v1.p1",
+          "description": "Fev1/fvc % predicted at dx pft",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fev1_fvc_percent_predicted",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "q11type",
+          "id": "phv00492324.v1.p1",
+          "description": "Scadding stage at follow-up chest X-ray (based on study criteria)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "q8type",
+          "id": "phv00492323.v1.p1",
+          "description": "Scadding stage at first chest X-ray (based on study criteria)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00266725.v3.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00266724.v3.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "study_classification",
+          "id": "phv00492317.v1.p1",
+          "description": "Sarcoidosis status",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_AA_Sarcoidosis_Sample_Attributes",
+      "datasetId": "pht005794.v3",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, sequencing center, funding source, TOPMed phase, project, and study name.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00266728.v3.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00396562.v3.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00396563.v3.p1",
+          "description": "Project funding source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00426916.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266727.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00266729.v3.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00396566.v3.p1",
+          "description": "TOPMed-assigned short study name (1:1 with TOPMed phs number)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00396564.v3.p1",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00396565.v3.p1",
+          "description": "TOPMed Project that funded sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_AA_Sarcoidosis_Pedigree",
+      "datasetId": "pht005791.v3",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and subject's sex.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00266716.v3.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00266717.v3.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00266718.v3.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00266719.v3.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266715.v3.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_AA_Sarcoidosis_Subject",
+      "datasetId": "pht005790.v3",
+      "description": "The subject consent data table contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00266713.v3.p1",
+          "description": "Registered consent groups (Data Use Limitations (DUL)) as determined by submitters' Institutional Review Boards (IRB) or equivalent body.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492316.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266712.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_AA_Sarcoidosis_Sample",
+      "datasetId": "pht005792.v3",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266721.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266720.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

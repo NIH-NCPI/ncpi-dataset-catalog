@@ -1,0 +1,186 @@
+{
+  "studyId": "phs001921",
+  "studyName": "DNA Methylation and Prostate Cancer",
+  "tables": [
+    {
+      "tableName": "DNA_Methylation_PC_Sample_Attributes",
+      "datasetId": "pht009587.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, tumor status of sample, primary tumor, metastasis, or transformed cell line, primary tumor location, and tumor treatment of disease of participants with prostate cancer and involved in the \"Primary Prostate Tumor Tissue DNA Methylation Profiles\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00420515.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00420514.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00420516.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00420517.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00420518.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420513.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00420519.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DNA_Methylation_PC_Subject_Phenotypes",
+      "datasetId": "pht009586.v1",
+      "description": "Subject ID, age group at diagnosis, race, Gleason score group, diagnostic PSA level group, and pathological stage of disease of participants with prostate cancer and involved in the \"Primary Prostate Tumor Tissue DNA Methylation Profiles\" project.",
+      "variables": [
+        {
+          "name": "AGE_GRP",
+          "id": "phv00420508.v1.p1",
+          "description": "Subject age group at diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GLEASON_GRP",
+          "id": "phv00420512.v1.p1",
+          "description": "Gleason score group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PSA_GRP",
+          "id": "phv00420511.v1.p1",
+          "description": "Diagnositc PSA level group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00420509.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE_DISEASE",
+          "id": "phv00420510.v1.p1",
+          "description": "Pathological stage of disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420507.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DNA_Methylation_PC_Subject",
+      "datasetId": "pht009584.v1",
+      "description": "Subject ID, consent group, and affection status of participants with prostate cancer and involved in the \"Primary Prostate Tumor Tissue DNA Methylation Profiles\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00420503.v1.p1",
+          "description": "Affection status of subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00420502.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420501.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DNA_Methylation_PC_Sample",
+      "datasetId": "pht009585.v1",
+      "description": "Subject ID, sample ID, and sample use variable of participants with prostate cancer and involved in the \"Primary Prostate Tumor Tissue DNA Methylation Profiles\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420505.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00420506.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420504.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

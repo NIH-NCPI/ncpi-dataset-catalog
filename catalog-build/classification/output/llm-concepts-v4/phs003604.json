@@ -1,0 +1,115 @@
+{
+  "studyId": "phs003604",
+  "studyName": "HiDEF-seq Single-Molecule Sequencing of Single-Strand Mismatches and Damage",
+  "tables": [
+    {
+      "tableName": "HiDEFSeq_Single_Molecule_Strand_Sample_Attributes",
+      "datasetId": "pht014414.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin, analyte type, tumor status, and additional information presenting sequencing barcodes and other data from supplementatry tables included in the study publication.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00536891.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00536890.v1.p1",
+          "description": "Body site(s) where sample was collected (comma-separated for pools)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00536892.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_DETAILS",
+          "id": "phv00536893.v1.p1",
+          "description": "Sequencing barcodes and further details of samples, per supplementary tables of the study publication.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00536889.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HiDEFSeq_Single_Molecule_Strand_Subject",
+      "datasetId": "pht014412.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, biological sex, and the IDs of subjects included in pools for sequencing.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00536884.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POOLING",
+          "id": "phv00536886.v1.p1",
+          "description": "IDs of subjects included in the pool represented by the given SUBJECT_ID for this row of the dataset.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00536885.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536883.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HiDEFSeq_Single_Molecule_Strand_Sample",
+      "datasetId": "pht014413.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00536888.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536887.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "studyId": "phs000760",
+  "studyName": "Human Responses to Influenza Vaccination",
+  "tables": [
+    {
+      "tableName": "Flu_Vaccine_Subject_Phenotypes",
+      "datasetId": "pht004264.v1",
+      "description": "This subject phenotype table includes subject's sex, age group, self-reported flu infection and vaccination, and influenza seroconversion status.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00217672.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_group",
+          "id": "phv00217675.v1.p1",
+          "description": "Age group of the subject",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "prior_infection",
+          "id": "phv00217676.v1.p1",
+          "description": "Subjects have had prior flu infection, self-reported",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prior_vaccination",
+          "id": "phv00217677.v1.p1",
+          "description": "Subjects have had prior flu vaccination, self-reported",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "seroconverter",
+          "id": "phv00217673.v1.p1",
+          "description": "Influenza Seroconversion status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00217674.v1.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Flu_Vaccine_Sample_Attributes",
+      "datasetId": "pht004265.v1",
+      "description": "This sample attributes table includes tissue type, analyte type, vaccination type, and days following vaccination when sample was taken.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00217680.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00217678.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TISSUE_TYPE",
+          "id": "phv00217679.v1.p1",
+          "description": "Tissue source of cells",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "vaccination_timepoint",
+          "id": "phv00217682.v1.p1",
+          "description": "Days following vaccination when sample was taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "vaccination_type",
+          "id": "phv00217681.v1.p1",
+          "description": "The type of vaccination used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Flu_Vaccine_Sample",
+      "datasetId": "pht004263.v1",
+      "description": "This data table contains mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00217670.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00217671.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00217669.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Flu_Vaccine_Subject",
+      "datasetId": "pht004262.v1",
+      "description": "The subject consent data table contains subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00217668.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00217667.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

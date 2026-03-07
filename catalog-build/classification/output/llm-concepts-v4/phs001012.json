@@ -1,0 +1,273 @@
+{
+  "studyId": "phs001012",
+  "studyName": "The Diabetes Heart Study (DHS)",
+  "tables": [
+    {
+      "tableName": "Diabetes_Heart_Study_EA_Subject_Phenotypes",
+      "datasetId": "pht005550.v1",
+      "description": "The dataset includes diagnosis information of participants (Type 2 diabetes), blood test results for high and low density lipoproteins, triglycerides, and C-reactive protein, BMI values, IMT thickness and extent of calcified carotid plaques.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00264855.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "admix1",
+          "id": "phv00264859.v1.p1",
+          "description": "First admixture proportion",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "admix2",
+          "id": "phv00264860.v1.p1",
+          "description": "Secondary admixture proportion",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00264856.v1.p1",
+          "description": "Age at recruitment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "aorta",
+          "id": "phv00264863.v1.p1",
+          "description": "Abdominal aortic calcified plaque",
+          "concept_id": "ncpi:cac_score_abdominal_aorta_calcium",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "avecac",
+          "id": "phv00264861.v1.p1",
+          "description": "Coronary artery calcified plaque",
+          "concept_id": "ncpi:cac_score_coronary_artery_calcium_presence",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "avecarotid",
+          "id": "phv00264862.v1.p1",
+          "description": "Carotid artery calcified plaque (130)",
+          "concept_id": "ncpi:carotid_plaque_carotid_calcified_plaque",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bmi",
+          "id": "phv00264865.v1.p1",
+          "description": "Body mass index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "chol",
+          "id": "phv00264870.v1.p1",
+          "description": "Total cholesterol",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "crp",
+          "id": "phv00264869.v1.p1",
+          "description": "C-reactive protein",
+          "concept_id": "topmed:crp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00264857.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hdl",
+          "id": "phv00264867.v1.p1",
+          "description": "High density lipoprotein",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "imt",
+          "id": "phv00264864.v1.p1",
+          "description": "Aortic intima-media thickness",
+          "concept_id": "ncpi:cimt_carotid_imt_phenotypes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ldl",
+          "id": "phv00264868.v1.p1",
+          "description": "Low density lipoprotein",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2dm_affected",
+          "id": "phv00264858.v1.p1",
+          "description": "Type 2 diabetes affected",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type2_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "trig",
+          "id": "phv00264866.v1.p1",
+          "description": "Triglycerides",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_standard_units_total_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Diabetes_Heart_Study_EA_Pedigree",
+      "datasetId": "pht005548.v1",
+      "description": "Pedigree Information",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00264848.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "family_id",
+          "id": "phv00264847.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "father_id",
+          "id": "phv00264849.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00264851.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mother_id",
+          "id": "phv00264850.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Diabetes_Heart_Study_EA_Sample",
+      "datasetId": "pht005549.v1",
+      "description": "Subject - Sample Mapping - Sample Use Information",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00264853.v1.p1",
+          "description": "Sample_ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00264854.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00264852.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Diabetes_Heart_Study_EA_Sample_Attributes",
+      "datasetId": "pht005551.v1",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00264873.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00264872.v1.p1",
+          "description": "Body Site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00264871.v1.p1",
+          "description": "De-identified SAMPLE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Diabetes_Heart_Study_EA_Subject",
+      "datasetId": "pht005547.v1",
+      "description": "Subject - Consent Information",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00264845.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "consent",
+          "id": "phv00264846.v1.p1",
+          "description": "Data sharing consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

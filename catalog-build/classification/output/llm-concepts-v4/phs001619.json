@@ -1,0 +1,281 @@
+{
+  "studyId": "phs001619",
+  "studyName": "Genetic Analysis of Patients with Inherited Retinal Dystrophies (IRDs)",
+  "tables": [
+    {
+      "tableName": "IRD_Subject_Phenotypes",
+      "datasetId": "pht008177.v3",
+      "description": "This subject phenotype table contains subject ID, ethnicity, retinal history, fundus examination, retinal changes, RPE changes, clarity of vision, night blindness, clinical diagnosis, healthy control, age at blood draw, and severity of vision.",
+      "variables": [
+        {
+          "name": "RPE_changes",
+          "id": "phv00389155.v3.p1",
+          "description": "Qualitative data of Retinal pigment epithelium (RPE) changes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00389149.v3.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_blood_draw",
+          "id": "phv00389160.v3.p1",
+          "description": "Subject age at blood draw",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "clinical_diagnosis",
+          "id": "phv00389158.v3.p1",
+          "description": "Specific conditions",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00389151.v3.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "fundus_examination",
+          "id": "phv00389153.v3.p1",
+          "description": "Qualitative data of fundus examination",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "healthy_controls",
+          "id": "phv00389159.v3.p1",
+          "description": "Absence of retinal abnormalities in participant",
+          "concept_id": "topmed:ophthalmology",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "night_blindness",
+          "id": "phv00389157.v3.p1",
+          "description": "Night_blindness Symptom present in participant: Yes/No",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "retina_history",
+          "id": "phv00389152.v3.p1",
+          "description": "Family history of retinal degeneration",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "retinal_changes",
+          "id": "phv00389154.v3.p1",
+          "description": "Qualitative data of retinal appearance in participants",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "visual_acuities",
+          "id": "phv00389156.v3.p1",
+          "description": "Clarity of vision",
+          "concept_id": "ncpi:ophthalmology_visual_acuity_visual_acuity_measurement_visual_acuity_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "visual_severity",
+          "id": "phv00397333.v2.p1",
+          "description": "Severity of vision",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IRD_Pedigree",
+      "datasetId": "pht008175.v3",
+      "description": "The subject pedigree table contains family ID, subject ID, mother ID, father ID, sex, other relationship, monozygotic twin, and monozygotic twin ID.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00389141.v3.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00389144.v3.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MONOZYGOTIC_TWIN",
+          "id": "phv00405318.v2.p1",
+          "description": "Monozygotic Twin",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MONOZYGOTIC_TWIN_ID",
+          "id": "phv00405401.v2.p1",
+          "description": "Monozygotic Twin ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00389143.v3.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OTHER",
+          "id": "phv00394989.v3.p1",
+          "description": "Other relationship",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00389145.v3.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00389142.v3.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IRD_Sample_Attributes",
+      "datasetId": "pht008178.v3",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, tumor status, and name of the center which conducted genotyping.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00389163.v3.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00389162.v3.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00389165.v3.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00389164.v3.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00389161.v3.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IRD_Subject",
+      "datasetId": "pht008174.v3",
+      "description": "The subject consent file includes subject ID, consent information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00389140.v3.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00481734.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00389139.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IRD_Sample",
+      "datasetId": "pht008176.v3",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00389147.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00389146.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

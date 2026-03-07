@@ -1,0 +1,361 @@
+{
+  "studyId": "phs002407",
+  "studyName": "A Single Cell Atlas of MMRd and MMRp Colorectal Cancer",
+  "tables": [
+    {
+      "tableName": "MMRd_MMRp_CRC_Sample_Attributes",
+      "datasetId": "pht011358.v1",
+      "description": "This sample attributes data table includes histological type, mismatch repair (MMR) protein expression, MMR status, methylation status of MLH1 promoter region, MMR and methylation status of MLH1 promoter region, tissue site (detailed and simplified), histologic grade (detailed and simplified), tumor stage, node status (detailed and simplified), metastasis status, tumor size and size divided in quantiles.",
+      "variables": [
+        {
+          "name": "HistologicGradeSimple",
+          "id": "phv00492178.v1.p1",
+          "description": "Histologic grade simplified",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HistologicGrade_detailed",
+          "id": "phv00492177.v1.p1",
+          "description": "Histologic grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HistologicTypeSimple",
+          "id": "phv00492170.v1.p1",
+          "description": "Histological type",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MLH1Status",
+          "id": "phv00492173.v1.p1",
+          "description": "Methylation status of MLH1 promoter region",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_mismatch_repair_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MMRMLH1Tumor",
+          "id": "phv00492174.v1.p1",
+          "description": "MMR status and methylation status of MLH1 promoter region",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_mismatch_repair_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MMRStatus",
+          "id": "phv00492172.v1.p1",
+          "description": "Mismatch repair status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_mismatch_repair_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MMR_IHC",
+          "id": "phv00492171.v1.p1",
+          "description": "Mismatch repair protein expression (hMLH1, hMSH2, hMSH6, hPMS2) by immunohistochemistry",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_mismatch_repair_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MetastasisStatus",
+          "id": "phv00492182.v1.p1",
+          "description": "Metastasis status according to TNM classification (on resection specimen path report)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_m_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NodeStatusSimple",
+          "id": "phv00492181.v1.p1",
+          "description": "Node status simplified",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NodeStatus_detailed",
+          "id": "phv00492180.v1.p1",
+          "description": "Node status according to TNM classification (on resection specimen path report)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROCESSING_TYPE",
+          "id": "phv00492167.v1.p1",
+          "description": "Enrichment strategy prior to loading onto 10x channel",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PatientTypeID",
+          "id": "phv00492169.v1.p1",
+          "description": "Patient barcode, specimen type, and specimen index",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492162.v1.p1",
+          "description": "Sample ID Barcode (Subject_ID; Specimen_Type; Source_Hospital with 0=DFCI and 1=MGH; Tissue_Processing_Team with 0=CCPM, 1=Hacohen, 2=CCPM_Hacohen, 3=Combined; Processing_Type with 0=unsorted, 1=CD45pMACS, 2=mixUnsortCD45MACS, 3=LiveMACS, 12=CD45pCD3nCD19nMACS)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SINGLECELL_TYPE",
+          "id": "phv00492168.v1.p1",
+          "description": "Single cell technology and version",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_HOSPITAL",
+          "id": "phv00492165.v1.p1",
+          "description": "Source facility",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SPECIMEN_INDEX",
+          "id": "phv00492164.v1.p1",
+          "description": "Specifies which specimen if a synchronous lesion was present and collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SPECIMEN_TYPE",
+          "id": "phv00492163.v1.p1",
+          "description": "Clinical specimen type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SizeQuantile",
+          "id": "phv00492184.v1.p1",
+          "description": "Size divided in four equal quantiles (1=smallest to 4=largest)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TISSUE_PROCESSING_TEAM",
+          "id": "phv00492166.v1.p1",
+          "description": "Processing team",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TissueSiteSimple",
+          "id": "phv00492176.v1.p1",
+          "description": "Tissue site simplified",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TissueSite_detailed",
+          "id": "phv00492175.v1.p1",
+          "description": "Tissue site",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TumorSize",
+          "id": "phv00492183.v1.p1",
+          "description": "Tumor size in cm",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TumorStage",
+          "id": "phv00492179.v1.p1",
+          "description": "Tumor stage according to TNM classification (on resection specimen path report)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MMRd_MMRp_CRC_Subject_Phenotypes",
+      "datasetId": "pht011357.v1",
+      "description": "This subject phenotype data table includes subject's sex, race and ethnicity, age at diagnosis, mismatch repair status, methylation status of MLH1 promoter region, days between diagnosis and last access, survival status, and time from diagnosis to death.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00492154.v1.p1",
+          "description": "Subject age at diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_general_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DaysDiagnosisToLastAccess",
+          "id": "phv00492159.v1.p1",
+          "description": "Days between diagnosis and last record access",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00492155.v1.p1",
+          "description": "Ethnicity (Hispanic or Latino)",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MLH1Status",
+          "id": "phv00492158.v1.p1",
+          "description": "Methylation status of MLH1 promoter region",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_mismatch_repair_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MMRStatus",
+          "id": "phv00492157.v1.p1",
+          "description": "Mismatch repair status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_mismatch_repair_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00492156.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492152.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00492153.v1.p1",
+          "description": "Subject sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SurvivalStatus",
+          "id": "phv00492160.v1.p1",
+          "description": "Survival status at last access",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TimeToDeath",
+          "id": "phv00492161.v1.p1",
+          "description": "Time from diagnosis to death (days)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MMRd_MMRp_CRC_Subject",
+      "datasetId": "pht011355.v1",
+      "description": "This subject consent data table includes subject IDs, consent group information, and subject's biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00492148.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492149.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492147.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MMRd_MMRp_CRC_Sample",
+      "datasetId": "pht011356.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492151.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492150.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MMRd_MMRp_CRC_GEO",
+      "datasetId": "pht011564.v1",
+      "description": "This sample GEO data table contains a mapping of sample IDs to NCBI GEO (GSM#) accessions.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00493295.v1.p1",
+          "description": "GEO accession ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00493294.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

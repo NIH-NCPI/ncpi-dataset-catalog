@@ -1,0 +1,154 @@
+{
+  "studyId": "phs001181",
+  "studyName": "Single-Cell DNA and RNA Sequencing over A 29-Year Period of A CLL Patient",
+  "tables": [
+    {
+      "tableName": "CLL_Multiple_Cell_Clones_Sample_Attributes",
+      "datasetId": "pht005772.v1",
+      "description": "This sample attributes table contains sample IDs, the year when the sample was collected, histological type, body site where sample was collected, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00266379.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00266378.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00266377.v1.p1",
+          "description": "Histological Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00266380.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266375.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEAR_SAMPLE_COLLECTION",
+          "id": "phv00266376.v1.p1",
+          "description": "The year when the sample is collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CLL_Multiple_Cell_Clones_Subject",
+      "datasetId": "pht005769.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and case control status of the subject for chronic lymphocytic leukemia.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00266368.v1.p1",
+          "description": "Case control status of the subject for chronic lymphocytic leukemia",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00266367.v1.p1",
+          "description": "Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266366.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CLL_Multiple_Cell_Clones_Sample",
+      "datasetId": "pht005770.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266370.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00266371.v1.p1",
+          "description": "Sample use. Array_SNP: SNP genotypes obtained using standard or custom microarrays; Seq_DNA_WholeGenome: Whole transcriptome sequencing; Seq_RNA: Whole genome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266369.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CLL_Multiple_Cell_Clones_Subject_Phenotypes",
+      "datasetId": "pht005771.v1",
+      "description": "This subject phenotype table contains subject IDs, disease and gender of the subject.",
+      "variables": [
+        {
+          "name": "DISEASE",
+          "id": "phv00266373.v1.p1",
+          "description": "Disease of the subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00266374.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266372.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

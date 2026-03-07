@@ -1,0 +1,2301 @@
+{
+  "studyId": "phs001667",
+  "studyName": "Genomics of Kidney Transplantation",
+  "tables": [
+    {
+      "tableName": "GEN03_phenotype_recip",
+      "datasetId": "pht014159.v1",
+      "description": "This recipient subject phenotype table contains subject ID, year of transplant, recipient information (n=13 variables; Black or African-American, Caucasian/White, Asian, Indian or Alaska Native, native Hawaiian or other Pacific Islander, racial category, Hispanic or Latino ethnicity, age at transplant, weight, height, BMI, diabetes, smoke cigarettes), serostatus (n=4 variables; CMV, EBV, Hepatitis B, and Hepatitis C), primary cause of original kidney disease, primary cause of kidney disease, history of prior kidney and prior non-kidney, receive plasmapheresis prior to transplant, panel-reactive antibody (PRA) positive or negative, no circulatory conditions, coronary artery disease (CAD) requiring drug treatment, CAD requiring invasive or surgical procedure, cerebral vascular disease requiring drug treatment, cerebral vascular disease requiring invasive or surgical procedure, congestive heart failure, hypertension, myocardial infarction, stroke, peripheral vascular disease (excluding venous disease), peripheral vascular disease requiring invasive or surgical procedure, hyperlipidemia requiring drug treatment, cancer (n=23 variables; bone marrow, brain, breast, colon, esophagus, gastrointestinal tract, kidney, larynx, liver, lung, lymphoma, nasopharyngeal, oral, osteosarcoma, ovarian, pancreatic, prostate, skin melanoma, skin not melanoma, stomach, thyroid, uterine, and other), post transplant lymphoproliferative disorder, other cancer primary site, donor information (n=11 variables; Black or African-American, Caucasian or White, Asian, Indian or Alaska Native, native Hawaiian or other Pacific Islander, racial category, Hispanic or Latino ethnicity, age at transplant, weight, height, and status), if recipient and donor related, recipient and donor relationship, recipient and donor relationship (other specify), if donation after cardiac death, if expanded criteria donor, primary cause of donor death, donor Kidney Donor Profile index (KDPI), deceased donor creatinine, donor serostatus at Tx (n=4 variables; CMV, EBV, Hepatitis B, and Hepatitis C), cross T cell, cross B cell, cross T-cell match or cross B-cell match, number of HLA mismatches, CMV new, transplant center, simultaneous pancreas-kidney Tx, cold ischemia time, cold ischemia time category, pre-emptive transplant, calcineurin inhibitor (CNI) at baseline (TAC, CSA, both, none), antibody induction at transplant, antibody induction at transplant (IL2 is treated as monoclonal), delayed graft function (dialysis in first 14 days post Tx), off steroids at day 14 post Tx, weight (month 1), creatinine (month 3-1, month 3-2, and month 3-3), creatinine reference point at month 3, death, time to death from transplant, death-censored graft failure, time to graft failure from transplant, max follow up time, recipient GWAS PC cluster (n=4 variables; Caucasian, African American, Asian, Hispanic/Native American), and donor GWAS PC cluster (n=4 variables; Caucasian, African American, Asian, and Hispanic/Native American).",
+      "variables": [
+        {
+          "name": "DCD",
+          "id": "phv00535519.v1.p1",
+          "description": "Donation after Cardiac Death?",
+          "concept_id": "ncpi:surgical_procedure_surgical_timing",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DONKDPI",
+          "id": "phv00535522.v1.p1",
+          "description": "Donor KDPI",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ECD",
+          "id": "phv00535520.v1.p1",
+          "description": "Expanded Criteria Donor?",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_kidney_transplant",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "HEPB",
+          "id": "phv00535460.v1.p1",
+          "description": "Hepatitis B Serostatus at Tx",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hepatitis_b",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEPC",
+          "id": "phv00535461.v1.p1",
+          "description": "Hepatitis C Serostatus at Tx",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hepatitis_c",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PRA_posneg",
+          "id": "phv00535467.v1.p1",
+          "description": "PRA: Positive if any are positive, Negative otherwise",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_miscellaneous_autoimmune",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "SPK",
+          "id": "phv00535534.v1.p1",
+          "description": "Simultaneous Pancreas-Kidney Tx",
+          "concept_id": "ncpi:surgical_procedure_transplant_procedures",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535443.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_tx",
+          "id": "phv00535452.v1.p1",
+          "description": "Recipient Age at Transplant (years)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_donor",
+          "id": "phv00535512.v1.p1",
+          "description": "Donor Age at Transplant (years)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "antibodyind",
+          "id": "phv00535539.v1.p1",
+          "description": "Antibody Induction at Transplant",
+          "concept_id": "ncpi:concomitant_medication_transplant_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "antibodyind_2",
+          "id": "phv00535540.v1.p1",
+          "description": "Antibody Induction at Transplant (IL2 is treated as Monoclonal)",
+          "concept_id": "ncpi:concomitant_medication_transplant_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "asian",
+          "id": "phv00535447.v1.p1",
+          "description": "Asian",
+          "concept_id": "ncpi:race_us_asian_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "asian_gwas",
+          "id": "phv00535555.v1.p1",
+          "description": "Recipient Asian GWAS PC Cluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "black",
+          "id": "phv00535445.v1.p1",
+          "description": "Black or African American",
+          "concept_id": "ncpi:race_us_black_african_american_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "black_gwas",
+          "id": "phv00535554.v1.p1",
+          "description": "Recipient African American GWAS PC Cluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bmi_base",
+          "id": "phv00535455.v1.p1",
+          "description": "BMI at baseline (kg/m2)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bone_base",
+          "id": "phv00535480.v1.p1",
+          "description": "Bone marrow cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "brain_base",
+          "id": "phv00535481.v1.p1",
+          "description": "Brain cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_brain_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "breast_base",
+          "id": "phv00535482.v1.p1",
+          "description": "Breast cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_breast_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cadrug_base",
+          "id": "phv00535469.v1.p1",
+          "description": "CAD requiring drug treatment - Baseline",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_coronary_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cainv_base",
+          "id": "phv00535470.v1.p1",
+          "description": "CAD requiring invasive or surgical procedure - Baseline",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_coronary_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cheart_base",
+          "id": "phv00535473.v1.p1",
+          "description": "Congestive heart failure - Baseline",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_heart_failure",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cir_base",
+          "id": "phv00535468.v1.p1",
+          "description": "No circulatory conditions - Baseline",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cmv",
+          "id": "phv00535458.v1.p1",
+          "description": "Cytomegalovirus (CMV) Serostatus at Tx",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_cytomegalovirus",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "cmv_donor",
+          "id": "phv00535524.v1.p1",
+          "description": "Donor Cytomegalovirus (CMV) Serostatus at Tx",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_cytomegalovirus",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "cmvnew",
+          "id": "phv00535532.v1.p1",
+          "description": "Cytomegalovirus (CMV)",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_cytomegalovirus",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "cni_base",
+          "id": "phv00535538.v1.p1",
+          "description": "Calcineurin Inhibitor (CNI) at Baseline (Tacrolimus, Cyclosporine, Both, None)",
+          "concept_id": "ncpi:concomitant_medication_transplant_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "coldtime",
+          "id": "phv00535535.v1.p1",
+          "description": "Cold Ischemia Time",
+          "concept_id": "ncpi:surgical_procedure_surgical_timing",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "coldtime_cat",
+          "id": "phv00535536.v1.p1",
+          "description": "Cold ischemia time",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "colon_base",
+          "id": "phv00535483.v1.p1",
+          "description": "Colon cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_colorectal_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "creatmgdl_dd",
+          "id": "phv00535523.v1.p1",
+          "description": "Deceased Donor creatinine",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_transplant",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "creatmgdl_mo3_1",
+          "id": "phv00535544.v1.p1",
+          "description": "Creatinine (mg/dL): Month 3 - 1",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_followup",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "creatmgdl_mo3_2",
+          "id": "phv00535545.v1.p1",
+          "description": "Creatinine (mg/dL): Month 3 - 2",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_followup",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "creatmgdl_mo3_3",
+          "id": "phv00535546.v1.p1",
+          "description": "Creatinine (mg/dL): Month 3 - 3",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_followup",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "creatmgdl_ref",
+          "id": "phv00535547.v1.p1",
+          "description": "Creatinine reference point at Month 3",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "crossbcell",
+          "id": "phv00535529.v1.p1",
+          "description": "Most Recent/Sensitive CM: B Cell result",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "crosstandbcell",
+          "id": "phv00535530.v1.p1",
+          "description": "Cross T-cell match or Cross B-cell match",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "crosstcell",
+          "id": "phv00535528.v1.p1",
+          "description": "Most Recent/Sensitive CM: T Cell result",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cvdrug_base",
+          "id": "phv00535471.v1.p1",
+          "description": "Cerebral vascular disease requiring drug treatment - Baseline",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_coronary_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cvinv_base",
+          "id": "phv00535472.v1.p1",
+          "description": "Cerebral vascular disease requiring invasive or surgical procedure - Baseline",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_coronary_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "death",
+          "id": "phv00535548.v1.p1",
+          "description": "Death",
+          "concept_id": "topmed:disease_diagnosis_medical_coding_death_records",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "dgf",
+          "id": "phv00535541.v1.p1",
+          "description": "Delayed Graft Function (Dialysis in first 14 days post-tx)",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_dialysis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "diab_base",
+          "id": "phv00535456.v1.p1",
+          "description": "Diabetes per doctor?",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donor_asian_gwas",
+          "id": "phv00535559.v1.p1",
+          "description": "Donor Asian GWAS PC Cluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donor_black_gwas",
+          "id": "phv00535558.v1.p1",
+          "description": "Donor African American GWAS PC Cluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donor_his_native_gwas",
+          "id": "phv00535560.v1.p1",
+          "description": "Donor Hispanic/Native American GWAS PC Cluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donor_white_gwas",
+          "id": "phv00535557.v1.p1",
+          "description": "Donor Caucasian GWAS PC Cluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorasian",
+          "id": "phv00535507.v1.p1",
+          "description": "Donor Asian",
+          "concept_id": "ncpi:race_us_donor_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorblack",
+          "id": "phv00535505.v1.p1",
+          "description": "Donor Black or African-American",
+          "concept_id": "ncpi:race_us_donor_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorethnic",
+          "id": "phv00535511.v1.p1",
+          "description": "Donor Hispanic or Latino Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_donor_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorhawaiian",
+          "id": "phv00535509.v1.p1",
+          "description": "Donor Native Hawaiian or Other Pacific Islander",
+          "concept_id": "ncpi:race_us_donor_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorindian",
+          "id": "phv00535508.v1.p1",
+          "description": "Donor Indian or Alaska Native",
+          "concept_id": "ncpi:race_us_donor_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorpcause",
+          "id": "phv00535521.v1.p1",
+          "description": "Primary Cause of Donor Death",
+          "concept_id": "topmed:disease_diagnosis_medical_coding_death_records",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "donorracecatc",
+          "id": "phv00535510.v1.p1",
+          "description": "Donor Racial Category (character)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorstatus",
+          "id": "phv00535515.v1.p1",
+          "description": "Donor Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorwhite",
+          "id": "phv00535506.v1.p1",
+          "description": "Donor Caucasian/White",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "epstein",
+          "id": "phv00535459.v1.p1",
+          "description": "Epstein-Barr Virus Serostatus at Tx",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_epstein_barr_virus",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "epstein_donor",
+          "id": "phv00535525.v1.p1",
+          "description": "Donor Epstein-Barr Virus Serostatus at Tx",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_epstein_barr_virus",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "esoph_base",
+          "id": "phv00535484.v1.p1",
+          "description": "Esophagus cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00535451.v1.p1",
+          "description": "Hispanic or Latino Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fup_days",
+          "id": "phv00535552.v1.p1",
+          "description": "Max Follow Up Time",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gastro_base",
+          "id": "phv00535485.v1.p1",
+          "description": "Gastrointestinal tract cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_other_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "graftfail",
+          "id": "phv00535550.v1.p1",
+          "description": "Death-Censored Graft Failure",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_kidney_transplant",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "hawaiian",
+          "id": "phv00535449.v1.p1",
+          "description": "Native Hawaiian or Other Pacific Islander",
+          "concept_id": "ncpi:race_us_native_hawaiian_pacific_islander_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hepb_donor",
+          "id": "phv00535526.v1.p1",
+          "description": "Donor Hepatitis B Serostatus at Tx",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hepatitis_b",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "hepc_donor",
+          "id": "phv00535527.v1.p1",
+          "description": "Donor Hepatitis C Serostatus at Tx",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hepatitis_c",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "his_native_gwas",
+          "id": "phv00535556.v1.p1",
+          "description": "Recipient Hispanic/Native American GWAS PC Cluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "htcm_base",
+          "id": "phv00535454.v1.p1",
+          "description": "Height (cm): Baseline",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "htcm_donor",
+          "id": "phv00535514.v1.p1",
+          "description": "Donor Height (cm)",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "hyper_base",
+          "id": "phv00535474.v1.p1",
+          "description": "Hypertension - Baseline",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypertension_hypertension_diagnosis_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hyperl_base",
+          "id": "phv00535479.v1.p1",
+          "description": "Hyperlipidemia requiring drug treatment - Baseline",
+          "concept_id": "ncpi:lipid_lowering_medication_hyperlipidemia_treatment",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "indian",
+          "id": "phv00535448.v1.p1",
+          "description": "American Indian or Alaska Native",
+          "concept_id": "ncpi:race_us_geographic_ancestry",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "kidney_base",
+          "id": "phv00535486.v1.p1",
+          "description": "Kidney cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_kidney_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "larynx_base",
+          "id": "phv00535487.v1.p1",
+          "description": "Larynx cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "liver_base",
+          "id": "phv00535488.v1.p1",
+          "description": "Liver cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_liver_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lung_base",
+          "id": "phv00535489.v1.p1",
+          "description": "Lung cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_lung_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lymphoma_base",
+          "id": "phv00535490.v1.p1",
+          "description": "Lymphoma cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mi_base",
+          "id": "phv00535475.v1.p1",
+          "description": "Myocardial infarction - Baseline",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_coronary_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "nasoph_base",
+          "id": "phv00535491.v1.p1",
+          "description": "Nasopharyngeal cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "nonkidneytx",
+          "id": "phv00535465.v1.p1",
+          "description": "History of Prior non-Kidney Tx",
+          "concept_id": "ncpi:surgical_procedure_transplant_procedures",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "nummismatch",
+          "id": "phv00535531.v1.p1",
+          "description": "Number of HLA mismatches",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "oral_base",
+          "id": "phv00535492.v1.p1",
+          "description": "Oral cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "osteosa_base",
+          "id": "phv00535493.v1.p1",
+          "description": "Osteosarcoma - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_bone_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othcan_base",
+          "id": "phv00535503.v1.p1",
+          "description": "Other cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_other_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othcanunk_base",
+          "id": "phv00535504.v1.p1",
+          "description": "Other cancer primary site: unknown - Baseline",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ovary_base",
+          "id": "phv00535494.v1.p1",
+          "description": "Ovarian cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_gynecologic_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pancreas_base",
+          "id": "phv00535496.v1.p1",
+          "description": "Pancreatic cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_pancreatic_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pcause",
+          "id": "phv00535462.v1.p1",
+          "description": "Primary cause of original kidney disease",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_general_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pcausenew",
+          "id": "phv00535463.v1.p1",
+          "description": "Primary Cause of Kidney Disease",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_general_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "plasma",
+          "id": "phv00535466.v1.p1",
+          "description": "Receive plasmapheresis prior to transplant?",
+          "concept_id": "ncpi:surgical_procedure_plasmapheresis",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "preemptive",
+          "id": "phv00535537.v1.p1",
+          "description": "Pre-emptive transplant",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_kidney_transplant",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "priorktx",
+          "id": "phv00535464.v1.p1",
+          "description": "History of Prior Kidney Tx",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_kidney_transplant",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prostate_base",
+          "id": "phv00535497.v1.p1",
+          "description": "Prostate cancer - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_prostate_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ptld_base",
+          "id": "phv00535495.v1.p1",
+          "description": "Post Transplant Lymphoproliferative Disorder - Baseline",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pvd_base",
+          "id": "phv00535477.v1.p1",
+          "description": "Peripheral vascular disease (excluding venous disease) - Baseline",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_peripheral_vascular_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pvdsurg_base",
+          "id": "phv00535478.v1.p1",
+          "description": "Peripheral vascular disease requiring invasive or surgical procedure - Baseline",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_peripheral_vascular_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "racecatc",
+          "id": "phv00535450.v1.p1",
+          "description": "Racial category (character)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "relat_othsp",
+          "id": "phv00535518.v1.p1",
+          "description": "Recipient/Donor Relationship - Other Specify",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "related",
+          "id": "phv00535516.v1.p1",
+          "description": "Are Recipient and Donor Related?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "relation",
+          "id": "phv00535517.v1.p1",
+          "description": "Recipient/Donor Relationship",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "skinmel_base",
+          "id": "phv00535498.v1.p1",
+          "description": "Skin cancer (melanoma) - Baseline",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "skinno_base",
+          "id": "phv00535499.v1.p1",
+          "description": "Skin cancer (not melanoma) - Baseline",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smoker",
+          "id": "phv00535457.v1.p1",
+          "description": "Smoke Cigarettes",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "steroids_stop2",
+          "id": "phv00535542.v1.p1",
+          "description": "Off Steroids at Day 14 post-tx",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "stomach_base",
+          "id": "phv00535500.v1.p1",
+          "description": "Stomach cancer - Baseline",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "stroke_base",
+          "id": "phv00535476.v1.p1",
+          "description": "Stroke - Baseline",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_stroke_cerebrovascular_diagnosis_stroke_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2death",
+          "id": "phv00535549.v1.p1",
+          "description": "Time to Death from Transplant (days)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2graftfail",
+          "id": "phv00535551.v1.p1",
+          "description": "Time to Graft Failure from Transplant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "thyroid_base",
+          "id": "phv00535501.v1.p1",
+          "description": "Thyroid cancer - Baseline",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "txyr",
+          "id": "phv00535444.v1.p1",
+          "description": "Year of Transplant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "unit",
+          "id": "phv00535533.v1.p1",
+          "description": "Transplant Center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "uterine_base",
+          "id": "phv00535502.v1.p1",
+          "description": "Uterine cancer - Baseline",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "white",
+          "id": "phv00535446.v1.p1",
+          "description": "Caucasian/White",
+          "concept_id": "ncpi:race_us_white_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "white_gwas",
+          "id": "phv00535553.v1.p1",
+          "description": "Recipient Caucasian GWAS PC Cluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wtkg_base",
+          "id": "phv00535453.v1.p1",
+          "description": "Weight (kg): Baseline",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wtkg_donor",
+          "id": "phv00535513.v1.p1",
+          "description": "Donor Weight (kg)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wtkg_mo1",
+          "id": "phv00535543.v1.p1",
+          "description": "Weight (kg): Month 1",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_donor",
+      "datasetId": "pht014161.v1",
+      "description": "This donor subject phenotype table contains subject ID, year of transplant, donor information (n=11 variables; Black or African-American, Caucasian/White, Asian, Indian or Alaska Native, Native Hawaiian or other Pacific Islander, racial category, Hispanic or Latino ethnicity, age at transplant, weight, height, and status), if recipient and donor are related, recipient and donor relationship, recipient and donor relationship (other specify), if donation after cardiac death, expanded criteria donor, primary cause of donor death, donor serostatus at Tx (n=4 variables; CMV, EBV,  Hepatitis B, and Hepatitis C), and donor GWAS PC Cluster (n=4 variables; Caucasian, African American, Asian, and Hispanic/Native American).",
+      "variables": [
+        {
+          "name": "DCD",
+          "id": "phv00535580.v1.p1",
+          "description": "Donation after Cardiac Death?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ECD",
+          "id": "phv00535581.v1.p1",
+          "description": "Expanded Criteria Donor?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535564.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_donor",
+          "id": "phv00535573.v1.p1",
+          "description": "Donor Age at Transplant (years)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cmv_donor",
+          "id": "phv00535583.v1.p1",
+          "description": "Donor Cytomegalovirus (CMV) Serostatus at Tx",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "donor_asian_gwas",
+          "id": "phv00535589.v1.p1",
+          "description": "Donor Asian GWAS PC Cluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donor_black_gwas",
+          "id": "phv00535588.v1.p1",
+          "description": "Donor African American GWAS PC Cluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donor_his_native_gwas",
+          "id": "phv00535590.v1.p1",
+          "description": "Donor Hispanic/Native American GWAS PC Cluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donor_white_gwas",
+          "id": "phv00535587.v1.p1",
+          "description": "Donor Caucasian GWAS PC Cluster",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorasian",
+          "id": "phv00535568.v1.p1",
+          "description": "Donor Asian",
+          "concept_id": "ncpi:race_us_donor_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorblack",
+          "id": "phv00535566.v1.p1",
+          "description": "Donor Black or African-American",
+          "concept_id": "ncpi:race_us_donor_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorethnic",
+          "id": "phv00535572.v1.p1",
+          "description": "Donor Hispanic or Latino Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_donor_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorhawaiian",
+          "id": "phv00535570.v1.p1",
+          "description": "Donor Native Hawaiian or Other Pacific Islander",
+          "concept_id": "ncpi:race_us_donor_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorindian",
+          "id": "phv00535569.v1.p1",
+          "description": "Donor Indian or Alaska Native",
+          "concept_id": "ncpi:race_us_donor_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorpcause",
+          "id": "phv00535582.v1.p1",
+          "description": "Primary Cause of Donor Death",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorracecatc",
+          "id": "phv00535571.v1.p1",
+          "description": "Donor Racial Category (character)",
+          "concept_id": "ncpi:race_us_donor_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorstatus",
+          "id": "phv00535576.v1.p1",
+          "description": "Donor Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "donorwhite",
+          "id": "phv00535567.v1.p1",
+          "description": "Donor Caucasian/White",
+          "concept_id": "ncpi:race_us_donor_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "epstein_donor",
+          "id": "phv00535584.v1.p1",
+          "description": "Donor Epstein-Barr Virus Serostatus at Tx",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "hepb_donor",
+          "id": "phv00535585.v1.p1",
+          "description": "Donor Hepatitis B Serostatus at Tx",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "hepc_donor",
+          "id": "phv00535586.v1.p1",
+          "description": "Donor Hepatitis C Serostatus at Tx",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "htcm_donor",
+          "id": "phv00535575.v1.p1",
+          "description": "Donor Height (cm)",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "relat_othsp",
+          "id": "phv00535579.v1.p1",
+          "description": "Recipient/Donor Relationship - Other Specify",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "related",
+          "id": "phv00535577.v1.p1",
+          "description": "Are Recipient and Donor Related?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "relation",
+          "id": "phv00535578.v1.p1",
+          "description": "Recipient/Donor Relationship",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "txyr",
+          "id": "phv00535565.v1.p1",
+          "description": "Year of Transplant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wtkg_donor",
+          "id": "phv00535574.v1.p1",
+          "description": "Donor Weight (kg)",
+          "concept_id": "ncpi:weight_baseline_current_weight_donor_weight",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_CSATrough",
+      "datasetId": "pht014146.v1",
+      "description": "This subject phenotype table contains subject ID, time to cyclosporine (CSA) trough, time spline at day 9 post Tx, CSA trough concentration, weight at CSA trough, CSA total daily dose, CSA frequency, dose-normalized CSA trough, ln of dose-normalized CSA trough, medicine use at CSA trough (n=9 variables; steroid, calcium channel blocker, angiotensin-converting enzyme (ACE) inhibitor, antiviral, ketoconazole, itraconazole, fluconazole, voriconazole, and posaconazole), name of steroid used at CSA trough, steroid total daily dose at CSA trough, steroid use during AR treatment, closest Glomerular Filtration Rate (GFR) to CSA trough, closest GFR Modification of Diet in Renal Disease (MDRD) to CSA trough, and closest creatinine to CSA trough.",
+      "variables": [
+        {
+          "name": "ACEINHI_use",
+          "id": "phv00535395.v1.p1",
+          "description": "Aceinhibitor use at Cyclosporine trough",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_ace_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANTIVIRAL_use",
+          "id": "phv00535396.v1.p1",
+          "description": "Antiviral use at Cyclosporine trough",
+          "concept_id": "ncpi:concomitant_medication_transplant_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CCB_use",
+          "id": "phv00535394.v1.p1",
+          "description": "Calcium Channel Blocker use at Cyclosporine trough",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_calcium_channel_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535381.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "closestGFRCG",
+          "id": "phv00535402.v1.p1",
+          "description": "Closest Glomerular Filtration Rate (CG) to Cyclosporine trough",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_cockcroft_gault",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "closestGFRMDRD",
+          "id": "phv00535403.v1.p1",
+          "description": "Closest Glomerular Filtration Rate (MDRD) to Cyclosporine trough",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_mdrd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "closestcreatmgdl",
+          "id": "phv00535404.v1.p1",
+          "description": "Closest creatinine to Cyclosporine trough",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_peak_drug_related",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "csa_dose",
+          "id": "phv00535386.v1.p1",
+          "description": "Cyclosporine total daily dose",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "csa_freq",
+          "id": "phv00535387.v1.p1",
+          "description": "Cyclosporine frequency",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "csa_level",
+          "id": "phv00535384.v1.p1",
+          "description": "Cyclosporine trough concentration",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "csa_level_dose_adjusted",
+          "id": "phv00535388.v1.p1",
+          "description": "Dose-normalized Cyclosporine trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "csa_wtkg",
+          "id": "phv00535385.v1.p1",
+          "description": "Weight at Cyclosporine trough",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "fluconazole_use",
+          "id": "phv00535399.v1.p1",
+          "description": "Fluconazole use at Cyclosporine trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "itraconazole_use",
+          "id": "phv00535398.v1.p1",
+          "description": "Itraconazole use at Cyclosporine trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ketoconazole_use",
+          "id": "phv00535397.v1.p1",
+          "description": "Ketoconazole use at Cyclosporine trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ln_csa_level_dose_adjusted",
+          "id": "phv00535389.v1.p1",
+          "description": "Ln of Dose-normalized Cyclosporine trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "posaconazole_use",
+          "id": "phv00535401.v1.p1",
+          "description": "Posaconazole use at Cyclosporine trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "steroid_dose",
+          "id": "phv00535392.v1.p1",
+          "description": "Steroid total daily dose at Cyclosporine trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "steroid_name",
+          "id": "phv00535391.v1.p1",
+          "description": "Name of steroid used at Cyclosporine trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "steroid_use",
+          "id": "phv00535390.v1.p1",
+          "description": "Steroid use at Cyclosporine trough",
+          "concept_id": "ncpi:concomitant_medication_specific_drug_names_corticosteroids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "steroid_use_AR",
+          "id": "phv00535393.v1.p1",
+          "description": "Steroid use during treatment of Acute Rejection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "time_spline",
+          "id": "phv00535383.v1.p1",
+          "description": "Time Spline at Day 9 Post Tx",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "time_to_level",
+          "id": "phv00535382.v1.p1",
+          "description": "Time to Cyclosporine (CSA) trough (from Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "voriconazole_use",
+          "id": "phv00535400.v1.p1",
+          "description": "Voriconazole use at Cyclosporine trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_TACTrough",
+      "datasetId": "pht014162.v1",
+      "description": "This subject phenotype table contains subject ID, time to Tacrolimus (TAC) trough (from Tx), time Spline at day 9 post Tx, TAC trough concentration, weight at TAC trough, TAC total daily dose, TAC frequency, dose-normalized TAC trough, ln of dose-normalized TAC trough, medicine use at TAC trough (n=9 variables; steroid, calcium channel blocker, ACE inhibitor, antiviral, ketoconazole, itraconazole, fluconazole, voriconazole, and posaconazole), name of steroid used at TAC trough, steroid total daily dose at TAC trough, steroid use during AR treatment, closest Glomerular Filtration Rate (CG) to TAC trough, closest Glomerular Filtration Rate (MDRD) to TAC trough, and closest creatinine to TAC trough.",
+      "variables": [
+        {
+          "name": "ACEINHI_use",
+          "id": "phv00535605.v1.p1",
+          "description": "Aceinhibitor use at Tacrolimus trough",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_ace_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANTIVIRAL_use",
+          "id": "phv00535606.v1.p1",
+          "description": "Antiviral use at Tacrolimus trough",
+          "concept_id": "ncpi:concomitant_medication_transplant_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CCB_use",
+          "id": "phv00535604.v1.p1",
+          "description": "Calcium Channel Blocker use at Tacrolimus trough",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_calcium_channel_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535591.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "closestGFRCG",
+          "id": "phv00535612.v1.p1",
+          "description": "Closest Glomerular Filtration Rate (CG) to Tacrolimus trough",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_cockcroft_gault",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "closestGFRMDRD",
+          "id": "phv00535613.v1.p1",
+          "description": "Closest Glomerular Filtration Rate (MDRD) to Tacrolimus trough",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_mdrd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "closestcreatmgdl",
+          "id": "phv00535614.v1.p1",
+          "description": "Closest creatinine to Tacrolimus trough",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_peak_drug_related",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fluconazole_use",
+          "id": "phv00535609.v1.p1",
+          "description": "Fluconazole use at Tacrolimus trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "itraconazole_use",
+          "id": "phv00535608.v1.p1",
+          "description": "Itraconazole use at Tacrolimus trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ketoconazole_use",
+          "id": "phv00535607.v1.p1",
+          "description": "Ketoconazole use at Tacrolimus trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ln_tac_level_dose_adjusted",
+          "id": "phv00535599.v1.p1",
+          "description": "Ln of Dose-normalized Tacrolimus trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "posaconazole_use",
+          "id": "phv00535611.v1.p1",
+          "description": "Posaconazole use at Tacrolimus trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "steroid_dose",
+          "id": "phv00535602.v1.p1",
+          "description": "Steroid total daily dose at Tacrolimus trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "steroid_name",
+          "id": "phv00535601.v1.p1",
+          "description": "Name of steroid used at Tacrolimus trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "steroid_use",
+          "id": "phv00535600.v1.p1",
+          "description": "Steroid use at Tacrolimus trough",
+          "concept_id": "ncpi:concomitant_medication_specific_drug_names_corticosteroids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "steroid_use_AR",
+          "id": "phv00535603.v1.p1",
+          "description": "Steroid use during treatment of Acute Rejection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tac_dose",
+          "id": "phv00535596.v1.p1",
+          "description": "Tacrolimus total daily dose",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tac_freq",
+          "id": "phv00535597.v1.p1",
+          "description": "Tacrolimus frequency",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tac_level",
+          "id": "phv00535594.v1.p1",
+          "description": "Tacrolimus trough concentration",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tac_level_dose_adjusted",
+          "id": "phv00535598.v1.p1",
+          "description": "Dose-normalized Tacrolimus trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tac_wtkg",
+          "id": "phv00535595.v1.p1",
+          "description": "Weight at Tacrolimus trough",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "time_spline",
+          "id": "phv00535593.v1.p1",
+          "description": "Time Spline at Day 9 Post Tx",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "time_to_level",
+          "id": "phv00535592.v1.p1",
+          "description": "Time to Tacrolimus (TAC) trough (from Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "voriconazole_use",
+          "id": "phv00535610.v1.p1",
+          "description": "Voriconazole use at Tacrolimus trough",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Kidney_Transplantation__Pedigree",
+      "datasetId": "pht014261.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00536035.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00536037.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00536038.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MZ_TWIN_ID",
+          "id": "phv00536040.v1.p1",
+          "description": "Twin ID for monozygotic twins and multiples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00536039.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00536036.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Kidney_Transplantation_Sample_Attributes",
+      "datasetId": "pht014165.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, tumor status, and histological type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00535625.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00535624.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00535627.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00535626.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00535623.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_tactoxicity",
+      "datasetId": "pht014144.v1",
+      "description": "This subject phenotype table contains subject ID, at risk start date and stop date (days post Tx), and tactoxicity.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535374.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1",
+          "id": "phv00535375.v1.p1",
+          "description": "At Risk Start Date (Days Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2",
+          "id": "phv00535376.v1.p1",
+          "description": "At Risk Stop Date (Days Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tactoxicity",
+          "id": "phv00535377.v1.p1",
+          "description": "Tacrolimus (TAC) Nephrotoxicity",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_other_cardiac_agents",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_ctscoreGroup",
+      "datasetId": "pht014154.v1",
+      "description": "This subject phenotype table contains subject ID, time to biopsy (from Tx), biopsy group, and ct-score group.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535425.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ctgroup",
+          "id": "phv00535428.v1.p1",
+          "description": "Ct-score Group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "group",
+          "id": "phv00535427.v1.p1",
+          "description": "Biopsy Group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2biop",
+          "id": "phv00535426.v1.p1",
+          "description": "Time to Biopsy (from Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_anemia",
+      "datasetId": "pht014155.v1",
+      "description": "This subject phenotype table contains subject ID, at risk start date and stop date (from day 7 post Tx), and mycophenolate-related anemia.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535429.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1",
+          "id": "phv00535430.v1.p1",
+          "description": "At Risk Start Date (from Day 7 Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2",
+          "id": "phv00535431.v1.p1",
+          "description": "At Risk Stop Date (from Day 7 Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "anemia",
+          "id": "phv00535432.v1.p1",
+          "description": "Mycophenolate-related Anemia",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_csatoxicity",
+      "datasetId": "pht014157.v1",
+      "description": "This subject phenotype table contains subject ID, at risk start date and stop date (days post Tx), and CSA nephrotoxicity.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535436.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1",
+          "id": "phv00535437.v1.p1",
+          "description": "At Risk Start Date (Days Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2",
+          "id": "phv00535438.v1.p1",
+          "description": "At Risk Stop Date (Days Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "csatoxicity",
+          "id": "phv00535439.v1.p1",
+          "description": "Cyclosporine (CSA) Nephrotoxicity",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_leuko",
+      "datasetId": "pht014163.v1",
+      "description": "This subject phenotype table contains subject ID, at risk start date and stop date  (from day 7 post Tx), and mycophenolate-related leukopenia.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535615.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1",
+          "id": "phv00535616.v1.p1",
+          "description": "At Risk Start Date (from Day 7 Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2",
+          "id": "phv00535617.v1.p1",
+          "description": "At Risk Stop Date (from Day 7 Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "leuko",
+          "id": "phv00535618.v1.p1",
+          "description": "Mycophenolate-related Leukopenia",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_tscoreGroup",
+      "datasetId": "pht014164.v1",
+      "description": "This subject phenotype table contains subject ID, time to biopsy (from Tx), biopsy group, and T-score group.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535619.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "group",
+          "id": "phv00535621.v1.p1",
+          "description": "Biopsy Group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2biop",
+          "id": "phv00535620.v1.p1",
+          "description": "Time to Biopsy (from Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tgroup",
+          "id": "phv00535622.v1.p1",
+          "description": "T-score Group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Kidney_Transplantation_Subject",
+      "datasetId": "pht014142.v1",
+      "description": "The subject consent file includes subject ID, consent information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00535371.v1.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00535370.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535369.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_EBV",
+      "datasetId": "pht014145.v1",
+      "description": "This subject phenotype table contains subject ID, time to Epstein-Barr Virus (EBV) infection or censoring, and EBV infection.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535378.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "epstein_posttx",
+          "id": "phv00535380.v1.p1",
+          "description": "Epstein-Barr Virus (EBV) Infection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2epstein",
+          "id": "phv00535379.v1.p1",
+          "description": "Time to Epstein-Barr Virus infection or censoring (Days Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_GFR_25_ACGF",
+      "datasetId": "pht014147.v1",
+      "description": "This subject phenotype table contains subject ID, time to 25% decrease in MDRD GFR, all-cause graft failure, or censoring (from month 3), and 25% decrease in MDRD GFR or all-cause graft failure.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535405.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "compgfr25decrease",
+          "id": "phv00535407.v1.p1",
+          "description": "25% decrease in MDRD Glomerular Filtration Rate (GFR) or All-Cause Graft Failure",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2gfr25decrease",
+          "id": "phv00535406.v1.p1",
+          "description": "Time to 25% decrease in MDRD Glomerular Filtration Rate (GFR), All-Cause Graft Failure, or censoring (from Month 3)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_ARalltime",
+      "datasetId": "pht014148.v1",
+      "description": "This subject phenotype table contains subject ID, time to Acute Rejection (AR) or censoring (days post Tx), and AR (all-time post Tx).",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535408.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ar_ever",
+          "id": "phv00535410.v1.p1",
+          "description": "Acute Rejection (All-Time Post-Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2ar_ever",
+          "id": "phv00535409.v1.p1",
+          "description": "Time to Acute Rejection (AR) or censoring (Days Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_AR12mo",
+      "datasetId": "pht014149.v1",
+      "description": "This subject phenotype table contains subject ID, time to Acute Rejection (AR) or censoring (days post Tx), and AR (12 months post Tx).",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535411.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ar_12mo",
+          "id": "phv00535413.v1.p1",
+          "description": "Acute Rejection (12 Months Post-Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2ar_12mo",
+          "id": "phv00535412.v1.p1",
+          "description": "Time to Acute Rejection (AR) or censoring (Days Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_GFR_25",
+      "datasetId": "pht014150.v1",
+      "description": "This subject phenotype table contains subject ID, time to 25% decrease in MDRD GFR or censoring (from month 3), and 25% decrease in MDRD GFR.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535414.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gfr25decrease",
+          "id": "phv00535416.v1.p1",
+          "description": "25% decrease in MDRD Glomerular Filtration Rate (GFR)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2gfr25decrease",
+          "id": "phv00535415.v1.p1",
+          "description": "Time to 25% decrease in MDRD Glomerular Filtration Rate (GFR) or censoring (from Month 3)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_CMV",
+      "datasetId": "pht014152.v1",
+      "description": "This subject phenotype table contains subject ID, time to Cytomegalovirus (CMV) infection or censoring (days post Tx), and CMV infection.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535419.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cmv_posttx",
+          "id": "phv00535421.v1.p1",
+          "description": "Cytomegalovirus (CMV) Infection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2cmv",
+          "id": "phv00535420.v1.p1",
+          "description": "Time to Cytomegalovirus (CMV) infection or censoring (Days Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_SCr_25_ACGF",
+      "datasetId": "pht014153.v1",
+      "description": "This subject phenotype table contains subject ID, time to 25% increase in creatinine, all-cause graft failure, or censoring (from month 3), and 25% increase in creatinine or all-cause graft failure.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535422.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "compcreat25increase",
+          "id": "phv00535424.v1.p1",
+          "description": "25% increase in Creatinine or All-Cause Graft Failure",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2creat25increase",
+          "id": "phv00535423.v1.p1",
+          "description": "Time to 25% increase in Creatinine, All-Cause Graft Failure, or censoring (from Month 3)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_NODAT",
+      "datasetId": "pht014156.v1",
+      "description": "This subject phenotype table contains subject ID, time to New Onset of Diabetes After transplant (NODAT) or censoring (days post Tx), and NODAT.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535433.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "new_diab",
+          "id": "phv00535435.v1.p1",
+          "description": "New Onset of Diabetes After Transplant (NODAT)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2nodat",
+          "id": "phv00535434.v1.p1",
+          "description": "Time to New Onset of Diabetes After Transplant (NODAT) or censoring (Days Post Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_SCr_25",
+      "datasetId": "pht014158.v1",
+      "description": "This subject phenotype table contains subject ID, time to 25% increase in creatinine or censoring (from month 3), and 25% increase in creatinine.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535440.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "creat25increase",
+          "id": "phv00535442.v1.p1",
+          "description": "25% increase in Creatinine",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2creat25increase",
+          "id": "phv00535441.v1.p1",
+          "description": "Time to 25% increase in Creatinine or censoring (from Month 3)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_IndexBiop",
+      "datasetId": "pht014160.v1",
+      "description": "This subject phenotype table contains subject ID, time to index biopsy or censoring (from month 3), and index biopsy.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535561.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "indexbiop_incl",
+          "id": "phv00535563.v1.p1",
+          "description": "Index Biopsy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t2indexbiop",
+          "id": "phv00535562.v1.p1",
+          "description": "Time to Index Biopsy or censoring (from Month 3)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Kidney_Transplantation_Sample",
+      "datasetId": "pht014143.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00535373.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535372.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GEN03_phenotype_DGF",
+      "datasetId": "pht014151.v1",
+      "description": "This subject phenotype table contains subject ID and delayed graft function (dialysis in the first week post Tx).",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535417.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dial_first_week",
+          "id": "phv00535418.v1.p1",
+          "description": "Delayed Graft Function (Dialysis in First Week Post-Tx)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

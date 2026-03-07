@@ -1,0 +1,186 @@
+{
+  "studyId": "phs000999",
+  "studyName": "CSER: Clinical Sequencing in Cancer: Clinical, Ethical, and Technological Studies",
+  "tables": [
+    {
+      "tableName": "CSER_ClinSeq_Cancer_Subject_Phenotypes",
+      "datasetId": "pht005182.v3",
+      "description": "This subject phenotype data table includes subject sex, age, race, education, colorectal cancer diagnosis and age, and intestinal polyps diagnosis and age.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258023.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00258024.v3.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "crcpdx",
+          "id": "phv00258027.v3.p1",
+          "description": "Colorectal cancer diagnosis?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_colorectal_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "crcpdxage",
+          "id": "phv00258028.v3.p1",
+          "description": "Age at colorectal cancer diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_colorectal_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "education",
+          "id": "phv00258026.v3.p1",
+          "description": "Level of education",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "polypsage",
+          "id": "phv00258030.v3.p1",
+          "description": "Age at intestinal polyps diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_colorectal_cancer_diagnosis_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "polypsdx",
+          "id": "phv00258029.v3.p1",
+          "description": "Intestinal polyps diagnosis?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_colorectal_cancer",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00258025.v3.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00258031.v3.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CSER_ClinSeq_Cancer_Sample_Attributes",
+      "datasetId": "pht005183.v3",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, and sequencing center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00258034.v3.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00258033.v3.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258032.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00258035.v3.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CSER_ClinSeq_Cancer_Subject",
+      "datasetId": "pht005180.v3",
+      "description": "This subject consent data table contains subject IDs, consent group information, and subject source.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00258017.v3.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258016.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00258018.v3.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CSER_ClinSeq_Cancer_Sample",
+      "datasetId": "pht005181.v3",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample source.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258020.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00258021.v3.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258019.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

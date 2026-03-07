@@ -1,0 +1,242 @@
+{
+  "studyId": "phs001994",
+  "studyName": "Smoking and Tumor Immune Microenvironment in HNSCC",
+  "tables": [
+    {
+      "tableName": "Tobacco_HNSCC_Subject_Phenotypes",
+      "datasetId": "pht010010.v1",
+      "description": "This subject phenotypes data table informs of subject's gender, ethnicity and race, age at diagnosis, smoking status, amount smoked, body site where primary tumor was found, type of treatment received, disease recurrence status, time from primary diagnosis to recurrence, vital status, and time from primary diagnosis to death or last known alive date.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00427712.v1.p1",
+          "description": "Patient sequence number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00427716.v1.p1",
+          "description": "Age at diagnosis of index tumor.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00427714.v1.p1",
+          "description": "Identifies patients of Hispanic origin.",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00427713.v1.p1",
+          "description": "Sex of the patient.",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "m",
+          "id": "phv00430361.v1.p1",
+          "description": "Distant metastasis status according to AJCC 7th Edition.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mif",
+          "id": "phv00430357.v1.p1",
+          "description": "Was muliplex immunohistochemistry performed on tumor slide?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "n",
+          "id": "phv00430360.v1.p1",
+          "description": "Nodal status according to AJCC 7th Edition.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pack_yr",
+          "id": "phv00427718.v1.p1",
+          "description": "Number of cigarette packs smoked per day muliplied by number of years smoked.",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "race",
+          "id": "phv00427715.v1.p1",
+          "description": "Identifies the race of the patient.",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "recurrence",
+          "id": "phv00427721.v1.p1",
+          "description": "Did the patient experience a recurrence of disease.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "recurrence_time",
+          "id": "phv00427722.v1.p1",
+          "description": "Time from primary diagnosis to recurrence.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "site",
+          "id": "phv00427719.v1.p1",
+          "description": "Location of primary tumor.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smoking",
+          "id": "phv00427717.v1.p1",
+          "description": "Patient smoking history.",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "stage",
+          "id": "phv00430362.v1.p1",
+          "description": "Pathological stage of tumor at diagnosis according to AJCC 7th Edition.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "survival",
+          "id": "phv00427723.v1.p1",
+          "description": "Patient vital status.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "survival_time",
+          "id": "phv00427724.v1.p1",
+          "description": "Time from primary diagnosis to death or last known date alive.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t",
+          "id": "phv00430359.v1.p1",
+          "description": "Tumor size according to AJCC 7th Edition.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment",
+          "id": "phv00427720.v1.p1",
+          "description": "Type of treatment the patient received.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tumor_status",
+          "id": "phv00430358.v1.p1",
+          "description": "Is the tumor primary, secondary, or a recurrence.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Tobacco_HNSCC_Sample_Attributes",
+      "datasetId": "pht010011.v1",
+      "description": "This sample attributes data table informs of whether the sample is a primary, secondary, or recurring tumor, tumor size, tumor nodal status, tumor metastatic status, pathological stage of tumor, and whether the sample originated from a tumor.",
+      "variables": [
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00427731.v1.p1",
+          "description": "Does the sample originate from a tumor?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00427725.v1.p1",
+          "description": "Sample identifier.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00430363.v1.p1",
+          "description": "Sample usage.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Tobacco_HNSCC_Subject",
+      "datasetId": "pht010008.v1",
+      "description": "This subject consent data table informs of subject ID and consent group in which the subject belongs.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00427709.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00427708.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Tobacco_HNSCC_Sample",
+      "datasetId": "pht010009.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00427711.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00427710.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

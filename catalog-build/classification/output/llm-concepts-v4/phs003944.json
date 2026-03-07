@@ -1,0 +1,225 @@
+{
+  "studyId": "phs003944",
+  "studyName": "Systemic Inflammation and Lymphocyte Activation Precede Rheumatoid Arthritis",
+  "tables": [
+    {
+      "tableName": "ALTRA_ACPA_Sample_Attributes",
+      "datasetId": "pht015726.v1",
+      "description": "This sample attributes data table includes each sample's body site of origin, analyte type, tumor status, hashtag sequence, and number of subject's days prior to a diagnosis of rheumatoid arthritis.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00558745.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00558744.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "DAYS_TO_RA_DIAGNOSIS",
+          "id": "phv00558748.v1.p1",
+          "description": "Number of days to conversion to rheumatoid arthritis",
+          "concept_id": "topmed:cad_followup_start_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "DUPLICATED_SAMPLE_ID",
+          "id": "phv00559779.v1.p1",
+          "description": "SAMPLE_ID of sample used in the overlapping dbGaP study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DUPLICATE_SAMPLE",
+          "id": "phv00559778.v1.p1",
+          "description": "Sequence data for duplicate samples are available through data access request to the overlapping dbGaP study whose accession number is indicated",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HASHTAG_SEQUENCE",
+          "id": "phv00558747.v1.p1",
+          "description": "The sequence of hash oligo for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00558746.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00558743.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ALTRA_ACPA_Subject",
+      "datasetId": "pht015722.v1",
+      "description": "This subject consent data table includes subject IDs, consent information, biological sex, and aliases to subject IDs used in other dbGaP studies.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00558729.v1.p1",
+          "description": "Registered consent groups (Data Use Limitations (DUL)) as determined by submitters' Institutional Review Boards (IRB) or equivalent body.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00558730.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00558732.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00558728.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00558731.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ALTRA_ACPA_Subject_Phenotypes",
+      "datasetId": "pht015724.v1",
+      "description": "This subject phenotypes data table reports each subject's race, ethnicity, disease status based on anti-citrullinated protein autoantibody (ACPA) levels, and rheumatoid arthritis conversion status.",
+      "variables": [
+        {
+          "name": "CONVERTER STATUS",
+          "id": "phv00558740.v1.p1",
+          "description": "Status of conversion to rheumatoid arthritis (RA)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00558738.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GROUP",
+          "id": "phv00558739.v1.p1",
+          "description": "Disease status based on anti-citrullinated protein autoantibody (ACPA) levels",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00558737.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00558736.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ALTRA_ACPA_Sample",
+      "datasetId": "pht015723.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to individual  and pooled sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "POOLED_SAMPLE_ID",
+          "id": "phv00558735.v1.p1",
+          "description": "Pooled Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00558734.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00558733.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ALTRA_ACPA_GEO",
+      "datasetId": "pht015725.v1",
+      "description": "This data table maps the sample IDs that appear in the subject sample mapping dataset file to the corresponding accession numbrs of the samples in NCBI's Gene Expression Omnibus (GEO) database.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00558741.v1.p1",
+          "description": "GEO Accession",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00558742.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

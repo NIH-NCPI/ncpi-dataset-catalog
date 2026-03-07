@@ -1,0 +1,578 @@
+{
+  "studyId": "phs000220",
+  "studyName": "PAGE: Multiethnic Cohort (MEC)",
+  "tables": [
+    {
+      "tableName": "PAGE_MEC_Metabochip_Subject_Phenotypes",
+      "datasetId": "pht002387.v2",
+      "description": "Subject ID, ethnicity, gender, year of blood draw, year of cohort entry, years of education, family history of diabetes, hypertension, and stroke, urinary creatinine, c-reactive protein, fasting glucose, HDL cholesterol, LDL cholesterol, total cholesterol, total triglycerides, insulin, age, BMI, diabetes, heart attack, height, weight, physical activity, consent status, stroke, smoking, alcohol consumption, and medications of participants involved in the \"Population Architecture using Genomics and Epidemiology (PAGE): Multiethnic Cohort (MEC)\" project.",
+      "variables": [
+        {
+          "name": "AGECAT",
+          "id": "phv00163087.v2.p2",
+          "description": "Age at entry into cohort (baseline) in 5 year intervals",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGEDRAWG",
+          "id": "phv00163088.v2.p2",
+          "description": "Age at blood draw in 5 year intervals",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00163107.v2.p2",
+          "description": "Body mass index (BMI) calculated from weight and height at baseline",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CORR_SEX",
+          "id": "phv00163089.v2.p2",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CURRSMOKE",
+          "id": "phv00163095.v2.p2",
+          "description": "Currently smoke? (reported at baseline)",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DB_STATUS1",
+          "id": "phv00163101.v2.p2",
+          "description": "Diabetes status: PAGE definition based on responses to Qx1, Qx2, and Qx3",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABET",
+          "id": "phv00163100.v2.p2",
+          "description": "Diabetes reported at baseline",
+          "concept_id": "topmed:disease_diagnosis_diabetes_metabolic_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EPUSEG",
+          "id": "phv00163134.v2.p2",
+          "description": "Estrogen/progesterone use: reported at baseline",
+          "concept_id": "ncpi:concomitant_medication_hormone_reproductive_medications_combined_estrogen_progesterone_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHANOL_CAT",
+          "id": "phv00163093.v2.p2",
+          "description": "Alcohol (drinks per day) reported at baseline",
+          "concept_id": "ncpi:alcohol_30day_quantity_and_frequency_alcohol_grams_ethanol",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00163721.v2.p2",
+          "description": "Race/Ethnicity (B, H, L, J, W, O)",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EVERSMOKE",
+          "id": "phv00163094.v2.p2",
+          "description": "Ever smoke? (reported at baseline)",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FH_DIAB",
+          "id": "phv00163126.v2.p2",
+          "description": "Family history of diabetes reported in 1st degree relative - Qx2",
+          "concept_id": "ncpi:family_medical_history_diabetes_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FH_HBP",
+          "id": "phv00163127.v2.p2",
+          "description": "Family history of hypertension reported in 1st degree relative - Qx2",
+          "concept_id": "ncpi:family_medical_history_hypertension_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FH_MI",
+          "id": "phv00163128.v2.p2",
+          "description": "Family history of CVD reported in 1st degree relative - Qx2",
+          "concept_id": "ncpi:family_medical_history_cardiovascular_disease_family_history_coronary_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FH_STROKE",
+          "id": "phv00163129.v2.p2",
+          "description": "Family history of stroke reported in 1st degree relative - Qx2",
+          "concept_id": "ncpi:family_medical_history_stroke_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HATTACK",
+          "id": "phv00163102.v2.p2",
+          "description": "Heart attack reported at baseline",
+          "concept_id": "ncpi:mi_prior_self_reported_mi_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HIBP",
+          "id": "phv00163099.v2.p2",
+          "description": "High blood pressure reported at baseline",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypertension_hypertension_diagnosis_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HTCM",
+          "id": "phv00163106.v2.p2",
+          "description": "Height (cm)",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MENOSTAG",
+          "id": "phv00163133.v2.p2",
+          "description": "Age at and type of menopause: reported at baseline",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_menopause_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MODVIG_PA",
+          "id": "phv00163104.v2.p2",
+          "description": "Hours per day of moderate or vigorous physical activity, on average, during the past year reported at baseline",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_moderate_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SMKQUIT",
+          "id": "phv00163097.v2.p2",
+          "description": "Number of years since quit smoking (reported at baseline)",
+          "concept_id": "phenx:protocol_2_tobacco_age_of_offset_of_use_adult_protocol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SMKYRS",
+          "id": "phv00163096.v2.p2",
+          "description": "Smoking duration (years) reported at baseline",
+          "concept_id": "phenx:protocol_2_tobacco_age_of_initiation_of_use_adult_protocol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "STAT",
+          "id": "phv00163130.v2.p2",
+          "description": "DbGaP status determined from Informed consent at blood draw",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STROKE",
+          "id": "phv00163103.v2.p2",
+          "description": "Stroke reported at baseline",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_stroke_cerebrovascular_diagnosis_stroke_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00163086.v2.p2",
+          "description": "Unique identifier for MEC subjects",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WTKG",
+          "id": "phv00163105.v2.p2",
+          "description": "Weight (kg) reported at baseline",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "W_AGEEST",
+          "id": "phv00163135.v2.p2",
+          "description": "Age started estrogen: reported at baseline",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_hrt_age_timing",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "W_AGESTOP",
+          "id": "phv00163132.v2.p2",
+          "description": "Age stopped menstruating: reported at baseline",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_age_at_menopause",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "W_FIRSTPER",
+          "id": "phv00163131.v2.p2",
+          "description": "Age at menarche",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_age_at_menarche",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "W_YRSEST",
+          "id": "phv00163136.v2.p2",
+          "description": "Number of years used estrogen: reported at baseline",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_hrt_duration",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YRSSCHL",
+          "id": "phv00163092.v2.p2",
+          "description": "Maximum years of education obtained",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YR_DRAW",
+          "id": "phv00305576.v1.p2",
+          "description": "Year of blood draw",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YR_ENTRY",
+          "id": "phv00305575.v1.p2",
+          "description": "Year of cohort entry (baseline)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_creatinine",
+          "id": "phv00163122.v2.p2",
+          "description": "Urinary creatinine  (HI biomarker analyses)",
+          "concept_id": "ncpi:kidney_function_urine_creatinine",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_creatinine_batch",
+          "id": "phv00163123.v2.p2",
+          "description": "Shipment number + batch number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_crp",
+          "id": "phv00163108.v2.p2",
+          "description": "C-Reactive protein  (HI biomarker analyses)",
+          "concept_id": "topmed:crp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_crp_batch",
+          "id": "phv00163109.v2.p2",
+          "description": "Shipment number + batch number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_gluc",
+          "id": "phv00163110.v2.p2",
+          "description": "Fasting glucose (HI biomarker analyses)",
+          "concept_id": "ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_gluc_batch",
+          "id": "phv00163111.v2.p2",
+          "description": "Shipment number + batch number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_hdl_chol",
+          "id": "phv00163112.v2.p2",
+          "description": "HDL cholesterol  (HI biomarker analyses)",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_hdl_chol_batch",
+          "id": "phv00163113.v2.p2",
+          "description": "Shipment number + batch number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_insulin",
+          "id": "phv00163114.v2.p2",
+          "description": "Insulin (HI biomarker analyses)",
+          "concept_id": "phenx:fasting_serum_insulin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_insulin_batch",
+          "id": "phv00163115.v2.p2",
+          "description": "Shipment number + batch number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_ldl_chol",
+          "id": "phv00163116.v2.p2",
+          "description": "LDL cholesterol  (HI biomarker analyses)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_ldl_chol_batch",
+          "id": "phv00163117.v2.p2",
+          "description": "Shipment number + batch number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_tot_chol",
+          "id": "phv00163118.v2.p2",
+          "description": "Total cholesterol  (HI biomarker analyses)",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_tot_chol_batch",
+          "id": "phv00163119.v2.p2",
+          "description": "Shipment number + batch number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_triglyc",
+          "id": "phv00163120.v2.p2",
+          "description": "Total triglycerides  (HI biomarker analyses)",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_standard_units_total_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "_triglyc_batch",
+          "id": "phv00163121.v2.p2",
+          "description": "Shipment number + batch number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "med_diab",
+          "id": "phv00163124.v2.p2",
+          "description": "Diabetes medications reported at blood draw",
+          "concept_id": "ncpi:diabetes_medication_general_diabetes_medication_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "med_lipid",
+          "id": "phv00163125.v2.p2",
+          "description": "Hypolipidemic (lipid lowering) medications reported at blood draw",
+          "concept_id": "ncpi:lipid_lowering_medication_general_lipid_lowering_medication",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "packyrs_cat",
+          "id": "phv00163098.v2.p2",
+          "description": "Pack-years of smoking (cigarettes) reported at baseline",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PAGE_MEC_Metabochip_Sample_Attributes",
+      "datasetId": "pht006616.v1",
+      "description": "Sample ID, sequencing center, tumor status of sample, histological type, genotyping center, body site where sample was obtained, and analyte type of sample obtained from participants involved in the \"Population Architecture using Genomics and Epidemiology (PAGE): Multiethnic Cohort (MEC)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00305579.v1.p2",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00305578.v1.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00305583.v1.p2",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00305581.v1.p2",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00305580.v1.p2",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00305577.v1.p2",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00305582.v1.p2",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PAGE_MEC_Metabochip_Sample",
+      "datasetId": "pht002386.v2",
+      "description": "Subject ID, sample ID, sample source, source sample ID, and sample use variable obtained from participants involved in the \"Population Architecture using Genomics and Epidemiology (PAGE): Multiethnic Cohort (MEC)\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00163083.v2.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00163084.v2.p2",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00305574.v1.p2",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00163085.v2.p2",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00163082.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PAGE_MEC_Metabochip_Subject",
+      "datasetId": "pht002385.v2",
+      "description": "Subject ID, subject source, source subject ID, and consent group of participants involved in the \"Population Architecture using Genomics and Epidemiology (PAGE): Multiethnic Cohort (MEC)\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00163080.v2.p2",
+          "description": "Subject consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00163081.v2.p2",
+          "description": "Source subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00163078.v2.p2",
+          "description": "Unique identifier for MEC subjects",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00163079.v2.p2",
+          "description": "Subject source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

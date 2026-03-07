@@ -1,0 +1,154 @@
+{
+  "studyId": "phs003691",
+  "studyName": "Somatic Mutations in 3,929 HPV-Positive Exfoliated Cervical Cell Samples",
+  "tables": [
+    {
+      "tableName": "HPV_Cervical_Sample_Attributes",
+      "datasetId": "pht014845.v1",
+      "description": "This sample attributes data table contains body site, analyte type, tumor status, collection time (n=2 variables; years before diagnosis/final infection outcome, whether two years or less before diagnosis or 3 years or more after diagnosis).",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00542601.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00542600.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00542599.v1.p1",
+          "description": "Histological Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HPVTypeAtVisit1",
+          "id": "phv00542605.v1.p1",
+          "description": "HPV type(s) present in the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00542602.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00542598.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Time",
+          "id": "phv00542603.v1.p1",
+          "description": "Time of sample collection in year(s) before diagnosis or final infection outcome",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Time_groups",
+          "id": "phv00542604.v1.p1",
+          "description": "Time of sample collection in years categorized as equal_and_less_than_2yrs before diagnosis or equal_and_greater_than_3yrs before diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HPV_Cervical_Subject",
+      "datasetId": "pht014842.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00542593.v1.p1",
+          "description": "Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00542592.v1.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00542591.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HPV_Cervical_Sample",
+      "datasetId": "pht014843.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00542595.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00542594.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HPV_Cervical_Subject_Phenotypes",
+      "datasetId": "pht014844.v1",
+      "description": "This subject phenotypes dataset includes most severe infection outcome.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00542596.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Status",
+          "id": "phv00542597.v1.p1",
+          "description": "Worst infection outcome of the patient during the study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

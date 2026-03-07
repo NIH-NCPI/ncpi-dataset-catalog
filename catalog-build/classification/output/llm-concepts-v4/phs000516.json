@@ -1,0 +1,330 @@
+{
+  "studyId": "phs000516",
+  "studyName": "Genome Sequencing of Pancreatic Ductal Adenocarcinoma",
+  "tables": [
+    {
+      "tableName": "Pancreatic_Ductal_Adenocarcinoma_Sample_Attributes",
+      "datasetId": "pht002831.v2",
+      "description": "Sample ID, tumor status of sample, histological type, histological subtype, tumor location, tumor stage, tumor grade, pathological staging of sample (pT) based on tumor characteristics, pathological staging of sample (pN) based on lymph node invasion, tumor size, presence of perinerual invasion, and analyte type of participants with pancreatic ductal adenocarcinoma and involved in the \"Genome Sequencing of Pancreatic Ductal Adenocarcinoma at The Human Genome Sequencing Center of Baylor College of Medicine (HGSC-BCM)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00171520.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_SUBTYPE",
+          "id": "phv00171511.v2.p1",
+          "description": "Cell or tissue subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00171510.v2.p1",
+          "description": "Cell or tissue type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00171509.v2.p1",
+          "description": "Tumor status of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00171508.v2.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00224922.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_GRADE",
+          "id": "phv00171514.v2.p1",
+          "description": "Tumor grade of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00171513.v2.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lymphovascular_invasion",
+          "id": "phv00171519.v2.p1",
+          "description": "Presence of lymphovascular invasion",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_invasion_characteristics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pN_staging",
+          "id": "phv00171516.v2.p1",
+          "description": "Pathological staging of sample (pN) based on lymph node invasion",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pT_staging",
+          "id": "phv00171515.v2.p1",
+          "description": "Pathological staging of sample (pT) based on tumor characteristics",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "perineural_invasion",
+          "id": "phv00171518.v2.p1",
+          "description": "Presence of perinerual invasion",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_invasion_characteristics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tumor_location",
+          "id": "phv00171512.v2.p1",
+          "description": "Location of tumor within the pancreas",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tumor_size",
+          "id": "phv00171517.v2.p1",
+          "description": "Tumor Size",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Pancreatic_Ductal_Adenocarcinoma_Subject_Phenotypes",
+      "datasetId": "pht002830.v2",
+      "description": "Subject ID, sex, age, smoking, amount the subject smoked, drinking, diabetes, BMI, family history of malignancy, status of subject at time of writing, follow up period after surgery, and subject's cause of death of participants with pancreatic ductal adenocarcinoma and involved in the \"Genome Sequencing of Pancreatic Ductal Adenocarcinoma at The Human Genome Sequencing Center of Baylor College of Medicine (HGSC-BCM)\" project.",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00171495.v2.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00171497.v2.p1",
+          "description": "Disease onset age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bmi",
+          "id": "phv00171502.v2.p1",
+          "description": "Body Mass Index at enrollment",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cause_of_death",
+          "id": "phv00171507.v2.p1",
+          "description": "Subject's cause of death",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diabetes",
+          "id": "phv00171501.v2.p1",
+          "description": "Diabetes status at enrollment",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "drinking",
+          "id": "phv00171500.v2.p1",
+          "description": "Subject's alcohol usage",
+          "concept_id": "phenx:alcohol_lifetime_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "family_PDAC_history",
+          "id": "phv00171504.v2.p1",
+          "description": "Family history of Pancreatic Cancer",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "family_cancer_history",
+          "id": "phv00171503.v2.p1",
+          "description": "Family history of malignancy (any cancer)",
+          "concept_id": "topmed:cancer_diagnosis_family_cancer_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "follow_up",
+          "id": "phv00171506.v2.p1",
+          "description": "Follow up period after surgery",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00171496.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smoking",
+          "id": "phv00171498.v2.p1",
+          "description": "Subject's history of tobacco usage",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smoking consumption",
+          "id": "phv00171499.v2.p1",
+          "description": "Amount the subject smoked",
+          "concept_id": "phenx:protocol_2_tobacco_30day_quantity_and_frequency_adult_protocol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "status",
+          "id": "phv00171505.v2.p1",
+          "description": "Status of subject at time of writing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Pancreatic_Ductal_Adenocarcinoma_Subject",
+      "datasetId": "pht002828.v2",
+      "description": "Subject ID, subject source, source subject ID, consent group, and affection status of participants with pancreatic ductal adenocarcinoma and involved in the \"Genome Sequencing of Pancreatic Ductal Adenocarcinoma at The Human Genome Sequencing Center of Baylor College of Medicine (HGSC-BCM)\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00171489.v2.p1",
+          "description": "Cancer status of subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00171486.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJID",
+          "id": "phv00171488.v2.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00171485.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJ_SOURCE",
+          "id": "phv00171487.v2.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Pancreatic_Ductal_Adenocarcinoma_Sample",
+      "datasetId": "pht002829.v2",
+      "description": "Subject ID, sample ID, sample source, source sample ID, and sample use variable obtained from participants with pancreatic ductal adenocarcinoma and involved in the \"Genome Sequencing of Pancreatic Ductal Adenocarcinoma at The Human Genome Sequencing Center of Baylor College of Medicine (HGSC-BCM)\" project.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00171491.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00171494.v2.p1",
+          "description": "Sample use. Seq_DNA_Target: Custom targeted DNA sequencing; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00171492.v2.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00171493.v2.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00171490.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

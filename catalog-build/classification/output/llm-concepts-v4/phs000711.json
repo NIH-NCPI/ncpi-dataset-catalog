@@ -1,0 +1,193 @@
+{
+  "studyId": "phs000711",
+  "studyName": "Baylor Hopkins Center for Mendelian Genomics (BH CMG)",
+  "tables": [
+    {
+      "tableName": "BH_CMG_Pedigree",
+      "datasetId": "pht003721.v7",
+      "description": null,
+      "variables": [
+        {
+          "name": "FAMID",
+          "id": "phv00200343.v7.p2",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00200345.v7.p2",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00200344.v7.p2",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MZ_TWIN_ID",
+          "id": "phv00483483.v1.p2",
+          "description": "Twin ID for monozygotic twins and multiples. An MZ_TWIN_ID is not provided for dizygotic twins or multiples.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00200346.v7.p2",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00200342.v7.p2",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BH_CMG_Sample_Attributes",
+      "datasetId": "pht003724.v6",
+      "description": "This sample attributes data table includes sample analyte type, name of condition, affection status for condition, and corresponding OMIM ID.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00200354.v6.p2",
+          "description": "Case control status of the subject for particular condition when sample was collected",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00200358.v6.p2",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONDITION",
+          "id": "phv00200353.v6.p2",
+          "description": "Name of disorder; presumed or confirmed.",
+          "concept_id": "ncpi:disease_diagnosis_other_conditions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DNA_SOURCE",
+          "id": "phv00436006.v1.p2",
+          "description": "Tissues listed for subjects with more than one sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OMIM_ID",
+          "id": "phv00200356.v6.p2",
+          "description": "Phenotype ID from Online Mendelian Inheritance in Man",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00200357.v6.p2",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BH_CMG_Subject_Phenotypes",
+      "datasetId": "pht003723.v6",
+      "description": "This subject phenotype data table includes subject's ancestry and consanguinity relative to parents.",
+      "variables": [
+        {
+          "name": "ANCESTRY",
+          "id": "phv00200352.v6.p2",
+          "description": "Ancestry of the subject",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "CONSANGUINITY",
+          "id": "phv00200355.v6.p2",
+          "description": "Consanguinity relative to parents",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00200350.v6.p2",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BH_CMG_Subject",
+      "datasetId": "pht003720.v6",
+      "description": "The subject consent data table includes subject IDs and consent information for subjects included in the Baylor Hopkins Center for Mendelian Genomics (BH CMG) study.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00200341.v6.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00200340.v6.p2",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BH_CMG_Sample",
+      "datasetId": "pht003722.v6",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00200348.v6.p2",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00200347.v6.p2",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "studyId": "phs001977",
+  "studyName": "Large Cancer Fingerprint Screening for Detection of Minimal Residual Disease.",
+  "tables": [
+    {
+      "tableName": "MRD_Sample_Attributes",
+      "datasetId": "pht011416.v1",
+      "description": "Sample ID, analyte type of sample, tumor status of sample, and sequencing center of samples associated with participants with or without different type of cancer and involved in the \"Large Cancer Fingerprint Screening for Detection of Minimal Residual Disease\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00492478.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00492479.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492477.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00492480.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MRD_Subject",
+      "datasetId": "pht011414.v1",
+      "description": "Subject ID, consent groups, and sex of participants with or without different type of cancer and involved in the \"Large Cancer Fingerprint Screening for Detection of Minimal Residual Disease\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00492473.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492474.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492472.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MRD_Sample",
+      "datasetId": "pht011415.v1",
+      "description": "Subject ID and sample ID of participants with or without different type of cancer and involved in the \"Large Cancer Fingerprint Screening for Detection of Minimal Residual Disease\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492476.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492475.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MRD_Subject_Phenotypes",
+      "datasetId": "pht012026.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00498033.v1.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498032.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

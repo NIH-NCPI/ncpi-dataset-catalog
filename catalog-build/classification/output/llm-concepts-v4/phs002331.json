@@ -1,0 +1,729 @@
+{
+  "studyId": "phs002331",
+  "studyName": "Prevention of Viral Hepatitis and HIV in Drug Users - A Hepatitis B Model for HIV and an HB Vaccine Model for HIV Vaccine Trials in Drug Users (DASH)",
+  "tables": [
+    {
+      "tableName": "DASH_Subject_Phenotypes",
+      "datasetId": "pht011103.v1",
+      "description": "The subject phenotype file includes subject ID, study number, biological sex, self-report gender, race, family race, age, affection status, year screened, living in a shelter or on the street, used any drugs in the last 7 days, times used any drugs in the last 7 days, used drugs (n=7 variables: Alcohol, Marijuana, Methamphetamines, Cocaine, Cocaine, Uppers, or Downers), consider yourself (n= 3 variables: gay, straight or bisexual), times traded sex for money in the last 30 days, with how many men or women have you traded sex for money in the last 30 days, times traded sex for drugs in the last 30 days, with how many men or women have you traded sex for drugs in the last 30 days, ever received a transfusion with blood or blood products (including clotting factors), the year of your first transfusion, ever been employed as a medical, dental, public safety or other health care worker involved with human blood contact, job description, other job description, degree of blood contact, ever been vaccinated against Hepatitis B, willing to be vaccinated against hepatitis B, ever been in prison or jail for more than 24 hours, ever been tested for a sexually transmitted disease, sexually transmitted disease been tested for (n=6 variables: Syphilis, Gonorrhoea, Chlamydia, Genital herpes, Genital warts, or other), ever been diagnosed with or treated for a sexually transmitted disease (n=6 variables: Syphilis, Gonorrhoea, Chlamydia, Genital herpes, Genital warts, or other), other sexually transmitted disease, if not treated, what was the reason, ever been tested for HIV, HIV status, and willing to be vaccinated against HIV.",
+      "variables": [
+        {
+          "name": "Affected_status",
+          "id": "phv00483608.v1.p1",
+          "description": "Which drugs have you used?: Cocaine (same as typdrgd)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Family_race",
+          "id": "phv00483606.v1.p1",
+          "description": "Family race derived from non-missing family member race (self-report)",
+          "concept_id": "ncpi:race_us_family_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00483601.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00483603.v1.p1",
+          "description": "Biological sex of participant (chrom X, Y snps)",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study",
+          "id": "phv00483602.v1.p1",
+          "description": "NIDA study number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00483607.v1.p1",
+          "description": "How old are you",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bldcntc",
+          "id": "phv00483647.v1.p1",
+          "description": "What was your degree of blood contact?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "blood",
+          "id": "phv00483642.v1.p1",
+          "description": "Have you ever received a transfusion with blood or blood products (including clotting factors)?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bloodyr",
+          "id": "phv00483643.v1.p1",
+          "description": "If yes, what was the year of your first transfusion?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "condom",
+          "id": "phv00483634.v1.p1",
+          "description": "Of these people you had sex with, what percentage of these did you use a condom with?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "crck48",
+          "id": "phv00483628.v1.p1",
+          "description": "Have you smoked crack in the last 48 hours?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "doby",
+          "id": "phv00483610.v1.p1",
+          "description": "Year of birth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "drugs",
+          "id": "phv00483613.v1.p1",
+          "description": "Have you used any drugs in the last 7 days?",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_substance_use_consequences",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "gender_identity",
+          "id": "phv00483604.v1.p1",
+          "description": "Gender identity of participant (self-report)",
+          "concept_id": "ncpi:annotated_sex_gender_identity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "gsb",
+          "id": "phv00483635.v1.p1",
+          "description": "Do you consider yourself: gay, straight or bisexual?",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "hepb",
+          "id": "phv00483648.v1.p1",
+          "description": "Have you ever been vaccinated against Hepatitis B?",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "hepbv",
+          "id": "phv00483649.v1.p1",
+          "description": "If not, are you willing to be vaccinated against hepatitis B?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hiv",
+          "id": "phv00483667.v1.p1",
+          "description": "Have you ever been tested for HIV?",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_substance_use_consequences",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "hivstat",
+          "id": "phv00483668.v1.p1",
+          "description": "What is your HIV status?",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "hivvac",
+          "id": "phv00483669.v1.p1",
+          "description": "If a vaccine was available for HIV, would you be willing to be vaccinated?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "inj",
+          "id": "phv00483622.v1.p1",
+          "description": "Have you injected drugs?",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_injection_drug_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "inj7",
+          "id": "phv00483624.v1.p1",
+          "description": "Have you injected drugs in the last 7 days?",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_injection_drug_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "jail",
+          "id": "phv00483650.v1.p1",
+          "description": "Have you ever been in prison or jail for more than 24 hours?",
+          "concept_id": "ncpi:psychiatric_interview_conduct_antisocial_disorders_legal_system_involvement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "jobdes",
+          "id": "phv00483645.v1.p1",
+          "description": "If yes, what was your job description?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "livst",
+          "id": "phv00483612.v1.p1",
+          "description": "Are you currently living on the street?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "longinj",
+          "id": "phv00483625.v1.p1",
+          "description": "How long have you injected drugs? (years)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "numtm",
+          "id": "phv00483614.v1.p1",
+          "description": "How many times have you used any drugs in the last 7 days?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "other",
+          "id": "phv00483646.v1.p1",
+          "description": "List other job description",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othstd",
+          "id": "phv00483665.v1.p1",
+          "description": "List other sexually transmitted disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00483605.v1.p1",
+          "description": "What is your race/ethnicity? (self-report)",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "reason",
+          "id": "phv00483666.v1.p1",
+          "description": "If you were not treated, what was the reason?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sexm",
+          "id": "phv00483632.v1.p1",
+          "description": "How many different men have you had sex with in the past 4 weeks?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sexw",
+          "id": "phv00483633.v1.p1",
+          "description": "How many different women have you had sex with in the past 4 weeks?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "share30",
+          "id": "phv00483626.v1.p1",
+          "description": "Have you ever shared needles/works while injecting any drug?",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_injection_drug_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "shelter",
+          "id": "phv00483611.v1.p1",
+          "description": "Are you currently living in a shelter?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "std",
+          "id": "phv00483651.v1.p1",
+          "description": "In your life time, have you ever been tested for a sexually transmitted disease?",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "std2",
+          "id": "phv00483658.v1.p1",
+          "description": "In your life time, have you ever been diagnosed with or treated for a sexually transmitted disease?",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "timinj30",
+          "id": "phv00483623.v1.p1",
+          "description": "How many times have you injected in the last 30 days?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tmcrck",
+          "id": "phv00483629.v1.p1",
+          "description": "How many times have you smoked crack in the last 48 hours?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tmshr",
+          "id": "phv00483627.v1.p1",
+          "description": "How many times have you shared while injecting any drug in the past 30 days?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tmtrdm",
+          "id": "phv00483636.v1.p1",
+          "description": "How many times have you traded sex for money in the last 30 days?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tmtrdm2",
+          "id": "phv00483639.v1.p1",
+          "description": "How many times have you traded sex for drugs in the last 30 days?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tmtrt",
+          "id": "phv00483631.v1.p1",
+          "description": "How many times have you received treatment?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "trdm",
+          "id": "phv00483637.v1.p1",
+          "description": "With how many men have you traded sex for money in the last 30 days?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "trdm2",
+          "id": "phv00483640.v1.p1",
+          "description": "With how many men have you traded sex for drugs in the last 30 days?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "trdw",
+          "id": "phv00483638.v1.p1",
+          "description": "With how many women have you traded sex for money in the last 30 days?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "trdw2",
+          "id": "phv00483641.v1.p1",
+          "description": "With how many women have you traded sex for drugs in the last 30 days?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "trtmt",
+          "id": "phv00483630.v1.p1",
+          "description": "Have you ever been in drug treatment?",
+          "concept_id": "ncpi:psychiatric_interview_medications_treatment_substance_abuse_treatment",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typdrga",
+          "id": "phv00483615.v1.p1",
+          "description": "Which drugs have you used?: Alcohol",
+          "concept_id": "ncpi:ffq_alcoholic_beverages_drinking_status",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "typdrgb",
+          "id": "phv00483616.v1.p1",
+          "description": "Which drugs have you used?: Marijuana",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_cannabis_use_patterns",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typdrgc",
+          "id": "phv00483617.v1.p1",
+          "description": "Which drugs have you used?: Methamphetamines",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_stimulant_use_patterns",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typdrgd",
+          "id": "phv00483618.v1.p1",
+          "description": "Which drugs have you used?: Cocaine",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_cocaine_use_patterns",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typdrge",
+          "id": "phv00483619.v1.p1",
+          "description": "Which drugs have you used?: Heroin",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_opioid_use_patterns",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typdrgf",
+          "id": "phv00483620.v1.p1",
+          "description": "Which drugs have you used?: Uppers",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_stimulant_use_patterns",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typdrgg",
+          "id": "phv00483621.v1.p1",
+          "description": "Which drugs have you used?: Downers",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_sedative_use_patterns",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typstd2a",
+          "id": "phv00483659.v1.p1",
+          "description": "If yes, what type(s) of sexually transmitted disease have you been diagnosed with or treated for?: Syphilis",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typstd2b",
+          "id": "phv00483660.v1.p1",
+          "description": "If yes, what type(s) of sexually transmitted disease have you been diagnosed with or treated for?: Gonorrhoea",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typstd2c",
+          "id": "phv00483661.v1.p1",
+          "description": "If yes, what type(s) of sexually transmitted disease have you been diagnosed with or treated for?: Chlamydia",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typstd2d",
+          "id": "phv00483662.v1.p1",
+          "description": "If yes, what type(s) of sexually transmitted disease have you been diagnosed with or treated for?: Genital herpes",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typstd2e",
+          "id": "phv00483663.v1.p1",
+          "description": "If yes, what type(s) of sexually transmitted disease have you been diagnosed with or treated for?: Genital warts",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typstd2f",
+          "id": "phv00483664.v1.p1",
+          "description": "If yes, what type(s) of sexually transmitted disease have you been diagnosed with or treated for?: Other",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typstda",
+          "id": "phv00483652.v1.p1",
+          "description": "If yes, what type(s) of sexually transmitted disease have you been tested for?: Syphilis",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typstdb",
+          "id": "phv00483653.v1.p1",
+          "description": "If yes, what type(s) of sexually transmitted disease have you been tested for?: Gonorrhoea",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typstdc",
+          "id": "phv00483654.v1.p1",
+          "description": "If yes, what type(s) of sexually transmitted disease have you been tested for?: Chlamydia",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typstdd",
+          "id": "phv00483655.v1.p1",
+          "description": "If yes, what type(s) of sexually transmitted disease have you been tested for?: Genital herpes",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typstde",
+          "id": "phv00483656.v1.p1",
+          "description": "If yes, what type(s) of sexually transmitted disease have you been tested for?: Genital warts",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "typstdf",
+          "id": "phv00483657.v1.p1",
+          "description": "If yes, what type(s) of sexually transmitted disease have you been tested for?: Other",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "workbl",
+          "id": "phv00483644.v1.p1",
+          "description": "Have you ever been employed as a medical, dental, public safety or other health care worker involved with human blood contact?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "yearscr",
+          "id": "phv00483609.v1.p1",
+          "description": "Year screened",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DASH_Subject",
+      "datasetId": "pht011100.v1",
+      "description": "The subject consent file includes subject ID, consent information, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00483590.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00483591.v1.p1",
+          "description": "Biological sex of participant (chrom X, Y snps)",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00483593.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00483589.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00483592.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DASH_Pedigree",
+      "datasetId": "pht011101.v1",
+      "description": "The subject pedigree table contains family ID, subject ID, father ID, mother ID, and sex.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00483594.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00483596.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00483597.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00483598.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00483595.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DASH_Sample_Attributes",
+      "datasetId": "pht011104.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, tumor status, and name of the center which conducted genotyping.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00483672.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00483671.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00483674.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00483673.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00483670.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DASH_Sample",
+      "datasetId": "pht011102.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00483600.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00483599.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}
