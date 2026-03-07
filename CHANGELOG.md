@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.15.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.14.0...v0.15.0) (2026-03-07)
+
+
+### Features
+
+* cache concept embeddings with content hash [#256](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/256) ([#258](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/258)) ([c1b90f4](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/c1b90f47b36eb04c8b7069e0baf3ac2e88735555))
+* cache embeddings and pre-build DuckDB for Docker [#257](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/257) ([#259](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/259)) ([2f22e07](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/2f22e07bd81a0e907b6bb3a199c53127b17bdc23))
+
+
+### Bug Fixes
+
+* allow env var to override ai.url for local dev ([#253](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/253)) ([8059555](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/805955500cb6e3daef63b266e6bd8c0159007749))
+* link variable study column to local study detail page ([#252](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/252)) ([4f12a37](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/4f12a372452cdd653db7f2df0f19d4fe86134ae5))
+
+
+### Documentation
+
+* expand About page with search methodology and study details ([#254](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/254)) ([d1583b7](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/d1583b7e9c719d519b65f36755a09ff588ff7cfd))
+
 ## [0.14.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.13.1...v0.14.0) (2026-03-05)
 
 
