@@ -22,11 +22,9 @@ RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTr
 # Copy application code
 COPY backend/concept_search/ concept_search/
 
-# Copy catalog data (built by npm run build-ncpi-db)
-COPY catalog/ncpi-platform-studies.json catalog/ncpi-platform-studies.json
-COPY catalog-build/classification/output/llm-concepts-v4/ catalog-build/classification/output/llm-concepts-v4/
+# Copy files needed at runtime (ISA drill-down, concept descriptions, consent logic).
+# Study metadata, demographics, and llm-concepts are baked into the DuckDB cache.
 COPY catalog-build/classification/output/concept-isa.json catalog-build/classification/output/concept-isa.json
-COPY catalog-build/classification/output/demographic-profiles.json catalog-build/classification/output/demographic-profiles.json
 COPY catalog-build/classification/output/concept-vocabulary.json catalog-build/classification/output/concept-vocabulary.json
 COPY catalog-build/classification/output/phenx-concept-vocabulary.json catalog-build/classification/output/phenx-concept-vocabulary.json
 COPY catalog-build/classification/output/ncpi-categories.json catalog-build/classification/output/ncpi-categories.json
