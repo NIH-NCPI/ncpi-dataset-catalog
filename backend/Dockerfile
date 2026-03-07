@@ -14,7 +14,9 @@ COPY backend/pyproject.toml .
 RUN pip install --no-cache-dir \
     $(python -c "import tomllib; d=tomllib.load(open('pyproject.toml','rb')); print(' '.join(d['project']['dependencies']))")
 
-# Pre-download embedding model so it's cached in the image
+# Pre-download embedding model so it's cached in the image.
+# Needed at runtime for query embedding (not for batch generation —
+# pre-computed embeddings are copied below).
 RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('pritamdeka/S-PubMedBert-MS-MARCO')"
 
 # Copy application code
@@ -30,13 +32,18 @@ COPY catalog-build/classification/output/phenx-concept-vocabulary.json catalog-b
 COPY catalog-build/classification/output/ncpi-categories.json catalog-build/classification/output/ncpi-categories.json
 COPY catalog-build/common/disease_abbrev_mapping.tsv /catalog-build/common/disease_abbrev_mapping.tsv
 
+# Copy pre-computed concept embeddings so index build skips generation.
+# Regenerate locally with: make clean-embeddings && make db-reload
+COPY catalog-build/classification/output/concept-embeddings.npy catalog-build/classification/output/concept-embeddings.npy
+COPY catalog-build/classification/output/concept-embeddings.sha256 catalog-build/classification/output/concept-embeddings.sha256
+
 # Build DuckDB cache at image build time so startup is fast.
-# This runs the full cold-build path (JSON parsing + embedding all catalog nodes)
-# once during `docker build` instead of on every container start.
+# With pre-computed embeddings, this only parses JSON + loads vectors
+# (seconds instead of minutes).
 RUN mkdir -p /cache
 ENV NCPI_DUCKDB_CACHE_PATH=/cache/concept-search.duckdb
 ENV NCPI_REPO_ROOT=/app
-RUN python -c "from concept_search.index import get_index; get_index()"
+RUN python -c "import logging; logging.basicConfig(level=logging.INFO); from concept_search.index import get_index; get_index()"
 
 EXPOSE 8000
 
