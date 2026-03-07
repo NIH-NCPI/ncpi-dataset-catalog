@@ -373,7 +373,7 @@ class ConceptIndex:
         """Load data — from cached DuckDB file if available, else from JSON."""
         cache_path = _resolve_cache_path()
         lock_path = cache_path.with_suffix(".lock")
-        cold_build = False
+        cache_miss = False
 
         # Use a file lock so only one process builds the cache; others wait.
         import filelock
@@ -390,7 +390,7 @@ class ConceptIndex:
                     _resolve_focus_isa_path()
                 )
             else:
-                cold_build = True
+                cache_miss = True
                 self._load_from_json()
 
         # These are small JSON files bundled with the package — always load
@@ -400,7 +400,23 @@ class ConceptIndex:
 
         # Build embeddings after focus categories are loaded so both
         # measurement and focus nodes are included.
-        if cold_build:
+        # On cache hit, verify the cached embeddings cover the current
+        # vocabulary — rebuild if the count doesn't match (stale cache).
+        if not cache_miss:
+            expected = (
+                len(self._ensure_concept_descriptions())
+                + len(self._index[Facet.FOCUS])
+            )
+            actual = len(self._embedding_nodes)
+            if actual != expected:
+                logger.warning(
+                    "Stale embedding cache: expected %d nodes, got %d "
+                    "— rebuilding embeddings",
+                    expected,
+                    actual,
+                )
+                cache_miss = True
+        if cache_miss:
             self._build_concept_embeddings()
             # Save cache (includes embeddings) for next startup
             if isinstance(self.store, DuckDBStore):
