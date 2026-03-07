@@ -1,0 +1,706 @@
+{
+  "studyId": "phs000957",
+  "studyName": "Geisinger Health System - MyCode, eMERGE III Exome Chip",
+  "tables": [
+    {
+      "tableName": "eMERGE_III_MyCode_Subject_Phenotypes",
+      "datasetId": "pht004854.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "Age_At_AAA",
+          "id": "phv00252046.v1.p1",
+          "description": "Age at time of diagnosis for cases, at time of enrollment in biobank for controls",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_At_Most_Recent_BMI",
+          "id": "phv00252049.v1.p1",
+          "description": "At the time of most recent BMI for cases and controls",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Alcoholism",
+          "id": "phv00252086.v1.p1",
+          "description": "Flag indicating Alcoholism. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_alcohol_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Anemia",
+          "id": "phv00252102.v1.p1",
+          "description": "Flag indicating Anemia .Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_anemia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Anorexia",
+          "id": "phv00252088.v1.p1",
+          "description": "Flag indicating Anorexia. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "topmed:psychiatric_interview_eating_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Anti-Psychotic_Meds_Use",
+          "id": "phv00252113.v1.p1",
+          "description": "Flag indicating Anti-Psychotic med use. At >= 2 indications of use.  Indications >= 180 days apart.",
+          "concept_id": "ncpi:concomitant_medication_neurological_psychiatric_medications_antipsychotics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Anticoagulent_Meds_Use",
+          "id": "phv00252078.v1.p1",
+          "description": "Flag indicating Anticoagulant med use. At >= 2 indications of use. Indications >= 180 days apart.",
+          "concept_id": "ncpi:anticoagulant_medication_general_anticoagulant_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Antihypertension_Meds_Use",
+          "id": "phv00252079.v1.p1",
+          "description": "Flag indicating Antihypertension med use. At >= 2 indications of use. Indications >= 180 days apart.",
+          "concept_id": "ncpi:antihypertensive_meds_hypertension_treatment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Antiplatelet_Meds_Use",
+          "id": "phv00252082.v1.p1",
+          "description": "Flag indicating Antiplatelet med use. At >= 2 indications of use. Indications >= 180 days apart.",
+          "concept_id": "ncpi:concomitant_medication_pain_analgesic_medications_antiplatelet_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Aplastic_Anemia",
+          "id": "phv00252071.v1.p1",
+          "description": "Flag indicating Aplastic Anemia. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_anemia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Benign_Neoplasms",
+          "id": "phv00252058.v1.p1",
+          "description": "Flag indicating Benign Neoplasm. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_related_events",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "COPD",
+          "id": "phv00252064.v1.p1",
+          "description": "Flag indicating COPD. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_copd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CVA",
+          "id": "phv00252066.v1.p1",
+          "description": "Flag indicating CVA (Cerebrovascular Accident ). Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_stroke_cerebrovascular",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Case_Control_AAA",
+          "id": "phv00252043.v1.p1",
+          "description": "Case - control status for AAA",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_aortic_aneurysm_dissection",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Case_Control_ExOb",
+          "id": "phv00252044.v1.p1",
+          "description": "Case - control status for Extreme Obesity",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Cerebrovascular_Disease",
+          "id": "phv00252059.v1.p1",
+          "description": "Flag indicating Cerebrovascular Disease. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_stroke_cerebrovascular",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Chronic_Diarrhea",
+          "id": "phv00252093.v1.p1",
+          "description": "Flag indicating Chronic Diarrhea. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_diarrhea",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Chronic_Liver_Disease_Cirrhosis",
+          "id": "phv00252097.v1.p1",
+          "description": "Flag indicating Chronic liver disease / Cirrhosis. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Chronic_liver_disease",
+          "id": "phv00252110.v1.p1",
+          "description": "Flag indicating Chronic liver disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Coronary_Stenosis",
+          "id": "phv00252060.v1.p1",
+          "description": "Flag indicating Coronary Stenosis. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "topmed:carotid_stenosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Decade_of_Birth",
+          "id": "phv00252047.v1.p1",
+          "description": "Decade of birth of participant",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Dementia",
+          "id": "phv00252090.v1.p1",
+          "description": "Flag indicating Dementia. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_alzheimers_dementia_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes",
+          "id": "phv00252107.v1.p1",
+          "description": "Flag indicating Diabetes. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes_Meds_Use",
+          "id": "phv00252083.v1.p1",
+          "description": "Flag indicating Diabetes med use. At >= 2 indications of use. Indications >= 180 days apart.",
+          "concept_id": "ncpi:diabetes_medication_general_diabetes_medication_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes_Mellitus",
+          "id": "phv00252057.v1.p1",
+          "description": "Flag indicating result of T2DM algorithm (Northwestern)",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Digestive_system_symptoms",
+          "id": "phv00252111.v1.p1",
+          "description": "Flag indicating Digestive system symptoms. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_general_gi_symptoms",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Diseases_Of_White_Blood_Cells",
+          "id": "phv00252103.v1.p1",
+          "description": "Flag indicating Diseases of the White Blood Cells. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_hematologic_disease_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diuretics_Meds_Use",
+          "id": "phv00252112.v1.p1",
+          "description": "Flag indicating Diuretics med use. At >= 2 indications of use.  Indications >= 180 days apart.",
+          "concept_id": "topmed:concomitant_medication_kidney_urinary_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Dyslipidemia_Meds_Use",
+          "id": "phv00252081.v1.p1",
+          "description": "Flag indicating Dyslipidemia med use. At >= 2 indications of use. Indications >= 180 days apart.",
+          "concept_id": "ncpi:lipid_lowering_medication_hyperlipidemia_treatment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Dysphagia",
+          "id": "phv00252099.v1.p1",
+          "description": "Flag indicating Dysphagia. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_dysphagia_swallowing",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Emphysema",
+          "id": "phv00252065.v1.p1",
+          "description": "Flag indicating Emphysema. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_emphysema",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "End_Stage_Kidney_Disease",
+          "id": "phv00252098.v1.p1",
+          "description": "Flag indicating End-stage kidney disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_end_stage_renal_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00252052.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ExOb_Subtype",
+          "id": "phv00252045.v1.p1",
+          "description": "Subtype of case or control from algorithm",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "General_Symptoms",
+          "id": "phv00252108.v1.p1",
+          "description": "Flag indicating General Symptoms. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HIV",
+          "id": "phv00252073.v1.p1",
+          "description": "Flag indicating HIV. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Heart_Failure",
+          "id": "phv00252063.v1.p1",
+          "description": "Flag indicating Heart Failure. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_heart_failure",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Height_Median",
+          "id": "phv00252053.v1.p1",
+          "description": "Median height used in algorithm",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hepatitis_B",
+          "id": "phv00252074.v1.p1",
+          "description": "Flag indicating Hepatitis B. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hepatitis_b",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hepatitis_C",
+          "id": "phv00252075.v1.p1",
+          "description": "Flag indicating Hepatitis C. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hepatitis_c",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hodgkins_Disease",
+          "id": "phv00252069.v1.p1",
+          "description": "Flag indicating Hodgkins Disease. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hyperthyroidism",
+          "id": "phv00252092.v1.p1",
+          "description": "Flag indicating Hyperthyroidism. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_hyperthyroidism_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Inflammatory_Bowel_Disease",
+          "id": "phv00252096.v1.p1",
+          "description": "Flag indicating Inflammatory Bowel Disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_inflammatory_bowel_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Kidney_Disease",
+          "id": "phv00252061.v1.p1",
+          "description": "Flag indicating Kidney Disease. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_general_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Lactose_Intolerance",
+          "id": "phv00252095.v1.p1",
+          "description": "Flag indicating Lactose Intolerance. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_lactose_intolerance",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Leukemia",
+          "id": "phv00252067.v1.p1",
+          "description": "Flag indicating Leukemia. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Liver_Failure",
+          "id": "phv00252072.v1.p1",
+          "description": "Flag indicating Liver Failure. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Lymphoma",
+          "id": "phv00252068.v1.p1",
+          "description": "Flag indicating Lymphoma. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Malabsorption_Celiac_Disease",
+          "id": "phv00252094.v1.p1",
+          "description": "Flag indicating Malabsorption / Celiac Disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_celiac_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Myeloma",
+          "id": "phv00252070.v1.p1",
+          "description": "Flag indicating Myeloma. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Nondependent_drug_use",
+          "id": "phv00252106.v1.p1",
+          "description": "Flag indicating Nondependent drug use. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_substance_use_consequences",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Nutrition_Metabolism_Symptoms",
+          "id": "phv00252105.v1.p1",
+          "description": "Flag indicating Nutrition Metabolism Symptoms. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_general_gi_symptoms",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Oral_Steroid_Meds_Use",
+          "id": "phv00252114.v1.p1",
+          "description": "Flag indicating  oral steroid med use. At >= 2 indications of use.    Indications >= 180 days apart.",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_glucocorticoids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PAD",
+          "id": "phv00252056.v1.p1",
+          "description": "Flag indicating result of PAD algorithm (Mayo)",
+          "concept_id": "ncpi:pad_incident_pad_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Pancreatitis",
+          "id": "phv00252101.v1.p1",
+          "description": "Flag indicating Pancreatitis. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_pancreatitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Parkinsons_Disease",
+          "id": "phv00252087.v1.p1",
+          "description": "Flag indicating Parkinson's Disease. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_parkinsons_disease_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Parvovirus",
+          "id": "phv00252076.v1.p1",
+          "description": "Flag indicating Parvovirus. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_childhood_infections",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Protein_Calorie_Malnutrition",
+          "id": "phv00252085.v1.p1",
+          "description": "Flag indicating Protein Calorie Malnutrition. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "topmed:disease_diagnosis_gastrointestinal_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Pulmonary_Disease",
+          "id": "phv00252062.v1.p1",
+          "description": "Flag indicating Pulmonary Disease. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_lung_disease_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Pulmonary_Meds_Use",
+          "id": "phv00252080.v1.p1",
+          "description": "Flag indicating Pulmonary med use. At >= 2 indications of use. Indications >= 180 days apart.",
+          "concept_id": "ncpi:concomitant_medication_respiratory_medications_general_respiratory_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00252051.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Rheumatoid_Arthritis",
+          "id": "phv00252104.v1.p1",
+          "description": "Flag indicating Rheumatoid Arthritis. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_rheumatoid_arthritis_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEVERE_Depression",
+          "id": "phv00252091.v1.p1",
+          "description": "Flag indicating SEVERE Depression. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:depression_anxiety_screening_clinical_depression_episodes_depression_diagnosis_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLE_Lupus",
+          "id": "phv00252100.v1.p1",
+          "description": "Flag indicating SLE/lupus. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_lupus_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00252042.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00252050.v1.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking_Status",
+          "id": "phv00252055.v1.p1",
+          "description": "Flag indicating smoking status.  (Passive smoking exposure is \"ever\")",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TB",
+          "id": "phv00252089.v1.p1",
+          "description": "Flag indicating TB (Tuberculosis). Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_tuberculosis_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Thrombocytopenia",
+          "id": "phv00252077.v1.p1",
+          "description": "Flag indicating Thrombocytopenia. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_thrombocytopenia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Thyroid_disorders",
+          "id": "phv00252109.v1.p1",
+          "description": "Flag indicating Thyroid disorders. Either on problem list or >=4 dx on different days from OP/IP encounters.",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_general_thyroid_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Unintentional_Weight_Loss_Causes",
+          "id": "phv00252084.v1.p1",
+          "description": "Flag indicating Unintentional Weight Loss Causes. Either on problem list or >=4 dx on different days from OP/IP encounters",
+          "concept_id": "ncpi:weight_baseline_weight_clinical_conditions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Weight_Most_Recent_BMI",
+          "id": "phv00252054.v1.p1",
+          "description": "Most recent weight used in algorithm",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Year_Birth",
+          "id": "phv00252048.v1.p1",
+          "description": "Year of birth of participant",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eMERGE_III_MyCode_Sample",
+      "datasetId": "pht004853.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00252038.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00252041.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00252039.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00252040.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00252037.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eMERGE_III_MyCode_Subject",
+      "datasetId": "pht004852.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00252034.v1.p1",
+          "description": "Subject consent information",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00252036.v1.p1",
+          "description": "ID given by source of the subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252033.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00252035.v1.p1",
+          "description": "Source of the subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eMERGE_III_MyCode_Sample_Attributes",
+      "datasetId": "pht004855.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00252116.v1.p1",
+          "description": "Analyte type used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SampleID",
+          "id": "phv00252115.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

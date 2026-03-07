@@ -1,0 +1,146 @@
+{
+  "studyId": "phs000947",
+  "studyName": "DNA methylation in SLE-related autoantibodies",
+  "tables": [
+    {
+      "tableName": "SLE_Autoantibodies_Subject_Phenotypes",
+      "datasetId": "pht004828.v1",
+      "description": "The dataset provides the results of auto-antibody testing: Anti-double-stranded DNA, Anti-Sj&#246;gren&#39;s-syndrome-related antigen A , Anti-Smith and Anti-ribonucleoprotein.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00251902.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dsdna",
+          "id": "phv00251903.v1.p1",
+          "description": "Anti-double-stranded DNA (dsDNA) autoantibody status",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_autoimmune_antibodies",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rnp",
+          "id": "phv00251906.v1.p1",
+          "description": "Anti-ribonucleoprotein (RNP) autoantibody status",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_autoimmune_antibodies",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sm",
+          "id": "phv00251905.v1.p1",
+          "description": "Anti-Smith (Sm) autoantibody status",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_autoimmune_antibodies",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ssa",
+          "id": "phv00251904.v1.p1",
+          "description": "Anti-Sj&#246;gren&#39;s-syndrome-related antigen A (SSA)/Ro autoantibody status",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_autoimmune_antibodies",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SLE_Autoantibodies_Subject",
+      "datasetId": "pht004826.v1",
+      "description": "Subject - Consent - Affection Status Information",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00251898.v1.p1",
+          "description": "Case - control status of the subject",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00251897.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00251896.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SLE_Autoantibodies_Sample",
+      "datasetId": "pht004827.v1",
+      "description": "Subject - Sample Mapping",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00251900.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00252137.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00251899.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SLE_Autoantibodies_Sample_Attributes",
+      "datasetId": "pht004829.v1",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00251909.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00251908.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00251907.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

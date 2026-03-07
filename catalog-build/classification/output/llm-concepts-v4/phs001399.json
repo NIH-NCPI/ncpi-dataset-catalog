@@ -1,0 +1,225 @@
+{
+  "studyId": "phs001399",
+  "studyName": "Development of Precision Neoadjuvant-Adjuvant Therapies",
+  "tables": [
+    {
+      "tableName": "Neoadjuvant_Adjuvant_Therapies_Subject_Phenotypes",
+      "datasetId": "pht006682.v1",
+      "description": "This subject phenotype table contains subject ID, study ID, group, gleason score, sex, PSA, biopsy cores, pathologic T-stage after treatment, cellularity, and residual cancer burden.",
+      "variables": [
+        {
+          "name": "CELLULARITY",
+          "id": "phv00308247.v1.p1",
+          "description": "Percent of tissue with residual tumor",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CORESPOS",
+          "id": "phv00308245.v1.p1",
+          "description": "Number of positive biopsy cores",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GLEASON",
+          "id": "phv00308242.v1.p1",
+          "description": "Gleason score at diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GROUP",
+          "id": "phv00308241.v1.p1",
+          "description": "Treatment arm",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PSA",
+          "id": "phv00308244.v1.p1",
+          "description": "Baseline PSA at time of diagnosis",
+          "concept_id": "phenx:prostate_health",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RCB",
+          "id": "phv00308248.v1.p1",
+          "description": "Residual cancer burden",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_pathological_response",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00308243.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY_ID",
+          "id": "phv00308240.v1.p1",
+          "description": "Patient ID used in publication",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00308239.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YPT",
+          "id": "phv00308246.v1.p1",
+          "description": "Pathologic T-stage after treatment",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Neoadjuvant_Adjuvant_Therapies_Sample_Attributes",
+      "datasetId": "pht006683.v1",
+      "description": "This sample attributes table contains sample ID, body site, analyte type, tumor status, and tissue region.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00308251.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00308250.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FOCUS",
+          "id": "phv00308253.v1.p1",
+          "description": "Region of tissue where sample was acquired",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00308252.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00308249.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Neoadjuvant_Adjuvant_Therapies_Subject",
+      "datasetId": "pht006680.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and affection status of the subject for neoadjuvant androgen deprivation .",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00308235.v1.p1",
+          "description": "Case control status of the subject for neoadjuvant androgen deprivation",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00308234.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00308233.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Neoadjuvant_Adjuvant_Therapies_Sample",
+      "datasetId": "pht006681.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00308237.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00308238.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00308236.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Neoadjuvant_Adjuvant_Therapies_GEO",
+      "datasetId": "pht006734.v1",
+      "description": "This GEO file includes sample ID and GEO accession ID.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00309970.v1.p1",
+          "description": "GEO accession ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00309969.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "studyId": "phs001234",
+  "studyName": "Sequence of Primary ER+ Breast Tumors Treated with 5 Years of Tamoxifen",
+  "tables": [
+    {
+      "tableName": "ER_Positive_Breast_Tumors_Tamoxifen_Sample_Attributes",
+      "datasetId": "pht006620.v1",
+      "description": "This sample attributes table contains sample ID, histological type, analyte type, body site, tumor status, and tissue treatment.",
+      "variables": [
+        {
+          "name": "Analyte_Type",
+          "id": "phv00305630.v1.p1",
+          "description": "Sample nucleic acid type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Body_Site",
+          "id": "phv00305631.v1.p1",
+          "description": "Body site from which sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histological_Type",
+          "id": "phv00305629.v1.p1",
+          "description": "Type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Is_Tumor",
+          "id": "phv00305632.v1.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_Source_Type",
+          "id": "phv00305633.v1.p1",
+          "description": "Tissue treatment prior to DNA extraction",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_id",
+          "id": "phv00305628.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ER_Positive_Breast_Tumors_Tamoxifen_Subject",
+      "datasetId": "pht006617.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and affection status of the subject for ER-positive invasive breast cancer.",
+      "variables": [
+        {
+          "name": "Affection_status",
+          "id": "phv00305586.v1.p1",
+          "description": "Has subject been diagnosed with ER-positive invasive breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Consent",
+          "id": "phv00305585.v1.p1",
+          "description": "Allowable research use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_id",
+          "id": "phv00305584.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ER_Positive_Breast_Tumors_Tamoxifen_Sample",
+      "datasetId": "pht006618.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00305589.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_id",
+          "id": "phv00305588.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_id",
+          "id": "phv00305587.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

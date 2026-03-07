@@ -1,0 +1,75 @@
+{
+  "studyId": "phs001798",
+  "studyName": "A New Reference Panel to Boost African American Genotype Imputation",
+  "tables": [
+    {
+      "tableName": "23andMe_AfAmSeq_Subject",
+      "datasetId": "pht008946.v2",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00405342.v2.p2",
+          "description": "Consent group as determined by Extramural Institutional Certification Form",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00405341.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "23andMe_AfAmSeq_Sample",
+      "datasetId": "pht008947.v2",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00405344.v2.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00405343.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "23andMe_AfAmSeq_Sample_Attributes",
+      "datasetId": "pht008948.v2",
+      "description": "This sample attributes table includes sample specimen type.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00405345.v2.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SPECIMEN",
+          "id": "phv00405346.v2.p2",
+          "description": "Specimen from which sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

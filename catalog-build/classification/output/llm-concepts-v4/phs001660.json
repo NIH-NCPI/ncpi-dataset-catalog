@@ -1,0 +1,2226 @@
+{
+  "studyId": "phs001660",
+  "studyName": "Lung Cancer Pharmacogenomics (LUPG)",
+  "tables": [
+    {
+      "tableName": "Paclitaxel_Cohort_LUPG_Subject_Phenotypes",
+      "datasetId": "pht008413.v1",
+      "description": "This subject phenotype table contains subject IDs, sex, treatment, toxicity, hematologic toxicity, neutropenia, anemia, thrombocytopenia, neuropathy, progression-free survival, Kaplan Meier-Censor, race, ethnicity, histology, type of disease, stage of cancer, smoking history of patient, age of patient during trial, number of prior therapies, and genotypes.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00395637.v1.p1",
+          "description": "Age of patient during trial",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANEMIA",
+          "id": "phv00395615.v1.p1",
+          "description": "Anemia",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_anemia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AVERAGE_NUMBER_CHEW_POUCHES",
+          "id": "phv00395633.v1.p1",
+          "description": "Average number of tobbaco packages chewed",
+          "concept_id": "phenx:tobacco_noncigarette_product_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AVERAGE_NUMBER_CIGARS",
+          "id": "phv00395629.v1.p1",
+          "description": "Average number of cigars smoked",
+          "concept_id": "phenx:tobacco_noncigarette_product_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AVERAGE_NUMBER_PIPES",
+          "id": "phv00395631.v1.p1",
+          "description": "Average number of pipes smoked",
+          "concept_id": "phenx:tobacco_noncigarette_product_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AVERAGE_NUMBER_SECOND_HAND_EXPOSURE",
+          "id": "phv00395635.v1.p1",
+          "description": "Average number of times patient exposed to second hand smoke",
+          "concept_id": "phenx:current_environmental_tobacco_smoke_exposure",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CENSOR",
+          "id": "phv00395619.v1.p1",
+          "description": "Kaplan Meier- Censor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHEWED_TOBACCO",
+          "id": "phv00395632.v1.p1",
+          "description": "Has the patient chewed tobacco",
+          "concept_id": "phenx:tobacco_noncigarette_product_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CIGARETTE_PACK_YEARS",
+          "id": "phv00395627.v1.p1",
+          "description": "Years smoked Cigarette",
+          "concept_id": "phenx:protocol_2_tobacco_30day_quantity_and_frequency_adult_protocol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASE_TYPE",
+          "id": "phv00395623.v1.p1",
+          "description": "Type of disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00395621.v1.p1",
+          "description": "Ethnicity of patient",
+          "concept_id": "phenx:ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEMOTOX",
+          "id": "phv00395613.v1.p1",
+          "description": "Hematologic toxicity",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_treatment_toxicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGY",
+          "id": "phv00395622.v1.p1",
+          "description": "Histology",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NEUROPATHY",
+          "id": "phv00395617.v1.p1",
+          "description": "Neuropathy",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_peripheral_neuropathy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NEUTROPENIA",
+          "id": "phv00395614.v1.p1",
+          "description": "Neutropenia",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_neutropenia_leukopenia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NUMBER_OF_PRIOR_THERAPIES",
+          "id": "phv00395638.v1.p1",
+          "description": "Number of Prior Therapies",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NUMBER_YEARS_EXPOSED_SECOND_HAND_TOBACCO",
+          "id": "phv00395636.v1.p1",
+          "description": "Average number of years patient exposed to second hand smoke",
+          "concept_id": "phenx:current_environmental_tobacco_smoke_exposure",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PFS",
+          "id": "phv00395618.v1.p1",
+          "description": "Progression-Free Survival",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_progression_free_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00395620.v1.p1",
+          "description": "Race of patient",
+          "concept_id": "phenx:race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SECOND_HAND_TOBACCO",
+          "id": "phv00395634.v1.p1",
+          "description": "Has the patient been exposed to second hand smoke",
+          "concept_id": "phenx:current_environmental_tobacco_smoke_exposure",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00395610.v1.p1",
+          "description": "Sex of Patient",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKED_CIGARETTES",
+          "id": "phv00395626.v1.p1",
+          "description": "Has the patient smoked cigarettes",
+          "concept_id": "phenx:protocol_2_tobacco_smoking_status_adult_protocol",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKED_CIGARS",
+          "id": "phv00395628.v1.p1",
+          "description": "Has the patient smoked cigars",
+          "concept_id": "phenx:tobacco_noncigarette_product_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKED_PIPE",
+          "id": "phv00395630.v1.p1",
+          "description": "Has the patient smoked a pipe",
+          "concept_id": "phenx:tobacco_noncigarette_product_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKING_HISTORY",
+          "id": "phv00395625.v1.p1",
+          "description": "Smoking history of patien",
+          "concept_id": "phenx:protocol_2_tobacco_smoking_status_adult_protocol",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE",
+          "id": "phv00395624.v1.p1",
+          "description": "Stage of cancer",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00395609.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "THROMBOCYTOPENIA",
+          "id": "phv00395616.v1.p1",
+          "description": "Thrombocytopenia",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_thrombocytopenia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOXICITY",
+          "id": "phv00395612.v1.p1",
+          "description": "Any neuropathy or hemaologic toxicity",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TREATMENT",
+          "id": "phv00395611.v1.p1",
+          "description": "Drug received",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs10002894",
+          "id": "phv00395779.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1003973",
+          "id": "phv00395725.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs10046",
+          "id": "phv00395747.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1042640",
+          "id": "phv00395666.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1046428",
+          "id": "phv00395770.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1049793",
+          "id": "phv00395672.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1051332",
+          "id": "phv00395804.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1051640",
+          "id": "phv00395640.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1051741",
+          "id": "phv00395772.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1051752",
+          "id": "phv00395705.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1056522",
+          "id": "phv00395777.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1056836",
+          "id": "phv00395766.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1056837",
+          "id": "phv00395787.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1056892",
+          "id": "phv00395750.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1061040",
+          "id": "phv00395676.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1064349",
+          "id": "phv00395736.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs10770865",
+          "id": "phv00395708.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1080983",
+          "id": "phv00395671.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs10929303",
+          "id": "phv00395673.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs11150564",
+          "id": "phv00395778.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs11249460",
+          "id": "phv00395679.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1135840",
+          "id": "phv00395674.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs11568373",
+          "id": "phv00395802.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs11584174",
+          "id": "phv00395662.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs11678615",
+          "id": "phv00395762.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs11764079",
+          "id": "phv00395780.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs11770903",
+          "id": "phv00395781.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs12179",
+          "id": "phv00395670.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1229983",
+          "id": "phv00395730.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs12727968",
+          "id": "phv00395681.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs13119049",
+          "id": "phv00395734.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs13142440",
+          "id": "phv00395735.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs13959",
+          "id": "phv00395656.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs149738",
+          "id": "phv00395653.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1517618",
+          "id": "phv00395746.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1541290",
+          "id": "phv00395641.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1645691",
+          "id": "phv00395803.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs16947",
+          "id": "phv00395655.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1695",
+          "id": "phv00395782.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs16975056",
+          "id": "phv00395707.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs17036104",
+          "id": "phv00395737.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs17064",
+          "id": "phv00395667.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs171248",
+          "id": "phv00395650.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs17216275",
+          "id": "phv00395683.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1783811",
+          "id": "phv00395698.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs17863783",
+          "id": "phv00395761.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs17878544",
+          "id": "phv00395774.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1789915",
+          "id": "phv00395651.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1800566",
+          "id": "phv00395675.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1800822",
+          "id": "phv00395745.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1801030",
+          "id": "phv00395801.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1826909",
+          "id": "phv00395785.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs183574",
+          "id": "phv00395660.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs188096",
+          "id": "phv00395668.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1883322",
+          "id": "phv00395811.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs1884725",
+          "id": "phv00395748.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2032588",
+          "id": "phv00395715.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2038067",
+          "id": "phv00395726.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2053098",
+          "id": "phv00395720.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2066853",
+          "id": "phv00395798.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs207440",
+          "id": "phv00395652.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2227291",
+          "id": "phv00395806.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2266637",
+          "id": "phv00395775.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2266780",
+          "id": "phv00395658.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2267665",
+          "id": "phv00395724.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2267669",
+          "id": "phv00395727.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2268873",
+          "id": "phv00395797.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2276299",
+          "id": "phv00395723.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2277448",
+          "id": "phv00395783.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2277624",
+          "id": "phv00395757.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2291075",
+          "id": "phv00395669.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295475",
+          "id": "phv00395815.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295476",
+          "id": "phv00395816.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295477",
+          "id": "phv00395817.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295478",
+          "id": "phv00395818.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295479",
+          "id": "phv00395819.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295480",
+          "id": "phv00395820.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295481",
+          "id": "phv00395821.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295482",
+          "id": "phv00395822.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295483",
+          "id": "phv00395823.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295484",
+          "id": "phv00395824.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295485",
+          "id": "phv00395825.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295486",
+          "id": "phv00395826.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295487",
+          "id": "phv00395827.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295488",
+          "id": "phv00395828.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295489",
+          "id": "phv00395829.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295490",
+          "id": "phv00395830.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295491",
+          "id": "phv00395831.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295492",
+          "id": "phv00395832.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295493",
+          "id": "phv00395833.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295494",
+          "id": "phv00395834.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295495",
+          "id": "phv00395835.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295496",
+          "id": "phv00395836.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295497",
+          "id": "phv00395837.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295498",
+          "id": "phv00395838.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295499",
+          "id": "phv00395839.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295500",
+          "id": "phv00395840.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295501",
+          "id": "phv00395841.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295502",
+          "id": "phv00395842.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295503",
+          "id": "phv00395843.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295504",
+          "id": "phv00395844.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295505",
+          "id": "phv00395845.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295506",
+          "id": "phv00395846.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295507",
+          "id": "phv00395847.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295508",
+          "id": "phv00395848.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295509",
+          "id": "phv00395849.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295510",
+          "id": "phv00395850.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295511",
+          "id": "phv00395851.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295512",
+          "id": "phv00395852.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295513",
+          "id": "phv00395853.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295514",
+          "id": "phv00395854.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295515",
+          "id": "phv00395855.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295516",
+          "id": "phv00395856.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295517",
+          "id": "phv00395857.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295518",
+          "id": "phv00395858.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295519",
+          "id": "phv00395859.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295520",
+          "id": "phv00395860.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295521",
+          "id": "phv00395861.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295522",
+          "id": "phv00395862.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295523",
+          "id": "phv00395863.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295524",
+          "id": "phv00395864.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295525",
+          "id": "phv00395865.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295526",
+          "id": "phv00395866.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295527",
+          "id": "phv00395867.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295528",
+          "id": "phv00395868.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295529",
+          "id": "phv00395869.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295530",
+          "id": "phv00395870.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295531",
+          "id": "phv00395871.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2295532",
+          "id": "phv00395872.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2297809",
+          "id": "phv00395740.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2297810",
+          "id": "phv00395769.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2302387",
+          "id": "phv00395680.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2306283",
+          "id": "phv00395728.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2341968",
+          "id": "phv00395799.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2359612",
+          "id": "phv00395796.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2468110",
+          "id": "phv00395814.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2470890",
+          "id": "phv00395718.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2544794",
+          "id": "phv00395768.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2550915",
+          "id": "phv00395800.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2644905",
+          "id": "phv00395741.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2738792",
+          "id": "phv00395776.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2762934",
+          "id": "phv00395717.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs279942",
+          "id": "phv00395659.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs28399454",
+          "id": "phv00395714.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs28399499",
+          "id": "phv00395699.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs2884737",
+          "id": "phv00395646.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs3093105",
+          "id": "phv00395763.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs3731680",
+          "id": "phv00395738.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs3731722",
+          "id": "phv00395719.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs3742106",
+          "id": "phv00395813.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs3748930",
+          "id": "phv00395752.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs3756067",
+          "id": "phv00395678.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs3765534",
+          "id": "phv00395689.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs3770603",
+          "id": "phv00395732.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs3788010",
+          "id": "phv00395682.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs3842",
+          "id": "phv00395760.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs3856650",
+          "id": "phv00395809.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs3862476",
+          "id": "phv00395684.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs41303343",
+          "id": "phv00395704.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs4148768",
+          "id": "phv00395639.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs4148942",
+          "id": "phv00395701.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs4148949",
+          "id": "phv00395755.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs4148951",
+          "id": "phv00395758.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs4149056",
+          "id": "phv00395716.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs4149057",
+          "id": "phv00395664.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs45446698",
+          "id": "phv00395686.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs45467892",
+          "id": "phv00395691.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs45494802",
+          "id": "phv00395688.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs4643786",
+          "id": "phv00395649.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs4679028",
+          "id": "phv00395648.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rs4715333",
+          "id": "phv00395786.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs4783745",
+          "id": "phv00395754.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs4808326",
+          "id": "phv00395712.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs4926802",
+          "id": "phv00395790.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs4986782",
+          "id": "phv00395685.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs4986907",
+          "id": "phv00395742.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs533486",
+          "id": "phv00395654.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs55676788",
+          "id": "phv00395756.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs55802895",
+          "id": "phv00395721.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs57633837",
+          "id": "phv00395693.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs57699806",
+          "id": "phv00395702.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs5952696",
+          "id": "phv00395807.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6162",
+          "id": "phv00395665.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6163",
+          "id": "phv00395731.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6193",
+          "id": "phv00395743.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6196",
+          "id": "phv00395645.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6324",
+          "id": "phv00395810.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6577",
+          "id": "phv00395647.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs67807361",
+          "id": "phv00395687.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6783962",
+          "id": "phv00395805.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6792261",
+          "id": "phv00395733.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs67944833",
+          "id": "phv00395692.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6811453",
+          "id": "phv00395765.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6830685",
+          "id": "phv00395784.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6851610",
+          "id": "phv00395661.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6965343",
+          "id": "phv00395749.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6980478",
+          "id": "phv00395729.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs6987861",
+          "id": "phv00395791.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs700518",
+          "id": "phv00395753.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7072219",
+          "id": "phv00395759.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7081",
+          "id": "phv00395767.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7200749",
+          "id": "phv00395771.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7294",
+          "id": "phv00395794.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7334118",
+          "id": "phv00395713.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs735320",
+          "id": "phv00395642.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs741817",
+          "id": "phv00395694.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs743572",
+          "id": "phv00395751.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7436962",
+          "id": "phv00395812.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7483",
+          "id": "phv00395644.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7623741",
+          "id": "phv00395706.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7798757",
+          "id": "phv00395695.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7867504",
+          "id": "phv00395789.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7879356",
+          "id": "phv00395808.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7886938",
+          "id": "phv00395657.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7889839",
+          "id": "phv00395643.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7899457",
+          "id": "phv00395696.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs7957203",
+          "id": "phv00395788.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs8050894",
+          "id": "phv00395795.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs8177517",
+          "id": "phv00395709.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs8187706",
+          "id": "phv00395697.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs8187722",
+          "id": "phv00395744.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs8187737",
+          "id": "phv00395711.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs8187755",
+          "id": "phv00395663.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs8187838",
+          "id": "phv00395700.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs8191439",
+          "id": "phv00395690.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs886205",
+          "id": "phv00395722.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs894469",
+          "id": "phv00395773.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs903247",
+          "id": "phv00395677.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs910795",
+          "id": "phv00395764.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs915909",
+          "id": "phv00395703.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs9457846",
+          "id": "phv00395710.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs9923231",
+          "id": "phv00395793.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs9934438",
+          "id": "phv00395792.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "rs998383",
+          "id": "phv00395739.v1.p1",
+          "description": "Genotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        }
+      ]
+    },
+    {
+      "tableName": "Paclitaxel_Cohort_LUPG_Sample_Attributes",
+      "datasetId": "pht008414.v1",
+      "description": "This sample attributes table contains sample IDs, body site where the sample was taken, analyte type, histological type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00395875.v1.p1",
+          "description": "What was analyzed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00395874.v1.p1",
+          "description": "The body site from which the sample was taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00395876.v1.p1",
+          "description": "Type of tissue taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00395877.v1.p1",
+          "description": "Tumor Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00395873.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Paclitaxel_Cohort_LUPG_Subject",
+      "datasetId": "pht008411.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and case control status of the subject for lung cancer. All subjects are cancer patients.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00395606.v1.p1",
+          "description": "Case control status of the subject for lung cancer; All subjects are cancer patients.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT_GROUP",
+          "id": "phv00395605.v1.p1",
+          "description": "Consent Group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00395604.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Paclitaxel_Cohort_LUPG_Sample",
+      "datasetId": "pht008412.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00395608.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00395607.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

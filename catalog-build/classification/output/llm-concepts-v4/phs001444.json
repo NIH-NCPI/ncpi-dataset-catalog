@@ -1,0 +1,76 @@
+{
+  "studyId": "phs001444",
+  "studyName": "Genomic Variation in Diffuse Large B Cell Lymphomas",
+  "tables": [
+    {
+      "tableName": "Genomic_Variation_DLBCL_Subject",
+      "datasetId": "pht006960.v1",
+      "description": "The subject consent file includes subject IDs, consent information, subject source, and affection status of the subject for Diffuse Large B Cell Lymphomas (DLBCL).",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00318323.v1.p1",
+          "description": "Case control status of the subject for Diffuse Large B Cell Lymphomas",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00318321.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00318320.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00318322.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Genomic_Variation_DLBCL_Sample",
+      "datasetId": "pht006961.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample source.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00318325.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00318326.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00318324.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

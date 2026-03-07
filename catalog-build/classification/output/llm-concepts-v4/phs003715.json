@@ -1,0 +1,202 @@
+{
+  "studyId": "phs003715",
+  "studyName": "Mutation Patterns Predict Drug Response in Acute Myeloid Leukemia",
+  "tables": [
+    {
+      "tableName": "AML_Mutations_Drug_Response_Subject_Phenotypes",
+      "datasetId": "pht015021.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00543844.v1.p1",
+          "description": "Status of the subject for Acute Myeloid Leukemia (AML); all subjects are AML patients.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AHD",
+          "id": "phv00543847.v1.p1",
+          "description": "Whether subject had antecedent hematological disorder",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CYTOGENETICS",
+          "id": "phv00543853.v1.p1",
+          "description": "Cytogenetics of sample associated with subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Dx_AGE",
+          "id": "phv00543852.v1.p1",
+          "description": "Subject age at diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ELN17",
+          "id": "phv00543848.v1.p1",
+          "description": "European Leukemianet 2017 Classification",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ELN22",
+          "id": "phv00543849.v1.p1",
+          "description": "European Leukemianet 2022 Classification",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00543846.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HAD_CR",
+          "id": "phv00543850.v1.p1",
+          "description": "Whether subject experienced complete remission (CR) or not.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_RELAPSE",
+          "id": "phv00543851.v1.p1",
+          "description": "Whether subject's case is a relapse or a new diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00543845.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00543843.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AML_Mutations_Drug_Response_Sample_Attributes",
+      "datasetId": "pht015022.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00543856.v1.p1",
+          "description": "Analyte Type (DNA)-use of MissionBio Myeloid 45-gene panel for targeted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00543855.v1.p1",
+          "description": "Site on the body from which sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00543858.v1.p1",
+          "description": "Whether sample is from a tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00543854.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SECONDARY_ANALYTE",
+          "id": "phv00543857.v1.p1",
+          "description": "Secondary Analyte Type (Protein) TotalSeq-D Human Heme Oncology Cocktail, V1.0 (BioLegened) panel of 42 antibodies to surface markers",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AML_Mutations_Drug_Response_Subject",
+      "datasetId": "pht015019.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00543839.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00543840.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00543838.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AML_Mutations_Drug_Response_Sample",
+      "datasetId": "pht015020.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00543842.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00543841.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

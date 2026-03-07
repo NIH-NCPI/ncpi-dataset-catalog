@@ -1,0 +1,490 @@
+{
+  "studyId": "phs002056",
+  "studyName": "Impact of genetic variants on failure of active surveillance for prostate cancer",
+  "tables": [
+    {
+      "tableName": "CIDR_PC_AS_Subject_Phenotypes",
+      "datasetId": "pht010452.v1",
+      "description": "This subject phenotypes data table includes location of study site for each subject, subject's race and ethnicity, subject's family history of prostate cancer and age at diagnosis, subject's PSA level at diagnosis, grade of biopsies, the number of days from diagnosis when the subject withdrew from active surveillance, subject's reasons for withdrawing from active status, whether the subject underwent active treatment, surgery and other therapies, the number of days from diagnosis when the subject started active treatment, the number of days from diagnosis when subject underwent prostatectomy, prostatectomy grades, the number of days from diagnosis until the subject experienced recurrence, subject's metastatic status, subject's status at last follow-up, and subject's live or dead status.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435133.v1.p1",
+          "description": "CIDR ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bx_gleason1",
+          "id": "phv00435142.v1.p1",
+          "description": "Biopsy primary Gleason grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bx_gleason2",
+          "id": "phv00435143.v1.p1",
+          "description": "Biopsy secondary Gleason grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bx_gleason3",
+          "id": "phv00435144.v1.p1",
+          "description": "Biopsy tertiary Gleason grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cap_death",
+          "id": "phv00435175.v1.p1",
+          "description": "Death from prostate cancer?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_cause_of_death",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "date_death_known",
+          "id": "phv00435176.v1.p1",
+          "description": "Is date of death known?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "death_days",
+          "id": "phv00435177.v1.p1",
+          "description": "Days from date of diagnosis to date of death",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dx_age",
+          "id": "phv00435140.v1.p1",
+          "description": "Age at diagnosis (years)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dx_year",
+          "id": "phv00435139.v1.p1",
+          "description": "Year of diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "enroll_site",
+          "id": "phv00435135.v1.p1",
+          "description": "Enrollment site name",
+          "concept_id": "ncpi:geographic_site_recruitment_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00435137.v1.p1",
+          "description": "Subject Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "fh_cap",
+          "id": "phv00435138.v1.p1",
+          "description": "Family history of prostate cancer",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fu_activetx___1",
+          "id": "phv00435155.v1.p1",
+          "description": "Active treatment (check all that apply): Surgery",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fu_activetx___2",
+          "id": "phv00435156.v1.p1",
+          "description": "Active treatment (check all that apply): Cryotherapy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fu_activetx___3",
+          "id": "phv00435157.v1.p1",
+          "description": "Active treatment (check all that apply): HiFU",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fu_activetx___4",
+          "id": "phv00435158.v1.p1",
+          "description": "Active treatment (check all that apply): Radiation (any type)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fu_activetx___5",
+          "id": "phv00435159.v1.p1",
+          "description": "Active treatment (check all that apply): Hormonal Therapy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_hormone_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fu_activetx___6",
+          "id": "phv00435160.v1.p1",
+          "description": "Active treatment (check all that apply): Chemotherapy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fu_activetx_days",
+          "id": "phv00435161.v1.p1",
+          "description": "Days from diagnosis to start date of earliest active treatment",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_follow_up_time",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "have_mets",
+          "id": "phv00435172.v1.p1",
+          "description": "Did subject have distant metastases?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_metastatic_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "last_contact_dead_days",
+          "id": "phv00435179.v1.p1",
+          "description": "Date from diagnosis to date of last contact",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "last_followup_days",
+          "id": "phv00435180.v1.p1",
+          "description": "Days from diagnosis to last follow-up",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "last_followup_status",
+          "id": "phv00435174.v1.p1",
+          "description": "Status at last follow-up",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_disease_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "mets_days",
+          "id": "phv00435173.v1.p1",
+          "description": "Days from date of diagnosis to date of distant metastases",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_metastatic_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "num_cores",
+          "id": "phv00435145.v1.p1",
+          "description": "Number of biopsy cores involved with cancer",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_biopsy_characteristics",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "psa_dx",
+          "id": "phv00435141.v1.p1",
+          "description": "PSA at diagnosis (ng/ml)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "race",
+          "id": "phv00435136.v1.p1",
+          "description": "Subject Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "recur_biochem",
+          "id": "phv00435170.v1.p1",
+          "description": "Did subject have biochemical recurrence?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "recur_biochem_days",
+          "id": "phv00435171.v1.p1",
+          "description": "Days from date of diagnosis to date of recurrence",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rp_ece",
+          "id": "phv00435166.v1.p1",
+          "description": "Prostatectomy extracapsular extension",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_invasion_characteristics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rp_gleason1",
+          "id": "phv00435163.v1.p1",
+          "description": "Prostatectomy primary Gleason grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rp_gleason2",
+          "id": "phv00435164.v1.p1",
+          "description": "Prostatectomy secondary Gleason grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rp_gleason3",
+          "id": "phv00435165.v1.p1",
+          "description": "Prostatectomy tertiary Gleason grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rp_margins",
+          "id": "phv00435167.v1.p1",
+          "description": "Prostatectomy surgical margins",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_surgical_margins",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rp_posnodes",
+          "id": "phv00435169.v1.p1",
+          "description": "Prostatectomy number of positive lymph nodes",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_lymph_node_examination",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rp_svi",
+          "id": "phv00435168.v1.p1",
+          "description": "Prostatectomy seminal vesicle invasion",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_invasion_characteristics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "start_tx",
+          "id": "phv00435154.v1.p1",
+          "description": "Did subject ever undergo active treatment?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "status_last_contact_dead",
+          "id": "phv00435178.v1.p1",
+          "description": "Status at last patient contact",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "surgdays",
+          "id": "phv00435162.v1.p1",
+          "description": "Days from diagnosis to date of prostatectomy",
+          "concept_id": "ncpi:surgical_procedure_prostate_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "switch_ww",
+          "id": "phv00435146.v1.p1",
+          "description": "Did subject ever switch to 'Watchful Waiting'?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_treatment_switching",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "switch_ww_days",
+          "id": "phv00435147.v1.p1",
+          "description": "Days from diagnosis to date of switch to 'Watchful Waiting'",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_follow_up_time",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "withdraw_days",
+          "id": "phv00435148.v1.p1",
+          "description": "Days from diagnosis to withdrawal from active surveillance",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_follow_up_time",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "withdraw_reason___1",
+          "id": "phv00435149.v1.p1",
+          "description": "Reason for withdrawal from active surveillance (Upgrading)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "withdraw_reason___2",
+          "id": "phv00435150.v1.p1",
+          "description": "Reason for withdrawal from active surveillance (Upstaging)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "withdraw_reason___3",
+          "id": "phv00435151.v1.p1",
+          "description": "Reason for withdrawal from active surveillance (PSA Progression)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "withdraw_reason___4",
+          "id": "phv00435152.v1.p1",
+          "description": "Reason for withdrawal from active surveillance (Anxiety)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "withdraw_reason___5",
+          "id": "phv00435153.v1.p1",
+          "description": "Reason for withdrawal from active surveillance (Other)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_PC_AS_Subject",
+      "datasetId": "pht010450.v1",
+      "description": "This subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00435130.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00491029.v1.p1",
+          "description": "Submitted subject ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435129.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00491028.v1.p1",
+          "description": "Repository name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_PC_AS_Sample_Attributes",
+      "datasetId": "pht010453.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, sample analyte type, and sample tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00435183.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00435182.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": "ncpi:surgical_procedure_specimen_collection",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00435184.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00435181.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_PC_AS_Sample",
+      "datasetId": "pht010451.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00435132.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435131.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

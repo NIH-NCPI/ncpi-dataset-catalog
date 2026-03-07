@@ -1,0 +1,122 @@
+{
+  "studyId": "phs000655",
+  "studyName": "Genetics of Inherited Muscle Disease",
+  "tables": [
+    {
+      "tableName": "Inherited_Muscle_Disease_Subject",
+      "datasetId": "pht003488.v3",
+      "description": "Subject - Consent - Affection Status (All Cases) Information",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00195625.v3.p1",
+          "description": "Case - control status of the subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00195626.v3.p1",
+          "description": "Consent status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PI Info",
+          "id": "phv00220879.v2.p1",
+          "description": "Principle Investigator contributing samples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00195624.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Inherited_Muscle_Disease_Sample",
+      "datasetId": "pht003489.v3",
+      "description": "Subject - Sample Mapping - Sample Use Information",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00195628.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00195629.v3.p1",
+          "description": "Type of data submitted. Seq_DNA_SNP: SNP genotypes derived from sequence data; Seq_DNA_WholeExome: Whole exome sequencing; Seq_DNA_WholeGenome: Whole genome sequencing; Seq_RNA: Whole transcriptome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00195627.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Inherited_Muscle_Disease_Sample_Attributes",
+      "datasetId": "pht003491.v3",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00195633.v3.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00195632.v3.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MacArthur_SubjectPhenotypes",
+      "datasetId": "pht004377.v2",
+      "description": "The dataset provides information about participants' gender. In study release version 3, data of n=263 additional subjects have been added, and all phenotype data (i.e. gender information) has been entered into one dataset (pht003490.v1.p1 - Inherited_Muscle_Disease_Subject_Phenotypes has been deleted).",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00220880.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00220881.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

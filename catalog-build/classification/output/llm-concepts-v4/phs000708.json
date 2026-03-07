@@ -1,0 +1,194 @@
+{
+  "studyId": "phs000708",
+  "studyName": "Warfarin Pharmacogenetics: Pharmacogenetic Optimization of Anticoagulant Response (POAT) and Genetic and Environmental Determinants of Warfarin Response (GEDWR)",
+  "tables": [
+    {
+      "tableName": "POAT_GEDWR_Subject_Phenotypes",
+      "datasetId": "pht003727.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "Dose_stable",
+          "id": "phv00200367.v1.p1",
+          "description": "Stable warfarin dose (mg/week) was defined as the dose (with up to a 10% change) that resulted in a therapeutic INR between 1.8 and 3.2 for at least 3 consecutive clinic visits at least two weeks apart",
+          "concept_id": "ncpi:anticoagulant_medication_warfarin_coumadin_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00200365.v1.p1",
+          "description": "Identification number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "aged",
+          "id": "phv00200368.v1.p1",
+          "description": "Age in decades (age/10)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "amiod",
+          "id": "phv00200374.v1.p1",
+          "description": "Amiodarone co-therapy",
+          "concept_id": "ncpi:concomitant_medication_specific_drug_names_antiarrhythmic_amiodarone",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "aspirin",
+          "id": "phv00200375.v1.p1",
+          "description": "Aspirin co-therapy",
+          "concept_id": "ncpi:pain_medication_aspirin_use_aspirin_duration",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ckd1_1",
+          "id": "phv00200372.v1.p1",
+          "description": "Glomerular filtration rate (GFR) was estimated by using the 4-variable MDRD Study equation. If GFR>30<60 then CKD1_1=1 else CKD1_1=0.",
+          "concept_id": "ncpi:kidney_function_kidney_disease_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ckd1_2",
+          "id": "phv00200373.v1.p1",
+          "description": "Glomerular filtration rate (GFR) was estimated by using the 4-variable MDRD Study equation. If GFR<30 then CKD1_2=1; else CKD1_2=0.",
+          "concept_id": "ncpi:kidney_function_kidney_disease_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "height",
+          "id": "phv00200370.v1.p1",
+          "description": "Height in centimeters",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rfchf",
+          "id": "phv00200371.v1.p1",
+          "description": "Congestive Heart failure; Comorbid condition/ risk factor for adverse events",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_heart_failure",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00200366.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "weight",
+          "id": "phv00200369.v1.p1",
+          "description": "Weight in kilograms",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "POAT_GEDWR_Sample_Attributes",
+      "datasetId": "pht003728.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00200378.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00200377.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00200379.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00200376.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "POAT_GEDWR_Sample",
+      "datasetId": "pht003726.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00200363.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00200364.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00200362.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "POAT_GEDWR_Subject",
+      "datasetId": "pht003725.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00200361.v1.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00200360.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

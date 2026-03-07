@@ -1,0 +1,218 @@
+{
+  "studyId": "phs001306",
+  "studyName": "Large Scale Meta-analysis Characterizes Genetic Architecture for Common Psoriasis-associated Variants",
+  "tables": [
+    {
+      "tableName": "Psoriasis_Associated_Variants_Sample_Attributes",
+      "datasetId": "pht006190.v1",
+      "description": "This sample attributes table contains sample IDs, body site, analyte type, histological type, tumor status, DNA concentration, coefficient of variation between two pico readings, dish QC metric, cluster call rate, heterozygous SNP genotypes, sample status, and name of the center which conducted genotyping.",
+      "variables": [
+        {
+          "name": "Analyte_Type",
+          "id": "phv00282679.v1.p1",
+          "description": "Analyte Type of the sample",
+          "concept_id": "topmed:proteomics_panel_sample_metadata",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Body_Site",
+          "id": "phv00282678.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": "topmed:lung_ct_imaging_clinical_demographics_metadata",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "CVpct",
+          "id": "phv00282683.v1.p1",
+          "description": "Coefficient of variation between two pico readings for a sample.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Cluster_CR",
+          "id": "phv00282685.v1.p1",
+          "description": "The Axiom GT1 cluster call rate of the best array.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DNA_Concentration",
+          "id": "phv00282682.v1.p1",
+          "description": "Affymetrix PicoGreen concentration of the DNA sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Genotyping_Center",
+          "id": "phv00282688.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Het_Rate",
+          "id": "phv00282686.v1.p1",
+          "description": "(# heterozygous SNP genotypes)/(total # SNPs called)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histological_Type",
+          "id": "phv00282680.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Is_Tumor",
+          "id": "phv00282681.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_ID",
+          "id": "phv00282677.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_Status",
+          "id": "phv00282687.v1.p1",
+          "description": "Status of the sample based on Affymetrix QC metrics.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dQC",
+          "id": "phv00282684.v1.p1",
+          "description": "Dish QC metric.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Psoriasis_Associated_Variants_Subject_Phenotypes",
+      "datasetId": "pht006189.v1",
+      "description": "This subject phenotype table contains subject IDs, cohort, sex, race, and case-control status for Psoriasis.",
+      "variables": [
+        {
+          "name": "Cohort",
+          "id": "phv00282673.v1.p1",
+          "description": "Geographic collection center",
+          "concept_id": "ncpi:geographic_site_recruitment_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Psoriasis",
+          "id": "phv00282676.v1.p1",
+          "description": "Case-control status for Psoriasis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00282675.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00282674.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00282672.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Psoriasis_Associated_Variants_Subject",
+      "datasetId": "pht006187.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and level of data sharing permitted for subject .",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00282667.v1.p1",
+          "description": "Consent group of subject as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DATA_SHARING",
+          "id": "phv00282668.v1.p1",
+          "description": "Level of data sharing permitted for subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00282666.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Psoriasis_Associated_Variants_Sample",
+      "datasetId": "pht006188.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00282671.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_ID",
+          "id": "phv00282670.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00282669.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,252 @@
+{
+  "studyId": "phs000467",
+  "studyName": "TARGET: Neuroblastoma (NBL)",
+  "tables": [
+    {
+      "tableName": "TARGET_NBL_Subject_Phenotypes",
+      "datasetId": "pht002630.v12",
+      "description": null,
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00167619.v12.p8",
+          "description": "Age at diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COG Risk Group",
+          "id": "phv00167637.v12.p8",
+          "description": "COG risk stratification criteria at the time the patient enrolled",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00167620.v12.p8",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NAACCR_ETHNICITY",
+          "id": "phv00167621.v12.p8",
+          "description": "NAACCR Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NAACCR_RACE",
+          "id": "phv00167622.v12.p8",
+          "description": "NAACCR Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Protocol(s)",
+          "id": "phv00167638.v12.p8",
+          "description": "COG Protocol number on which the patient was enrolled",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00167618.v12.p8",
+          "description": "TARGET Subject id",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diag",
+          "id": "phv00167629.v12.p8",
+          "description": "Diagnostic Category (Revised INPC).  If INPC diagnostic category is missing, then this is Shimada diagnostic category.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_cancer_type_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "efscens",
+          "id": "phv00167633.v12.p8",
+          "description": "Events are described as the first occurrence of relapse, progressive disease, secondary malignancy, or death.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_event_free_survival",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "efstime",
+          "id": "phv00167635.v12.p8",
+          "description": "Number of days from diagnosis until the event, or until last contact if no event",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_event_free_survival",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "grade",
+          "id": "phv00167627.v12.p8",
+          "description": "Grade of Neuroblastic Differentiation (Revised INPC).  If INPC grade is missing, then this is Shimada grade.",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hist",
+          "id": "phv00167626.v12.p8",
+          "description": "Revised INPC prognostic group (Cancer 2003). If INPC is missing, this is the Shimada classification (JNCI 1984).",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "icdo",
+          "id": "phv00167630.v12.p8",
+          "description": "ICD-O Topography Code (International Classification of Disease Code)",
+          "concept_id": "topmed:cancer_diagnosis_cancer_registry_codes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "icdo_snomed_description",
+          "id": "phv00167632.v12.p8",
+          "description": "Either the ICDO code, or the SNOMED code (if ICDO=999 or Unknown) or a Hard-coded value if both codes unknown but information available",
+          "concept_id": "topmed:cancer_diagnosis_cancer_registry_codes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "inss_stage",
+          "id": "phv00167623.v12.p8",
+          "description": "INSS stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mki",
+          "id": "phv00167628.v12.p8",
+          "description": "MKI (Revised INPC).  If INPC MKI is missing, then this is Shimada MKI.  When multiple nodules present in a single Ganglioneuroblastoma, nodular tumor, the higher MKI value is reported.",
+          "concept_id": "topmed:cancer_diagnosis_tumor_characteristics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mycn",
+          "id": "phv00167624.v12.p8",
+          "description": "MYCN status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_other_tumor_markers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "percent_necrosis",
+          "id": "phv00167640.v12.p8",
+          "description": "Proportion of tumor (necrotic vs viable), as estimated on specimen quality control review by the Biopathology Center in Columbus",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "percent_tumor",
+          "id": "phv00167639.v12.p8",
+          "description": "Proportion of specimen (tumor vs non-tumor), as estimated on specimen quality control review by the Biopathology Center in Columbus",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ploidy",
+          "id": "phv00167625.v12.p8",
+          "description": "Ploidy",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_chromosomal_alterations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "scens",
+          "id": "phv00167634.v12.p8",
+          "description": "Events are described as the first occurrence of relapse, progressive disease, secondary malignancy, or death.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_event_free_survival",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "snomed",
+          "id": "phv00167631.v12.p8",
+          "description": "Older Topography Code (Systemized Nomenclature of Medicine-Clinical Terms)",
+          "concept_id": "topmed:cancer_diagnosis_cancer_registry_codes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "stime",
+          "id": "phv00167636.v12.p8",
+          "description": "Number of days from diagnosis until death, or until last contact if alive",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TARGET_NBL_Sample_Attributes",
+      "datasetId": "pht002631.v13",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTETYPE",
+          "id": "phv00167645.v13.p8",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASEPROJECT",
+          "id": "phv00196459.v9.p8",
+          "description": "Disease project",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASESTATE",
+          "id": "phv00167642.v13.p8",
+          "description": "Disease state of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXTRACTNAME",
+          "id": "phv00167643.v13.p8",
+          "description": "Extract name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLENAME",
+          "id": "phv00167641.v13.p8",
+          "description": "Sample Name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLETYPE",
+          "id": "phv00167644.v13.p8",
+          "description": "Sample type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

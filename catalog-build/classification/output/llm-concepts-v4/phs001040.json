@@ -1,0 +1,522 @@
+{
+  "studyId": "phs001040",
+  "studyName": "NHLBI TOPMed: Novel Risk Factors for the Development of Atrial Fibrillation in Women",
+  "tables": [
+    {
+      "tableName": "TOPMed_WGS_WGHS_Subject_Phenotypes",
+      "datasetId": "pht005682.v3",
+      "description": "This subject phenotype data table includes subject's sex, race, atrial fibrillation (AF) status, age at enrollment, age at AF diagnosis, and cholesterol measurements (n=6 variables; LDL, HDL, triglycerides, total cholesterol and cholesterol lowering medication at baseline, and blood draw following 8 hr fast). Additional variables have been added: height, weight, BMI, waist/hip ratio, diabetes at baseline, age at menarche, uterine fibroids, age at menopause, diastolic and systolic blood pressure, blood test (n=9 variables; APOA1, APOB, creatinine, CRP, fibrinogen, HBA1C, homocysteine, ICAM, and LPA), principal components (n=10 variables), alcohol use, excercise, and smoking status.",
+      "variables": [
+        {
+          "name": "HEIGHT",
+          "id": "phv00375254.v1.p1",
+          "description": "Height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00375261.v1.p1",
+          "description": "Weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "race",
+          "id": "phv00328556.v2.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "sex",
+          "id": "phv00265850.v3.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "ALCUSE",
+          "id": "phv00375251.v1.p1",
+          "description": "Alcohol use",
+          "concept_id": "phenx:alcohol_30day_quantity_and_frequency",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "APOA1",
+          "id": "phv00375245.v1.p1",
+          "description": "Apo A1",
+          "concept_id": "topmed:proteomics_panel_lipoproteins_lipid_metabolism",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "APOB",
+          "id": "phv00375246.v1.p1",
+          "description": "Apo B",
+          "concept_id": "topmed:proteomics_panel_lipoproteins_lipid_metabolism",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00375247.v1.p1",
+          "description": "Body mass index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHOL",
+          "id": "phv00328560.v2.p1",
+          "description": "Total cholesterol at baseline",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CREA",
+          "id": "phv00375248.v1.p1",
+          "description": "Creatinine",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CRP",
+          "id": "phv00375249.v1.p1",
+          "description": "CRP(Denka)",
+          "concept_id": "topmed:crp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DBPCAT",
+          "id": "phv00375250.v1.p1",
+          "description": "Diastolic blood pressure",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_miscellaneous",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "E1",
+          "id": "phv00375266.v1.p1",
+          "description": "Principal component 1",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "E10",
+          "id": "phv00375275.v1.p1",
+          "description": "Principal component 10",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_10",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "E2",
+          "id": "phv00375267.v1.p1",
+          "description": "Principal component 2",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_2",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "E3",
+          "id": "phv00375268.v1.p1",
+          "description": "Principal component 3",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_3",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "E4",
+          "id": "phv00375269.v1.p1",
+          "description": "Principal component 4",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_4",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "E5",
+          "id": "phv00375270.v1.p1",
+          "description": "Principal component 5",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_5",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "E6",
+          "id": "phv00375271.v1.p1",
+          "description": "Principal component 6",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_6",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "E7",
+          "id": "phv00375272.v1.p1",
+          "description": "Principal component 7",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_7",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "E8",
+          "id": "phv00375273.v1.p1",
+          "description": "Principal component 8",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_8",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "E9",
+          "id": "phv00375274.v1.p1",
+          "description": "Principal component 9",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_9",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXERCISE",
+          "id": "phv00375258.v1.p1",
+          "description": "Exercise",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_physical_activity_indices_scores",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FAST8HRS",
+          "id": "phv00328561.v2.p1",
+          "description": "Baseline blood draw at least 8 hours after last meal",
+          "concept_id": "topmed:fasting_lipids",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FIBRINOGEN",
+          "id": "phv00375252.v1.p1",
+          "description": "Fibrinogen",
+          "concept_id": "ncpi:proteomics_panel_complement_coagulation_fibrinogen_fibrin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HBA1C",
+          "id": "phv00375253.v1.p1",
+          "description": "HbA1c",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HCYS",
+          "id": "phv00375255.v1.p1",
+          "description": "Homocysteine",
+          "concept_id": "topmed:proteomics_panel_metabolic_enzymes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HDL",
+          "id": "phv00328558.v2.p1",
+          "description": "HDL cholesterol in mg/dl at baseline",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ICAM",
+          "id": "phv00375256.v1.p1",
+          "description": "ICAM",
+          "concept_id": "topmed:icam1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL",
+          "id": "phv00328557.v2.p1",
+          "description": "LDL cholesterol in mg/dl at baseline, direct measure",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LPA",
+          "id": "phv00375257.v1.p1",
+          "description": "Lp(a)",
+          "concept_id": "topmed:proteomics_panel_lipoproteins_lipid_metabolism",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SBPCAT",
+          "id": "phv00375259.v1.p1",
+          "description": "Systolic blood pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_average_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMK3CAT",
+          "id": "phv00375260.v1.p1",
+          "description": "Smoking status",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00265846.v3.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TGGB",
+          "id": "phv00328559.v2.p1",
+          "description": "Triglycerides in mg/dl at baseline",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_standard_units_total_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WHratio",
+          "id": "phv00375277.v1.p1",
+          "description": "Waist/hip ratio",
+          "concept_id": "phenx:waist_circumference_waist_circumference_ncfs",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "af_status",
+          "id": "phv00265847.v3.p1",
+          "description": "AF status",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "age",
+          "id": "phv00265848.v3.p1",
+          "description": "Age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_diagnosis",
+          "id": "phv00265849.v3.p1",
+          "description": "Age at AF diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "agemenarche",
+          "id": "phv00375264.v1.p1",
+          "description": "Age at menarche",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_age_at_menarche",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "agemeno",
+          "id": "phv00375276.v1.p1",
+          "description": "Age at menopause",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_age_at_menopause",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cholmeds1",
+          "id": "phv00328562.v2.p1",
+          "description": "Cholesterol lowering medication at baseline",
+          "concept_id": "ncpi:lipid_lowering_medication_general_lipid_lowering_medication",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diabetbs",
+          "id": "phv00375262.v1.p1",
+          "description": "Diabetes at baseline",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "metabsyn",
+          "id": "phv00375263.v1.p1",
+          "description": "Metabolic syndrome",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "uterinefibr",
+          "id": "phv00375265.v1.p1",
+          "description": "Uterine fibroids",
+          "concept_id": "ncpi:disease_diagnosis_genitourinary_disorders_uterine_conditions",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_WGHS_Sample_Attributes",
+      "datasetId": "pht005205.v2",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, sequencing center, funding source, TOPMed phase, project, and study name.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00258328.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00258327.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00328564.v1.p1",
+          "description": "Funding Source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00258329.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258326.v2.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00328563.v1.p1",
+          "description": "SEQUENCING CENTER",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00328567.v1.p1",
+          "description": "Study Name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00328565.v1.p1",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00328566.v1.p1",
+          "description": "TOPMed Project",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_WGHS_Subject",
+      "datasetId": "pht005203.v3",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00258321.v3.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": "ncpi:subcohort_consent_group",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00530123.v1.p1",
+          "description": "Sex/gender of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00328555.v2.p1",
+          "description": "Subject ID from Source Study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258320.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00328554.v2.p1",
+          "description": "Source Study of Subject if other",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_WGHS_Sample",
+      "datasetId": "pht005204.v3",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258324.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258323.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "studyId": "phs002343",
+  "studyName": "Structure of the Mucosal and Stool Microbiome in Lynch Syndrome",
+  "tables": [
+    {
+      "tableName": "Lynch_Syndrome_Microbiome_Sample_Attributes",
+      "datasetId": "pht012469.v1",
+      "description": "This sample attributes table contains sample ID, analyte type, body site where sample was collected, sample collection location, collection site, mutation status, BMI, aspirin, aspirin dose, antibiotics, surgery history, surgery type, baseline polyp, number of baseline polyp, interval polyp, bristol score, If patients has stool samples, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00505917.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Antibiotics",
+          "id": "phv00505925.v1.p1",
+          "description": "Antibiotics",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_current_antibiotic_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Aspirin",
+          "id": "phv00505923.v1.p1",
+          "description": "Aspirin",
+          "concept_id": "ncpi:pain_medication_aspirin_use_aspirin_duration",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Aspirin_dose",
+          "id": "phv00505924.v1.p1",
+          "description": "Aspirin dose",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00505922.v1.p1",
+          "description": "BMI",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00505918.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_polyp",
+          "id": "phv00505928.v1.p1",
+          "description": "Baseline polyp",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_polyp_number",
+          "id": "phv00505929.v1.p1",
+          "description": "Number of baseline polyp",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Bristol_score",
+          "id": "phv00505931.v1.p1",
+          "description": "Bristol score",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_general_gi_symptoms",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_SITE",
+          "id": "phv00505920.v1.p1",
+          "description": "Collection site",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00540929.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Interval_polyp",
+          "id": "phv00505930.v1.p1",
+          "description": "Interval polyp",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Mutation",
+          "id": "phv00505921.v1.p1",
+          "description": "Mutation status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "New_Sample_Location",
+          "id": "phv00505919.v1.p1",
+          "description": "Sample  collection location",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00505915.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Simplify_surgery_type",
+          "id": "phv00505927.v1.p1",
+          "description": "Surgery type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Surgery_history",
+          "id": "phv00505926.v1.p1",
+          "description": "Surgery history",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "has_stool",
+          "id": "phv00505932.v1.p1",
+          "description": "If patients has stool samples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Lynch_Syndrome_Microbiome_Subject_Phenotypes",
+      "datasetId": "pht012468.v1",
+      "description": "This subject phenotype table contains subject ID, age, race, and ethnicity.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00505912.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00505914.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00505913.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00505911.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Lynch_Syndrome_Microbiome_Subject",
+      "datasetId": "pht012466.v1",
+      "description": "The subject consent file includes subject ID, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00505907.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00505908.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00505906.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Lynch_Syndrome_Microbiome_Sample",
+      "datasetId": "pht012467.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00505910.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00505909.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

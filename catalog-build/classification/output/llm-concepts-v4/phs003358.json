@@ -1,0 +1,210 @@
+{
+  "studyId": "phs003358",
+  "studyName": "Patient Microbiome and Surgical Site Infection in Spine Surgery",
+  "tables": [
+    {
+      "tableName": "Spine_Surgery_Infection_Microbiome_Subject_Phenotypes",
+      "datasetId": "pht013899.v1",
+      "description": "This subject phenotype data table includes affection status for occurrence of surgical site infection, patient age at sampling, self-report race and ethnicity, diabetes comorbidity, presence of MRSA, immunosuppression status, and surgical procedure group.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00533187.v1.p1",
+          "description": "Case - Control status (occurrence of surgical site infection)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_DECILE",
+          "id": "phv00533188.v1.p1",
+          "description": "Patient age at time of sampling (decile)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETES",
+          "id": "phv00533191.v1.p1",
+          "description": "Comorbid diabetes at time of enrollment",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY_GROUP",
+          "id": "phv00533190.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IMMUNOSUPPRESSED",
+          "id": "phv00533193.v1.p1",
+          "description": "Immunosuppressed at time of enrollment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MRSA_COLONIZATION",
+          "id": "phv00533192.v1.p1",
+          "description": "Result of admission screening test for methicillin-resistant Staphylococcus aureus",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_GROUP",
+          "id": "phv00533189.v1.p1",
+          "description": "Self-reported race (limited to White, non-White by IRB approved protections against re-identification)",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00533186.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SURGICAL_PROCEDURE_GROUP",
+          "id": "phv00533194.v1.p1",
+          "description": "Surgical procedure group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Spine_Surgery_Infection_Microbiome_Sample_Attributes",
+      "datasetId": "pht013900.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, host, histological type, enrichment protocol, and taxonomic class of culture.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00533197.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00533196.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CULT_TARGET",
+          "id": "phv00533202.v1.p1",
+          "description": "Taxonomic class for which reads were enriched and filtered",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ENRICHMENT_PROTOCOL",
+          "id": "phv00533201.v1.p1",
+          "description": "Enrichment protocol",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00533200.v1.p1",
+          "description": "Sample material type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HOST",
+          "id": "phv00533199.v1.p1",
+          "description": "Host",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00533198.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00533195.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Spine_Surgery_Infection_Microbiome_Subject",
+      "datasetId": "pht013897.v1",
+      "description": "The subject consent data table includes subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00533182.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00533183.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00533181.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Spine_Surgery_Infection_Microbiome_Sample",
+      "datasetId": "pht013898.v1",
+      "description": "This subject sample mapping data table includes a mapping of study patient IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00533185.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00533184.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

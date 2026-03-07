@@ -1,0 +1,154 @@
+{
+  "studyId": "phs001451",
+  "studyName": "A Phase I Study with a Personalized Neoantigen Cancer Vaccine in Melanoma",
+  "tables": [
+    {
+      "tableName": "Melanoma_Neoantigen_Vaccine_Subject_Phenotypes",
+      "datasetId": "pht007133.v4",
+      "description": "This subject phenotype table contains subject IDs, age, ethnicity, subject IDs used in publication, and affection status of the subject for melanoma. All subjects are melanoma patients.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00528568.v1.p1",
+          "description": "Affection status of the subject for melanoma; all subjects are melanoma patients.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00328546.v2.p1",
+          "description": "Age of subject",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00328548.v2.p1",
+          "description": "Ethnicity of subject",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PUBLICATION_SUBJID",
+          "id": "phv00481423.v1.p1",
+          "description": "SUBJID used in publication",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00328545.v2.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Melanoma_Neoantigen_Vaccine_Sample_Attributes",
+      "datasetId": "pht007134.v5",
+      "description": "This sample attributes table contains sample IDs, body site where sample was collected, analyte type, histological type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00328551.v5.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00328550.v5.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00328552.v5.p1",
+          "description": "Cell or tissue type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00328553.v5.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00328549.v5.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Melanoma_Neoantigen_Vaccine_Subject",
+      "datasetId": "pht007131.v3",
+      "description": "The subject consent file includes subject IDs, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00328540.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00528567.v1.p1",
+          "description": "Biological sex of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00328539.v2.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Melanoma_Neoantigen_Vaccine_Sample",
+      "datasetId": "pht007132.v5",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00328543.v5.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00328542.v5.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

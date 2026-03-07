@@ -1,0 +1,130 @@
+{
+  "studyId": "phs000426",
+  "studyName": "SLCO1B1 Variants and Methotrexate Clearance",
+  "tables": [
+    {
+      "tableName": "4a_dbGaP_SampleAttributesDS",
+      "datasetId": "pht002455.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00163755.v1.p1",
+          "description": "Germline or tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLEID",
+          "id": "phv00163751.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_TYPE",
+          "id": "phv00163754.v1.p1",
+          "description": "Sample type: DNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_TimePoint",
+          "id": "phv00163753.v1.p1",
+          "description": "Time point of treatment when samples were collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Source_Tissue_Type",
+          "id": "phv00163752.v1.p1",
+          "description": "Source of tissue where DNA was extracted",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "3a_dbGaP_SubjectPhenotypesDS",
+      "datasetId": "pht002454.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "Subject_ID",
+          "id": "phv00163748.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "adjusted_methotrexate_clearance",
+          "id": "phv00163750.v1.p1",
+          "description": "Methotrexate clearance adjusted for treatment arm, sex and age; mean clearance among patient population was normalized to zero.",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_methotrexate",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "methotrexate clearance",
+          "id": "phv00163749.v1.p1",
+          "description": "Methotrexate clearance averaged over multiple courses for each patient",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_methotrexate",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "5a_dbGap_SubjectConsent_Subject",
+      "datasetId": "pht002452.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "Consent",
+          "id": "phv00163745.v1.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00163744.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "6a_dbGaP_SubjectSampleMappingDS_Sample",
+      "datasetId": "pht002453.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLEID",
+          "id": "phv00163747.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00163746.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

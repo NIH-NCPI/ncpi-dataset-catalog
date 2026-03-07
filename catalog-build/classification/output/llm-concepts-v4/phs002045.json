@@ -1,0 +1,242 @@
+{
+  "studyId": "phs002045",
+  "studyName": "Intraductal Transplantation Models of PDAC Reveal Progression of Subtypes",
+  "tables": [
+    {
+      "tableName": "PDAC_Sample_Attributes",
+      "datasetId": "pht010310.v1",
+      "description": "This sample attributes table contains sample IDs, body site, xenograft body site, control status, analyte type, histological type, tumor status, sample type, engraftment model, project analysis, intraductally grafted organoid (IGO) progressor type, KRAS in vivo, KRAS in vitro, isolated region, and days of harvested sample.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00431138.v1.p1",
+          "description": "Analyte type of sample",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00431135.v1.p1",
+          "description": "Site in the patient's body where the specimen used to generate the organoid line was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLONE_ID",
+          "id": "phv00431303.v1.p1",
+          "description": "For samples derived from clonal organoids or xenografts of clonal organoids, the clone ID of the organoid",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONTROL_STATUS",
+          "id": "phv00431137.v1.p1",
+          "description": "For experiments that compared treated cells or mice to controls (project analyses 4 and 5 detailed below), this describes whether the sample was a case or a control",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DAY_SAMPLE_HARVESTED",
+          "id": "phv00431148.v1.p1",
+          "description": "The number of days after initial transplant that the tumor was harvested, or the number of days after plating that the organoids were harvested",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "ENGRAFTMENT_MODEL",
+          "id": "phv00431142.v1.p1",
+          "description": "Method used to engraft patient-derived organoid cells into the pancreas of NSG (NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ) mice",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00431139.v1.p1",
+          "description": "Histology of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IGO_PROGRESSOR_TYPE",
+          "id": "phv00431144.v1.p1",
+          "description": "For tumors arising from intraductally grafted organoids (IGOs) that were used to compare fast- vs. slow-progessing IGO tumors (i.e. tumors used to generate samples used for Project Analyses 2 or 3), the relative speed of progression",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ISOLATED_REGION",
+          "id": "phv00431147.v1.p1",
+          "description": "Region isolated by laser-capture microdissection of IGO-derived tumors used for Project Analyses 6, 7, and 8",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00431140.v1.p1",
+          "description": "Tumor status of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "KRAS_IN_VITRO",
+          "id": "phv00431146.v1.p1",
+          "description": "Treatment of the organoids used for comparison of cultured organoids in which oncogenic KRAS was hyperactivated vs untreated, control organoids for Project Analysis 5",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "KRAS_IN_VIVO",
+          "id": "phv00431145.v1.p1",
+          "description": "Vector construct present in the organoids used to generate the IGO tumors used to compare laser-capture microdissected KRAS-hyperactivated or control regions for Project Analysis 4",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ORGANOID_USED",
+          "id": "phv00431302.v1.p1",
+          "description": "Organoid line used to generate this sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROJECT_ANALYSIS",
+          "id": "phv00431143.v1.p1",
+          "description": "Type of analysis in which the sample was included",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00431134.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00431141.v1.p1",
+          "description": "Preclinical model system used to generate sample. For samples with SAMPLE_TYPE=ORGANOID, the name of the organoid used to generate the sample. For samples with SAMPLE_TYPE=IGO_LCM or XENOGRAFT, the name of the organoid transplanted to generate the xenograft tumor.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "XENOGRAFT_BODY_SITE",
+          "id": "phv00431136.v1.p1",
+          "description": "For xenografts of patient-derived organoids, the site in the mouse's body from which the sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PDAC_Subject_Phenotypes",
+      "datasetId": "pht010309.v1",
+      "description": "This subject phenotype table contains subject IDs, case control status of the subject for pancreatic ductal adenocarcinoma (PDAC), sex, age, and race.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00431130.v1.p1",
+          "description": "Case control status of the subject for pancreatic ductal adenocarcinoma (PDAC)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00431132.v1.p1",
+          "description": "Age at diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00431133.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00431131.v1.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431129.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PDAC_Subject",
+      "datasetId": "pht010307.v1",
+      "description": "The subject consent file includes subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00431126.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431125.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PDAC_Sample",
+      "datasetId": "pht010308.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00431128.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00431127.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

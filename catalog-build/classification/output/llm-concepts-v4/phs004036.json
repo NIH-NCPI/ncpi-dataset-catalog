@@ -1,0 +1,440 @@
+{
+  "studyId": "phs004036",
+  "studyName": "Omic Studies in Children's Respiratory and Environmental Workgroup (CREW) Cohorts",
+  "tables": [
+    {
+      "tableName": "CREW_Omics_Subject_Phenotypes",
+      "datasetId": "pht015963.v1",
+      "description": "This subject phenotypes data table reports each subject's parent-reported race and ethnicity, age, age and sex standardized body mass index (BMI) z score, proportion of positive skin prick tests, fractional exhaled nitric oxide, total serum IgE, blood eosiniphil count, allergic asthma status, non-allergic asthma status, forced expiratory volume in 1 second (FEV1), forced vital capacity (FVC), FEV1/FVC ratio, allergic rhinitis status, first three ancestry principal components, history of parent-reported physician diagnosis of asthma plus a parental report of 1 or more wheezing episodes in the past 12 months, and name of cohort.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00560269.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALLERGIC_ASTHMA",
+          "id": "phv00560275.v1.p1",
+          "description": "Allergic asthma",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_type_classification",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALLERGIC_RHINITIS",
+          "id": "phv00560280.v1.p1",
+          "description": "Allergic rhinitis. Rhinitis diagnosed based on symptoms (runny nose, stuffy nose, and sneezing). Allergic rhinitis based on presence of rhinitis in addition to allergic sensitization at age 10.",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_hay_fever_allergic_rhinitis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ANC_PC1",
+          "id": "phv00560281.v1.p1",
+          "description": "Ancestry PC1",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_all_population_pcs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANC_PC2",
+          "id": "phv00560282.v1.p1",
+          "description": "Ancestry PC2",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_all_population_pcs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANC_PC3",
+          "id": "phv00560283.v1.p1",
+          "description": "Ancestry PC3",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_all_population_pcs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ASTHMA_2",
+          "id": "phv00560284.v1.p1",
+          "description": "Asthma definition 2:  Parent-reported physician diagnosis of asthma plus a parental report of 1 or more wheezing episodes in the past 12 months.",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_type_classification",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ATOPY_SPT",
+          "id": "phv00560271.v1.p1",
+          "description": "Proportion of positive skin prick tests",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_respiratory_questionnaires",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BMIZ",
+          "id": "phv00560270.v1.p1",
+          "description": "Age and sex standardized body mass index (BMI) z score",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "COHORT",
+          "id": "phv00560285.v1.p1",
+          "description": "Name of cohort",
+          "concept_id": "ncpi:subcohort_study_cohort_assignment_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EOS",
+          "id": "phv00560274.v1.p1",
+          "description": "Blood eosinophil count  (EOS)",
+          "concept_id": "topmed:eosinophil_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FENO",
+          "id": "phv00560272.v1.p1",
+          "description": "Fractional exhaled nitric oxide (FeNO)",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_respiratory_symptoms_general",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FEV1",
+          "id": "phv00560277.v1.p1",
+          "description": "Forced expiratory volume in 1 second (FEV1)",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fev1_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FEV1/FVC",
+          "id": "phv00560279.v1.p1",
+          "description": "FEV1/FVC ratio",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fev1_fvc_ratio",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FVC",
+          "id": "phv00560278.v1.p1",
+          "description": "Forced vital capacity (FVC)",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fvc_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IGE",
+          "id": "phv00560273.v1.p1",
+          "description": "Total serum immunoglobulin E (IgE)",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_respiratory_symptoms_general",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NON_ALLERGIC_ASTHMA",
+          "id": "phv00560276.v1.p1",
+          "description": "Non-allergic asthma",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_type_classification",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00560268.v1.p1",
+          "description": "Parent-reported race and ethnicity",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00560267.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DNAm",
+      "datasetId": "pht015965.v1",
+      "description": "This sample attributes data table includes each sample's body site of origin, analyte type, tumor status, subject age at collection, basename, plate, array or Sentrix ID, DNA concentration, percent of ciliated epithelial cells, percent of squamous cells, percent of neutrophils, percent of macrophages, percent of eosinophils, and percent of lymphocytes.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00560290.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ARRAY",
+          "id": "phv00560295.v1.p1",
+          "description": "Array or Sentrix ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BASENAME",
+          "id": "phv00560293.v1.p1",
+          "description": "Basename",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00560289.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CIL_EPI",
+          "id": "phv00560297.v1.p1",
+          "description": "Percent ciliated epithelial cells",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00560292.v1.p1",
+          "description": "Age sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DNA_CONC",
+          "id": "phv00560296.v1.p1",
+          "description": "DNA concentration",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EOS",
+          "id": "phv00560301.v1.p1",
+          "description": "Percent of eosinophils",
+          "concept_id": "topmed:eosinophil_ncnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00560291.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LYMPHO",
+          "id": "phv00560302.v1.p1",
+          "description": "Percent of lymphocytes",
+          "concept_id": "topmed:lymphocyte_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MACRO",
+          "id": "phv00560300.v1.p1",
+          "description": "Percent of macrophages",
+          "concept_id": "topmed:monocyte_ncnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NEUTRO",
+          "id": "phv00560299.v1.p1",
+          "description": "Percent of neutrophils",
+          "concept_id": "topmed:neutrophil_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLATE",
+          "id": "phv00560294.v1.p1",
+          "description": "Plate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00560288.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SQUAM",
+          "id": "phv00560298.v1.p1",
+          "description": "Percent squamous cells",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CREW_Omics_Subject",
+      "datasetId": "pht015961.v1",
+      "description": "This subject consent data table includes subject IDs, consent information, biological sex, and aliases to subject IDs used in other dbGaP studies.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00560261.v1.p1",
+          "description": "Registered consent groups (Data Use Limitations (DUL)) as determined by submitters' Institutional Review Boards (IRB) or equivalent body.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00560262.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00560264.v1.p1",
+          "description": "Subject source ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID2",
+          "id": "phv00560363.v1.p1",
+          "description": "Subject source ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00560260.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00560263.v1.p1",
+          "description": "Subject source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE2",
+          "id": "phv00560362.v1.p1",
+          "description": "Subject source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CREW_Omics_Sample_Attributes",
+      "datasetId": "pht015966.v1",
+      "description": "This sample attributes data table includes each sample's body site of origin, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00560305.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00560304.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00560306.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00560303.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CREW_Omics_Sample",
+      "datasetId": "pht015962.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to individual  and pooled sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00560266.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00560265.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CREW_Omics_GEO",
+      "datasetId": "pht015964.v1",
+      "description": "This data table maps the sample IDs that appear in the subject sample mapping dataset file to the corresponding accession numbrs of the samples in NCBI's Gene Expression Omnibus (GEO) database.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00560287.v1.p1",
+          "description": "GEO accession ID (GSM#)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00560286.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

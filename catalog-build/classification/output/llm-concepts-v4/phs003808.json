@@ -1,0 +1,194 @@
+{
+  "studyId": "phs003808",
+  "studyName": "HIV DAb-seq of ART-Treated Individuals",
+  "tables": [
+    {
+      "tableName": "HIV_DAbseq_ART_Sample_Attributes",
+      "datasetId": "pht015749.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00558870.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00558868.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CD4_TCELL_COUNT_LEUKA_DATE",
+          "id": "phv00558871.v1.p1",
+          "description": "Number of CD4+ T-cells in blood at the date of sample collection",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "CD8_TCELL_COUNT_LEUKA_DATE",
+          "id": "phv00558872.v1.p1",
+          "description": "Number of CD8+ T-cells in blood at the date of sample collection",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "PREPROCESSING",
+          "id": "phv00558869.v1.p1",
+          "description": "Preprocessing steps applied to the samples prior to measurement",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00558867.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TREATMENT_REGIME",
+          "id": "phv00558876.v1.p1",
+          "description": "Antiretroviral therapy regime",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VIRAL_LOAD_AT_COLLECTION_DATE",
+          "id": "phv00558873.v1.p1",
+          "description": "Number of viral particles in blood at collection date",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hiv_viral_load",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "VIRAL_LOAD_PANTHER_ESIMATED",
+          "id": "phv00558875.v1.p1",
+          "description": "Estimated number of viable HIV virions in the blood",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_hiv_viral_load",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "YEARS_ON_ART",
+          "id": "phv00558874.v1.p1",
+          "description": "Time since antiretroviral therapy started at sample collection date",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        }
+      ]
+    },
+    {
+      "tableName": "HIV_DAbseq_ART_Subject_Phenotypes",
+      "datasetId": "pht015748.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00558863.v1.p1",
+          "description": "Case control status of the subject for HIV",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00558865.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DOCUMENTED_CD4_NADIR",
+          "id": "phv00558866.v1.p1",
+          "description": "Lowest measured CD4+ T-cell count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00558864.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00558862.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HIV_DAbseq_ART_Subject",
+      "datasetId": "pht015746.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00558858.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00558859.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00558857.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HIV_DAbseq_ART_Sample",
+      "datasetId": "pht015747.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00558861.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00558860.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

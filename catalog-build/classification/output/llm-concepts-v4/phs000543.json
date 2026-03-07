@@ -1,0 +1,146 @@
+{
+  "studyId": "phs000543",
+  "studyName": "Exome Sequencing of Pleuropulmonary Blastoma",
+  "tables": [
+    {
+      "tableName": "PPB_Sample_Attributes",
+      "datasetId": "pht002939.v1",
+      "description": "Sample ID, analyte type, tumor type [primary or recurrent], sample type [tumor or normal] and body site where samples were obtained from participants with pleuropulmonary blastoma and involved in the \"Genomic Sequencing of Pleuropulmonary blastoma\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00173416.v1.p1",
+          "description": "Molecular analyte",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00173414.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00173415.v1.p1",
+          "description": "Indicates the Tumor / Normal status of a sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TISSUE SITE",
+          "id": "phv00173417.v1.p1",
+          "description": "General body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR TYPE",
+          "id": "phv00173418.v1.p1",
+          "description": "Indicates primary or recurrent tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PPB_Subject_Phenotypes",
+      "datasetId": "pht002938.v1",
+      "description": "Subject ID, gender, age, and primary disease of participants with pleuropulmonary blastoma and involved in the \"Genomic Sequencing of Pleuropulmonary blastoma\" project.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00173411.v1.p1",
+          "description": "Participant's age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gender",
+          "id": "phv00173412.v1.p1",
+          "description": "Participant's gender as \"Male\" or \"Female\"",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary Disease",
+          "id": "phv00173413.v1.p1",
+          "description": "The main disease(s) for which the participant has been asked to donate a sample for study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00173410.v1.p1",
+          "description": "Unique participant identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PPB_Sample",
+      "datasetId": "pht002937.v1",
+      "description": "Sample ID, subject ID, and sample use variables obtained from participants with pleuropulmonary blastoma and involved in the \"Genomic Sequencing of Pleuropulmonary blastoma\" project.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00173408.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00173409.v1.p1",
+          "description": "Sample use. Seq_DNA_SNP_MAF_Ind: Sample(s) were used to generate aggregate mutation annotation file (.maf) with individual SNP genotypes; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00173407.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PPB_Subject",
+      "datasetId": "pht002936.v1",
+      "description": "Subject ID and consent group of participants with pleuropulmonary blastoma and involved in the \"Genomic Sequencing of Pleuropulmonary blastoma\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00173406.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00173405.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

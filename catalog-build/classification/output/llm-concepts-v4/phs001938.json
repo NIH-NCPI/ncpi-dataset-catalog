@@ -1,0 +1,361 @@
+{
+  "studyId": "phs001938",
+  "studyName": "Genomic and Genetic Characterization of Prostate Tumors Treated with Neoadjuvant Intense Androgen Deprivation Therapy",
+  "tables": [
+    {
+      "tableName": "ADT_PC_Sample_Attributes",
+      "datasetId": "pht009637.v3",
+      "description": "Sample ID, analyte type, body site where sample was obtained, Gleason score, histological type of sample, baseline status, post-treatment status, tumor status of sample, primary tumor location, region of interest, sequencing center, and tumor treatment of participants with prostate cancer and involved in the \"Multiple Primary Tumors with Differential Drug Sensitivity\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00420912.v3.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00420911.v3.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GLEASON_SCORE",
+          "id": "phv00420915.v3.p1",
+          "description": "Gleason score of region",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_BASELINE",
+          "id": "phv00420917.v3.p1",
+          "description": "Baseline status",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "IS_CRIBRIFORM",
+          "id": "phv00431318.v2.p1",
+          "description": "Cribriform morphology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_DUCTAL",
+          "id": "phv00431316.v2.p1",
+          "description": "Ductal morphology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_INTRADUCTAL",
+          "id": "phv00431317.v2.p1",
+          "description": "Intraductal carcinoma of the prostate (IDC-P) morphology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_INVASIVE",
+          "id": "phv00431315.v2.p1",
+          "description": "Invasive morphology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_POST-TREATMENT",
+          "id": "phv00420918.v3.p1",
+          "description": "Post-treatment status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00420913.v3.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_G4_G5",
+          "id": "phv00431320.v2.p1",
+          "description": "Percent of LCM tumor Gleason pattern 4 or 5",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PREDOMINANT_GLEASON_PATTERN",
+          "id": "phv00431319.v2.p1",
+          "description": "Predominant Gleason pattern in dissecterd focus",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00420916.v3.p1",
+          "description": "Primary tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ROI",
+          "id": "phv00420921.v3.p1",
+          "description": "Region of interest",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420910.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00420920.v3.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00420919.v3.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ADT_PC_Subject_Phenotypes",
+      "datasetId": "pht009636.v2",
+      "description": "Subject ID, age, race, sex, Gleason score, PSA, and affection status of participants with prostate cancer and involved in the \"Multiple Primary Tumors with Differential Drug Sensitivity\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00420904.v2.p1",
+          "description": "Case status of the subject for",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00420908.v2.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BASELINE_PSA",
+          "id": "phv00420906.v2.p1",
+          "description": "Baseline PSA at start of treatment",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_psa_levels",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BASELINE_STAGE",
+          "id": "phv00431309.v1.p1",
+          "description": "Baseline clinical stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BASELINE_VOL",
+          "id": "phv00431307.v1.p1",
+          "description": "Baseline tumor volume by MRI",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BIOPSY",
+          "id": "phv00431304.v1.p1",
+          "description": "Patient underwent biopsy",
+          "concept_id": "ncpi:surgical_procedure_biopsy_procedures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GLEASON_SCORE",
+          "id": "phv00420907.v2.p1",
+          "description": "Biopsy Gleason score at start of treatment",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LESIONS",
+          "id": "phv00431312.v1.p1",
+          "description": "Number of MRI-visible lesions",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_treatment_response",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "POST_PSA",
+          "id": "phv00431306.v1.p1",
+          "description": "PSA at the end of treatment",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_psa_levels",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POST_STAGE",
+          "id": "phv00431310.v1.p1",
+          "description": "Post-treatment clinical stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POST_VOL",
+          "id": "phv00431308.v1.p1",
+          "description": "Tumor volume by MRI at the end of treatment",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00420909.v2.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RCB",
+          "id": "phv00431311.v1.p1",
+          "description": "Residual cancer burden (pathologic volume)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_treatment_response",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00420905.v2.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420903.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SURGERY",
+          "id": "phv00431305.v1.p1",
+          "description": "Surgical procedure for removal of prostate",
+          "concept_id": "ncpi:surgical_procedure_general_surgery_surgery_history",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ADT_PC_Subject",
+      "datasetId": "pht009634.v3",
+      "description": "Subject ID, sex, and consent group of participants with prostate cancer and involved in the \"Multiple Primary Tumors with Differential Drug Sensitivity\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00420898.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00493059.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420897.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ADT_PC_Sample",
+      "datasetId": "pht009635.v3",
+      "description": "Subject and sample IDs of participants with prostate cancer and involved in the \"Multiple Primary Tumors with Differential Drug Sensitivity\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420902.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420901.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ADT_PC_GEO",
+      "datasetId": "pht010331.v2",
+      "description": "Sample ID and GEO accession ID of participants with prostate cancer and involved in the \"Multiple Primary Tumors with Differential Drug Sensitivity\" project.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00431314.v2.p1",
+          "description": "GEO accession ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00431313.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

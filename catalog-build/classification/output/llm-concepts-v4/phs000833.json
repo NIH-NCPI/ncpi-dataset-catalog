@@ -1,0 +1,203 @@
+{
+  "studyId": "phs000833",
+  "studyName": "Single Cell Analysis Program - Transcriptome (SCAP-T)",
+  "tables": [
+    {
+      "tableName": "SCAPT_allCenters_Subject_Phenotypes",
+      "datasetId": "pht004360.v6",
+      "description": "The SCAP-T subject phenotype table includes gender, race, subject age, fetal age if applicable, historical and working diagnosis, medication status, pathological report and diagnosis, post mortem interval for subjects in all centers (UCSD, UPenn, and USC).",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00219207.v6.p1",
+          "description": "Age of subjects",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COMMENT",
+          "id": "phv00219216.v6.p1",
+          "description": "Additional comments associated with this subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FETAL_AGE",
+          "id": "phv00219209.v6.p1",
+          "description": "Some samples are fetal, in which case this field is used",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FETAL_SAMPLE?",
+          "id": "phv00219208.v6.p1",
+          "description": "Is this a fetal sample?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00219205.v6.p1",
+          "description": "Gender of the subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTORICAL_DIAGNOSIS",
+          "id": "phv00219210.v6.p1",
+          "description": "Historical diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEDICATIONS_DOSE_ROUTE_FREQ",
+          "id": "phv00219212.v6.p1",
+          "description": "Information on medications/dose etc",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATHOLOGICAL_DIAGNOSIS",
+          "id": "phv00219214.v6.p1",
+          "description": "Pathological diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATHOLOGICAL_REPORT",
+          "id": "phv00219213.v6.p1",
+          "description": "Pathological report",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POST MORTEM INTERVAL",
+          "id": "phv00219215.v6.p1",
+          "description": "Post Mortem Interval: the time between death and the collection/freezing of the specimen. It's typically expressed in hours.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00219206.v6.p1",
+          "description": "Race of the subject",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00219204.v6.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WORKING_DIAGNOSIS",
+          "id": "phv00219211.v6.p1",
+          "description": "Working diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SCAPT_allCenters_Sample",
+      "datasetId": "pht004359.v7",
+      "description": "This subject sample mapping file includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use, center name, and substudy accession.",
+      "variables": [
+        {
+          "name": "CENTER",
+          "id": "phv00219202.v6.p1",
+          "description": "Center Name",
+          "concept_id": "ncpi:geographic_site_recruitment_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00219200.v6.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00219201.v6.p1",
+          "description": "Sample use. Seq_RNA: Whole transcriptome sequencing; Seq_RNA_Expression: Expression levels derived from RNA sequences",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY",
+          "id": "phv00219203.v7.p1",
+          "description": "Study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00219199.v6.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SCAPT_allCenters_Subject",
+      "datasetId": "pht004358.v6",
+      "description": "This subject consent file includes subject IDs, consent group information, and subject aliases from the three centers (UCSD, UPenn, USC) participating in the Single Cell Analysis Program - Transcriptome (SCAP-T).",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00219196.v6.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00219198.v6.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00219195.v6.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00219197.v6.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

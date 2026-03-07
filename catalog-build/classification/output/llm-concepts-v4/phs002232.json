@@ -1,0 +1,625 @@
+{
+  "studyId": "phs002232",
+  "studyName": "TOPDECC-Trans-omics for Precision Dentistry and Early Childhood Caries: Genome-Wide Genotyping (CIDR) and Microbiome in the ZOE 2.0 Study",
+  "tables": [
+    {
+      "tableName": "CIDR_ECC_Subject_Phenotypes",
+      "datasetId": "pht011783.v1",
+      "description": "This subject phenotypes data table includes cluster ID, sex, race, age at time of examination, height, weight, guardian-reported child oral health status, guardian's education level, case status with respect to early childhood caries (ECC) based on differing thresholds (n=10 variables), continuous measure of ECC experience at various thresholds/considerations (n=10 variables), case status of untreated ECC at various thresholds (n=5 variables), continuous measure of untreated ECC experience based on various considerations (n=5 variables), dental pain due to teething, environmental factors/behaviors that can affect development of dental caries (fluoride quality in water, tooth brushing frequency, sleeping with bottle, dentist visit history, sugar-containing snacks between meals, primary source of home drinking water, whether toothpaste contains fluoride).",
+      "variables": [
+        {
+          "name": "AGE_MONTHS",
+          "id": "phv00495438.v1.p1",
+          "description": "Age at the time of clinical examination in months",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BEDWITHBOTTLE",
+          "id": "phv00495440.v1.p1",
+          "description": "Child has ever been put to bed with bottle with something other than water, yes/no",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BRUSHFREQ2ORMORE",
+          "id": "phv00495441.v1.p1",
+          "description": "Brushing twice a day or more",
+          "concept_id": "phenx:protocol_1_tobacco_30day_quantity_and_frequency_adolescent_protocol",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "CLUSTER_ID",
+          "id": "phv00495425.v1.p1",
+          "description": "Numeric ID defining the 34 study design clusters; i.e., public preschool programs attended by participants",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COHS",
+          "id": "phv00495445.v1.p1",
+          "description": "Guardian-reported child oral health status: excellent/very good/good/fair/poor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00495424.v1.p1",
+          "description": "Provided written informed consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DENTALPAIN",
+          "id": "phv00495446.v1.p1",
+          "description": "Child ever had a toothache or dental pain not due to teething, yes/no/I don't know",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DENTIST",
+          "id": "phv00495443.v1.p1",
+          "description": "Child has ever been to do the dentist, yes/no",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EDUC",
+          "id": "phv00495444.v1.p1",
+          "description": "Responding guardian's education level: some elementary/some high school/high school or GED/some technical or community college/college or more",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FLTPASTE",
+          "id": "phv00495442.v1.p1",
+          "description": "Use of fluoride tooth paste every times child's teeth are brushed: yes, no, I don't know",
+          "concept_id": "phenx:personal_and_family_history_of_eye_disease_and_treatments",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHTFEET",
+          "id": "phv00495448.v1.p1",
+          "description": "Height feet component",
+          "concept_id": "ncpi:height_baseline_height_inches_feet",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHTINCHES",
+          "id": "phv00495449.v1.p1",
+          "description": "Height inches component",
+          "concept_id": "ncpi:height_baseline_height_inches_feet",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HISPANIC_ETHNICITY",
+          "id": "phv00495437.v1.p1",
+          "description": "Responding guardian's Hispanic ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OPTIMALWATERFLUORIDEIMPUTED",
+          "id": "phv00495455.v1.p1",
+          "description": "Binary indicator denoting directly measured domestic water source fluoride concentration >=0.60ppm F; directly measured for 25% of examined participants",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_AA",
+          "id": "phv00495431.v1.p1",
+          "description": "Child's reported race is: African American",
+          "concept_id": "ncpi:race_us_black_african_american_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_AIAN",
+          "id": "phv00495432.v1.p1",
+          "description": "Child's reported race is: American Indian/Alaskan Native",
+          "concept_id": "ncpi:race_us_american_indian_alaska_native_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_ASIAN_NH_PI",
+          "id": "phv00495433.v1.p1",
+          "description": "Child's reported race is: Asian, Native Hawaiian or other Pacific Islander",
+          "concept_id": "ncpi:race_us_asian_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_MORETHANONE",
+          "id": "phv00495435.v1.p1",
+          "description": "Child's reported race is: more than one race",
+          "concept_id": "ncpi:race_us_multiracial",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_OTHER",
+          "id": "phv00495436.v1.p1",
+          "description": "Child's reported race is: other",
+          "concept_id": "ncpi:race_us_other_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_WHITE",
+          "id": "phv00495434.v1.p1",
+          "description": "Child's reported race is: white",
+          "concept_id": "ncpi:race_us_white_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00495426.v1.p1",
+          "description": "Sex, male or female",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SSBS",
+          "id": "phv00495439.v1.p1",
+          "description": "Daily between-meal sugar containing snacks and beverages: 0-1, 2-3, 4+",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495423.v1.p1",
+          "description": "Twice-removed ID from the original data collection identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00495447.v1.p1",
+          "description": "Weight in lbs",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WSOURCE_BOTTLE",
+          "id": "phv00495451.v1.p1",
+          "description": "Primary source of home drinking water for child is bottled water, yes/no",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WSOURCE_COMM",
+          "id": "phv00495452.v1.p1",
+          "description": "Primary source of home drinking water for child is city or community water, yes/no",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WSOURCE_FILTER",
+          "id": "phv00495453.v1.p1",
+          "description": "Primary source of home drinking water for child is filtered water, yes/no",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WSOURCE_NOWATER",
+          "id": "phv00495454.v1.p1",
+          "description": "Primary source of home drinking water for child is not applicable because child does not drink water, yes/no",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WSOURCE_WELL",
+          "id": "phv00495450.v1.p1",
+          "description": "Primary source of home drinking water for child is well water, yes/no",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "meta_t3_a",
+          "id": "phv00495470.v1.p1",
+          "description": "Case status of ECC defined at the ICDAS>=1 threshold, only considering teeth #F, #G, #H, #I and #J (where plaque for metabolomics was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "meta_t3_b",
+          "id": "phv00495476.v1.p1",
+          "description": "Case status of ECC defined at the ICDAS>=1 threshold, only considering the 5 buccal/facial surfaces of teeth #F, #G, #H, #I and #J (where plaque for metabolomics was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "meta_t3c_a",
+          "id": "phv00495471.v1.p1",
+          "description": "Continuous measure of caries (ECC) experience, defined at the ICDAS>=1 threshold, only considering teeth #F, #G, #H, #I and #J (where plaque for metabolomics was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "meta_t3c_b",
+          "id": "phv00495477.v1.p1",
+          "description": "Continuous measure of caries (ECC) experience, defined at the ICDAS>=1 threshold, only considering the 5 buccal/facial surfaces of teeth #F, #G, #H, #I and #J (where plaque for metabolomics was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "meta_t6_a",
+          "id": "phv00495472.v1.p1",
+          "description": "Case status of ECC defined at the ICDAS>=1 threshold, only considering teeth #F, #G, #H, #I and #J (where plaque for metabolomics was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "meta_t6_b",
+          "id": "phv00495478.v1.p1",
+          "description": "Case status of ECC defined at the ICDAS>=3 threshold, only considering the 5 buccal/facial surfaces of teeth #F, #G, #H, #I and #J (where plaque for metabolomics was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "meta_t6c_a",
+          "id": "phv00495473.v1.p1",
+          "description": "Continuous measure of caries (ECC) experience, defined at the ICDAS>=3 threshold, only considering teeth #F, #G, #H, #I and #J (where plaque for metabolomics was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "meta_t6c_b",
+          "id": "phv00495479.v1.p1",
+          "description": "Continuous measure of caries (ECC) experience, defined at the ICDAS>=3 threshold, only considering the 5 buccal/facial surfaces of teeth #F, #G, #H, #I and #J (where plaque for metabolomics was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "meta_t8_a",
+          "id": "phv00495474.v1.p1",
+          "description": "Case status of untreated ECC defined at the ICDAS>=3 threshold, only considering teeth #F, #G, #H, #I and #J (where plaque for metabolomics was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "meta_t8_b",
+          "id": "phv00495480.v1.p1",
+          "description": "Case status of untreated ECC defined at the ICDAS>=3 threshold, only considering the 5 buccal/facial surfaces of teeth #F, #G, #H, #I and #J (where plaque for metabolomics was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "meta_t8c_a",
+          "id": "phv00495475.v1.p1",
+          "description": "Continuous measure of untreated ECC experience, number of non-restored surfaces, only considering teeth #F, #G, #H, #I and #J (where plaque for metabolomics was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "meta_t8c_b",
+          "id": "phv00495481.v1.p1",
+          "description": "Continuous measure of untreated ECC experience, number of non-restored surfaces, only considering the 5 buccal/facial surfaces of teeth #F, #G, #H, #I and #J (where plaque for metabolomics was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "micro_t3_a",
+          "id": "phv00495458.v1.p1",
+          "description": "Case status of ECC defined at the ICDAS>=1 threshold, only considering teeth #A, #B, #C, #D and #E (where plaque for DNA/RNA was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "micro_t3_b",
+          "id": "phv00495464.v1.p1",
+          "description": "Case status of ECC defined at the ICDAS>=1 threshold, only considering the 5 buccal/facial surfaces of teeth #A, #B, #C, #D and #E (where plaque for DNA/RNA was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "micro_t3c_a",
+          "id": "phv00495459.v1.p1",
+          "description": "Continuous measure of caries (ECC) experience, defined at the ICDAS>=1 threshold, only considering teeth #A, #B, #C, #D and #E (where plaque for DNA/RNA was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "micro_t3c_b",
+          "id": "phv00495465.v1.p1",
+          "description": "Continuous measure of caries (ECC) experience, defined at the ICDAS>=1 threshold, only considering the 5 buccal/facial surfaces of teeth #A, #B, #C, #D and #E (where plaque for DNA/RNA was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "micro_t6_a",
+          "id": "phv00495460.v1.p1",
+          "description": "Case status of ECC defined at the ICDAS>=3 threshold;, only considering teeth #A, #B, #C, #D and #E (where plaque for DNA/RNA was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "micro_t6_b",
+          "id": "phv00495466.v1.p1",
+          "description": "Case status of ECC defined at the ICDAS>=3 threshold, only considering the 5 buccal/facial surfaces of teeth #A, #B, #C, #D and #E (where plaque for DNA/RNA was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "micro_t6c_a",
+          "id": "phv00495461.v1.p1",
+          "description": "Continuous measure of caries (ECC) experience, defined at the ICDAS>=1 threshold, only considering teeth #A, #B, #C, #D and #E (where plaque for DNA/RNA was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "micro_t6c_b",
+          "id": "phv00495467.v1.p1",
+          "description": "Continuous measure of caries (ECC) experience, defined at the ICDAS>=3 threshold, only considering the 5 buccal/facial surfaces of teeth #A, #B, #C, #D and #E (where plaque for DNA/RNA was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "micro_t8_a",
+          "id": "phv00495462.v1.p1",
+          "description": "Case status of untreated ECC defined at the ICDAS>=3 threshold, only considering teeth #A, #B, #C, #D and #E (where plaque for DNA/RNA was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "micro_t8_b",
+          "id": "phv00495468.v1.p1",
+          "description": "Case status of untreated ECC defined at the ICDAS>=3 threshold, only considering the 5 buccal/facial surfaces of teeth #A, #B, #C, #D and #E (where plaque for DNA/RNA was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "micro_t8c_a",
+          "id": "phv00495463.v1.p1",
+          "description": "Continuous measure of untreated ECC experience, number of non-restored surfaces, only considering teeth #A, #B, #C, #D and #E (where plaque for DNA/RNA was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "micro_t8c_b",
+          "id": "phv00495469.v1.p1",
+          "description": "Continuous measure of untreated ECC experience, number of non-restored surfaces, only considering the 5 buccal/facial surfaces of teeth #A, #B, #C, #D and #E (where plaque for DNA/RNA was collected from)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t3",
+          "id": "phv00495429.v1.p1",
+          "description": "Case status of ECC defined at the ICDAS>=1 threshold; i.e., presence of one or more tooth surfaces with caries experience defined at the early-stage caries lesion threshold",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t3c",
+          "id": "phv00495430.v1.p1",
+          "description": "Continuous measure of caries (ECC) experience, defined at the ICDAS>=1 threshold; i.e., the number of decayed, missing, or filled tooth surfaces",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t6",
+          "id": "phv00495427.v1.p1",
+          "description": "Case status of ECC defined at the ICDAS>=3 threshold; i.e., presence of one or more tooth surfaces with caries experience defined at the moderate or advanced stage caries lesion threshold",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t6c",
+          "id": "phv00495428.v1.p1",
+          "description": "Continuous measure of caries (ECC) experience, defined at the ICDAS>=3 threshold;  i.e., the number of decayed, missing, or filled tooth surfaces",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t8",
+          "id": "phv00495456.v1.p1",
+          "description": "Case status of untreated ECC defined at the ICDAS>=3 threshold; i.e., presence of one or more tooth surfaces with untreated caries lesions defined at the moderate or advanced stage caries lesion threshold",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "t8c",
+          "id": "phv00495457.v1.p1",
+          "description": "Continuous measure of untreated ECC experience, defined at the ICDAS>=3 threshold; i.e., number of untreated moderate-advanced caries lesions",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ECC_Pedigree",
+      "datasetId": "pht011781.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, sex of subjects, and twin pair IDs.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00495415.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00495417.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00495418.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MZ_TWIN_ID",
+          "id": "phv00495420.v1.p1",
+          "description": "Twin pair ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00495419.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495416.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ECC_Subject",
+      "datasetId": "pht011780.v1",
+      "description": "The subject consent dataset contains subject IDs consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00495413.v1.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00495414.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495412.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ECC_Sample_Attributes",
+      "datasetId": "pht011784.v1",
+      "description": "This sample attributes table includes body site where sample was collected and analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00495484.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00495482.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE",
+          "id": "phv00495483.v1.p1",
+          "description": "Biospecimen source of nucleic acids",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ECC_Sample",
+      "datasetId": "pht011782.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00495422.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495421.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

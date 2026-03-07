@@ -1,0 +1,154 @@
+{
+  "studyId": "phs000773",
+  "studyName": "CTLA4:CD28 in Sezary Syndrome",
+  "tables": [
+    {
+      "tableName": "Sezary_Syndrome_Sample_Attributes",
+      "datasetId": "pht004694.v1",
+      "description": "Sample ID, body site where sample was obtained, analyte type, histological type, and sequencing center of participants with Sezary syndrome and involved in the \"Personalized Treatment of Sezary Syndrome through a CTLA4:CD28 Fusion\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00226080.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00226079.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00226081.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00226078.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00226082.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Sezary_Syndrome_Subject_Phenotypes",
+      "datasetId": "pht004693.v1",
+      "description": "Subject ID, age, gender, and race of participants with Sezary syndrome and involved in the \"Personalized Treatment of Sezary Syndrome through a CTLA4:CD28 Fusion\" project.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00226075.v1.p1",
+          "description": "Age at biopsy",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00226077.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00226076.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226074.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Sezary_Syndrome_Subject",
+      "datasetId": "pht004691.v1",
+      "description": "Subject ID, consent group, and affection status of participants with Sezary syndrome and involved in the \"Personalized Treatment of Sezary Syndrome through a CTLA4:CD28 Fusion\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00226070.v1.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00226069.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226068.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Sezary_Syndrome_Sample",
+      "datasetId": "pht004692.v1",
+      "description": "Subject ID, sample ID, and sample use variable obtained from participants with Sezary syndrome and involved in the \"Personalized Treatment of Sezary Syndrome through a CTLA4:CD28 Fusion\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00226072.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00226073.v1.p1",
+          "description": "Sample use. Seq_DNA_SNP_CNV: SNP and CNV genotypes derived from sequence data; Seq_DNA_WholeGenome: Whole genome sequencing; Seq_RNA: Whole transcriptome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226071.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

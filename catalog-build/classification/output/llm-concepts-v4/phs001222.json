@@ -1,0 +1,138 @@
+{
+  "studyId": "phs001222",
+  "studyName": "CCDG - Whole Genome Sequencing in Type 1 Diabetes (T1DGC)",
+  "tables": [
+    {
+      "tableName": "CCDG_T1DGC_Sample_Attributes",
+      "datasetId": "pht005910.v1",
+      "description": "This sample attributes table includes body site from which sample was collected, sample analyte type, histological type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00273230.v1.p1",
+          "description": "Sample nucleic acid type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00273229.v1.p1",
+          "description": "Body site from which sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00273231.v1.p1",
+          "description": "Type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00273232.v1.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00273228.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CCDG_T1DGC_Subject",
+      "datasetId": "pht005907.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, and affection status for type 1 diabetes (T1D).",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00273221.v1.p1",
+          "description": "Has subject been diagnosed with type 1 diabetes (T1D)",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00273220.v1.p1",
+          "description": "Allowable research use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00273219.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CCDG_T1DGC_Subject_Phenotypes",
+      "datasetId": "pht005909.v1",
+      "description": "This subject phenotype table includes sex and race of subjects.",
+      "variables": [
+        {
+          "name": "GENDER",
+          "id": "phv00273226.v1.p1",
+          "description": "Sex of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00273227.v1.p1",
+          "description": "Race of subject",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00273225.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CCDG_T1DGC_Sample",
+      "datasetId": "pht005908.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00273223.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00273222.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

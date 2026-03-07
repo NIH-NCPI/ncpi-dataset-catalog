@@ -1,0 +1,218 @@
+{
+  "studyId": "phs001157",
+  "studyName": "Wisconsin Longitudinal Study on Aging",
+  "tables": [
+    {
+      "tableName": "WLS_Aging_Subject_Phenotypes",
+      "datasetId": "pht005805.v1",
+      "description": "This subject phenotype table contains subject IDs, sample batch, age, sex, flag for imputation of day of birth, flag for imputation of day saliva sample was produced on 2008 and 2011 collections, item response theory (IRT) cognitive score, and birth year.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266777.v1.p1",
+          "description": "Subject level ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_Batch",
+          "id": "phv00266778.v1.p1",
+          "description": "Sample batch (Year/Batch when the sample was collected)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00266779.v1.p1",
+          "description": "Age at saliva collection (2 digit integer measuring years); winsorized for ages > 89 or < 49",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bdflag",
+          "id": "phv00266781.v1.p1",
+          "description": "Flag for imputation of day of birth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "s08flag",
+          "id": "phv00266782.v1.p1",
+          "description": "Flag for imputation of day saliva sample was produced, based on the 2008 collection effort",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "s11flag",
+          "id": "phv00266783.v1.p1",
+          "description": "Flag for imputation of day saliva sample was produced, based on the 2011 collection effort",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00266780.v1.p1",
+          "description": "Genetic sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "theta",
+          "id": "phv00266784.v1.p1",
+          "description": "IRT cognitive score",
+          "concept_id": "ncpi:cognition_global_cognitive_scores",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "yrbirth",
+          "id": "phv00266785.v1.p1",
+          "description": "Birth year. years 1918-1922 and 1959-1964 have each been combined into one group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WLS_Aging_Sample",
+      "datasetId": "pht005804.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use and sample aliases.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266773.v1.p1",
+          "description": "Sample level ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00266775.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00266774.v1.p1",
+          "description": "Sample Use. Array_SNP: SNP genotypes obtained using standard or custom microarrays; Imputation_SNP_CNV: Imputed SNP and CNV genotypes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00266776.v1.p1",
+          "description": "Submitted sample ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266772.v1.p1",
+          "description": "Subject level ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WLS_Aging_Sample_Attributes",
+      "datasetId": "pht005806.v1",
+      "description": "This sample attributes table contains sample IDs, body site where sample was collected, histological type, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00266789.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00266787.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00266788.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00266790.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266786.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WLS_Aging_Subject",
+      "datasetId": "pht005803.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00266769.v1.p1",
+          "description": "Consent code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00266771.v1.p1",
+          "description": "Submitted subject ID used in the source repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266768.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00266770.v1.p1",
+          "description": "Repository name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

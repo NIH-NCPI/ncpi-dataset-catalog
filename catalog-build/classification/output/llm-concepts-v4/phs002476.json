@@ -1,0 +1,210 @@
+{
+  "studyId": "phs002476",
+  "studyName": "Immune Profiling in Patients with High-Risk Smoldering Myeloma",
+  "tables": [
+    {
+      "tableName": "SMM_E_PRISM_Sample_Attributes",
+      "datasetId": "pht011354.v1",
+      "description": "This sample attributes table contains sample IDs, body site where sample was collected, analyte type, tumor status, histological type, age at time of sample collection, time point at time of collection, tumor stage, and comments 1 and 2.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00492138.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00492137.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00492141.v1.p1",
+          "description": "Subject's age at time of sample collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COMMENT1",
+          "id": "phv00508637.v1.p1",
+          "description": "Library Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COMMENT2",
+          "id": "phv00508638.v1.p1",
+          "description": "10x Kit version",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00492140.v1.p1",
+          "description": "Histological type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00492139.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492136.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIMEPOINT",
+          "id": "phv00492142.v1.p1",
+          "description": "Timepoint at time of collection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00492143.v1.p1",
+          "description": "Stage of disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SMM_E_PRISM_Subject",
+      "datasetId": "pht011351.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00492126.v1.p1",
+          "description": "Type of consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492127.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00529064.v1.p1",
+          "description": "Source_Subject_ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492125.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00529063.v1.p1",
+          "description": "Subject_Source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SMM_E_PRISM_Subject_Phenotypes",
+      "datasetId": "pht011353.v1",
+      "description": "This subject phenotypes data table contains subject IDs, race, index of progression requiring treatment events, time in months from date of trial registration to progression requiring treatment or death, and case control status of the subject for Smoldering Multiple Myeloma (SMM).",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00508636.v1.p1",
+          "description": "Case control status of the subject for Smoldering Multiple Myeloma (SMM)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PD_RT_IND",
+          "id": "phv00492132.v1.p1",
+          "description": "Index of progression requiring treatment events",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PD_RT_TIME",
+          "id": "phv00492134.v1.p1",
+          "description": "Time in months from date of trial registration to progression requiring treatment or death",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00492131.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492130.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SMM_E_PRISM_Sample",
+      "datasetId": "pht011352.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492129.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492128.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

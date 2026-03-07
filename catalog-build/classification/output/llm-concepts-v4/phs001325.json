@@ -1,0 +1,337 @@
+{
+  "studyId": "phs001325",
+  "studyName": "NextGen Consortium: The iPSCORE (iPSC Collection for Omic Research) Resource for Studying the Impact of Genetic Variation on Molecular and Physiological Phenotypes - Whole Genome Sequence",
+  "tables": [
+    {
+      "tableName": "iPSCORE_WGS_Subject_Phenotypes",
+      "datasetId": "pht006352.v3",
+      "description": null,
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00292766.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASE_ONTOLOGY_CODE",
+          "id": "phv00292774.v1.p1",
+          "description": "Disease ontology (DO) code for primary heart diagnoses as described http://www.disease-ontology.org/ and obtained through http://www.malacards.org/",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENETICALLY_SIMILAR_POPULATION_GROUP",
+          "id": "phv00292769.v1.p1",
+          "description": "Most similar super population group as estimated by comparing the individuals SNPs to the 1KG dataset by PCA. This value is the super population values from 1KG, not eg \"Asian\"",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEART_DISEASE_CATEGORY",
+          "id": "phv00292770.v1.p1",
+          "description": "Classification of primary heart diagnoses for individuals recruited through the UCSD Sulpizio Cardiovascular Center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEART_DISEASE_COMMENT",
+          "id": "phv00292773.v1.p1",
+          "description": "Comment on heart diagnoses for individuals recruited through the UCSD Sulpizio Cardiovascular Center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HUMAN_CORE_EXOME_ARRAY",
+          "id": "phv00542369.v1.p1",
+          "description": "Indicator for whether subject has HumanCoreExome12v1 or HumanCoreExome24v1 array data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEGA_V2_ARRAY",
+          "id": "phv00542370.v1.p1",
+          "description": "Indicator for whether subject has MEGA V2 array data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OTHER_HEART_DIAGNOSES",
+          "id": "phv00292772.v1.p1",
+          "description": "Other (non-primary) heart diagnoses for individuals recruited through the UCSD Sulpizio Cardiovascular Center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_HEART_DIAGNOSES",
+          "id": "phv00292771.v1.p1",
+          "description": "Primary heart diagnosis for individuals recruited through the UCSD Sulpizio Cardiovascular Center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE_ETHNICITY_GROUPING",
+          "id": "phv00292768.v1.p1",
+          "description": "Race/ethnicity category as grouped by researcher",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "REPORTED_RACE_ETHNICITY",
+          "id": "phv00292767.v1.p1",
+          "description": "Reported race/ethnicity of participant as recorded by fill in the blank",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00292765.v1.p1",
+          "description": "Subject sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00292763.v1.p1",
+          "description": "De-identified unique Subject ID with the format of either a universally unique identifier (UUID) for subjects with data or the iPSCORE_ID for those that are only in pedigree file",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WHOLE_GENOME_SEQUENCING",
+          "id": "phv00542368.v1.p1",
+          "description": "Indicator for whether subject has whole genome sequence data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "iPSCORE_ID",
+          "id": "phv00292764.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "iPSCORE_WGS_Sample_Attributes",
+      "datasetId": "pht006353.v3",
+      "description": "This sample attributes table includes sample histological type, tumor status, analyte type, sample source, other IDs (UCSD source tissue, UCSD iPSC clone, WiCell), sequencing center, clone and passage.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00292783.v3.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLONE",
+          "id": "phv00395950.v2.p1",
+          "description": "Original clone number from which cell line was expanded",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00292780.v3.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00292781.v3.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PASSAGE",
+          "id": "phv00395951.v2.p1",
+          "description": "Passage number of cell line which was analysed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00292779.v3.p1",
+          "description": "De-identified unique Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00292784.v3.p1",
+          "description": "Organisation providing original sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00292785.v3.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UCSD_IPSC_CLONE_ID",
+          "id": "phv00395952.v2.p1",
+          "description": "UUID Identifier for iPSC clone. If the cell is an iPSC-derived cell type, this indicates the source clone.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UCSD_SOURCE_TISSUE_ID",
+          "id": "phv00292782.v3.p1",
+          "description": "UUID Identifier for tissue sample source. Samples with the same tissue ID were sequenced twice.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WICELL_ID",
+          "id": "phv00395953.v2.p1",
+          "description": "WiCell identifier assigned to iPSC line archived at WiCell Research Institute, Wisconsin, USA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "iPSCORE_WGS_Pedigree",
+      "datasetId": "pht006350.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, subjects's sex, twin IDs, and indicator for monozygotic and dizygotic twins.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00292753.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER_SUBJECT_ID",
+          "id": "phv00292755.v1.p1",
+          "description": "Father's SUBJECT_ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER_SUBJECT_ID",
+          "id": "phv00292756.v1.p1",
+          "description": "Mother's SUBJECT_ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MZorDZ",
+          "id": "phv00292759.v1.p1",
+          "description": "An indicator when an individual is a monozygotic or dizygotic twin",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00292757.v1.p1",
+          "description": "Subject sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00292754.v1.p1",
+          "description": "SUBJECT_ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TWIN_ID",
+          "id": "phv00292758.v1.p1",
+          "description": "Number indicating pair of monozygotic twins",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "iPSCORE_WGS_Subject",
+      "datasetId": "pht006349.v1",
+      "description": "The subject consent data table contains subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00292752.v1.p1",
+          "description": "CONSENT",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00292751.v1.p1",
+          "description": "SUBJECT_ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "iPSCORE_WGS_Sample",
+      "datasetId": "pht006351.v3",
+      "description": "This data table contains mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00292761.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00292760.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

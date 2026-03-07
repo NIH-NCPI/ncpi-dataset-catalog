@@ -1,0 +1,786 @@
+{
+  "studyId": "phs001229",
+  "studyName": "Sequencing Lymphoma",
+  "tables": [
+    {
+      "tableName": "Hodgkin",
+      "datasetId": "pht011011.v1",
+      "description": "This Hodgkin subject phenotype table contains subject ID, ethnicity, race, contributed biopsy, GSHG early stage, International Prognostic Score (IPS), hodgkin subtype, lymphoma stage, Progression Free Survival (PFS) of primary or relapse samples, progression status, count of Hodgkin and Reed/Sternberg (HRS) cells, Epstein Barr virus (EBV) alignment status, EBV EBER-ISH status,  and case control status of the subject for hodgkin lymphoma.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00482745.v1.p1",
+          "description": "Case control status of the subject for lymphoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CENSORED",
+          "id": "phv00482741.v1.p1",
+          "description": "Progression status; whether or not an individual was censored",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EARLY_STAGE_DESIGNATION",
+          "id": "phv00482735.v1.p1",
+          "description": "GSHG Early Stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EBV_ALIGNMENT_STATUS",
+          "id": "phv00482743.v1.p1",
+          "description": "Epstein Barr virus status determined by competitive alignment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EBV_EBER_STATUS",
+          "id": "phv00482744.v1.p1",
+          "description": "Epstein Barr virus status determined by EBER ISH",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00482732.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HODGKIN_SUB_TYPE",
+          "id": "phv00482737.v1.p1",
+          "description": "Sub-type of Hodgkin lymphoma",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HRS_CELL_COUNT",
+          "id": "phv00482742.v1.p1",
+          "description": "Approximate count of Hodgkin and Reed/Sternberg cells",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IPS",
+          "id": "phv00482736.v1.p1",
+          "description": "International Prognostic Score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PFS_PRIMARY",
+          "id": "phv00482739.v1.p1",
+          "description": "Progression free survival (primary samples)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PFS_RELAPSE",
+          "id": "phv00482740.v1.p1",
+          "description": "Progression free survival (relapse samples)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_RELAPSE",
+          "id": "phv00482734.v1.p1",
+          "description": "Contributed biopsy is diagnostic biopsy or relapse sample biopsy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00482733.v1.p1",
+          "description": "Self-reported  race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE",
+          "id": "phv00482738.v1.p1",
+          "description": "Lymphoma stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00482731.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Follicular_Lymphoma",
+      "datasetId": "pht006549.v2",
+      "description": "This Follicular Lymphoma subject phenotype table contains subject ID, non-hodgkin lymphoma type, age at diagnosis, grade of biopsy sequenced, lymphoma stage, nodal sites, LDH, hemoglobin, Eastern Cooperative Oncology Group (ECOG) performance status score, Prognostic Index Score (PIS), sequencing cohort, and case control status of the subject for follicular lymphoma.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00482726.v1.p1",
+          "description": "Case control status of the subject for lymphoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_AT_DX",
+          "id": "phv00302063.v2.p1",
+          "description": "Age at diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_general_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COHORT",
+          "id": "phv00302071.v1.p1",
+          "description": "Sequencing cohort",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ECOG_PS",
+          "id": "phv00302069.v2.p1",
+          "description": "ECOG performance status score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FLIPI_SCORE",
+          "id": "phv00302070.v2.p1",
+          "description": "Prognostic index score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GRADE_OF_BX_SEQ",
+          "id": "phv00302064.v1.p1",
+          "description": "Grade of biopsy sequenced",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HGB",
+          "id": "phv00302068.v2.p1",
+          "description": "Hemoglobin",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDH_ELEVATED",
+          "id": "phv00302067.v1.p1",
+          "description": "Is LDH elevated",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NHL_TYPE",
+          "id": "phv00302062.v1.p1",
+          "description": "Non-Hodgkin lymphoma type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NODAL_SITES",
+          "id": "phv00302066.v2.p1",
+          "description": "Number of involved nodal sites used in calculating the FLIPI score (PMID:15126323)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE",
+          "id": "phv00302065.v1.p1",
+          "description": "Lymphoma stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00302060.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NeoantigenFollicular",
+      "datasetId": "pht011012.v1",
+      "description": "This Neoantigen Follicular subject phenotype table contains subject ID, non-hodgkin lymphoma type, age at diagnosis, grade of biopsy sequenced, lymphoma stage, nodal sites, LDH, hemoglobin, Eastern Cooperative Oncology Group (ECOG) performance status score, Prognostic Index Score (PIS), and case control status of the subject for follicular lymphoma.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00482756.v1.p1",
+          "description": "Case control status of the subject for lymphoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_AT_Dx",
+          "id": "phv00482748.v1.p1",
+          "description": "Age at diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_general_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ECOG_PS",
+          "id": "phv00482754.v1.p1",
+          "description": "ECOG performance status score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FLIPI_SCORE",
+          "id": "phv00482755.v1.p1",
+          "description": "Prognostic index score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GRADE_OF_BX_SEQ",
+          "id": "phv00482749.v1.p1",
+          "description": "Grade of biopsy sequenced",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HGB",
+          "id": "phv00482753.v1.p1",
+          "description": "Hemoglobin",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDH_ELEVATED",
+          "id": "phv00482752.v1.p1",
+          "description": "Is LDH elevated",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NHL_TYPE",
+          "id": "phv00482747.v1.p1",
+          "description": "Non-Hodgkin lymphoma type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NODAL_SITES",
+          "id": "phv00482751.v1.p1",
+          "description": "Number of involved nodal sites used in calculating the FLIPI score (PMID:15126323)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE",
+          "id": "phv00482750.v1.p1",
+          "description": "Lymphoma stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00482746.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GTB12",
+      "datasetId": "pht012054.v1",
+      "description": "This GTB12 subject phenotype table contains subject ID, ethnicity, race, hodgkin lymphoma (HL) stage, diffuse large B-cell lymphoma (DLBCL) stage, follicular lymphoma (FL) stage, composite lymphoma stage, DLBCL International Prognostic Index (IPI), HL International Prognostic Score (IPS), and FL IPI (FLIPI).",
+      "variables": [
+        {
+          "name": "COMPOSITE_LYMPHOMA_STAGE",
+          "id": "phv00498146.v1.p1",
+          "description": "Composite lymphoma stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DLBCL_STAGE",
+          "id": "phv00498144.v1.p1",
+          "description": "Diffuse large B-cell lymphoma stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00498141.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FLIPI",
+          "id": "phv00498149.v1.p1",
+          "description": "Follicular lymphoma international prognostic index (FLIPI)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FL_STAGE",
+          "id": "phv00498145.v1.p1",
+          "description": "Follicular lymphoma stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HL_STAGE",
+          "id": "phv00498143.v1.p1",
+          "description": "Hodgkin lymphoma stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IPI",
+          "id": "phv00498147.v1.p1",
+          "description": "International prognostic index for diffuse large B-cell lymphoma",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IPS",
+          "id": "phv00498148.v1.p1",
+          "description": "International prognostic score for Hodgkin lymphoma",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00498142.v1.p1",
+          "description": "Self-reported  race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498140.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Follicular_Lymphoma_Sample_Attributes",
+      "datasetId": "pht006550.v2",
+      "description": "This Follicular Lymphoma sample attributes table contains sample ID, sample name, histological type, analyte type, body site where sample was collected, tumor status, tissue type, and capture type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00302075.v1.p1",
+          "description": "Sample nucleic acid type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00302076.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CAPTURE_TYPE",
+          "id": "phv00302079.v1.p1",
+          "description": "Sequence library capture method",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00302074.v1.p1",
+          "description": "Type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00302077.v2.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00302072.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SIMPLE_SAMPLE_NAME",
+          "id": "phv00302073.v1.p1",
+          "description": "Short descriptive sample name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TISSUE_TYPE",
+          "id": "phv00302078.v1.p1",
+          "description": "Tissue treatment prior to DNA extraction",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CITE_seq_Sample_Attributes",
+      "datasetId": "pht011013.v1",
+      "description": "This CITE sample attributes table contains sample ID, body site where sample was collected, analyte type,  histological type, tumor status, time point, and tumor treatment.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00482759.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00482758.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00482760.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00482761.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00482757.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIMEPOINT",
+          "id": "phv00482762.v1.p1",
+          "description": "Time on study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00482763.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Hodgkin_Sample_Attributes",
+      "datasetId": "pht011014.v1",
+      "description": "This Hodgkin sample attributes table contains sample ID, tumor status, biopsy specimen, analyte type, and body site where sample was collected.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00482767.v1.p1",
+          "description": "The analyte type of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BIOPSY_SPECIMEN",
+          "id": "phv00482766.v1.p1",
+          "description": "The type of biopsy specimen",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00482768.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00482765.v1.p1",
+          "description": "The tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00482764.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NeoantigenFollicular_Sample_Attributes",
+      "datasetId": "pht011015.v1",
+      "description": "This Neoantigen Follicular sample attributes table contains sample ID, histological type, tumor status, analyte type, and body site where sample was collected.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00482772.v1.p1",
+          "description": "Sample nucleic acid type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00482773.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00482770.v1.p1",
+          "description": "Type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00482771.v1.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00482769.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GTB12_Sample_Attributes",
+      "datasetId": "pht012055.v1",
+      "description": "This GTB12 sample attributes table contains sample ID, tumor status, biopsy specimen, analyte type, and body site where sample was collected.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00498153.v1.p1",
+          "description": "The analyte type of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BIOPSY_SPECIMEN",
+          "id": "phv00498152.v1.p1",
+          "description": "The type of biopsy specimen",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00498154.v1.p1",
+          "description": "The collection site of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00498151.v1.p1",
+          "description": "The tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00498150.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CITE_seq",
+      "datasetId": "pht011010.v1",
+      "description": "This CITE subject phenotype table contains subject ID, race,  age at treatment, and diagnosis.",
+      "variables": [
+        {
+          "name": "AGE_TREATMENT",
+          "id": "phv00482729.v1.p1",
+          "description": "Age at time of treatment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS",
+          "id": "phv00482730.v1.p1",
+          "description": "Clinical diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00482728.v1.p1",
+          "description": "Reported Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00482727.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Follicular_Lymphoma_Seq_Subject",
+      "datasetId": "pht006547.v2",
+      "description": "The subject consent file includes subject ID, consent information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00302055.v2.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00482725.v1.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00302054.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Follicular_Lymphoma_Seq_Sample",
+      "datasetId": "pht006548.v2",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00302058.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00302057.v2.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

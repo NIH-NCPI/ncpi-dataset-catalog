@@ -1,0 +1,138 @@
+{
+  "studyId": "phs000938",
+  "studyName": "Appraisal of Whole Exome Sequencing Methods",
+  "tables": [
+    {
+      "tableName": "WES_HybCapture_vs_Amplicon_Sample",
+      "datasetId": "pht004784.v1",
+      "description": "This data table contains mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use and sample aliases.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00226798.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00226800.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00226799.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00226801.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226797.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WES_HybCapture_vs_Amplicon_Sample_Attributes",
+      "datasetId": "pht004786.v1",
+      "description": "This sample attributes table contains sample ID, analyte type, tumor status, and histological type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00226805.v1.p1",
+          "description": "Genetic material analyzed (DNA)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00226807.v1.p1",
+          "description": "Tissue Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00226806.v1.p1",
+          "description": "Yes or No",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00226804.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WES_HybCapture_vs_Amplicon_Subject",
+      "datasetId": "pht004783.v1",
+      "description": "The subject consent file includes subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00226796.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226795.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WES_HybCapture_vs_Amplicon_Subject_Phenotypes",
+      "datasetId": "pht004785.v1",
+      "description": "This subject phenotype table contains de-identified subject ID and age of cancer development.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00226802.v1.p1",
+          "description": "This study's identification for the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_onset",
+          "id": "phv00226803.v1.p1",
+          "description": "Age of cancer development",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_breast_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

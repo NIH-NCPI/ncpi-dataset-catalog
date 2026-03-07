@@ -1,0 +1,607 @@
+{
+  "studyId": "phs002088",
+  "studyName": "Drug Signatures for Prediction and Mitigation of Toxicity",
+  "tables": [
+    {
+      "tableName": "LINCS_DToxS_Clinical_Data",
+      "datasetId": "pht010715.v1",
+      "description": "This subject phenotypes data table includes EKG data (n=9 variables; ventricular rate, atrial rate, PR interval, QRS duration, QT, QTc, and PRT axis), laboratory results (n=22 variables; anthropometric measurements, blood pressure, and metabolic panel), CBC platelets differential (n=9 variables), and cardiac, endocrine, and other functions (n=6 variables) for selected clinically healthy subjects.",
+      "variables": [
+        {
+          "name": "ALT",
+          "id": "phv00437567.v1.p1",
+          "description": "ALT",
+          "concept_id": "ncpi:liver_function_alanine_aminotransferase_alt_standard_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AST",
+          "id": "phv00437568.v1.p1",
+          "description": "AST",
+          "concept_id": "ncpi:liver_function_aspartate_aminotransferase",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Albumin",
+          "id": "phv00437571.v1.p1",
+          "description": "Albumin",
+          "concept_id": "ncpi:liver_function_serum_albumin_serum_albumin_level",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Atrial Rate",
+          "id": "phv00437543.v1.p1",
+          "description": "Atrial Rate",
+          "concept_id": "ncpi:heart_rate_ecg_atrial_rate",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00437553.v1.p1",
+          "description": "BMI",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BNP",
+          "id": "phv00437582.v1.p1",
+          "description": "BNP",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Bilirubin total",
+          "id": "phv00437569.v1.p1",
+          "description": "Bilirubin total",
+          "concept_id": "ncpi:liver_function_total_bilirubin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CO2 total",
+          "id": "phv00437563.v1.p1",
+          "description": "CO2 total",
+          "concept_id": "ncpi:kidney_function_electrolytes_bicarbonate",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Calcium",
+          "id": "phv00437566.v1.p1",
+          "description": "Calcium",
+          "concept_id": "ncpi:kidney_function_electrolytes_calcium",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Chloride",
+          "id": "phv00437562.v1.p1",
+          "description": "Chloride",
+          "concept_id": "ncpi:kidney_function_electrolytes_chloride",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Creatinine",
+          "id": "phv00437565.v1.p1",
+          "description": "Creatinine",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diastolic blood pressure",
+          "id": "phv00437556.v1.p1",
+          "description": "Diastolic blood pressure",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_miscellaneous",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ferritin",
+          "id": "phv00437583.v1.p1",
+          "description": "Ferritin",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Glucose",
+          "id": "phv00437559.v1.p1",
+          "description": "Glucose",
+          "concept_id": "ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HBA1C",
+          "id": "phv00437585.v1.p1",
+          "description": "HBA1C",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Heart Rate",
+          "id": "phv00437554.v1.p1",
+          "description": "Heart Rate",
+          "concept_id": "ncpi:heart_rate_resting_heart_rate",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Height",
+          "id": "phv00437552.v1.p1",
+          "description": "Height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hematocrit",
+          "id": "phv00437576.v1.p1",
+          "description": "Hematocrit",
+          "concept_id": "topmed:hematocrit_vfr_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hemoglobin",
+          "id": "phv00437575.v1.p1",
+          "description": "Hemoglobin",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Mean corp. HGB Conc.",
+          "id": "phv00437578.v1.p1",
+          "description": "Mean corp. HGB Conc.",
+          "concept_id": "topmed:mchc_mcnc_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Mean corp. Vol",
+          "id": "phv00437577.v1.p1",
+          "description": "Mean corp. Vol",
+          "concept_id": "topmed:mcv_entvol_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Mean plt Vol",
+          "id": "phv00437581.v1.p1",
+          "description": "Mean plt Vol",
+          "concept_id": "topmed:pmv_entvol_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Oxygen Saturation",
+          "id": "phv00437558.v1.p1",
+          "description": "Oxygen Saturation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "P Axis",
+          "id": "phv00437548.v1.p1",
+          "description": "P Axis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "P-R Interval",
+          "id": "phv00437544.v1.p1",
+          "description": "P-R Interval",
+          "concept_id": "ncpi:ecg_pr_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Platelet",
+          "id": "phv00437580.v1.p1",
+          "description": "Platelet",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Potassium",
+          "id": "phv00437561.v1.p1",
+          "description": "Potassium",
+          "concept_id": "ncpi:kidney_function_electrolytes_potassium",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Protein total",
+          "id": "phv00437572.v1.p1",
+          "description": "Protein total",
+          "concept_id": "ncpi:liver_function_total_protein",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "QRS Duration",
+          "id": "phv00437545.v1.p1",
+          "description": "QRS Duration",
+          "concept_id": "ncpi:ecg_qrs_interval_qrs_duration_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "QT",
+          "id": "phv00437546.v1.p1",
+          "description": "QT",
+          "concept_id": "ncpi:ecg_qt_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "QTc",
+          "id": "phv00437547.v1.p1",
+          "description": "QTc",
+          "concept_id": "ncpi:ecg_qt_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "R Axis",
+          "id": "phv00437549.v1.p1",
+          "description": "R Axis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Red blood cells",
+          "id": "phv00437574.v1.p1",
+          "description": "Red blood cells",
+          "concept_id": "topmed:rbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Red distrib. Width",
+          "id": "phv00437579.v1.p1",
+          "description": "Red distrib. Width",
+          "concept_id": "topmed:rdw_ratio_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Respiratory rate",
+          "id": "phv00437557.v1.p1",
+          "description": "Respiratory rate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00437541.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sodium",
+          "id": "phv00437560.v1.p1",
+          "description": "Sodium",
+          "concept_id": "ncpi:kidney_function_electrolytes_sodium",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Systolic blood pressure",
+          "id": "phv00437555.v1.p1",
+          "description": "Systolic blood pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_generic_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T Axis",
+          "id": "phv00437550.v1.p1",
+          "description": "T Axis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TSH",
+          "id": "phv00437586.v1.p1",
+          "description": "TSH",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_tsh_levels",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Transferrin, serum",
+          "id": "phv00437584.v1.p1",
+          "description": "Transferrin, serum",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Urea Nitrogen",
+          "id": "phv00437564.v1.p1",
+          "description": "Urea Nitrogen",
+          "concept_id": "ncpi:kidney_function_bun",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ventricular Rate",
+          "id": "phv00437542.v1.p1",
+          "description": "Ventricular Rate",
+          "concept_id": "ncpi:heart_rate_ecg_ventricular_rate",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Weight",
+          "id": "phv00437551.v1.p1",
+          "description": "Weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "White blood cells",
+          "id": "phv00437573.v1.p1",
+          "description": "White blood cells",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alk Phos",
+          "id": "phv00437570.v1.p1",
+          "description": "Alk Phos",
+          "concept_id": "ncpi:liver_function_alkaline_phosphatase",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LINCS_DToxS_Sample_Attributes",
+      "datasetId": "pht010652.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, tumor status, histological type, and sequencing center.\"",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00437143.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00437142.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00437145.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00437144.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00437141.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00437146.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LINCS_DToxS_Subject_Phenotypes",
+      "datasetId": "pht010651.v1",
+      "description": "This subject phenotypes data table includes subject's self-reported sex, age at enrollment, and affection status. All subjects were pre-screened healthy individuals.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00437137.v1.p1",
+          "description": "Case control status of the subject. All are pre-screened healthy individuals.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00437139.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00437140.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00437138.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00437136.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LINCS_DToxS_Image_Mapping",
+      "datasetId": "pht010716.v1",
+      "description": "This image mapping data table includes a mapping of subject IDs to their electrocardiogram image file.",
+      "variables": [
+        {
+          "name": "BODY_SITE",
+          "id": "phv00437589.v1.p1",
+          "description": "Body site of image",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FILENAME",
+          "id": "phv00437590.v1.p1",
+          "description": "Filename including the file extension",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FILE_TYPE",
+          "id": "phv00437591.v1.p1",
+          "description": "File type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IMAGE_TYPE",
+          "id": "phv00437588.v1.p1",
+          "description": "Image type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00437587.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LINCS_DToxS_Subject",
+      "datasetId": "pht010649.v1",
+      "description": "This subject consent data table includes subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00437132.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00437133.v1.p1",
+          "description": "Biological sex",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00437131.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LINCS_DToxS_Sample",
+      "datasetId": "pht010650.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and sample aliases. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00437135.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00437134.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LINCS_DToxS_GEO",
+      "datasetId": "pht010653.v1",
+      "description": "This GEO sample mapping data table includes a mapping of SAMPLE_IDs to GEO accessions.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00437148.v1.p1",
+          "description": "GEO accession ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00437147.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

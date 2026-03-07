@@ -1,0 +1,138 @@
+{
+  "studyId": "phs003201",
+  "studyName": "E5103 Correlative Studies",
+  "tables": [
+    {
+      "tableName": "E5103_BC_TIPN_Subject_Phenotypes",
+      "datasetId": "pht013163.v1",
+      "description": "This subject phenotypes data table reports each subject's case control status for peripheral neuropathy, assigned study arm within the ECOG-ACRIN E5103 study, and age at enrollment.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00527964.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PERIPHERAL NEUROPATHY",
+          "id": "phv00527962.v1.p1",
+          "description": "Case control status for peripheral neuropathy",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_peripheral_neuropathy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY ARM",
+          "id": "phv00527963.v1.p1",
+          "description": "Study arm to which patients were randomly assigned.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00527961.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "E5103_BC_TIPN_Sample_Attributes",
+      "datasetId": "pht013164.v1",
+      "description": "This sample attributes data table reports each sample's body site, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00527967.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00527966.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00527968.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00527965.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "E5103_BC_TIPN_Subject",
+      "datasetId": "pht013161.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00527955.v1.p1",
+          "description": "Consent type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00527956.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00527954.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "E5103_BC_TIPN_Sample",
+      "datasetId": "pht013162.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00527960.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00527959.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

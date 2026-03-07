@@ -1,0 +1,706 @@
+{
+  "studyId": "phs001682",
+  "studyName": "NHLBI TOPMed: Pulmonary Hypertension and the Hypoxic Response in SCD (PUSH)",
+  "tables": [
+    {
+      "tableName": "TOPMed_WGS_PUSH_SCD_Subject_Phenotypes",
+      "datasetId": "pht009764.v1",
+      "description": "This subject phenotype table includes subject ID, age, gender, systolic and diastolic blood pressures, oxygen saturation, weight, height, number of pregnancies, smoking, race, ethnicity, education, blood cell counts, red cell distribution width, hemoglobin, hematocrit, mean corpuscular volume, mean corpuscular hemoglobin, mean corpuscular hemoglobin concentration, percentage of reticulocytes in the blood, fetal hemoglobin/total hemoglobin, hemoglobin S_, C_, F_, A1_, and A2_electrophoresis, hemoglobin S_,  C_, F_, A1_, and A2_high-performance liquid chromatography, serum creatinine level, blood urea nitrogen, lactate dehydrogenase, total bilirubin, serum ferritin level, serum transferrin level, echocardiography_tricuspid regurgitation velocity, transcranial Doppler_right  and left middle cerebral arteries, transcranial Doppler_right  and left middle internal carotid arteries, pulmonary function test_forced vital capacity (FVC) and expiratory volume in one second (FEV1), pulmonary function test_total lung capacity, hemoglobin adjusted diffusing capacity for carbon monoxide, total number of red blood cell transfusion in lifetime, chronic red blood cell transfusion program, hydroxyurea treatment, chronic pain, stroke history, stroke history in past 6 months, silent cerebral infarction in past 6 months, number of hospital admissions in past 6 months, number of pain crisis (Vaso-occlusive episodes) requiring ER or Doctor visit in past 6 months, acute chest syndrome, avascular necrosis/osteonecrosis hip and shoulder, leg ulcers, painful erections, asthma or wheezing, eye problem or retinal disease, kidney disease or renal insufficiency, gallbladder disease, and splenectomy surgery.",
+      "variables": [
+        {
+          "name": "ACS",
+          "id": "phv00424031.v1.p1",
+          "description": "Acute Chest Syndrome",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_acute_chest_syndrome",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00423972.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANC",
+          "id": "phv00423985.v1.p1",
+          "description": "Absolute neutrophil count (ANC)",
+          "concept_id": "topmed:neutrophil_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ARC",
+          "id": "phv00423995.v1.p1",
+          "description": "Absolute Reticulocyte Counts",
+          "concept_id": "topmed:rbc_ncnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ASTHMA",
+          "id": "phv00424036.v1.p1",
+          "description": "Asthma or wheezing",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_diagnosis_ever",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AVN_HIP",
+          "id": "phv00424032.v1.p1",
+          "description": "Avascular Necrosis/Osteonecrosis_Hip",
+          "concept_id": "topmed:bone_musculoskeletal_joint_replacement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AVN_SHOULDER",
+          "id": "phv00424033.v1.p1",
+          "description": "Avascular Necrosis/Osteonecrosis_Shoulder",
+          "concept_id": "topmed:bone_musculoskeletal_joint_replacement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BUN",
+          "id": "phv00424008.v1.p1",
+          "description": "Blood urea nitrogen",
+          "concept_id": "ncpi:kidney_function_bun",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHRONIC_PAIN",
+          "id": "phv00424025.v1.p1",
+          "description": "Chronic pain _6 months or more of pain",
+          "concept_id": "ncpi:pain_medication_chronic_pain_conditions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CHRONIC_RBC",
+          "id": "phv00424023.v1.p1",
+          "description": "Is the participant on a chronic red blood cell transfusion program",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "CREATININE",
+          "id": "phv00424007.v1.p1",
+          "description": "Serum creatinine level",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DBP",
+          "id": "phv00423975.v1.p1",
+          "description": "Diastolic blood pressue",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_device_specific",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DLCO_ADJUSTED",
+          "id": "phv00424021.v1.p1",
+          "description": "Hemoglobin adjusted diffusing capacity for carbon monoxide",
+          "concept_id": "topmed:pulmonary_function_detailed_diffusion_capacity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ECHO_TRV",
+          "id": "phv00424013.v1.p1",
+          "description": "Echocardiography_Tricuspid Regurgitation Velocity",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "EDUCATION",
+          "id": "phv00423983.v1.p1",
+          "description": "Level of education",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00423982.v1.p1",
+          "description": "Ethnicity group of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FERRITIN",
+          "id": "phv00424011.v1.p1",
+          "description": "Serum ferritin level",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "GALLBLADDER",
+          "id": "phv00424039.v1.p1",
+          "description": "Gallbladder disease",
+          "concept_id": "topmed:disease_diagnosis_gallbladder_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00423973.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HBA1_HPLC",
+          "id": "phv00424005.v1.p1",
+          "description": "Hemoglobin A1_high-performance liquid chromatography",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HBA2_HPLC",
+          "id": "phv00424006.v1.p1",
+          "description": "Hemoglobin A2_high-performance liquid chromatography",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HBC_HPLC",
+          "id": "phv00424003.v1.p1",
+          "description": "Hemoglobin C_high-performance liquid chromatography",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HBF_HPLC",
+          "id": "phv00424004.v1.p1",
+          "description": "Hemoglobin F_high-performance liquid chromatography",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HBS_HPLC",
+          "id": "phv00424002.v1.p1",
+          "description": "Hemoglobin S_high-performance liquid chromatography",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HB_F",
+          "id": "phv00423996.v1.p1",
+          "description": "Fetal hemoglobin/total hemoglobin.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT",
+          "id": "phv00423978.v1.p1",
+          "description": "Height measured at enrollment",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEMATOCRIT",
+          "id": "phv00423989.v1.p1",
+          "description": "Percentage of red blood cells by volume in the blood",
+          "concept_id": "topmed:hematocrit_vfr_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEMOGLOBIN",
+          "id": "phv00423988.v1.p1",
+          "description": "Hemoglobin",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HGBA1_EP",
+          "id": "phv00424000.v1.p1",
+          "description": "Hemoglobin A1_Electrophoresis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HGBA2_EP",
+          "id": "phv00424001.v1.p1",
+          "description": "Hemoglobin A2_Electrophoresis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HGBC_EP",
+          "id": "phv00423998.v1.p1",
+          "description": "Hemoglobin C_Electrophoresis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HGBF_EP",
+          "id": "phv00423999.v1.p1",
+          "description": "Hemoglobin F_Electrophoresis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HGBS_EP",
+          "id": "phv00423997.v1.p1",
+          "description": "Hemoglobin S_Electrophoresis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HOSPITAL_6_MONTHS",
+          "id": "phv00424029.v1.p1",
+          "description": "Number of hospital admissions in past 6 months",
+          "concept_id": "ncpi:hospitalization_hospital_admissions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HU",
+          "id": "phv00424024.v1.p1",
+          "description": "Hydroxyurea treatment",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "KIDNEY_DISEASE",
+          "id": "phv00424038.v1.p1",
+          "description": "Kidney disease or renal insufficiency",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_general_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDH",
+          "id": "phv00424009.v1.p1",
+          "description": "Lactate dehydrogenase",
+          "concept_id": "ncpi:liver_function_lactate_dehydrogenase",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "LEG_ULCERS",
+          "id": "phv00424034.v1.p1",
+          "description": "Leg ulcers",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_vascular_circulatory",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "LIFETIME_RBC",
+          "id": "phv00424022.v1.p1",
+          "description": "Total number of red blood cell transfusion in lifetime",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "MCH",
+          "id": "phv00423991.v1.p1",
+          "description": "Mean corpuscular hemoglobin",
+          "concept_id": "topmed:mch_entmass_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MCHC",
+          "id": "phv00423992.v1.p1",
+          "description": "Mean corpuscular hemoglobin concentration",
+          "concept_id": "topmed:mchc_mcnc_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MCV",
+          "id": "phv00423990.v1.p1",
+          "description": "Mean corpuscular volume",
+          "concept_id": "topmed:mcv_entvol_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "O2",
+          "id": "phv00423976.v1.p1",
+          "description": "Oxygen saturation",
+          "concept_id": "ncpi:polysomnography_oxygen_saturation_average_oxygen_saturation_overall",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PFT_FEV1",
+          "id": "phv00424019.v1.p1",
+          "description": "Pulmonary function test_forced expiratory volume in one second (FEV1)",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fev1_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PFT_FVC",
+          "id": "phv00424018.v1.p1",
+          "description": "Pulmonary function test_forced vital capacity (FVC)",
+          "concept_id": "ncpi:pulmonary_function_detailed_spirometry_volumes_ratios_fvc_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PFT_TLC",
+          "id": "phv00424020.v1.p1",
+          "description": "Pulmonary function test_Total Lung Capacity",
+          "concept_id": "topmed:pulmonary_function_detailed_lung_volumes_capacities",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLATELET",
+          "id": "phv00423993.v1.p1",
+          "description": "Platelet Count",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PREGNANCY",
+          "id": "phv00423979.v1.p1",
+          "description": "Number of pregnancies",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_count_history_pregnancy_related_events",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIAPISM",
+          "id": "phv00424035.v1.p1",
+          "description": "Painful erections",
+          "concept_id": "ncpi:disease_diagnosis_genitourinary_disorders_priapism",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00423981.v1.p1",
+          "description": "Racial category of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RBC",
+          "id": "phv00423986.v1.p1",
+          "description": "Red Blood Cell Count",
+          "concept_id": "topmed:rbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RDW",
+          "id": "phv00423987.v1.p1",
+          "description": "Red cell Distribution Width",
+          "concept_id": "topmed:rdw_ratio_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RETIC_PERCENTAGE",
+          "id": "phv00423994.v1.p1",
+          "description": "Percentage of reticulocytes in the blood",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RETINOPATHY",
+          "id": "phv00424037.v1.p1",
+          "description": "Eye problem or retinal disease",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_diabetic_retinopathy_diagnosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SBP",
+          "id": "phv00423974.v1.p1",
+          "description": "Systolic blood pressue",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_closeout_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKING",
+          "id": "phv00423980.v1.p1",
+          "description": "Tobacco use history of participant - current smoking status",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SPLENEC_TOMY",
+          "id": "phv00424040.v1.p1",
+          "description": "Splenectomy surgery",
+          "concept_id": "ncpi:surgical_procedure_spleen_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STROKE_6_MONTHS",
+          "id": "phv00424027.v1.p1",
+          "description": "Stroke history in past 6 months",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_stroke_cerebrovascular_diagnosis_stroke_recent",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "STROKE_HISTORY",
+          "id": "phv00424026.v1.p1",
+          "description": "Stroke history",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_stroke_cerebrovascular_diagnosis_stroke_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "STROKE_SILENT",
+          "id": "phv00424028.v1.p1",
+          "description": "Silent Cerebral Infarction in past 6 months",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_stroke_cerebrovascular_diagnosis_ischemic_stroke",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00423971.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TCD_LEFTICA",
+          "id": "phv00424017.v1.p1",
+          "description": "Transcranial Doppler_Left Internal Carotid Arteries",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TCD_LEFTMCA",
+          "id": "phv00424015.v1.p1",
+          "description": "Transcranial Doppler_Left Middle Cerebral Arteries",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TCD_RIGHTICA",
+          "id": "phv00424016.v1.p1",
+          "description": "Transcranial Doppler_Right Internal Carotid Arteries",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TCD_RIGHTMCA",
+          "id": "phv00424014.v1.p1",
+          "description": "Transcranial Doppler_Right Middle Cerebral Arteries",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRANSFERRIN",
+          "id": "phv00424012.v1.p1",
+          "description": "Serum transferrin level",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T_BILI",
+          "id": "phv00424010.v1.p1",
+          "description": "Total Bilirubin",
+          "concept_id": "ncpi:liver_function_total_bilirubin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VOE_6_MONTHS",
+          "id": "phv00424030.v1.p1",
+          "description": "Number of pain crisis (Vaso-occlusive episodes) requiring ER or Doctor visit in past 6 months",
+          "concept_id": "ncpi:hospitalization_emergency_room_visits",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WBC",
+          "id": "phv00423984.v1.p1",
+          "description": "White Blood Cell Count",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00423977.v1.p1",
+          "description": "Subject's weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_PUSH_SCD_Sample_Attributes",
+      "datasetId": "pht009765.v1",
+      "description": "This sample attributes data table includes sample IDs, body site where sample was collected, analyte type, tumor status, sequencing center, funding source, TOPMed phase, project, and study name.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00424043.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00424042.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00424046.v1.p1",
+          "description": "Project funding source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00424044.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00424041.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00424045.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00424049.v1.p1",
+          "description": "TOPMed-assigned short study name (1:1 with TOPMed phs number)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00424047.v1.p1",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00424048.v1.p1",
+          "description": "TOPMed Project that funded sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_PUSH_SCD_Subject",
+      "datasetId": "pht009762.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00423967.v1.p1",
+          "description": "Registered consent groups (Data Use Limitations (DUL)) as determined by submitters' Institutional Review Boards (IRB) or equivalent body",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00556618.v1.p1",
+          "description": "Sex of Subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00423966.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_PUSH_SCD_Sample",
+      "datasetId": "pht009763.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00423970.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00423969.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "studyId": "phs001352",
+  "studyName": "Metagenomics-Guided Pathogen Discovery in Travelers' Diarrhea",
+  "tables": [
+    {
+      "tableName": "Travelers_Diarrhea_Sample_Attributes",
+      "datasetId": "pht007067.v1",
+      "description": "Sample Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00325616.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BFT_STATUS",
+          "id": "phv00325618.v1.p1",
+          "description": "BFT (<i>Bacteroides fragilis toxin</i>) status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00325615.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETEC_STATUS",
+          "id": "phv00325617.v1.p1",
+          "description": "ETEC (<i>Enterotoxigenic Escherichia coli</i>) status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00325614.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00325619.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Travelers_Diarrhea_Sample",
+      "datasetId": "pht007065.v1",
+      "description": "Subject - Sample Mapping - Sample Use information",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00325608.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00325609.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00325611.v1.p1",
+          "description": "Sample use. Seq_Metagenomic: Metagenome sequencing; Seq_rRNA_16S: 16S rRNA sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00325610.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00325607.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Travelers_Diarrhea_Subject",
+      "datasetId": "pht007064.v1",
+      "description": "Subject - Consent - Affection Status Information",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00325606.v1.p1",
+          "description": "Case - control status of the subject",
+          "concept_id": "ncpi:disease_diagnosis_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00325604.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00325603.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00325605.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Travelers_Diarrhea_Subject_Phenotypes",
+      "datasetId": "pht007066.v1",
+      "description": "Phenotype Information: Subject ID/Travel Destination",
+      "variables": [
+        {
+          "name": "DESTINATION",
+          "id": "phv00325613.v1.p1",
+          "description": "Subject's Travel Destination",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00325612.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

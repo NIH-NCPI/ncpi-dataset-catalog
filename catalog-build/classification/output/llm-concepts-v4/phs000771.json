@@ -1,0 +1,114 @@
+{
+  "studyId": "phs000771",
+  "studyName": "Bladder Cancer Clinical Cohorts",
+  "tables": [
+    {
+      "tableName": "Bladder_Cancer_Chemotherapy_Response_Sample",
+      "datasetId": "pht003982.v2",
+      "description": "Subject ID, sample ID, and sample use variable obtained from participants with muscle invasive urothelial carcinoma and involved in the \"Bladder Chemotherapy Responders\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00202610.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00202611.v2.p1",
+          "description": "Sample use. Seq_DNA_SNP_MAF_Sum: Samples were used to generate aggregate mutation annotation file (.maf); Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00202609.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Bladder_Cancer_Chemotherapy_Response_Sample_Attributes",
+      "datasetId": "pht003984.v2",
+      "description": "Sample ID, analyte type, and tumor status of samples obtained from participants with muscle invasive urothelial carcinoma and involved in the \"Bladder Chemotherapy Responders\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00202616.v2.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00202614.v2.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00202615.v2.p1",
+          "description": "Indicates the tumor / normal status of a sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Bladder_Cancer_Chemotherapy_Response_Subject",
+      "datasetId": "pht003981.v2",
+      "description": "Subject ID and consent group of participants with muscle invasive urothelial carcinoma and involved in the \"Bladder Chemotherapy Responders\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00202608.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00202607.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Bladder_Cancer_Chemotherapy_Response_Subject_Phenotypes",
+      "datasetId": "pht003983.v2",
+      "description": "Subject ID and sex of participants with muscle invasive urothelial carcinoma and involved in the \"Bladder Chemotherapy Responders\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00202612.v2.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00202613.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

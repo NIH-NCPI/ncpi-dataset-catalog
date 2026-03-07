@@ -1,0 +1,122 @@
+{
+  "studyId": "phs002846",
+  "studyName": "Pharmacogenomics of Mercaptopurine Intolerance in Children with Acute Lymphoblastic Leukemia (AALL03N1)",
+  "tables": [
+    {
+      "tableName": "MP_ALL_Subject",
+      "datasetId": "pht012094.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, biological sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00498334.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00498335.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00498337.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498333.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00498336.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MP_ALL_Sample",
+      "datasetId": "pht012095.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and pooled sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00498339.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498338.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MP_ALL_Subject_Phenotypes",
+      "datasetId": "pht012096.v1",
+      "description": "This subject phenotypes data table contains mercaptopurine dose intensity.",
+      "variables": [
+        {
+          "name": "DOSE_INTENSITY",
+          "id": "phv00498341.v1.p1",
+          "description": "Mercaptopurine dose intensity, estimated based on linear mixed-effects model",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498340.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MP_ALL_Sample_Attributes",
+      "datasetId": "pht012097.v1",
+      "description": "This sample attributes data table contains tumor status.",
+      "variables": [
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00498343.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00498342.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

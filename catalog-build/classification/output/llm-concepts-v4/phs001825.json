@@ -1,0 +1,234 @@
+{
+  "studyId": "phs001825",
+  "studyName": "Study of 5'UTR Mutations in Prostate Cancer",
+  "tables": [
+    {
+      "tableName": "5UTR_Mutations_PC_Sample_Attributes",
+      "datasetId": "pht009050.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, histological type, metastastic status, primary tumor location, tumor gleason index, type of tumor treatment for sample, genotyping and sequencing centers.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00407320.v1.p1",
+          "description": "Type of analyte",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Androgen deprivation therapy",
+          "id": "phv00407327.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_hormone_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00407319.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00407328.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00407322.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00407321.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00407323.v1.p1",
+          "description": "Presence or absence of metastasis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00407324.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00407318.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00407329.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_Gleason index",
+          "id": "phv00407326.v1.p1",
+          "description": "Tumor grade of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00407325.v1.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "5UTR_Mutations_PC_Subject_Phenotypes",
+      "datasetId": "pht009049.v1",
+      "description": "This subject phenotype data table includes subject's race, GI of primary Cancer of the Prostate (CaP) status, stage of cancer, PSA levels, age at diagnosis and death, and survival status.",
+      "variables": [
+        {
+          "name": "Age_at_Diagnosis",
+          "id": "phv00407315.v1.p1",
+          "description": "Age at diagnosis in years",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_lung_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_death",
+          "id": "phv00407316.v1.p1",
+          "description": "Age at death in years",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gl_of_Primary_CaP",
+          "id": "phv00407312.v1.p1",
+          "description": "GI of primary Cancer of Prostate (CaP) if available",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PSA_at_Ddx",
+          "id": "phv00407314.v1.p1",
+          "description": "PSA levels at diagnosis",
+          "concept_id": "topmed:cancer_diagnosis_cancer_screening",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00407311.v1.p1",
+          "description": "Race of patient",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00407310.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Stage",
+          "id": "phv00407313.v1.p1",
+          "description": "Cancer stage of patient",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "survival_from_dx",
+          "id": "phv00407317.v1.p1",
+          "description": "Survival in years from diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "5UTR_Mutations_PC_Subject",
+      "datasetId": "pht009047.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, and affection status for prostate cancer.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00407307.v1.p1",
+          "description": "Case control status of the subject for prostate cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00407306.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00407305.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "5UTR_Mutations_PC_Sample",
+      "datasetId": "pht009048.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00407309.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00407308.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

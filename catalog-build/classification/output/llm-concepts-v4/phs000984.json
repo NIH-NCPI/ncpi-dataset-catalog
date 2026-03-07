@@ -1,0 +1,359 @@
+{
+  "studyId": "phs000984",
+  "studyName": "Pharmacogenomics of metformin dose response in T2DM patients",
+  "tables": [
+    {
+      "tableName": "T2DM_Metformin_Basic_Data",
+      "datasetId": "pht005010.v1",
+      "description": "This subject phenotype data table includes subjects year and decade of birth, gender, race, ethnicity, and case/control status for subject with type 2 diabetes mellitus (T2DM) taking metformin.",
+      "variables": [
+        {
+          "name": "Case_Control",
+          "id": "phv00253069.v1.p1",
+          "description": "Case or Control for Metformin",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Decade_Birth",
+          "id": "phv00253064.v1.p1",
+          "description": "Decade of Birth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00253067.v1.p1",
+          "description": "Subject's self-identified Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Height",
+          "id": "phv00253068.v1.p1",
+          "description": "Subject's Height in Meters",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Metformin_Start_Age",
+          "id": "phv00253062.v1.p1",
+          "description": "Age at first record of Metformin",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00253066.v1.p1",
+          "description": "Subject's self-identified Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00253061.v1.p1",
+          "description": "Deidentified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00253065.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Year_Birth",
+          "id": "phv00253063.v1.p1",
+          "description": "Year of Birth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T2DM_Metformin_Subject",
+      "datasetId": "pht005008.v1",
+      "description": "This subject consent data table includes subjects IDs, consent information, mapping to subject aliases, and affection status for subject with type 2 diabetes mellitus (T2DM) taking metformin.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00253055.v1.p1",
+          "description": "Case control status for metformin",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00253052.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJID",
+          "id": "phv00253054.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00253051.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJ_SOURCE",
+          "id": "phv00253053.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T2DM_Metformin_Sample",
+      "datasetId": "pht005009.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00253057.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00253060.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00253058.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00253059.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00253056.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T2DM_Metformin_Sample_Attributes",
+      "datasetId": "pht005011.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, tumor status, and histological type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00253072.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00253071.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00253074.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00253073.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00253070.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T2DM_Metformin_Weight",
+      "datasetId": "pht005703.v1",
+      "description": "This data table includes weight measurements, binary flag indicating possible pregnancy around time of weight measure, age when weight was recorded, and the index number which uniquely indentifies lab values within each year.",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00266031.v1.p1",
+          "description": "Deidentified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "measurement_index",
+          "id": "phv00266035.v1.p1",
+          "description": "Unique index number to uniquely identify lab values w/in each year",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "preg_binary_flag",
+          "id": "phv00266033.v1.p1",
+          "description": "Binary flag indicating possible pregnancy around time of weight measure",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "weight_age",
+          "id": "phv00266034.v1.p1",
+          "description": "Age when weight recorded",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "weight_kg",
+          "id": "phv00266032.v1.p1",
+          "description": "Weight in kilograms",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T2DM_Metformin_Pedigree",
+      "datasetId": "pht005767.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "FAMID",
+          "id": "phv00266354.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00266357.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00266356.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00266358.v1.p1",
+          "description": "Sex",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00266355.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T2DM_Metformin_HbA1c",
+      "datasetId": "pht005702.v1",
+      "description": "This data table includes HbA1c measurements, age when the measurements were taken, and the index number which uniquely indentifies lab values within each year.",
+      "variables": [
+        {
+          "name": "Glycosylated_Hemoglobin_Measurement",
+          "id": "phv00266028.v1.p1",
+          "description": "Percent of hemoglobin A1c",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HbA1c_lab_order_age",
+          "id": "phv00266029.v1.p1",
+          "description": "Age when HbA1c lab ordered",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00266027.v1.p1",
+          "description": "Deidentified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "measurement_index",
+          "id": "phv00266030.v1.p1",
+          "description": "Unique index number to uniquely identify lab values w/in each year",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

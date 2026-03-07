@@ -1,0 +1,209 @@
+{
+  "studyId": "phs002288",
+  "studyName": "Analysis of Epigenomes and Genome Topology in Colorectal Cancer",
+  "tables": [
+    {
+      "tableName": "CRC_Topology_Subject_Phenotypes",
+      "datasetId": "pht010902.v1",
+      "description": "This subject phenotype table contains subject IDs, diagnosis, CpG island hypermethylator phenotype, microsatellite instability phenotype, mutations in APC, BRAF, TP53, and KRAS genes, and methylation status of MLH1 promoter.",
+      "variables": [
+        {
+          "name": "APC",
+          "id": "phv00481492.v1.p1",
+          "description": "Mutations in APC gene",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_apc_mutations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BRAF",
+          "id": "phv00481493.v1.p1",
+          "description": "Mutations in BRAF gene",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_braf_mutations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CIMP",
+          "id": "phv00481490.v1.p1",
+          "description": "CpG island hypermethylator phenotype",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_methylation_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS",
+          "id": "phv00481489.v1.p1",
+          "description": "Diagnosis of the individual",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_primary_disease_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "KRAS",
+          "id": "phv00481495.v1.p1",
+          "description": "Mutations in KRAS gene",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_kras_mutations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MLH1_Meth",
+          "id": "phv00481496.v1.p1",
+          "description": "Methylation status of MLH1 promoter",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_mismatch_repair_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MSI",
+          "id": "phv00481491.v1.p1",
+          "description": "Microsatellite instability phenotype",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_treatment_response",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00481488.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TP53",
+          "id": "phv00481494.v1.p1",
+          "description": "Mutations in TP53 gene",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_tp53_mutations",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CRC_Topology_Sample_Attributes",
+      "datasetId": "pht010903.v1",
+      "description": "This sample attributes table contains sample IDs, body site where sample was collected, analyte type, histological type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00481499.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00481498.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00481500.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00481501.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00481497.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CRC_Topology_Subject",
+      "datasetId": "pht010900.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00481484.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00481485.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00481483.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CRC_Topology_Sample",
+      "datasetId": "pht010901.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00481487.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00481486.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CRC_Topology_GEO",
+      "datasetId": "pht013604.v1",
+      "description": "This data table contains a mapping of study sample IDs and GEO accession IDs.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00530451.v1.p1",
+          "description": "GEO accession ID (GSM#)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00530450.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

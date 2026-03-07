@@ -1,0 +1,212 @@
+{
+  "studyId": "phs000464",
+  "studyName": "TARGET: Acute Lymphoblastic Leukemia (ALL) Expansion Phase 2",
+  "tables": [
+    {
+      "tableName": "TARGET_ALLP2_Subject_Phenotypes",
+      "datasetId": "pht002624.v14",
+      "description": "The data table contains Acute Lymphoblastic Leukemia Phase 2 (ALLP2) subject phenotypes including sociodemography (n=3 variables; gender, race and ethnicity), observations at diagnosis (n=4 variables; age, cns status, testicular involvement and wbc), minimal residual disease (n=2 variables), relapse status (n=2 variables), vital status (n=2 variables), and status of chromosomal aberrations and fusion oncogene proteins (n=4 variables; trisomies, MLL, E2A-PBX1, BCR-ABL). Please note that several variables do not have any data, but are placeholders for data that is forthcoming.",
+      "variables": [
+        {
+          "name": "AGE_AT_DIAGNOSIS",
+          "id": "phv00167585.v13.p8",
+          "description": "Age at diagnosis, rounded to the nearest year",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BCR_ABL_STATUS",
+          "id": "phv00167598.v13.p8",
+          "description": "BCR ABL Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CNS_STATUS_AT_DIAGNOSIS",
+          "id": "phv00167587.v13.p8",
+          "description": "CNS status at diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "E2A_PBX1_STATUS",
+          "id": "phv00167597.v13.p8",
+          "description": "E2A PBX1 Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00167584.v13.p8",
+          "description": "NAACCR Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FIRST_EVENT",
+          "id": "phv00167591.v13.p8",
+          "description": "First Event",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00167582.v14.p8",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MLL_STATUS",
+          "id": "phv00167596.v13.p8",
+          "description": "MLL Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MRD_DAY29",
+          "id": "phv00167590.v13.p8",
+          "description": "Minimum residual disease status, in blood, day 29, 0.01% sensitivity",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MRD_DAY8",
+          "id": "phv00167589.v13.p8",
+          "description": "Minimum residual disease status, in blood, day 8, 0.01% sensitivity",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00167583.v13.p8",
+          "description": "NAACCR Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00167581.v13.p8",
+          "description": "TARGET Subject id",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TESTICULAR_INVOLVEMENT",
+          "id": "phv00167588.v13.p8",
+          "description": "Testicular disease status at diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRISOMIES_4_10_STATUS",
+          "id": "phv00167595.v13.p8",
+          "description": "Trisomes 4 10 Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VITAL_STATUS",
+          "id": "phv00167593.v13.p8",
+          "description": "Vital Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WBC_AT_DIAGNOSIS",
+          "id": "phv00167586.v13.p8",
+          "description": "White Blood Cell Range at diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEARS_TO_DEATH",
+          "id": "phv00167594.v13.p8",
+          "description": "Time to death, rounded to nearest 0.25 years",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEARS_TO_EVENT",
+          "id": "phv00167592.v13.p8",
+          "description": "Time to first event (or censoring), rounded to nearest 0.25 years",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TARGET_ALLP2_Sample_Attributes",
+      "datasetId": "pht002625.v17",
+      "description": "This sample attributes data table includes sample analyte type (DNA or RNA), disease state of sample (tumor or normal/in remission), and sample type obtained from subjects in the Acute Lymphoblastic Leukemia Phase 2 (ALLP2) substudy. The variable, DISEASEPROJECT, is included to track the disease project of the sample.",
+      "variables": [
+        {
+          "name": "ANALYTETYPE",
+          "id": "phv00167603.v17.p8",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASEPROJECT",
+          "id": "phv00196455.v12.p8",
+          "description": "Disease project",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASESTATE",
+          "id": "phv00167600.v17.p8",
+          "description": "Disease state of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXTRACTNAME",
+          "id": "phv00167601.v17.p8",
+          "description": "Extract name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLENAME",
+          "id": "phv00167599.v17.p8",
+          "description": "Sample Name",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLETYPE",
+          "id": "phv00167602.v17.p8",
+          "description": "Sample type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

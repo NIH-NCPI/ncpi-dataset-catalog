@@ -1,0 +1,258 @@
+{
+  "studyId": "phs003178",
+  "studyName": "Combined PDCD1, BRAF and MAP2K7 Inhibition in BRAFV600E Colorectal Cancer: a Phase 2 Trial",
+  "tables": [
+    {
+      "tableName": "BRAFV600E_CRC_Sample_Attributes",
+      "datasetId": "pht013739.v1",
+      "description": "This sample attributes data table includes sample IDs, analyte type, data type, number of epithelial cells used to generate scRNAseq data, tumor status, body site where sample was collected, treatment cycle, treatment cycle day, sample collected before, on, or after treatment, primary tumor, metastasis, or transformed cell line, primary tumor location, tumor grade, and name of the center which conducted sequencing.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00531241.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00531245.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "CYCLE",
+          "id": "phv00531246.v1.p1",
+          "description": "Treatment cycle sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DATA_TYPE",
+          "id": "phv00531242.v1.p1",
+          "description": "Type of sequencing used to generate data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DAY",
+          "id": "phv00531247.v1.p1",
+          "description": "Treatment cycle day sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00531244.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NCELLS_EPI",
+          "id": "phv00531243.v1.p1",
+          "description": "Number of epithelial cells used to generate single cell RNA-seq (scRNAseq) data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ON_TREATMENT",
+          "id": "phv00531248.v1.p1",
+          "description": "Was the sample collected before, on, or after treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00531249.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00531250.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00531240.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00531252.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_GRADE",
+          "id": "phv00531251.v1.p1",
+          "description": "Grade of primary tumor at time of sample collection",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRAFV600E_CRC_Subject_Phenotypes",
+      "datasetId": "pht013738.v1",
+      "description": "This subject phenotype table includes subject ID, subject alias, case control status of the subject for Colorectal Cancer (All subjects are Colorectal Cancer patients), ages at diagnosis and start of treatment, stage at diagnosis, response to therapy, mismatch repair status, and response evaluation criteria in solid tumors.",
+      "variables": [
+        {
+          "name": "DIAGNOSIS_AGE",
+          "id": "phv00531234.v1.p1",
+          "description": "Age at Diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_general_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS_STAGE",
+          "id": "phv00531236.v1.p1",
+          "description": "Stage at diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MMR_STATUS",
+          "id": "phv00531238.v1.p1",
+          "description": "Mismatch repair status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_mismatch_repair_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_DISEASE",
+          "id": "phv00531233.v1.p1",
+          "description": "Case control status of the subject for Colorectal Cancer; all subjects are Colorectal Cancer patients.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_primary_disease_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RECIST",
+          "id": "phv00531239.v1.p1",
+          "description": "Response Evaluation Criteria in Solid Tumors",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RESPONSE",
+          "id": "phv00531237.v1.p1",
+          "description": "Responder or Non-responder to Therapy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_treatment_response",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ALIAS",
+          "id": "phv00531232.v1.p1",
+          "description": "Subject Aliases used in publication",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00531231.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TREATMENT_AGE",
+          "id": "phv00531235.v1.p1",
+          "description": "Age at start of treatment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRAFV600E_CRC_Subject",
+      "datasetId": "pht013736.v1",
+      "description": "The subject consent file includes subject IDs, consent information, sex, and subject source.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00531226.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00531227.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00531225.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00531228.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BRAFV600E_CRC_Sample",
+      "datasetId": "pht013737.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00531230.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00531229.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

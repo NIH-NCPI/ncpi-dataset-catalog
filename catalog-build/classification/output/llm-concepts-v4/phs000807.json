@@ -1,0 +1,282 @@
+{
+  "studyId": "phs000807",
+  "studyName": "Breast Cancer Study",
+  "tables": [
+    {
+      "tableName": "CALGB40101_Early_Breast_Cancer_Subject_Phenotypes",
+      "datasetId": "pht004388.v1",
+      "description": "Subject ID, case or control status for neuropathy, cumulative Paclitaxel dose, race, ethnicity, gender, age at registration, indicator of ideal body weight, ANC, wbc, and bilirubin value at baseline, indicator of GCSF use in cycle 1 of therapy, and indicator of average relative dose intensity > .85 of participants with primary breast cancer and involved in the \"Study on longer adjuvant chemotherapy in Women with Early Breast Cancer\" project.",
+      "variables": [
+        {
+          "name": "ANC",
+          "id": "phv00220932.v1.p1",
+          "description": "ANC value at baseline",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ANCevent",
+          "id": "phv00220937.v1.p1",
+          "description": "Case control status for neutropenia",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Event",
+          "id": "phv00220924.v1.p1",
+          "description": "Case control status for neutropathy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GFR",
+          "id": "phv00220931.v1.p1",
+          "description": "Indicator of ideal body weight adjusted creatinine clearance<60",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_other_equations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "G_CSF_cyc1",
+          "id": "phv00220935.v1.p1",
+          "description": "Indicator of GCSF use in cycle 1 of therapy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00220923.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TE_Cond_CmDsBSA",
+          "id": "phv00220925.v1.p1",
+          "description": "Cumulative Paclitaxel dose",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_therapeutic_agents",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "agedecade",
+          "id": "phv00220930.v1.p1",
+          "description": "Age at registration in decades",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "arm",
+          "id": "phv00220929.v1.p1",
+          "description": "Treatment arm",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bili",
+          "id": "phv00220934.v1.p1",
+          "description": "Indicator of baseline bilirubin>1 mg/dl",
+          "concept_id": "ncpi:liver_function_total_bilirubin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnic",
+          "id": "phv00220927.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "prdi",
+          "id": "phv00220936.v1.p1",
+          "description": "Indicator of average relative dose intensity>.85",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00220926.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00220928.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wbc",
+          "id": "phv00220933.v1.p1",
+          "description": "Indicator of baseline wbc<5x10^3",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CALGB40101_Early_Breast_Cancer_Sample_Attributes",
+      "datasetId": "pht004389.v1",
+      "description": "Sample ID, body site where sample was obtained, analyte type, tumor status of sample, histological type, genotyping center of participants with primary breast cancer and involved in the \"Study on longer adjuvant chemotherapy in Women with Early Breast Cancer\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00220940.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00220939.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00220943.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00220942.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00220941.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00220938.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CALGB40101_Early_Breast_Cancer_Subject",
+      "datasetId": "pht004386.v1",
+      "description": "Subject ID, consent group, subject source, source subject ID, and affection status of participants with primary breast cancer and involved in the \"Study on longer adjuvant chemotherapy in Women with Early Breast Cancer\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00220917.v1.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00220914.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00220916.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00220913.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00220915.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CALGB40101_Early_Breast_Cancer_Sample",
+      "datasetId": "pht004387.v1",
+      "description": "Subject ID, sample ID, sample source, source sample ID, and sample use variable associated with participants with primary breast cancer and involved in the \"Study on longer adjuvant chemotherapy in Women with Early Breast Cancer\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00220919.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00220920.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00220922.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00220921.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00220918.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

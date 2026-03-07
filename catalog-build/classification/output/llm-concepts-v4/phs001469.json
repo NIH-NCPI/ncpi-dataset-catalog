@@ -1,0 +1,226 @@
+{
+  "studyId": "phs001469",
+  "studyName": "High Response Rate to Anti PD-1 Therapy in Desmoplastic Melanoma",
+  "tables": [
+    {
+      "tableName": "DM_Anti_PD1_Subject_Phenotypes",
+      "datasetId": "pht007169.v1",
+      "description": "This subject phenotype table includes subject ID, histologic subtype of desmoplastic melanoma, age, sex, TNM staging, prior therapy with ipilimumab, therapy treatment, biopsy setting, overall response by RECIST 1.1 criteria, progression free survival, and overall survival in months.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00328782.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00328784.v1.p1",
+          "description": "Subject age at thearpy start",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "biopsy_setting",
+          "id": "phv00328789.v1.p1",
+          "description": "Stage at which biopsy was taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "histologic_subtype",
+          "id": "phv00328783.v1.p1",
+          "description": "Histologic Subtypeof Desmoplastic melanoma",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "orr",
+          "id": "phv00328790.v1.p1",
+          "description": "Overall Response by RECIST 1.1 criteria",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "os",
+          "id": "phv00328792.v1.p1",
+          "description": "Overall Survival",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pfs",
+          "id": "phv00328791.v1.p1",
+          "description": "Progression Free Survival",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_progression_free_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prior_ipilimumab",
+          "id": "phv00328787.v1.p1",
+          "description": "Prior therapy with ipilimumab",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_immunotherapy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00328785.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "stage",
+          "id": "phv00328786.v1.p1",
+          "description": "TNM Staging at therapy start",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment",
+          "id": "phv00328788.v1.p1",
+          "description": "Therapy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DM_Anti_PD1_Sample_Attributes",
+      "datasetId": "pht007170.v1",
+      "description": "This sample attributes table includes sample ID, analyte type, tumor status, histological type, sample preservation method, and name of the center which conducted sequencing.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00328794.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00328796.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00328795.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRESERVATION_TYPE",
+          "id": "phv00328797.v1.p1",
+          "description": "Sample preservation method",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00328793.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00328798.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DM_Anti_PD1_Subject",
+      "datasetId": "pht007167.v1",
+      "description": "The subject consent data table contains subject ID, consent information, subject source, and subject response to anti-PD1 therapy.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00328778.v1.p1",
+          "description": "Subject response to anti-PD1 therapy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00328776.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00328775.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00328777.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "DM_Anti_PD1_Sample",
+      "datasetId": "pht007168.v1",
+      "description": "The subject sample mapping data table contains a mapping of study subject IDs to sample IDs. dbGaP samples are defined as the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00328780.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00328781.v1.p1",
+          "description": "Sample use. Seq_DNA_SNP_MAF_Ind: Sample(s) were used to generate aggregate mutation annotation file (.maf) with individual SNP genotypes; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00328779.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

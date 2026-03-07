@@ -1,0 +1,138 @@
+{
+  "studyId": "phs000811",
+  "studyName": "Comparison of custom capture for targeted next generation DNA sequencing",
+  "tables": [
+    {
+      "tableName": "Targeted_DNA_NGS_Sample",
+      "datasetId": "pht004399.v1",
+      "description": "Subject - Sample Mapping",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00221081.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00221083.v1.p1",
+          "description": "Vendor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00221082.v1.p1",
+          "description": "Sample use. Seq_DNA_SNP: SNP genotypes derived from sequence data; Seq_DNA_Target: Custom targeted DNA sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00221084.v1.p1",
+          "description": "Sample IDs",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00221080.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Targeted_DNA_NGS_Sample_Attributes",
+      "datasetId": "pht004401.v1",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00221088.v1.p1",
+          "description": "Genetic material analyzed (DNA)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00221090.v1.p1",
+          "description": "Tissue type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00221089.v1.p1",
+          "description": "Tumor: Yes or No",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00221087.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Targeted_DNA_NGS_Subject",
+      "datasetId": "pht004398.v1",
+      "description": "Subject - Consent Information",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00221079.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00221078.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Targeted_DNA_NGS_Subject_Phenotypes",
+      "datasetId": "pht004400.v1",
+      "description": "The dataset provides age-of-onset information for the cancer examined.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00221085.v1.p1",
+          "description": "This study's identification for the sample (subject's sample)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_onset",
+          "id": "phv00221086.v1.p1",
+          "description": "Age of cancer development",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_breast_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

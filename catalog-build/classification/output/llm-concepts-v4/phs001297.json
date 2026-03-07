@@ -1,0 +1,402 @@
+{
+  "studyId": "phs001297",
+  "studyName": "PROP Functional and Lymphocytic Markers of Respiratory Morbidity in Hyperoxic Preemies",
+  "tables": [
+    {
+      "tableName": "PROP_LymphocyticMarkers_Sample_Attributes",
+      "datasetId": "pht006202.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, histological type, postmenstrual age at time of rectal swab, and day of life at time of rectal swab, Z score of body weight at rectal swab, microbiome phase, read count, medications taken in the past week (n=6 variables; corticosteroid, motility, proton pump inhibitors, H2 receptor antagonists, diurectics, and antimicrobials), and nutrients consumed in the past week (n=11 variables; protein, lipid, total enteral calories, total calories, total carbohydrates, total lipids, total proteins, enteral calories, enteral carbohydrates, enteral lipids, and enteral proteins).",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00282781.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANTIMICROBIAL_PW",
+          "id": "phv00282768.v1.p1",
+          "description": "Whether antimicrobials were taken in the past week",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_recent_antibiotic_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00282780.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CAL_RATIO",
+          "id": "phv00282771.v1.p1",
+          "description": "Ratio of total enteral calories in the past week over total calories taken in the past week, per kg body weight",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "CORTICOSTERIOD_PW",
+          "id": "phv00282763.v1.p1",
+          "description": "Whether corticosteroids were taken in the past week",
+          "concept_id": "ncpi:concomitant_medication_specific_drug_names_corticosteroids",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIURETIC_PW",
+          "id": "phv00282767.v1.p1",
+          "description": "Whether a diuretic was taken in the past week",
+          "concept_id": "topmed:concomitant_medication_kidney_urinary_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ENTERAL_CAL_PW",
+          "id": "phv00282776.v1.p1",
+          "description": "Enteral calories in the past week, per kg body weight",
+          "concept_id": "topmed:nutrient_intake",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ENTERAL_CARB_PW",
+          "id": "phv00282777.v1.p1",
+          "description": "Enteral carbs taken in the last week, per kg body weight",
+          "concept_id": "ncpi:nutrient_intake_total_carbohydrates",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ENTERAL_LIPID_PW",
+          "id": "phv00282778.v1.p1",
+          "description": "Enteral lipids taken in the last week, per kg body weight",
+          "concept_id": "ncpi:nutrient_intake_total_fat",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ENTERAL_PROTEIN_PW",
+          "id": "phv00282779.v1.p1",
+          "description": "Enteral proteins taken in the last week, per kg body weight",
+          "concept_id": "ncpi:nutrient_intake_total_protein",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "H2_RECEPTORY_ANTAGONIST_PW",
+          "id": "phv00282766.v1.p1",
+          "description": "Whether H2 receptor antagonists were taken in the past week",
+          "concept_id": "ncpi:concomitant_medication_gastrointestinal_medications_h2_receptor_antagonists",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00282783.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00282782.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTILITY_PW",
+          "id": "phv00282764.v1.p1",
+          "description": "Whether motility agents were taken in the past week",
+          "concept_id": "ncpi:concomitant_medication_gastrointestinal_medications_motility_agents",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PERCENT_LIPID",
+          "id": "phv00282770.v1.p1",
+          "description": "Ratio of total grams of lipid in the past week over total calories taken in the past week, per kg body weight",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "PERCENT_PROTEIN",
+          "id": "phv00282769.v1.p1",
+          "description": "Ratio of total grams of protein in the past week over total calories taken in the past week, per kg body weight",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "PHASE",
+          "id": "phv00282760.v1.p1",
+          "description": "Microbiome phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROTON_PUMP_INHIBITORS_PW",
+          "id": "phv00282765.v1.p1",
+          "description": "Whether proton pump inhibitors were taken in the past week",
+          "concept_id": "ncpi:concomitant_medication_gastrointestinal_medications_proton_pump_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "READ_COUNT",
+          "id": "phv00282761.v1.p1",
+          "description": "RNA read count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RECTAL_CGA",
+          "id": "phv00282758.v1.p1",
+          "description": "Postmenstrual age at time of rectal swab",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RECTAL_DOL",
+          "id": "phv00282759.v1.p1",
+          "description": "Day of life at time of rectal swab",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00282757.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOTAL_CAL_PW",
+          "id": "phv00282772.v1.p1",
+          "description": "Total calories taken in the past week, per kg body weight",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "TOTAL_CARB_PW",
+          "id": "phv00282773.v1.p1",
+          "description": "Total carbs taken in the last week, per kg body weight",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "TOTAL_LIPID_PW",
+          "id": "phv00282774.v1.p1",
+          "description": "Total lipids taken in the last week, per kg body weight",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "TOTAL_PROTEIN_PW",
+          "id": "phv00282775.v1.p1",
+          "description": "Total proteins taken in the last week, per kg body weight",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "WEIGHT_Z_SCORE",
+          "id": "phv00282762.v1.p1",
+          "description": "Z score of body weight at time of rectal sample",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PROP_LymphocyticMarkers_Subject_Phenotypes",
+      "datasetId": "pht006201.v1",
+      "description": "This subject phenotype data table includes the subject's sex, race, ethnicity, cohort assignment based on full term or pre-term at gestational birth, gestational age, birth weight and mode, day of life and diagnosis of NEC.",
+      "variables": [
+        {
+          "name": "Babies_with_NEC_Dx",
+          "id": "phv00282755.v1.p1",
+          "description": "Confirmed diagnosis of necrotizing enterocolitis",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_necrotizing_enterocolitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BirthMode",
+          "id": "phv00282754.v1.p1",
+          "description": "Mode of Delivery",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_delivery_method",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BirthWeight",
+          "id": "phv00282750.v1.p1",
+          "description": "Birth Weight",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_birth_weight",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Cohort",
+          "id": "phv00282748.v1.p1",
+          "description": "Cohort assignment FullTerm  and PreTerm based upon gestational age at birth",
+          "concept_id": "ncpi:subcohort_study_cohort_assignment_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00282753.v1.p1",
+          "description": "Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GestationalAge",
+          "id": "phv00282749.v1.p1",
+          "description": "Gestational Age at Birth",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NEC_Dx_DOL",
+          "id": "phv00282756.v1.p1",
+          "description": "Day of life at Diagnosis of necrotizing enterocolitis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00282752.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00282747.v1.p1",
+          "description": "Unique Identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00282751.v1.p1",
+          "description": "Subject sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PROP_LymphocyticMarkers_Sample",
+      "datasetId": "pht006200.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00282743.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00282744.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00282746.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00282745.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00282742.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PROP_LymphocyticMarkers_Subject",
+      "datasetId": "pht006199.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00282739.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00282741.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00282738.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00282740.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

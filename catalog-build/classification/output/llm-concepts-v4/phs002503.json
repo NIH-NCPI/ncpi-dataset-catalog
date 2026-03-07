@@ -1,0 +1,314 @@
+{
+  "studyId": "phs002503",
+  "studyName": "GWA Study of Oral Cavity, Pharynx and Larynx Cancers in European, and North and South American Populations - CIDR",
+  "tables": [
+    {
+      "tableName": "CIDR_HNC_Ancestry_Subject_Phenotypes",
+      "datasetId": "pht013152.v1",
+      "description": "This subject phenotypes data table contains subject IDs, case control status of the subject for Head and Neck cancer (HNC), study design, country and region of residence, ages at enrollment and disease onset, gender, ICD code (10th version), site when icd code missing, tumor size, lymph nodes invasion, presence of metastasis, ever smoke or drink alcohol, smoking and drink status at interview, age start smoking, time since stop smoking or drinking, smoking and drinking intensity, and human papillomavirus (HPV) status.",
+      "variables": [
+        {
+          "name": "HPV",
+          "id": "phv00527907.v1.p1",
+          "description": "HPV status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_hpv_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00527885.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "affection_status",
+          "id": "phv00527886.v1.p1",
+          "description": "Case control status of the subject for Head and Neck cancer (HNC)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00527890.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_onset",
+          "id": "phv00527891.v1.p1",
+          "description": "Disease onset age",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_breast_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "country",
+          "id": "phv00527888.v1.p1",
+          "description": "Country of residence",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "design",
+          "id": "phv00527887.v1.p1",
+          "description": "Design of the study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "drink_ever",
+          "id": "phv00527903.v1.p1",
+          "description": "Ever drink alcohol",
+          "concept_id": "phenx:alcohol_lifetime_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "drink_intensity",
+          "id": "phv00527906.v1.p1",
+          "description": "Drinking intensity",
+          "concept_id": "ncpi:alcohol_30day_quantity_and_frequency_alcohol_use_level",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "drink_status",
+          "id": "phv00527904.v1.p1",
+          "description": "Drinking status at interview",
+          "concept_id": "phenx:alcohol_lifetime_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "drink_tss",
+          "id": "phv00527905.v1.p1",
+          "description": "Time since stop drinking",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00527892.v1.p1",
+          "description": "Subject gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "icdcode",
+          "id": "phv00527893.v1.p1",
+          "description": "ICD code (10th version)",
+          "concept_id": "topmed:cancer_diagnosis_cancer_registry_codes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "packyears",
+          "id": "phv00527902.v1.p1",
+          "description": "Smoking intensity",
+          "concept_id": "phenx:protocol_2_tobacco_30day_quantity_and_frequency_adult_protocol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "region",
+          "id": "phv00527889.v1.p1",
+          "description": "Region of residence",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "site",
+          "id": "phv00527894.v1.p1",
+          "description": "When icdcode missing",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smok_agestart",
+          "id": "phv00527900.v1.p1",
+          "description": "Age start smoking",
+          "concept_id": "phenx:protocol_2_tobacco_age_of_initiation_of_use_adult_protocol",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smok_ever",
+          "id": "phv00527898.v1.p1",
+          "description": "Ever smoker",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smok_status",
+          "id": "phv00527899.v1.p1",
+          "description": "Smoking status at interview",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "smok_tss",
+          "id": "phv00527901.v1.p1",
+          "description": "Time since stop smoking",
+          "concept_id": "phenx:protocol_2_tobacco_age_of_offset_of_use_adult_protocol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "tnm_m",
+          "id": "phv00527897.v1.p1",
+          "description": "Presence of metastasis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_m_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tnm_n",
+          "id": "phv00527896.v1.p1",
+          "description": "Lymph nodes invasion",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tnm_t",
+          "id": "phv00527895.v1.p1",
+          "description": "Tumor size category",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_HNC_Ancestry_Subject",
+      "datasetId": "pht013150.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, biological sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00527879.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00527880.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00527882.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00527878.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00527881.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_HNC_Ancestry_Sample_Attributes",
+      "datasetId": "pht013153.v1",
+      "description": "This sample attributes table contains sample IDs, body site where sample was collected, histological type, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00527911.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00527909.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00527910.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00527912.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00527908.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_HNC_Ancestry_Sample",
+      "datasetId": "pht013151.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00527884.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00527883.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

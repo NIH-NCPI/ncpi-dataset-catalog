@@ -1,0 +1,218 @@
+{
+  "studyId": "phs001389",
+  "studyName": "Gene Expression and Histone Modification Profiles in GBM Tumors",
+  "tables": [
+    {
+      "tableName": "GBM_Tumors_Sample_Attributes",
+      "datasetId": "pht006604.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, histological type of sample, tumor status of sample, sequence center, and tumor grade of participants with primary glioma and involved in the \"University of Texas at Austin (UTA) Histone Modification and Gene Expression Profiling in 9 Primary Glioblastoma Multiform, 2 Anaplastic Astrocytomas and Two Meningiomas\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00304810.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00304809.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00304812.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00304811.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00304808.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00304814.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_GRADE",
+          "id": "phv00304813.v1.p1",
+          "description": "Tumor grade of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GBM_Tumors_Subject_Phenotypes",
+      "datasetId": "pht006603.v1",
+      "description": "Subject ID, sex, age, tumor grade, tumor pathology, and subtype of tumor of participants with primary glioma and involved in the \"University of Texas at Austin (UTA) Histone Modification and Gene Expression Profiling in 9 Primary Glioblastoma Multiform, 2 Anaplastic Astrocytomas and Two Meningiomas\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00304802.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00304806.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "grade",
+          "id": "phv00304804.v1.p1",
+          "description": "Tumor grade",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pathology",
+          "id": "phv00304803.v1.p1",
+          "description": "Tumor pathology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00304805.v1.p1",
+          "description": "Subject sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subtype",
+          "id": "phv00304807.v1.p1",
+          "description": "Molecular subtype of lesion",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GBM_Tumors_Subject",
+      "datasetId": "pht006601.v1",
+      "description": "Subject ID, subject source, source subject ID, consent group, and affection status of participants with primary glioma and involved in the \"University of Texas at Austin (UTA) Histone Modification and Gene Expression Profiling in 9 Primary Glioblastoma Multiform, 2 Anaplastic Astrocytomas and Two Meningiomas\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00304796.v1.p1",
+          "description": "Case control status of the subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00304793.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00304795.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00304792.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00304794.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GBM_Tumors_Sample",
+      "datasetId": "pht006602.v1",
+      "description": "Subject ID, sample ID, sample source, source sample ID, and sample use of participants with primary glioma and involved in the \"University of Texas at Austin (UTA) Histone Modification and Gene Expression Profiling in 9 Primary Glioblastoma Multiform, 2 Anaplastic Astrocytomas and Two Meningiomas\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00304798.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00304799.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00304801.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00304800.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00304797.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "studyId": "phs001050",
+  "studyName": "Breast Cancer Genome Guided Therapy Study (BEAUTY)",
+  "tables": [
+    {
+      "tableName": "BEAUTY_Sample_Attributes",
+      "datasetId": "pht005234.v1",
+      "description": "This sample attributes table contains de-identified sample ID, body site where sample was collected, analyte type, tumor status, histologic type, primary metastatic tumor, primary tumor location, tumor stage, grade, treatment, name of the center which conducted sequencing, portion of sequencing lane, and comments.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00258585.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00258584.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COMMENTS",
+          "id": "phv00258595.v1.p1",
+          "description": "Description of sequencing preparation or alignment exceptions",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGIC_TYPE",
+          "id": "phv00258587.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00258586.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LANE_PORTION",
+          "id": "phv00258594.v1.p1",
+          "description": "Portion of sequencing lane taken by the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00258588.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00258589.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258583.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00258593.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_GRADE",
+          "id": "phv00258591.v1.p1",
+          "description": "Tumor grade of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00258590.v1.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00258592.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BEAUTY_Subject_Phenotypes",
+      "datasetId": "pht005233.v1",
+      "description": "This subject phenotype table contains subject ID, pathological complete response in breast and nodes, clinical molecular tumor type, tumor stage, nodal stage, lab estimate of tumor percentage at baseline, Ki67 sensitivity, estrogen and progesterone receptor level, HER2 results by IHC or Fish, and patient age.",
+      "variables": [
+        {
+          "name": "Age.group",
+          "id": "phv00258582.v1.p1",
+          "description": "Patient age at date on study, marked in 10 year group",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Breast.Nodal.CR.all",
+          "id": "phv00258572.v1.p1",
+          "description": "Pathological complete response in breast and nodes (path-CR) after 24 weeks of chemo-therapy or the patient's regimen.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_pathological_response",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Clinical.Molecular.Subtype",
+          "id": "phv00258573.v1.p1",
+          "description": "Clinical molecular tumor type, based on baseline Ki67 results, estrogen receptor level and HER2 status (by IHC or FISH)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_molecular_subtype",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Estrogen.receptor",
+          "id": "phv00258578.v1.p1",
+          "description": "Estrogen Receptor level",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HER2.FISH",
+          "id": "phv00258581.v1.p1",
+          "description": "HER2 results by Fish",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_her2_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HER2.IHC",
+          "id": "phv00258580.v1.p1",
+          "description": "HER2 results by IHC",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_her2_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ki67Sensitivity",
+          "id": "phv00258577.v1.p1",
+          "description": "Was tumor sensitive to chemo decreasing significantly by Ki67 measure?",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_ki67_proliferation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "N.stage",
+          "id": "phv00258575.v1.p1",
+          "description": "Nodal stage, based on if tumor spread to lymph nodes by breast and, if so, how many nodes are affected",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Percentage.tumor.cells.baseline",
+          "id": "phv00258576.v1.p1",
+          "description": "Lab estimate of tumor percentage at baseline",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Progesterone.receptor",
+          "id": "phv00258579.v1.p1",
+          "description": "Progesterone Receptor level",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_progesterone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00258571.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T.stage",
+          "id": "phv00258574.v1.p1",
+          "description": "Tumor stage, based on size and spread to skin or chest wall under breast",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BEAUTY_Sample",
+      "datasetId": "pht005232.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258567.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00258568.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00258570.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00258569.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258566.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BEAUTY_Subject",
+      "datasetId": "pht005231.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and case control status of the subject. All subjects are patients with Stage I-III breast cancer.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00258565.v1.p1",
+          "description": "Case control status of the subject. All subjects are patients with Stage I-III breast cancer.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00258564.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00258563.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

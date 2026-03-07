@@ -1,0 +1,178 @@
+{
+  "studyId": "phs001016",
+  "studyName": "Fixed Single Cell Study (Radial Glia Cells)",
+  "tables": [
+    {
+      "tableName": "Radial_Glial_Diversity_Sample_Attributes",
+      "datasetId": "pht005082.v1",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00253579.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00253578.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Phenotype_EOMES",
+          "id": "phv00253582.v1.p1",
+          "description": "EOMES phenotype of sorted cell",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Phenotype_PAX6",
+          "id": "phv00253580.v1.p1",
+          "description": "PAX6 phenotype of sorted cell",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Phenotype_SOX2",
+          "id": "phv00253581.v1.p1",
+          "description": "SOX2 phenotype of sorted cell",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253577.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00253583.v1.p1",
+          "description": "Location of sequencing center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Radial_Glial_Diversity_Subject",
+      "datasetId": "pht005079.v1",
+      "description": "Subject - Consent Information",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00253567.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00253569.v1.p1",
+          "description": "Subject ID used by the Source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253566.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00253568.v1.p1",
+          "description": "Source where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Radial_Glial_Diversity_Subject_Phenotypes",
+      "datasetId": "pht005081.v1",
+      "description": "The dataset includes sociodemographic (i.e. estimated fetal age in days/sex/post-mortem interval in hours) data not shown on the public web pages (because there are fewer than n=5 subjects), but available to authorized access users of the data.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253573.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "days_post_conception",
+          "id": "phv00253574.v1.p1",
+          "description": "Estimated fetal age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "post_mortem_index",
+          "id": "phv00253575.v1.p1",
+          "description": "Post-mortem index",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00253576.v1.p1",
+          "description": "Gender of donor",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Radial_Glial_Diversity_Sample",
+      "datasetId": "pht005080.v1",
+      "description": "Subject - Sample Mapping - Sample Use Information",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00253571.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00253572.v1.p1",
+          "description": "Sample use. Seq_RNA: Whole transcriptome sequencing; Seq_RNA_Expression: Expression levels derived from RNA sequences",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253570.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

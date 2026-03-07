@@ -1,0 +1,170 @@
+{
+  "studyId": "phs003922",
+  "studyName": "Atezolizumab Plus Personalized Neoantigen Vaccination in Patients with Urothelial Cancer: a Phase 1 Trial",
+  "tables": [
+    {
+      "tableName": "Atezolizumab_PGV001_UC_Sample_Attributes",
+      "datasetId": "pht015543.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin, analyte type, tumor status, status as primary tumor or metastasis, primary tumor location, and pathological stage for the adjuvant cohort.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00556765.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00556764.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00556766.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATHOLOGIC_STAGE_ADJUVANT",
+          "id": "phv00556769.v1.p1",
+          "description": "Pathological stage for adjuvant cohort",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00556767.v1.p1",
+          "description": "Primary tumor or metastasis if applicable",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00556768.v1.p1",
+          "description": "Primary tumor location if applicable",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00556763.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Atezolizumab_PGV001_UC_Subject_Phenotypes",
+      "datasetId": "pht015542.v1",
+      "description": "This subject phenotypes data table reports each subject's race, age, response to adjuvant, and best therapeutic response.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00556760.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BEST_THERAPEUTIC_RESPONSE_METASTATIC",
+          "id": "phv00556762.v1.p1",
+          "description": "Response to therapy metastatic cohort",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00556759.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00556758.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "THERAPEUTIC_RESPONSE_ADJUVANT",
+          "id": "phv00556761.v1.p1",
+          "description": "Response to therapy adjuvant cohort",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Atezolizumab_PGV001_UC_Subject",
+      "datasetId": "pht015540.v1",
+      "description": "This subject consent data table reports each subject's subject ID, consent, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00556754.v1.p1",
+          "description": "Registered consent groups (Data Use Limitations (DUL)) as determined by submitters' Institutional Review Boards (IRB) or equivalent body.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00556755.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00556753.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Atezolizumab_PGV001_UC_Sample",
+      "datasetId": "pht015541.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to individual sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00556757.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00556756.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

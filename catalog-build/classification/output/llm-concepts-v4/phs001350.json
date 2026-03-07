@@ -1,0 +1,170 @@
+{
+  "studyId": "phs001350",
+  "studyName": "Pancreatitis after Treatment for Acute Lymphoblastic Leukemia (SJIRB XPD04-123 and XPD05-078)",
+  "tables": [
+    {
+      "tableName": "ALL_Pancreatitis_Subject",
+      "datasetId": "pht009877.v1",
+      "description": "Subject ID, consent group, subject source, source subject ID, and sex of participants with or without pancreatitis and involved in the \"Pancreatitis after Treatment for Acute Lymphoblastic Leukemia (SJIRB XPD04-123 and XPD05-078)\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00426898.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00496056.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00426900.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426897.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00426899.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ALL_Pancreatitis_Subject_Phenotypes",
+      "datasetId": "pht009879.v1",
+      "description": "Subject ID, St Jude TOTALXV protocols, with or without pancreatitis, gender, and genotype race of participants with or without pancreatitis and involved in the \"Pancreatitis after Treatment for Acute Lymphoblastic Leukemia (SJIRB XPD04-123 and XPD05-078)\" project.",
+      "variables": [
+        {
+          "name": "Clinical_Protocol",
+          "id": "phv00426907.v1.p1",
+          "description": "St Jude TOTALXV protocols; Children's Oncology Group P9904, P9905, P9906, AALL0331 and AALL0232 protocols.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gender",
+          "id": "phv00426909.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GenotypeRace",
+          "id": "phv00426910.v1.p1",
+          "description": "Race genetically determined using STRUCTURE with genome-wide mapping array",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Pancreatitis",
+          "id": "phv00426908.v1.p1",
+          "description": "1 indicates pancreatitis, 0 not so",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426906.v1.p1",
+          "description": "De-identified subject identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ALL_Pancreatitis_Sample_Attributes",
+      "datasetId": "pht009880.v1",
+      "description": "Sample ID, body site where sample was obtained, analyte type, tumor status of sample, and histological type of sample obtained from participants with or without pancreatitis and involved in the \"Pancreatitis after Treatment for Acute Lymphoblastic Leukemia (SJIRB XPD04-123 and XPD05-078)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00426913.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00426912.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00426915.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00426914.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00426911.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ALL_Pancreatitis_Sample",
+      "datasetId": "pht009878.v1",
+      "description": "Subject ID and sample ID of participants with or without pancreatitis and involved in the \"Pancreatitis after Treatment for Acute Lymphoblastic Leukemia (SJIRB XPD04-123 and XPD05-078)\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00426902.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00426901.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

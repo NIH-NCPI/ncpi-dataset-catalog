@@ -1,0 +1,114 @@
+{
+  "studyId": "phs000936",
+  "studyName": "NHLBI GO-ESP: Early-Onset Myocardial Infarction Exome Chip (Broad EOMI)",
+  "tables": [
+    {
+      "tableName": "GOESP_Broad_EOMI_ExomeChip_Subject",
+      "datasetId": "pht004889.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, and affection status. Please see coments in the AFFECTION_STATUS variable for specific inclusion/exclusion criteria.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00252311.v1.p1",
+          "description": "Case control status of the subject. Please see comments for specific inclusion/exclusion criteria.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00252312.v1.p1",
+          "description": "Consent status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00252310.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GOESP_Broad_EOMI_ExomeChip_Sample",
+      "datasetId": "pht004890.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00252314.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00252315.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00252313.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GOESP_Broad_EOMI_ExomeChip_Subject_Phenotypes",
+      "datasetId": "pht004891.v1",
+      "description": "This subject phenotype table includes sex of the subject.",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00252316.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00252317.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GOESP_Broad_EOMI_ExomeChip_Sample_Attributes",
+      "datasetId": "pht004892.v1",
+      "description": "This sample attributes table includes analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00252319.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00252318.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "studyId": "phs003385",
+  "studyName": "METSIM Subcutaneous Adipose Needle Biopsy RNA-Seq",
+  "tables": [
+    {
+      "tableName": "METSIM_SubQAdiposeNeedle_RNASeq_Sample_Attributes",
+      "datasetId": "pht014945.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, tumor status, histological type, biopsy type, multiple samples from the same subject with METSIM needle biopsies or with FUSION adipose, if genotype available in METSIM parent study, if samples are included in PMID:37647564, PMID:31564431, and/or PMID:34995504 and AdipoExpress publication, RNA integrity number, median of deletions across reads calculated using RSeQC, median of insertions across reads and mean of read 1 and read 2 calculated using RSeQC, and RNA-sequencing batch.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00543180.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BIOPSY_TYPE",
+          "id": "phv00543183.v1.p1",
+          "description": "Type of biopsy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00543179.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": "phenx:current_address",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "DELETION_SIZE",
+          "id": "phv00543190.v1.p1",
+          "description": "Median of deletions across reads calculated using RSeQC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HAS_GENOTYPE",
+          "id": "phv00543186.v1.p1",
+          "description": "Has genotype available in METSIM parent study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00543182.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INSERTION_SIZE_MEAN_R1R2",
+          "id": "phv00543191.v1.p1",
+          "description": "Median of insertions across reads and mean of read 1 and read 2 calculated using RSeQC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_PUBLISHED_N426",
+          "id": "phv00543188.v1.p1",
+          "description": "The sample is included in PMID: 34995504 (Brotman and Raulerson et al., 2022, AJHG) and AdipoExpress publication",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_PUBLISHED_N434",
+          "id": "phv00543187.v1.p1",
+          "description": "The sample is included in PMID: 37647564 (Brotman et al., 2023, Diabetes) and PMID: 31564431 (Raulerson et al., 2019)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_SHARED_FUSION",
+          "id": "phv00543185.v1.p1",
+          "description": "Multiple samples from the same subject with FUSION adipose",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_SHARED_METSIM_SURGICAL",
+          "id": "phv00543184.v1.p1",
+          "description": "Multiple samples from the same subject with METSIM needle biopsies",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00543181.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RIN",
+          "id": "phv00543189.v1.p1",
+          "description": "RNA integrity number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00543178.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_BATCH",
+          "id": "phv00543192.v1.p1",
+          "description": "RNA-sequencing batch",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "METSIM_SubQAdiposeNeedle_RNASeq_Subject_Phenotypes",
+      "datasetId": "pht014943.v1",
+      "description": "This subject phenotype table contains subject ID, race, and estimated cell-type proportions from SCDC tree-based approach (n= 11 variables; Adipocyte, Endothelial, Fibroblast, Mast, Preadipocyte, Perivascular, Macrophage, T_naive, T_NK, B, and Neutrophil).",
+      "variables": [
+        {
+          "name": "Adipocyte",
+          "id": "phv00543165.v1.p1",
+          "description": "Estimated cell-type proportions from SCDC tree-based approach",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "B",
+          "id": "phv00543174.v1.p1",
+          "description": "Estimated cell-type proportions from SCDC tree-based approach",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Endothelial",
+          "id": "phv00543166.v1.p1",
+          "description": "Estimated cell-type proportions from SCDC tree-based approach",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Fibroblast",
+          "id": "phv00543167.v1.p1",
+          "description": "Estimated cell-type proportions from SCDC tree-based approach",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Macrophage",
+          "id": "phv00543171.v1.p1",
+          "description": "Estimated cell-type proportions from SCDC tree-based approach",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Mast",
+          "id": "phv00543168.v1.p1",
+          "description": "Estimated cell-type proportions from SCDC tree-based approach",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Neutrophil",
+          "id": "phv00543175.v1.p1",
+          "description": "Estimated cell-type proportions from SCDC tree-based approach",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Perivascular",
+          "id": "phv00543170.v1.p1",
+          "description": "Estimated cell-type proportions from SCDC tree-based approach",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Preadipocyte",
+          "id": "phv00543169.v1.p1",
+          "description": "Estimated cell-type proportions from SCDC tree-based approach",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00543164.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00543163.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T_NK",
+          "id": "phv00543173.v1.p1",
+          "description": "Estimated cell-type proportions from SCDC tree-based approach",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T_naive",
+          "id": "phv00543172.v1.p1",
+          "description": "Estimated cell-type proportions from SCDC tree-based approach",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "METSIM_SubQAdiposeNeedle_RNASeq_GEO",
+      "datasetId": "pht014944.v1",
+      "description": "This data table contains a mapping of study sample IDs and GEO accession IDs.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00543177.v1.p1",
+          "description": "GEO accession ID (GSM#)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00543176.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

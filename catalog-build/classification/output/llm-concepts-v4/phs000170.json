@@ -1,0 +1,568 @@
+{
+  "studyId": "phs000170",
+  "studyName": "GWAS on Cataract and HDL in the PMRP",
+  "tables": [
+    {
+      "tableName": "Marshfield_Data_Phenotype",
+      "datasetId": "pht000737.v1",
+      "description": "This table contains variables describing cataract and lipid status of case or control subjects whose medical records were taken from the Marshfield Clinic EMR database (case-control status n=1 variable, cataract related variables n=3; lipid values related variables n=18).  In addition, information about basic medication use (e.g. statin and/or steroid use, n=4 variables),  medical history, (e.g. occurrence of diabetes, hypo- or hyperthyroidism and/or cancer, n=6 variables), physical measurements (n=2 variables), alcohol consumption and smoking status (n=2 variables), and general sociodemographics (including relatedness to other participating subjects, n=7 variables) is included.",
+      "variables": [
+        {
+          "name": "Adjusted_HDL_Cholesterol_Measurement",
+          "id": "phv00073590.v1.p1",
+          "description": "Adjusted baseline HDL (age 59, BMI 29, no estrogen)",
+          "concept_id": "ncpi:hdl_hdl_adjusted_measurements",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Adjusted_LDL_Cholesterol_Measurement",
+          "id": "phv00073594.v1.p1",
+          "description": "Adjusted baseline LDL (age 59, BMI 29, no estrogen)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_adjusted",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Adjusted_Total_Cholesterol_Measurement",
+          "id": "phv00073598.v1.p1",
+          "description": "Adjusted baseline total cholesterol (age 59, BMI 29, no estrogen)",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Adjusted_Triglycerides",
+          "id": "phv00073602.v1.p1",
+          "description": "Adjusted baseline triglycerides (age 59, BMI 29, no estrogen)",
+          "concept_id": "ncpi:triglycerides_adjusted_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_At_Enrollment",
+          "id": "phv00073573.v1.p1",
+          "description": "Age of participant at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_Diabetes_Mellitus_Diagnosis",
+          "id": "phv00073575.v1.p1",
+          "description": "Age at the earliest indication of diabetes",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age_First_Cancer",
+          "id": "phv00073585.v1.p1",
+          "description": "Age at first cancer indication",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age_First_Cataract_Diagnosis",
+          "id": "phv00073569.v1.p1",
+          "description": "Age at first diagnosis of cataract",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age_First_Cataract_Surgery",
+          "id": "phv00073570.v1.p1",
+          "description": "Age at first cataract surgery",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age_First_Hypo_Hyperthyroidism",
+          "id": "phv00073583.v1.p1",
+          "description": "Age at first hypo- or hyperthyroidism indication?",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age_First_Statin",
+          "id": "phv00073581.v1.p1",
+          "description": "Age at first statin use indication",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age_First_Steroid",
+          "id": "phv00073579.v1.p1",
+          "description": "Age at first steroid use indication",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age_Last_Eye_Exam",
+          "id": "phv00073571.v1.p1",
+          "description": "Age at most recent CPT recorded eye exam",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age_Median_HDL_Cholesterol_Measurement",
+          "id": "phv00073587.v1.p1",
+          "description": "Median age at HDL results",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_Median_HDL_Cholesterol_Measurement",
+          "id": "phv00073588.v1.p1",
+          "description": "Median BMI at HDL results",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Cancer_Indicator",
+          "id": "phv00073584.v1.p1",
+          "description": "Any cancer (omitting minor skin cancer)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_general_cancer_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Counts_HDL_Cholesterol_Measurement",
+          "id": "phv00073591.v1.p1",
+          "description": "Number of baseline HDL results (no estrogen)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Counts_LDL_Cholesterol_Measurement",
+          "id": "phv00073595.v1.p1",
+          "description": "Number of baseline LDL results (no estrogen)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Counts_Total_Cholesterol_Measurement",
+          "id": "phv00073599.v1.p1",
+          "description": "Number of baseline total cholesterol results (no estrogen)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Counts_Triglycerides",
+          "id": "phv00073603.v1.p1",
+          "description": "Number of baseline triglyceride results (no estrogen)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes_Mellitus",
+          "id": "phv00073574.v1.p1",
+          "description": "Diabetes status",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Median_HDL_Cholesterol_Measurement",
+          "id": "phv00073589.v1.p1",
+          "description": "Median baseline HDL cholesterol (no estrogen)",
+          "concept_id": "ncpi:hdl_hdl_adjusted_measurements",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Median_LDL_Cholesterol_Measurement",
+          "id": "phv00073593.v1.p1",
+          "description": "Median baseline LDL cholesterol (no estrogen)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_adjusted",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Median_Total_Cholesterol_Measurement",
+          "id": "phv00073597.v1.p1",
+          "description": "Median baseline total cholesterol (no estrogen)",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Median_Triglycerides",
+          "id": "phv00073601.v1.p1",
+          "description": "Median baseline triglycerides (no estrogen)",
+          "concept_id": "ncpi:triglycerides_adjusted_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Relative_In_Cohort",
+          "id": "phv00077307.v1.p1",
+          "description": "Indicates if this individual is related to at least one other individual in the cohort.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00071868.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking_Status",
+          "id": "phv00073572.v1.p1",
+          "description": "Smoking status at enrollment",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Standard_Error_HDL_Cholesterol_Measurement",
+          "id": "phv00073592.v1.p1",
+          "description": "Estimated standard error for baseline HDL",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Standard_Error_LDL_Cholesterol_Measurement",
+          "id": "phv00073596.v1.p1",
+          "description": "Estimated standard error for baseline LDL",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Standard_Error_Total_Cholesterol_Measurement",
+          "id": "phv00073600.v1.p1",
+          "description": "Estimated standard error for baseline total cholesterol",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Standard_Error_Triglycerides",
+          "id": "phv00073604.v1.p1",
+          "description": "Estimated standard error for baseline triglycerides",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Statin_Use_IND-2",
+          "id": "phv00073580.v1.p1",
+          "description": "Ever used statins?",
+          "concept_id": "ncpi:lipid_lowering_medication_statins",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Validation_Status",
+          "id": "phv00088194.v1.p1",
+          "description": "Indicates if manual chart abstraction was performed, and how it compares to the electronic algorithm.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alcohol_use_past_month",
+          "id": "phv00073586.v1.p1",
+          "description": "During the past month, have you had at least one drink of any alcoholic beverage, such as beer, wine, wine coolers, or liquor?",
+          "concept_id": "ncpi:ffq_alcoholic_beverages_alcohol_use_recent",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "case_control",
+          "id": "phv00071869.v1.p1",
+          "description": "Case or control?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "decade_birth",
+          "id": "phv00073568.v1.p1",
+          "description": "Decade of birth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00076432.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "height",
+          "id": "phv00073577.v1.p1",
+          "description": "Subject's height at enrollment",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hypothyroidism_or_hyperthyroidism",
+          "id": "phv00073582.v1.p1",
+          "description": "Subject has hypo-or hyperthyroidism?",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_hypothyroidism_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00076431.v1.p1",
+          "description": "Race of partipant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00071870.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "steroid_use",
+          "id": "phv00073578.v1.p1",
+          "description": "Suspicion of oral/adrenal steroid use?",
+          "concept_id": "ncpi:concomitant_medication_specific_drug_names_corticosteroids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "weight",
+          "id": "phv00073576.v1.p1",
+          "description": "Subject's weight at enrollment",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Marshfield_Pedigree",
+      "datasetId": "pht000981.v1",
+      "description": "eMERGE-Marshfield-Cataract - Pedigree Information",
+      "variables": [
+        {
+          "name": "FAMID",
+          "id": "phv00077308.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00077311.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00077310.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00077312.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00077309.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TWINID",
+          "id": "phv00077313.v1.p1",
+          "description": "Identifier for each group of twins",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Marshfield_Subject",
+      "datasetId": "pht000738.v2",
+      "description": "eMERGE-Marshfield-Cataract - Subject - Consent Information",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00071875.v2.p1",
+          "description": "Final affection status derived from electronic algorithm, but may have been superseded by the result of manual validation (if done).",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00071872.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJID",
+          "id": "phv00071874.v2.p1",
+          "description": "Subject ID used at the subject source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00071871.v2.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJ_SOURCE",
+          "id": "phv00071873.v2.p1",
+          "description": "Repository source of the subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Marshfield_Sample",
+      "datasetId": "pht000739.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00071877.v1.p1",
+          "description": "Genetic Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00181341.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00071878.v1.p1",
+          "description": "Repository source of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00071879.v1.p1",
+          "description": "Sample ID used at the sample source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00071876.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Marshfield_Data_BMI",
+      "datasetId": "pht000807.v1",
+      "description": "eMERGE-Marshfield-Cataract - Body Mass Index Information",
+      "variables": [
+        {
+          "name": "Age_Observation",
+          "id": "phv00073608.v1.p1",
+          "description": "Age when clinical event was recorded in record",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Body_Mass_Index",
+          "id": "phv00073607.v1.p1",
+          "description": "Imputed BMI based on +/- 6 months time period",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00073605.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Marshfield_Sample_Attributes",
+      "datasetId": "pht003533.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00195871.v1.p1",
+          "description": "Analyte type used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00195870.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

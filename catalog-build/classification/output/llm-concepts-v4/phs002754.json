@@ -1,0 +1,194 @@
+{
+  "studyId": "phs002754",
+  "studyName": "PROGRESS/ELEMENT DNA Methylation Study",
+  "tables": [
+    {
+      "tableName": "PROGRESS_ELEMENT_Sample_Attributes",
+      "datasetId": "pht012067.v1",
+      "description": "This sample attributes table includes collection timepoint for 850K microarray, whether sample is from a child or mother, well position and plate number on 96-well plates for 850K microarray, whether sample is primary or replicate, analyte type, histological type, and tumor status.",
+      "variables": [
+        {
+          "name": "850_REPLICATE",
+          "id": "phv00498207.v1.p1",
+          "description": "Primary or replicate sample for 850K",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00498208.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ARRAY_TYPE",
+          "id": "phv00498464.v1.p1",
+          "description": "Microarray used to generate data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00498209.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_GROUP",
+          "id": "phv00498202.v1.p1",
+          "description": "Child or mother group of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00498200.v1.p1",
+          "description": "Sample identifier; SENTRIX_ID - barcode for sample position on 850K",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SENTRIX_PLATE",
+          "id": "phv00498206.v1.p1",
+          "description": "96-well plate number for each sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SENTRIX_WELL",
+          "id": "phv00498205.v1.p1",
+          "description": "Well position of sample on 96-well plate for 850K microarray",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE",
+          "id": "phv00498201.v1.p1",
+          "description": "Timepoint of sample collection for 850K microarray",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR",
+          "id": "phv00498210.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PROGRESS_ELEMENT_Pedigree",
+      "datasetId": "pht012065.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and sex of subjects.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00498193.v1.p1",
+          "description": "Family identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00498195.v1.p1",
+          "description": "Subject identifier for paternal relationship",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00498196.v1.p1",
+          "description": "Subject identifier for maternal relationship",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00498197.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498194.v1.p1",
+          "description": "Subject identifier for child",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PROGRESS_ELEMENT_Subject",
+      "datasetId": "pht012064.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00498191.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00498192.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498190.v1.p1",
+          "description": "Randomized Subject ID for 850K microarray",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PROGRESS_ELEMENT_Sample",
+      "datasetId": "pht012066.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00498199.v1.p1",
+          "description": "Sample identifier; SENTRIX_ID - barcode for specific sample position on 850K array",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498198.v1.p1",
+          "description": "Subject identifiers",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

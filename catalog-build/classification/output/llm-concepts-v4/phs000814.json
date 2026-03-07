@@ -1,0 +1,114 @@
+{
+  "studyId": "phs000814",
+  "studyName": "MIGen_ExS: Italian Atherosclerosis Thrombosis and Vascular Biology",
+  "tables": [
+    {
+      "tableName": "MIGen_Exome_Italian_ATVB_Subject",
+      "datasetId": "pht004581.v1",
+      "description": "This subject consent file contains subject IDs, consent group information, and affection status. The cases were patients who were hospitalised for a first MI before the age of 45 years and underwent coronary angiography. The controls were healthy subjects without a history of thromboembolic disease who were unrelated to the patients, but individually matched with them by age, gender and geographical origin.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00225052.v1.p1",
+          "description": "Case control status of the subject. The cases were patients who were hospitalised for a first MI before the age of 45 years and underwent coronary angiography. Acute MI was defined as resting chest pain lasting more than 30 minutes, accompanied by persistent electrocardiographic changes, and confirmed by an increase in total creatine kinase or in the MB fraction to more than twice the upper normal limits. The controls were healthy subjects without a history of thromboembolic disease who were unrelated to the patients, but individually matched with them by age, gender and geographical origin.",
+          "concept_id": "ncpi:mi_incident_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00225053.v1.p1",
+          "description": "Consent status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00225051.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MIGen_Exome_Italian_ATVB_Sample",
+      "datasetId": "pht004582.v1",
+      "description": "This subject sample mapping file contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00225055.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00225056.v1.p1",
+          "description": "Type of data submitted. Seq_DNA_SNP_CNV: SNP and CNV genotypes derived from sequence data; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00225054.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MIGen_Exome_Italian_ATVB_Subject_Phenotypes",
+      "datasetId": "pht004583.v1",
+      "description": "This subject phenotype data table contains gender of participants.",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00225057.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00225058.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MIGen_Exome_Italian_ATVB_Sample_Attributes",
+      "datasetId": "pht004584.v1",
+      "description": "This sample attributes data table includes sample analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00225060.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00225059.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

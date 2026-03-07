@@ -1,0 +1,226 @@
+{
+  "studyId": "phs002235",
+  "studyName": "Global Microbiome Conservancy Sequence Data",
+  "tables": [
+    {
+      "tableName": "GMbC_Microbiome_Sample_Attributes",
+      "datasetId": "pht010956.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, tumor status, histological type, sample type, data type, broad and local-scal environmental context, and environmental medium.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00481754.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00481753.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DATA_TYPE",
+          "id": "phv00483475.v1.p1",
+          "description": "Short reads or Genome assembly",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ENV_BROAD_SCALE",
+          "id": "phv00481757.v1.p1",
+          "description": "Broad-scale environmental context",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ENV_LOCAL_SCALE",
+          "id": "phv00481758.v1.p1",
+          "description": "Local-scale environmental context",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ENV_MEDIUM",
+          "id": "phv00481759.v1.p1",
+          "description": "Environmental medium",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00481756.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00481755.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00481752.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00483474.v1.p1",
+          "description": "Amplicon, Metagenome or Isolate genome",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GMbC_Microbiome_Subject_Phenotypes",
+      "datasetId": "pht011081.v1",
+      "description": "This subject phenotypes data table includes subject's age, BMI, country, locality, ethnicity, urbanization, industrialization, and subsistence strategy.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00483472.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00483473.v1.p1",
+          "description": "Subject Body Mass Index at enrollment",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COUNTRY",
+          "id": "phv00483466.v1.p1",
+          "description": "Country in which participant was enrolled",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00483468.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "INDUSTRIALIZATION",
+          "id": "phv00483470.v1.p1",
+          "description": "Industrialized or non-industrialized locality",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LOCALITY",
+          "id": "phv00483467.v1.p1",
+          "description": "Locality where participant was enrolled",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00483465.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBSISTENCE_STRATEGY",
+          "id": "phv00483471.v1.p1",
+          "description": "Subsistence strategy of participant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "URBANIZATION",
+          "id": "phv00483469.v1.p1",
+          "description": "Urban or rural locality",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GMbC_Microbiome_Subject",
+      "datasetId": "pht010954.v1",
+      "description": "This subject consent data table includes subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00481748.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00481749.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00481747.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GMbC_Microbiome_Sample",
+      "datasetId": "pht010955.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and sample aliases. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00481751.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00481750.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

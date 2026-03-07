@@ -1,0 +1,154 @@
+{
+  "studyId": "phs001999",
+  "studyName": "Advanced Genetic and Molecular Analysis of Solid Tumors",
+  "tables": [
+    {
+      "tableName": "Solid_Tumors_PaC_Sample_Attributes",
+      "datasetId": "pht010046.v1",
+      "description": "This sample attributes data table includes analyte type, histological type, sequencing center, method of sample preservation, library preparation method used, and sample extraction protocol.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00428414.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXTRACT_PROTOCOL",
+          "id": "phv00428419.v1.p1",
+          "description": "Isolation or extraction protocol",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00428415.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIBRARY_CONSTRUCTION_PROTOCOL",
+          "id": "phv00428418.v1.p1",
+          "description": "Preparation protocol executed before sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00428413.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00428416.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TISSUE_TYPE",
+          "id": "phv00428417.v1.p1",
+          "description": "Form of preservation and preparation for biopsy specimens",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Solid_Tumors_PaC_Subject",
+      "datasetId": "pht010043.v1",
+      "description": "This subject consent data table includes subject IDs, consent group information, and subject's sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00428406.v1.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00428411.v1.p1",
+          "description": "Gender of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00428405.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Solid_Tumors_PaC_Subject_Phenotypes",
+      "datasetId": "pht010045.v1",
+      "description": "This subject phenotypes date table includes race and affection status for pancreatic cancer.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00428407.v1.p1",
+          "description": "Case control status of the subject for pancreatic cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00428412.v1.p1",
+          "description": "Race of subject",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00428410.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Solid_Tumors_PaC_Sample",
+      "datasetId": "pht010044.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00428409.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00428408.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

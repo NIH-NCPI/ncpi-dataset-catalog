@@ -1,0 +1,281 @@
+{
+  "studyId": "phs000554",
+  "studyName": "Mutational Landscape of Lethal Castrate Resistant Prostate Cancer",
+  "tables": [
+    {
+      "tableName": "CRPC_Sample_Attributes",
+      "datasetId": "pht003198.v1",
+      "description": "Sample ID, body site where sample was obtained, analyte type, tumor status of samples, histological type of samples, tumor Gleason score of sample, serum PSA, type of tumor treatment, survival in months after diagnosis, survival in months after first hormone therapy, survival in months after first chemotherapy, alias name of samples obtained from patients with prostate cancer and involved in the \"Mutational Landscape of Lethal Castrate Resistant Prostate Cancer\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00181115.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00181114.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL TYPE",
+          "id": "phv00181117.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00181116.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00181118.v1.p1",
+          "description": "Primary tumor or metastasis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ALIAS",
+          "id": "phv00181125.v1.p1",
+          "description": "Alias name to sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00181113.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SERUM_PSA",
+          "id": "phv00181120.v1.p1",
+          "description": "Serum PSA at diagnosis (untreated tumors) or death (treated tumors)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SURVIVAL_C",
+          "id": "phv00181124.v1.p1",
+          "description": "Survival (in months) after first chemotherapy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SURVIVAL_DX",
+          "id": "phv00181122.v1.p1",
+          "description": "Survival (in months) after diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SURVIVAL_H",
+          "id": "phv00181123.v1.p1",
+          "description": "Survival (in months) after first hormone therapy",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_GLEASON_SCORE",
+          "id": "phv00181119.v1.p1",
+          "description": "Tumor Gleason score of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00181121.v1.p1",
+          "description": "Type(s) of tumor treatment for sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CRPC_Subject_Phenotypes",
+      "datasetId": "pht003196.v1",
+      "description": "Subject ID, age, ERG gene rearrangement in tumor, ETV1 gene rearrangement in tumor, SPINK1 gene outlier over-expression in tumor, SPINK1 gene outlier over-expression in tumor of patients with prostate cancer and involved in the \"Mutational Landscape of Lethal Castrate Resistant Prostate Cancer\" project.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00181106.v1.p1",
+          "description": "Age at time of sampe collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ERG",
+          "id": "phv00181107.v1.p1",
+          "description": "ERG gene rearrangement in tumor",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_gene_fusions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETV1",
+          "id": "phv00181108.v1.p1",
+          "description": "ETV1 gene rearrangement in tumor",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_gene_fusions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RAF/RAS",
+          "id": "phv00181110.v1.p1",
+          "description": "RAF/RAS family gene rearrangement tumor",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_gene_fusions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SPINK1",
+          "id": "phv00181109.v1.p1",
+          "description": "SPINK1 gene outlier over-expression in tumor",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_gene_fusions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00181105.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CRPC_Sample",
+      "datasetId": "pht003195.v1",
+      "description": "Subject ID, sample ID, sample source, sample source ID, and sample use variable of patients with prostate cancer and involved in the \"Mutational Landscape of Lethal Castrate Resistant Prostate Cancer\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00181101.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00181102.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00181104.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00181103.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00181100.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CRPC_Subject",
+      "datasetId": "pht003194.v1",
+      "description": "Subject ID, consent group, subject source, and subject source ID of patients with prostate cancer and involved in the \"Mutational Landscape of Lethal Castrate Resistant Prostate Cancer\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00181097.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00181099.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00181096.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00181098.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CRPC_GEO",
+      "datasetId": "pht003197.v1",
+      "description": "Sample ID and GEO accession of samples obtained from patients with prostate cancer and involved in the \"Mutational Landscape of Lethal Castrate Resistant Prostate Cancer\" project.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00181112.v1.p1",
+          "description": "GEO accession ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00181111.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

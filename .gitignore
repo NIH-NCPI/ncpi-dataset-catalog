@@ -15,13 +15,23 @@ node_modules
 /catalog/grant-publications.json
 /catalog/pmc-citations.json
 
-# classification pipeline output (generated)
-# NOTE: concept-vocabulary.json and ncpi-categories.json are force-tracked
-# (git add -f) since they are hand-curated, not generated.
-/catalog-build/classification/output/
+# classification pipeline output (generated, mostly gitignored)
+# Files needed by the backend Docker build are un-ignored below.
+/catalog-build/classification/output/*
+!/catalog-build/classification/output/concept-embeddings.npy
+!/catalog-build/classification/output/concept-embeddings.sha256
+!/catalog-build/classification/output/concept-isa.json
+!/catalog-build/classification/output/concept-vocabulary.json
+!/catalog-build/classification/output/demographic-profiles.json
+!/catalog-build/classification/output/llm-concepts-v4/
+!/catalog-build/classification/output/ncpi-categories.json
+!/catalog-build/classification/output/phenx-concept-vocabulary.json
 
 # classification source data (copied from external pipeline)
 /catalog-build/classification/source/
+
+# dbGaP variable XML files (672 MB, re-downloadable via npm run update-dbgap-source)
+/catalog-build/source/dbgap-variables/
 
 # UMLS data (large download + generated db)
 /catalog-build/source/umls/2025*/

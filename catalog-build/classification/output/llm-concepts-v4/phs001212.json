@@ -1,0 +1,218 @@
+{
+  "studyId": "phs001212",
+  "studyName": "NextGen Consortium: Globin Gene Expression in Sickle Cell Genotype-Specific iPS Cells",
+  "tables": [
+    {
+      "tableName": "Globin_Sickle_Cell_iPSC_Sample_Attributes",
+      "datasetId": "pht006565.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, genotyping and sequencing centers, experimental details, and indicator for sample duplicates.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00302167.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00302166.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DGE_CENTER",
+          "id": "phv00302169.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXPERIMENTAL DETAILS",
+          "id": "phv00302170.v1.p1",
+          "description": "Experimental Details",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00302168.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Is Duplicate",
+          "id": "phv00302171.v1.p1",
+          "description": "Yes applies to gene expression data that were run in duplicate and have the same ID in the molecular data file",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00302165.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Globin_Sickle_Cell_iPSC_Subject_Phenotypes",
+      "datasetId": "pht006564.v1",
+      "description": "This subject phenotype table includes subject's sex, birthplace, and race, age at blook collection, and fetal hemoglobin percentage.",
+      "variables": [
+        {
+          "name": "Age_blood",
+          "id": "phv00302161.v1.p1",
+          "description": "Age at blood collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Birthplace",
+          "id": "phv00302163.v1.p1",
+          "description": "Place of subject's birth",
+          "concept_id": "phenx:birthplace",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HbF",
+          "id": "phv00302162.v1.p1",
+          "description": "Fetal hemoglobin",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00302164.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00302159.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00302160.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Globin_Sickle_Cell_iPSC_Subject",
+      "datasetId": "pht006562.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, subject aliases, and affection status for sickle cell anemia.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00302153.v1.p1",
+          "description": "Case (Sickle Cell Anemia) control (Healthy) status of the subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00302150.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00302152.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00302149.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00302151.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Globin_Sickle_Cell_iPSC_Sample",
+      "datasetId": "pht006563.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00302155.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00302156.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00302158.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00302157.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00302154.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

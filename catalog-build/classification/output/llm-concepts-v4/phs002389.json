@@ -1,0 +1,434 @@
+{
+  "studyId": "phs002389",
+  "studyName": "MicroRNAs, Hypertension and End Organ Damage in Humans",
+  "tables": [
+    {
+      "tableName": "HTN_microRNAs_Subject_Phenotypes",
+      "datasetId": "pht011093.v1",
+      "description": "This subject phenotypes data table informs of subject's age, case-control status for NTN, HTN, MetS, CKD, medication consumption status, body weight and body mass index, disease state, and clinical test results.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00483518.v1.p1",
+          "description": "Case control status of the subject for NTN, HTN, MetS, or CKD",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00483517.v1.p1",
+          "description": "Age of subject",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALPHA2-AGONIST",
+          "id": "phv00483519.v1.p1",
+          "description": "Subjects consumed alpha2-adrenergic receptor agonists",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_central_acting_agents",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ARBs",
+          "id": "phv00483520.v1.p1",
+          "description": "Subjects consumed angiotensin receptor type 1 blocker",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_angiotensin_receptor_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ASA",
+          "id": "phv00483521.v1.p1",
+          "description": "Subjects consumed acetylsalicylic acid",
+          "concept_id": "ncpi:pain_medication_aspirin_use_current_aspirin_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BETA-BLOCKERS",
+          "id": "phv00483522.v1.p1",
+          "description": "Subjects consumed beta-adrenergic receptor blockers",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_beta_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00483523.v1.p1",
+          "description": "Body mass index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_WEIGHT",
+          "id": "phv00483524.v1.p1",
+          "description": "Body weight of patient",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CAI",
+          "id": "phv00483525.v1.p1",
+          "description": "Subjects consumed cholesterol-absorption inhibitors",
+          "concept_id": "ncpi:lipid_lowering_medication_cholesterol_absorption_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CCBs",
+          "id": "phv00483526.v1.p1",
+          "description": "Subjects consumed calcium channel blockers",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_calcium_channel_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CENTRAL_OBESITY",
+          "id": "phv00483527.v1.p1",
+          "description": "Subjects with central obesity",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_obesity_weight_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CHOLESTEROL_HDL",
+          "id": "phv00483528.v1.p1",
+          "description": "HDL/cholesterol ratio in blood",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "CHOLESTEROL_LDL",
+          "id": "phv00483529.v1.p1",
+          "description": "LDL/cholesterol ratio in blood",
+          "concept_id": "ncpi:ldl_ldl_hdl_ratio",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CREATININE",
+          "id": "phv00483530.v1.p1",
+          "description": "Creatinine content in blood",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DBP",
+          "id": "phv00483531.v1.p1",
+          "description": "Diastolic blood pressure",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_device_specific",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETES",
+          "id": "phv00483532.v1.p1",
+          "description": "Subjects with diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIURETICS",
+          "id": "phv00483533.v1.p1",
+          "description": "Subjects consumed diuretics",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_diuretics_any_diuretic",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DYSLIPIDEMIA",
+          "id": "phv00483534.v1.p1",
+          "description": "Subjects with dyslipidemias",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_lipid_metabolic_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FASTING_GLUCOSE",
+          "id": "phv00483536.v1.p1",
+          "description": "Fasting blood glucose",
+          "concept_id": "ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FIBRATES",
+          "id": "phv00483537.v1.p1",
+          "description": "Subjects consumed fibrates",
+          "concept_id": "ncpi:lipid_lowering_medication_fibrates",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00483538.v1.p1",
+          "description": "Sex of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HBA1C",
+          "id": "phv00483539.v1.p1",
+          "description": "Hemoglobin a1c",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HR",
+          "id": "phv00483540.v1.p1",
+          "description": "Heart rate",
+          "concept_id": "ncpi:heart_rate_resting_heart_rate",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INSULIN",
+          "id": "phv00483541.v1.p1",
+          "description": "Subjects consumed insulin",
+          "concept_id": "ncpi:diabetes_medication_insulin_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INSULIN_SECRETAGOGUES",
+          "id": "phv00483542.v1.p1",
+          "description": "Subjects consumed insulin secretagogues",
+          "concept_id": "ncpi:diabetes_medication_combination_diabetes_medications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INSULIN_SENSITIZES",
+          "id": "phv00483543.v1.p1",
+          "description": "Subjects consumed insulin sensitizes",
+          "concept_id": "ncpi:diabetes_medication_thiazolidinediones",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MICROALBUMINURIA",
+          "id": "phv00483544.v1.p1",
+          "description": "Subjects with microalbuminuria",
+          "concept_id": "ncpi:kidney_function_urine_albumin",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MRB",
+          "id": "phv00483545.v1.p1",
+          "description": "Subjects consumed mineralocorticoid receptor blocker",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_aldosterone_antagonists",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OBESITY",
+          "id": "phv00483546.v1.p1",
+          "description": "Subjects with obesity",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_obesity_weight_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PP",
+          "id": "phv00483547.v1.p1",
+          "description": "Pulse pressure",
+          "concept_id": "ncpi:bp_systolic_pulse_pressure",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00483548.v1.p1",
+          "description": "Race of subject",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SBP",
+          "id": "phv00483549.v1.p1",
+          "description": "Systolic blood pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_closeout_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STATINS",
+          "id": "phv00483550.v1.p1",
+          "description": "Subjects consumed statins",
+          "concept_id": "ncpi:lipid_lowering_medication_statins",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00483516.v1.p1",
+          "description": "ID of subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOTAL_CHOLESTEROL",
+          "id": "phv00483551.v1.p1",
+          "description": "Total cholesterol content in blood",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRIGLYCERIDES",
+          "id": "phv00483552.v1.p1",
+          "description": "Content of triglycerides in blood",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UACR",
+          "id": "phv00483553.v1.p1",
+          "description": "Urinary albumin creatinine ratio",
+          "concept_id": "ncpi:kidney_function_albumin_creatinine_ratio",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WAIST",
+          "id": "phv00483554.v1.p1",
+          "description": "Waist circumference of Subjects",
+          "concept_id": "phenx:waist_circumference_waist_circumference_ncfs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "eGFR",
+          "id": "phv00483535.v1.p1",
+          "description": "Estimated glomerular filtration rate",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_generic",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HTN_microRNAs_Sample_Attributes",
+      "datasetId": "pht011094.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00483557.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00483556.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00483560.v2.p1",
+          "description": "Age sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00483559.v2.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00483558.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00483555.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HTN_microRNAs_Subject",
+      "datasetId": "pht011091.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, and subject's biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00483512.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00483513.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00483511.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HTN_microRNAs_Sample",
+      "datasetId": "pht011092.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00483515.v2.p1",
+          "description": "Identification number of RNA sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00483514.v2.p1",
+          "description": "Identification number of patient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

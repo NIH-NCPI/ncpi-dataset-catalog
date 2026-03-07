@@ -1,0 +1,170 @@
+{
+  "studyId": "phs001786",
+  "studyName": "SU2C GEMM Trial",
+  "tables": [
+    {
+      "tableName": "SU2C_GEMM_Sample_Attributes",
+      "datasetId": "pht008839.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, histological type of sample, archival sample status, tumor status of sample, sequence center, and stage of sample at presentation of participants with melanoma and involved in the \"Stand Up 2 Cancer (SU2C) Genomics-Enabled Medicine for Melanoma (GEMM) Trial\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00404549.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00404548.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00404552.v1.p1",
+          "description": "Subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_ARCHIVAL",
+          "id": "phv00404551.v1.p1",
+          "description": "Archival sample status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00404550.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00404547.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00404554.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE_PRESENTATION",
+          "id": "phv00404553.v1.p1",
+          "description": "Stage of sample at presentation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SU2C_GEMM_Subject_Phenotypes",
+      "datasetId": "pht008838.v1",
+      "description": "Subject ID, race, sex, and age at biopsy of participants with melanoma and involved in the \"Stand Up 2 Cancer (SU2C) Genomics-Enabled Medicine for Melanoma (GEMM) Trial\" project.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00404545.v1.p1",
+          "description": "Age at biopsy",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00404546.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00404544.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404543.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SU2C_GEMM_Sample",
+      "datasetId": "pht008837.v1",
+      "description": "Subject ID, sample ID, and sample use variable of participants with melanoma and involved in the \"Stand Up 2 Cancer (SU2C) Genomics-Enabled Medicine for Melanoma (GEMM) Trial\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00404541.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00404542.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404540.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SU2C_GEMM_Subject",
+      "datasetId": "pht008836.v1",
+      "description": "Subject ID and consent group of participants with melanoma and involved in the \"Stand Up 2 Cancer (SU2C) Genomics-Enabled Medicine for Melanoma (GEMM) Trial\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00404539.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00404538.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

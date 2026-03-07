@@ -1,0 +1,941 @@
+{
+  "studyId": "phs001636",
+  "studyName": "FixationDelay",
+  "tables": [
+    {
+      "tableName": "BPV_FixationDelay_Sample_Attributes",
+      "datasetId": "pht008317.v1",
+      "description": "Sample ID, time in fixative, analyte type, tissue bank [tumor tissue and surrounding normal tissue], % of necrosis in sample, body site where sample was obtained, diagnostic pathology report, % of tumor tissue in sample, time the tissue sample was frozen in liquid nitrogen, fixation time, diagnosis of resected tissue, surgical tissue collection and preservation procedure, disease was observed in resected tissue, dimensions of tissue, histologic grade, histological type, tumor status of sample, % of necrosis in tumor sample, method of freezing, non-cellular component in sample, organ of origin of tumor sample, pathologic spread of distant metastases, pathologic spread of lymph nodes, tumor stage, pathologic spread of primary tumor, % of non-cellular component in sample, number of tumor epithelial cell nuclei as compared to all cell nuclei, experimental protocol, weight of resection, dimensions of resection, presence of sarcomatoid features, tissue processor cycle completion and embedding, histologic profile of sample, surgical tissue collection and preservation, tumor dimension, and weight of frozen tumor block of participants with different type of cancer and involved in the \"National Cancer Institute (NCI) Biospecimen Pre-analytical Variables (BPV) Analysis\" project.",
+      "variables": [
+        {
+          "name": "ACTUAL_TIME_IN_FIXATIVE",
+          "id": "phv00394295.v1.p1",
+          "description": "Actual Time in Fixative",
+          "concept_id": "ncpi:surgical_procedure_surgical_timing",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "APPEARANCE",
+          "id": "phv00394321.v1.p1",
+          "description": "Gross appearance of material sent to tissue bank",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AREA_PERCENTAGE",
+          "id": "phv00394319.v1.p1",
+          "description": "Percentage of gross area of necrosis of material sent to tissue bank",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte Type",
+          "id": "phv00394400.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Anonymous Case ID",
+          "id": "phv00394394.v1.p1",
+          "description": "Anonymous Case ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Body Site",
+          "id": "phv00394286.v1.p1",
+          "description": "PRIMARY_TISSUE_TYPE, Primary Organ",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSISTENT_LOCAL_PRC",
+          "id": "phv00394366.v1.p1",
+          "description": "This slide is consistent with the findings of the Diagnostic Pathology Report for this case",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSISTENT_LOCAL_PRC.1",
+          "id": "phv00394389.v1.p1",
+          "description": "CONSISTENT_LOCAL_PRC.1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONTENT_PERCENTAGE",
+          "id": "phv00394320.v1.p1",
+          "description": "Percentage of tumor content of material sent to tissue bank",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DATE_SAMPLE_FROZEN",
+          "id": "phv00394289.v1.p1",
+          "description": "Date/Time the tissue sample was frozen in liquid nitrogen",
+          "concept_id": "ncpi:surgical_procedure_surgical_timing",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DELAY_TO_FIXATION_TIME",
+          "id": "phv00394294.v1.p1",
+          "description": "Delay to Fixation Time",
+          "concept_id": "ncpi:surgical_procedure_surgical_timing",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DETAIL",
+          "id": "phv00394343.v1.p1",
+          "description": "Specify types and %",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DETAIL_PRC",
+          "id": "phv00394372.v1.p1",
+          "description": "Specify types and %",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS",
+          "id": "phv00394308.v1.p1",
+          "description": "Gross diagnosis of resected tissue",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_cancer_type_diagnosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DIMEN_MEET_CRITERIA",
+          "id": "phv00394335.v1.p1",
+          "description": "Do the dimensions of each experimental piece meet the criteria specified within the BPV Surgical Tissue Collection and Preservation Procedure",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASE_COMMENTS",
+          "id": "phv00394307.v1.p1",
+          "description": "Comments",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASE_OBSERVED",
+          "id": "phv00394306.v1.p1",
+          "description": "Gross appearance of disease was observed in resected tissue",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXCESSD",
+          "id": "phv00394312.v1.p1",
+          "description": "Dimensions of tissue",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXCESSH",
+          "id": "phv00394310.v1.p1",
+          "description": "Dimensions of tissue",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXCESSW",
+          "id": "phv00394311.v1.p1",
+          "description": "Dimensions of tissue",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXCESS_RELEASED",
+          "id": "phv00394309.v1.p1",
+          "description": "Tumor tissue was released to the tissue bank",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FTM1",
+          "id": "phv00394313.v1.p1",
+          "description": "Allocated for processing as",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FTM2",
+          "id": "phv00394314.v1.p1",
+          "description": "Allocated for processing as",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FTM3",
+          "id": "phv00394315.v1.p1",
+          "description": "Allocated for processing as",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FTM4",
+          "id": "phv00394316.v1.p1",
+          "description": "Allocated for processing as",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FTM5",
+          "id": "phv00394317.v1.p1",
+          "description": "Allocated for processing as",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FT_ADDL_TUMOR",
+          "id": "phv00394318.v1.p1",
+          "description": "Allocated for processing as",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GRADE",
+          "id": "phv00394357.v1.p1",
+          "description": "Histologic Grade (WHO Grading System)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GRADE_PRC",
+          "id": "phv00394385.v1.p1",
+          "description": "Histologic Grade (WHO Grading System)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GRADING_SYSTEM",
+          "id": "phv00394356.v1.p1",
+          "description": "What histologic grading system was applied",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GRADING_SYSTEM_PRC",
+          "id": "phv00394384.v1.p1",
+          "description": "What histologic grading system was applied",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGIC_TYPE_PRC",
+          "id": "phv00394370.v1.p1",
+          "description": "Histologic type",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_cancer_type_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTO_ELIGIBLE",
+          "id": "phv00394362.v1.p1",
+          "description": "Did pathology review of the H&E slide derived from QC FFPE tumor tissue confirm the histological type to be eligible for BPV study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTO_ELIGIBLE_PRC",
+          "id": "phv00394386.v1.p1",
+          "description": "Did pathology review of the H and E slide derived from QC FFPE tumor tissue confirm the histological type to be eligible for BPV study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histological Type",
+          "id": "phv00394341.v1.p1",
+          "description": "Histologic type",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00394399.v1.p1",
+          "description": "Tumor status of sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEETS_CRITERIA",
+          "id": "phv00394363.v1.p1",
+          "description": "This slide meets the microscopic analysis criteria of the BPV project of necrosis percentage of less than 20% and tumor content of about 50% tumor cells by surface area",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEETS_CRITERIA_PRC",
+          "id": "phv00394387.v1.p1",
+          "description": "This slide meets the microscopic analysis criteria of the BPV project of necrosis percentage of less than 20% and tumor content of about 50% tumor nuclei",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEETS_CRITERIA_SAMPLE",
+          "id": "phv00394392.v1.p1",
+          "description": "This slide meets the microscopic analysis criteria for the BPV project of less than 20% necrosis and tumor content of about 50% tumor nuclei",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "METHOD_OF_FREEZING",
+          "id": "phv00394290.v1.p1",
+          "description": "Method of Freezing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MODULE",
+          "id": "phv00394287.v1.p1",
+          "description": "MODULE",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NON_CELLULAR_DESC",
+          "id": "phv00394354.v1.p1",
+          "description": "If present, describe Non-Cellular component",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NORMAL_ADJD",
+          "id": "phv00394339.v1.p1",
+          "description": "Dimensions of tissue",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NORMAL_ADJH",
+          "id": "phv00394337.v1.p1",
+          "description": "Dimensions of tissue",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NORMAL_ADJW",
+          "id": "phv00394338.v1.p1",
+          "description": "Dimensions of tissue",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NORMAL_ADJ_RELEASED",
+          "id": "phv00394336.v1.p1",
+          "description": "Normal adjacent tissue was released to the tissue bank in addition to tumor tissue?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ORGAN_ORIGIN_PRC",
+          "id": "phv00394369.v1.p1",
+          "description": "Organ of origin",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OTHER_HISTOLOGIC_TYPE",
+          "id": "phv00394342.v1.p1",
+          "description": "Specify type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OTHER_HISTOLOGIC_TYPE_PRC",
+          "id": "phv00394371.v1.p1",
+          "description": "Specify type:",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Organ",
+          "id": "phv00394395.v1.p1",
+          "description": "Organ",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATHOLOGY_COMMENTS",
+          "id": "phv00394365.v1.p1",
+          "description": "Pathology review comments",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATH_METASTASES",
+          "id": "phv00394360.v1.p1",
+          "description": "CM: Pathologic Spread Distant Metastases (AJCC 7th Edition)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_m_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATH_NODES",
+          "id": "phv00394359.v1.p1",
+          "description": "PN: Pathologic Spread Lymph Nodes (AJCC 7th Edition)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATH_STAGE",
+          "id": "phv00394361.v1.p1",
+          "description": "Pathologic Tumor Stage Grouping (FIGO)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATH_TUMOR",
+          "id": "phv00394358.v1.p1",
+          "description": "PT: Pathologic Spread Primary Tumor (AJCC 7th Edition)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_NECROTIC_TISSUE",
+          "id": "phv00394349.v1.p1",
+          "description": "Percent of cross-sectional surface area of entire slide composed of necrotic tissue",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_NECROTIC_TISSUE_PRC",
+          "id": "phv00394378.v1.p1",
+          "description": "Percent of cross-sectional surface area of entire slide composed of necrotic tissue",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_NECROTIC_TUMOR",
+          "id": "phv00394351.v1.p1",
+          "description": "Percent Necrotic Tumor by surface area",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_NECROTIC_TUMOR_PRC",
+          "id": "phv00394380.v1.p1",
+          "description": "Percent Necrotic Tumor by surface area",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_NON_CELLULAR",
+          "id": "phv00394353.v1.p1",
+          "description": "Percent Non-Cellular Component by surface area (i.e., mucin, hemorrhage, blood clot, etc.)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_NON_CELLULAR_PRC",
+          "id": "phv00394382.v1.p1",
+          "description": "Percent Non-Cellular Component by surface area (i.e., mucin, hemorrhage, blood clot, etc.)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_TUMOR_AREA",
+          "id": "phv00394347.v1.p1",
+          "description": "Percent of cross-sectional surface area of entire slide composed of tumor focus (includes necrotic tumor)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_TUMOR_AREA_PRC",
+          "id": "phv00394376.v1.p1",
+          "description": "Percent of cross-sectional surface area of entire slide composed of tumor focus (Includes necrotic tumor)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_TUMOR_CELLULARITY",
+          "id": "phv00394348.v1.p1",
+          "description": "Percent of tumor nuclei by cell count of the entire slide (number of tumor epithelial cell nuclei as compared to all cell nuclei)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_TUMOR_CELLULARITY_PRC",
+          "id": "phv00394377.v1.p1",
+          "description": "Percent of tumor nuclei by cell count of the entire slide (number of tumor epithelial cell nuclei as compared to all cell nuclei):",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_cellularity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_VIABLE_NON_TUMOR",
+          "id": "phv00394352.v1.p1",
+          "description": "Percent Tumor Stroma by surface area",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_VIABLE_NON_TUMOR_PRC",
+          "id": "phv00394381.v1.p1",
+          "description": "Percent Tumor Stroma by surface area",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_VIABL_TUMOR",
+          "id": "phv00394350.v1.p1",
+          "description": "Percent Viable Tumor by surface area (not including stroma)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PCT_VIABL_TUMOR_PRC",
+          "id": "phv00394379.v1.p1",
+          "description": "Percent Viable Tumor by surface area (not including stroma)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PERC_TUMOR",
+          "id": "phv00394393.v1.p1",
+          "description": "Percent tumor nuclei",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROTOCOL",
+          "id": "phv00394288.v1.p1",
+          "description": "Experimental Protocol A-D AND QC FFPE (Middle Left) Section",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Protocol_1",
+          "id": "phv00394398.v1.p1",
+          "description": "Protocol",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REASON_NOT_CONS",
+          "id": "phv00394367.v1.p1",
+          "description": "Specify findings",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REASON_NOT_CONS_PRC",
+          "id": "phv00394390.v1.p1",
+          "description": "Specify findings",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REASON_NOT_MEET",
+          "id": "phv00394364.v1.p1",
+          "description": "Specify findings",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REASON_NOT_MEET_PRC",
+          "id": "phv00394388.v1.p1",
+          "description": "Specify findings",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RESECTIOND",
+          "id": "phv00394304.v1.p1",
+          "description": "Dimensions of resection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RESECTIONH",
+          "id": "phv00394302.v1.p1",
+          "description": "Dimensions of resection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RESECTIONW",
+          "id": "phv00394303.v1.p1",
+          "description": "Dimensions of resection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RESECTION_WEIGHT",
+          "id": "phv00394305.v1.p1",
+          "description": "Weight of resection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ROOM_HUMIDITY",
+          "id": "phv00394301.v1.p1",
+          "description": "Humidity of pathology gross room when specimen arrived from OR",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ROOM_TEMPERATURE",
+          "id": "phv00394300.v1.p1",
+          "description": "Temperature of pathology gross room when specimen arrived from OR",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAME_ORIGIN_TYPE",
+          "id": "phv00394391.v1.p1",
+          "description": "Organ of origin and histologic type are the same as the QC section",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00394285.v1.p1",
+          "description": "BRIMS Curl ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SARCOMATOID",
+          "id": "phv00394344.v1.p1",
+          "description": "Presence of Sarcomatoid features",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_morphology_features",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SARCOMATOID_DESC",
+          "id": "phv00394345.v1.p1",
+          "description": "Describe Sarcomatoid features",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SARCOMATOID_DESC_PRC",
+          "id": "phv00394374.v1.p1",
+          "description": "Describe Sarcomatoid features",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SARCOMATOID_PRC",
+          "id": "phv00394373.v1.p1",
+          "description": "Presence of Sarcomatoid features",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_morphology_features",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEC_TISD",
+          "id": "phv00394325.v1.p1",
+          "description": "Dimensions of second piece of tumor tissue (if applicable)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEC_TISH",
+          "id": "phv00394323.v1.p1",
+          "description": "Dimensions of second piece of tumor tissue (if applicable)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEC_TISSUE_COLLECT",
+          "id": "phv00394322.v1.p1",
+          "description": "Was a second piece of tumor tissue collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEC_TISW",
+          "id": "phv00394324.v1.p1",
+          "description": "Dimensions of second piece of tumor tissue (if applicable)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLIDE_MODULE",
+          "id": "phv00394340.v1.p1",
+          "description": "Slide ID examined by pathologist",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLIDE_MODULE_PRC",
+          "id": "phv00394368.v1.p1",
+          "description": "Slide ID examined by pathologist",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOP",
+          "id": "phv00394298.v1.p1",
+          "description": "BPV SOP governing transport of tissue from OR to pathology gross room",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STM1",
+          "id": "phv00394326.v1.p1",
+          "description": "Allocated for processing as",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STM2",
+          "id": "phv00394327.v1.p1",
+          "description": "Allocated for processing as",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STM3",
+          "id": "phv00394328.v1.p1",
+          "description": "Allocated for processing as",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STM4",
+          "id": "phv00394329.v1.p1",
+          "description": "Allocated for processing as",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STM5",
+          "id": "phv00394330.v1.p1",
+          "description": "Allocated for processing as",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ST_ADDL_TUMOR",
+          "id": "phv00394331.v1.p1",
+          "description": "Allocated for processing as",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ST_APPEARANCE",
+          "id": "phv00394334.v1.p1",
+          "description": "Gross appearance of second piece of tumor tissue sent to tissue bank (if applicable)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ST_AREA_PERCENTAGE",
+          "id": "phv00394332.v1.p1",
+          "description": "Percentage of gross area of necrosis of second piece of tumor tissue sent to tissue bank (if applicable)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ST_CONTENT_PERCENTAGE",
+          "id": "phv00394333.v1.p1",
+          "description": "Percentage of tumor content of second piece of tumor tissue sent to tissue bank (if applicable)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample Prep",
+          "id": "phv00394397.v1.p1",
+          "description": "Sample Prep",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIME_PROC_END_EMBED_START",
+          "id": "phv00394296.v1.p1",
+          "description": "Time between Tissue Processor Cycle Completion and Embedding",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIME_TRANSFERRED",
+          "id": "phv00394291.v1.p1",
+          "description": "Time Transferred",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TISSUE_RECEIVED",
+          "id": "phv00394297.v1.p1",
+          "description": "Tissue received in Gross Room from OR",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOTAL",
+          "id": "phv00394355.v1.p1",
+          "description": "Histologic Profile Total % (should equal 100%)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOTAL_PRC",
+          "id": "phv00394383.v1.p1",
+          "description": "Histologic Profile Total",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRANSFERRED_TO",
+          "id": "phv00394292.v1.p1",
+          "description": "Transferred to",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRANSPORT_PERFORMED",
+          "id": "phv00394299.v1.p1",
+          "description": "Transport of tissue was performed per BPV Surgical Tissue Collection and Preservation SOP",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_DIMENSION",
+          "id": "phv00394346.v1.p1",
+          "description": "Greatest tumor dimension on slide",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_DIMENSION_PRC",
+          "id": "phv00394375.v1.p1",
+          "description": "Greatest tumor dimension on slide",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tissue Type",
+          "id": "phv00394396.v1.p1",
+          "description": "Tissue type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00394293.v1.p1",
+          "description": "Weight of frozen tumor block",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

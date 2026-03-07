@@ -1,0 +1,250 @@
+{
+  "studyId": "phs002231",
+  "studyName": "Germ Cell and Associated Heme Malignancies Evolve from a Common Shared Precursor",
+  "tables": [
+    {
+      "tableName": "GCT_Heme_Malignancy_Subject_Phenotypes",
+      "datasetId": "pht010545.v1",
+      "description": "This subject phenotype table contains subject ID, age, sex, Klinefelter Syndrome status, predominant and other germ cell tumor (GCT) histologies, time from GCT diagnosis to heme malignacy (HM) diagnosis, first, second and third HM histology diagnosis, time from GCT diagnosis to death, and cause of death.",
+      "variables": [
+        {
+          "name": "1st HM histology",
+          "id": "phv00435828.v1.p1",
+          "description": "First heme malignancy histlogy diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "2nd HM histology",
+          "id": "phv00435829.v1.p1",
+          "description": "Second heme malignancy histlogy diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "3rd HM histology",
+          "id": "phv00435830.v1.p1",
+          "description": "Third heme malignancy histlogy diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age at Dx of GCT",
+          "id": "phv00435822.v1.p1",
+          "description": "Age at diagnosis of germ cell tumor",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Cause of Death",
+          "id": "phv00435832.v1.p1",
+          "description": "Cause of death",
+          "concept_id": "topmed:disease_diagnosis_medical_coding_death_records",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Klinefelter Syndrome",
+          "id": "phv00435824.v1.p1",
+          "description": "Patient's  Klinefelter Syndrome status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Other GCT histology",
+          "id": "phv00435826.v1.p1",
+          "description": "Other germ cell tumor histologies present",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Predominant GCT histology",
+          "id": "phv00435825.v1.p1",
+          "description": "Predominant germ cell tumor histology present",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435821.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00435823.v1.p1",
+          "description": "Sex of patient",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Time from GCT Dx to Death (months)",
+          "id": "phv00435831.v1.p1",
+          "description": "Time from germ cell tumor diagnosis to death",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Time from GCT Dx to HM (months)",
+          "id": "phv00435827.v1.p1",
+          "description": "Time from germ cell tumor diagnosis to heme malignacy  diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GCT_Heme_Malignancy_Sample_Attributes",
+      "datasetId": "pht010546.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, tumor status, histological type, primary tumor, metastasis, secondary malignancy, or transformed cell line, primary tumor location, Memorial Sloan Kettering Cancer Center (MSKCC) additional patient-level and sample-level IDs, and MSKCC additional historical sample-level IDs.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00435835.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00435834.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00435837.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00435836.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MSK_PATIENT_ID",
+          "id": "phv00435840.v1.p1",
+          "description": "MSKCC additional patient-level identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MSK_SAMPLE_ID",
+          "id": "phv00435841.v1.p1",
+          "description": "MSKCC additional sample-level identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MSK_SAMPLE_ID_HISTORICAL",
+          "id": "phv00435842.v1.p1",
+          "description": "MSKCC additional sample-level identifier (historical)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00435838.v1.p1",
+          "description": "Primary tumor, metastasis, secondary malignancy, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00435839.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00435833.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GCT_Heme_Malignancy_Subject",
+      "datasetId": "pht010543.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00435817.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00435818.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435816.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GCT_Heme_Malignancy_Sample",
+      "datasetId": "pht010544.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00435820.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435819.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

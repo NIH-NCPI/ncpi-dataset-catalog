@@ -1,0 +1,800 @@
+{
+  "studyId": "phs000360",
+  "studyName": "eMERGE Network Combined Dataset",
+  "tables": [
+    {
+      "tableName": "MergedSet_Subject_Phenotypes",
+      "datasetId": "pht003255.v2",
+      "description": "The dataset provides medical history information, including presence/absence of a diagnosis of cataract, dementia, diabetic retinopathy, hypothyroidism, PAD, resistent hypertension, and red/white blood cell count abnormalities, blood test results, lipid values, and others.",
+      "variables": [
+        {
+          "name": "ACTIVITY_EXERCISE_HRS_PER_WK",
+          "id": "phv00182500.v1.p1",
+          "description": "The type or amount of exercise performed in a typical week in hours",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_activity_duration_hours",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_DIABETIC_RETINOPATHY",
+          "id": "phv00182466.v1.p1",
+          "description": "Age at diagnosis of the farthest progression of diabetic retinopathy",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_diabetic_retinopathy_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_EXUDATIVE_RETINOPATHY",
+          "id": "phv00182468.v1.p1",
+          "description": "The age of the subject at the time of the worst detected exudative retinopathy.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "AGE_FIRST_HYPOTHYROIDISM",
+          "id": "phv00182462.v1.p1",
+          "description": "Age at first hypothyroidism indication?",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_hypothyroidism_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_LAST_EYE_EXAM",
+          "id": "phv00182473.v1.p1",
+          "description": "Age at most recent CPT recorded eye exam",
+          "concept_id": "topmed:ophthalmology_fundus_photography",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_MACULAR_EDEMA",
+          "id": "phv00182470.v1.p1",
+          "description": "Age at diagnosis of diabetic macular edema",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_macular_edema",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_RETINAL_ISCHEMIA",
+          "id": "phv00182472.v1.p1",
+          "description": "The age of the patient at the diagnosis of retinal ischemia.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "BMI_MAX_BEFORE_HEIGHT_STUDY_EXCLUSIONS",
+          "id": "phv00182508.v1.p1",
+          "description": "Subject's body mass index maximum value, calculated using measures collected before the age at which the first height study exclusion occurred",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_MAX_BEFORE_LIPID_STUDY_EXCLUSIONS",
+          "id": "phv00182497.v1.p1",
+          "description": "Subject's body mass index maximum value, calculated using measures collected before the age at which the first lipid study exclusion occurred",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_MEDIAN_BEFORE_HEIGHT_STUDY_EXCLUSIONS",
+          "id": "phv00182510.v1.p1",
+          "description": "Subject's body mass index median value, calculated using measures collected before the age at which the first height study exclusion occurred",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_MEDIAN_BEFORE_LIPID_STUDY_EXCLUSIONS",
+          "id": "phv00182499.v1.p1",
+          "description": "Subject's body mass index median value, calculated using measures collected before the age at which the first lipid study exclusion occurred",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_MEDIAN_HDL_CHOLESTEROL_MEASUREMENT",
+          "id": "phv00182474.v1.p1",
+          "description": "Median BMI at HDL results",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_MIN_BEFORE_HEIGHT_STUDY_EXCLUSIONS",
+          "id": "phv00182509.v1.p1",
+          "description": "Subject's body mass index minimum value, calculated using measures collected before the age at which the first height study exclusion occurred",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_MIN_BEFORE_LIPID_STUDY_EXCLUSIONS",
+          "id": "phv00182498.v1.p1",
+          "description": "Subject's body mass index minimum value, calculated using measures collected before the age at which the first lipid study exclusion occurred",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_ACTINIC_KERATOSIS",
+          "id": "phv00196109.v1.p1",
+          "description": "Case/control status for actinic keratosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_CATARACT",
+          "id": "phv00182457.v1.p1",
+          "description": "Case/control status for cataract phenotype",
+          "concept_id": "ncpi:ophthalmology_cataract_lens_cataract_diagnosis_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_DEMENTIA",
+          "id": "phv00182458.v1.p1",
+          "description": "Case/control status for Dementia phenotype",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_alzheimers_dementia_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_DR",
+          "id": "phv00182451.v1.p1",
+          "description": "Case/control status for diabetic retinopathy",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_diabetic_retinopathy_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_HEIGHT",
+          "id": "phv00182455.v1.p1",
+          "description": "Case/control status for height phenotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_HYPOTHYROIDISM",
+          "id": "phv00182450.v1.p1",
+          "description": "Case/control status for hypothyroidism",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_hypothyroidism_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_LIPIDS",
+          "id": "phv00182454.v1.p1",
+          "description": "Case/control status for lipids phenotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_NONMELANOMA_SKIN_CANCER",
+          "id": "phv00196111.v1.p1",
+          "description": "Case/control status for  non-melanoma skin cancer",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_PAD",
+          "id": "phv00182459.v1.p1",
+          "description": "Case/control status for PAD phenotype",
+          "concept_id": "ncpi:pad_incident_pad_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_QRS",
+          "id": "phv00182460.v1.p1",
+          "description": "Case/control status for QRS phenotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_RBC",
+          "id": "phv00182453.v1.p1",
+          "description": "Case/control status for red blood cell indices phenotype",
+          "concept_id": "topmed:rbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_RESHYP",
+          "id": "phv00182456.v1.p1",
+          "description": "Case/control status for resistant hypertension phenotype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_SEBHORREIC_KERATOSIS",
+          "id": "phv00196110.v1.p1",
+          "description": "Case/control status for sebhorreic keratosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_T2D",
+          "id": "phv00182461.v1.p1",
+          "description": "Case/control status for T2D",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CONTROL_WBC",
+          "id": "phv00182452.v1.p1",
+          "description": "Case/control status for white blood cell indices phenotype",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DECADE_BIRTH",
+          "id": "phv00182446.v1.p1",
+          "description": "Decade of birth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETES_MELLITUS",
+          "id": "phv00182463.v1.p1",
+          "description": "Diabetes status",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETES_MELLITUS_AGE",
+          "id": "phv00182464.v1.p1",
+          "description": "Age at the earliest indication of diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_age_onset",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETIC_RETINOPATHY",
+          "id": "phv00182465.v1.p1",
+          "description": "Indication of diabetic retinopathy present in the patient",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_diabetic_retinopathy_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ERYTHROCYTE_SEDIMENTATION_RATE",
+          "id": "phv00182482.v1.p1",
+          "description": "Laboratory Procedure Erythrocyte Sedimentation Rate Outcome Specified Value",
+          "concept_id": "phenx:assay_for_cytokine_panel_12",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00182447.v1.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "EXUDATIVE_RETINOPATHY",
+          "id": "phv00182467.v1.p1",
+          "description": "Indication of exudative retinopathy present in the patient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "FAMILY_HX_HYPERCHOLESTEROLEMIA",
+          "id": "phv00182501.v1.p1",
+          "description": "Is there a family history of hypercholesterolemia",
+          "concept_id": "ncpi:family_medical_history_cholesterol_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GLYCOSYLATED_HEMOGLOBIN_MEASUREMENT",
+          "id": "phv00182475.v1.p1",
+          "description": "Patient's Hemoglobin A1C Value",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL_MEDIAN",
+          "id": "phv00182483.v1.p1",
+          "description": "Median High-Density Lipoprotein measurement before any exclusions",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL_MEDIAN_AGE",
+          "id": "phv00182484.v1.p1",
+          "description": "HDL median age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT_MAX_BEFORE_HEIGHT_STUDY_EXCLUSIONS",
+          "id": "phv00182505.v1.p1",
+          "description": "Subject's height in centimeters maximum value, calculated using measures collected before the age at which the first height study exclusion occurred",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT_MAX_BEFORE_LIPID_STUDY_EXCLUSIONS",
+          "id": "phv00182494.v1.p1",
+          "description": "Subject's height in centimeters maximum value, calculated using measures collected before the age at which the first lipid study exclusion occurred",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT_MEDIAN_BEFORE_HEIGHT_STUDY_EXCLUSIONS",
+          "id": "phv00182507.v1.p1",
+          "description": "Subject's height in centimeters, the median value, calculated using measures collected before the age at which the first height study exclusion occurred",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT_MEDIAN_BEFORE_LIPID_STUDY_EXCLUSIONS",
+          "id": "phv00182496.v1.p1",
+          "description": "Subject's height in centimeters median value, calculated using measures collected before the age at which the first lipid study exclusion occurred",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT_MIN_BEFORE_HEIGHT_STUDY_EXCLUSIONS",
+          "id": "phv00182506.v1.p1",
+          "description": "Subject's height in centimeters minimum value, calculated using measures collected before the age at which the first height study exclusion occurred",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT_MIN_BEFORE_LIPID_STUDY_EXCLUSIONS",
+          "id": "phv00182495.v1.p1",
+          "description": "Subject's height in centimeters minimum value, calculated using measures collected before the age at which the first lipid study exclusion occurred",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HEMATOCRIT_OUTCOME_PERCENTAGE",
+          "id": "phv00182476.v1.p1",
+          "description": "The value in percentage of the medical procedure that involves testing a sample of blood for hematocrit, the percentage of a whole blood specimen that is composed of red blood cells (erythrocytes).",
+          "concept_id": "topmed:hematocrit_vfr_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL_MEDIAN",
+          "id": "phv00182485.v1.p1",
+          "description": "Median Low-Density Lipoprotein measurement before any exclusions",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_aggregated",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL_MEDIAN_AGE",
+          "id": "phv00182486.v1.p1",
+          "description": "LDL median age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LN_MEDIANTSH",
+          "id": "phv00219176.v1.p1",
+          "description": "Median TSH values (Tyrosine Stimulating Hormone).",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_tsh_levels",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MACULAR_EDEMA",
+          "id": "phv00182469.v1.p1",
+          "description": "Indication of macular edema present in the patient",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_macular_edema",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEAN_CORPUSCULAR_HEMOGLOBIN",
+          "id": "phv00182479.v1.p1",
+          "description": "Hematology Erythrocyte Mean Corpuscular Hemoglobin Laboratory Value",
+          "concept_id": "topmed:mch_entmass_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEAN_CORPUSCULAR_HEMOGLOBIN_CONCENTRATION",
+          "id": "phv00182480.v1.p1",
+          "description": "Hematology Erythrocyte Mean Corpuscular Hemoglobin Concentration Laboratory Percentage Value",
+          "concept_id": "topmed:mchc_mcnc_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEAN_CORPUSCULAR_VOLUME",
+          "id": "phv00182478.v1.p1",
+          "description": "Hematology Erythrocyte Mean Corpuscular Volume Laboratory Value",
+          "concept_id": "topmed:mcv_entvol_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEDIAN_AGE_AT_LAB",
+          "id": "phv00219175.v1.p1",
+          "description": "Median age at blood draw for TSH values.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEDIAN_TSH",
+          "id": "phv00219174.v1.p1",
+          "description": "Median TSH values (Tyrosine Stimulating Hormone).",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_tsh_levels",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00182448.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RBC_COUNT",
+          "id": "phv00182477.v1.p1",
+          "description": "Nucleated Red Blood Cell Laboratory Procedure Exponent Value",
+          "concept_id": "topmed:rbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RBC_DISTRIBUTION_WIDTH",
+          "id": "phv00182481.v1.p1",
+          "description": "Red blood cell distribution width in percentage",
+          "concept_id": "topmed:rdw_ratio_rbc",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RETINAL_ISCHEMIA",
+          "id": "phv00182471.v1.p1",
+          "description": "Indication of retinal ischemia present in the patient.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00182445.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKING_STATUS",
+          "id": "phv00182449.v1.p1",
+          "description": "Smoking status at enrollment",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00182444.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOTAL_CHOLESTEROL_MEDIAN",
+          "id": "phv00182487.v1.p1",
+          "description": "Median serum total cholesterol measurement before any exclusions",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOTAL_CHOLESTEROL_MEDIAN_AGE",
+          "id": "phv00182488.v1.p1",
+          "description": "Total cholesterol median age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRIGLYCERIDE_MEDIAN",
+          "id": "phv00182489.v1.p1",
+          "description": "Median triglycerides measurement before any exclusions",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_standard_units_total_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRIGLYCERIDE_MEDIAN_AGE",
+          "id": "phv00182490.v1.p1",
+          "description": "Triglyceride median age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT_MAX_BEFORE_HEIGHT_STUDY_EXCLUSIONS",
+          "id": "phv00182502.v1.p1",
+          "description": "Subject's weight in kilograms maximum value, calculated using measures collected before the age at which the first height study exclusion occurred",
+          "concept_id": "ncpi:weight_baseline_weight_statistical_measures",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT_MAX_BEFORE_LIPID_STUDY_EXCLUSIONS",
+          "id": "phv00182491.v1.p1",
+          "description": "Subject's weight in kilograms maximum value, calculated using measures collected before the age at which the first lipid study exclusion occurred",
+          "concept_id": "ncpi:weight_baseline_weight_statistical_measures",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT_MEDIAN_BEFORE_HEIGHT_STUDY_EXCLUSIONS",
+          "id": "phv00182504.v1.p1",
+          "description": "Subject's weight in kilograms median value, calculated using measures collected before the age at which the first height study exclusion occurred",
+          "concept_id": "ncpi:weight_baseline_weight_statistical_measures",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT_MEDIAN_BEFORE_LIPID_STUDY_EXCLUSIONS",
+          "id": "phv00182493.v1.p1",
+          "description": "Subject's weight in kilograms median value, calculated using measures collected before the age at which the first lipid study exclusion occurred",
+          "concept_id": "ncpi:weight_baseline_weight_statistical_measures",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT_MIN_BEFORE_HEIGHT_STUDY_EXCLUSIONS",
+          "id": "phv00182503.v1.p1",
+          "description": "Subject's weight in kilograms minimum value, calculated using measures collected before the age at which the first height study exclusion occurred",
+          "concept_id": "ncpi:weight_baseline_weight_statistical_measures",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT_MIN_BEFORE_LIPID_STUDY_EXCLUSIONS",
+          "id": "phv00182492.v1.p1",
+          "description": "Subject's weight in kilograms minimum value, calculated using measures collected before the age at which the first lipid study exclusion occurred",
+          "concept_id": "ncpi:weight_baseline_weight_statistical_measures",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MergedSet_Sample",
+      "datasetId": "pht003252.v2",
+      "description": "Subject - Sample - Mapping - Sample Use Information.",
+      "variables": [
+        {
+          "name": "HUMAN_1_M",
+          "id": "phv00197301.v1.p1",
+          "description": "Indicator if subject was included in the set genotyped using the Illumina 1M BeadChip",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00182431.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00182434.v2.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00182432.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00182433.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00182430.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MergedSet_BMI",
+      "datasetId": "pht003253.v2",
+      "description": "The dataset provides BMI, height, weight data, and age at observation.",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00182435.v1.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_observation",
+          "id": "phv00182439.v1.p1",
+          "description": "Age when clinical event recorded in record",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "body_mass_index",
+          "id": "phv00182438.v1.p1",
+          "description": "Subject's BMI over time",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "height",
+          "id": "phv00182437.v1.p1",
+          "description": "Subject's height at enrollment",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "visit_number",
+          "id": "phv00182440.v1.p1",
+          "description": "A database generated unique key created for weight, height, BMI repeated values",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "weight",
+          "id": "phv00182436.v1.p1",
+          "description": "Subject's weight at enrollment",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MergedSet_Subject",
+      "datasetId": "pht003251.v2",
+      "description": "Subject - Consent Information",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00182426.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "consent",
+          "id": "phv00182427.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "source_subjid",
+          "id": "phv00182429.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subj_source",
+          "id": "phv00182428.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MergedSet_Lab",
+      "datasetId": "pht003254.v3",
+      "description": null,
+      "variables": [
+        {
+          "name": "Age_Observation",
+          "id": "phv00182443.v2.p1",
+          "description": "Age when clinical event recorded in record",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Leukocyte_Result",
+          "id": "phv00182442.v2.p1",
+          "description": "The absolute peripheral white blood cell count.",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00182441.v2.p1",
+          "description": "Deidentified Subject/eMERGE ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MergedSet_Sample_Attributes",
+      "datasetId": "pht003256.v2",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00182511.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "analyte_type",
+          "id": "phv00182512.v1.p1",
+          "description": "Analyte type used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

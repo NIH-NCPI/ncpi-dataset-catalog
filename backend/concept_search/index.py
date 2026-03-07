@@ -373,6 +373,7 @@ class ConceptIndex:
         """Load data — from cached DuckDB file if available, else from JSON."""
         cache_path = _resolve_cache_path()
         lock_path = cache_path.with_suffix(".lock")
+        cache_miss = False
 
         # Use a file lock so only one process builds the cache; others wait.
         import filelock
@@ -389,22 +390,43 @@ class ConceptIndex:
                     _resolve_focus_isa_path()
                 )
             else:
+                cache_miss = True
                 self._load_from_json()
-                # Save cache for next startup
-                if isinstance(self.store, DuckDBStore):
-                    try:
-                        self.store.save_to_file(cache_path)
-                        logger.info("Saved DuckDB cache: %s", cache_path)
-                    except OSError:
-                        logger.warning(
-                            "Could not save DuckDB cache to %s", cache_path
-                        )
+
         # These are small JSON files bundled with the package — always load
         self.load_focus_categories()
         self.load_consent_code_descriptions()
-        # Load concept descriptions before _build_concept_embeddings needs them
-        # (on cold build, _load_from_json calls _build_concept_embeddings)
         self._concept_descriptions = _load_concept_descriptions()
+
+        # Build embeddings after focus categories are loaded so both
+        # measurement and focus nodes are included.
+        # On cache hit, verify the cached embeddings cover the current
+        # vocabulary — rebuild if the count doesn't match (stale cache).
+        if not cache_miss:
+            expected = (
+                len(self._ensure_concept_descriptions())
+                + len(self._index[Facet.FOCUS])
+            )
+            actual = len(self._embedding_nodes)
+            if actual != expected:
+                logger.warning(
+                    "Stale embedding cache: expected %d nodes, got %d "
+                    "— rebuilding embeddings",
+                    expected,
+                    actual,
+                )
+                cache_miss = True
+        if cache_miss:
+            self._build_concept_embeddings()
+            # Save cache (includes embeddings) for next startup
+            if isinstance(self.store, DuckDBStore):
+                try:
+                    self.store.save_to_file(cache_path)
+                    logger.info("Saved DuckDB cache: %s", cache_path)
+                except OSError:
+                    logger.warning(
+                        "Could not save DuckDB cache to %s", cache_path
+                    )
 
     def _ensure_concept_descriptions(self) -> dict[str, dict]:
         """Return concept descriptions, loading them if not yet available."""
@@ -453,9 +475,6 @@ class ConceptIndex:
 
         if isinstance(self.store, DuckDBStore):
             self.store.finalize()
-
-        # Build concept embeddings for semantic search
-        self._build_concept_embeddings()
 
     def _rebuild_index_from_store(self) -> None:
         """Rebuild the in-memory _index from a loaded DuckDB store."""
@@ -550,10 +569,10 @@ class ConceptIndex:
                     expected = (len(nodes), 768)
                     if matrix.shape == expected:
                         logger.info(
-                            "Embedding cache hit (%d nodes, hash %s…) "
-                            "— skipping model load",
+                            "Using cached embeddings (%d nodes) from %s "
+                            "— skipping model download and embedding generation",
                             len(texts),
-                            text_hash[:12],
+                            npy_path,
                         )
                         self._store_embeddings(nodes, matrix)
                         return
@@ -568,7 +587,11 @@ class ConceptIndex:
                     "Failed to read embedding cache: %s — recomputing", exc
                 )
 
-        logger.info("Embedding %d nodes (measurement + focus)...", len(texts))
+        logger.info(
+            "No cached embeddings found — generating %d embeddings "
+            "(this requires downloading the model on first run)...",
+            len(texts),
+        )
         try:
             matrix = embeddings.embed_texts(texts)
         except ImportError:

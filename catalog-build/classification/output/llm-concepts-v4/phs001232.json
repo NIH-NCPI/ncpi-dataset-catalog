@@ -1,0 +1,240 @@
+{
+  "studyId": "phs001232",
+  "studyName": "Clinical and Genetic Evaluation of Individuals with Undiagnosed Disorders through the Undiagnosed Diseases Network (UDN)",
+  "tables": [
+    {
+      "tableName": "UDN_Subject_Phenotypes",
+      "datasetId": "pht006079.v7",
+      "description": "This subject phenotypes data table includes affection status, sociodemographic information (n=3 variables; sex, race, and ethnicity), primary category of symptoms, and age of onset of disease symptoms.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00278122.v7.p3",
+          "description": "Affection status of subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_ONSET",
+          "id": "phv00278121.v7.p3",
+          "description": "Onset of disease symptoms",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00278119.v7.p3",
+          "description": "Ethnicity of subject",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_SYMPTOM_CATEGORY",
+          "id": "phv00278120.v7.p3",
+          "description": "Primary category of symptoms",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00278118.v7.p3",
+          "description": "Race of subject",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00278117.v7.p3",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00278116.v7.p3",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "UDN_Pedigree",
+      "datasetId": "pht006076.v7",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and sex of subjects.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00278105.v7.p3",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER_ID",
+          "id": "phv00278108.v7.p3",
+          "description": "Father's de-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER_ID",
+          "id": "phv00278107.v7.p3",
+          "description": "Mother's de-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00278109.v7.p3",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00278106.v7.p3",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "UDN_Sample_Attributes",
+      "datasetId": "pht006080.v7",
+      "description": "This sample attributes table includes analyte type, bioisample tissue type, and name of sequencing core.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00278124.v7.p3",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_BIOSAMPLE",
+          "id": "phv00278125.v7.p3",
+          "description": "Tissue type of biosample taken from the participant that the analyte was extracted or processed from",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00278123.v7.p3",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CORE",
+          "id": "phv00278126.v7.p3",
+          "description": "Name of sequencing core that performed sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "UDN_Subject",
+      "datasetId": "pht006075.v7",
+      "description": "The subject consent data table contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00278104.v7.p3",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00479540.v5.p3",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00278103.v7.p3",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "UDN_phenotype_code",
+      "datasetId": "pht006078.v7",
+      "description": "The data table shows the HPO (Human Phenotype Ontology) phenotype codes (<a href=\"https://hpo.jax.org/app/\">HPO</a> terms) and whether the phenotype was observed in the patient.",
+      "variables": [
+        {
+          "name": "HPO_OBSERVED_STATUS",
+          "id": "phv00278115.v7.p3",
+          "description": "Whether or not phenotype was observed in the patient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HPO_PHENOTYPES",
+          "id": "phv00278114.v7.p3",
+          "description": "HPO (Human Phenotype Ontology) phenotype codes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00278113.v7.p3",
+          "description": "De-identified subject id",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "UDN_Sample",
+      "datasetId": "pht006077.v7",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00278111.v7.p3",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00278110.v7.p3",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

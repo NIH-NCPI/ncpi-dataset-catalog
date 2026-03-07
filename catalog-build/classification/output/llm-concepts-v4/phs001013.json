@@ -1,0 +1,338 @@
+{
+  "studyId": "phs001013",
+  "studyName": "Heart and Vascular Health Study (HVH)",
+  "tables": [
+    {
+      "tableName": "HVH_Subject_Phenotypes",
+      "datasetId": "pht005311.v2",
+      "description": "This subject phenotype data table includes case control status, index year, race, ethnicity, age, sex, height, weight, stroke type, venous thrombosis type, echocardiographic measurements at AF onset (n=2 variables; left atrial diameter and ejection fraction <50%), treated diseases (n=3 variables; hypertension, diabetes milletus, and hyperlipidemia), and smoking status.",
+      "variables": [
+        {
+          "name": "ccs",
+          "id": "phv00259376.v2.p2",
+          "description": "Case-control status",
+          "concept_id": "topmed:vte_case_status",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00259381.v2.p2",
+          "description": "Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "height",
+          "id": "phv00259392.v2.p2",
+          "description": "Height during adulthood",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "priorvt",
+          "id": "phv00259384.v2.p2",
+          "description": "Prior VT",
+          "concept_id": "topmed:vte_prior_history",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "race",
+          "id": "phv00259380.v2.p2",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "sex",
+          "id": "phv00259379.v2.p2",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "weight",
+          "id": "phv00259393.v2.p2",
+          "description": "Weight at index date",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259375.v2.p2",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00259378.v2.p2",
+          "description": "Age at index date",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alcohol",
+          "id": "phv00328534.v1.p2",
+          "description": "Alcohol status at index date (self-report)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "apnea",
+          "id": "phv00328536.v1.p2",
+          "description": "Apnea at AF onset",
+          "concept_id": "topmed:polysomnography_sleep_apnea_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "copd",
+          "id": "phv00328532.v1.p2",
+          "description": "Prior COPD or asthma",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_copd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dmind",
+          "id": "phv00259390.v2.p2",
+          "description": "Treated diabetes milletus at index date",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "echodiam",
+          "id": "phv00259395.v2.p2",
+          "description": "Left atrial diameter by echocardiography at AF onset",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "edu",
+          "id": "phv00328535.v1.p2",
+          "description": "Highest grade or year of school completed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "eflt50",
+          "id": "phv00259396.v2.p2",
+          "description": "Ejection fraction <50% by echocardiography at AF onset",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "htnind",
+          "id": "phv00259389.v2.p2",
+          "description": "Treated hypertension at index date",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_general_hypertension_medication_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "indexy",
+          "id": "phv00259377.v2.p2",
+          "description": "Index Year",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lipidind",
+          "id": "phv00259391.v2.p2",
+          "description": "Treated hyperlipidemia at index date",
+          "concept_id": "ncpi:lipid_lowering_medication_general_lipid_lowering_medication",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "polyevnt",
+          "id": "phv00328538.v1.p2",
+          "description": "Polysomnography events per hour",
+          "concept_id": "ncpi:polysomnography_apnea_hypopnea_indices_polysomnography_general_metrics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "polyind",
+          "id": "phv00328537.v1.p2",
+          "description": "Polysomnography index at AF onset",
+          "concept_id": "ncpi:polysomnography_apnea_hypopnea_indices_polysomnography_general_metrics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prioraf",
+          "id": "phv00259385.v2.p2",
+          "description": "Prior AF",
+          "concept_id": "ncpi:ecg_atrial_fibrillation",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "priorchd",
+          "id": "phv00259386.v2.p2",
+          "description": "Prior coronary heart disease",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_coronary_heart_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "priormi",
+          "id": "phv00259382.v2.p2",
+          "description": "Prior MI",
+          "concept_id": "ncpi:mi_prior_mi_history_composite",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "priorstk",
+          "id": "phv00259383.v2.p2",
+          "description": "Prior Stroke",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_stroke_cerebrovascular",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "priorsttype",
+          "id": "phv00328531.v1.p2",
+          "description": "Stroke type for prior stroke",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pstm",
+          "id": "phv00328533.v1.p2",
+          "description": "Postmenopausal at index date",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smoke",
+          "id": "phv00259394.v2.p2",
+          "description": "Smoking status at index date",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sttype",
+          "id": "phv00259387.v2.p2",
+          "description": "Stroke type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "vttype",
+          "id": "phv00259388.v2.p2",
+          "description": "VT type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HVH_Sample",
+      "datasetId": "pht005310.v2",
+      "description": "This subject sample mapping file contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00259373.v2.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00259374.v2.p2",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259372.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HVH_Sample_Attributes",
+      "datasetId": "pht005312.v2",
+      "description": "This sample attributes data table includes body site where sample was collected and analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00259399.v2.p2",
+          "description": "Sample Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00259398.v2.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00259397.v2.p2",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HVH_Subject",
+      "datasetId": "pht005309.v3",
+      "description": "This subject consent file contains subject IDs, consent group information, and affection status for myocardial infarction, stroke, or atrial fibrillation.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00259370.v3.p2",
+          "description": "Consent group",
+          "concept_id": "ncpi:subcohort_consent_group",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00259369.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

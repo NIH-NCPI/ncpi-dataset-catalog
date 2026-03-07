@@ -1,0 +1,322 @@
+{
+  "studyId": "phs000980",
+  "studyName": "PD-1 Blockade in Non-Small Cell Lung Cancer",
+  "tables": [
+    {
+      "tableName": "NSCLC_Pembrolizumab_Subject_Phenotypes",
+      "datasetId": "pht005053.v1",
+      "description": "This subject phenotype table contains de-identified Subject ID, patient's cohort in current study, tumor histology, age, sex, smoking status and pack years, PD-L1 protein expression, prior courses of cytotoxic chemotherapy, pembrolizumab dose and administration, progression free survival, best overall response to pembrolizumab, durable clinical benefit and molecular smoking signature.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00253415.v1.p1",
+          "description": "Patient's age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Cohort",
+          "id": "phv00253413.v1.p1",
+          "description": "Patient's cohort in current study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Dose (mg/kg)",
+          "id": "phv00253421.v1.p1",
+          "description": "Dose  (mg/kg)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Durable_Clinical_Benefit",
+          "id": "phv00253425.v1.p1",
+          "description": "Patient's clinical benefit",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_treatment_response",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Histology",
+          "id": "phv00253414.v1.p1",
+          "description": "Tumor histology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PD-L1",
+          "id": "phv00253419.v1.p1",
+          "description": "Programmed death-ligand 1 (PD-L1) expression",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_pdl1_expression",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PFS (mos)",
+          "id": "phv00253423.v1.p1",
+          "description": "Progression free survival in months",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_progression_free_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Pack-years",
+          "id": "phv00253418.v1.p1",
+          "description": "Product of number of packs per day and number of years smoked",
+          "concept_id": "ncpi:ever_smoker_baseline_pack_years",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Priors",
+          "id": "phv00253420.v1.p1",
+          "description": "Prior courses of cytotoxic chemotherapy.  Combination chemotherapy counted as a single course.  No patient had received prior immunotherapy.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Resp",
+          "id": "phv00253424.v1.p1",
+          "description": "Denotes best overall response to pembrolizumab",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_immunotherapy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00253412.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sched",
+          "id": "phv00253422.v1.p1",
+          "description": "Pembrolizumab dosed every 2 or 3 weeks as indicated.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00253416.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking",
+          "id": "phv00253417.v1.p1",
+          "description": "Self-reported smoking status",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking_Signature",
+          "id": "phv00253426.v1.p1",
+          "description": "Molecular smoking signature",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NSCLC_Pembrolizumab_Sample_Attributes",
+      "datasetId": "pht004963.v1",
+      "description": "This sample attributes table contains de-identified sample ID, body site where sample was collected, analyte type, tumor status, histological type, primary tumor, metastasis, or transformed cell line, primary tumor location, tumor stage, type of tumor treatment, and names of the center which conducted genotyping and sequencing.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00252813.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00252812.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00252821.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00252815.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00252814.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00252816.v1.p1",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00252817.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00252811.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00252822.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00252818.v1.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00252820.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NSCLC_Pembrolizumab_Subject",
+      "datasetId": "pht004961.v1",
+      "description": "The subject consent file includes subject IDs, consent information, subject aliases and affection status for case control status of the subject. All subjects are patients with non-small cell lung cancer.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00252805.v1.p1",
+          "description": "Case control status of the subject. All subjects are patients with non-small cell lung cancer.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00252802.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00252804.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252801.v1.p1",
+          "description": "Subject  ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00252803.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NSCLC_Pembrolizumab_Sample",
+      "datasetId": "pht004962.v1",
+      "description": "This subject sample mapping data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00252807.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00252808.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00252810.v1.p1",
+          "description": "Sample use. Seq_DNA_SNP_MAF_Sum: Samples were used to generate aggregate mutation annotation file (.maf); Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00252809.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252806.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,633 @@
+{
+  "studyId": "phs000737",
+  "studyName": "NIDDK Genetics of Metabolic Syndrome in an Island Population",
+  "tables": [
+    {
+      "tableName": "Metabolic_Syndrome_Hvar_Islanders_Subject_Phenotypes",
+      "datasetId": "pht004446.v1",
+      "description": "The dataset provides medical history information (e.g. diagnosis coronary heart disease, diabetes, gout, metabolic syndrom x, age of diagnosis, etc.), blood test values (n=11 variables, e.g. creatinin, glucose, HbA1c, insulin, lipids, uric acid), body measurements (n=15 variables, e.g. BMI, height, waist, weight, waist-to-hip ratio, biceps and abdominal skinfold thickness), and basic socio-demographic data.",
+      "variables": [
+        {
+          "name": "ATP",
+          "id": "phv00222352.v1.p1",
+          "description": "MS by Adult Treatment Panel (ATP) - III",
+          "concept_id": "topmed:diet_quality_score",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "ATP_no",
+          "id": "phv00222351.v1.p1",
+          "description": "Number of abnormal MS components by Adult Treatment Panel (ATP) - III definition",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AbS",
+          "id": "phv00222321.v1.p1",
+          "description": "Abdomen skin fold thickness",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00222309.v1.p1",
+          "description": "BMI (kg/m2)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BiS",
+          "id": "phv00222317.v1.p1",
+          "description": "Biceps skin fold thickness",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "CHD",
+          "id": "phv00222337.v1.p1",
+          "description": "CHD (Do you have coronary heart disease?) in original data: 1 = yes, 2 = no",
+          "concept_id": "topmed:cad_followup_start_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "CHD_age",
+          "id": "phv00222338.v1.p1",
+          "description": "CHD (Age of diagnosis) in original data",
+          "concept_id": "topmed:cad_followup_start_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CHD_med",
+          "id": "phv00222340.v1.p1",
+          "description": "CHD (medications) in original data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHD_yr",
+          "id": "phv00222339.v1.p1",
+          "description": "CHD (Year of diagnosis) in original data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Calcium",
+          "id": "phv00222329.v1.p1",
+          "description": "S-Calcium",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "Cholesterol",
+          "id": "phv00222325.v1.p1",
+          "description": "S-Cholesterol (mmol/L)",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Comp",
+          "id": "phv00222355.v1.p1",
+          "description": "Is MS record complete? (i.e., all 5 MS component variables contain non-blank data) 1= no, 2 = yes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Creatinin",
+          "id": "phv00222322.v1.p1",
+          "description": "S-Creatinin",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DBP",
+          "id": "phv00222314.v1.p1",
+          "description": "Average diastolic blood pressure 2nd and 3rd measurements (mmHg)",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_device_specific",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diab",
+          "id": "phv00222341.v1.p1",
+          "description": "Diabetes (Do you have diabetes?) in original data: 1 = yes, 2 = no",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diab_age",
+          "id": "phv00222342.v1.p1",
+          "description": "Diabetes (Age of diagnosis) in original data",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_age_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diab_med",
+          "id": "phv00222344.v1.p1",
+          "description": "Diabetes (medications) in original data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diab_yr",
+          "id": "phv00222343.v1.p1",
+          "description": "Diabetes (Year of diagnosis) in original data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Fibrinogen",
+          "id": "phv00222332.v1.p1",
+          "description": "Fibrinogen (g/L)",
+          "concept_id": "ncpi:proteomics_panel_complement_coagulation_fibrinogen_fibrin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Glucose",
+          "id": "phv00222324.v1.p1",
+          "description": "S-Glucose (mmol/L)",
+          "concept_id": "ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gout",
+          "id": "phv00222345.v1.p1",
+          "description": "Gout (Do you have gout?) in original data: 1 = yes, 2 = no",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_gout_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gout_age",
+          "id": "phv00222346.v1.p1",
+          "description": "Gout (Age of diagnosis) in original data",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_gout_age_onset",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gout_med",
+          "id": "phv00222348.v1.p1",
+          "description": "Gout (medications) in original data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gout_yr",
+          "id": "phv00222347.v1.p1",
+          "description": "Gout (Year of diagnosis) in original data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HBP",
+          "id": "phv00222333.v1.p1",
+          "description": "HBP (Do you have elevated blood pressure?) in original data: 1 = yes, 2 = no",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "HBP_age",
+          "id": "phv00222334.v1.p1",
+          "description": "HBP (Age of diagnosis) in original data",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "HBP_med",
+          "id": "phv00222336.v1.p1",
+          "description": "HBP (medications) in original data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HBP_yr",
+          "id": "phv00222335.v1.p1",
+          "description": "HBP (Year of diagnosis) in original data",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HC",
+          "id": "phv00222311.v1.p1",
+          "description": "Hip circumference (cm)",
+          "concept_id": "phenx:hip_circumference_hip_circumference_v1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL",
+          "id": "phv00222327.v1.p1",
+          "description": "S-HDL-Cholesterol (mmol/L)",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HbA1c",
+          "id": "phv00222330.v1.p1",
+          "description": "HbA1c (%)",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ht",
+          "id": "phv00222307.v1.p1",
+          "description": "Body height (cm)",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IDF",
+          "id": "phv00222354.v1.p1",
+          "description": "MS by International Diabetes Federation (IDF) - 2005",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IDF_no",
+          "id": "phv00222353.v1.p1",
+          "description": "Number of abnormal MS components by International Diabetes Federation (IF) - 2005 definition",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Insulin",
+          "id": "phv00222331.v1.p1",
+          "description": "Insulin",
+          "concept_id": "phenx:fasting_serum_insulin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL",
+          "id": "phv00222328.v1.p1",
+          "description": "S-LDL-Cholesterol (mmol/L)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MedCode",
+          "id": "phv00222350.v1.p1",
+          "description": "Treatment code: T = triglycerides, H = HDL, B = hypertension, C = cardiovascular diseases, D = diabetes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MedDesp",
+          "id": "phv00222349.v1.p1",
+          "description": "Medications relevant for high cholesterol/triglycerides, low HDL, cardiovascular diseases, hypertension, and diabetes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SBP",
+          "id": "phv00222313.v1.p1",
+          "description": "Average systolic blood pressure of 2nd and 3rd measurements (mmHg)",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_closeout_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00222304.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SbS",
+          "id": "phv00222319.v1.p1",
+          "description": "Subscapular skin fold thickness",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "SpS",
+          "id": "phv00222320.v1.p1",
+          "description": "Suprailiac skin fold thickness",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "TrS",
+          "id": "phv00222318.v1.p1",
+          "description": "Triceps skin fold thickness",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "Triglycerides",
+          "id": "phv00222326.v1.p1",
+          "description": "S-Triglycerides (mmol/L)",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UAC",
+          "id": "phv00222315.v1.p1",
+          "description": "Upper arm circumference",
+          "concept_id": "phenx:midupper_arm_circumference",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UAW",
+          "id": "phv00222316.v1.p1",
+          "description": "Bicondilar upper arm width",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UricAcid",
+          "id": "phv00222323.v1.p1",
+          "description": "Acidum uricum",
+          "concept_id": "phenx:substances_lifetime_use",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "WC",
+          "id": "phv00222310.v1.p1",
+          "description": "Waist circumference at the belly button level (cm)",
+          "concept_id": "phenx:waist_circumference_waist_circumference_ncfs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WHR",
+          "id": "phv00222312.v1.p1",
+          "description": "Waist-to-hip ratio",
+          "concept_id": "phenx:waist_circumference_waist_circumference_ncfs",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Wt",
+          "id": "phv00222308.v1.p1",
+          "description": "Body weight (kg)",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00222306.v1.p1",
+          "description": "Age at data collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00222305.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Metabolic_Syndrome_Hvar_Islanders_Sample",
+      "datasetId": "pht004445.v1",
+      "description": "Subject - Sample Mapping",
+      "variables": [
+        {
+          "name": "GENOTYPED",
+          "id": "phv00222302.v1.p1",
+          "description": "Times of genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHENOTYPED",
+          "id": "phv00222301.v1.p1",
+          "description": "Phenotyped or not",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00222298.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00222299.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00222303.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00222300.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00222297.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Metabolic_Syndrome_Hvar_Islanders_Sample_Attributes",
+      "datasetId": "pht004447.v1",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00222358.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00222357.v1.p1",
+          "description": "Body site from where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPED",
+          "id": "phv00222361.v1.p1",
+          "description": "Times of genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00222360.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00222359.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00222356.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Metabolic_Syndrome_Hvar_Islanders_Pedigree",
+      "datasetId": "pht004444.v1",
+      "description": "Pedigree Information",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00222292.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00222294.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00222295.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00222296.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00222293.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Metabolic_Syndrome_Hvar_Islanders_Subject",
+      "datasetId": "pht004443.v1",
+      "description": "Subject - Consent - Affection Status (All Controls)",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00222289.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00222291.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00222288.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00222290.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

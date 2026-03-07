@@ -1,0 +1,209 @@
+{
+  "studyId": "phs002969",
+  "studyName": "Black Representation in Genomic Research Whole Blood eQTL Study",
+  "tables": [
+    {
+      "tableName": "WholeBlood_eQTL_African_Sample_Attributes",
+      "datasetId": "pht012876.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, RNA-seq plate number, RNA Integrity Number (RIN), percent contamination, and mean sequencing coverage.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00520230.v1.p1",
+          "description": "Analysis type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00520231.v1.p1",
+          "description": "Body location of sample collection",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "CONTAMINATION",
+          "id": "phv00520227.v1.p1",
+          "description": "Percent contamination",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00520229.v1.p1",
+          "description": "Is tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MEAN_COVERAGE",
+          "id": "phv00520228.v1.p1",
+          "description": "Mean sequencing coverage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLATE_NUMBER",
+          "id": "phv00520225.v1.p1",
+          "description": "RNA-seq plate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RIN",
+          "id": "phv00520226.v1.p1",
+          "description": "RNA Integrity Number",
+          "concept_id": "topmed:lung_ct_imaging_scan_technical_parameters",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00520224.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WholeBlood_eQTL_African_Pedigree",
+      "datasetId": "pht012873.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and biological sex.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00520214.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00520216.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00520217.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00520218.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00520215.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WholeBlood_eQTL_African_Subject",
+      "datasetId": "pht012872.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, and genetic sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00520212.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00520213.v1.p1",
+          "description": "Genetic sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00520211.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WholeBlood_eQTL_African_Subject_Phenotypes",
+      "datasetId": "pht012875.v1",
+      "description": "This subject phenotypes data table includes genetic sex and predicted fraction of African ancestry.",
+      "variables": [
+        {
+          "name": "ETHNICITY",
+          "id": "phv00520222.v1.p1",
+          "description": "Predicted fraction of African ancestry",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENETIC_SEX",
+          "id": "phv00520223.v1.p1",
+          "description": "Genetic sex",
+          "concept_id": "ncpi:annotated_sex_genetic_sex",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00520221.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "WholeBlood_eQTL_African_Sample",
+      "datasetId": "pht012874.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00520220.v1.p1",
+          "description": "Sample ID RNA-seq or DNA-seq",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00520219.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

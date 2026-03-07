@@ -1,0 +1,761 @@
+{
+  "studyId": "phs001387",
+  "studyName": "NHLBI TOPMed: Rare Variants for Hypertension in Taiwan Chinese (THRV)",
+  "tables": [
+    {
+      "tableName": "TOPMed_WGS_THRV_Subject_Phenotypes",
+      "datasetId": "pht008970.v2",
+      "description": "This subject phenotypes data table includes age at clinic visit, sex, anthropometric measures (n=6 variables), blood pressure and pulse (n=7 variables), diagnosis (n=3 variables; hypertension, coronary artery disease, and diabetes mellitus), OGGT (n=7 variables), SSPG (n=6 variables), cholesterol (n=5 variables), blood and urine measurements (n=20 variables), alcohol use, smoking status, hypertension medications (n=9 variables), diabetes medications, and cholesterol medications.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00405787.v1.p1",
+          "description": "Age at clinic visit",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALCOHOL",
+          "id": "phv00405803.v2.p1",
+          "description": "Drink Alcohol",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00405791.v2.p1",
+          "description": "Body Mass Index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BR",
+          "id": "phv00405846.v2.p1",
+          "description": "Total Bilirubin",
+          "concept_id": "ncpi:liver_function_total_bilirubin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BUN",
+          "id": "phv00405847.v2.p1",
+          "description": "Blood Urea Nitrogen",
+          "concept_id": "ncpi:kidney_function_bun",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CA",
+          "id": "phv00405850.v2.p1",
+          "description": "Serum Calcium",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHMED_TOTAL",
+          "id": "phv00405815.v2.p1",
+          "description": "Number of Cholesterol Medications",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHOL",
+          "id": "phv00405829.v2.p1",
+          "description": "Cholesterol",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DBP1",
+          "id": "phv00405796.v2.p1",
+          "description": "1st Diastolic Blood Pressure",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_exam_visits",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DBP2",
+          "id": "phv00405798.v1.p1",
+          "description": "2nd Diastolic Blood Pressure",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_exam_visits",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DBP3",
+          "id": "phv00405800.v1.p1",
+          "description": "3rd Diastolic Blood Pressure",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_exam_visits",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DMMED_TOTAL",
+          "id": "phv00405814.v2.p1",
+          "description": "Number of Diabetes Medications",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DX_CAD",
+          "id": "phv00405805.v2.p1",
+          "description": "Coronary Artery Disease Diagnosis",
+          "concept_id": "topmed:cad_followup_start_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DX_DM",
+          "id": "phv00405806.v2.p1",
+          "description": "Diabetes Mellitus Diagnosis",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DX_HTN",
+          "id": "phv00405804.v2.p1",
+          "description": "Hypertension Diagnosis",
+          "concept_id": "ncpi:disease_diagnosis_hypertension",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FASTING",
+          "id": "phv00405816.v2.p1",
+          "description": "Fasting Status",
+          "concept_id": "topmed:fasting_lipids",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GLUC",
+          "id": "phv00405835.v2.p1",
+          "description": "Glucose",
+          "concept_id": "ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GOT",
+          "id": "phv00405845.v2.p1",
+          "description": "Glutamic Oxaloacetic Transaminase (Aspartate aminotransferase)",
+          "concept_id": "ncpi:liver_function_aspartate_aminotransferase",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GPT",
+          "id": "phv00405840.v2.p1",
+          "description": "Glutamic Pyruvic Transaminase (Alanine aminotransferase)",
+          "concept_id": "ncpi:liver_function_alanine_aminotransferase_alt_standard_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDLC",
+          "id": "phv00405831.v2.p1",
+          "description": "High-Density Lipoprotein Cholesterol",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT",
+          "id": "phv00405789.v2.p1",
+          "description": "Height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HIP",
+          "id": "phv00405793.v2.p1",
+          "description": "Hip Circumference",
+          "concept_id": "topmed:bone_musculoskeletal",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HTMED_AB",
+          "id": "phv00405807.v2.p1",
+          "description": "Anti-HT Meds: AlphaBlockers",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_alpha_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HTMED_ACEI",
+          "id": "phv00405809.v2.p1",
+          "description": "Anti-HT Meds: Angiotensin-Converting Enzyme Inhibitors",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_ace_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HTMED_ARB",
+          "id": "phv00405808.v2.p1",
+          "description": "Anti-HT Meds: Angiotensin II Receptor Blockers",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_angiotensin_receptor_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HTMED_BB",
+          "id": "phv00405810.v2.p1",
+          "description": "Anti-HT Meds: BetaBlockers",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_beta_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HTMED_CCB",
+          "id": "phv00405811.v2.p1",
+          "description": "Anti-HT Meds: Calcium Channel Blockers",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_calcium_channel_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HTMED_DIURETIC",
+          "id": "phv00405812.v2.p1",
+          "description": "Anti-HT Meds: Diuretics",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_diuretics_any_diuretic",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HTMED_TOTAL",
+          "id": "phv00405813.v2.p1",
+          "description": "Number of Anti-Hypertensive Medications",
+          "concept_id": "ncpi:antihypertensive_meds_antihypertensive_medication_count",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hb",
+          "id": "phv00405839.v2.p1",
+          "description": "Hemoglobin",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HbA1c",
+          "id": "phv00405836.v2.p1",
+          "description": "Glycated hemoglobin",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INS",
+          "id": "phv00405834.v2.p1",
+          "description": "Insulin",
+          "concept_id": "phenx:fasting_serum_insulin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "KK",
+          "id": "phv00405852.v2.p1",
+          "description": "Serum Potassium",
+          "concept_id": "ncpi:kidney_function_electrolytes_potassium",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "LDLC",
+          "id": "phv00405832.v2.p1",
+          "description": "Low-Density Lipoprotein  Cholesterol",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDLCALC",
+          "id": "phv00405833.v2.p1",
+          "description": "Calculated Low-Density Lipoprotein Cholesterol",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_calculated",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NA",
+          "id": "phv00426932.v1.p1",
+          "description": "Serum Sodium",
+          "concept_id": "ncpi:kidney_function_electrolytes_sodium",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NEU",
+          "id": "phv00405843.v2.p1",
+          "description": "Neutrophils",
+          "concept_id": "topmed:neutrophil_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OGTT0GLUC",
+          "id": "phv00405817.v2.p1",
+          "description": "Oral Glucose Tolerance Test 0 min (glucose)",
+          "concept_id": "phenx:oral_glucose_tolerance_test",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OGTT0INS",
+          "id": "phv00405820.v2.p1",
+          "description": "Oral Glucose Tolerance Test 0 min (insulin)",
+          "concept_id": "phenx:oral_glucose_tolerance_test",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OGTT120GLUC",
+          "id": "phv00405819.v2.p1",
+          "description": "Oral Glucose Tolerance Test 120 mins (glucose)",
+          "concept_id": "phenx:oral_glucose_tolerance_test",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OGTT120INS",
+          "id": "phv00405822.v2.p1",
+          "description": "Oral Glucose Tolerance Test 120 mins (insulin)",
+          "concept_id": "phenx:oral_glucose_tolerance_test",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OGTT60GLUC",
+          "id": "phv00405818.v2.p1",
+          "description": "Oral Glucose Tolerance Test 60 mins (glucose)",
+          "concept_id": "phenx:oral_glucose_tolerance_test",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OGTT60INS",
+          "id": "phv00405821.v2.p1",
+          "description": "Oral Glucose Tolerance Test 60 mins (insulin)",
+          "concept_id": "phenx:oral_glucose_tolerance_test",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLCR",
+          "id": "phv00405837.v2.p1",
+          "description": "Plasma Creatinine",
+          "concept_id": "ncpi:kidney_function_serum_creatinine_serum_creatinine_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLT",
+          "id": "phv00405844.v2.p1",
+          "description": "Platelet",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PR",
+          "id": "phv00405801.v2.p1",
+          "description": "Pulse Rate",
+          "concept_id": "ncpi:heart_rate_resting_heart_rate",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SBP1",
+          "id": "phv00405795.v2.p1",
+          "description": "1st Systolic Blood Pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_exam_specific_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SBP2",
+          "id": "phv00405797.v1.p1",
+          "description": "2nd Systolic Blood Pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_second_systolic_bp_reading",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SBP3",
+          "id": "phv00405799.v1.p1",
+          "description": "3rd Systolic Blood Pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_exam_specific_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00405788.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKE",
+          "id": "phv00405802.v2.p1",
+          "description": "Smoke Cigarettes",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SSPG0",
+          "id": "phv00405823.v2.p1",
+          "description": "Steady-state Plasma Glucose 0 min",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SSPG150",
+          "id": "phv00405824.v2.p1",
+          "description": "Steady-state Plasma Glucose 150 mins",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SSPG160",
+          "id": "phv00405825.v2.p1",
+          "description": "Steady-state Plasma Glucose 160 mins",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SSPG170",
+          "id": "phv00405826.v2.p1",
+          "description": "Steady-state Plasma Glucose 170 mins",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SSPG180",
+          "id": "phv00405827.v2.p1",
+          "description": "Steady-state Plasma Glucose 180 mins",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SSPGMEAN",
+          "id": "phv00405828.v2.p1",
+          "description": "Steady-state Plasma Glucose Mean",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00405785.v1.p1",
+          "description": "Subject Identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00405786.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TG",
+          "id": "phv00405830.v2.p1",
+          "description": "Triglycerides",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TSH",
+          "id": "phv00405848.v2.p1",
+          "description": "Thyroid-Stimulating Hormone",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_tsh_levels",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "URIC",
+          "id": "phv00405841.v2.p1",
+          "description": "Uric Acid",
+          "concept_id": "ncpi:kidney_function_uric_acid",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WAIST",
+          "id": "phv00405792.v2.p1",
+          "description": "Waist Circumference",
+          "concept_id": "topmed:bone_musculoskeletal",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WBC",
+          "id": "phv00405838.v2.p1",
+          "description": "White Blood Cell",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00405790.v2.p1",
+          "description": "Weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WHR",
+          "id": "phv00405794.v2.p1",
+          "description": "Waist Hip Ratio",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "eGFR",
+          "id": "phv00405842.v2.p1",
+          "description": "Estimated Glomerular Giltration Rate",
+          "concept_id": "ncpi:kidney_function_egfr_egfr_generic",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hs_CRP",
+          "id": "phv00405849.v2.p1",
+          "description": "High sensitive C reaction protein",
+          "concept_id": "topmed:crp",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_THRV_Sample_Attributes",
+      "datasetId": "pht008971.v2",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, sequencing center, funding source, TOPMed phase, project, and study name.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00405855.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00405854.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00405859.v2.p1",
+          "description": "Project funding source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00405856.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00405853.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00405858.v2.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00405862.v2.p1",
+          "description": "TOPMed-assigned short study name (1:1 with TOPMed phs number)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00405860.v2.p1",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00405861.v2.p1",
+          "description": "TOPMed Project that funded sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_THRV_Subject",
+      "datasetId": "pht008967.v2",
+      "description": "The subject consent data table contains subject IDs, consent group information, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00405773.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00405775.v2.p1",
+          "description": "Subject ID used in the SUBJECT_SOURCE repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID2",
+          "id": "phv00405777.v2.p1",
+          "description": "Subject ID used in the SUBJECT_SOURCE2 repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00405772.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00405774.v2.p1",
+          "description": "Repository name for dbGaP study also containing this individual",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE2",
+          "id": "phv00405776.v2.p1",
+          "description": "Second repository name for dbGaP study also containing this individual",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_THRV_Pedigree",
+      "datasetId": "pht008968.v2",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and sex of subjects.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00405778.v2.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00405780.v2.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00405781.v2.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00405782.v2.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00405779.v2.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_WGS_THRV_Sample",
+      "datasetId": "pht008969.v2",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00405783.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00405784.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

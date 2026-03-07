@@ -1,0 +1,442 @@
+{
+  "studyId": "phs003431",
+  "studyName": "CIDR-Whole Genome Sequencing: Prospective Birth Cohort to Elucidate Etiology of ADHD in US Minority Children",
+  "tables": [
+    {
+      "tableName": "CIDR_ADHD_Minority_Children_Subject_Phenotypes",
+      "datasetId": "pht015905.v1",
+      "description": "This subject phenotypes data table includes type of delivery, clinical presentation before delivery, mother's medical status/event status during this pregnancy (preeclampsia, eclampsia, chronic hypertension, placental abruption, placenta previa, incompetent cervix, gestational or diabetes mellitus, HELLP syndrome, oligohydramnios, polyhydramnios, meconium in amniotic fluid, preterm contractions), mother's pregnancy history (prior pregnancies, previous deliveries), mother's lifestyle information (smoking history, exposure to passive smoke, alcohol consumption, illicit drug use, stress during lifetime, stress during pregnancy), mother's demographic information (education level, ethnicity, marriage status, maternal age, maternal pre-pregnancy BMI), birth information (gestational age, birth weight status, preterm or term birth, child gender), child's medical status (ADHD, ADHD-Inattentive, ADHD-Hyperactive, age at ADHD diagnosis, ASD, other developmental disabilities).",
+      "variables": [
+        {
+          "name": "ABRUPTIO",
+          "id": "phv00559740.v1.p1",
+          "description": "Abruptio placenta during this pregnancy?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_placental_complications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ADHD",
+          "id": "phv00559768.v1.p1",
+          "description": "The child has ever been diagnosed as attention deficit hyperactivity disorder (ADHD)",
+          "concept_id": "topmed:disease_diagnosis_psychiatric_mental_health",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ADHDhyp",
+          "id": "phv00559770.v1.p1",
+          "description": "The child has ever been diagnosed as hyperactive ADHD?",
+          "concept_id": "topmed:disease_diagnosis_psychiatric_mental_health",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ADHDina",
+          "id": "phv00559769.v1.p1",
+          "description": "The child has ever been diagnosed as inattentive ADHD?",
+          "concept_id": "topmed:disease_diagnosis_psychiatric_mental_health",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ASD",
+          "id": "phv00559771.v1.p1",
+          "description": "The child has ever been diagnosed as autism spectrum disorders (ASD)",
+          "concept_id": "topmed:disease_diagnosis_autism_developmental_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00559758.v1.p1",
+          "description": "Maternal pre-pregnancy BMI",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BWT",
+          "id": "phv00559764.v1.p1",
+          "description": "Birth weight in gram",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_birth_weight",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHTN",
+          "id": "phv00559739.v1.p1",
+          "description": "Mom having chronic hypertension during this pregnancy?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_gestational_hypertension",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLINPRES",
+          "id": "phv00559736.v1.p1",
+          "description": "Mom having any clinical presentation before delivery",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_general_pregnancy_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONT_SMK",
+          "id": "phv00559760.v1.p1",
+          "description": "Mom Continuing smoking during the 2nd and/or 3rd trimester?",
+          "concept_id": "topmed:pregnancy_reproductive_maternal_exposures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DD",
+          "id": "phv00559772.v1.p1",
+          "description": "The child has ever been diagnosed as having other developmental disabilities (DD)",
+          "concept_id": "topmed:disease_diagnosis_autism_developmental_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DELTYPE",
+          "id": "phv00559735.v1.p1",
+          "description": "Type of delivery",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_delivery_method",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETES",
+          "id": "phv00559743.v1.p1",
+          "description": "Mom having gestational or Mellitus diabetes during this pregnancy?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_gestational_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DRUG",
+          "id": "phv00559753.v1.p1",
+          "description": "Mom having any history of illicit drug use during pregnancy?",
+          "concept_id": "topmed:pregnancy_reproductive_maternal_exposures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ECLAMP",
+          "id": "phv00559738.v1.p1",
+          "description": "Mom having eclampsia during this pregnancy?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_preeclampsia_eclampsia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EDU",
+          "id": "phv00559754.v1.p1",
+          "description": "Maternal education level before delivery",
+          "concept_id": "phenx:current_educational_attainment",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "EPISODE",
+          "id": "phv00559748.v1.p1",
+          "description": "Mom having any episodes of preterm contractions during this pregnancy?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_preterm_labor",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETOH",
+          "id": "phv00559752.v1.p1",
+          "description": "Alcohol consumption during this pregnancy",
+          "concept_id": "topmed:pregnancy_reproductive_maternal_exposures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EVER_SMK",
+          "id": "phv00559759.v1.p1",
+          "description": "Mom ever smoking 3 months before pregnancy and/or during pregnancy",
+          "concept_id": "topmed:pregnancy_reproductive_maternal_exposures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GEAA",
+          "id": "phv00559763.v1.p1",
+          "description": "Gestational age in weeks",
+          "concept_id": "topmed:pregnancy_reproductive_gestational_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENSTRE",
+          "id": "phv00559761.v1.p1",
+          "description": "Self-reported maternal stress during general lifetime",
+          "concept_id": "phenx:perceived_stress",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GRAVITY",
+          "id": "phv00559749.v1.p1",
+          "description": "Number of previous pregnancies, including this index pregnancy",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_count_history_total_pregnancies",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HELLP",
+          "id": "phv00559744.v1.p1",
+          "description": "HELLP syndrome during this pregnancy?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_hellp_syndrome",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INCOMP",
+          "id": "phv00559742.v1.p1",
+          "description": "Incompetent cervix during this pregnancy?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_cervical_complications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INDXSTRE",
+          "id": "phv00559762.v1.p1",
+          "description": "Self-reported maternal stress during pregnancy",
+          "concept_id": "phenx:perceived_stress",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "LBW",
+          "id": "phv00559766.v1.p1",
+          "description": "Low birth weight",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_birth_weight",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MAGE",
+          "id": "phv00559757.v1.p1",
+          "description": "Maternal age when delivery",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MARRY",
+          "id": "phv00559756.v1.p1",
+          "description": "Marriage status",
+          "concept_id": "phenx:current_marital_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MECON",
+          "id": "phv00559747.v1.p1",
+          "description": "Meconium in amniotic fluid during this pregnancy?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_fetal_complications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OLIGO",
+          "id": "phv00559745.v1.p1",
+          "description": "Oligohydramnios during this pregnancy?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_amniotic_fluid_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PARITY",
+          "id": "phv00559750.v1.p1",
+          "description": "Number of previous deliveries, not including the index pregnancy",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_count_history_live_births",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POLY",
+          "id": "phv00559746.v1.p1",
+          "description": "Polyhydramnios during this pregnancy?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_amniotic_fluid_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PREECLAM",
+          "id": "phv00559737.v1.p1",
+          "description": "Mom having preeclampsia during this pregnancy?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_preeclampsia_eclampsia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRETERM",
+          "id": "phv00559765.v1.p1",
+          "description": "Preterm or term birth?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_outcomes_gestational_age_term",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PREVIA",
+          "id": "phv00559741.v1.p1",
+          "description": "Placenta previa during this pregnancy?",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_complications_placental_complications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PSMOKE",
+          "id": "phv00559751.v1.p1",
+          "description": "Mom suffers from passive smoking (that is, live with one or more smokers) during pregnancy",
+          "concept_id": "topmed:pregnancy_reproductive_maternal_exposures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00559755.v1.p1",
+          "description": "Maternal ethnicity",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00559767.v1.p1",
+          "description": "Child's gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00559734.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age.ADHD",
+          "id": "phv00559773.v1.p1",
+          "description": "The child's age when ADHD was diagnosed",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ADHD_Minority_Children_Subject",
+      "datasetId": "pht015903.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, biological sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00559728.v1.p1",
+          "description": "Registered consent groups (Data Use Limitations (DUL)) as determined by submitters' Institutional Review Boards (IRB) or equivalent body.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00559729.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00559731.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00559727.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00559730.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ADHD_Minority_Children_Sample_Attributes",
+      "datasetId": "pht015906.v1",
+      "description": "This sample attributes table includes body site, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00559776.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00559775.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00559777.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00559774.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ADHD_Minority_Children_Sample",
+      "datasetId": "pht015904.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00559733.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00559732.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -29,7 +29,7 @@ DEV_LOG_GROUP = /aws/apprunner/jso-ncpi-dataset-catalog/59bf88e6efa543319f5c03df
 PROD_LOG_GROUP = /aws/apprunner/5wu-ncpi-dataset-catalog/d2f7c9715dbc4d6d9b4c3af33f8eefd3/application
 
 .PHONY: help build push-dev push-prod deploy-dev deploy-prod \
-        start stop restart db-reload evals logs-dev logs-prod
+        start stop restart db-reload clean-embeddings evals logs-dev logs-prod
 
 # Default target
 help:
@@ -39,8 +39,9 @@ help:
 	@echo "  start       - Start local API server on :8000 (background)"
 	@echo "  stop        - Stop running local server"
 	@echo "  restart     - Stop + start"
-	@echo "  db-reload   - Rebuild DuckDB index and restart server"
-	@echo "  evals       - Run extract agent evals"
+	@echo "  db-reload         - Rebuild DuckDB index and restart server"
+	@echo "  clean-embeddings  - Delete cached embedding files (forces regeneration)"
+	@echo "  evals             - Run extract agent evals"
 	@echo ""
 	@echo "Docker deploy:"
 	@echo "  build       - Build Docker image locally"
@@ -84,8 +85,14 @@ db-reload: stop
 	@echo "Deleting cached DuckDB index..."
 	@rm -f ../catalog/concept-search.duckdb
 	@echo "Rebuilding index (this may take a moment)..."
-	@.venv/bin/python -c "from concept_search.index import get_index; idx = get_index(); print(f'Index rebuilt: {idx.store.study_count} studies')"
+	@.venv/bin/python -c "import logging; logging.basicConfig(level=logging.INFO); from concept_search.index import get_index; idx = get_index(); print(f'Index rebuilt: {idx.store.study_count} studies')"
 	@$(MAKE) start
+
+# Delete cached embedding files so db-reload regenerates them
+clean-embeddings:
+	@rm -f ../catalog-build/classification/output/concept-embeddings.npy
+	@rm -f ../catalog-build/classification/output/concept-embeddings.sha256
+	@echo "Embedding cache cleared."
 
 # Run extract, resolve, and end-to-end pipeline evals
 evals:
@@ -97,6 +104,10 @@ evals:
 
 # Build Docker image (bakes in git SHA for /health endpoint)
 build:
+	@if [ ! -f ../catalog/concept-search.duckdb ]; then \
+		echo "Error: catalog/concept-search.duckdb not found. Run 'make db-reload' first."; \
+		exit 1; \
+	fi
 	@if [ -n "$$(git -C .. status --porcelain -uno)" ]; then \
 		echo "Error: uncommitted changes. Commit or stash before deploying."; \
 		exit 1; \

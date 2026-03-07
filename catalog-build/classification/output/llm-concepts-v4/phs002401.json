@@ -1,0 +1,154 @@
+{
+  "studyId": "phs002401",
+  "studyName": "High Glucose Macrophage Exosomes Enhance Atherosclerosis by Driving Cellular Proliferation and Hematopoiesis",
+  "tables": [
+    {
+      "tableName": "Hyperglycemia_Atherosclerosis_Sample_Attributes",
+      "datasetId": "pht011149.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, diabetes status, Rutherford classification for peripheral arterial disease (PAD), and collection age.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00487891.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00487890.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00487894.v1.p1",
+          "description": "Age sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETES_TYPE2",
+          "id": "phv00487892.v1.p1",
+          "description": "Diabetes status",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RUTHERFORD",
+          "id": "phv00487893.v1.p1",
+          "description": "Peripheral Arterial Disease status",
+          "concept_id": "ncpi:pad_incident_pad_diagnosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00487889.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Hyperglycemia_Atherosclerosis_Subject_Phenotypes",
+      "datasetId": "pht011148.v1",
+      "description": "This subject phenotypes data table includes affection status, age at enrollment, and hemoglobin A1c (HBA1c) measurement.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00487886.v1.p1",
+          "description": "Case control status of the subject for Peripheral Arterial Disease (PAD), diabetes mellitus, or both",
+          "concept_id": "ncpi:pad_incident_pad_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00487887.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HBA1c",
+          "id": "phv00487888.v1.p1",
+          "description": "Hemoglobin A1c measurement",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_hemoglobin_a1c",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00487885.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Hyperglycemia_Atherosclerosis_Subject",
+      "datasetId": "pht011146.v1",
+      "description": "This subject consent data table includes subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00487881.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00487882.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00487880.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Hyperglycemia_Atherosclerosis_Sample",
+      "datasetId": "pht011147.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and sample aliases. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00487884.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00487883.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

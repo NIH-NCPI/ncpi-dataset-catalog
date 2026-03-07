@@ -1,0 +1,170 @@
+{
+  "studyId": "phs002718",
+  "studyName": "Genetics of Prostate Cancer in Africa",
+  "tables": [
+    {
+      "tableName": "MADCaP_SubSaharan_Africa_Subject_Phenotypes",
+      "datasetId": "pht011771.v1",
+      "description": "This subject phenotypes data table includes case control status of the subject for prostate cancer, race, age, and family history of prostate cancer (n=5 variables; biological father, biological brothers, number of brothers, biological sons, number of sons).",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00495375.v1.p1",
+          "description": "Case control status of the subject for prostate cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_5_YR_CATEGORY",
+          "id": "phv00495377.v1.p1",
+          "description": "Subject age at time of diagnosis, or when designated as a control",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "F2",
+          "id": "phv00495378.v1.p1",
+          "description": "Was your biological father ever diagnosed with prostate cancer",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "F5",
+          "id": "phv00495379.v1.p1",
+          "description": "Were any of your biologically related brothers ever diagnosed with prostate cancer?",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "F5A",
+          "id": "phv00495380.v1.p1",
+          "description": "How many brothers?",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "F8",
+          "id": "phv00495381.v1.p1",
+          "description": "Were any of your biological sons ever diagnosed with prostate cancer?",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "F8A",
+          "id": "phv00495382.v1.p1",
+          "description": "If any of your sons were ever diagnosed with prostate cancer, how many?",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00495376.v1.p1",
+          "description": "Black African ancestry status",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495374.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MADCaP_SubSaharan_Africa_Subject",
+      "datasetId": "pht011769.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00495370.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00495371.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495369.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MADCaP_SubSaharan_Africa_Sample_Attributes",
+      "datasetId": "pht011772.v1",
+      "description": "This sample attributes table includes body site where sample was collected and analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00495385.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00495384.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00495383.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MADCaP_SubSaharan_Africa_Sample",
+      "datasetId": "pht011770.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00495373.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495372.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

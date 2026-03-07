@@ -1,0 +1,202 @@
+{
+  "studyId": "phs001697",
+  "studyName": "Integrative Analysis of Lung Adenocarcinoma in Never Smokers",
+  "tables": [
+    {
+      "tableName": "EAGLE_Never_Smokers_Subject_Phenotypes",
+      "datasetId": "pht010578.v1",
+      "description": "Subject ID, affection status, age, death, tumor grade, tumor histology, status of passive smoking, race, sex, tumor stage, and survival in months of participants with lung adenocarcinoma and involved in the \"Integrative Analysis of Lung Adenocarcinoma in Never Smokers\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00436027.v1.p1",
+          "description": "Exposure status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00436028.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Death",
+          "id": "phv00436033.v1.p1",
+          "description": "Patient death status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GRADE",
+          "id": "phv00436031.v1.p1",
+          "description": "Tumor Grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histology",
+          "id": "phv00436035.v1.p1",
+          "description": "Histological Type",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Passive_Smoking",
+          "id": "phv00436032.v1.p1",
+          "description": "Passive smoking status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00436029.v1.p1",
+          "description": "Race of subject originated",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00436026.v1.p1",
+          "description": "Sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STAGE",
+          "id": "phv00436030.v1.p1",
+          "description": "Clinical stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00436025.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Survival_Months",
+          "id": "phv00436034.v1.p1",
+          "description": "Patient overall survival months",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EAGLE_Never_Smokers_Sample_Attributes",
+      "datasetId": "pht010579.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, histological type of sample, and tumor status of sample obtained from participants with lung adenocarcinoma and involved in the \"Integrative Analysis of Lung Adenocarcinoma in Never Smokers\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00436039.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00436038.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00436037.v1.p1",
+          "description": "Histological type",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00436040.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00436036.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EAGLE_Never_Smokers_Subject",
+      "datasetId": "pht010576.v1",
+      "description": "Subject ID and consent group of participants with lung adenocarcinoma and involved in the \"Integrative Analysis of Lung Adenocarcinoma in Never Smokers\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00436022.v1.p1",
+          "description": "Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00481253.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00436021.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EAGLE_Never_Smokers_Sample",
+      "datasetId": "pht010577.v1",
+      "description": "Subject ID and sample ID of participants with lung adenocarcinoma and involved in the \"Integrative Analysis of Lung Adenocarcinoma in Never Smokers\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00436024.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00436023.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

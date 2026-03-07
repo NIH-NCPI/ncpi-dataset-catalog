@@ -1,0 +1,146 @@
+{
+  "studyId": "phs000792",
+  "studyName": "Oncogenomics of Malignant Peripheral Nerve Sheath Tumors",
+  "tables": [
+    {
+      "tableName": "MPNST_Sample_Attributes",
+      "datasetId": "pht004251.v1",
+      "description": "Sample ID, body site where sample was obtained, analyte type, tumor status of sample, and sequencing center of participants with malignant peripheral nerve sheath tumors and involved in the \"Oncogenomics of Malignant Peripheral Nerve Sheath Tumors\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00217581.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00217580.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00217582.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00217579.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00217583.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MPNST_Subject",
+      "datasetId": "pht004248.v1",
+      "description": "Subject ID, consent group, and affection status of participants with malignant peripheral nerve sheath tumors and involved in the \"Oncogenomics of Malignant Peripheral Nerve Sheath Tumors\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00217572.v1.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00217571.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00217570.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MPNST_Sample",
+      "datasetId": "pht004249.v1",
+      "description": "Subject ID, sample ID, and sample use variable obtained from participants with malignant peripheral nerve sheath tumors and involved in the \"Oncogenomics of Malignant Peripheral Nerve Sheath Tumors\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00217574.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00217575.v1.p1",
+          "description": "Sample use. Array_SNP: SNP genotypes obtained using standard or custom microarrays; Seq_DNA_WholeExome: Whole exome sequencing; Seq_RNA: Whole transcriptome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00217573.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "MPNST_Subject_Phenotypes",
+      "datasetId": "pht004250.v1",
+      "description": "Subject ID, sex, and clinical annotation of tumor subtype of participants with malignant peripheral nerve sheath tumors and involved in the \"Oncogenomics of Malignant Peripheral Nerve Sheath Tumors\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00217576.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "clinical_annotation",
+          "id": "phv00217578.v1.p1",
+          "description": "Clinical annotation of disease association or subtype",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00217577.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

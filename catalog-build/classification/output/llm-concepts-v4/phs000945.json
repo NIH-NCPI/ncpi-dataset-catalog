@@ -1,0 +1,178 @@
+{
+  "studyId": "phs000945",
+  "studyName": "Genomic Characterization of African-American Prostate Cancer",
+  "tables": [
+    {
+      "tableName": "Prostate_Cancer_AA_Sample_Attributes",
+      "datasetId": "pht010148.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, tumor status of sample, primary or metastatic tumor, tumor stage, and sequencing center of participants with prostate cancer and involved in the \"Genomic Characterization of African-American Prostate Cancer\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00430400.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00430399.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00430401.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00430402.v1.p1",
+          "description": "Primary tumor, metastasis or transformed cell line",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_tumor_classification",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00430398.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00430404.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00430403.v1.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Prostate_Cancer_AA_Subject_Phenotypes",
+      "datasetId": "pht010147.v1",
+      "description": "Subject ID, affection status, age onset, age at time of surgery, race, and sex of participants with prostate cancer and involved in the \"Genomic Characterization of African-American Prostate Cancer\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00430393.v1.p1",
+          "description": "Case or control status of the subject for",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_ONSET",
+          "id": "phv00430396.v1.p1",
+          "description": "Disease onset age",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_breast_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_SURGERY",
+          "id": "phv00430397.v1.p1",
+          "description": "Age at time of surgery",
+          "concept_id": "ncpi:surgical_procedure_general_surgery_surgery_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00430395.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00430394.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00430392.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Prostate_Cancer_AA_Subject",
+      "datasetId": "pht010145.v1",
+      "description": "Subject ID, sex, and consent group of participants with prostate cancer and involved in the \"Genomic Characterization of African-American Prostate Cancer\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00430389.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00527563.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00430388.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Prostate_Cancer_AA_Sample",
+      "datasetId": "pht010146.v1",
+      "description": "Subject ID and sample ID of participants with prostate cancer and involved in the \"Genomic Characterization of African-American Prostate Cancer\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00430391.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00430390.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

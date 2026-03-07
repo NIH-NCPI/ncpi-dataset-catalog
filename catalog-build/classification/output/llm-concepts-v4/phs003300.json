@@ -1,0 +1,194 @@
+{
+  "studyId": "phs003300",
+  "studyName": "Small RNA Contents of Extracellular Vesicles from Patients with Cognitive Decline",
+  "tables": [
+    {
+      "tableName": "EVs_Cognitive_Decline_Subject_Phenotypes",
+      "datasetId": "pht013597.v1",
+      "description": "This subject phenotypes data table contains biological sex, age at enrollment, apolipoprotein genotype copies, score on the Mini Mental Status Examination, score on the Dementia Rating Scale, disease status at enrollment and upon follow up, and years between enrollment and follow up.",
+      "variables": [
+        {
+          "name": "AGE_AT_DRAW",
+          "id": "phv00530410.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "APOE",
+          "id": "phv00530411.v1.p1",
+          "description": "Subject's apolipoprotein genotype copies",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASE_STATUS_AT_DRAW",
+          "id": "phv00530414.v1.p1",
+          "description": "Disease status of the subject at enrollment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DRS_AT_DRAW",
+          "id": "phv00530413.v1.p1",
+          "description": "Subject's score on the Dementia Rating Scale at enrollment",
+          "concept_id": "ncpi:cognition_neuropsychological_ratings",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MMSE_AT_DRAW",
+          "id": "phv00530412.v1.p1",
+          "description": "Subject's score on the Mini Mental Status Examination at enrollment",
+          "concept_id": "ncpi:cognition_mmse",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOST_RECENT_DISEASE_STATUS",
+          "id": "phv00530415.v1.p1",
+          "description": "Disease status of the subject upon follow-up",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00530409.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00530408.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEARS_BETWEEN_DRAW_AND_RECENT_DIAGNOSIS",
+          "id": "phv00530416.v1.p1",
+          "description": "Years between enrollment and follow-up",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EVs_Cognitive_Decline_Sample_Attributes",
+      "datasetId": "pht013598.v1",
+      "description": "This sample attributes data table contains biofluid, analyte type, RNA source, RNA isolation kit used, bioscientific version, filtration and extracellular vesicle depletion status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00530419.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BIOFLUID",
+          "id": "phv00530418.v1.p1",
+          "description": "Biofluid",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FLOW_THROUGH_ONLY",
+          "id": "phv00530422.v1.p1",
+          "description": "The sample is filtered and EV depleted",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RNA_ISOLATION_KIT",
+          "id": "phv00530421.v1.p1",
+          "description": "Isolation kit used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RNA_SOURCE",
+          "id": "phv00530420.v1.p1",
+          "description": "RNA source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00530417.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EVs_Cognitive_Decline_Subject",
+      "datasetId": "pht013595.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00530404.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00530405.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00530403.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EVs_Cognitive_Decline_Sample",
+      "datasetId": "pht013596.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and pooled sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00530407.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00530406.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

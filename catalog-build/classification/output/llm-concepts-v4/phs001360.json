@@ -1,0 +1,242 @@
+{
+  "studyId": "phs001360",
+  "studyName": "Genome-Wide Association Study in African-Americans with RA",
+  "tables": [
+    {
+      "tableName": "CLEAR_Subject_Phenotypes",
+      "datasetId": "pht006295.v1",
+      "description": "This subject phenotype table contains subject IDs, sex, Rheumatoid Arthritis (RA) onset age, age at baseline, disease duration, height, weight, cyclic citrullinated peptide (CCP) and rheumatoid factor (RF) IgM status, smoking tobacco and drinking alcohol status, medication and steroid use history, and RA status.",
+      "variables": [
+        {
+          "name": "AgeRA",
+          "id": "phv00290071.v1.p1",
+          "description": "Rheumatoid Arthritis (RA) onset age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AgeScreen",
+          "id": "phv00290072.v1.p1",
+          "description": "Age at baseline",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Alcohol",
+          "id": "phv00290079.v1.p1",
+          "description": "Drink alcohol",
+          "concept_id": "ncpi:ffq_alcoholic_beverages_total_alcohol_intake",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "CCP_status",
+          "id": "phv00290076.v1.p1",
+          "description": "CCP positivity",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_autoimmune_antibodies",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DisDurMonths",
+          "id": "phv00290073.v1.p1",
+          "description": "Disease duration at baseline visit",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Height",
+          "id": "phv00290074.v1.p1",
+          "description": "Height measured at enrollment",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MedUse",
+          "id": "phv00290080.v1.p1",
+          "description": "Medication use history",
+          "concept_id": "ncpi:concomitant_medication_general_medication_use_medication_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RFIgM_status",
+          "id": "phv00290077.v1.p1",
+          "description": "RF positivity",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_autoimmune_antibodies",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00290069.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00290070.v1.p1",
+          "description": "Participant Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SmokingStatus",
+          "id": "phv00290078.v1.p1",
+          "description": "Smoke tobacco or other substance",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Status",
+          "id": "phv00290082.v1.p1",
+          "description": "RA or not RA",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SteroidBL",
+          "id": "phv00290081.v1.p1",
+          "description": "Steroid use history",
+          "concept_id": "ncpi:concomitant_medication_specific_drug_names_corticosteroids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Weight",
+          "id": "phv00290075.v1.p1",
+          "description": "Subject's weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CLEAR_Sample_Attributes",
+      "datasetId": "pht006296.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, histological type, and name of the center which conducted genotyping.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00290085.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00290084.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00290087.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00290086.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00290083.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CLEAR_Subject",
+      "datasetId": "pht006293.v1",
+      "description": "The subject consent file includes subject IDs, consent information, subject source, and affection status of the subject for Rheumatoid Arthritis.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00290064.v1.p1",
+          "description": "Case control status of the subject for Rheumatoid Arthritis",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00290062.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00290061.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00290063.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CLEAR_Sample",
+      "datasetId": "pht006294.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample source.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00290066.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00290067.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00290065.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

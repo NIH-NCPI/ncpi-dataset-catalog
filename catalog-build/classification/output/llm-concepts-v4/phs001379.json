@@ -1,0 +1,281 @@
+{
+  "studyId": "phs001379",
+  "studyName": "Joint Linkage/Association in AMD Genetic Susceptibility",
+  "tables": [
+    {
+      "tableName": "AMD_Susceptibility_Subject_Phenotypes",
+      "datasetId": "pht007062.v1",
+      "description": "This subject phenotype table contains subject IDs, sample IDs, sex, smoking status, race, ethnicity, family IDs, AMD disease status, advance AMD disease phenotype, and age at AMD category.",
+      "variables": [
+        {
+          "name": "AAMD_PHENOTYPE",
+          "id": "phv00325594.v1.p1",
+          "description": "Advanced AMD disease phenotype",
+          "concept_id": "ncpi:ophthalmology_amd_drusen_amd_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_AT _AAMD_CATEGORY",
+          "id": "phv00325595.v1.p1",
+          "description": "Age of participant when disease status (AREDS_CATEGORY) was determined",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AREDS_CATEGORY",
+          "id": "phv00325593.v1.p1",
+          "description": "AMD disease status",
+          "concept_id": "ncpi:ophthalmology_amd_drusen_amd_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DECLARED_ETH",
+          "id": "phv00325591.v1.p1",
+          "description": "Ethnicity- patient declared",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DECLARED_RACE",
+          "id": "phv00325590.v1.p1",
+          "description": "Race- patient declared",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00325592.v1.p1",
+          "description": "Identifier of family pedigree",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00325587.v1.p1",
+          "description": "Unique blood sample identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00325588.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMK_STATUS",
+          "id": "phv00325589.v1.p1",
+          "description": "Smoking status- patient declared",
+          "concept_id": "topmed:ever_smoker_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00325586.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AMD_Susceptibility_Sample_Attributes",
+      "datasetId": "pht007063.v1",
+      "description": "This sample attributes table contains sample IDs, body site, analyte type, tumor status, name of the center which conducted sequencing, sample ID alias used by sequencing center, and WGS batch.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00325598.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00325597.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00325599.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00325596.v1.p1",
+          "description": "Unique blood sample identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00325600.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_SAMPLE_ID",
+          "id": "phv00325601.v1.p1",
+          "description": "Sample ID alias used by sequencing center, if applicable",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WGS_BATCH",
+          "id": "phv00325602.v1.p1",
+          "description": "The batch of WGS performed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AMD_Susceptibility_Pedigree",
+      "datasetId": "pht007060.v1",
+      "description": "The subject pedigree table contains family ID, subject ID, mother ID, father ID, and sex.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00325576.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER_ID",
+          "id": "phv00325578.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER_ID",
+          "id": "phv00325579.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00325580.v1.p1",
+          "description": "Sex",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00325577.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AMD_Susceptibility_Sample",
+      "datasetId": "pht007061.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00325582.v1.p1",
+          "description": "Sample ID available in the individual .bam file headers",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00325583.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00325585.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00325584.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00325581.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AMD_Susceptibility_Subject",
+      "datasetId": "pht007059.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and affection status of the subject for age related macular degeneration (AMD).",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00325575.v1.p1",
+          "description": "Case control status of the subject for AMD",
+          "concept_id": "ncpi:ophthalmology_amd_drusen_amd_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00325574.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00325573.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

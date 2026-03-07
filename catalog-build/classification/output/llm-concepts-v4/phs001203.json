@@ -1,0 +1,359 @@
+{
+  "studyId": "phs001203",
+  "studyName": "Stockholm-Tartu Atherosclerosis Reverse Network Engineering Task (STARNET)",
+  "tables": [
+    {
+      "tableName": "clinical_traits",
+      "datasetId": "pht013518.v1",
+      "description": "This clinical traits data table includes subjects' gender, age, BMI, waist/hip measurements, HbA1c, cholesterol measurements (n=4 variables), CRP, significant CAD, diseased vessels, lesions, syntax score, and Duke CAD index. There are indicators to show if the subject is included in the Nature Cardiovascular Research (PMID: 36276926) and Science (PMID: 27540175) articles.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00530029.v1.p1",
+          "description": "Age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00530030.v1.p1",
+          "description": "BMI",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CRP",
+          "id": "phv00530037.v1.p1",
+          "description": "CRP",
+          "concept_id": "topmed:crp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Duke.CAD.Index",
+          "id": "phv00530042.v1.p1",
+          "description": "Duke.CAD.Index",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HbA1c",
+          "id": "phv00530032.v1.p1",
+          "description": "HbA1c",
+          "concept_id": "phenx:glycosylated_hemoglobin_assay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NCVR",
+          "id": "phv00530043.v1.p1",
+          "description": "Subject is included in Nature Cardiovascular Research, PMID: 36276926",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "P-Chol",
+          "id": "phv00530033.v1.p1",
+          "description": "P-Chol",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00530027.v1.p1",
+          "description": "Patient ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SYNTAX.Score",
+          "id": "phv00530041.v1.p1",
+          "description": "SYNTAX.Score",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Science",
+          "id": "phv00530044.v1.p1",
+          "description": "Subject is included in Science, PMID: 27540175",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Signif.CAD",
+          "id": "phv00530038.v1.p1",
+          "description": "Signif.CAD",
+          "concept_id": "topmed:cad_followup_start_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Waist/Hip",
+          "id": "phv00530031.v1.p1",
+          "description": "Waist/Hip",
+          "concept_id": "phenx:hip_circumference_hip_circumference_v1",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "diseased.vessels",
+          "id": "phv00530039.v1.p1",
+          "description": "Diseased.vessels",
+          "concept_id": "topmed:carotid_stenosis",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "fP-HDL-Chol",
+          "id": "phv00530035.v1.p1",
+          "description": "FP-HDL-Chol",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mmol_l",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fP-LDL-Chol",
+          "id": "phv00530034.v1.p1",
+          "description": "FP-LDL-Chol",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fP-TG",
+          "id": "phv00530036.v1.p1",
+          "description": "FP-TG",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00530028.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lesions",
+          "id": "phv00530040.v1.p1",
+          "description": "Lesions",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "STARNET_Sample_Attributes",
+      "datasetId": "pht005967.v4",
+      "description": "This sample attributes data table includes body site where sample was collected (n=2 variables), analyte type, and histological type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00273490.v4.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00273488.v4.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE_ABBREV",
+          "id": "phv00273489.v4.p1",
+          "description": "Abbreviation used for the body site",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00556152.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273487.v4.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "STARNET_Subject_Phenotypes",
+      "datasetId": "pht012262.v2",
+      "description": "This subject phenotypes data table includes subject's sex, age at samples, and case controls status for coronary artery disease (CAD).",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00503517.v2.p1",
+          "description": "Subject age at sampling",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CASE_CTRL",
+          "id": "phv00503518.v2.p1",
+          "description": "Case control status of the subject for Coronary Artery Disease, verified by SYNTAX angiographic score values of zero.",
+          "concept_id": "topmed:cad_followup_start_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00503516.v2.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00503515.v2.p1",
+          "description": "Patient ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "STARNET_Subject",
+      "datasetId": "pht005965.v3",
+      "description": "This subject consent data table includes subject IDs, consent group information, and subjects' sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00273483.v3.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00503514.v2.p1",
+          "description": "Patient gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273482.v3.p1",
+          "description": "Patient ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "STARNET_Sample",
+      "datasetId": "pht005966.v4",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "POOLED_SAMPLE_ID",
+          "id": "phv00556389.v1.p1",
+          "description": "Pooled Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273485.v4.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273484.v4.p1",
+          "description": "Patient ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "mortality",
+      "datasetId": "pht016297.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "Actual.disease.or.condition.leading.to.death",
+          "id": "phv00570567.v1.p1",
+          "description": "Actual disease or condition leading to death (ICD code)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Main.disease.which.lead.to.death",
+          "id": "phv00570566.v1.p1",
+          "description": "Main disease which leads to death (ICD code)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00570565.v1.p1",
+          "description": "Patient ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "survival",
+      "datasetId": "pht015969.v1",
+      "description": "This survival data table includes subjects' year of death.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00560313.v1.p1",
+          "description": "Patient ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Time.of.death..according.to.01.02.2025.",
+          "id": "phv00560314.v1.p1",
+          "description": "Year of death",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

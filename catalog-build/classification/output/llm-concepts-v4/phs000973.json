@@ -1,0 +1,226 @@
+{
+  "studyId": "phs000973",
+  "studyName": "The Genomic Landscape of Juvenile Myelomonocytic Leukemia",
+  "tables": [
+    {
+      "tableName": "JMML_Subject_Phenotypes",
+      "datasetId": "pht004989.v1",
+      "description": "This subject phenotype table contains subject ID, gender, age, primary disease, laboratory measurements (n= 7 variables; white blood count, absolute monocyte count, platelet count, fetal hemoglobin levels, missing a copy of chromosome 7 or not,  abnomal enlargement of the spleen or not,  and abnomal enlargement of the liver or not), patient treatment, outcome of the treatment, and status of patient at the time of study.",
+      "variables": [
+        {
+          "name": "Absolute_Monocyte_Count",
+          "id": "phv00253303.v1.p1",
+          "description": "Blood absolute monocyte count",
+          "concept_id": "topmed:monocyte_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_months",
+          "id": "phv00253301.v1.p1",
+          "description": "Age of patient in number of months",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Fetal_hemoglobin",
+          "id": "phv00253305.v1.p1",
+          "description": "Fetal hemoglobin levels",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Gender",
+          "id": "phv00252933.v1.p1",
+          "description": "Participant's gender as Male or Female",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hepatomegaly",
+          "id": "phv00253308.v1.p1",
+          "description": "Did the patient prensent with an abnomal enlargement of the liver?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Monosomy_7",
+          "id": "phv00253306.v1.p1",
+          "description": "Is the patient missing a copy of chromosome 7?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Outcome",
+          "id": "phv00253310.v1.p1",
+          "description": "The patient outcome as it relates to the treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Platelets",
+          "id": "phv00253304.v1.p1",
+          "description": "Blood platelet count",
+          "concept_id": "topmed:platelet_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary Disease",
+          "id": "phv00252934.v1.p1",
+          "description": "Primary disease of patient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00252932.v1.p1",
+          "description": "Unique Participant Identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Splenomegaly",
+          "id": "phv00253307.v1.p1",
+          "description": "Did the patient prensent with an abnomal enlargement of the spleen?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Status",
+          "id": "phv00253311.v1.p1",
+          "description": "Status of patient at the time of study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Treatment",
+          "id": "phv00253309.v1.p1",
+          "description": "The patient treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "White_Blood_Count",
+          "id": "phv00253302.v1.p1",
+          "description": "White blood count",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "JMML_Sample_Attributes",
+      "datasetId": "pht004990.v1",
+      "description": "This sample attributes table contains sample ID, sample type, sample origin, analyte type, and tissue type.",
+      "variables": [
+        {
+          "name": "ANALYTE_Type",
+          "id": "phv00252938.v1.p1",
+          "description": "Molecular analyte",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00252935.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample Origin",
+          "id": "phv00252937.v1.p1",
+          "description": "Differentiates tumor and normal sample origin from patient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample Type",
+          "id": "phv00252936.v1.p1",
+          "description": "Indicates the Tumor / Normal status of a sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tissue_Type",
+          "id": "phv00253312.v1.p1",
+          "description": "The tissue type of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "JMML_Sample",
+      "datasetId": "pht004988.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00252930.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00252931.v1.p1",
+          "description": "Sample use type. Seq_DNA_SNP_MAF_Ind: Sample(s) were used to generate aggregate mutation annotation file (.maf) with individual SNP genotypes; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00252929.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "JMML_Subject",
+      "datasetId": "pht004987.v1",
+      "description": "The subject consent file includes subject IDs and consent information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00252928.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00252927.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

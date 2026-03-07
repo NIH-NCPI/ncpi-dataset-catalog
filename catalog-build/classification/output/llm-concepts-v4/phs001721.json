@@ -1,0 +1,186 @@
+{
+  "studyId": "phs001721",
+  "studyName": "NIDDK IBD Genetics Consortium Repository Immunochip",
+  "tables": [
+    {
+      "tableName": "IBDGC_Repo_IC_Subject_Phenotypes",
+      "datasetId": "pht009719.v1",
+      "description": "This subject phenotype table includes subject's sex, ancestry (n=3 variables; race, hispanic, and jewish ancestry), IBD diagnosis, and indicator for controls.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00421629.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "control",
+          "id": "phv00421635.v1.p1",
+          "description": "Indicator for controls",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diag",
+          "id": "phv00421634.v1.p1",
+          "description": "IBD diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hispanic",
+          "id": "phv00421632.v1.p1",
+          "description": "Hispanic ethnicity of participant (self-reported)",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "jewish",
+          "id": "phv00421633.v1.p1",
+          "description": "Participant has at least two Jewish grandparents",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00421631.v1.p1",
+          "description": "Race of participant (self-reported)",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00421630.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IBDGC_Repo_IC_Subject",
+      "datasetId": "pht009717.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, affection status for inflammatory bowel disease (IBD), and subject aliases to the NIDDK IBDGC Repository.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00421624.v1.p1",
+          "description": "Case control status of the subject for Inflammatory Bowel Disease",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_inflammatory_bowel_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00421623.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00421626.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00421622.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00421625.v1.p1",
+          "description": "Source repository where subjects originate. NIDDK Central Repository - <a href=\"https://repository.niddk.nih.gov/home/\">https://repository.niddk.nih.gov/home/</a>",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IBDGC_Repo_IC_Sample_Attributes",
+      "datasetId": "pht009720.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, and histological type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00421638.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00421637.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00421640.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00421639.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00421636.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IBDGC_Repo_IC_Sample",
+      "datasetId": "pht009718.v1",
+      "description": "This data table contains mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00421628.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00421627.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

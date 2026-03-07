@@ -1,0 +1,123 @@
+{
+  "studyId": "phs001563",
+  "studyName": "Blood Handling and Leukocyte Isolation Methods Impact the Global Transcriptome of Immune Cells",
+  "tables": [
+    {
+      "tableName": "Blood_Handling_Sample_Attributes",
+      "datasetId": "pht008324.v1",
+      "description": "Sample Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00394870.v1.p1",
+          "description": "Analyte measured",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "HEALTHY_OR_ICH",
+          "id": "phv00394866.v1.p1",
+          "description": "Leukocytes isolated from healthy or ICH patients",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IMMUNE_CELL",
+          "id": "phv00394867.v1.p1",
+          "description": "Immune cell type",
+          "concept_id": "topmed:wbc_ncnc_bld",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "ISOLATION_METHOD",
+          "id": "phv00394868.v1.p1",
+          "description": "Method of isolation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00394865.v1.p1",
+          "description": "Sequencing ID for each sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STORAGE_CONDITION",
+          "id": "phv00394869.v1.p1",
+          "description": "Method of blood storage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Blood_Handling_Subject",
+      "datasetId": "pht008322.v1",
+      "description": "Subject - Consent - Affection Status Information",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00394861.v1.p1",
+          "description": "Case (intracerebral hemorrhage",
+          "concept_id": "ncpi:disease_diagnosis_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00394860.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00394859.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Blood_Handling_Sample",
+      "datasetId": "pht008323.v1",
+      "description": "Subject - Sample Mapping - Sample Use information",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00394863.v1.p1",
+          "description": "Sequencing ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00394862.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00394864.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

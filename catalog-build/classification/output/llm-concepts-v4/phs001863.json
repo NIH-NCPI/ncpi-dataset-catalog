@@ -1,0 +1,458 @@
+{
+  "studyId": "phs001863",
+  "studyName": "Randomized Phase II 2 x 2 Factorial Trial of the Addition of Carboplatin +/- Bevacizumab to Neoadjuvant Weekly Paclitaxel Followed by Dose-Dense AC in Hormone Receptor-Poor/HER2-Negative Resectable Breast Cancer",
+  "tables": [
+    {
+      "tableName": "CALGB_40603_Subject_Phenotypes",
+      "datasetId": "pht009385.v1",
+      "description": "This subject phenotype table provides the following information for the subject: age, race, menopausal status, treatment arm, tumor grade and cancer disease stage, presence or absence of cancer cell molecular markers, anti-cancer drug given, lymph node biopsy results, recovery status, residual cancer burden, and primary tumor size.",
+      "variables": [
+        {
+          "name": "AGE_C",
+          "id": "phv00417470.v1.p1",
+          "description": "Age category",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ClinicalN",
+          "id": "phv00417474.v1.p1",
+          "description": "Clinical N stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ClinicalT",
+          "id": "phv00417473.v1.p1",
+          "description": "Clincal T stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ER",
+          "id": "phv00417475.v1.p1",
+          "description": "Estrogen Receptor Status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FactorA",
+          "id": "phv00417480.v1.p1",
+          "description": "Was carboplatin given? Factor A",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_platinum_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FactorB",
+          "id": "phv00417481.v1.p1",
+          "description": "Was Bevacizumab given? Factor B",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_therapeutic_agents",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GRADE",
+          "id": "phv00417472.v1.p1",
+          "description": "Tumor grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HER2FISH",
+          "id": "phv00417478.v1.p1",
+          "description": "FISH Her2-neu results",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_her2_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HER2IHC",
+          "id": "phv00417479.v1.p1",
+          "description": "IHC Her2-neu results",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_her2_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IndRx",
+          "id": "phv00417469.v1.p1",
+          "description": "Treatment Arm",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MENO",
+          "id": "phv00417477.v1.p1",
+          "description": "Menopausal Status",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_age_at_menopause",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NodeAxilEXAM",
+          "id": "phv00417487.v1.p1",
+          "description": "Number of axillary nodes examined",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_lymph_node_examination",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NodeAxilPOS",
+          "id": "phv00417486.v1.p1",
+          "description": "Number of positive axillary nodes",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_lymph_node_examination",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NodeAxill",
+          "id": "phv00417485.v1.p1",
+          "description": "Was ALND done?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_surgery",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NodeSentEXAM",
+          "id": "phv00417484.v1.p1",
+          "description": "Number of SLN examined",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_lymph_node_examination",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NodeSentPOS",
+          "id": "phv00417483.v1.p1",
+          "description": "Number of postitive SLNs",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_lymph_node_examination",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NodeSentinel",
+          "id": "phv00417482.v1.p1",
+          "description": "Was SLN done?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_surgery",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PGR",
+          "id": "phv00417476.v1.p1",
+          "description": "Progesterone Receptor Status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_progesterone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00494944.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RCB",
+          "id": "phv00417493.v1.p1",
+          "description": "Residual Cancer Burden",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_treatment_response",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RCBclass",
+          "id": "phv00417494.v1.p1",
+          "description": "Residual Cancer Burden Class",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_treatment_response",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00417468.v1.p1",
+          "description": "De-identified subject identification number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "StageGroup",
+          "id": "phv00417490.v1.p1",
+          "description": "Pathological Stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "StageN",
+          "id": "phv00417489.v1.p1",
+          "description": "N Stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "StageT",
+          "id": "phv00417488.v1.p1",
+          "description": "T Stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TsizeMAMM",
+          "id": "phv00417496.v1.p1",
+          "description": "Primary tumor size (mammogram)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TsizeMRI",
+          "id": "phv00417498.v1.p1",
+          "description": "Primary tumor size (MRI)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TsizePE",
+          "id": "phv00417495.v1.p1",
+          "description": "Primary tumor size (PE)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TsizeULTRA",
+          "id": "phv00417497.v1.p1",
+          "description": "Primay tumor size (ultrasound)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WHITE",
+          "id": "phv00417471.v1.p1",
+          "description": "Race=White?",
+          "concept_id": "ncpi:race_us_white_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "efs_stat",
+          "id": "phv00420531.v1.p1",
+          "description": "Event free survival status (event is either death by any cause or recurrence - local or distant)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_event_free_survival",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "efs_time",
+          "id": "phv00420532.v1.p1",
+          "description": "Time to first event (event is either death by any cause or recurrence - local or distant)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_event_free_survival",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pCR_BrAx",
+          "id": "phv00417492.v1.p1",
+          "description": "PCR in the breast and axilla",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_pathological_response",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pCR_Breast",
+          "id": "phv00417491.v1.p1",
+          "description": "PCR in the breast",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_pathological_response",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CALGB_40603_Sample_Attributes",
+      "datasetId": "pht009386.v1",
+      "description": "This sample attributes table includes sample analyte type, sample tumor status, sample histological type, tumor metastatic status, body site where sample was collected, primary tumor location, tumor treatment, time of tumor collection, tumor clinical stage, tumor metastatic potential (PAM50 status), and sequencing center information.",
+      "variables": [
+        {
+          "name": "Analyte_Type",
+          "id": "phv00417500.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histological_Type",
+          "id": "phv00417502.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histotype",
+          "id": "phv00417503.v1.p1",
+          "description": "Histology",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Is_Tumor",
+          "id": "phv00417501.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_Metastatic_Normal",
+          "id": "phv00417504.v1.p1",
+          "description": "Primary tumor, metastatic tumor, or normal blood",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_Tumor_Location",
+          "id": "phv00417506.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00417499.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_Body_Site",
+          "id": "phv00417505.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sequencing_Center",
+          "id": "phv00417511.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Stra1_Stage",
+          "id": "phv00417509.v1.p1",
+          "description": "Clinical (pre-NST) stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tumor_Collection",
+          "id": "phv00417508.v1.p1",
+          "description": "Timing of tumor collection, pre or post surgery",
+          "concept_id": "topmed:cancer_diagnosis_cancer_clinical_data",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Tumor_Subtype_PAM50",
+          "id": "phv00417510.v1.p1",
+          "description": "Tumor subtype by PAM50",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_molecular_subtypes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tumor_Treatment",
+          "id": "phv00417507.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CALGB_40603_Subject",
+      "datasetId": "pht009383.v1",
+      "description": "This subject consent data table contains subject IDs, consent group, subject source, source subject IDs, and subject's affection status information.",
+      "variables": [
+        {
+          "name": "Consent",
+          "id": "phv00417459.v1.p1",
+          "description": "Consent group as determined by DAC; Main Study Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00417461.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00417458.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00417460.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CALGB_40603_Sample",
+      "datasetId": "pht009384.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. It also includes the sample source and source sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00417464.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00417463.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

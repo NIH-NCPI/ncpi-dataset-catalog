@@ -1,0 +1,985 @@
+{
+  "studyId": "phs002185",
+  "studyName": "Genome-Wide Association Study of Genetic Susceptibility for Graft-vs-Host Disease Cohort 1",
+  "tables": [
+    {
+      "tableName": "Recipient_Phenotype",
+      "datasetId": "pht010969.v2",
+      "description": "This recipient subject phenotype table contains subject IDs, donor subject IDs, age, donor age, sex, race, ethnicity, disease diagnosis, disease status prior to transplant, AML, ALL, and MDS disease status prior to transplant, disease status prior to transplant in AML, ALL and MDS patients, months from diagnosis to transplant, year of transplant from 2000 to 2020, Lansky performance score (for age <16), Karnofsky performance score (for age >=16), HCT-CI score (continuous), donor-recipient cytomegalovirus (CMV) status, GVHD prophylaxis, anti-thymocyte globulin (ATG) or campath, graft type, height, weight, BMI, donor-recipient sex match, ABO blood type, donor-recipient ABO type match, HLA 8/8 match, conditioning intensity, MAC regimens or fewer categories, total body irradiation (TBI) use, all regimens, TBI fractionated, TBI dose, survival status, survival interval in months, death before 1 year post-bone marrow transplant (BMT), relapse post-BMT, transplant related mortality (TRM) post-BMT, leukemia-free survival (LFS), Relapse/TRM/LFS interval in months at any time point post-BMT or a year, relapse, TRM, or death before 1 year post-BMT, grades II-IV or III-IV acute GVHD anytime post-BMT, death without grades II-IV or III-IV acute GVHD anytime post-BMT, months from BMT to grades II-IV or III-IV acute GVHD, chronic GVHD anytime post-BMT, death without chronic GVHD anytime post-BMT, months from BMT to chronic GVHD, acute GVHD (max severity of skin, lower and upper intestinal tract, and liver involvements), chronic GVHD (sclerosis of skin, other skin or hair, eye, mouth, bronchiolitis obliterans, other lung, gastrointestinal tract, liver, musculoskeletal, thrombocytopenia, eosinophilia, autoantibodies, other hematologic, serositis, weight loss, and other organ involvements), and primary, second, third, fourth, fifth, sixth, and seventh causes of death reported by center.",
+      "variables": [
+        {
+          "name": "ABOTYPER",
+          "id": "phv00481972.v2.p1",
+          "description": "Recipient ABO blood type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00481939.v2.p1",
+          "description": "Recipient age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_CAT",
+          "id": "phv00481940.v2.p1",
+          "description": "Recipient age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGVHD24",
+          "id": "phv00481994.v2.p1",
+          "description": "Grade II-IV acute GVHD anytime post-BMT",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AGVHD34",
+          "id": "phv00481996.v2.p1",
+          "description": "Grade III-IV acute GVHD anytime post-BMT",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ALIVERH1",
+          "id": "phv00482006.v2.p1",
+          "description": "Acute GVHD, max liver involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ALSTATPR",
+          "id": "phv00481950.v2.p1",
+          "description": "ALL disease status prior to transplant",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ALWGUTH1",
+          "id": "phv00482004.v2.p1",
+          "description": "Acute GVHD, max lower intestinal tract involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AMSTATPR",
+          "id": "phv00481949.v2.p1",
+          "description": "AML disease status prior to transplant",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ASKINH1",
+          "id": "phv00482003.v2.p1",
+          "description": "Acute GVHD, max severity of skin involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ATGCAMPATHGP",
+          "id": "phv00481963.v2.p1",
+          "description": "ATG or Campath",
+          "concept_id": "ncpi:concomitant_medication_transplant_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AUPGUTH1",
+          "id": "phv00482005.v2.p1",
+          "description": "Acute GVHD, max upper intestinal tract involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00481967.v2.p1",
+          "description": "Recipient BMI (kg/m2)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_CAT",
+          "id": "phv00481968.v2.p1",
+          "description": "Recipient BMI, categorized: Children under 2 are \"normal\", children 2-20 are \"underweight\" if below the 5th percentile, \"normal\" if between 5-85th percentiles, \"overweight\" if between 85 and 95th percentiles, and \"obese\" if >=95th percentile. Adults categorized such that <18.5 is \"underweight\", 18.5-24.99 is \"normal\", 25 - 29.99 is \"overweight\", and >=30 is \"obese\". Missing BMI values are categorized as \"normal\"",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CGAUTH1",
+          "id": "phv00482018.v2.p1",
+          "description": "Chronic GVHD, autoantibodies",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGBRONH1",
+          "id": "phv00482011.v2.p1",
+          "description": "Chronic GVHD, bronchiolitis obliterans",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGEOSIH1",
+          "id": "phv00482017.v2.p1",
+          "description": "Chronic GVHD, eosinophillia",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGEYEH1",
+          "id": "phv00482009.v2.p1",
+          "description": "Chronic GVHD, Eye involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGGIH1",
+          "id": "phv00482013.v2.p1",
+          "description": "Chronic GVHD, gastrointestinal tract involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGLIVH1",
+          "id": "phv00482014.v2.p1",
+          "description": "Chronic GVHD, liver involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGMOUH1",
+          "id": "phv00482010.v2.p1",
+          "description": "Chronic GVHD, mouth involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGMUSKH1",
+          "id": "phv00482015.v2.p1",
+          "description": "Chronic GVHD, musculoskeletal involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGOHEMH1",
+          "id": "phv00482019.v2.p1",
+          "description": "Chronic GVHD, other hematologic involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGOLUNH1",
+          "id": "phv00482012.v2.p1",
+          "description": "Chronic GVHD, other lung involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGOSKIH1",
+          "id": "phv00482008.v2.p1",
+          "description": "Chronic GVHD, other skin or hair involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGOTHOH1",
+          "id": "phv00482022.v2.p1",
+          "description": "Chronis GVHD, other organ involvement",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGSCLEH1",
+          "id": "phv00482007.v2.p1",
+          "description": "Chronic GVHD, sclerosis of skin",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGSEROH1",
+          "id": "phv00482020.v2.p1",
+          "description": "Chronic GVHD, serositis",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGTHROH1",
+          "id": "phv00482016.v2.p1",
+          "description": "Chronic GVHD, thrombocytopenia",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGVHD",
+          "id": "phv00482000.v2.p1",
+          "description": "Chronic GVHD anytime post-BMT",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CGWTLOH1",
+          "id": "phv00482021.v2.p1",
+          "description": "Chronic GVHD, weight loss",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONDINT",
+          "id": "phv00481975.v2.p1",
+          "description": "Conditioning intensity",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONDLIST",
+          "id": "phv00481979.v2.p1",
+          "description": "Detailed list of all regimens",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DEAD_1Y",
+          "id": "phv00481984.v2.p1",
+          "description": "Death before 1 year post-BMT",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DEAD_OVERALL",
+          "id": "phv00481982.v2.p1",
+          "description": "Survival status - overall at any timepoint post-BM",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISEASE",
+          "id": "phv00481945.v2.p1",
+          "description": "Diagnosis",
+          "concept_id": "ncpi:disease_diagnosis_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISTATAML_ALL",
+          "id": "phv00481952.v2.p1",
+          "description": "Disease status prior to transplant in AML and ALL patients",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISTATD",
+          "id": "phv00481948.v2.p1",
+          "description": "Disease status prior to transplant, calculated from \"distatgp2\", where \"Intermediate\" cases are placed in \"Early\" category",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISTATD_AML_ALL",
+          "id": "phv00481953.v2.p1",
+          "description": "Disease status prior to transplant in AML and ALL patients, where \"intermediate\" is categorized as \"early\"",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISTATGP",
+          "id": "phv00481946.v2.p1",
+          "description": "Disease status prior to transplant",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISTATGP2",
+          "id": "phv00481947.v2.p1",
+          "description": "Disease status prior to transplant, calculated from \"distatgp\"",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISTATMDS",
+          "id": "phv00481954.v2.p1",
+          "description": "Disease status prior to transplant in MDS",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DNRAGE",
+          "id": "phv00481941.v2.p1",
+          "description": "Donor age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DONOR_SUBJECT_ID",
+          "id": "phv00481938.v2.p1",
+          "description": "Donor subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DRABOMATCH",
+          "id": "phv00481973.v2.p1",
+          "description": "Donor-recipient ABO type match",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DRCMVPR",
+          "id": "phv00481961.v2.p1",
+          "description": "Donor-recipient CMV status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DTHPRIM",
+          "id": "phv00482023.v2.p1",
+          "description": "Primary cause of death reported by center",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DTHPRIM2",
+          "id": "phv00482025.v2.p1",
+          "description": "Second cause of death reported by center",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DTHPRIM3",
+          "id": "phv00482027.v2.p1",
+          "description": "Third cause of death reported by center",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DTHPRIM4",
+          "id": "phv00482029.v2.p1",
+          "description": "Fourth cause of death reported by center",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DTHPRIM5",
+          "id": "phv00482031.v2.p1",
+          "description": "Fifth cause of death reported by center",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DTHPRIM6",
+          "id": "phv00482033.v2.p1",
+          "description": "Sixth cause of death reported by center",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DTHPRIM7",
+          "id": "phv00482035.v2.p1",
+          "description": "Seventh cause of death reported by center",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DWOAGVHD24",
+          "id": "phv00481995.v2.p1",
+          "description": "Death without Grade II-IV acute GVHD anytime post-BMT",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DWOAGVHD34",
+          "id": "phv00481997.v2.p1",
+          "description": "Death without Grade III-IV acute GVHD anytime post-BMT",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DWOCGVHD",
+          "id": "phv00482001.v2.p1",
+          "description": "Death wihtout chronic GVHD anytime post-BMT",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ETHGP",
+          "id": "phv00481944.v2.p1",
+          "description": "Recipient ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GRAFTYPE",
+          "id": "phv00481964.v2.p1",
+          "description": "Graft type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GVHDGP",
+          "id": "phv00481962.v2.p1",
+          "description": "GVHD prophylaxis",
+          "concept_id": "ncpi:concomitant_medication_transplant_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HCTCI",
+          "id": "phv00481960.v2.p1",
+          "description": "HCT-CI score (continuous)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HLAMATCH8",
+          "id": "phv00481974.v2.p1",
+          "description": "Is HLA 8/8 match?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HTPR",
+          "id": "phv00481965.v2.p1",
+          "description": "Recipient height in cm",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INTDXTX",
+          "id": "phv00481955.v2.p1",
+          "description": "Time from diagnosis to transplant, months",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INTXAGVHD24",
+          "id": "phv00481998.v2.p1",
+          "description": "Time from BMT to grade II-IV acute GVHD, months",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INTXAGVHD34",
+          "id": "phv00481999.v2.p1",
+          "description": "Time from BMT to grade III-IV acute GVHD, months",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INTXCGVHD",
+          "id": "phv00482002.v2.p1",
+          "description": "Time from BMT to chronic GVHD, months",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INTXREL_1Y",
+          "id": "phv00481993.v2.p1",
+          "description": "Rel/TRM/LFS interval in months at 1 year",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INTXREL_OVERALL",
+          "id": "phv00481989.v2.p1",
+          "description": "Rel/TRM/LFS interval in months - overall at any timepoint post-BMT",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INTXSURV_1Y",
+          "id": "phv00481985.v2.p1",
+          "description": "Survival interval in months at 1 year",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INTXSURV_OVERALL",
+          "id": "phv00481983.v2.p1",
+          "description": "Survival interval in months - overall at any time point post-BMT",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "KPS",
+          "id": "phv00481959.v2.p1",
+          "description": "Karnofsky performance score (for age >=16)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LFS_1Y",
+          "id": "phv00481992.v2.p1",
+          "description": "Relapse or death before 1 year post-BMT",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "LFS_OVERALL",
+          "id": "phv00481988.v2.p1",
+          "description": "Leukemia-free survival overall- anytime post-BMT",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "LPS",
+          "id": "phv00481958.v2.p1",
+          "description": "Lansky performance score (for age <16)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MDSTATPR",
+          "id": "phv00481951.v2.p1",
+          "description": "MDS disease status prior to transplant",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MYELOREG1",
+          "id": "phv00481976.v2.p1",
+          "description": "Detailed list of MAC regimens only",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MYELOREG2",
+          "id": "phv00481977.v2.p1",
+          "description": "Fewer categories than myeloreg1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACEGP",
+          "id": "phv00481943.v2.p1",
+          "description": "Recipient race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REL_1Y",
+          "id": "phv00481990.v2.p1",
+          "description": "Relapse before 1 year post-BMT",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "REL_OVERALL",
+          "id": "phv00481986.v2.p1",
+          "description": "Relapse post-BMT",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00481942.v2.p1",
+          "description": "Patient sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEXMM",
+          "id": "phv00481970.v2.p1",
+          "description": "Indicates whether donor-recipient sex matched",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEXMM4",
+          "id": "phv00481969.v2.p1",
+          "description": "Donor-recipient sex match, where M-F is male donor, female recipient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEXMMDUMMY",
+          "id": "phv00481971.v2.p1",
+          "description": "Indicates if the donor was female and the recipient was male",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00481937.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TBI",
+          "id": "phv00481978.v2.p1",
+          "description": "TBI use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TBIDOSE",
+          "id": "phv00481981.v2.p1",
+          "description": "TBI dose (cGy)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TBIFX",
+          "id": "phv00481980.v2.p1",
+          "description": "TBI fractionated",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TCCOD1GEN",
+          "id": "phv00482024.v2.p1",
+          "description": "Primary cause of death reported by center, grouped",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TCCOD2GEN",
+          "id": "phv00482026.v2.p1",
+          "description": "Second cause of death reported by center, grouped",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TCCOD3GEN",
+          "id": "phv00482028.v2.p1",
+          "description": "Third cause of death reported by center, grouped",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TCCOD4GEN",
+          "id": "phv00482030.v2.p1",
+          "description": "Fourth cause of death reported by center, grouped",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TCCOD5GEN",
+          "id": "phv00482032.v2.p1",
+          "description": "Fifth cause of death reported by center, grouped",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TCCOD6GEN",
+          "id": "phv00482034.v2.p1",
+          "description": "Sixth cause of death reported by center, grouped",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TCCOD7GEN",
+          "id": "phv00482036.v2.p1",
+          "description": "Seventh cause of death reported by center, grouped",
+          "concept_id": "ncpi:disease_diagnosis_death_causes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TRM_1Y",
+          "id": "phv00481991.v2.p1",
+          "description": "Transplant related mortality before 1 year post-BMT",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TRM_OVERALL",
+          "id": "phv00481987.v2.p1",
+          "description": "Transplant related mortality post-BMT",
+          "concept_id": "ncpi:disease_diagnosis_transplant_complications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WTPR",
+          "id": "phv00481966.v2.p1",
+          "description": "Recipient actual weight in kg",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEARTX",
+          "id": "phv00481956.v2.p1",
+          "description": "Year of transplant (range 2000 to 2020)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEARTX_CAT",
+          "id": "phv00481957.v2.p1",
+          "description": "Year of transplant, categorized by year and cohort",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Donor_Phenotype",
+      "datasetId": "pht010968.v2",
+      "description": "This donor subject phenotype table contains subject IDs, sex, age, race, ethnicity, and ABO blood type.",
+      "variables": [
+        {
+          "name": "ABOTYPED",
+          "id": "phv00481936.v2.p1",
+          "description": "Donor ABO blood type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DNRAGE",
+          "id": "phv00481933.v2.p1",
+          "description": "Donor age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DNRETHGP",
+          "id": "phv00481935.v2.p1",
+          "description": "Donor ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_donor_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DNRRACEGP",
+          "id": "phv00481934.v2.p1",
+          "description": "Donor race",
+          "concept_id": "ncpi:race_us_donor_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DNRSEX",
+          "id": "phv00481932.v2.p1",
+          "description": "Donor gender",
+          "concept_id": "ncpi:annotated_sex_donor_sex",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00481931.v2.p1",
+          "description": "Donor subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_GVHD_Subject",
+      "datasetId": "pht010966.v2",
+      "description": "The subject consent file includes subject IDs, consent information, sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00481926.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00491907.v2.p1",
+          "description": "Biological Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00481928.v2.p1",
+          "description": "Subject source ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00481925.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00481927.v2.p1",
+          "description": "Subject source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_GVHD_Sample_Attributes",
+      "datasetId": "pht010970.v2",
+      "description": "This sample attributes table contains sample IDs, body site where sample was collected, analyte type, histological type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00482039.v2.p1",
+          "description": "Analyte type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00482038.v2.p1",
+          "description": "Collection site of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00482040.v2.p1",
+          "description": "Type of cell or tissue type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00482041.v2.p1",
+          "description": "Tumor status of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00482037.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_GVHD_Sample",
+      "datasetId": "pht010967.v2",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00481930.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00481929.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "studyId": "phs002461",
+  "studyName": "Single-Cell Analysis of Human Adipogenesis",
+  "tables": [
+    {
+      "tableName": "Adipogenesis_WAT_BAT_Sample_Attributes",
+      "datasetId": "pht011691.v2",
+      "description": "This sample attributes data table contains body site, analyte type, tumor status, anatomical location of sample collection within neck, type of preadipocyte used, days into adipogenic differentiation at RNA-Seq analysis, sequencing details (n=5 variables; technique, chemistry, software, QC status, mapped reads for quantification, whether samples are multiplexed), and additional sample comments.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00494952.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANATOMICAL_LOCATION",
+          "id": "phv00494954.v2.p1",
+          "description": "Anatomical location for the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00494951.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CELL_TYPE",
+          "id": "phv00494955.v2.p1",
+          "description": "Type of preadipocyte used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CHEMISTRY",
+          "id": "phv00494958.v2.p1",
+          "description": "Sequencing chemistry used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COMMENTS",
+          "id": "phv00494962.v2.p1",
+          "description": "Additional information about samples. Includes information about demultiplexing for multiplexed samples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DAY_OF_HARVESTATION",
+          "id": "phv00494956.v2.p1",
+          "description": "How many days into adipogenic differentiation was RNA-seq performed",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00494953.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MULTIPLEXED",
+          "id": "phv00495172.v2.p1",
+          "description": "Are samples multiplexed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PIPELINE",
+          "id": "phv00494959.v2.p1",
+          "description": "Read quantification software used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "QC_PERFORMED",
+          "id": "phv00494960.v2.p1",
+          "description": "Whether QC performed or not. If yes, low-quality barcodes such as empty dropts, doublets, high MT content cells, apoptotic cells were removed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "READ_TYPE",
+          "id": "phv00494961.v2.p1",
+          "description": "Mapped reads used for quantification",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00494950.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TECHNIQUE",
+          "id": "phv00494957.v2.p1",
+          "description": "Sequencing technique used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Adipogenesis_WAT_BAT_Subject",
+      "datasetId": "pht011689.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00494946.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00494947.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494945.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Adipogenesis_WAT_BAT_Sample",
+      "datasetId": "pht011690.v2",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00494949.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00494948.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

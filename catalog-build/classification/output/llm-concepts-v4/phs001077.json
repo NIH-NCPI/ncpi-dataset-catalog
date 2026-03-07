@@ -1,0 +1,108 @@
+{
+  "studyId": "phs001077",
+  "studyName": "Women's Health Initiative (WHI)",
+  "tables": [
+    {
+      "tableName": "GECCO_WHI_Subject_Phenotypes",
+      "datasetId": "pht005748.v1",
+      "description": "Subject ID, race, gender, family history of colorectal cancer, age at enrolment, and cancer site of participants with or without colorectal cancer and involved in the \"Inflammatory Bowel Disease Exome Sequencing Study\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266273.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cagebq",
+          "id": "phv00266275.v1.p1",
+          "description": "Age, calculated age, birth to enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dem_race",
+          "id": "phv00266277.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "famcolon",
+          "id": "phv00266274.v1.p1",
+          "description": "Family history of colorectal cancer",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00266278.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "site",
+          "id": "phv00266276.v1.p1",
+          "description": "Cancer site, ICD-9",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GECCO_WHI_Sample_Attributes",
+      "datasetId": "pht005749.v1",
+      "description": "Sample ID, analyte type, body site, histological type, and tumor status of samples obtained from participants with or without colorectal cancer and involved in the \"Inflammatory Bowel Disease Exome Sequencing Study\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00266281.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00266280.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00266282.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00266283.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266279.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,296 @@
+{
+  "studyId": "phs000911",
+  "studyName": "Type 1 Diabetes Genetics Consortium (T1DGC): ImmunoChip Study",
+  "tables": [
+    {
+      "tableName": "T1DGC_ImmunoChip_Subject_Phenotypes_UKGRID",
+      "datasetId": "pht004979.v1",
+      "description": "This subject phenotype data table for UK Genetic Resource Investigating Diabetes (UKGRID) includes type 1 diabetes (T1D) status, sex of the participant, approximate year of birth, region of the UK developed by the 1958 British Birth Cohort, self-reported ethnicity, and best sample type.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252891.v1.p1",
+          "description": "Subject Identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "approx_year_of_birth",
+          "id": "phv00252894.v1.p1",
+          "description": "Approximate year of birth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "b58cregion",
+          "id": "phv00252895.v1.p1",
+          "description": "Region of the UK developed by the 1958 British Birth Cohort",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case_control",
+          "id": "phv00252892.v1.p1",
+          "description": "Type 1 diabetes (T1D) status",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "caucasian",
+          "id": "phv00252896.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:race_us_white_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sample_type",
+          "id": "phv00252897.v1.p1",
+          "description": "(Best) sample type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00252893.v1.p1",
+          "description": "Sex of the participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T1DGC_ImmunoChip_Pedigree",
+      "datasetId": "pht004976.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, sex of subjects, and twin IDs.",
+      "variables": [
+        {
+          "name": "FAID",
+          "id": "phv00252880.v1.p1",
+          "description": "Father ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMID",
+          "id": "phv00252878.v1.p1",
+          "description": "T1DGC Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOID",
+          "id": "phv00252881.v1.p1",
+          "description": "Mother ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00252882.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252879.v1.p1",
+          "description": "T1DGC Analytic Subject Identifier (SUBJECT ID)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TWIN_ID",
+          "id": "phv00252883.v1.p1",
+          "description": "Twin ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T1DGC_ImmunoChip_Sample_Attributes",
+      "datasetId": "pht004980.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, DNA source, analyte type, tumor status, and genotyping center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00252901.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00252899.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DNA_Source",
+          "id": "phv00252900.v1.p1",
+          "description": "Blood or cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00252903.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00252902.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00252898.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T1DGC_ImmunoChip_Subject",
+      "datasetId": "pht004975.v1",
+      "description": "This subject consent data table includes subjects IDs (T1DGC Analytic ID), consent information, T1D affection status, and mapping to subject aliases.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00252877.v1.p1",
+          "description": "Case control status of the subject for type 1 diabetes (T1D)",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00252874.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00252876.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252873.v1.p1",
+          "description": "Subject ID (T1DGC Analytic ID)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00252875.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T1DGC_ImmunoChip_Subject_Phenotypes_ASP",
+      "datasetId": "pht004978.v1",
+      "description": "This subject phenotype data table for affected sib pair (ASP) families includes sex of the participant, age at ascertainment, and best sample type.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252887.v1.p1",
+          "description": "Subject Identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00252889.v1.p1",
+          "description": "Age at ascertainment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_type",
+          "id": "phv00252890.v1.p1",
+          "description": "(Best) sample type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00252888.v1.p1",
+          "description": "Sex of the participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "T1DGC_ImmunoChip_Sample",
+      "datasetId": "pht004977.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs, both of which are T1DGC Analytic IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00252885.v1.p1",
+          "description": "Sample ID (T1DGC Analytic ID)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00252886.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00252884.v1.p1",
+          "description": "Subject ID (T1DGC Analytic ID)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

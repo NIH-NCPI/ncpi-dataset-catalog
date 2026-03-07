@@ -1,0 +1,1490 @@
+{
+  "studyId": "phs000914",
+  "studyName": "Genome-wide Association Study of Adiposity in Samoans",
+  "tables": [
+    {
+      "tableName": "Samoans_Adiposity_Subject_Phenotypes",
+      "datasetId": "pht005253.v1",
+      "description": "This subject phenotype data table includes eligibility and enrollment information (n=6 variables), relationship and twin status, anthropometric measurements (n=21 variables; height, weight, BMI, circumference, skinfold test, obesity classifications, body fat measurements, resistance, and reactance), blood pressure and heart rate (n=5 variables), diagnosis (n=14 variables; hypertension, diabetes, angina, heart attack, stroke, and heart disease), glucose and cholesterol measurements (n=21 variables; glucose, insulin, leptin, adiponectin, cholesterol, TG, VLDL, LDL, and HDL), smoking status (n=19 variables), treatment and medications for hypertension, diabetes, and heart disease (n=19 variables), and physical activity measurements (n=54 variables; work, walking, sitting, and leisure).",
+      "variables": [
+        {
+          "name": "Census_Region",
+          "id": "phv00258677.v1.p1",
+          "description": "Census Region of Samoa",
+          "concept_id": "ncpi:geographic_site_geographic_region",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "Cholesterol",
+          "id": "phv00258733.v1.p1",
+          "description": "Cholesterol from venous blood sample (mg/dL)",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "Dec_Age",
+          "id": "phv00258680.v1.p1",
+          "description": "Age at enrollment",
+          "concept_id": "topmed:fasting_lipids",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "Diastolic_BP",
+          "id": "phv00258703.v1.p1",
+          "description": "Diastolic blood pressure (average of last two measurements)",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_statistical_measures",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "Gender",
+          "id": "phv00258679.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "HDL_C",
+          "id": "phv00258743.v1.p1",
+          "description": "HDL-C from venous blood sample (mg/dL)",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "Height",
+          "id": "phv00258683.v1.p1",
+          "description": "Height of participant",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "Hyp_meds",
+          "id": "phv00258749.v1.p1",
+          "description": "Are you taking medication for hypertension?",
+          "concept_id": "ncpi:antihypertensive_meds_current_antihypertensive_use_current_antihypertensive_use_current_antihypertensive_use",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "NetTG",
+          "id": "phv00258736.v1.p1",
+          "description": "Net Triglycerides from venous blood sample (mg/dL)",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_standard_units_total_triglycerides",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "Past_smoker",
+          "id": "phv00258713.v1.p1",
+          "description": "Past Smoker",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_former_smoker",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "Systolic_BP",
+          "id": "phv00258701.v1.p1",
+          "description": "Systolic blood pressure (average of last two measurements)",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_median_systolic_bp",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "Weight",
+          "id": "phv00258684.v1.p1",
+          "description": "Weight of participant",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "Abd_Circ",
+          "id": "phv00258690.v1.p1",
+          "description": "Abdominal Circumference Average",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "Abd_Skf",
+          "id": "phv00258696.v1.p1",
+          "description": "Abdominal Skinfold (Average)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "Adiponectin",
+          "id": "phv00258732.v1.p1",
+          "description": "Adiponectin from venous blood sample",
+          "concept_id": "topmed:lppla2_mass",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Age_Quit",
+          "id": "phv00258714.v1.p1",
+          "description": "Age Quit Smoking",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Age_smoking",
+          "id": "phv00258706.v1.p1",
+          "description": "Age Started Smoking (years)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Angina",
+          "id": "phv00258766.v1.p1",
+          "description": "Angina diagnosis - Self-report",
+          "concept_id": "ncpi:angina_prior_angina_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Arm_Circ",
+          "id": "phv00258689.v1.p1",
+          "description": "Arm Circumference Average",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "BIA_BF",
+          "id": "phv00258779.v1.p1",
+          "description": "Percent Body Fat based on Bioelectrical Impedance (BIA). Polynesian-specific equations: Swinburn et al., 1999 & Keighley et al., 2006",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00258685.v1.p1",
+          "description": "Body mass index of participant",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_BF",
+          "id": "phv00258781.v1.p1",
+          "description": "Percent Body Fat based on Body Mass Index. Polynesian-specific equations: Swinburn et al., 1999",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Betel_quid",
+          "id": "phv00258721.v1.p1",
+          "description": "How many times per day do you use Betel / Quid?",
+          "concept_id": "ncpi:current_smoker_baseline_smokeless_tobacco",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Biochemistry_Complete",
+          "id": "phv00258728.v1.p1",
+          "description": "Participants biochemistry completed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CUFFSIZE",
+          "id": "phv00258700.v1.p1",
+          "description": "Blood Pressure Cuff Size",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Calf_Circ",
+          "id": "phv00258692.v1.p1",
+          "description": "Calf Circumference Average",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "Cholesterol_mmol",
+          "id": "phv00258734.v1.p1",
+          "description": "Cholesterol from venous blood sample (mmol)",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Cigars",
+          "id": "phv00258712.v1.p1",
+          "description": "Number of cigars per day",
+          "concept_id": "ncpi:current_smoker_baseline_cigar_smoking",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Current_smoke",
+          "id": "phv00258705.v1.p1",
+          "description": "Current Smoker",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Daily_LeisureMVPA_Mins",
+          "id": "phv00258828.v1.p1",
+          "description": "Minutes of leisure time MVPA per day",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Daily_TotalMVPA_Mins",
+          "id": "phv00258825.v1.p1",
+          "description": "Total minutes of MVPA per day",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Daily_TransportMVPA_Mins",
+          "id": "phv00258827.v1.p1",
+          "description": "Minutes of transport-related (walking/cycling) MVPA per day",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Daily_WorkMVPA_Mins",
+          "id": "phv00258826.v1.p1",
+          "description": "Minutes of work-related MVPA per day",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Db_traditional_healer",
+          "id": "phv00258763.v1.p1",
+          "description": "Have you seen a traditional healer for your diabetes?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Db_traditional_meds",
+          "id": "phv00258764.v1.p1",
+          "description": "Are you taking traditional remedies for diabetes?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes_Binary",
+          "id": "phv00258759.v1.p1",
+          "description": "Diabetes Status (based on venous blood sample and questionnaire data)",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes_Status",
+          "id": "phv00258758.v1.p1",
+          "description": "Diabetes Status (based on venous blood sample ONLY)",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes_diagnosis",
+          "id": "phv00258760.v1.p1",
+          "description": "Have you ever been diagnosed with diabetes? (Based on questionnaire)",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes_diagnosis_years",
+          "id": "phv00258761.v1.p1",
+          "description": "How many years ago were you diagnosed with diabetes?",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_age_diagnosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Diabetes_treatment",
+          "id": "phv00258762.v1.p1",
+          "description": "Type of diabetes treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Diastolic_BP_Av3",
+          "id": "phv00258704.v1.p1",
+          "description": "Diastolic blood pressure (average of all three measurements)",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_statistical_measures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Farming",
+          "id": "phv00258682.v1.p1",
+          "description": "Participants primary occupation is farming/plantation work",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Fasting",
+          "id": "phv00258726.v1.p1",
+          "description": "Fasting Status",
+          "concept_id": "topmed:fasting_lipids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Finger_Glucose",
+          "id": "phv00258727.v1.p1",
+          "description": "Blood Glucose from finger stick assessment",
+          "concept_id": "phenx:fasting_plasma_glucose_glucometer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "For_Skf",
+          "id": "phv00258694.v1.p1",
+          "description": "Forearm Skinfold (Average)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "GWAS_BMI",
+          "id": "phv00258838.v1.p1",
+          "description": "Eligible participants genotyped and examined in GWAS of BMI",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GWAS_Eligible",
+          "id": "phv00258678.v1.p1",
+          "description": "Eligible for inclusion in the GWAS",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GWAS_Genotyped",
+          "id": "phv00258836.v1.p1",
+          "description": "Participants genotyped",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GWAS_Genotyped_Eligible",
+          "id": "phv00258837.v1.p1",
+          "description": "Eligible participants genotyped",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Glucose",
+          "id": "phv00258730.v1.p1",
+          "description": "Glucose from venous blood sample",
+          "concept_id": "ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL_Binary",
+          "id": "phv00258745.v1.p1",
+          "description": "HDL cholesterol below or equal to (1) or above (0) 1.03 mmol/l (men) or 1.29 mmol/l (women) (AHA criteria)",
+          "concept_id": "ncpi:hdl_hdl_categorical",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL_mmol",
+          "id": "phv00258744.v1.p1",
+          "description": "HDL-C from venous blood sample (mmol)",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mmol_l",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HRSSINCEATE",
+          "id": "phv00258725.v1.p1",
+          "description": "Hours since last ate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hand_cigarettes",
+          "id": "phv00258710.v1.p1",
+          "description": "Number of hand-rolled cigarettes per day",
+          "concept_id": "ncpi:current_smoker_baseline_cigarettes_per_day",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Hd_diagnosis_years",
+          "id": "phv00258770.v1.p1",
+          "description": "How many years ago were you diagnosed with heart disease?",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_general_heart_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Hd_meds",
+          "id": "phv00258771.v1.p1",
+          "description": "Are you taking medication for heart disease?",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_general_cardiac_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Hd_meds_name",
+          "id": "phv00258772.v1.p1",
+          "description": "Name of heart disease meds",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hd_meds_years",
+          "id": "phv00258773.v1.p1",
+          "description": "How many years have you been taking heart disease meds?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hd_traditional_healer",
+          "id": "phv00258776.v1.p1",
+          "description": "Have you seen a traditional healer for your heart disease?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hd_traditional_meds",
+          "id": "phv00258777.v1.p1",
+          "description": "Are you taking traditional remedies for heart disease?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Heart_Rate",
+          "id": "phv00258724.v1.p1",
+          "description": "Heart Rate (measured during blood pressure assessment) (Average)",
+          "concept_id": "ncpi:heart_rate_resting_heart_rate",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Heart_attack",
+          "id": "phv00258767.v1.p1",
+          "description": "Have you ever had a heart attack? Self-report",
+          "concept_id": "ncpi:mi_prior_self_reported_mi_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Heart_disease_diagnosis",
+          "id": "phv00258769.v1.p1",
+          "description": "Have you ever been diagnosed with heart disease? (Based on questionnaire)",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_general_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hip_Circ",
+          "id": "phv00258691.v1.p1",
+          "description": "Hip Circumference Average",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "Hyp_diagnosis_years",
+          "id": "phv00258748.v1.p1",
+          "description": "How many years ago were you diagnosed with hypertension?",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypertension_hypertension_age_onset",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Hyp_meds_years",
+          "id": "phv00258750.v1.p1",
+          "description": "How many years have you been taking these meds?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hyp_traditional_healer",
+          "id": "phv00258753.v1.p1",
+          "description": "Have you seen a traditional healer for your hypertension?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hyp_traditional_meds",
+          "id": "phv00258754.v1.p1",
+          "description": "Are you taking traditional remedies for hypertension?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hypertension",
+          "id": "phv00258746.v1.p1",
+          "description": "Based on Sys>140 OR Dias>90 (Based on physical examination & questionnaire data)",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypertension_hypertension_diagnosis_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hypertension_13",
+          "id": "phv00258756.v1.p1",
+          "description": "Hypertension based on average of two BP measurements or hypertension meds",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypertension_hypertension_clinical_definition",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hypertension_All3",
+          "id": "phv00258757.v1.p1",
+          "description": "Hypertension diagnosis based on average of all three BP measurements or hypertension meds",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypertension_hypertension_clinical_definition",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hypertension_diagnosis",
+          "id": "phv00258747.v1.p1",
+          "description": "Self-reported Hypertension diagnosis",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypertension_hypertension_diagnosis_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Insulin",
+          "id": "phv00258729.v1.p1",
+          "description": "Insulin from venous blood sample",
+          "concept_id": "phenx:fasting_serum_insulin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL_Binary",
+          "id": "phv00258742.v1.p1",
+          "description": "LDL cholesterol above or equal to (1) or below (0) 2.59 mmol/l (AHA criteria)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_categories",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL_C",
+          "id": "phv00258740.v1.p1",
+          "description": "LDL-C from venous blood sample (mg/dL)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL_mmol",
+          "id": "phv00258741.v1.p1",
+          "description": "LDL-C from venous blood sample (mmol)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Leisure_Moderate",
+          "id": "phv00258801.v1.p1",
+          "description": "Do you do moderate activities during your leisure time?",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Leisure_Moderate_Days",
+          "id": "phv00258802.v1.p1",
+          "description": "How many days per week do you do moderate activity in your leisure time? (days)",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Leisure_Moderate_Hours",
+          "id": "phv00258803.v1.p1",
+          "description": "Time spent doing moderate leisure time activities (hours)",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Leisure_Moderate_Mins",
+          "id": "phv00258804.v1.p1",
+          "description": "Time spent doing moderate leisure time activities (minutes)",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Leisure_Sitting",
+          "id": "phv00258796.v1.p1",
+          "description": "Do you spend most of your leisure time sitting?",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Leisure_Vigorous",
+          "id": "phv00258797.v1.p1",
+          "description": "Do you do vigorous activities during your leisure time?",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Leisure_Vigorous_Days",
+          "id": "phv00258798.v1.p1",
+          "description": "How many days per week do you do vigorous activity in your leisure time? (days)",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Leisure_Vigorous_Hours",
+          "id": "phv00258799.v1.p1",
+          "description": "Time spent doing vigorous leisure time activities (hours)",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Leisure_Vigorous_Mins",
+          "id": "phv00258800.v1.p1",
+          "description": "Time spent doing vigorous leisure time activities (minutes)",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Length_Quit_Months",
+          "id": "phv00258716.v1.p1",
+          "description": "Length of time since Quitting (months)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Length_Quit_Weeks",
+          "id": "phv00258717.v1.p1",
+          "description": "Length of time since Quitting (weeks)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Length_Quit_Years",
+          "id": "phv00258715.v1.p1",
+          "description": "Length of time since Quitting (years)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Length_sm_months",
+          "id": "phv00258708.v1.p1",
+          "description": "Length of time smoking (months)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Length_sm_years",
+          "id": "phv00258707.v1.p1",
+          "description": "Length of time smoking (years)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Leptin",
+          "id": "phv00258731.v1.p1",
+          "description": "Leptin from venous blood sample",
+          "concept_id": "topmed:lppla2_mass",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "MET_ModLeisure_Week",
+          "id": "phv00258817.v1.p1",
+          "description": "MET value of moderate leisure activities per week",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MET_ModWork_Week",
+          "id": "phv00258814.v1.p1",
+          "description": "MET value of moderate work activity per week",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MET_Transport_Week",
+          "id": "phv00258815.v1.p1",
+          "description": "MET value of transport (walking/cycling) activity per week",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MET_VigLeisure_Week",
+          "id": "phv00258816.v1.p1",
+          "description": "MET value of vigorous leisure activities per week",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MET_VigWork_Week",
+          "id": "phv00258813.v1.p1",
+          "description": "MET value of vigorous work activity per week",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Man_cigarettes",
+          "id": "phv00258709.v1.p1",
+          "description": "Number of manufactured cigarettes per day",
+          "concept_id": "ncpi:current_smoker_baseline_cigarettes_per_day",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MeetsWHO_Rec",
+          "id": "phv00258819.v1.p1",
+          "description": "Meets WHO Recommendations of >= 600 MET-minutes activity per week",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Mins_ModLeisure_Week",
+          "id": "phv00258824.v1.p1",
+          "description": "Moderate leisure activity (minutes per week)",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Mins_ModWork_Week",
+          "id": "phv00258821.v1.p1",
+          "description": "Moderate work activity (minutes per week)",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Mins_Transport_Week",
+          "id": "phv00258822.v1.p1",
+          "description": "Transport-related (walking/cycling) activity (minutes per week)",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Mins_VigLeisure_Week",
+          "id": "phv00258823.v1.p1",
+          "description": "Vigorous leisure activity (minutes per week)",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Mins_VigWork_Week",
+          "id": "phv00258820.v1.p1",
+          "description": "Vigorous work activity (minutes per week)",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "No_LeisureMVPA",
+          "id": "phv00258831.v1.p1",
+          "description": "Reported no leisure time physical activity",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "No_TransportMVPA",
+          "id": "phv00258830.v1.p1",
+          "description": "Reported no transport-related physical activity",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "No_Vigorous",
+          "id": "phv00258832.v1.p1",
+          "description": "Repored no vigorous activity (across any category)",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "No_WorkMVPA",
+          "id": "phv00258829.v1.p1",
+          "description": "Reported NO work related physical activity",
+          "concept_id": "ncpi:current_quality_of_life_physical_activity_level",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "OWOB_Binary_Poly",
+          "id": "phv00258688.v1.p1",
+          "description": "Obese or Overweight using Polynesian Cutoffs",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Obesity_Int",
+          "id": "phv00258686.v1.p1",
+          "description": "Obesity Classification using International Cutoffs (STEPS)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Obesity_Poly",
+          "id": "phv00258687.v1.p1",
+          "description": "Obesity Classification using Polynesian Cutoffs",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Other_smokeless",
+          "id": "phv00258722.v1.p1",
+          "description": "How many times per day do you use other types of smokeless tobacco?",
+          "concept_id": "ncpi:current_smoker_baseline_smokeless_tobacco",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Past_hd_meds",
+          "id": "phv00258774.v1.p1",
+          "description": "Have you taken heart diseasemeds in the past?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Past_hd_meds_years",
+          "id": "phv00258775.v1.p1",
+          "description": "How many years did you take meds for?",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_general_cardiac_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Past_hyp_meds",
+          "id": "phv00258751.v1.p1",
+          "description": "Have you taken hypertension meds in the past?",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_general_hypertension_medication_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Past_hyp_meds_years",
+          "id": "phv00258752.v1.p1",
+          "description": "How many years did you take meds for?",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_general_hypertension_medication_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Percent_LeisureMVPA",
+          "id": "phv00258835.v1.p1",
+          "description": "Percentage of physical activity completed in leisure time activities",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_recreational_leisure_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Percent_TransportMVPA",
+          "id": "phv00258834.v1.p1",
+          "description": "Percentage of physical activity completed in transport activities (walking/cycling)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_transport_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Percent_WorkMVPA",
+          "id": "phv00258833.v1.p1",
+          "description": "Percentage of physical activity completed in work-related activities",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_work_related_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Pipes",
+          "id": "phv00258711.v1.p1",
+          "description": "Number of pipes per day",
+          "concept_id": "phenx:use_of_tobacco_products",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Pregnant",
+          "id": "phv00258681.v1.p1",
+          "description": "Pregnancy status at enrollment",
+          "concept_id": "topmed:pregnancy_reproductive_pregnancy_timing_dates",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "REACT",
+          "id": "phv00258699.v1.p1",
+          "description": "Reactance (bioelectrical impedance analysis)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "RESIST",
+          "id": "phv00258698.v1.p1",
+          "description": "Resistance (bioelectrical impedance analysis)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "SKF_BF",
+          "id": "phv00258780.v1.p1",
+          "description": "Percent Body Fat based on Skinfold Measurements. Polynesian-specific equations: Swinburn et al., 1999",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258674.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sitting_Hours",
+          "id": "phv00258805.v1.p1",
+          "description": "Hours spent sitting during a typical day",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_sedentary_behavior",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Sitting_Mins",
+          "id": "phv00258806.v1.p1",
+          "description": "Minutes spent sitting during a typical day",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_sedentary_behavior",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Smokeless_tobacco_use",
+          "id": "phv00258718.v1.p1",
+          "description": "Do you use smokeless tobacco?",
+          "concept_id": "phenx:use_of_tobacco_products",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Snuff_mouth",
+          "id": "phv00258719.v1.p1",
+          "description": "How many times per day do you use snuff by mouth?",
+          "concept_id": "phenx:use_of_tobacco_products",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Snuff_nose",
+          "id": "phv00258720.v1.p1",
+          "description": "How many times per day do you use snuff by nose?",
+          "concept_id": "phenx:use_of_tobacco_products",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Stroke",
+          "id": "phv00258768.v1.p1",
+          "description": "Have you ever had a stroke? Self-report",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_stroke_cerebrovascular_diagnosis_stroke_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Sub_Skf",
+          "id": "phv00258695.v1.p1",
+          "description": "Subscapular Skinfold (Average)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Sup_Skf",
+          "id": "phv00258697.v1.p1",
+          "description": "Suprailiac Skinfold (Average)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Systolic_BP_Av3",
+          "id": "phv00258702.v1.p1",
+          "description": "Systolic blood pressure (average of all three measurements)",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_average_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Total_Cholesterol_Binary",
+          "id": "phv00258735.v1.p1",
+          "description": "Total cholesterol above or equal to (1) or below (0) 5.2 mmol/l (AHA criteria)",
+          "concept_id": "ncpi:total_cholesterol_cholesterol_categories",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Total_MET_Week",
+          "id": "phv00258818.v1.p1",
+          "description": "Total MET value for all weekly activity",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_physical_activity_indices_scores",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Traditional_remedy_name_db",
+          "id": "phv00258765.v1.p1",
+          "description": "Name of traditional diabetes remedy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Traditional_remedy_name_hd",
+          "id": "phv00258778.v1.p1",
+          "description": "Name of traditional heart disease remedy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Traditional_remedy_name_hyp",
+          "id": "phv00258755.v1.p1",
+          "description": "Name of traditional hypertension remedy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tri_Skf",
+          "id": "phv00258693.v1.p1",
+          "description": "Triceps Skinfold (Average)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Triglycerides_Binary",
+          "id": "phv00258738.v1.p1",
+          "description": "Triglycerides above (1) or below or equal to (0) 1.69 mmol/l (AHA criteria)",
+          "concept_id": "ncpi:triglycerides_high_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Triglycerides_mmol",
+          "id": "phv00258737.v1.p1",
+          "description": "Net Triglycerides from venous blood sample (mmol)",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Twin",
+          "id": "phv00258676.v1.p1",
+          "description": "Which of a pair of twins used in genetic analyses",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Type_other_smokeless",
+          "id": "phv00258723.v1.p1",
+          "description": "What type of other smokeless tobacco do you use?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TypicalDaily_LeisureModerateMins",
+          "id": "phv00258811.v1.p1",
+          "description": "Minutes of moderate leisure time activity (on a typical day)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_moderate_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TypicalDaily_LeisureVigorousMins",
+          "id": "phv00258810.v1.p1",
+          "description": "Minutes of vigorous leisure time activity (on a typical day)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_vigorous_strenuous_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TypicalDaily_SittingMins",
+          "id": "phv00258812.v1.p1",
+          "description": "Minutes of sitting/reclining (on a typical day)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_sedentary_behavior",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TypicalDaily_TransportMins",
+          "id": "phv00258809.v1.p1",
+          "description": "Minutes of Walking/Cycling (on a typical day)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_transport_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TypicalDaily_WorkModerateMins",
+          "id": "phv00258808.v1.p1",
+          "description": "Minutes of moderate work activity (on a typical day)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_moderate_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TypicalDaily_WorkVigorousMins",
+          "id": "phv00258807.v1.p1",
+          "description": "Minutes of vigorous work activity (on a typical day)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_vigorous_strenuous_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Unrelated",
+          "id": "phv00258675.v1.p1",
+          "description": "Member of set of unrelated individuals as determined for BMI GWAS",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VLDL_C",
+          "id": "phv00258739.v1.p1",
+          "description": "VLDL-C from venous blood sample",
+          "concept_id": "ncpi:total_cholesterol_vldl_cholesterol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Walking_Cycling",
+          "id": "phv00258792.v1.p1",
+          "description": "Do you walk or cycle for more than 10 minutes?",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_walking",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Walking_Cycling_Days",
+          "id": "phv00258793.v1.p1",
+          "description": "How many days per week do you walk or cycle? (days)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_walking",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Walking_Cycling_Hours",
+          "id": "phv00258794.v1.p1",
+          "description": "Time spent walking or cycling (hours)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_walking",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Walking_Cycling_Mins",
+          "id": "phv00258795.v1.p1",
+          "description": "Time spent walking or cycling (minutes)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_walking",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Work_Moderate",
+          "id": "phv00258787.v1.p1",
+          "description": "Does your work involve moderate activities?",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_work_related_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Work_Moderate_Days",
+          "id": "phv00258788.v1.p1",
+          "description": "How many days per week do you do moderate activity as part of your work? (days)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_work_related_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Work_Moderate_Hours",
+          "id": "phv00258789.v1.p1",
+          "description": "Time spent doing work-related moderate activities (hours)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_work_related_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Work_Moderate_Mins",
+          "id": "phv00258790.v1.p1",
+          "description": "Time spent doing work-related moderate activities (minutes)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_work_related_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Work_Sedentary",
+          "id": "phv00258782.v1.p1",
+          "description": "Does your work involve mostly sedentary activity?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Work_Vigorous",
+          "id": "phv00258783.v1.p1",
+          "description": "Does your work involve vigorous activities?",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_work_related_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Work_Vigorous_Days",
+          "id": "phv00258784.v1.p1",
+          "description": "How many days per week do you do vigorous activity as part of your work? (days)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_work_related_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Work_Vigorous_Hours",
+          "id": "phv00258785.v1.p1",
+          "description": "Time spent doing work-related vigorous activities (hours)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_work_related_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Work_Vigorous_Mins",
+          "id": "phv00258786.v1.p1",
+          "description": "Time spent doing work-related vigorous activities (minutes)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_work_related_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Workday_Length",
+          "id": "phv00258791.v1.p1",
+          "description": "Length of a typical work day",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_work_related_activity",
+          "confidence": "low",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Samoans_Adiposity_Sample",
+      "datasetId": "pht005252.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliasese and sample use.",
+      "variables": [
+        {
+          "name": "PLATE",
+          "id": "phv00258672.v1.p1",
+          "description": "Plate identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258668.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00258669.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00258671.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00258670.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258667.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WELL",
+          "id": "phv00258673.v1.p1",
+          "description": "Well identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Samoans_Adiposity_Sample_Attributes",
+      "datasetId": "pht005254.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, tumor status, and sample plate and well information.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00258841.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00258840.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00258842.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLATE",
+          "id": "phv00258843.v1.p1",
+          "description": "Plate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258839.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WELL",
+          "id": "phv00258844.v1.p1",
+          "description": "Well",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Samoans_Adiposity_Subject",
+      "datasetId": "pht005251.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00258664.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": "ncpi:subcohort_consent_group",
+          "confidence": "high",
+          "source": "ground_truth"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00258666.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258663.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00258665.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

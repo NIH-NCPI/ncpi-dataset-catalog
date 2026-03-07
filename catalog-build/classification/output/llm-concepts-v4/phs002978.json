@@ -1,0 +1,489 @@
+{
+  "studyId": "phs002978",
+  "studyName": "AC-ICAM: An Atlas and Compass of Immune-CAncer-Microbiome Interactions in Colon Cancer",
+  "tables": [
+    {
+      "tableName": "AC_ICAM_Subject_Phenotypes",
+      "datasetId": "pht012542.v1",
+      "description": "This subject phenotypes data table includes case control status for colon cancer, gender, location and morphology of the primary tumor, location of distant metastasis at initial diagnosis, prior malignancy other than basal cell carcinoma or cervical carcinoma, treatment of colon cancer before and after surgery, applied therapy to remove distant metastasis present at initial diagnosis, pathological tumor category ratings (TNM; n=4 variables), clinical tumor category ratings (TNM; n=4 variables), information about timing at initial diagnosis, treatment, follow up, recurrence, death (n=8 variables), vital status of patient on last day of follow up, cause of death, indicator of recurrence status (n=3 variables; local regional, distant), indicator of a new primary tumor, overall survival status, and progression free survival status.",
+      "variables": [
+        {
+          "name": "ADJUVANT_TREATMENT",
+          "id": "phv00508144.v1.p1",
+          "description": "Treatment of colon cancer and metastasis after surgery",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00508138.v1.p1",
+          "description": "Case control status of the subject for colon cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_AT_DX",
+          "id": "phv00508155.v1.p1",
+          "description": "Age of subject at initial pathologic diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_general_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BIRTH_DAYS_TO",
+          "id": "phv00508156.v1.p1",
+          "description": "Number of days between birthday and initial pathologic diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CAUSE_OF_DEATH",
+          "id": "phv00508159.v1.p1",
+          "description": "Cause of death as provided by medical records",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_cause_of_death",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CLINICAL_M",
+          "id": "phv00508151.v1.p1",
+          "description": "Clinical Tumor Metastasis Category (cM)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_m_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLINICAL_N",
+          "id": "phv00508150.v1.p1",
+          "description": "Clinical Tumor Node Category (cN)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLINICAL_STAGE",
+          "id": "phv00508152.v1.p1",
+          "description": "Clinical Tumor Stage (cTNM)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLINICAL_T",
+          "id": "phv00508149.v1.p1",
+          "description": "Clinical Tumor Category (cT)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DEATH_DAYS_TO",
+          "id": "phv00508162.v1.p1",
+          "description": "Number of days between date of surgery and date of death",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISTANT_RECURRENCE_DAYS_TO",
+          "id": "phv00508168.v1.p1",
+          "description": "Number of days between date of surgery and date of first distant recurrence",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DISTANT_RECURRENCE_STATUS",
+          "id": "phv00508167.v1.p1",
+          "description": "Indicator of distant recurrence status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00508139.v1.p1",
+          "description": "Subjects gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTORY_OF_CANCER",
+          "id": "phv00508142.v1.p1",
+          "description": "Prior occurance of other malignancy other than basal cell carcinoma or cervical carcinoma in situ",
+          "concept_id": "topmed:cancer_diagnosis_family_cancer_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "LAST_CONTACT_DAYS_TO",
+          "id": "phv00508161.v1.p1",
+          "description": "Number of days between date of surgery and last day of follow up",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LOCAL_RECURRENCE_DAYS_TO",
+          "id": "phv00508164.v1.p1",
+          "description": "Number of days between date of surgery and date of first regional recurrence",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LOCAL_RECURRENCE_STATUS",
+          "id": "phv00508163.v1.p1",
+          "description": "Indicator of local recurrence status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LOCATION_METASTASIS_AT_DX",
+          "id": "phv00508153.v1.p1",
+          "description": "Anatomic location of distant metastasis present at initial diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_metastatic_site",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NEOADJUVANT_TREATED",
+          "id": "phv00508143.v1.p1",
+          "description": "Treatment of colon cancer prior to surgery",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NEW_PRIMARY_TUMOR_IN_FU",
+          "id": "phv00508169.v1.p1",
+          "description": "Indicator of a new primary tumor other than basal cell carcinoma or cervical carcinoma in situ in follow up",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_incident_cancer_diagnosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "OS_STATUS",
+          "id": "phv00508170.v1.p1",
+          "description": "Overall survival status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OS_TIME",
+          "id": "phv00508171.v1.p1",
+          "description": "Number of days between date of surgery and date of death or last day of follow up",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATH_M",
+          "id": "phv00508147.v1.p1",
+          "description": "Pathological Tumor Metastasis Category (pM)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_m_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATH_N",
+          "id": "phv00508146.v1.p1",
+          "description": "Pathological Tumor Node Category (pN)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATH_STAGE",
+          "id": "phv00508148.v1.p1",
+          "description": "Pathological Tumor Stage (pTNM)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATH_T",
+          "id": "phv00508145.v1.p1",
+          "description": "Pathological Tumor Category (pT)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_t_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PFS_STATUS",
+          "id": "phv00508172.v1.p1",
+          "description": "Progression Free Survival Status.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_progression_free_survival_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PFS_TIME",
+          "id": "phv00508173.v1.p1",
+          "description": "Number of days between date of surgery and date of Event or last day of follow-up",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REGIONAL_RECURRENCE_DAYS_TO",
+          "id": "phv00508166.v1.p1",
+          "description": "Number of days between date of surgery and date of first regional recurrence",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REGIONAL_RECURRENCE_STATUS",
+          "id": "phv00508165.v1.p1",
+          "description": "Indicator of regional recurrence status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00508137.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SURGERY_DAYS_TO",
+          "id": "phv00508160.v1.p1",
+          "description": "Number of days between initial diagnosis and day of surgery",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "THERAPY_METASTASIS_AT_DX",
+          "id": "phv00508154.v1.p1",
+          "description": "Applied therapy to remove distant metastasis present at initial diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_ANATOMIC_LOCATION",
+          "id": "phv00508140.v1.p1",
+          "description": "Anatomical location of the primary tumor",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_MORPHOLOGY",
+          "id": "phv00508141.v1.p1",
+          "description": "Morphology of the primary tumor",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VITAL_STATUS",
+          "id": "phv00508158.v1.p1",
+          "description": "Vital status of patient on last day of follow up",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEAR_OF_DX",
+          "id": "phv00508157.v1.p1",
+          "description": "Year of initial diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AC_ICAM_Sample_Attributes",
+      "datasetId": "pht012544.v1",
+      "description": "This sample attributes table includes metastasis status, tumor portion, analyte type, body site, tumor status, primary tumor location, tissue histology, age at sample collection, tumor stage, and tumor treatment type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00508183.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00508184.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00508188.v1.p1",
+          "description": "Age sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00508187.v1.p1",
+          "description": "Tissue histology",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00508185.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PORTION",
+          "id": "phv00508182.v1.p1",
+          "description": "Portion of the tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_NORMAL",
+          "id": "phv00508181.v1.p1",
+          "description": "Primary tumor, metastasis, or normal colon",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_tumor_classification",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00508186.v1.p1",
+          "description": "Primary tumor location",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00508179.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00508180.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00508189.v1.p1",
+          "description": "Tumor stage of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00508190.v1.p1",
+          "description": "Type of tumor treatment for sample",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AC_ICAM_Subject",
+      "datasetId": "pht012540.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00508133.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00508134.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00508132.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AC_ICAM_Sample",
+      "datasetId": "pht012541.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00508136.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00508135.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AC_ICAM_SRA",
+      "datasetId": "pht013398.v1",
+      "description": "This SRA mapping data table includes a mapping of study subject ID to public SRA accession ID for microbiome sequences.",
+      "variables": [
+        {
+          "name": "SRA_ACCESSION",
+          "id": "phv00529293.v1.p1",
+          "description": "SRA public sequence accession ID (SAMN#)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00529292.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

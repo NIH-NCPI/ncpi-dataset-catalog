@@ -1,0 +1,52 @@
+{
+  "studyId": "phs003463",
+  "studyName": "NIH RECOVER: A Multi-Site Observational Study of Post-Acute Sequelae of SARS-CoV-2 Infection in Adults",
+  "tables": [
+    {
+      "tableName": "RECOVER_Subject",
+      "datasetId": "pht014060.v5",
+      "description": "The subject consent dataset contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00534450.v5.p4",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00534449.v5.p4",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RECOVER_Sample",
+      "datasetId": "pht014061.v5",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00534452.v5.p4",
+          "description": "Individual sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00534451.v5.p4",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

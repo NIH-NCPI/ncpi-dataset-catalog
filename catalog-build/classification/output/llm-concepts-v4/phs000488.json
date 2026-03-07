@@ -1,0 +1,194 @@
+{
+  "studyId": "phs000488",
+  "studyName": "Genomic Sequencing of Lung Adenocarcinoma",
+  "tables": [
+    {
+      "tableName": "LUAD_CIP_Subject_Phenotypes",
+      "datasetId": "pht002911.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00173142.v1.p1",
+          "description": "Participant's age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Censored",
+          "id": "phv00173145.v2.p1",
+          "description": "For patients with TRUE value, PFS value represents time point when patient was lost to follow-up",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Data Freeze Included",
+          "id": "phv00173148.v2.p1",
+          "description": "Sample was included in final Imielinski et al analysis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00173144.v1.p1",
+          "description": "Imputed ethnicity using principal component analysis on 1000-Genomes SNP data",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Histology",
+          "id": "phv00173147.v2.p1",
+          "description": "Histological classification based on expert pathology re-review",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PFS",
+          "id": "phv00173146.v2.p1",
+          "description": "Progression free survival measured as number of months until local or distant lung adenocarcinoma recurrence",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00173139.v2.p1",
+          "description": "Unique participant identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking Pack Years",
+          "id": "phv00173141.v2.p1",
+          "description": "Pack year quantification of participant at tumor resection.  Number of reported cigarette packs smoked per day x number of years of reported smoking",
+          "concept_id": "phenx:substances_lifetime_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking Status",
+          "id": "phv00173140.v1.p1",
+          "description": "Smoking status of participant at time of tumor resection",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Stage",
+          "id": "phv00173143.v1.p1",
+          "description": "Stage at tumor resection",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LUAD_CIP_Sample_Attributes",
+      "datasetId": "pht002912.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00173152.v2.p1",
+          "description": "Molecular analyte",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00173153.v2.p1",
+          "description": "Body site of tissue collection",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "OSH Diagnosis",
+          "id": "phv00173150.v2.p1",
+          "description": "Outside hospital diagnosis as reported by the collaborator",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00173149.v2.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00173151.v2.p1",
+          "description": "Indicates the tumor / normal status of a sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LUAD_CIP_Sample",
+      "datasetId": "pht002910.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00173137.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00173138.v2.p1",
+          "description": "Sample use. Array_SNP: SNP genotypes obtained using standard or custom microarrays; Seq_DNA_WholeExome: Whole exome sequencing; Seq_DNA_WholeGenome: Whole genome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00173136.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "LUAD_CIP_Subject",
+      "datasetId": "pht002909.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00173135.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00173134.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

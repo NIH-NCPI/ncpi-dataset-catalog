@@ -1,0 +1,233 @@
+{
+  "studyId": "phs001245",
+  "studyName": "Autosomal Recessive CD70 Deficiency",
+  "tables": [
+    {
+      "tableName": "CD70_Subject_Phenotypes",
+      "datasetId": "pht005932.v1",
+      "description": "This subject phenotype table includes subjects' age, sex, race, and diagnosis criteria (n=4 variables; immunodeficiency, EBV-associated diseases, hypogammaglobulinema, and Hodgkin lymphoma).",
+      "variables": [
+        {
+          "name": "EBV-associated diseases",
+          "id": "phv00273323.v1.p1",
+          "description": "Diagnosis criteria - EBV-associated diseases",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_epstein_barr_virus",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hodgkin lymphoma",
+          "id": "phv00273325.v1.p1",
+          "description": "Diagnosis criteria - Hodgkin lymphoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hypogammaglobulinema",
+          "id": "phv00273324.v1.p1",
+          "description": "Diagnosis criteria - Hypogammaglobulinema",
+          "concept_id": "ncpi:disease_diagnosis_congenital_genetic",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Immunodeficiency",
+          "id": "phv00273322.v1.p1",
+          "description": "Diagnosis criteria - Immunodeficiency",
+          "concept_id": "ncpi:disease_diagnosis_congenital_genetic",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273318.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00273319.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00273321.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00273320.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CD70_Pedigree",
+      "datasetId": "pht005930.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and sex of subjects.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00273310.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00273313.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00273312.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00273314.v1.p1",
+          "description": "Sex",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273311.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CD70_Sample_Attributes",
+      "datasetId": "pht005933.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, and genotyping center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00273328.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00273327.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00273330.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00273329.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273326.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CD70_Subject",
+      "datasetId": "pht005929.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, and affection status for EBV associated diseases and CD70 deficiency.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00273309.v1.p1",
+          "description": "Case control status of the subject for EBV associated diseases and CD70 deficiency",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00273308.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273307.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CD70_Sample",
+      "datasetId": "pht005931.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273316.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00273317.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273315.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

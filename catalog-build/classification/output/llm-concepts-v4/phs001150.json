@@ -1,0 +1,140 @@
+{
+  "studyId": "phs001150",
+  "studyName": "FOCI Mayo 2.5M",
+  "tables": [
+    {
+      "tableName": "FOCI_Mayo_2_5M_Subject_Phenotypes",
+      "datasetId": "pht007501.v1",
+      "description": "Subject ID, subject ancestry, age at diagnosis, tumor description including tumor behavior, tumor grade, tumor histology, tumor status of sample, primary site of tumor, and indicator if analyzed in European GWAS by FOCI of participants with or without ovarian cancer and involved in the \"Follow-up of Ovarian Cancer Genetic Association and Interaction Studies (FOCI)\" project.",
+      "variables": [
+        {
+          "name": "ANCESTRY",
+          "id": "phv00354227.v1.p1",
+          "description": "Intercontinental ancestry as assigned by LAMP. 90 % was used for European, 80% for African and Asian, respectively. The remaining samples were categorized as Other ethnic group.",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BEHAVIOR",
+          "id": "phv00354223.v1.p1",
+          "description": "Tumor behavior",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_behavior",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EUR_GWAS",
+          "id": "phv00354228.v1.p1",
+          "description": "Indicator if analyzed in European GWAS by FOCI",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GRADE",
+          "id": "phv00354224.v1.p1",
+          "description": "Tumor grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGY",
+          "id": "phv00354225.v1.p1",
+          "description": "Tumor histology",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_SITE",
+          "id": "phv00354222.v1.p1",
+          "description": "Primary cancer site or control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REF_AGE",
+          "id": "phv00354226.v1.p1",
+          "description": "Age at diagnosis (cases) or interview (controls)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00354221.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "FOCI_Mayo_2_5M_Sample_Attributes",
+      "datasetId": "pht007502.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, indicator for worse duplicates for sample, and indicator for failed QC criterion of participants with or without ovarian cancer and involved in the \"Follow-up of Ovarian Cancer Genetic Association and Interaction Studies (FOCI)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00354231.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00354230.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXCLUDE_QC",
+          "id": "phv00354233.v1.p1",
+          "description": "Indicator for failed QC criterion: call rate less than 95%, extreme heterozygosity",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXCL_WORSEDUP",
+          "id": "phv00354232.v1.p1",
+          "description": "Indicator for worse duplicates for sample, to be removed from primary analysis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAIL_SEXCHECK",
+          "id": "phv00431114.v1.p1",
+          "description": "Indicator for failed sex check from plink --sex-check option (i.e. >80% male calls)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00354234.v1.p1",
+          "description": "Tumor status of sample",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tissue_characteristics",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00354229.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

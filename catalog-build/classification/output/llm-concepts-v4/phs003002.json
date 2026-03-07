@@ -1,0 +1,241 @@
+{
+  "studyId": "phs003002",
+  "studyName": "A Platform Study of Combination Immunotherapy for the Neoadjuvant and Adjuvant Treatment of Patients With Surgically Resectable Adenocarcinoma of the Pancreas",
+  "tables": [
+    {
+      "tableName": "Resectable_PDA_Sample_Attributes",
+      "datasetId": "pht012957.v2",
+      "description": "This sample attributes table contains sample IDs, cell type, treatment, overall survival, immunohistochemistry (IHC) stain indicating status (n=6 variables; CD66b granulocytes,  regulatory T cell (Treg), CD8 and CD137, M1, M2, and CD4 and Th17), body site where sample was collected, analyte type, tumor status, and single-cell RNAseq batch.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00525513.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BATCH",
+          "id": "phv00542432.v1.p1",
+          "description": "Single-cell RNA-seq batch (1 or 2)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00525512.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "CD4_Th17_Status",
+          "id": "phv00525511.v2.p1",
+          "description": "IHC Stain results indicating CD4+ and TH17 High/Low Status (Stain: CD3+CD4+RORgammaT+)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CD66b_Gr_Status",
+          "id": "phv00525505.v2.p1",
+          "description": "IHC Stain Indicating CD66b+ Granulocytes (Stain: CD3-CD66b+)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CD8_CD137_Status",
+          "id": "phv00525508.v2.p1",
+          "description": "IHC Stain results indicating CD8+ and CD137 High/Low status (Stain: CD3+CD8+CD137+)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Cell_Type",
+          "id": "phv00525503.v2.p1",
+          "description": "Sorted Cell Population",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00525514.v2.p1",
+          "description": "Tumor Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "M1_Status",
+          "id": "phv00525509.v2.p1",
+          "description": "IHC Stain results indicating High/Low M1 status (Stain: CD45+CSF1R+CD68+CD163-)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "M2_Status",
+          "id": "phv00525510.v2.p1",
+          "description": "IHC Stain results indicating High/Low M2 status (Stain: CD45+CSF1R+CD68+CD163+)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "OS",
+          "id": "phv00525506.v2.p1",
+          "description": "Overall Survival",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00525502.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Treatment",
+          "id": "phv00525504.v2.p1",
+          "description": "Treatment Received",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Treg_Status",
+          "id": "phv00525507.v2.p1",
+          "description": "IHC Stain results indicating High/Low Treg status (Stain: CD45+CD4+RORgammaT+)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Resectable_PDA_Subject_Phenotypes",
+      "datasetId": "pht012955.v2",
+      "description": "This subject phenotypes data table contains subject IDs, case control status of the subject for adenocarcinoma, and age.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00525498.v2.p1",
+          "description": "Case control status of the subject for adenocarcinoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00525499.v2.p1",
+          "description": "Age at time of surgery",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RESPONSE",
+          "id": "phv00555511.v1.p1",
+          "description": "Pathological response",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00525497.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Resectable_PDA_Subject",
+      "datasetId": "pht012953.v2",
+      "description": "This subject consent data table contains subject IDs, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00525493.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00525494.v2.p1",
+          "description": "Biological Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00525492.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Resectable_PDA_Sample",
+      "datasetId": "pht012954.v2",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00525496.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00525495.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Resectable_PDA_GEO",
+      "datasetId": "pht012956.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00525501.v2.p1",
+          "description": "GEO accession ID (GSM#)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00525500.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

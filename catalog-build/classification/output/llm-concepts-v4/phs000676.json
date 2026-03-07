@@ -1,0 +1,337 @@
+{
+  "studyId": "phs000676",
+  "studyName": "Sequence-Based Analysis of Human Breast Tumors",
+  "tables": [
+    {
+      "tableName": "Breast_Tissues_Sequence_Analysis_Subject_Phenotypes",
+      "datasetId": "pht003588.v2",
+      "description": "Subject ID, age, race, survival event, tumor characteristics including ER, PR, HER2 status, and PAM50 subtype, tumor size, grade, M stage, and nodule status of participants with breast cancer and involved in the \"Sequence-Based Analysis of Human Breast Tumors\" project.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00196187.v2.p2",
+          "description": "Age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ER",
+          "id": "phv00196188.v2.p2",
+          "description": "ER (1=positive; 0=negative)",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Grade",
+          "id": "phv00196191.v2.p2",
+          "description": "Grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HER2 Status",
+          "id": "phv00334404.v1.p2",
+          "description": "HER2 Status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_her2_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "M Stage",
+          "id": "phv00334405.v1.p2",
+          "description": "M Stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_m_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Node status",
+          "id": "phv00196190.v2.p2",
+          "description": "Node status (1=positive=1 or more nodes; 0=negative)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Overall survival event",
+          "id": "phv00196195.v2.p2",
+          "description": "Overall survival event (0=alive; 1=DOD or DOC)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Overall suvival months",
+          "id": "phv00196196.v2.p2",
+          "description": "Overall suvival months",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PAM50_Subtype",
+          "id": "phv00334407.v1.p2",
+          "description": "PAM50 Subtype",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_molecular_subtypes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PR",
+          "id": "phv00196189.v2.p2",
+          "description": "PR (1=positive; 0=negative)",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_progesterone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RFS event",
+          "id": "phv00196193.v2.p2",
+          "description": "RFS event (0=no relapse; 1=relapsed at any site or died of disease)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RFS months",
+          "id": "phv00196194.v2.p2",
+          "description": "RFS months",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_recurrence_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00334406.v1.p2",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00196186.v2.p2",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Size",
+          "id": "phv00196192.v2.p2",
+          "description": "Tumor Size (1= <=2cm; 2= >2cm to <=5cm; 3= >5cm; 4=any size with direct extension to chest wall or skin)",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_extension_spread",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Tissues_Sequence_Analysis_Sample_Attributes",
+      "datasetId": "pht003590.v2",
+      "description": "Sample ID, analyte type, body site where sample was obtained, protocols to extract total RNA, cell or tissue type of sample, tumor status of sample, protocols to remove rRNA from sequencing library, primary tumor, metastasis, or transformed cell line, primary tumor location, sequencing center, tissue type to extract total RNA for library construction, tumor grade, tumor stage, and tumor treatment of participants with breast cancer and involved in the \"Sequence-Based Analysis of Human Breast Tumors\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00196201.v2.p2",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00196200.v2.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXTRACT_PROTOCOL",
+          "id": "phv00196209.v2.p2",
+          "description": "Protocols to extract total RNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00196203.v2.p2",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00196202.v2.p2",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIBRARY_CONSTRUCTION_PROTOCOL",
+          "id": "phv00196208.v2.p2",
+          "description": "Protocols to remove rRNA from sequencing library",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_METASTATIC_TUMOR",
+          "id": "phv00196204.v2.p2",
+          "description": "Primary tumor, metastasis, or transformed cell line",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_TUMOR_LOCATION",
+          "id": "phv00196205.v2.p2",
+          "description": "Primary tumor location",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00196199.v2.p2",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00196206.v2.p2",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TISSUE_TYPE",
+          "id": "phv00196207.v2.p2",
+          "description": "Type of tissues to extract total RNA for library construction",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_GRADE",
+          "id": "phv00334409.v1.p2",
+          "description": "Tumor grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_STAGE",
+          "id": "phv00334408.v1.p2",
+          "description": "Tumor stage",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TUMOR_TREATMENT",
+          "id": "phv00334410.v1.p2",
+          "description": "Tumor treatment",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_general_treatment",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Tissues_Sequence_Analysis_Subject",
+      "datasetId": "pht003586.v2",
+      "description": "Subject ID, affection status, and consent group of participants with breast cancer and involved in the \"Sequence-Based Analysis of Human Breast Tumors\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00196182.v2.p2",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00196179.v2.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00196178.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Tissues_Sequence_Analysis_Sample",
+      "datasetId": "pht003587.v2",
+      "description": "Subject ID, sample ID, and sample use variable of participants with breast cancer and involved in the \"Sequence-Based Analysis of Human Breast Tumors\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00196184.v2.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00196185.v2.p2",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00196183.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Breast_Tissues_Sequence_Analysis_GEO",
+      "datasetId": "pht003589.v1",
+      "description": "Sample ID and GEO accession ID of samples obtained from participants with breast cancer and involved in the \"Sequence-Based Analysis of Human Breast Tumors\" project.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00196198.v1.p2",
+          "description": "GEO accession ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00196197.v1.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

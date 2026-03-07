@@ -1,0 +1,194 @@
+{
+  "studyId": "phs001897",
+  "studyName": "Regulatory and Effector T cells in Oral Immunotherapy for Food Allergy",
+  "tables": [
+    {
+      "tableName": "Peanut_OIT_Subject_Phenotypes",
+      "datasetId": "pht009542.v2",
+      "description": "This subject phenotype table contains subject IDs, affection status of the subject for peanut allergy, age, gender, race, cumulative eliciting dose, skin prick test, peanut-specific IgE titer in plasma, and clinical outcome of treatment with peanut oral immunotherapy.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00420262.v2.p1",
+          "description": "Peanut allergy phenotype (Reactive or Hyporeactive; Reactive patients received peanut oral immunotherapy)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00420263.v2.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLINICAL_OUTCOME_OF_TREATMENT",
+          "id": "phv00420269.v2.p1",
+          "description": "Clinical outcome of treatment with peanut oral immunotherapy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CUMULATIVE_ELICITING_DOSE",
+          "id": "phv00420266.v2.p1",
+          "description": "Cumulative eliciting dose (mg peanut protein) at first objective allergic reaction during baseline double-blind placebo-controlled food challenge",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00420264.v2.p1",
+          "description": "Self-reported gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PEANUT_IGE",
+          "id": "phv00420268.v2.p1",
+          "description": "Peanut-specific IgE titer in plasma (kU/L)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00420265.v2.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SKIN_PRICK",
+          "id": "phv00420267.v2.p1",
+          "description": "Skin prick test wheal size (mm) in response to peanut allergen",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420261.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Peanut_OIT_Sample_Attributes",
+      "datasetId": "pht009543.v2",
+      "description": "This sample attributes table contains sample IDs, body site where sample was collected, analyte type, histological type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00420272.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00420271.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00420273.v2.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00420274.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420270.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Peanut_OIT_Subject",
+      "datasetId": "pht009540.v2",
+      "description": "The subject consent file includes subject IDs, consent information, and pooled subjects.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00420258.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POOLING",
+          "id": "phv00420941.v2.p1",
+          "description": "Samples from these individual subjects are pooled in the corresponding pooled subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420257.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Peanut_OIT_Sample",
+      "datasetId": "pht009541.v2",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. This data table also includes pooled sample IDs.",
+      "variables": [
+        {
+          "name": "POOLED_SAMPLE_ID",
+          "id": "phv00420942.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420260.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420259.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

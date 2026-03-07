@@ -1,0 +1,187 @@
+{
+  "studyId": "phs003313",
+  "studyName": "RNA-Seq from PMM2-CDG Patients and Healthy Controls",
+  "tables": [
+    {
+      "tableName": "PMM2_CDG_Sample_Attributes",
+      "datasetId": "pht013549.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, tumor status, cell type, method used for RNA extraction, ratio of absorbances at 260/280 and 260/230, condition of samples, and treatment type, duration, temperature, and dose.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00530170.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": "topmed:proteomics_panel_sample_metadata",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00530169.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "CELL_TYPE",
+          "id": "phv00530172.v1.p1",
+          "description": "Type of cell from which the sample was obtained",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONDITION",
+          "id": "phv00530176.v1.p1",
+          "description": "Condition of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DOSE",
+          "id": "phv00530180.v1.p1",
+          "description": "Dose of the treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00530171.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RATIO_260/230",
+          "id": "phv00530175.v1.p1",
+          "description": "Ratio of the absorbances at 260nm and 230nm",
+          "concept_id": "topmed:proteomics_panel_sample_metadata",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RATIO_260/280",
+          "id": "phv00530174.v1.p1",
+          "description": "Ratio of the absorbances at 260nm and 280nm",
+          "concept_id": "topmed:proteomics_panel_sample_metadata",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RNA_EXTRACTION",
+          "id": "phv00530173.v1.p1",
+          "description": "Method used for RNA extraction",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00530168.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY_INC_TEMP",
+          "id": "phv00530179.v1.p1",
+          "description": "Temperature in which the sample was subjected to the treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY_INC_TIME",
+          "id": "phv00530178.v1.p1",
+          "description": "Duration that the sample was subjected to the treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY_TMNT",
+          "id": "phv00530177.v1.p1",
+          "description": "Treatment to which the sample was subjected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PMM2_CDGS_Subject",
+      "datasetId": "pht013547.v1",
+      "description": "This subject consent data table includes subject IDs, consent information, and subject's biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00530162.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00530163.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00530165.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00530161.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00530164.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PMM2_CDG_Sample",
+      "datasetId": "pht013548.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00530167.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00530166.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

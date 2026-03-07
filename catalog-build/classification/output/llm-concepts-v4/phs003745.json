@@ -1,0 +1,738 @@
+{
+  "studyId": "phs003745",
+  "studyName": "Identifying and Reducing Disparities in Patient-Reported Outcomes Among African American Prostate Cancer Survivors",
+  "tables": [
+    {
+      "tableName": "AA_PC_Survivors_Subject_Phenotypes",
+      "datasetId": "pht015579.v1",
+      "description": "This subject phenotype table contains subject ID, source sites AAB, MOF, or UMS, age at survey, age calculated using system survey date and date of birth, race, Hispanic or not, race group, married status, education, income, household income, employment, insurance, years since date of diagnosis, months since date of diagnosis, year since initial treatment, national percentile of block group ADI score in 2020 and 2022, state-specific decile of block group ADI score in 2020 and 2022, Charlson Comorbidity Index (CMI) total score, days per week to get moderate to strenuous exercise (such as heavy lifting, shop work, construction or farm work, home repair, gardening, bowling, golf, jogging, basketball, riding a bike, etc.), minutes to exercise at this level, how often to have at least one drink of any alcoholic beverage such as beer, wine, a malt beverage, or liquor last month, drinks to have on a typical occasion during the past month, smoking status, number of years smoked times the number of packs of cigarettes smoked per day, total strenuous, moderate, or mild physical activity (minutes per week), calculate metabolic equivalents (METS), EPIC26 (5 variables; urinary incontinence, urinary irritative, bowel, sexual, and hormonal), PSQI (9 variables; duration of sleep, sleep disturbance, sleep latency, sleep efficiency, sleep efficiency category, overall sleep quality, day dysfunction due to sleepiness, need meds to sleep, and total score), EQ5D5L (3 variables; level sum score, index score, and visual analogue scale score), PROMIS (8 variables; pain intensity, physical function t-score, anxiety t-score, depression t-score, fatigue t-score, sleep disturbance t-score, ability to participate in social roles t-score, and pain intensity t-score), number of situations in which each participant reports discrimination, total frequency of discrimination, trust in physicians, trust in medical professions, religious belief, religious behavior, religiosity categories, powe fatalism inventory (PFI), three level genetic counselor categories, gleason scores, three categories for Gleason scores, TNM mixed stage, three disease stages, if disease is metastatic, treatment, treatment status, surgery of primary site, radiation, chemotherapy, hormone therapy, no single or multiple treatment, body mass index calculated from lifestyle, and standard weight status categories.",
+      "variables": [
+        {
+          "name": "ADI_NATRANK_2020",
+          "id": "phv00556946.v1.p1",
+          "description": "National percentile of block group ADI score in 2020",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ADI_NATRANK_2022",
+          "id": "phv00556948.v1.p1",
+          "description": "National percentile of block group ADI score in 2022",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ADI_STATERNK_2020",
+          "id": "phv00556947.v1.p1",
+          "description": "State-specific decile of block group ADI score in 2020",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ADI_STATERNK_2022",
+          "id": "phv00556949.v1.p1",
+          "description": "State-specific decile of block group ADI score in 2022",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_dx",
+          "id": "phv00556933.v1.p1",
+          "description": "Age calculated using system survey date and date of birth",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_survey",
+          "id": "phv00556932.v1.p1",
+          "description": "Age at survey",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00557007.v1.p1",
+          "description": "Body mass index calculated from lifestyle hight and weight",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_Category",
+          "id": "phv00557008.v1.p1",
+          "description": "Standard weight status categories",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CMItot",
+          "id": "phv00556950.v1.p1",
+          "description": "CMI total score - Charlson Comorbidity Index",
+          "concept_id": "ncpi:disease_diagnosis_comorbidity_indices",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Dx_months",
+          "id": "phv00556944.v1.p1",
+          "description": "Months since date of diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Dx_years",
+          "id": "phv00556943.v1.p1",
+          "description": "Years since date of diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EOD_Frequency",
+          "id": "phv00556987.v1.p1",
+          "description": "Total frequency of discrimination (0 - 45)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EOD_Sum",
+          "id": "phv00556986.v1.p1",
+          "description": "The number of situations in which each participant reports discrimination (0-9)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EPIC26_Bowel",
+          "id": "phv00556963.v1.p1",
+          "description": "EPIC26 Bowel",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_general_gi_symptoms",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "EPIC26_Hormonal",
+          "id": "phv00556965.v1.p1",
+          "description": "EPIC26 Hormonal",
+          "concept_id": "ncpi:concomitant_medication_hormone_reproductive_medications_other_hormone_medications",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "EPIC26_Sexual",
+          "id": "phv00556964.v1.p1",
+          "description": "EPIC26 Sexual",
+          "concept_id": "ncpi:disease_diagnosis_genitourinary_disorders_sexual_dysfunction",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "EPIC26_UrinIncont",
+          "id": "phv00556961.v1.p1",
+          "description": "EPIC26 Urinary incontinence",
+          "concept_id": "ncpi:disease_diagnosis_genitourinary_disorders_urinary_incontinence",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "EPIC26_UrinIrrit",
+          "id": "phv00556962.v1.p1",
+          "description": "EPIC26 Urinary irritative",
+          "concept_id": "ncpi:disease_diagnosis_genitourinary_disorders_urinary_irritative_symptoms",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "EQ5D5L_Index_Score",
+          "id": "phv00556976.v1.p1",
+          "description": "EQ5D5L index score (0-1)",
+          "concept_id": "ncpi:depression_anxiety_screening_quality_of_life_emotional",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "EQ5D5L_LSS",
+          "id": "phv00556975.v1.p1",
+          "description": "EQ5D5L level sum score (5-25)",
+          "concept_id": "ncpi:depression_anxiety_screening_quality_of_life_emotional",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "EQ5D5L_VAS",
+          "id": "phv00556977.v1.p1",
+          "description": "EQ5D5L Visual analogue scale score (0-100)",
+          "concept_id": "ncpi:depression_anxiety_screening_quality_of_life_emotional",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Employed",
+          "id": "phv00556941.v1.p1",
+          "description": "Employment",
+          "concept_id": "phenx:current_employment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GCT3_3level",
+          "id": "phv00556994.v1.p1",
+          "description": "Three level genetic counselor categories - not available if patients reported not seeing genetic counselor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Hispanic",
+          "id": "phv00556935.v1.p1",
+          "description": "Hispanic or not",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Income",
+          "id": "phv00556939.v1.p1",
+          "description": "Income",
+          "concept_id": "phenx:annual_family_income",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LRS_Behavior",
+          "id": "phv00556991.v1.p1",
+          "description": "Religious behavior (5-21)",
+          "concept_id": "ncpi:depression_anxiety_screening_religious_spiritual_coping",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "LRS_Belief",
+          "id": "phv00556990.v1.p1",
+          "description": "Religious belief (4-20)",
+          "concept_id": "ncpi:depression_anxiety_screening_religious_spiritual_coping",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "LRS_Category",
+          "id": "phv00556992.v1.p1",
+          "description": "Religiosity categories",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "METS",
+          "id": "phv00556960.v1.p1",
+          "description": "Calculate metabolic equivalents (METS)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Married",
+          "id": "phv00556937.v1.p1",
+          "description": "Married or not",
+          "concept_id": "phenx:current_marital_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "More50K",
+          "id": "phv00556940.v1.p1",
+          "description": "Household income 50K or not",
+          "concept_id": "phenx:annual_family_income",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PFI_sum",
+          "id": "phv00556993.v1.p1",
+          "description": "Powe Fatalism Inventory (PFI) (0 - 15)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROMIS_Anxiety_t",
+          "id": "phv00556980.v1.p1",
+          "description": "PROMIS Anxiety t-score",
+          "concept_id": "topmed:depression_anxiety_screening_phq9_gad7_scores",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROMIS_Depression_t",
+          "id": "phv00556981.v1.p1",
+          "description": "PROMIS Depression t-score",
+          "concept_id": "topmed:depression_anxiety_screening_cesd_total_scores",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROMIS_Fatigue_t",
+          "id": "phv00556982.v1.p1",
+          "description": "PROMIS Fatigue t-score",
+          "concept_id": "ncpi:depression_anxiety_screening_promis_fatigue_social",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PROMIS_Pain_Intensity",
+          "id": "phv00556978.v1.p1",
+          "description": "PROMIS Pain intensity (0-10)",
+          "concept_id": "ncpi:pain_medication_pain_intensity_assessment",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PROMIS_Pain_Interference_t",
+          "id": "phv00556985.v1.p1",
+          "description": "PROMIS Pain Intensity t-score",
+          "concept_id": "ncpi:pain_medication_pain_intensity_assessment",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PROMIS_Part_Soc_Roles_t",
+          "id": "phv00556984.v1.p1",
+          "description": "PROMIS Ability to Participate in Social Roles t-score",
+          "concept_id": "ncpi:depression_anxiety_screening_promis_fatigue_social",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "PROMIS_RSS_Phys_Function_t",
+          "id": "phv00556979.v1.p1",
+          "description": "PROMIS Physical Function t-score",
+          "concept_id": "ncpi:physical_functioning_subjective_composite_scores",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PROMIS_Sleep_Disturb_t",
+          "id": "phv00556983.v1.p1",
+          "description": "PROMIS Sleep Disturbance t-score",
+          "concept_id": "ncpi:sleep_duration_sleep_disturbances",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PSQI",
+          "id": "phv00556974.v1.p1",
+          "description": "PSQI total score (0-21)",
+          "concept_id": "ncpi:sleep_duration_sleep_quality_scores",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PSQIDAYDYS",
+          "id": "phv00556972.v1.p1",
+          "description": "PSQI day dysfunction due to sleepiness",
+          "concept_id": "ncpi:sleep_duration_daytime_sleepiness",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PSQIDISTB",
+          "id": "phv00556967.v1.p1",
+          "description": "PSQI Sleep disturbance (0-3)",
+          "concept_id": "ncpi:sleep_duration_sleep_disturbances",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PSQIDURAT",
+          "id": "phv00556966.v1.p1",
+          "description": "PSQI Duration of sleep (0-3)",
+          "concept_id": "ncpi:sleep_duration_sleep_duration_scores",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PSQIHSE",
+          "id": "phv00556969.v1.p1",
+          "description": "PSQI Sleep efficiency (0-3)",
+          "concept_id": "ncpi:sleep_duration_sleep_efficiency",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PSQIHSE_Category",
+          "id": "phv00556970.v1.p1",
+          "description": "PSQI Sleep efficiency category",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PSQILATEN",
+          "id": "phv00556968.v1.p1",
+          "description": "PSQI Sleep latency (0-3)",
+          "concept_id": "ncpi:sleep_duration_sleep_latency_scores",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PSQIMEDS",
+          "id": "phv00556973.v1.p1",
+          "description": "PSQI need meds to sleep (0-3)",
+          "concept_id": "topmed:concomitant_medication_sleep_sedative_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PSQISLPQUAL",
+          "id": "phv00556971.v1.p1",
+          "description": "PSQI Overall sleep quality (0-3)",
+          "concept_id": "ncpi:sleep_duration_sleep_quality_scores",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Pack_Years",
+          "id": "phv00556956.v1.p1",
+          "description": "The number of years smoked times the number of packs of cigarettes smoked per day",
+          "concept_id": "ncpi:ever_smoker_baseline_pack_years",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Race_Group",
+          "id": "phv00556936.v1.p1",
+          "description": "Race group",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00556930.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking_Status",
+          "id": "phv00556955.v1.p1",
+          "description": "Smoking status",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SomeCollege",
+          "id": "phv00556938.v1.p1",
+          "description": "Whether subject had college education",
+          "concept_id": "phenx:current_educational_attainment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TMPS_MedProfession",
+          "id": "phv00556989.v1.p1",
+          "description": "Trust in medical professions (5-25)",
+          "concept_id": "ncpi:depression_anxiety_screening_trust_medical_care",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "TMPS_Physician",
+          "id": "phv00556988.v1.p1",
+          "description": "Trust in physicians (5-25)",
+          "concept_id": "ncpi:depression_anxiety_screening_trust_medical_care",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "TNM_stage",
+          "id": "phv00556997.v1.p1",
+          "description": "TNM mixed stage (currently only available for Moffitt Participants)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cancer_yr",
+          "id": "phv00556945.v1.p1",
+          "description": "Year since initial treatment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "first_chemotherapy2",
+          "id": "phv00557004.v1.p1",
+          "description": "Chemotherapy",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_chemotherapy_general_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "first_hormone_therapy2",
+          "id": "phv00557005.v1.p1",
+          "description": "Hormone therapy",
+          "concept_id": "ncpi:concomitant_medication_hormone_reproductive_medications_general_hormone_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "first_radiotherapy2",
+          "id": "phv00557003.v1.p1",
+          "description": "Radiation",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "first_surgery2",
+          "id": "phv00557002.v1.p1",
+          "description": "Surgery of primary site 2 level",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "first_treatment_count3",
+          "id": "phv00557006.v1.p1",
+          "description": "No single or multiple treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gleason",
+          "id": "phv00556995.v1.p1",
+          "description": "Gleason scores",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gleason3",
+          "id": "phv00556996.v1.p1",
+          "description": "Three categories for Gleason scores",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_gleason_score",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "insurance2",
+          "id": "phv00556942.v1.p1",
+          "description": "Insurance",
+          "concept_id": "phenx:health_insurance_coverage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lifestyle3",
+          "id": "phv00556951.v1.p1",
+          "description": "3. How many days per week do you typically get moderate to strenuous exercise (such as heavy lifting, shop work, construction or farm work, home repair, gardening, bowling, golf, jogging, basketball, riding a bike, etc.)?",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_moderate_activity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lifestyle4",
+          "id": "phv00556952.v1.p1",
+          "description": "4. On those days that you do moderate to strenuous exercise, how many minutes did you typically exercise at this level?",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_moderate_activity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lifestyle5",
+          "id": "phv00556953.v1.p1",
+          "description": "5. In the past month, about how often did you have at least one drink of any alcoholic beverage such as beer, wine, a malt beverage, or liquor? One drink is equivalent to a 12 oz beer, a 5 oz glass of wine, or a drink with one shot of liquor.",
+          "concept_id": "ncpi:alcohol_30day_quantity_and_frequency_alcohol_frequency",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lifestyle6",
+          "id": "phv00556954.v1.p1",
+          "description": "6. When you drank during the past month, how many drinks did you have on a typical occasion?",
+          "concept_id": "ncpi:alcohol_30day_quantity_and_frequency_drinks_per_day_typical",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lsia_total_min",
+          "id": "phv00556957.v1.p1",
+          "description": "Total strenuous physical activity (minutes per week)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_recreational_leisure_activity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lsib_total_min",
+          "id": "phv00556958.v1.p1",
+          "description": "Total moderate physical activity (minutes per week)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_recreational_leisure_activity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lsic_total_min",
+          "id": "phv00556959.v1.p1",
+          "description": "Total mild physical activity (minutes per week)",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_mild_light_activity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "metastatic2",
+          "id": "phv00556999.v1.p1",
+          "description": "If disease is metastatic",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_m_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00556934.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "source",
+          "id": "phv00556931.v1.p1",
+          "description": "Which site AAB, MOF, or UMS",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "stage3",
+          "id": "phv00556998.v1.p1",
+          "description": "Three disease stages",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment2",
+          "id": "phv00557000.v1.p1",
+          "description": "On treatment or not",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment3",
+          "id": "phv00557001.v1.p1",
+          "description": "Treatment status 3 group",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_status",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AA_PC_Survivors_Sample_Attributes",
+      "datasetId": "pht015580.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00557011.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00557010.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00557012.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00557009.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AA_PC_Survivors_Subject",
+      "datasetId": "pht015577.v1",
+      "description": "The subject consent file includes subject ID, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00556926.v1.p1",
+          "description": "Registered consent groups (Data Use Limitations (DUL)) as determined by submitters' Institutional Review Boards (IRB) or equivalent body",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00556927.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00556925.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AA_PC_Survivors_Sample",
+      "datasetId": "pht015578.v1",
+      "description": "This subject sample mapping data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00556929.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00556928.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

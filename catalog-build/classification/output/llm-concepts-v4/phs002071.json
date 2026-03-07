@@ -1,0 +1,171 @@
+{
+  "studyId": "phs002071",
+  "studyName": "Multimodal Mapping of the Immune Landscape in Human Pancreatic Cancer",
+  "tables": [
+    {
+      "tableName": "PDA_Sample_Attributes",
+      "datasetId": "pht010456.v1",
+      "description": "This sample attributes data table includes isolate identification number, type of tissue, disease, sample type, treatment type, disease stage and grade, recist category, and subject information (n=3 variables; age of subject at enrollment, sex, and BMI).",
+      "variables": [
+        {
+          "name": "BMI",
+          "id": "phv00435200.v1.p1",
+          "description": "Body Mass Index of subject",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00435190.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00435193.v1.p1",
+          "description": "Age of subject at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "disease",
+          "id": "phv00435196.v1.p1",
+          "description": "Type of disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "grade",
+          "id": "phv00435202.v1.p1",
+          "description": "Disease grade",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "isolate",
+          "id": "phv00435192.v1.p1",
+          "description": "Isolate identification number",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "organism",
+          "id": "phv00435191.v1.p1",
+          "description": "Organism",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "recist_category",
+          "id": "phv00435203.v1.p1",
+          "description": "Response evaluation critera in solid tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_type",
+          "id": "phv00435198.v1.p1",
+          "description": "Type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00435194.v1.p1",
+          "description": "Sex of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "stage",
+          "id": "phv00435201.v1.p1",
+          "description": "Disease stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tissue",
+          "id": "phv00435195.v1.p1",
+          "description": "Type of tissue",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment",
+          "id": "phv00435199.v1.p1",
+          "description": "Subject treatment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PDA_Subject",
+      "datasetId": "pht010454.v1",
+      "description": "This subject consent data table includes subject IDs, consent group information, and subject's sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00435186.v1.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00435187.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435185.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PDA_Sample",
+      "datasetId": "pht010455.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and sample aliases. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00435189.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435188.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

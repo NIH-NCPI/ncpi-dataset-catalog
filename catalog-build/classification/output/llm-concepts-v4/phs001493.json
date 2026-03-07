@@ -1,0 +1,170 @@
+{
+  "studyId": "phs001493",
+  "studyName": "Whole Exome Predictors Immune Checkpoint Therapy Response in Renal Cell Carcinoma",
+  "tables": [
+    {
+      "tableName": "RCC_Immune_Checkpoint_Subject_Phenotypes",
+      "datasetId": "pht007298.v1",
+      "description": "Subject ID, age, gender, immunotherapy, drug of first-line treatment, response to immunotherapy, and specific treatment of participants with or without different tumor types, including metastatic melanoma, non-small cell lung cancer (NSCLC), and renal cell carcinoma (RCC) and involved in the \"Genomic Predictors of Response to Immune Checkpoint Therapy\" project.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00347476.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00347478.v1.p1",
+          "description": "Age of patient",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "drug",
+          "id": "phv00347479.v1.p1",
+          "description": "Type of immunotherapy patient received",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "first line",
+          "id": "phv00347481.v1.p1",
+          "description": "Indicates whether the drug listed was first-line treatment or if the patient had prior therapy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00347477.v1.p1",
+          "description": "Gender of patient",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "response category",
+          "id": "phv00347482.v1.p1",
+          "description": "Patient response to immunotherapy, as defined in publication",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "treatment group",
+          "id": "phv00347480.v1.p1",
+          "description": "Specific treatment arm of the clinical trial each patient was assigned to, where applicable",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RCC_Immune_Checkpoint_Sample_Attributes",
+      "datasetId": "pht007299.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00347487.v1.p1",
+          "description": "Molecular analyte",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00347483.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample Type",
+          "id": "phv00347484.v1.p1",
+          "description": "Indicates the Tumor / Normal status of a sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Source",
+          "id": "phv00347486.v1.p1",
+          "description": "Material source that DNA or DNA & RNA were extracted from",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tumor Type",
+          "id": "phv00347485.v1.p1",
+          "description": "Indicates primary or metastatic tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RCC_Immune_Checkpoint_Sample",
+      "datasetId": "pht007297.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00347474.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00347475.v2.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00347473.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RCC_Immune_Checkpoint_Subject",
+      "datasetId": "pht007296.v1",
+      "description": "Subject ID and consent group of participants with or without different tumor types, including metastatic melanoma, non-small cell lung cancer (NSCLC), and renal cell carcinoma (RCC) and involved in the \"Genomic Predictors of Response to Immune Checkpoint Therapy\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00347472.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00347471.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

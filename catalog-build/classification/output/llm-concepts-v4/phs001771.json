@@ -1,0 +1,1154 @@
+{
+  "studyId": "phs001771",
+  "studyName": "Genomic Diagnosis and Individualized Therapy of Monogenic Diabetes",
+  "tables": [
+    {
+      "tableName": "IGNITE_Subject_Phenotypes",
+      "datasetId": "pht008717.v1",
+      "description": "This subject phenotypes data table includes study site, self-reported information about diabetes diagnosis (Type 1, Type 2, gestational, pre-diabetes, other), age at diabetes diagnosis, medical history (stroke, epilepsy or seizures, asthma or lung disease, digestive system disease information or surgery,  joint or muscular problems, osteoporosis, thyroid problems, anemia, circulation problems, cancers or tumors, genetic disorders, surgeries, ovarian disorders, cystic fibrosis, hearing loss, vision problems, intellectual disabilities), family history of diabetes, anthropometric measurements (height, weight, and obesity status), hypertension,  medications (n=33 variables), blood measurements (hemoglobin  A1c , C-Peptide, IA2 antibodies, GAD 65 autoantibody, high cholesterol or lipids), education level, and marital status.",
+      "variables": [
+        {
+          "name": "PHHQ1",
+          "id": "phv00400536.v1.p1",
+          "description": "Stroke",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_stroke_cerebrovascular",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ10",
+          "id": "phv00400545.v1.p1",
+          "description": "Pancreatitis or pancreas surgery",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_pancreatitis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ11",
+          "id": "phv00400546.v1.p1",
+          "description": "Liver disease (cirrhosis, hepatitis, fatty liver, abnormal liver tests)",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ12",
+          "id": "phv00400547.v1.p1",
+          "description": "Kidney disease",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_general_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ13",
+          "id": "phv00400548.v1.p1",
+          "description": "Kidney failure or transplant",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_general_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ15",
+          "id": "phv00400549.v1.p1",
+          "description": "Joint or muscular problems",
+          "concept_id": "ncpi:bone_musculoskeletal_arthritis_joint_disease_musculoskeletal_conditions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ16",
+          "id": "phv00400550.v1.p1",
+          "description": "Osteoporosis",
+          "concept_id": "topmed:bone_musculoskeletal_osteoporosis_bone_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ17",
+          "id": "phv00400551.v1.p1",
+          "description": "Thyroid problems",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_general_thyroid_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ18",
+          "id": "phv00400552.v1.p1",
+          "description": "Anemia or bleeding disorder",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_anemia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ19",
+          "id": "phv00400553.v1.p1",
+          "description": "Skin problems (eczema, hyperpigmentation)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ2",
+          "id": "phv00400537.v1.p1",
+          "description": "High blood pressure",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypertension_hypertension_diagnosis_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ20",
+          "id": "phv00400554.v1.p1",
+          "description": "Diabetic ketoacidosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ21",
+          "id": "phv00400555.v1.p1",
+          "description": "Diabetes related eye problems (retinopathy)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "PHHQ22",
+          "id": "phv00400556.v1.p1",
+          "description": "Circulation problems (major leg cramps, leg sores, amputation)",
+          "concept_id": "ncpi:pad_prior_poor_circulation",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ23",
+          "id": "phv00400557.v1.p1",
+          "description": "Diabetes related neuropathy (tingling, numbness, or burning in hands/feet)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ24",
+          "id": "phv00400558.v1.p1",
+          "description": "Cancer or tumors",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_general_cancer_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ25",
+          "id": "phv00400559.v1.p1",
+          "description": "Genetic disorder",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_genetic_syndromes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ27",
+          "id": "phv00400560.v1.p1",
+          "description": "Surgery in childhood (specify)",
+          "concept_id": "ncpi:surgical_procedure_general_surgery_childhood_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ28",
+          "id": "phv00400561.v1.p1",
+          "description": "SURGERY IN ADULTHOOD",
+          "concept_id": "ncpi:surgical_procedure_general_surgery_adulthood_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ29",
+          "id": "phv00400562.v1.p1",
+          "description": "Birth defects",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ3",
+          "id": "phv00400538.v1.p1",
+          "description": "Heart disease (angina, bypass, heart attack, angioplasty)",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_general_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ30",
+          "id": "phv00400563.v1.p1",
+          "description": "Polycystic ovary syndrome (PCOS), ovarian cysts or other ovarian disorder",
+          "concept_id": "ncpi:disease_diagnosis_genitourinary_disorders_polycystic_ovary_syndrome",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ31",
+          "id": "phv00400564.v1.p1",
+          "description": "Hypogonadism; delayed or absent puberty; precocious puberty",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ32",
+          "id": "phv00400565.v1.p1",
+          "description": "Cystic Fibrosis",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_cystic_fibrosis_pcd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ33",
+          "id": "phv00400566.v1.p1",
+          "description": "Hearing loss",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_hearing_problems",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ34",
+          "id": "phv00400567.v1.p1",
+          "description": "Vision loss",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_sensory_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ35",
+          "id": "phv00400568.v1.p1",
+          "description": "Intellectual disability, learning problem, special education classes",
+          "concept_id": "topmed:disease_diagnosis_psychiatric_mental_health",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ38A",
+          "id": "phv00400569.v1.p1",
+          "description": "Type 1 diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type1_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ38B",
+          "id": "phv00400570.v1.p1",
+          "description": "Type 2 diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type2_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ38C",
+          "id": "phv00400571.v1.p1",
+          "description": "Gestational diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_gestational_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ38C1",
+          "id": "phv00400572.v1.p1",
+          "description": "High Blood Sugar without diabetes diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ38D",
+          "id": "phv00400574.v1.p1",
+          "description": "OTHER TYPE OF DIABETES",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ38DS",
+          "id": "phv00400573.v1.p1",
+          "description": "OTHER TYPE OF DIABETES (SPECIFY)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ38E",
+          "id": "phv00400576.v1.p1",
+          "description": "OTHER TYPE OF DIABETES",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ38ES",
+          "id": "phv00400575.v1.p1",
+          "description": "OTHER TYPE OF DIABETES (SPECIFY)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ39",
+          "id": "phv00400577.v1.p1",
+          "description": "Have you ever been told or suspected that you might have a \"special\" type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ39SP",
+          "id": "phv00400578.v1.p1",
+          "description": "HAVE YOU EVER BEEN TOLD OR SUSPECTED THAT YOU MIGHT HAVE SPECIAL TYPE OF DIABETES, SPECIFY",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ4",
+          "id": "phv00400539.v1.p1",
+          "description": "High cholesterol or lipids",
+          "concept_id": "ncpi:total_cholesterol_high_cholesterol_diagnosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ40",
+          "id": "phv00400579.v1.p1",
+          "description": "Current Height",
+          "concept_id": "ncpi:height_baseline_height_inches_feet",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ41",
+          "id": "phv00400580.v1.p1",
+          "description": "Current Weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ42",
+          "id": "phv00400581.v1.p1",
+          "description": "Height at time of diagnosis",
+          "concept_id": "ncpi:height_baseline_height_inches_feet",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ42U",
+          "id": "phv00400582.v1.p1",
+          "description": "Height at diagnosis-unknown",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ43",
+          "id": "phv00400583.v1.p1",
+          "description": "Weight at time of diagnosis",
+          "concept_id": "ncpi:weight_baseline_weight_historical_timepoints",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ43U",
+          "id": "phv00400584.v1.p1",
+          "description": "Weight at diagnosis-unknown",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ44A",
+          "id": "phv00400585.v1.p1",
+          "description": "Diabetic Ketoacidosis/hospitalization to ICU for diabetes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ44B",
+          "id": "phv00400586.v1.p1",
+          "description": "Routine physician visit/blood work",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ44C",
+          "id": "phv00400587.v1.p1",
+          "description": "Testing during pregnancy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ44D",
+          "id": "phv00400588.v1.p1",
+          "description": "Symptoms (excessive thirst or urination)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ44E",
+          "id": "phv00400589.v1.p1",
+          "description": "Testing because of risk factors (e.g., obesity, triglycerides)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ44F",
+          "id": "phv00400590.v1.p1",
+          "description": "Diagnosis in a family member",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ44G",
+          "id": "phv00400591.v1.p1",
+          "description": "Other (specify)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ44SP",
+          "id": "phv00400592.v1.p1",
+          "description": "WHAT WERE THE FACTORS LEADING TO YOUR DIABETES DIAGNOSIS, OTHER",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ45A",
+          "id": "phv00400593.v1.p1",
+          "description": "Insulin",
+          "concept_id": "ncpi:diabetes_medication_insulin_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ45B",
+          "id": "phv00400594.v1.p1",
+          "description": "Insulin-did you take this in the first 6 months after you were diagnosed",
+          "concept_id": "ncpi:diabetes_medication_insulin_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ45C",
+          "id": "phv00400595.v1.p1",
+          "description": "Insulin-do you currently take this",
+          "concept_id": "ncpi:diabetes_medication_insulin_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ46A",
+          "id": "phv00400596.v1.p1",
+          "description": "Glipizide (Glucotrol, Glucotrol XL), glyburide (Micronase, Glynase, Diabeta),",
+          "concept_id": "ncpi:diabetes_medication_sulfonylureas",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ46B",
+          "id": "phv00400597.v1.p1",
+          "description": "Glipizide-did you take this in the first 6 months after you were diagnosed",
+          "concept_id": "ncpi:diabetes_medication_sulfonylureas",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ46C",
+          "id": "phv00400598.v1.p1",
+          "description": "Glipizide-do you currently take this",
+          "concept_id": "ncpi:diabetes_medication_sulfonylureas",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ47A",
+          "id": "phv00400599.v1.p1",
+          "description": "Metformin (Glucophage)",
+          "concept_id": "ncpi:diabetes_medication_metformin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ47B",
+          "id": "phv00400600.v1.p1",
+          "description": "Metformin-did you take this in the first 6 months after you were diagnosed",
+          "concept_id": "ncpi:diabetes_medication_metformin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ47C",
+          "id": "phv00400601.v1.p1",
+          "description": "Metformin (Glucophage)-do you currently take this",
+          "concept_id": "ncpi:diabetes_medication_metformin",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ48A",
+          "id": "phv00400602.v1.p1",
+          "description": "Repaglinide (Prandin), nateglinide (Starlix)",
+          "concept_id": "ncpi:diabetes_medication_meglitinides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ48B",
+          "id": "phv00400603.v1.p1",
+          "description": "Repaglinide-did you take this in the first 6 months after you were diagnosed",
+          "concept_id": "ncpi:diabetes_medication_meglitinides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ48C",
+          "id": "phv00400604.v1.p1",
+          "description": "Repaglinide (Prandin), pioglitazone (Actos)-do you currently take this",
+          "concept_id": "ncpi:diabetes_medication_meglitinides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ49A",
+          "id": "phv00400605.v1.p1",
+          "description": "Rosiglitazone (Avandia), pioglitazone (Actos)",
+          "concept_id": "ncpi:diabetes_medication_thiazolidinediones",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ49B",
+          "id": "phv00400606.v1.p1",
+          "description": "Rosiglitazone-did you take this in the first 6 months after you were diagnosed",
+          "concept_id": "ncpi:diabetes_medication_thiazolidinediones",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ49C",
+          "id": "phv00400607.v1.p1",
+          "description": "Rosiglitazone (Avandia), pioglitazone (Actos)-do you currently take this",
+          "concept_id": "ncpi:diabetes_medication_thiazolidinediones",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ5",
+          "id": "phv00400540.v1.p1",
+          "description": "Epilepsy or seizures",
+          "concept_id": "topmed:disease_diagnosis_seizure_epilepsy_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ50A",
+          "id": "phv00400608.v1.p1",
+          "description": "Sitagliptin (Januvia), saxagliptin (Onglyza), linagliptin (Tradjenta), alogliptin",
+          "concept_id": "ncpi:diabetes_medication_dpp4_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ50B",
+          "id": "phv00400609.v1.p1",
+          "description": "Sitagliptin -did you take this in the first 6 months after you were diagnosed",
+          "concept_id": "ncpi:diabetes_medication_dpp4_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ50C",
+          "id": "phv00400610.v1.p1",
+          "description": "Sitagliptin-do you currently take this",
+          "concept_id": "ncpi:diabetes_medication_dpp4_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ51A",
+          "id": "phv00400611.v1.p1",
+          "description": "Canagliflozin (Invokana), dapagliflozin (Farxiga)",
+          "concept_id": "ncpi:diabetes_medication_sglt2_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ51B",
+          "id": "phv00400612.v1.p1",
+          "description": "Canagliflozin-did you take this in the first 6 months after you were diagnosed",
+          "concept_id": "ncpi:diabetes_medication_sglt2_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ51C",
+          "id": "phv00400613.v1.p1",
+          "description": "Canagliflozin (Invokana), dapagliflozin (Farxiga)-do you currently take this",
+          "concept_id": "ncpi:diabetes_medication_sglt2_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ52A",
+          "id": "phv00400614.v1.p1",
+          "description": "Exenatide (Byetta, Bydureon), liraglutide (Victoza)",
+          "concept_id": "ncpi:diabetes_medication_glp1_agonists",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ52B",
+          "id": "phv00400615.v1.p1",
+          "description": "Exenatide-did you take this in the first 6 months after you were diagnosed",
+          "concept_id": "ncpi:diabetes_medication_glp1_agonists",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ52C",
+          "id": "phv00400616.v1.p1",
+          "description": "Exenatide (Byetta, Bydureon), liraglutide (Victoza)-do you currently take this",
+          "concept_id": "ncpi:diabetes_medication_glp1_agonists",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ53A",
+          "id": "phv00400617.v1.p1",
+          "description": "Pramlintide (Symlin)",
+          "concept_id": "ncpi:diabetes_medication_amylin_analogs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ53B",
+          "id": "phv00400618.v1.p1",
+          "description": "Pramlintide-did you take this in the first 6 months after you were diagnosed",
+          "concept_id": "ncpi:diabetes_medication_amylin_analogs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ53C",
+          "id": "phv00400619.v1.p1",
+          "description": "Pramlintide (Symlin)-do you currently take this",
+          "concept_id": "ncpi:diabetes_medication_amylin_analogs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ54A",
+          "id": "phv00400620.v1.p1",
+          "description": "Acarbose (Precose), meglitol (Glyset)",
+          "concept_id": "ncpi:diabetes_medication_alpha_glucosidase_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ54B",
+          "id": "phv00400621.v1.p1",
+          "description": "Acarbose-did you take this in the first 6 months after you were diagnosed",
+          "concept_id": "ncpi:diabetes_medication_alpha_glucosidase_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ54C",
+          "id": "phv00400622.v1.p1",
+          "description": "Acarbose (Precose), meglitol (Glyset)-do you currently take this",
+          "concept_id": "ncpi:diabetes_medication_alpha_glucosidase_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ55A",
+          "id": "phv00400623.v1.p1",
+          "description": "Colesevelam (Welchol)",
+          "concept_id": "ncpi:diabetes_medication_bile_acid_sequestrants",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ55B",
+          "id": "phv00400624.v1.p1",
+          "description": "Colesevelam-did you take this in the first 6 months after you were diagnosed",
+          "concept_id": "ncpi:diabetes_medication_bile_acid_sequestrants",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ55C",
+          "id": "phv00400625.v1.p1",
+          "description": "Colesevelam (Welchol)-do you currently take this",
+          "concept_id": "ncpi:diabetes_medication_bile_acid_sequestrants",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ59",
+          "id": "phv00400626.v1.p1",
+          "description": "What is the highest grade  or level of school you completed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ6",
+          "id": "phv00400541.v1.p1",
+          "description": "Asthma or lung disease",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_lung_disease_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ60",
+          "id": "phv00400627.v1.p1",
+          "description": "Marital Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ62",
+          "id": "phv00400628.v1.p1",
+          "description": "What is your most recent Hemoglobin A1c?",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ62A",
+          "id": "phv00400629.v1.p1",
+          "description": "What is your most recent Hemoglobin A1c? - unknown",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ7",
+          "id": "phv00400542.v1.p1",
+          "description": "Gallstones or gallbladder disease",
+          "concept_id": "topmed:disease_diagnosis_gallbladder_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ8",
+          "id": "phv00400543.v1.p1",
+          "description": "Stomach ulcers or colitis, inflammatory bowel disease",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_peptic_ulcer_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHHQ9",
+          "id": "phv00400544.v1.p1",
+          "description": "Obesity",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00400500.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00400504.v1.p1",
+          "description": "Age - study site 1",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_diagnosed",
+          "id": "phv00400517.v1.p1",
+          "description": "How old were you when you were diagnosed with diabetes?",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_nodob",
+          "id": "phv00400505.v1.p1",
+          "description": "Age - study site 2 - 4",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "before_1_combined",
+          "id": "phv00400515.v1.p1",
+          "description": "Were you diagnosed with diabetes(versions 2-5)/diabetes or high blood sugar(version 6) before 1 year of age?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "before_30_combined",
+          "id": "phv00400516.v1.p1",
+          "description": "Were you diagnosed with diabetes (versions 2-5)/diabetes or high blood sugar(version 6) before 30 year of age?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "child_problems_sp",
+          "id": "phv00400521.v1.p1",
+          "description": "Specify childhood problems",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "childhood_problems",
+          "id": "phv00400520.v1.p1",
+          "description": "As a child, did/do you have hearing or vision problems, an intellectual disability, birth defect(s), or kidney disease?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cpeptide",
+          "id": "phv00400530.v1.p1",
+          "description": "C-Peptide",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cpeptide_units",
+          "id": "phv00400531.v1.p1",
+          "description": "C-Peptide Units",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00400507.v1.p1",
+          "description": "Ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "gad65",
+          "id": "phv00400529.v1.p1",
+          "description": "GAD 65 autoantibody (U/mL)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00400506.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "glucose",
+          "id": "phv00400532.v1.p1",
+          "description": "Glucose (mg/dl) on day of C-peptide measurement",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "group",
+          "id": "phv00400534.v1.p1",
+          "description": "What is the participant's group assignment?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "group_assignment",
+          "id": "phv00400535.v1.p1",
+          "description": "What type of variant does the proband have?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ia2",
+          "id": "phv00400528.v1.p1",
+          "description": "IA2 antibodies (U/ml)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mody_panel",
+          "id": "phv00400533.v1.p1",
+          "description": "Is monogenic diabetes panel indicated?",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "obese_at_dx",
+          "id": "phv00400519.v1.p1",
+          "description": "Were you obese when you were diagnosed with diabetes? (version 2) OR Was your BMI higher than 30 when you were diagnosed with diabetes? (version 3) OR Were you extremely overweight when you were diagnosed with diabetes? (version 4-6)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "other_diagnosis",
+          "id": "phv00400518.v1.p1",
+          "description": "Age of other non-diabetic blood sugar disorder diagnosis.",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_age_diagnosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "parent_child_sp___1",
+          "id": "phv00400525.v1.p1",
+          "description": "Parent with Type 1 Diabetes",
+          "concept_id": "ncpi:family_medical_history_diabetes_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "parent_child_sp___2",
+          "id": "phv00400526.v1.p1",
+          "description": "Child with Type 1 Diabetes",
+          "concept_id": "ncpi:family_medical_history_diabetes_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "parent_child_type1",
+          "id": "phv00400524.v1.p1",
+          "description": "Do you have a parent or a child with Type 1 Diabetes? (versions 4 - 6)",
+          "concept_id": "ncpi:family_medical_history_diabetes_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "parent_type1",
+          "id": "phv00400523.v1.p1",
+          "description": "Do you have a parent with type 1 diabetes? (version 2 and 3)",
+          "concept_id": "ncpi:family_medical_history_diabetes_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "participant_source",
+          "id": "phv00400502.v1.p1",
+          "description": "Participant Source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00400508.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "study_site",
+          "id": "phv00400501.v1.p1",
+          "description": "Study Site",
+          "concept_id": "ncpi:geographic_site_recruitment_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "type1_diabetes",
+          "id": "phv00400522.v1.p1",
+          "description": "Do you have type 1 diabetes?",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type1_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "type2_diabetes",
+          "id": "phv00400527.v1.p1",
+          "description": "Do you have 2 or more people related to you by blood with diabetes?",
+          "concept_id": "ncpi:family_medical_history_diabetes_family_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "type_diagnosis___1",
+          "id": "phv00400509.v1.p1",
+          "description": "Have you been diagnosed with the following? (check all that apply) - Type 1 Diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type1_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "type_diagnosis___2",
+          "id": "phv00400510.v1.p1",
+          "description": "Have you been diagnosed with the following? (check all that apply) - Type 2 Diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type2_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "type_diagnosis___3",
+          "id": "phv00400511.v1.p1",
+          "description": "Have you been diagnosed with the following? (check all that apply) - Gestational Diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_gestational_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "type_diagnosis___4",
+          "id": "phv00400512.v1.p1",
+          "description": "Have you been diagnosed with the following? (check all that apply) - Pre-diabetes or high blood sugar",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_prediabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "type_diagnosis___5",
+          "id": "phv00400513.v1.p1",
+          "description": "Have you been diagnosed with the following? (check all that apply) - Other",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_other_diabetes_types",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "type_oth_sp",
+          "id": "phv00400514.v1.p1",
+          "description": "Please specify other diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "version",
+          "id": "phv00400503.v1.p1",
+          "description": "Intake Questionnaire Version",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IGNITE_Sample_Attributes",
+      "datasetId": "pht008718.v1",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, cell or tissue type of sample, and the name of the center that conducted the sequencing.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00400632.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00400631.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00400634.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00400633.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00400630.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00400635.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IGNITE_Subject",
+      "datasetId": "pht008715.v1",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00400497.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00400496.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IGNITE_Sample",
+      "datasetId": "pht008716.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00400499.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00400498.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

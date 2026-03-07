@@ -1,0 +1,178 @@
+{
+  "studyId": "phs003806",
+  "studyName": "Genotyping Data From Subjects With Brain Lesions",
+  "tables": [
+    {
+      "tableName": "Brain_Lesions_Subject_Phenotypes",
+      "datasetId": "pht015102.v1",
+      "description": "This subject phenotype table contains subject ID, case control status of the subject for diffuse glioma, age, race, IDH1/IDH2 mutation, 1p/19q codeletion, histology of brain tumor, tumor grade, and diagnosis group.",
+      "variables": [
+        {
+          "name": "_1p_19q_codeletion",
+          "id": "phv00544362.v1.p1",
+          "description": "1p/19q codeletion",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_chromosomal_alterations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "affection_status",
+          "id": "phv00544358.v1.p1",
+          "description": "Case control status of the subject for diffuse glioma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00544359.v1.p1",
+          "description": "Subject age at diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "grade_brain_tumor",
+          "id": "phv00544364.v1.p1",
+          "description": "Grade of brain tumor",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "group",
+          "id": "phv00544365.v1.p1",
+          "description": "Diagnosis Group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "histology_brain_tumor",
+          "id": "phv00544363.v1.p1",
+          "description": "Histology of brain tumor",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "idh_mutation",
+          "id": "phv00544361.v1.p1",
+          "description": "IDH1/IDH2 mutation",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_idh_mutations",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race_name",
+          "id": "phv00544360.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00544357.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Brain_Lesions_Sample_Attributes",
+      "datasetId": "pht015103.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "analyte_type",
+          "id": "phv00544368.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "body_site",
+          "id": "phv00544367.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "is_tumor",
+          "id": "phv00544369.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_id",
+          "id": "phv00544366.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Brain_Lesions_Subject",
+      "datasetId": "pht015100.v1",
+      "description": "The subject consent file includes subject ID, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "consent",
+          "id": "phv00544353.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00544354.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00544352.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Brain_Lesions_Sample",
+      "datasetId": "pht015101.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "sample_id",
+          "id": "phv00544356.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00544355.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

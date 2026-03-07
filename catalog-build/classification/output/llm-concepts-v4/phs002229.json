@@ -1,0 +1,418 @@
+{
+  "studyId": "phs002229",
+  "studyName": "Germ Cell Tumor Molecular Heterogeneity Revealed through Analysis of Primary and Metastasis Pairs",
+  "tables": [
+    {
+      "tableName": "GCT_PrimaryMetastasis_Subject_Phenotypes",
+      "datasetId": "pht010556.v1",
+      "description": "This subject phenotypes data table includes race,  gender, age at diagnosis, primary tumor  site, teratoma status in primary tumor, seminoma/non-seminoma characterization, IGCCCG risk group, cancer staging (AJCC 7 stage, cN stage, S stage, pT stage), primary tumor histology, chemotherapy regimen (first-line chemo regimen, number of cycles, chemo duration, chemo regimen category, chemo resistance status, salvage chemotherapy), retroperitoneal lymph node dissection (before/after chemotherapy, pN stage assessment, post-chemo pathology), disease progression, time of disease progression, whether subject died of disease, and ID aliases.",
+      "variables": [
+        {
+          "name": "AJCC 7 Stage",
+          "id": "phv00435894.v1.p1",
+          "description": "AJCC 7 Stage at presentation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age at Diagnosis",
+          "id": "phv00435889.v1.p1",
+          "description": "Age at Diagnosis (Years)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Chemo Regimen Category",
+          "id": "phv00435904.v1.p1",
+          "description": "Firstline Chemotherapy Regimen Category (main chemotherapy regimen if various regimens given)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Chemo resistant",
+          "id": "phv00482786.v1.p1",
+          "description": "Whether patient had chemotherapy resistant disease",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_chemotherapy_general_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DOD (Died of disease)",
+          "id": "phv00492448.v1.p1",
+          "description": "Whether patient Died of Disease",
+          "concept_id": "topmed:chd_death_definite",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Disease Status at Last Follow up",
+          "id": "phv00492450.v1.p1",
+          "description": "Disease status at last Follow Up",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "First-line chemo regimen",
+          "id": "phv00435901.v1.p1",
+          "description": "First-line chemotherapy regimen",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_chemotherapy_regimens_drugs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Follow up Time from Diagnosis",
+          "id": "phv00435914.v1.p1",
+          "description": "Follow up Time from Diagnosis Date",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Gender",
+          "id": "phv00435888.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IGCCCG Risk Group",
+          "id": "phv00435893.v1.p1",
+          "description": "IGCCCG ( International Germ Cell Cancer Collaborative Group) Risk Group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MSK Subject ID",
+          "id": "phv00435886.v1.p1",
+          "description": "MSK internal subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Number of cycles",
+          "id": "phv00435902.v1.p1",
+          "description": "Number of cycles of firstline chemotherapy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Overall Patient Histology",
+          "id": "phv00435892.v1.p1",
+          "description": "Overall Patient Histology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC-RPLND",
+          "id": "phv00435907.v1.p1",
+          "description": "Whether patient had Post-chemotherapy RPLND (Retroperitoneal Lymph Node Dissection)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC-RPLND pathology",
+          "id": "phv00435909.v1.p1",
+          "description": "Post-Chemo RPLND (Retroperitoneal Lymph Node Dissection) pathology results",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POD after 1st line chemo",
+          "id": "phv00492446.v1.p1",
+          "description": "Whether patient had POD (Progression of Disease) as of data cutoff date",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary Tumor Histology",
+          "id": "phv00435899.v1.p1",
+          "description": "Primary Tumor Histology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary tumor site",
+          "id": "phv00435890.v1.p1",
+          "description": "Primary tumor site",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00435887.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "S stage",
+          "id": "phv00435897.v1.p1",
+          "description": "S (Serum Tumor Marker) Stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435885.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Salvage chemo",
+          "id": "phv00435910.v1.p1",
+          "description": "Whether patient had salvage chemotherapy",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_chemotherapy_general_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Teratoma in the Primary tumor",
+          "id": "phv00435891.v1.p1",
+          "description": "Was Teratoma in the Primary tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Time from Diagnosis to Firstline Chemotherapy",
+          "id": "phv00482789.v1.p1",
+          "description": "Time from Diagnosis to Chemotherapy (Days)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Time from Diagnosis to POD",
+          "id": "phv00435918.v1.p1",
+          "description": "Time from Diagnosis to POD (Progression of Disease)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Time from Firstline Chemo Start to POD (Progression of disease)",
+          "id": "phv00492447.v1.p1",
+          "description": "Time to POD (Progression of Disease, months from firstline chemo start)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Time from Start of Firstline Chemo to last follow up or death",
+          "id": "phv00492449.v1.p1",
+          "description": "Follow up Time from Start of Firstline Chemotherapy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Treated with chemotherapy",
+          "id": "phv00435900.v1.p1",
+          "description": "Whether or not patient was treated with Chemotherapy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cM Stage",
+          "id": "phv00435896.v1.p1",
+          "description": "Clinical M (Mets) Stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cN Stage",
+          "id": "phv00435895.v1.p1",
+          "description": "Clinical N (Nodes) Stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pT Stage",
+          "id": "phv00435898.v1.p1",
+          "description": "PT Stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GCT_PrimaryMetastasis_Sample_Attributes",
+      "datasetId": "pht010557.v1",
+      "description": "This sample attributes table includes the body site where sample was collected, analyte type, tumor status, histological type, primary or metastatic tumor, primary tumor location, metastasis  site  location, and tumor stage, and ID aliases.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00435922.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00435921.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histological Type",
+          "id": "phv00492451.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00435923.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MSK Historical Sample IDs",
+          "id": "phv00482793.v1.p1",
+          "description": "MSKCC additional sample-level identifier (historical)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MSK Patient IDs",
+          "id": "phv00482791.v1.p1",
+          "description": "MSKCC additional subject-level identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MSK Sample IDs",
+          "id": "phv00482792.v1.p1",
+          "description": "MSKCC additional sample-level identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Metastatic Site Location",
+          "id": "phv00492453.v1.p1",
+          "description": "Anatomical location of paired metastatic sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary or Metastatic Tumor",
+          "id": "phv00492452.v1.p1",
+          "description": "Whether sample is primary tumor or site of metastasis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00435920.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Timing of specimen",
+          "id": "phv00482790.v1.p1",
+          "description": "Whether specimen was collected pre or post-firstline chemotherapy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Tumor Stage",
+          "id": "phv00435928.v1.p1",
+          "description": "Tumor Stage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GCT_PrimaryMetastasis_Subject",
+      "datasetId": "pht010554.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00435881.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00435882.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435880.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GCT_PrimaryMetastasis_Sample",
+      "datasetId": "pht010555.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00435884.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00435883.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

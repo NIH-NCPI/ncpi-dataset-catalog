@@ -1,0 +1,810 @@
+{
+  "studyId": "phs000256",
+  "studyName": "The Vaginal Microbiome: Disease, Genetics and the Environment",
+  "tables": [
+    {
+      "tableName": "HMP_Vaginal_Microbiome_Subject_Phenotype",
+      "datasetId": "pht001239.v4",
+      "description": "This subject phenotype data table includes subject sociodemography (n=5 variables; age, ethnicity/race, education, employment and marital status), affection status, menstrual cycle (n=12 variables), sexual activity (n=3 variables), treatments such as medications, vitamins, hormones, vaccines (n=32 variables), smoking status (n=5 variables), alcohol use (n=6 variables), physical activity (n=6 variables), food intake and diet (n=13 variables), and site where biospecimen were collected/processed. Note from the submitters: \"This questionnaire data contains the original uncleaned raw data information collected from the participants during their visits to one of our clinics. The data provided by the participants may contain errors or anomalies which are in some way not fit for use in the analysis. We acknowledge that some fields have nonsensical values. Participants may have accidentally written inappropriate data.\"",
+      "variables": [
+        {
+          "name": "affection_status_id",
+          "id": "phv00158978.v3.p3",
+          "description": "Umls Concept Id",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_enr_years",
+          "id": "phv00090420.v4.p3",
+          "description": "Age Of The Subject At The Time Of Collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_first_period",
+          "id": "phv00090425.v4.p3",
+          "description": "How Old Were You When You Got Your First Period?",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_age_at_menarche",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_startsmoking",
+          "id": "phv00090473.v4.p3",
+          "description": "At What Age Did You Start Smoking?",
+          "concept_id": "phenx:protocol_2_tobacco_age_of_initiation_of_use_adult_protocol",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_stopsmoking",
+          "id": "phv00090476.v4.p3",
+          "description": "If You Don'T Currently Smoke, What Age Did You Stop Smoking?",
+          "concept_id": "phenx:protocol_2_tobacco_age_of_offset_of_use_adult_protocol",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_when_periods_stopped",
+          "id": "phv00090436.v4.p3",
+          "description": "How Old Were You When Your Periods Stopped?",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_age_at_menopause",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alcohol_12months",
+          "id": "phv00090477.v4.p3",
+          "description": "How Many Ocassions Have You Had Alcohol In The Last 12 Months?",
+          "concept_id": "phenx:alcohol_lifetime_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "alcohol_30days",
+          "id": "phv00090478.v4.p3",
+          "description": "How Many Ocassions Have You Had Alcohol In The Last 30 Days?",
+          "concept_id": "ncpi:alcohol_30day_quantity_and_frequency_monthly_alcohol_consumption",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alcohol_onesitting_12months",
+          "id": "phv00090480.v4.p3",
+          "description": "On How Many Occasions Have You Had Four Or More Alcoholic Drinks In One Sitting In The Last 12 Months?",
+          "concept_id": "phenx:screening_and_severity_of_substance_use_problems_adults_alcohol_lifetime",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "alcohol_onesitting_30days",
+          "id": "phv00090481.v4.p3",
+          "description": "On How Many Occasions Have You Had Four Or More Alcoholic Drinks In One Sitting In The Last 30 Days?",
+          "concept_id": "ncpi:alcohol_30day_quantity_and_frequency_binge_drinking",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "alcohol_onesitting_pastweek",
+          "id": "phv00090482.v4.p3",
+          "description": "On How Many Occasions Have You Had Four Or More Alcoholic Drinks In One Sitting In The Past Week?",
+          "concept_id": "ncpi:alcohol_30day_quantity_and_frequency_binge_drinking",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "alcohol_pastweek",
+          "id": "phv00090479.v4.p3",
+          "description": "How Many Ocassions Have You Had Alcohol In The Past Week?",
+          "concept_id": "ncpi:alcohol_30day_quantity_and_frequency_monthly_alcohol_consumption",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "bleeding_between_periods",
+          "id": "phv00090433.v4.p3",
+          "description": "Do You Experience Bleeding Or Spotting Between Periods?",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_menstrual_bleeding_patterns",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bleeding_description",
+          "id": "phv00090435.v4.p3",
+          "description": "How Would You Describe Your Bleeding Or Spotting?",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_menstrual_bleeding_patterns",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bleeding_frequency",
+          "id": "phv00090434.v4.p3",
+          "description": "How Regular Is Your Bleeding Or Spotting?",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_menstrual_bleeding_patterns",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "calcium_supplement_frequency",
+          "id": "phv00090444.v4.p3",
+          "description": "How Often Do You Take Calcium Supplements?",
+          "concept_id": "ncpi:concomitant_medication_vitamins_supplements_medications_calcium_supplements",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cephalosporins_taken",
+          "id": "phv00090458.v4.p3",
+          "description": "Have You Taken Cephalosporins In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cheese",
+          "id": "phv00090491.v4.p3",
+          "description": "On Average, During The Last Year, How Often Did You Eat Cheese?",
+          "concept_id": "ncpi:ffq_dairy_products_cheese_full_fat",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cigarettes_per_day",
+          "id": "phv00090475.v4.p3",
+          "description": "During The Last 30 Days, On Average, How Many Cigarettes Have You Smoked Per Day?",
+          "concept_id": "phenx:protocol_2_tobacco_30day_quantity_and_frequency_adult_protocol",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "counter_yeast_infection_medication",
+          "id": "phv00090448.v4.p3",
+          "description": "Have You Taken Over-The-Counter Yeast Infection Medication (Ex:Monistat) In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_yeast_infection_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "current_smoke",
+          "id": "phv00090474.v4.p3",
+          "description": "Do You Currently Smoke?",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "days_since_most_recent_use_doctor_yeast_infection_medication",
+          "id": "phv00090447.v4.p3",
+          "description": "Most Recent Date Since You Used A Doctor-Prescribed Yeast Infection Medication",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_yeast_infection_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "days_since_most_recent_use_insulin",
+          "id": "phv00090451.v4.p3",
+          "description": "Most Recent Date You Took Insulin",
+          "concept_id": "ncpi:concomitant_medication_diabetes_medications_insulin_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "days_since_most_recent_use_oral_steroids",
+          "id": "phv00090453.v4.p3",
+          "description": "Most Recent Date You Took Oral Steroids",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_glucocorticoids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "days_since_most_recent_use_over_counter_yeast_infection_medication",
+          "id": "phv00090449.v4.p3",
+          "description": "Most Recent Date Since You Used A Over-The-Counter Yeast Infection Medication",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_yeast_infection_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "days_since_use_cephalosporins",
+          "id": "phv00090459.v4.p3",
+          "description": "Days Since Most Recent Use Of Cephalosporins",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "days_since_use_macrolides",
+          "id": "phv00090465.v4.p3",
+          "description": "Days Since Most Recent Use Of Macrolides",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "days_since_use_nitrofurantoin",
+          "id": "phv00090461.v4.p3",
+          "description": "Days Since Most Recent Use Of Nitrofurantoin",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "days_since_use_other_antibiotics",
+          "id": "phv00090471.v4.p3",
+          "description": "Days Since Most Recent Use Of Antibiotics",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "days_since_use_penicillins",
+          "id": "phv00090457.v4.p3",
+          "description": "Days Since Most Recent Use Of Penicillin",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "days_since_use_quinolones",
+          "id": "phv00090463.v4.p3",
+          "description": "Days Since Most Recent Use Of Quinolones",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "days_since_use_sulfa",
+          "id": "phv00090467.v4.p3",
+          "description": "Days Since Most Recent Use Of Sulfa",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "days_since_use_tetracyclines",
+          "id": "phv00090469.v4.p3",
+          "description": "Days Since Most Recent Use Of Tetracyclines",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "doctor_yeast_infection_medication",
+          "id": "phv00090446.v4.p3",
+          "description": "Have You Taken Doctor-Prescribed Yeast Infection Medication In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_yeast_infection_medications",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "education",
+          "id": "phv00090422.v4.p3",
+          "description": "Highest Level Of Education Of The Subject",
+          "concept_id": "phenx:current_educational_attainment",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "employment",
+          "id": "phv00090423.v4.p3",
+          "description": "Employment Status",
+          "concept_id": "phenx:current_employment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "flow_status",
+          "id": "phv00090432.v4.p3",
+          "description": "How Would You Describe Your Bleeding Flow?",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_menstrual_flow_heaviness",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gardasil",
+          "id": "phv00090441.v4.p3",
+          "description": "Have You Received The Hpv Vaccination (Gardasil, Cervarix)?",
+          "concept_id": "phenx:human_papillomavirus_vaccine_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "glutenfree_diet",
+          "id": "phv00090499.v4.p3",
+          "description": "Have You Been On A Gluten-Free Diet In The Past Year?",
+          "concept_id": "ncpi:ffq_dietary_patterns",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "had_sex_last_48hours",
+          "id": "phv00090439.v4.p3",
+          "description": "Had Sex Within Last 48 Hours?",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "herbal_remedies_frequency",
+          "id": "phv00090443.v4.p3",
+          "description": "How Often Do You Take Herbal Remedies?",
+          "concept_id": "ncpi:concomitant_medication_vitamins_supplements_medications_herbal_supplements",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "icecream",
+          "id": "phv00090492.v4.p3",
+          "description": "On Average, During The Last Year, How Often Did You Eat Icecream?",
+          "concept_id": "ncpi:ffq_sweets_desserts_ice_cream",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "insulin",
+          "id": "phv00090450.v4.p3",
+          "description": "Have You Taken Insulin In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_diabetes_medications_insulin_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "light_physical",
+          "id": "phv00090485.v4.p3",
+          "description": "On Average, During The Last Year, How Many Times Per Week Did You Take Part In Light Physical Activity",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_mild_light_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "light_physical_frequency",
+          "id": "phv00090488.v4.p3",
+          "description": "On Average, During The Last Year How Long Did The Light Physical Activity Last Each Time?",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_mild_light_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "lowcalorie_diet",
+          "id": "phv00090496.v4.p3",
+          "description": "Have You Been On A Low-Calorie Diet In The Past Year?",
+          "concept_id": "ncpi:ffq_dietary_patterns",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lowcarb_diet",
+          "id": "phv00090495.v4.p3",
+          "description": "Have You Been On A Low-Carb Diet In The Past Year?",
+          "concept_id": "ncpi:ffq_dietary_patterns",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lowfat_diet",
+          "id": "phv00090494.v4.p3",
+          "description": "Have You Been On A Low-Fat Diet In The Past Year?",
+          "concept_id": "ncpi:ffq_dietary_patterns",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "macrolides_taken",
+          "id": "phv00090464.v4.p3",
+          "description": "Have You Taken Macrolides In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "marital_status",
+          "id": "phv00090424.v4.p3",
+          "description": "Current Marital Status",
+          "concept_id": "phenx:current_marital_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "metronidazole_days_since_use",
+          "id": "phv00090455.v4.p3",
+          "description": "Days Since Most Recent Use Of Metrodinazole",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "metronidazole_taken",
+          "id": "phv00090454.v4.p3",
+          "description": "Have You Taken Metrodinzole In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "milk",
+          "id": "phv00090490.v4.p3",
+          "description": "On Average, During The Last Year, How Often Did You Eat Milk?",
+          "concept_id": "ncpi:ffq_dairy_products_milk_whole",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "moderate_physical",
+          "id": "phv00090484.v4.p3",
+          "description": "On Average, During The Last Year, How Many Times Per Week Did You Take Part In Moderate Physical Activity",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_moderate_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "moderate_physical_frequency",
+          "id": "phv00090487.v4.p3",
+          "description": "On Average, During The Last Year How Long Did The Moderate Physical Activity Last Each Time?",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_moderate_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "nitrofurantoin_taken",
+          "id": "phv00090460.v4.p3",
+          "description": "Have You Taken Nitrofurantoin In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "number_days_between_periods",
+          "id": "phv00090429.v4.p3",
+          "description": "How Many Days Usually Pass Between Your Periods?",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_menstrual_cycle_length",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "number_days_from_last_period",
+          "id": "phv00090428.v4.p3",
+          "description": "What Was The First Day Of Your Last Menstrual Period?",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_last_menstrual_period_date",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "number_days_period_last",
+          "id": "phv00090430.v4.p3",
+          "description": "How Many Days Does Your Period Last?",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_menstrual_flow_duration",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "oral_steroids",
+          "id": "phv00090452.v4.p3",
+          "description": "Have You Taken Oral Steroids In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_other_general_medications_glucocorticoids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "other_antibiotics_taken",
+          "id": "phv00090470.v4.p3",
+          "description": "Have You Taken Other Antibiotics In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "other_dairy",
+          "id": "phv00090493.v4.p3",
+          "description": "On Average, During The Last Year, How Often Did You Eat Other Dairy Products?",
+          "concept_id": "ncpi:ffq_dairy_products_cheese_full_fat",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "other_diet",
+          "id": "phv00090501.v4.p3",
+          "description": "Have You Been On Other Diet In The Past Year?",
+          "concept_id": "ncpi:ffq_dietary_patterns",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "penicillins_taken",
+          "id": "phv00090456.v4.p3",
+          "description": "Have You Taken Penicillin In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "periods_regular",
+          "id": "phv00090427.v4.p3",
+          "description": "Are Your Periods Regular?",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_menstrual_cycle_regularity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "prescribed_diet",
+          "id": "phv00090500.v4.p3",
+          "description": "Have You Been On A Physician-Prescribed Diet In The Past Year?",
+          "concept_id": "ncpi:ffq_dietary_patterns",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "probiotics_frequency",
+          "id": "phv00090442.v4.p3",
+          "description": "How Often Do You Take Probiotics?",
+          "concept_id": "ncpi:concomitant_medication_vitamins_supplements_medications_probiotics",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "quinolones_taken",
+          "id": "phv00090462.v4.p3",
+          "description": "Have You Taken Quinolones In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "racial_background",
+          "id": "phv00090421.v4.p3",
+          "description": "Ethnicity Of The Subject",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_collection_location",
+          "id": "phv00158979.v3.p3",
+          "description": "Location Where Biospecimen Were Collected And/Or Processed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sanitary_product_used_on_period",
+          "id": "phv00090431.v4.p3",
+          "description": "What Do You Use When On Your Period?",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_menstrual_product_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "screen_ID",
+          "id": "phv00090419.v4.p3",
+          "description": "Visit Id",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00158980.v3.p3",
+          "description": "Gender Of The Participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sexually_active",
+          "id": "phv00090438.v4.p3",
+          "description": "Are You Currently Sexually Active (Sex Within Past 6 Months)?",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "smoking_status",
+          "id": "phv00090472.v4.p3",
+          "description": "Have You Smoked More Than 100 Cigarettes In Your Lifetime?",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "still_have_periods",
+          "id": "phv00090426.v4.p3",
+          "description": "Do You Still Have Periods?",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_current_menstruation_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_ID",
+          "id": "phv00090418.v4.p3",
+          "description": "Subject Id",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sulfa_taken",
+          "id": "phv00090466.v4.p3",
+          "description": "Have You Taken Sulfa In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "take_hormone_therapy",
+          "id": "phv00090437.v4.p3",
+          "description": "Are You Taking Hormone Replacement Therapy?",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_hormone_replacement_therapy_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tetracyclines_taken",
+          "id": "phv00090468.v4.p3",
+          "description": "Have You Taken Tetracyclines In The Past 6 Months?",
+          "concept_id": "ncpi:concomitant_medication_antibiotic_antimicrobial_medications_antibiotic_class_usage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "vaginal_lubricant_last48hours",
+          "id": "phv00090440.v4.p3",
+          "description": "Used Vaginal Lubricant In Last 48 Hours?",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "vegan_diet",
+          "id": "phv00090498.v4.p3",
+          "description": "Have You Been On A Vegan Diet In The Past Year?",
+          "concept_id": "ncpi:ffq_dietary_patterns",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "vegeterian_diet",
+          "id": "phv00090497.v4.p3",
+          "description": "Have You Been On A Vegetarian Diet In The Past Year?",
+          "concept_id": "ncpi:ffq_dietary_patterns",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "vigorous_physical",
+          "id": "phv00090483.v4.p3",
+          "description": "On Average, During The Last Year, How Many Times Per Week Did You Take Part In Vigorous Physical Activity",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_vigorous_strenuous_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "vigorous_physical_frequency",
+          "id": "phv00090486.v4.p3",
+          "description": "On Average, During The Last Year How Long Did The Vigorous Physical Activity Last Each Time?",
+          "concept_id": "ncpi:cumulative_lifetime_physical_activity_general_activity_levels_vigorous_strenuous_activity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "vitamins_frequency",
+          "id": "phv00090445.v4.p3",
+          "description": "How Often Do You Take Vitamins?",
+          "concept_id": "ncpi:concomitant_medication_vitamins_supplements_medications_multivitamins",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "yogurt",
+          "id": "phv00090489.v4.p3",
+          "description": "On Average, During The Last Year, How Often Did You Eat Yogurt?",
+          "concept_id": "ncpi:ffq_dairy_products_yogurt_sweetened",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HMP_Vaginal_Microbiome_Sample_Attributes",
+      "datasetId": "pht002179.v3",
+      "description": "The sample attributes data table includes body site, analyte type, tumor status, and sequencing center.",
+      "variables": [
+        {
+          "name": "analyte_type",
+          "id": "phv00190875.v2.p3",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "body_site",
+          "id": "phv00158982.v3.p3",
+          "description": "Body site from which the sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "extraction_protocol",
+          "id": "phv00420176.v1.p3",
+          "description": "DNA extraction protocol",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "is_tumor",
+          "id": "phv00190877.v2.p3",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_ID",
+          "id": "phv00158981.v3.p3",
+          "description": "Unique sampleID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sequencing_center",
+          "id": "phv00408810.v1.p3",
+          "description": "Name of the sequencing center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HMP_Vaginal_Microbiome_Subject",
+      "datasetId": "pht001237.v4",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "consent",
+          "id": "phv00090415.v4.p3",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_ID",
+          "id": "phv00090414.v4.p3",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HMP_Vaginal_Microbiome_Sample",
+      "datasetId": "pht001238.v4",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "sample_ID",
+          "id": "phv00090417.v4.p3",
+          "description": "Unique sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_ID",
+          "id": "phv00090416.v4.p3",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

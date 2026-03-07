@@ -1,0 +1,130 @@
+{
+  "studyId": "phs000824",
+  "studyName": "Genome-Wide Discovery of Novel Colon Cancer Predisposing Mutations",
+  "tables": [
+    {
+      "tableName": "Colon_Cancer_Predisposing_Mutations_Sample_Attributes",
+      "datasetId": "pht005139.v1",
+      "description": "Sample ID, analyte type, tumor status of sample, and body site where sample was collected of participants with predisposing mutation of colon cancer and involved in the \"Genome-Wide Discovery of Novel Colon Cancer Predisposing Mutations\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00253868.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00253870.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00253869.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00253867.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Colon_Cancer_Predisposing_Mutations_Subject",
+      "datasetId": "pht005136.v1",
+      "description": "Subject ID, affection status, and consent group of participants with predisposing mutation of colon cancer and involved in the \"Genome-Wide Discovery of Novel Colon Cancer Predisposing Mutations\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00253860.v1.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00253861.v1.p1",
+          "description": "Consent status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00253859.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Colon_Cancer_Predisposing_Mutations_Sample",
+      "datasetId": "pht005137.v1",
+      "description": "Subject ID, sample ID, and sample use variable of participants with predisposing mutation of colon cancer and involved in the \"Genome-Wide Discovery of Novel Colon Cancer Predisposing Mutations\" project.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00253863.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00253864.v1.p1",
+          "description": "Type of data submitted. Seq_DNA_SNP: SNP genotypes derived from sequence data; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00253862.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Colon_Cancer_Predisposing_Mutations_Subject_Phenotypes",
+      "datasetId": "pht005138.v1",
+      "description": "Subject ID and sex of participants with predisposing mutation of colon cancer and involved in the \"Genome-Wide Discovery of Novel Colon Cancer Predisposing Mutations\" project.",
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00253865.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00253866.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

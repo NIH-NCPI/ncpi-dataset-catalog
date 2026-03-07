@@ -1,0 +1,472 @@
+{
+  "studyId": "phs002406",
+  "studyName": "The Northern Manhattan Family Study - a Sub-Study of the Epidemiologic Study of Stroke Outcome in 3 Ethnic Groups: The Northern Manhattan Study",
+  "tables": [
+    {
+      "tableName": "Phenotype_NOMAS",
+      "datasetId": "pht011729.v1",
+      "description": "This subject phenotypes data table contains subject's self-reported sex, age at time of  assessments (n=5 variables; intima-media thickness  - IMT, plaque assessment, left ventricular mass, MRI, risk factor), cardiac health indicators (n=5 variables; left ventricular mass information, total carotid intima-media thickness information, binary plaque status, systolic blood pressure, hypertension status), smoking information (n=2 variables; ever smoker, pack-years smoking), diabetes status, adiposity indicators (n=3 variables; BMI, waist-to-hip ratio, waist circumference).",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS_DichotPLQ",
+          "id": "phv00495127.v1.p1",
+          "description": "Binary plaque presence variable",
+          "concept_id": "ncpi:carotid_plaque_carotid_plaque_presence",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AFFECTION_STATUS_lnIMTm1",
+          "id": "phv00495126.v1.p1",
+          "description": "Log transformed total carotid intima-media thickness phenotype",
+          "concept_id": "ncpi:cimt_carotid_imt_phenotypes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AFFECTION_STATUS_lnlvmass",
+          "id": "phv00495125.v1.p1",
+          "description": "Log transformed left ventricular mass phenotype",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "AgeLVMASS",
+          "id": "phv00495122.v1.p1",
+          "description": "Age at time of left ventricular mass assessment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AgeMRI",
+          "id": "phv00495123.v1.p1",
+          "description": "Age at time of MRI",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AgeRF",
+          "id": "phv00495124.v1.p1",
+          "description": "Age at time of risk factor assessment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AgeScan",
+          "id": "phv00495121.v1.p1",
+          "description": "Age at time of IMT and Plaque assessment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00495133.v1.p1",
+          "description": "Body mass index at time of MRI",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_RF",
+          "id": "phv00495139.v1.p1",
+          "description": "Body mass index at time of risk factor assessment",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETES",
+          "id": "phv00495132.v1.p1",
+          "description": "Diabetes status of individual at time of MRI",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETES_RF",
+          "id": "phv00495138.v1.p1",
+          "description": "Diabetes status of individual at time of risk factor assessment",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ISEX",
+          "id": "phv00495120.v1.p1",
+          "description": "Self-reported sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PackYears",
+          "id": "phv00495129.v1.p1",
+          "description": "Pack-years of smoking",
+          "concept_id": "ncpi:ever_smoker_baseline_pack_years",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SBP",
+          "id": "phv00495130.v1.p1",
+          "description": "Systolic blood pressure at time of MRI (calculated as the mean of 3 SBP measurements)",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_closeout_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SBP_RF",
+          "id": "phv00495136.v1.p1",
+          "description": "Systolic blood pressure at time of risk factor assessment (calculated as the mean of 2 SBP measurements)",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_mri_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKE",
+          "id": "phv00495128.v1.p1",
+          "description": "Ever smoker",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_tobacco_use_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495119.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WAISTCIRCUM",
+          "id": "phv00495135.v1.p1",
+          "description": "Waist circumference of individual at time of MRI",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WAISTCIRCUM_RF",
+          "id": "phv00495141.v1.p1",
+          "description": "Waist circumference of individual at time of risk factor assessment",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WHR",
+          "id": "phv00495134.v1.p1",
+          "description": "Waist-hip-ratio of individual at time of MRI",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "WHR_RF",
+          "id": "phv00495140.v1.p1",
+          "description": "Waist-hip-ratio of individual at time of risk factor assessment",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "htn140",
+          "id": "phv00495131.v1.p1",
+          "description": "Hypertension status of individual at time of MRI",
+          "concept_id": "ncpi:antihypertensive_meds_hypertension_treatment_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "htn140_RF",
+          "id": "phv00495137.v1.p1",
+          "description": "Hypertension status of individual at time of risk factor assessment",
+          "concept_id": "ncpi:antihypertensive_meds_hypertension_treatment_status",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NOMAS_Family_Subject_Phenotypes",
+      "datasetId": "pht011728.v1",
+      "description": "This subject phenotypes data table contains subject's self-reported sex, proband status, adiposity indicators (n=2 variables; BMI, waist-to-hip ratio), age, smoking information (n=2 variables; smoking status, pack years smoking), diabetes status, and cardiac health indicators (n=5 variables; systolic blood pressure, hypertension status, left ventricular mass data, carotid intima media thickness data - IMT, and binary plaque status).",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS_IMT",
+          "id": "phv00495117.v1.p1",
+          "description": "IMT phenotype variable, calculated as (ln(100*IMTm))*10",
+          "concept_id": "ncpi:cimt_carotid_imt_phenotypes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AFFECTION_STATUS_LVM",
+          "id": "phv00495116.v1.p1",
+          "description": "Left ventricular phenotype variable, calculated as: ln(lvmass)*10",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "AFFECTION_STATUS_PLAQUE",
+          "id": "phv00495118.v1.p1",
+          "description": "Binary plaque presence variable",
+          "concept_id": "ncpi:carotid_plaque_carotid_plaque_presence",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00495106.v1.p1",
+          "description": "Self-reported sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495105.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diabetes_126",
+          "id": "phv00495114.v1.p1",
+          "description": "Diabetes status of participant",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gage",
+          "id": "phv00495110.v1.p1",
+          "description": "Age of participant",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hyper_140",
+          "id": "phv00495115.v1.p1",
+          "description": "Hypertension status of participant",
+          "concept_id": "ncpi:antihypertensive_meds_hypertension_treatment_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "packyears",
+          "id": "phv00495112.v1.p1",
+          "description": "Pack-years of smoking",
+          "concept_id": "ncpi:ever_smoker_baseline_pack_years",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "proband",
+          "id": "phv00495107.v1.p1",
+          "description": "Proband status of participant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rbmi",
+          "id": "phv00495108.v1.p1",
+          "description": "BMI of participant",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rgwaisthiprat",
+          "id": "phv00495109.v1.p1",
+          "description": "Waist-hip ratio of participant",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "smoker_yn",
+          "id": "phv00495111.v1.p1",
+          "description": "Self-reported smoking status",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "systolic",
+          "id": "phv00495113.v1.p1",
+          "description": "Systolic blood pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_generic_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NOMAS_Family_Subject",
+      "datasetId": "pht011725.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00495094.v1.p1",
+          "description": "Consent group for participant",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00495095.v1.p1",
+          "description": "Self-reported sex of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00495097.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495093.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00495096.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NOMAS_Family_Pedigree",
+      "datasetId": "pht011726.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and sex of subjects.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00495098.v1.p1",
+          "description": "De-identified Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00495100.v1.p1",
+          "description": "Father's Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00495101.v1.p1",
+          "description": "Mother's Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00495102.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495099.v1.p1",
+          "description": "De-identified Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NOMAS_Family_Sample_Attributes",
+      "datasetId": "pht011730.v1",
+      "description": "This sample attributes data table contains body site, analyte type, and  tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00495144.v1.p1",
+          "description": "Analyte type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00495143.v1.p1",
+          "description": "Body Part from which sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00495145.v1.p1",
+          "description": "Tumor status of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00495142.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NOMAS_Family_Sample",
+      "datasetId": "pht011727.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00495104.v1.p1",
+          "description": "De-identified sample ID 1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00495103.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

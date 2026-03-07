@@ -1,0 +1,210 @@
+{
+  "studyId": "phs000551",
+  "studyName": "Gene expression in CAD",
+  "tables": [
+    {
+      "tableName": "CATHGEN_Subject_Phenotypes",
+      "datasetId": "pht003063.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "BPPRED",
+          "id": "phv00174373.v1.p1",
+          "description": "Hypertension",
+          "concept_id": "topmed:antihypertensive_meds",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DIABETES",
+          "id": "phv00174369.v1.p1",
+          "description": "Diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DeathOrMI_Event",
+          "id": "phv00174377.v1.p1",
+          "description": "Death or myocardial infarction in follow up",
+          "concept_id": "ncpi:mi_incident_mi_incident_status_composite_death_mi",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DeathOrMI_Time",
+          "id": "phv00174376.v1.p1",
+          "description": "Days from catheterization to death, myocardial infarction, or last follow up",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HYL_PRED",
+          "id": "phv00174374.v1.p1",
+          "description": "Hyperlipdemia",
+          "concept_id": "ncpi:lipid_lowering_medication_hyperlipidemia_treatment",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "QC_POOR",
+          "id": "phv00174378.v1.p1",
+          "description": "Failed quality analysis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00174370.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00174371.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMK_PRED",
+          "id": "phv00174372.v1.p1",
+          "description": "Smoking",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY1",
+          "id": "phv00174368.v1.p1",
+          "description": "Cohort",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRANSPLT",
+          "id": "phv00174379.v1.p1",
+          "description": "History of cardiac transplantation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cad",
+          "id": "phv00174375.v1.p1",
+          "description": "Coronary artery disease",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_coronary_heart_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "overlap",
+          "id": "phv00174380.v1.p1",
+          "description": "Subjects that were profiled in both OBS and CC studies",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subjid",
+          "id": "phv00174367.v1.p1",
+          "description": "Unique Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CATHGEN_Sample",
+      "datasetId": "pht003062.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00174366.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sampleid",
+          "id": "phv00174365.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subjid",
+          "id": "phv00174364.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CATHGEN_Sample_Attributes",
+      "datasetId": "pht003064.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "analyte type",
+          "id": "phv00174383.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sampleid",
+          "id": "phv00174381.v1.p1",
+          "description": "Unique sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "source",
+          "id": "phv00174382.v1.p1",
+          "description": "Source of biologic sample",
+          "concept_id": "topmed:lung_ct_imaging_clinical_demographics_metadata",
+          "confidence": "low",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CATHGEN_Subject",
+      "datasetId": "pht003061.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00174363.v1.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subjid",
+          "id": "phv00174362.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

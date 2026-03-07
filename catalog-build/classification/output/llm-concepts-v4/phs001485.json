@@ -1,0 +1,202 @@
+{
+  "studyId": "phs001485",
+  "studyName": "Somatic Mutations and Cell Lineage in the Human Brain",
+  "tables": [
+    {
+      "tableName": "Cell_ID_Sample_Attributes",
+      "datasetId": "pht007188.v3",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, histological type, sample preservation, number of cells sequenced, amplification protocol, and sequencing center.",
+      "variables": [
+        {
+          "name": "AMPLIFICATION_PROTOCOL",
+          "id": "phv00498617.v1.p1",
+          "description": "Protocol used to amplify single cell genomes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ANALYTE",
+          "id": "phv00331655.v3.p1",
+          "description": "Analyte: DNA or RNA",
+          "concept_id": "ncpi:ffq_specialty_foods",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00331653.v3.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00331657.v3.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00331656.v3.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NUMBER_CELLS",
+          "id": "phv00331658.v3.p1",
+          "description": "The number of cells sequenced, or \"bulk\" for bulk tissue sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRESERVATION",
+          "id": "phv00331654.v3.p1",
+          "description": "Sample preservation prior to DNA or RNA extraction",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00331652.v3.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00331659.v3.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Cell_ID_Subject_Phenotypes",
+      "datasetId": "pht007187.v2",
+      "description": "This subject phenotype data table includes subject's sex, race, age at death, clinical brain diagnosis (Cockayne syndrome, xeroderma pigmentosum, and unaffected control), post mortem interval (PMI). No subjects were prenatal.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00331647.v2.p1",
+          "description": "Subject age at death, postnatal age in years, prenatal age in weeks",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLINICAL_BRAIN_DIAGNOSIS",
+          "id": "phv00331649.v2.p1",
+          "description": "Disease phenotype of subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PMI",
+          "id": "phv00331651.v2.p1",
+          "description": "Post mortem interval",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRENATAL",
+          "id": "phv00331646.v2.p1",
+          "description": "Is the subject prenatal",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00498616.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00331648.v2.p1",
+          "description": "Sex of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00331645.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Cell_ID_Subject",
+      "datasetId": "pht007184.v2",
+      "description": "The subject consent data table contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00331631.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00498615.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00331630.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Cell_ID_Sample",
+      "datasetId": "pht007186.v3",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00331641.v3.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00331640.v3.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "studyId": "phs000669",
+  "studyName": "AMBER Consortium",
+  "tables": [
+    {
+      "tableName": "AMBER_Subject_Phenotypes",
+      "datasetId": "pht003732.v1",
+      "description": "Subject ID, age, sex, race, medical history of breast cancer of mother, sister or daughter, estrogen receptor status, and progesterone receptor status of participants with or without breast cancer and involved in the \"The African American Breast Cancer Epidemiology and Risk (AMBER) Consortium Study\" project.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00200397.v1.p1",
+          "description": "Case age at diagnosis or control age, categorized in to 5 year age groups",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ERSTAT",
+          "id": "phv00200401.v1.p1",
+          "description": "Estrogen Receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMHX",
+          "id": "phv00200400.v1.p1",
+          "description": "Mother, sister or daughter diagnosed with breast cancer",
+          "concept_id": "topmed:cancer_diagnosis_family_cancer_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRSTAT",
+          "id": "phv00200402.v1.p1",
+          "description": "Progesterone Receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_progesterone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00200399.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00200398.v1.p1",
+          "description": "Gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00200396.v1.p1",
+          "description": "Unique ID for the subjects in the AMBER Collaborative Study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AMBER_Sample_Attributes",
+      "datasetId": "pht003733.v1",
+      "description": "Sample ID, body site where sample was obtained, analyte type, tumor status of sample, histological type of sample, and genotyping center of participants with or without breast cancer and involved in the \"The African American Breast Cancer Epidemiology and Risk (AMBER) Consortium Study\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00200405.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00200404.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00200408.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00200407.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00200406.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00200403.v1.p1",
+          "description": "Unique ID for the samples in the AMBER Collaborative Study.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AMBER_Subject",
+      "datasetId": "pht003730.v1",
+      "description": "Subject ID, consent group, subject source, subject source ID, and affection status of participants with or without breast cancer and involved in the \"The African American Breast Cancer Epidemiology and Risk (AMBER) Consortium Study\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00200390.v1.p1",
+          "description": "Case-control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00200387.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00200386.v1.p1",
+          "description": "Unique ID for the subjects in the AMBER Collaborative Study.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00200388.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE_ID",
+          "id": "phv00200389.v1.p1",
+          "description": "Unique identifier for the AMBER Study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "AMBER_Sample",
+      "datasetId": "pht003731.v1",
+      "description": "Subject ID, sample ID, sample source, sample source ID, and sample use variable obtained from participants with or without breast cancer and involved in the \"The African American Breast Cancer Epidemiology and Risk (AMBER) Consortium Study\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00200392.v1.p1",
+          "description": "Unique ID for the samples in the AMBER Collaborative Study.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00200393.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00200395.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00200394.v1.p1",
+          "description": "CIDR ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00200391.v1.p1",
+          "description": "Unique ID for the subjects in the AMBER Collaborative Study.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

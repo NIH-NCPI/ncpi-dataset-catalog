@@ -1,0 +1,248 @@
+{
+  "studyId": "phs002771",
+  "studyName": "SLAMF7 Regulates Synovial Macrophages in Rheumatoid Arthritis",
+  "tables": [
+    {
+      "tableName": "SLAMF7_RA_High_Sample_Attributes",
+      "datasetId": "pht011890.v1",
+      "description": "This sample attributes data table includes samples with high or low expression of SLAMF7. The variables are body site where sample was collected, analyte type, tumor status, cell or tissue type, monocyte population defined by expression of CD14 and CD16, and expression level of SLAMF7 on sorted monocyte population.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00496071.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00496070.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00496073.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": "topmed:lung_ct_imaging_clinical_demographics_metadata",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00496072.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POPULATION",
+          "id": "phv00496074.v1.p1",
+          "description": "Monocyte population defined by expression of CD14 and CD16",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00496069.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SLAMF7_STATUS",
+          "id": "phv00496075.v1.p1",
+          "description": "Expression level of SLAMF7 on sorted monocyte population",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SLAMF7_RA_Stimulation_Sample_Attributes",
+      "datasetId": "pht011891.v1",
+      "description": "This sample attributes data table includes samples with monocyte-derived macrophages from healthy controls that were left untreated, or stimulated with anti-SLAMF7 or recombinant SLAMF7 protein. The variables are body site where sample was collected, analyte type, tumor status, cell or tissue type, and stimulation of cells in vitro.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00496078.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00496077.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00496080.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": "topmed:lung_ct_imaging_clinical_demographics_metadata",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00496079.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00496076.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STIMULATION",
+          "id": "phv00496081.v1.p1",
+          "description": "Treatment of cells in vitro",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SLAMF7_RA_Subject_Phenotypes",
+      "datasetId": "pht011889.v1",
+      "description": "This subject phenotype data table includes subject's race, sex, age at enrollment, and diagnosis.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00496067.v1.p1",
+          "description": "Subject age at enrollment",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS",
+          "id": "phv00496068.v1.p1",
+          "description": "Patient diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00496065.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00496066.v1.p1",
+          "description": "Subject sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00496064.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SLAMF7_RA_Subject",
+      "datasetId": "pht011887.v1",
+      "description": "The subject consent data table includes subject IDs, consent group information, and subject's biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00496060.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00496061.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00496059.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SLAMF7_RA_Sample",
+      "datasetId": "pht011888.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and sample aliases. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00496063.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00496062.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SLAMF7_RA_Stimulation_GEO",
+      "datasetId": "pht011892.v1",
+      "description": "The sample GEO mapping data table includes a mapping of sample IDs to publicly available expression data at NCBI GEO.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00496083.v1.p1",
+          "description": "GEO accession ID (GSM#)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00496082.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "studyId": "phs000694",
+  "studyName": "Clinical Cancer Sequencing",
+  "tables": [
+    {
+      "tableName": "Clinical_Cancer_Sequencing_Sample",
+      "datasetId": "pht003755.v3",
+      "description": "Subject ID, sample ID, and sample use of participants with tumors and involved in the \"Clinical Cancer Sequencing\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00200821.v3.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00200822.v3.p2",
+          "description": "Sample use. Seq_DNA_SNP_MAF_Ind: Sample(s) were used to generate aggregate mutation annotation file (.maf) with individual SNP genotypes; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00200820.v3.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Clinical_Cancer_Sequencing_Sample_Attributes",
+      "datasetId": "pht003757.v3",
+      "description": "Sample ID, sample type, and analyte type of participants with tumors and involved in the \"Clinical Cancer Sequencing\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00200827.v3.p2",
+          "description": "Molecular analyte",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00200825.v3.p2",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_TYPE",
+          "id": "phv00200826.v3.p2",
+          "description": "Indicates the tumor / normal status of a sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Clinical_Cancer_Sequencing_Subject",
+      "datasetId": "pht003754.v3",
+      "description": "Subject ID and consent group of participants with tumors and involved in the \"Clinical Cancer Sequencing\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00200819.v3.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00200818.v3.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Clinical_Cancer_Sequencing_Subject_Phenotypes",
+      "datasetId": "pht003756.v3",
+      "description": "Subject ID and primary disease of participants with tumors and involved in the \"Clinical Cancer Sequencing\" project.",
+      "variables": [
+        {
+          "name": "Primary_Disease",
+          "id": "phv00200824.v3.p2",
+          "description": "Primary disease",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_cancer_type_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00200823.v3.p2",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

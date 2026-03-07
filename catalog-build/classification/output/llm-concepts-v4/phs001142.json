@@ -1,0 +1,100 @@
+{
+  "studyId": "phs001142",
+  "studyName": "FOCI Mayo OmniExpress",
+  "tables": [
+    {
+      "tableName": "FOCI_Mayo_OmniExpress_Subject_Phenotypes",
+      "datasetId": "pht007497.v1",
+      "description": "Subject ID, age at diagnosis, tumor description including tumor behavior, tumor grade, tumor histology, tumor status of sample, and primary site of tumor of participants with or without ovarian cancer and involved in the \"Follow-up of Ovarian Cancer Genetic Association and Interaction Studies (FOCI)\" project.",
+      "variables": [
+        {
+          "name": "BEHAVIOR",
+          "id": "phv00354200.v1.p1",
+          "description": "Tumor behavior",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_behavior",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GRADE",
+          "id": "phv00354201.v1.p1",
+          "description": "Tumor grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGY",
+          "id": "phv00354202.v1.p1",
+          "description": "Tumor histology",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_SITE",
+          "id": "phv00354199.v1.p1",
+          "description": "Primary cancer site or control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REF_AGE",
+          "id": "phv00354203.v1.p1",
+          "description": "Age at diagnosis (cases) or interview (controls)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00354198.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "FOCI_Mayo_OmniExpress_Sample_Attributes",
+      "datasetId": "pht007498.v1",
+      "description": "Sample ID, analyte type, and body site where sample was obtained of participants with or without ovarian cancer and involved in the \"Follow-up of Ovarian Cancer Genetic Association and Interaction Studies (FOCI)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00354206.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00354205.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00354207.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00354204.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

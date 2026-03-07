@@ -1,0 +1,249 @@
+{
+  "studyId": "phs000339",
+  "studyName": "MitoExome Sequencing of Mitochondrial OXPHOS Diseases (MGH)",
+  "tables": [
+    {
+      "tableName": "Mitochondrial_OXPHOS_Diseases_Subject_Phenotypes",
+      "datasetId": "pht002138.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "AGE_OF_MITO_DX",
+          "id": "phv00180632.v1.p1",
+          "description": "Age at first biochemical/genetic test for mitochondrial disease. Age from medical record converted to years (e.g. 1 month => 0.08333 years)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_OF_ONSET",
+          "id": "phv00180630.v1.p1",
+          "description": "Age of onset of symptoms, converted to years (e.g. 1 month => 0.08333 years), rounded to at most three decimal places.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_OF_ONSET_UNCERTAIN",
+          "id": "phv00180631.v1.p1",
+          "description": "Flag denoting if the age of onset is uncertain",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BERNIER_CRITERIA",
+          "id": "phv00156599.v2.p1",
+          "description": "Status of OXPHOS disease diagnosis based on Bernier diagnostic criteria",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CLINICAL_DESCRIPTION",
+          "id": "phv00180629.v1.p1",
+          "description": "Description of patient phenotype and clinical history",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSANGUINITY",
+          "id": "phv00180634.v1.p1",
+          "description": "Consanguinity reported in medical history",
+          "concept_id": "ncpi:family_medical_history_general_family_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FAMILY_HISTORY",
+          "id": "phv00180633.v1.p1",
+          "description": "First-degree relative with phenotype highly similar to proband",
+          "concept_id": "ncpi:family_medical_history_inflammatory_bowel_disease_family_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00156596.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HYBRID_SELECTION_DESIGN",
+          "id": "phv00156595.v2.p1",
+          "description": "Design number of the hybrid selection reagents",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MORAVA_SCORE",
+          "id": "phv00156600.v2.p1",
+          "description": "Score of OXPHOS disease diagnosis based on Morava diagnostic criteria",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SELF-REPORTED_ANCESTRY",
+          "id": "phv00156598.v2.p1",
+          "description": "Self-reported ancestry",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00156594.v2.p1",
+          "description": "Deidentified Subject's ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Mitochondrial_OXPHOS_Diseases_Pedigree",
+      "datasetId": "pht002136.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "FAMID",
+          "id": "phv00156585.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00156588.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00156587.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00156589.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00156586.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Mitochondrial_OXPHOS_Diseases_Subject",
+      "datasetId": "pht002135.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00156584.v1.p1",
+          "description": "Case - control status of the subject.",
+          "concept_id": "ncpi:disease_diagnosis_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00156581.v1.p1",
+          "description": "Consent group as determined by DAC.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00156580.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Mitochondrial_OXPHOS_Diseases_Sample",
+      "datasetId": "pht002137.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00156591.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00164717.v1.p1",
+          "description": "Subject's sample use.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00156590.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "mitogo_dbGaP_SampleAttributesDS",
+      "datasetId": "pht002486.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00164722.v1.p1",
+          "description": "Analyte Type.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00164720.v1.p1",
+          "description": "De-identified Sample ID.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TISSUE_SOURCE",
+          "id": "phv00164721.v1.p1",
+          "description": "Tissue from which DNA was extracted.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

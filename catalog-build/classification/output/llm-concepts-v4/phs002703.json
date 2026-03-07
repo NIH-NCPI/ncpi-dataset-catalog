@@ -1,0 +1,490 @@
+{
+  "studyId": "phs002703",
+  "studyName": "SEARCH for Diabetes in Youth Study - Genetic Risk Score",
+  "tables": [
+    {
+      "tableName": "SEARCH_Subject_Phenotypes",
+      "datasetId": "pht012472.v1",
+      "description": "This subject phenotypes data table includes self-reported sex, race, diabetes type (provider determined and etiologic type), diabetes duration, age at diagnosis, measures from baseline (SEARCH 3 and SEARCH 4 follow-ups: age, height, weight, waist circumference, HbA1c, fasting/non-fasting glucose, C-peptide, triglycerides, HDL, LDL, blood pressure), measures from SEARCH 3 and 4 (arterial stiffness, retinopathy), measures from SEARCH 4 only (LV structure and diastolic function measurements, GAD autoantibody, IAD autoantibody, ZnT8 autoantibody).",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00505973.v1.p1",
+          "description": "Age at visit",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CPep_limit",
+          "id": "phv00505962.v1.p1",
+          "description": "C-Peptide - result beyond assay limits (if applicable)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CPep_ngmL",
+          "id": "phv00505958.v1.p1",
+          "description": "C-peptide",
+          "concept_id": "topmed:fasting_lipids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DAAIRgrp11",
+          "id": "phv00505974.v1.p1",
+          "description": "Etiologic diabetes type (11 categories)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EF",
+          "id": "phv00505965.v1.p1",
+          "description": "Ejection Fraction from 4 chamber",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "GAD65DK",
+          "id": "phv00505950.v1.p1",
+          "description": "GAD65 antibodies",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_diabetes_autoantibodies",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GLS_4ch",
+          "id": "phv00505963.v1.p1",
+          "description": "Global Longitudinal strain",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Glucose_mgdL",
+          "id": "phv00505957.v1.p1",
+          "description": "Serum glucose",
+          "concept_id": "topmed:fasting_lipids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HDLChol_mgdL",
+          "id": "phv00505954.v1.p1",
+          "description": "HDL-cholesterol",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HbA1cPcnt",
+          "id": "phv00505956.v1.p1",
+          "description": "HbA1c",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_hemoglobin_a1c",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "IA2DK",
+          "id": "phv00505951.v1.p1",
+          "description": "IA2 antibodies",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_diabetes_autoantibodies",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "INDEXYEAR",
+          "id": "phv00505980.v1.p1",
+          "description": "Index Year",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDLChol_mgdL",
+          "id": "phv00505953.v1.p1",
+          "description": "LDL-cholesterol",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RET_new",
+          "id": "phv00505960.v1.p1",
+          "description": "Retinopathy status of worst eye",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_diabetic_retinopathy_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SR_x_LONGSR",
+          "id": "phv00505964.v1.p1",
+          "description": "Peak longitudinal strain rate from the 4 chamber from the segment in all segments",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00505938.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Trig_mgdL",
+          "id": "phv00505955.v1.p1",
+          "description": "Triglycerides",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_standard_units_total_triglycerides",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Type_DAAsens_2",
+          "id": "phv00505975.v1.p1",
+          "description": "Etiologic diabetes type (4 categories)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VC",
+          "id": "phv00505939.v1.p1",
+          "description": "Visit Code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ZnT8",
+          "id": "phv00505952.v1.p1",
+          "description": "ZnT8 antibodies",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_diabetes_autoantibodies",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "age_dx",
+          "id": "phv00505977.v1.p1",
+          "description": "Age at diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "complication_AS",
+          "id": "phv00505959.v1.p1",
+          "description": "Arterial stiffness (carotid-femoral PWV >=90th Ptile of CVD control group)",
+          "concept_id": "topmed:carotid_stenosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "complication_RET_new",
+          "id": "phv00505961.v1.p1",
+          "description": "Any Mild/Mod/PDR retinopathy in either eye",
+          "concept_id": "ncpi:ophthalmology_diabetic_retinopathy_diabetic_retinopathy_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dbp",
+          "id": "phv00505943.v1.p1",
+          "description": "Diastolic Blood Pressure",
+          "concept_id": "ncpi:bp_diastolic_resting_seated_dbp_diastolic_bp_device_specific",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "duration_months",
+          "id": "phv00505941.v1.p1",
+          "description": "Diabetes duration",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ea_aa",
+          "id": "phv00505972.v1.p1",
+          "description": "E'/a' ratio ((lateral+septal)/2)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ewave_awave",
+          "id": "phv00505970.v1.p1",
+          "description": "E/A ratio",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ewave_eaavg",
+          "id": "phv00505971.v1.p1",
+          "description": "E/e' ratio",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fasting_CPep",
+          "id": "phv00505949.v1.p1",
+          "description": "Fasting status - C-peptide",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fasting_Glucose",
+          "id": "phv00505948.v1.p1",
+          "description": "Fasting status - glucose",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00505976.v1.p1",
+          "description": "Gender from IPS/Tracking",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "height",
+          "id": "phv00505946.v1.p1",
+          "description": "Height",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "lvm",
+          "id": "phv00505966.v1.p1",
+          "description": "LVM (raw, g)",
+          "concept_id": "topmed:bone_musculoskeletal",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "lvmht27",
+          "id": "phv00505967.v1.p1",
+          "description": "LVM Index (g/m2.7)",
+          "concept_id": "topmed:bone_musculoskeletal",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "nawaist",
+          "id": "phv00505945.v1.p1",
+          "description": "Natural waist circumference",
+          "concept_id": "topmed:bone_musculoskeletal",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "nhwaist",
+          "id": "phv00505944.v1.p1",
+          "description": "NHANES waist circumference",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race_pl",
+          "id": "phv00505978.v1.p1",
+          "description": "Race - plurality approach to remove multiracial",
+          "concept_id": "ncpi:race_us_multiracial",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race_v2",
+          "id": "phv00505979.v1.p1",
+          "description": "Race - with muliracial",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "rwt",
+          "id": "phv00505968.v1.p1",
+          "description": "Relative Wall Thickness",
+          "concept_id": "topmed:bone_musculoskeletal",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "sbp",
+          "id": "phv00505942.v1.p1",
+          "description": "Systolic Blood Pressure",
+          "concept_id": "ncpi:bp_systolic_resting_systolic_bp_closeout_systolic_bp",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sf",
+          "id": "phv00505969.v1.p1",
+          "description": "Shortening Fraction (%)",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "type_provider",
+          "id": "phv00505940.v1.p1",
+          "description": "Diabetes type determined by provider",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_type_classification",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "weight",
+          "id": "phv00505947.v1.p1",
+          "description": "Weight",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SEARCH_Sample_Attributes",
+      "datasetId": "pht012473.v1",
+      "description": "This sample attributes table includes type I diabetes risk score, type 2 diabetes risk score, BMI genetic risk score, body site, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ALL_BMI_GRS",
+          "id": "phv00505984.v1.p1",
+          "description": "BMI Genetic risk score",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "ALL_T1D_GRS2",
+          "id": "phv00505982.v1.p1",
+          "description": "Type 1 Diabetes risk score",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "ALL_T2D_397",
+          "id": "phv00505983.v1.p1",
+          "description": "Type 2 Diabetes risk score",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00505986.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00505985.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00505987.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00505981.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SEARCH_Subject",
+      "datasetId": "pht012470.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00505935.v1.p1",
+          "description": "Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00505934.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00525807.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00505933.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00525806.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SEARCH_Sample",
+      "datasetId": "pht012471.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00505937.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00505936.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

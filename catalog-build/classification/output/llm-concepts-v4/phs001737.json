@@ -1,0 +1,217 @@
+{
+  "studyId": "phs001737",
+  "studyName": "Ectrodactyly Ectodermal Dysplasia Cleft Lip/Palate (EEC) Syndrome Study",
+  "tables": [
+    {
+      "tableName": "EEC_Syndrome_Sample_Attributes",
+      "datasetId": "pht008562.v2",
+      "description": "This sample attributes table includes body site where sample was collected, analyte type, tumor status, genotyping and sequencing center, and cell type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00396721.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00396720.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CELL_TYPE",
+          "id": "phv00416418.v1.p1",
+          "description": "Cell type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00396723.v2.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00396722.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00396719.v2.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00396724.v2.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EEC_Syndrome_Subject_Phenotypes",
+      "datasetId": "pht008561.v2",
+      "description": "This subject phenotype table includes subject's birthplace, sex, race, and examination age.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396713.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "birthplace",
+          "id": "phv00396715.v2.p1",
+          "description": "Place of subject's birth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "examination age",
+          "id": "phv00396718.v2.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00396717.v2.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00396716.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EEC_Syndrome_Subject",
+      "datasetId": "pht008559.v2",
+      "description": "The subject consent data table contains subject IDs, consent group information, case control status for ectrodactyly, ectodermal dysplasia, and cleft lip/palate, and pooling of case and control subjects.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00396707.v2.p1",
+          "description": "Case control status of the subject for ectrodactyly, ectodermal dysplasia, and cleft lip/palate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00396704.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POOLING",
+          "id": "phv00416417.v1.p1",
+          "description": "Pooling of case and control subjects - CTR=anonymous controls, PSC=pluripotent stem cells, Kera=keratinocytes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396703.v2.p1",
+          "description": "Subject ID - CTR=anonymous controls, PSC=pluripotent stem cells, Kera=keratinocytes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EEC_Syndrome_Sample_Pooling",
+      "datasetId": "pht009326.v1",
+      "description": "This sample pooling table includes pooled samples, sample and cell barcodes.",
+      "variables": [
+        {
+          "name": "CELL_BARCODES",
+          "id": "phv00416422.v1.p1",
+          "description": "Cell barcodes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "POOLING",
+          "id": "phv00416420.v1.p1",
+          "description": "Pooled samples",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_BARCODES",
+          "id": "phv00416421.v1.p1",
+          "description": "Sample barcodes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00416419.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EEC_Syndrome_Sample",
+      "datasetId": "pht008560.v2",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00396709.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396708.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

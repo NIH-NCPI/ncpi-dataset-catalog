@@ -1,0 +1,623 @@
+{
+  "studyId": "phs001612",
+  "studyName": "NHLBI TOPMed: Coronary Artery Risk Development in Young Adults (CARDIA)",
+  "tables": [
+    {
+      "tableName": "TOPMed_CARDIA_Methylation_Sample_Attributes",
+      "datasetId": "pht013744.v2",
+      "description": "This sample attributes table for methylation samples includes Primary biosample type, analyte type, analyte isolated, collection details (n=3 variables; collection year, age at collection, collection visit), analyte isolation year, analyte isolation lab, alternate IDs (n=7 variables; analyte sample ID, UBERON_ID, UBERON term, material isolation batch ID, analyte isolation batch ID, sample container ID, sample well ID), processing details (n=7 variables; assay lab, assay batch, barcode, row col, SNPs read, decode date, extract date), and fraction of CpG sites that pass detection p-value thresholds (p.0.05, p.0.01).",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00531286.v2.p3",
+          "description": "Type of analyte to be measured from the submitted sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_collection",
+          "id": "phv00531282.v2.p3",
+          "description": "Subject age at time of primary biosample collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_isolated",
+          "id": "phv00531287.v2.p3",
+          "description": "Type of analyte isolated from primary biosample or derived material",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_isolation_batch_ID",
+          "id": "phv00531289.v2.p3",
+          "description": "Identifier for analyte isolation batch",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_isolation_lab",
+          "id": "phv00531291.v2.p3",
+          "description": "Name of laboratory performing the analyte isolation",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_isolation_year",
+          "id": "phv00531290.v2.p3",
+          "description": "Year in which analyte was isolated",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Analyte_sample_ID",
+          "id": "phv00531288.v2.p3",
+          "description": "Identifier for analyte isolated from primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Assay_batch",
+          "id": "phv00531295.v2.p3",
+          "description": "Data processing batch",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Assay_lab",
+          "id": "phv00531294.v2.p3",
+          "description": "Name of assay lab to which the samples were sent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00531276.v2.p3",
+          "description": "Anatomical site at which biosample was taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Barcode",
+          "id": "phv00531296.v2.p3",
+          "description": "Illumina chip Sentrix barcode",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_visit",
+          "id": "phv00531284.v2.p3",
+          "description": "Study visit at which primary biosample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_year",
+          "id": "phv00531283.v2.p3",
+          "description": "Year in which primary biosample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00531277.v2.p3",
+          "description": "The primary biosample type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00531278.v2.p3",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Material_isolation_batch_ID",
+          "id": "phv00531285.v2.p3",
+          "description": "Identifier for material isolation batch",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_biosample_type",
+          "id": "phv00531279.v2.p3",
+          "description": "Type of primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RowCol",
+          "id": "phv00531297.v2.p3",
+          "description": "Illumina chip assay position",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00531275.v2.p3",
+          "description": "DNA methylation sample identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_container_ID",
+          "id": "phv00531292.v2.p3",
+          "description": "Identifier for sample plate for shipping samples to assay center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample_well_ID",
+          "id": "phv00531293.v2.p3",
+          "description": "Identifier for well of the sample shipment container",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UBERON_ID",
+          "id": "phv00531280.v2.p3",
+          "description": "UBERON ontology identifier for type of primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "UBERON_Term",
+          "id": "phv00531281.v2.p3",
+          "description": "UBERON ontology term for type of primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "decodeDate",
+          "id": "phv00531299.v2.p3",
+          "description": "Earliest date shown for 'AutoDecode' action in the .idat 'RunInfo' table.  Presumably related to the chip manufacturing date.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "extractDate",
+          "id": "phv00531300.v2.p3",
+          "description": "Earliest date shown for 'Scan', 'Register' and 'Extract' actions in the .idat 'RunInfo' table.  Presumably date when the chip was scanned after hybridization, extension and staining.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "nSNPsRead",
+          "id": "phv00531298.v2.p3",
+          "description": "Value reported as 'nSNPsRead' in Illumina .idat file header",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p.0.01",
+          "id": "phv00531302.v2.p3",
+          "description": "Fraction of CpG sites which pass a detection p-value threshold of 0.01",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "p.0.05",
+          "id": "phv00531301.v2.p3",
+          "description": "Fraction of CpG sites which pass a detection p-value threshold of 0.05",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CARDIA_Metabolomics_Sample_Attributes",
+      "datasetId": "pht014666.v1",
+      "description": "This sample attributes table for metabolomics data includes body site, histological type, tumor status, analyte type, primary biosample type, age at collection, collection year, collection visit, fasting status, and fasting hours.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00541498.v1.p3",
+          "description": "Type of omics assay to be performed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_collection",
+          "id": "phv00541491.v1.p3",
+          "description": "Subject's age in years at time of tissue collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00541495.v1.p3",
+          "description": "Anatomical site at which biosample was taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_visit",
+          "id": "phv00541494.v1.p3",
+          "description": "Study visit when the primary biosample was collected (relevant for longitudianal studies with multiple waves of clinic visits). Y = Year. Duplicates are indicated with \"_dup\" suffix",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_year",
+          "id": "phv00541493.v1.p3",
+          "description": "Year in which primary biosample was collected (if not known can note as NA but Age_at_collection is required)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00541496.v1.p3",
+          "description": "Cell or tissue subtype derived from the Primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00541497.v1.p3",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_biosample_type",
+          "id": "phv00541492.v1.p3",
+          "description": "Specifies the type of the primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00541490.v1.p3",
+          "description": "TOPMed identifier for each sample aliquot sent to the omics assay center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fasting",
+          "id": "phv00541499.v1.p3",
+          "description": "Fasting status",
+          "concept_id": "topmed:fasting_lipids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "fasting_hours",
+          "id": "phv00541500.v1.p3",
+          "description": "Duration of fasting in hours",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CARDIA_WGS_Sample_Attributes",
+      "datasetId": "pht009498.v3",
+      "description": "This sample attributes table includes body site, analyte type, tumor status, sequencing center, funding source, TOPMed phase, project, and study name.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00420004.v3.p3",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00420003.v3.p3",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00420007.v3.p3",
+          "description": "Project funding source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00420005.v3.p3",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420002.v3.p3",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00420006.v3.p3",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00420010.v3.p3",
+          "description": "TOPMed-assigned short study name (1:1 with TOPMed phs number)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00420008.v3.p3",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00420009.v3.p3",
+          "description": "TOPMed Project that funded sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CARDIA_RNASeq_Sample_Attributes",
+      "datasetId": "pht014665.v1",
+      "description": "This sample attributes table for RNA sequence data includes body site, histological type, tumor status, analyte type, primary biosample type, age at collection, collection year, and collection visit.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00541489.v1.p3",
+          "description": "Type of omics assay to be performed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_collection",
+          "id": "phv00541482.v1.p3",
+          "description": "Subject's age in years at time of tissue collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00541486.v1.p3",
+          "description": "Anatomical site at which biosample was taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_visit",
+          "id": "phv00541485.v1.p3",
+          "description": "Study visit when the primary biosample was collected (relevant for longitudianal studies with multiple waves of clinic visits). Y = Year. Duplicates are indicated with \"_dup\" suffix",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_year",
+          "id": "phv00541484.v1.p3",
+          "description": "Year in which primary biosample was collected (if not known can note as NA but Age_at_collection is required)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00541487.v1.p3",
+          "description": "Cell or tissue subtype derived from the Primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00541488.v1.p3",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_biosample_type",
+          "id": "phv00541483.v1.p3",
+          "description": "Specifies the type of the primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00541481.v1.p3",
+          "description": "TOPMed identifier for each sample aliquot sent to the omics assay center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CARDIA_Proteomics_Sample_Attributes",
+      "datasetId": "pht014667.v1",
+      "description": "This sample attributes table for proteomics data includes body site, histological type, tumor status, analyte type, primary biosample type, age at collection, collection year, and collection visit.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00541509.v1.p3",
+          "description": "Type of omics assay to be performed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age_at_collection",
+          "id": "phv00541502.v1.p3",
+          "description": "Subject's age in years at time of tissue collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00541506.v1.p3",
+          "description": "Anatomical site at which biosample was taken",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_visit",
+          "id": "phv00541505.v1.p3",
+          "description": "Study visit when the primary biosample was collected (relevant for longitudianal studies with multiple waves of clinic visits). Y = Year. Duplicates are indicated with \"_dup\" suffix",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_year",
+          "id": "phv00541504.v1.p3",
+          "description": "Year in which primary biosample was collected (if not known can note as NA but Age_at_collection is required)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00541507.v1.p3",
+          "description": "Cell or tissue subtype derived from the Primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00541508.v1.p3",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Primary_biosample_type",
+          "id": "phv00541503.v1.p3",
+          "description": "Specifies the type of the primary biosample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00541501.v1.p3",
+          "description": "TOPMed identifier for each sample aliquot sent to the omics assay center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CARDIA_Subject",
+      "datasetId": "pht009496.v3",
+      "description": "The subject consent data table contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00419997.v3.p3",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00531203.v2.p3",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00419996.v3.p3",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CARDIA_Sample",
+      "datasetId": "pht009497.v3",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420000.v3.p3",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420001.v3.p3",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

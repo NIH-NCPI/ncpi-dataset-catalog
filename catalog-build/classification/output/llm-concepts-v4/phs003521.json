@@ -1,0 +1,169 @@
+{
+  "studyId": "phs003521",
+  "studyName": "Cell Type-Specific and Disease-Associated eQTL in the Human Lung",
+  "tables": [
+    {
+      "tableName": "eQTL_ILD_Subject_Phenotypes",
+      "datasetId": "pht014226.v1",
+      "description": "This subject phenotype table contains subject ID, disease diagnosis, age at sample collection, ethnicity, and tobacco use history.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00535859.v1.p1",
+          "description": "Age of patient at time of sample collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS",
+          "id": "phv00535858.v1.p1",
+          "description": "Diagnosed lung disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SELF-REPORTED_ETHNICITY",
+          "id": "phv00535860.v1.p1",
+          "description": "Self reported ethnicity of patient",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535857.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOBACCO_STATUS",
+          "id": "phv00535861.v1.p1",
+          "description": "Patient tobacco use history",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_tobacco_use_general",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eQTL_ILD_Sample_Attributes",
+      "datasetId": "pht014228.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00535866.v1.p1",
+          "description": "Type of molecule sequenced",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00535865.v1.p1",
+          "description": "Region of the body from which sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00535867.v1.p1",
+          "description": "Was the sample derived from a tumor",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00535864.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eQTL_ILD_Subject",
+      "datasetId": "pht014224.v1",
+      "description": "The subject consent file includes subject ID, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00535853.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00535854.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535852.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eQTL_ILD_Sample",
+      "datasetId": "pht014225.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00535856.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535855.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "eQTL_ILD_GEO",
+      "datasetId": "pht014227.v1",
+      "description": "This data table contains a mapping of study subject IDs and GEO accession IDs.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00535863.v1.p1",
+          "description": "GEO accession ID (GSM#)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00535862.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,274 @@
+{
+  "studyId": "phs000279",
+  "studyName": "NHLBI GO-ESP: Early-Onset Myocardial Infarction (Broad EOMI)",
+  "tables": [
+    {
+      "tableName": "ESP_Broad_EOMI_Subject_Phenotypes",
+      "datasetId": "pht001437.v2",
+      "description": "This subject phenotype data table contains sociodemography variables, race and gender, and myocardial infarction status and age of MI occurrence.",
+      "variables": [
+        {
+          "name": "ESP_AGE_AT_BMI",
+          "id": "phv00160325.v2.p1",
+          "description": "Age at baseline BMI",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_AGE_AT_FRS",
+          "id": "phv00160319.v2.p1",
+          "description": "Age at FRS calculation",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_AGE_AT_LAST_FU",
+          "id": "phv00160327.v2.p1",
+          "description": "Age at last follow-up for MI (missing for anyone with a baseline or incident MI)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_AGE_AT_LDL",
+          "id": "phv00160321.v2.p1",
+          "description": "Age in years at baseline LDL",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_AGE_AT_MI",
+          "id": "phv00160317.v2.p1",
+          "description": "Age at incident MI.  For HeartGO, this is only filled in (i.e. non-missing) for those with adjudicated MI that occurred during the study.  It is missing for those that are censored.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_BMI",
+          "id": "phv00160324.v2.p1",
+          "description": "Baseline BMI in kg/m2",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_FRS_CHDPROB",
+          "id": "phv00160318.v2.p1",
+          "description": "Framingham Risk Score predicted prob. (only calcultated in HeartGO for those with no baseline or incident MI)",
+          "concept_id": "topmed:cad_followup_start_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_LDL",
+          "id": "phv00160320.v2.p1",
+          "description": "Baseline calculated LDL in mg/dL (missing where trigs>400)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_calculated",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_LDL_UNTREATED",
+          "id": "phv00160322.v2.p1",
+          "description": "Estimated untreated LDL (In HeartGO, it is currently baseline LDL divided by 0.75 for those on lipid lowering meds)",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_adjusted",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_LIPID_MED",
+          "id": "phv00160323.v2.p1",
+          "description": "Any lipid lower med at baseline",
+          "concept_id": "ncpi:lipid_lowering_medication_general_lipid_lowering_medication",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_MI_BASELINE",
+          "id": "phv00160316.v2.p1",
+          "description": "MI status at baseline (0/1)",
+          "concept_id": "ncpi:mi_prior_mi_history_composite",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_PHENOTYPE",
+          "id": "phv00160315.v2.p1",
+          "description": "EOMI_Case; EOMI_Control; LDL_High; LDL_Low; Stroke; BP_High; BP_Low; DPR",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_RACE",
+          "id": "phv00160312.v2.p1",
+          "description": "European American; African American",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_SEX",
+          "id": "phv00160313.v2.p1",
+          "description": "Male; Female",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_STUDY_SITE",
+          "id": "phv00160314.v2.p1",
+          "description": "Clinic or field center within cohort",
+          "concept_id": "ncpi:geographic_site_recruitment_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ESP_T2DIABETES",
+          "id": "phv00160326.v2.p1",
+          "description": "Type 2 diabetes status at baseline (0/1)",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type2_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY",
+          "id": "phv00160311.v2.p1",
+          "description": "HeartGO cohort (ARIC, CARDIA, CHS, FHS, JHS, MESA)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00098591.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ESP_Broad_EOMI_Sample_Attributes",
+      "datasetId": "pht003003.v1",
+      "description": "The sample attributes data table includes sample analyte type (DNA or RNA), body site where sample was extracted, tumor status, and histological type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00174041.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00174040.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00174042.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00174043.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00174039.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ESP_Broad_EOMI_Subject",
+      "datasetId": "pht001435.v2",
+      "description": "This data table contains subject IDs, consent information, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00098588.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJID",
+          "id": "phv00160310.v2.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00098587.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJ_SOURCE",
+          "id": "phv00160309.v2.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ESP_Broad_EOMI_Sample",
+      "datasetId": "pht001436.v2",
+      "description": "This data table contains the mapping of subject IDs to sample IDs and sample use.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00098590.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00174044.v1.p1",
+          "description": "Sample Use. Seq_DNA_SNP: SNP genotypes derived from sequence data; Seq_DNA_SNP_CNV: SNP and CNV genotypes derived from sequence data; Seq_DNA_WholeExome: Whole exome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00098589.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

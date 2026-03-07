@@ -1,0 +1,692 @@
+{
+  "studyId": "phs001034",
+  "studyName": "New England-Based Case-Control Study of Ovarian Cancer (NECC)",
+  "tables": [
+    {
+      "tableName": "NECC_Ovarian_Cancer_Subject_Phenotypes",
+      "datasetId": "pht005188.v1",
+      "description": "This subject phenotype table contains de-identified subject ID, study center and phase, reference age, year of birth, jewish ethnicity, race or ethnicity, body mass index, weight at reference age, height, menopausal status, smoking status, ever diagnosed with asthma, age when asthma was diagnosed, family history of ovarian cancer or premenopausal breast cancer, personal history of breast cancer, ever regularly used acetaminophen, aspirin or ibuprofen, ever used postmenopausal hormone therapy among postmenopausal subjects, ovulatory cycles, endometriosis or painful periods, parity, duration of breastfeeding, hysterectomy, age at hysterectomy, tubal ligation, age at tubal ligation, histologic type, alcohol consumption, birth control (n=4 variables; condoms, diaphragm or IUD ever used regularly or as primary method of birth control, and oral contraceptive use), husband or regular partner used body powder on his genital or rectal area, and powder applied to genital or rectal areas, non-genital or non-rectal areas, sanitary napkins or tampons, and underwear. The powder use counts times used per month, months used per year, age at first use, years used, first and second brand codes, texts, and contents.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258150.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ace",
+          "id": "phv00258178.v1.p1",
+          "description": "Ever regularly used acetaminophen",
+          "concept_id": "ncpi:pain_medication_acetaminophen_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alcocat",
+          "id": "phv00258182.v1.p1",
+          "description": "Grams of alcohol per day",
+          "concept_id": "ncpi:ffq_alcoholic_beverages_total_alcohol_intake",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "alcodi",
+          "id": "phv00258183.v1.p1",
+          "description": "Grams of alcohol per day",
+          "concept_id": "ncpi:ffq_alcoholic_beverages_total_alcohol_intake",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "aspibu",
+          "id": "phv00258179.v1.p1",
+          "description": "Ever regularly used aspirin or ibuprofen",
+          "concept_id": "ncpi:pain_medication_aspirin_use_aspirin_use_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "asthmadx",
+          "id": "phv00258172.v1.p1",
+          "description": "Ever diagnosed with asthma",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_diagnosis_ever",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "asthmadxage",
+          "id": "phv00258173.v1.p1",
+          "description": "Age when asthma was diagnosed",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bmiq",
+          "id": "phv00258164.v1.p1",
+          "description": "Body mass index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "center",
+          "id": "phv00258151.v1.p1",
+          "description": "Study center",
+          "concept_id": "ncpi:geographic_site_recruitment_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "condoms",
+          "id": "phv00258167.v1.p1",
+          "description": "Condoms ever used regularly or as primary method of birth control",
+          "concept_id": "ncpi:pregnancy_reproductive_contraception_condom_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "diaph",
+          "id": "phv00258168.v1.p1",
+          "description": "Diaphragm ever used regularly or as primary method of birth control",
+          "concept_id": "ncpi:pregnancy_reproductive_contraception_barrier_methods",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "dobyearcat",
+          "id": "phv00258154.v1.p1",
+          "description": "Year of birth",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "endopain",
+          "id": "phv00258180.v1.p1",
+          "description": "Endometriosis or painful periods",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "everhrt",
+          "id": "phv00258181.v1.p1",
+          "description": "Ever used postmenopausal hormone therapy among postmenopausal subjects",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_hormone_replacement_therapy_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "fhxebrov",
+          "id": "phv00258170.v1.p1",
+          "description": "Family history of ovarian cancer or premenopausal breast cancer",
+          "concept_id": "ncpi:family_medical_history_cancer_family_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genage",
+          "id": "phv00258199.v1.p1",
+          "description": "Genital use: age at first use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genbrand1",
+          "id": "phv00258202.v1.p1",
+          "description": "Genital use: first brand text",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genbrand2",
+          "id": "phv00258205.v1.p1",
+          "description": "Genital use: second brand text",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genbrandcode1",
+          "id": "phv00258201.v1.p1",
+          "description": "Genital use: first brand code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genbrandcode2",
+          "id": "phv00258204.v1.p1",
+          "description": "Genital use: second brand code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gencontcode1",
+          "id": "phv00258203.v1.p1",
+          "description": "Genital use: first brand content",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gencontcode2",
+          "id": "phv00258206.v1.p1",
+          "description": "Genital use: second brand content",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genfreq",
+          "id": "phv00258197.v1.p1",
+          "description": "Genital use: times used per month",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genmoyr",
+          "id": "phv00258198.v1.p1",
+          "description": "Genital use: months used per year",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genpowd",
+          "id": "phv00258196.v1.p1",
+          "description": "Regularly applied powder directly to genital or rectal areas",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "genyears",
+          "id": "phv00258200.v1.p1",
+          "description": "Genital use: years used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "histology",
+          "id": "phv00258156.v1.p1",
+          "description": "Histologic type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "htq",
+          "id": "phv00258166.v1.p1",
+          "description": "Height at reference age",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "husbtalc",
+          "id": "phv00258184.v1.p1",
+          "description": "Husband or regular partner used body powder on his genital or rectal area",
+          "concept_id": "topmed:pregnancy_reproductive",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "hyst",
+          "id": "phv00258174.v1.p1",
+          "description": "Hysterectomy",
+          "concept_id": "ncpi:pregnancy_reproductive_hysterectomy_surgery_hysterectomy_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hystage",
+          "id": "phv00258175.v1.p1",
+          "description": "Age at hysterectomy",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "iud",
+          "id": "phv00258169.v1.p1",
+          "description": "IUD ever used regularly or as primary method of birth control",
+          "concept_id": "ncpi:pregnancy_reproductive_contraception_iud_contraception",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "jewish",
+          "id": "phv00258162.v1.p1",
+          "description": "Jewish ethnicity",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "meno",
+          "id": "phv00258163.v1.p1",
+          "description": "Menopausal status",
+          "concept_id": "ncpi:pregnancy_reproductive_menopause_hrt_age_at_menopause",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mosbrfedcat",
+          "id": "phv00258161.v1.p1",
+          "description": "Duration of breastfeeding",
+          "concept_id": "topmed:pregnancy_reproductive_breastfeeding",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "napage",
+          "id": "phv00258210.v1.p1",
+          "description": "Napkin use: age at first use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "napbrand1",
+          "id": "phv00258213.v1.p1",
+          "description": "Napkin use: first brand text",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "napbrand2",
+          "id": "phv00258216.v1.p1",
+          "description": "Napkin use: second brand text",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "napbrandcode1",
+          "id": "phv00258212.v1.p1",
+          "description": "Napkin use: first brand code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "napbrandcode2",
+          "id": "phv00258215.v1.p1",
+          "description": "Napkin use: second brand code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "napcontcode1",
+          "id": "phv00258214.v1.p1",
+          "description": "Napkin use: first brand content",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "napcontcode2",
+          "id": "phv00258217.v1.p1",
+          "description": "Napkin use: second brand content",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "napfreq",
+          "id": "phv00258208.v1.p1",
+          "description": "Napkin use: times used per month",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "napmoyr",
+          "id": "phv00258209.v1.p1",
+          "description": "Napkin use: months used per year",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "nappowd",
+          "id": "phv00258207.v1.p1",
+          "description": "Regularly applied powder to sanitary napkins or tampons",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "napyears",
+          "id": "phv00258211.v1.p1",
+          "description": "Napkin use: years used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ocmonscat",
+          "id": "phv00258160.v1.p1",
+          "description": "Oral contraceptive use",
+          "concept_id": "ncpi:pregnancy_reproductive_contraception_oral_contraceptive_duration_months",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othage",
+          "id": "phv00258188.v1.p1",
+          "description": "Non-genital/rectal use: age at first use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othbrand1",
+          "id": "phv00258191.v1.p1",
+          "description": "Non-genital/rectal use: first brand text",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othbrand2",
+          "id": "phv00258194.v1.p1",
+          "description": "Non-genital/rectal use: second brand text",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othbrandcode1",
+          "id": "phv00258190.v1.p1",
+          "description": "Non-genital/rectal use: first brand code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othbrandcode2",
+          "id": "phv00258193.v1.p1",
+          "description": "Non-genital/rectal use: second brand code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othcontcode1",
+          "id": "phv00258192.v1.p1",
+          "description": "Non-genital/rectal use: first brand content",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othcontcode2",
+          "id": "phv00258195.v1.p1",
+          "description": "Non-genital/rectal use: second brand content",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "otherpowd",
+          "id": "phv00258185.v1.p1",
+          "description": "Regularly applied powder to non-genital/rectal areas",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othfreq",
+          "id": "phv00258186.v1.p1",
+          "description": "Non-genital/rectal use: times used per month",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othmoyr",
+          "id": "phv00258187.v1.p1",
+          "description": "Non-genital/rectal use: months used per year",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "othyears",
+          "id": "phv00258189.v1.p1",
+          "description": "Non-genital/rectal use: years used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ovulcycq",
+          "id": "phv00258158.v1.p1",
+          "description": "Ovulatory cycles",
+          "concept_id": "ncpi:pregnancy_reproductive_menstrual_cycle_menopause_duration",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "parcat",
+          "id": "phv00258159.v1.p1",
+          "description": "Parity",
+          "concept_id": "ncpi:pregnancy_reproductive_pregnancy_count_history_pregnancy_outcomes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pershxbrca",
+          "id": "phv00258171.v1.p1",
+          "description": "Personal history of breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_breast_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "racecat",
+          "id": "phv00258155.v1.p1",
+          "description": "Race/ethnicity",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "refage",
+          "id": "phv00258152.v1.p1",
+          "description": "Reference age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "smoke3",
+          "id": "phv00258157.v1.p1",
+          "description": "Smoking status",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "study",
+          "id": "phv00258153.v1.p1",
+          "description": "Study phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tubage",
+          "id": "phv00258177.v1.p1",
+          "description": "Age at tubal ligation",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tubal",
+          "id": "phv00258176.v1.p1",
+          "description": "Tubal ligation",
+          "concept_id": "ncpi:pregnancy_reproductive_contraception_sterilization_tubal_ligation",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "undage",
+          "id": "phv00258221.v1.p1",
+          "description": "Underwear use: age at first use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "undbrand1",
+          "id": "phv00258224.v1.p1",
+          "description": "Underwear use: first brand text",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "undbrand2",
+          "id": "phv00258227.v1.p1",
+          "description": "Underwear use: second brand text",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "undbrandcode1",
+          "id": "phv00258223.v1.p1",
+          "description": "Underwear use: first brand code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "undbrandcode2",
+          "id": "phv00258226.v1.p1",
+          "description": "Underwear use: second brand code",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "undcontcode1",
+          "id": "phv00258225.v1.p1",
+          "description": "Underwear use: first brand content",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "undcontcode2",
+          "id": "phv00258228.v1.p1",
+          "description": "Underwear use: second brand content",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "undfreq",
+          "id": "phv00258219.v1.p1",
+          "description": "Underwear use: times used per month",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "undmoyr",
+          "id": "phv00258220.v1.p1",
+          "description": "Underwear use: months used per year",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "undpowd",
+          "id": "phv00258218.v1.p1",
+          "description": "Regularly applied powder to underwear",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "undyears",
+          "id": "phv00258222.v1.p1",
+          "description": "Underwear use: years used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "wtrefq",
+          "id": "phv00258165.v1.p1",
+          "description": "Weight at reference age",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NECC_Ovarian_Cancer_Subject",
+      "datasetId": "pht005187.v1",
+      "description": "The subject consent file includes subject IDs, consent information, subject aliases and affection status for ovarian cancer.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258145.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "affection_status",
+          "id": "phv00258149.v1.p1",
+          "description": "Case control status for ovarian cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "consent",
+          "id": "phv00258146.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "source_subject_id",
+          "id": "phv00258148.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_source",
+          "id": "phv00258147.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

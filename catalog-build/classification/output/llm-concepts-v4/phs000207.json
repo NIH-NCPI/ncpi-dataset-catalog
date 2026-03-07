@@ -1,0 +1,107 @@
+{
+  "studyId": "phs000207",
+  "studyName": "CGEMS Prostate Cancer GWAS - Stage 1 - PLCO",
+  "tables": [
+    {
+      "tableName": "CGEMS_Prostate_Data",
+      "datasetId": "pht001105.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SUBJID",
+          "id": "phv00082614.v1.p1",
+          "description": "De-identified subject's ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00082616.v1.p1",
+          "description": "<a href=\"http://www.ncbi.nlm.nih.gov/mesh/68000367?ordinalpos=3&itool=EntrezSystem2.PEntrez.Mesh.Mesh_ResultsPanel.Mesh_RVDocSum\">Age</a> at enrollment in 10 year interval",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "case_control",
+          "id": "phv00082615.v1.p1",
+          "description": "Case or control?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "family_history",
+          "id": "phv00082618.v1.p1",
+          "description": "Family history of <a href=\"http://www.ncbi.nlm.nih.gov/mesh/68011471?ordinalpos=1&itool=EntrezSystem2.PEntrez.Mesh.Mesh_ResultsPanel.Mesh_RVDocSum\">prostate cancer</a>",
+          "concept_id": "topmed:cancer_diagnosis_family_cancer_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00082617.v1.p1",
+          "description": "<a href=\"http://www.ncbi.nlm.nih.gov/mesh/68005783?ordinalpos=1&itool=EntrezSystem2.PEntrez.Mesh.Mesh_ResultsPanel.Mesh_RVDocSum\">Gender</a> of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CGEMS_Prostate_Subject",
+      "datasetId": "pht001106.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00082621.v1.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00082620.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00082619.v1.p1",
+          "description": "De-identified subject's ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CGEMS_Prostate_Sample",
+      "datasetId": "pht001107.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00082623.v1.p1",
+          "description": "De-identified sample's ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00082622.v1.p1",
+          "description": "De-identified subject's ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

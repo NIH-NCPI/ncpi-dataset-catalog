@@ -1,0 +1,218 @@
+{
+  "studyId": "phs001759",
+  "studyName": "Profiles of exRNA in CSF and Plasma from Subarachnoid Hemorrhage Patients",
+  "tables": [
+    {
+      "tableName": "SAH_Sample_Attributes",
+      "datasetId": "pht008710.v1",
+      "description": "This sample attributes table includes body site where the sample was collected, analyte type, the biofluid type, and details about the exRNA source material from subjects with subarachnoid hemmorrhage.",
+      "variables": [
+        {
+          "name": "Analyte Type",
+          "id": "phv00400477.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Anatomical Location",
+          "id": "phv00400476.v1.p1",
+          "description": "Details About the Anatomical Location from Which the Fluid Was Collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Biofluid Name",
+          "id": "phv00400479.v1.p1",
+          "description": "Source of Body Fluid of Sample",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "Disease Type",
+          "id": "phv00400480.v1.p1",
+          "description": "Disease Type",
+          "concept_id": "ncpi:disease_diagnosis_other_conditions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Is Tumor",
+          "id": "phv00400478.v1.p1",
+          "description": "Tumor Status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00400475.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "exRNA Source",
+          "id": "phv00400481.v1.p1",
+          "description": "Details About exRNA Source Material",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SAH_Subject_Phenotypes",
+      "datasetId": "pht008709.v1",
+      "description": "This subject phenotypes data table includes subject sex, age, race, and ethnic group.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00400472.v1.p1",
+          "description": "Age of Subject",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnic Group",
+          "id": "phv00400474.v1.p1",
+          "description": "Ethnic Group of Subject",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Racial Category",
+          "id": "phv00400473.v1.p1",
+          "description": "Racial Category of Subject",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00400469.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00400471.v1.p1",
+          "description": "Sex of Subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject Type",
+          "id": "phv00400470.v1.p1",
+          "description": "Type of Subject (Case? Control?)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SAH_Subject",
+      "datasetId": "pht008707.v1",
+      "description": "The subject consent data table contains subject IDs, consent group information, the source repository where subjects originate, and subject aliases.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00400463.v1.p1",
+          "description": "Case control status of the subject with respect to subarachnoid hemorrhage",
+          "concept_id": "topmed:vte_case_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00400460.v1.p1",
+          "description": "Consent group as determined by Translational Genomics Research Institute and DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00400462.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00400459.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00400461.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "SAH_Sample",
+      "datasetId": "pht008708.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs, the source repository where samples originate, and sample aliases. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00400465.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00400466.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00400468.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00400467.v1.p1",
+          "description": "Sample ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00400464.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

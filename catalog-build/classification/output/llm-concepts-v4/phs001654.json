@@ -1,0 +1,194 @@
+{
+  "studyId": "phs001654",
+  "studyName": "NSAIDS and Somatic Mutations in Barrett's Esophagus",
+  "tables": [
+    {
+      "tableName": "NSAID_BE_Subject_Phenotypes",
+      "datasetId": "pht008443.v1",
+      "description": "This subject phenotype data table includes subject's sex and ethnicity, NSAID use, baseline and sequencing age, Barrett's epithelial segment length, and smoking status.",
+      "variables": [
+        {
+          "name": "BE_Segment_Length",
+          "id": "phv00396053.v1.p1",
+          "description": "Length of Barrett's epithelial segment measured from the squamocolumnar junction (top) to the gastroesophageal juction (bottom) of the esophagus at the time of sequencing.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Baseline_Age",
+          "id": "phv00396051.v1.p1",
+          "description": "Subject age at baseline. Baseline is defined as start of consistent NSAID use or nonuse.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Ethnicity",
+          "id": "phv00396161.v1.p1",
+          "description": "Subject ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NSAID_Status",
+          "id": "phv00396048.v1.p1",
+          "description": "Subject NSAID use between Baseline_Age and Sequencing_Age",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396047.v1.p1",
+          "description": "Unique Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sequencing_Age",
+          "id": "phv00396052.v1.p1",
+          "description": "Subject age at time of sequencing. Time of sequencing is after period of consistent NSAID use or nonuse.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00396050.v1.p1",
+          "description": "Subject gender",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking_Status",
+          "id": "phv00396049.v1.p1",
+          "description": "Lifetime smoking status of subject",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NSAID_BE_Sample_Attributes",
+      "datasetId": "pht008444.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, tumor status, histological type, genotyping center, and sequencing center. All tumor status is marked as no, since samples are either normal or pre-malignant.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00396056.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00396055.v1.p1",
+          "description": "Collection site",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00396059.v1.p1",
+          "description": "Genotyping center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00396058.v1.p1",
+          "description": "Histological type. Samples are normal or pre-malignant.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00396057.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00396054.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00396060.v1.p1",
+          "description": "Sequencing center",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NSAID_BE_Subject",
+      "datasetId": "pht008441.v1",
+      "description": "The subject consent data table includes subject IDs, consent group information, and case control status for Barrett's Esophagus (BE) NSAID use.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00396044.v1.p1",
+          "description": "Case control status of the subject for Barrett's Esophagus (BE)",
+          "concept_id": "ncpi:disease_diagnosis_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00396043.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396042.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NSAID_BE_Sample",
+      "datasetId": "pht008442.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00396046.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00396045.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

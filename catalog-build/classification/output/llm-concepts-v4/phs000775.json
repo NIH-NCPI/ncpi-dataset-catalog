@@ -1,0 +1,298 @@
+{
+  "studyId": "phs000775",
+  "studyName": "Joint Genome-Wide Gene Expression and GWAS Mapping in the MGS Dataset",
+  "tables": [
+    {
+      "tableName": "Molecular_Genetics_Schizophrenia_Subject_Phenotypes",
+      "datasetId": "pht003945.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "EA_PC_1",
+          "id": "phv00202330.v1.p1",
+          "description": "EA PC (principal component 1 of 5; North-South)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_european_ancestry_pcs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EA_PC_2",
+          "id": "phv00202331.v1.p1",
+          "description": "EA PC (principal component 2 of 5; slight North-South)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_european_ancestry_pcs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EA_PC_3",
+          "id": "phv00202332.v1.p1",
+          "description": "EA PC (principal component 3 of 5; East-West)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_european_ancestry_pcs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EA_PC_4",
+          "id": "phv00202333.v1.p1",
+          "description": "EA PC (principal component 4 of 5; none)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_european_ancestry_pcs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EA_PC_5",
+          "id": "phv00202334.v1.p1",
+          "description": "EA PC (principal component 5 of 5; Ashkenazi)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_european_ancestry_pcs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EBV_LOAD",
+          "id": "phv00202336.v1.p1",
+          "description": "EBV load (viral load) of LCL",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EBV_TRANSFORMATION_SITE",
+          "id": "phv00202335.v1.p1",
+          "description": "Site of EBV transformation to produce LCL",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLINK_FID",
+          "id": "phv00202328.v1.p1",
+          "description": "Family ID used in PLINK for dbGaP GWAS",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PLINK_IID",
+          "id": "phv00202329.v1.p1",
+          "description": "Individual ID used in PLINK for dbGaP GWAS",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00202324.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00202327.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00202326.v1.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00202325.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Molecular_Genetics_Schizophrenia_Sample_Attributes",
+      "datasetId": "pht003946.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00202344.v1.p1",
+          "description": "Analyte type - all samples are RNA",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ATP_PER_CELL_COUNT",
+          "id": "phv00202341.v1.p1",
+          "description": "ATP level adjusted by number of cells reflecting energy status of LCLs. Positive number with values from ATP average of duplicate luminescence readings from ATP assay, corrected for concentration of cells by dividing by cell count (see PMID: 23904455 for further details)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BACKGROUND_INTENSITY",
+          "id": "phv00202342.v1.p1",
+          "description": "Background intensity of that sample - used to generate the normalized expression values from the raw (non-normalized) expression values. Positive number with values from expression assay. Positive number with values from expression assay",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00202343.v1.p1",
+          "description": "Body site where sample was collected - all are LCLs made from peripheral blood",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CELL_COUNT",
+          "id": "phv00202340.v1.p1",
+          "description": "LCL cell count at harvest reflecting growth rate. Positive number with values from viable cell count at harvest x10 6 (24 hrs after 0.250 x 10^6 cells/ml) (see PMID: 23904455 for further details)",
+          "concept_id": "topmed:lung_ct_imaging_clinical_demographics_metadata",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "EXPRESSION_ARRAY_BATCH",
+          "id": "phv00202339.v1.p1",
+          "description": "Array batch (first or second) in which sample was run on expression array",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXPRESSION_ARRAY_SERVICE",
+          "id": "phv00202338.v1.p1",
+          "description": "Name of the service provider which ran the expression array",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00202345.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00202337.v1.p1",
+          "description": "Sample ID. Wave-tech-sample, namely growing wave number, technician surname initial, order in growing wave",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Molecular_Genetics_Schizophrenia_Subject",
+      "datasetId": "pht003943.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00202317.v1.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_opioid_use_disorder_case_control_status",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00202314.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00202316.v1.p1",
+          "description": "Subject ID used in the Source Repository. Also known as DNA_ID, the ID number assigned by the RUCDR to this subject's DNA specimens and LCLs (lymphoblastoid cell lines)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00202313.v1.p1",
+          "description": "De-identified subject ID. Also known as the GAIN/nonGAIN ID, this is the 5 digit ID you will find in GAIN and nonGAIN data (i.e., GWAS data deposited into dbGaP). GAIN is dbGaP study ID phs000021; nonGAIN is dbGaP study ID phs000167.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID_dbGaP_GWAS",
+          "id": "phv00202318.v1.p1",
+          "description": "Name of dbGaP GWAS for subject",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00202315.v1.p1",
+          "description": "Source repository where subjects originate. All from RUCDR (Rutgers University Cell and DNA Repository)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Molecular_Genetics_Schizophrenia_Sample",
+      "datasetId": "pht003944.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00202320.v1.p1",
+          "description": "Sample ID. Wave-tech-sample, namely growing wave number, technician surname initial, order in growing wave",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00202321.v1.p1",
+          "description": "Source repository where samples originate. All from RUCDR (Rutgers University Cell and DNA Repository)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00202323.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPLE_ID",
+          "id": "phv00202322.v1.p1",
+          "description": "Sample ID used in the Source Repository. Also known as DNA_ID, the ID number assigned by the RUCDR to this subject's DNA specimens and LCLs (lymphoblastoid cell lines)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00202319.v1.p1",
+          "description": "De-identified subject ID. Also known as the GAIN/nonGAIN ID, this is the 5 digit ID you will find in GAIN and nonGAIN data (i.e., GWAS data deposited into dbGaP). GAIN is dbGaP study ID phs000021; nonGAIN is dbGaP study ID phs000167.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

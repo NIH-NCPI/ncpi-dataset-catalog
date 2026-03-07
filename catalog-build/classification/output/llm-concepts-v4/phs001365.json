@@ -1,0 +1,282 @@
+{
+  "studyId": "phs001365",
+  "studyName": "Neoadjuvant Chemotherapy +/- Bevacizumab Pharmacogenomics",
+  "tables": [
+    {
+      "tableName": "NAC_Bevacizumab_Subject_Phenotypes",
+      "datasetId": "pht006409.v1",
+      "description": "This subject phenotype table contains subject ID, tumor size, nodal status, hormone receptor status, treatments of gemcitabine, capecitabine,  and bevacizumab, age at randomization, estrogen receptor status, progesterone receptor status, race, histologic tumor grade, side of cancer, completion of neoadjuvant therapies by protocol, best response status, time to last follow-up in years, censoring code for death, time to the first disease-free survival (DFS) event (TOFF, including recurrent, second primary and death), and censoring code for TOFF.",
+      "variables": [
+        {
+          "name": "Age",
+          "id": "phv00294391.v1.p1",
+          "description": "Age at Randomization",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Bevacizumab",
+          "id": "phv00294390.v1.p1",
+          "description": "Bevacizumab Treatment",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_monoclonal_antibodies",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Breast",
+          "id": "phv00294396.v1.p1",
+          "description": "Side of cancer",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CDFS",
+          "id": "phv00294402.v1.p1",
+          "description": "Censoring code for TOFF",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CNS",
+          "id": "phv00294386.v1.p1",
+          "description": "Clinical Nodal Status",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tnm_n_stage",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CTS",
+          "id": "phv00294385.v1.p1",
+          "description": "Clinical Tumor Size",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_size",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Capecitabine",
+          "id": "phv00294389.v1.p1",
+          "description": "Capecitabine Treatment",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_pyrimidine_analogs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DEATH",
+          "id": "phv00294400.v1.p1",
+          "description": "Censoring code for death",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ER",
+          "id": "phv00294392.v1.p1",
+          "description": "Estrogen Receptor Status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Gemcitabine",
+          "id": "phv00294388.v1.p1",
+          "description": "Gemcitabine Treatment",
+          "concept_id": "ncpi:concomitant_medication_cancer_chemotherapy_medications_pyrimidine_analogs",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Grade",
+          "id": "phv00294395.v1.p1",
+          "description": "Histologic Tumor Grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HR",
+          "id": "phv00294387.v1.p1",
+          "description": "Hormone Receptor Status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_hormone_receptor_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NAT_Complete",
+          "id": "phv00294397.v1.p1",
+          "description": "Completion of neoadjuvant therapies by protocol",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_neoadjuvant_therapy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PgR",
+          "id": "phv00294393.v1.p1",
+          "description": "Progesterone Receptor Status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_progesterone_receptor_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Race",
+          "id": "phv00294394.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Response",
+          "id": "phv00294398.v1.p1",
+          "description": "Best response status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_treatment_response",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00294384.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TLFUP",
+          "id": "phv00294399.v1.p1",
+          "description": "Time to last follow-up in years",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TOFF",
+          "id": "phv00294401.v1.p1",
+          "description": "Time to the first DFS event (including recurrent, second primary and death)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_disease_free_survival",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NAC_Bevacizumab_Sample_Attributes",
+      "datasetId": "pht006410.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, tumor status, histological type, and name of the center which conducted genotyping.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00294405.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00294404.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00294408.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00294407.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00294406.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00294403.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NAC_Bevacizumab_Subject",
+      "datasetId": "pht006407.v1",
+      "description": "The subject consent file includes subject IDs, consent information and case control status of the subject for pathologic complete response (PCR) .",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00294380.v1.p1",
+          "description": "Case control status of the subject for Pathologic Complete Response",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00294379.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00294378.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NAC_Bevacizumab_Sample",
+      "datasetId": "pht006408.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample use.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00294382.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00294383.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00294381.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

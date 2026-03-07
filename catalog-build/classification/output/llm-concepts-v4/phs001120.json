@@ -1,0 +1,100 @@
+{
+  "studyId": "phs001120",
+  "studyName": "ELLIPSE Prostate Cancer Meta-Analysis and Genotyping",
+  "tables": [
+    {
+      "tableName": "ELLIPSE_Subject",
+      "datasetId": "pht005807.v2",
+      "description": "The subject consent file includes subject IDs, consent information, case control status of the subject for prostate cancer, and subject aliases.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00266793.v2.p2",
+          "description": "Case control status of the subject for prostate cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00266792.v2.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00482340.v1.p2",
+          "description": "Submitted subject_ID of study A",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID2",
+          "id": "phv00482342.v1.p2",
+          "description": "Submitted subject_ID of study B",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266791.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00482339.v1.p2",
+          "description": "Repository name in the sample report of study A",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE2",
+          "id": "phv00482341.v1.p2",
+          "description": "Repository name in the sample report of study B",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "ELLIPSE_Sample",
+      "datasetId": "pht005808.v2",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes a substudy accession.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00266795.v1.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY",
+          "id": "phv00266797.v2.p2",
+          "description": "Substudy accession",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00266794.v1.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "studyId": "phs001710",
+  "studyName": "Transplant Outcomes in Aplastic Anemia (TOAA): GWAS Data",
+  "tables": [
+    {
+      "tableName": "TOAA_Subject_Phenotypes",
+      "datasetId": "pht011292.v2",
+      "description": "Subject ID, affection status, array imputed ancestry, and ASA, CEU, and YRI array result of participants with aplastic anemia and involved in the \"Transplant Outcomes in Aplastic Anemia (TOAA): GWAS and WES Data\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00529896.v1.p1",
+          "description": "Disease status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Array.ASA",
+          "id": "phv00529900.v1.p1",
+          "description": "Imputed ancestry score of ASA using array genotyping data",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Array.CEU",
+          "id": "phv00529898.v1.p1",
+          "description": "Imputed ancestry score of CEU using array genotyping data",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "Array.Imputed_Ancestry",
+          "id": "phv00529897.v1.p1",
+          "description": "Imputed ancestry using array genotyping data. 0.8 was used as the threshold for imputed ancestry designation. Subjects were assigned to just one ancestry group if the ancestry score fell above this threshold for just one group. ADMIXED populations were designated as ancestry groups with an imputed ancestry score greater than 0.2 and less than 0.8. These are named as ADMIXED plus the name of ancestry group if only one group met these criteria.",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Array.YRI",
+          "id": "phv00529899.v1.p1",
+          "description": "Imputed ancestry score of YRI using array genotyping data",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491604.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOAA_Sample_Attributes",
+      "datasetId": "pht011293.v2",
+      "description": "Sample ID, analyte type of sample, body site of sample, histological type of sample, and tumor status of participants with aplastic anemia and involved in the \"Transplant Outcomes in Aplastic Anemia (TOAA): GWAS and WES Data\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00491611.v2.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00491610.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00491609.v2.p1",
+          "description": "Histological type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00491612.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00491608.v2.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOAA_Subject",
+      "datasetId": "pht011290.v2",
+      "description": "Subject ID, sex, and consent group of participants with aplastic anemia and involved in the \"Transplant Outcomes in Aplastic Anemia (TOAA): GWAS and WES Data\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00491600.v2.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00491601.v2.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491599.v2.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOAA_Sample",
+      "datasetId": "pht011291.v2",
+      "description": "Subject and sample IDs of participants with aplastic anemia and involved in the \"Transplant Outcomes in Aplastic Anemia (TOAA): GWAS and WES Data\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00491603.v2.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00491602.v2.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

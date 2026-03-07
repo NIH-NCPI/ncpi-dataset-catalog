@@ -1,0 +1,146 @@
+{
+  "studyId": "phs002576",
+  "studyName": "Longitudinal Immune Dynamics of Mild COVID-19 Define Signatures of Recovery and Persistence",
+  "tables": [
+    {
+      "tableName": "PASC_Longitudinal_IR_Sample_Attributes",
+      "datasetId": "pht012078.v1",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, tumor status, cell or tissue type, days of sample collected after COVID-19 onset, and sequencing center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00498252.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00498251.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": "topmed:lung_ct_imaging_clinical_demographics_metadata",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "DAYS_SYMPTOM_ONSET",
+          "id": "phv00498255.v1.p1",
+          "description": "The days of sample collected after COVID-19 onset",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HASHTAG_SEQUENCE",
+          "id": "phv00498666.v1.p1",
+          "description": "The sequence of hash oligo for sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00498253.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00498250.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PASC_Longitudinal_IR_Subject",
+      "datasetId": "pht012076.v1",
+      "description": "The subject consent data table includes subject IDs, consent group information, and subjects' biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00498246.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00498247.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498245.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PASC_Longitudinal_IR_Sample",
+      "datasetId": "pht012077.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs and sample aliases. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "POOLED_SAMPLE_ID",
+          "id": "phv00498665.v1.p1",
+          "description": "Pooled Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00498249.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00498248.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PASC_Longitudinal_IR_Sample_Attributes_GEO",
+      "datasetId": "pht012079.v1",
+      "description": "The sample GEO mapping data table includes a mapping of sample IDs to publicly available expression data at NCBI GEO.",
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00498258.v1.p1",
+          "description": "GEO Accession",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00498257.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

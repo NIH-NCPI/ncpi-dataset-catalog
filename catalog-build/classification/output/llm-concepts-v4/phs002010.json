@@ -1,0 +1,273 @@
+{
+  "studyId": "phs002010",
+  "studyName": "Nationwide Children's Hospital Genetics of Congenital Heart Disease",
+  "tables": [
+    {
+      "tableName": "Nationwide_Childrens_CHD_Subject_Phenotypes",
+      "datasetId": "pht011143.v1",
+      "description": "This subject phenotypes data table includes subject's age, race, affection status with respect to a congenital heart defect, and specific diagnosis information regarding the subject's diagnosed congenital heart defect.",
+      "variables": [
+        {
+          "name": "AFFLICTION_STATUS",
+          "id": "phv00487862.v1.p1",
+          "description": "Whether the subject has been diagnosed with a congenital heart defect",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00487871.v1.p1",
+          "description": "Age at Enrollement",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHENOTYPE_ID_1",
+          "id": "phv00487863.v1.p1",
+          "description": "First ID for a subject's specific diagnosed congenital heart defect. A phenotype ID will not be provided for unaffected subjects.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHENOTYPE_ID_2",
+          "id": "phv00487864.v1.p1",
+          "description": "Second ID for a subject's specific diagnosed congenital heart defect. A phenotype ID will not be provided for unaffected subjects.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHENOTYPE_ID_3",
+          "id": "phv00487865.v1.p1",
+          "description": "Third ID for a subject's specific diagnosed congenital heart defect. A phenotype ID will not be provided for unaffected subjects.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHENOTYPE_ID_4",
+          "id": "phv00487866.v1.p1",
+          "description": "Fourth ID for a subject's specific diagnosed congenital heart defect. A phenotype ID will not be provided for unaffected subjects.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHENOTYPE_ID_5",
+          "id": "phv00487867.v1.p1",
+          "description": "Fifth ID for a subject's specific diagnosed congenital heart defect. A phenotype ID will not be provided for unaffected subjects.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHENOTYPE_ID_6",
+          "id": "phv00487868.v1.p1",
+          "description": "Sixth ID for a subject's specific diagnosed congenital heart defect. A phenotype ID will not be provided for unaffected subjects.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PHENOTYPE_NOTE",
+          "id": "phv00487869.v1.p1",
+          "description": "Denotes observed phenotype if PHENOTYPE_ID includes 'Other'",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00487870.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00493743.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00487861.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Nationwide_Childrens_CHD_Pedigree",
+      "datasetId": "pht011141.v1",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, sex of subjects, and monozygotic twin IDs.",
+      "variables": [
+        {
+          "name": "FAMILY_ID",
+          "id": "phv00487854.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FATHER",
+          "id": "phv00487856.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MOTHER",
+          "id": "phv00487855.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MZ_TWIN_ID",
+          "id": "phv00487858.v1.p1",
+          "description": "Twin ID for monozygotic twins and multiples. An MZ_TWIN_ID is not provided for dizygotic twins or multiples.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00487857.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00487853.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Nationwide_Childrens_CHD_Sample_Attributes",
+      "datasetId": "pht011144.v1",
+      "description": "This sample attributes table includes the body site where sample was collected, histological type, analyte type, sequencing center, and genotyping center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00487875.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00487873.v1.p1",
+          "description": "Body Site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENOTYPING_CENTER",
+          "id": "phv00487877.v1.p1",
+          "description": "Name of the center which conducted genotyping",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00487874.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00487872.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00487876.v1.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Nationwide_Childrens_CHD_Subject",
+      "datasetId": "pht011140.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00487851.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00487852.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00487850.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Nationwide_Childrens_CHD_Sample",
+      "datasetId": "pht011142.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00487859.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00487860.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "studyId": "phs001110",
+  "studyName": "Kids First: Pediatric Research Project on the Genomic Analysis of Congenital Diaphragmatic Hernia",
+  "tables": [
+    {
+      "tableName": "GMKF_CDH_Subject_Phenotypes",
+      "datasetId": "pht006514.v2",
+      "description": "This subject phenotype data table includes subject's sex, race, ethnicity, isolated birth defect, congenital heart defect, central nervous system defect, gastrointestinal defect, and other congenital malformations (n=3 variables), discharge status, and affection status for congenital diaphragmatic hernia/defects.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00301368.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "affected_status",
+          "id": "phv00420310.v1.p1",
+          "description": "Case control status of the subject for congenital diaphragmatic hernia/defects",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "chd",
+          "id": "phv00301371.v2.p1",
+          "description": "If the subject has a congenital heart defect",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cns",
+          "id": "phv00301372.v2.p1",
+          "description": "If the subject has a central nervous system defect",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "discharge_status",
+          "id": "phv00301377.v2.p1",
+          "description": "Discharge status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ethnicity",
+          "id": "phv00301378.v2.p1",
+          "description": "Ethnicity of participant",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "gi",
+          "id": "phv00301373.v2.p1",
+          "description": "If the subject has a gastrointestinal defect",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "isolated",
+          "id": "phv00301370.v2.p1",
+          "description": "If the subject has a second birth defect",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "other_cong_malf_1",
+          "id": "phv00301374.v2.p1",
+          "description": "Other birth defects (1)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "other_cong_malf_2",
+          "id": "phv00301375.v2.p1",
+          "description": "Other birth defects (2)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "other_cong_malf_3",
+          "id": "phv00301376.v2.p1",
+          "description": "Other birth defects (3)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00301379.v2.p1",
+          "description": "Race of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00301369.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GMKF_CDH_Pedigree",
+      "datasetId": "pht006512.v2",
+      "description": "This pedigree data table contains family relationships in the format of family IDs, subject IDs, father IDs, mother IDs, and subjects's sex.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00301361.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "family_id",
+          "id": "phv00301360.v2.p1",
+          "description": "Family_ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "father",
+          "id": "phv00301362.v2.p1",
+          "description": "Subject_ID of father",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mother",
+          "id": "phv00301363.v2.p1",
+          "description": "Subject_ID of mother",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00301364.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GMKF_CDH_Sample_Attributes",
+      "datasetId": "pht006515.v2",
+      "description": "This sample attributes data table includes body site where sample was collected, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00301380.v2.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "analyte_type",
+          "id": "phv00301382.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "body_site",
+          "id": "phv00301381.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "is_tumor",
+          "id": "phv00301383.v2.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GMKF_CDH_Subject",
+      "datasetId": "pht006511.v4",
+      "description": "This subject consent file includes subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00301358.v4.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00559148.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00301357.v4.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "GMKF_CDH_Sample",
+      "datasetId": "pht006513.v4",
+      "description": "This subject sample mapping file contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00301366.v4.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00301365.v4.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "studyId": "phs001548",
+  "studyName": "TCR Repertoire Sequencing to Evaluate the Diversity of Follicular Helper T Cells in HIV Infected Lymph Nodes",
+  "tables": [
+    {
+      "tableName": "HIV_TFH_Subject_Phenotypes",
+      "datasetId": "pht007542.v2",
+      "description": "Subject ID, age, sex, affection status, antiretroviral therapy status, CD4 count, amount of CD4 cells per ul / Amount of CD8 cells per ul, and HIV viral titer of participants with or without HIV infected lymph nodes and involved in the \"TCR Repertoire Sequencing to Evaluate the Diversity of Follicular Helper T Cells in HIV Infected Lymph Nodes\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00495407.v1.p1",
+          "description": "Case or control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "ART",
+          "id": "phv00355556.v1.p1",
+          "description": "Antiretroviral therapy status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age",
+          "id": "phv00355552.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CD4 T Cells/ul",
+          "id": "phv00355553.v1.p1",
+          "description": "CD4 count",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "CD4:CD8 Ratio",
+          "id": "phv00355554.v1.p1",
+          "description": "Amount of CD4 cells per ul / Amount of CD8 cells per ul",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00355550.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00355551.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pVL",
+          "id": "phv00355555.v1.p1",
+          "description": "HIV viral titer",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HIV_TFH_Sample_Attributes",
+      "datasetId": "pht007543.v2",
+      "description": "Sample ID, analyte type, body site where sample was obtained, histological type of sample, tumor status of sample, and sequencing center of participants with or without HIV infected lymph nodes and involved in the \"TCR Repertoire Sequencing to Evaluate the Diversity of Follicular Helper T Cells in HIV Infected Lymph Nodes\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00355559.v2.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00355558.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00355560.v2.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00355562.v2.p1",
+          "description": "Tumor status of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00355557.v2.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00355561.v2.p1",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HIV_TFH_Subject",
+      "datasetId": "pht007540.v2",
+      "description": "Subject ID, subject source, source subject ID, affection status, and consent group of participants with or without HIV infected lymph nodes and involved in the \"TCR Repertoire Sequencing to Evaluate the Diversity of Follicular Helper T Cells in HIV Infected Lymph Nodes\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00355541.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00495406.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00355543.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00355540.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00355542.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HIV_TFH_Sample",
+      "datasetId": "pht007541.v2",
+      "description": "Subject ID, sample ID, sample source, source sample ID, and sample use variable of participants with or without HIV infected lymph nodes and involved in the \"TCR Repertoire Sequencing to Evaluate the Diversity of Follicular Helper T Cells in HIV Infected Lymph Nodes\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00355546.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00355545.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

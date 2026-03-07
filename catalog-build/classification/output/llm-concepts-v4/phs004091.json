@@ -1,0 +1,234 @@
+{
+  "studyId": "phs004091",
+  "studyName": "An Ultrasensitive Method for Detection of Cell-Free RNA",
+  "tables": [
+    {
+      "tableName": "RARE_Seq_Sample_Attributes",
+      "datasetId": "pht016243.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00568784.v1.p1",
+          "description": "Sample analyte type (RNA/DNA)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Age",
+          "id": "phv00568774.v1.p1",
+          "description": "Age (years) at sample collection date.",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BCT",
+          "id": "phv00568778.v1.p1",
+          "description": "Tube type used for sample collection.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00568783.v1.p1",
+          "description": "Sample collection site",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ColID",
+          "id": "phv00568773.v1.p1",
+          "description": "De-identified label indicating the blood collection (\"C\") date or timepoint (\"TP\") for each unique sample for each subject or patient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DAYS_FROM_DIAGNOSIS",
+          "id": "phv00568786.v1.p1",
+          "description": "Time (days) from cancer diagnosis for subjects used in longitudinal EGFR TKI analysis.",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "Histology",
+          "id": "phv00568775.v1.p1",
+          "description": "Cancer histology at sample collection date.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_histological_type",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00568785.v1.p1",
+          "description": "Sample tumor status (yes/no)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00568772.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Selector",
+          "id": "phv00568780.v1.p1",
+          "description": "Rare Abundance Gene (RAG) panel used for hybrid capture. Two versions of the panel were used in our study: Version 1 (V1) and Version 2 (V2)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Source",
+          "id": "phv00568777.v1.p1",
+          "description": "Institution where sample collected.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Spin",
+          "id": "phv00568779.v1.p1",
+          "description": "Centrifugation speed used to isolate plasma. Sequential centrifugation steps are denoted with \"+\".",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Stage",
+          "id": "phv00568776.v1.p1",
+          "description": "Cancer stage at sample collection date. Stage was determined using American Joint Committee on Cancer (AJCC) 8th edition.",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pg_input",
+          "id": "phv00568782.v1.p1",
+          "description": "Plasma RNA input (pg)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "plasma_conc_ng_mL",
+          "id": "phv00568781.v1.p1",
+          "description": "Plasma cfRNA concentration (ng/mL)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RARE_Seq_Subject_Phenotypes",
+      "datasetId": "pht016242.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "PackYears",
+          "id": "phv00568771.v1.p1",
+          "description": "Subject's smoking status (pack-years)",
+          "concept_id": "ncpi:ever_smoker_baseline_pack_years",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00568767.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00568769.v1.p1",
+          "description": "Subject's sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking",
+          "id": "phv00568770.v1.p1",
+          "description": "Subject smoking history",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "group",
+          "id": "phv00568768.v1.p1",
+          "description": "Subject groups used in this study.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RARE_Seq_Subject",
+      "datasetId": "pht016240.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00568763.v1.p1",
+          "description": "Registered consent groups (Data Use Limitations (DUL)) as determined by submitters' Institutional Review Boards (IRB) or equivalent body.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00568764.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00568762.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "RARE_Seq_Sample",
+      "datasetId": "pht016241.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00568766.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00568765.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

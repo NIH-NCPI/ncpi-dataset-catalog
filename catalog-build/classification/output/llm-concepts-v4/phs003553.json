@@ -1,0 +1,138 @@
+{
+  "studyId": "phs003553",
+  "studyName": "Harnessing the Electronic Health Record to Predict Risk of Cardiovascular Disease: Sangre Por Salud (SPS) Biobank GWAS Data",
+  "tables": [
+    {
+      "tableName": "EHR_SPS_Subject_Phenotypes",
+      "datasetId": "pht014391.v1",
+      "description": "This subject phenotypes dataset includes sex, age, race, and status of subject with respect to cardiovascular disease.",
+      "variables": [
+        {
+          "name": "affection_status",
+          "id": "phv00536779.v1.p1",
+          "description": "Case control status of the subject for cardiovascular disease",
+          "concept_id": "topmed:cad_followup_start_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00536777.v1.p1",
+          "description": "Subject age at consent",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race_name",
+          "id": "phv00536778.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00536776.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00536775.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EHR_SPS_Subject",
+      "datasetId": "pht014372.v1",
+      "description": "This subject consent data table contains subject IDs, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "consent",
+          "id": "phv00536699.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00536700.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00536698.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EHR_SPS_Sample_Attributes",
+      "datasetId": "pht014392.v1",
+      "description": "This sample attributes dataset includes body site and analyte type.",
+      "variables": [
+        {
+          "name": "analyte_type",
+          "id": "phv00536782.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "body_site",
+          "id": "phv00536781.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sample_id",
+          "id": "phv00536780.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "EHR_SPS_Sample",
+      "datasetId": "pht014373.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "sample_id",
+          "id": "phv00536702.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subject_id",
+          "id": "phv00536701.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

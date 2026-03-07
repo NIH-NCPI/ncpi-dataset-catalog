@@ -1,0 +1,146 @@
+{
+  "studyId": "phs001241",
+  "studyName": "Clonal Architectures and Driver Mutations in Metastatic Melanomas",
+  "tables": [
+    {
+      "tableName": "Metastatic_Melanomas_Sample_Attributes",
+      "datasetId": "pht005924.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, histological type of sample, and tumor status of sample obtained from participants with melanoma and involved in the \"Clonal Architectures and Driver Mutations in Metastatic Melanomas\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00273285.v1.p1",
+          "description": "Sample nucleic acid type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00273284.v1.p1",
+          "description": "Body site from which sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00273286.v1.p1",
+          "description": "Histological type of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00273287.v1.p1",
+          "description": "Tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273283.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Metastatic_Melanomas_Subject",
+      "datasetId": "pht005921.v1",
+      "description": "Subject ID, consent group, and affection status of participants with melanoma and involved in the \"Clonal Architectures and Driver Mutations in Metastatic Melanomas\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00273275.v1.p1",
+          "description": "Consent group",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_AFFECTED",
+          "id": "phv00273276.v1.p1",
+          "description": "Has subject been diagnosed with melanoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_cancer_diagnosis_context",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273274.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Metastatic_Melanomas_Sample",
+      "datasetId": "pht005922.v1",
+      "description": "Subject ID, sample ID, and sample use variable obtained from participants with melanoma and involved in the \"Clonal Architectures and Driver Mutations in Metastatic Melanomas\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00273278.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00273279.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273277.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Metastatic_Melanomas_Subject_Phenotypes",
+      "datasetId": "pht005923.v1",
+      "description": "Subject ID, age, and gender of participants with melanoma and involved in the \"Clonal Architectures and Driver Mutations in Metastatic Melanomas\" project.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00273282.v1.p1",
+          "description": "Age of subject in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00273281.v1.p1",
+          "description": "Sex of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00273280.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

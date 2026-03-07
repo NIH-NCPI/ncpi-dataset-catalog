@@ -1,0 +1,146 @@
+{
+  "studyId": "phs000253",
+  "studyName": "Human Liver Cohort (HLC)",
+  "tables": [
+    {
+      "tableName": "HLC_SAGE_Subject_Phenotypes",
+      "datasetId": "pht001214.v1",
+      "description": "Subject ID, age, gender, ethnicity, weight, and body mass index of subjects from the Human Liver Cohort (HLC) study",
+      "variables": [
+        {
+          "name": "affection_status",
+          "id": "phv00525401.v1.p1",
+          "description": "Affection status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00090288.v1.p1",
+          "description": "Age of participant",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "bmi",
+          "id": "phv00090293.v1.p1",
+          "description": "Body mass index of participant",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "gender",
+          "id": "phv00090289.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "inferred_population",
+          "id": "phv00090291.v1.p1",
+          "description": "Inferred ethnicity of participant based on genotype data",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "self_reported_ethnicity",
+          "id": "phv00090290.v1.p1",
+          "description": "Self-reported ethnicity of participant",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "subjid",
+          "id": "phv00090287.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "weight",
+          "id": "phv00090292.v1.p1",
+          "description": "Weight of participant",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HLC_SAGE_Subject",
+      "datasetId": "pht001215.v1",
+      "description": "Subject ID, consent group, and affection status of subjects from the Human Liver Cohort (HLC) study",
+      "variables": [
+        {
+          "name": "consent",
+          "id": "phv00090295.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subjid",
+          "id": "phv00090294.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HLC_SAGE_Sample",
+      "datasetId": "pht001216.v1",
+      "description": "Subject ID, sample ID, and sample source of subjects from the Human Liver Cohort (HLC) study",
+      "variables": [
+        {
+          "name": "sampid",
+          "id": "phv00090298.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "subjid",
+          "id": "phv00090297.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "HLC_SAGE_GEO",
+      "datasetId": "pht012937.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00525403.v1.p1",
+          "description": "GEO accession ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sampid",
+          "id": "phv00525402.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

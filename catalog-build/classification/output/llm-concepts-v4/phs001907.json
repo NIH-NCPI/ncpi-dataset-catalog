@@ -1,0 +1,147 @@
+{
+  "studyId": "phs001907",
+  "studyName": "CPTAC: Microscaled Proteogenomic Methods for Precision Oncology",
+  "tables": [
+    {
+      "tableName": "CPTAC_MiProt_Sample_Attributes",
+      "datasetId": "pht009583.v1",
+      "description": "Sample ID, analyte type, estrogen receptor status, method of testing HER2 positivity, progesterone receptor status, collection timepoint, drug regimen including first and follow-up drugs, tumor status of sample, and pathological response in breast and nodes of participants with or without breast cancer and involved in the \"CPTAC: Microscaled Proteogenomic Methods for Precision Oncology\" project.",
+      "variables": [
+        {
+          "name": "Analyte",
+          "id": "phv00420493.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Clinic_ER_Status",
+          "id": "phv00420497.v1.p1",
+          "description": "Clinical estrogen receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_estrogen_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Clinic_Method_of_HER2-positive_testing.*",
+          "id": "phv00420496.v1.p1",
+          "description": "Clinical method of testing HER2 positivity",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Clinic_PgR_Status",
+          "id": "phv00420498.v1.p1",
+          "description": "Clinical progesterone receptor status",
+          "concept_id": "ncpi:cancer_diagnosis_biomarkers_molecular_progesterone_receptor_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Collection_timepoint",
+          "id": "phv00420495.v1.p1",
+          "description": "Collection timepoint for this sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Drug_Regimen_(first_drug_regimen_-_follow-up_drug_regimen)",
+          "id": "phv00420499.v1.p1",
+          "description": "Drug regimen including first and follow-up drugs",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420492.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "is tumor",
+          "id": "phv00420494.v1.p1",
+          "description": "Tumor status of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ypCR_in_breast_and_nodes",
+          "id": "phv00420500.v1.p1",
+          "description": "Complete pathological response in breast and nodes",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_pathological_response",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CPTAC_MiProt_Subject",
+      "datasetId": "pht009581.v1",
+      "description": "Subject ID, subject source, source subject ID, and consent group of participants with or without breast cancer and involved in the \"CPTAC: Microscaled Proteogenomic Methods for Precision Oncology\" project.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00420487.v1.p1",
+          "description": "Consent",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00420489.v1.p1",
+          "description": "Source subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420486.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00420488.v1.p1",
+          "description": "Subject source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CPTAC_MiProt_Sample",
+      "datasetId": "pht009582.v1",
+      "description": "Subject ID and sample ID of participants with or without breast cancer and involved in the \"CPTAC: Microscaled Proteogenomic Methods for Precision Oncology\" project.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420491.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420490.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

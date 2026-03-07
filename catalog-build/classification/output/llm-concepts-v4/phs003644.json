@@ -1,0 +1,330 @@
+{
+  "studyId": "phs003644",
+  "studyName": "Left Atrial Cardiomyocyte Transcriptomic Analysis of Postoperative Atrial Fibrillation",
+  "tables": [
+    {
+      "tableName": "Postoperative_AF_Subject_Phenotypes",
+      "datasetId": "pht014522.v1",
+      "description": "This subject phenotype table contains subject ID, height, weight, body mass index, race and ethnicity, preoperative history of atrial fibrillation (AF), disease history (n=4 variables; hypertension, diabetes mellitus, congestive heart failure, and chronic obstructive pulmonary disease), duration of the PR interval on EKG or QTC (bezet) on EKG, left ventricular ejection fraction, left atrial volume index, New York Heart Association (NYHA) Functional Classification of congestive heart failure, preoperative of beta blocker use, preoperative of angiotensin converting enzyme Inhibitor use, preoperative of angiotensin receptor blocker Use, intraoperative tricuspid valve repair, intraoperative coronary artery bypass grafting, robotic mitral valve repair, cardiopulmonary bypass time, aortic cross clamp time, length of stay, epinephrine dose at intensive care unit admission, presence of introtropes administered at intensive care unit admission, and new onset postoperative AF.",
+      "variables": [
+        {
+          "name": "ACE",
+          "id": "phv00537620.v1.p1",
+          "description": "Preoperative of Angiotensin Converting Enzyme Inhibitor Use",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_ace_inhibitors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ARB",
+          "id": "phv00537621.v1.p1",
+          "description": "Preoperative of Angiotensin Receptor Blocker Use",
+          "concept_id": "ncpi:concomitant_medication_antihypertensive_medications_angiotensin_receptor_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BB",
+          "id": "phv00537619.v1.p1",
+          "description": "Preoperative of Beta Blocker Use",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_beta_blockers",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI",
+          "id": "phv00537607.v1.p1",
+          "description": "Body mass index",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CABG",
+          "id": "phv00537623.v1.p1",
+          "description": "Intraoperative Coronary Artery Bypass Grafting",
+          "concept_id": "topmed:cabg_incident",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CHF",
+          "id": "phv00537616.v1.p1",
+          "description": "History of Congestive Heart Failure",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_heart_failure",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "COPD",
+          "id": "phv00537618.v1.p1",
+          "description": "History of Chronic Obstructive Pulmonary Disease",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_copd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CPBtime",
+          "id": "phv00537625.v1.p1",
+          "description": "Cardiopulmonary bypass time in minutes",
+          "concept_id": "ncpi:surgical_procedure_surgical_timing",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DM",
+          "id": "phv00537611.v1.p1",
+          "description": "History of Diabetes Mellitus",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EpiDose",
+          "id": "phv00537628.v1.p1",
+          "description": "Epinephrine dose at intensive care unit admission in micrograms per kilogram per minute",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_inotropes_vasopressors",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HTN",
+          "id": "phv00537610.v1.p1",
+          "description": "History of Hypertension",
+          "concept_id": "ncpi:antihypertensive_meds_hypertension_treatment_status",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "Height",
+          "id": "phv00537605.v1.p1",
+          "description": "Height in centimeters",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Inotropes",
+          "id": "phv00537629.v1.p1",
+          "description": "Presence of introtropes administered at intensive care unit admission",
+          "concept_id": "ncpi:concomitant_medication_cardiac_medications_inotropes_vasopressors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LA_index",
+          "id": "phv00537615.v1.p1",
+          "description": "Left atrial volume index",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_cardiovascular_procedures",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "LOS",
+          "id": "phv00537627.v1.p1",
+          "description": "Length of stay in days",
+          "concept_id": "ncpi:hospitalization_length_of_stay",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LVEF",
+          "id": "phv00537614.v1.p1",
+          "description": "Left ventricular ejection fraction",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_cardiovascular_symptoms",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "NYHA_stage",
+          "id": "phv00537617.v1.p1",
+          "description": "New York Heart Association Functional Classification of Congestive Heart Failure",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_heart_failure",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "POAF",
+          "id": "phv00537630.v1.p1",
+          "description": "New onset postoperative atrial fibrillation",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "PR",
+          "id": "phv00537612.v1.p1",
+          "description": "Duration of the PR interval on EKG",
+          "concept_id": "ncpi:ecg_pr_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PreopAF",
+          "id": "phv00537609.v1.p1",
+          "description": "Preoperative history of atrial fibrillation",
+          "concept_id": null,
+          "confidence": "low",
+          "source": "rejected"
+        },
+        {
+          "name": "QTc",
+          "id": "phv00537613.v1.p1",
+          "description": "Duration of QTc (Bezet) on EKG",
+          "concept_id": "ncpi:ecg_qt_interval",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Race_and_Ethnicity",
+          "id": "phv00537608.v1.p1",
+          "description": "Self Reported Race and Ethnicity",
+          "concept_id": "topmed:race_us",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Robotic",
+          "id": "phv00537624.v1.p1",
+          "description": "Robotic mitral valve repair",
+          "concept_id": "ncpi:surgical_procedure_cardiac_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00537604.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00537603.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TVR",
+          "id": "phv00537622.v1.p1",
+          "description": "Intraoperative Tricuspid Valve Repair",
+          "concept_id": "ncpi:surgical_procedure_cardiac_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Weight",
+          "id": "phv00537606.v1.p1",
+          "description": "Weight in kilograms",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "XCtime",
+          "id": "phv00537626.v1.p1",
+          "description": "Aortic cross clamp time in minutes",
+          "concept_id": "ncpi:surgical_procedure_surgical_timing",
+          "confidence": "medium",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Postoperative_AF_Sample_Attributes",
+      "datasetId": "pht014523.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00537633.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00537632.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00537634.v1.p1",
+          "description": "The tumor status of the sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00537631.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Postoperative_AF_Subject",
+      "datasetId": "pht014520.v1",
+      "description": "The subject consent file includes subject ID, consent information, and biological sex.",
+      "variables": [
+        {
+          "name": "Consent",
+          "id": "phv00537599.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00537600.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00537598.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Postoperative_AF_Sample",
+      "datasetId": "pht014521.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00537602.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Subject_ID",
+          "id": "phv00537601.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

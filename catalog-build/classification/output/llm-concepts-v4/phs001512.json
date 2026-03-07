@@ -1,0 +1,178 @@
+{
+  "studyId": "phs001512",
+  "studyName": "Platform for Assessing Immune Response Signatures in Healthy Human Subjects",
+  "tables": [
+    {
+      "tableName": "IR_Signatures_Sample_Attributes",
+      "datasetId": "pht007668.v1",
+      "description": "This sample attributes table includes run name, body site, analyte type, histological type, sample order and condition, and tumor status.",
+      "variables": [
+        {
+          "name": "Analyte Type",
+          "id": "phv00363273.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Body Site",
+          "id": "phv00363269.v1.p1",
+          "description": "Body site",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Histol. Type",
+          "id": "phv00363270.v1.p1",
+          "description": "Histological type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Is Tumor",
+          "id": "phv00363274.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RUN_NAME",
+          "id": "phv00363268.v1.p1",
+          "description": "Name of sample assigned during sequencing run",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00363267.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample Condition",
+          "id": "phv00363272.v1.p1",
+          "description": "Sample condition",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sample Order",
+          "id": "phv00363271.v1.p1",
+          "description": "Sample order",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IR_Signatures_Sample",
+      "datasetId": "pht007666.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes run name, sample source, and sample use.",
+      "variables": [
+        {
+          "name": "RUN_NAME",
+          "id": "phv00363261.v1.p1",
+          "description": "Name of sample assigned during sequencing run",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00363260.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_SOURCE",
+          "id": "phv00363262.v1.p1",
+          "description": "Source repository where samples originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00363263.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00363259.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IR_Signatures_Subject_Phenotypes",
+      "datasetId": "pht007667.v1",
+      "description": "This subject phenotype data table includes subject's sex and age.",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00363264.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age",
+          "id": "phv00363265.v1.p1",
+          "description": "Subject age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00363266.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "IR_Signatures_Subject",
+      "datasetId": "pht007665.v1",
+      "description": "The subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "Consent",
+          "id": "phv00363258.v1.p1",
+          "description": "Consent group for GDS",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00363257.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "studyId": "phs000889",
+  "studyName": "NCI Non-Hodgkin Lymphoma GWAS: DLBCL",
+  "tables": [
+    {
+      "tableName": "NHL_DLBCL_Cases_Subject_Phenotypes",
+      "datasetId": "pht005239.v1",
+      "description": "Subject ID, affection status, gender, study design, and age of participants with or without non-Hodgkin lymphoma and involved in the \"National Cancer Institute (NCI) Non-Hodgkin Lymphoma Genome-wide Association Study (GWAS): Diffuse Large B-Cell Lymphoma (DLBCL)\" project.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00258607.v1.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_IN_GROUP",
+          "id": "phv00258610.v1.p1",
+          "description": "Subject age group",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00258608.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "STUDY_DESIGN",
+          "id": "phv00258609.v1.p1",
+          "description": "Study design",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258606.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "NHL_DLBCL_Cases_Sample_Attributes",
+      "datasetId": "pht005240.v1",
+      "description": "Sample ID, histological type, body site where sample was obtained, analyte type, and tumor status of participants with or without non-Hodgkin lymphoma and involved in the \"National Cancer Institute (NCI) Non-Hodgkin Lymphoma Genome-wide Association Study (GWAS): Diffuse Large B-Cell Lymphoma (DLBCL)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00258614.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00258613.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00258612.v1.p1",
+          "description": "Histological type",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00258615.v1.p1",
+          "description": "Tumor status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_general_cancer_diagnosis_tumor_sample_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258611.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2162 @@
+{
+  "studyId": "phs001949",
+  "studyName": "PheWAS of phenotypes associated with HLA variants",
+  "tables": [
+    {
+      "tableName": "P3DT_Subject_Phenotypes",
+      "datasetId": "pht009706.v1",
+      "description": "This subject phenotypes table informs of subject's sex, race, age at disease onset, predicted race, and presence or absence of phenotypes examined (see https://phewascatalog.org/ for phenotype code definitions).",
+      "variables": [
+        {
+          "name": "PC1",
+          "id": "phv00421308.v1.p1",
+          "description": "Principal Comp. 1 (race)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_1",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PC2",
+          "id": "phv00421309.v1.p1",
+          "description": "Principal Comp. 2 (race)",
+          "concept_id": "ncpi:genetic_principal_components_genetic_principal_components_generic_genetic_pcs_genetic_pc_2",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00421307.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00421306.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00421304.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_alt",
+          "id": "phv00421305.v1.p1",
+          "description": "Disease onset Subject Age",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_008",
+          "id": "phv00421310.v1.p1",
+          "description": "Intestinal infection",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_gastrointestinal_infections",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_008.5",
+          "id": "phv00421311.v1.p1",
+          "description": "Bacterial enteritis",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_gastrointestinal_infections",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_008.52",
+          "id": "phv00421312.v1.p1",
+          "description": "Intestinal infection due to C. difficile",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_gastrointestinal_infections",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_010",
+          "id": "phv00421313.v1.p1",
+          "description": "Tuberculosis",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_tuberculosis_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_053",
+          "id": "phv00421314.v1.p1",
+          "description": "Herpes zoster",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_herpes_infections",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_070.4",
+          "id": "phv00421315.v1.p1",
+          "description": "Chronic hepatitis",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_071",
+          "id": "phv00421316.v1.p1",
+          "description": "Human immunodeficiency virus",
+          "concept_id": "topmed:disease_diagnosis_infectious_diseases",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_080",
+          "id": "phv00421317.v1.p1",
+          "description": "Postoperative infection",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_surgical_wound_infections",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_145",
+          "id": "phv00421318.v1.p1",
+          "description": "Cancer of mouth",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_145.2",
+          "id": "phv00421319.v1.p1",
+          "description": "Cancer of tongue",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_145.3",
+          "id": "phv00421320.v1.p1",
+          "description": "Cancer of major salivary glands",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_145.5",
+          "id": "phv00421321.v1.p1",
+          "description": "Cancer of the mouth floor",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_149",
+          "id": "phv00421322.v1.p1",
+          "description": "Cancer of larynx, pharynx, nasal cavities",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_149.1",
+          "id": "phv00421323.v1.p1",
+          "description": "Cancer of oropharynx",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_149.2",
+          "id": "phv00421324.v1.p1",
+          "description": "Cancer of nasopharynx",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_149.4",
+          "id": "phv00421325.v1.p1",
+          "description": "Cancer of larynx",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_149.5",
+          "id": "phv00421326.v1.p1",
+          "description": "Hx of malignant neoplasm of oral cavity and pharynx",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_head_neck_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_159.4",
+          "id": "phv00421327.v1.p1",
+          "description": "Malignant neoplasm of retroperitoneum and peritoneum",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_peritoneum_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_172.1",
+          "id": "phv00421328.v1.p1",
+          "description": "Melanomas of skin, dx or hx",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_skin_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_172.11",
+          "id": "phv00421329.v1.p1",
+          "description": "Melanomas of skin",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_skin_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_174",
+          "id": "phv00421330.v1.p1",
+          "description": "Breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_breast_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_174.1",
+          "id": "phv00421331.v1.p1",
+          "description": "Breast cancer",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_breast_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_174.11",
+          "id": "phv00421332.v1.p1",
+          "description": "Malignant neoplasm of female breast",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_breast_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_175",
+          "id": "phv00421333.v1.p1",
+          "description": "Acquired absence of breast",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_180",
+          "id": "phv00421334.v1.p1",
+          "description": "Cervical cancer and dysplasia",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_gynecologic_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_180.3",
+          "id": "phv00421335.v1.p1",
+          "description": "Cervical intraepithelial neoplasia [CIN]",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_gynecologic_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_184.2",
+          "id": "phv00421336.v1.p1",
+          "description": "Cancer of other female genital organs (excluding uterus and ovary)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_gynecologic_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_189",
+          "id": "phv00421337.v1.p1",
+          "description": "Cancer of urinary organs (incl. kidney and bladder)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_kidney_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_189.11",
+          "id": "phv00421338.v1.p1",
+          "description": "Malignant neoplasm of kidney, except pelvis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_kidney_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_190",
+          "id": "phv00421339.v1.p1",
+          "description": "Cancer of eye",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_eye_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_191",
+          "id": "phv00421340.v1.p1",
+          "description": "Manlignant and unknown neoplasms of brain and nervous system",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_brain_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_191.1",
+          "id": "phv00421341.v1.p1",
+          "description": "Cancer of brain and nervous system",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_brain_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_196",
+          "id": "phv00421342.v1.p1",
+          "description": "Radiotherapy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_198.3",
+          "id": "phv00421343.v1.p1",
+          "description": "Secondary malignant neoplasm of digestive systems",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_metastatic_sites",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_198.4",
+          "id": "phv00421344.v1.p1",
+          "description": "Secondary malignant neoplasm of liver",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_liver_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_198.6",
+          "id": "phv00421345.v1.p1",
+          "description": "Secondary malignancy of bone",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_bone_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_202.21",
+          "id": "phv00421346.v1.p1",
+          "description": "Nodular lymphoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_202.23",
+          "id": "phv00421347.v1.p1",
+          "description": "Lymphosarcoma",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_blood_cancer",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_229",
+          "id": "phv00421348.v1.p1",
+          "description": "Benign neoplasm of unspecified sites",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_241",
+          "id": "phv00421349.v1.p1",
+          "description": "Nontoxic nodular goiter",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_241.2",
+          "id": "phv00421350.v1.p1",
+          "description": "Nontoxic multinodular goiter",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_242",
+          "id": "phv00421351.v1.p1",
+          "description": "Thyrotoxicosis with or without goiter",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_242.1",
+          "id": "phv00421352.v1.p1",
+          "description": "Graves' disease",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_hyperthyroidism_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_242.3",
+          "id": "phv00421353.v1.p1",
+          "description": "Exophthalmos",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_244",
+          "id": "phv00421354.v1.p1",
+          "description": "Hypothyroidism",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_hypothyroidism_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_244.4",
+          "id": "phv00421355.v1.p1",
+          "description": "Hypothyroidism NOS",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_hypothyroidism_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_245",
+          "id": "phv00421356.v1.p1",
+          "description": "Thyroiditis",
+          "concept_id": "ncpi:disease_diagnosis_thyroid_disease_other_thyroid_conditions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250",
+          "id": "phv00421357.v1.p1",
+          "description": "Diabetes mellitus",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetes_status_general_diabetes_status_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.1",
+          "id": "phv00421358.v1.p1",
+          "description": "Type 1 diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type1_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.11",
+          "id": "phv00421359.v1.p1",
+          "description": "Type 1 diabetes with ketoacidosis",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type1_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.12",
+          "id": "phv00421360.v1.p1",
+          "description": "Type 1 diabetes with renal manifestations",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type1_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.13",
+          "id": "phv00421361.v1.p1",
+          "description": "Type 1 diabetes with ophthalmic manifestations",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type1_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.14",
+          "id": "phv00421362.v1.p1",
+          "description": "Type 1 diabetes with neurological manifestations",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type1_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.2",
+          "id": "phv00421363.v1.p1",
+          "description": "Type 2 diabetes",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type2_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.22",
+          "id": "phv00421364.v1.p1",
+          "description": "Type 2 diabetes with renal manifestations",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type2_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.23",
+          "id": "phv00421365.v1.p1",
+          "description": "Type 2 diabetes with ophthalmic manifestations",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type2_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.24",
+          "id": "phv00421366.v1.p1",
+          "description": "Type 2 diabetes with neurological manifestations",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_type2_diabetes",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.3",
+          "id": "phv00421367.v1.p1",
+          "description": "Insulin pump user",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.42",
+          "id": "phv00421368.v1.p1",
+          "description": "Other abnormal glucose",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.6",
+          "id": "phv00421369.v1.p1",
+          "description": "Polyneuropathy in diabetes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_250.7",
+          "id": "phv00421370.v1.p1",
+          "description": "Diabetic retinopathy",
+          "concept_id": "ncpi:disease_diagnosis_diabetes_metabolic_disorders_diabetes_status_diabetic_retinopathy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_251.1",
+          "id": "phv00421371.v1.p1",
+          "description": "Hypoglycemia",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_255.3",
+          "id": "phv00421372.v1.p1",
+          "description": "Adrenogenital disorders",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_259",
+          "id": "phv00421373.v1.p1",
+          "description": "Other endocrine disorders",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_270",
+          "id": "phv00421374.v1.p1",
+          "description": "Disorders of protein plasma/amino-acid transport and metabolism",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_270.3",
+          "id": "phv00421375.v1.p1",
+          "description": "Disorders of plasma protein metabolism",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_270.33",
+          "id": "phv00421376.v1.p1",
+          "description": "Amyloidosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_272",
+          "id": "phv00421377.v1.p1",
+          "description": "Disorders of lipoid metabolism",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_lipid_metabolic_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_272.1",
+          "id": "phv00421378.v1.p1",
+          "description": "Hyperlipidemia",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_lipid_metabolic_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_272.11",
+          "id": "phv00421379.v1.p1",
+          "description": "Hypercholesterolemia",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_lipid_metabolic_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_272.13",
+          "id": "phv00421380.v1.p1",
+          "description": "Mixed hyperlipidemia",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_lipid_metabolic_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_274.11",
+          "id": "phv00421381.v1.p1",
+          "description": "Gouty arthropathy",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_gout_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_275.1",
+          "id": "phv00421382.v1.p1",
+          "description": "Disorders of iron metabolism",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_275.5",
+          "id": "phv00421383.v1.p1",
+          "description": "Disorders of calcium/phosphorus metabolism",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_276.6",
+          "id": "phv00421384.v1.p1",
+          "description": "Fluid overload",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_280",
+          "id": "phv00421385.v1.p1",
+          "description": "Iron deficiency anemias",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_anemia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_286.3",
+          "id": "phv00421386.v1.p1",
+          "description": "Coagulation defects complicating pregnancy or postpartum",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_286.4",
+          "id": "phv00421387.v1.p1",
+          "description": "Acquired coagulation factor deficiency",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_287",
+          "id": "phv00421388.v1.p1",
+          "description": "Purpura and other hemorrhagic conditions",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_bleeding_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_287.2",
+          "id": "phv00421389.v1.p1",
+          "description": "Allergic purpura",
+          "concept_id": "ncpi:disease_diagnosis_hematologic_disorders_bleeding_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_289",
+          "id": "phv00421390.v1.p1",
+          "description": "Other diseases of blood and blood-forming organs",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_291.4",
+          "id": "phv00421391.v1.p1",
+          "description": "Specific nonpsychotic mental disorders due to brain damage",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_292",
+          "id": "phv00421392.v1.p1",
+          "description": "Neurological disorders",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_neurological_phenotypes_general",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_292.2",
+          "id": "phv00421393.v1.p1",
+          "description": "Mild cognitive impairment",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_neurological_phenotypes_general",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_300",
+          "id": "phv00421394.v1.p1",
+          "description": "Anxiety disorders",
+          "concept_id": "ncpi:depression_anxiety_screening_depression_diagnosis_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_300.1",
+          "id": "phv00421395.v1.p1",
+          "description": "Anxiety disorder",
+          "concept_id": "ncpi:depression_anxiety_screening_depression_diagnosis_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_301.2",
+          "id": "phv00421396.v1.p1",
+          "description": "Antisocial/borderline personality disorder",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_306.9",
+          "id": "phv00421397.v1.p1",
+          "description": "Tension headache",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_316",
+          "id": "phv00421398.v1.p1",
+          "description": "Substance addiction and disorders",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_323",
+          "id": "phv00421399.v1.p1",
+          "description": "Encephalitis",
+          "concept_id": "ncpi:disease_diagnosis_infectious_diseases_meningitis_encephalitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_327.32",
+          "id": "phv00421400.v1.p1",
+          "description": "Obstructive sleep apnea",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_sleep_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_327.7",
+          "id": "phv00421401.v1.p1",
+          "description": "Sleep related movement disorders",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_327.71",
+          "id": "phv00421402.v1.p1",
+          "description": "Restless legs syndrome",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_335",
+          "id": "phv00421403.v1.p1",
+          "description": "Multiple sclerosis",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_multiple_sclerosis_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_341",
+          "id": "phv00421404.v1.p1",
+          "description": "Other demyelinating diseases of central nervous system",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_multiple_sclerosis_diagnosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_345.12",
+          "id": "phv00421405.v1.p1",
+          "description": "Partial epilepsy",
+          "concept_id": "topmed:disease_diagnosis_seizure_epilepsy_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_350.3",
+          "id": "phv00421406.v1.p1",
+          "description": "Lack of coordination",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_ataxia_coordination_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_352",
+          "id": "phv00421407.v1.p1",
+          "description": "Disorders of other cranial nerves",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_cranial_nerve_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_352.1",
+          "id": "phv00421408.v1.p1",
+          "description": "Trigeminal nerve disorders",
+          "concept_id": "ncpi:disease_diagnosis_neurological_movement_disorders_cranial_nerve_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_360",
+          "id": "phv00421409.v1.p1",
+          "description": "Disorders of the globe",
+          "concept_id": "topmed:ophthalmology",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_360.2",
+          "id": "phv00421410.v1.p1",
+          "description": "Progressive myopia",
+          "concept_id": "topmed:ophthalmology_refractive_error",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_362.1",
+          "id": "phv00421411.v1.p1",
+          "description": "Retinopathy of prematurity",
+          "concept_id": "topmed:ophthalmology_retinopathy_prematurity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_362.5",
+          "id": "phv00421412.v1.p1",
+          "description": "Toxic maculopathy of retina",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_362.8",
+          "id": "phv00421413.v1.p1",
+          "description": "Retinal hemorrhage/ischemia",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "rejected"
+        },
+        {
+          "name": "pheno_366.1",
+          "id": "phv00421414.v1.p1",
+          "description": "Nonsenile Cataract",
+          "concept_id": "ncpi:ophthalmology_cataract_lens_cataract_diagnosis_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_367.9",
+          "id": "phv00421415.v1.p1",
+          "description": "Blindness and low vision",
+          "concept_id": "ncpi:ophthalmology_visual_acuity_blindness",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_368.2",
+          "id": "phv00421416.v1.p1",
+          "description": "Diplopia and disorders of binocular vision",
+          "concept_id": "topmed:ophthalmology_color_vision_visual_fields",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_368.4",
+          "id": "phv00421417.v1.p1",
+          "description": "Visual field defects",
+          "concept_id": "topmed:ophthalmology_color_vision_visual_fields",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_371.1",
+          "id": "phv00421418.v1.p1",
+          "description": "Uveitis, noninfectious or NOS",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "pheno_377.3",
+          "id": "phv00421419.v1.p1",
+          "description": "Optic neuritis/neuropathy",
+          "concept_id": "topmed:ophthalmology_neurological_movement",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_394.4",
+          "id": "phv00421420.v1.p1",
+          "description": "Acute rheumatic heart disease",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_rheumatic_heart_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_395.3",
+          "id": "phv00421421.v1.p1",
+          "description": "Nonrheumatic tricuspid valve disorders",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_valvular_heart_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_401.2",
+          "id": "phv00421422.v1.p1",
+          "description": "Hypertensive heart and/or renal disease",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypertension_hypertension_diagnosis_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_401.22",
+          "id": "phv00421423.v1.p1",
+          "description": "Hypertensive chronic kidney disease",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_chronic_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_411.2",
+          "id": "phv00421424.v1.p1",
+          "description": "Myocardial infarction",
+          "concept_id": "ncpi:mi_incident_cardiovascular_categories",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_411.8",
+          "id": "phv00421425.v1.p1",
+          "description": "Other chronic ischemic heart disease, unspecified",
+          "concept_id": "topmed:disease_diagnosis_cardiovascular_related_conditions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_414",
+          "id": "phv00421426.v1.p1",
+          "description": "Other forms of chronic heart disease",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_general_heart_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_420",
+          "id": "phv00421427.v1.p1",
+          "description": "Carditis",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_myocarditis_pericarditis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_420.2",
+          "id": "phv00421428.v1.p1",
+          "description": "Pericarditis",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_myocarditis_pericarditis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_427.22",
+          "id": "phv00421429.v1.p1",
+          "description": "Atrial flutter",
+          "concept_id": "ncpi:ecg_atrial_flutter",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_427.41",
+          "id": "phv00421430.v1.p1",
+          "description": "Ventricular fibrillation and flutter",
+          "concept_id": "ncpi:ecg_arrhythmia",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_427.5",
+          "id": "phv00421431.v1.p1",
+          "description": "Arrhythmia (cardiac) NOS",
+          "concept_id": "ncpi:ecg_arrhythmia",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_427.61",
+          "id": "phv00421432.v1.p1",
+          "description": "Supraventricular premature beats",
+          "concept_id": "ncpi:ecg_premature_beats_supraventricular_premature_beats_phenotype",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_427.7",
+          "id": "phv00421433.v1.p1",
+          "description": "Tachycardia NOS",
+          "concept_id": "ncpi:ecg_tachycardia",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_428.1",
+          "id": "phv00421434.v1.p1",
+          "description": "Congestive heart failure (CHF) NOS",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_429.2",
+          "id": "phv00421435.v1.p1",
+          "description": "Abnormal function study of cardiovascular system",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "pheno_430.1",
+          "id": "phv00421436.v1.p1",
+          "description": "Subarachnoid hemorrhage",
+          "concept_id": "topmed:disease_diagnosis_cardiovascular_related_conditions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_433.1",
+          "id": "phv00421437.v1.p1",
+          "description": "Occlusion and stenosis of precerebral arteries",
+          "concept_id": "topmed:disease_diagnosis_cardiovascular_related_conditions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_433.3",
+          "id": "phv00421438.v1.p1",
+          "description": "Cerebral ischemia",
+          "concept_id": "topmed:disease_diagnosis_cardiovascular_related_conditions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_433.8",
+          "id": "phv00421439.v1.p1",
+          "description": "Late effects of cerebrovascular disease",
+          "concept_id": "topmed:disease_diagnosis_cardiovascular_related_conditions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_440.2",
+          "id": "phv00421440.v1.p1",
+          "description": "Atherosclerosis of the extremities",
+          "concept_id": "ncpi:pad_incident_atherosclerosis_extremities",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_444.1",
+          "id": "phv00421441.v1.p1",
+          "description": "Arterial embolism and thrombosis of lower extremity artery",
+          "concept_id": "ncpi:pad_incident_atherosclerosis_extremities",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_446.4",
+          "id": "phv00421442.v1.p1",
+          "description": "Wegener's granulomatosis",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_specific_autoimmune_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_446.6",
+          "id": "phv00421443.v1.p1",
+          "description": "Polyarteritis nodosa",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_specific_autoimmune_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_458",
+          "id": "phv00421444.v1.p1",
+          "description": "Hypotension",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypotension",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_458.1",
+          "id": "phv00421445.v1.p1",
+          "description": "Orthostatic hypotension",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypotension",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_458.9",
+          "id": "phv00421446.v1.p1",
+          "description": "Hypotension NOS",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_hypotension",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_459",
+          "id": "phv00421447.v1.p1",
+          "description": "Other disorders of circulatory system",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_other_circulatory_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_459.9",
+          "id": "phv00421448.v1.p1",
+          "description": "Circulatory disease NEC",
+          "concept_id": "ncpi:disease_diagnosis_cardiovascular_related_conditions_other_circulatory_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_465",
+          "id": "phv00421449.v1.p1",
+          "description": "Acute upper respiratory infections of multiple or unspecified sites",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_chest_illness_infections",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_465.2",
+          "id": "phv00421450.v1.p1",
+          "description": "Acute pharyngitis",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_chest_illness_infections",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_476",
+          "id": "phv00421451.v1.p1",
+          "description": "Allergic rhinitis",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_hay_fever_allergic_rhinitis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_479",
+          "id": "phv00421452.v1.p1",
+          "description": "Other upper respiratory disease",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_chest_illness_infections",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_480",
+          "id": "phv00421453.v1.p1",
+          "description": "Pneumonia",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_pneumonia",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_483",
+          "id": "phv00421454.v1.p1",
+          "description": "Acute bronchitis and bronchiolitis",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_chest_illness_infections",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_501",
+          "id": "phv00421455.v1.p1",
+          "description": "Pneumonitis due to inhalation of food or vomitus",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_specialized_conditions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_506",
+          "id": "phv00421456.v1.p1",
+          "description": "Empyema and pneumothorax",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_pneumothorax_pleural",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_507",
+          "id": "phv00421457.v1.p1",
+          "description": "Pleurisy; pleural effusion",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_pneumothorax_pleural",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_513.31",
+          "id": "phv00421458.v1.p1",
+          "description": "Apnea",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_sleep_apnea",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_521",
+          "id": "phv00421459.v1.p1",
+          "description": "Diseases of hard tissues of teeth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_521.1",
+          "id": "phv00421460.v1.p1",
+          "description": "Dental caries",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_dental_oral_health",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_523.3",
+          "id": "phv00421461.v1.p1",
+          "description": "Periodontitis (acute or chronic)",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_dental_oral_health",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_523.31",
+          "id": "phv00421462.v1.p1",
+          "description": "Acute periodontitis",
+          "concept_id": "ncpi:disease_diagnosis_other_chronic_conditions_dental_oral_health",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_525.1",
+          "id": "phv00421463.v1.p1",
+          "description": "Loss of teeth or edentulism",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_527.2",
+          "id": "phv00421464.v1.p1",
+          "description": "Sialoadenitis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_530.2",
+          "id": "phv00421465.v1.p1",
+          "description": "Esophageal bleeding (varices/hemorrhage)",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_gastrointestinal_bleeding",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_530.5",
+          "id": "phv00421466.v1.p1",
+          "description": "Disorders of esophageal motility",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_esophageal_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_530.6",
+          "id": "phv00421467.v1.p1",
+          "description": "Diverticulum of esophagus, acquired",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_esophageal_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_530.9",
+          "id": "phv00421468.v1.p1",
+          "description": "Heartburn",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_gastroesophageal_reflux_disease",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_532",
+          "id": "phv00421469.v1.p1",
+          "description": "Dysphagia",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_dysphagia_swallowing",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_536.3",
+          "id": "phv00421470.v1.p1",
+          "description": "Gastroparesis",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_gastroparesis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_555",
+          "id": "phv00421471.v1.p1",
+          "description": "Inflammatory bowel disease and other gastroenteritis and colitis",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_general_gi_symptoms",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_555.1",
+          "id": "phv00421472.v1.p1",
+          "description": "Regional enteritis",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_crohns_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_555.2",
+          "id": "phv00421473.v1.p1",
+          "description": "Ulcerative colitis",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_ulcerative_colitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_555.21",
+          "id": "phv00421474.v1.p1",
+          "description": "Ulcerative colitis (chronic)",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_ulcerative_colitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_556",
+          "id": "phv00421475.v1.p1",
+          "description": "Ulceration of the lower GI tract",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_general_gi_symptoms",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_557.1",
+          "id": "phv00421476.v1.p1",
+          "description": "Celiac disease",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_celiac_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_559",
+          "id": "phv00421477.v1.p1",
+          "description": "Ileostomy status",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_ileostomy",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_561",
+          "id": "phv00421478.v1.p1",
+          "description": "Symptoms involving digestive system",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_general_gi_symptoms",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_565",
+          "id": "phv00421479.v1.p1",
+          "description": "Anal and rectal conditions",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_hemorrhoids",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_571",
+          "id": "phv00421480.v1.p1",
+          "description": "Chronic liver disease and cirrhosis",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_571.5",
+          "id": "phv00421481.v1.p1",
+          "description": "Other chronic nonalcoholic liver disease",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_571.51",
+          "id": "phv00421482.v1.p1",
+          "description": "Cirrhosis of liver without mention of alcohol",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_571.6",
+          "id": "phv00421483.v1.p1",
+          "description": "Primary biliary cirrhosis",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_573",
+          "id": "phv00421484.v1.p1",
+          "description": "Other disorders of liver",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_573.2",
+          "id": "phv00421485.v1.p1",
+          "description": "Liver replaced by transplant",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_573.4",
+          "id": "phv00421486.v1.p1",
+          "description": "Acute and subacute necrosis of liver",
+          "concept_id": "topmed:disease_diagnosis_liver_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_575",
+          "id": "phv00421487.v1.p1",
+          "description": "Other biliary tract disease",
+          "concept_id": "topmed:disease_diagnosis_gallbladder_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_575.1",
+          "id": "phv00421488.v1.p1",
+          "description": "Cholangitis",
+          "concept_id": "topmed:disease_diagnosis_gallbladder_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_578.9",
+          "id": "phv00421489.v1.p1",
+          "description": "Hemorrhage of gastrointestinal tract",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_gastrointestinal_bleeding",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_580",
+          "id": "phv00421490.v1.p1",
+          "description": "Nephritis; nephrosis; renal sclerosis",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_nephritis_glomerulonephritis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_580.1",
+          "id": "phv00421491.v1.p1",
+          "description": "Glomerulonephritis",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_nephritis_glomerulonephritis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_580.12",
+          "id": "phv00421492.v1.p1",
+          "description": "Non-proliferative glomerulonephritis",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_nephritis_glomerulonephritis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_580.14",
+          "id": "phv00421493.v1.p1",
+          "description": "Chronic glomerulonephritis, NOS",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_nephritis_glomerulonephritis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_580.3",
+          "id": "phv00421494.v1.p1",
+          "description": "Nephritis and nephropathy without mention of glomerulonephritis",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_nephritis_glomerulonephritis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_580.31",
+          "id": "phv00421495.v1.p1",
+          "description": "Nephritis and nephropathy in diseases classified elsewhere",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_nephritis_glomerulonephritis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_585.3",
+          "id": "phv00421496.v1.p1",
+          "description": "Chronic renal failure",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_chronic_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_585.32",
+          "id": "phv00421497.v1.p1",
+          "description": "End stage renal disease",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_end_stage_renal_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_585.33",
+          "id": "phv00421498.v1.p1",
+          "description": "Chronic Kidney Disease, Stage III",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_chronic_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_585.34",
+          "id": "phv00421499.v1.p1",
+          "description": "Chronic Kidney Disease, Stage IV",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_chronic_kidney_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_587",
+          "id": "phv00421500.v1.p1",
+          "description": "Kidney replaced by transpant",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_kidney_transplant",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_592.12",
+          "id": "phv00421501.v1.p1",
+          "description": "Chronic cystitis",
+          "concept_id": "ncpi:disease_diagnosis_genitourinary_disorders_cystitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_592.2",
+          "id": "phv00421502.v1.p1",
+          "description": "Urethritis and urethral syndrome",
+          "concept_id": "ncpi:disease_diagnosis_genitourinary_disorders_urethritis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_604",
+          "id": "phv00421503.v1.p1",
+          "description": "Disorders of penis",
+          "concept_id": "ncpi:disease_diagnosis_genitourinary_disorders_penile_disorders",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_611.11",
+          "id": "phv00421504.v1.p1",
+          "description": "Mammographic microcalcification",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_612",
+          "id": "phv00421505.v1.p1",
+          "description": "Breast conditions, congenital or relating to hormones",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_613.5",
+          "id": "phv00421506.v1.p1",
+          "description": "Mastodynia",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_619.3",
+          "id": "phv00421507.v1.p1",
+          "description": "Noninflammatory disorders of cervix",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_620",
+          "id": "phv00421508.v1.p1",
+          "description": "Dysplasia of female genital organs",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_622.2",
+          "id": "phv00421509.v1.p1",
+          "description": "Mucous polyp of cervix",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_655.1",
+          "id": "phv00421510.v1.p1",
+          "description": "Abnormality in fetal heart rate or rhythm",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_656.6",
+          "id": "phv00421511.v1.p1",
+          "description": "Perinatal disorders of digestive system",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_657",
+          "id": "phv00421512.v1.p1",
+          "description": "Infections specific to the perinatal period",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_681.2",
+          "id": "phv00421513.v1.p1",
+          "description": "Cellulitis and abscess of face/neck",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_681.6",
+          "id": "phv00421514.v1.p1",
+          "description": "Cellulitis and abscess of foot, toe",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_690",
+          "id": "phv00421515.v1.p1",
+          "description": "Erythematosquamous dermatosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_690.1",
+          "id": "phv00421516.v1.p1",
+          "description": "Seborrheic dermatitis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_691",
+          "id": "phv00421517.v1.p1",
+          "description": "Congenital anomalies of skin",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_694.1",
+          "id": "phv00421518.v1.p1",
+          "description": "Vitiligo",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_skin_autoimmune_conditions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_695.4",
+          "id": "phv00421519.v1.p1",
+          "description": "Lupus (localized and systemic)",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_lupus_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_695.42",
+          "id": "phv00421520.v1.p1",
+          "description": "Systemic lupus erythematosus",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_lupus_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_696",
+          "id": "phv00421521.v1.p1",
+          "description": "Psoriasis and related disorders",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_psoriasis_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_696.4",
+          "id": "phv00421522.v1.p1",
+          "description": "Psoriasis",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_psoriasis_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_696.41",
+          "id": "phv00421523.v1.p1",
+          "description": "Psoriasis vulgaris",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_psoriasis_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_696.42",
+          "id": "phv00421524.v1.p1",
+          "description": "Psoriatic arthropathy",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_psoriatic_arthritis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_706",
+          "id": "phv00421525.v1.p1",
+          "description": "Diseases of sebaceous glands",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_709",
+          "id": "phv00421526.v1.p1",
+          "description": "Diffuse diseases of connective tissue",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_connective_tissue_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_709.2",
+          "id": "phv00421527.v1.p1",
+          "description": "Sicca syndrome",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_specific_autoimmune_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_709.3",
+          "id": "phv00421528.v1.p1",
+          "description": "Systemic sclerosis",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_scleroderma_diagnosis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_709.4",
+          "id": "phv00421529.v1.p1",
+          "description": "Polymyositis",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_specific_autoimmune_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_709.5",
+          "id": "phv00421530.v1.p1",
+          "description": "Dermatomyositis",
+          "concept_id": "ncpi:disease_diagnosis_autoimmune_disorders_specific_autoimmune_disorders",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_711",
+          "id": "phv00421531.v1.p1",
+          "description": "Arthropathy associated with infections",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_714",
+          "id": "phv00421532.v1.p1",
+          "description": "Rheumatoid arthritis and other inflammatory polyarthropathies",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_rheumatoid_arthritis_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_714.1",
+          "id": "phv00421533.v1.p1",
+          "description": "Rheumatoid arthritis",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_rheumatoid_arthritis_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_714.2",
+          "id": "phv00421534.v1.p1",
+          "description": "Juvenile rheumatoid arthritis",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_juvenile_rheumatoid_arthritis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_715",
+          "id": "phv00421535.v1.p1",
+          "description": "Other inflammatory spondylopathies",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_715.2",
+          "id": "phv00421536.v1.p1",
+          "description": "Ankylosing spondylitis",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_ankylosing_spondylitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_716",
+          "id": "phv00421537.v1.p1",
+          "description": "Other arthropathies",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_717",
+          "id": "phv00421538.v1.p1",
+          "description": "Polymyalgia Rheumatica",
+          "concept_id": "ncpi:disease_diagnosis_arthritis_joint_disorders_polymyalgia_rheumatica",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_722.1",
+          "id": "phv00421539.v1.p1",
+          "description": "Displacement of intervertebral disc",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_726.2",
+          "id": "phv00421540.v1.p1",
+          "description": "Synoviopathy",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_727.4",
+          "id": "phv00421541.v1.p1",
+          "description": "Ganglion and cyst of synovium, tendon, and bursa",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_728",
+          "id": "phv00421542.v1.p1",
+          "description": "Disorders of muscle, ligament, and fascia",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_728.2",
+          "id": "phv00421543.v1.p1",
+          "description": "Laxity of ligament or hypermobility syndrome",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_749.1",
+          "id": "phv00421544.v1.p1",
+          "description": "Cleft palate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_750.21",
+          "id": "phv00421545.v1.p1",
+          "description": "Congenital anomalies of intestine",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_755.1",
+          "id": "phv00421546.v1.p1",
+          "description": "Congenital deformities of feet",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_756.2",
+          "id": "phv00421547.v1.p1",
+          "description": "Pectus and other congenital anomalies of ribs/sternum",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_756.21",
+          "id": "phv00421548.v1.p1",
+          "description": "Pectus excavatum",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_772.6",
+          "id": "phv00421549.v1.p1",
+          "description": "Facial weakness",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_800.3",
+          "id": "phv00421550.v1.p1",
+          "description": "Fracture of tibia and fibula",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_801",
+          "id": "phv00421551.v1.p1",
+          "description": "Fracture of ankle and foot",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_801.1",
+          "id": "phv00421552.v1.p1",
+          "description": "Fracture of foot",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_803.2",
+          "id": "phv00421553.v1.p1",
+          "description": "Fracture of radius and ulna",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_851",
+          "id": "phv00421554.v1.p1",
+          "description": "Complications of transplants and reattached limbs",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "pheno_860",
+          "id": "phv00421555.v1.p1",
+          "description": "Bone marrow or stem cell transplant",
+          "concept_id": "ncpi:surgical_procedure_transplant_procedures",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_870",
+          "id": "phv00421556.v1.p1",
+          "description": "Open wounds of head; neck; and trunk",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_871.2",
+          "id": "phv00421557.v1.p1",
+          "description": "Open wound of finger(s)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_876",
+          "id": "phv00421558.v1.p1",
+          "description": "Posttraumatic wound infection not elsewhere classified",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_962.1",
+          "id": "phv00421559.v1.p1",
+          "description": "Adrenal cortical steroids causing adverse effects in therapeutic use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_965",
+          "id": "phv00421560.v1.p1",
+          "description": "Poisoning by analgesics, antipyretics, and antirheumatics",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "pheno_972",
+          "id": "phv00421561.v1.p1",
+          "description": "Poisoning by agents primarily affecting the cardiovascular system",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "P3DT_Sample_Attributes",
+      "datasetId": "pht009707.v1",
+      "description": "This sample attributes table informs of body site where sample was collected, sample analyte type, and sample tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00421564.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00421563.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00421565.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00421562.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "P3DT_Subject",
+      "datasetId": "pht009704.v1",
+      "description": "This subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00421301.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00421300.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "P3DT_Sample",
+      "datasetId": "pht009705.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00421303.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00421302.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

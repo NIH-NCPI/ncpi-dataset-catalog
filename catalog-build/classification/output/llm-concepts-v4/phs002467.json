@@ -1,0 +1,209 @@
+{
+  "studyId": "phs002467",
+  "studyName": "Multimodal Profiling of 500,000 Memory T Cells from a Tuberculosis Cohort Identifies Cell State Associations with Demographics, Environment, and Disease",
+  "tables": [
+    {
+      "tableName": "TB_T_Cell_States_Subject_Phenotypes",
+      "datasetId": "pht011583.v1",
+      "description": "The subject phenotypes data table contains case-control status of the subject for history of Mycobacterium tuberculosis infection, self-reported sex, age, season of blood draw, and ancestry information.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00493767.v1.p1",
+          "description": "Case-control status of the subject for history of Mycobacterium tuberculosis infection",
+          "concept_id": "ncpi:disease_diagnosis_kidney_renal_disease_case_control_status",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "AGE",
+          "id": "phv00493768.v1.p1",
+          "description": "Subject age at blood draw",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROP_EUR",
+          "id": "phv00493771.v1.p1",
+          "description": "Subject's proportion of European ancestry measured with ADMIXTURE (K = 4)",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEASON",
+          "id": "phv00493770.v1.p1",
+          "description": "Season of blood draw in Lima, Peru",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00493769.v1.p1",
+          "description": "Subject self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493766.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TB_T_Cell_States_Sample_Attributes",
+      "datasetId": "pht011584.v1",
+      "description": "This sample attributes data table contains body site, analyte type, histological type, tumor status, and multiplexed library preparation batch.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00493774.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BATCH",
+          "id": "phv00493777.v1.p1",
+          "description": "Multiplexed library preparation batch",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00493773.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00493775.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": "topmed:lung_ct_imaging_clinical_demographics_metadata",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00493776.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00493772.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TB_T_Cell_States_Subject",
+      "datasetId": "pht011581.v1",
+      "description": "This subject consent data table contains subject IDs, consent group information, self-reported sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00493760.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00493761.v1.p1",
+          "description": "Subject self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00493763.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493759.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00493762.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TB_T_Cell_States_Sample",
+      "datasetId": "pht011582.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00493765.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00493764.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TB_T_Cell_States_GEO",
+      "datasetId": "pht011592.v1",
+      "description": null,
+      "variables": [
+        {
+          "name": "GEO_ACCESSION",
+          "id": "phv00493820.v1.p1",
+          "description": "GEO accession ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00493819.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

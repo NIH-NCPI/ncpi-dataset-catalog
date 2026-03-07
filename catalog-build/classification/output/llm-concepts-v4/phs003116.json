@@ -1,0 +1,410 @@
+{
+  "studyId": "phs003116",
+  "studyName": "Detroit Research on Cancer Survivors (ROCS) and Disparities and Cancer Epidemiology - Colorectal Cancer (DANCE)",
+  "tables": [
+    {
+      "tableName": "CIDR_ROCS_DANCE_AA_Subject_Phenotypes",
+      "datasetId": "pht015088.v1",
+      "description": "This subject phenotypes data table reports each subject's self-reported sex, self-reported ethnicity, SEER cancer site, ICD-O-3 histologic tumor type, SEER summary stage at diagnosis, BMI at time of survey, general FACT total, PROMIS anxiety T-score, PROMIS depression T-score, age at survey, education, marital status, employment status, smoking status, current cancer treatment status, household income, vital status at date of last contact, number of months from diagnosis to interview, ICD-O-3 primary cancer site, primary tumor surgery status, family history of same cancer, family history of any cancer, count of comorbidities, radiation therapy status, age at diagnosis, ICD-O-3 tumor behavior, diagnosis year, insurance type, self-reported race, calculated survival time in months, first course surgical treatment, surgical history for cancer, radiation history, and chemotherapy history.",
+      "variables": [
+        {
+          "name": "AGE_DIAGNOSIS",
+          "id": "phv00544277.v1.p1",
+          "description": "Subject age at cancer diagnosis",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BEHAVIOR_ICDO3",
+          "id": "phv00544278.v1.p1",
+          "description": "Behavior of the tumor reported using ICD-O-3",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BMI_CURRENT",
+          "id": "phv00544258.v1.p1",
+          "description": "BMI at time of survey (derived using height and current weight)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "COMORB4COUNT",
+          "id": "phv00544275.v1.p1",
+          "description": "Count of comorbidities, including  high blood pressure, diabetes, COPD/emphysema and cardiovascular disease",
+          "concept_id": "ncpi:disease_diagnosis_comorbidity_indices",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS_YEAR",
+          "id": "phv00544279.v1.p1",
+          "description": "Year of cancer diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EDUCATION",
+          "id": "phv00544263.v1.p1",
+          "description": "Highest level of education completed",
+          "concept_id": "phenx:current_educational_attainment",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "EMPLOY",
+          "id": "phv00544266.v1.p1",
+          "description": "Employment status at time of survey",
+          "concept_id": "phenx:current_employment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ETHNICITY",
+          "id": "phv00544254.v1.p1",
+          "description": "Self-reported ethnicity",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "FACTG_TOTAL",
+          "id": "phv00544259.v1.p1",
+          "description": "General FACT (Functional Assessment of Cancer Therapy) total",
+          "concept_id": "ncpi:depression_anxiety_screening_quality_of_life_emotional",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "FAMHIST_ANY",
+          "id": "phv00544274.v1.p1",
+          "description": "First degree family history of any cancer",
+          "concept_id": "topmed:cancer_diagnosis_family_cancer_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMHIST_SAME",
+          "id": "phv00544273.v1.p1",
+          "description": "First degree family history of same cancer as subject",
+          "concept_id": "topmed:cancer_diagnosis_family_cancer_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FIN_INCOME",
+          "id": "phv00544268.v1.p1",
+          "description": "Household income in the last year (before taxes)",
+          "concept_id": "phenx:annual_family_income",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGY_ICDO3",
+          "id": "phv00544256.v1.p1",
+          "description": "Histologic tumor type using ICD-O-3",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INSURANCE_TYPE",
+          "id": "phv00544280.v1.p1",
+          "description": "Current insurance",
+          "concept_id": "phenx:health_insurance_coverage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "INTREAT",
+          "id": "phv00544267.v1.p1",
+          "description": "Currently in treatment for cancer diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MARITAL",
+          "id": "phv00544264.v1.p1",
+          "description": "Current relationship status",
+          "concept_id": "phenx:current_marital_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_SITE",
+          "id": "phv00544271.v1.p1",
+          "description": "Primary site for index cancer (ICD-O-3 site codes)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROMIS_ANX4",
+          "id": "phv00544260.v1.p1",
+          "description": "PROMIS anxiety T-score",
+          "concept_id": "ncpi:depression_anxiety_screening_promis_anxiety_depression",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROMIS_DEP4",
+          "id": "phv00544261.v1.p1",
+          "description": "PROMIS depression T-score",
+          "concept_id": "ncpi:depression_anxiety_screening_promis_anxiety_depression",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00544281.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEERSTAGE",
+          "id": "phv00544257.v1.p1",
+          "description": "SEER summary stage at diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_stage",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEER_PRIM_SURG",
+          "id": "phv00544272.v1.p1",
+          "description": "Surgery to the primary site performed as part of the first course of treatment",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEER_RAD",
+          "id": "phv00544276.v1.p1",
+          "description": "Radiation therapy performed as part of the first course of treatment",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_radiation_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEER_SITE_RECODE",
+          "id": "phv00544255.v1.p1",
+          "description": "SEER major cancer site/histology group",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00544253.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKE",
+          "id": "phv00544265.v1.p1",
+          "description": "Have you smoked at least 100 cigarettes in your lifetime?",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_tobacco_use_general",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00544252.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SURVEYAGE",
+          "id": "phv00544262.v1.p1",
+          "description": "Age at survey",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SURVIVAL_TIME_MONTHS",
+          "id": "phv00544282.v1.p1",
+          "description": "Survival months, calculated from date of diagnosis to date of last contact",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TIMETOINT",
+          "id": "phv00544270.v1.p1",
+          "description": "Number of months from diagnosis to interview",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "TX_CHEMO",
+          "id": "phv00544285.v1.p1",
+          "description": "Ever had chemotherapy for your cancer?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_chemotherapy_history",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TX_RAD",
+          "id": "phv00544284.v1.p1",
+          "description": "Ever had radiation for your cancer?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_radiation_therapy",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TX_SURG",
+          "id": "phv00544283.v1.p1",
+          "description": "Ever had surgery for your cancer?",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_surgery",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "VITAL_STATUS",
+          "id": "phv00544269.v1.p1",
+          "description": "Vital status at date of last contact",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_status",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ROCS_DANCE_AA_Sample_Attributes",
+      "datasetId": "pht015089.v1",
+      "description": "This sample attributes data table reports each sample's body site of origin, analyte type, tumor status, histological type, and subject's age at collection.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00544288.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00544287.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COLLECTION_AGE",
+          "id": "phv00544291.v1.p1",
+          "description": "Age sample was collected",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00544290.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00544289.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00544286.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ROCS_DANCE_AA_Subject",
+      "datasetId": "pht015086.v1",
+      "description": "This subject consent data table reports each subject's subject ID, consent, biological sex, and aliases to subject IDs for subjects overlapping other dbGaP studies.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00544246.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00544247.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00544249.v1.p1",
+          "description": "Subject ID assigned by public repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00544245.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00544248.v1.p1",
+          "description": "Name of public repository for subjects in public repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CIDR_ROCS_DANCE_AA_Sample",
+      "datasetId": "pht015087.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to individual and pooled sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00544251.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00544250.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "studyId": "phs002207",
+  "studyName": "Genomic and Transcriptomic Profiling of Patients with Malignant Pleural and Peritoneal Mesothelioma: The NCI Cohort",
+  "tables": [
+    {
+      "tableName": "Mesothelioma_Subject_Phenotypes",
+      "datasetId": "pht011349.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00492115.v1.p1",
+          "description": "Case control status of the subject for Mesothelioma; all subjects are Mesothelioma patients.",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_AT_DIAGNOSIS",
+          "id": "phv00492114.v1.p1",
+          "description": "Age At Diagnosis",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_lung_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Asbestos",
+          "id": "phv00528658.v1.p1",
+          "description": "Asbestos exposure by self reporting",
+          "concept_id": "topmed:cancer_diagnosis_cancer_risk_factors",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Biopsy survival",
+          "id": "phv00528657.v1.p1",
+          "description": "Biopsy survival",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Overall survival",
+          "id": "phv00528656.v1.p1",
+          "description": "Overall survival",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_outcomes_survival_overall_survival_time",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Prior treatment",
+          "id": "phv00528660.v1.p1",
+          "description": "Prior treatment",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_treatment_treatment_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00492113.v1.p1",
+          "description": "Race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Radiation prior to mesothelioma diagnosis",
+          "id": "phv00528661.v1.p1",
+          "description": "Radiation prior to mesothelioma diagnosis",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492112.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking History",
+          "id": "phv00528659.v1.p1",
+          "description": "Smoking History",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "live/dead",
+          "id": "phv00528655.v1.p1",
+          "description": "Live or Dead",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Mesothelioma_Sample_Attributes",
+      "datasetId": "pht011350.v1",
+      "description": "This sample attributes table contains sample IDs, flow cell IDs, DNA or RNA samples, experiment type, specimen type, disease site, and histology.",
+      "variables": [
+        {
+          "name": "DNA_OR_RNA",
+          "id": "phv00492118.v1.p1",
+          "description": "DNA or RNA Sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "EXPERIMENT_TYPE",
+          "id": "phv00492119.v1.p1",
+          "description": "RNAseq or Exome",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FCID",
+          "id": "phv00492117.v1.p1",
+          "description": "Flow Cell ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGY",
+          "id": "phv00492122.v1.p1",
+          "description": "Histology",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00498437.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492116.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SITE_OF_DISEASE",
+          "id": "phv00492121.v1.p1",
+          "description": "Site of disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SPECIMEN_TYPE",
+          "id": "phv00492120.v1.p1",
+          "description": "Specimen type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Mesothelioma_Subject",
+      "datasetId": "pht011347.v1",
+      "description": "The subject consent file includes subject IDs, consent information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00492108.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492109.v1.p1",
+          "description": "Sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492107.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Mesothelioma_Sample",
+      "datasetId": "pht011348.v1",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00492111.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00492110.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

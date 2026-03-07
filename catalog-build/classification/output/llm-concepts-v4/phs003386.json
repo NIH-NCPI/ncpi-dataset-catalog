@@ -1,0 +1,221 @@
+{
+  "studyId": "phs003386",
+  "studyName": "METSIM Subcutaneous Adipose Needle Biopsy ATAC-Seq",
+  "tables": [
+    {
+      "tableName": "METSIM_SubQAdiposeNeedle_ATACSeq_Sample_Attributes",
+      "datasetId": "pht014946.v1",
+      "description": "This sample attributes table contains sample ID, body site where sample was collected, analyte type, tumor status, histological type, version of the ATAC-seq protocol used, amount of adipose tissue used, amount of the Tn5 transposase used, single- or paired-end sequencing, ID of the fastq files, lab in which the ATAC-seq experiments were performed, read length, number of (n=7 variables; raw ATAC sequenced reads, adapter-trimmed and base quality-trimmed ATAC reads before alignment, reads aligned to the hg19 genome, reads aligned to nuclear chromosomes, reads aligning to the mitochondrial chromosome, nuclear alignments after removing duplicates, and narrow peaks called by MACS2), percentage of (n=4 variables; uniquely aligned reads on nuclear chromosomes, uniquely aligned reads mapping to the mitochondrial chromosome, nuclear reads remaining after duplicate removal, non-duplicated nuclear alignments overlapping narrow peaks), TSS enrichments calculated by ataqv or by a customized script that allows single-end libraries, and whether the library was included in the final set used for analyses in PMID:34699533.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00543195.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00543194.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "medium",
+          "source": "rejected"
+        },
+        {
+          "name": "FILE_ID",
+          "id": "phv00543202.v1.p1",
+          "description": "ID of the fastq files",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00543197.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_INCLUDED_IN_MANUSCRIPT",
+          "id": "phv00543218.v1.p1",
+          "description": "Whether the library was included in the final set used for analyses in PMID: 34699533 (Perrin and Currin et al. 2021)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00543196.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LAB",
+          "id": "phv00543203.v1.p1",
+          "description": "Lab in which the ATAC-seq experiments were performed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NUM_AFTER_DUPS_REMOVED",
+          "id": "phv00543212.v1.p1",
+          "description": "Number of nuclear alignments after removing duplicates",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NUM_CHR_M",
+          "id": "phv00543210.v1.p1",
+          "description": "Number of reads aligning to the mitochondrial chromosome",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NUM_FILTERED",
+          "id": "phv00543206.v1.p1",
+          "description": "Number of adapter-trimmed and base quality-trimmed ATAC reads before alignment",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NUM_NUCLEAR",
+          "id": "phv00543208.v1.p1",
+          "description": "Number of reads aligned to nuclear chromosomes (chr1-22, X, Y)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NUM_N_PEAKS",
+          "id": "phv00543214.v1.p1",
+          "description": "Number of narrow peaks called by MACS2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NUM_RAW",
+          "id": "phv00543205.v1.p1",
+          "description": "Number of raw ATAC sequenced reads",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "NUM_UNIQUE_ALIGNED",
+          "id": "phv00543207.v1.p1",
+          "description": "Number of reads aligned to the hg19 genome with mapq>20",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PERCENT_AFTER_DUPS_REMOVED",
+          "id": "phv00543213.v1.p1",
+          "description": "Percentage of nuclear reads remaining after duplicate removal",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PERCENT_CHR_M",
+          "id": "phv00543211.v1.p1",
+          "description": "Percentage of uniquely aligned reads mapping to the mitochondrial chromosome",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PERCENT_NUCLEAR",
+          "id": "phv00543209.v1.p1",
+          "description": "Percentage of uniquely aligned reads on nuclear chromosomes",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PERCENT_READS_IN_N_PEAKS",
+          "id": "phv00543215.v1.p1",
+          "description": "Percentage of non-duplicated, nuclear alignments overlapping narrow peaks",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PROTOCOL",
+          "id": "phv00543198.v1.p1",
+          "description": "Version of the ATAC-seq protocol used",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "READ_LENGTH",
+          "id": "phv00543204.v1.p1",
+          "description": "Read length; many samples were trimmed to 50nt for consistent read length",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "READ_TYPE",
+          "id": "phv00543201.v1.p1",
+          "description": "Indicates if single- or paired-end sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00543193.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TISSUE_AMOUNT",
+          "id": "phv00543199.v1.p1",
+          "description": "Amount of adipose tissue used, either in milligrams or number of cells depending on the protocol",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TN5_CONCENTRATION",
+          "id": "phv00543200.v1.p1",
+          "description": "Amount of the Tn5 transposase used in the ATAC-seq protocol",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TSS_ENRICHMENT_ATAQV",
+          "id": "phv00543216.v1.p1",
+          "description": "TSS enrichment calculated by ataqv",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TSS_ENRICHMENT_MYSCRIPT",
+          "id": "phv00543217.v1.p1",
+          "description": "TSS enrichment calculated by a customized script that allows single-end libraries",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

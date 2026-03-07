@@ -1,0 +1,290 @@
+{
+  "studyId": "phs001644",
+  "studyName": "NHLBI TOPMed - NHGRI CCDG: The BioMe Biobank at Mount Sinai",
+  "tables": [
+    {
+      "tableName": "TOPMed_CCDG_BioME_Subject_Phenotypes",
+      "datasetId": "pht009946.v2",
+      "description": "This subject phenotype table includes subject ID, ages at BMI, height, weight measurements, and at blood draw, sex, weight, height, BMI, hispanic subgroup, ancestry group, and case control status of the subject for myocardial infarction (MI), coronary revascularization (CR), angina, peripheral artery disease (PAD), coronary artery disease (CAD),  and chronic obstructive pulmonary disease (COPD).",
+      "variables": [
+        {
+          "name": "ANGINA",
+          "id": "phv00492689.v1.p2",
+          "description": "Case/control status for angina",
+          "concept_id": "ncpi:angina_incident_angina_incident",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CAD",
+          "id": "phv00492691.v1.p2",
+          "description": "Case/control status for coronary artery disease",
+          "concept_id": "topmed:cad_followup_start_age",
+          "confidence": "low",
+          "source": "llm"
+        },
+        {
+          "name": "COPD",
+          "id": "phv00492692.v1.p2",
+          "description": "Case/control status for chronic obstructive pulmonary disease",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CR",
+          "id": "phv00492688.v1.p2",
+          "description": "Case/control status for coronary revascularization",
+          "concept_id": "topmed:coronary_revascularization_prior",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "MI",
+          "id": "phv00492687.v1.p2",
+          "description": "Case/control status for myocardial infarction",
+          "concept_id": "ncpi:mi_incident_mi_incident_status_mi_status_general",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "PAD",
+          "id": "phv00492690.v1.p2",
+          "description": "Case/control status for peripheral artery disease",
+          "concept_id": "ncpi:pad_incident_pad_diagnosis",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00427335.v2.p2",
+          "description": "Reported sex/gender for subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00427331.v2.p2",
+          "description": "Subject identifier",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_bmi",
+          "id": "phv00427332.v2.p2",
+          "description": "Age at bmi measurement; may differ from age at measurement for other phenotypes",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_dna_blood_draw_wgs",
+          "id": "phv00492693.v1.p2",
+          "description": "Age of subject at the time of a blood draw from which a DNA sample was to be extracted for TOPMed whole genome sequencing (WGS)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_height",
+          "id": "phv00427333.v2.p2",
+          "description": "Age at height measurement; may differ from age at measurement for other phenotypes",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_at_weight",
+          "id": "phv00427334.v2.p2",
+          "description": "Age at weight measurement; may differ from age at measurement for other phenotypes",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ancestry_group",
+          "id": "phv00492686.v1.p2",
+          "description": "Reported ancestry",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "bmi",
+          "id": "phv00427338.v2.p2",
+          "description": "Body mass index (bmi) measurement in kg/m^2 (kilogram/meters^2)",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "height",
+          "id": "phv00427337.v2.p2",
+          "description": "Height in cm (centimeters)",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "hispanic_subgroup",
+          "id": "phv00427341.v2.p2",
+          "description": "Classification of Hispanic/Latino background for Hispanic/Latino subjects where country or region of origin information is available",
+          "concept_id": "topmed:hispanic_subgroup",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "weight",
+          "id": "phv00427336.v2.p2",
+          "description": "Weight in kg (kilograms)",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CCDG_BioME_Sample_Attributes",
+      "datasetId": "pht009947.v3",
+      "description": null,
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00427344.v3.p2",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00427343.v3.p2",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CCDG_SAMPLE_ID",
+          "id": "phv00427351.v3.p2",
+          "description": "Sample ID in the CCDG project",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Funding_Source",
+          "id": "phv00427347.v3.p2",
+          "description": "Project funding source",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00427345.v3.p2",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00427342.v3.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00427346.v3.p2",
+          "description": "Name of the center which conducted sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Study_Name",
+          "id": "phv00427350.v3.p2",
+          "description": "TOPMed-assigned short study name (1:1 with TOPMed phs number)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Phase",
+          "id": "phv00427348.v3.p2",
+          "description": "TOPMed Phase",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOPMed_Project",
+          "id": "phv00427349.v3.p2",
+          "description": "TOPMed Project that funded sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CCDG_BioME_Subject",
+      "datasetId": "pht009944.v2",
+      "description": "The subject consent file includes subject IDs, consent information, and sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00427328.v2.p2",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00492685.v1.p2",
+          "description": "Reported sex/gender of subject",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00427327.v2.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "TOPMed_CCDG_BioME_Sample",
+      "datasetId": "pht009945.v3",
+      "description": null,
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00427329.v3.p2",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00427330.v3.p2",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

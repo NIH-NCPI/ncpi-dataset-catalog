@@ -1,0 +1,832 @@
+{
+  "studyId": "phs000763",
+  "studyName": "The Collaborative Study on the Genetics of Alcoholism (COGA)",
+  "tables": [
+    {
+      "tableName": "COGA_Family_GWAS_Subject_Phenotypes",
+      "datasetId": "pht004255.v2",
+      "description": "This adult subject phenotype file includes subject ID, age of first whole drink, ages at first drunk and last interview, alcohol abuse information (including DSM4 alcohol abuse regardless of dependence, maximum number of symptoms 1-4, DSM4 alcohol abuse symptoms endorsed, onset age of DSM4 alcohol abuse, first diagnoses 1-4 of alcohol abuse, first diagnoses endorsed,  DSM4 alcohol dependence, maximum alcohol dependence criteria 1-7, maximum DSM4 alcohol criteria endorsed, onset age of DSM4 alcohol dependence, first diagnoses 1-7 of  alcohol dependence,  DSM4 alcohol criteria endorsed, and drink status), sex, birth year, ethnicity, race, age at ERO test, and theta activity at the frontal midline electrode (Fz).",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00217596.v1.p1",
+          "description": "Unique random subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_ERO_test",
+          "id": "phv00217639.v1.p1",
+          "description": "Age at the time the ERO was recorded",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_first_drink",
+          "id": "phv00217597.v1.p1",
+          "description": "Age of first whole drink",
+          "concept_id": "phenx:alcohol_age_of_first_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "age_first_got_drunk",
+          "id": "phv00217598.v1.p1",
+          "description": "Age 1st got drunk - earliest pos. interview",
+          "concept_id": "phenx:alcohol_age_of_first_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "age_last_intvw",
+          "id": "phv00217599.v1.p1",
+          "description": "Age at Last Interview",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_abuse",
+          "id": "phv00217600.v1.p1",
+          "description": "DSM4 ALC Abuse (regardless of Depend.)",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_alcohol_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_abuse_max_sx1",
+          "id": "phv00217601.v1.p1",
+          "description": "Fail fulfill major role obligations @max SX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_abuse_max_sx2",
+          "id": "phv00217602.v1.p1",
+          "description": "Recur use in phys hazardous situations @max SX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_abuse_max_sx3",
+          "id": "phv00217603.v1.p1",
+          "description": "Recur alc-related legal problems @max SX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_abuse_max_sx4",
+          "id": "phv00217604.v1.p1",
+          "description": "Cont use despite -- social problems @max SX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_abuse_max_sx_cnt",
+          "id": "phv00217605.v1.p1",
+          "description": "# DSM4 ALC Abuse SXs Endorsed @ max SX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_abuse_ons",
+          "id": "phv00217606.v1.p1",
+          "description": "Age of onset, DSMIV Alcohol Abuse",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_alcohol_use_disorder",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "alc_abuse_sx1",
+          "id": "phv00217607.v1.p1",
+          "description": "Fail fulfill major role obligations @1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_abuse_sx2",
+          "id": "phv00217608.v1.p1",
+          "description": "Recur use in phys hazardous situations @1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_abuse_sx3",
+          "id": "phv00217609.v1.p1",
+          "description": "Recur alc-related legal problems @1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_abuse_sx4",
+          "id": "phv00217610.v1.p1",
+          "description": "Cont use despite -- social problems @1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_abuse_sx_cnt",
+          "id": "phv00217611.v1.p1",
+          "description": "# DSM4 ALC Abuse SXs Endorsed @ 1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_dx",
+          "id": "phv00217612.v1.p1",
+          "description": "DSM4 ALC Dependence",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_alcohol_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_max_sx1",
+          "id": "phv00217613.v1.p1",
+          "description": "Tolerance @ max_sx_count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_max_sx2",
+          "id": "phv00217614.v1.p1",
+          "description": "Withdrawal @ max_sx_count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_max_sx3",
+          "id": "phv00217615.v1.p1",
+          "description": "More than intended @ max_sx_count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_max_sx4",
+          "id": "phv00217616.v1.p1",
+          "description": "Persist. desire to cut down @ max_sx_count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_max_sx5",
+          "id": "phv00217617.v1.p1",
+          "description": "Excessive time used @ max_sx_count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_max_sx6",
+          "id": "phv00217618.v1.p1",
+          "description": "Use dominates life @ max_sx_count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_max_sx7",
+          "id": "phv00217619.v1.p1",
+          "description": "Recur. physical/psych. prbs @ max_sx_count",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_max_sx_cnt",
+          "id": "phv00217620.v1.p1",
+          "description": "Maximum # DSM4 ALC Criteria Endorsed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_ons",
+          "id": "phv00217621.v1.p1",
+          "description": "Age of onset, DSMIV Alcohol dependence",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_alcohol_use_disorder",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_sx1",
+          "id": "phv00217622.v1.p1",
+          "description": "Tolerance @ 1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_sx2",
+          "id": "phv00217623.v1.p1",
+          "description": "Withdrawal @ 1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_sx3",
+          "id": "phv00217624.v1.p1",
+          "description": "More than intended @ 1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_sx4",
+          "id": "phv00217625.v1.p1",
+          "description": "Persistant desire to cut down @ 1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_sx5",
+          "id": "phv00217626.v1.p1",
+          "description": "Excessive time used @ 1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_sx6",
+          "id": "phv00217627.v1.p1",
+          "description": "Use dominates life @ 1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_sx7",
+          "id": "phv00217628.v1.p1",
+          "description": "Recurrent physical/psych. problems @ 1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "alc_dep_sx_cnt",
+          "id": "phv00217629.v1.p1",
+          "description": "# DSM4 ALC Criteria Endorsed @ 1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ever_drink",
+          "id": "phv00217630.v1.p1",
+          "description": "Ever had a drink of Alcohol",
+          "concept_id": "phenx:alcohol_lifetime_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ever_got_drunk",
+          "id": "phv00217631.v1.p1",
+          "description": "Ever been drunk",
+          "concept_id": "phenx:alcohol_lifetime_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "hisp",
+          "id": "phv00217637.v1.p1",
+          "description": "Hispanic  (1=No   5=Yes)",
+          "concept_id": "ncpi:hispanic_or_latino_self_reported_hispanic_ethnicity_self_reported_hispanic_ethnicity",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "max_drinks",
+          "id": "phv00217634.v1.p1",
+          "description": "Max # of drinks in 24 hours",
+          "concept_id": "phenx:alcohol_maximum_drinks_in_24_hours",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "race",
+          "id": "phv00217638.v1.p1",
+          "description": "Race  (WHITE/BLACK/ASIAN/OTHER/UNK.)",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "reg_drink_ons",
+          "id": "phv00217632.v1.p1",
+          "description": "Age of onset,1st interview with reg drinking",
+          "concept_id": "phenx:alcohol_age_of_first_use",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "regular_drinking",
+          "id": "phv00217633.v1.p1",
+          "description": "Ever drank once/month for 6 mths or more",
+          "concept_id": "ncpi:alcohol_30day_quantity_and_frequency_current_drinking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "sex",
+          "id": "phv00217635.v1.p1",
+          "description": "Gender Status",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "theta_Fz",
+          "id": "phv00217640.v1.p1",
+          "description": "Values of theta_Fz (frontal midline electrode)",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "y_o_b",
+          "id": "phv00217636.v1.p1",
+          "description": "Year of Birth",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "COGA_EUFAM_Phenotype2",
+      "datasetId": "pht015879.v1",
+      "description": "This subject phenotype file includes subject ID, smoking status, and information of drug abuse (including marijuana, cocaine, stimulants, sedatives, and opiates).",
+      "variables": [
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00559516.v1.p1",
+          "description": "Unique random subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "cig_100",
+          "id": "phv00559521.v1.p1",
+          "description": "Smoked at least 100 cigarettes lifetime",
+          "concept_id": "phenx:protocol_2_tobacco_smoking_status_adult_protocol",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "co_abuse",
+          "id": "phv00559534.v1.p1",
+          "description": "DSM4 COC Abuse (regardless of Depend.)",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_cocaine_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "co_abuse_max_sx_cnt",
+          "id": "phv00559535.v1.p1",
+          "description": "# DSM4 COC Abuse SXs Endorsed @ max SX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "co_dep_dx",
+          "id": "phv00559531.v1.p1",
+          "description": "DSM4 COC Dependence",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_cocaine_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "co_dep_max_sx_cnt",
+          "id": "phv00559533.v1.p1",
+          "description": "Maximum # DSM4 COC Criteria Endorsed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ever_chew",
+          "id": "phv00559520.v1.p1",
+          "description": "Ever used chewing tobacco or snuff",
+          "concept_id": "phenx:use_of_tobacco_products",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ever_cig_full",
+          "id": "phv00559517.v1.p1",
+          "description": "Ever smoked a full cigarette",
+          "concept_id": "phenx:protocol_2_tobacco_smoking_status_adult_protocol",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ever_cigar",
+          "id": "phv00559518.v1.p1",
+          "description": "Ever smoked cigar",
+          "concept_id": "phenx:use_of_tobacco_products",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ever_co",
+          "id": "phv00559532.v1.p1",
+          "description": "Ever used Cocaine",
+          "concept_id": "phenx:substances_lifetime_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ever_mj",
+          "id": "phv00559527.v1.p1",
+          "description": "Ever used Marijuana",
+          "concept_id": "phenx:substances_lifetime_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ever_op",
+          "id": "phv00559547.v1.p1",
+          "description": "Ever used Opiates",
+          "concept_id": "phenx:substances_lifetime_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ever_pipe",
+          "id": "phv00559519.v1.p1",
+          "description": "Ever smoked a pipe",
+          "concept_id": "phenx:use_of_tobacco_products",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ever_sd",
+          "id": "phv00559542.v1.p1",
+          "description": "Ever used Sedatives",
+          "concept_id": "phenx:substances_lifetime_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ever_st",
+          "id": "phv00559537.v1.p1",
+          "description": "Ever used Stimulants",
+          "concept_id": "phenx:substances_lifetime_use",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ftnd_dx",
+          "id": "phv00559525.v1.p1",
+          "description": "FTND DX (1={0-3}   5={4-10})",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ftnd_tot",
+          "id": "phv00559524.v1.p1",
+          "description": "Maximum FTND score over all interviews",
+          "concept_id": "phenx:tobacco_nicotine_dependence",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mj_abuse",
+          "id": "phv00559529.v1.p1",
+          "description": "DSM4 MJ Abuse (Regardless of Depend.)",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_cannabis_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mj_abuse_max_sx_cnt",
+          "id": "phv00559530.v1.p1",
+          "description": "# DSM4 MJ Abuse SXs Endorsed @ max SX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mj_dep_dx",
+          "id": "phv00559526.v1.p1",
+          "description": "DSM4 MJ Dependence",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_cannabis_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mj_dep_max_sx_cnt",
+          "id": "phv00559528.v1.p1",
+          "description": "Maximum # DSM4 MJ Criteria Endorsed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "op_abuse",
+          "id": "phv00559549.v1.p1",
+          "description": "DSM4 OP Abuse (regardless of Depend.)",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_opioid_use_disorder_dsm_iv_opioid_abuse",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "op_abuse_max_sx_cnt",
+          "id": "phv00559550.v1.p1",
+          "description": "# DSM4 OP Abuse SXs Endorsed @ max SX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "op_dep_dx",
+          "id": "phv00559546.v1.p1",
+          "description": "DSM4 OP Dependence",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_opioid_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "op_dep_max_sx_cnt",
+          "id": "phv00559548.v1.p1",
+          "description": "Maximum # DSM4 OP Criteria Endorsed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sd_abuse",
+          "id": "phv00559544.v1.p1",
+          "description": "DSM4 Sed Abuse (regardless of Depend.)",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_sedative_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sd_abuse_max_sx_cnt",
+          "id": "phv00559545.v1.p1",
+          "description": "# DSM4 Sed Abuse SXs Endorsed @ max SX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sd_dep_dx",
+          "id": "phv00559541.v1.p1",
+          "description": "DSM4 Sed Dependence",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_sedative_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "sd_dep_max_sx_cnt",
+          "id": "phv00559543.v1.p1",
+          "description": "Maximum # DSM4 Sed Criteria Endorsed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "st_abuse",
+          "id": "phv00559539.v1.p1",
+          "description": "DSM4 STIM Abuse (regardless of Depend.)",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_stimulant_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "st_abuse_max_sx_cnt",
+          "id": "phv00559540.v1.p1",
+          "description": "# DSM4 STIM Abuse SXs Endorsed @ max SX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "st_dep_dx",
+          "id": "phv00559536.v1.p1",
+          "description": "DSM4 STIM Dependence",
+          "concept_id": "ncpi:psychiatric_interview_substance_use_disorders_stimulant_use_disorder",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "st_dep_max_sx_cnt",
+          "id": "phv00559538.v1.p1",
+          "description": "Maximum # DSM4 STIM Criteria Endorsed",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tb_dep_dx",
+          "id": "phv00559522.v1.p1",
+          "description": "DSM4 Tobacco  Dependence",
+          "concept_id": "phenx:tobacco_nicotine_dependence",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "tb_dep_sx_cnt",
+          "id": "phv00559523.v1.p1",
+          "description": "# DSM4 Tobacco Criteria Endorsed @ 1st DX",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "COGA_Family_GWAS_Subject",
+      "datasetId": "pht004252.v2",
+      "description": "The subject consent file includes subject ID, consent information, biological sex, and subject aliases.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00217585.v1.p1",
+          "description": "Registered consent groups (Data Use Limitations (DUL)) as determined by submitters' Institutional Review Boards (IRB) or equivalent body.",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00559513.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID",
+          "id": "phv00217586.v2.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJECT_ID2",
+          "id": "phv00559515.v1.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00217584.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE",
+          "id": "phv00217587.v2.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_SOURCE2",
+          "id": "phv00559514.v1.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "COGA_Family_GWAS_Pedigree",
+      "datasetId": "pht004253.v2",
+      "description": "The subject pedigree table contains family ID, subject ID, mother ID, father ID, and biological sex.",
+      "variables": [
+        {
+          "name": "SEX",
+          "id": "phv00217592.v2.p1",
+          "description": "Gender Status",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00217589.v1.p1",
+          "description": "Unique Random Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "family_id",
+          "id": "phv00217588.v1.p1",
+          "description": "Family ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "father_id",
+          "id": "phv00217590.v1.p1",
+          "description": "Father's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "mother_id",
+          "id": "phv00217591.v1.p1",
+          "description": "Mother's Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "COGA_Family_GWAS_Sample_Attributes",
+      "datasetId": "pht004256.v2",
+      "description": "This sample attributes file includes sample ID, analyte type, body site where sample was collected, and tumor status.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00217642.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00217643.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00559551.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00217641.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "COGA_Family_GWAS_Sample",
+      "datasetId": "pht004254.v2",
+      "description": "This data table contains a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00217594.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00217593.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

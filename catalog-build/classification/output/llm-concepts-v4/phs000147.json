@@ -1,0 +1,162 @@
+{
+  "studyId": "phs000147",
+  "studyName": "CGEMS Breast Cancer GWAS",
+  "tables": [
+    {
+      "tableName": "CGEMS_Breast_Cancer_Subject_Phenotypes",
+      "datasetId": "pht000663.v3",
+      "description": "Subject ID, age, gender, family history of breast cancer, and estrogen receptor status of samples obtained from participants with or without breast cancer and involved in the \"Cancer Genetic Markers of Susceptibility (CGEMS) Breast Cancer Genome-wide Association Study (GWAS) - Primary Scan: Nurses' Health Study - Additional Cases: Nurses' Health Study 2\" project.",
+      "variables": [
+        {
+          "name": "AGE",
+          "id": "phv00066639.v3.p1",
+          "description": "Age at enrollment in 5 year interval",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "ER_STATUS",
+          "id": "phv00226041.v1.p1",
+          "description": "Estrogen receptor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "FAMILY_HISTORY",
+          "id": "phv00066642.v3.p1",
+          "description": "Family history, yes or no?",
+          "concept_id": "ncpi:family_medical_history_inflammatory_bowel_disease_family_history",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00066640.v3.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00066638.v3.p1",
+          "description": "Deidentified subject's ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CGEMS_Breast_Cancer_Sample_Attributes",
+      "datasetId": "pht003584.v1",
+      "description": "Sample ID, body site, analyte type, tumor status of sample, and histological type of samples obtained from participants with or without breast cancer and involved in the \"Cancer Genetic Markers of Susceptibility (CGEMS) Breast Cancer Genome-wide Association Study (GWAS) - Primary Scan: Nurses' Health Study - Additional Cases: Nurses' Health Study 2\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00196169.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00196168.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00196171.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00196170.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00196167.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CGEMS_Breast_Cancer_Subject",
+      "datasetId": "pht000664.v2",
+      "description": "Subject ID, consent group, and case or control information obtained from participants with or without breast cancer and involved in the \"Cancer Genetic Markers of Susceptibility (CGEMS) Breast Cancer Genome-wide Association Study (GWAS) - Primary Scan: Nurses' Health Study - Additional Cases: Nurses' Health Study 2\" project.",
+      "variables": [
+        {
+          "name": "CASE_CONTROL",
+          "id": "phv00066647.v2.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00066644.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00066643.v2.p1",
+          "description": "Deidentified subject's ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "CGEMS_Breast_Cancer_Sample",
+      "datasetId": "pht000665.v2",
+      "description": "Sample ID, subject ID, and sample use variable obtained from participants with or without breast cancer and involved in the \"Cancer Genetic Markers of Susceptibility (CGEMS) Breast Cancer Genome-wide Association Study (GWAS) - Primary Scan: Nurses' Health Study - Additional Cases: Nurses' Health Study 2\" project.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00066648.v2.p1",
+          "description": "Deidentified sample's ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00196166.v1.p1",
+          "description": "Sample use. Array_SNP: SNP genotypes obtained using standard or custom microarrays; Seq_DNA_Target: Custom targeted DNA sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00066649.v2.p1",
+          "description": "Deidentified subject's ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

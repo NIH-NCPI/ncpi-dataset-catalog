@@ -1,0 +1,187 @@
+{
+  "studyId": "phs000992",
+  "studyName": "VESPA: Genome Wide Study of Ace Inhibitor Cough",
+  "tables": [
+    {
+      "tableName": "VESPA_ACEi_Cough_Subject_Phenotypes",
+      "datasetId": "pht005258.v1",
+      "description": "The dataset provides information about the medical history of participants, including diagnoses of respiratory system illnesses, emphysema, and GERD, in addition to information of smoking status (ever/never) and gender/age category.",
+      "variables": [
+        {
+          "name": "Allergic_alveolitis",
+          "id": "phv00258865.v1.p1",
+          "description": "Flag indicating subject has post-nasal drip ICD9s (495.X) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_specialized_conditions",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Asthma",
+          "id": "phv00258858.v1.p1",
+          "description": "Asthma History Ind-2 a 'yes' or 'no' indicator to ask whether there is a history of asthma ICD9s (see list) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_asthma_asthma_diagnosis_ever",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Bronchiectasis",
+          "id": "phv00258864.v1.p1",
+          "description": "Flag indicating subject has asthma ICD9s (494.X) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_bronchiectasis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Bronchitis",
+          "id": "phv00258861.v1.p1",
+          "description": "Flag indicating subject has Bronchitis ICD9s (490) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_bronchitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "COPD",
+          "id": "phv00258866.v1.p1",
+          "description": "Flag indicating subject has COPD ICD9s (496) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_copd",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Chronic_Bronchitis",
+          "id": "phv00258862.v1.p1",
+          "description": "Flag indicating subject has Chronic Bronchitis ICD9s (491.X) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_chronic_bronchitis",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Decade_Birth",
+          "id": "phv00258857.v1.p1",
+          "description": "Decade of Birth",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Emphysema",
+          "id": "phv00258863.v1.p1",
+          "description": "Flag indicating subject has Emphysema ICD9s (492.X) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_emphysema",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GERD",
+          "id": "phv00258860.v1.p1",
+          "description": "Flag indicating subject has GERD ICD9s (530.11, 530.81) ever",
+          "concept_id": "ncpi:disease_diagnosis_gastrointestinal_disorders_gastroesophageal_reflux_disease",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Post_Nasal_Drip",
+          "id": "phv00258859.v1.p1",
+          "description": "Flag indicating subject has post-nasal drip ICD9s (461.X, 473.X) ever",
+          "concept_id": "ncpi:disease_diagnosis_respiratory_lung_disease_nasal_sinus_symptoms",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258855.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Sex",
+          "id": "phv00258856.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Smoking_Status",
+          "id": "phv00258867.v1.p1",
+          "description": "Flag indicating smoking status - just ever (=4)  or never (=1)",
+          "concept_id": "ncpi:ever_smoker_baseline_ever_smoked_cigarettes_ever_smoked_cigarettes",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VESPA_ACEi_Cough_Sample_Attributes",
+      "datasetId": "pht005259.v1",
+      "description": "Sample - Attribute Information",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00258869.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00258871.v1.p1",
+          "description": "Cell or tissue type or subtype of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00258870.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258868.v1.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "VESPA_ACEi_Cough_Sample",
+      "datasetId": "pht005257.v1",
+      "description": "Subject - Sample Mapping - Sample Use",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00258853.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00258854.v1.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00258852.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

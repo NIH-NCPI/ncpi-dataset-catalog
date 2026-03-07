@@ -1,0 +1,274 @@
+{
+  "studyId": "phs002767",
+  "studyName": "Epidemiologic Architecture for Genes Linked to Environment (EAGLE) MetaboChip Study",
+  "tables": [
+    {
+      "tableName": "PAGE_EAGLE_MetaboChip_Subject_Phenotypes",
+      "datasetId": "pht012348.v1",
+      "description": "This subject phenotypes data table includes demographic information (n=3 variables; race, gender, age), anthropometric information (n=3 variables; weight, height, BMI), medication status relative to lab values (n=4 variables; total cholesterol, triglycerides, LDL, HDL), age associated with lab value (n=4 variables; total cholesterol, triglycerides, LDL, HDL), first mention of lab value in electronic records (n=4 variables; total cholesterol, LDL, HDL, triglycerides), number of lipid medications mentioned in electronic records, type of lipid drug mentioned, and smoking status estimated from health records.",
+      "variables": [
+        {
+          "name": "BMI_CALCULATED",
+          "id": "phv00504222.v1.p1",
+          "description": "Body mass index calcuated from extracted weight and height",
+          "concept_id": "topmed:bmi_baseline",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00504218.v1.p1",
+          "description": "Gender extracted from electronic health records",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL",
+          "id": "phv00504232.v1.p1",
+          "description": "First mention of subject's high-density lipoprotein cholesterol lab value in the electronic health record",
+          "concept_id": "ncpi:hdl_hdl_total_cholesterol_hdl_cholesterol_mg_dl_hdl_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL_AGE",
+          "id": "phv00504230.v1.p1",
+          "description": "Subject's age associated with high-density lipoprotein cholesterol lab value",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HDL_MEDICATION",
+          "id": "phv00504226.v1.p1",
+          "description": "Subject's lipid-lowering medication status relative to high-density lipoprotein cholesterol lab value extracted",
+          "concept_id": "ncpi:lipid_lowering_medication_lipid_medication_lab_context",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HEIGHT",
+          "id": "phv00504221.v1.p1",
+          "description": "Height extracted",
+          "concept_id": "ncpi:height_baseline_standing_height_adult_standing_height_measurement_standing_height_measurement",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL",
+          "id": "phv00504233.v1.p1",
+          "description": "First mention of subject's low density lipoprotein cholesterol lab value in the electronic health record",
+          "concept_id": "ncpi:ldl_ldl_cholesterol_direct_ldl_cholesterol_direct",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL_AGE",
+          "id": "phv00504229.v1.p1",
+          "description": "Subject's age associated with low density lipoprotein cholesterol lab value",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LDL_MEDICATION",
+          "id": "phv00504225.v1.p1",
+          "description": "Subject's lipid-lowering medication status relative to low density lipoprotein cholesterol lab value extracted",
+          "concept_id": "ncpi:lipid_lowering_medication_lipid_medication_lab_context",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "LIPID_DRUGS",
+          "id": "phv00504235.v1.p1",
+          "description": "Subject's number of lipid lowering medications mentioned in the electronic health record",
+          "concept_id": "ncpi:lipid_lowering_medication_lipid_medication_dosage",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "LIPID_DRUG_CLASS",
+          "id": "phv00504236.v1.p1",
+          "description": "Type of lipid drug mentioned",
+          "concept_id": "ncpi:lipid_lowering_medication_lipid_medication_dosage",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00504217.v1.p1",
+          "description": "Administratively reported race in electronic health records",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SMOKER_STATUS",
+          "id": "phv00504237.v1.p1",
+          "description": "Smoking status estimated from electronic health records",
+          "concept_id": "ncpi:current_smoker_baseline_current_smoking_status_current_cigarette_smoking_status_current_cigarette_smoking_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00504216.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOTAL_CHOLESTEROL",
+          "id": "phv00504231.v1.p1",
+          "description": "First mention of subject's total cholesterol lab value in the electronic health record",
+          "concept_id": "ncpi:total_cholesterol_total_cholesterol_measurement_total_cholesterol_standard",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOTAL_CHOLESTEROL_AGE",
+          "id": "phv00504227.v1.p1",
+          "description": "Subject's age associated with total cholesterol lab value",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TOTAL_CHOLESTEROL_MEDICATION",
+          "id": "phv00504223.v1.p1",
+          "description": "Subject's lipid-lowering medication status relative to total cholesterol lab value extracted",
+          "concept_id": "ncpi:lipid_lowering_medication_lipid_medication_lab_context",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRIGLYCERIDES",
+          "id": "phv00504234.v1.p1",
+          "description": "First mention of subject's triglycerides lab value in the electronic health record",
+          "concept_id": "ncpi:triglycerides_total_triglycerides_total_triglycerides_si_units",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRIGLYCERIDES_AGE",
+          "id": "phv00504228.v1.p1",
+          "description": "Subject's age associated with triglycerides lab value",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "TRIGLYCERIDES_MEDICATION",
+          "id": "phv00504224.v1.p1",
+          "description": "Subject's lipid-lowering medication status relative to triglyceride lab value extracted",
+          "concept_id": "ncpi:lipid_lowering_medication_lipid_medication_lab_context",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT",
+          "id": "phv00504220.v1.p1",
+          "description": "Weight extracted",
+          "concept_id": "ncpi:weight_baseline_current_weight_body_weight_measured_body_weight_measured",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WEIGHT_HEIGHT_AGE",
+          "id": "phv00504219.v1.p1",
+          "description": "Age at extracted weight and height extracted from electronic health records",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PAGE_EAGLE_MetaboChip_Subject",
+      "datasetId": "pht012346.v1",
+      "description": "The subject consent dataset contains subject IDs, consent group information, and biological sex.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00504212.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00504213.v1.p1",
+          "description": "Biological sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00504211.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PAGE_EAGLE_MetaboChip_Sample_Attributes",
+      "datasetId": "pht012349.v1",
+      "description": "This sample attributes table includes body site and analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00504240.v1.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00504239.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00504238.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "PAGE_EAGLE_MetaboChip_Sample",
+      "datasetId": "pht012347.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00504215.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00504214.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

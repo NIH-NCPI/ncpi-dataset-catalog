@@ -1,0 +1,257 @@
+{
+  "studyId": "phs000691",
+  "studyName": "CIP: Differential Response to Hydroxyurea and Incidence of Stroke in Sickle Cell Disease",
+  "tables": [
+    {
+      "tableName": "Sickle_Cell_CIP_Subject_Phenotypes",
+      "datasetId": "pht003653.v1",
+      "description": "This subject phenotype table includes subject gender, age that hydroxyurea was initiated, maximum tolerated hydroxyurea dose, baseline fetal hemoglobin level, fetal hemoglobin level at the maximum tolerated dose (MTD) of hydroxyurea, and delta of fetal hemoglobin levels between baseline and MTD.",
+      "variables": [
+        {
+          "name": "BL F/F+S",
+          "id": "phv00196904.v2.p1",
+          "description": "Baseline fetal hemoglobin (HbF) before starting hydroxyurea (%HbF/%HbF+ %HbS)*100",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DELTA HbF",
+          "id": "phv00196906.v2.p1",
+          "description": "(MTD F/F+S)-(BL F/F+S), where MTD F/F+S = Fetal hemoglobin (HbF) at the maximum hydroxyurea dose and BL F/F+S = Baseline fetal hemoglobin (HbF) before starting hydroxyurea (%HbF/%HbF+ %HbS)*100.",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HU mg/kg",
+          "id": "phv00196903.v1.p1",
+          "description": "Maximum tolerated daily dose of hydroxyurea in milligrams per kilogram",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MTD F/F+S",
+          "id": "phv00196905.v2.p1",
+          "description": "Fetal hemoglobin (HbF) at the maximum hydroxyurea dose",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00196901.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "START_AGE",
+          "id": "phv00196902.v2.p1",
+          "description": "Age they initiated the drug, hydroxyurea, in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00196900.v1.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Sickle_Cell_CIP_Subject_Phenotypes",
+      "datasetId": "pht003653.v2",
+      "description": null,
+      "variables": [
+        {
+          "name": "BL F/F+S",
+          "id": "phv00196904.v2.p1",
+          "description": "Baseline fetal hemoglobin (HbF) before starting hydroxyurea (%HbF/%HbF+ %HbS)*100",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "DELTA HbF",
+          "id": "phv00196906.v2.p1",
+          "description": "(MTD F/F+S)-(BL F/F+S), where MTD F/F+S = Fetal hemoglobin (HbF) at the maximum hydroxyurea dose and BL F/F+S = Baseline fetal hemoglobin (HbF) before starting hydroxyurea (%HbF/%HbF+ %HbS)*100.",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "HU mg/kg",
+          "id": "phv00196903.v2.p1",
+          "description": "Maximum tolerated daily dose of hydroxyurea in milligrams per kilogram",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "MTD F/F+S",
+          "id": "phv00196905.v2.p1",
+          "description": "Fetal hemoglobin (HbF) at the maximum hydroxyurea dose",
+          "concept_id": "topmed:hemoglobin_mcnc_bld",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00196901.v2.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "START_AGE",
+          "id": "phv00196902.v2.p1",
+          "description": "Age they initiated the drug, hydroxyurea, in years",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00196900.v2.p1",
+          "description": "De-identified Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Sickle_Cell_CIP_Subject",
+      "datasetId": "pht003651.v2",
+      "description": "This data table contains subject IDs, consent information, affection status, and subject aliases.",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00196895.v2.p1",
+          "description": "Case control status of the subject",
+          "concept_id": "ncpi:disease_diagnosis_case_control_status",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "CONSENT",
+          "id": "phv00196892.v2.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SUBJID",
+          "id": "phv00196894.v2.p1",
+          "description": "Subject ID used in the Source Repository",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00196891.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJ_SOURCE",
+          "id": "phv00196893.v2.p1",
+          "description": "Source repository where subjects originate",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Sickle_Cell_CIP_Sample",
+      "datasetId": "pht003652.v2",
+      "description": "This data table contains mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs. The data table also includes sample aliases and sample use.",
+      "variables": [
+        {
+          "name": "SAMPID",
+          "id": "phv00196897.v2.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_USE",
+          "id": "phv00200359.v2.p1",
+          "description": "Sample Use",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMP_SOURCE",
+          "id": "phv00196898.v2.p1",
+          "description": "Source repository where samples originate. HUSTLE=Long Term Effects of Hydroxyurea Therapy in Children with Sickle Cell Disease; SWITCH=Stroke with Transfusions Changing to Hydroxyurea",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SOURCE_SAMPID",
+          "id": "phv00196899.v2.p1",
+          "description": "Sample ID used in the Source Repository. HUSTLE=Long Term Effects of Hydroxyurea Therapy in Children with Sickle Cell Disease; SWITCH=Stroke with Transfusions Changing to Hydroxyurea",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJID",
+          "id": "phv00196896.v2.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "Sickle_Cell_CIP_Sample_Attributes",
+      "datasetId": "pht003654.v2",
+      "description": "This sample attributes table includes body site where sample was extracted and analyte type.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00196909.v2.p1",
+          "description": "Analyte Type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00196908.v2.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPID",
+          "id": "phv00196907.v2.p1",
+          "description": "De-identified Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

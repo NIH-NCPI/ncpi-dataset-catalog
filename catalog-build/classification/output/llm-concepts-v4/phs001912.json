@@ -1,0 +1,482 @@
+{
+  "studyId": "phs001912",
+  "studyName": "Somatic Genome Dynamics of Barrett's Esophagus Patients with Non-Cancer and Cancer Outcomes",
+  "tables": [
+    {
+      "tableName": "BE_EA_Subject_Phenotypes",
+      "datasetId": "pht009624.v1",
+      "description": "This subject phenotypes data table includes case control status of subject for progression/nonprogression to esophageal adenocarcinoma, demographic information (self-reported sex, race, and age at various timepoints during the study), age at baseline endoscopy and most recent endoscopy, count of unique point mutations and indels across all four T1 and T2 biopsies per patient, age at death or age confirmed alive, genetic and physical indicators for risk of progression at various timepoints (maximum histopathologic diagnosis, maximum TP53 abnormality, Barrett's segment length measurements, maximum count of SNVs, maximum count of indels, detection of whole genome doubled, maximum load of somatic chromosomal abnormalities, maximum count of structural variants, distance of incisors to ora serrata, distance from incisors to the gastroesophageal junction), time elapsed between timepoints (n=2 variables; between T1 and T2, between T1 and T3).",
+      "variables": [
+        {
+          "name": "AFFECTION_STATUS",
+          "id": "phv00420787.v1.p1",
+          "description": "Case control status of the subject for nonprogression or progression to esophageal adenocarcinoma outcome",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_occurrence_status_case_control_status",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_ALIVE",
+          "id": "phv00420799.v1.p1",
+          "description": "Known Age confirmed alive in cohort study as of April 2019",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_BASELINE",
+          "id": "phv00420790.v1.p1",
+          "description": "Age at baseline endoscopy in cohort study",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_DEATH",
+          "id": "phv00420798.v1.p1",
+          "description": "Known Age at death in cohort study as of April 2019",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_EA_DIAGNOSIS",
+          "id": "phv00420794.v1.p1",
+          "description": "Age at diagnosis of esophageal adenocarcinoma (EA)",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_diagnosis_age_esophageal_cancer_diagnosis_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_LAST",
+          "id": "phv00420797.v1.p1",
+          "description": "Age at last endoscopy in cohort study",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_T1",
+          "id": "phv00420791.v1.p1",
+          "description": "Age at first timepoint TI in case control study",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_T2",
+          "id": "phv00420792.v1.p1",
+          "description": "Age at second timepoint T2 in case control study",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "AGE_T3",
+          "id": "phv00420795.v1.p1",
+          "description": "Age at third timepoint T3",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BE_SEGMENT_T1",
+          "id": "phv00420800.v1.p1",
+          "description": "Barrett's segment length  measured  between the ora serrata and the gastroesophageal junction  at T1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BE_SEGMENT_T2",
+          "id": "phv00420801.v1.p1",
+          "description": "Barrett's segment length  measured  between the ora serrata and the gastroesophageal junction  at T2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BE_SEGMENT_T3",
+          "id": "phv00420802.v1.p1",
+          "description": "Barrett's segment length  measured  between the ora serrata and the gastroesophageal junction  at T3",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS_BASELINE",
+          "id": "phv00420803.v1.p1",
+          "description": "Maximum histopathologic diagnosis at baseline in cohort study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS_LAST",
+          "id": "phv00420808.v1.p1",
+          "description": "Maximum histopathologic diagnosis at last endoscopy in cohort study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS_MAX_EVER",
+          "id": "phv00420807.v1.p1",
+          "description": "Maximum histopathologic diagnosis ever in cohort study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS_T1",
+          "id": "phv00420804.v1.p1",
+          "description": "Maximum histopathologic diagnosis at T1 in case control study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS_T2",
+          "id": "phv00420805.v1.p1",
+          "description": "Maximum histopathologic diagnosis at T2 in case control study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "DIAGNOSIS_T3",
+          "id": "phv00420806.v1.p1",
+          "description": "Maximum histopathologic diagnosis at T3 in case control study",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "RACE",
+          "id": "phv00420789.v1.p1",
+          "description": "Self-reported race",
+          "concept_id": "ncpi:race_us_self_reported_race",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEX",
+          "id": "phv00420788.v1.p1",
+          "description": "Self-reported sex",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420786.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1_GEJ",
+          "id": "phv00420826.v1.p1",
+          "description": "Distance from incisors to the gastroesophageal junction (GEJ) T1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1_MaxOftotal_Indel_cnt",
+          "id": "phv00420811.v1.p1",
+          "description": "Maximum count of indels at timepoint T1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1_MaxOftotal_SNV_cnt",
+          "id": "phv00420809.v1.p1",
+          "description": "Maximum count of SNVs at timepoint T1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1_Max_Mbp_SCA",
+          "id": "phv00420817.v1.p1",
+          "description": "Maximum load of somatic chromosomal abnormalities (SCA) in Mbp at T1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1_Max_SV_total",
+          "id": "phv00420819.v1.p1",
+          "description": "Maximum count of structural variants (SV) at T1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1_Max_TP53hit",
+          "id": "phv00420813.v1.p1",
+          "description": "Maximum TP53 abnormality detected at timepoint T1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1_OS",
+          "id": "phv00420823.v1.p1",
+          "description": "Distance from incisors to ora serrata (OS) or squamocolumnar junction at T1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T1_WGD",
+          "id": "phv00420815.v1.p1",
+          "description": "Detection of a whole genome doubled biopsy at timepoint T1",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2_GEJ",
+          "id": "phv00420827.v1.p1",
+          "description": "Distance from incisors to the gastroesophageal junction (GEJ) T2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2_MaxOftotal_Indel_cnt",
+          "id": "phv00420812.v1.p1",
+          "description": "Maximum count of indels at timepoint T2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2_MaxOftotal_SNV_cnt",
+          "id": "phv00420810.v1.p1",
+          "description": "Maximum count of SNVs at timepoint T2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2_Max_Mbp_SCA",
+          "id": "phv00420818.v1.p1",
+          "description": "Maximum load of somatic chromosomal abnormalities (SCA) in Mbp at T2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2_Max_SV_total",
+          "id": "phv00420820.v1.p1",
+          "description": "Maximum count of structural variants (SV) at T2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2_Max_TP53hit",
+          "id": "phv00420814.v1.p1",
+          "description": "Maximum TP53 abnormality detected at timepoint T2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2_OS",
+          "id": "phv00420824.v1.p1",
+          "description": "Distance from incisors to ora serrata (OS) or squamocolumnar junction at T2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T2_WGD",
+          "id": "phv00420816.v1.p1",
+          "description": "Detection of a whole genome doubled biopsy at timepoint T2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T3_GEJ",
+          "id": "phv00420828.v1.p1",
+          "description": "Distance from incisors to the gastroesophageal junction (GEJ) T3",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "T3_OS",
+          "id": "phv00420825.v1.p1",
+          "description": "Distance from incisors to ora serrata (OS) or squamocolumnar junction at T3",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "Unique_ByPatient_Count_SNV+Indel",
+          "id": "phv00435990.v1.p1",
+          "description": "Count of unique point mutations and indels across all four T1 and T2 biopsies per patient",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEARS_T1_T2",
+          "id": "phv00420793.v1.p1",
+          "description": "Time between timepoint T1 and T2",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "YEARS_T1_T3",
+          "id": "phv00420796.v1.p1",
+          "description": "Time between timepoint T1 and T3, subset of 10 NP controls with long follow up",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BE_EA_Sample_Attributes",
+      "datasetId": "pht009625.v1",
+      "description": "This sample attributes table includes the body site where sample was collected, analyte type, tumor status, tissue type, paired normal control sample ID, patient age at time of sample collection, distance from gastroesophageal junction from which sample was collected, and sequencing center.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00420831.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00420830.v1.p1",
+          "description": "Body site where biopsies were collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "CM_DISTANCE_FROM_GEJ",
+          "id": "phv00436010.v1.p1",
+          "description": "Centimeter distance in the esophagus that sample was collected relative to the gastroesophageal junction",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGICAL_TYPE",
+          "id": "phv00420833.v1.p1",
+          "description": "Tissue type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00420832.v1.p1",
+          "description": "Tumor status",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PAIRED_NORMAL",
+          "id": "phv00436008.v1.p1",
+          "description": "Sample ID of the normal control sample used in paired normal:BE sample analyses",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PATIENT_AGE_AT_SAMPLING_TIME",
+          "id": "phv00436009.v1.p1",
+          "description": "Patient age in years at time of sample collection",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_CATEGORY",
+          "id": "phv00436007.v1.p1",
+          "description": "Sample classification including timepoint",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420829.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SEQUENCING_CENTER",
+          "id": "phv00420834.v1.p1",
+          "description": "Name of the center that performed the whole genome sequencing",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BE_EA_Subject",
+      "datasetId": "pht009622.v1",
+      "description": "This subject consent data table contains subject IDs and consent group information.",
+      "variables": [
+        {
+          "name": "CONSENT",
+          "id": "phv00420781.v1.p1",
+          "description": "Consent group as determined by DAC",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420780.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "BE_EA_Sample",
+      "datasetId": "pht009623.v1",
+      "description": "This subject sample mapping data table includes a mapping of study subject IDs to sample IDs. Samples are the final preps submitted for genotyping, sequencing, and/or expression data. For example, if one patient (subject ID) gave one sample, and that sample was processed differently to generate 2 sequencing runs, there would be two rows, both using the same subject ID, but having 2 unique sample IDs.",
+      "variables": [
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00420785.v1.p1",
+          "description": "Sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00420784.v1.p1",
+          "description": "Subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}

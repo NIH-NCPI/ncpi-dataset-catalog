@@ -1,0 +1,124 @@
+{
+  "studyId": "phs001131",
+  "studyName": "FOCI Affymetrix Exome Chip",
+  "tables": [
+    {
+      "tableName": "FOCI_Affymetrix_Exome_Chip_Subject_Phenotypes",
+      "datasetId": "pht007499.v1",
+      "description": "Subject ID, gender, ancestry, age at diagnosis, tumor description including tumor behavior, tumor grade, tumor histology, and primary site of tumor of participants with or without ovarian cancer and involved in the \"Follow-up of Ovarian Cancer Genetic Association and Interaction Studies (FOCI)\" project.",
+      "variables": [
+        {
+          "name": "ANCESTRY",
+          "id": "phv00354214.v1.p1",
+          "description": "Intercontinental ancestry as assigned by LAMP. 90 % was used for European, 80% for African and Asian, respectively. The remaining samples were analyzed as other ethnic group.",
+          "concept_id": "topmed:admixture_proportions",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "BEHAVIOR",
+          "id": "phv00354210.v1.p1",
+          "description": "Tumor behavior",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_behavior",
+          "confidence": "medium",
+          "source": "llm"
+        },
+        {
+          "name": "GENDER",
+          "id": "phv00354215.v1.p1",
+          "description": "Gender of participant",
+          "concept_id": "ncpi:annotated_sex_participant_sex_self_reported_sex_gender_self_reported_sex_gender",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "GRADE",
+          "id": "phv00354211.v1.p1",
+          "description": "Tumor grade",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_tumor_grade",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "HISTOLOGY",
+          "id": "phv00354212.v1.p1",
+          "description": "Tumor histology",
+          "concept_id": "ncpi:cancer_diagnosis_tumor_characteristics_histological_type",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "PRIMARY_SITE",
+          "id": "phv00354209.v1.p1",
+          "description": "Primary cancer site or control status",
+          "concept_id": "ncpi:cancer_diagnosis_cancer_site_type_cancer_site_anatomical_primary_cancer_site",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "REF_AGE",
+          "id": "phv00354213.v1.p1",
+          "description": "Age at diagnosis (cases) or interview (controls)",
+          "concept_id": "ncpi:subject_age",
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SUBJECT_ID",
+          "id": "phv00354208.v1.p1",
+          "description": "De-identified subject ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    },
+    {
+      "tableName": "FOCI_Affymetrix_Exome_Chip_Sample_Attributes",
+      "datasetId": "pht007500.v1",
+      "description": "Sample ID, analyte type, body site where sample was obtained, tumor status of sample, and indicator if DNA was whole genome amplified of participants with or without ovarian cancer and involved in the \"Follow-up of Ovarian Cancer Genetic Association and Interaction Studies (FOCI)\" project.",
+      "variables": [
+        {
+          "name": "ANALYTE_TYPE",
+          "id": "phv00354219.v1.p1",
+          "description": "Analyte type",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "BODY_SITE",
+          "id": "phv00354217.v1.p1",
+          "description": "Body site where sample was collected",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "IS_TUMOR",
+          "id": "phv00354220.v1.p1",
+          "description": "Tumor status of sample",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "SAMPLE_ID",
+          "id": "phv00354216.v1.p1",
+          "description": "De-identified sample ID",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        },
+        {
+          "name": "WGA",
+          "id": "phv00354218.v1.p1",
+          "description": "Indicator if DNA was whole genome amplified",
+          "concept_id": null,
+          "confidence": "high",
+          "source": "llm"
+        }
+      ]
+    }
+  ]
+}
