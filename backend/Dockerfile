@@ -32,18 +32,13 @@ COPY catalog-build/classification/output/phenx-concept-vocabulary.json catalog-b
 COPY catalog-build/classification/output/ncpi-categories.json catalog-build/classification/output/ncpi-categories.json
 COPY catalog-build/common/disease_abbrev_mapping.tsv /catalog-build/common/disease_abbrev_mapping.tsv
 
-# Copy pre-computed concept embeddings so index build skips generation.
-# Regenerate locally with: make clean-embeddings && make db-reload
-COPY catalog-build/classification/output/concept-embeddings.npy catalog-build/classification/output/concept-embeddings.npy
-COPY catalog-build/classification/output/concept-embeddings.sha256 catalog-build/classification/output/concept-embeddings.sha256
-
-# Build DuckDB cache at image build time so startup is fast.
-# With pre-computed embeddings, this only parses JSON + loads vectors
-# (seconds instead of minutes).
+# Copy pre-built DuckDB cache (built locally via `make db-reload`).
+# This eliminates all JSON parsing and embedding generation from the
+# Docker build — the container starts with a ready-to-use index.
 RUN mkdir -p /cache
+COPY catalog/concept-search.duckdb /cache/concept-search.duckdb
 ENV NCPI_DUCKDB_CACHE_PATH=/cache/concept-search.duckdb
 ENV NCPI_REPO_ROOT=/app
-RUN python -c "import logging; logging.basicConfig(level=logging.INFO); from concept_search.index import get_index; get_index()"
 
 EXPOSE 8000
 

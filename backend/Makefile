@@ -104,6 +104,10 @@ evals:
 
 # Build Docker image (bakes in git SHA for /health endpoint)
 build:
+	@if [ ! -f ../catalog/concept-search.duckdb ]; then \
+		echo "Error: catalog/concept-search.duckdb not found. Run 'make db-reload' first."; \
+		exit 1; \
+	fi
 	@if [ -n "$$(git -C .. status --porcelain -uno)" ]; then \
 		echo "Error: uncommitted changes. Commit or stash before deploying."; \
 		exit 1; \
