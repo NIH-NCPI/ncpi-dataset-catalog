@@ -158,6 +158,45 @@ def _merge(
 
 
 # ---------------------------------------------------------------------------
+# Multi-turn merge
+# ---------------------------------------------------------------------------
+
+def _merge_with_previous(
+    previous: QueryModel,
+    new_mentions: list[ResolvedMention],
+    new_intent: str | None = None,
+) -> QueryModel:
+    """Merge new resolved mentions onto a previous QueryModel.
+
+    Args:
+        previous: The previous query state (from the client round-trip).
+        new_mentions: Newly resolved mentions from the current turn.
+        new_intent: Intent from the new extraction. If provided and not
+            the default ``"study"``, overrides the previous intent.
+
+    Returns:
+        Merged QueryModel with previous + new mentions. If the same
+        ``(facet, original_text)`` appears in both, the new mention wins.
+    """
+    # Index previous mentions by (facet, original_text)
+    by_key: dict[tuple[str, str], ResolvedMention] = {}
+    for m in previous.mentions:
+        by_key[(m.facet.value, m.original_text)] = m
+
+    # New mentions overwrite previous on collision
+    for m in new_mentions:
+        by_key[(m.facet.value, m.original_text)] = m
+
+    # Determine intent: new extraction wins if it explicitly changed
+    intent = new_intent if new_intent else previous.intent
+
+    return QueryModel(
+        intent=intent,
+        mentions=list(by_key.values()),
+    )
+
+
+# ---------------------------------------------------------------------------
 # Main pipeline
 # ---------------------------------------------------------------------------
 
@@ -165,6 +204,7 @@ async def _run_pipeline_uncached(
     query: str,
     index: ConceptIndex | None = None,
     model: str | None = None,
+    previous_query: QueryModel | None = None,
 ) -> QueryModel:
     """Run the full 3-agent pipeline (no caching).
 
@@ -172,6 +212,7 @@ async def _run_pipeline_uncached(
         query: The user's natural-language search query.
         index: ConceptIndex to use. If None, uses the shared singleton.
         model: Override the model for all agents.
+        previous_query: Previous query state for multi-turn refinement.
 
     Returns:
         Structured QueryModel with resolved mentions and boolean logic.
@@ -181,7 +222,9 @@ async def _run_pipeline_uncached(
 
     # --- Step 1: Extract (sequential — must run first) ---
     t0 = time.monotonic()
-    extract_result = await run_extract(query, model=model)
+    extract_result = await run_extract(
+        query, model=model, previous_query=previous_query
+    )
     t_extract = time.monotonic()
     logger.info(
         "Extract: %.0fms, %d mentions",
@@ -191,6 +234,14 @@ async def _run_pipeline_uncached(
 
     intent = extract_result.intent
     logger.info("Intent: %s", intent)
+
+    # In refine mode with no new mentions, return previous with updated intent
+    if not extract_result.mentions and previous_query:
+        return QueryModel(
+            intent=intent,
+            mentions=previous_query.mentions,
+            message=extract_result.message,
+        )
 
     if not extract_result.mentions:
         return QueryModel(
@@ -214,8 +265,15 @@ async def _run_pipeline_uncached(
     messages.extend(resolve_msgs)
 
     # --- Step 3: Deterministic merge ---
-    query_model = _merge(resolved, structure_result)
-    query_model.intent = intent
+    new_merged = _merge(resolved, structure_result)
+
+    if previous_query:
+        query_model = _merge_with_previous(
+            previous_query, new_merged.mentions, new_intent=intent
+        )
+    else:
+        query_model = new_merged
+        query_model.intent = intent
 
     for m in query_model.mentions:
         logger.debug(
@@ -235,20 +293,30 @@ async def run_pipeline(
     query: str,
     index: ConceptIndex | None = None,
     model: str | None = None,
+    previous_query: QueryModel | None = None,
 ) -> QueryModel:
     """Run the full 3-agent pipeline on a natural-language query.
 
     Results are cached by normalized query string. A cache hit skips
-    all three agents (extract, resolve, structure).
+    all three agents (extract, resolve, structure). Cache is bypassed
+    for multi-turn requests (session-specific, near-zero hit rate).
 
     Args:
         query: The user's natural-language search query.
         index: ConceptIndex to use. If None, uses the shared singleton.
         model: Override the model for all agents.
+        previous_query: Previous query state for multi-turn refinement.
 
     Returns:
         Structured QueryModel with resolved mentions and boolean logic.
     """
+    # Skip pipeline cache for multi-turn (session-specific state).
+    # Per-mention resolve cache still works.
+    if previous_query:
+        return await _run_pipeline_uncached(
+            query, index, model, previous_query=previous_query
+        )
+
     key = query.strip().lower()
     return await pipeline_cache.get_or_compute(
         key, lambda: _run_pipeline_uncached(query, index, model)

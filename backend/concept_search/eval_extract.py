@@ -6,11 +6,19 @@ import asyncio
 from pathlib import Path
 
 from dotenv import load_dotenv
+from pydantic import BaseModel
 from pydantic_evals import Case, Dataset
 from pydantic_evals.evaluators import Evaluator, EvaluatorContext
 
 from .extract_agent import run_extract
-from .models import ExtractResult, Facet, RawMention
+from .models import ExtractResult, Facet, QueryModel, RawMention, ResolvedMention
+
+
+class MultiTurnExtractInput(BaseModel):
+    """Input for multi-turn extract eval cases."""
+
+    previous: QueryModel
+    query: str
 
 
 class ExtractEvaluator(Evaluator[str, ExtractResult]):
@@ -554,14 +562,85 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
 )
 
 
+def _prev(*mentions: ResolvedMention) -> QueryModel:
+    """Build a previous QueryModel for multi-turn eval cases."""
+    return QueryModel(mentions=list(mentions))
+
+
+def _resolved(
+    facet: Facet,
+    text: str,
+    values: list[str],
+    exclude: bool = False,
+) -> ResolvedMention:
+    """Shorthand for building a ResolvedMention in eval cases."""
+    return ResolvedMention(
+        exclude=exclude,
+        facet=facet,
+        original_text=text,
+        values=values,
+    )
+
+
+multi_turn_dataset = Dataset[MultiTurnExtractInput, ExtractResult, ExtractResult](
+    evaluators=[ExtractEvaluator()],
+    cases=[
+        Case(
+            name="refine-add-platform",
+            inputs=MultiTurnExtractInput(
+                query="also on AnVIL",
+                previous=_prev(
+                    _resolved(Facet.FOCUS, "asthma", ["Asthma"]),
+                    _resolved(Facet.FOCUS, "children", ["Child"]),
+                ),
+            ),
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[_rm("AnVIL", Facet.PLATFORM, ["AnVIL"])],
+            ),
+        ),
+        Case(
+            name="refine-add-data-type",
+            inputs=MultiTurnExtractInput(
+                query="with WGS data",
+                previous=_prev(
+                    _resolved(Facet.FOCUS, "diabetes", ["Diabetes Mellitus"]),
+                ),
+            ),
+            expected_output=ExtractResult(
+                intent="study",
+                mentions=[_rm("WGS", Facet.DATA_TYPE, ["WGS"])],
+            ),
+        ),
+        Case(
+            name="refine-change-intent",
+            inputs=MultiTurnExtractInput(
+                query="show me variables instead",
+                previous=_prev(
+                    _resolved(Facet.FOCUS, "asthma", ["Asthma"]),
+                ),
+            ),
+            expected_output=ExtractResult(intent="variable", mentions=[]),
+        ),
+    ],
+)
+
+
 async def _run_task(inputs: str) -> ExtractResult:
     return await run_extract(inputs)
+
+
+async def _run_multi_turn_task(inputs: MultiTurnExtractInput) -> ExtractResult:
+    return await run_extract(inputs.query, previous_query=inputs.previous)
 
 
 async def run_evals() -> None:
     """Run the extract eval dataset and print the report."""
     report = await dataset.evaluate(_run_task)
     report.print()
+    print("\n--- Multi-turn extract evals ---\n")
+    mt_report = await multi_turn_dataset.evaluate(_run_multi_turn_task)
+    mt_report.print()
 
 
 def main() -> None:

@@ -13,9 +13,22 @@ from .models import Intent, QueryModel
 
 
 class SearchRequest(BaseModel):
-    """Incoming search query."""
+    """Incoming search query.
 
-    query: str = Field(..., min_length=1, max_length=1000)
+    Three modes based on which fields are present:
+
+    1. **Fresh** — ``query`` is set, no ``previous_query``.  Full pipeline.
+    2. **Refine** — ``query`` is set *and* ``previous_query`` is present.
+       Extract only new mentions, merge onto previous state.
+    3. **Lookup-only** — ``query`` is empty/absent, ``previous_query`` is
+       present.  Skip LLM pipeline; re-run deterministic lookup with the
+       (possibly mutated) previous query model.
+    """
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    previous_query: QueryModel | None = None
+    query: str = Field(default="", max_length=1000)
 
 
 class DemographicCategory(BaseModel):

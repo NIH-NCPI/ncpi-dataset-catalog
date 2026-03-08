@@ -8,7 +8,7 @@ from pathlib import Path
 from pydantic_ai import Agent
 from pydantic_ai.settings import ModelSettings
 
-from .models import ExtractResult
+from .models import ExtractResult, QueryModel
 
 _PROMPT_PATH = Path(__file__).parent / "EXTRACT_PROMPT.md"
 _DEFAULT_MODEL = "anthropic:claude-haiku-4-5-20251001"
@@ -40,16 +40,48 @@ def _get_agent(model: str | None = None) -> Agent[None, ExtractResult]:
         return _agent
 
 
-async def run_extract(query: str, model: str | None = None) -> ExtractResult:
+def _format_previous_context(previous: QueryModel) -> str:
+    """Format the previous query state as context for the extract agent.
+
+    Args:
+        previous: The previous QueryModel with active filters.
+
+    Returns:
+        A compact text summary of active filters.
+    """
+    lines: list[str] = []
+    for m in previous.mentions:
+        prefix = "exclude" if m.exclude else "include"
+        values_str = ", ".join(m.values) if m.values else "(unresolved)"
+        lines.append(
+            f"- {m.facet.value}: \"{m.original_text}\" → [{values_str}] ({prefix})"
+        )
+    return "\n".join(lines)
+
+
+async def run_extract(
+    query: str,
+    model: str | None = None,
+    previous_query: QueryModel | None = None,
+) -> ExtractResult:
     """Parse a natural-language query into raw mentions.
 
     Args:
         query: The user's natural-language search query.
         model: Override the model (default: Haiku).
+        previous_query: Previous query state for multi-turn refinement.
+            When present, the agent extracts only NEW mentions.
 
     Returns:
         ExtractResult with a list of RawMention items.
     """
     agent = _get_agent(model)
-    result = await agent.run(query)
+
+    if previous_query and previous_query.mentions:
+        context = _format_previous_context(previous_query)
+        prompt = f"Active filters:\n{context}\n\nNew user input: {query}"
+    else:
+        prompt = query
+
+    result = await agent.run(prompt)
     return result.output

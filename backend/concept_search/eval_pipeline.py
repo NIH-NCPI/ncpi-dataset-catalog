@@ -204,10 +204,152 @@ async def _run_task(inputs: str) -> PipelineOutput:
     return PipelineOutput(query=query_model, studies=studies)
 
 
+# ---------------------------------------------------------------------------
+# Multi-turn pipeline evals
+# ---------------------------------------------------------------------------
+
+
+class Turn(BaseModel):
+    """A single turn in a multi-turn pipeline eval."""
+
+    query: str = ""
+    remove_facets: list[str] = []
+
+
+class MultiTurnInput(BaseModel):
+    """Input for multi-turn pipeline eval cases."""
+
+    turns: list[Turn]
+
+
+class MultiTurnPipelineEvaluator(Evaluator[MultiTurnInput, PipelineOutput]):
+    """Scores multi-turn pipeline evals using the same study checks."""
+
+    def evaluate(
+        self, ctx: EvaluatorContext[MultiTurnInput, PipelineOutput]
+    ) -> dict[str, float]:
+        expected: StudyExpectation | None = ctx.expected_output
+        actual = ctx.output
+        if expected is None:
+            return {"pipeline_score": 1.0}
+
+        studies = actual.studies
+        penalties = 0.0
+        checks = 0
+
+        checks += 1
+        if len(studies) < expected.min_studies:
+            penalties += 1.0
+        if expected.max_studies is not None and len(studies) > expected.max_studies:
+            penalties += 1.0
+            checks += 1
+        elif expected.max_studies is not None:
+            checks += 1
+
+        for field, required_values in expected.all_have.items():
+            req_lower = {v.lower() for v in required_values}
+            for study in studies:
+                checks += 1
+                vals = _get_study_values(study, field)
+                if not req_lower.issubset(vals):
+                    penalties += 1.0
+
+        for field, candidate_values in expected.any_have.items():
+            cand_lower = {v.lower() for v in candidate_values}
+            for study in studies:
+                checks += 1
+                vals = _get_study_values(study, field)
+                if not cand_lower.intersection(vals):
+                    penalties += 1.0
+
+        for field, forbidden_values in expected.none_have.items():
+            forb_lower = {v.lower() for v in forbidden_values}
+            for study in studies:
+                checks += 1
+                vals = _get_study_values(study, field)
+                if forb_lower.intersection(vals):
+                    penalties += 1.0
+
+        score = max(0.0, 1.0 - penalties / checks) if checks > 0 else 1.0
+        return {"pipeline_score": round(score, 3)}
+
+
+multi_turn_dataset = Dataset[MultiTurnInput, PipelineOutput, StudyExpectation](
+    evaluators=[MultiTurnPipelineEvaluator()],
+    cases=[
+        Case(
+            name="multi-turn-add-platform",
+            inputs=MultiTurnInput(
+                turns=[
+                    Turn(query="heart disease studies"),
+                    Turn(query="also on AnVIL"),
+                ],
+            ),
+            expected_output=StudyExpectation(
+                min_studies=1,
+                all_have={"platform": ["AnVIL"]},
+            ),
+        ),
+        Case(
+            name="multi-turn-lookup-only-remove",
+            inputs=MultiTurnInput(
+                turns=[
+                    Turn(query="WGS diabetes studies on AnVIL"),
+                    Turn(query="", remove_facets=["platform"]),
+                ],
+            ),
+            expected_output=StudyExpectation(
+                min_studies=1,
+                all_have={"dataType": ["WGS"]},
+            ),
+        ),
+    ],
+)
+
+
+async def _run_multi_turn_task(inputs: MultiTurnInput) -> PipelineOutput:
+    """Chain turns: each turn passes its QueryModel as previousQuery to the next."""
+    index = get_index()
+    query_model: QueryModel | None = None
+
+    for turn in inputs.turns:
+        if turn.query and query_model:
+            # Refine mode
+            query_model = await run_pipeline(
+                turn.query, previous_query=query_model
+            )
+        elif query_model and not turn.query:
+            # Lookup-only mode — apply remove_facets if specified
+            if turn.remove_facets:
+                remove_set = set(turn.remove_facets)
+                query_model = QueryModel(
+                    intent=query_model.intent,
+                    mentions=[
+                        m
+                        for m in query_model.mentions
+                        if m.facet.value not in remove_set
+                    ],
+                )
+            # In lookup-only mode, query_model is used as-is for lookup
+        else:
+            # Fresh mode
+            query_model = await run_pipeline(turn.query)
+
+    assert query_model is not None
+    studies: list[dict] = []
+    if query_model.mentions:
+        include, exclude = _split_mentions(query_model.mentions)
+        studies = index.query_studies(include, exclude or None)
+    return PipelineOutput(query=query_model, studies=studies)
+
+
 async def run_evals() -> None:
     """Run the pipeline eval dataset and print the report."""
     report = await dataset.evaluate(_run_task)
     report.print()
+    print("\n--- Multi-turn pipeline evals ---\n")
+    mt_report = await multi_turn_dataset.evaluate(_run_multi_turn_task)
+    mt_report.print()
 
 
 def main() -> None:
