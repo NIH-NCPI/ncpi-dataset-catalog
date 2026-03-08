@@ -6,7 +6,7 @@ Separate from models.py to avoid coupling HTTP transport concerns
 
 from __future__ import annotations
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 from pydantic.alias_generators import to_camel
 
 from .models import Intent, QueryModel
@@ -29,6 +29,15 @@ class SearchRequest(BaseModel):
 
     previous_query: QueryModel | None = None
     query: str = Field(default="", max_length=1000)
+
+    @model_validator(mode="after")
+    def require_query_or_previous(self) -> "SearchRequest":
+        """Ensure at least one of query or previous_query is provided."""
+        if not (self.query and self.query.strip()) and self.previous_query is None:
+            raise ValueError(
+                "Either 'query' must be non-empty or 'previousQuery' must be provided."
+            )
+        return self
 
 
 class DemographicCategory(BaseModel):

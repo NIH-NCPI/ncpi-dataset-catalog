@@ -21,6 +21,25 @@ function getCategoryKey<T extends RowData>(
 }
 
 /**
+ * Retrieves the facet name for a given category key (column header) from the table columns.
+ * @param table - Table instance.
+ * @param categoryKey - The category key (column header) to reverse-lookup.
+ * @returns The facet (column id) if found, otherwise returns the original category key.
+ */
+export function getFacet<T extends RowData>(
+  table: Table<T>,
+  categoryKey: string
+): string {
+  const column = table
+    .getAllColumns()
+    .find((c) => String(c.columnDef.header) === categoryKey);
+
+  if (!column) return categoryKey;
+
+  return column.id;
+}
+
+/**
  * Extracts filters from the assistant message response.
  * @param table - Table instance.
  * @param message - Assistant message containing the response with filters.

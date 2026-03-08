@@ -77,9 +77,13 @@ async def run_extract(
     """
     agent = _get_agent(model)
 
-    if previous_query and previous_query.mentions:
+    if previous_query and (previous_query.mentions or previous_query.intent):
         context = _format_previous_context(previous_query)
-        prompt = f"Active filters:\n{context}\n\nNew user input: {query}"
+        prompt = (
+            f"Active intent: {previous_query.intent}\n"
+            f"Active filters:\n{context}\n\n"
+            f"New user input: {query}"
+        )
     else:
         prompt = query
 

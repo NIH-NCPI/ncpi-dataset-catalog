@@ -187,8 +187,14 @@ def _merge_with_previous(
     for m in new_mentions:
         by_key[(m.facet.value, m.original_text)] = m
 
-    # Determine intent: new extraction wins if it explicitly changed
-    intent = new_intent if new_intent else previous.intent
+    # Determine intent: new extraction wins only if explicitly changed
+    # from the default ("study").  The extract agent returns "study" by
+    # default, so we must not let that silently clobber a prior "variable".
+    intent = (
+        new_intent
+        if new_intent and new_intent != "study"
+        else previous.intent
+    )
 
     return QueryModel(
         intent=intent,
@@ -235,10 +241,15 @@ async def _run_pipeline_uncached(
     intent = extract_result.intent
     logger.info("Intent: %s", intent)
 
-    # In refine mode with no new mentions, return previous with updated intent
+    # In refine mode with no new mentions, return previous with preserved intent.
+    # Only override intent if the extract agent returned something other than
+    # the default "study" (which it always emits, even when user didn't change it).
     if not extract_result.mentions and previous_query:
+        preserved_intent = (
+            intent if intent != "study" else previous_query.intent
+        )
         return QueryModel(
-            intent=intent,
+            intent=preserved_intent,
             mentions=previous_query.mentions,
             message=extract_result.message,
         )

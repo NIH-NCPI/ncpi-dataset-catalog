@@ -3,9 +3,10 @@ import { Props } from "./types";
 import { Chip, Stack, Typography } from "@mui/material";
 import { STACK_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/stack";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
-import { getFilters } from "./utils";
+import { getFacet, getFilters } from "./utils";
 import { CHIP_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/chip";
 import { RowData } from "@tanstack/react-table";
+import { useMultiTurn } from "../../../../../../../../artifact/form";
 
 /**
  * Filters component to display applied filters from the assistant message.
@@ -19,6 +20,7 @@ export const Filters = <T extends RowData>({
   table,
 }: Props<T>): JSX.Element | null => {
   const filters = getFilters(table, message);
+  const { removeFilter } = useMultiTurn();
 
   if (filters.length === 0) return null;
 
@@ -50,6 +52,9 @@ export const Filters = <T extends RowData>({
                   {String(value)}
                 </Typography>
               </Fragment>
+            }
+            onDelete={(): void =>
+              removeFilter(getFacet(table, filter.categoryKey), String(value))
             }
             size={CHIP_PROPS.SIZE.MEDIUM}
           />

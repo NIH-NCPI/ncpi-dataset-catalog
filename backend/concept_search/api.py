@@ -251,9 +251,7 @@ async def search(
         )
 
     has_query = bool(request.query and request.query.strip())
-    has_previous = bool(
-        request.previous_query and request.previous_query.mentions
-    )
+    has_previous = request.previous_query is not None
     mode = (
         "refine" if has_query and has_previous
         else "lookup" if has_previous
@@ -265,9 +263,9 @@ async def search(
 
     if mode == "lookup":
         # Lookup-only: skip LLM pipeline entirely, use previous query as-is.
-        # has_previous guard above ensures previous_query is not None here.
         assert request.previous_query is not None
         query_model = request.previous_query
+        t_pipeline = t_start  # No pipeline work — zero out pipeline_ms.
     else:
         # Fresh or Refine: run the LLM pipeline
         try:
