@@ -11,7 +11,7 @@ from pydantic_evals.evaluators import Evaluator, EvaluatorContext
 
 from .consent_logic import compute_eligible_codes, resolve_disease_name
 from .index import get_index
-from .models import DisambiguationOption, Facet, MatchedVariable, RawMention, ResolveResult
+from .models import DisambiguationOption, Facet, RawMention, ResolveResult
 from .resolve_agent import run_resolve
 
 

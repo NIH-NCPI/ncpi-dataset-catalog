@@ -386,9 +386,13 @@ async def _run_resolve_uncached(
     prompt = f"Resolve this mention:\n- text: {mention.text}\n- facet: {mention.facet.value}"
     result = await agent.run(prompt, deps=index)
     output = result.output
-    # Enforce mutual exclusivity: disambiguation ⇒ values must be empty
+    # Enforce mutual exclusivity: disambiguation ⇒ values must be empty.
+    # Disambiguation is only defined for measurement; clear it on other facets.
     if output.disambiguation:
-        output.values = []
+        if mention.facet == Facet.MEASUREMENT:
+            output.values = []
+        else:
+            output.disambiguation = []
     # Cull descendant focus values — ISA closure makes them redundant
     if mention.facet == Facet.FOCUS and output.values:
         output.values = _dedup_focus_values(output.values, index)
