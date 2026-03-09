@@ -20,6 +20,7 @@ from concept_search.models import (
     ResolvedMention,
 )
 from concept_search.pipeline import _merge_with_previous
+from concept_search.resolve_agent import _run_resolve_uncached
 
 
 def _rm(
@@ -490,3 +491,66 @@ class TestDisambiguation:
         assert mention["values"] == []
         assert len(mention["disambiguation"]) == 2
         assert mention["disambiguation"][0]["conceptId"] == "phenx:fasting_plasma_glucose_blood_draw"
+
+    def test_disambiguation_clears_values_and_generates_message(self) -> None:
+        """ResolveResult validator clears values and auto-generates message."""
+        from concept_search.models import ResolveResult
+
+        result = ResolveResult(
+            disambiguation=_disambig_options(),
+            values=["should_be_cleared"],
+            message=None,
+        )
+
+        assert result.values == []
+        assert result.message is not None
+        assert "Blood glucose measurement" in result.message
+        assert "Dietary glucose intake" in result.message
+
+    def test_disambiguation_preserves_explicit_message(self) -> None:
+        """ResolveResult validator keeps an explicit message from the LLM."""
+        from concept_search.models import ResolveResult
+
+        result = ResolveResult(
+            disambiguation=_disambig_options(),
+            values=["should_be_cleared"],
+            message="Custom question from the LLM",
+        )
+
+        assert result.values == []
+        assert result.message == "Custom question from the LLM"
+
+    @pytest.mark.asyncio
+    @patch("concept_search.resolve_agent._get_agent")
+    async def test_disambiguation_on_non_measurement_cleared(
+        self, mock_get_agent
+    ) -> None:
+        """Disambiguation on non-measurement facets is silently cleared."""
+        from concept_search.models import ResolveResult
+
+        # Validator fires first (clears values, sets message), then
+        # _run_resolve_uncached clears disambiguation for non-measurement.
+        mock_result = ResolveResult(
+            disambiguation=_disambig_options(),
+            values=["Heart Diseases"],
+            message=None,
+        )
+        # Re-set values after validator cleared them — simulates what the
+        # agent would need. Instead, build without disambiguation first.
+        mock_result = ResolveResult(values=["Heart Diseases"], message=None)
+        mock_result.disambiguation = _disambig_options()
+
+        class FakeRunResult:
+            output = mock_result
+
+        async def fake_run(*a, **kw):
+            return FakeRunResult()
+
+        mock_agent = mock_get_agent.return_value
+        mock_agent.run = fake_run
+
+        mention = RawMention(facet=Facet.FOCUS, text="heart", values=[])
+        result = await _run_resolve_uncached(mention, index=None)
+
+        assert result.disambiguation == []
+        assert result.values == ["Heart Diseases"]

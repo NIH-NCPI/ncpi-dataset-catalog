@@ -20,7 +20,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 from pydantic.alias_generators import to_camel
 
 
@@ -137,6 +137,20 @@ class ResolveResult(BaseModel):
         description="Canonical value(s) from the index, combined with OR. "
         "Empty if the concept could not be resolved."
     )
+
+    @model_validator(mode="after")
+    def enforce_disambiguation_invariants(self) -> "ResolveResult":
+        """Enforce mutual exclusivity and require a message for disambiguation."""
+        if self.disambiguation:
+            self.values = []
+            if not self.message:
+                labels = [d.label for d in self.disambiguation]
+                self.message = (
+                    f'Did you mean {", ".join(labels[:-1])} or {labels[-1]}?'
+                    if len(labels) > 1
+                    else f'Did you mean {labels[0]}?'
+                )
+        return self
 
 
 # --- Structure agent / final query models ---
