@@ -143,13 +143,11 @@ class ResolveResult(BaseModel):
         """Enforce mutual exclusivity and require a message for disambiguation."""
         if self.disambiguation:
             self.values = []
-            if not self.message:
-                labels = [d.label for d in self.disambiguation]
-                self.message = (
-                    f'Did you mean {", ".join(labels[:-1])} or {labels[-1]}?'
-                    if len(labels) > 1
-                    else f'Did you mean {labels[0]}?'
-                )
+            # Always use deterministic formatting — don't trust LLM message
+            lines = [f"- {d.label}" for d in self.disambiguation]
+            self.message = (
+                "Which did you mean?\n" + "\n".join(lines)
+            )
         return self
 
 

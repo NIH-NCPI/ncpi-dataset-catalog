@@ -504,11 +504,12 @@ class TestDisambiguation:
 
         assert result.values == []
         assert result.message is not None
-        assert "Blood glucose measurement" in result.message
-        assert "Dietary glucose intake" in result.message
+        assert "Which did you mean?" in result.message
+        assert "- Blood glucose measurement" in result.message
+        assert "- Dietary glucose intake" in result.message
 
-    def test_disambiguation_preserves_explicit_message(self) -> None:
-        """ResolveResult validator keeps an explicit message from the LLM."""
+    def test_disambiguation_overwrites_llm_message(self) -> None:
+        """ResolveResult validator replaces LLM message with deterministic format."""
         from concept_search.models import ResolveResult
 
         result = ResolveResult(
@@ -518,7 +519,8 @@ class TestDisambiguation:
         )
 
         assert result.values == []
-        assert result.message == "Custom question from the LLM"
+        assert "Which did you mean?" in result.message
+        assert "- Blood glucose measurement" in result.message
 
     @pytest.mark.asyncio
     @patch("concept_search.resolve_agent._get_agent")
