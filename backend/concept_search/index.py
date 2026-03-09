@@ -364,6 +364,7 @@ class ConceptIndex:
         self._concept_descriptions: dict[str, dict] = {}
         self._focus_categories: dict[str, list[dict]] = {}
         self._isa_children: dict[str, list[str]] = {}
+        self._isa_parents: dict[str, list[str]] = {}
         self._focus_isa_children: dict[str, list[str]] = {}
         # Embedding search data (populated during build or cache load)
         self._embedding_nodes: list[dict] = []
@@ -384,8 +385,8 @@ class ConceptIndex:
                 logger.info("Loading from cached DuckDB: %s", cache_path)
                 self.store = DuckDBStore.load_from_file(str(cache_path))
                 self._rebuild_index_from_store()
-                # Load ISA children for drill-down (not stored in DuckDB)
-                _, self._isa_children = _load_isa_table()
+                # Load ISA for drill-down and parent lookup (not stored in DuckDB)
+                self._isa_parents, self._isa_children = _load_isa_table()
                 _, self._focus_isa_children = _load_isa_table(
                     _resolve_focus_isa_path()
                 )
@@ -706,6 +707,7 @@ class ConceptIndex:
             logger.exception("Embedding search failed — returning empty")
             return []
 
+        descs = self._ensure_concept_descriptions() if self._isa_parents else {}
         results: list[dict] = []
         for raw_idx, sim in hits:
             # Map sub-matrix index back to full node list index
@@ -720,14 +722,35 @@ class ConceptIndex:
                 match = self._index[Facet.FOCUS].get(node["name"].lower())
             else:
                 match = self._index[Facet.MEASUREMENT].get(cid.lower())
-            results.append({
+            result_entry = {
                 "concept_id": cid,
                 "description": node["description"],
                 "name": node["name"],
                 "similarity": round(sim, 4),
                 "study_count": match.study_count if match else 0,
                 "type": node["type"],
-            })
+            }
+            # Build ancestor chain for measurement results so the LLM
+            # can see the full hierarchy and pick the right level.
+            if node_facet == "measurement" and self._isa_parents:
+                ancestors: list[dict] = []
+                visited: set[str] = set()
+                cur = cid
+                while True:
+                    plist = self._isa_parents.get(cur, [])
+                    if not plist or plist[0] in visited:
+                        break
+                    cur = plist[0]
+                    visited.add(cur)
+                    info = descs.get(cur, {})
+                    ancestors.append({
+                        "id": cur,
+                        "name": info.get("name", cur),
+                    })
+                if ancestors:
+                    result_entry["ancestors"] = ancestors
+            results.append(result_entry)
+
         return results
 
     def _load_measurement_concepts(self, llm_dir: Path) -> None:
@@ -739,7 +762,8 @@ class ConceptIndex:
         """
         if not llm_dir.exists():
             return
-        isa_parents, self._isa_children = _load_isa_table()
+        self._isa_parents, self._isa_children = _load_isa_table()
+        isa_parents = self._isa_parents
         concept_studies: dict[str, set[str]] = defaultdict(set)
         study_concepts: dict[str, set[str]] = defaultdict(set)
         variable_rows: list[tuple[str, str, str, str, str, str, str, str, str, str]] = []

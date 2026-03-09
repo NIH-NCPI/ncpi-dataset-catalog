@@ -11,9 +11,9 @@ export interface Props {
 
 export type ResultsView =
   | { message: AssistantMessage<Response>; status: STATUS.COMPLETE }
+  | { message?: AssistantMessage<Response>; status: STATUS.NOT_FOUND }
   | { message: PromptMessage; status: STATUS.READY }
-  | { status: STATUS.LOADING }
-  | { status: STATUS.NOT_FOUND };
+  | { status: STATUS.LOADING };
 
 export enum STATUS {
   COMPLETE = "COMPLETE",

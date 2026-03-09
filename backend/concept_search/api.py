@@ -250,49 +250,69 @@ async def search(
             status_code=429,
         )
 
-    _log_json(event="search_request", query=request.query)
+    has_query = bool(request.query and request.query.strip())
+    has_previous = request.previous_query is not None
+    mode = (
+        "refine" if has_query and has_previous
+        else "lookup" if has_previous
+        else "fresh"
+    )
+
+    _log_json(event="search_request", mode=mode, query=request.query)
     t_start = time.monotonic()
 
-    # Run the 3-agent LLM pipeline (semaphore + timeout)
-    try:
-        async with _pipeline_semaphore:
-            query_model = await asyncio.wait_for(
-                run_pipeline(request.query), timeout=60.0
+    if mode == "lookup":
+        # Lookup-only: skip LLM pipeline entirely, use previous query as-is.
+        assert request.previous_query is not None
+        query_model = request.previous_query
+        t_pipeline = t_start  # No pipeline work — zero out pipeline_ms.
+    else:
+        # Fresh or Refine: run the LLM pipeline
+        try:
+            async with _pipeline_semaphore:
+                query_model = await asyncio.wait_for(
+                    run_pipeline(
+                        request.query,
+                        previous_query=(
+                            request.previous_query if mode == "refine" else None
+                        ),
+                    ),
+                    timeout=60.0,
+                )
+        except (TimeoutError, asyncio.CancelledError):
+            _log_json(event="search_timeout", query=request.query)
+            elapsed_ms = int((time.monotonic() - t_start) * 1000)
+            return SearchResponse(
+                message="Search timed out — please try a simpler query.",
+                query=QueryModel(mentions=[]),
+                studies=[],
+                timing=SearchTiming(
+                    lookup_ms=0,
+                    pipeline_ms=elapsed_ms,
+                    total_ms=elapsed_ms,
+                ),
+                total_studies=0,
             )
-    except (TimeoutError, asyncio.CancelledError):
-        _log_json(event="search_timeout", query=request.query)
-        elapsed_ms = int((time.monotonic() - t_start) * 1000)
-        return SearchResponse(
-            message="Search timed out — please try a simpler query.",
-            query=QueryModel(mentions=[]),
-            studies=[],
-            timing=SearchTiming(
-                lookup_ms=0,
-                pipeline_ms=elapsed_ms,
-                total_ms=elapsed_ms,
-            ),
-            total_studies=0,
-        )
-    except Exception as exc:
-        _log_json(
-            event="search_pipeline_error",
-            query=request.query,
-            error=str(exc),
-            error_type=type(exc).__name__,
-        )
-        elapsed_ms = int((time.monotonic() - t_start) * 1000)
-        return SearchResponse(
-            message="Something went wrong — please try again.",
-            query=QueryModel(mentions=[]),
-            studies=[],
-            timing=SearchTiming(
-                lookup_ms=0,
-                pipeline_ms=elapsed_ms,
-                total_ms=elapsed_ms,
-            ),
-            total_studies=0,
-        )
-    t_pipeline = time.monotonic()
+        except Exception as exc:
+            _log_json(
+                event="search_pipeline_error",
+                query=request.query,
+                error=str(exc),
+                error_type=type(exc).__name__,
+            )
+            elapsed_ms = int((time.monotonic() - t_start) * 1000)
+            return SearchResponse(
+                message="Something went wrong — please try again.",
+                query=QueryModel(mentions=[]),
+                studies=[],
+                timing=SearchTiming(
+                    lookup_ms=0,
+                    pipeline_ms=elapsed_ms,
+                    total_ms=elapsed_ms,
+                ),
+                total_studies=0,
+            )
+        t_pipeline = time.monotonic()
 
     # Deterministic lookup — branch on intent
     index = get_index()
@@ -363,6 +383,7 @@ async def search(
     _log_json(
         event="search_response",
         intent=intent,
+        mode=mode,
         query=request.query,
         mentions=[
             {

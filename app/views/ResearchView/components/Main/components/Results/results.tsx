@@ -6,6 +6,7 @@ import { Props } from "./types";
 import { StyledLoadingIcon, StyledRoundedPaper } from "./results.styles";
 import { SVG_ICON_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/svgIcon";
 import { QueryResults } from "./components/QueryResults/queryResults";
+import { NotFoundResults } from "./components/NotFoundResults/notFoundResults";
 import { Typography } from "@mui/material";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 
@@ -26,6 +27,9 @@ export const Results = ({ state }: Pick<Props, "state">): JSX.Element => {
     case STATUS.COMPLETE:
       return <QueryResults message={view.message} />;
     case STATUS.NOT_FOUND:
+      if (view.message) {
+        return <NotFoundResults message={view.message} />;
+      }
       return (
         <StyledRoundedPaper elevation={0}>
           <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_400}>

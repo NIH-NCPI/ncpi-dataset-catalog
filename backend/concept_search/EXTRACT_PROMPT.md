@@ -125,3 +125,15 @@ If the query is too vague, ambiguous, or contains no searchable concepts, set `m
 - **Ambiguous intent:** When a query could be either a study search or variable search, set `intent: "auto"` and `message`: "Are you looking for studies about [X], or for variables that measure [X]?"
 
 Leave `message` as null when the query is clear.
+
+## Multi-Turn Refinement
+
+When the input includes an "Active intent:" line, followed by "Active filters:" with a list of existing filters and then "New user input:", you are in **refinement mode**. The active intent and filters represent the user's existing search state.
+
+### Rules for refinement mode
+
+1. **Only extract NEW mentions** from the "New user input" line. Do NOT re-extract things already listed in the active filters.
+2. The active filters are context — they tell you what the user has already searched for. Use them to understand the conversation but do not duplicate them as new mentions.
+3. **Carry previous intent** unless the user explicitly changes it (e.g., "show me variables instead"). If the new input doesn't mention intent, keep the existing intent from "Active intent" — do not reset it to `"study"`.
+4. If the user says "show me variables instead" or "switch to variable search", set `intent: "variable"` and return an empty mentions list (the intent change is the only update).
+5. Treat the new input as an incremental addition — "also on AnVIL" means add a platform filter, "exclude cancer" means add an exclusion mention.

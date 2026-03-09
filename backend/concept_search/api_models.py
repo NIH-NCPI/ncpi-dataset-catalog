@@ -6,16 +6,38 @@ Separate from models.py to avoid coupling HTTP transport concerns
 
 from __future__ import annotations
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 from pydantic.alias_generators import to_camel
 
 from .models import Intent, QueryModel
 
 
 class SearchRequest(BaseModel):
-    """Incoming search query."""
+    """Incoming search query.
 
-    query: str = Field(..., min_length=1, max_length=1000)
+    Three modes based on which fields are present:
+
+    1. **Fresh** — ``query`` is set, no ``previous_query``.  Full pipeline.
+    2. **Refine** — ``query`` is set *and* ``previous_query`` is present.
+       Extract only new mentions, merge onto previous state.
+    3. **Lookup-only** — ``query`` is empty/absent, ``previous_query`` is
+       present.  Skip LLM pipeline; re-run deterministic lookup with the
+       (possibly mutated) previous query model.
+    """
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    previous_query: QueryModel | None = None
+    query: str = Field(default="", max_length=1000)
+
+    @model_validator(mode="after")
+    def require_query_or_previous(self) -> "SearchRequest":
+        """Ensure at least one of query or previous_query is provided."""
+        if not (self.query and self.query.strip()) and self.previous_query is None:
+            raise ValueError(
+                "Either 'query' must be non-empty or 'previousQuery' must be provided."
+            )
+        return self
 
 
 class DemographicCategory(BaseModel):

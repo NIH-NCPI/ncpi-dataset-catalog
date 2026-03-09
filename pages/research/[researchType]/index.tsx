@@ -2,6 +2,7 @@ import { JSX } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ResearchView } from "@databiosphere/findable-ui/lib/views/ResearchView/researchView";
 import { Artifact } from "../../../app/views/ResearchView/artifact/artifact";
+import { MultiTurnQueryProvider } from "../../../app/views/ResearchView/artifact/form";
 import { ParsedUrlQuery } from "querystring";
 import {
   RESEARCH_TYPE,
@@ -37,9 +38,11 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 
 const Page = ({ researchType }: Props): JSX.Element => {
   return (
-    <ResearchView>
-      <Artifact researchType={researchType} />
-    </ResearchView>
+    <MultiTurnQueryProvider>
+      <ResearchView>
+        <Artifact researchType={researchType} />
+      </ResearchView>
+    </MultiTurnQueryProvider>
   );
 };
 
