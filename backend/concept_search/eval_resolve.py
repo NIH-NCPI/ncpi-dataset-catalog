@@ -126,9 +126,10 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="lay-blood-sugar",
             inputs=_mention("blood sugar", Facet.MEASUREMENT),
-            # Embedding maps lay term to glucose concepts directly.
+            # "Blood sugar" is a broad lay term — parent concept covers all
+            # glucose measurements (fasting, random, pre-meal) via ISA closure.
             expected_output=ResolveResult(
-                values=["ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose"]
+                values=["phenx:fasting_plasma_glucose_blood_draw"]
             ),
         ),
         Case(
@@ -143,10 +144,10 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="category-sleep",
             inputs=_mention("sleep", Facet.MEASUREMENT),
-            # Embedding returns specific sleep concepts (duration, etc.).
-            # The parent ncpi:sleep or topmed:sleep_duration are both valid.
+            # Broad term — ISA closure from ncpi:sleep covers all descendants
+            # (sleep_duration, polysomnography, sleep_architecture, etc.).
             expected_output=ResolveResult(
-                values=["topmed:sleep_duration"]
+                values=["ncpi:sleep"]
             ),
         ),
         Case(
@@ -162,9 +163,10 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="disambig-glucose",
             inputs=_mention("glucose", Facet.MEASUREMENT),
-            # Embedding returns glucose-related concepts directly.
+            # "Glucose" is broad — multiple archetypes share the parent.
+            # LLM collapses to parent; ISA closure covers descendants.
             expected_output=ResolveResult(
-                values=["ncpi:fasting_plasma_glucose_blood_draw_fasting_glucose"]
+                values=["phenx:fasting_plasma_glucose_blood_draw"]
             ),
         ),
         # --- Concepts with low relevance (embedding finds related) ---
@@ -181,12 +183,12 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="synonym-smoking",
             inputs=_mention("smoking", Facet.MEASUREMENT),
-            # Broad term — must include current smoking status. Embedding
-            # returns archetypes (ncpi:current_smoker_baseline_*) rather
-            # than parent concepts; ISA closure covers the same variables.
+            # Broad term — embedding returns many archetypes sharing parent
+            # concepts. Agent should collapse to parent concept(s) since
+            # ISA closure captures all descendant variables.
             expected_output=ResolveResult(
                 values=[
-                    "ncpi:current_smoker_baseline_current_smoking_status",
+                    "topmed:current_smoker_baseline",
                 ]
             ),
         ),
@@ -348,14 +350,11 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="embed-drilldown-lung-function",
             inputs=_mention("lung function", Facet.MEASUREMENT),
-            # Embedding returns ncpi:respiratory (broad) and specific
-            # pulmonary function concepts. Agent should include the
-            # specific concept; may also include the broad parent.
+            # Embedding returns ncpi:respiratory at top. The child
+            # topmed:pulmonary_function_detailed is redundant under
+            # ISA closure — respiratory covers all descendants.
             expected_output=ResolveResult(
-                values=[
-                    "ncpi:respiratory",
-                    "topmed:pulmonary_function_detailed",
-                ]
+                values=["ncpi:respiratory"]
             ),
         ),
         # --- Consent code semantic resolution (dynamic expectations) ---

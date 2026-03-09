@@ -263,7 +263,10 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
 
                 Returns:
                     Top-K concepts with concept_id, name, description, type,
-                    similarity score, and study_count.
+                    similarity score, and study_count. Measurement entries
+                    include an ancestors list showing the full ISA hierarchy
+                    (each with id and name) from immediate parent up to the
+                    top-level category.
                 """
                 return ctx.deps.search_concepts_by_embedding(
                     query, top_k=top_k, facet=facet
