@@ -411,7 +411,7 @@ def _disambig_options() -> list[DisambiguationOption]:
             label="Blood glucose measurement",
         ),
         DisambiguationOption(
-            concept_id="topmed:food_frequency_questionnaire",
+            concept_id="topmed:nutrient_intake",
             label="Dietary glucose intake",
         ),
     ]

@@ -73,7 +73,7 @@ When embedding results for a measurement mention span **distinct semantic domain
 **When to disambiguate:**
 
 - Results have ancestors in 2+ unrelated top-level categories (e.g., `ncpi:biomarkers` AND `ncpi:diet`)
-- Example: "glucose" → `phenx:fasting_plasma_glucose_blood_draw` (biomarker, ancestor of glucose archetypes) vs `ncpi:nutrient_intake_glucose` (diet)
+- Example: "glucose" → `phenx:fasting_plasma_glucose_blood_draw` (biomarker, ancestor of glucose archetypes) vs `topmed:nutrient_intake` (diet)
 
 **When NOT to disambiguate:**
 

@@ -48,6 +48,11 @@ class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
                 scores["resolve_score"] = round(recall, 3)
             return scores
 
+        # Penalize unexpected disambiguation (expected values but got disambiguation)
+        if actual.disambiguation and (expected is None or not expected.disambiguation):
+            scores["resolve_score"] = 0.0
+            return scores
+
         # Score values (concept IDs)
         if expected is None or not expected.values:
             scores["resolve_score"] = 1.0 if not actual.values else 0.0

@@ -86,9 +86,7 @@ async def _resolve_all(
                 ResolvedMention(
                     disambiguation=rr.disambiguation,
                     facet=mention.facet,
-                    matched_variables=[
-                        mv for mv in rr.matched_variables
-                    ] if rr.matched_variables else [],
+                    matched_variables=rr.matched_variables or [],
                     original_text=mention.text,
                     values=rr.values,
                 )
