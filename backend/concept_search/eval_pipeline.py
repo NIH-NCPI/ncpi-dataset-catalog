@@ -63,6 +63,62 @@ def _get_study_values(study: dict, field: str) -> set[str]:
     return vals
 
 
+def _score_studies(
+    studies: list[dict[str, Any]],
+    expected: StudyExpectation,
+) -> dict[str, float]:
+    """Score study results against expectations.
+
+    Args:
+        studies: Actual study results from the pipeline.
+        expected: Expected study properties.
+
+    Returns:
+        Dict with ``pipeline_score`` between 0.0 and 1.0.
+    """
+    penalties = 0.0
+    checks = 0
+
+    # Check study count bounds.
+    checks += 1
+    if len(studies) < expected.min_studies:
+        penalties += 1.0
+    if expected.max_studies is not None:
+        checks += 1
+        if len(studies) > expected.max_studies:
+            penalties += 1.0
+
+    # Check all_have: every study must contain ALL listed values.
+    for field, required_values in expected.all_have.items():
+        req_lower = {v.lower() for v in required_values}
+        for study in studies:
+            checks += 1
+            vals = _get_study_values(study, field)
+            if not req_lower.issubset(vals):
+                penalties += 1.0
+
+    # Check any_have: every study must contain AT LEAST ONE value.
+    for field, candidate_values in expected.any_have.items():
+        cand_lower = {v.lower() for v in candidate_values}
+        for study in studies:
+            checks += 1
+            vals = _get_study_values(study, field)
+            if not cand_lower.intersection(vals):
+                penalties += 1.0
+
+    # Check none_have: no study should contain any listed value.
+    for field, forbidden_values in expected.none_have.items():
+        forb_lower = {v.lower() for v in forbidden_values}
+        for study in studies:
+            checks += 1
+            vals = _get_study_values(study, field)
+            if forb_lower.intersection(vals):
+                penalties += 1.0
+
+    score = max(0.0, 1.0 - penalties / checks) if checks > 0 else 1.0
+    return {"pipeline_score": round(score, 3)}
+
+
 class PipelineEvaluator(Evaluator[str, PipelineOutput]):
     """Scores the end-to-end pipeline by checking study result properties."""
 
@@ -70,52 +126,9 @@ class PipelineEvaluator(Evaluator[str, PipelineOutput]):
         self, ctx: EvaluatorContext[str, PipelineOutput]
     ) -> dict[str, float]:
         expected: StudyExpectation | None = ctx.expected_output
-        actual = ctx.output
         if expected is None:
             return {"pipeline_score": 1.0}
-
-        studies = actual.studies
-        penalties = 0.0
-        checks = 0
-
-        # Check study count bounds.
-        checks += 1
-        if len(studies) < expected.min_studies:
-            penalties += 1.0
-        if expected.max_studies is not None:
-            checks += 1
-            if len(studies) > expected.max_studies:
-                penalties += 1.0
-
-        # Check all_have: every study must contain ALL listed values.
-        for field, required_values in expected.all_have.items():
-            req_lower = {v.lower() for v in required_values}
-            for study in studies:
-                checks += 1
-                vals = _get_study_values(study, field)
-                if not req_lower.issubset(vals):
-                    penalties += 1.0
-
-        # Check any_have: every study must contain AT LEAST ONE value.
-        for field, candidate_values in expected.any_have.items():
-            cand_lower = {v.lower() for v in candidate_values}
-            for study in studies:
-                checks += 1
-                vals = _get_study_values(study, field)
-                if not cand_lower.intersection(vals):
-                    penalties += 1.0
-
-        # Check none_have: no study should contain any listed value.
-        for field, forbidden_values in expected.none_have.items():
-            forb_lower = {v.lower() for v in forbidden_values}
-            for study in studies:
-                checks += 1
-                vals = _get_study_values(study, field)
-                if forb_lower.intersection(vals):
-                    penalties += 1.0
-
-        score = max(0.0, 1.0 - penalties / checks) if checks > 0 else 1.0
-        return {"pipeline_score": round(score, 3)}
+        return _score_studies(ctx.output.studies, expected)
 
 
 dataset = Dataset[str, PipelineOutput, StudyExpectation](
@@ -228,48 +241,9 @@ class MultiTurnPipelineEvaluator(Evaluator[MultiTurnInput, PipelineOutput]):
         self, ctx: EvaluatorContext[MultiTurnInput, PipelineOutput]
     ) -> dict[str, float]:
         expected: StudyExpectation | None = ctx.expected_output
-        actual = ctx.output
         if expected is None:
             return {"pipeline_score": 1.0}
-
-        studies = actual.studies
-        penalties = 0.0
-        checks = 0
-
-        checks += 1
-        if len(studies) < expected.min_studies:
-            penalties += 1.0
-        if expected.max_studies is not None:
-            checks += 1
-            if len(studies) > expected.max_studies:
-                penalties += 1.0
-
-        for field, required_values in expected.all_have.items():
-            req_lower = {v.lower() for v in required_values}
-            for study in studies:
-                checks += 1
-                vals = _get_study_values(study, field)
-                if not req_lower.issubset(vals):
-                    penalties += 1.0
-
-        for field, candidate_values in expected.any_have.items():
-            cand_lower = {v.lower() for v in candidate_values}
-            for study in studies:
-                checks += 1
-                vals = _get_study_values(study, field)
-                if not cand_lower.intersection(vals):
-                    penalties += 1.0
-
-        for field, forbidden_values in expected.none_have.items():
-            forb_lower = {v.lower() for v in forbidden_values}
-            for study in studies:
-                checks += 1
-                vals = _get_study_values(study, field)
-                if forb_lower.intersection(vals):
-                    penalties += 1.0
-
-        score = max(0.0, 1.0 - penalties / checks) if checks > 0 else 1.0
-        return {"pipeline_score": round(score, 3)}
+        return _score_studies(ctx.output.studies, expected)
 
 
 multi_turn_dataset = Dataset[MultiTurnInput, PipelineOutput, StudyExpectation](
