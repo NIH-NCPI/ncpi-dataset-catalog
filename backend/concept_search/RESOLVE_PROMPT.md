@@ -59,6 +59,28 @@ When the text describes a use case (e.g. "diabetes research", "for-profit cancer
 - "population genetics, not disease-related" → `compute_consent_eligibility(purpose="general")` → returns GRU\* only
 - "consented for diabetes only" → `compute_consent_eligibility(purpose="disease", disease="diabetes", disease_only=True)` → DS-DIAB\* only
 
+## Disambiguation (measurement facet only)
+
+When embedding results for a measurement mention span **distinct semantic domains** (different top-level ancestors like `ncpi:biomarkers` vs `ncpi:diet` vs `ncpi:disease_events`), you MUST disambiguate:
+
+**CRITICAL: When you populate `disambiguation`, you MUST set `values` to an empty list `[]`. Never set both `values` and `disambiguation` — they are mutually exclusive.**
+
+- Set `values` to `[]`
+- Set `message` to a brief question: "Did you mean X or Y?"
+- Populate `disambiguation` with 2-3 options, each with `concept_id` and `label`
+- **Use parent concept IDs from the `ancestors` list, NOT archetype IDs.** Look at each result's ancestors to find the first non-top-level parent. For example, if a result has ancestors `[phenx:fasting_plasma_glucose_blood_draw, ncpi:biomarkers]`, use `phenx:fasting_plasma_glucose_blood_draw` as the concept_id.
+
+**When to disambiguate:**
+
+- Results have ancestors in 2+ unrelated top-level categories (e.g., `ncpi:biomarkers` AND `ncpi:diet`)
+- Example: "glucose" → `phenx:fasting_plasma_glucose_blood_draw` (biomarker, ancestor of glucose archetypes) vs `ncpi:nutrient_intake_glucose` (diet)
+
+**When NOT to disambiguate:**
+
+- Broad terms with a clear parent (e.g., "blood pressure" → systolic + diastolic, same domain)
+- One interpretation is overwhelmingly more likely (e.g., "BMI", "blood sugar" → blood glucose)
+- Results are siblings under the same ancestor (collapse to parent instead)
+
 ## General Rules
 
 - Prefer broader concepts over overly specific ones.

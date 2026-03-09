@@ -97,6 +97,15 @@ class ExtractResult(BaseModel):
 # --- Resolve agent models ---
 
 
+class DisambiguationOption(BaseModel):
+    """One possible interpretation of an ambiguous mention."""
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    concept_id: str = Field(description="Canonical concept ID")
+    label: str = Field(description="Human-readable label for this interpretation")
+
+
 class MatchedVariable(BaseModel):
     """A specific variable that matched the user's query at a leaf concept."""
 
@@ -107,6 +116,12 @@ class MatchedVariable(BaseModel):
 class ResolveResult(BaseModel):
     """Output of the resolve agent for a single mention."""
 
+    disambiguation: list[DisambiguationOption] = Field(
+        default_factory=list,
+        description="When the mention is ambiguous across distinct semantic "
+        "domains, list 2-3 candidate interpretations here. Leave empty "
+        "when resolution is confident.",
+    )
     matched_variables: list[MatchedVariable] = Field(
         default_factory=list,
         description="Specific variables at a leaf concept whose descriptions "
@@ -132,6 +147,11 @@ class ResolvedMention(BaseModel):
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
+    disambiguation: list[DisambiguationOption] = Field(
+        default_factory=list,
+        description="Candidate interpretations when the mention is ambiguous "
+        "across distinct semantic domains. Empty when resolved.",
+    )
     exclude: bool = Field(
         default=False,
         description="True to exclude matching studies (NOT). "

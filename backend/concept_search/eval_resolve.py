@@ -11,7 +11,7 @@ from pydantic_evals.evaluators import Evaluator, EvaluatorContext
 
 from .consent_logic import compute_eligible_codes, resolve_disease_name
 from .index import get_index
-from .models import Facet, MatchedVariable, RawMention, ResolveResult
+from .models import DisambiguationOption, Facet, MatchedVariable, RawMention, ResolveResult
 from .resolve_agent import run_resolve
 
 
@@ -36,6 +36,17 @@ class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
 
         # Determine facet from inputs
         is_measurement = ctx.inputs.facet == Facet.MEASUREMENT
+
+        # Score disambiguation (when expected has disambiguation options)
+        if expected is not None and expected.disambiguation:
+            exp_ids = {d.concept_id.lower() for d in expected.disambiguation}
+            act_ids = {d.concept_id.lower() for d in actual.disambiguation}
+            if not act_ids:
+                scores["resolve_score"] = 0.0
+            else:
+                recall = len(exp_ids & act_ids) / len(exp_ids)
+                scores["resolve_score"] = round(recall, 3)
+            return scores
 
         # Score values (concept IDs)
         if expected is None or not expected.values:
@@ -126,8 +137,8 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="lay-blood-sugar",
             inputs=_mention("blood sugar", Facet.MEASUREMENT),
-            # "Blood sugar" is a broad lay term — parent concept covers all
-            # glucose measurements (fasting, random, pre-meal) via ISA closure.
+            # "Blood sugar" clearly means blood glucose — not truly ambiguous.
+            # Parent concept covers all glucose measurements via ISA closure.
             expected_output=ResolveResult(
                 values=["phenx:fasting_plasma_glucose_blood_draw"]
             ),
@@ -155,10 +166,21 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="disambig-glucose",
             inputs=_mention("glucose", Facet.MEASUREMENT),
-            # "Glucose" is broad — multiple archetypes share the parent.
-            # LLM collapses to parent; ISA closure covers descendants.
+            # "Glucose" spans 3 domains: nutrition (ncpi:diet), biomarker
+            # (ncpi:biomarkers), diagnosis (ncpi:disease_events).
+            # Agent should disambiguate with parent concept IDs.
             expected_output=ResolveResult(
-                values=["phenx:fasting_plasma_glucose_blood_draw"]
+                disambiguation=[
+                    DisambiguationOption(
+                        concept_id="phenx:fasting_plasma_glucose_blood_draw",
+                        label="Blood glucose measurement",
+                    ),
+                    DisambiguationOption(
+                        concept_id="topmed:nutrient_intake",
+                        label="Dietary glucose intake",
+                    ),
+                ],
+                values=[],
             ),
         ),
         # --- Concepts with low relevance (embedding finds related) ---
@@ -300,9 +322,10 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="ffq-dairy",
             inputs=_mention("dairy intake", Facet.MEASUREMENT),
-            # Embedding finds dairy products concept or specific archetype.
+            # Embedding finds dairy nutrient archetypes and ffq dairy products.
+            # Either the ffq parent or the nutrient parent is acceptable.
             expected_output=ResolveResult(
-                values=["ncpi:ffq_dairy_products_total_dairy_intake"]
+                values=["ncpi:ffq_dairy_products"]
             ),
         ),
         Case(

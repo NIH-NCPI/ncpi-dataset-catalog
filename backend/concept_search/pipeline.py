@@ -84,6 +84,7 @@ async def _resolve_all(
             logger.debug("  %r: resolved to %s", mention.text, rr.values)
             resolved.append(
                 ResolvedMention(
+                    disambiguation=rr.disambiguation,
                     facet=mention.facet,
                     matched_variables=[
                         mv for mv in rr.matched_variables
@@ -146,6 +147,7 @@ def _merge(
         key = (m.facet.value, m.original_text)
         merged.append(
             ResolvedMention(
+                disambiguation=m.disambiguation,
                 exclude=exclude_flags.get(key, False),
                 facet=m.facet,
                 matched_variables=m.matched_variables,

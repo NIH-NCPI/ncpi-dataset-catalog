@@ -11,7 +11,14 @@ from unittest.mock import patch
 
 from concept_search.api import app
 from concept_search.extract_agent import _format_previous_context
-from concept_search.models import ExtractResult, Facet, QueryModel, RawMention, ResolvedMention
+from concept_search.models import (
+    DisambiguationOption,
+    ExtractResult,
+    Facet,
+    QueryModel,
+    RawMention,
+    ResolvedMention,
+)
 from concept_search.pipeline import _merge_with_previous
 
 
@@ -394,3 +401,92 @@ class TestConcurrentSemaphore:
 
         assert all(r.status_code == 200 for r in responses)
         assert len(responses) == 8
+
+
+def _disambig_options() -> list[DisambiguationOption]:
+    """Build sample disambiguation options."""
+    return [
+        DisambiguationOption(
+            concept_id="phenx:fasting_plasma_glucose_blood_draw",
+            label="Blood glucose measurement",
+        ),
+        DisambiguationOption(
+            concept_id="topmed:food_frequency_questionnaire",
+            label="Dietary glucose intake",
+        ),
+    ]
+
+
+class TestDisambiguation:
+    """Tests for disambiguation flow through the pipeline."""
+
+    def test_disambiguation_preserved_in_merge(self) -> None:
+        """Disambiguation options survive _merge_with_previous."""
+        previous = QueryModel(
+            mentions=[_rm(Facet.FOCUS, "asthma", ["Asthma"])]
+        )
+        new = [
+            ResolvedMention(
+                disambiguation=_disambig_options(),
+                facet=Facet.MEASUREMENT,
+                original_text="glucose",
+                values=[],
+            )
+        ]
+        result = _merge_with_previous(previous, new)
+        assert len(result.mentions) == 2
+        glucose = [m for m in result.mentions if m.original_text == "glucose"][0]
+        assert len(glucose.disambiguation) == 2
+        assert glucose.values == []
+
+    def test_followup_adds_alongside_disambiguation(self) -> None:
+        """User follow-up adds a new mention; disambiguation mention stays."""
+        previous = QueryModel(
+            mentions=[
+                _rm(Facet.FOCUS, "asthma", ["Asthma"]),
+                ResolvedMention(
+                    disambiguation=_disambig_options(),
+                    facet=Facet.MEASUREMENT,
+                    original_text="glucose",
+                    values=[],
+                ),
+            ]
+        )
+        # User typed "blood glucose" — different original_text, so both kept
+        new = [_rm(Facet.MEASUREMENT, "blood glucose",
+                    ["phenx:fasting_plasma_glucose_blood_draw"])]
+        result = _merge_with_previous(previous, new)
+        assert len(result.mentions) == 3
+        glucose = [m for m in result.mentions if m.original_text == "glucose"][0]
+        assert len(glucose.disambiguation) == 2
+        assert glucose.values == []
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    def test_disambiguation_in_api_response(
+        self, mock_pipeline, mock_index
+    ) -> None:
+        """API response includes disambiguation options on mentions."""
+        mock_pipeline.return_value = QueryModel(
+            mentions=[
+                ResolvedMention(
+                    disambiguation=_disambig_options(),
+                    facet=Facet.MEASUREMENT,
+                    original_text="glucose",
+                    values=[],
+                ),
+            ],
+            message="Did you mean blood glucose levels or dietary glucose intake?",
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={"query": "glucose"})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["message"] == "Did you mean blood glucose levels or dietary glucose intake?"
+        mention = data["query"]["mentions"][0]
+        assert mention["values"] == []
+        assert len(mention["disambiguation"]) == 2
+        assert mention["disambiguation"][0]["conceptId"] == "phenx:fasting_plasma_glucose_blood_draw"
