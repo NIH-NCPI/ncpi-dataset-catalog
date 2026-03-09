@@ -16,7 +16,9 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useRef,
+  useState,
 } from "react";
 import { getSearchApiUrl } from "../../../utils/searchApiUrl";
 
@@ -57,6 +59,7 @@ export function MultiTurnQueryProvider({
   const dispatch = useChatDispatch();
   const lastQueryRef = useRef<MessageResponse["query"] | null>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const [hasResults, setHasResults] = useState(false);
 
   const doFetch = useCallback(
     async (
@@ -98,6 +101,7 @@ export function MultiTurnQueryProvider({
         }
         const data: MessageResponse = await res.json();
         lastQueryRef.current = data.query;
+        setHasResults(true);
         dispatch.onSetMessage(data);
         options.onSuccess?.(data);
       } catch (error) {
@@ -155,6 +159,20 @@ export function MultiTurnQueryProvider({
     },
     [dispatch, doFetch]
   );
+
+  // Update the input placeholder to indicate refine mode after first results.
+  // The library's Assistant component sets placeholder from chat state PROMPT
+  // messages, which we can't modify. Override via DOM after each render.
+  useEffect(() => {
+    if (!hasResults) return;
+    const input = document.querySelector<HTMLTextAreaElement>(
+      'textarea[name="ai-prompt"]'
+    );
+    if (input) {
+      input.placeholder =
+        "Refine, e.g. \u201Calso where BMI was measured\u201D";
+    }
+  });
 
   return (
     <MultiTurnContext.Provider value={{ removeFilter }}>
