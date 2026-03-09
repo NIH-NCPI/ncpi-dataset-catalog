@@ -141,7 +141,8 @@ class TestModeDetection:
         # query. In lookup mode, pipelineMs should be ~0 (no LLM call).
         assert data["timing"]["pipelineMs"] == 0
 
-    def test_rejects_empty_request(self) -> None:
+    @patch("concept_search.api.get_index")
+    def test_rejects_empty_request(self, mock_index) -> None:
         """Request with no query and no previousQuery should be rejected."""
         client = TestClient(app, raise_server_exceptions=False)
         resp = client.post("/search", json={"query": ""})
