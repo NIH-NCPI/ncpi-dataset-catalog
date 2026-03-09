@@ -14,9 +14,9 @@ Focus terms have **MeSH ISA closure**: returning a parent automatically includes
 
 **Your first tool call MUST be `search_concepts_by_embedding` with `facet="measurement"`.**
 
-Read the returned names, descriptions, types, similarity scores, and `ancestors` fields. Each result includes an `ancestors` list showing its full hierarchy (immediate parent → grandparent → ... → top-level category), each with `id` and `name`. **In most cases you can return directly without further tool calls.**
+Read the returned names, descriptions, types, similarity scores, and `ancestors` fields. Each measurement result includes an `ancestors` list showing its full hierarchy (immediate parent → grandparent → ... → top-level category), each with `id` and `name`. **In most cases you can return directly without further tool calls.**
 
-- **Specific query** (e.g. "systolic blood pressure", "eGFR", "dairy intake"): Return the single best match. If a concept in the results is an ancestor of the top hit, prefer the ancestor — it is the canonical level.
+- **Specific query** (e.g. "systolic blood pressure", "eGFR", "dairy intake"): Return the single best match. If another concept in the results is an ancestor of the top hit and better matches the query, prefer it.
 - **Broad query** (e.g. "blood pressure", "smoking"): When many archetypes share a common ancestor, return that ancestor instead of individual archetypes — ISA closure includes all descendants. Use the `ancestors` lists to find the right level. **Pick the most specific ancestor that covers the results — do NOT go up to broad categories like "Substance Use" or "Biomarkers".** For example, if archetypes share ancestor `topmed:current_smoker_baseline` → `phenx:...tobacco...` → `ncpi:substance_use`, return `topmed:current_smoker_baseline` (the most specific shared ancestor), not `ncpi:substance_use`.
 - Only call `get_concept_children` if the best match is a broad top-level category (e.g. `ncpi:biomarkers`). This should be rare.
 

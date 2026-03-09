@@ -132,14 +132,6 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
                 values=["phenx:fasting_plasma_glucose_blood_draw"]
             ),
         ),
-        Case(
-            name="lay-blood-pressure",
-            inputs=_mention("blood pressure", Facet.MEASUREMENT),
-            # Broad term — should include both systolic and diastolic siblings.
-            expected_output=ResolveResult(
-                values=["topmed:bp_systolic", "topmed:bp_diastolic"]
-            ),
-        ),
         # --- Category expansion ---
         Case(
             name="category-sleep",

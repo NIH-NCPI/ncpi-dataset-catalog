@@ -707,6 +707,7 @@ class ConceptIndex:
             logger.exception("Embedding search failed — returning empty")
             return []
 
+        descs = self._ensure_concept_descriptions() if self._isa_parents else {}
         results: list[dict] = []
         for raw_idx, sim in hits:
             # Map sub-matrix index back to full node list index
@@ -732,14 +733,15 @@ class ConceptIndex:
             # Build ancestor chain for measurement results so the LLM
             # can see the full hierarchy and pick the right level.
             if node_facet == "measurement" and self._isa_parents:
-                descs = self._ensure_concept_descriptions()
                 ancestors: list[dict] = []
+                visited: set[str] = set()
                 cur = cid
                 while True:
                     plist = self._isa_parents.get(cur, [])
-                    if not plist:
+                    if not plist or plist[0] in visited:
                         break
                     cur = plist[0]
+                    visited.add(cur)
                     info = descs.get(cur, {})
                     ancestors.append({
                         "id": cur,
@@ -749,7 +751,7 @@ class ConceptIndex:
                     result_entry["ancestors"] = ancestors
             results.append(result_entry)
 
-        return results[:top_k]
+        return results
 
     def _load_measurement_concepts(self, llm_dir: Path) -> None:
         """Load concept names and variable details from per-study LLM JSON.
