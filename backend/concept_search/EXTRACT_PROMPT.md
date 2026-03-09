@@ -128,7 +128,7 @@ Leave `message` as null when the query is clear.
 
 ## Multi-Turn Refinement
 
-When the input begins with "Active filters:" followed by a list of existing filters and "New user input:", you are in **refinement mode**. The active filters represent the user's existing search state.
+When the input includes an "Active intent:" line, followed by "Active filters:" with a list of existing filters and then "New user input:", you are in **refinement mode**. The active intent and filters represent the user's existing search state.
 
 ### Rules for refinement mode
 

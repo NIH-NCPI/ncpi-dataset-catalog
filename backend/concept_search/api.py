@@ -312,7 +312,7 @@ async def search(
                 ),
                 total_studies=0,
             )
-    t_pipeline = time.monotonic()
+        t_pipeline = time.monotonic()
 
     # Deterministic lookup — branch on intent
     index = get_index()

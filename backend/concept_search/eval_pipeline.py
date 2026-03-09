@@ -82,11 +82,10 @@ class PipelineEvaluator(Evaluator[str, PipelineOutput]):
         checks += 1
         if len(studies) < expected.min_studies:
             penalties += 1.0
-        if expected.max_studies is not None and len(studies) > expected.max_studies:
-            penalties += 1.0
+        if expected.max_studies is not None:
             checks += 1
-        elif expected.max_studies is not None:
-            checks += 1
+            if len(studies) > expected.max_studies:
+                penalties += 1.0
 
         # Check all_have: every study must contain ALL listed values.
         for field, required_values in expected.all_have.items():
@@ -240,11 +239,10 @@ class MultiTurnPipelineEvaluator(Evaluator[MultiTurnInput, PipelineOutput]):
         checks += 1
         if len(studies) < expected.min_studies:
             penalties += 1.0
-        if expected.max_studies is not None and len(studies) > expected.max_studies:
-            penalties += 1.0
+        if expected.max_studies is not None:
             checks += 1
-        elif expected.max_studies is not None:
-            checks += 1
+            if len(studies) > expected.max_studies:
+                penalties += 1.0
 
         for field, required_values in expected.all_have.items():
             req_lower = {v.lower() for v in required_values}

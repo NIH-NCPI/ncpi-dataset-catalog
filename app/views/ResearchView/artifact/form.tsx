@@ -64,6 +64,13 @@ export function MultiTurnQueryProvider({
       previousQuery: MessageResponse["query"] | null,
       options: OnSubmitOptions
     ): Promise<void> => {
+      if (!url) {
+        dispatch.onSetError(
+          "Search API URL is not configured. Set NEXT_PUBLIC_SEARCH_API_URL or config.ai.url."
+        );
+        dispatch.onSetStatus(false);
+        return;
+      }
       // Abort any in-flight request.
       abortRef.current?.abort();
       const controller = new AbortController();

@@ -35,6 +35,7 @@ export function getResultsView(state: ChatState): ResultsView {
         status: STATUS.COMPLETE,
       };
     }
+    return { message: assistantMessage, status: STATUS.NOT_FOUND };
   }
 
   return { status: STATUS.NOT_FOUND };
