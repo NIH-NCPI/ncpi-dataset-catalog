@@ -7,7 +7,7 @@ import asyncio
 import httpx
 import pytest
 from fastapi.testclient import TestClient
-from unittest.mock import AsyncMock, patch
+from unittest.mock import patch
 
 from concept_search.api import app
 from concept_search.extract_agent import _format_previous_context
@@ -658,6 +658,7 @@ class TestRouteHandlers:
         mentions = data["query"]["mentions"]
         assert len(mentions) == 1
         assert mentions[0]["originalText"] == "blood pressure"
+        assert data["message"] == "Removed diabetes."
 
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_pipeline")
@@ -734,12 +735,11 @@ class TestRouteHandlers:
         assert call_args[0][0] == "also on AnVIL"
         assert call_args[1]["previous_query"] is not None
 
-    @patch("concept_search.api._rate_limiter.is_allowed", new_callable=AsyncMock, return_value=True)
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_pipeline")
     @patch("concept_search.api.run_router")
     def test_route_add_preserves_previous_intent(
-        self, mock_router, mock_pipeline, mock_index, _mock_rl
+        self, mock_router, mock_pipeline, mock_index
     ) -> None:
         """Add route preserves previous intent even if pipeline infers differently."""
         mock_router.return_value = RouteAdd()
@@ -775,7 +775,6 @@ class TestRouteHandlers:
         # Previous intent "study" must be preserved, not clobbered to "variable"
         assert data["intent"] == "study"
 
-    @patch("concept_search.api._rate_limiter.is_allowed", new_callable=AsyncMock, return_value=True)
     @patch("concept_search.api.get_index")
     @patch("concept_search.pipeline.get_index")
     @patch("concept_search.pipeline.run_structure")
@@ -784,7 +783,7 @@ class TestRouteHandlers:
     @patch("concept_search.api.run_router")
     def test_route_add_same_facet_merges(
         self, mock_router, mock_extract, mock_resolve, mock_structure,
-        mock_pipeline_index, mock_index, _mock_rl
+        mock_pipeline_index, mock_index
     ) -> None:
         """Add 'and asthma' when focus=diabetes already exists merges both."""
         mock_router.return_value = RouteAdd()
@@ -827,7 +826,6 @@ class TestRouteHandlers:
         texts = {m["originalText"] for m in focus_mentions}
         assert texts == {"diabetes", "asthma"}
 
-    @patch("concept_search.api._rate_limiter.is_allowed", new_callable=AsyncMock, return_value=True)
     @patch("concept_search.api.get_index")
     @patch("concept_search.pipeline.get_index")
     @patch("concept_search.pipeline.run_structure")
@@ -836,7 +834,7 @@ class TestRouteHandlers:
     @patch("concept_search.api.run_router")
     def test_route_add_measurement_to_existing(
         self, mock_router, mock_extract, mock_resolve, mock_structure,
-        mock_pipeline_index, mock_index, _mock_rl
+        mock_pipeline_index, mock_index
     ) -> None:
         """Add 'also BMI' when measurement=blood_pressure already exists keeps both."""
         mock_router.return_value = RouteAdd()

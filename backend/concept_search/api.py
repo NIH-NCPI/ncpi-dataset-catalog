@@ -247,7 +247,7 @@ def _split_mentions(
 
 
 async def _handle_route(
-    query: str, previous_query: QueryModel | None
+    query: str, previous_query: QueryModel
 ) -> QueryModel:
     """Route a follow-up message through the router agent and dispatch.
 
@@ -258,17 +258,20 @@ async def _handle_route(
     Returns:
         Updated QueryModel after applying the routed action.
     """
-    assert previous_query is not None
     route = await run_router(query, previous_query)
     logger.info("Router: %s", route.kind)
 
     if isinstance(route, RouteSelect):
-        # Set values from selected disambiguation concept_ids, clear disambiguation
-        mentions = []
+        # Resolve the first disambiguation-pending mention whose options
+        # overlap with selected_ids.  Only one mention is resolved per
+        # select action — this avoids accidentally resolving a second
+        # unrelated disambiguation.
+        selected = set(route.selected_ids)
+        mentions: list[ResolvedMention] = []
+        resolved = False
         for m in previous_query.mentions:
-            if m.disambiguation and any(
-                opt.concept_id in route.selected_ids
-                for opt in m.disambiguation
+            if not resolved and m.disambiguation and any(
+                opt.concept_id in selected for opt in m.disambiguation
             ):
                 mentions.append(
                     ResolvedMention(
@@ -277,6 +280,7 @@ async def _handle_route(
                         values=route.selected_ids,
                     )
                 )
+                resolved = True
             else:
                 mentions.append(m)
         return QueryModel(
@@ -287,14 +291,16 @@ async def _handle_route(
     if isinstance(route, RouteRemove):
         # Drop matching mentions
         remove_set = {t.lower() for t in route.original_texts}
+        removed = [t for t in route.original_texts]
         mentions = [
             m for m in previous_query.mentions
             if m.original_text.lower() not in remove_set
         ]
+        label = ", ".join(removed)
         return QueryModel(
             intent=previous_query.intent,
             mentions=mentions,
-            message="OK, removed." if not mentions else None,
+            message=f"Removed {label}.",
         )
 
     if isinstance(route, RouteReplace):
@@ -307,9 +313,11 @@ async def _handle_route(
             intent=previous_query.intent,
             mentions=remaining,
         )
-        return await run_pipeline(
+        result = await run_pipeline(
             route.new_text, previous_query=modified_previous
         )
+        result.intent = previous_query.intent
+        return result
 
     if isinstance(route, RouteReset):
         # Fresh pipeline, ignore previous state
