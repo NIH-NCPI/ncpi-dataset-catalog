@@ -18,6 +18,11 @@ from concept_search.models import (
     QueryModel,
     RawMention,
     ResolvedMention,
+    RouteAdd,
+    RouteRemove,
+    RouteReplace,
+    RouteReset,
+    RouteSelect,
 )
 from concept_search.pipeline import _merge_with_previous
 from concept_search.resolve_agent import _run_resolve_uncached
@@ -221,11 +226,13 @@ class TestRefinePreservesIntent:
     @patch("concept_search.pipeline.run_structure")
     @patch("concept_search.pipeline.run_resolve")
     @patch("concept_search.pipeline.run_extract")
+    @patch("concept_search.api.run_router")
     def test_refine_preserves_variable_intent(
-        self, mock_extract, mock_resolve, mock_structure, mock_index
+        self, mock_router, mock_extract, mock_resolve, mock_structure, mock_index
     ) -> None:
         """Refine with previousQuery.intent='variable' keeps it even when
         extract returns default 'study' intent."""
+        mock_router.return_value = RouteAdd()
         # Extract returns a new mention with default "study" intent
         mock_extract.return_value = ExtractResult(
             intent="study",
@@ -556,3 +563,170 @@ class TestDisambiguation:
 
         assert result.disambiguation == []
         assert result.values == ["Heart Diseases"]
+
+
+class TestRouteHandlers:
+    """Tests for _handle_route dispatch in the API."""
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_router")
+    def test_route_select_resolves_disambiguation(
+        self, mock_router, mock_index
+    ) -> None:
+        """Select route sets values from chosen concept_id and clears disambiguation."""
+        mock_router.return_value = RouteSelect(
+            selected_ids=["phenx:fasting_plasma_glucose_blood_draw"],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "blood glucose",
+            "previousQuery": {
+                "intent": "study",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                    {
+                        "facet": "measurement",
+                        "originalText": "glucose",
+                        "values": [],
+                        "exclude": False,
+                        "disambiguation": [
+                            {
+                                "conceptId": "phenx:fasting_plasma_glucose_blood_draw",
+                                "label": "Blood glucose measurement",
+                            },
+                            {
+                                "conceptId": "topmed:nutrient_intake",
+                                "label": "Dietary glucose intake",
+                            },
+                        ],
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        mentions = data["query"]["mentions"]
+        assert len(mentions) == 2
+        glucose = [m for m in mentions if m["originalText"] == "glucose"][0]
+        assert glucose["values"] == ["phenx:fasting_plasma_glucose_blood_draw"]
+        assert glucose["disambiguation"] == []
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_router")
+    def test_route_remove_drops_mention(
+        self, mock_router, mock_index
+    ) -> None:
+        """Remove route drops the specified mention."""
+        mock_router.return_value = RouteRemove(original_texts=["diabetes"])
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "remove the diabetes filter",
+            "previousQuery": {
+                "intent": "study",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                    {
+                        "facet": "measurement",
+                        "originalText": "blood pressure",
+                        "values": ["topmed:bp_systolic"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        mentions = data["query"]["mentions"]
+        assert len(mentions) == 1
+        assert mentions[0]["originalText"] == "blood pressure"
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
+    def test_route_reset_runs_fresh_pipeline(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """Reset route runs fresh pipeline ignoring previous state."""
+        mock_router.return_value = RouteReset(new_query="COPD studies")
+        mock_pipeline.return_value = QueryModel(
+            mentions=[_rm(Facet.FOCUS, "COPD", ["Pulmonary Disease, Chronic Obstructive"])],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "show me COPD studies instead",
+            "previousQuery": {
+                "intent": "study",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        mentions = data["query"]["mentions"]
+        assert len(mentions) == 1
+        assert mentions[0]["originalText"] == "COPD"
+        # Pipeline called with new_query, no previous_query
+        mock_pipeline.assert_called_once_with("COPD studies")
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
+    def test_route_add_falls_through_to_pipeline(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """Add route falls through to existing refine pipeline."""
+        mock_router.return_value = RouteAdd()
+        mock_pipeline.return_value = QueryModel(
+            mentions=[
+                _rm(Facet.FOCUS, "diabetes", ["Diabetes Mellitus"]),
+                _rm(Facet.PLATFORM, "AnVIL", ["AnVIL"]),
+            ],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "also on AnVIL",
+            "previousQuery": {
+                "intent": "study",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        # Pipeline called with query and previous_query
+        call_args = mock_pipeline.call_args
+        assert call_args[0][0] == "also on AnVIL"
+        assert call_args[1]["previous_query"] is not None
