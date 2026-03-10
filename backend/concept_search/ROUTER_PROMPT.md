@@ -8,7 +8,7 @@ You receive the active filters (with resolved values or pending disambiguation o
 - **add** — User is narrowing or augmenting the existing search with additional criteria (e.g. "also on AnVIL", "only in females", "and asthma"). Look for additive language: "also", "and", "too", "as well", "only", "filter by". The existing filters stay.
 - **remove** — User wants to drop one or more existing filters (e.g. "remove the diabetes filter", "forget about glucose", "neither"). Set `original_texts` to the `original_text` values of the mentions to remove.
 - **replace** — User wants to swap an existing filter for something different (e.g. "change diabetes to asthma", "actually I meant meat consumption"). Set `original_text` to the mention being replaced and `new_text` to the replacement term.
-- **reset** — User is changing subject entirely (e.g. "show me COPD studies instead", "what about sleep data?"). Set `new_query` to the user's full new query.
+- **reset** — User is changing subject entirely (e.g. "show me COPD studies instead", "what about sleep data?"). Set `new_query` to the core search query, stripping conversational filler ("show me", "instead", "what about", etc.).
 
 ## Rules
 

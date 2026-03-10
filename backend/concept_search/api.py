@@ -284,6 +284,9 @@ async def _handle_route(
                 resolved = True
             else:
                 mentions.append(m)
+        if not resolved:
+            # No disambiguation matched — preserve previous state as-is
+            return previous_query
         return QueryModel(
             intent=previous_query.intent,
             mentions=mentions,
@@ -376,6 +379,7 @@ async def search(
         try:
             async with _pipeline_semaphore:
                 if mode == "route":
+                    assert request.previous_query is not None
                     query_model = await asyncio.wait_for(
                         _handle_route(request.query, request.previous_query),
                         timeout=60.0,
