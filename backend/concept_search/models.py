@@ -183,6 +183,57 @@ class ResolvedMention(BaseModel):
     )
 
 
+# --- Router agent models ---
+
+
+class RouteSelect(BaseModel):
+    """User selected one or more of the offered disambiguation options."""
+
+    kind: Literal["select"] = "select"
+    selected_ids: list[str] = Field(
+        description="concept_id values from the disambiguation options the user chose."
+    )
+
+
+class RouteAdd(BaseModel):
+    """User is adding new criteria to the existing query."""
+
+    kind: Literal["add"] = "add"
+
+
+class RouteRemove(BaseModel):
+    """User wants to drop one or more mentions entirely."""
+
+    kind: Literal["remove"] = "remove"
+    original_texts: list[str] = Field(
+        description="original_text values of the mentions to remove."
+    )
+
+
+class RouteReplace(BaseModel):
+    """User wants to replace an existing mention with a different term."""
+
+    kind: Literal["replace"] = "replace"
+    original_text: str = Field(
+        description="original_text of the mention to replace."
+    )
+    new_text: str = Field(
+        description="The replacement term to extract and resolve."
+    )
+
+
+class RouteReset(BaseModel):
+    """User is starting a completely new query."""
+
+    kind: Literal["reset"] = "reset"
+    new_query: str = Field(
+        description="The new query to run fresh."
+    )
+
+
+RouterResult = RouteSelect | RouteAdd | RouteRemove | RouteReplace | RouteReset
+
+
 class QueryModel(BaseModel):
     """Structured query output from the structure agent.
 

@@ -28,10 +28,20 @@ from .api_models import (
     VariableResult,
 )
 from .index import get_index
-from .models import Facet, QueryModel, ResolvedMention
+from .models import (
+    Facet,
+    QueryModel,
+    ResolvedMention,
+    RouteAdd,
+    RouteRemove,
+    RouteReplace,
+    RouteReset,
+    RouteSelect,
+)
 from .pipeline import pipeline_cache, run_pipeline
 from .rate_limit import RateLimiter
 from .resolve_agent import resolve_cache
+from .router_agent import run_router
 
 # Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
 logging.basicConfig(
@@ -236,6 +246,107 @@ def _split_mentions(
     return include, exclude
 
 
+async def _handle_route(
+    query: str, previous_query: QueryModel
+) -> QueryModel:
+    """Route a follow-up message through the router agent and dispatch.
+
+    Args:
+        query: The user's follow-up message.
+        previous_query: Previous query state with active filters.
+
+    Returns:
+        Updated QueryModel after applying the routed action.
+    """
+    route = await run_router(query, previous_query)
+    logger.info("Router: %s", route.kind)
+
+    if isinstance(route, RouteSelect):
+        # Resolve the first disambiguation-pending mention whose options
+        # overlap with selected_ids.  Only one mention is resolved per
+        # select action — this avoids accidentally resolving a second
+        # unrelated disambiguation.
+        mentions: list[ResolvedMention] = []
+        resolved = False
+        for m in previous_query.mentions:
+            valid_ids = {opt.concept_id for opt in m.disambiguation} if m.disambiguation else set()
+            if not resolved and valid_ids and valid_ids & set(route.selected_ids):
+                # Only keep IDs that actually exist in the disambiguation options
+                filtered_ids = [sid for sid in route.selected_ids if sid in valid_ids]
+                mentions.append(
+                    ResolvedMention(
+                        exclude=m.exclude,
+                        facet=m.facet,
+                        original_text=m.original_text,
+                        values=filtered_ids,
+                    )
+                )
+                resolved = True
+            else:
+                mentions.append(m)
+        if not resolved:
+            # No disambiguation matched — preserve previous state as-is
+            return previous_query
+        return QueryModel(
+            intent=previous_query.intent,
+            mentions=mentions,
+        )
+
+    if isinstance(route, RouteRemove):
+        # Drop matching mentions, report what was actually removed
+        remove_set = {t.lower() for t in route.original_texts}
+        kept: list[ResolvedMention] = []
+        actually_removed: list[str] = []
+        for m in previous_query.mentions:
+            if m.original_text.lower() in remove_set:
+                actually_removed.append(m.original_text)
+            else:
+                kept.append(m)
+        message = f"Removed {', '.join(actually_removed)}." if actually_removed else None
+        return QueryModel(
+            intent=previous_query.intent,
+            mentions=kept,
+            message=message,
+        )
+
+    if isinstance(route, RouteReplace):
+        # Drop the old mention, run pipeline on new text with remaining mentions.
+        # If original_text doesn't match, fall through to add behavior.
+        remaining = [
+            m for m in previous_query.mentions
+            if m.original_text.lower() != route.original_text.lower()
+        ]
+        if len(remaining) == len(previous_query.mentions):
+            # No match found — treat as add
+            result = await run_pipeline(query, previous_query=previous_query)
+            if previous_query.intent != "auto":
+                result.intent = previous_query.intent
+            return result
+        modified_previous = QueryModel(
+            intent=previous_query.intent,
+            mentions=remaining,
+        )
+        result = await run_pipeline(
+            route.new_text, previous_query=modified_previous
+        )
+        if previous_query.intent != "auto":
+            result.intent = previous_query.intent
+        return result
+
+    if isinstance(route, RouteReset):
+        # Fresh pipeline, ignore previous state
+        return await run_pipeline(route.new_query)
+
+    # RouteAdd — refine pipeline, but preserve the previous intent.
+    # The extract agent may infer a different intent from the fragment
+    # (e.g. "also blood pressure" → "variable") but the user is refining,
+    # not changing direction.  Let pipeline win if previous was "auto".
+    result = await run_pipeline(query, previous_query=previous_query)
+    if previous_query.intent != "auto":
+        result.intent = previous_query.intent
+    return result
+
+
 @app.post("/search", response_model=SearchResponse)
 async def search(
     request: SearchRequest, fastapi_request: Request
@@ -252,33 +363,35 @@ async def search(
 
     has_query = bool(request.query and request.query.strip())
     has_previous = request.previous_query is not None
-    mode = (
-        "refine" if has_query and has_previous
-        else "lookup" if has_previous
-        else "fresh"
-    )
+    if has_query and has_previous:
+        mode = "route"
+    elif has_previous:
+        mode = "requery"
+    else:
+        mode = "fresh"
 
     _log_json(event="search_request", mode=mode, query=request.query)
     t_start = time.monotonic()
 
-    if mode == "lookup":
-        # Lookup-only: skip LLM pipeline entirely, use previous query as-is.
+    if mode == "requery":
+        # Requery: skip LLM pipeline entirely, use previous query as-is.
         assert request.previous_query is not None
         query_model = request.previous_query
         t_pipeline = t_start  # No pipeline work — zero out pipeline_ms.
     else:
-        # Fresh or Refine: run the LLM pipeline
         try:
             async with _pipeline_semaphore:
-                query_model = await asyncio.wait_for(
-                    run_pipeline(
-                        request.query,
-                        previous_query=(
-                            request.previous_query if mode == "refine" else None
-                        ),
-                    ),
-                    timeout=60.0,
-                )
+                if mode == "route":
+                    assert request.previous_query is not None
+                    query_model = await asyncio.wait_for(
+                        _handle_route(request.query, request.previous_query),
+                        timeout=60.0,
+                    )
+                else:
+                    query_model = await asyncio.wait_for(
+                        run_pipeline(request.query),
+                        timeout=60.0,
+                    )
         except (TimeoutError, asyncio.CancelledError):
             _log_json(event="search_timeout", query=request.query)
             elapsed_ms = int((time.monotonic() - t_start) * 1000)

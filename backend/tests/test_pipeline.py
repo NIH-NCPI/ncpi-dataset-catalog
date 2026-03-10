@@ -18,6 +18,11 @@ from concept_search.models import (
     QueryModel,
     RawMention,
     ResolvedMention,
+    RouteAdd,
+    RouteRemove,
+    RouteReplace,
+    RouteReset,
+    RouteSelect,
 )
 from concept_search.pipeline import _merge_with_previous
 from concept_search.resolve_agent import _run_resolve_uncached
@@ -221,11 +226,13 @@ class TestRefinePreservesIntent:
     @patch("concept_search.pipeline.run_structure")
     @patch("concept_search.pipeline.run_resolve")
     @patch("concept_search.pipeline.run_extract")
+    @patch("concept_search.api.run_router")
     def test_refine_preserves_variable_intent(
-        self, mock_extract, mock_resolve, mock_structure, mock_index
+        self, mock_router, mock_extract, mock_resolve, mock_structure, mock_index
     ) -> None:
         """Refine with previousQuery.intent='variable' keeps it even when
         extract returns default 'study' intent."""
+        mock_router.return_value = RouteAdd()
         # Extract returns a new mention with default "study" intent
         mock_extract.return_value = ExtractResult(
             intent="study",
@@ -267,11 +274,13 @@ class TestRefinePreservesIntent:
 
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_pipeline")
-    def test_api_passes_through_pipeline_intent(
-        self, mock_pipeline, mock_index
+    @patch("concept_search.api.run_router")
+    def test_route_add_preserves_previous_intent_over_pipeline(
+        self, mock_router, mock_pipeline, mock_index
     ) -> None:
-        """API must not mask pipeline intent — passes through whatever
-        the pipeline returns, even if it's wrong."""
+        """RouteAdd preserves previous intent even when pipeline returns
+        a different one — the user is refining, not changing direction."""
+        mock_router.return_value = RouteAdd()
         mock_pipeline.return_value = QueryModel(
             intent="study",
             mentions=[
@@ -280,6 +289,7 @@ class TestRefinePreservesIntent:
             ],
         )
         mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.store.query_variables.return_value = ([], 0)
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
@@ -298,9 +308,9 @@ class TestRefinePreservesIntent:
             },
         })
         assert resp.status_code == 200
-        # API is a passthrough — if the pipeline returns "study", that's
-        # what the response should have. The pipeline owns intent logic.
-        assert resp.json()["intent"] == "study"
+        # RouteAdd preserves previous intent ("variable"), not the
+        # pipeline's inferred intent ("study").
+        assert resp.json()["intent"] == "variable"
 
 
 class TestLookupWithMutatedMentions:
@@ -556,3 +566,493 @@ class TestDisambiguation:
 
         assert result.disambiguation == []
         assert result.values == ["Heart Diseases"]
+
+
+class TestRouteHandlers:
+    """Tests for _handle_route dispatch in the API."""
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_router")
+    def test_route_select_resolves_disambiguation(
+        self, mock_router, mock_index
+    ) -> None:
+        """Select route sets values from chosen concept_id and clears disambiguation."""
+        mock_router.return_value = RouteSelect(
+            selected_ids=["phenx:fasting_plasma_glucose_blood_draw"],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "blood glucose",
+            "previousQuery": {
+                "intent": "study",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                    {
+                        "facet": "measurement",
+                        "originalText": "glucose",
+                        "values": [],
+                        "exclude": False,
+                        "disambiguation": [
+                            {
+                                "conceptId": "phenx:fasting_plasma_glucose_blood_draw",
+                                "label": "Blood glucose measurement",
+                            },
+                            {
+                                "conceptId": "topmed:nutrient_intake",
+                                "label": "Dietary glucose intake",
+                            },
+                        ],
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        mentions = data["query"]["mentions"]
+        assert len(mentions) == 2
+        glucose = [m for m in mentions if m["originalText"] == "glucose"][0]
+        assert glucose["values"] == ["phenx:fasting_plasma_glucose_blood_draw"]
+        assert glucose["disambiguation"] == []
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_router")
+    def test_route_remove_drops_mention(
+        self, mock_router, mock_index
+    ) -> None:
+        """Remove route drops the specified mention."""
+        mock_router.return_value = RouteRemove(original_texts=["diabetes"])
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "remove the diabetes filter",
+            "previousQuery": {
+                "intent": "study",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                    {
+                        "facet": "measurement",
+                        "originalText": "blood pressure",
+                        "values": ["topmed:bp_systolic"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        mentions = data["query"]["mentions"]
+        assert len(mentions) == 1
+        assert mentions[0]["originalText"] == "blood pressure"
+        assert data["message"] == "Removed diabetes."
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
+    def test_route_reset_runs_fresh_pipeline(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """Reset route runs fresh pipeline ignoring previous state."""
+        mock_router.return_value = RouteReset(new_query="COPD studies")
+        mock_pipeline.return_value = QueryModel(
+            mentions=[_rm(Facet.FOCUS, "COPD", ["Pulmonary Disease, Chronic Obstructive"])],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "show me COPD studies instead",
+            "previousQuery": {
+                "intent": "study",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        mentions = data["query"]["mentions"]
+        assert len(mentions) == 1
+        assert mentions[0]["originalText"] == "COPD"
+        # Pipeline called with new_query, no previous_query
+        mock_pipeline.assert_called_once_with("COPD studies")
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
+    def test_route_replace_swaps_mention(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """Replace route drops the old mention and runs pipeline on new text."""
+        mock_router.return_value = RouteReplace(
+            original_text="diabetes", new_text="asthma",
+        )
+        mock_pipeline.return_value = QueryModel(
+            intent="variable",
+            mentions=[
+                _rm(Facet.FOCUS, "asthma", ["Asthma"]),
+                _rm(Facet.MEASUREMENT, "blood pressure",
+                     ["topmed:bp_systolic", "topmed:bp_diastolic"]),
+            ],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.store.query_variables.return_value = ([], 0)
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "change diabetes to asthma",
+            "previousQuery": {
+                "intent": "variable",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                    {
+                        "facet": "measurement",
+                        "originalText": "blood pressure",
+                        "values": ["topmed:bp_systolic", "topmed:bp_diastolic"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        # Pipeline called with "asthma" and previous_query minus diabetes
+        call_args = mock_pipeline.call_args
+        assert call_args[0][0] == "asthma"
+        prev = call_args[1]["previous_query"]
+        assert len(prev.mentions) == 1
+        assert prev.mentions[0].original_text == "blood pressure"
+        # Intent preserved from previous
+        assert data["intent"] == "variable"
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
+    def test_route_replace_fallback_when_no_match(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """Replace with unmatched original_text falls back to add behavior."""
+        mock_router.return_value = RouteReplace(
+            original_text="nonexistent", new_text="asthma",
+        )
+        mock_pipeline.return_value = QueryModel(
+            intent="study",
+            mentions=[
+                _rm(Facet.FOCUS, "diabetes", ["Diabetes Mellitus"]),
+                _rm(Facet.FOCUS, "asthma", ["Asthma"]),
+            ],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "change nonexistent to asthma",
+            "previousQuery": {
+                "intent": "auto",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        # Pipeline's "study" wins because previous was "auto"
+        assert resp.json()["intent"] == "study"
+        # Pipeline called with full query and previous_query (add behavior)
+        call_args = mock_pipeline.call_args
+        assert call_args[1]["previous_query"] is not None
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
+    def test_route_add_falls_through_to_pipeline(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """Add route falls through to existing refine pipeline."""
+        mock_router.return_value = RouteAdd()
+        mock_pipeline.return_value = QueryModel(
+            mentions=[
+                _rm(Facet.FOCUS, "diabetes", ["Diabetes Mellitus"]),
+                _rm(Facet.PLATFORM, "AnVIL", ["AnVIL"]),
+            ],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "also on AnVIL",
+            "previousQuery": {
+                "intent": "study",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        # Pipeline called with query and previous_query
+        call_args = mock_pipeline.call_args
+        assert call_args[0][0] == "also on AnVIL"
+        assert call_args[1]["previous_query"] is not None
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
+    def test_route_add_preserves_previous_intent(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """Add route preserves previous intent even if pipeline infers differently."""
+        mock_router.return_value = RouteAdd()
+        # Pipeline returns "variable" because it saw a measurement term
+        mock_pipeline.return_value = QueryModel(
+            intent="variable",
+            mentions=[
+                _rm(Facet.FOCUS, "diabetes", ["Diabetes Mellitus"]),
+                _rm(Facet.MEASUREMENT, "blood pressure",
+                     ["topmed:bp_systolic", "topmed:bp_diastolic"]),
+            ],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "also where blood pressure was measured",
+            "previousQuery": {
+                "intent": "study",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        # Previous intent "study" must be preserved, not clobbered to "variable"
+        assert data["intent"] == "study"
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
+    def test_route_add_lets_pipeline_win_when_auto(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """When previous intent is 'auto', let the pipeline resolve it."""
+        mock_router.return_value = RouteAdd()
+        mock_pipeline.return_value = QueryModel(
+            intent="variable",
+            mentions=[
+                _rm(Facet.MEASUREMENT, "blood pressure",
+                     ["topmed:bp_systolic"]),
+            ],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.store.query_variables.return_value = ([], 0)
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "also blood pressure",
+            "previousQuery": {
+                "intent": "auto",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        # Pipeline's "variable" wins because previous was "auto"
+        assert resp.json()["intent"] == "variable"
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
+    def test_route_replace_lets_pipeline_win_when_auto(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """When previous intent is 'auto', replace lets pipeline resolve it."""
+        mock_router.return_value = RouteReplace(
+            original_text="diabetes", new_text="asthma",
+        )
+        mock_pipeline.return_value = QueryModel(
+            intent="study",
+            mentions=[_rm(Facet.FOCUS, "asthma", ["Asthma"])],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "change diabetes to asthma",
+            "previousQuery": {
+                "intent": "auto",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        # Pipeline's "study" wins because previous was "auto"
+        assert resp.json()["intent"] == "study"
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.pipeline.get_index")
+    @patch("concept_search.pipeline.run_structure")
+    @patch("concept_search.pipeline.run_resolve")
+    @patch("concept_search.pipeline.run_extract")
+    @patch("concept_search.api.run_router")
+    def test_route_add_same_facet_merges(
+        self, mock_router, mock_extract, mock_resolve, mock_structure,
+        mock_pipeline_index, mock_index
+    ) -> None:
+        """Add 'and asthma' when focus=diabetes already exists merges both."""
+        mock_router.return_value = RouteAdd()
+        # Extract sees previous focus=diabetes and extracts only the new mention
+        mock_extract.return_value = ExtractResult(
+            intent="study",
+            mentions=[RawMention(facet=Facet.FOCUS, text="asthma", values=[])],
+        )
+        from concept_search.models import ResolveResult
+        mock_resolve.return_value = ResolveResult(
+            values=["Asthma"], message=None,
+        )
+        mock_structure.return_value = QueryModel(
+            mentions=[_rm(Facet.FOCUS, "asthma", [])],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "and asthma",
+            "previousQuery": {
+                "intent": "study",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        mentions = data["query"]["mentions"]
+        # Both focus mentions should be present (previous + new)
+        focus_mentions = [m for m in mentions if m["facet"] == "focus"]
+        assert len(focus_mentions) == 2
+        texts = {m["originalText"] for m in focus_mentions}
+        assert texts == {"diabetes", "asthma"}
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.pipeline.get_index")
+    @patch("concept_search.pipeline.run_structure")
+    @patch("concept_search.pipeline.run_resolve")
+    @patch("concept_search.pipeline.run_extract")
+    @patch("concept_search.api.run_router")
+    def test_route_add_measurement_to_existing(
+        self, mock_router, mock_extract, mock_resolve, mock_structure,
+        mock_pipeline_index, mock_index
+    ) -> None:
+        """Add 'also BMI' when measurement=blood_pressure already exists keeps both."""
+        mock_router.return_value = RouteAdd()
+        mock_extract.return_value = ExtractResult(
+            intent="variable",
+            mentions=[RawMention(facet=Facet.MEASUREMENT, text="BMI", values=[])],
+        )
+        from concept_search.models import ResolveResult
+        mock_resolve.return_value = ResolveResult(
+            values=["topmed:bmi"], message=None,
+        )
+        mock_structure.return_value = QueryModel(
+            mentions=[_rm(Facet.MEASUREMENT, "BMI", [])],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.store.query_variables.return_value = ([], 0)
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "also BMI",
+            "previousQuery": {
+                "intent": "variable",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                    {
+                        "facet": "measurement",
+                        "originalText": "blood pressure",
+                        "values": ["topmed:bp_systolic", "topmed:bp_diastolic"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        mentions = data["query"]["mentions"]
+        # Should have 3 mentions: focus + 2 measurements
+        assert len(mentions) == 3
+        meas = [m for m in mentions if m["facet"] == "measurement"]
+        assert len(meas) == 2
+        meas_texts = {m["originalText"] for m in meas}
+        assert meas_texts == {"blood pressure", "BMI"}
+        # Intent should stay "variable" (not clobbered by extract default "study")
+        # Actually extract returned "variable" here so it should override
+        assert data["intent"] == "variable"
