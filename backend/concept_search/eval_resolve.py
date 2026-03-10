@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 from pydantic_evals import Case, Dataset
 from pydantic_evals.evaluators import Evaluator, EvaluatorContext
 
-from .consent_logic import compute_eligible_codes, resolve_disease_name
 from .index import get_index
 from .models import DisambiguationOption, Facet, RawMention, ResolveResult
 from .resolve_agent import run_resolve
@@ -99,27 +98,19 @@ def _mention(text: str, facet: Facet) -> RawMention:
 # Dynamic consent code expectations
 # ---------------------------------------------------------------------------
 
-def _consent_expected(**kwargs: object) -> ResolveResult:
-    """Compute expected consent code values deterministically.
+def _consent_tags(*tags: str) -> ResolveResult:
+    """Build expected ResolveResult for consent tag output.
 
-    Loads the index once, gets all consent codes, and calls
-    ``compute_eligible_codes`` with the given kwargs.  This keeps
-    expectations in sync with the actual catalog data.
+    With axis-based consent filtering (#273), the resolve agent returns
+    lightweight tags instead of expanded code lists.
 
     Args:
-        **kwargs: Forwarded to ``compute_eligible_codes`` (after resolving
-            any ``disease`` name to an abbreviation).
+        *tags: Expected tag values (e.g. ``"explicit:GRU"``, ``"no-npu"``).
 
     Returns:
-        A :class:`ResolveResult` with sorted eligible codes.
+        A :class:`ResolveResult` with the expected tags.
     """
-    index = get_index()
-    all_codes = [m.value for m in index.list_facet_values("consentCode")]
-    # Resolve disease name if provided
-    if "disease" in kwargs:
-        kwargs["disease"] = resolve_disease_name(str(kwargs["disease"]))
-    eligible = compute_eligible_codes(all_codes, **kwargs)  # type: ignore[arg-type]
-    return ResolveResult(values=sorted(eligible))
+    return ResolveResult(values=sorted(tags))
 
 
 dataset = Dataset[RawMention, ResolveResult, ResolveResult](
@@ -377,108 +368,115 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
                 values=["ncpi:respiratory"]
             ),
         ),
-        # --- Consent code semantic resolution (dynamic expectations) ---
+        # --- Consent code resolution (axis-based tags, #273) ---
+        # Pattern A: Explicit codes → explicit:<CODE> tags
         Case(
             name="consent-gru-direct",
             inputs=_mention("GRU", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(explicit_code="GRU"),
+            expected_output=_consent_tags("explicit:GRU"),
         ),
         Case(
             name="consent-general-research",
             inputs=_mention("general research use", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(explicit_code="GRU"),
+            expected_output=_consent_tags("explicit:GRU"),
         ),
         Case(
             name="consent-hmb-direct",
             inputs=_mention("HMB", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(explicit_code="HMB"),
-        ),
-        Case(
-            name="consent-health-medical",
-            inputs=_mention("health medical biomedical", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(purpose="health"),
+            expected_output=_consent_tags("explicit:HMB"),
         ),
         Case(
             name="consent-disease-specific-cvd",
             inputs=_mention("cardiovascular disease specific", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(explicit_code="DS-CVD"),
-        ),
-        Case(
-            name="consent-breast-cancer",
-            inputs=_mention("breast cancer research", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(purpose="disease", disease="BRCA"),
-        ),
-        Case(
-            name="consent-not-for-profit",
-            inputs=_mention("general research, not for profit", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(purpose="general"),
+            expected_output=_consent_tags("explicit:DS-CVD"),
         ),
         Case(
             name="consent-hmb-irb",
             inputs=_mention("HMB-IRB", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(explicit_code="HMB-IRB"),
+            expected_output=_consent_tags("explicit:HMB-IRB"),
+        ),
+        # Pattern B: Use cases → no-* tags or empty
+        Case(
+            name="consent-health-medical",
+            inputs=_mention("health medical biomedical", Facet.CONSENT_CODE),
+            # No constraints expressed → empty (scope inferred by API layer)
+            expected_output=_consent_tags(),
+        ),
+        Case(
+            name="consent-breast-cancer",
+            inputs=_mention("breast cancer research", Facet.CONSENT_CODE),
+            # Disease context is in focus mention, not here → empty
+            expected_output=_consent_tags(),
+        ),
+        Case(
+            name="consent-not-for-profit",
+            inputs=_mention("general research, not for profit", Facet.CONSENT_CODE),
+            # Agent interprets as GRU (general research use)
+            expected_output=_consent_tags("explicit:GRU"),
         ),
         Case(
             name="consent-diabetes",
             inputs=_mention("diabetes research", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(purpose="disease", disease="DIAB"),
+            # Disease context is in focus mention → empty
+            expected_output=_consent_tags(),
         ),
-        # --- Consent eligibility resolution ---
         Case(
             name="consent-for-profit-cancer",
             inputs=_mention("for-profit cancer", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(purpose="disease", disease="CA", is_nonprofit=False),
+            # For-profit → exclude NPU
+            expected_output=_consent_tags("no-npu"),
         ),
         Case(
             name="consent-sub-disease",
             inputs=_mention("type 1 diabetes research consent", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(purpose="disease", disease="T1D"),
+            # Agent maps specific disease consent to explicit DS code
+            expected_output=_consent_tags("explicit:DS-T1D"),
         ),
         Case(
             name="consent-consented-diabetes",
             inputs=_mention("diabetes", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(purpose="disease", disease="DIAB"),
+            expected_output=_consent_tags(),
         ),
         Case(
             name="consent-consented-alzheimers",
             inputs=_mention("Alzheimer's", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(purpose="health"),
+            # Agent maps disease name to explicit DS code
+            expected_output=_consent_tags("explicit:DS-ALZ"),
         ),
         Case(
             name="consent-disease-only-diabetes",
             inputs=_mention("diabetes only", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(purpose="disease", disease="DIAB", disease_only=True),
+            # "only" → disease-specific explicit code
+            expected_output=_consent_tags("explicit:DS-DIAB"),
         ),
         Case(
             name="consent-disease-only-cancer",
             inputs=_mention("specifically cancer", Facet.CONSENT_CODE),
-            expected_output=_consent_expected(purpose="disease", disease="CA", disease_only=True),
+            # "specifically" → disease-specific explicit code
+            expected_output=_consent_tags("explicit:DS-CA"),
         ),
-        # --- GRU vs HMB disambiguation ---
         Case(
             name="consent-social-science",
             inputs=_mention("social science behavioral genetics research", Facet.CONSENT_CODE),
-            # NOT health/medical -> general purpose -> GRU only
-            # HMB is restricted to health/medical/biomedical
-            expected_output=_consent_expected(purpose="general"),
+            # Agent interprets as GRU (general, non-medical research)
+            expected_output=_consent_tags("explicit:GRU"),
         ),
         Case(
             name="consent-biomedical",
             inputs=_mention("biomedical research on aging", Facet.CONSENT_CODE),
-            # Explicitly biomedical -> health purpose -> GRU + HMB
-            expected_output=_consent_expected(purpose="health"),
+            expected_output=_consent_tags(),
         ),
         Case(
             name="consent-for-profit-health",
             inputs=_mention("for-profit biomedical health research", Facet.CONSENT_CODE),
-            # Health purpose + for-profit -> GRU + HMB minus NPU variants
-            expected_output=_consent_expected(purpose="health", is_nonprofit=False),
+            # For-profit → exclude NPU
+            expected_output=_consent_tags("no-npu"),
         ),
         Case(
             name="consent-population-genetics",
             inputs=_mention("population genetics, not disease-related", Facet.CONSENT_CODE),
-            # Explicitly not disease/health -> general -> GRU only
-            expected_output=_consent_expected(purpose="general"),
+            # Agent interprets as GRU (general, non-disease research)
+            expected_output=_consent_tags("explicit:GRU"),
         ),
     ],
 )

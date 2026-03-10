@@ -11,8 +11,9 @@ from pydantic import BaseModel
 from pydantic_evals import Case, Dataset
 from pydantic_evals.evaluators import Evaluator, EvaluatorContext
 
+from .mention_constraints import split_mentions
 from .index import get_index
-from .models import Facet, QueryModel, ResolvedMention
+from .models import QueryModel
 from .pipeline import run_pipeline
 
 
@@ -193,25 +194,12 @@ dataset = Dataset[str, PipelineOutput, StudyExpectation](
 )
 
 
-def _split_mentions(
-    mentions: list[ResolvedMention],
-) -> tuple[list[tuple[Facet, list[str]]], list[tuple[Facet, list[str]]]]:
-    """Split mentions into include and exclude constraint lists."""
-    include: list[tuple[Facet, list[str]]] = []
-    exclude: list[tuple[Facet, list[str]]] = []
-    for mention in mentions:
-        if mention.values:
-            target = exclude if mention.exclude else include
-            target.append((mention.facet, mention.values))
-    return include, exclude
-
-
 async def _run_task(inputs: str) -> PipelineOutput:
     index = get_index()
     query_model = await run_pipeline(inputs)
     studies: list[dict] = []
     if query_model.mentions:
-        include, exclude = _split_mentions(query_model.mentions)
+        include, exclude = split_mentions(query_model.mentions, index)
         studies = index.query_studies(include, exclude or None)
     return PipelineOutput(query=query_model, studies=studies)
 
@@ -310,7 +298,7 @@ async def _run_multi_turn_task(inputs: MultiTurnInput) -> PipelineOutput:
     assert query_model is not None
     studies: list[dict] = []
     if query_model.mentions:
-        include, exclude = _split_mentions(query_model.mentions)
+        include, exclude = split_mentions(query_model.mentions, index)
         studies = index.query_studies(include, exclude or None)
     return PipelineOutput(query=query_model, studies=studies)
 

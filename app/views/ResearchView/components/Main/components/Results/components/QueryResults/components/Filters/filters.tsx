@@ -8,6 +8,43 @@ import { CHIP_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/chi
 import { RowData } from "@tanstack/react-table";
 import { useMultiTurn } from "../../../../../../../../artifact/form";
 
+const CONSENT_TAG_LABELS: Record<string, string> = {
+  "no-col": "No collaboration required",
+  "no-gso": "Not genetics-only",
+  "no-irb": "No IRB required",
+  "no-mds": "Not methods-only",
+  "no-npu": "For-profit OK",
+  "no-pub": "No publication required",
+  "no-rd": "No rare disease restrictions",
+};
+
+/**
+ * Returns a human-readable display label for a consent filter value.
+ * Tags like "no-npu" become "For-profit OK"; "explicit:GRU" becomes "GRU".
+ * Other values pass through unchanged.
+ * @param value - The raw filter value string.
+ * @param facet - The facet id (e.g. "consentCode").
+ * @returns Human-readable label.
+ */
+function getConsentDisplayLabel(value: string, facet: string): string {
+  if (facet !== "consentCode") return value;
+  if (value in CONSENT_TAG_LABELS) return CONSENT_TAG_LABELS[value];
+  if (value.startsWith("explicit:")) return value.slice("explicit:".length);
+  return value;
+}
+
+/**
+ * Returns a display-friendly category label, overriding column headers where
+ * needed (e.g. "Consent Code" → "Study Consent" for tag-based filters).
+ * @param facet - The facet id.
+ * @param categoryKey - The default category key from the table column header.
+ * @returns Display label for the chip category.
+ */
+function getCategoryLabel(facet: string, categoryKey: string): string {
+  if (facet === "consentCode") return "Study Consent";
+  return categoryKey;
+}
+
 /**
  * Filters component to display applied filters from the assistant message.
  * @param props - Component props.
@@ -46,10 +83,10 @@ export const Filters = <T extends RowData>({
                   variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_400}
                   sx={{ textTransform: "capitalize" }}
                 >
-                  {filter.categoryKey}:{" "}
+                  {getCategoryLabel(filter.facet, filter.categoryKey)}:{" "}
                 </Typography>
                 <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_500}>
-                  {String(value)}
+                  {getConsentDisplayLabel(String(value), filter.facet)}
                 </Typography>
               </Fragment>
             }

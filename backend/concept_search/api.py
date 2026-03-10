@@ -28,6 +28,7 @@ from .api_models import (
     VariableResult,
 )
 from .index import get_index
+from .mention_constraints import split_mentions as _split_mentions
 from .models import (
     Facet,
     QueryModel,
@@ -229,23 +230,6 @@ def _build_variable_result(row: dict) -> VariableResult:
     )
 
 
-def _split_mentions(
-    mentions: list[ResolvedMention],
-) -> tuple[list[tuple[Facet, list[str]]], list[tuple[Facet, list[str]]]]:
-    """Split mentions into include and exclude constraint lists.
-
-    Each mention becomes its own constraint tuple (AND between mentions,
-    OR within a mention's values).
-    """
-    include: list[tuple[Facet, list[str]]] = []
-    exclude: list[tuple[Facet, list[str]]] = []
-    for mention in mentions:
-        if mention.values:
-            target = exclude if mention.exclude else include
-            target.append((mention.facet, mention.values))
-    return include, exclude
-
-
 async def _handle_route(
     query: str, previous_query: QueryModel
 ) -> QueryModel:
@@ -435,7 +419,7 @@ async def search(
     total_variable_count = 0
 
     if query_model.mentions:
-        include, exclude = _split_mentions(query_model.mentions)
+        include, exclude = _split_mentions(query_model.mentions, index)
         if intent == "auto":
             pass  # Ambiguous — return clarification message only
         elif intent == "variable":

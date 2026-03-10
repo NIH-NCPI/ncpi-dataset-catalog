@@ -5,6 +5,7 @@ from __future__ import annotations
 from concept_search.consent_logic import (
     ParsedConsentCode,
     compute_eligible_codes,
+    expand_consent_tags,
     expand_disease,
     parse_consent_code,
     resolve_disease_name,
@@ -937,4 +938,92 @@ class TestEdgeCases:
         # Even though purpose=general normally excludes HMB, explicit path ignores it
         assert "HMB" in result
         assert "HMB-IRB" in result
+
+
+# ---------------------------------------------------------------------------
+# expand_consent_tags — axis-based tag expansion
+# ---------------------------------------------------------------------------
+
+
+class TestExpandConsentTags:
+    """Tests for the tag-based consent expansion introduced in #273."""
+
+    def test_no_npu_disease_scope(self):
+        """no-npu + disease scope → GRU + HMB + DS-CVD minus NPU codes."""
+        result = expand_consent_tags(
+            EXTENDED_CODES, ["no-npu"], scope="disease", disease="CVD"
+        )
+        # Should include GRU, HMB, and matching DS-CVD codes
+        assert "GRU" in result
+        assert "HMB" in result
+        assert "DS-CVD" in result
+        assert "DS-CVD-IRB" in result
+        # NPU codes excluded
+        assert "GRU-NPU" not in result
+        assert "HMB-NPU" not in result
+        assert "DS-CVD-NPU" not in result
+
+    def test_no_npu_general_scope(self):
+        """no-npu + general scope → GRU codes minus NPU."""
+        result = expand_consent_tags(
+            EXTENDED_CODES, ["no-npu"], scope="general"
+        )
+        for code in result:
+            assert parse_consent_code(code).base == "GRU"
+            assert "NPU" not in parse_consent_code(code).modifiers
+        assert "GRU" in result
+        assert "GRU-IRB" in result
+        assert "GRU-NPU" not in result
+
+    def test_empty_tags_general_scope(self):
+        """Empty tags + general scope → all GRU codes (no filtering)."""
+        result = expand_consent_tags(EXTENDED_CODES, [], scope="general")
+        all_gru = compute_eligible_codes(EXTENDED_CODES, purpose="general")
+        assert result == all_gru
+
+    def test_multiple_modifier_tags(self):
+        """no-npu + no-irb → exclude both NPU and IRB modifiers."""
+        result = expand_consent_tags(
+            EXTENDED_CODES, ["no-npu", "no-irb"], scope="health"
+        )
+        for code in result:
+            parsed = parse_consent_code(code)
+            assert "NPU" not in parsed.modifiers
+            assert "IRB" not in parsed.modifiers
+        assert "GRU" in result
+        assert "HMB" in result
+        assert "GRU-IRB" not in result
+        assert "HMB-IRB" not in result
+        assert "GRU-NPU" not in result
+
+    def test_explicit_gru(self):
+        """explicit:GRU → all GRU variants."""
+        result = expand_consent_tags(EXTENDED_CODES, ["explicit:GRU"])
+        assert "GRU" in result
+        assert "GRU-IRB" in result
+        assert "GRU-NPU" in result
+        assert "HMB" not in result
+
+    def test_explicit_hmb_with_no_npu(self):
+        """explicit:HMB + no-npu → HMB variants minus NPU."""
+        result = expand_consent_tags(EXTENDED_CODES, ["explicit:HMB", "no-npu"])
+        assert "HMB" in result
+        assert "HMB-IRB" in result
+        assert "HMB-PUB" in result
+        assert "HMB-NPU" not in result
+        assert "HMB-IRB-NPU" not in result
+        assert "GRU" not in result
+
+    def test_empty_tags_no_filter(self):
+        """Empty tags = scope-based codes with no modifier filtering."""
+        result = expand_consent_tags(EXTENDED_CODES, [], scope="health")
+        expected = compute_eligible_codes(EXTENDED_CODES, purpose="health")
+        assert result == expected
+
+    def test_results_sorted(self):
+        """Output is always sorted."""
+        result = expand_consent_tags(
+            EXTENDED_CODES, ["no-npu"], scope="disease", disease="CA"
+        )
+        assert result == sorted(result)
 
