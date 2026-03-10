@@ -93,13 +93,13 @@ User sends follow-up message
   │               └─ Changing subject ───────→ reset   (clear state, run pipeline fresh)
 ```
 
-| Route | Handler | LLM pipeline? |
-| --- | --- | --- |
-| **select** | Set `values` from selected disambiguation `concept_id`(s), clear `disambiguation`, requery | No |
-| **add** | Run extract → resolve → merge with previous mentions | Yes |
-| **remove** | Drop matching mention(s) from `previousQuery`, requery | No |
-| **replace** | Drop old mention, run extract → resolve on new term, merge | Yes |
-| **reset** | Discard `previousQuery`, run fresh pipeline on new query | Yes |
+| Route       | Handler                                                                                    | LLM pipeline? |
+| ----------- | ------------------------------------------------------------------------------------------ | ------------- |
+| **select**  | Set `values` from selected disambiguation `concept_id`(s), clear `disambiguation`, requery | No            |
+| **add**     | Run extract → resolve → merge with previous mentions                                       | Yes           |
+| **remove**  | Drop matching mention(s) from `previousQuery`, requery                                     | No            |
+| **replace** | Drop old mention, run extract → resolve on new term, merge                                 | Yes           |
+| **reset**   | Discard `previousQuery`, run fresh pipeline on new query                                   | Yes           |
 
 State is **not persisted server-side**. It is encoded in the request:
 
