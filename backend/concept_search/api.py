@@ -319,7 +319,8 @@ async def _handle_route(
         if len(remaining) == len(previous_query.mentions):
             # No match found — treat as add
             result = await run_pipeline(query, previous_query=previous_query)
-            result.intent = previous_query.intent
+            if previous_query.intent != "auto":
+                result.intent = previous_query.intent
             return result
         modified_previous = QueryModel(
             intent=previous_query.intent,

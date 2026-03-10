@@ -754,6 +754,48 @@ class TestRouteHandlers:
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_pipeline")
     @patch("concept_search.api.run_router")
+    def test_route_replace_fallback_when_no_match(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """Replace with unmatched original_text falls back to add behavior."""
+        mock_router.return_value = RouteReplace(
+            original_text="nonexistent", new_text="asthma",
+        )
+        mock_pipeline.return_value = QueryModel(
+            intent="study",
+            mentions=[
+                _rm(Facet.FOCUS, "diabetes", ["Diabetes Mellitus"]),
+                _rm(Facet.FOCUS, "asthma", ["Asthma"]),
+            ],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "change nonexistent to asthma",
+            "previousQuery": {
+                "intent": "auto",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        # Pipeline's "study" wins because previous was "auto"
+        assert resp.json()["intent"] == "study"
+        # Pipeline called with full query and previous_query (add behavior)
+        call_args = mock_pipeline.call_args
+        assert call_args[1]["previous_query"] is not None
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
     def test_route_add_falls_through_to_pipeline(
         self, mock_router, mock_pipeline, mock_index
     ) -> None:
