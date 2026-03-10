@@ -235,8 +235,9 @@ def _infer_consent_scope(
 ) -> tuple[str, str | None]:
     """Infer consent scope from sibling focus mentions.
 
-    Scans all FOCUS mentions for disease context. Returns a (scope, disease)
-    tuple where scope is "general", "health", or "disease".
+    Scans ALL FOCUS mentions for disease context — tries both resolved
+    values and original_text to maximise disease detection.  Returns a
+    (scope, disease) tuple where scope is "general", "health", or "disease".
 
     Args:
         mentions: All resolved mentions in the current query.
@@ -244,14 +245,21 @@ def _infer_consent_scope(
     Returns:
         Tuple of (scope, disease_abbrev_or_none).
     """
+    has_focus = False
     for m in mentions:
         if m.facet != Facet.FOCUS or not m.values:
             continue
+        has_focus = True
+        # Try resolved values first, then original_text
         for val in m.values:
             disease = resolve_disease_name(val)
             if disease:
                 return ("disease", disease)
-        # Focus mention exists but no disease match → health scope
+        disease = resolve_disease_name(m.original_text)
+        if disease:
+            return ("disease", disease)
+    # Focus exists but no disease match → health scope
+    if has_focus:
         return ("health", None)
     return ("general", None)
 
@@ -279,6 +287,11 @@ def _split_mentions(
     """
     include: list[tuple[Facet, list[str]]] = []
     exclude: list[tuple[Facet, list[str]]] = []
+
+    # Pre-compute consent expansion inputs (lazy — only when needed)
+    consent_scope: tuple[str, str | None] | None = None
+    all_codes: list[str] | None = None
+
     for mention in mentions:
         values = mention.values
         # Expand consent tags into actual codes
@@ -291,10 +304,13 @@ def _split_mentions(
                 v.startswith("no-") or v.startswith("explicit:") for v in values
             )
             if has_tags or values == []:
-                scope, disease = _infer_consent_scope(mentions)
-                all_codes = [
-                    m.value for m in index.list_facet_values("consentCode")
-                ]
+                if consent_scope is None:
+                    consent_scope = _infer_consent_scope(mentions)
+                if all_codes is None:
+                    all_codes = [
+                        m.value for m in index.list_facet_values("consentCode")
+                    ]
+                scope, disease = consent_scope
                 values = expand_consent_tags(
                     all_codes, values, scope=scope, disease=disease
                 )

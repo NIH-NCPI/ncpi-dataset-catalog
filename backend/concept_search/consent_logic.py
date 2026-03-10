@@ -271,17 +271,6 @@ TAG_TO_MODIFIER: dict[str, str] = {
     "no-rd": "RD",
 }
 
-TAG_DISPLAY_LABELS: dict[str, str] = {
-    "no-col": "No collaboration required",
-    "no-gso": "Not genetics-only",
-    "no-irb": "No IRB required",
-    "no-mds": "Not methods-only",
-    "no-npu": "For-profit OK",
-    "no-pub": "No publication required",
-    "no-rd": "No rare disease restrictions",
-}
-
-
 def expand_consent_tags(
     all_codes: list[str],
     tags: list[str],
@@ -316,11 +305,6 @@ def expand_consent_tags(
     excluded_modifiers: set[str] = set()
     for tag in modifier_tags:
         excluded_modifiers.add(TAG_TO_MODIFIER[tag])
-
-    # Expand the user's disease to include sub-diseases
-    user_diseases: set[str] = set()
-    if disease:
-        user_diseases = expand_disease(disease)
 
     if explicit_tags:
         # Explicit code path: prefix-match each explicit tag, then apply
