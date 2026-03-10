@@ -37,7 +37,7 @@ This should be the first thing you read. No jargon beyond the platform names (wh
 
 ### 2. Search Input (primary CTA)
 
-Large text input below the value statement. Submitting navigates to `/research` with the query as the first message.
+Large text input below the value statement. Submitting navigates to `/research/studies` with the query as the first message.
 
 - **Placeholder**: "Describe what you're looking for — e.g., cardiovascular studies with whole genome sequencing"
 - **Example chips** below the input (clickable, pre-fill and submit):
@@ -106,7 +106,7 @@ One line: "The catalog uses only publicly available metadata — no subject-leve
 
 When the user submits a query (typed or from a chip):
 
-1. Navigate to `/research`
+1. Navigate to `/research/studies`
 2. Query appears as the first chat message
 3. System starts processing immediately (thinking indicator)
 4. Browser back returns to home page
