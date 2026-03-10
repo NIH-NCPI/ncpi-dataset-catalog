@@ -7,7 +7,7 @@ import asyncio
 import httpx
 import pytest
 from fastapi.testclient import TestClient
-from unittest.mock import patch
+from unittest.mock import AsyncMock, patch
 
 from concept_search.api import app
 from concept_search.extract_agent import _format_previous_context
@@ -730,3 +730,117 @@ class TestRouteHandlers:
         call_args = mock_pipeline.call_args
         assert call_args[0][0] == "also on AnVIL"
         assert call_args[1]["previous_query"] is not None
+
+    @patch("concept_search.api._rate_limiter.is_allowed", new_callable=AsyncMock, return_value=True)
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.pipeline.get_index")
+    @patch("concept_search.pipeline.run_structure")
+    @patch("concept_search.pipeline.run_resolve")
+    @patch("concept_search.pipeline.run_extract")
+    @patch("concept_search.api.run_router")
+    def test_route_add_same_facet_merges(
+        self, mock_router, mock_extract, mock_resolve, mock_structure,
+        mock_pipeline_index, mock_index, _mock_rl
+    ) -> None:
+        """Add 'and asthma' when focus=diabetes already exists merges both."""
+        mock_router.return_value = RouteAdd()
+        # Extract sees previous focus=diabetes and extracts only the new mention
+        mock_extract.return_value = ExtractResult(
+            intent="study",
+            mentions=[RawMention(facet=Facet.FOCUS, text="asthma", values=[])],
+        )
+        from concept_search.models import ResolveResult
+        mock_resolve.return_value = ResolveResult(
+            values=["Asthma"], message=None,
+        )
+        mock_structure.return_value = QueryModel(
+            mentions=[_rm(Facet.FOCUS, "asthma", [])],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "and asthma",
+            "previousQuery": {
+                "intent": "study",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        mentions = data["query"]["mentions"]
+        # Both focus mentions should be present (previous + new)
+        focus_mentions = [m for m in mentions if m["facet"] == "focus"]
+        assert len(focus_mentions) == 2
+        texts = {m["originalText"] for m in focus_mentions}
+        assert texts == {"diabetes", "asthma"}
+
+    @patch("concept_search.api._rate_limiter.is_allowed", new_callable=AsyncMock, return_value=True)
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.pipeline.get_index")
+    @patch("concept_search.pipeline.run_structure")
+    @patch("concept_search.pipeline.run_resolve")
+    @patch("concept_search.pipeline.run_extract")
+    @patch("concept_search.api.run_router")
+    def test_route_add_measurement_to_existing(
+        self, mock_router, mock_extract, mock_resolve, mock_structure,
+        mock_pipeline_index, mock_index, _mock_rl
+    ) -> None:
+        """Add 'also BMI' when measurement=blood_pressure already exists keeps both."""
+        mock_router.return_value = RouteAdd()
+        mock_extract.return_value = ExtractResult(
+            intent="variable",
+            mentions=[RawMention(facet=Facet.MEASUREMENT, text="BMI", values=[])],
+        )
+        from concept_search.models import ResolveResult
+        mock_resolve.return_value = ResolveResult(
+            values=["topmed:bmi"], message=None,
+        )
+        mock_structure.return_value = QueryModel(
+            mentions=[_rm(Facet.MEASUREMENT, "BMI", [])],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.store.query_variables.return_value = ([], 0)
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "also BMI",
+            "previousQuery": {
+                "intent": "variable",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                    {
+                        "facet": "measurement",
+                        "originalText": "blood pressure",
+                        "values": ["topmed:bp_systolic", "topmed:bp_diastolic"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        mentions = data["query"]["mentions"]
+        # Should have 3 mentions: focus + 2 measurements
+        assert len(mentions) == 3
+        meas = [m for m in mentions if m["facet"] == "measurement"]
+        assert len(meas) == 2
+        meas_texts = {m["originalText"] for m in meas}
+        assert meas_texts == {"blood pressure", "BMI"}
+        # Intent should stay "variable" (not clobbered by extract default "study")
+        # Actually extract returned "variable" here so it should override
+        assert data["intent"] == "variable"

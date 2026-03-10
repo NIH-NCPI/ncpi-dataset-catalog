@@ -307,6 +307,39 @@ dataset = Dataset[RouterInput, RouterResult, RouterResult](
             ),
             expected_output=RouteReset(new_query="sleep data"),
         ),
+        # --- Add within same facet ---
+        Case(
+            name="add-and-same-facet",
+            inputs=RouterInput(
+                query="and asthma",
+                previous_query=_resolved_previous(),
+            ),
+            expected_output=RouteAdd(),
+        ),
+        Case(
+            name="add-or-same-facet",
+            inputs=RouterInput(
+                query="or asthma",
+                previous_query=_resolved_previous(),
+            ),
+            expected_output=RouteAdd(),
+        ),
+        Case(
+            name="add-also-measurement",
+            inputs=RouterInput(
+                query="also BMI",
+                previous_query=_resolved_previous(),
+            ),
+            expected_output=RouteAdd(),
+        ),
+        Case(
+            name="add-additional-focus",
+            inputs=RouterInput(
+                query="include heart disease too",
+                previous_query=_resolved_previous(),
+            ),
+            expected_output=RouteAdd(),
+        ),
     ],
 )
 
