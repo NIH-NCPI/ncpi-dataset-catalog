@@ -328,7 +328,8 @@ async def _handle_route(
         result = await run_pipeline(
             route.new_text, previous_query=modified_previous
         )
-        result.intent = previous_query.intent
+        if previous_query.intent != "auto":
+            result.intent = previous_query.intent
         return result
 
     if isinstance(route, RouteReset):
@@ -338,9 +339,10 @@ async def _handle_route(
     # RouteAdd — refine pipeline, but preserve the previous intent.
     # The extract agent may infer a different intent from the fragment
     # (e.g. "also blood pressure" → "variable") but the user is refining,
-    # not changing direction.
+    # not changing direction.  Let pipeline win if previous was "auto".
     result = await run_pipeline(query, previous_query=previous_query)
-    result.intent = previous_query.intent
+    if previous_query.intent != "auto":
+        result.intent = previous_query.intent
     return result
 
 
