@@ -386,6 +386,10 @@ async def _run_resolve_uncached(
     prompt = f"Resolve this mention:\n- text: {mention.text}\n- facet: {mention.facet.value}"
     result = await agent.run(prompt, deps=index)
     output = result.output
+    # Disambiguation is only defined for measurement; clear it on other facets.
+    # (values/message enforcement is handled by ResolveResult.model_validator)
+    if output.disambiguation and mention.facet != Facet.MEASUREMENT:
+        output.disambiguation = []
     # Cull descendant focus values — ISA closure makes them redundant
     if mention.facet == Facet.FOCUS and output.values:
         output.values = _dedup_focus_values(output.values, index)

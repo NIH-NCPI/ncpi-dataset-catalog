@@ -11,8 +11,16 @@ from unittest.mock import patch
 
 from concept_search.api import app
 from concept_search.extract_agent import _format_previous_context
-from concept_search.models import ExtractResult, Facet, QueryModel, RawMention, ResolvedMention
+from concept_search.models import (
+    DisambiguationOption,
+    ExtractResult,
+    Facet,
+    QueryModel,
+    RawMention,
+    ResolvedMention,
+)
 from concept_search.pipeline import _merge_with_previous
+from concept_search.resolve_agent import _run_resolve_uncached
 
 
 def _rm(
@@ -394,3 +402,157 @@ class TestConcurrentSemaphore:
 
         assert all(r.status_code == 200 for r in responses)
         assert len(responses) == 8
+
+
+def _disambig_options() -> list[DisambiguationOption]:
+    """Build sample disambiguation options."""
+    return [
+        DisambiguationOption(
+            concept_id="phenx:fasting_plasma_glucose_blood_draw",
+            label="Blood glucose measurement",
+        ),
+        DisambiguationOption(
+            concept_id="topmed:nutrient_intake",
+            label="Dietary glucose intake",
+        ),
+    ]
+
+
+class TestDisambiguation:
+    """Tests for disambiguation flow through the pipeline."""
+
+    def test_disambiguation_preserved_in_merge(self) -> None:
+        """Disambiguation options survive _merge_with_previous."""
+        previous = QueryModel(
+            mentions=[_rm(Facet.FOCUS, "asthma", ["Asthma"])]
+        )
+        new = [
+            ResolvedMention(
+                disambiguation=_disambig_options(),
+                facet=Facet.MEASUREMENT,
+                original_text="glucose",
+                values=[],
+            )
+        ]
+        result = _merge_with_previous(previous, new)
+        assert len(result.mentions) == 2
+        glucose = [m for m in result.mentions if m.original_text == "glucose"][0]
+        assert len(glucose.disambiguation) == 2
+        assert glucose.values == []
+
+    def test_followup_adds_alongside_disambiguation(self) -> None:
+        """User follow-up adds a new mention; disambiguation mention stays."""
+        previous = QueryModel(
+            mentions=[
+                _rm(Facet.FOCUS, "asthma", ["Asthma"]),
+                ResolvedMention(
+                    disambiguation=_disambig_options(),
+                    facet=Facet.MEASUREMENT,
+                    original_text="glucose",
+                    values=[],
+                ),
+            ]
+        )
+        # User typed "blood glucose" — different original_text, so both kept
+        new = [_rm(Facet.MEASUREMENT, "blood glucose",
+                    ["phenx:fasting_plasma_glucose_blood_draw"])]
+        result = _merge_with_previous(previous, new)
+        assert len(result.mentions) == 3
+        glucose = [m for m in result.mentions if m.original_text == "glucose"][0]
+        assert len(glucose.disambiguation) == 2
+        assert glucose.values == []
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    def test_disambiguation_in_api_response(
+        self, mock_pipeline, mock_index
+    ) -> None:
+        """API response includes disambiguation options on mentions."""
+        mock_pipeline.return_value = QueryModel(
+            mentions=[
+                ResolvedMention(
+                    disambiguation=_disambig_options(),
+                    facet=Facet.MEASUREMENT,
+                    original_text="glucose",
+                    values=[],
+                ),
+            ],
+            message="Did you mean blood glucose levels or dietary glucose intake?",
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={"query": "glucose"})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["message"] == "Did you mean blood glucose levels or dietary glucose intake?"
+        mention = data["query"]["mentions"][0]
+        assert mention["values"] == []
+        assert len(mention["disambiguation"]) == 2
+        assert mention["disambiguation"][0]["conceptId"] == "phenx:fasting_plasma_glucose_blood_draw"
+
+    def test_disambiguation_clears_values_and_generates_message(self) -> None:
+        """ResolveResult validator clears values and auto-generates message."""
+        from concept_search.models import ResolveResult
+
+        result = ResolveResult(
+            disambiguation=_disambig_options(),
+            values=["should_be_cleared"],
+            message=None,
+        )
+
+        assert result.values == []
+        assert result.message is not None
+        assert "Which did you mean?" in result.message
+        assert "- Blood glucose measurement" in result.message
+        assert "- Dietary glucose intake" in result.message
+
+    def test_disambiguation_overwrites_llm_message(self) -> None:
+        """ResolveResult validator replaces LLM message with deterministic format."""
+        from concept_search.models import ResolveResult
+
+        result = ResolveResult(
+            disambiguation=_disambig_options(),
+            values=["should_be_cleared"],
+            message="Custom question from the LLM",
+        )
+
+        assert result.values == []
+        assert "Which did you mean?" in result.message
+        assert "- Blood glucose measurement" in result.message
+
+    @pytest.mark.asyncio
+    @patch("concept_search.resolve_agent._get_agent")
+    async def test_disambiguation_on_non_measurement_cleared(
+        self, mock_get_agent
+    ) -> None:
+        """Disambiguation on non-measurement facets is silently cleared."""
+        from concept_search.models import ResolveResult
+
+        # Validator fires first (clears values, sets message), then
+        # _run_resolve_uncached clears disambiguation for non-measurement.
+        mock_result = ResolveResult(
+            disambiguation=_disambig_options(),
+            values=["Heart Diseases"],
+            message=None,
+        )
+        # Re-set values after validator cleared them — simulates what the
+        # agent would need. Instead, build without disambiguation first.
+        mock_result = ResolveResult(values=["Heart Diseases"], message=None)
+        mock_result.disambiguation = _disambig_options()
+
+        class FakeRunResult:
+            output = mock_result
+
+        async def fake_run(*a, **kw):
+            return FakeRunResult()
+
+        mock_agent = mock_get_agent.return_value
+        mock_agent.run = fake_run
+
+        mention = RawMention(facet=Facet.FOCUS, text="heart", values=[])
+        result = await _run_resolve_uncached(mention, index=None)
+
+        assert result.disambiguation == []
+        assert result.values == ["Heart Diseases"]
