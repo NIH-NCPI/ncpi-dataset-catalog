@@ -24,40 +24,51 @@ Read the returned names, descriptions, types, similarity scores, and `ancestors`
 
 ## Consent Code Facet
 
+**Do NOT call `compute_consent_eligibility`.** Return lightweight tags instead — the API layer expands them into actual codes using context from other mentions.
+
 ### Pattern A: Explicit Code
 
-When the text IS a consent code (e.g. "GRU", "HMB-IRB", "DS-CVD"):
+When the text IS a consent code (e.g. "GRU", "HMB-IRB", "DS-CVD") or means one ("general research use" → GRU, "open access" → GRU):
 
-1. Call `compute_consent_eligibility(explicit_code=<the code>)` to get the code and all its modifier variants.
-2. Return ALL eligible codes from the result — these are combined with OR.
+Return `values=["explicit:<CODE>"]`. No tool call needed.
 
-Also use explicit_code for "general research use" or "open access" → `explicit_code="GRU"`.
+Examples:
+
+- "GRU" → `values=["explicit:GRU"]`
+- "HMB-IRB" → `values=["explicit:HMB-IRB"]`
+- "DS-CVD" → `values=["explicit:DS-CVD"]`
+- "general research use" → `values=["explicit:GRU"]`
 
 ### Pattern B: Research Use Case
 
-When the text describes a use case (e.g. "diabetes research", "for-profit cancer"):
+When the text describes constraints on permitted use (e.g. "for-profit", "no IRB needed"):
 
-1. Determine **purpose**:
-   - "general" — unrestricted, non-medical research (social science, population genetics). Only GRU codes are eligible.
-   - "health" — health/medical/biomedical research. GRU + HMB codes are eligible.
-   - "disease" — specific disease research. GRU + HMB + matching DS-\* codes.
-2. Determine **is_nonprofit**: False if "for-profit" or "commercial"; True or None otherwise.
-3. Call `compute_consent_eligibility(purpose=..., disease=..., is_nonprofit=...)` — the disease parameter accepts full names or abbreviations. The tool resolves names automatically.
-4. Return ALL eligible codes from the result.
+Identify which constraints the user expressed and return the applicable `no-*` tags as values. **No tool call needed.**
 
-**disease_only flag:** Set `disease_only=True` when the user says "only", "specifically", "disease-specific". This excludes GRU, HMB, and other broad codes.
+Available tags:
+| Tag | Meaning |
+|---|---|
+| `no-npu` | For-profit / commercial use OK (excludes NPU modifier) |
+| `no-irb` | No IRB approval required (excludes IRB modifier) |
+| `no-pub` | No publication required (excludes PUB modifier) |
+| `no-col` | No collaboration required (excludes COL modifier) |
+| `no-mds` | Not restricted to methods development (excludes MDS modifier) |
+| `no-gso` | Not restricted to genetic studies (excludes GSO modifier) |
+| `no-rd` | No rare disease restrictions (excludes RD modifier) |
 
-**You MUST call `compute_consent_eligibility` — it expands base codes into all modifier variants (e.g. GRU → GRU, GRU-IRB, GRU-NPU). Never return base codes without calling the tool.**
+If the user expresses NO constraints (just "what can I use?", "eligible datasets"), return `values=[]` (empty list). The API layer will apply scope-based filtering without modifier exclusions.
 
-**Examples:**
+Examples:
 
-- "diabetes research" → `compute_consent_eligibility(purpose="disease", disease="diabetes")` → returns GRU\*, HMB\*, DS-DIAB\*, etc.
-- "for-profit cancer" → `compute_consent_eligibility(purpose="disease", disease="cancer", is_nonprofit=False)` → codes without NPU modifier
-- "health medical biomedical" → `compute_consent_eligibility(purpose="health")` → returns GRU\* + HMB\* + HMP + HR
-- "biomedical research on aging" → `compute_consent_eligibility(purpose="health")` → returns GRU\* + HMB\*
-- "social science behavioral genetics" → `compute_consent_eligibility(purpose="general")` → returns GRU\* only (NOT health → no HMB)
-- "population genetics, not disease-related" → `compute_consent_eligibility(purpose="general")` → returns GRU\* only
-- "consented for diabetes only" → `compute_consent_eligibility(purpose="disease", disease="diabetes", disease_only=True)` → DS-DIAB\* only
+- "for-profit research" → `values=["no-npu"]`
+- "for-profit, no IRB needed" → `values=["no-npu", "no-irb"]`
+- "commercial use without publication requirement" → `values=["no-npu", "no-pub"]`
+- "what datasets can I use?" → `values=[]`
+- "nonprofit cancer" → `values=[]` (nonprofit is the default, no constraints to exclude)
+- "diabetes research" → `values=[]` (disease context is captured in a focus mention, not here)
+- "health medical biomedical" → `values=[]` (scope is inferred from context)
+
+**Important:** Disease context and scope (general/health/disease) are NOT your concern — the API layer infers scope from the focus mentions in the query. The consent mention captures ONLY the constraint tags.
 
 ## Disambiguation (measurement facet only)
 

@@ -255,3 +255,104 @@ def _is_eligible_by_purpose(
     # Other base codes (NPU, CADM, IRU) are restriction/modifier codes,
     # not primary consent categories. They don't grant research use.
     return False
+
+
+# ---------------------------------------------------------------------------
+# Axis-based tag expansion
+# ---------------------------------------------------------------------------
+
+TAG_TO_MODIFIER: dict[str, str] = {
+    "no-col": "COL",
+    "no-gso": "GSO",
+    "no-irb": "IRB",
+    "no-mds": "MDS",
+    "no-npu": "NPU",
+    "no-pub": "PUB",
+    "no-rd": "RD",
+}
+
+TAG_DISPLAY_LABELS: dict[str, str] = {
+    "no-col": "No collaboration required",
+    "no-gso": "Not genetics-only",
+    "no-irb": "No IRB required",
+    "no-mds": "Not methods-only",
+    "no-npu": "For-profit OK",
+    "no-pub": "No publication required",
+    "no-rd": "No rare disease restrictions",
+}
+
+
+def expand_consent_tags(
+    all_codes: list[str],
+    tags: list[str],
+    scope: str = "general",
+    disease: str | None = None,
+) -> list[str]:
+    """Expand axis-based consent tags into eligible consent code strings.
+
+    Tags come in two flavours:
+
+    - ``explicit:<CODE>`` — prefix-match against *all_codes* (reuses the
+      explicit-code logic from :func:`compute_eligible_codes`).
+    - ``no-<modifier>`` — exclude codes whose parsed modifiers contain the
+      mapped modifier (e.g. ``no-npu`` excludes codes with ``NPU``).
+
+    Scope determines which base codes are eligible (same semantics as
+    :func:`compute_eligible_codes`'s *purpose* parameter).
+
+    Args:
+        all_codes: Every consent code value in the index.
+        tags: List of tags, e.g. ``["no-npu"]`` or ``["explicit:GRU"]``.
+        scope: ``"general"``, ``"health"``, or ``"disease"``.
+        disease: Disease abbreviation when *scope* is ``"disease"``.
+
+    Returns:
+        Sorted list of eligible consent code strings.
+    """
+    explicit_tags = [t for t in tags if t.startswith("explicit:")]
+    modifier_tags = [t for t in tags if t in TAG_TO_MODIFIER]
+
+    # Collect modifiers to exclude
+    excluded_modifiers: set[str] = set()
+    for tag in modifier_tags:
+        excluded_modifiers.add(TAG_TO_MODIFIER[tag])
+
+    # Expand the user's disease to include sub-diseases
+    user_diseases: set[str] = set()
+    if disease:
+        user_diseases = expand_disease(disease)
+
+    if explicit_tags:
+        # Explicit code path: prefix-match each explicit tag, then apply
+        # modifier exclusions on top.
+        eligible: list[str] = []
+        for tag in explicit_tags:
+            code_prefix = tag.removeprefix("explicit:")
+            eligible.extend(
+                compute_eligible_codes(all_codes, explicit_code=code_prefix)
+            )
+        # Deduplicate while preserving order
+        seen: set[str] = set()
+        deduped: list[str] = []
+        for code in eligible:
+            if code not in seen:
+                seen.add(code)
+                deduped.append(code)
+        eligible = deduped
+    else:
+        # Scope-based path: filter by purpose (general/health/disease)
+        eligible = compute_eligible_codes(
+            all_codes, purpose=scope, disease=disease
+        )
+
+    # Apply modifier exclusions
+    if excluded_modifiers:
+        filtered: list[str] = []
+        for code in eligible:
+            parsed = parse_consent_code(code)
+            if not (parsed.modifiers & excluded_modifiers):
+                filtered.append(code)
+        eligible = filtered
+
+    eligible.sort()
+    return eligible

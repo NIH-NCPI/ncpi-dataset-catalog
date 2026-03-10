@@ -468,7 +468,7 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
                 intent="study",
                 mentions=[
                     _rm("cancer", Facet.FOCUS),
-                    _rm("for-profit cancer", Facet.CONSENT_CODE),
+                    _rm("for-profit", Facet.CONSENT_CODE),
                 ],
             ),
         ),
@@ -537,7 +537,7 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
                 intent="study",
                 mentions=[
                     _rm("cancer", Facet.FOCUS),
-                    _rm("nonprofit cancer", Facet.CONSENT_CODE),
+                    _rm("nonprofit", Facet.CONSENT_CODE),
                 ],
             ),
         ),

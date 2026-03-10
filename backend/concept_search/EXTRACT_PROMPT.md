@@ -89,11 +89,12 @@ For these facets, extract the user's text and leave `values` empty. A resolve ag
 
 Key rule: "diabetes studies" = focus only. "What diabetes datasets can I use?" = focus + consentCode (because "can I use" signals eligibility).
 
-**Dual mentions:** When eligibility cues appear alongside a disease, emit BOTH a focus mention (what the study is about) AND a consentCode mention (what the data is permitted for). Examples:
+**Dual mentions:** When eligibility cues appear alongside a disease, emit BOTH a focus mention (what the study is about) AND a consentCode mention (the constraint only, NOT the disease). The consent mention captures only the use-case constraint; the disease is already in the focus mention. Examples:
 
-- "I'm a nonprofit studying cancer, what's available?" → focus="cancer" + consentCode="nonprofit cancer"
-- "for-profit diabetes datasets" → focus="diabetes" + consentCode="for-profit diabetes"
-- "what datasets can I use for Alzheimer's research?" → focus="Alzheimer's" + consentCode="Alzheimer's"
+- "I'm a nonprofit studying cancer, what's available?" → focus="cancer" + consentCode="nonprofit"
+- "for-profit diabetes datasets" → focus="diabetes" + consentCode="for-profit"
+- "what datasets can I use for Alzheimer's research?" → focus="Alzheimer's" + consentCode="eligible"
+- "commercial cancer research without publication requirement" → focus="cancer" + consentCode="commercial, no publication"
 
 ## Instructions
 
