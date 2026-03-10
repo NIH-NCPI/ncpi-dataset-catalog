@@ -65,18 +65,20 @@ Semantic, AI-powered search across:
 
 Prominent stats that communicate scale:
 
-| Stat               | Value                                          |
-| ------------------ | ---------------------------------------------- |
-| Studies            | thousands of dbGaP studies                     |
-| Measured variables | hundreds of thousands, semantically harmonized |
-| Disease focus      | searchable via MeSH disease hierarchy          |
-| Platforms          | 4 (AnVIL, BDC, CRDC, KFDRC)                    |
+| Stat               | Value                                                           |
+| ------------------ | --------------------------------------------------------------- |
+| Studies            | thousands of dbGaP studies                                      |
+| Measured variables | hundreds of thousands, semantically harmonized                  |
+| Disease focus      | searchable via MeSH disease hierarchy                           |
+| Consent codes      | hundreds of GA4GH consent codes, searchable in natural language |
+| Platforms          | 4 (AnVIL, BDC, CRDC, KFDRC)                                     |
 
 ### 5. What Each Study Includes
 
 Brief list of what the catalog associates with each study — this is the "what do I get" section:
 
-- **Study metadata** — description, disease focus (searchable via MeSH hierarchy), study design, data types, consent codes
+- **Study metadata** — description, disease focus (searchable via MeSH hierarchy), study design, data types
+- **Consent codes** — hundreds of GA4GH consent codes, searchable in natural language (e.g., "for-profit use with no review board")
 - **Selected publications** — PI-curated references with citation counts
 - **Measured variables** — hundreds of thousands of variables semantically harmonized into canonical concepts, linked to dbGaP variable records
 - **Demographics** — sex, race/ethnicity, and genetically inferred ancestry distributions
