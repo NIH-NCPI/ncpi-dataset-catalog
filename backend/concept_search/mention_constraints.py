@@ -95,6 +95,11 @@ def split_mentions(
                 values = expand_consent_tags(
                     all_codes, values, scope=scope, disease=disease
                 )
+                # If expansion yields nothing (e.g. all codes excluded),
+                # use a sentinel so the constraint stays active and returns
+                # zero results rather than silently broadening the query.
+                if not values:
+                    values = ["__NO_MATCH__"]
         if values:
             target = exclude if mention.exclude else include
             target.append((mention.facet, values))
