@@ -11,7 +11,7 @@ from pydantic import BaseModel
 from pydantic_evals import Case, Dataset
 from pydantic_evals.evaluators import Evaluator, EvaluatorContext
 
-from .api import _split_mentions as api_split_mentions
+from .mention_constraints import split_mentions
 from .index import get_index
 from .models import QueryModel
 from .pipeline import run_pipeline
@@ -199,7 +199,7 @@ async def _run_task(inputs: str) -> PipelineOutput:
     query_model = await run_pipeline(inputs)
     studies: list[dict] = []
     if query_model.mentions:
-        include, exclude = api_split_mentions(query_model.mentions, index)
+        include, exclude = split_mentions(query_model.mentions, index)
         studies = index.query_studies(include, exclude or None)
     return PipelineOutput(query=query_model, studies=studies)
 
@@ -298,7 +298,7 @@ async def _run_multi_turn_task(inputs: MultiTurnInput) -> PipelineOutput:
     assert query_model is not None
     studies: list[dict] = []
     if query_model.mentions:
-        include, exclude = api_split_mentions(query_model.mentions, index)
+        include, exclude = split_mentions(query_model.mentions, index)
         studies = index.query_studies(include, exclude or None)
     return PipelineOutput(query=query_model, studies=studies)
 

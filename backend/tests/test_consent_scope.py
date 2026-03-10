@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from concept_search.api import _infer_consent_scope, _split_mentions
+from concept_search.mention_constraints import infer_consent_scope as _infer_consent_scope
+from concept_search.mention_constraints import split_mentions as _split_mentions
 from concept_search.index import get_index
 from concept_search.models import Facet, ResolvedMention
 

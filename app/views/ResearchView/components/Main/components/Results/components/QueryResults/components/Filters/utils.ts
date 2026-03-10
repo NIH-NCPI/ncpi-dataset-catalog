@@ -39,12 +39,6 @@ export function getFacet<T extends RowData>(
 }
 
 /**
- * Extracts filters from the assistant message response.
- * @param table - Table instance.
- * @param message - Assistant message containing the response with filters.
- * @returns An array of filters with category keys and values.
- */
-/**
  * A filter entry that also carries the original facet id.
  */
 export interface FilterWithFacet {
@@ -55,6 +49,7 @@ export interface FilterWithFacet {
 
 /**
  * Extracts filters from the assistant message response.
+ * Filters out mentions with empty values to avoid rendering chipless filter labels.
  * @param table - Table instance.
  * @param message - Assistant message containing the response with filters.
  * @returns An array of filters with category keys, facet ids, and values.
@@ -63,9 +58,13 @@ export function getFilters<T extends RowData>(
   table: Table<T>,
   message: AssistantMessage<Response>
 ): FilterWithFacet[] {
-  return message.response.query.mentions.map((mention) => ({
-    categoryKey: getCategoryKey(table, mention.facet),
-    facet: mention.facet,
-    value: mention.values,
-  }));
+  return message.response.query.mentions
+    .filter(
+      (mention) => Array.isArray(mention.values) && mention.values.length > 0
+    )
+    .map((mention) => ({
+      categoryKey: getCategoryKey(table, mention.facet),
+      facet: mention.facet,
+      value: mention.values,
+    }));
 }
