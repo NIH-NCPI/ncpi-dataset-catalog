@@ -23,14 +23,26 @@ const CONSENT_TAG_LABELS: Record<string, string> = {
  * Tags like "no-npu" become "For-profit OK"; "explicit:GRU" becomes "GRU".
  * Other values pass through unchanged.
  * @param value - The raw filter value string.
- * @param categoryKey - The filter category key.
+ * @param facet - The facet id (e.g. "consentCode").
  * @returns Human-readable label.
  */
-function getConsentDisplayLabel(value: string, categoryKey: string): string {
-  if (categoryKey !== "consentCode") return value;
+function getConsentDisplayLabel(value: string, facet: string): string {
+  if (facet !== "consentCode") return value;
   if (value in CONSENT_TAG_LABELS) return CONSENT_TAG_LABELS[value];
   if (value.startsWith("explicit:")) return value.slice("explicit:".length);
   return value;
+}
+
+/**
+ * Returns a display-friendly category label, overriding column headers where
+ * needed (e.g. "Consent Code" → "Study Consent" for tag-based filters).
+ * @param facet - The facet id.
+ * @param categoryKey - The default category key from the table column header.
+ * @returns Display label for the chip category.
+ */
+function getCategoryLabel(facet: string, categoryKey: string): string {
+  if (facet === "consentCode") return "Study Consent";
+  return categoryKey;
 }
 
 /**
@@ -71,10 +83,10 @@ export const Filters = <T extends RowData>({
                   variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_400}
                   sx={{ textTransform: "capitalize" }}
                 >
-                  {filter.categoryKey}:{" "}
+                  {getCategoryLabel(filter.facet, filter.categoryKey)}:{" "}
                 </Typography>
                 <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_500}>
-                  {getConsentDisplayLabel(String(value), filter.categoryKey)}
+                  {getConsentDisplayLabel(String(value), filter.facet)}
                 </Typography>
               </Fragment>
             }

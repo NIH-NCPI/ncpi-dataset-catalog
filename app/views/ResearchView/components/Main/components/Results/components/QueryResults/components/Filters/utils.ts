@@ -1,6 +1,5 @@
 import { AssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
 import { Response } from "../../../../../../../../types/response";
-import { Filters } from "@databiosphere/findable-ui/lib/common/entities";
 import { RowData, Table } from "@tanstack/react-table";
 
 /**
@@ -45,12 +44,28 @@ export function getFacet<T extends RowData>(
  * @param message - Assistant message containing the response with filters.
  * @returns An array of filters with category keys and values.
  */
+/**
+ * A filter entry that also carries the original facet id.
+ */
+export interface FilterWithFacet {
+  categoryKey: string;
+  facet: string;
+  value: (number | string)[];
+}
+
+/**
+ * Extracts filters from the assistant message response.
+ * @param table - Table instance.
+ * @param message - Assistant message containing the response with filters.
+ * @returns An array of filters with category keys, facet ids, and values.
+ */
 export function getFilters<T extends RowData>(
   table: Table<T>,
   message: AssistantMessage<Response>
-): Filters {
+): FilterWithFacet[] {
   return message.response.query.mentions.map((mention) => ({
     categoryKey: getCategoryKey(table, mention.facet),
+    facet: mention.facet,
     value: mention.values,
   }));
 }
