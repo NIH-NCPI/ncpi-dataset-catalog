@@ -830,6 +830,80 @@ class TestRouteHandlers:
         assert data["intent"] == "study"
 
     @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
+    def test_route_add_lets_pipeline_win_when_auto(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """When previous intent is 'auto', let the pipeline resolve it."""
+        mock_router.return_value = RouteAdd()
+        mock_pipeline.return_value = QueryModel(
+            intent="variable",
+            mentions=[
+                _rm(Facet.MEASUREMENT, "blood pressure",
+                     ["topmed:bp_systolic"]),
+            ],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.store.query_variables.return_value = ([], 0)
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "also blood pressure",
+            "previousQuery": {
+                "intent": "auto",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        # Pipeline's "variable" wins because previous was "auto"
+        assert resp.json()["intent"] == "variable"
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
+    def test_route_replace_lets_pipeline_win_when_auto(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """When previous intent is 'auto', replace lets pipeline resolve it."""
+        mock_router.return_value = RouteReplace(
+            original_text="diabetes", new_text="asthma",
+        )
+        mock_pipeline.return_value = QueryModel(
+            intent="study",
+            mentions=[_rm(Facet.FOCUS, "asthma", ["Asthma"])],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "change diabetes to asthma",
+            "previousQuery": {
+                "intent": "auto",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        # Pipeline's "study" wins because previous was "auto"
+        assert resp.json()["intent"] == "study"
+
+    @patch("concept_search.api.get_index")
     @patch("concept_search.pipeline.get_index")
     @patch("concept_search.pipeline.run_structure")
     @patch("concept_search.pipeline.run_resolve")
