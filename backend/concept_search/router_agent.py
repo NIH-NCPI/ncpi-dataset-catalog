@@ -53,8 +53,9 @@ def _format_filters(previous_query: QueryModel) -> str:
     lines: list[str] = []
     for m in previous_query.mentions:
         if m.disambiguation:
+            prefix = "exclude" if m.exclude else "include"
             values_str = "[] (DISAMBIGUATION PENDING)"
-            lines.append(f'- {m.facet.value}: "{m.original_text}" → {values_str}')
+            lines.append(f'- {m.facet.value}: "{m.original_text}" → {values_str} ({prefix})')
             for i, opt in enumerate(m.disambiguation, 1):
                 lines.append(f"    {i}. {opt.concept_id} — {opt.label}")
         else:
