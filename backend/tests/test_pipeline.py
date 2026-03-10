@@ -700,6 +700,60 @@ class TestRouteHandlers:
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_pipeline")
     @patch("concept_search.api.run_router")
+    def test_route_replace_swaps_mention(
+        self, mock_router, mock_pipeline, mock_index
+    ) -> None:
+        """Replace route drops the old mention and runs pipeline on new text."""
+        mock_router.return_value = RouteReplace(
+            original_text="diabetes", new_text="asthma",
+        )
+        mock_pipeline.return_value = QueryModel(
+            intent="variable",
+            mentions=[
+                _rm(Facet.FOCUS, "asthma", ["Asthma"]),
+                _rm(Facet.MEASUREMENT, "blood pressure",
+                     ["topmed:bp_systolic", "topmed:bp_diastolic"]),
+            ],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.store.query_variables.return_value = ([], 0)
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "change diabetes to asthma",
+            "previousQuery": {
+                "intent": "variable",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                    {
+                        "facet": "measurement",
+                        "originalText": "blood pressure",
+                        "values": ["topmed:bp_systolic", "topmed:bp_diastolic"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        # Pipeline called with "asthma" and previous_query minus diabetes
+        call_args = mock_pipeline.call_args
+        assert call_args[0][0] == "asthma"
+        prev = call_args[1]["previous_query"]
+        assert len(prev.mentions) == 1
+        assert prev.mentions[0].original_text == "blood pressure"
+        # Intent preserved from previous
+        assert data["intent"] == "variable"
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
     def test_route_add_falls_through_to_pipeline(
         self, mock_router, mock_pipeline, mock_index
     ) -> None:

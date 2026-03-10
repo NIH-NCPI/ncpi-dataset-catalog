@@ -1,6 +1,6 @@
-# PRD: Conversation Routing & Disambiguation #264
+# PRD: Conversation Routing & Disambiguation #268
 
-**Issue**: #264
+**Issue**: #268
 **Status**: Draft
 **Date**: 2026-03-09
 
@@ -66,43 +66,47 @@ User abandons the current query entirely.
 | ------------- | ------------------------------ | --------------------------------- |
 | **New topic** | "show me COPD studies instead" | Clear state, start fresh pipeline |
 
-## Dialog State Machine
+## Router Decision Tree
+
+The router runs only in **route mode** (both `query` and `previousQuery` present). It classifies the user's follow-up message and dispatches accordingly.
 
 ```
-                    ┌─────────┐
-                    │  IDLE   │
-                    └────┬────┘
-                         │ user sends query (fresh)
-                         v
-                    ┌─────────┐
-              ┌─────│EXTRACTED│─────┐
-              │     └─────────┘     │
-              │ all resolved        │ some ambiguous
-              v                     v
-        ┌──────────┐        ┌──────────────┐
-        │ RESOLVED │        │DISAMBIGUATING│
-        └────┬─────┘        └──────┬───────┘
-             │                     │
-             │ user follows up     │ user responds
-             │ (route mode)        │ (route mode)
-             │                     │
-             ├─ add ──────> EXTRACTED
-             ├─ remove ───> RESOLVED (requery)
-             ├─ replace ──> EXTRACTED
-             ├─ reset ────> IDLE
-             │                     ├─ select → RESOLVED (requery)
-             │                     ├─ remove → RESOLVED (requery)
-             │                     ├─ replace → EXTRACTED
-             │                     ├─ add ──→ EXTRACTED
-             │                     └─ reset → IDLE
+User sends follow-up message
+  │
+  ├─ Is disambiguation pending?
+  │   │
+  │   ├─ YES ─── Does the message answer the question?
+  │   │            │
+  │   │            ├─ Picks option(s) ───────→ select  (set values from chosen concept_ids, requery)
+  │   │            ├─ Rejects all ───────────→ remove  (drop the ambiguous mention entirely, requery)
+  │   │            │                            System responds: "OK, removed. How would you like to refine your search?"
+  │   │            ├─ Wants something else ──→ replace (drop mention + options, run pipeline on new term)
+  │   │            │                            e.g. "actually I meant meat consumption"
+  │   │            └─ Unrelated ─────────────→ reset   (clear everything, run pipeline fresh)
+  │   │                                         e.g. "show me COPD studies instead"
+  │   │
+  │   └─ NO ──── What is the user doing?
+  │               │
+  │               ├─ Adding new criteria ────→ add     (run pipeline, merge with previous)
+  │               ├─ Removing a filter ──────→ remove  (drop mention, requery)
+  │               ├─ Replacing a filter ─────→ replace (drop old, run pipeline on new term)
+  │               └─ Changing subject ───────→ reset   (clear state, run pipeline fresh)
 ```
+
+| Route | Handler | LLM pipeline? |
+| --- | --- | --- |
+| **select** | Set `values` from selected disambiguation `concept_id`(s), clear `disambiguation`, requery | No |
+| **add** | Run extract → resolve → merge with previous mentions | Yes |
+| **remove** | Drop matching mention(s) from `previousQuery`, requery | No |
+| **replace** | Drop old mention, run extract → resolve on new term, merge | Yes |
+| **reset** | Discard `previousQuery`, run fresh pipeline on new query | Yes |
 
 State is **not persisted server-side**. It is encoded in the request:
 
-- `previousQuery.mentions[].disambiguation` — non-empty means DISAMBIGUATING
-- `previousQuery` present + `query` present — route mode
-- `previousQuery` present + `query` empty — requery mode
-- `query` present + no `previousQuery` — IDLE (fresh mode)
+- `previousQuery.mentions[].disambiguation` — non-empty means disambiguation is pending
+- `previousQuery` present + `query` present — route mode (router runs)
+- `previousQuery` present + `query` empty — requery mode (no router, no LLM)
+- `query` present + no `previousQuery` — fresh mode (no router, full pipeline)
 
 ## Routing Logic
 

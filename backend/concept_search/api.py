@@ -266,18 +266,19 @@ async def _handle_route(
         # overlap with selected_ids.  Only one mention is resolved per
         # select action — this avoids accidentally resolving a second
         # unrelated disambiguation.
-        selected = set(route.selected_ids)
         mentions: list[ResolvedMention] = []
         resolved = False
         for m in previous_query.mentions:
-            if not resolved and m.disambiguation and any(
-                opt.concept_id in selected for opt in m.disambiguation
-            ):
+            valid_ids = {opt.concept_id for opt in m.disambiguation} if m.disambiguation else set()
+            if not resolved and valid_ids and valid_ids & set(route.selected_ids):
+                # Only keep IDs that actually exist in the disambiguation options
+                filtered_ids = [sid for sid in route.selected_ids if sid in valid_ids]
                 mentions.append(
                     ResolvedMention(
+                        exclude=m.exclude,
                         facet=m.facet,
                         original_text=m.original_text,
-                        values=route.selected_ids,
+                        values=filtered_ids,
                     )
                 )
                 resolved = True
@@ -289,26 +290,34 @@ async def _handle_route(
         )
 
     if isinstance(route, RouteRemove):
-        # Drop matching mentions
+        # Drop matching mentions, report what was actually removed
         remove_set = {t.lower() for t in route.original_texts}
-        removed = [t for t in route.original_texts]
-        mentions = [
-            m for m in previous_query.mentions
-            if m.original_text.lower() not in remove_set
-        ]
-        label = ", ".join(removed)
+        kept: list[ResolvedMention] = []
+        actually_removed: list[str] = []
+        for m in previous_query.mentions:
+            if m.original_text.lower() in remove_set:
+                actually_removed.append(m.original_text)
+            else:
+                kept.append(m)
+        message = f"Removed {', '.join(actually_removed)}." if actually_removed else None
         return QueryModel(
             intent=previous_query.intent,
-            mentions=mentions,
-            message=f"Removed {label}.",
+            mentions=kept,
+            message=message,
         )
 
     if isinstance(route, RouteReplace):
-        # Drop the old mention, run pipeline on new text with remaining mentions
+        # Drop the old mention, run pipeline on new text with remaining mentions.
+        # If original_text doesn't match, fall through to add behavior.
         remaining = [
             m for m in previous_query.mentions
             if m.original_text.lower() != route.original_text.lower()
         ]
+        if len(remaining) == len(previous_query.mentions):
+            # No match found — treat as add
+            result = await run_pipeline(query, previous_query=previous_query)
+            result.intent = previous_query.intent
+            return result
         modified_previous = QueryModel(
             intent=previous_query.intent,
             mentions=remaining,

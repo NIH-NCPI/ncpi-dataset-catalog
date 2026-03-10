@@ -52,13 +52,13 @@ def _format_filters(previous_query: QueryModel) -> str:
     """Format active filters for the router prompt."""
     lines: list[str] = []
     for m in previous_query.mentions:
-        prefix = "exclude" if m.exclude else "include"
         if m.disambiguation:
             values_str = "[] (DISAMBIGUATION PENDING)"
             lines.append(f'- {m.facet.value}: "{m.original_text}" → {values_str}')
             for i, opt in enumerate(m.disambiguation, 1):
                 lines.append(f"    {i}. {opt.concept_id} — {opt.label}")
         else:
+            prefix = "exclude" if m.exclude else "include"
             values_str = ", ".join(m.values) if m.values else "(unresolved)"
             lines.append(
                 f'- {m.facet.value}: "{m.original_text}" → [{values_str}] ({prefix})'
