@@ -185,8 +185,6 @@ class ResolvedMention(BaseModel):
 
 # --- Router agent models ---
 
-RouteKind = Literal["add", "remove", "replace", "reset", "select"]
-
 
 class RouteSelect(BaseModel):
     """User selected one or more of the offered disambiguation options."""
