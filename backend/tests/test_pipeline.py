@@ -274,11 +274,13 @@ class TestRefinePreservesIntent:
 
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_pipeline")
-    def test_api_passes_through_pipeline_intent(
-        self, mock_pipeline, mock_index
+    @patch("concept_search.api.run_router")
+    def test_route_add_preserves_previous_intent_over_pipeline(
+        self, mock_router, mock_pipeline, mock_index
     ) -> None:
-        """API must not mask pipeline intent — passes through whatever
-        the pipeline returns, even if it's wrong."""
+        """RouteAdd preserves previous intent even when pipeline returns
+        a different one — the user is refining, not changing direction."""
+        mock_router.return_value = RouteAdd()
         mock_pipeline.return_value = QueryModel(
             intent="study",
             mentions=[
@@ -287,6 +289,7 @@ class TestRefinePreservesIntent:
             ],
         )
         mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.store.query_variables.return_value = ([], 0)
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
@@ -305,9 +308,9 @@ class TestRefinePreservesIntent:
             },
         })
         assert resp.status_code == 200
-        # API is a passthrough — if the pipeline returns "study", that's
-        # what the response should have. The pipeline owns intent logic.
-        assert resp.json()["intent"] == "study"
+        # RouteAdd preserves previous intent ("variable"), not the
+        # pipeline's inferred intent ("study").
+        assert resp.json()["intent"] == "variable"
 
 
 class TestLookupWithMutatedMentions:
@@ -730,6 +733,47 @@ class TestRouteHandlers:
         call_args = mock_pipeline.call_args
         assert call_args[0][0] == "also on AnVIL"
         assert call_args[1]["previous_query"] is not None
+
+    @patch("concept_search.api._rate_limiter.is_allowed", new_callable=AsyncMock, return_value=True)
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_pipeline")
+    @patch("concept_search.api.run_router")
+    def test_route_add_preserves_previous_intent(
+        self, mock_router, mock_pipeline, mock_index, _mock_rl
+    ) -> None:
+        """Add route preserves previous intent even if pipeline infers differently."""
+        mock_router.return_value = RouteAdd()
+        # Pipeline returns "variable" because it saw a measurement term
+        mock_pipeline.return_value = QueryModel(
+            intent="variable",
+            mentions=[
+                _rm(Facet.FOCUS, "diabetes", ["Diabetes Mellitus"]),
+                _rm(Facet.MEASUREMENT, "blood pressure",
+                     ["topmed:bp_systolic", "topmed:bp_diastolic"]),
+            ],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search", json={
+            "query": "also where blood pressure was measured",
+            "previousQuery": {
+                "intent": "study",
+                "mentions": [
+                    {
+                        "facet": "focus",
+                        "originalText": "diabetes",
+                        "values": ["Diabetes Mellitus"],
+                        "exclude": False,
+                    },
+                ],
+            },
+        })
+        assert resp.status_code == 200
+        data = resp.json()
+        # Previous intent "study" must be preserved, not clobbered to "variable"
+        assert data["intent"] == "study"
 
     @patch("concept_search.api._rate_limiter.is_allowed", new_callable=AsyncMock, return_value=True)
     @patch("concept_search.api.get_index")

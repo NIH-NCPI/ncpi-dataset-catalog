@@ -315,8 +315,13 @@ async def _handle_route(
         # Fresh pipeline, ignore previous state
         return await run_pipeline(route.new_query)
 
-    # RouteAdd — fall through to existing refine pipeline
-    return await run_pipeline(query, previous_query=previous_query)
+    # RouteAdd — refine pipeline, but preserve the previous intent.
+    # The extract agent may infer a different intent from the fragment
+    # (e.g. "also blood pressure" → "variable") but the user is refining,
+    # not changing direction.
+    result = await run_pipeline(query, previous_query=previous_query)
+    result.intent = previous_query.intent
+    return result
 
 
 @app.post("/search", response_model=SearchResponse)

@@ -340,6 +340,33 @@ dataset = Dataset[RouterInput, RouterResult, RouterResult](
             ),
             expected_output=RouteAdd(),
         ),
+        # --- Standalone queries should reset, not add ---
+        Case(
+            name="reset-standalone-query",
+            inputs=RouterInput(
+                query="show me studies with BMI data",
+                previous_query=_resolved_previous(),
+            ),
+            expected_output=RouteReset(new_query="studies with BMI data"),
+        ),
+        Case(
+            name="reset-full-sentence",
+            inputs=RouterInput(
+                query="I want to find lung cancer studies on BDC",
+                previous_query=_resolved_previous(),
+            ),
+            expected_output=RouteReset(new_query="lung cancer studies on BDC"),
+        ),
+        Case(
+            name="reset-new-criteria",
+            inputs=RouterInput(
+                query="studies where participants have COPD and are over 65",
+                previous_query=_resolved_previous(),
+            ),
+            expected_output=RouteReset(
+                new_query="studies where participants have COPD and are over 65",
+            ),
+        ),
     ],
 )
 
