@@ -31,7 +31,7 @@ class SearchRequest(BaseModel):
     query: str = Field(default="", max_length=1000)
 
     @model_validator(mode="after")
-    def require_query_or_previous(self) -> "SearchRequest":
+    def require_query_or_previous(self) -> SearchRequest:
         """Ensure at least one of query or previous_query is provided."""
         if not (self.query and self.query.strip()) and self.previous_query is None:
             raise ValueError(

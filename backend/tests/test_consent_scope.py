@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
+from concept_search.index import get_index
 from concept_search.mention_constraints import infer_consent_scope as _infer_consent_scope
 from concept_search.mention_constraints import split_mentions as _split_mentions
-from concept_search.index import get_index
 from concept_search.models import Facet, ResolvedMention
 
 
@@ -91,6 +91,7 @@ class TestSplitMentionsConsentExpansion:
         assert any(c.startswith("HMB") for c in codes)
         # No NPU codes
         from concept_search.consent_logic import parse_consent_code
+
         for code in codes:
             assert "NPU" not in parse_consent_code(code).modifiers
 

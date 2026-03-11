@@ -28,15 +28,11 @@ class StructureEvaluator(Evaluator[StructureInput, QueryModel]):
     - Score = fraction of expected mentions correctly structured.
     """
 
-    def evaluate(
-        self, ctx: EvaluatorContext[StructureInput, QueryModel]
-    ) -> dict[str, float]:
+    def evaluate(self, ctx: EvaluatorContext[StructureInput, QueryModel]) -> dict[str, float]:
         expected = ctx.expected_output
         actual = ctx.output
         if expected is None or not expected.mentions:
-            return {
-                "structure_score": 1.0 if not actual.mentions else 0.0
-            }
+            return {"structure_score": 1.0 if not actual.mentions else 0.0}
 
         matched = 0.0
         used_actual: set[int] = set()
@@ -56,14 +52,10 @@ class StructureEvaluator(Evaluator[StructureInput, QueryModel]):
                 matched += best_score
 
         total = len(expected.mentions)
-        return {
-            "structure_score": round(matched / total, 3) if total > 0 else 1.0
-        }
+        return {"structure_score": round(matched / total, 3) if total > 0 else 1.0}
 
 
-def _structure_similarity(
-    expected: ResolvedMention, actual: ResolvedMention
-) -> float:
+def _structure_similarity(expected: ResolvedMention, actual: ResolvedMention) -> float:
     """Score a single structure mention match (0.0 or 1.0).
 
     Checks facet, exclude flag, and that values are preserved.

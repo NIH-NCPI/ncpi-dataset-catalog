@@ -20,11 +20,7 @@ logger = logging.getLogger(__name__)
 
 def _resolve_repo_root() -> Path:
     """Resolve the repo root from NCPI_REPO_ROOT env var or relative to this file."""
-    return Path(
-        os.environ.get(
-            "NCPI_REPO_ROOT", Path(__file__).resolve().parent.parent.parent
-        )
-    )
+    return Path(os.environ.get("NCPI_REPO_ROOT", Path(__file__).resolve().parent.parent.parent))
 
 
 def _resolve_paths() -> tuple[Path, Path]:
@@ -73,13 +69,7 @@ def _resolve_demographics_path() -> Path:
     if explicit:
         return Path(explicit)
     repo_root = _resolve_repo_root()
-    return (
-        repo_root
-        / "catalog-build"
-        / "classification"
-        / "output"
-        / "demographic-profiles.json"
-    )
+    return repo_root / "catalog-build" / "classification" / "output" / "demographic-profiles.json"
 
 
 def _load_demographic_mappings() -> dict[str, dict[str, str]]:
@@ -175,8 +165,7 @@ def _load_demographic_profiles(
                 cats = _normalize_categories(raw_cats, lookup, fallback)
             else:
                 cats = sorted(
-                    [{"count": c.get("count", 0), "label": c.get("label", "")}
-                     for c in raw_cats],
+                    [{"count": c.get("count", 0), "label": c.get("label", "")} for c in raw_cats],
                     key=lambda x: -x["count"],
                 )
 
@@ -207,13 +196,7 @@ def _resolve_isa_path() -> Path:
     if explicit:
         return Path(explicit)
     repo_root = _resolve_repo_root()
-    return (
-        repo_root
-        / "catalog-build"
-        / "classification"
-        / "output"
-        / "concept-isa.json"
-    )
+    return repo_root / "catalog-build" / "classification" / "output" / "concept-isa.json"
 
 
 def _resolve_focus_isa_path() -> Path:
@@ -322,9 +305,7 @@ def _load_isa_table(
     return dict(parents), dict(children)
 
 
-def _compute_closure(
-    concept_id: str, isa_parents: dict[str, list[str]]
-) -> list[str]:
+def _compute_closure(concept_id: str, isa_parents: dict[str, list[str]]) -> list[str]:
     """Walk the ISA graph upward from a concept to compute its full closure.
 
     The closure includes the concept itself plus all transitive ancestors.
@@ -387,9 +368,7 @@ class ConceptIndex:
                 self._rebuild_index_from_store()
                 # Load ISA for drill-down and parent lookup (not stored in DuckDB)
                 self._isa_parents, self._isa_children = _load_isa_table()
-                _, self._focus_isa_children = _load_isa_table(
-                    _resolve_focus_isa_path()
-                )
+                _, self._focus_isa_children = _load_isa_table(_resolve_focus_isa_path())
             else:
                 cache_miss = True
                 self._load_from_json()
@@ -404,15 +383,11 @@ class ConceptIndex:
         # On cache hit, verify the cached embeddings cover the current
         # vocabulary — rebuild if the count doesn't match (stale cache).
         if not cache_miss:
-            expected = (
-                len(self._ensure_concept_descriptions())
-                + len(self._index[Facet.FOCUS])
-            )
+            expected = len(self._ensure_concept_descriptions()) + len(self._index[Facet.FOCUS])
             actual = len(self._embedding_nodes)
             if actual != expected:
                 logger.warning(
-                    "Stale embedding cache: expected %d nodes, got %d "
-                    "— rebuilding embeddings",
+                    "Stale embedding cache: expected %d nodes, got %d — rebuilding embeddings",
                     expected,
                     actual,
                 )
@@ -425,9 +400,7 @@ class ConceptIndex:
                     self.store.save_to_file(cache_path)
                     logger.info("Saved DuckDB cache: %s", cache_path)
                 except OSError:
-                    logger.warning(
-                        "Could not save DuckDB cache to %s", cache_path
-                    )
+                    logger.warning("Could not save DuckDB cache to %s", cache_path)
 
     def _ensure_concept_descriptions(self) -> dict[str, dict]:
         """Return concept descriptions, loading them if not yet available."""
@@ -495,8 +468,7 @@ class ConceptIndex:
             self._load_embeddings_from_store()
         except Exception as exc:
             logger.warning(
-                "Could not load concept embeddings from cache "
-                "(may be an older cache file): %s",
+                "Could not load concept embeddings from cache (may be an older cache file): %s",
                 exc,
             )
 
@@ -528,28 +500,30 @@ class ConceptIndex:
             name = info.get("name", cid)
             desc = info.get("description", "")
             node_type = info.get("type", "concept")
-            nodes.append({
-                "concept_id": cid,
-                "description": desc,
-                "facet": "measurement",
-                "name": name,
-                "type": node_type,
-            })
+            nodes.append(
+                {
+                    "concept_id": cid,
+                    "description": desc,
+                    "facet": "measurement",
+                    "name": name,
+                    "type": node_type,
+                }
+            )
             texts.append(f"{name}: {desc}" if desc else name)
 
         # Focus nodes from the focus index
         # concept_id = the canonical term name (e.g. "Heart Diseases") so
         # that resolved values match the focus facet directly.
-        for _key, match in sorted(
-            self._index[Facet.FOCUS].items(), key=lambda x: x[0]
-        ):
-            nodes.append({
-                "concept_id": match.value,
-                "description": "",
-                "facet": "focus",
-                "name": match.value,
-                "type": "focus",
-            })
+        for _key, match in sorted(self._index[Facet.FOCUS].items(), key=lambda x: x[0]):
+            nodes.append(
+                {
+                    "concept_id": match.value,
+                    "description": "",
+                    "facet": "focus",
+                    "name": match.value,
+                    "type": "focus",
+                }
+            )
             texts.append(match.value)
 
         if not texts:
@@ -578,15 +552,12 @@ class ConceptIndex:
                         self._store_embeddings(nodes, matrix)
                         return
                     logger.warning(
-                        "Embedding cache shape mismatch — expected %d rows, "
-                        "got %s; recomputing",
+                        "Embedding cache shape mismatch — expected %d rows, got %s; recomputing",
                         len(nodes),
                         matrix.shape,
                     )
             except (OSError, ValueError) as exc:
-                logger.warning(
-                    "Failed to read embedding cache: %s — recomputing", exc
-                )
+                logger.warning("Failed to read embedding cache: %s — recomputing", exc)
 
         logger.info(
             "No cached embeddings found — generating %d embeddings "
@@ -619,9 +590,7 @@ class ConceptIndex:
 
         self._store_embeddings(nodes, matrix)
 
-    def _store_embeddings(
-        self, nodes: list[dict], matrix: np.ndarray
-    ) -> None:
+    def _store_embeddings(self, nodes: list[dict], matrix: np.ndarray) -> None:
         """Store embedding nodes and matrix in DuckDB and memory.
 
         Args:
@@ -630,8 +599,14 @@ class ConceptIndex:
         """
         if isinstance(self.store, DuckDBStore):
             rows = [
-                (n["concept_id"], n["name"], n["description"], n["type"],
-                 matrix[i].tolist(), n["facet"])
+                (
+                    n["concept_id"],
+                    n["name"],
+                    n["description"],
+                    n["type"],
+                    matrix[i].tolist(),
+                    n["facet"],
+                )
                 for i, n in enumerate(nodes)
             ]
             self.store.load_concept_embeddings_batch(rows)
@@ -650,19 +625,19 @@ class ConceptIndex:
         nodes: list[dict] = []
         vecs: list[list[float]] = []
         for cid, name, desc, node_type, embedding, facet in rows:
-            nodes.append({
-                "concept_id": cid,
-                "description": desc or "",
-                "facet": facet or "measurement",
-                "name": name or cid,
-                "type": node_type or "concept",
-            })
+            nodes.append(
+                {
+                    "concept_id": cid,
+                    "description": desc or "",
+                    "facet": facet or "measurement",
+                    "name": name or cid,
+                    "type": node_type or "concept",
+                }
+            )
             vecs.append(embedding)
         self._embedding_nodes = nodes
         self._embedding_matrix = np.array(vecs, dtype=np.float32)
-        logger.info(
-            "Loaded %d concept embeddings from cache", len(nodes)
-        )
+        logger.info("Loaded %d concept embeddings from cache", len(nodes))
 
     def search_concepts_by_embedding(
         self, query: str, top_k: int = 10, facet: str | None = None
@@ -687,7 +662,8 @@ class ConceptIndex:
         # so results are guaranteed correct (no missed true top-k).
         if facet:
             facet_indices = [
-                i for i, n in enumerate(self._embedding_nodes)
+                i
+                for i, n in enumerate(self._embedding_nodes)
                 if n.get("facet", "measurement") == facet
             ]
             if not facet_indices:
@@ -699,10 +675,9 @@ class ConceptIndex:
 
         try:
             from . import embeddings
+
             query_vec = embeddings.embed_query(query)
-            hits = embeddings.search_embeddings(
-                query_vec, search_matrix, top_k=top_k
-            )
+            hits = embeddings.search_embeddings(query_vec, search_matrix, top_k=top_k)
         except Exception:
             logger.exception("Embedding search failed — returning empty")
             return []
@@ -743,10 +718,12 @@ class ConceptIndex:
                     cur = plist[0]
                     visited.add(cur)
                     info = descs.get(cur, {})
-                    ancestors.append({
-                        "id": cur,
-                        "name": info.get("name", cur),
-                    })
+                    ancestors.append(
+                        {
+                            "id": cur,
+                            "name": info.get("name", cur),
+                        }
+                    )
                 if ancestors:
                     result_entry["ancestors"] = ancestors
             results.append(result_entry)
@@ -779,25 +756,25 @@ class ConceptIndex:
                     if concept:
                         # Compute ISA closure (self + all ancestors)
                         closure = _compute_closure(concept, isa_parents)
-                        closure_json = json.dumps(
-                            [c.lower() for c in closure]
-                        )
+                        closure_json = json.dumps([c.lower() for c in closure])
                         # Track studies for ALL concepts in closure
                         for ancestor in closure:
                             concept_studies[ancestor].add(study_id)
                         study_concepts[study_id].add(concept)
-                        variable_rows.append((
-                            concept,
-                            concept.lower(),
-                            var.get("cui", "") or "",
-                            closure_json,
-                            dataset_id,
-                            var.get("description", ""),
-                            var.get("id", ""),
-                            study_id,
-                            table_name,
-                            var.get("name", ""),
-                        ))
+                        variable_rows.append(
+                            (
+                                concept,
+                                concept.lower(),
+                                var.get("cui", "") or "",
+                                closure_json,
+                                dataset_id,
+                                var.get("description", ""),
+                                var.get("id", ""),
+                                study_id,
+                                table_name,
+                                var.get("name", ""),
+                            )
+                        )
         for concept, studies in concept_studies.items():
             key = concept.lower()
             self._index[Facet.MEASUREMENT][key] = ConceptMatch(
@@ -843,9 +820,7 @@ class ConceptIndex:
 
         # Load focus ISA hierarchy for ancestor expansion
         focus_isa_path = _resolve_focus_isa_path()
-        focus_isa_parents, self._focus_isa_children = _load_isa_table(
-            focus_isa_path
-        )
+        focus_isa_parents, self._focus_isa_children = _load_isa_table(focus_isa_path)
 
         # Count occurrences per facet value
         facet_counts: dict[Facet, Counter[str]] = {f: Counter() for f in Facet}
@@ -1027,24 +1002,22 @@ class ConceptIndex:
 
         categories = []
         for code, description in base_codes.items():
-            categories.append({
-                "code": code,
-                "description": description,
-                "total_studies": base_counts.get(code, 0),
-            })
+            categories.append(
+                {
+                    "code": code,
+                    "description": description,
+                    "total_studies": base_counts.get(code, 0),
+                }
+            )
         # Sort by study count
         categories.sort(key=lambda x: -x["total_studies"])
 
         return {
             "base_codes": categories,
-            "modifiers": [
-                {"code": k, "description": v} for k, v in modifiers.items()
-            ],
+            "modifiers": [{"code": k, "description": v} for k, v in modifiers.items()],
         }
 
-    def get_consent_codes_for_base(
-        self, base_code: str, limit: int = 20
-    ) -> list[dict]:
+    def get_consent_codes_for_base(self, base_code: str, limit: int = 20) -> list[dict]:
         """Return all consent code variants for a base code.
 
         Args:
@@ -1058,10 +1031,12 @@ class ConceptIndex:
         for key, match in self._index[Facet.CONSENT_CODE].items():
             # Match exact base or base- prefix
             if key == prefix or key.startswith(prefix + "-"):
-                results.append({
-                    "code": match.value,
-                    "study_count": match.study_count,
-                })
+                results.append(
+                    {
+                        "code": match.value,
+                        "study_count": match.study_count,
+                    }
+                )
         results.sort(key=lambda x: -x["study_count"])
         return results[:limit]
 
@@ -1071,9 +1046,7 @@ class ConceptIndex:
         Returns:
             Disease codes with their full names and total study counts.
         """
-        disease_abbrevs = self._consent_descriptions.get(
-            "disease_abbreviations", {}
-        )
+        disease_abbrevs = self._consent_descriptions.get("disease_abbreviations", {})
         # Aggregate counts per disease abbreviation
         disease_counts: dict[str, int] = defaultdict(int)
         for match in self._index[Facet.CONSENT_CODE].values():
@@ -1094,18 +1067,18 @@ class ConceptIndex:
 
         results = []
         for abbrev, count in disease_counts.items():
-            results.append({
-                "abbreviation": abbrev,
-                "disease": disease_abbrevs.get(abbrev, abbrev),
-                "code_prefix": f"DS-{abbrev}",
-                "total_studies": count,
-            })
+            results.append(
+                {
+                    "abbreviation": abbrev,
+                    "disease": disease_abbrevs.get(abbrev, abbrev),
+                    "code_prefix": f"DS-{abbrev}",
+                    "total_studies": count,
+                }
+            )
         results.sort(key=lambda x: -x["total_studies"])
         return results
 
-    def get_measurement_category_concepts(
-        self, keyword: str
-    ) -> list[ConceptMatch]:
+    def get_measurement_category_concepts(self, keyword: str) -> list[ConceptMatch]:
         """Return measurement concepts matching a keyword, sorted by study count.
 
         Searches the live measurement index keys for substring matches
@@ -1153,9 +1126,7 @@ class ConceptIndex:
             results.append(entry)
         return sorted(results, key=lambda x: -x["study_count"])
 
-    def list_variables_for_concept(
-        self, concept_id: str, limit: int = 200
-    ) -> list[dict]:
+    def list_variables_for_concept(self, concept_id: str, limit: int = 200) -> list[dict]:
         """Return distinct variables under a concept with descriptions.
 
         Delegates to the store's ``list_variables_for_concept`` method.

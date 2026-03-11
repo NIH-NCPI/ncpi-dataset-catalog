@@ -41,6 +41,7 @@ pipeline_cache: LRUCache[str, QueryModel] = LRUCache(
 # Resolve step (parallel per mention)
 # ---------------------------------------------------------------------------
 
+
 async def _resolve_all(
     mentions: list,
     index: ConceptIndex,
@@ -65,7 +66,7 @@ async def _resolve_all(
     if needs_resolve:
         coros = [run_resolve(m, index, model=model) for _, m in needs_resolve]
         results = await asyncio.gather(*coros)
-        for (i, _), result in zip(needs_resolve, results):
+        for (i, _), result in zip(needs_resolve, results, strict=True):
             resolve_results[i] = result
 
     # Reassemble in original order
@@ -101,6 +102,7 @@ async def _resolve_all(
 # Structure step (placeholder values — only needs facet + original_text)
 # ---------------------------------------------------------------------------
 
+
 async def _structure(
     query: str,
     mentions: list,
@@ -125,6 +127,7 @@ async def _structure(
 # ---------------------------------------------------------------------------
 # Deterministic merge
 # ---------------------------------------------------------------------------
+
 
 def _merge(
     resolved: list[ResolvedMention],
@@ -161,6 +164,7 @@ def _merge(
 # Multi-turn merge
 # ---------------------------------------------------------------------------
 
+
 def _merge_with_previous(
     previous: QueryModel,
     new_mentions: list[ResolvedMention],
@@ -190,11 +194,7 @@ def _merge_with_previous(
     # Determine intent: new extraction wins only if explicitly changed
     # from the default ("study").  The extract agent returns "study" by
     # default, so we must not let that silently clobber a prior "variable".
-    intent = (
-        new_intent
-        if new_intent and new_intent != "study"
-        else previous.intent
-    )
+    intent = new_intent if new_intent and new_intent != "study" else previous.intent
 
     return QueryModel(
         intent=intent,
@@ -205,6 +205,7 @@ def _merge_with_previous(
 # ---------------------------------------------------------------------------
 # Main pipeline
 # ---------------------------------------------------------------------------
+
 
 async def _run_pipeline_uncached(
     query: str,
@@ -228,9 +229,7 @@ async def _run_pipeline_uncached(
 
     # --- Step 1: Extract (sequential — must run first) ---
     t0 = time.monotonic()
-    extract_result = await run_extract(
-        query, model=model, previous_query=previous_query
-    )
+    extract_result = await run_extract(query, model=model, previous_query=previous_query)
     t_extract = time.monotonic()
     logger.info(
         "Extract: %.0fms, %d mentions",
@@ -245,9 +244,7 @@ async def _run_pipeline_uncached(
     # Only override intent if the extract agent returned something other than
     # the default "study" (which it always emits, even when user didn't change it).
     if not extract_result.mentions and previous_query:
-        preserved_intent = (
-            intent if intent != "study" else previous_query.intent
-        )
+        preserved_intent = intent if intent != "study" else previous_query.intent
         return QueryModel(
             intent=preserved_intent,
             mentions=previous_query.mentions,
@@ -279,9 +276,7 @@ async def _run_pipeline_uncached(
     new_merged = _merge(resolved, structure_result)
 
     if previous_query:
-        query_model = _merge_with_previous(
-            previous_query, new_merged.mentions, new_intent=intent
-        )
+        query_model = _merge_with_previous(previous_query, new_merged.mentions, new_intent=intent)
     else:
         query_model = new_merged
         query_model.intent = intent
@@ -324,9 +319,7 @@ async def run_pipeline(
     # Skip pipeline cache for multi-turn (session-specific state).
     # Per-mention resolve cache still works.
     if previous_query:
-        return await _run_pipeline_uncached(
-            query, index, model, previous_query=previous_query
-        )
+        return await _run_pipeline_uncached(query, index, model, previous_query=previous_query)
 
     key = query.strip().lower()
     return await pipeline_cache.get_or_compute(

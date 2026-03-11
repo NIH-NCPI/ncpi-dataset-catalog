@@ -26,9 +26,7 @@ class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
     - When expected has matched_variables, checks recall on variable names.
     """
 
-    def evaluate(
-        self, ctx: EvaluatorContext[RawMention, ResolveResult]
-    ) -> dict[str, float]:
+    def evaluate(self, ctx: EvaluatorContext[RawMention, ResolveResult]) -> dict[str, float]:
         expected = ctx.expected_output
         actual = ctx.output
         scores: dict[str, float] = {}
@@ -98,6 +96,7 @@ def _mention(text: str, facet: Facet) -> RawMention:
 # Dynamic consent code expectations
 # ---------------------------------------------------------------------------
 
+
 def _consent_tags(*tags: str) -> ResolveResult:
     """Build expected ResolveResult for consent tag output.
 
@@ -135,9 +134,7 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             inputs=_mention("blood sugar", Facet.MEASUREMENT),
             # "Blood sugar" clearly means blood glucose — not truly ambiguous.
             # Parent concept covers all glucose measurements via ISA closure.
-            expected_output=ResolveResult(
-                values=["phenx:fasting_plasma_glucose_blood_draw"]
-            ),
+            expected_output=ResolveResult(values=["phenx:fasting_plasma_glucose_blood_draw"]),
         ),
         # --- Category expansion ---
         Case(
@@ -145,9 +142,7 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             inputs=_mention("sleep", Facet.MEASUREMENT),
             # Broad term — ISA closure from ncpi:sleep covers all descendants
             # (sleep_duration, polysomnography, sleep_architecture, etc.).
-            expected_output=ResolveResult(
-                values=["ncpi:sleep"]
-            ),
+            expected_output=ResolveResult(values=["ncpi:sleep"]),
         ),
         Case(
             name="category-cholesterol",
@@ -155,9 +150,7 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             # Broad term — must include total cholesterol. Embedding results
             # may return parent concepts (topmed:hdl) or their archetypes
             # (ncpi:hdl_*); ISA closure covers the same variables either way.
-            expected_output=ResolveResult(
-                values=["topmed:total_cholesterol"]
-            ),
+            expected_output=ResolveResult(values=["topmed:total_cholesterol"]),
         ),
         Case(
             name="disambig-glucose",
@@ -185,9 +178,7 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             inputs=_mention("echocardiography", Facet.MEASUREMENT),
             # Embedding finds echo-related BP and heart rate archetypes.
             # Any echo-related concept is acceptable.
-            expected_output=ResolveResult(
-                values=["ncpi:heart_rate_echo_doppler_heart_rate"]
-            ),
+            expected_output=ResolveResult(values=["ncpi:heart_rate_echo_doppler_heart_rate"]),
         ),
         # --- Substance use ---
         Case(
@@ -207,18 +198,14 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             name="found-vitamin-k",
             inputs=_mention("vitamin K", Facet.MEASUREMENT),
             # Embedding finds vitamin K supplement/nutrient concepts.
-            expected_output=ResolveResult(
-                values=["ncpi:nutrient_intake_vitamin_k"]
-            ),
+            expected_output=ResolveResult(values=["ncpi:nutrient_intake_vitamin_k"]),
         ),
         Case(
             name="rewrite-heart-disease",
             inputs=_mention("heart disease", Facet.FOCUS),
             # ISA closure means "Heart Diseases" already includes all
             # subtypes; no need to also return "Cardiovascular Diseases".
-            expected_output=ResolveResult(
-                values=["Heart Diseases"]
-            ),
+            expected_output=ResolveResult(values=["Heart Diseases"]),
         ),
         # --- Focus/disease via category drill-down ---
         Case(
@@ -236,18 +223,14 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             inputs=_mention("lung cancer", Facet.FOCUS),
             # ISA closure expands "Lung Neoplasms" to include subtypes
             # (Adenocarcinoma of Lung, Carcinoma Non-Small-Cell Lung, etc.)
-            expected_output=ResolveResult(
-                values=["Lung Neoplasms"]
-            ),
+            expected_output=ResolveResult(values=["Lung Neoplasms"]),
         ),
         Case(
             name="focus-pancreatic-cancer",
             inputs=_mention("pancreatic cancer", Facet.FOCUS),
             # ISA closure: "Pancreatic Neoplasms" includes descendants
             # like "Carcinoma, Pancreatic Ductal".
-            expected_output=ResolveResult(
-                values=["Pancreatic Neoplasms"]
-            ),
+            expected_output=ResolveResult(values=["Pancreatic Neoplasms"]),
         ),
         Case(
             name="focus-diabetes",
@@ -282,9 +265,7 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
         Case(
             name="focus-copd",
             inputs=_mention("COPD", Facet.FOCUS),
-            expected_output=ResolveResult(
-                values=["Pulmonary Disease, Chronic Obstructive"]
-            ),
+            expected_output=ResolveResult(values=["Pulmonary Disease, Chronic Obstructive"]),
         ),
         Case(
             name="focus-covid",
@@ -311,26 +292,20 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             name="ffq-broad",
             inputs=_mention("food frequency questionnaire", Facet.MEASUREMENT),
             # Broad query should return the FFQ parent concept.
-            expected_output=ResolveResult(
-                values=["topmed:food_frequency_questionnaire"]
-            ),
+            expected_output=ResolveResult(values=["topmed:food_frequency_questionnaire"]),
         ),
         Case(
             name="ffq-dairy",
             inputs=_mention("dairy intake", Facet.MEASUREMENT),
             # Embedding finds dairy nutrient archetypes and ffq dairy products.
             # Either the ffq parent or the nutrient parent is acceptable.
-            expected_output=ResolveResult(
-                values=["ncpi:ffq_dairy_products"]
-            ),
+            expected_output=ResolveResult(values=["ncpi:ffq_dairy_products"]),
         ),
         Case(
             name="ffq-fish",
             inputs=_mention("fish and seafood consumption", Facet.MEASUREMENT),
             # Embedding directly finds ffq_fish_seafood.
-            expected_output=ResolveResult(
-                values=["ncpi:ffq_fish_seafood"]
-            ),
+            expected_output=ResolveResult(values=["ncpi:ffq_fish_seafood"]),
         ),
         Case(
             name="ffq-chocolate",
@@ -344,9 +319,7 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             name="broad-bp",
             inputs=_mention("blood pressure", Facet.MEASUREMENT),
             # Broad term — should include both systolic and diastolic siblings.
-            expected_output=ResolveResult(
-                values=["topmed:bp_systolic", "topmed:bp_diastolic"]
-            ),
+            expected_output=ResolveResult(values=["topmed:bp_systolic", "topmed:bp_diastolic"]),
         ),
         # --- Embedding search: direct return vs drill-down ---
         Case(
@@ -354,9 +327,7 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             inputs=_mention("eGFR", Facet.MEASUREMENT),
             # Embedding returns archetype ncpi:kidney_function_egfr at rank 1
             # (sim=0.936). Should return directly — no drill-down needed.
-            expected_output=ResolveResult(
-                values=["ncpi:kidney_function_egfr"]
-            ),
+            expected_output=ResolveResult(values=["ncpi:kidney_function_egfr"]),
         ),
         Case(
             name="embed-drilldown-lung-function",
@@ -364,9 +335,7 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             # Embedding returns ncpi:respiratory at top. The child
             # topmed:pulmonary_function_detailed is redundant under
             # ISA closure — respiratory covers all descendants.
-            expected_output=ResolveResult(
-                values=["ncpi:respiratory"]
-            ),
+            expected_output=ResolveResult(values=["ncpi:respiratory"]),
         ),
         # --- Consent code resolution (axis-based tags, #273) ---
         # Pattern A: Explicit codes → explicit:<CODE> tags

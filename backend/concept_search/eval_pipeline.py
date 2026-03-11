@@ -11,8 +11,8 @@ from pydantic import BaseModel
 from pydantic_evals import Case, Dataset
 from pydantic_evals.evaluators import Evaluator, EvaluatorContext
 
-from .mention_constraints import split_mentions
 from .index import get_index
+from .mention_constraints import split_mentions
 from .models import QueryModel
 from .pipeline import run_pipeline
 
@@ -54,10 +54,7 @@ def _get_study_values(study: dict, field: str) -> set[str]:
     raw = study.get(key)
     if raw is None:
         return set()
-    if isinstance(raw, list):
-        vals = {v.lower() for v in raw}
-    else:
-        vals = {str(raw).lower()}
+    vals = {v.lower() for v in raw} if isinstance(raw, list) else {str(raw).lower()}
     # For consent codes, also include the base code (e.g. "gru" from "gru-irb").
     if field == "consentCode":
         vals |= {v.split("-")[0] for v in vals}
@@ -123,9 +120,7 @@ def _score_studies(
 class PipelineEvaluator(Evaluator[str, PipelineOutput]):
     """Scores the end-to-end pipeline by checking study result properties."""
 
-    def evaluate(
-        self, ctx: EvaluatorContext[str, PipelineOutput]
-    ) -> dict[str, float]:
+    def evaluate(self, ctx: EvaluatorContext[str, PipelineOutput]) -> dict[str, float]:
         expected: StudyExpectation | None = ctx.expected_output
         if expected is None:
             return {"pipeline_score": 1.0}
@@ -150,12 +145,14 @@ dataset = Dataset[str, PipelineOutput, StudyExpectation](
             expected_output=StudyExpectation(
                 min_studies=1,
                 all_have={"dataType": ["WGS"]},
-                any_have={"focus": [
-                    "Diabetes Mellitus",
-                    "Diabetes Mellitus, Type 1",
-                    "Diabetes Mellitus, Type 2",
-                    "Diabetic Retinopathy",
-                ]},
+                any_have={
+                    "focus": [
+                        "Diabetes Mellitus",
+                        "Diabetes Mellitus, Type 1",
+                        "Diabetes Mellitus, Type 2",
+                        "Diabetic Retinopathy",
+                    ]
+                },
             ),
         ),
         Case(
@@ -225,9 +222,7 @@ class MultiTurnInput(BaseModel):
 class MultiTurnPipelineEvaluator(Evaluator[MultiTurnInput, PipelineOutput]):
     """Scores multi-turn pipeline evals using the same study checks."""
 
-    def evaluate(
-        self, ctx: EvaluatorContext[MultiTurnInput, PipelineOutput]
-    ) -> dict[str, float]:
+    def evaluate(self, ctx: EvaluatorContext[MultiTurnInput, PipelineOutput]) -> dict[str, float]:
         expected: StudyExpectation | None = ctx.expected_output
         if expected is None:
             return {"pipeline_score": 1.0}
@@ -275,20 +270,14 @@ async def _run_multi_turn_task(inputs: MultiTurnInput) -> PipelineOutput:
     for turn in inputs.turns:
         if turn.query and query_model:
             # Refine mode
-            query_model = await run_pipeline(
-                turn.query, previous_query=query_model
-            )
+            query_model = await run_pipeline(turn.query, previous_query=query_model)
         elif query_model and not turn.query:
             # Lookup-only mode — apply remove_facets if specified
             if turn.remove_facets:
                 remove_set = set(turn.remove_facets)
                 query_model = QueryModel(
                     intent=query_model.intent,
-                    mentions=[
-                        m
-                        for m in query_model.mentions
-                        if m.facet.value not in remove_set
-                    ],
+                    mentions=[m for m in query_model.mentions if m.facet.value not in remove_set],
                 )
             # In lookup-only mode, query_model is used as-is for lookup
         else:

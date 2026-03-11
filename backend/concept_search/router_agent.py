@@ -14,8 +14,8 @@ from .models import (
     RouteRemove,
     RouteReplace,
     RouteReset,
-    RouteSelect,
     RouterResult,
+    RouteSelect,
 )
 
 _PROMPT_PATH = Path(__file__).parent / "ROUTER_PROMPT.md"
@@ -61,9 +61,7 @@ def _format_filters(previous_query: QueryModel) -> str:
         else:
             prefix = "exclude" if m.exclude else "include"
             values_str = ", ".join(m.values) if m.values else "(unresolved)"
-            lines.append(
-                f'- {m.facet.value}: "{m.original_text}" → [{values_str}] ({prefix})'
-            )
+            lines.append(f'- {m.facet.value}: "{m.original_text}" → [{values_str}] ({prefix})')
     return "\n".join(lines)
 
 
@@ -84,6 +82,6 @@ async def run_router(
     """
     agent = _get_agent(model)
     filters = _format_filters(previous_query)
-    prompt = f"Active filters:\n{filters}\n\nUser's message: \"{query}\""
+    prompt = f'Active filters:\n{filters}\n\nUser\'s message: "{query}"'
     result = await agent.run(prompt)
     return result.output

@@ -7,7 +7,6 @@ from types import SimpleNamespace
 from concept_search.build_focus_categories import _compute_isa_edges
 from concept_search.resolve_agent import _dedup_focus_values
 
-
 # ---------------------------------------------------------------------------
 # _compute_isa_edges
 # ---------------------------------------------------------------------------
@@ -126,29 +125,33 @@ class TestDedupFocusValues:
 
     def test_parent_subsumes_child(self) -> None:
         """Child is removed when parent is present."""
-        index = _make_index_with_isa({
-            "Lung Neoplasms": ["Adenocarcinoma of Lung"],
-        })
-        result = _dedup_focus_values(
-            ["Lung Neoplasms", "Adenocarcinoma of Lung"], index
+        index = _make_index_with_isa(
+            {
+                "Lung Neoplasms": ["Adenocarcinoma of Lung"],
+            }
         )
+        result = _dedup_focus_values(["Lung Neoplasms", "Adenocarcinoma of Lung"], index)
         assert result == ["Lung Neoplasms"]
 
     def test_grandchild_removed(self) -> None:
         """Transitive descendants are also removed."""
-        index = _make_index_with_isa({
-            "A": ["B"],
-            "B": ["C"],
-        })
+        index = _make_index_with_isa(
+            {
+                "A": ["B"],
+                "B": ["C"],
+            }
+        )
         result = _dedup_focus_values(["A", "C"], index)
         assert result == ["A"]
 
     def test_unrelated_terms_kept(self) -> None:
         """Terms with no ISA relationship are all kept."""
-        index = _make_index_with_isa({
-            "X": ["X1"],
-            "Y": ["Y1"],
-        })
+        index = _make_index_with_isa(
+            {
+                "X": ["X1"],
+                "Y": ["Y1"],
+            }
+        )
         result = _dedup_focus_values(["X", "Y"], index)
         assert result == ["X", "Y"]
 
@@ -172,20 +175,22 @@ class TestDedupFocusValues:
 
     def test_preserves_order(self) -> None:
         """Surviving values keep their original order."""
-        index = _make_index_with_isa({
-            "Parent": ["Child1", "Child2"],
-        })
-        result = _dedup_focus_values(
-            ["Child2", "Parent", "Child1"], index
+        index = _make_index_with_isa(
+            {
+                "Parent": ["Child1", "Child2"],
+            }
         )
+        result = _dedup_focus_values(["Child2", "Parent", "Child1"], index)
         assert result == ["Parent"]
 
     def test_cycle_does_not_loop(self) -> None:
         """Cycle in ISA graph terminates without infinite loop."""
-        index = _make_index_with_isa({
-            "A": ["B"],
-            "B": ["A"],
-        })
+        index = _make_index_with_isa(
+            {
+                "A": ["B"],
+                "B": ["A"],
+            }
+        )
         # Cycles shouldn't happen in practice, but the function must not hang.
         # Both terms are descendants of each other, so both get removed.
         result = _dedup_focus_values(["A", "B"], index)

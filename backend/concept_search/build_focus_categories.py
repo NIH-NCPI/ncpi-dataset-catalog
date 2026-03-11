@@ -87,9 +87,7 @@ OUTPUT_PATH = Path(__file__).parent / "focus_categories.json"
 ISA_OUTPUT_PATH = Path(__file__).parent / "focus_isa.json"
 
 
-async def lookup_descriptor_uid(
-    client: httpx.AsyncClient, label: str
-) -> str | None:
+async def lookup_descriptor_uid(client: httpx.AsyncClient, label: str) -> str | None:
     """Look up a MeSH descriptor UID by label."""
     resp = await client.get(
         MESH_LOOKUP_URL,
@@ -105,9 +103,7 @@ async def lookup_descriptor_uid(
     return uid
 
 
-async def lookup_tree_numbers(
-    client: httpx.AsyncClient, uid: str
-) -> list[str]:
+async def lookup_tree_numbers(client: httpx.AsyncClient, uid: str) -> list[str]:
     """Get tree numbers for a MeSH descriptor UID."""
     resp = await client.get(f"{MESH_DESCRIPTOR_URL}/{uid}.json")
     if resp.status_code != 200:
@@ -118,9 +114,8 @@ async def lookup_tree_numbers(
         tree_nums = [tree_nums]
     codes = []
     for tn in tree_nums:
-        if isinstance(tn, dict):
-            tn = tn.get("@id", "")
-        code = tn.split("/")[-1] if "/" in tn else tn
+        tn_str = tn.get("@id", "") if isinstance(tn, dict) else tn
+        code = tn_str.split("/")[-1] if "/" in tn_str else tn_str
         codes.append(code)
     return codes
 
@@ -210,10 +205,7 @@ async def build_categories() -> None:
 
     sem = asyncio.Semaphore(10)
     async with httpx.AsyncClient(timeout=30.0) as client:
-        tasks = [
-            process_term(sem, client, m.value, m.study_count)
-            for m in focus_values
-        ]
+        tasks = [process_term(sem, client, m.value, m.study_count) for m in focus_values]
         results = await asyncio.gather(*tasks)
 
     # Build category → terms mapping (consolidated by category name)
@@ -226,10 +218,12 @@ async def build_categories() -> None:
         for cat_name in r["categories"]:
             if cat_name not in category_terms:
                 category_terms[cat_name] = []
-            category_terms[cat_name].append({
-                "term": r["term"],
-                "study_count": r["study_count"],
-            })
+            category_terms[cat_name].append(
+                {
+                    "term": r["term"],
+                    "study_count": r["study_count"],
+                }
+            )
 
     # Deduplicate terms within categories (a term may appear via multiple tree codes)
     for cat_name in category_terms:
@@ -244,8 +238,7 @@ async def build_categories() -> None:
     # Add unmapped terms to "Other" category
     if unmapped:
         category_terms["Other"] = [
-            {"term": u["term"], "study_count": u["study_count"]}
-            for u in unmapped
+            {"term": u["term"], "study_count": u["study_count"]} for u in unmapped
         ]
 
     # Sort categories and terms within each
@@ -264,8 +257,10 @@ async def build_categories() -> None:
 
     OUTPUT_PATH.write_text(json.dumps(output, indent=2))
     print(f"\nWrote {OUTPUT_PATH}")
-    print(f"  {output['stats']['mapped_terms']} mapped, "
-          f"{output['stats']['unmapped_terms']} unmapped → Other")
+    print(
+        f"  {output['stats']['mapped_terms']} mapped, "
+        f"{output['stats']['unmapped_terms']} unmapped → Other"
+    )
     print(f"  {output['stats']['category_count']} categories total")
 
     print("\nCategories:")

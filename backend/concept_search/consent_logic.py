@@ -36,9 +36,7 @@ if _DISEASE_TSV_PATH.exists():
         for row in reader:
             _DISEASE_ABBREVIATIONS[row["Disease abbrev"]] = row["Disease name"]
 else:
-    raise FileNotFoundError(
-        f"Disease abbreviation mapping not found: {_DISEASE_TSV_PATH}"
-    )
+    raise FileNotFoundError(f"Disease abbreviation mapping not found: {_DISEASE_TSV_PATH}")
 
 # Reverse map: lowercase disease name → abbreviation
 _DISEASE_NAME_TO_ABBREV: dict[str, str] = {
@@ -149,9 +147,8 @@ def resolve_disease_name(name: str) -> str | None:
     # Prefer the shortest matching name (most specific match).
     best: tuple[str, int] | None = None
     for full_name, abbrev in _DISEASE_NAME_TO_ABBREV.items():
-        if lower in full_name:
-            if best is None or len(full_name) < best[1]:
-                best = (abbrev, len(full_name))
+        if lower in full_name and (best is None or len(full_name) < best[1]):
+            best = (abbrev, len(full_name))
     return best[0] if best else None
 
 
@@ -271,6 +268,7 @@ TAG_TO_MODIFIER: dict[str, str] = {
     "no-rd": "RD",
 }
 
+
 def expand_consent_tags(
     all_codes: list[str],
     tags: list[str],
@@ -312,9 +310,7 @@ def expand_consent_tags(
         eligible: list[str] = []
         for tag in explicit_tags:
             code_prefix = tag.removeprefix("explicit:")
-            eligible.extend(
-                compute_eligible_codes(all_codes, explicit_code=code_prefix)
-            )
+            eligible.extend(compute_eligible_codes(all_codes, explicit_code=code_prefix))
         # Deduplicate while preserving order
         seen: set[str] = set()
         deduped: list[str] = []
@@ -325,9 +321,7 @@ def expand_consent_tags(
         eligible = deduped
     else:
         # Scope-based path: filter by purpose (general/health/disease)
-        eligible = compute_eligible_codes(
-            all_codes, purpose=scope, disease=disease
-        )
+        eligible = compute_eligible_codes(all_codes, purpose=scope, disease=disease)
 
     # Apply modifier exclusions
     if excluded_modifiers:

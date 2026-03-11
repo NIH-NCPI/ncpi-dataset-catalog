@@ -19,15 +19,15 @@ from .models import (
     RouteRemove,
     RouteReplace,
     RouteReset,
-    RouteSelect,
     RouterResult,
+    RouteSelect,
 )
 from .router_agent import run_router
-
 
 # ---------------------------------------------------------------------------
 # Input model for eval cases
 # ---------------------------------------------------------------------------
+
 
 class RouterInput(BaseModel):
     """Input to the router eval: a follow-up message + previous query state."""
@@ -39,6 +39,7 @@ class RouterInput(BaseModel):
 # ---------------------------------------------------------------------------
 # Test fixtures
 # ---------------------------------------------------------------------------
+
 
 def _disambig_previous() -> QueryModel:
     """Previous query with a disambiguation-pending glucose mention + resolved diabetes."""
@@ -90,6 +91,7 @@ def _resolved_previous() -> QueryModel:
 # Evaluator
 # ---------------------------------------------------------------------------
 
+
 class RouterEvaluator(Evaluator[RouterInput, RouterResult]):
     """Scores router output against expected route classification.
 
@@ -102,9 +104,7 @@ class RouterEvaluator(Evaluator[RouterInput, RouterResult]):
     - For add: kind match is sufficient
     """
 
-    def evaluate(
-        self, ctx: EvaluatorContext[RouterInput, RouterResult]
-    ) -> dict[str, float]:
+    def evaluate(self, ctx: EvaluatorContext[RouterInput, RouterResult]) -> dict[str, float]:
         expected = ctx.expected_output
         actual = ctx.output
         scores: dict[str, float] = {}
@@ -143,7 +143,9 @@ class RouterEvaluator(Evaluator[RouterInput, RouterResult]):
             actual_replace = actual  # type: ignore[assignment]
             orig_match = expected.original_text.lower() in actual_replace.original_text.lower()
             new_match = expected.new_text.lower() in actual_replace.new_text.lower()
-            scores["route_score"] = 1.0 if (orig_match and new_match) else 0.5 if orig_match else 0.0
+            scores["route_score"] = (
+                1.0 if (orig_match and new_match) else 0.5 if orig_match else 0.0
+            )
 
         elif expected.kind == "reset" and isinstance(expected, RouteReset):
             actual_reset = actual  # type: ignore[assignment]

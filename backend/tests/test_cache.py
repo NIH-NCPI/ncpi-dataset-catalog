@@ -82,7 +82,7 @@ async def test_ttl_expiration() -> None:
 async def test_lru_eviction(cache: LRUCache[str, str]) -> None:
     """When max_size is reached, the oldest entry should be evicted."""
     for k in ["a", "b", "c"]:
-        await cache.get_or_compute(k, lambda: _compute(k))
+        await cache.get_or_compute(k, lambda k=k: _compute(k))
     assert len(cache._cache) == 3
 
     await cache.get_or_compute("d", lambda: _compute("d"))
@@ -94,7 +94,7 @@ async def test_lru_eviction(cache: LRUCache[str, str]) -> None:
 async def test_lru_access_refreshes(cache: LRUCache[str, str]) -> None:
     """Accessing an entry should move it to the end (most recent)."""
     for k in ["a", "b", "c"]:
-        await cache.get_or_compute(k, lambda: _compute(k))
+        await cache.get_or_compute(k, lambda k=k: _compute(k))
     # Access "a" to refresh it
     await cache.get_or_compute("a", lambda: _compute("a"))
     # Adding "d" should now evict "b" (the oldest untouched)

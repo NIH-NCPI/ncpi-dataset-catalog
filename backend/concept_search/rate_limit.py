@@ -29,9 +29,7 @@ class RateLimiter:
         if max_requests is None:
             max_requests = int(os.environ.get("RATE_LIMIT_MAX_REQUESTS", "10"))
         if window_seconds is None:
-            window_seconds = float(
-                os.environ.get("RATE_LIMIT_WINDOW_SECONDS", "60")
-            )
+            window_seconds = float(os.environ.get("RATE_LIMIT_WINDOW_SECONDS", "60"))
         self.max_requests = max_requests
         self.window_seconds = window_seconds
         self._hits: dict[str, deque[float]] = {}

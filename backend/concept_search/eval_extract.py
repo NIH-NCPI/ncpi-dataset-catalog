@@ -33,9 +33,7 @@ class ExtractEvaluator(Evaluator[str, ExtractResult]):
     - Score = fraction of expected mentions correctly matched.
     """
 
-    def evaluate(
-        self, ctx: EvaluatorContext[str, ExtractResult]
-    ) -> dict[str, float]:
+    def evaluate(self, ctx: EvaluatorContext[str, ExtractResult]) -> dict[str, float]:
         expected = ctx.expected_output
         actual = ctx.output
         if expected is None or not expected.mentions:
@@ -43,9 +41,7 @@ class ExtractEvaluator(Evaluator[str, ExtractResult]):
                 "extract_score": 1.0 if not actual.mentions else 0.0,
             }
             if expected is not None:
-                scores["intent_score"] = (
-                    1.0 if actual.intent == expected.intent else 0.0
-                )
+                scores["intent_score"] = 1.0 if actual.intent == expected.intent else 0.0
             return scores
 
         matched = 0.0
@@ -105,9 +101,7 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
         Case(
             name="single-measurement",
             inputs="studies with BMI data",
-            expected_output=ExtractResult(
-                mentions=[_rm("body mass index", Facet.MEASUREMENT)]
-            ),
+            expected_output=ExtractResult(mentions=[_rm("body mass index", Facet.MEASUREMENT)]),
         ),
         Case(
             name="two-facets",
@@ -280,9 +274,7 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
         Case(
             name="sex-female",
             inputs="studies with female participants",
-            expected_output=ExtractResult(
-                mentions=[_rm("female", Facet.SEX, ["Female"])]
-            ),
+            expected_output=ExtractResult(mentions=[_rm("female", Facet.SEX, ["Female"])]),
         ),
         Case(
             name="race-ethnicity",
@@ -544,7 +536,10 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
         # --- Complex research questions ---
         Case(
             name="multi-measurement-research-question",
-            inputs="I'm studying whether smoking modifies the effect of GLP-1 agonists on glycemic control in T2D patients",
+            inputs=(
+                "I'm studying whether smoking modifies the effect of"
+                " GLP-1 agonists on glycemic control in T2D patients"
+            ),
             # Should extract all four concepts: the disease focus plus
             # three distinct measurement domains (smoking, medication,
             # glycemic outcome).

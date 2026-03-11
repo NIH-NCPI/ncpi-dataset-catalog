@@ -45,11 +45,13 @@ def _format_mentions(mentions: list[ResolvedMention]) -> str:
     """Format resolved mentions as a readable list for the agent."""
     items = []
     for m in mentions:
-        items.append({
-            "facet": m.facet.value,
-            "original_text": m.original_text,
-            "values": m.values,
-        })
+        items.append(
+            {
+                "facet": m.facet.value,
+                "original_text": m.original_text,
+                "values": m.values,
+            }
+        )
     return json.dumps(items, indent=2)
 
 
@@ -69,9 +71,6 @@ async def run_structure(
         QueryModel with exclude flags applied.
     """
     agent = _get_agent(model)
-    prompt = (
-        f"Original query: {query}\n\n"
-        f"Resolved mentions:\n{_format_mentions(mentions)}"
-    )
+    prompt = f"Original query: {query}\n\nResolved mentions:\n{_format_mentions(mentions)}"
     result = await agent.run(prompt)
     return result.output

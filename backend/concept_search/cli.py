@@ -24,9 +24,7 @@ def main() -> None:
         description="NCPI Concept Search — parse natural-language queries into faceted mentions"
     )
     parser.add_argument("query", help="Natural-language search query")
-    parser.add_argument(
-        "--debug", action="store_true", help="Enable debug logging"
-    )
+    parser.add_argument("--debug", action="store_true", help="Enable debug logging")
     parser.add_argument(
         "--lookup",
         action="store_true",
