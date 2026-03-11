@@ -32,6 +32,7 @@ COPY catalog-build/common/disease_abbrev_mapping.tsv /catalog-build/common/disea
 # Copy pre-computed concept embeddings (generated locally via `make embeddings`).
 # Loaded directly from .npy at startup — not stored in DuckDB.
 COPY catalog-build/classification/output/concept-embeddings.npy catalog-build/classification/output/concept-embeddings.npy
+COPY catalog-build/classification/output/concept-embeddings.sha256 catalog-build/classification/output/concept-embeddings.sha256
 
 # Copy pre-built DuckDB cache (built locally via `make db-reload`).
 # This eliminates all JSON parsing from the Docker build —

@@ -378,8 +378,9 @@ class ConceptIndex:
         self.load_consent_code_descriptions()
         self._concept_descriptions = _load_concept_descriptions()
 
-        # Load pre-computed embeddings from .npy on cache miss,
-        # or verify count on cache hit.
+        # On cache miss, load pre-computed embeddings from .npy and
+        # persist into the DuckDB cache. On cache hit, embeddings
+        # are restored from the store via _rebuild_index_from_store().
         if cache_miss:
             self._load_concept_embeddings_from_npy()
             if isinstance(self.store, DuckDBStore):
