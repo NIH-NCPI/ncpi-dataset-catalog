@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import logging
 import os
@@ -378,23 +377,10 @@ class ConceptIndex:
         self.load_consent_code_descriptions()
         self._concept_descriptions = _load_concept_descriptions()
 
-        # Build embeddings after focus categories are loaded so both
-        # measurement and focus nodes are included.
-        # On cache hit, verify the cached embeddings cover the current
-        # vocabulary — rebuild if the count doesn't match (stale cache).
-        if not cache_miss:
-            expected = len(self._ensure_concept_descriptions()) + len(self._index[Facet.FOCUS])
-            actual = len(self._embedding_nodes)
-            if actual != expected:
-                logger.warning(
-                    "Stale embedding cache: expected %d nodes, got %d — rebuilding embeddings",
-                    expected,
-                    actual,
-                )
-                cache_miss = True
+        # Load pre-computed embeddings from .npy on cache miss,
+        # or verify count on cache hit.
         if cache_miss:
-            self._build_concept_embeddings()
-            # Save cache (includes embeddings) for next startup
+            self._load_concept_embeddings_from_npy()
             if isinstance(self.store, DuckDBStore):
                 try:
                     self.store.save_to_file(cache_path)
@@ -465,35 +451,34 @@ class ConceptIndex:
                 value=value,
             )
         try:
-            self._load_embeddings_from_store()
+            self._load_concept_embeddings_from_npy()
         except Exception as exc:
             logger.warning(
-                "Could not load concept embeddings from cache (may be an older cache file): %s",
+                "Could not load concept embeddings: %s",
                 exc,
             )
 
-    def _build_concept_embeddings(self) -> None:
-        """Generate embeddings for measurement and focus nodes, store them.
+    def _load_concept_embeddings_from_npy(self) -> None:
+        """Load pre-computed embeddings from .npy cache file.
 
-        Measurement nodes come from ``_concept_descriptions``.  Focus nodes
-        come from ``self._index[Facet.FOCUS]``.  Each node is embedded as
-        ``"name: description"`` (measurements) or just the term name (focus).
-        Results are stored in the DuckDB ``concept_embeddings`` table and
-        cached in memory for KNN search.
+        Embeddings are generated separately via ``make embeddings``
+        (backend/generate_embeddings/).  This method only loads them —
+        it never invokes the embedding model.
 
-        Uses a content hash of the input texts to skip recomputation when
-        the underlying vocabulary hasn't changed.  Cached embeddings are
-        stored as ``.npy`` + ``.sha256`` files alongside the concept vocabulary.
-
-        Gracefully skips if sentence-transformers is not installed (e.g. in
-        test environments).
+        Builds the node metadata list (measurement + focus) and pairs it
+        with the cached matrix, then stores both in DuckDB and memory.
         """
-        from . import embeddings
+        cache_dir = _resolve_embedding_cache_dir()
+        npy_path = cache_dir / "concept-embeddings.npy"
+
+        if not npy_path.exists():
+            raise FileNotFoundError(
+                f"No embedding cache at {npy_path} — run 'make embeddings' first"
+            )
 
         descs = self._ensure_concept_descriptions()
 
         nodes: list[dict] = []
-        texts: list[str] = []
 
         # Measurement nodes from concept descriptions
         for cid, info in sorted(descs.items()):
@@ -509,11 +494,8 @@ class ConceptIndex:
                     "type": node_type,
                 }
             )
-            texts.append(f"{name}: {desc}" if desc else name)
 
         # Focus nodes from the focus index
-        # concept_id = the canonical term name (e.g. "Heart Diseases") so
-        # that resolved values match the focus facet directly.
         for _key, match in sorted(self._index[Facet.FOCUS].items(), key=lambda x: x[0]):
             nodes.append(
                 {
@@ -524,120 +506,17 @@ class ConceptIndex:
                     "type": "focus",
                 }
             )
-            texts.append(match.value)
 
-        if not texts:
-            logger.warning("No concept/focus nodes found — skipping embeddings")
-            return
+        matrix = np.load(npy_path, allow_pickle=False)
+        if matrix.shape[0] != len(nodes):
+            raise ValueError(
+                f"Embedding cache has {matrix.shape[0]} rows but expected {len(nodes)} nodes "
+                "— run 'make embeddings' to regenerate"
+            )
 
-        # Check content hash against cached embeddings
-        text_hash = hashlib.sha256("\n".join(texts).encode()).hexdigest()
-        cache_dir = _resolve_embedding_cache_dir()
-        npy_path = cache_dir / "concept-embeddings.npy"
-        hash_path = cache_dir / "concept-embeddings.sha256"
-
-        if npy_path.exists() and hash_path.exists():
-            try:
-                cached_hash = hash_path.read_text().strip()
-                if cached_hash == text_hash:
-                    matrix = np.load(npy_path, allow_pickle=False)
-                    expected = (len(nodes), 768)
-                    if matrix.shape == expected:
-                        logger.info(
-                            "Using cached embeddings (%d nodes) from %s "
-                            "— skipping model download and embedding generation",
-                            len(texts),
-                            npy_path,
-                        )
-                        self._store_embeddings(nodes, matrix)
-                        return
-                    logger.warning(
-                        "Embedding cache shape mismatch — expected %d rows, got %s; recomputing",
-                        len(nodes),
-                        matrix.shape,
-                    )
-            except (OSError, ValueError) as exc:
-                logger.warning("Failed to read embedding cache: %s — recomputing", exc)
-
-        logger.info(
-            "No cached embeddings found — generating %d embeddings "
-            "(this requires downloading the model on first run)...",
-            len(texts),
-        )
-        try:
-            matrix = embeddings.embed_texts(texts)
-        except ImportError:
-            logger.warning("sentence-transformers not available — skipping embeddings")
-            return
-        except Exception:
-            logger.exception("Failed to generate concept embeddings — skipping")
-            return
-        logger.info("Embedding complete: %s", matrix.shape)
-
-        # Save cache — write to temp files then atomically replace
-        try:
-            cache_dir.mkdir(parents=True, exist_ok=True)
-            tmp_npy = npy_path.parent / (npy_path.name + ".tmp")
-            tmp_hash = hash_path.parent / (hash_path.name + ".tmp")
-            with open(tmp_npy, "wb") as f:
-                np.save(f, matrix)
-            tmp_hash.write_text(text_hash + "\n")
-            os.replace(tmp_npy, npy_path)
-            os.replace(tmp_hash, hash_path)
-            logger.info("Saved embedding cache: %s", npy_path)
-        except OSError:
-            logger.warning("Could not save embedding cache to %s", cache_dir)
-
-        self._store_embeddings(nodes, matrix)
-
-    def _store_embeddings(self, nodes: list[dict], matrix: np.ndarray) -> None:
-        """Store embedding nodes and matrix in DuckDB and memory.
-
-        Args:
-            nodes: Node metadata dicts.
-            matrix: (N, 768) embedding matrix.
-        """
-        if isinstance(self.store, DuckDBStore):
-            rows = [
-                (
-                    n["concept_id"],
-                    n["name"],
-                    n["description"],
-                    n["type"],
-                    matrix[i].tolist(),
-                    n["facet"],
-                )
-                for i, n in enumerate(nodes)
-            ]
-            self.store.load_concept_embeddings_batch(rows)
-
+        logger.info("Loaded %d embeddings from %s", len(nodes), npy_path)
         self._embedding_nodes = nodes
         self._embedding_matrix = matrix
-
-    def _load_embeddings_from_store(self) -> None:
-        """Load concept embeddings from the DuckDB cache into memory."""
-        if not isinstance(self.store, DuckDBStore):
-            return
-        rows = self.store.get_concept_embeddings()
-        if not rows:
-            logger.info("No concept embeddings in cache")
-            return
-        nodes: list[dict] = []
-        vecs: list[list[float]] = []
-        for cid, name, desc, node_type, embedding, facet in rows:
-            nodes.append(
-                {
-                    "concept_id": cid,
-                    "description": desc or "",
-                    "facet": facet or "measurement",
-                    "name": name or cid,
-                    "type": node_type or "concept",
-                }
-            )
-            vecs.append(embedding)
-        self._embedding_nodes = nodes
-        self._embedding_matrix = np.array(vecs, dtype=np.float32)
-        logger.info("Loaded %d concept embeddings from cache", len(nodes))
 
     def search_concepts_by_embedding(
         self, query: str, top_k: int = 10, facet: str | None = None
