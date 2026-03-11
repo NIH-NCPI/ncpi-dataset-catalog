@@ -6,12 +6,12 @@ ENV GIT_SHA=${GIT_SHA}
 WORKDIR /app
 
 # Install uv for fast, deterministic dependency installs
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.10.9 /uv /uvx /bin/
 
 # Install dependencies first (layer caching: only re-runs when deps change)
 # PyTorch CPU-only index is configured in pyproject.toml [tool.uv.sources]
 COPY backend/pyproject.toml backend/uv.lock ./
-RUN uv sync --frozen --no-dev --no-editable
+RUN uv sync --frozen --no-dev --no-install-project
 
 # Pre-download embedding model so it's cached in the image.
 # Needed at runtime for query embedding (not for batch generation —
