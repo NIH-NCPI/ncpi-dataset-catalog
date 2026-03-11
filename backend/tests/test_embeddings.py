@@ -179,6 +179,24 @@ class TestFacetFilteredSearch:
         with pytest.raises(ValueError, match="make embeddings"):
             idx._load_concept_embeddings_from_npy()
 
+    def test_load_from_npy_hash_mismatch(self, tmp_path, monkeypatch) -> None:
+        """Content hash mismatch raises ValueError."""
+        from concept_search.index import ConceptIndex
+
+        idx = ConceptIndex()
+        idx._concept_descriptions = {
+            "topmed:bp": {"description": "Blood pressure", "name": "BP"},
+        }
+
+        monkeypatch.setenv("NCPI_EMBEDDING_CACHE_DIR", str(tmp_path))
+
+        fake_matrix = np.random.default_rng(0).standard_normal((1, 768)).astype(np.float32)
+        np.save(tmp_path / "concept-embeddings.npy", fake_matrix)
+        (tmp_path / "concept-embeddings.sha256").write_text("deadbeef\n")
+
+        with pytest.raises(ValueError, match="hash mismatch"):
+            idx._load_concept_embeddings_from_npy()
+
     def test_no_facet_returns_all(self) -> None:
         """No facet filter returns nodes of all facets."""
         from concept_search.index import ConceptIndex
