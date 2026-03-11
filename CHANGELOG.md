@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.16.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.15.0...v0.16.0) (2026-03-10)
+
+
+### Features
+
+* axis-based consent filtering with tag expansion [#273](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/273) ([#274](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/274)) ([8a2f3f0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/8a2f3f035affd901c555b14d60fd1ad42c76adfa))
+* conversation routing for multi-turn search [#268](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/268) ([#271](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/271)) ([924ba75](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/924ba75c4d3f01290d976842527ccc6bbac57126))
+* disambiguation output for ambiguous measurements [#264](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/264) ([#267](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/267)) ([904c8b4](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/904c8b44b0a0c50c900ae24d8d05417d695128f4))
+* multi-turn search with client-side state round-tripping ([#261](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/261)) ([172230f](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/172230f44b45c193b5f24f55c0cbc71b90d83653))
+
+
+### Documentation
+
+* add consent codes and key capabilities to home page brief [#298](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/298) ([5bb1740](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/5bb1740ac3e373714a16325af638f174cefde374))
+* rewrite home page design brief as actionable connector-focused spec [#298](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/298) ([85a46d5](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/85a46d5508719b83d5b11e9d291a1b7f1a3df3a6))
+* update home page brief to use /research/studies route [#298](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/298) ([67027f6](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/67027f68e3d003fc54333b56c99d43178303ff2d))
+
 ## [0.15.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.14.0...v0.15.0) (2026-03-07)
 
 
