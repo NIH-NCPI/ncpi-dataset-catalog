@@ -1,5 +1,18 @@
 # If backend/Dockerfile changed in this commit, run Docker smoke test
 if git diff-tree --no-commit-id --name-only -r HEAD | grep -q '^backend/Dockerfile$'; then
   echo "Dockerfile changed — running Docker smoke test..."
+
+  # Skip if Docker CLI is not available
+  if ! command -v docker >/dev/null 2>&1; then
+    echo "Docker not found in PATH; skipping Docker smoke test."
+    exit 0
+  fi
+
+  # Skip if Docker daemon is not reachable
+  if ! docker info >/dev/null 2>&1; then
+    echo "Docker daemon is not available; skipping Docker smoke test."
+    exit 0
+  fi
+
   cd backend && make docker-smoke
 fi

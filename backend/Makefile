@@ -97,7 +97,7 @@ db-reload: stop
 embeddings:
 	cd generate_embeddings && uv sync --quiet && uv run python generate_embeddings.py
 
-# Delete cached embedding files so db-reload regenerates them
+# Delete cached embedding files (run 'make embeddings' to regenerate)
 clean-embeddings:
 	@rm -f ../catalog-build/classification/output/concept-embeddings.npy
 	@rm -f ../catalog-build/classification/output/concept-embeddings.sha256
@@ -121,6 +121,10 @@ format:
 
 # Build Docker image (bakes in git SHA for /health endpoint)
 build:
+	@if [ ! -f ../catalog-build/classification/output/concept-embeddings.npy ]; then \
+		echo "Error: concept-embeddings.npy not found. Run 'make embeddings' first."; \
+		exit 1; \
+	fi
 	@if [ ! -f ../catalog/concept-search.duckdb ]; then \
 		echo "Error: catalog/concept-search.duckdb not found. Run 'make db-reload' first."; \
 		exit 1; \
