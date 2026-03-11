@@ -1,0 +1,5 @@
+# If backend/Dockerfile changed in this commit, run Docker smoke test
+if git diff-tree --no-commit-id --name-only -r HEAD | grep -q '^backend/Dockerfile$'; then
+  echo "Dockerfile changed — running Docker smoke test..."
+  cd backend && make docker-smoke
+fi

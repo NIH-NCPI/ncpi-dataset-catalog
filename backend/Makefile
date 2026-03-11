@@ -29,7 +29,8 @@ DEV_LOG_GROUP = /aws/apprunner/jso-ncpi-dataset-catalog/59bf88e6efa543319f5c03df
 PROD_LOG_GROUP = /aws/apprunner/5wu-ncpi-dataset-catalog/d2f7c9715dbc4d6d9b4c3af33f8eefd3/application
 
 .PHONY: help build push-dev push-prod deploy-dev deploy-prod \
-        start stop restart db-reload embeddings clean-embeddings evals lint format logs-dev logs-prod
+        start stop restart db-reload embeddings clean-embeddings evals lint format \
+        docker-smoke logs-dev logs-prod
 
 # Default target
 help:
@@ -47,9 +48,10 @@ help:
 	@echo "  format            - Run ruff formatter"
 	@echo ""
 	@echo "Docker deploy:"
-	@echo "  build       - Build Docker image locally"
-	@echo "  deploy-dev  - Build + push to dev ECR"
-	@echo "  deploy-prod - Build + push to prod ECR"
+	@echo "  build        - Build Docker image locally"
+	@echo "  docker-smoke - Build image, start container, hit /health, teardown"
+	@echo "  deploy-dev   - Build + push to dev ECR"
+	@echo "  deploy-prod  - Build + push to prod ECR"
 	@echo ""
 	@echo "Logs:"
 	@echo "  logs-dev    - Tail dev search logs (Ctrl-C to stop)"
@@ -131,6 +133,36 @@ build:
 	docker build --platform linux/amd64 \
 		--build-arg GIT_SHA=$$(git -C .. rev-parse --short HEAD) \
 		-t $(IMAGE_NAME):$(IMAGE_TAG) -f Dockerfile ..
+
+# Build image, start container, smoke test /health, teardown
+SMOKE_CONTAINER = ncpi-smoke-test
+SMOKE_PORT = 8001
+docker-smoke: build
+	@echo "Starting smoke-test container on :$(SMOKE_PORT)..."
+	@docker rm -f $(SMOKE_CONTAINER) 2>/dev/null || true
+	@docker run -d --name $(SMOKE_CONTAINER) \
+		-p $(SMOKE_PORT):8000 \
+		--env-file .env \
+		$(IMAGE_NAME):$(IMAGE_TAG) >/dev/null
+	@echo "Waiting for container to start..."
+	@for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do \
+		if curl -sf http://localhost:$(SMOKE_PORT)/health >/dev/null 2>&1; then \
+			break; \
+		fi; \
+		if [ $$i -eq 20 ]; then \
+			echo "FAIL: container did not become healthy"; \
+			docker logs $(SMOKE_CONTAINER); \
+			docker rm -f $(SMOKE_CONTAINER) >/dev/null; \
+			exit 1; \
+		fi; \
+		sleep 3; \
+	done
+	@echo "Health check:"
+	@curl -sf http://localhost:$(SMOKE_PORT)/health | python3 -m json.tool
+	@echo ""
+	@echo "Image size: $$(docker images $(IMAGE_NAME):$(IMAGE_TAG) --format '{{.Size}}')"
+	@docker rm -f $(SMOKE_CONTAINER) >/dev/null
+	@echo "Smoke test passed."
 
 # Push to dev ECR
 push-dev:
