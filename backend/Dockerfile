@@ -5,19 +5,18 @@ ENV GIT_SHA=${GIT_SHA}
 
 WORKDIR /app
 
-# Install dependencies first (layer caching: only re-runs when deps change)
-# Install CPU-only PyTorch first — saves ~1.2 GB vs the full CUDA build
-# that sentence-transformers would otherwise pull in.
-RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+# Install uv for fast, deterministic dependency installs
+COPY --from=ghcr.io/astral-sh/uv:0.10.9 /uv /uvx /bin/
 
-COPY backend/pyproject.toml .
-RUN pip install --no-cache-dir \
-    $(python -c "import tomllib; d=tomllib.load(open('pyproject.toml','rb')); print(' '.join(d['project']['dependencies']))")
+# Install dependencies first (layer caching: only re-runs when deps change)
+# PyTorch CPU-only index is configured in pyproject.toml [tool.uv.sources]
+COPY backend/pyproject.toml backend/uv.lock ./
+RUN uv sync --frozen --no-dev --no-install-project
 
 # Pre-download embedding model so it's cached in the image.
 # Needed at runtime for query embedding (not for batch generation —
 # pre-computed embeddings are copied below).
-RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('pritamdeka/S-PubMedBert-MS-MARCO')"
+RUN uv run python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('pritamdeka/S-PubMedBert-MS-MARCO')"
 
 # Copy application code
 COPY backend/concept_search/ concept_search/
@@ -40,4 +39,4 @@ ENV NCPI_REPO_ROOT=/app
 
 EXPOSE 8000
 
-CMD ["uvicorn", "concept_search.api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uv", "run", "uvicorn", "concept_search.api:app", "--host", "0.0.0.0", "--port", "8000"]
