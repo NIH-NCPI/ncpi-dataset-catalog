@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.16.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.16.0...v0.16.1) (2026-03-11)
+
+
+### Bug Fixes
+
+* slim Docker image with CPU-only PyTorch ([#280](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/280)) ([ecdfc76](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/ecdfc76957076428ffb14c38fd88600a17683857))
+
+
+### Chores
+
+* add ruff for Python linting and formatting ([#276](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/276)) ([7ad9716](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/7ad9716aea1ec7bbd988a4bc1a00286e89b7803a))
+* migrate Python package management from pip to uv ([#278](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/278)) ([15e9ca3](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/15e9ca306f1162144e85f09bd83fabce20a0319a))
+* update Claude Code hooks to new schema format ([9b07f27](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/9b07f27718484f7fb0c6ec52eb8f1c9b5d050db6))
+
 ## [0.16.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.15.0...v0.16.0) (2026-03-10)
 
 
