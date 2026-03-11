@@ -23,6 +23,12 @@ dev = [
     "ruff",
 ]
 
+[tool.uv]
+find-links = ["https://download.pytorch.org/whl/cpu/torch"]
+
+[tool.uv.sources]
+torch = { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-manylinux_2_28_x86_64.whl", marker = "sys_platform == 'linux'" }
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 

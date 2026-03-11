@@ -8,19 +8,10 @@ WORKDIR /app
 # Install uv for fast, deterministic dependency installs
 COPY --from=ghcr.io/astral-sh/uv:0.10.9 /uv /uvx /bin/
 
-# Install dependencies (layer caching: only re-runs when deps change)
-# 1. Export locked deps to requirements.txt
-# 2. Strip CUDA-only packages (nvidia-*, triton, cuda-*) — not needed on
-#    CPU-only App Runner instances, saves ~3 GB
-# 3. Install CPU-only PyTorch from pytorch.org/whl/cpu
-# 4. Install remaining deps from PyPI
+# Install dependencies first (layer caching: only re-runs when deps change)
+# CPU-only PyTorch is configured in pyproject.toml [tool.uv.sources]
 COPY backend/pyproject.toml backend/uv.lock ./
-RUN uv venv .venv && \
-    uv export --frozen --no-dev --no-emit-project --no-hashes -o requirements.txt && \
-    grep -v -E '^(nvidia-|triton==|cuda-|torch==)' requirements.txt > requirements-cpu.txt && \
-    uv pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
-    uv pip install --no-cache-dir -r requirements-cpu.txt && \
-    rm requirements.txt requirements-cpu.txt
+RUN uv sync --frozen --no-dev --no-install-project
 
 # Pre-download embedding model so it's cached in the image.
 # Needed at runtime for query embedding (not for batch generation —
