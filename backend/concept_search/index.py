@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import os
@@ -465,8 +466,10 @@ class ConceptIndex:
         (backend/generate_embeddings/).  This method only loads them —
         it never invokes the embedding model.
 
-        Builds the node metadata list (measurement + focus) and pairs it
-        with the cached matrix, then stores both in DuckDB and memory.
+        Builds the node metadata list (measurement + focus), pairs it
+        with the cached matrix, and stores both in in-memory fields.
+        Validates the content hash against the .sha256 file to detect
+        stale embeddings when text content changes.
         """
         cache_dir = _resolve_embedding_cache_dir()
         npy_path = cache_dir / "concept-embeddings.npy"
@@ -479,6 +482,7 @@ class ConceptIndex:
         descs = self._ensure_concept_descriptions()
 
         nodes: list[dict] = []
+        texts: list[str] = []
 
         # Measurement nodes from concept descriptions
         for cid, info in sorted(descs.items()):
@@ -494,6 +498,7 @@ class ConceptIndex:
                     "type": node_type,
                 }
             )
+            texts.append(f"{name}: {desc}" if desc else name)
 
         # Focus nodes from the focus index
         for _key, match in sorted(self._index[Facet.FOCUS].items(), key=lambda x: x[0]):
@@ -506,6 +511,7 @@ class ConceptIndex:
                     "type": "focus",
                 }
             )
+            texts.append(match.value)
 
         matrix = np.load(npy_path, allow_pickle=False)
         if matrix.shape[0] != len(nodes):
@@ -513,6 +519,19 @@ class ConceptIndex:
                 f"Embedding cache has {matrix.shape[0]} rows but expected {len(nodes)} nodes "
                 "— run 'make embeddings' to regenerate"
             )
+        if matrix.ndim != 2 or matrix.shape[1] != 768:
+            raise ValueError(f"Unexpected embedding dimensions {matrix.shape} — expected (N, 768)")
+
+        # Validate content hash to detect stale embeddings
+        hash_path = cache_dir / "concept-embeddings.sha256"
+        if hash_path.exists():
+            text_hash = hashlib.sha256("\n".join(texts).encode()).hexdigest()
+            cached_hash = hash_path.read_text().splitlines()[0].strip()
+            if cached_hash != text_hash:
+                raise ValueError(
+                    "Embedding content hash mismatch — concept vocabulary has changed. "
+                    "Run 'make embeddings' to regenerate"
+                )
 
         logger.info("Loaded %d embeddings from %s", len(nodes), npy_path)
         self._embedding_nodes = nodes
