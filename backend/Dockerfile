@@ -8,15 +8,24 @@ WORKDIR /app
 # Install uv for fast, deterministic dependency installs
 COPY --from=ghcr.io/astral-sh/uv:0.10.9 /uv /uvx /bin/
 
-# Install dependencies first (layer caching: only re-runs when deps change)
-# PyTorch CPU-only index is configured in pyproject.toml [tool.uv.sources]
+# Install dependencies (layer caching: only re-runs when deps change)
+# 1. Export locked deps to requirements.txt
+# 2. Strip CUDA-only packages (nvidia-*, triton, cuda-*) — not needed on
+#    CPU-only App Runner instances, saves ~3 GB
+# 3. Install CPU-only PyTorch from pytorch.org/whl/cpu
+# 4. Install remaining deps from PyPI
 COPY backend/pyproject.toml backend/uv.lock ./
-RUN uv sync --frozen --no-dev --no-install-project
+RUN uv venv .venv && \
+    uv export --frozen --no-dev --no-emit-project --no-hashes -o requirements.txt && \
+    grep -v -E '^(nvidia-|triton==|cuda-|torch==)' requirements.txt > requirements-cpu.txt && \
+    uv pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
+    uv pip install --no-cache-dir -r requirements-cpu.txt && \
+    rm requirements.txt requirements-cpu.txt
 
 # Pre-download embedding model so it's cached in the image.
 # Needed at runtime for query embedding (not for batch generation —
 # pre-computed embeddings are copied below).
-RUN uv run python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('pritamdeka/S-PubMedBert-MS-MARCO')"
+RUN .venv/bin/python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('pritamdeka/S-PubMedBert-MS-MARCO')"
 
 # Copy application code
 COPY backend/concept_search/ concept_search/
@@ -39,4 +48,4 @@ ENV NCPI_REPO_ROOT=/app
 
 EXPOSE 8000
 
-CMD ["uv", "run", "uvicorn", "concept_search.api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD [".venv/bin/uvicorn", "concept_search.api:app", "--host", "0.0.0.0", "--port", "8000"]

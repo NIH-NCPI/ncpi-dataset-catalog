@@ -23,16 +23,6 @@ dev = [
     "ruff",
 ]
 
-[tool.uv]
-index-url = "https://pypi.org/simple"
-
-[[tool.uv.index]]
-name = "pytorch-cpu"
-url = "https://download.pytorch.org/whl/cpu"
-
-[tool.uv.sources]
-torch = { index = "pytorch-cpu" }
-
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 
