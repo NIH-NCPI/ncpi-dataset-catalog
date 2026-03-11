@@ -59,7 +59,7 @@ help:
 # Start API server in background
 start: stop
 	@echo "Starting API server on http://localhost:8000 ..."
-	@.venv/bin/python -m uvicorn concept_search.api:app \
+	@uv run python -m uvicorn concept_search.api:app \
 		--host 0.0.0.0 --port 8000 > .server.log 2>&1 & echo $$! > $(PID_FILE)
 	@sleep 2
 	@if kill -0 $$(cat $(PID_FILE)) 2>/dev/null; then \
@@ -87,7 +87,7 @@ db-reload: stop
 	@echo "Deleting cached DuckDB index..."
 	@rm -f ../catalog/concept-search.duckdb
 	@echo "Rebuilding index (this may take a moment)..."
-	@.venv/bin/python -c "import logging; logging.basicConfig(level=logging.INFO); from concept_search.index import get_index; idx = get_index(); print(f'Index rebuilt: {idx.store.study_count} studies')"
+	@uv run python -c "import logging; logging.basicConfig(level=logging.INFO); from concept_search.index import get_index; idx = get_index(); print(f'Index rebuilt: {idx.store.study_count} studies')"
 	@$(MAKE) start
 
 # Delete cached embedding files so db-reload regenerates them
@@ -98,17 +98,17 @@ clean-embeddings:
 
 # Run extract, resolve, and end-to-end pipeline evals
 evals:
-	.venv/bin/python -m concept_search.eval_extract
-	.venv/bin/python -m concept_search.eval_resolve
-	.venv/bin/python -m concept_search.eval_pipeline
+	uv run python -m concept_search.eval_extract
+	uv run python -m concept_search.eval_resolve
+	uv run python -m concept_search.eval_pipeline
 
 # Lint Python files with ruff
 lint:
-	.venv/bin/ruff check concept_search/ tests/
+	uv run ruff check concept_search/ tests/
 
 # Format Python files with ruff
 format:
-	.venv/bin/ruff format concept_search/ tests/
+	uv run ruff format concept_search/ tests/
 
 # --- Docker deploy ------------------------------------------------------
 
