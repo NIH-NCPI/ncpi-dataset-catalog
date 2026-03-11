@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 import asyncio
+from unittest.mock import patch
 
 import httpx
 import pytest
 from fastapi.testclient import TestClient
-from unittest.mock import patch
 
 from concept_search.api import app
 from concept_search.extract_agent import _format_previous_context
@@ -47,9 +47,7 @@ class TestMergeWithPrevious:
     """Tests for _merge_with_previous()."""
 
     def test_adds_new_mention(self) -> None:
-        previous = QueryModel(
-            mentions=[_rm(Facet.FOCUS, "asthma", ["Asthma"])]
-        )
+        previous = QueryModel(mentions=[_rm(Facet.FOCUS, "asthma", ["Asthma"])])
         new = [_rm(Facet.PLATFORM, "AnVIL", ["AnVIL"])]
         result = _merge_with_previous(previous, new)
         assert len(result.mentions) == 2
@@ -65,9 +63,7 @@ class TestMergeWithPrevious:
         assert result.mentions[0].original_text == "diabetes"
 
     def test_duplicate_key_latest_wins(self) -> None:
-        previous = QueryModel(
-            mentions=[_rm(Facet.FOCUS, "cancer", ["Cancer"], exclude=False)]
-        )
+        previous = QueryModel(mentions=[_rm(Facet.FOCUS, "cancer", ["Cancer"], exclude=False)])
         new = [_rm(Facet.FOCUS, "cancer", ["Cancer"], exclude=True)]
         result = _merge_with_previous(previous, new)
         assert len(result.mentions) == 1
@@ -115,9 +111,7 @@ class TestMergeWithPrevious:
 
     def test_same_facet_different_text_both_kept(self) -> None:
         """Two focus mentions with different text should both be kept."""
-        previous = QueryModel(
-            mentions=[_rm(Facet.FOCUS, "asthma", ["Asthma"])]
-        )
+        previous = QueryModel(mentions=[_rm(Facet.FOCUS, "asthma", ["Asthma"])])
         new = [_rm(Facet.FOCUS, "diabetes", ["Diabetes Mellitus"])]
         result = _merge_with_previous(previous, new)
         assert len(result.mentions) == 2
@@ -144,10 +138,13 @@ class TestModeDetection:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "",
-            "previousQuery": {"intent": "study", "mentions": []},
-        })
+        resp = client.post(
+            "/search",
+            json={
+                "query": "",
+                "previousQuery": {"intent": "study", "mentions": []},
+            },
+        )
         assert resp.status_code == 200
         data = resp.json()
         # If mode was incorrectly 'fresh', the pipeline would run on empty
@@ -168,20 +165,23 @@ class TestModeDetection:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "",
-            "previousQuery": {
-                "intent": "study",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "asthma",
-                        "values": ["Asthma"],
-                        "exclude": False,
-                    }
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "",
+                "previousQuery": {
+                    "intent": "study",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "asthma",
+                            "values": ["Asthma"],
+                            "exclude": False,
+                        }
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         assert resp.json()["timing"]["pipelineMs"] == 0
 
@@ -236,8 +236,7 @@ class TestRefinePreservesIntent:
         # Extract returns a new mention with default "study" intent
         mock_extract.return_value = ExtractResult(
             intent="study",
-            mentions=[RawMention(facet=Facet.PLATFORM, text="AnVIL",
-                                 values=["AnVIL"])],
+            mentions=[RawMention(facet=Facet.PLATFORM, text="AnVIL", values=["AnVIL"])],
         )
         # Resolve returns the mention as-is (pre-resolved small facet skips)
         # Structure returns with no exclude flags
@@ -249,20 +248,23 @@ class TestRefinePreservesIntent:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "also on AnVIL",
-            "previousQuery": {
-                "intent": "variable",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "asthma",
-                        "values": ["Asthma"],
-                        "exclude": False,
-                    }
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "also on AnVIL",
+                "previousQuery": {
+                    "intent": "variable",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "asthma",
+                            "values": ["Asthma"],
+                            "exclude": False,
+                        }
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         data = resp.json()
         # Extract returned default "study" but previous was "variable".
@@ -293,20 +295,23 @@ class TestRefinePreservesIntent:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "also on AnVIL",
-            "previousQuery": {
-                "intent": "variable",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "asthma",
-                        "values": ["Asthma"],
-                        "exclude": False,
-                    }
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "also on AnVIL",
+                "previousQuery": {
+                    "intent": "variable",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "asthma",
+                            "values": ["Asthma"],
+                            "exclude": False,
+                        }
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         # RouteAdd preserves previous intent ("variable"), not the
         # pipeline's inferred intent ("study").
@@ -339,20 +344,23 @@ class TestLookupWithMutatedMentions:
 
         # Send lookup with only focus mention (platform removed)
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "",
-            "previousQuery": {
-                "intent": "study",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "asthma",
-                        "values": ["Asthma"],
-                        "exclude": False,
-                    }
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "",
+                "previousQuery": {
+                    "intent": "study",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "asthma",
+                            "values": ["Asthma"],
+                            "exclude": False,
+                        }
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         data = resp.json()
         # Should use the mentions as-is (no pipeline)
@@ -368,9 +376,7 @@ class TestConcurrentSemaphore:
     @pytest.mark.asyncio
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_pipeline")
-    async def test_concurrent_requests_all_complete(
-        self, mock_pipeline, mock_index
-    ) -> None:
+    async def test_concurrent_requests_all_complete(self, mock_pipeline, mock_index) -> None:
         """Fire more requests than the semaphore allows (5) and verify
         all eventually complete without errors."""
         gate = asyncio.Event()
@@ -433,9 +439,7 @@ class TestDisambiguation:
 
     def test_disambiguation_preserved_in_merge(self) -> None:
         """Disambiguation options survive _merge_with_previous."""
-        previous = QueryModel(
-            mentions=[_rm(Facet.FOCUS, "asthma", ["Asthma"])]
-        )
+        previous = QueryModel(mentions=[_rm(Facet.FOCUS, "asthma", ["Asthma"])])
         new = [
             ResolvedMention(
                 disambiguation=_disambig_options(),
@@ -464,8 +468,9 @@ class TestDisambiguation:
             ]
         )
         # User typed "blood glucose" — different original_text, so both kept
-        new = [_rm(Facet.MEASUREMENT, "blood glucose",
-                    ["phenx:fasting_plasma_glucose_blood_draw"])]
+        new = [
+            _rm(Facet.MEASUREMENT, "blood glucose", ["phenx:fasting_plasma_glucose_blood_draw"])
+        ]
         result = _merge_with_previous(previous, new)
         assert len(result.mentions) == 3
         glucose = [m for m in result.mentions if m.original_text == "glucose"][0]
@@ -474,9 +479,7 @@ class TestDisambiguation:
 
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_pipeline")
-    def test_disambiguation_in_api_response(
-        self, mock_pipeline, mock_index
-    ) -> None:
+    def test_disambiguation_in_api_response(self, mock_pipeline, mock_index) -> None:
         """API response includes disambiguation options on mentions."""
         mock_pipeline.return_value = QueryModel(
             mentions=[
@@ -500,7 +503,9 @@ class TestDisambiguation:
         mention = data["query"]["mentions"][0]
         assert mention["values"] == []
         assert len(mention["disambiguation"]) == 2
-        assert mention["disambiguation"][0]["conceptId"] == "phenx:fasting_plasma_glucose_blood_draw"
+        assert (
+            mention["disambiguation"][0]["conceptId"] == "phenx:fasting_plasma_glucose_blood_draw"
+        )
 
     def test_disambiguation_clears_values_and_generates_message(self) -> None:
         """ResolveResult validator clears values and auto-generates message."""
@@ -534,9 +539,7 @@ class TestDisambiguation:
 
     @pytest.mark.asyncio
     @patch("concept_search.resolve_agent._get_agent")
-    async def test_disambiguation_on_non_measurement_cleared(
-        self, mock_get_agent
-    ) -> None:
+    async def test_disambiguation_on_non_measurement_cleared(self, mock_get_agent) -> None:
         """Disambiguation on non-measurement facets is silently cleared."""
         from concept_search.models import ResolveResult
 
@@ -573,9 +576,7 @@ class TestRouteHandlers:
 
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_router")
-    def test_route_select_resolves_disambiguation(
-        self, mock_router, mock_index
-    ) -> None:
+    def test_route_select_resolves_disambiguation(self, mock_router, mock_index) -> None:
         """Select route sets values from chosen concept_id and clears disambiguation."""
         mock_router.return_value = RouteSelect(
             selected_ids=["phenx:fasting_plasma_glucose_blood_draw"],
@@ -584,36 +585,39 @@ class TestRouteHandlers:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "blood glucose",
-            "previousQuery": {
-                "intent": "study",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "diabetes",
-                        "values": ["Diabetes Mellitus"],
-                        "exclude": False,
-                    },
-                    {
-                        "facet": "measurement",
-                        "originalText": "glucose",
-                        "values": [],
-                        "exclude": False,
-                        "disambiguation": [
-                            {
-                                "conceptId": "phenx:fasting_plasma_glucose_blood_draw",
-                                "label": "Blood glucose measurement",
-                            },
-                            {
-                                "conceptId": "topmed:nutrient_intake",
-                                "label": "Dietary glucose intake",
-                            },
-                        ],
-                    },
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "blood glucose",
+                "previousQuery": {
+                    "intent": "study",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "diabetes",
+                            "values": ["Diabetes Mellitus"],
+                            "exclude": False,
+                        },
+                        {
+                            "facet": "measurement",
+                            "originalText": "glucose",
+                            "values": [],
+                            "exclude": False,
+                            "disambiguation": [
+                                {
+                                    "conceptId": "phenx:fasting_plasma_glucose_blood_draw",
+                                    "label": "Blood glucose measurement",
+                                },
+                                {
+                                    "conceptId": "topmed:nutrient_intake",
+                                    "label": "Dietary glucose intake",
+                                },
+                            ],
+                        },
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         data = resp.json()
         mentions = data["query"]["mentions"]
@@ -624,35 +628,36 @@ class TestRouteHandlers:
 
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_router")
-    def test_route_remove_drops_mention(
-        self, mock_router, mock_index
-    ) -> None:
+    def test_route_remove_drops_mention(self, mock_router, mock_index) -> None:
         """Remove route drops the specified mention."""
         mock_router.return_value = RouteRemove(original_texts=["diabetes"])
         mock_index.return_value.query_studies.return_value = []
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "remove the diabetes filter",
-            "previousQuery": {
-                "intent": "study",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "diabetes",
-                        "values": ["Diabetes Mellitus"],
-                        "exclude": False,
-                    },
-                    {
-                        "facet": "measurement",
-                        "originalText": "blood pressure",
-                        "values": ["topmed:bp_systolic"],
-                        "exclude": False,
-                    },
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "remove the diabetes filter",
+                "previousQuery": {
+                    "intent": "study",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "diabetes",
+                            "values": ["Diabetes Mellitus"],
+                            "exclude": False,
+                        },
+                        {
+                            "facet": "measurement",
+                            "originalText": "blood pressure",
+                            "values": ["topmed:bp_systolic"],
+                            "exclude": False,
+                        },
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         data = resp.json()
         mentions = data["query"]["mentions"]
@@ -663,9 +668,7 @@ class TestRouteHandlers:
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_pipeline")
     @patch("concept_search.api.run_router")
-    def test_route_reset_runs_fresh_pipeline(
-        self, mock_router, mock_pipeline, mock_index
-    ) -> None:
+    def test_route_reset_runs_fresh_pipeline(self, mock_router, mock_pipeline, mock_index) -> None:
         """Reset route runs fresh pipeline ignoring previous state."""
         mock_router.return_value = RouteReset(new_query="COPD studies")
         mock_pipeline.return_value = QueryModel(
@@ -675,20 +678,23 @@ class TestRouteHandlers:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "show me COPD studies instead",
-            "previousQuery": {
-                "intent": "study",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "diabetes",
-                        "values": ["Diabetes Mellitus"],
-                        "exclude": False,
-                    },
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "show me COPD studies instead",
+                "previousQuery": {
+                    "intent": "study",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "diabetes",
+                            "values": ["Diabetes Mellitus"],
+                            "exclude": False,
+                        },
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         data = resp.json()
         mentions = data["query"]["mentions"]
@@ -700,19 +706,21 @@ class TestRouteHandlers:
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_pipeline")
     @patch("concept_search.api.run_router")
-    def test_route_replace_swaps_mention(
-        self, mock_router, mock_pipeline, mock_index
-    ) -> None:
+    def test_route_replace_swaps_mention(self, mock_router, mock_pipeline, mock_index) -> None:
         """Replace route drops the old mention and runs pipeline on new text."""
         mock_router.return_value = RouteReplace(
-            original_text="diabetes", new_text="asthma",
+            original_text="diabetes",
+            new_text="asthma",
         )
         mock_pipeline.return_value = QueryModel(
             intent="variable",
             mentions=[
                 _rm(Facet.FOCUS, "asthma", ["Asthma"]),
-                _rm(Facet.MEASUREMENT, "blood pressure",
-                     ["topmed:bp_systolic", "topmed:bp_diastolic"]),
+                _rm(
+                    Facet.MEASUREMENT,
+                    "blood pressure",
+                    ["topmed:bp_systolic", "topmed:bp_diastolic"],
+                ),
             ],
         )
         mock_index.return_value.query_studies.return_value = []
@@ -720,26 +728,29 @@ class TestRouteHandlers:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "change diabetes to asthma",
-            "previousQuery": {
-                "intent": "variable",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "diabetes",
-                        "values": ["Diabetes Mellitus"],
-                        "exclude": False,
-                    },
-                    {
-                        "facet": "measurement",
-                        "originalText": "blood pressure",
-                        "values": ["topmed:bp_systolic", "topmed:bp_diastolic"],
-                        "exclude": False,
-                    },
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "change diabetes to asthma",
+                "previousQuery": {
+                    "intent": "variable",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "diabetes",
+                            "values": ["Diabetes Mellitus"],
+                            "exclude": False,
+                        },
+                        {
+                            "facet": "measurement",
+                            "originalText": "blood pressure",
+                            "values": ["topmed:bp_systolic", "topmed:bp_diastolic"],
+                            "exclude": False,
+                        },
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         data = resp.json()
         # Pipeline called with "asthma" and previous_query minus diabetes
@@ -759,7 +770,8 @@ class TestRouteHandlers:
     ) -> None:
         """Replace with unmatched original_text falls back to add behavior."""
         mock_router.return_value = RouteReplace(
-            original_text="nonexistent", new_text="asthma",
+            original_text="nonexistent",
+            new_text="asthma",
         )
         mock_pipeline.return_value = QueryModel(
             intent="study",
@@ -772,20 +784,23 @@ class TestRouteHandlers:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "change nonexistent to asthma",
-            "previousQuery": {
-                "intent": "auto",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "diabetes",
-                        "values": ["Diabetes Mellitus"],
-                        "exclude": False,
-                    },
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "change nonexistent to asthma",
+                "previousQuery": {
+                    "intent": "auto",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "diabetes",
+                            "values": ["Diabetes Mellitus"],
+                            "exclude": False,
+                        },
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         # Pipeline's "study" wins because previous was "auto"
         assert resp.json()["intent"] == "study"
@@ -811,20 +826,23 @@ class TestRouteHandlers:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "also on AnVIL",
-            "previousQuery": {
-                "intent": "study",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "diabetes",
-                        "values": ["Diabetes Mellitus"],
-                        "exclude": False,
-                    },
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "also on AnVIL",
+                "previousQuery": {
+                    "intent": "study",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "diabetes",
+                            "values": ["Diabetes Mellitus"],
+                            "exclude": False,
+                        },
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         # Pipeline called with query and previous_query
         call_args = mock_pipeline.call_args
@@ -844,28 +862,34 @@ class TestRouteHandlers:
             intent="variable",
             mentions=[
                 _rm(Facet.FOCUS, "diabetes", ["Diabetes Mellitus"]),
-                _rm(Facet.MEASUREMENT, "blood pressure",
-                     ["topmed:bp_systolic", "topmed:bp_diastolic"]),
+                _rm(
+                    Facet.MEASUREMENT,
+                    "blood pressure",
+                    ["topmed:bp_systolic", "topmed:bp_diastolic"],
+                ),
             ],
         )
         mock_index.return_value.query_studies.return_value = []
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "also where blood pressure was measured",
-            "previousQuery": {
-                "intent": "study",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "diabetes",
-                        "values": ["Diabetes Mellitus"],
-                        "exclude": False,
-                    },
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "also where blood pressure was measured",
+                "previousQuery": {
+                    "intent": "study",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "diabetes",
+                            "values": ["Diabetes Mellitus"],
+                            "exclude": False,
+                        },
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         data = resp.json()
         # Previous intent "study" must be preserved, not clobbered to "variable"
@@ -882,8 +906,7 @@ class TestRouteHandlers:
         mock_pipeline.return_value = QueryModel(
             intent="variable",
             mentions=[
-                _rm(Facet.MEASUREMENT, "blood pressure",
-                     ["topmed:bp_systolic"]),
+                _rm(Facet.MEASUREMENT, "blood pressure", ["topmed:bp_systolic"]),
             ],
         )
         mock_index.return_value.query_studies.return_value = []
@@ -891,20 +914,23 @@ class TestRouteHandlers:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "also blood pressure",
-            "previousQuery": {
-                "intent": "auto",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "diabetes",
-                        "values": ["Diabetes Mellitus"],
-                        "exclude": False,
-                    },
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "also blood pressure",
+                "previousQuery": {
+                    "intent": "auto",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "diabetes",
+                            "values": ["Diabetes Mellitus"],
+                            "exclude": False,
+                        },
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         # Pipeline's "variable" wins because previous was "auto"
         assert resp.json()["intent"] == "variable"
@@ -917,7 +943,8 @@ class TestRouteHandlers:
     ) -> None:
         """When previous intent is 'auto', replace lets pipeline resolve it."""
         mock_router.return_value = RouteReplace(
-            original_text="diabetes", new_text="asthma",
+            original_text="diabetes",
+            new_text="asthma",
         )
         mock_pipeline.return_value = QueryModel(
             intent="study",
@@ -927,20 +954,23 @@ class TestRouteHandlers:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "change diabetes to asthma",
-            "previousQuery": {
-                "intent": "auto",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "diabetes",
-                        "values": ["Diabetes Mellitus"],
-                        "exclude": False,
-                    },
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "change diabetes to asthma",
+                "previousQuery": {
+                    "intent": "auto",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "diabetes",
+                            "values": ["Diabetes Mellitus"],
+                            "exclude": False,
+                        },
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         # Pipeline's "study" wins because previous was "auto"
         assert resp.json()["intent"] == "study"
@@ -952,8 +982,13 @@ class TestRouteHandlers:
     @patch("concept_search.pipeline.run_extract")
     @patch("concept_search.api.run_router")
     def test_route_add_same_facet_merges(
-        self, mock_router, mock_extract, mock_resolve, mock_structure,
-        mock_pipeline_index, mock_index
+        self,
+        mock_router,
+        mock_extract,
+        mock_resolve,
+        mock_structure,
+        mock_pipeline_index,
+        mock_index,
     ) -> None:
         """Add 'and asthma' when focus=diabetes already exists merges both."""
         mock_router.return_value = RouteAdd()
@@ -963,8 +998,10 @@ class TestRouteHandlers:
             mentions=[RawMention(facet=Facet.FOCUS, text="asthma", values=[])],
         )
         from concept_search.models import ResolveResult
+
         mock_resolve.return_value = ResolveResult(
-            values=["Asthma"], message=None,
+            values=["Asthma"],
+            message=None,
         )
         mock_structure.return_value = QueryModel(
             mentions=[_rm(Facet.FOCUS, "asthma", [])],
@@ -973,20 +1010,23 @@ class TestRouteHandlers:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "and asthma",
-            "previousQuery": {
-                "intent": "study",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "diabetes",
-                        "values": ["Diabetes Mellitus"],
-                        "exclude": False,
-                    },
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "and asthma",
+                "previousQuery": {
+                    "intent": "study",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "diabetes",
+                            "values": ["Diabetes Mellitus"],
+                            "exclude": False,
+                        },
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         data = resp.json()
         mentions = data["query"]["mentions"]
@@ -1003,8 +1043,13 @@ class TestRouteHandlers:
     @patch("concept_search.pipeline.run_extract")
     @patch("concept_search.api.run_router")
     def test_route_add_measurement_to_existing(
-        self, mock_router, mock_extract, mock_resolve, mock_structure,
-        mock_pipeline_index, mock_index
+        self,
+        mock_router,
+        mock_extract,
+        mock_resolve,
+        mock_structure,
+        mock_pipeline_index,
+        mock_index,
     ) -> None:
         """Add 'also BMI' when measurement=blood_pressure already exists keeps both."""
         mock_router.return_value = RouteAdd()
@@ -1013,8 +1058,10 @@ class TestRouteHandlers:
             mentions=[RawMention(facet=Facet.MEASUREMENT, text="BMI", values=[])],
         )
         from concept_search.models import ResolveResult
+
         mock_resolve.return_value = ResolveResult(
-            values=["topmed:bmi"], message=None,
+            values=["topmed:bmi"],
+            message=None,
         )
         mock_structure.return_value = QueryModel(
             mentions=[_rm(Facet.MEASUREMENT, "BMI", [])],
@@ -1024,26 +1071,29 @@ class TestRouteHandlers:
         mock_index.return_value.stats = {}
 
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search", json={
-            "query": "also BMI",
-            "previousQuery": {
-                "intent": "variable",
-                "mentions": [
-                    {
-                        "facet": "focus",
-                        "originalText": "diabetes",
-                        "values": ["Diabetes Mellitus"],
-                        "exclude": False,
-                    },
-                    {
-                        "facet": "measurement",
-                        "originalText": "blood pressure",
-                        "values": ["topmed:bp_systolic", "topmed:bp_diastolic"],
-                        "exclude": False,
-                    },
-                ],
+        resp = client.post(
+            "/search",
+            json={
+                "query": "also BMI",
+                "previousQuery": {
+                    "intent": "variable",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "diabetes",
+                            "values": ["Diabetes Mellitus"],
+                            "exclude": False,
+                        },
+                        {
+                            "facet": "measurement",
+                            "originalText": "blood pressure",
+                            "values": ["topmed:bp_systolic", "topmed:bp_diastolic"],
+                            "exclude": False,
+                        },
+                    ],
+                },
             },
-        })
+        )
         assert resp.status_code == 200
         data = resp.json()
         mentions = data["query"]["mentions"]

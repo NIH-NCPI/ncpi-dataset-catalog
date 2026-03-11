@@ -247,7 +247,9 @@ dataset = Dataset[str, QueryModel, QueryModel](
         ),
         Case(
             name="consent-disease-alzheimers-typo",
-            inputs="I am interested in diabetes datasets consented for use with alzhimers research",
+            inputs=(
+                "I am interested in diabetes datasets consented for use with alzhimers research"
+            ),
             expected_output=QueryModel(
                 mentions=[
                     _m("diabetes", Facet.FOCUS, ["Diabetes Mellitus"]),

@@ -29,7 +29,7 @@ DEV_LOG_GROUP = /aws/apprunner/jso-ncpi-dataset-catalog/59bf88e6efa543319f5c03df
 PROD_LOG_GROUP = /aws/apprunner/5wu-ncpi-dataset-catalog/d2f7c9715dbc4d6d9b4c3af33f8eefd3/application
 
 .PHONY: help build push-dev push-prod deploy-dev deploy-prod \
-        start stop restart db-reload clean-embeddings evals logs-dev logs-prod
+        start stop restart db-reload clean-embeddings evals lint format logs-dev logs-prod
 
 # Default target
 help:
@@ -42,6 +42,8 @@ help:
 	@echo "  db-reload         - Rebuild DuckDB index and restart server"
 	@echo "  clean-embeddings  - Delete cached embedding files (forces regeneration)"
 	@echo "  evals             - Run extract agent evals"
+	@echo "  lint              - Run ruff linter"
+	@echo "  format            - Run ruff formatter"
 	@echo ""
 	@echo "Docker deploy:"
 	@echo "  build       - Build Docker image locally"
@@ -99,6 +101,14 @@ evals:
 	.venv/bin/python -m concept_search.eval_extract
 	.venv/bin/python -m concept_search.eval_resolve
 	.venv/bin/python -m concept_search.eval_pipeline
+
+# Lint Python files with ruff
+lint:
+	.venv/bin/ruff check concept_search/ tests/
+
+# Format Python files with ruff
+format:
+	.venv/bin/ruff format concept_search/ tests/
 
 # --- Docker deploy ------------------------------------------------------
 

@@ -76,25 +76,15 @@ def split_mentions(
     for mention in mentions:
         values = mention.values
         # Expand consent tags into actual codes
-        if (
-            mention.facet == Facet.CONSENT_CODE
-            and index is not None
-            and values is not None
-        ):
-            has_tags = any(
-                v in TAG_TO_MODIFIER or v.startswith("explicit:") for v in values
-            )
+        if mention.facet == Facet.CONSENT_CODE and index is not None and values is not None:
+            has_tags = any(v in TAG_TO_MODIFIER or v.startswith("explicit:") for v in values)
             if has_tags or values == []:
                 if consent_scope is None:
                     consent_scope = infer_consent_scope(mentions)
                 if all_codes is None:
-                    all_codes = [
-                        m.value for m in index.list_facet_values("consentCode")
-                    ]
+                    all_codes = [m.value for m in index.list_facet_values("consentCode")]
                 scope, disease = consent_scope
-                values = expand_consent_tags(
-                    all_codes, values, scope=scope, disease=disease
-                )
+                values = expand_consent_tags(all_codes, values, scope=scope, disease=disease)
                 # If expansion yields nothing (e.g. all codes excluded),
                 # use a sentinel so the constraint stays active and returns
                 # zero results rather than silently broadening the query.

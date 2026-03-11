@@ -20,6 +20,7 @@ dependencies = [
 dev = [
     "pytest",
     "pytest-asyncio",
+    "ruff",
 ]
 
 [tool.pytest.ini_options]
@@ -28,3 +29,21 @@ asyncio_mode = "auto"
 [project.scripts]
 concept-search = "concept_search.cli:main"
 concept-search-api = "concept_search.api:main"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 99
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "I",    # isort (import sorting)
+    "UP",   # pyupgrade (modern Python syntax)
+    "B",    # flake8-bugbear (common bugs)
+    "SIM",  # flake8-simplify
+    "PLW",  # pylint warnings
+]
+
+[tool.ruff.format]
+quote-style = "double"

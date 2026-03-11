@@ -17,7 +17,6 @@ from concept_search.index import ConceptIndex
 from concept_search.models import ConceptMatch, Facet
 from concept_search.store import DuckDBStore
 
-
 # ---------------------------------------------------------------------------
 # Helpers — build synthetic store + index
 # ---------------------------------------------------------------------------
@@ -100,7 +99,11 @@ ISA = {
 }
 
 CATEGORIES = [
-    {"concept_id": "ncpi:biomarkers", "description": "Biomarker measurements", "name": "Biomarkers"},
+    {
+        "concept_id": "ncpi:biomarkers",
+        "description": "Biomarker measurements",
+        "name": "Biomarkers",
+    },
     {"concept_id": "ncpi:imaging", "description": "Imaging studies", "name": "Imaging"},
 ]
 
@@ -135,15 +138,42 @@ def _build_store() -> DuckDBStore:
 
     # Load variables
     rows = [
-        ("ncpi:bp_systolic", "ncpi:bp_systolic", "",
-         json.dumps(["ncpi:bp_systolic", "ncpi:biomarkers"]),
-         "ds1", "Systolic blood pressure", "phv001", "phs000001", "exam1", "SBP"),
-        ("ncpi:bp_diastolic", "ncpi:bp_diastolic", "",
-         json.dumps(["ncpi:bp_diastolic", "ncpi:biomarkers"]),
-         "ds1", "Diastolic blood pressure", "phv002", "phs000001", "exam1", "DBP"),
-        ("ncpi:hba1c", "ncpi:hba1c", "",
-         json.dumps(["ncpi:hba1c", "ncpi:biomarkers"]),
-         "ds2", "Hemoglobin A1c", "phv003", "phs000002", "lab1", "HBA1C"),
+        (
+            "ncpi:bp_systolic",
+            "ncpi:bp_systolic",
+            "",
+            json.dumps(["ncpi:bp_systolic", "ncpi:biomarkers"]),
+            "ds1",
+            "Systolic blood pressure",
+            "phv001",
+            "phs000001",
+            "exam1",
+            "SBP",
+        ),
+        (
+            "ncpi:bp_diastolic",
+            "ncpi:bp_diastolic",
+            "",
+            json.dumps(["ncpi:bp_diastolic", "ncpi:biomarkers"]),
+            "ds1",
+            "Diastolic blood pressure",
+            "phv002",
+            "phs000001",
+            "exam1",
+            "DBP",
+        ),
+        (
+            "ncpi:hba1c",
+            "ncpi:hba1c",
+            "",
+            json.dumps(["ncpi:hba1c", "ncpi:biomarkers"]),
+            "ds2",
+            "Hemoglobin A1c",
+            "phv003",
+            "phs000002",
+            "lab1",
+            "HBA1C",
+        ),
     ]
     store.load_variables_batch(rows)
     store.finalize()
@@ -165,11 +195,20 @@ def _build_index(store: DuckDBStore) -> ConceptIndex:
 
     # _concept_descriptions: concept_id -> {name, description}
     index._concept_descriptions = {
-        "ncpi:bp_systolic": {"name": "Systolic Blood Pressure", "description": "Systolic BP measurement"},
-        "ncpi:bp_diastolic": {"name": "Diastolic Blood Pressure", "description": "Diastolic BP measurement"},
+        "ncpi:bp_systolic": {
+            "name": "Systolic Blood Pressure",
+            "description": "Systolic BP measurement",
+        },
+        "ncpi:bp_diastolic": {
+            "name": "Diastolic Blood Pressure",
+            "description": "Diastolic BP measurement",
+        },
         "ncpi:bmi": {"name": "BMI", "description": "Body mass index"},
         "ncpi:hba1c": {"name": "HbA1c", "description": "Glycosylated hemoglobin"},
-        "ncpi:fasting_glucose": {"name": "Fasting Glucose", "description": "Fasting glucose level"},
+        "ncpi:fasting_glucose": {
+            "name": "Fasting Glucose",
+            "description": "Fasting glucose level",
+        },
         "ncpi:heart_rate": {"name": "Heart Rate", "description": "Heart rate measurement"},
     }
 
@@ -361,9 +400,7 @@ class TestSearchStudies:
     def test_or_within_facet(self) -> None:
         from mcp_catalog.server import search_studies
 
-        result = search_studies(
-            focus=["Cardiovascular Diseases", "Diabetes Mellitus, Type 2"]
-        )
+        result = search_studies(focus=["Cardiovascular Diseases", "Diabetes Mellitus, Type 2"])
         assert result["total"] == 3
 
     @pytest.mark.usefixtures("_patch_index")
@@ -521,9 +558,7 @@ class TestComputeConsentEligibility:
     def test_nonprofit_false_excludes_npu(self) -> None:
         from mcp_catalog.server import compute_consent_eligibility
 
-        result = compute_consent_eligibility(
-            purpose="general", is_nonprofit=False
-        )
+        result = compute_consent_eligibility(purpose="general", is_nonprofit=False)
         for code in result["eligible_codes"]:
             assert "NPU" not in code
 

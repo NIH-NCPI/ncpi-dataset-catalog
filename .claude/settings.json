@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "postToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "command": "f=$(echo \"$TOOL_INPUT\" | jq -r '.file_path // empty'); if [[ \"$f\" == *.py ]]; then cd \"$(git rev-parse --show-toplevel)/backend\" && .venv/bin/ruff format \"$f\" && .venv/bin/ruff check --fix \"$f\"; fi"
+      }
+    ]
+  }
+}

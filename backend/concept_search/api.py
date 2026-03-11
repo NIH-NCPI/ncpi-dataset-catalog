@@ -33,7 +33,6 @@ from .models import (
     Facet,
     QueryModel,
     ResolvedMention,
-    RouteAdd,
     RouteRemove,
     RouteReplace,
     RouteReset,
@@ -92,6 +91,7 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     # search still works without embeddings.
     try:
         from .embeddings import get_model
+
         get_model()
     except Exception:
         logger.exception("Failed to preload embedding model at startup")
@@ -217,9 +217,7 @@ def _build_variable_result(row: dict) -> VariableResult:
         concept_id=concept_id,
         cui=row.get("cui") or None,
         dataset_id=row.get("datasetId", ""),
-        db_gap_url=_build_dbgap_variable_url(
-            study_accession, row.get("phvId", "")
-        ),
+        db_gap_url=_build_dbgap_variable_url(study_accession, row.get("phvId", "")),
         description=row.get("description", ""),
         phv_id=row.get("phvId", ""),
         study_id=study_id,
@@ -230,9 +228,7 @@ def _build_variable_result(row: dict) -> VariableResult:
     )
 
 
-async def _handle_route(
-    query: str, previous_query: QueryModel
-) -> QueryModel:
+async def _handle_route(query: str, previous_query: QueryModel) -> QueryModel:
     """Route a follow-up message through the router agent and dispatch.
 
     Args:
@@ -297,7 +293,8 @@ async def _handle_route(
         # Drop the old mention, run pipeline on new text with remaining mentions.
         # If original_text doesn't match, fall through to add behavior.
         remaining = [
-            m for m in previous_query.mentions
+            m
+            for m in previous_query.mentions
             if m.original_text.lower() != route.original_text.lower()
         ]
         if len(remaining) == len(previous_query.mentions):
@@ -310,9 +307,7 @@ async def _handle_route(
             intent=previous_query.intent,
             mentions=remaining,
         )
-        result = await run_pipeline(
-            route.new_text, previous_query=modified_previous
-        )
+        result = await run_pipeline(route.new_text, previous_query=modified_previous)
         if previous_query.intent != "auto":
             result.intent = previous_query.intent
         return result
@@ -424,14 +419,10 @@ async def search(
             pass  # Ambiguous — return clarification message only
         elif intent == "variable":
             # Apply study-level constraints (platform, dataType, etc.)
-            non_measurement = [
-                c for c in include if c[0] != Facet.MEASUREMENT
-            ]
+            non_measurement = [c for c in include if c[0] != Facet.MEASUREMENT]
             study_ids: set[str] | None = None
             if non_measurement:
-                matched = index.query_studies(
-                    non_measurement, exclude or None
-                )
+                matched = index.query_studies(non_measurement, exclude or None)
                 study_ids = {s.get("dbGapId", "") for s in matched}
             elif exclude:
                 matched = index.query_studies([], exclude)
@@ -447,11 +438,9 @@ async def search(
                 all_concepts.extend(m.values)
 
             if all_concepts or study_ids:
-                rows, total_variable_count = (
-                    index.store.query_variables(
-                        concepts=all_concepts or None,
-                        study_ids=study_ids,
-                    )
+                rows, total_variable_count = index.store.query_variables(
+                    concepts=all_concepts or None,
+                    study_ids=study_ids,
                 )
                 variable_rows.extend(rows)
         else:

@@ -12,7 +12,6 @@ import pytest
 from concept_search.embeddings import search_embeddings
 from concept_search.store import DuckDBStore
 
-
 # ---------------------------------------------------------------------------
 # search_embeddings: edge cases
 # ---------------------------------------------------------------------------
@@ -24,11 +23,14 @@ class TestSearchEmbeddings:
     @pytest.fixture
     def matrix(self) -> np.ndarray:
         """3 unit vectors in 4-D for easy manual verification."""
-        vecs = np.array([
-            [1.0, 0.0, 0.0, 0.0],
-            [0.0, 1.0, 0.0, 0.0],
-            [0.0, 0.0, 1.0, 0.0],
-        ], dtype=np.float32)
+        vecs = np.array(
+            [
+                [1.0, 0.0, 0.0, 0.0],
+                [0.0, 1.0, 0.0, 0.0],
+                [0.0, 0.0, 1.0, 0.0],
+            ],
+            dtype=np.float32,
+        )
         return vecs
 
     def test_basic_topk(self, matrix: np.ndarray) -> None:
@@ -184,28 +186,37 @@ class TestFacetFilteredSearch:
         )
         # Build synthetic embedding nodes: one measurement, one focus
         idx._embedding_nodes = [
-            {"concept_id": "topmed:bp_systolic", "name": "Systolic BP",
-             "description": "Systolic blood pressure", "type": "concept",
-             "facet": "measurement"},
-            {"concept_id": "Heart Failure", "name": "Heart Failure",
-             "description": "", "type": "focus", "facet": "focus"},
+            {
+                "concept_id": "topmed:bp_systolic",
+                "name": "Systolic BP",
+                "description": "Systolic blood pressure",
+                "type": "concept",
+                "facet": "measurement",
+            },
+            {
+                "concept_id": "Heart Failure",
+                "name": "Heart Failure",
+                "description": "",
+                "type": "focus",
+                "facet": "focus",
+            },
         ]
         # Two unit vectors: [1,0,0,0] and [0,1,0,0]
-        idx._embedding_matrix = np.array([
-            [1.0, 0.0, 0.0, 0.0],
-            [0.0, 1.0, 0.0, 0.0],
-        ], dtype=np.float32)
+        idx._embedding_matrix = np.array(
+            [
+                [1.0, 0.0, 0.0, 0.0],
+                [0.0, 1.0, 0.0, 0.0],
+            ],
+            dtype=np.float32,
+        )
 
         # Mock embed_query to return a vector that matches both equally
         import concept_search.embeddings as emb_mod
+
         original = getattr(emb_mod, "embed_query", None)
-        emb_mod.embed_query = lambda q: np.array(
-            [0.7, 0.7, 0.0, 0.0], dtype=np.float32
-        )
+        emb_mod.embed_query = lambda q: np.array([0.7, 0.7, 0.0, 0.0], dtype=np.float32)
         try:
-            results = idx.search_concepts_by_embedding(
-                "heart", top_k=10, facet="focus"
-            )
+            results = idx.search_concepts_by_embedding("heart", top_k=10, facet="focus")
             assert len(results) == 1
             assert results[0]["concept_id"] == "Heart Failure"
             assert results[0]["study_count"] == 42
@@ -262,7 +273,9 @@ class TestFacetFilteredSearch:
         np.save(tmp_path / "concept-embeddings.npy", np.zeros((1, 768), dtype=np.float32))
 
         fake_result = np.ones((1, 768), dtype=np.float32)
-        with patch("concept_search.embeddings.embed_texts", return_value=fake_result) as mock_embed:
+        with patch(
+            "concept_search.embeddings.embed_texts", return_value=fake_result
+        ) as mock_embed:
             idx._build_concept_embeddings()
             # Stale hash should trigger recomputation
             mock_embed.assert_called_once()
@@ -273,25 +286,36 @@ class TestFacetFilteredSearch:
     def test_no_facet_returns_all(self) -> None:
         """No facet filter returns nodes of all facets."""
         from concept_search.index import ConceptIndex
-        from concept_search.models import Facet
 
         idx = ConceptIndex()
         idx._embedding_nodes = [
-            {"concept_id": "m:a", "name": "A", "description": "",
-             "type": "concept", "facet": "measurement"},
-            {"concept_id": "f:a", "name": "B", "description": "",
-             "type": "focus", "facet": "focus"},
+            {
+                "concept_id": "m:a",
+                "name": "A",
+                "description": "",
+                "type": "concept",
+                "facet": "measurement",
+            },
+            {
+                "concept_id": "f:a",
+                "name": "B",
+                "description": "",
+                "type": "focus",
+                "facet": "focus",
+            },
         ]
-        idx._embedding_matrix = np.array([
-            [1.0, 0.0, 0.0, 0.0],
-            [0.0, 1.0, 0.0, 0.0],
-        ], dtype=np.float32)
+        idx._embedding_matrix = np.array(
+            [
+                [1.0, 0.0, 0.0, 0.0],
+                [0.0, 1.0, 0.0, 0.0],
+            ],
+            dtype=np.float32,
+        )
 
         import concept_search.embeddings as emb_mod
+
         original = getattr(emb_mod, "embed_query", None)
-        emb_mod.embed_query = lambda q: np.array(
-            [0.7, 0.7, 0.0, 0.0], dtype=np.float32
-        )
+        emb_mod.embed_query = lambda q: np.array([0.7, 0.7, 0.0, 0.0], dtype=np.float32)
         try:
             results = idx.search_concepts_by_embedding("test", top_k=10)
             assert len(results) == 2

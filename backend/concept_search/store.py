@@ -51,9 +51,7 @@ class StudyStore(Protocol):
         """Return a single study by its dbGaP accession, or None."""
         ...
 
-    def list_variables_for_concept(
-        self, concept_id: str, limit: int = 200
-    ) -> list[dict]:
+    def list_variables_for_concept(self, concept_id: str, limit: int = 200) -> list[dict]:
         """Return distinct variables under a concept with descriptions."""
         ...
 
@@ -86,10 +84,7 @@ class DuckDBStore:
 
     def _init_schema(self) -> None:
         self._conn.execute(
-            "CREATE TABLE studies ("
-            "  db_gap_id VARCHAR PRIMARY KEY,"
-            "  raw_json VARCHAR"
-            ")"
+            "CREATE TABLE studies (  db_gap_id VARCHAR PRIMARY KEY,  raw_json VARCHAR)"
         )
         self._conn.execute(
             "CREATE TABLE study_facet_values ("
@@ -133,9 +128,7 @@ class DuckDBStore:
             [db_gap_id, json.dumps(study)],
         )
 
-    def load_facet_value(
-        self, db_gap_id: str, facet: Facet, value: str
-    ) -> None:
+    def load_facet_value(self, db_gap_id: str, facet: Facet, value: str) -> None:
         """Insert a facet value for a study."""
         self._conn.execute(
             "INSERT INTO study_facet_values VALUES (?, ?, ?, ?)",
@@ -151,9 +144,7 @@ class DuckDBStore:
             [(sid, json.dumps(study)) for sid, study in rows],
         )
 
-    def load_facet_values_batch(
-        self, rows: list[tuple[str, str, str, str]]
-    ) -> None:
+    def load_facet_values_batch(self, rows: list[tuple[str, str, str, str]]) -> None:
         """Batch-insert facet values via CSV COPY.
 
         Each row is (db_gap_id, facet_value, value, value_lower).
@@ -164,9 +155,7 @@ class DuckDBStore:
 
     def load_variables_batch(
         self,
-        rows: list[
-            tuple[str, str, str, str, str, str, str, str, str, str]
-        ],
+        rows: list[tuple[str, str, str, str, str, str, str, str, str, str]],
     ) -> None:
         """Batch-insert variable records via CSV COPY.
 
@@ -213,17 +202,13 @@ class DuckDBStore:
         ).fetchall()
         return [(r[0], r[1], r[2], r[3], r[4], r[5] or "measurement") for r in rows]
 
-    def _copy_csv(
-        self, table: str, rows: list[tuple[str, ...]]
-    ) -> None:
+    def _copy_csv(self, table: str, rows: list[tuple[str, ...]]) -> None:
         """Write rows to a temp CSV and COPY into the table."""
         buf = io.StringIO()
         writer = csv.writer(buf)
         for row in rows:
             writer.writerow(row)
-        with tempfile.NamedTemporaryFile(
-            mode="w", suffix=".csv", delete=False
-        ) as f:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False) as f:
             f.write(buf.getvalue())
             tmp = f.name
         try:
@@ -235,15 +220,9 @@ class DuckDBStore:
 
     def finalize(self) -> None:
         """Create indexes after bulk loading is complete."""
-        self._conn.execute(
-            "CREATE INDEX idx_sfv ON study_facet_values (facet, value_lower)"
-        )
-        self._conn.execute(
-            "CREATE INDEX idx_var_concept ON variables (concept_lower)"
-        )
-        self._conn.execute(
-            "CREATE INDEX idx_var_study ON variables (study_id)"
-        )
+        self._conn.execute("CREATE INDEX idx_sfv ON study_facet_values (facet, value_lower)")
+        self._conn.execute("CREATE INDEX idx_var_concept ON variables (concept_lower)")
+        self._conn.execute("CREATE INDEX idx_var_study ON variables (study_id)")
 
     # -- persistence ----------------------------------------------------------
 
@@ -256,36 +235,20 @@ class DuckDBStore:
             os.unlink(tmp)
         self._conn.execute(f"ATTACH '{tmp}' AS export_db")
         try:
+            self._conn.execute("CREATE TABLE export_db.studies AS SELECT * FROM studies")
             self._conn.execute(
-                "CREATE TABLE export_db.studies AS SELECT * FROM studies"
+                "CREATE TABLE export_db.study_facet_values AS SELECT * FROM study_facet_values"
             )
+            self._conn.execute("CREATE TABLE export_db.variables AS SELECT * FROM variables")
             self._conn.execute(
-                "CREATE TABLE export_db.study_facet_values "
-                "AS SELECT * FROM study_facet_values"
-            )
-            self._conn.execute(
-                "CREATE TABLE export_db.variables "
-                "AS SELECT * FROM variables"
-            )
-            self._conn.execute(
-                "CREATE TABLE export_db.concept_embeddings "
-                "AS SELECT * FROM concept_embeddings"
+                "CREATE TABLE export_db.concept_embeddings AS SELECT * FROM concept_embeddings"
             )
             # DuckDB doesn't support schema-qualified CREATE INDEX names,
             # so switch context to the attached DB for index creation.
             self._conn.execute("USE export_db")
-            self._conn.execute(
-                "CREATE INDEX idx_sfv "
-                "ON study_facet_values (facet, value_lower)"
-            )
-            self._conn.execute(
-                "CREATE INDEX idx_var_concept "
-                "ON variables (concept_lower)"
-            )
-            self._conn.execute(
-                "CREATE INDEX idx_var_study "
-                "ON variables (study_id)"
-            )
+            self._conn.execute("CREATE INDEX idx_sfv ON study_facet_values (facet, value_lower)")
+            self._conn.execute("CREATE INDEX idx_var_concept ON variables (concept_lower)")
+            self._conn.execute("CREATE INDEX idx_var_study ON variables (study_id)")
         finally:
             self._conn.execute("USE memory")
             self._conn.execute("DETACH export_db")
@@ -385,9 +348,7 @@ class DuckDBStore:
             # concept in its closure array matches any requested concept.
             closure_clauses = []
             for c in concepts:
-                closure_clauses.append(
-                    "list_contains(v.concept_ids_closure, ?)"
-                )
+                closure_clauses.append("list_contains(v.concept_ids_closure, ?)")
                 params.append(c.lower())
             clauses.append(f"({' OR '.join(closure_clauses)})")
         if study_ids is not None:
@@ -420,15 +381,20 @@ class DuckDBStore:
         )
         rows = self._conn.execute(sql, params).fetchall()
         cols = [
-            "concept", "cui", "datasetId", "description", "phvId",
-            "studyId", "tableName", "variableName", "studyTitle",
+            "concept",
+            "cui",
+            "datasetId",
+            "description",
+            "phvId",
+            "studyId",
+            "tableName",
+            "variableName",
+            "studyTitle",
             "studyAccession",
         ]
-        return [dict(zip(cols, row)) for row in rows], total
+        return [dict(zip(cols, row, strict=True)) for row in rows], total
 
-    def list_variables_for_concept(
-        self, concept_id: str, limit: int = 200
-    ) -> list[dict]:
+    def list_variables_for_concept(self, concept_id: str, limit: int = 200) -> list[dict]:
         """Return distinct variables under a concept with descriptions.
 
         Searches against concept_ids_closure so that querying a parent concept
@@ -449,9 +415,7 @@ class DuckDBStore:
             "ORDER BY variable_name "
             "LIMIT ?"
         )
-        rows = self._conn.execute(
-            sql, [concept_id.lower(), safe_limit]
-        ).fetchall()
+        rows = self._conn.execute(sql, [concept_id.lower(), safe_limit]).fetchall()
         return [{"description": row[1], "variable_name": row[0]} for row in rows]
 
     def get_study(self, dbgap_id: str) -> dict | None:

@@ -53,9 +53,7 @@ def _format_previous_context(previous: QueryModel) -> str:
     for m in previous.mentions:
         prefix = "exclude" if m.exclude else "include"
         values_str = ", ".join(m.values) if m.values else "(unresolved)"
-        lines.append(
-            f"- {m.facet.value}: \"{m.original_text}\" → [{values_str}] ({prefix})"
-        )
+        lines.append(f'- {m.facet.value}: "{m.original_text}" → [{values_str}] ({prefix})')
     return "\n".join(lines)
 
 

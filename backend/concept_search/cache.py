@@ -5,8 +5,8 @@ from __future__ import annotations
 import asyncio
 import logging
 import time
-from dataclasses import dataclass, field
 from collections.abc import Awaitable, Callable
+from dataclasses import dataclass, field
 from typing import Generic, TypeVar
 
 logger = logging.getLogger(__name__)
@@ -101,9 +101,7 @@ class LRUCache(Generic[K, V]):
                     if len(self._cache) >= self.max_size:
                         oldest = next(iter(self._cache))
                         del self._cache[oldest]
-                    self._cache[key] = _CacheEntry(
-                        created=time.monotonic(), value=value
-                    )
+                    self._cache[key] = _CacheEntry(created=time.monotonic(), value=value)
                 ev = self._in_flight.pop(key, None)
                 if ev is not None:
                     ev.set()

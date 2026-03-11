@@ -151,9 +151,7 @@ class TestExplicitCode:
         assert "HMB-NPU" in result
 
     def test_explicit_with_npu_filter(self):
-        result = compute_eligible_codes(
-            SAMPLE_CODES, explicit_code="GRU", is_nonprofit=False
-        )
+        result = compute_eligible_codes(SAMPLE_CODES, explicit_code="GRU", is_nonprofit=False)
         assert "GRU" in result
         assert "GRU-IRB" in result
         assert "GRU-NPU" not in result
@@ -193,8 +191,12 @@ class TestPurposePath:
         for code in result:
             assert code.startswith("GRU"), f"general purpose should only return GRU, got {code}"
         # Explicit exclusion checks
-        assert not any(c.startswith("HMB") for c in result), "HMB should NOT appear for general purpose"
-        assert not any(c.startswith("DS-") for c in result), "DS should NOT appear for general purpose"
+        assert not any(c.startswith("HMB") for c in result), (
+            "HMB should NOT appear for general purpose"
+        )
+        assert not any(c.startswith("DS-") for c in result), (
+            "DS should NOT appear for general purpose"
+        )
 
     def test_health_purpose_returns_gru_and_hmb(self):
         """Health/medical/biomedical research → GRU + HMB + HMP + HR.
@@ -212,7 +214,9 @@ class TestPurposePath:
         assert "HMP" in bases
         assert "HR" in bases
         # DS codes should NOT appear for health purpose without disease
-        assert not any(c.startswith("DS-") for c in result), "DS should NOT appear without a disease"
+        assert not any(c.startswith("DS-") for c in result), (
+            "DS should NOT appear without a disease"
+        )
 
     def test_health_vs_general_disambiguation(self):
         """Verify that HMB appears for health but NOT for general."""
@@ -228,9 +232,7 @@ class TestPurposePath:
         assert "HMB" in health_bases, "HMB must appear for health purpose"
 
     def test_disease_purpose_diabetes(self):
-        result = compute_eligible_codes(
-            SAMPLE_CODES, purpose="disease", disease="DIAB"
-        )
+        result = compute_eligible_codes(SAMPLE_CODES, purpose="disease", disease="DIAB")
         bases = {parse_consent_code(c).base for c in result}
         assert "GRU" in bases
         assert "HMB" in bases
@@ -245,9 +247,7 @@ class TestPurposePath:
 
     def test_disease_purpose_child_disease(self):
         """T1D is a child of DIAB; querying T1D should match DS-T1D and DS-DIAB."""
-        result = compute_eligible_codes(
-            SAMPLE_CODES, purpose="disease", disease="T1D"
-        )
+        result = compute_eligible_codes(SAMPLE_CODES, purpose="disease", disease="T1D")
         # DS-T1D: direct match
         assert "DS-T1D" in result
         # DS-DIAB: T1D ∈ expand_disease("DIAB"), and DIAB ∈ expand_disease("T1D")
@@ -258,18 +258,14 @@ class TestPurposePath:
         assert "DS-DIAB-IRB" in result
 
     def test_disease_purpose_cancer_includes_subcancers(self):
-        result = compute_eligible_codes(
-            SAMPLE_CODES, purpose="disease", disease="CA"
-        )
+        result = compute_eligible_codes(SAMPLE_CODES, purpose="disease", disease="CA")
         assert "DS-CA" in result
         assert "DS-CA-IRB" in result
         # BRCA is a child of CA
         assert "DS-BRCA" in result
 
     def test_npu_filter_for_profit(self):
-        result = compute_eligible_codes(
-            SAMPLE_CODES, purpose="health", is_nonprofit=False
-        )
+        result = compute_eligible_codes(SAMPLE_CODES, purpose="health", is_nonprofit=False)
         for code in result:
             parsed = parse_consent_code(code)
             assert "NPU" not in parsed.modifiers
@@ -318,9 +314,7 @@ class TestPurposePath:
 
     def test_disease_only_no_effect_on_explicit_code(self):
         """disease_only should not affect explicit_code path."""
-        result = compute_eligible_codes(
-            SAMPLE_CODES, explicit_code="GRU", disease_only=True
-        )
+        result = compute_eligible_codes(SAMPLE_CODES, explicit_code="GRU", disease_only=True)
         assert "GRU" in result
         assert "GRU-IRB" in result
 
@@ -506,9 +500,7 @@ class TestForProfitNonProfit:
 
     def test_for_profit_general_excludes_npu(self):
         """For-profit + general purpose: GRU codes only, no -NPU variants."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="general", is_nonprofit=False
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="general", is_nonprofit=False)
         for code in result:
             parsed = parse_consent_code(code)
             assert "NPU" not in parsed.modifiers, f"NPU code {code} should be excluded for-profit"
@@ -520,9 +512,7 @@ class TestForProfitNonProfit:
 
     def test_for_profit_health_excludes_npu(self):
         """For-profit + health purpose: GRU + HMB families, no -NPU variants."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="health", is_nonprofit=False
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="health", is_nonprofit=False)
         for code in result:
             parsed = parse_consent_code(code)
             assert "NPU" not in parsed.modifiers, f"NPU code {code} excluded for-profit"
@@ -553,9 +543,7 @@ class TestForProfitNonProfit:
 
     def test_nonprofit_true_includes_npu(self):
         """Non-profit (is_nonprofit=True) includes NPU codes."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="health", is_nonprofit=True
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="health", is_nonprofit=True)
         assert "GRU-NPU" in result
         assert "HMB-NPU" in result
         assert "HMB-IRB-NPU" in result
@@ -568,9 +556,7 @@ class TestForProfitNonProfit:
 
     def test_for_profit_explicit_code_excludes_npu(self):
         """Explicit code path + for-profit still filters NPU."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, explicit_code="HMB", is_nonprofit=False
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, explicit_code="HMB", is_nonprofit=False)
         assert "HMB" in result
         assert "HMB-IRB" in result
         assert "HMB-PUB" in result
@@ -605,9 +591,7 @@ class TestGruHmbHierarchy:
 
     def test_disease_adds_matching_ds(self):
         """Disease research: GRU + HMB + HMP + HR + matching DS codes."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="disease", disease="DIAB"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="DIAB")
         bases = {parse_consent_code(c).base for c in result}
         assert "GRU" in bases
         assert "HMB" in bases
@@ -626,9 +610,7 @@ class TestGruHmbHierarchy:
     def test_health_subset_of_disease(self):
         """Every health-eligible code is also disease-eligible (with a disease)."""
         health = set(compute_eligible_codes(EXTENDED_CODES, purpose="health"))
-        disease = set(
-            compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="DIAB")
-        )
+        disease = set(compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="DIAB"))
         assert health.issubset(disease), f"health not ⊆ disease: {health - disease}"
 
     def test_cadm_iru_never_eligible(self):
@@ -655,9 +637,7 @@ class TestDiseaseHierarchy:
 
     def test_cancer_parent_matches_all_subcancers(self):
         """Searching disease=CA includes DS-BRCA, DS-OVCA, DS-LC, DS-PC, etc."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="disease", disease="CA"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="CA")
         ds_codes = [c for c in result if c.startswith("DS-")]
         ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
         assert "CA" in ds_diseases
@@ -671,9 +651,7 @@ class TestDiseaseHierarchy:
 
     def test_subcancer_matches_parent(self):
         """Searching disease=BRCA matches DS-BRCA and DS-CA (BRCA ∈ CA children)."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="disease", disease="BRCA"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="BRCA")
         ds_codes = [c for c in result if c.startswith("DS-")]
         ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
         assert "BRCA" in ds_diseases, "Direct match"
@@ -684,9 +662,7 @@ class TestDiseaseHierarchy:
 
     def test_cvd_hierarchy(self):
         """CVD parent matches AF, CHD, STK (those present in fixture)."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="disease", disease="CVD"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="CVD")
         ds_codes = [c for c in result if c.startswith("DS-")]
         ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
         assert "CVD" in ds_diseases
@@ -696,9 +672,7 @@ class TestDiseaseHierarchy:
 
     def test_diabetes_child_t1d_matches_parent(self):
         """T1D (leaf) matches DS-T1D and DS-DIAB (parent)."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="disease", disease="T1D"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="T1D")
         ds_codes = [c for c in result if c.startswith("DS-")]
         ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
         assert "T1D" in ds_diseases
@@ -708,9 +682,7 @@ class TestDiseaseHierarchy:
 
     def test_diabetes_parent_matches_children_in_fixture(self):
         """DIAB matches DS-DIAB, DS-T1D, DS-T2D, DS-T1DR, DS-IR (those in fixture)."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="disease", disease="DIAB"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="DIAB")
         ds_codes = [c for c in result if c.startswith("DS-")]
         ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
         assert "DIAB" in ds_diseases
@@ -721,9 +693,7 @@ class TestDiseaseHierarchy:
 
     def test_unrelated_diseases_excluded(self):
         """Diabetes search excludes cancer and CVD."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="disease", disease="DIAB"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="DIAB")
         ds_codes = [c for c in result if c.startswith("DS-")]
         ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
         assert "CA" not in ds_diseases
@@ -734,9 +704,7 @@ class TestDiseaseHierarchy:
 
     def test_no_hierarchy_disease(self):
         """Diseases with no hierarchy match only themselves."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="disease", disease="ASTHMA"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="ASTHMA")
         ds_codes = [c for c in result if c.startswith("DS-")]
         ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
         assert ds_diseases == {"ASTHMA"}
@@ -765,9 +733,7 @@ class TestIrbModifier:
 
     def test_irb_codes_included_disease(self):
         """DS-*-IRB codes are eligible when disease matches."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="disease", disease="CVD"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="CVD")
         assert "DS-CVD-IRB" in result
         assert "DS-CVD-IRB-NPU-MDS" in result
         assert "DS-AF-IRB-RD" in result
@@ -775,9 +741,7 @@ class TestIrbModifier:
 
     def test_irb_not_a_filter(self):
         """IRB does not reduce the eligible set — codes with and without IRB appear."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="disease", disease="DIAB"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="DIAB")
         # Both plain and IRB variants
         assert "DS-DIAB" in result
         assert "DS-DIAB-IRB" in result
@@ -788,18 +752,14 @@ class TestIrbModifier:
 
     def test_irb_npu_combined(self):
         """Codes with both IRB and NPU: for-profit excludes them (NPU filter applies)."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="health", is_nonprofit=False
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="health", is_nonprofit=False)
         assert "HMB-IRB" in result  # IRB only — included
         assert "HMB-IRB-NPU" not in result  # IRB + NPU — excluded (NPU)
         assert "GRU-IRB-NPU" not in result  # IRB + NPU — excluded (NPU)
 
     def test_irb_npu_combined_nonprofit(self):
         """Non-profit org: codes with both IRB and NPU are included."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="health", is_nonprofit=True
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="health", is_nonprofit=True)
         assert "HMB-IRB-NPU" in result
         assert "GRU-IRB-NPU" in result
 
@@ -859,9 +819,7 @@ class TestDiseaseOnlyFlag:
 
     def test_disease_only_without_disease_returns_empty_ds(self):
         """disease_only=True with purpose='health' (no disease) → no DS codes match."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="health", disease_only=True
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="health", disease_only=True)
         # disease_only filters to DS-* only, but purpose='health' without a disease
         # won't match any DS codes (DS requires disease overlap)
         assert result == []
@@ -883,9 +841,7 @@ class TestEdgeCases:
 
     def test_unknown_disease_no_hierarchy_match(self):
         """Unknown disease (not in hierarchy) matches only exact DS-code."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="disease", disease="SCD"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="SCD")
         ds_codes = [c for c in result if c.startswith("DS-")]
         # SCD is not in any hierarchy, so only DS-SCD matches
         ds_diseases = {parse_consent_code(c).disease for c in ds_codes}
@@ -911,9 +867,7 @@ class TestEdgeCases:
 
     def test_multi_modifier_codes_preserved(self):
         """Codes with many modifiers (IRB-NPU-MDS) are correctly handled."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, purpose="disease", disease="CVD"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, purpose="disease", disease="CVD")
         assert "DS-CVD-IRB-NPU-MDS" in result
 
     def test_multi_modifier_codes_npu_filtered(self):
@@ -932,9 +886,7 @@ class TestEdgeCases:
 
     def test_explicit_code_ignores_purpose(self):
         """Explicit code path does not consider purpose at all."""
-        result = compute_eligible_codes(
-            EXTENDED_CODES, explicit_code="HMB", purpose="general"
-        )
+        result = compute_eligible_codes(EXTENDED_CODES, explicit_code="HMB", purpose="general")
         # Even though purpose=general normally excludes HMB, explicit path ignores it
         assert "HMB" in result
         assert "HMB-IRB" in result
@@ -950,9 +902,7 @@ class TestExpandConsentTags:
 
     def test_no_npu_disease_scope(self):
         """no-npu + disease scope → GRU + HMB + DS-CVD minus NPU codes."""
-        result = expand_consent_tags(
-            EXTENDED_CODES, ["no-npu"], scope="disease", disease="CVD"
-        )
+        result = expand_consent_tags(EXTENDED_CODES, ["no-npu"], scope="disease", disease="CVD")
         # Should include GRU, HMB, and matching DS-CVD codes
         assert "GRU" in result
         assert "HMB" in result
@@ -965,9 +915,7 @@ class TestExpandConsentTags:
 
     def test_no_npu_general_scope(self):
         """no-npu + general scope → GRU codes minus NPU."""
-        result = expand_consent_tags(
-            EXTENDED_CODES, ["no-npu"], scope="general"
-        )
+        result = expand_consent_tags(EXTENDED_CODES, ["no-npu"], scope="general")
         for code in result:
             assert parse_consent_code(code).base == "GRU"
             assert "NPU" not in parse_consent_code(code).modifiers
@@ -983,9 +931,7 @@ class TestExpandConsentTags:
 
     def test_multiple_modifier_tags(self):
         """no-npu + no-irb → exclude both NPU and IRB modifiers."""
-        result = expand_consent_tags(
-            EXTENDED_CODES, ["no-npu", "no-irb"], scope="health"
-        )
+        result = expand_consent_tags(EXTENDED_CODES, ["no-npu", "no-irb"], scope="health")
         for code in result:
             parsed = parse_consent_code(code)
             assert "NPU" not in parsed.modifiers
@@ -1022,8 +968,5 @@ class TestExpandConsentTags:
 
     def test_results_sorted(self):
         """Output is always sorted."""
-        result = expand_consent_tags(
-            EXTENDED_CODES, ["no-npu"], scope="disease", disease="CA"
-        )
+        result = expand_consent_tags(EXTENDED_CODES, ["no-npu"], scope="disease", disease="CA")
         assert result == sorted(result)
-

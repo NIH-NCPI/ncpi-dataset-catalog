@@ -17,18 +17,17 @@ subtract from the result set.
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from pydantic.alias_generators import to_camel
 
-
 # Valid query intent values.
 Intent = Literal["auto", "study", "variable"]
 
 
-class Facet(str, Enum):
+class Facet(StrEnum):
     """Searchable facets in the NCPI catalog."""
 
     COMPUTED_ANCESTRY = "computedAncestry"
@@ -139,15 +138,13 @@ class ResolveResult(BaseModel):
     )
 
     @model_validator(mode="after")
-    def enforce_disambiguation_invariants(self) -> "ResolveResult":
+    def enforce_disambiguation_invariants(self) -> ResolveResult:
         """Enforce mutual exclusivity and require a message for disambiguation."""
         if self.disambiguation:
             self.values = []
             # Always use deterministic formatting — don't trust LLM message
             lines = [f"- {d.label}" for d in self.disambiguation]
-            self.message = (
-                "Which did you mean?\n" + "\n".join(lines)
-            )
+            self.message = "Which did you mean?\n" + "\n".join(lines)
         return self
 
 
@@ -214,21 +211,15 @@ class RouteReplace(BaseModel):
     """User wants to replace an existing mention with a different term."""
 
     kind: Literal["replace"] = "replace"
-    original_text: str = Field(
-        description="original_text of the mention to replace."
-    )
-    new_text: str = Field(
-        description="The replacement term to extract and resolve."
-    )
+    original_text: str = Field(description="original_text of the mention to replace.")
+    new_text: str = Field(description="The replacement term to extract and resolve.")
 
 
 class RouteReset(BaseModel):
     """User is starting a completely new query."""
 
     kind: Literal["reset"] = "reset"
-    new_query: str = Field(
-        description="The new query to run fresh."
-    )
+    new_query: str = Field(description="The new query to run fresh.")
 
 
 RouterResult = RouteSelect | RouteAdd | RouteRemove | RouteReplace | RouteReset

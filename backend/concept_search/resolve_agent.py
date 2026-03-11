@@ -268,9 +268,7 @@ def _get_agent(model: str | None = None) -> Agent[ConceptIndex, ResolveResult]:
                     (each with id and name) from immediate parent up to the
                     top-level category.
                 """
-                return ctx.deps.search_concepts_by_embedding(
-                    query, top_k=top_k, facet=facet
-                )
+                return ctx.deps.search_concepts_by_embedding(query, top_k=top_k, facet=facet)
 
             @_agent.tool
             def get_concept_children(
