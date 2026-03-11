@@ -29,7 +29,8 @@ DEV_LOG_GROUP = /aws/apprunner/jso-ncpi-dataset-catalog/59bf88e6efa543319f5c03df
 PROD_LOG_GROUP = /aws/apprunner/5wu-ncpi-dataset-catalog/d2f7c9715dbc4d6d9b4c3af33f8eefd3/application
 
 .PHONY: help build push-dev push-prod deploy-dev deploy-prod \
-        start stop restart db-reload clean-embeddings evals lint format logs-dev logs-prod
+        start stop restart db-reload embeddings clean-embeddings evals lint format \
+        docker-smoke logs-dev logs-prod
 
 # Default target
 help:
@@ -39,16 +40,18 @@ help:
 	@echo "  start       - Start local API server on :8000 (background)"
 	@echo "  stop        - Stop running local server"
 	@echo "  restart     - Stop + start"
-	@echo "  db-reload         - Rebuild DuckDB index and restart server"
+	@echo "  embeddings        - Generate concept embeddings (uses GPU if available)"
+	@echo "  db-reload         - Rebuild DuckDB index and restart server (needs embeddings)"
 	@echo "  clean-embeddings  - Delete cached embedding files (forces regeneration)"
 	@echo "  evals             - Run extract agent evals"
 	@echo "  lint              - Run ruff linter"
 	@echo "  format            - Run ruff formatter"
 	@echo ""
 	@echo "Docker deploy:"
-	@echo "  build       - Build Docker image locally"
-	@echo "  deploy-dev  - Build + push to dev ECR"
-	@echo "  deploy-prod - Build + push to prod ECR"
+	@echo "  build        - Build Docker image locally"
+	@echo "  docker-smoke - Build image, start container, hit /health, teardown"
+	@echo "  deploy-dev   - Build + push to dev ECR"
+	@echo "  deploy-prod  - Build + push to prod ECR"
 	@echo ""
 	@echo "Logs:"
 	@echo "  logs-dev    - Tail dev search logs (Ctrl-C to stop)"
@@ -82,7 +85,7 @@ stop:
 # Stop + start
 restart: stop start
 
-# Rebuild DuckDB index and restart server
+# Rebuild DuckDB index and restart server (requires pre-built embeddings: make embeddings)
 db-reload: stop
 	@echo "Deleting cached DuckDB index..."
 	@rm -f ../catalog/concept-search.duckdb
@@ -90,7 +93,11 @@ db-reload: stop
 	@uv run python -c "import logging; logging.basicConfig(level=logging.INFO); from concept_search.index import get_index; idx = get_index(); print(f'Index rebuilt: {idx.store.study_count} studies')"
 	@$(MAKE) start
 
-# Delete cached embedding files so db-reload regenerates them
+# Generate concept embeddings using GPU torch (separate venv from backend)
+embeddings:
+	cd generate_embeddings && uv sync --quiet && uv run python generate_embeddings.py
+
+# Delete cached embedding files (run 'make embeddings' to regenerate)
 clean-embeddings:
 	@rm -f ../catalog-build/classification/output/concept-embeddings.npy
 	@rm -f ../catalog-build/classification/output/concept-embeddings.sha256
@@ -114,6 +121,10 @@ format:
 
 # Build Docker image (bakes in git SHA for /health endpoint)
 build:
+	@if [ ! -f ../catalog-build/classification/output/concept-embeddings.npy ]; then \
+		echo "Error: concept-embeddings.npy not found. Run 'make embeddings' first."; \
+		exit 1; \
+	fi
 	@if [ ! -f ../catalog/concept-search.duckdb ]; then \
 		echo "Error: catalog/concept-search.duckdb not found. Run 'make db-reload' first."; \
 		exit 1; \
@@ -126,6 +137,36 @@ build:
 	docker build --platform linux/amd64 \
 		--build-arg GIT_SHA=$$(git -C .. rev-parse --short HEAD) \
 		-t $(IMAGE_NAME):$(IMAGE_TAG) -f Dockerfile ..
+
+# Build image, start container, smoke test /health, teardown
+SMOKE_CONTAINER = ncpi-smoke-test
+SMOKE_PORT = 8001
+docker-smoke: build
+	@echo "Starting smoke-test container on :$(SMOKE_PORT)..."
+	@docker rm -f $(SMOKE_CONTAINER) 2>/dev/null || true
+	@docker run -d --name $(SMOKE_CONTAINER) \
+		-p $(SMOKE_PORT):8000 \
+		--env-file .env \
+		$(IMAGE_NAME):$(IMAGE_TAG) >/dev/null
+	@echo "Waiting for container to start..."
+	@for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do \
+		if curl -sf http://localhost:$(SMOKE_PORT)/health >/dev/null 2>&1; then \
+			break; \
+		fi; \
+		if [ $$i -eq 20 ]; then \
+			echo "FAIL: container did not become healthy"; \
+			docker logs $(SMOKE_CONTAINER); \
+			docker rm -f $(SMOKE_CONTAINER) >/dev/null; \
+			exit 1; \
+		fi; \
+		sleep 3; \
+	done
+	@echo "Health check:"
+	@curl -sf http://localhost:$(SMOKE_PORT)/health | python3 -m json.tool
+	@echo ""
+	@echo "Image size: $$(docker images $(IMAGE_NAME):$(IMAGE_TAG) --format '{{.Size}}')"
+	@docker rm -f $(SMOKE_CONTAINER) >/dev/null
+	@echo "Smoke test passed."
 
 # Push to dev ECR
 push-dev:

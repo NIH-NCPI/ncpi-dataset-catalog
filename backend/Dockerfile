@@ -9,14 +9,14 @@ WORKDIR /app
 COPY --from=ghcr.io/astral-sh/uv:0.10.9 /uv /uvx /bin/
 
 # Install dependencies first (layer caching: only re-runs when deps change)
-# PyTorch CPU-only index is configured in pyproject.toml [tool.uv.sources]
+# CPU-only PyTorch is configured in pyproject.toml [tool.uv.sources]
 COPY backend/pyproject.toml backend/uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project
 
 # Pre-download embedding model so it's cached in the image.
 # Needed at runtime for query embedding (not for batch generation —
 # pre-computed embeddings are copied below).
-RUN uv run python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('pritamdeka/S-PubMedBert-MS-MARCO')"
+RUN .venv/bin/python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('pritamdeka/S-PubMedBert-MS-MARCO')"
 
 # Copy application code
 COPY backend/concept_search/ concept_search/
@@ -29,9 +29,14 @@ COPY catalog-build/classification/output/phenx-concept-vocabulary.json catalog-b
 COPY catalog-build/classification/output/ncpi-categories.json catalog-build/classification/output/ncpi-categories.json
 COPY catalog-build/common/disease_abbrev_mapping.tsv /catalog-build/common/disease_abbrev_mapping.tsv
 
+# Copy pre-computed concept embeddings (generated locally via `make embeddings`).
+# Loaded directly from .npy at startup — not stored in DuckDB.
+COPY catalog-build/classification/output/concept-embeddings.npy catalog-build/classification/output/concept-embeddings.npy
+COPY catalog-build/classification/output/concept-embeddings.sha256 catalog-build/classification/output/concept-embeddings.sha256
+
 # Copy pre-built DuckDB cache (built locally via `make db-reload`).
-# This eliminates all JSON parsing and embedding generation from the
-# Docker build — the container starts with a ready-to-use index.
+# This eliminates all JSON parsing from the Docker build —
+# the container starts with a ready-to-use index.
 RUN mkdir -p /cache
 COPY catalog/concept-search.duckdb /cache/concept-search.duckdb
 ENV NCPI_DUCKDB_CACHE_PATH=/cache/concept-search.duckdb
@@ -39,4 +44,4 @@ ENV NCPI_REPO_ROOT=/app
 
 EXPOSE 8000
 
-CMD ["uv", "run", "uvicorn", "concept_search.api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD [".venv/bin/uvicorn", "concept_search.api:app", "--host", "0.0.0.0", "--port", "8000"]
