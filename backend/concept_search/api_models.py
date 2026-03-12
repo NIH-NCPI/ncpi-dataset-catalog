@@ -9,7 +9,28 @@ from __future__ import annotations
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from pydantic.alias_generators import to_camel
 
-from .models import Intent, QueryModel
+from .models import Facet, Intent, QueryModel
+
+
+class QueryClause(BaseModel):
+    """A single clause in the structured query breakdown."""
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    exclude: bool = False
+    facet: Facet
+    labels: list[str]
+    operator: str = "AND"
+
+
+class QueryStructure(BaseModel):
+    """Structured representation of the resolved query for frontend rendering."""
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    clauses: list[QueryClause]
+    intent: Intent
+    summary: str = ""
 
 
 class SearchRequest(BaseModel):
@@ -122,6 +143,7 @@ class SearchResponse(BaseModel):
     intent: Intent = "study"
     message: str | None
     query: QueryModel
+    query_structure: QueryStructure | None = None
     studies: list[StudySummary] = Field(default_factory=list)
     timing: SearchTiming
     total_studies: int = 0

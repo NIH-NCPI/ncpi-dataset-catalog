@@ -27,6 +27,8 @@ from .api_models import (
     StudySummary,
     VariableResult,
 )
+from .api_models import QueryClause as ApiQueryClause
+from .api_models import QueryStructure as ApiQueryStructure
 from .index import get_index
 from .mention_constraints import split_mentions as _split_mentions
 from .models import (
@@ -41,6 +43,7 @@ from .models import (
 from .pipeline import pipeline_cache, run_pipeline
 from .rate_limit import RateLimiter
 from .resolve_agent import resolve_cache
+from .response_summary import build_message, build_query_structure, diagnose_empty_results
 from .router_agent import run_router
 
 # Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
@@ -451,10 +454,49 @@ async def search(
     pipeline_ms = int((t_pipeline - t_start) * 1000)
     lookup_ms = int((t_lookup - t_pipeline) * 1000)
 
+    # Build structured query and response message
+    query_structure = build_query_structure(query_model, index)
+    if query_model.message:
+        # Disambiguation/removal — keep existing message
+        message = query_model.message
+    elif not studies and not variable_rows and query_model.mentions:
+        # Zero results — recovery guidance
+        message = diagnose_empty_results(query_model, index)
+    elif query_model.mentions:
+        # Normal results — summary + structure + refinements
+        message = build_message(
+            query_structure,
+            len(studies),
+            total_variable_count,
+            studies,
+            query_model,
+            index,
+        )
+    else:
+        message = None
+
+    # Convert internal QueryStructure to API model
+    api_query_structure: ApiQueryStructure | None = None
+    if query_structure is not None:
+        api_query_structure = ApiQueryStructure(
+            clauses=[
+                ApiQueryClause(
+                    exclude=c.exclude,
+                    facet=c.facet,
+                    labels=c.labels,
+                    operator=c.operator,
+                )
+                for c in query_structure.clauses
+            ],
+            intent=query_structure.intent,
+            summary=query_structure.summary,
+        )
+
     response = SearchResponse(
         intent=intent,
-        message=query_model.message,
+        message=message,
         query=query_model,
+        query_structure=api_query_structure,
         studies=[_build_study_summary(s) for s in studies],
         timing=SearchTiming(
             lookup_ms=lookup_ms,
@@ -479,7 +521,7 @@ async def search(
             }
             for m in query_model.mentions
         ],
-        message=query_model.message,
+        message=message,
         total_studies=len(studies),
         total_variables=len(variable_rows),
         pipeline_ms=pipeline_ms,
