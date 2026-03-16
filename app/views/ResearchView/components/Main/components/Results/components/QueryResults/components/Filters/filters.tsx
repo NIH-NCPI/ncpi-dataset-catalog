@@ -3,7 +3,7 @@ import { Props } from "./types";
 import { Stack, Typography } from "@mui/material";
 import { STACK_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/stack";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
-import { getFacet, getFilters } from "./utils";
+import { getFilters } from "./utils";
 import { CHIP_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/chip";
 import { RowData } from "@tanstack/react-table";
 import { useMultiTurn } from "../../../../../../../../artifact/form";
@@ -34,18 +34,6 @@ function getConsentDisplayLabel(value: string, facet: string): string {
   if (value in CONSENT_TAG_LABELS) return CONSENT_TAG_LABELS[value];
   if (value.startsWith("explicit:")) return value.slice("explicit:".length);
   return value;
-}
-
-/**
- * Returns a display-friendly category label, overriding column headers where
- * needed (e.g. "Consent Code" → "Study Consent" for tag-based filters).
- * @param facet - The facet id.
- * @param categoryKey - The default category key from the table column header.
- * @returns Display label for the chip category.
- */
-function getCategoryLabel(facet: string, categoryKey: string): string {
-  if (facet === "consentCode") return "Study Consent";
-  return categoryKey;
 }
 
 /**
@@ -88,7 +76,7 @@ export const Filters = <T extends RowData>({
                   variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_400}
                   sx={{ textTransform: "capitalize" }}
                 >
-                  {getCategoryLabel(filter.facet, filter.categoryKey)}:{" "}
+                  {filter.categoryKey}:{" "}
                 </Typography>
                 <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_500}>
                   {getConsentDisplayLabel(String(value), filter.facet)}
@@ -97,7 +85,7 @@ export const Filters = <T extends RowData>({
             }
             onDelete={(): void => {
               onSetQuery(`Removed filter ${filter.facet}: ${value}`);
-              removeFilter(getFacet(table, filter.categoryKey), String(value));
+              removeFilter(filter.facet, String(value));
             }}
             size={CHIP_PROPS.SIZE.MEDIUM}
             variant={CHIP_PROPS.VARIANT.DEFAULT}
