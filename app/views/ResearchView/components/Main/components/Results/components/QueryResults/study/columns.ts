@@ -13,7 +13,8 @@ const CONSENT_CODES: ColumnDef<Study> = {
     buildNTagProps(METADATA_KEY.CONSENT_CODE, "consentCodes")
   ),
   header: "Consent Code",
-  id: "consentCode",
+  // Rename id to `consentCodes` to avoid conflict with the consentCode facet "Study Consent"
+  id: "consentCodes",
   meta: { width: { max: "1fr", min: "140px" } },
 };
 
