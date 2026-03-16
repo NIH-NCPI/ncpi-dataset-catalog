@@ -65,32 +65,40 @@ export const Filters = <T extends RowData>({
         Filters
       </Typography>
       {filters.map((filter) =>
-        filter.value.map((value) => (
-          <StyledChip
-            key={`${filter.categoryKey}-${value}`}
-            deleteIcon={<CloseRounded color="inherit" />}
-            label={
-              <Fragment>
-                <Typography
-                  color={TYPOGRAPHY_PROPS.COLOR.INK_LIGHT}
-                  variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_400}
-                  sx={{ textTransform: "capitalize" }}
-                >
-                  {filter.categoryLabel}:{" "}
-                </Typography>
-                <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_500}>
-                  {getConsentDisplayLabel(String(value), filter.categoryKey)}
-                </Typography>
-              </Fragment>
-            }
-            onDelete={(): void => {
-              onSetQuery(`Removed filter ${filter.categoryKey}: ${value}`);
-              removeFilter(filter.categoryKey, String(value));
-            }}
-            size={CHIP_PROPS.SIZE.MEDIUM}
-            variant={CHIP_PROPS.VARIANT.DEFAULT}
-          />
-        ))
+        filter.value.map((value) => {
+          const displayValue = getConsentDisplayLabel(
+            String(value),
+            filter.categoryKey
+          );
+          return (
+            <StyledChip
+              key={`${filter.categoryKey}-${value}`}
+              deleteIcon={<CloseRounded color="inherit" />}
+              label={
+                <Fragment>
+                  <Typography
+                    color={TYPOGRAPHY_PROPS.COLOR.INK_LIGHT}
+                    variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_400}
+                    sx={{ textTransform: "capitalize" }}
+                  >
+                    {filter.categoryLabel}:{" "}
+                  </Typography>
+                  <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_500}>
+                    {displayValue}
+                  </Typography>
+                </Fragment>
+              }
+              onDelete={(): void => {
+                onSetQuery(
+                  `Removed filter ${filter.categoryLabel}: ${displayValue}`
+                );
+                removeFilter(filter.categoryKey, String(value));
+              }}
+              size={CHIP_PROPS.SIZE.MEDIUM}
+              variant={CHIP_PROPS.VARIANT.DEFAULT}
+            />
+          );
+        })
       )}
     </Stack>
   );
