@@ -19,7 +19,7 @@ function getCategoryLabel<T extends RowData>(
 ): string {
   const column = findColumn(table, facet);
 
-  if (!column) return facet;
+  if (!column) return resolveCategoryLabel(facet);
 
   return String(column.columnDef.header);
 }
@@ -39,9 +39,7 @@ export function getFilters<T extends RowData>(
     .filter(filterMention)
     .map((mention) => ({
       categoryKey: mention.facet,
-      categoryLabel: resolveCategoryLabel(
-        getCategoryLabel(table, mention.facet)
-      ),
+      categoryLabel: getCategoryLabel(table, mention.facet),
       value: mention.values,
     }));
 }
