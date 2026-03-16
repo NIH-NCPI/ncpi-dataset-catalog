@@ -76,16 +76,16 @@ export const Filters = <T extends RowData>({
                   variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_400}
                   sx={{ textTransform: "capitalize" }}
                 >
-                  {filter.categoryKey}:{" "}
+                  {filter.categoryLabel}:{" "}
                 </Typography>
                 <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_500}>
-                  {getConsentDisplayLabel(String(value), filter.facet)}
+                  {getConsentDisplayLabel(String(value), filter.categoryKey)}
                 </Typography>
               </Fragment>
             }
             onDelete={(): void => {
-              onSetQuery(`Removed filter ${filter.facet}: ${value}`);
-              removeFilter(filter.facet, String(value));
+              onSetQuery(`Removed filter ${filter.categoryKey}: ${value}`);
+              removeFilter(filter.categoryKey, String(value));
             }}
             size={CHIP_PROPS.SIZE.MEDIUM}
             variant={CHIP_PROPS.VARIANT.DEFAULT}

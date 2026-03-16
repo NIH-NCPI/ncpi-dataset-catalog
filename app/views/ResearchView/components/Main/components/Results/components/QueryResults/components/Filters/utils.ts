@@ -4,16 +4,16 @@ import {
 } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
 import { Response } from "../../../../../../../../types/response";
 import { Column, RowData, Table } from "@tanstack/react-table";
-import { CATEGORY_KEY_OVERRIDES } from "./constants";
+import { CATEGORY_LABEL_OVERRIDES } from "./constants";
 import { SelectedFilter } from "@databiosphere/findable-ui/lib/common/entities";
 
 /**
- * Retrieves the category key for a given facet from the table columns.
+ * Retrieves the category label for a given facet from the table columns.
  * @param table - Table instance.
  * @param facet - The facet name to find the corresponding column header.
- * @returns The category key (column header) if found, otherwise returns the original facet name.
+ * @returns The category label (column header) if found, otherwise returns the original facet name.
  */
-function getCategoryKey<T extends RowData>(
+function getCategoryLabel<T extends RowData>(
   table: Table<T>,
   facet: string
 ): string {
@@ -29,17 +29,19 @@ function getCategoryKey<T extends RowData>(
  * Filters out mentions with empty values to avoid rendering chipless filter labels.
  * @param table - Table instance.
  * @param message - Assistant message containing the response with filters.
- * @returns An array of filters with category keys, facet ids, and values.
+ * @returns An array of applied filters with category labels for display.
  */
 export function getFilters<T extends RowData>(
   table: Table<T>,
   message: AssistantMessage<Response>
-): (SelectedFilter & { facet: string })[] {
+): (SelectedFilter & { categoryLabel: string })[] {
   return message.response.query.mentions
     .filter(filterMention)
     .map((mention) => ({
-      categoryKey: resolveCategoryKey(getCategoryKey(table, mention.facet)),
-      facet: mention.facet,
+      categoryKey: mention.facet,
+      categoryLabel: resolveCategoryLabel(
+        getCategoryLabel(table, mention.facet)
+      ),
       value: mention.values,
     }));
 }
@@ -69,9 +71,9 @@ function findColumn<T extends RowData>(
 
 /**
  * Resolves the display label for a filter category, applying any necessary overrides for specific facets.
- * @param categoryKey - Category key derived from the column header or facet.
- * @returns Category key (display label) with overrides applied if applicable.
+ * @param label - Label.
+ * @returns Category label (display label) with overrides applied if applicable.
  */
-function resolveCategoryKey(categoryKey: string): string {
-  return CATEGORY_KEY_OVERRIDES[categoryKey] || categoryKey;
+function resolveCategoryLabel(label: string): string {
+  return CATEGORY_LABEL_OVERRIDES[label] ?? label;
 }
