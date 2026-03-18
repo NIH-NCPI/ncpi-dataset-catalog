@@ -158,7 +158,7 @@ const config: SiteConfig = {
       logo: C.Logo({
         alt: APP_TITLE,
         height: 36,
-        link: "/platforms",
+        link: "/",
         src: logoNcpi,
       }),
       navigation: [
@@ -186,12 +186,13 @@ const config: SiteConfig = {
       socialMedia: socialMedia,
     },
   },
-  redirectRootToPath: "/platforms",
+  redirectRootToPath: "/",
   themeOptions: {
     palette: {
       primary: {
         dark: "#003E76",
-        main: "#035C94",
+        lightest: "#E6EFF6",
+        main: "#28285B",
       },
     },
   },

@@ -6,7 +6,7 @@ import { Head } from "@databiosphere/findable-ui/lib/components/Head/head";
 import { AppLayout } from "@databiosphere/findable-ui/lib/components/Layout/components/AppLayout/appLayout.styles";
 import { Floating } from "@databiosphere/findable-ui/lib/components/Layout/components/Floating/floating";
 import { Footer } from "@databiosphere/findable-ui/lib/components/Layout/components/Footer/footer";
-import { Header } from "@databiosphere/findable-ui/lib/components/Layout/components/Header/header";
+import { Header as DXHeader } from "@databiosphere/findable-ui/lib/components/Layout/components/Header/header";
 import { Main as DXMain } from "@databiosphere/findable-ui/lib/components/Layout/components/Main/main";
 import { setFeatureFlags } from "@databiosphere/findable-ui/lib/hooks/useFeatureFlag/common/utils";
 import { TerraProfileProvider } from "@databiosphere/findable-ui/lib/providers/authentication/terra/provider";
@@ -42,6 +42,7 @@ export interface PageProps extends AzulEntitiesStaticResponse {
 }
 
 export type NextPageWithComponent = NextPage & {
+  Header?: typeof DXHeader;
   Main?: typeof DXMain;
 };
 
@@ -63,6 +64,7 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
   const theme = createAppTheme(themeOptions);
   const { entityListType, pageTitle } = pageProps as PageProps;
   const Main = Component.Main || DXMain;
+  const Header = Component.Header || DXHeader;
   const { url: aiUrl } = ai || {};
 
   // Initialize Google Tag Manager.
