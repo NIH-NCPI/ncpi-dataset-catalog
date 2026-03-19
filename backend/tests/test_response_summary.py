@@ -14,7 +14,6 @@ from concept_search.response_summary import (
     _oxford_join,
     _render_natural_query,
     _resolve_label,
-    _suggest_refinements,
     build_message,
     build_query_structure,
     diagnose_empty_results,
@@ -231,21 +230,11 @@ class TestBuildMessage:
         msg = build_message(qs, 5, 0, self._make_studies(5), qm, index)
         assert "excluding Diabetes" in msg
 
-    def test_refinement_conditional(self) -> None:
-        # <= 10 studies: no refinement
-        qm = QueryModel(
-            mentions=[_mention(Facet.MEASUREMENT, ["ncpi:blood_pressure"], "blood pressure")]
-        )
-        index = _mock_index()
-        qs = build_query_structure(qm, index)
-        msg = build_message(qs, 5, 0, self._make_studies(5), qm, index)
-        assert "You could narrow" not in msg
-
-    def test_none_query_structure_returns_empty(self) -> None:
+    def test_none_query_structure_returns_none(self) -> None:
         qm = QueryModel(mentions=[])
         index = _mock_index()
         msg = build_message(None, 0, 0, [], qm, index)
-        assert msg == ""
+        assert msg is None
 
     def test_summary_set_on_structure(self) -> None:
         qm = QueryModel(
@@ -256,55 +245,6 @@ class TestBuildMessage:
         build_message(qs, 5, 0, self._make_studies(5), qm, index)
         assert qs is not None
         assert qs.summary.startswith("Found 5")
-
-
-# --- _suggest_refinements ---
-
-
-class TestSuggestRefinements:
-    def test_lte_10_returns_none(self) -> None:
-        qm = QueryModel(mentions=[_mention(Facet.MEASUREMENT, ["ncpi:blood_pressure"], "bp")])
-        assert _suggest_refinements(10, [], qm) is None
-
-    def test_suggests_unfiltered_facets(self) -> None:
-        studies = [
-            {"platforms": ["AnVIL", "BDC"], "focus": "Cancer", "dataTypes": ["WGS"]},
-        ] * 15
-        qm = QueryModel(mentions=[_mention(Facet.MEASUREMENT, ["ncpi:blood_pressure"], "bp")])
-        result = _suggest_refinements(15, studies, qm)
-        assert result is not None
-        assert "platform" in result
-
-    def test_caps_at_3(self) -> None:
-        studies = [
-            {
-                "platforms": ["AnVIL", "BDC"],
-                "focus": "Cancer",
-                "dataTypes": ["WGS", "SNP Array"],
-            },
-        ] * 15
-        qm = QueryModel(mentions=[_mention(Facet.MEASUREMENT, ["ncpi:blood_pressure"], "bp")])
-        result = _suggest_refinements(15, studies, qm)
-        assert result is not None
-        # Should not have more than 3 suggestions
-        # Count commas + "or" to verify
-        assert result.count(",") <= 2
-
-    def test_none_when_all_filtered(self) -> None:
-        studies = [{"platforms": ["AnVIL"], "focus": "Cancer", "dataTypes": ["WGS"]}] * 15
-        qm = QueryModel(
-            mentions=[
-                _mention(Facet.MEASUREMENT, ["ncpi:blood_pressure"], "bp"),
-                _mention(Facet.PLATFORM, ["AnVIL"], "AnVIL"),
-                _mention(Facet.FOCUS, ["Cancer"], "cancer"),
-                _mention(Facet.DATA_TYPE, ["WGS"], "WGS"),
-                _mention(Facet.CONSENT_CODE, ["GRU"], "general research"),
-            ]
-        )
-        result = _suggest_refinements(15, studies, qm)
-        # Only variable-level search might be suggested
-        if result is not None:
-            assert "variable-level" in result
 
 
 # --- diagnose_empty_results ---
@@ -390,6 +330,18 @@ class TestDiagnoseEmptyResults:
         msg = diagnose_empty_results(qm, index)
         # Count "→" arrows to verify cap
         assert msg.count("\u2192") <= 3
+
+    def test_variable_intent_says_no_results(self) -> None:
+        """Variable-intent queries say 'No results found' instead of 'No studies found'."""
+        qm = QueryModel(
+            intent="variable",
+            mentions=[_mention(Facet.MEASUREMENT, ["ncpi:blood_pressure"], "blood pressure")],
+        )
+        index = _mock_index()
+        index.query_studies.return_value = []
+        msg = diagnose_empty_results(qm, index)
+        assert "No results found" in msg
+        assert "No studies found" not in msg
 
     def test_no_values_returns_generic(self) -> None:
         """Mentions with no values get a generic message."""

@@ -124,11 +124,12 @@ def _mention_to_clause(
         if lbl not in seen:
             seen.add(lbl)
             unique.append(lbl)
+    # Values within a mention are OR-ed at the query layer, so join with "or".
     return QueryClause(
         facet=mention.facet,
         labels=unique,
         exclude=mention.exclude,
-        operator="NOT" if mention.exclude else "AND",
+        operator="NOT" if mention.exclude else "OR",
     )
 
 
@@ -196,7 +197,7 @@ def _render_english_query(clauses: list[QueryClause]) -> str:
     excludes: list[str] = []
 
     for clause in clauses:
-        joined = _oxford_join(clause.labels)
+        joined = _oxford_join(clause.labels, "or")
         if not joined:
             continue
         if clause.exclude:
@@ -213,7 +214,7 @@ def _render_english_query(clauses: list[QueryClause]) -> str:
     if qualifiers:
         parts.append(", ".join(qualifiers))
     if excludes:
-        parts.append(f"excluding {_oxford_join(excludes)}")
+        parts.append(f"excluding {_oxford_join(excludes, 'or')}")
 
     return ", ".join(parts) if parts else ""
 
@@ -252,7 +253,7 @@ def _render_natural_query(
     for clause in clauses:
         if not clause.labels:
             continue
-        joined = _oxford_join(clause.labels)
+        joined = _oxford_join(clause.labels, "or")
         if clause.exclude:
             excludes.append(joined)
         elif clause.facet == Facet.MEASUREMENT:
@@ -274,9 +275,9 @@ def _render_natural_query(
     parts.append(count_prefix or "Results")
 
     if focuses:
-        parts.append(f"with focus {_oxford_join(focuses)}")
+        parts.append(f"with focus {_oxford_join(focuses, 'or')}")
     if platforms:
-        parts.append(f"on {_oxford_join(platforms)}")
+        parts.append(f"on {_oxford_join(platforms, 'or')}")
     for q in other_qualifiers:
         parts.append(q)
 
@@ -304,76 +305,6 @@ def _render_natural_query(
     return sentence + "."
 
 
-def _suggest_refinements(
-    n_studies: int,
-    studies: list[dict],
-    query_model: QueryModel,
-) -> str | None:
-    """Suggest ways to narrow a large result set.
-
-    Args:
-        n_studies: Number of studies returned.
-        studies: Raw study dicts from the index.
-        query_model: The query model (to check which facets are already filtered).
-
-    Returns:
-        A suggestion string, or None if not applicable.
-    """
-    if n_studies <= 10:
-        return None
-
-    # Determine which facets already have active filters
-    active_facets: set[Facet] = set()
-    for m in query_model.mentions:
-        if not m.exclude:
-            active_facets.add(m.facet)
-
-    suggestions: list[str] = []
-
-    # Platform
-    if Facet.PLATFORM not in active_facets:
-        platforms: set[str] = set()
-        for s in studies:
-            for p in s.get("platforms", []):
-                platforms.add(p)
-        if len(platforms) > 1:
-            display = [_PLATFORM_DISPLAY.get(p, p) for p in sorted(platforms)]
-            suggestions.append(f"platform (results span {_oxford_join(display)})")
-
-    # Focus
-    if Facet.FOCUS not in active_facets:
-        focuses: set[str] = set()
-        for s in studies:
-            f = s.get("focus")
-            if f:
-                focuses.add(f)
-        if len(focuses) > 1:
-            suggestions.append("disease focus")
-
-    # Data type
-    if Facet.DATA_TYPE not in active_facets:
-        data_types: set[str] = set()
-        for s in studies:
-            for dt in s.get("dataTypes", []):
-                data_types.add(dt)
-        if len(data_types) > 1:
-            suggestions.append("data type")
-
-    # Consent
-    if Facet.CONSENT_CODE not in active_facets:
-        suggestions.append("consent type")
-
-    # Variable-level search
-    if query_model.intent == "study" and Facet.MEASUREMENT in active_facets:
-        suggestions.append("switching to variable-level search")
-
-    if not suggestions:
-        return None
-
-    capped = suggestions[:3]
-    return f"You could narrow by {_oxford_join(capped, 'or')}."
-
-
 def build_message(
     query_structure: QueryStructure | None,
     n_studies: int,
@@ -381,7 +312,7 @@ def build_message(
     studies: list[dict],
     query_model: QueryModel,
     index: ConceptIndex,
-) -> str:
+) -> str | None:
     """Build the full response message for a successful query.
 
     Args:
@@ -393,10 +324,10 @@ def build_message(
         index: The concept index.
 
     Returns:
-        A multi-line message string.
+        A message string, or None if there is no query structure.
     """
     if query_structure is None or not query_structure.clauses:
-        return ""
+        return None
 
     clauses = query_structure.clauses
     intent = query_model.intent
@@ -441,7 +372,10 @@ def diagnose_empty_results(
 
     # Render the "no results" header using natural phrasing
     clauses = [_mention_to_clause(m, descriptions) for m in mentions]
-    header = _render_natural_query(clauses, query_model.intent, count_prefix="No studies found")
+    no_results_prefix = (
+        "No results found" if query_model.intent == "variable" else "No studies found"
+    )
+    header = _render_natural_query(clauses, query_model.intent, count_prefix=no_results_prefix)
 
     # Single mention — skip drop analysis
     if len(mentions) == 1:
