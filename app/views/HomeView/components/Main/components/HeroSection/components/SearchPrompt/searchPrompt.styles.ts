@@ -1,6 +1,6 @@
 import { PALETTE } from "@databiosphere/findable-ui/lib/styles/common/constants/palette";
-import styled from "@emotion/styled";
 import { Chips } from "@databiosphere/findable-ui/lib/views/ResearchView/assistant/components/Messages/components/PromptMessage/components/Chips/chips";
+import styled from "@emotion/styled";
 import { Chip, Stack } from "@mui/material";
 
 export const StyledForm = styled("form")`

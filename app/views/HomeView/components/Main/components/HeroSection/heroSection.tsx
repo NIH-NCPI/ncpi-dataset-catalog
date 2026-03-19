@@ -10,20 +10,23 @@ import { StyledStack } from "./heroSection.styles";
  */
 export const HeroSection = (): JSX.Element => {
   return (
-    <StyledStack spacing={8} useFlexGap>
-      <Stack spacing={4} useFlexGap>
-        <h1>Find the right study, faster</h1>
-        <Typography
-          color={TYPOGRAPHY_PROPS.COLOR.INK_LIGHT}
-          component="h2"
-          variant={TYPOGRAPHY_PROPS.VARIANT.BODY_LARGE_400_2_LINES}
-        >
-          Search dbGaP studies with natural language across study metadata,
-          semantically harmonized variables, disease hierarchies, and consent
-          codes. Then apply for access or view the study on its cloud platform.
-        </Typography>
-      </Stack>
-      <SearchPrompt />
-    </StyledStack>
+    <section>
+      <StyledStack spacing={8} useFlexGap>
+        <Stack spacing={4} useFlexGap>
+          <h1>Find the right study, faster</h1>
+          <Typography
+            color={TYPOGRAPHY_PROPS.COLOR.INK_LIGHT}
+            component="h2"
+            variant={TYPOGRAPHY_PROPS.VARIANT.BODY_LARGE_400_2_LINES}
+          >
+            Search dbGaP studies with natural language across study metadata,
+            semantically harmonized variables, disease hierarchies, and consent
+            codes. Then apply for access or view the study on its cloud
+            platform.
+          </Typography>
+        </Stack>
+        <SearchPrompt />
+      </StyledStack>
+    </section>
   );
 };
