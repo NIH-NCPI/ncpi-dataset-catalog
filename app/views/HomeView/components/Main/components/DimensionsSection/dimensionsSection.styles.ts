@@ -1,11 +1,13 @@
 import { FONT } from "@databiosphere/findable-ui/lib/styles/common/constants/font";
 import { PALETTE } from "@databiosphere/findable-ui/lib/styles/common/constants/palette";
 import {
+  bpDownMd,
   bpDownSm,
   bpUpSm,
 } from "@databiosphere/findable-ui/lib/styles/common/mixins/breakpoints";
 import styled from "@emotion/styled";
-import { Accordion, Box, Container, Stack } from "@mui/material";
+import { Accordion, Box } from "@mui/material";
+import { Headline } from "../Section/section.styles";
 
 const CONTAINER_WIDTH = 924;
 const SPACING = 72;
@@ -15,29 +17,42 @@ export const StyledSection = styled.section`
   position: relative; /* positions image container */
 `;
 
-export const StyledContainer = styled(Container)`
-  && {
-    box-sizing: content-box;
-    max-width: 1158px;
-    padding: ${SPACING}px 16px;
-    width: unset;
+export const StyledHeadline = styled(Headline)`
+  grid-column: 2 / span 5;
+
+  ${bpDownMd} {
+    grid-column: 1 / span 5;
+  }
+
+  ${bpDownSm} {
+    grid-column: 1 / -1;
   }
 `;
 
-export const StyledStack = styled(Stack)`
-  flex-direction: row;
-  gap: 32px 16px;
+export const StyledLeftBox = styled(Box)`
+  grid-column: 2 / span 4;
+
+  ${bpDownMd} {
+    grid-column: 1 / span 5;
+  }
 
   ${bpDownSm} {
-    flex-direction: column;
+    grid-column: 1 / -1;
   }
 `;
 
-export const StyledBox = styled(Box)`
-  max-width: 454px;
+export const StyledRightBox = styled(Box)`
+  grid-column: 7 / -2;
+  grid-row: 1 / span all;
+
+  ${bpDownMd} {
+    grid-column: 7 / -1;
+  }
 
   ${bpDownSm} {
-    max-width: none;
+    grid-column: 1 / -1;
+    grid-row: unset;
+    margin-bottom: -${SPACING}px;
   }
 `;
 
@@ -97,10 +112,6 @@ export const StyledImageBox = styled(Box)`
     height: ${SPACING}px;
     position: absolute;
     width: 100%;
-  }
-
-  ${bpDownSm} {
-    margin-bottom: -${SPACING}px;
   }
 
   ${bpUpSm} {
