@@ -11,13 +11,16 @@ import { Main as DXMain } from "@databiosphere/findable-ui/lib/components/Layout
 import { setFeatureFlags } from "@databiosphere/findable-ui/lib/hooks/useFeatureFlag/common/utils";
 import { TerraProfileProvider } from "@databiosphere/findable-ui/lib/providers/authentication/terra/provider";
 import { ConfigProvider as DXConfigProvider } from "@databiosphere/findable-ui/lib/providers/config";
+import { DataDictionaryStateProvider } from "@databiosphere/findable-ui/lib/providers/dataDictionaryState/provider";
 import { ExploreStateProvider } from "@databiosphere/findable-ui/lib/providers/exploreState";
 import { FileManifestStateProvider } from "@databiosphere/findable-ui/lib/providers/fileManifestState";
 import { GoogleSignInAuthenticationProvider } from "@databiosphere/findable-ui/lib/providers/googleSignInAuthentication/provider";
 import { LayoutDimensionsProvider } from "@databiosphere/findable-ui/lib/providers/layoutDimensions/provider";
+import { ServicesProvider } from "@databiosphere/findable-ui/lib/providers/services/provider";
 import { SystemStatusProvider } from "@databiosphere/findable-ui/lib/providers/systemStatus";
 import { createAppTheme } from "@databiosphere/findable-ui/lib/theme/theme";
 import { DataExplorerError } from "@databiosphere/findable-ui/lib/types/error";
+import { ChatProvider } from "@databiosphere/findable-ui/lib/views/ResearchView/state/provider";
 import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import { createTheme, CssBaseline, Theme, ThemeProvider } from "@mui/material";
 import { createBreakpoints } from "@mui/system";
@@ -28,11 +31,8 @@ import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { JSX, useEffect } from "react";
 import TagManager from "react-gtm-module";
-import { BREAKPOINTS } from "../site-config/common/constants";
-import { ServicesProvider } from "@databiosphere/findable-ui/lib/providers/services/provider";
-import { DataDictionaryStateProvider } from "@databiosphere/findable-ui/lib/providers/dataDictionaryState/provider";
-import { ChatProvider } from "@databiosphere/findable-ui/lib/views/ResearchView/state/provider";
 import { useEntities } from "../app/services/workflows/hooks/UseEntities/hook";
+import { BREAKPOINTS } from "../site-config/common/constants";
 
 const FEATURE_FLAGS = Object.values(FEATURES);
 const SESSION_TIMEOUT = 15 * 60 * 1000; // 15 minutes
@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
   const { gtmAuth, gtmId, gtmPreview } = analytics || {};
   const { floating, footer, header } = layout || {};
   const theme = createAppTheme(themeOptions);
-  const { entityListType, pageTitle } = pageProps as PageProps;
+  const { entityListType = "platforms", pageTitle } = pageProps as PageProps;
   const Main = Component.Main || DXMain;
   const Header = Component.Header || DXHeader;
   const { url: aiUrl } = ai || {};

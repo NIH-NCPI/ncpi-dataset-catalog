@@ -1,4 +1,5 @@
 import { JSX } from "react";
+import { DimensionsSection } from "./components/Main/components/DimensionsSection/dimensionsSection";
 import { HeroSection } from "./components/Main/components/HeroSection/heroSection";
 
 /**
@@ -7,8 +8,9 @@ import { HeroSection } from "./components/Main/components/HeroSection/heroSectio
  */
 export const HomeView = (): JSX.Element => {
   return (
-    <>
+    <main>
       <HeroSection />
-    </>
+      <DimensionsSection />
+    </main>
   );
 };

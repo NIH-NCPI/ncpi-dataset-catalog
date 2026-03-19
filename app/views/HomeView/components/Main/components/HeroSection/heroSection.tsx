@@ -1,8 +1,8 @@
+import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { Stack, Typography } from "@mui/material";
 import { JSX } from "react";
-import { StyledStack } from "./heroSection.styles";
-import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { SearchPrompt } from "./components/SearchPrompt/searchPrompt";
+import { StyledStack } from "./heroSection.styles";
 
 /**
  * Renders the hero section, headings and AI assisted search prompt.
