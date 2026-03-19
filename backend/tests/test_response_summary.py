@@ -124,6 +124,32 @@ class TestBuildQueryStructure:
         index = _mock_index()
         assert build_query_structure(qm, index) is None
 
+    def test_included_clause_operator_is_and(self) -> None:
+        """Included clauses get operator AND (inter-clause semantics)."""
+        qm = QueryModel(
+            mentions=[_mention(Facet.MEASUREMENT, ["ncpi:blood_pressure"], "blood pressure")]
+        )
+        index = _mock_index()
+        qs = build_query_structure(qm, index)
+        assert qs is not None
+        assert qs.clauses[0].operator == "AND"
+
+    def test_multi_value_mention_labels_deduplicated(self) -> None:
+        """Multiple values in one mention produce OR-ed labels."""
+        qm = QueryModel(
+            mentions=[
+                _mention(
+                    Facet.MEASUREMENT,
+                    ["topmed:bp_systolic", "topmed:bp_diastolic"],
+                    "blood pressure",
+                )
+            ]
+        )
+        index = _mock_index()
+        qs = build_query_structure(qm, index)
+        assert qs is not None
+        assert qs.clauses[0].labels == ["systolic blood pressure", "diastolic blood pressure"]
+
     def test_unresolved_mentions_skipped(self) -> None:
         qm = QueryModel(mentions=[_mention(Facet.MEASUREMENT, [], "something")])
         index = _mock_index()
@@ -416,3 +442,31 @@ class TestRenderNaturalQuery:
         clauses = [QueryClause(Facet.FOCUS, ["Cancer"])]
         result = _render_natural_query(clauses, "study", count_prefix="Found 12 studies")
         assert result == "Found 12 studies with focus Cancer."
+
+    def test_multi_label_clause_uses_or(self) -> None:
+        """Labels within a single clause are OR-ed."""
+        clauses = [
+            QueryClause(
+                Facet.MEASUREMENT, ["systolic blood pressure", "diastolic blood pressure"]
+            ),
+        ]
+        result = _render_natural_query(clauses, "study", count_prefix="Found 5 studies")
+        assert "systolic blood pressure or diastolic blood pressure" in result
+
+    def test_multiple_focus_clauses_use_and(self) -> None:
+        """Multiple clauses for the same facet are AND-ed."""
+        clauses = [
+            QueryClause(Facet.FOCUS, ["Cancer"]),
+            QueryClause(Facet.FOCUS, ["Diabetes"]),
+        ]
+        result = _render_natural_query(clauses, "study", count_prefix="Found 3 studies")
+        assert "with focus Cancer and Diabetes" in result
+
+    def test_multiple_platform_clauses_use_and(self) -> None:
+        """Multiple platform clauses are AND-ed."""
+        clauses = [
+            QueryClause(Facet.PLATFORM, ["AnVIL"]),
+            QueryClause(Facet.PLATFORM, ["BioData Catalyst"]),
+        ]
+        result = _render_natural_query(clauses, "study", count_prefix="Found 2 studies")
+        assert "on AnVIL and BioData Catalyst" in result

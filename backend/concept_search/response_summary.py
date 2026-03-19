@@ -67,22 +67,6 @@ class QueryStructure:
         self.intent = intent
         self.summary = summary
 
-    def to_dict(self) -> dict:
-        """Serialize for the API response."""
-        return {
-            "clauses": [
-                {
-                    "exclude": c.exclude,
-                    "facet": c.facet.value,
-                    "labels": c.labels,
-                    "operator": c.operator,
-                }
-                for c in self.clauses
-            ],
-            "intent": self.intent,
-            "summary": self.summary,
-        }
-
 
 def _resolve_label(
     concept_id: str,
@@ -238,9 +222,10 @@ def _render_natural_query(
     parts.append(count_prefix or "Results")
 
     if focuses:
-        parts.append(f"with focus {_oxford_join(focuses, 'or')}")
+        # Multiple focus clauses are AND-ed; labels within a clause are OR-ed
+        parts.append(f"with focus {_oxford_join(focuses, 'and')}")
     if platforms:
-        parts.append(f"on {_oxford_join(platforms, 'or')}")
+        parts.append(f"on {_oxford_join(platforms, 'and')}")
     for q in other_qualifiers:
         parts.append(q)
 

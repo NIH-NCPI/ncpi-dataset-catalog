@@ -473,6 +473,12 @@ async def search(
     else:
         message = None
 
+    # Ensure query_structure.summary is populated even when message comes
+    # from disambiguation or diagnostics (build_message sets it as side effect,
+    # but these paths skip build_message).
+    if query_structure is not None and not query_structure.summary and message:
+        query_structure.summary = message
+
     # Convert internal QueryStructure to API model
     api_query_structure: ApiQueryStructure | None = None
     if query_structure is not None:
@@ -521,7 +527,7 @@ async def search(
         ],
         message=message,
         total_studies=len(studies),
-        total_variables=len(variable_rows),
+        total_variables=total_variable_count,
         pipeline_ms=pipeline_ms,
         lookup_ms=lookup_ms,
     )
