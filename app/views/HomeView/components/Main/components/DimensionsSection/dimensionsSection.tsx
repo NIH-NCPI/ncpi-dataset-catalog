@@ -45,7 +45,7 @@ export const DimensionsSection = (): JSX.Element => {
                   onClick={() => onSelectIndex(value)}
                 >
                   <AccordionSummary>{title}</AccordionSummary>
-                  {details && <AccordionDetails>{details}</AccordionDetails>}
+                  <AccordionDetails key={value}>{details}</AccordionDetails>
                 </StyledAccordion>
               ))}
             </StyledBox>
