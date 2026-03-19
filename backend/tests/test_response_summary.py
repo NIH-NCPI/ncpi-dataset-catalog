@@ -362,6 +362,25 @@ class TestDiagnoseEmptyResults:
         msg = diagnose_empty_results(qm, index)
         assert "No results found" in msg
         assert "No studies found" not in msg
+        assert "no results" in msg  # single-mention fallback uses "results"
+
+    def test_variable_intent_drop_uses_results(self) -> None:
+        """Variable-intent drop suggestions say 'results' not 'studies'."""
+        qm = QueryModel(
+            intent="variable",
+            mentions=[
+                _mention(Facet.MEASUREMENT, ["ncpi:blood_pressure"], "blood pressure"),
+                _mention(Facet.PLATFORM, ["KFDRC"], "Kids First"),
+            ],
+        )
+        index = _mock_index()
+        index.query_studies.side_effect = [
+            [],
+            [{"dbGapId": f"phs{i:06d}"} for i in range(14)],
+        ]
+        msg = diagnose_empty_results(qm, index)
+        assert "14 results" in msg
+        assert "studies" not in msg
 
     def test_no_values_returns_generic(self) -> None:
         """Mentions with no values get a generic message."""

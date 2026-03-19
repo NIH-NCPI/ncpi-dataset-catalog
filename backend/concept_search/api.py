@@ -461,7 +461,13 @@ async def search(
         # Still populate query_structure.summary independently so it
         # always describes the query, not the disambiguation text.
         message = query_model.message
-        if query_structure is not None and not query_structure.summary:
+        # Populate summary independently — but skip for intent=="auto"
+        # where lookup was skipped and counts would be misleading (0).
+        if (
+            query_structure is not None
+            and not query_structure.summary
+            and intent != "auto"
+        ):
             build_message(
                 query_structure,
                 len(studies),

@@ -320,11 +320,21 @@ def diagnose_empty_results(
     )
     header = _render_natural_query(clauses, query_model.intent, count_prefix=no_results_prefix)
 
+    # Noun for counts — "study/studies" for study intent, "result/results" for variable
+    is_variable = query_model.intent == "variable"
+
+    def _count_noun(n: int) -> str:
+        if is_variable:
+            return "result" if n == 1 else "results"
+        return "study" if n == 1 else "studies"
+
     # Single mention — skip drop analysis
     if len(mentions) == 1:
+        noun = "results" if is_variable else "indexed studies"
         return (
             f"{header}\n"
-            "This concept has no indexed studies. Try rephrasing or using a more common term."
+            f"This concept has no {noun}. "
+            "Try rephrasing or using a more common term."
         )
 
     # Drop-one-at-a-time analysis
@@ -357,13 +367,14 @@ def diagnose_empty_results(
     if len(bottlenecks) >= len(drop_results) - 1 and len(has_results) <= 1:
         # Case A: single mention is the bottleneck
         for label, count in has_results[:3]:
-            study_word = "study" if count == 1 else "studies"
-            lines.append(f'Dropping "{label}" would match {count} {study_word}.')
+            lines.append(
+                f'Dropping "{label}" would match {count} {_count_noun(count)}.'
+            )
     else:
         # Case B: intersection too narrow
         lines.append("Each filter alone has results, but the combination is too narrow.")
         suggestions = [
-            f'"{label}" (\u2192 {count} {"study" if count == 1 else "studies"})'
+            f'"{label}" (\u2192 {count} {_count_noun(count)})'
             for label, count in has_results[:3]
         ]
         lines.append(f"Try removing {_oxford_join(suggestions, 'or')}.")
