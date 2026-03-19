@@ -301,7 +301,7 @@ def _render_natural_query(
     if excludes:
         sentence += f", excluding {_oxford_join(excludes)}"
 
-    return sentence
+    return sentence + "."
 
 
 def _suggest_refinements(

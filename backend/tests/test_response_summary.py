@@ -147,7 +147,7 @@ class TestBuildMessage:
         index = _mock_index()
         qs = build_query_structure(qm, index)
         msg = build_message(qs, 33, 0, self._make_studies(33), qm, index)
-        assert msg == "Found 33 studies where blood pressure was measured"
+        assert msg == "Found 33 studies where blood pressure was measured."
 
     def test_measurement_and_focus(self) -> None:
         qm = QueryModel(
@@ -469,4 +469,4 @@ class TestRenderNaturalQuery:
     def test_focus_only(self) -> None:
         clauses = [QueryClause(Facet.FOCUS, ["Cancer"])]
         result = _render_natural_query(clauses, "study", count_prefix="Found 12 studies")
-        assert result == "Found 12 studies with focus Cancer"
+        assert result == "Found 12 studies with focus Cancer."
