@@ -468,9 +468,7 @@ async def search(
             query_structure,
             len(studies),
             total_variable_count,
-            studies,
             query_model,
-            index,
         )
     else:
         message = None

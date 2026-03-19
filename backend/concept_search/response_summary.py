@@ -181,44 +181,6 @@ def _oxford_join(items: list[str], conjunction: str = "and") -> str:
     return ", ".join(items[:-1]) + f", {conjunction} {items[-1]}"
 
 
-def _render_english_query(clauses: list[QueryClause]) -> str:
-    """Render clauses as a plain-English phrase.
-
-    Groups by facet role: measurements first, then qualifiers, then excludes.
-
-    Args:
-        clauses: The query clauses.
-
-    Returns:
-        Human-readable query string.
-    """
-    measurements: list[str] = []
-    qualifiers: list[str] = []
-    excludes: list[str] = []
-
-    for clause in clauses:
-        joined = _oxford_join(clause.labels, "or")
-        if not joined:
-            continue
-        if clause.exclude:
-            excludes.append(joined)
-        elif clause.facet == Facet.MEASUREMENT:
-            measurements.append(joined)
-        else:
-            prefix = _FACET_PREFIX.get(clause.facet, "with")
-            qualifiers.append(f"{prefix} {joined}")
-
-    parts: list[str] = []
-    if measurements:
-        parts.append(" and ".join(measurements))
-    if qualifiers:
-        parts.append(", ".join(qualifiers))
-    if excludes:
-        parts.append(f"excluding {_oxford_join(excludes, 'or')}")
-
-    return ", ".join(parts) if parts else ""
-
-
 def _render_natural_query(
     clauses: list[QueryClause],
     intent: str,
@@ -309,9 +271,7 @@ def build_message(
     query_structure: QueryStructure | None,
     n_studies: int,
     n_variables: int,
-    studies: list[dict],
     query_model: QueryModel,
-    index: ConceptIndex,
 ) -> str | None:
     """Build the full response message for a successful query.
 
@@ -319,9 +279,7 @@ def build_message(
         query_structure: The structured query (may be None).
         n_studies: Number of matching studies.
         n_variables: Total variable count.
-        studies: Raw study dicts (for refinement suggestions).
         query_model: The query model.
-        index: The concept index.
 
     Returns:
         A message string, or None if there is no query structure.

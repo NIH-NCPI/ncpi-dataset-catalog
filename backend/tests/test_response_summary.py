@@ -134,18 +134,13 @@ class TestBuildQueryStructure:
 
 
 class TestBuildMessage:
-    def _make_studies(self, n: int) -> list[dict]:
-        return [
-            {"dbGapId": f"phs{i:06d}", "platforms": ["AnVIL"], "focus": "Cancer"} for i in range(n)
-        ]
-
     def test_measurement_only(self) -> None:
         qm = QueryModel(
             mentions=[_mention(Facet.MEASUREMENT, ["ncpi:blood_pressure"], "blood pressure")]
         )
         index = _mock_index()
         qs = build_query_structure(qm, index)
-        msg = build_message(qs, 33, 0, self._make_studies(33), qm, index)
+        msg = build_message(qs, 33, 0, qm)
         assert msg == "Found 33 studies where blood pressure was measured."
 
     def test_measurement_and_focus(self) -> None:
@@ -157,7 +152,7 @@ class TestBuildMessage:
         )
         index = _mock_index()
         qs = build_query_structure(qm, index)
-        msg = build_message(qs, 28, 0, self._make_studies(28), qm, index)
+        msg = build_message(qs, 28, 0, qm)
         assert "Found 28 studies with focus Cardiovascular Diseases" in msg
         assert "where blood pressure was measured" in msg
 
@@ -170,7 +165,7 @@ class TestBuildMessage:
         )
         index = _mock_index()
         qs = build_query_structure(qm, index)
-        msg = build_message(qs, 10, 0, self._make_studies(10), qm, index)
+        msg = build_message(qs, 10, 0, qm)
         assert "were measured" in msg
 
     def test_variable_intent_with_counts(self) -> None:
@@ -180,7 +175,7 @@ class TestBuildMessage:
         )
         index = _mock_index()
         qs = build_query_structure(qm, index)
-        msg = build_message(qs, 12, 847, [], qm, index)
+        msg = build_message(qs, 12, 847, qm)
         assert "12 studies with 847 variables" in msg
 
     def test_singular_study(self) -> None:
@@ -189,7 +184,7 @@ class TestBuildMessage:
         )
         index = _mock_index()
         qs = build_query_structure(qm, index)
-        msg = build_message(qs, 1, 0, self._make_studies(1), qm, index)
+        msg = build_message(qs, 1, 0, qm)
         assert "Found 1 study" in msg
 
     def test_with_platform(self) -> None:
@@ -201,7 +196,7 @@ class TestBuildMessage:
         )
         index = _mock_index()
         qs = build_query_structure(qm, index)
-        msg = build_message(qs, 5, 0, self._make_studies(5), qm, index)
+        msg = build_message(qs, 5, 0, qm)
         assert "on BioData Catalyst" in msg
         assert "where blood pressure was measured" in msg
 
@@ -214,7 +209,7 @@ class TestBuildMessage:
         )
         index = _mock_index()
         qs = build_query_structure(qm, index)
-        msg = build_message(qs, 5, 0, self._make_studies(5), qm, index)
+        msg = build_message(qs, 5, 0, qm)
         assert "data type is Whole Genome Sequencing" in msg
         assert "blood pressure was measured" in msg
 
@@ -227,13 +222,12 @@ class TestBuildMessage:
         )
         index = _mock_index()
         qs = build_query_structure(qm, index)
-        msg = build_message(qs, 5, 0, self._make_studies(5), qm, index)
+        msg = build_message(qs, 5, 0, qm)
         assert "excluding Diabetes" in msg
 
     def test_none_query_structure_returns_none(self) -> None:
         qm = QueryModel(mentions=[])
-        index = _mock_index()
-        msg = build_message(None, 0, 0, [], qm, index)
+        msg = build_message(None, 0, 0, qm)
         assert msg is None
 
     def test_summary_set_on_structure(self) -> None:
@@ -242,7 +236,7 @@ class TestBuildMessage:
         )
         index = _mock_index()
         qs = build_query_structure(qm, index)
-        build_message(qs, 5, 0, self._make_studies(5), qm, index)
+        build_message(qs, 5, 0, qm)
         assert qs is not None
         assert qs.summary.startswith("Found 5")
 
