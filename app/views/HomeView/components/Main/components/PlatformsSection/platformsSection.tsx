@@ -8,10 +8,10 @@ import {
 } from "../Section/section.styles";
 import { PLATFORMS } from "./constants";
 import {
-  StyledFlexBox,
   StyledHeadline,
   StyledRoundedPaper,
   StyledSection,
+  StyledStack,
 } from "./platformsSection.styles";
 
 /**
@@ -28,7 +28,7 @@ export const PlatformsSection = (): JSX.Element => {
             We connect you to datasets across four NIH cloud platforms.
           </SectionSubtitle>
         </StyledHeadline>
-        <StyledFlexBox>
+        <StyledStack useFlexGap>
           {PLATFORMS.map(({ description, logo, name }) => (
             <StyledRoundedPaper key={name}>
               <img alt={name} src={logo} />
@@ -45,7 +45,7 @@ export const PlatformsSection = (): JSX.Element => {
               </Stack>
             </StyledRoundedPaper>
           ))}
-        </StyledFlexBox>
+        </StyledStack>
       </StyledContainer>
     </StyledSection>
   );

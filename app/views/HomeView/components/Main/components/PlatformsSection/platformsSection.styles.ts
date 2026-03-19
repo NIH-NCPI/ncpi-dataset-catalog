@@ -21,17 +21,11 @@ export const StyledHeadline = styled(Headline)`
 
 export const StyledStack = styled(Stack)`
   align-items: center;
-  grid-column: 2 / -2;
-  text-align: center;
-`;
-
-export const StyledFlexBox = styled.div`
-  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 16px;
   grid-column: 2 / -2;
   justify-content: flex-start;
-  margin-top: 32px;
 
   ${bpDownMd} {
     grid-column: 1 / -1;
