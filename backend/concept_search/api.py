@@ -457,13 +457,25 @@ async def search(
     # Build structured query and response message
     query_structure = build_query_structure(query_model, index)
     if query_model.message:
-        # Disambiguation/removal — keep existing message
+        # Disambiguation/removal — keep existing message.
+        # Still populate query_structure.summary independently so it
+        # always describes the query, not the disambiguation text.
         message = query_model.message
+        if query_structure is not None and not query_structure.summary:
+            build_message(
+                query_structure,
+                len(studies),
+                total_variable_count,
+                query_model,
+            )
     elif not studies and not variable_rows and query_model.mentions:
-        # Zero results — recovery guidance
+        # Zero results — recovery guidance.
+        # Set summary to just the header line (e.g. "No studies found where…").
         message = diagnose_empty_results(query_model, index)
+        if query_structure is not None and not query_structure.summary:
+            query_structure.summary = message.split("\n", 1)[0]
     elif query_model.mentions:
-        # Normal results — summary + structure + refinements
+        # Normal results — build_message sets summary as side effect
         message = build_message(
             query_structure,
             len(studies),
@@ -472,14 +484,6 @@ async def search(
         )
     else:
         message = None
-
-    # Ensure query_structure.summary is populated even when message comes
-    # from disambiguation or diagnostics (build_message sets it as side effect,
-    # but these paths skip build_message).
-    if query_structure is not None and not query_structure.summary and message:
-        # Use only the first line — diagnostics can be multi-line but summary
-        # should be a single sentence.
-        query_structure.summary = message.split("\n", 1)[0]
 
     # Convert internal QueryStructure to API model
     api_query_structure: ApiQueryStructure | None = None
