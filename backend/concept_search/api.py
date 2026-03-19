@@ -477,7 +477,9 @@ async def search(
     # from disambiguation or diagnostics (build_message sets it as side effect,
     # but these paths skip build_message).
     if query_structure is not None and not query_structure.summary and message:
-        query_structure.summary = message
+        # Use only the first line — diagnostics can be multi-line but summary
+        # should be a single sentence.
+        query_structure.summary = message.split("\n", 1)[0]
 
     # Convert internal QueryStructure to API model
     api_query_structure: ApiQueryStructure | None = None

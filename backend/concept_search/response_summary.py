@@ -237,10 +237,9 @@ def _render_natural_query(
         where_parts.append(f"data type {dt_verb} {dt_joined}")
     if measurements:
         measure_phrase = " and ".join(measurements)
-        total = sum(
-            len(c.labels) for c in clauses if c.facet == Facet.MEASUREMENT and not c.exclude
-        )
-        verb = "was" if total == 1 else "were"
+        # Base verb on clause count, not label count — "systolic BP or
+        # diastolic BP" is one conceptual measurement (one clause, OR-ed).
+        verb = "was" if len(measurements) == 1 else "were"
         where_parts.append(f"{measure_phrase} {verb} measured")
     if where_parts:
         parts.append(f"where {' and '.join(where_parts)}")

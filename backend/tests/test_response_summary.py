@@ -444,7 +444,7 @@ class TestRenderNaturalQuery:
         assert result == "Found 12 studies with focus Cancer."
 
     def test_multi_label_clause_uses_or(self) -> None:
-        """Labels within a single clause are OR-ed."""
+        """Labels within a single clause are OR-ed; verb is singular (one clause)."""
         clauses = [
             QueryClause(
                 Facet.MEASUREMENT, ["systolic blood pressure", "diastolic blood pressure"]
@@ -452,6 +452,7 @@ class TestRenderNaturalQuery:
         ]
         result = _render_natural_query(clauses, "study", count_prefix="Found 5 studies")
         assert "systolic blood pressure or diastolic blood pressure" in result
+        assert "was measured" in result
 
     def test_multiple_focus_clauses_use_and(self) -> None:
         """Multiple clauses for the same facet are AND-ed."""
