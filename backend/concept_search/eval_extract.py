@@ -437,7 +437,7 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
             name="intent-auto-ambiguous",
             inputs="blood pressure",
             expected_output=ExtractResult(
-                intent="auto",
+                intent="ambiguous",
                 mentions=[_rm("blood pressure", Facet.MEASUREMENT)],
             ),
         ),

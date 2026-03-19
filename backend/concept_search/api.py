@@ -303,7 +303,7 @@ async def _handle_route(query: str, previous_query: QueryModel) -> QueryModel:
         if len(remaining) == len(previous_query.mentions):
             # No match found — treat as add
             result = await run_pipeline(query, previous_query=previous_query)
-            if previous_query.intent != "auto":
+            if previous_query.intent != "ambiguous":
                 result.intent = previous_query.intent
             return result
         modified_previous = QueryModel(
@@ -311,7 +311,7 @@ async def _handle_route(query: str, previous_query: QueryModel) -> QueryModel:
             mentions=remaining,
         )
         result = await run_pipeline(route.new_text, previous_query=modified_previous)
-        if previous_query.intent != "auto":
+        if previous_query.intent != "ambiguous":
             result.intent = previous_query.intent
         return result
 
@@ -322,9 +322,9 @@ async def _handle_route(query: str, previous_query: QueryModel) -> QueryModel:
     # RouteAdd — refine pipeline, but preserve the previous intent.
     # The extract agent may infer a different intent from the fragment
     # (e.g. "also blood pressure" → "variable") but the user is refining,
-    # not changing direction.  Let pipeline win if previous was "auto".
+    # not changing direction.  Let pipeline win if previous was "ambiguous".
     result = await run_pipeline(query, previous_query=previous_query)
-    if previous_query.intent != "auto":
+    if previous_query.intent != "ambiguous":
         result.intent = previous_query.intent
     return result
 
@@ -418,7 +418,7 @@ async def search(
 
     if query_model.mentions:
         include, exclude = _split_mentions(query_model.mentions, index)
-        if intent == "auto":
+        if intent == "ambiguous":
             pass  # Ambiguous — return clarification message only
         elif intent == "variable":
             # Apply study-level constraints (platform, dataType, etc.)
@@ -461,13 +461,9 @@ async def search(
         # Still populate query_structure.summary independently so it
         # always describes the query, not the disambiguation text.
         message = query_model.message
-        # Populate summary independently — but skip for intent=="auto"
+        # Populate summary independently — but skip for intent=="ambiguous"
         # where lookup was skipped and counts would be misleading (0).
-        if (
-            query_structure is not None
-            and not query_structure.summary
-            and intent != "auto"
-        ):
+        if query_structure is not None and not query_structure.summary and intent != "ambiguous":
             build_message(
                 query_structure,
                 len(studies),

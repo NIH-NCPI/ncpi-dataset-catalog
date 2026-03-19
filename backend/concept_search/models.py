@@ -24,7 +24,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from pydantic.alias_generators import to_camel
 
 # Valid query intent values.
-Intent = Literal["auto", "study", "variable"]
+Intent = Literal["ambiguous", "study", "variable"]
 
 
 class Facet(StrEnum):

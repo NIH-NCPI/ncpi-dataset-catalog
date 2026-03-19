@@ -789,7 +789,7 @@ class TestRouteHandlers:
             json={
                 "query": "change nonexistent to asthma",
                 "previousQuery": {
-                    "intent": "auto",
+                    "intent": "ambiguous",
                     "mentions": [
                         {
                             "facet": "focus",
@@ -802,7 +802,7 @@ class TestRouteHandlers:
             },
         )
         assert resp.status_code == 200
-        # Pipeline's "study" wins because previous was "auto"
+        # Pipeline's "study" wins because previous was "ambiguous"
         assert resp.json()["intent"] == "study"
         # Pipeline called with full query and previous_query (add behavior)
         call_args = mock_pipeline.call_args
@@ -919,7 +919,7 @@ class TestRouteHandlers:
             json={
                 "query": "also blood pressure",
                 "previousQuery": {
-                    "intent": "auto",
+                    "intent": "ambiguous",
                     "mentions": [
                         {
                             "facet": "focus",
@@ -932,7 +932,7 @@ class TestRouteHandlers:
             },
         )
         assert resp.status_code == 200
-        # Pipeline's "variable" wins because previous was "auto"
+        # Pipeline's "variable" wins because previous was "ambiguous"
         assert resp.json()["intent"] == "variable"
 
     @patch("concept_search.api.get_index")
@@ -959,7 +959,7 @@ class TestRouteHandlers:
             json={
                 "query": "change diabetes to asthma",
                 "previousQuery": {
-                    "intent": "auto",
+                    "intent": "ambiguous",
                     "mentions": [
                         {
                             "facet": "focus",
@@ -972,7 +972,7 @@ class TestRouteHandlers:
             },
         )
         assert resp.status_code == 200
-        # Pipeline's "study" wins because previous was "auto"
+        # Pipeline's "study" wins because previous was "ambiguous"
         assert resp.json()["intent"] == "study"
 
     @patch("concept_search.api.get_index")

@@ -159,7 +159,6 @@ class DuckDBStore:
             return
         self._copy_csv("variables", rows)
 
-
     def _copy_csv(self, table: str, rows: list[tuple[str, ...]]) -> None:
         """Write rows to a temp CSV and COPY into the table."""
         buf = io.StringIO()
