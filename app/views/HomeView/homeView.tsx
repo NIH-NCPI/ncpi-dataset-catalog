@@ -1,6 +1,7 @@
 import { JSX } from "react";
 import { DimensionsSection } from "./components/Main/components/DimensionsSection/dimensionsSection";
 import { HeroSection } from "./components/Main/components/HeroSection/heroSection";
+import { MetadataSection } from "./components/Main/components/MetadataSection/metadataSection";
 
 /**
  * Renders the home view.
@@ -11,6 +12,7 @@ export const HomeView = (): JSX.Element => {
     <main>
       <HeroSection />
       <DimensionsSection />
+      <MetadataSection />
     </main>
   );
 };
