@@ -1,4 +1,3 @@
-import { STACK_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/stack";
 import {
   AccordionDetails,
   AccordionSummary,
@@ -16,6 +15,7 @@ import {
   StyledImage,
   StyledImageBox,
   StyledSection,
+  StyledStack,
 } from "./dimensionsSection.styles";
 import { useAutoCycle } from "./hooks/UseAutoCycle/hook";
 
@@ -30,7 +30,7 @@ export const DimensionsSection = (): JSX.Element => {
   return (
     <StyledSection>
       <StyledContainer>
-        <Stack direction={STACK_PROPS.DIRECTION.ROW} spacing={4} useFlexGap>
+        <StyledStack useFlexGap>
           <Stack flex={1} spacing={6} useFlexGap>
             <StyledSectionHeading component="h2">
               <div>Describe your research question.</div>
@@ -62,7 +62,7 @@ export const DimensionsSection = (): JSX.Element => {
               </Slide>
             ))}
           </Stack>
-        </Stack>
+        </StyledStack>
       </StyledContainer>
     </StyledSection>
   );

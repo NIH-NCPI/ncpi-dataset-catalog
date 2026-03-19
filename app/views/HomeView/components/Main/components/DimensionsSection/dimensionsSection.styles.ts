@@ -1,10 +1,14 @@
 import { FONT } from "@databiosphere/findable-ui/lib/styles/common/constants/font";
 import { PALETTE } from "@databiosphere/findable-ui/lib/styles/common/constants/palette";
+import {
+  bpDownSm,
+  bpUpSm,
+} from "@databiosphere/findable-ui/lib/styles/common/mixins/breakpoints";
 import styled from "@emotion/styled";
-import { Accordion, Box, Container } from "@mui/material";
+import { Accordion, Box, Container, Stack } from "@mui/material";
 
-const MAX_WIDTH = 924;
-const PADDING = 72;
+const CONTAINER_WIDTH = 924;
+const SPACING = 72;
 
 export const StyledSection = styled.section`
   overflow: hidden;
@@ -15,13 +19,26 @@ export const StyledContainer = styled(Container)`
   && {
     box-sizing: content-box;
     max-width: 1158px;
-    padding: ${PADDING}px 16px;
+    padding: ${SPACING}px 16px;
     width: unset;
+  }
+`;
+
+export const StyledStack = styled(Stack)`
+  gap: 32px 16px;
+  flex-direction: row;
+
+  ${bpDownSm} {
+    flex-direction: column;
   }
 `;
 
 export const StyledBox = styled(Box)`
   max-width: 454px;
+
+  ${bpDownSm} {
+    max-width: none;
+  }
 `;
 
 export const StyledAccordion = styled(Accordion)`
@@ -68,11 +85,6 @@ export const StyledAccordion = styled(Accordion)`
 `;
 
 export const StyledImageBox = styled(Box)`
-  height: calc(100% - ${PADDING}px);
-  max-width: ${MAX_WIDTH}px;
-  position: absolute;
-  width: 100%;
-
   &::after {
     background: linear-gradient(
       180deg,
@@ -82,7 +94,18 @@ export const StyledImageBox = styled(Box)`
     bottom: 0;
     content: "";
     display: block;
-    height: ${PADDING}px;
+    height: ${SPACING}px;
+    position: absolute;
+    width: 100%;
+  }
+
+  ${bpDownSm} {
+    margin-bottom: -${SPACING}px;
+  }
+
+  ${bpUpSm} {
+    height: calc(100% - ${SPACING}px);
+    max-width: ${CONTAINER_WIDTH}px;
     position: absolute;
     width: 100%;
   }
@@ -90,5 +113,13 @@ export const StyledImageBox = styled(Box)`
 
 export const StyledImage = styled.img`
   height: auto;
+  max-width: ${CONTAINER_WIDTH}px;
   width: 100%;
+
+  ${bpDownSm} {
+    clip-path: inset(0 0 100px 0);
+    height: 100%;
+    margin-bottom: -100px;
+    width: auto;
+  }
 `;
