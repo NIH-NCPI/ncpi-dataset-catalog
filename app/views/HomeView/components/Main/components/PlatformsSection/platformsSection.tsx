@@ -1,13 +1,17 @@
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { Stack, Typography } from "@mui/material";
 import { JSX } from "react";
-import { SectionTitle, StyledContainer } from "../Section/section.styles";
+import {
+  SectionSubtitle,
+  SectionTitle,
+  StyledContainer,
+} from "../Section/section.styles";
 import { PLATFORMS } from "./constants";
 import {
   StyledFlexBox,
+  StyledHeadline,
   StyledRoundedPaper,
   StyledSection,
-  StyledStack,
 } from "./platformsSection.styles";
 
 /**
@@ -18,16 +22,12 @@ export const PlatformsSection = (): JSX.Element => {
   return (
     <StyledSection>
       <StyledContainer>
-        <StyledStack spacing={2} useFlexGap>
+        <StyledHeadline useFlexGap>
           <SectionTitle component="h2">Where the data lives</SectionTitle>
-          <Typography
-            color={TYPOGRAPHY_PROPS.COLOR.INK_LIGHT}
-            component="h3"
-            variant={TYPOGRAPHY_PROPS.VARIANT.BODY_LARGE_400}
-          >
+          <SectionSubtitle component="h3">
             We connect you to datasets across four NIH cloud platforms.
-          </Typography>
-        </StyledStack>
+          </SectionSubtitle>
+        </StyledHeadline>
         <StyledFlexBox>
           {PLATFORMS.map(({ description, logo, name }) => (
             <StyledRoundedPaper key={name}>

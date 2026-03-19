@@ -6,9 +6,17 @@ import {
 } from "@databiosphere/findable-ui/lib/styles/common/mixins/breakpoints";
 import styled from "@emotion/styled";
 import { Stack } from "@mui/material";
+import { Headline } from "../Section/section.styles";
 
 export const StyledSection = styled.section`
   background-color: ${PALETTE.COMMON_WHITE};
+`;
+
+export const StyledHeadline = styled(Headline)`
+  grid-column: 2 / -2;
+  margin: 0 auto;
+  max-width: 560px;
+  text-align: center;
 `;
 
 export const StyledStack = styled(Stack)`

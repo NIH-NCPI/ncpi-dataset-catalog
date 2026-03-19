@@ -1,7 +1,10 @@
-import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import { JSX } from "react";
-import { SectionTitle } from "../Section/section.styles";
+import {
+  Headline,
+  SectionSubtitle,
+  SectionTitle,
+} from "../Section/section.styles";
 import { List } from "./components/List/list";
 import { Stats } from "./components/Stats/stats";
 import {
@@ -21,16 +24,13 @@ export const MetadataSection = (): JSX.Element => {
         <StyledStack useFlexGap>
           <Stack flex={1} spacing={4} useFlexGap>
             <Stack spacing={6} useFlexGap>
-              <Stack spacing={2} useFlexGap>
+              <Headline useFlexGap>
                 <SectionTitle component="h2">More than metadata</SectionTitle>
-                <Typography
-                  color={TYPOGRAPHY_PROPS.COLOR.INK_LIGHT}
-                  variant={TYPOGRAPHY_PROPS.VARIANT.BODY_LARGE_400_2_LINES}
-                >
+                <SectionSubtitle component="h3">
                   Every study is enriched with data you won&apos;t find on dbGaP
                   alone.
-                </Typography>
-              </Stack>
+                </SectionSubtitle>
+              </Headline>
               <List />
             </Stack>
           </Stack>
