@@ -1,16 +1,26 @@
 import { RoundedPaper } from "@databiosphere/findable-ui/lib/components/common/Paper/components/RoundedPaper/roundedPaper";
+import {
+  bpDownMd,
+  bpDownSm,
+} from "@databiosphere/findable-ui/lib/styles/common/mixins/breakpoints";
 import styled from "@emotion/styled";
-import { Box, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
-export const StyledGrid = styled(Box)`
+export const StyledStack = styled(Stack)`
   align-items: center;
   display: grid;
-  gap: 16px;
+  gap: 8px;
+  grid-column: 7 / -2;
+  grid-row: 1 / span 2;
   grid-template-columns: repeat(2, 1fr);
-  height: 100%;
 
-  ${({ theme }) => theme.breakpoints.down(860)} {
-    grid-template-columns: 1fr;
+  ${bpDownMd} {
+    grid-column: 7 / -1;
+  }
+
+  ${bpDownSm} {
+    grid-column: 1 / -1;
+    grid-row: unset;
   }
 `;
 

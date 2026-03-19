@@ -3,8 +3,8 @@ import { Typography } from "@mui/material";
 import { JSX } from "react";
 import { STATS } from "./constants";
 import {
-  StyledGrid,
   StyledRoundedPaper,
+  StyledStack,
   StyledTypography,
 } from "./stats.styles";
 
@@ -14,7 +14,7 @@ import {
  */
 export const Stats = (): JSX.Element => {
   return (
-    <StyledGrid>
+    <StyledStack useFlexGap>
       {STATS.map(({ label, value }) => (
         <StyledRoundedPaper key={label}>
           <StyledTypography>{value}</StyledTypography>
@@ -26,6 +26,6 @@ export const Stats = (): JSX.Element => {
           </Typography>
         </StyledRoundedPaper>
       ))}
-    </StyledGrid>
+    </StyledStack>
   );
 };
