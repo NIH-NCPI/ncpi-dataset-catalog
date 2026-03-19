@@ -124,12 +124,13 @@ def _mention_to_clause(
         if lbl not in seen:
             seen.add(lbl)
             unique.append(lbl)
-    # Values within a mention are OR-ed at the query layer, so join with "or".
+    # Values within a mention are OR-ed (handled by display join); the operator
+    # field describes how this clause combines with other clauses (AND/NOT).
     return QueryClause(
         facet=mention.facet,
         labels=unique,
         exclude=mention.exclude,
-        operator="NOT" if mention.exclude else "OR",
+        operator="NOT" if mention.exclude else "AND",
     )
 
 
