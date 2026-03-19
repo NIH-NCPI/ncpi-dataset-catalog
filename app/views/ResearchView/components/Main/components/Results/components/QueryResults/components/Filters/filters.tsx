@@ -1,12 +1,15 @@
 import { Fragment, JSX } from "react";
 import { Props } from "./types";
-import { Chip, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { STACK_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/stack";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { getFacet, getFilters } from "./utils";
 import { CHIP_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/chip";
 import { RowData } from "@tanstack/react-table";
 import { useMultiTurn } from "../../../../../../../../artifact/form";
+import { useChatDispatch } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatDispatch/hook";
+import { CloseRounded } from "@mui/icons-material";
+import { StyledChip } from "./filters.styles";
 
 const CONSENT_TAG_LABELS: Record<string, string> = {
   "no-col": "No collaboration required",
@@ -56,6 +59,7 @@ export const Filters = <T extends RowData>({
   message,
   table,
 }: Props<T>): JSX.Element | null => {
+  const { onSetQuery } = useChatDispatch();
   const filters = getFilters(table, message);
   const { removeFilter } = useMultiTurn();
 
@@ -74,8 +78,9 @@ export const Filters = <T extends RowData>({
       </Typography>
       {filters.map((filter) =>
         filter.value.map((value) => (
-          <Chip
+          <StyledChip
             key={`${filter.categoryKey}-${value}`}
+            deleteIcon={<CloseRounded color="inherit" />}
             label={
               <Fragment>
                 <Typography
@@ -90,10 +95,12 @@ export const Filters = <T extends RowData>({
                 </Typography>
               </Fragment>
             }
-            onDelete={(): void =>
-              removeFilter(getFacet(table, filter.categoryKey), String(value))
-            }
+            onDelete={(): void => {
+              onSetQuery(`Removed filter ${filter.facet}: ${value}`);
+              removeFilter(getFacet(table, filter.categoryKey), String(value));
+            }}
             size={CHIP_PROPS.SIZE.MEDIUM}
+            variant={CHIP_PROPS.VARIANT.DEFAULT}
           />
         ))
       )}
