@@ -17,8 +17,8 @@ export const StyledContainer = styled(Container)`
 `;
 
 export const StyledStack = styled(Stack)`
-  gap: 32px 16px;
   flex-direction: row;
+  gap: 32px 16px;
 
   > .MuiStack-root:first-of-type {
     > * {

@@ -1,5 +1,15 @@
 import styled from "@emotion/styled";
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
+
+export const StyledContainer = styled(Container)`
+  && {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(12, 1fr);
+    margin: 0 auto;
+    padding: 72px 24px;
+  }
+`;
 
 export const StyledSectionHeading = styled(Typography)`
   font-family: "Inter Tight", sans-serif;
