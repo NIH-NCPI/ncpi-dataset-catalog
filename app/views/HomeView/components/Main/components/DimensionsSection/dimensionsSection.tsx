@@ -5,7 +5,7 @@ import {
   Stack,
 } from "@mui/material";
 import { JSX } from "react";
-import { StyledSectionHeading } from "../Section/section.styles";
+import { SectionTitle } from "../Section/section.styles";
 import { ACCORDION, IMAGE } from "./accordion";
 import { ACCORDION_PROPS, SLIDE_PROPS } from "./constants";
 import {
@@ -32,10 +32,10 @@ export const DimensionsSection = (): JSX.Element => {
       <StyledContainer>
         <StyledStack useFlexGap>
           <Stack flex={1} spacing={6} useFlexGap>
-            <StyledSectionHeading component="h2">
+            <SectionTitle component="h2">
               <div>Describe your research question.</div>
               <div>We search six dimensions.</div>
-            </StyledSectionHeading>
+            </SectionTitle>
             <StyledBox>
               {Object.entries(ACCORDION).map(([value, { details, title }]) => (
                 <StyledAccordion

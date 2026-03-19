@@ -1,7 +1,7 @@
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { Stack, Typography } from "@mui/material";
 import { JSX } from "react";
-import { StyledSectionHeading } from "../Section/section.styles";
+import { SectionTitle } from "../Section/section.styles";
 import { List } from "./components/List/list";
 import { Stats } from "./components/Stats/stats";
 import {
@@ -22,9 +22,7 @@ export const MetadataSection = (): JSX.Element => {
           <Stack flex={1} spacing={4} useFlexGap>
             <Stack spacing={6} useFlexGap>
               <Stack spacing={2} useFlexGap>
-                <StyledSectionHeading component="h2">
-                  More than metadata
-                </StyledSectionHeading>
+                <SectionTitle component="h2">More than metadata</SectionTitle>
                 <Typography
                   color={TYPOGRAPHY_PROPS.COLOR.INK_LIGHT}
                   variant={TYPOGRAPHY_PROPS.VARIANT.BODY_LARGE_400_2_LINES}

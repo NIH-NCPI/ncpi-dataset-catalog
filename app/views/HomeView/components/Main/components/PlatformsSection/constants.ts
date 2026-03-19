@@ -4,7 +4,7 @@
 export const PLATFORMS = [
   {
     description: "Database of Genotypes and Phenotypes",
-    logo: "/home/platforms/ncbi-datasets.webp",
+    logo: "/home/platforms/ncbi.webp",
     name: "NCBI Datasets",
   },
   {

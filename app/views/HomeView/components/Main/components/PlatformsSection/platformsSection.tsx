@@ -1,10 +1,7 @@
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { Stack, Typography } from "@mui/material";
 import { JSX } from "react";
-import {
-  StyledContainer,
-  StyledSectionHeading,
-} from "../Section/section.styles";
+import { SectionTitle, StyledContainer } from "../Section/section.styles";
 import { PLATFORMS } from "./constants";
 import {
   StyledFlexBox,
@@ -22,9 +19,7 @@ export const PlatformsSection = (): JSX.Element => {
     <StyledSection>
       <StyledContainer>
         <StyledStack spacing={2} useFlexGap>
-          <StyledSectionHeading component="h2">
-            Where the data lives
-          </StyledSectionHeading>
+          <SectionTitle component="h2">Where the data lives</SectionTitle>
           <Typography
             color={TYPOGRAPHY_PROPS.COLOR.INK_LIGHT}
             component="h3"

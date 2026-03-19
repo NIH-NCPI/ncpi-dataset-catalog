@@ -1,4 +1,5 @@
 import { JSX } from "react";
+import { DataAccessSection } from "./components/Main/components/DataAccessSection/dataAccessSection";
 import { DimensionsSection } from "./components/Main/components/DimensionsSection/dimensionsSection";
 import { HeroSection } from "./components/Main/components/HeroSection/heroSection";
 import { MetadataSection } from "./components/Main/components/MetadataSection/metadataSection";
@@ -15,6 +16,7 @@ export const HomeView = (): JSX.Element => {
       <DimensionsSection />
       <MetadataSection />
       <PlatformsSection />
+      <DataAccessSection />
     </main>
   );
 };
