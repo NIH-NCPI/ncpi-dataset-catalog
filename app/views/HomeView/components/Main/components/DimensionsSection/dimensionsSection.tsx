@@ -14,6 +14,7 @@ import {
   StyledBox,
   StyledContainer,
   StyledImage,
+  StyledImageBox,
   StyledSection,
 } from "./dimensionsSection.styles";
 import { useAutoCycle } from "./hooks/UseAutoCycle/hook";
@@ -52,10 +53,12 @@ export const DimensionsSection = (): JSX.Element => {
           <Stack flex={1} useFlexGap>
             {Object.entries(IMAGE).map(([value, src]) => (
               <Slide {...SLIDE_PROPS} key={value} in={activeIndex === value}>
-                <StyledImage
-                  alt={ACCORDION[value as keyof typeof ACCORDION].title}
-                  src={src}
-                />
+                <StyledImageBox>
+                  <StyledImage
+                    alt={ACCORDION[value as keyof typeof ACCORDION].title}
+                    src={src}
+                  />
+                </StyledImageBox>
               </Slide>
             ))}
           </Stack>

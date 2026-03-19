@@ -3,31 +3,19 @@ import { PALETTE } from "@databiosphere/findable-ui/lib/styles/common/constants/
 import styled from "@emotion/styled";
 import { Accordion, Box, Container } from "@mui/material";
 
+const MAX_WIDTH = 924;
+const PADDING = 72;
+
 export const StyledSection = styled.section`
   overflow: hidden;
   position: relative; /* positions image container */
-
-  &::after {
-    background: linear-gradient(
-      180deg,
-      rgba(254, 254, 254, 0) 0%,
-      #fefefe 100%
-    );
-    bottom: 0;
-    content: "";
-    display: block;
-    height: 72px;
-    left: calc(50% + 8px);
-    position: absolute;
-    width: 100%;
-  }
 `;
 
 export const StyledContainer = styled(Container)`
   && {
     box-sizing: content-box;
     max-width: 1158px;
-    padding: 72px 16px;
+    padding: ${PADDING}px 16px;
     width: unset;
   }
 `;
@@ -79,9 +67,28 @@ export const StyledAccordion = styled(Accordion)`
   }
 `;
 
+export const StyledImageBox = styled(Box)`
+  height: calc(100% - ${PADDING}px);
+  max-width: ${MAX_WIDTH}px;
+  position: absolute;
+  width: 100%;
+
+  &::after {
+    background: linear-gradient(
+      180deg,
+      rgba(254, 254, 254, 0) 0%,
+      #fefefe 100%
+    );
+    bottom: 0;
+    content: "";
+    display: block;
+    height: ${PADDING}px;
+    position: absolute;
+    width: 100%;
+  }
+`;
+
 export const StyledImage = styled.img`
   height: auto;
-  max-width: 924px;
-  position: absolute;
   width: 100%;
 `;
