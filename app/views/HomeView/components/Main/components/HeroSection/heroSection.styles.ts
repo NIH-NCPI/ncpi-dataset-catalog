@@ -1,11 +1,17 @@
 import styled from "@emotion/styled";
-import { Stack } from "@mui/material";
+import { Container, Stack } from "@mui/material";
+
+export const StyledContainer = styled(Container)`
+  && {
+    box-sizing: content-box;
+    max-width: 752px;
+    padding: 72px 16px;
+    width: unset;
+  }
+`;
 
 export const StyledStack = styled(Stack)`
   align-items: center;
-  margin: 0 auto;
-  max-width: 752px;
-  padding: 72px 0;
 
   h1 {
     background: linear-gradient(180deg, #7f8daa 0%, #373c4f 100%);
