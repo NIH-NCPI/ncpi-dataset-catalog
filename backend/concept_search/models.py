@@ -83,7 +83,7 @@ class ExtractResult(BaseModel):
     intent: Intent = Field(
         default="study",
         description="Query intent: 'study' to search datasets, 'variable' to "
-        "search measured variables, 'auto' when ambiguous (ask user).",
+        "search measured variables, 'ambiguous' when intent is unclear (ask user).",
     )
     mentions: list[RawMention] = Field(default_factory=list)
     message: str | None = Field(
