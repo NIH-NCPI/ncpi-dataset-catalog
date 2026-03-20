@@ -13,6 +13,10 @@ export const StyledContainer = styled(Container)`
   }
 `;
 
+export const StyledSkyline = styled.div`
+  background: linear-gradient(180deg, #c6e1ef 0%, #fefefe 54.81%);
+`;
+
 export const Headline = styled(Stack)`
   gap: 8px;
 `;

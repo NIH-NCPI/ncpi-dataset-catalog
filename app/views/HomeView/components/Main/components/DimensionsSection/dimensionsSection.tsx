@@ -21,8 +21,7 @@ import { useAutoCycle } from "./hooks/UseAutoCycle/hook";
  */
 export const DimensionsSection = (): JSX.Element => {
   const accordionKeys = Object.keys(ACCORDION);
-  const { onSelectIndex } = useAutoCycle(accordionKeys);
-  const activeIndex = "0";
+  const { activeIndex, onSelectIndex } = useAutoCycle(accordionKeys);
   return (
     <StyledSection>
       <StyledContainer>

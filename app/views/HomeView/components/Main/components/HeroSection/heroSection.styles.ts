@@ -1,9 +1,11 @@
+import { UseLayoutSpacing } from "@databiosphere/findable-ui/lib/hooks/UseLayoutSpacing/types";
 import styled from "@emotion/styled";
 import { Stack } from "@mui/material";
 import { StyledContainer as BaseStyledContainer } from "../Section/section.styles";
 
-export const StyledSection = styled.section`
+export const StyledSection = styled.section<UseLayoutSpacing>`
   overflow-x: clip;
+  padding-top: ${({ spacing }) => spacing.top}px;
 `;
 
 export const StyledContainer = styled(BaseStyledContainer)`
