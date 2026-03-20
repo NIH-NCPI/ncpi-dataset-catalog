@@ -1,17 +1,21 @@
 import styled from "@emotion/styled";
-import { Container, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
+import { StyledContainer as BaseStyledContainer } from "../Section/section.styles";
 
-export const StyledContainer = styled(Container)`
-  && {
-    box-sizing: content-box;
-    max-width: 752px;
-    padding: 72px 16px;
-    width: unset;
-  }
+export const StyledSection = styled.section`
+  overflow-x: clip;
+`;
+
+export const StyledContainer = styled(BaseStyledContainer)`
+  justify-items: center;
 `;
 
 export const StyledStack = styled(Stack)`
   align-items: center;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  max-width: 752px;
+  z-index: 1;
 
   h1 {
     background: linear-gradient(180deg, #7f8daa 0%, #373c4f 100%);
