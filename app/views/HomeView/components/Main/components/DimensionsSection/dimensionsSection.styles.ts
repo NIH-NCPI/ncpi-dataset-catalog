@@ -63,18 +63,19 @@ export const StyledAccordion = styled(Accordion)`
     box-shadow: inset 0 -1px 0 0 ${PALETTE.SMOKE_MAIN};
   }
 
-  &.Mui-expanded {
-    &::after {
-      background-color: ${PALETTE.PRIMARY_MAIN};
-      bottom: 0;
-      content: "";
-      display: block;
-      height: 1px;
-      left: 0;
-      opacity: 1;
-      position: absolute;
-      width: 72px;
-    }
+  &::after {
+    background-color: ${PALETTE.PRIMARY_MAIN};
+    bottom: 0;
+    content: "";
+    height: 1px;
+    left: 0;
+    position: absolute;
+    transition: width 0.4s ease;
+    width: 0;
+  }
+
+  &.Mui-expanded::after {
+    width: 100%;
   }
 
   .MuiAccordionSummary-root {
