@@ -1,5 +1,6 @@
 import { FONT } from "@databiosphere/findable-ui/lib/styles/common/constants/font";
 import { PALETTE } from "@databiosphere/findable-ui/lib/styles/common/constants/palette";
+import { bpDownSm } from "@databiosphere/findable-ui/lib/styles/common/mixins/breakpoints";
 import styled from "@emotion/styled";
 import { Container, Stack, Typography } from "@mui/material";
 
@@ -14,7 +15,11 @@ export const StyledContainer = styled(Container)`
 `;
 
 export const StyledSkyline = styled.div`
-  background: linear-gradient(180deg, #c6e1ef 0%, #fefefe 54.81%);
+  background: linear-gradient(180deg, #c6e1ef 0%, #fefefe 54%);
+
+  ${bpDownSm} {
+    background: linear-gradient(180deg, #c6e1ef 0%, #fefefe 36%);
+  }
 `;
 
 export const Headline = styled(Stack)`
