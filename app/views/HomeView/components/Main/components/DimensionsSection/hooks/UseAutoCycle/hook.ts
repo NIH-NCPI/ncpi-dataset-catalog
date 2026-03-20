@@ -5,9 +5,13 @@ import { UseAutoCycle } from "./types";
  * Auto-cycles through a list of index keys on a 5-second interval.
  * Resets the timer when a key is manually selected.
  * @param indexKeys - Index keys to cycle through.
+ * @param autoCycle - Whether to auto-cycle. Defaults to true.
  * @returns active index and selection handler.
  */
-export function useAutoCycle(indexKeys: string[]): UseAutoCycle {
+export function useAutoCycle(
+  indexKeys: string[],
+  autoCycle = true
+): UseAutoCycle {
   const cycleRef = useRef<NodeJS.Timeout | null>(null);
   const [activeIndex, setActiveIndex] = useState<string>(indexKeys[0]);
 
@@ -29,17 +33,18 @@ export function useAutoCycle(indexKeys: string[]): UseAutoCycle {
   const onSelectIndex = useCallback(
     (indexKey: string): void => {
       setActiveIndex(indexKey);
-      startAutoCycle();
+      if (autoCycle) startAutoCycle();
     },
-    [startAutoCycle]
+    [autoCycle, startAutoCycle]
   );
 
   useEffect(() => {
+    if (!autoCycle) return;
     startAutoCycle();
     return (): void => {
       clearAutoCycle();
     };
-  }, [clearAutoCycle, startAutoCycle]);
+  }, [autoCycle, clearAutoCycle, startAutoCycle]);
 
   return { activeIndex, onSelectIndex };
 }

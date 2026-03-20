@@ -65,7 +65,7 @@ export const StyledAccordion = styled(Accordion)`
 
   &.Mui-expanded {
     &::after {
-      background-color: ${PALETTE.INK_MAIN};
+      background-color: ${PALETTE.PRIMARY_MAIN};
       bottom: 0;
       content: "";
       display: block;

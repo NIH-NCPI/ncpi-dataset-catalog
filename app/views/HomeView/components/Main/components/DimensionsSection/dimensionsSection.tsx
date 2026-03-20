@@ -21,7 +21,7 @@ import { useAutoCycle } from "./hooks/UseAutoCycle/hook";
  */
 export const DimensionsSection = (): JSX.Element => {
   const accordionKeys = Object.keys(ACCORDION);
-  const { activeIndex, onSelectIndex } = useAutoCycle(accordionKeys);
+  const { activeIndex, onSelectIndex } = useAutoCycle(accordionKeys, false);
   return (
     <StyledSection>
       <StyledContainer>
@@ -45,8 +45,9 @@ export const DimensionsSection = (): JSX.Element => {
           ))}
         </StyledLeftBox>
         <StyledRightBox>
+          {/* Slide transitions will be driven by activeIndex when all images are added */}
           {Object.entries(IMAGE).map(([value, src]) => (
-            <Slide {...SLIDE_PROPS} key={value} in={activeIndex === value}>
+            <Slide {...SLIDE_PROPS} key={value} in={value === "0"}>
               <StyledImageBox>
                 <StyledImage
                   alt={ACCORDION[value as keyof typeof ACCORDION].title}
