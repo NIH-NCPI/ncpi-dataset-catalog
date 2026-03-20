@@ -9,15 +9,17 @@ import {
   StyledSection,
   StyledStack,
 } from "./heroSection.styles";
+import { Props } from "./types";
 
 /**
  * Renders the hero section, headings and AI assisted search prompt.
+ * @param props - Component props.
  * @returns Hero section.
  */
-export const HeroSection = (): JSX.Element => {
+export const HeroSection = (props: Props): JSX.Element => {
   const { spacing } = useLayoutSpacing();
   return (
-    <StyledSection spacing={spacing}>
+    <StyledSection ref={props.ref} spacing={spacing}>
       <StyledContainer>
         <HeroImage />
         <StyledStack spacing={8} useFlexGap>

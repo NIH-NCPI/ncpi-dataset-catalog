@@ -1,4 +1,5 @@
-import { JSX } from "react";
+import { JSX, useRef } from "react";
+import { useConnect } from "./components/Header/hooks/useConnect/hook";
 import { DataAccessSection } from "./components/Main/components/DataAccessSection/dataAccessSection";
 import { DimensionsSection } from "./components/Main/components/DimensionsSection/dimensionsSection";
 import { HeroSection } from "./components/Main/components/HeroSection/heroSection";
@@ -11,10 +12,12 @@ import { StyledSkyline } from "./components/Main/components/Section/section.styl
  * @returns Home view.
  */
 export const HomeView = (): JSX.Element => {
+  const observerRef = useRef<HTMLDivElement>(null);
+  useConnect(observerRef);
   return (
     <main>
       <StyledSkyline>
-        <HeroSection />
+        <HeroSection ref={observerRef} />
         <DimensionsSection />
       </StyledSkyline>
       <MetadataSection />
