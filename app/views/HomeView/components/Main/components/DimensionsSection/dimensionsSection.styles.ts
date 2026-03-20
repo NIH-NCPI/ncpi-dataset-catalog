@@ -63,6 +63,15 @@ export const StyledAccordion = styled(Accordion)`
     box-shadow: inset 0 -1px 0 0 ${PALETTE.SMOKE_MAIN};
   }
 
+  @keyframes expand-line {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
   &::after {
     background-color: ${PALETTE.PRIMARY_MAIN};
     bottom: 0;
@@ -70,12 +79,11 @@ export const StyledAccordion = styled(Accordion)`
     height: 1px;
     left: 0;
     position: absolute;
-    transition: width 0.4s ease;
     width: 0;
   }
 
   &.Mui-expanded::after {
-    width: 100%;
+    animation: expand-line 5000ms linear forwards;
   }
 
   .MuiAccordionSummary-root {
@@ -97,6 +105,12 @@ export const StyledAccordion = styled(Accordion)`
     font: ${FONT.BODY_SMALL_400};
     margin-bottom: 4px;
     padding: 0;
+  }
+
+  &:hover {
+    .MuiAccordionSummary-content {
+      color: ${PALETTE.INK_MAIN};
+    }
   }
 `;
 
