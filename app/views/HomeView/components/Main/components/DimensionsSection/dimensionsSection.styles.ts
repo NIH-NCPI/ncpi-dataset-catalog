@@ -43,7 +43,7 @@ export const StyledLeftBox = styled(Box)`
 
 export const StyledRightBox = styled(Box)`
   grid-column: 7 / -2;
-  grid-row: 1 / span all;
+  grid-row: 1 / 3;
 
   ${bpDownMd} {
     grid-column: 7 / -1;
