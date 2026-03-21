@@ -6,14 +6,6 @@ export const SOCIALS = {
     label: "GitHub",
     url: "https://github.com/NIH-NCPI/ncpi-dataset-catalog",
   },
-  X: {
-    label: "X",
-    url: "https://twitter.com/NIHCloudInterop",
-  },
-  YOUTUBE: {
-    label: "YouTube",
-    url: "https://www.youtube.com/@ncpi-acc",
-  },
 };
 
 export const socialMedia: SocialMedia = {
@@ -21,14 +13,6 @@ export const socialMedia: SocialMedia = {
     {
       ...SOCIALS.GITHUB,
       Icon: C.GitHubIcon,
-    },
-    {
-      ...SOCIALS.X,
-      Icon: C.XIcon,
-    },
-    {
-      ...SOCIALS.YOUTUBE,
-      Icon: C.YouTubeIcon,
     },
   ],
 };
