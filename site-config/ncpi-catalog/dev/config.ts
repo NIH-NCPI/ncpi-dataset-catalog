@@ -162,6 +162,15 @@ const config: SiteConfig = {
   },
   redirectRootToPath: "/",
   themeOptions: {
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          html: {
+            overscrollBehavior: "none",
+          },
+        },
+      },
+    },
     palette: {
       primary: {
         dark: "#003E76",
