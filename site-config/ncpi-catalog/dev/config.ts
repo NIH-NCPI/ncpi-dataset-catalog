@@ -1,29 +1,27 @@
-import { ANCHOR_TARGET } from "@databiosphere/findable-ui/lib/components/Links/common/entities";
-import { SiteConfig } from "@databiosphere/findable-ui/lib/config/entities";
 import { VIEW_KIND } from "@databiosphere/findable-ui/lib/common/categories/views/types";
+import { DataDictionaryConfig } from "@databiosphere/findable-ui/lib/common/entities";
+import { FILTER_SORT } from "@databiosphere/findable-ui/lib/common/filters/sort/config/types";
+import { SiteConfig } from "@databiosphere/findable-ui/lib/config/entities";
+import { buildDataDictionary } from "app/viewModelBuilders/dataDictionaryMapper/dataDictionaryMapper";
+import { TABLE_OPTIONS } from "app/viewModelBuilders/dataDictionaryMapper/tableOptions";
+import { ROUTES } from "routes/constants";
 import * as C from "../../../app/components/index";
 import { GIT_HUB_REPO_URL } from "../../common/constants";
 import {
   NCPI_CATALOG_CATEGORY_KEY,
   NCPI_CATALOG_CATEGORY_LABEL,
 } from "../category";
+import dataDictionary from "./dataDictionary/data-dictionary.json";
+import { exportConfig } from "./export/export";
 import { platformsEntityConfig } from "./index/platformsEntityConfig";
 import { studiesEntityConfig } from "./index/studiesEntityConfig";
-import { exportConfig } from "./export/export";
 import { socialMedia } from "./socialMedia";
-import { ROUTES } from "routes/constants";
-import dataDictionary from "./dataDictionary/data-dictionary.json";
-import { buildDataDictionary } from "app/viewModelBuilders/dataDictionaryMapper/dataDictionaryMapper";
-import { TABLE_OPTIONS } from "app/viewModelBuilders/dataDictionaryMapper/tableOptions";
-import { DataDictionaryConfig } from "@databiosphere/findable-ui/lib/common/entities";
-import { FILTER_SORT } from "@databiosphere/findable-ui/lib/common/filters/sort/config/types";
 
 const logoNcpi = "/images/logoNCPI.png";
 
 // Template constants
 const APP_TITLE = "NCPI Dataset Catalog";
 const BROWSER_URL = "https://ncpi-data.dev.clevercanary.com";
-const PORTAL_URL = "https://ncpi-acc.org"; // https://www.ncpi-acc.org/
 const SLOGAN = "NIH Cloud Platform Interoperability Effort";
 
 const config: SiteConfig = {
@@ -132,33 +130,14 @@ const config: SiteConfig = {
   gitHubUrl: GIT_HUB_REPO_URL,
   layout: {
     footer: {
-      Branding: C.Logo({
-        alt: APP_TITLE,
-        height: 36,
-        link: PORTAL_URL,
-        src: logoNcpi,
-        target: ANCHOR_TARGET.BLANK,
-      }),
-      navLinks: [
-        {
-          label: "Status",
-          url: "/status",
-        },
-        {
-          label: "Feedback & Support",
-          target: ANCHOR_TARGET.BLANK,
-          url: "https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/new?template=feedback.md",
-        },
-      ],
-      socials: socialMedia.socials,
-      versionInfo: true,
+      /* Footer is overridden by app/components/Layout/components/Footer */
     },
     header: {
       authenticationEnabled: false,
       logo: C.Logo({
         alt: APP_TITLE,
         height: 36,
-        link: "/platforms",
+        link: "/",
         src: logoNcpi,
       }),
       navigation: [
@@ -173,11 +152,6 @@ const config: SiteConfig = {
             label: "Data Dictionary",
             url: ROUTES.DATA_DICTIONARY,
           },
-          {
-            label: C.LabelIconMenuItem({ label: "Visit ncpi-acc.org" }),
-            target: ANCHOR_TARGET.BLANK,
-            url: PORTAL_URL,
-          },
         ],
       ],
       searchEnabled: false,
@@ -186,12 +160,22 @@ const config: SiteConfig = {
       socialMedia: socialMedia,
     },
   },
-  redirectRootToPath: "/platforms",
+  redirectRootToPath: "/",
   themeOptions: {
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          html: {
+            overscrollBehavior: "none",
+          },
+        },
+      },
+    },
     palette: {
       primary: {
         dark: "#003E76",
-        main: "#035C94",
+        lightest: "#E6EFF6",
+        main: "#28285B",
       },
     },
   },
