@@ -789,7 +789,7 @@ class TestRouteHandlers:
             json={
                 "query": "change nonexistent to asthma",
                 "previousQuery": {
-                    "intent": "auto",
+                    "intent": "ambiguous",
                     "mentions": [
                         {
                             "facet": "focus",
@@ -802,7 +802,7 @@ class TestRouteHandlers:
             },
         )
         assert resp.status_code == 200
-        # Pipeline's "study" wins because previous was "auto"
+        # Pipeline's "study" wins because previous was "ambiguous"
         assert resp.json()["intent"] == "study"
         # Pipeline called with full query and previous_query (add behavior)
         call_args = mock_pipeline.call_args
@@ -898,10 +898,10 @@ class TestRouteHandlers:
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_pipeline")
     @patch("concept_search.api.run_router")
-    def test_route_add_lets_pipeline_win_when_auto(
+    def test_route_add_lets_pipeline_win_when_ambiguous(
         self, mock_router, mock_pipeline, mock_index
     ) -> None:
-        """When previous intent is 'auto', let the pipeline resolve it."""
+        """When previous intent is 'ambiguous', let the pipeline resolve it."""
         mock_router.return_value = RouteAdd()
         mock_pipeline.return_value = QueryModel(
             intent="variable",
@@ -919,7 +919,7 @@ class TestRouteHandlers:
             json={
                 "query": "also blood pressure",
                 "previousQuery": {
-                    "intent": "auto",
+                    "intent": "ambiguous",
                     "mentions": [
                         {
                             "facet": "focus",
@@ -932,16 +932,16 @@ class TestRouteHandlers:
             },
         )
         assert resp.status_code == 200
-        # Pipeline's "variable" wins because previous was "auto"
+        # Pipeline's "variable" wins because previous was "ambiguous"
         assert resp.json()["intent"] == "variable"
 
     @patch("concept_search.api.get_index")
     @patch("concept_search.api.run_pipeline")
     @patch("concept_search.api.run_router")
-    def test_route_replace_lets_pipeline_win_when_auto(
+    def test_route_replace_lets_pipeline_win_when_ambiguous(
         self, mock_router, mock_pipeline, mock_index
     ) -> None:
-        """When previous intent is 'auto', replace lets pipeline resolve it."""
+        """When previous intent is 'ambiguous', replace lets pipeline resolve it."""
         mock_router.return_value = RouteReplace(
             original_text="diabetes",
             new_text="asthma",
@@ -959,7 +959,7 @@ class TestRouteHandlers:
             json={
                 "query": "change diabetes to asthma",
                 "previousQuery": {
-                    "intent": "auto",
+                    "intent": "ambiguous",
                     "mentions": [
                         {
                             "facet": "focus",
@@ -972,7 +972,7 @@ class TestRouteHandlers:
             },
         )
         assert resp.status_code == 200
-        # Pipeline's "study" wins because previous was "auto"
+        # Pipeline's "study" wins because previous was "ambiguous"
         assert resp.json()["intent"] == "study"
 
     @patch("concept_search.api.get_index")

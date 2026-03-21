@@ -331,11 +331,7 @@ def diagnose_empty_results(
     # Single mention — skip drop analysis
     if len(mentions) == 1:
         noun = "results" if is_variable else "indexed studies"
-        return (
-            f"{header}\n"
-            f"This concept has no {noun}. "
-            "Try rephrasing or using a more common term."
-        )
+        return f"{header}\nThis concept has no {noun}. Try rephrasing or using a more common term."
 
     # Drop-one-at-a-time analysis
     drop_results: list[tuple[str, int]] = []
@@ -367,15 +363,12 @@ def diagnose_empty_results(
     if len(bottlenecks) >= len(drop_results) - 1 and len(has_results) <= 1:
         # Case A: single mention is the bottleneck
         for label, count in has_results[:3]:
-            lines.append(
-                f'Dropping "{label}" would match {count} {_count_noun(count)}.'
-            )
+            lines.append(f'Dropping "{label}" would match {count} {_count_noun(count)}.')
     else:
         # Case B: intersection too narrow
         lines.append("Each filter alone has results, but the combination is too narrow.")
         suggestions = [
-            f'"{label}" (\u2192 {count} {_count_noun(count)})'
-            for label, count in has_results[:3]
+            f'"{label}" (\u2192 {count} {_count_noun(count)})' for label, count in has_results[:3]
         ]
         lines.append(f"Try removing {_oxford_join(suggestions, 'or')}.")
 

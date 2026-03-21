@@ -24,7 +24,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from pydantic.alias_generators import to_camel
 
 # Valid query intent values.
-Intent = Literal["auto", "study", "variable"]
+Intent = Literal["ambiguous", "study", "variable"]
 
 
 class Facet(StrEnum):
@@ -83,7 +83,7 @@ class ExtractResult(BaseModel):
     intent: Intent = Field(
         default="study",
         description="Query intent: 'study' to search datasets, 'variable' to "
-        "search measured variables, 'auto' when ambiguous (ask user).",
+        "search measured variables, 'ambiguous' when intent is unclear (ask user).",
     )
     mentions: list[RawMention] = Field(default_factory=list)
     message: str | None = Field(

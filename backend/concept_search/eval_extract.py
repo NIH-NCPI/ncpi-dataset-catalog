@@ -434,10 +434,10 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
         ),
         # --- Intent detection: ambiguous queries ---
         Case(
-            name="intent-auto-ambiguous",
+            name="intent-ambiguous",
             inputs="blood pressure",
             expected_output=ExtractResult(
-                intent="auto",
+                intent="ambiguous",
                 mentions=[_rm("blood pressure", Facet.MEASUREMENT)],
             ),
         ),
