@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from "react";
+import { RefObject, useEffect, useLayoutEffect } from "react";
 import { suppressTransition } from "./utils";
 
 const DATA_ATTRIBUTE = "data-header-state";
@@ -23,7 +23,7 @@ const INTERSECTION_OPTIONS = { rootMargin: "0px 0px 0px 0px", threshold: 0 };
  * @param ref - Ref to the element to observe.
  */
 export function useConnect(ref: RefObject<HTMLElement | null>): void {
-  useEffect(() => {
+  useLayoutEffect(() => {
     suppressTransition();
   }, []);
 
