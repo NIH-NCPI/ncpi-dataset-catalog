@@ -43,7 +43,7 @@ export interface PageProps extends AzulEntitiesStaticResponse {
 
 export type NextPageWithComponent = NextPage & {
   Header?: typeof DXHeader;
-  Main?: typeof DXMain;
+  Main?: React.ComponentType<{ children?: React.ReactNode }>;
 };
 
 export type AppPropsWithComponent = AppProps & {
