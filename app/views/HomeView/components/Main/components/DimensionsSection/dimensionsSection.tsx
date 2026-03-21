@@ -1,6 +1,6 @@
 import { AccordionDetails, AccordionSummary, Slide } from "@mui/material";
 import { JSX } from "react";
-import { SectionTitle, StyledContainer } from "../Section/section.styles";
+import { StyledContainer } from "../Section/section.styles";
 import { ACCORDION, IMAGE } from "./accordion";
 import { ACCORDION_PROPS, SLIDE_PROPS } from "./constants";
 import {
@@ -11,6 +11,7 @@ import {
   StyledLeftBox,
   StyledRightBox,
   StyledSection,
+  StyledSectionTitle,
 } from "./dimensionsSection.styles";
 import { useAutoCycle } from "./hooks/UseAutoCycle/hook";
 
@@ -26,10 +27,10 @@ export const DimensionsSection = (): JSX.Element => {
     <StyledSection>
       <StyledContainer>
         <StyledHeadline>
-          <SectionTitle component="h2">
-            <div>Describe your research question.</div>
-            <div>We search six dimensions.</div>
-          </SectionTitle>
+          <StyledSectionTitle component="h2">
+            <span>Describe your research question.</span>
+            <span>We search six dimensions.</span>
+          </StyledSectionTitle>
         </StyledHeadline>
         <StyledLeftBox>
           {Object.entries(ACCORDION).map(([value, { details, title }]) => (

@@ -7,7 +7,7 @@ import {
 } from "@databiosphere/findable-ui/lib/styles/common/mixins/breakpoints";
 import styled from "@emotion/styled";
 import { Accordion, Box } from "@mui/material";
-import { Headline } from "../Section/section.styles";
+import { Headline, SectionTitle } from "../Section/section.styles";
 
 const CONTAINER_WIDTH = 924;
 const SPACING = 72;
@@ -28,6 +28,11 @@ export const StyledHeadline = styled(Headline)`
     grid-column: 1 / -1;
   }
 `;
+
+export const StyledSectionTitle = styled(SectionTitle)`
+  display: flex;
+  flex-direction: column;
+` as typeof SectionTitle;
 
 export const StyledLeftBox = styled(Box)`
   grid-column: 2 / span 4;
