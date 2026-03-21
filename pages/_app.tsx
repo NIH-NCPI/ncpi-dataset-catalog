@@ -5,7 +5,6 @@ import { ErrorBoundary } from "@databiosphere/findable-ui/lib/components/ErrorBo
 import { Head } from "@databiosphere/findable-ui/lib/components/Head/head";
 import { AppLayout } from "@databiosphere/findable-ui/lib/components/Layout/components/AppLayout/appLayout.styles";
 import { Floating } from "@databiosphere/findable-ui/lib/components/Layout/components/Floating/floating";
-import { Footer } from "@databiosphere/findable-ui/lib/components/Layout/components/Footer/footer";
 import { Header as DXHeader } from "@databiosphere/findable-ui/lib/components/Layout/components/Header/header";
 import { Main as DXMain } from "@databiosphere/findable-ui/lib/components/Layout/components/Main/main";
 import { setFeatureFlags } from "@databiosphere/findable-ui/lib/hooks/useFeatureFlag/common/utils";
@@ -31,6 +30,7 @@ import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { JSX, useEffect } from "react";
 import TagManager from "react-gtm-module";
+import { Footer } from "../app/components/Layout/components/Footer/footer";
 import { useEntities } from "../app/services/workflows/hooks/UseEntities/hook";
 import { BREAKPOINTS } from "../site-config/common/constants";
 
@@ -60,7 +60,7 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
 
   const { ai, analytics, layout, redirectRootToPath, themeOptions } = appConfig;
   const { gtmAuth, gtmId, gtmPreview } = analytics || {};
-  const { floating, footer, header } = layout || {};
+  const { floating, header } = layout || {};
   const theme = createAppTheme(themeOptions);
   const { entityListType = "platforms", pageTitle } = pageProps as PageProps;
   const Main = Component.Main || DXMain;
@@ -132,7 +132,7 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
                         </DataDictionaryStateProvider>
                       </ExploreStateProvider>
                     </ChatProvider>
-                    <Footer {...footer} />
+                    <Footer />
                   </AppLayout>
                 </LayoutDimensionsProvider>
               </GoogleSignInAuthenticationProvider>

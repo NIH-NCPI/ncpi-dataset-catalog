@@ -1,7 +1,6 @@
 import { VIEW_KIND } from "@databiosphere/findable-ui/lib/common/categories/views/types";
 import { DataDictionaryConfig } from "@databiosphere/findable-ui/lib/common/entities";
 import { FILTER_SORT } from "@databiosphere/findable-ui/lib/common/filters/sort/config/types";
-import { ANCHOR_TARGET } from "@databiosphere/findable-ui/lib/components/Links/common/entities";
 import { SiteConfig } from "@databiosphere/findable-ui/lib/config/entities";
 import { buildDataDictionary } from "app/viewModelBuilders/dataDictionaryMapper/dataDictionaryMapper";
 import { TABLE_OPTIONS } from "app/viewModelBuilders/dataDictionaryMapper/tableOptions";
@@ -23,7 +22,6 @@ const logoNcpi = "/images/logoNCPI.png";
 // Template constants
 const APP_TITLE = "NCPI Dataset Catalog";
 const BROWSER_URL = "https://ncpi-data.dev.clevercanary.com";
-const PORTAL_URL = "https://ncpi-acc.org"; // https://www.ncpi-acc.org/
 const SLOGAN = "NIH Cloud Platform Interoperability Effort";
 
 const config: SiteConfig = {
@@ -132,26 +130,7 @@ const config: SiteConfig = {
   gitHubUrl: GIT_HUB_REPO_URL,
   layout: {
     footer: {
-      Branding: C.Logo({
-        alt: APP_TITLE,
-        height: 36,
-        link: PORTAL_URL,
-        src: logoNcpi,
-        target: ANCHOR_TARGET.BLANK,
-      }),
-      navLinks: [
-        {
-          label: "Status",
-          url: "/status",
-        },
-        {
-          label: "Feedback & Support",
-          target: ANCHOR_TARGET.BLANK,
-          url: "https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/new?template=feedback.md",
-        },
-      ],
-      socials: socialMedia.socials,
-      versionInfo: true,
+      /* Footer is overridden by app/components/Layout/components/Footer */
     },
     header: {
       authenticationEnabled: false,
@@ -172,11 +151,6 @@ const config: SiteConfig = {
           {
             label: "Data Dictionary",
             url: ROUTES.DATA_DICTIONARY,
-          },
-          {
-            label: C.LabelIconMenuItem({ label: "Visit ncpi-acc.org" }),
-            target: ANCHOR_TARGET.BLANK,
-            url: PORTAL_URL,
           },
         ],
       ],
