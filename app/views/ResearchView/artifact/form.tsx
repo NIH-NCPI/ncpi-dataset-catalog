@@ -79,7 +79,7 @@ export function MultiTurnQueryProvider({
       input.placeholder =
         "Refine, e.g. \u201Calso where BMI was measured\u201D";
     }
-  });
+  }, [lastMessage]);
 
   const removeFilter = useCallback(
     (facet: string, value: string): void => {
