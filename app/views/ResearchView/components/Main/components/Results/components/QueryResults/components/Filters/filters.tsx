@@ -3,7 +3,7 @@ import { Props } from "./types";
 import { Stack, Typography } from "@mui/material";
 import { STACK_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/stack";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
-import { getFacet, getFilters } from "./utils";
+import { getFilters } from "./utils";
 import { CHIP_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/chip";
 import { RowData } from "@tanstack/react-table";
 import { useMultiTurn } from "../../../../../../../../artifact/form";
@@ -37,18 +37,6 @@ function getConsentDisplayLabel(value: string, facet: string): string {
 }
 
 /**
- * Returns a display-friendly category label, overriding column headers where
- * needed (e.g. "Consent Code" → "Study Consent" for tag-based filters).
- * @param facet - The facet id.
- * @param categoryKey - The default category key from the table column header.
- * @returns Display label for the chip category.
- */
-function getCategoryLabel(facet: string, categoryKey: string): string {
-  if (facet === "consentCode") return "Study Consent";
-  return categoryKey;
-}
-
-/**
  * Filters component to display applied filters from the assistant message.
  * @param props - Component props.
  * @param props.message - Assistant message.
@@ -77,32 +65,40 @@ export const Filters = <T extends RowData>({
         Filters
       </Typography>
       {filters.map((filter) =>
-        filter.value.map((value) => (
-          <StyledChip
-            key={`${filter.categoryKey}-${value}`}
-            deleteIcon={<CloseRounded color="inherit" />}
-            label={
-              <Fragment>
-                <Typography
-                  color={TYPOGRAPHY_PROPS.COLOR.INK_LIGHT}
-                  variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_400}
-                  sx={{ textTransform: "capitalize" }}
-                >
-                  {getCategoryLabel(filter.facet, filter.categoryKey)}:{" "}
-                </Typography>
-                <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_500}>
-                  {getConsentDisplayLabel(String(value), filter.facet)}
-                </Typography>
-              </Fragment>
-            }
-            onDelete={(): void => {
-              onSetQuery(`Removed filter ${filter.facet}: ${value}`);
-              removeFilter(getFacet(table, filter.categoryKey), String(value));
-            }}
-            size={CHIP_PROPS.SIZE.MEDIUM}
-            variant={CHIP_PROPS.VARIANT.DEFAULT}
-          />
-        ))
+        filter.value.map((value) => {
+          const displayValue = getConsentDisplayLabel(
+            String(value),
+            filter.categoryKey
+          );
+          return (
+            <StyledChip
+              key={`${filter.categoryKey}-${value}`}
+              deleteIcon={<CloseRounded color="inherit" />}
+              label={
+                <Fragment>
+                  <Typography
+                    color={TYPOGRAPHY_PROPS.COLOR.INK_LIGHT}
+                    variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_400}
+                    sx={{ textTransform: "capitalize" }}
+                  >
+                    {filter.categoryLabel}:{" "}
+                  </Typography>
+                  <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_SMALL_500}>
+                    {displayValue}
+                  </Typography>
+                </Fragment>
+              }
+              onDelete={(): void => {
+                onSetQuery(
+                  `Removed filter ${filter.categoryLabel}: ${displayValue}`
+                );
+                removeFilter(filter.categoryKey, String(value));
+              }}
+              size={CHIP_PROPS.SIZE.MEDIUM}
+              variant={CHIP_PROPS.VARIANT.DEFAULT}
+            />
+          );
+        })
       )}
     </Stack>
   );
