@@ -107,6 +107,12 @@ export function MultiTurnQueryProvider({
         signal: controller.signal,
       })
         .then(async (res) => {
+          if (res.status === 429) {
+            dispatch.onSetError(
+              "You're sending too many requests. Please wait a moment."
+            );
+            return;
+          }
           if (!res.ok) throw new Error(`Search failed (${res.status})`);
           const data: MessageResponse = await res.json();
           lastQueryRef.current = data.query;
