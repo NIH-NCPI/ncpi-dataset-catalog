@@ -25,7 +25,7 @@ export const PlatformsSection = (): JSX.Element => {
         <StyledHeadline useFlexGap>
           <SectionTitle component="h2">Where the data lives</SectionTitle>
           <SectionSubtitle component="h3">
-            We connect you to datasets across four NIH cloud platforms.
+            We connect you to datasets across five NIH cloud platforms.
           </SectionSubtitle>
         </StyledHeadline>
         <StyledStack useFlexGap>
