@@ -5,7 +5,6 @@ import { ErrorBoundary } from "@databiosphere/findable-ui/lib/components/ErrorBo
 import { Head } from "@databiosphere/findable-ui/lib/components/Head/head";
 import { AppLayout } from "@databiosphere/findable-ui/lib/components/Layout/components/AppLayout/appLayout.styles";
 import { Floating } from "@databiosphere/findable-ui/lib/components/Layout/components/Floating/floating";
-import { Header as DXHeader } from "@databiosphere/findable-ui/lib/components/Layout/components/Header/header";
 import { Main as DXMain } from "@databiosphere/findable-ui/lib/components/Layout/components/Main/main";
 import { setFeatureFlags } from "@databiosphere/findable-ui/lib/hooks/useFeatureFlag/common/utils";
 import { TerraProfileProvider } from "@databiosphere/findable-ui/lib/providers/authentication/terra/provider";
@@ -24,6 +23,7 @@ import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import { createTheme, CssBaseline, Theme, ThemeProvider } from "@mui/material";
 import { createBreakpoints } from "@mui/system";
 import { deepmerge } from "@mui/utils";
+import { StyledHeader } from "app/components/Layout/components/Header/header.styles";
 import { config } from "app/config/config";
 import { FEATURES } from "app/shared/entities";
 import { NextPage } from "next";
@@ -38,11 +38,11 @@ const FEATURE_FLAGS = Object.values(FEATURES);
 const SESSION_TIMEOUT = 15 * 60 * 1000; // 15 minutes
 
 export interface PageProps extends AzulEntitiesStaticResponse {
+  homePage?: boolean;
   pageTitle?: string;
 }
 
 export type NextPageWithComponent = NextPage & {
-  Header?: typeof DXHeader;
   Main?: React.ComponentType<{ children?: React.ReactNode }>;
 };
 
@@ -62,9 +62,12 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
   const { gtmAuth, gtmId, gtmPreview } = analytics || {};
   const { floating, header } = layout || {};
   const theme = createAppTheme(themeOptions);
-  const { entityListType = "platforms", pageTitle } = pageProps as PageProps;
+  const {
+    entityListType = "platforms",
+    homePage,
+    pageTitle,
+  } = pageProps as PageProps;
   const Main = Component.Main || DXMain;
-  const Header = Component.Header || DXHeader;
   const { url: aiUrl } = ai || {};
 
   // Initialize Google Tag Manager.
@@ -101,7 +104,7 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
                         )
                       }
                     >
-                      <Header {...header} />
+                      <StyledHeader {...header} transparent={homePage} />
                     </ThemeProvider>
                     <ChatProvider initialArgs={ai?.prompt} url={aiUrl}>
                       <ExploreStateProvider entityListType={entityListType}>
