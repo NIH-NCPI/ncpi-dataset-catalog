@@ -1,24 +1,19 @@
 import { useConfig } from "@databiosphere/findable-ui/lib/hooks/useConfig";
-import { QueryContext } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/context";
 import { useChatDispatch } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatDispatch/hook";
+import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
+import { isAssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards";
 import {
   MessageResponse,
   Mention,
 } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
 import {
-  OnSubmitOptions,
-  OnSubmitPayload,
-} from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/types";
-import {
   createContext,
-  FormEvent,
   JSX,
   ReactNode,
   useCallback,
   useContext,
   useEffect,
   useRef,
-  useState,
 } from "react";
 import { getSearchApiUrl } from "../../../utils/searchApiUrl";
 
@@ -45,11 +40,12 @@ interface MultiTurnQueryProviderProps {
 }
 
 /**
- * Provider that shadows the library's QueryContext with multi-turn support.
- * Tracks the last query response and includes previousQuery in submissions.
+ * Provider that tracks query state for multi-turn support.
+ * Observes assistant messages from the chat state to capture the latest
+ * QueryModel, enabling filter removal via requery.
  * @param props - Component props.
  * @param props.children - Children to render.
- * @returns Provider wrapping children with multi-turn query context.
+ * @returns Provider wrapping children with multi-turn context.
  */
 export function MultiTurnQueryProvider({
   children,
@@ -59,91 +55,35 @@ export function MultiTurnQueryProvider({
   const dispatch = useChatDispatch();
   const lastQueryRef = useRef<MessageResponse["query"] | null>(null);
   const abortRef = useRef<AbortController | null>(null);
-  const [hasResults, setHasResults] = useState(false);
 
-  const doFetch = useCallback(
-    async (
-      query: string,
-      previousQuery: MessageResponse["query"] | null,
-      options: OnSubmitOptions
-    ): Promise<void> => {
-      if (!url) {
-        dispatch.onSetError(
-          "Search API URL is not configured. Set NEXT_PUBLIC_SEARCH_API_URL or config.ai.url."
-        );
-        dispatch.onSetStatus(false);
-        return;
+  // Sync lastQueryRef from chat state whenever a new assistant message arrives.
+  const { state } = useChatState();
+  const messages = state.messages;
+  const lastMessage = messages[messages.length - 1];
+  useEffect(() => {
+    if (lastMessage && isAssistantMessage(lastMessage)) {
+      const response = (lastMessage as { response: MessageResponse }).response;
+      if (response?.query) {
+        lastQueryRef.current = response.query;
       }
-      // Abort any in-flight request.
-      abortRef.current?.abort();
-      const controller = new AbortController();
-      abortRef.current = controller;
-      const timeout = setTimeout(() => controller.abort(), 90_000);
-      try {
-        const body: Record<string, unknown> = { query };
-        if (previousQuery) {
-          body.previousQuery = previousQuery;
-        }
-        const res = await fetch(url, {
-          body: JSON.stringify(body),
-          headers: { "Content-Type": "application/json" },
-          method: "POST",
-          signal: controller.signal,
-        });
-        if (res.status === 429) {
-          dispatch.onSetError(
-            "You're sending too many requests. Please wait a moment."
-          );
-          return;
-        }
-        if (!res.ok) {
-          throw new Error(`Search failed (${res.status})`);
-        }
-        const data: MessageResponse = await res.json();
-        lastQueryRef.current = data.query;
-        setHasResults(true);
-        dispatch.onSetMessage(data);
-        options.onSuccess?.(data);
-      } catch (error) {
-        if (controller.signal.aborted) return;
-        const message =
-          error instanceof Error ? error.message : "An unknown error occurred.";
-        dispatch.onSetError(message);
-        if (error instanceof Error) options.onError?.(error);
-      } finally {
-        clearTimeout(timeout);
-        dispatch.onSetStatus(false);
-        if (options.onSettled) {
-          const form = document.querySelector("form");
-          if (form) options.onSettled(form);
-        }
-      }
-    },
-    [dispatch, url]
-  );
+    }
+  }, [lastMessage]);
 
-  const onSubmit = useCallback(
-    async (
-      e: FormEvent<HTMLFormElement>,
-      payload: OnSubmitPayload,
-      options: OnSubmitOptions
-    ): Promise<void> => {
-      e.preventDefault();
-      if (options.status.loading) return;
-      const { query } = payload;
-      if (!query) return;
-      dispatch.onSetQuery(query);
-      dispatch.onSetStatus(true);
-      e.currentTarget.reset();
-      options.onMutate?.(e.currentTarget, query);
-      await doFetch(query, lastQueryRef.current, options);
-    },
-    [dispatch, doFetch]
-  );
+  // Update the input placeholder to indicate refine mode after first results.
+  useEffect(() => {
+    if (!lastQueryRef.current) return;
+    const input = document.querySelector<HTMLTextAreaElement>(
+      'textarea[name="ai-prompt"]'
+    );
+    if (input) {
+      input.placeholder =
+        "Refine, e.g. \u201Calso where BMI was measured\u201D";
+    }
+  }, [lastMessage]);
 
   const removeFilter = useCallback(
     (facet: string, value: string): void => {
-      if (!lastQueryRef.current) return;
+      if (!lastQueryRef.current || !url) return;
       const filtered = lastQueryRef.current.mentions
         .map((m: Mention) => {
           if (m.facet !== facet) return m;
@@ -155,30 +95,48 @@ export function MultiTurnQueryProvider({
       const updatedQuery = { ...lastQueryRef.current, mentions: filtered };
       lastQueryRef.current = updatedQuery;
       dispatch.onSetStatus(true);
-      doFetch("", updatedQuery, { status: { loading: false } });
+      // Abort any in-flight request.
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
+      const timeout = setTimeout(() => controller.abort(), 90_000);
+      fetch(url, {
+        body: JSON.stringify({ previousQuery: updatedQuery, query: "" }),
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        signal: controller.signal,
+      })
+        .then(async (res) => {
+          if (res.status === 429) {
+            dispatch.onSetError(
+              "You're sending too many requests. Please wait a moment."
+            );
+            return;
+          }
+          if (!res.ok) throw new Error(`Search failed (${res.status})`);
+          const data: MessageResponse = await res.json();
+          lastQueryRef.current = data.query;
+          dispatch.onSetMessage(data);
+        })
+        .catch((error) => {
+          if (controller.signal.aborted) return;
+          const message =
+            error instanceof Error
+              ? error.message
+              : "An unknown error occurred.";
+          dispatch.onSetError(message);
+        })
+        .finally(() => {
+          clearTimeout(timeout);
+          dispatch.onSetStatus(false);
+        });
     },
-    [dispatch, doFetch]
+    [dispatch, url]
   );
-
-  // Update the input placeholder to indicate refine mode after first results.
-  // The library's Assistant component sets placeholder from chat state PROMPT
-  // messages, which we can't modify. Override via DOM after each render.
-  useEffect(() => {
-    if (!hasResults) return;
-    const input = document.querySelector<HTMLTextAreaElement>(
-      'textarea[name="ai-prompt"]'
-    );
-    if (input) {
-      input.placeholder =
-        "Refine, e.g. \u201Calso where BMI was measured\u201D";
-    }
-  });
 
   return (
     <MultiTurnContext.Provider value={{ removeFilter }}>
-      <QueryContext.Provider value={{ onSubmit }}>
-        {children}
-      </QueryContext.Provider>
+      {children}
     </MultiTurnContext.Provider>
   );
 }
