@@ -1,8 +1,30 @@
-import type { PlaywrightTestConfig } from "@playwright/test";
-const config: PlaywrightTestConfig = {
+import { defineConfig } from "@playwright/test";
+
+export default defineConfig({
+  fullyParallel: false,
+  projects: [{ name: "chromium", use: { browserName: "chromium" } }],
+  reporter: [["list"], ["html", { open: "never" }]],
+  retries: 1,
   testDir: "e2e",
+  timeout: 90_000,
   use: {
-    baseURL: "http://localhost:3000/explore/",
+    baseURL: "http://localhost:3000",
   },
-};
-export default config;
+  webServer: [
+    {
+      command: "make -C backend start",
+      port: 8000,
+      reuseExistingServer: true,
+      timeout: 30_000,
+    },
+    {
+      command:
+        "./scripts/dev.sh ncpi-catalog dev && ./scripts/set-version.sh dev && ./scripts/sync-api.sh && npx next dev",
+      env: { NEXT_PUBLIC_SEARCH_API_URL: "http://localhost:8000/search" },
+      port: 3000,
+      reuseExistingServer: true,
+      timeout: 60_000,
+    },
+  ],
+  workers: 1,
+});
