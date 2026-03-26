@@ -67,8 +67,7 @@ async function postSearch(
 ): Promise<MessageResponse | undefined> {
   abortRef.current?.abort();
   const controller = new AbortController();
-  (abortRef as React.MutableRefObject<AbortController | null>).current =
-    controller;
+  abortRef.current = controller;
   const timeout = setTimeout(() => controller.abort(), 90_000);
 
   try {
@@ -187,6 +186,8 @@ export function MultiTurnQueryProvider({
       if (data) {
         lastQueryRef.current = data.query;
         options.onSuccess?.(data);
+      } else {
+        options.onError?.(new Error("Search request failed"));
       }
       options.onSettled?.(form);
     },
