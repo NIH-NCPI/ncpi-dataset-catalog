@@ -1,3 +1,4 @@
+import { LAYOUT_STYLE_NO_CONTRAST_DEFAULT } from "@databiosphere/findable-ui/lib/components/Layout/components/ContentLayout/common/constants";
 import { ContentView } from "@databiosphere/findable-ui/lib/views/ContentView/contentView";
 import { JSX } from "react";
 import { Content } from "../../components/Layout/components/Content/content";
@@ -11,6 +12,7 @@ import { DIMENSIONS } from "./constants";
 export const ExampleQueriesView = (): JSX.Element => {
   return (
     <ContentView
+      layoutStyle={LAYOUT_STYLE_NO_CONTRAST_DEFAULT}
       content={
         <Content>
           <h1>Example Queries</h1>

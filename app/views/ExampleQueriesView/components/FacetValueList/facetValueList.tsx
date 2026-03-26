@@ -1,6 +1,9 @@
-import { Stack } from "@mui/material";
 import { JSX } from "react";
 import { FacetValueGroup } from "../../constants";
+import {
+  StyledChipStack,
+  StyledValueList,
+} from "../../exampleQueriesView.styles";
 import { QueryChip } from "../QueryChip/queryChip";
 
 interface FacetValueListProps {
@@ -21,22 +24,17 @@ export const FacetValueList = ({
       {facetValues.map(({ examples, label, values }) => (
         <div key={label}>
           <h3>{label}</h3>
-          <ul>
+          <StyledValueList>
             {values.map((value) => (
               <li key={value}>{value}</li>
             ))}
-          </ul>
+          </StyledValueList>
           {examples && examples.length > 0 && (
-            <Stack
-              direction="row"
-              flexWrap="wrap"
-              gap={1}
-              sx={{ margin: "16px 0" }}
-            >
+            <StyledChipStack>
               {examples.map(({ label: chipLabel, query }) => (
                 <QueryChip key={chipLabel} label={chipLabel} query={query} />
               ))}
-            </Stack>
+            </StyledChipStack>
           )}
         </div>
       ))}

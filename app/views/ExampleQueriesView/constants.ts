@@ -1,15 +1,20 @@
 /**
  * Dimension configuration for the example queries page.
  */
+export interface ExampleQuery {
+  label: string;
+  query: string;
+}
+
 export interface FacetValueGroup {
-  examples?: { label: string; query: string }[];
+  examples?: ExampleQuery[];
   label: string;
   values: string[];
 }
 
 export interface Dimension {
   description: string;
-  examples: { label: string; query: string }[];
+  examples: ExampleQuery[];
   explanation?: string;
   facetValues?: FacetValueGroup[];
   title: string;
@@ -89,6 +94,16 @@ export const DIMENSIONS: Dimension[] = [
         ],
       },
       {
+        examples: [
+          {
+            label: "Cross-sectional studies with genotyping data",
+            query: "Cross-sectional studies with genotyping data",
+          },
+          {
+            label: "Mendelian disease studies",
+            query: "Mendelian disease studies",
+          },
+        ],
         label: "Study designs",
         values: [
           "Case-Control",

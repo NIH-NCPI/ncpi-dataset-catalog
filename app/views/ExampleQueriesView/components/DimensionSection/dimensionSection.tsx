@@ -1,6 +1,6 @@
-import { Stack } from "@mui/material";
 import { JSX } from "react";
 import { Dimension } from "../../constants";
+import { StyledChipStack } from "../../exampleQueriesView.styles";
 import { FacetValueList } from "../FacetValueList/facetValueList";
 import { QueryChip } from "../QueryChip/queryChip";
 
@@ -23,11 +23,11 @@ export const DimensionSection = ({
       <h2>{title}</h2>
       <p>{description}</p>
       {explanation && <p>{explanation}</p>}
-      <Stack direction="row" flexWrap="wrap" gap={1} sx={{ margin: "16px 0" }}>
+      <StyledChipStack>
         {examples.map(({ label, query }) => (
           <QueryChip key={label} label={label} query={query} />
         ))}
-      </Stack>
+      </StyledChipStack>
       {facetValues && <FacetValueList facetValues={facetValues} />}
     </section>
   );
