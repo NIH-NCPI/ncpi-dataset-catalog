@@ -31,17 +31,23 @@ test.describe("Example Queries page", () => {
     await expect(page.locator("h2", { hasText: "Demographics" })).toBeVisible();
   });
 
-  test("query chip navigates to research page and returns results", async ({
+  test("query chip submits its query and navigates to research page with results", async ({
     page,
   }) => {
     const chip = page.locator('button[type="submit"][data-query]').first();
     await expect(chip).toBeVisible();
+
+    const queryText = await chip.getAttribute("data-query");
+    expect(queryText).not.toBeNull();
 
     await chip.click();
 
     await page.waitForURL(/\/research\/studies/);
     await page.locator(SEARCH_INPUT).waitFor({ state: "visible" });
     await waitForResults(page);
+
+    // Verify the chip's query text appears on the research page.
+    await expect(page.locator("main")).toContainText(queryText as string);
 
     const tab = page.getByRole("tab", { name: /Results \(\d+\)/ });
     await expect(tab).toBeVisible();
