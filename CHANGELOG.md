@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.17.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.16.1...v0.17.0) (2026-03-26)
+
+
+### Features
+
+* add Playwright e2e tests for research chat UI [#299](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/299) ([#300](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/300)) ([3311dea](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/3311dea8d1d4cbcbf0affe012fa475989aa38b46))
+* implement home page ([#286](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/286)) ([#294](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/294)) ([3d3e81e](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/3d3e81e0c4cde01bf0e70b2821ea21c6351d8c1a))
+* response summary, query structure, and empty-results recovery ([#287](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/287)) ([c2f9b4b](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/c2f9b4b82887fe959d1d1d0a9dffc94718af8d03))
+* single header with transparent prop and scroll transitions ([#298](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/298)) ([33f438a](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/33f438a5f27eea7e50182830b8e106179f28e02e))
+
+
+### Bug Fixes
+
+* chip filter removal not triggering requery [#295](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/295) ([#296](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/296)) ([9abd397](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/9abd397247ba735f244e6120aab9bd8c6209eb93))
+* commit topmed-harmonized as files, not embedded repo [#291](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/291) ([#293](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/293)) ([2a85a1c](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/2a85a1c69112ab96d62db8ae519ed53d0b58a830))
+* console.error: column with id 'measurement' does not exist in category key ([#283](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/283)) ([#284](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/284)) ([ba461be](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/ba461befc550c55cb2e23a9028e5a24fa5736982))
+* inject previousQuery on follow-up submissions ([#310](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/310)) ([a30c720](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/a30c7201f84d3280175f6b92ebf320b673a82601))
+
+
+### Documentation
+
+* reusable backend PRD and request flow documentation [#291](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/291) ([#292](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/292)) ([2e35535](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/2e3553551b5ea793f55b87a166df2982dc01e0ef))
+
+
+### Code Refactoring
+
+* rename intent "auto" to "ambiguous" [#289](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/289) ([#290](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/290)) ([6a0fa35](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/6a0fa35432153ccacf00a1497f48fa4c81901773))
+
 ## [0.16.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.16.0...v0.16.1) (2026-03-11)
 
 
