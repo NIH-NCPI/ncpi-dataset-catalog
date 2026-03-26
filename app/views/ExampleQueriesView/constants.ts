@@ -164,7 +164,7 @@ export const DIMENSIONS: Dimension[] = [
       },
     ],
     explanation:
-      'MeSH terms are organized in a polyhierarchy of ~800 disease terms. Searching a broad term like "Cardiovascular Diseases" returns studies tagged with any descendant disease, such as Coronary Artery Disease, Atrial Fibrillation, or Heart Failure.',
+      'MeSH terms are organized in a polyhierarchy of ~950 disease terms. Searching a broad term like "Cardiovascular Diseases" returns studies tagged with any descendant disease, such as Coronary Artery Disease, Atrial Fibrillation, or Heart Failure.',
     title: "MeSH disease hierarchy",
   },
   {
