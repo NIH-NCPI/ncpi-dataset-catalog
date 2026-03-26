@@ -1,34 +1,45 @@
-import { Chip, Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import { JSX } from "react";
-import { StyledSection } from "./facetValueList.styles";
+import { FacetValueGroup } from "../../constants";
+import { QueryChip } from "../QueryChip/queryChip";
 
 interface FacetValueListProps {
-  facetValues: { label: string; values: string[] }[];
+  facetValues: FacetValueGroup[];
 }
 
 /**
- * Renders display-only lists of allowed facet values.
+ * Renders allowed facet values as bullet lists with optional example query chips.
  * @param props - Component props.
- * @param props.facetValues - Array of facet groups with labels and values.
+ * @param props.facetValues - Array of facet groups with labels, values, and optional examples.
  * @returns Facet value list component.
  */
 export const FacetValueList = ({
   facetValues,
 }: FacetValueListProps): JSX.Element => {
   return (
-    <StyledSection>
-      {facetValues.map(({ label, values }) => (
+    <>
+      {facetValues.map(({ examples, label, values }) => (
         <div key={label}>
-          <Typography component="h4" variant="body-large-500">
-            {label}
-          </Typography>
-          <Stack direction="row" flexWrap="wrap" gap={1}>
+          <h3>{label}</h3>
+          <ul>
             {values.map((value) => (
-              <Chip key={value} label={value} size="small" variant="outlined" />
+              <li key={value}>{value}</li>
             ))}
-          </Stack>
+          </ul>
+          {examples && examples.length > 0 && (
+            <Stack
+              direction="row"
+              flexWrap="wrap"
+              gap={1}
+              sx={{ margin: "16px 0" }}
+            >
+              {examples.map(({ label: chipLabel, query }) => (
+                <QueryChip key={chipLabel} label={chipLabel} query={query} />
+              ))}
+            </Stack>
+          )}
         </div>
       ))}
-    </StyledSection>
+    </>
   );
 };

@@ -1,4 +1,3 @@
-import { CHIP_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/chip";
 import { getPayload } from "@databiosphere/findable-ui/lib/views/ResearchView/assistant/components/Form/utils";
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
 import { useQuery } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/hooks/UseQuery/hook";
@@ -35,12 +34,11 @@ export const QueryChip = ({ label, query }: QueryChipProps): JSX.Element => {
     >
       <Chip
         clickable
-        color={CHIP_PROPS.COLOR.SECONDARY}
         component="button"
         data-query={query}
         label={label}
         type="submit"
-        variant={CHIP_PROPS.VARIANT.OUTLINED}
+        variant="filled"
       />
     </StyledForm>
   );

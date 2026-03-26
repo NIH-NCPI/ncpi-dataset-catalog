@@ -1,11 +1,17 @@
 /**
  * Dimension configuration for the example queries page.
  */
+export interface FacetValueGroup {
+  examples?: { label: string; query: string }[];
+  label: string;
+  values: string[];
+}
+
 export interface Dimension {
   description: string;
   examples: { label: string; query: string }[];
   explanation?: string;
-  facetValues?: { label: string; values: string[] }[];
+  facetValues?: FacetValueGroup[];
   title: string;
 }
 
@@ -29,10 +35,30 @@ export const DIMENSIONS: Dimension[] = [
     ],
     facetValues: [
       {
+        examples: [
+          {
+            label: "Longitudinal cohort studies on BioData Catalyst",
+            query: "Longitudinal cohort studies on BioData Catalyst",
+          },
+          {
+            label: "Studies on Kids First Data Resource Center",
+            query: "Studies on Kids First Data Resource Center",
+          },
+        ],
         label: "Platforms",
         values: ["AnVIL", "BDC", "CRDC", "dbGaP", "KFDRC"],
       },
       {
+        examples: [
+          {
+            label: "Studies with methylation data",
+            query: "Studies with methylation data",
+          },
+          {
+            label: "Case-control studies with genotyping arrays",
+            query: "Case-control studies with genotyping arrays",
+          },
+        ],
         label: "Data types",
         values: [
           "AMPLICON",
@@ -93,8 +119,8 @@ export const DIMENSIONS: Dimension[] = [
         query: "Studies measuring systolic blood pressure",
       },
       {
-        label: "All variables related to smoking and tobacco use",
-        query: "All variables related to smoking and tobacco use",
+        label: "Studies with smoking data",
+        query: "Studies with smoking data",
       },
       {
         label: "Studies with body mass index and cholesterol measurements",
@@ -164,6 +190,12 @@ export const DIMENSIONS: Dimension[] = [
     ],
     facetValues: [
       {
+        examples: [
+          {
+            label: "Studies with South Asian ancestry participants",
+            query: "Studies with South Asian ancestry participants",
+          },
+        ],
         label: "Computed ancestry values",
         values: [
           "African",
@@ -194,10 +226,22 @@ export const DIMENSIONS: Dimension[] = [
     ],
     facetValues: [
       {
+        examples: [
+          {
+            label: "Studies with female participants",
+            query: "Studies with female participants",
+          },
+        ],
         label: "Sex",
         values: ["Female", "Male", "Other/Unknown"],
       },
       {
+        examples: [
+          {
+            label: "Studies with Black or African American participants",
+            query: "Studies with Black or African American participants",
+          },
+        ],
         label: "Race/Ethnicity",
         values: [
           "American Indian or Alaska Native",
