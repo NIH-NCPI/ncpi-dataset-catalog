@@ -32,7 +32,7 @@ export const SearchPrompt = (): JSX.Element => {
         });
       }}
     >
-      <Input placeholder="Ask anything..." />
+      <Input placeholder="Search for studies or variables" />
       <StyledStack spacing={2} useFlexGap>
         <StyledChips message={PROMPT_MESSAGE} />
         <StyledChip

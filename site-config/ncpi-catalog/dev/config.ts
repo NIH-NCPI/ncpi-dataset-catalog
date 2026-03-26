@@ -28,7 +28,7 @@ const config: SiteConfig = {
   ai: {
     enabled: true,
     prompt: {
-      inputPlaceholder: "Ask about studies or variables",
+      inputPlaceholder: "Search for studies or variables",
       suggestions: [
         {
           label: "Smoking + BMI in heart disease",
