@@ -8,7 +8,6 @@ Run: cd backend && uv run python -m pytest tests/test_router.py -x -q
 
 from __future__ import annotations
 
-import asyncio
 import os
 
 import pytest
@@ -16,7 +15,6 @@ import pytest
 from concept_search.models import Facet, QueryModel, ResolvedMention
 
 # Skip entire module if no API key is set.
-
 if not os.environ.get("ANTHROPIC_API_KEY"):
     pytest.skip("ANTHROPIC_API_KEY not set — skipping LLM evals", allow_module_level=True)
 
@@ -106,19 +104,20 @@ CASES: list[tuple[str, QueryModel, str, str]] = [
 ]
 
 
+@pytest.mark.evals
 @pytest.mark.parametrize(
     "description,previous_query,follow_up,expected_kind",
     CASES,
     ids=[c[0] for c in CASES],
 )
-def test_router_classification(
+async def test_router_classification(
     description: str,
     previous_query: QueryModel,
     follow_up: str,
     expected_kind: str,
 ) -> None:
     """Verify the router LLM classifies the follow-up correctly."""
-    result = asyncio.run(run_router(follow_up, previous_query))
+    result = await run_router(follow_up, previous_query)
     assert result.kind == expected_kind, (
         f"Router classified '{follow_up}' as '{result.kind}', expected '{expected_kind}'. "
         f"Full result: {result}"

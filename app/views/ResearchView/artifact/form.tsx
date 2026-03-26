@@ -154,8 +154,11 @@ export function MultiTurnQueryProvider({
         options.onError?.(error instanceof Error ? error : new Error(message));
       } finally {
         clearTimeout(timeout);
-        dispatch.onSetStatus(false);
-        options.onSettled?.(form);
+        // Only clear loading if this is still the active request.
+        if (abortRef.current === controller) {
+          dispatch.onSetStatus(false);
+          options.onSettled?.(form);
+        }
       }
     },
     [dispatch, url]
