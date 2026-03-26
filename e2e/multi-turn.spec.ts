@@ -27,6 +27,22 @@ test.describe("Multi-turn conversation", () => {
     expect(chipsAfter.length).toBeGreaterThan(0);
   });
 
+  test("follow-up preserves study intent when adding criteria", async ({
+    page,
+  }) => {
+    await submitQuery(page, "studies with transcriptomic data on diabetes");
+    await waitForResults(page);
+
+    const headingBefore = page.locator("h1").first();
+    await expect(headingBefore).toHaveText("Studies");
+
+    await submitQuery(page, "also where BMI was measured");
+    await waitForResults(page);
+
+    const headingAfter = page.locator("h1").first();
+    await expect(headingAfter).toHaveText("Studies");
+  });
+
   test("follow-up replaces a filter", async ({ page }) => {
     await submitQuery(page, "cancer studies on AnVIL");
     await waitForResults(page);
