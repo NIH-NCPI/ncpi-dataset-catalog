@@ -1,8 +1,5 @@
 FROM python:3.13-slim
 
-ARG GIT_SHA=unknown
-ENV GIT_SHA=${GIT_SHA}
-
 WORKDIR /app
 
 # Install uv for fast, deterministic dependency installs
@@ -23,16 +20,18 @@ COPY backend/concept_search/ concept_search/
 
 # Copy files needed at runtime (ISA drill-down, concept descriptions, consent logic).
 # Study metadata, demographics, and llm-concepts are baked into the DuckDB cache.
-COPY catalog-build/classification/output/concept-isa.json catalog-build/classification/output/concept-isa.json
-COPY catalog-build/classification/output/concept-vocabulary.json catalog-build/classification/output/concept-vocabulary.json
-COPY catalog-build/classification/output/phenx-concept-vocabulary.json catalog-build/classification/output/phenx-concept-vocabulary.json
-COPY catalog-build/classification/output/ncpi-categories.json catalog-build/classification/output/ncpi-categories.json
+COPY catalog-build/classification/output/concept-isa.json \
+     catalog-build/classification/output/concept-vocabulary.json \
+     catalog-build/classification/output/phenx-concept-vocabulary.json \
+     catalog-build/classification/output/ncpi-categories.json \
+     catalog-build/classification/output/
 COPY catalog-build/common/disease_abbrev_mapping.tsv /catalog-build/common/disease_abbrev_mapping.tsv
 
 # Copy pre-computed concept embeddings (generated locally via `make embeddings`).
 # Loaded directly from .npy at startup — not stored in DuckDB.
-COPY catalog-build/classification/output/concept-embeddings.npy catalog-build/classification/output/concept-embeddings.npy
-COPY catalog-build/classification/output/concept-embeddings.sha256 catalog-build/classification/output/concept-embeddings.sha256
+COPY catalog-build/classification/output/concept-embeddings.npy \
+     catalog-build/classification/output/concept-embeddings.sha256 \
+     catalog-build/classification/output/
 
 # Copy pre-built DuckDB cache (built locally via `make db-reload`).
 # This eliminates all JSON parsing from the Docker build —
@@ -41,6 +40,11 @@ RUN mkdir -p /cache
 COPY catalog/concept-search.duckdb /cache/concept-search.duckdb
 ENV NCPI_DUCKDB_CACHE_PATH=/cache/concept-search.duckdb
 ENV NCPI_REPO_ROOT=/app
+
+# GIT_SHA must be last — it changes every commit and would invalidate
+# all layers below it if placed earlier.
+ARG GIT_SHA=unknown
+ENV GIT_SHA=${GIT_SHA}
 
 EXPOSE 8000
 
