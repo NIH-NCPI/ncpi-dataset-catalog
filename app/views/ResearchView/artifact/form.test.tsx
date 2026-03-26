@@ -213,6 +213,20 @@ describe("MultiTurnQueryProvider onSubmit", () => {
 
     expect(global.fetch).not.toHaveBeenCalled();
   });
+
+  it("does not submit whitespace-only queries", async () => {
+    const { result } = renderOnSubmit();
+
+    await act(async () => {
+      await result.current.onSubmit(
+        mockFormEvent(),
+        { query: "   " },
+        defaultOptions
+      );
+    });
+
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
 });
 /* eslint-enable @typescript-eslint/no-explicit-any -- re-enable after test mocks */
 /* eslint-enable @typescript-eslint/explicit-function-return-type -- re-enable after test helpers */

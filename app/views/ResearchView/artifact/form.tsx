@@ -43,6 +43,68 @@ interface MultiTurnQueryProviderProps {
 }
 
 /**
+ * Dispatch actions used by the search helpers.
+ */
+interface SearchDispatch {
+  onSetError: (message: string) => void;
+  onSetMessage: (data: MessageResponse) => void;
+  onSetStatus: (loading: boolean) => void;
+}
+
+/**
+ * Posts a search request, handling abort, timeout, rate-limit, and errors.
+ * @param url - Search API URL.
+ * @param body - Request body to send as JSON.
+ * @param abortRef - Shared abort controller ref (previous request is aborted).
+ * @param dispatch - Chat dispatch actions.
+ * @returns The parsed response, or undefined on error/abort.
+ */
+async function postSearch(
+  url: string,
+  body: Record<string, unknown>,
+  abortRef: React.RefObject<AbortController | null>,
+  dispatch: SearchDispatch
+): Promise<MessageResponse | undefined> {
+  abortRef.current?.abort();
+  const controller = new AbortController();
+  (abortRef as React.MutableRefObject<AbortController | null>).current =
+    controller;
+  const timeout = setTimeout(() => controller.abort(), 90_000);
+
+  try {
+    const res = await fetch(url, {
+      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      signal: controller.signal,
+    });
+
+    if (res.status === 429) {
+      dispatch.onSetError(
+        "You're sending too many requests. Please wait a moment."
+      );
+      return undefined;
+    }
+    if (!res.ok) throw new Error(`Search failed (${res.status})`);
+
+    const data: MessageResponse = await res.json();
+    dispatch.onSetMessage(data);
+    return data;
+  } catch (error) {
+    if (controller.signal.aborted) return undefined;
+    const message =
+      error instanceof Error ? error.message : "An unknown error occurred.";
+    dispatch.onSetError(message);
+    return undefined;
+  } finally {
+    clearTimeout(timeout);
+    if (abortRef.current === controller) {
+      dispatch.onSetStatus(false);
+    }
+  }
+}
+
+/**
  * Provider that tracks query state for multi-turn support.
  * Observes assistant messages from the chat state to capture the latest
  * QueryModel, enabling filter removal via requery.
@@ -106,7 +168,7 @@ export function MultiTurnQueryProvider({
 
       if (options.status.loading) return;
 
-      const { query } = payload;
+      const query = payload.query.trim();
       if (!query || !url) return;
 
       const form = e.currentTarget;
@@ -116,50 +178,17 @@ export function MultiTurnQueryProvider({
       form.reset();
       options.onMutate?.(form, query);
 
-      abortRef.current?.abort();
-      const controller = new AbortController();
-      abortRef.current = controller;
-      const timeout = setTimeout(() => controller.abort(), 90_000);
-
       const body: Record<string, unknown> = { query };
       if (lastQueryRef.current) {
         body.previousQuery = lastQueryRef.current;
       }
 
-      try {
-        const res = await fetch(url, {
-          body: JSON.stringify(body),
-          headers: { "Content-Type": "application/json" },
-          method: "POST",
-          signal: controller.signal,
-        });
-
-        if (res.status === 429) {
-          dispatch.onSetError(
-            "You're sending too many requests. Please wait a moment."
-          );
-          return;
-        }
-        if (!res.ok) throw new Error(`Search failed (${res.status})`);
-
-        const data: MessageResponse = await res.json();
+      const data = await postSearch(url, body, abortRef, dispatch);
+      if (data) {
         lastQueryRef.current = data.query;
-        dispatch.onSetMessage(data);
         options.onSuccess?.(data);
-      } catch (error) {
-        if (controller.signal.aborted) return;
-        const message =
-          error instanceof Error ? error.message : "An unknown error occurred.";
-        dispatch.onSetError(message);
-        options.onError?.(error instanceof Error ? error : new Error(message));
-      } finally {
-        clearTimeout(timeout);
-        // Only clear loading if this is still the active request.
-        if (abortRef.current === controller) {
-          dispatch.onSetStatus(false);
-          options.onSettled?.(form);
-        }
       }
+      options.onSettled?.(form);
     },
     [dispatch, url]
   );
@@ -180,41 +209,17 @@ export function MultiTurnQueryProvider({
       const updatedQuery = { ...lastQueryRef.current, mentions: filtered };
       lastQueryRef.current = updatedQuery;
       dispatch.onSetStatus(true);
-      // Abort any in-flight request.
-      abortRef.current?.abort();
-      const controller = new AbortController();
-      abortRef.current = controller;
-      const timeout = setTimeout(() => controller.abort(), 90_000);
-      fetch(url, {
-        body: JSON.stringify({ previousQuery: updatedQuery, query: "" }),
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        signal: controller.signal,
-      })
-        .then(async (res) => {
-          if (res.status === 429) {
-            dispatch.onSetError(
-              "You're sending too many requests. Please wait a moment."
-            );
-            return;
-          }
-          if (!res.ok) throw new Error(`Search failed (${res.status})`);
-          const data: MessageResponse = await res.json();
+
+      postSearch(
+        url,
+        { previousQuery: updatedQuery, query: "" },
+        abortRef,
+        dispatch
+      ).then((data) => {
+        if (data) {
           lastQueryRef.current = data.query;
-          dispatch.onSetMessage(data);
-        })
-        .catch((error) => {
-          if (controller.signal.aborted) return;
-          const message =
-            error instanceof Error
-              ? error.message
-              : "An unknown error occurred.";
-          dispatch.onSetError(message);
-        })
-        .finally(() => {
-          clearTimeout(timeout);
-          dispatch.onSetStatus(false);
-        });
+        }
+      });
     },
     [dispatch, url]
   );
