@@ -145,6 +145,10 @@ const config: SiteConfig = {
         undefined,
         [
           {
+            label: "Example Queries",
+            url: ROUTES.EXAMPLE_QUERIES,
+          },
+          {
             label: "About",
             url: ROUTES.ABOUT,
           },
