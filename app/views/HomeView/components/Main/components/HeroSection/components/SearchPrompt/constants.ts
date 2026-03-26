@@ -13,8 +13,8 @@ export const PROMPT_MESSAGE = {
       query: "Diabetes studies with whole genome sequencing",
     },
     {
-      label: "Pediatric cancer on KFDRC",
-      query: "Pediatric cancer on KFDRC",
+      label: "Studies about cancer on KFDRC",
+      query: "Studies about cancer on KFDRC",
     },
     {
       label: "All variables measuring chocolate consumption",
