@@ -9,18 +9,18 @@ Run: cd backend && uv run python -m pytest tests/test_router.py -x -q
 from __future__ import annotations
 
 import asyncio
+import os
 
 import pytest
 
 from concept_search.models import Facet, QueryModel, ResolvedMention
 
-# Skip entire module if no API key available.
-pytest.importorskip("anthropic")
+# Skip entire module if no API key is set.
 
-try:
-    from concept_search.router_agent import run_router
-except Exception:
-    pytest.skip("router_agent not importable", allow_module_level=True)
+if not os.environ.get("ANTHROPIC_API_KEY"):
+    pytest.skip("ANTHROPIC_API_KEY not set — skipping LLM evals", allow_module_level=True)
+
+from concept_search.router_agent import run_router  # noqa: E402
 
 
 def _rm(facet: Facet, text: str, values: list[str]) -> ResolvedMention:

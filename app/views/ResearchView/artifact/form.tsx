@@ -86,13 +86,13 @@ export function MultiTurnQueryProvider({
 
   /**
    * Submits a query to the search API, injecting previousQuery when available.
-   * @param _e - Form event (unused; dispatch handles state).
+   * @param e - Form event used to prevent default submission and access the form element.
    * @param payload - Payload containing the query string.
    * @param options - Callbacks for the submit lifecycle.
    */
   const onSubmit = useCallback(
     async (
-      _e: FormEvent<HTMLFormElement>,
+      e: FormEvent<HTMLFormElement>,
       payload: { query: string },
       options: {
         onError?: (error: Error) => void;
@@ -102,14 +102,14 @@ export function MultiTurnQueryProvider({
         status: { loading: boolean };
       }
     ): Promise<void> => {
-      _e.preventDefault();
+      e.preventDefault();
 
       if (options.status.loading) return;
 
       const { query } = payload;
       if (!query || !url) return;
 
-      const form = (_e.target ?? _e.currentTarget) as HTMLFormElement;
+      const form = e.currentTarget;
 
       dispatch.onSetQuery(query);
       dispatch.onSetStatus(true);
