@@ -3,7 +3,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { FormEvent, ReactNode, useContext } from "react";
 import { QueryContext } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/context";
-import { MultiTurnQueryProvider } from "./form";
+import { MultiTurnContext, MultiTurnQueryProvider } from "./form";
 
 // --- Mocks ---
 
@@ -226,6 +226,73 @@ describe("MultiTurnQueryProvider onSubmit", () => {
     });
 
     expect(global.fetch).not.toHaveBeenCalled();
+  });
+});
+
+describe("MultiTurnQueryProvider removeFilter", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockChatState.state.messages = [
+      {
+        response: {
+          intent: "study",
+          message: null,
+          query: {
+            intent: "study",
+            mentions: [
+              { facet: "focus", originalText: "diabetes", values: ["DM"] },
+              {
+                facet: "platform",
+                originalText: "AnVIL",
+                values: ["AnVIL"],
+              },
+            ],
+            message: null,
+          },
+          timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
+        },
+        type: "ASSISTANT",
+      },
+    ] as any;
+    global.fetch = jest.fn().mockResolvedValue({
+      json: () =>
+        Promise.resolve({
+          intent: "study",
+          message: null,
+          query: {
+            intent: "study",
+            mentions: [
+              { facet: "focus", originalText: "diabetes", values: ["DM"] },
+            ],
+            message: null,
+          },
+          timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
+        }),
+      ok: true,
+      status: 200,
+    });
+  });
+
+  it("sends requery with previousQuery and empty query", async () => {
+    const { result } = renderHook(() => useContext(MultiTurnContext), {
+      wrapper: ({ children }: { children: ReactNode }) => (
+        <MultiTurnQueryProvider>{children}</MultiTurnQueryProvider>
+      ),
+    });
+
+    await act(async () => {
+      result.current.removeFilter("platform", "AnVIL");
+      // Allow the postSearch promise to resolve.
+      await new Promise((r) => setTimeout(r, 0));
+    });
+
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    const body = JSON.parse((global.fetch as jest.Mock).mock.calls[0][1].body);
+    expect(body.query).toBe("");
+    expect(body).toHaveProperty("previousQuery");
+    expect(body.previousQuery.mentions).toEqual([
+      expect.objectContaining({ facet: "focus", originalText: "diabetes" }),
+    ]);
   });
 });
 /* eslint-enable @typescript-eslint/no-explicit-any -- re-enable after test mocks */
