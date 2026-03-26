@@ -53,7 +53,7 @@ test.describe("Chat UI", () => {
 
     await expect(input).toHaveAttribute(
       "placeholder",
-      "Ask about studies or variables"
+      "Search for studies or variables"
     );
 
     await submitQuery(page, "diabetes studies on AnVIL");
