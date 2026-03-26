@@ -2,17 +2,20 @@ import { useConfig } from "@databiosphere/findable-ui/lib/hooks/useConfig";
 import { useChatDispatch } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatDispatch/hook";
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
 import { isAssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards";
+import { QueryContext } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/context";
 import {
   MessageResponse,
   Mention,
 } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
 import {
   createContext,
+  FormEvent,
   JSX,
   ReactNode,
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
 } from "react";
 import { getSearchApiUrl } from "../../../utils/searchApiUrl";
@@ -81,6 +84,85 @@ export function MultiTurnQueryProvider({
     }
   }, [lastMessage]);
 
+  /**
+   * Submits a query to the search API, injecting previousQuery when available.
+   * @param _e - Form event (unused; dispatch handles state).
+   * @param payload - Payload containing the query string.
+   * @param options - Callbacks for the submit lifecycle.
+   */
+  const onSubmit = useCallback(
+    async (
+      _e: FormEvent<HTMLFormElement>,
+      payload: { query: string },
+      options: {
+        onError?: (error: Error) => void;
+        onMutate?: (form: HTMLFormElement, query: string) => void;
+        onSettled?: (form: HTMLFormElement) => void;
+        onSuccess?: (data: unknown) => void;
+        status: { loading: boolean };
+      }
+    ): Promise<void> => {
+      _e.preventDefault();
+
+      if (options.status.loading) return;
+
+      const { query } = payload;
+      if (!query || !url) return;
+
+      const form = (_e.target ?? _e.currentTarget) as HTMLFormElement;
+
+      dispatch.onSetQuery(query);
+      dispatch.onSetStatus(true);
+      form.reset();
+      options.onMutate?.(form, query);
+
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
+      const timeout = setTimeout(() => controller.abort(), 90_000);
+
+      const body: Record<string, unknown> = { query };
+      if (lastQueryRef.current) {
+        body.previousQuery = lastQueryRef.current;
+      }
+
+      try {
+        const res = await fetch(url, {
+          body: JSON.stringify(body),
+          headers: { "Content-Type": "application/json" },
+          method: "POST",
+          signal: controller.signal,
+        });
+
+        if (res.status === 429) {
+          dispatch.onSetError(
+            "You're sending too many requests. Please wait a moment."
+          );
+          return;
+        }
+        if (!res.ok) throw new Error(`Search failed (${res.status})`);
+
+        const data: MessageResponse = await res.json();
+        lastQueryRef.current = data.query;
+        dispatch.onSetMessage(data);
+        options.onSuccess?.(data);
+      } catch (error) {
+        if (controller.signal.aborted) return;
+        const message =
+          error instanceof Error ? error.message : "An unknown error occurred.";
+        dispatch.onSetError(message);
+        options.onError?.(error instanceof Error ? error : new Error(message));
+      } finally {
+        clearTimeout(timeout);
+        dispatch.onSetStatus(false);
+        options.onSettled?.(form);
+      }
+    },
+    [dispatch, url]
+  );
+
+  const queryContextValue = useMemo(() => ({ onSubmit }), [onSubmit]);
+
   const removeFilter = useCallback(
     (facet: string, value: string): void => {
       if (!lastQueryRef.current || !url) return;
@@ -135,8 +217,10 @@ export function MultiTurnQueryProvider({
   );
 
   return (
-    <MultiTurnContext.Provider value={{ removeFilter }}>
-      {children}
-    </MultiTurnContext.Provider>
+    <QueryContext.Provider value={queryContextValue}>
+      <MultiTurnContext.Provider value={{ removeFilter }}>
+        {children}
+      </MultiTurnContext.Provider>
+    </QueryContext.Provider>
   );
 }

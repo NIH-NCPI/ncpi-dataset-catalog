@@ -1,0 +1,218 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- test mocks require flexible typing */
+/* eslint-disable @typescript-eslint/explicit-function-return-type -- test helpers */
+import { act, renderHook } from "@testing-library/react";
+import { FormEvent, ReactNode, useContext } from "react";
+import { QueryContext } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/context";
+import { MultiTurnQueryProvider } from "./form";
+
+// --- Mocks ---
+
+const mockDispatch = {
+  onSetError: jest.fn(),
+  onSetMessage: jest.fn(),
+  onSetQuery: jest.fn(),
+  onSetStatus: jest.fn(),
+};
+
+const mockChatState = {
+  state: { messages: [], status: { loading: false } },
+};
+
+jest.mock("@databiosphere/findable-ui/lib/hooks/useConfig", () => ({
+  useConfig: (): any => ({
+    config: { ai: { url: "https://test-api/search" } },
+  }),
+}));
+
+jest.mock(
+  "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatDispatch/hook",
+  () => ({
+    useChatDispatch: (): any => mockDispatch,
+  })
+);
+
+jest.mock(
+  "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook",
+  () => ({
+    useChatState: (): any => mockChatState,
+  })
+);
+
+jest.mock(
+  "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards",
+  () => ({
+    isAssistantMessage: (m: any): boolean => m?.type === "ASSISTANT",
+  })
+);
+
+jest.mock("../../../utils/searchApiUrl", () => ({
+  getSearchApiUrl: (url: string): string => url,
+}));
+
+// --- Helpers ---
+
+const mockFormEvent = (): FormEvent<HTMLFormElement> =>
+  ({
+    currentTarget: { reset: jest.fn() } as unknown as HTMLFormElement,
+    preventDefault: jest.fn(),
+    target: { reset: jest.fn() } as unknown as EventTarget,
+  }) as unknown as FormEvent<HTMLFormElement>;
+
+const defaultOptions = {
+  status: { loading: false },
+};
+
+/**
+ * Returns onSubmit from QueryContext as provided by MultiTurnQueryProvider.
+ * @returns Hook result with onSubmit.
+ */
+function renderOnSubmit() {
+  return renderHook(() => useContext(QueryContext), {
+    wrapper: ({ children }: { children: ReactNode }) => (
+      <MultiTurnQueryProvider>{children}</MultiTurnQueryProvider>
+    ),
+  });
+}
+
+// --- Tests ---
+
+describe("MultiTurnQueryProvider onSubmit", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockChatState.state.messages = [];
+    global.fetch = jest.fn().mockResolvedValue({
+      json: () =>
+        Promise.resolve({
+          intent: "study",
+          message: null,
+          query: {
+            intent: "study",
+            mentions: [
+              { facet: "focus", originalText: "diabetes", values: ["DM"] },
+            ],
+            message: null,
+          },
+          timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
+        }),
+      ok: true,
+      status: 200,
+    });
+  });
+
+  it("sends only query on first submission (no previousQuery)", async () => {
+    const { result } = renderOnSubmit();
+
+    await act(async () => {
+      await result.current.onSubmit(
+        mockFormEvent(),
+        { query: "diabetes studies" },
+        defaultOptions
+      );
+    });
+
+    const body = JSON.parse((global.fetch as jest.Mock).mock.calls[0][1].body);
+    expect(body).toEqual({ query: "diabetes studies" });
+    expect(body).not.toHaveProperty("previousQuery");
+  });
+
+  it("sends previousQuery on follow-up after first response", async () => {
+    const { result } = renderOnSubmit();
+
+    // First query — sets lastQueryRef via response.
+    await act(async () => {
+      await result.current.onSubmit(
+        mockFormEvent(),
+        { query: "diabetes studies" },
+        defaultOptions
+      );
+    });
+
+    // Simulate assistant message arriving (syncs lastQueryRef).
+    act(() => {
+      mockChatState.state.messages = [
+        {
+          response: {
+            intent: "study",
+            message: null,
+            query: {
+              intent: "study",
+              mentions: [
+                { facet: "focus", originalText: "diabetes", values: ["DM"] },
+              ],
+              message: null,
+            },
+            timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
+          },
+          type: "ASSISTANT",
+        },
+      ] as any;
+    });
+
+    // Re-render to pick up the message change.
+    const { result: result2 } = renderOnSubmit();
+
+    // Second query — should include previousQuery.
+    await act(async () => {
+      await result2.current.onSubmit(
+        mockFormEvent(),
+        { query: "also where BMI was measured" },
+        defaultOptions
+      );
+    });
+
+    const calls = (global.fetch as jest.Mock).mock.calls;
+    const secondBody = JSON.parse(calls[calls.length - 1][1].body);
+    expect(secondBody.query).toBe("also where BMI was measured");
+    expect(secondBody).toHaveProperty("previousQuery");
+    expect(secondBody.previousQuery.mentions).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ facet: "focus", originalText: "diabetes" }),
+      ])
+    );
+  });
+
+  it("updates lastQueryRef from response for subsequent calls", async () => {
+    const { result } = renderOnSubmit();
+
+    // First query.
+    await act(async () => {
+      await result.current.onSubmit(
+        mockFormEvent(),
+        { query: "diabetes studies" },
+        defaultOptions
+      );
+    });
+
+    // The onSubmit itself updates lastQueryRef from the response (line 145).
+    // Second query should carry that forward.
+    await act(async () => {
+      await result.current.onSubmit(
+        mockFormEvent(),
+        { query: "also on AnVIL" },
+        defaultOptions
+      );
+    });
+
+    const calls = (global.fetch as jest.Mock).mock.calls;
+    const secondBody = JSON.parse(calls[1][1].body);
+    expect(secondBody).toHaveProperty("previousQuery");
+  });
+
+  it("does not submit when loading", async () => {
+    const { result } = renderOnSubmit();
+
+    await act(async () => {
+      await result.current.onSubmit(
+        mockFormEvent(),
+        { query: "test" },
+        {
+          status: { loading: true },
+        }
+      );
+    });
+
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+});
+/* eslint-enable @typescript-eslint/no-explicit-any -- re-enable after test mocks */
+/* eslint-enable @typescript-eslint/explicit-function-return-type -- re-enable after test helpers */
