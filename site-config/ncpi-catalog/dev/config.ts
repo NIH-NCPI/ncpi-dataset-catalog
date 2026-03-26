@@ -152,6 +152,10 @@ const config: SiteConfig = {
             label: "Data Dictionary",
             url: ROUTES.DATA_DICTIONARY,
           },
+          {
+            label: "Example Queries",
+            url: ROUTES.EXAMPLE_QUERIES,
+          },
         ],
       ],
       searchEnabled: false,
