@@ -24,11 +24,6 @@ export const FacetValueList = ({
       {facetValues.map(({ examples, label, values }) => (
         <div key={label}>
           <h3>{label}</h3>
-          <StyledValueList>
-            {values.map((value) => (
-              <li key={value}>{value}</li>
-            ))}
-          </StyledValueList>
           {examples && examples.length > 0 && (
             <StyledChipStack>
               {examples.map(({ label: chipLabel, query }) => (
@@ -36,6 +31,12 @@ export const FacetValueList = ({
               ))}
             </StyledChipStack>
           )}
+          <p>Available options:</p>
+          <StyledValueList>
+            {values.map((value) => (
+              <li key={value}>{value}</li>
+            ))}
+          </StyledValueList>
         </div>
       ))}
     </>
