@@ -44,6 +44,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 interface Props {
+  pageTitle?: string;
   researchType: string;
   studyId: string;
   subpath: string;

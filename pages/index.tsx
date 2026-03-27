@@ -3,7 +3,7 @@ import { GetStaticProps } from "next";
 import { Fragment, JSX } from "react";
 
 export const getStaticProps: GetStaticProps = () => {
-  return { props: { homePage: true, pageTitle: "Home" } };
+  return { props: { homePage: true } };
 };
 
 const Page = (): JSX.Element => {

@@ -15,6 +15,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 interface Props {
+  pageTitle?: string;
   researchType: ResearchType;
 }
 
