@@ -5,6 +5,7 @@ import { JSX } from "react";
 const DEFAULT_DESCRIPTION =
   "Search 2,944 studies across AnVIL, BDC, CRDC, and KFDRC.";
 const OG_IMAGE_PATH = "/favicons/web-app-manifest-512x512.png";
+const TWITTER_SITE = "@clevercanary";
 
 interface OgMetaProps {
   appTitle: string;
@@ -38,11 +39,20 @@ export const OgMeta = ({
         content={DEFAULT_DESCRIPTION}
       />
       <meta key="og:image" property="og:image" content={imageUrl} />
+      <meta key="og:image:width" property="og:image:width" content="512" />
+      <meta key="og:image:height" property="og:image:height" content="512" />
       <meta key="og:site_name" property="og:site_name" content={appTitle} />
       <meta key="og:title" property="og:title" content={title} />
       <meta key="og:type" property="og:type" content="website" />
       {url && <meta key="og:url" property="og:url" content={url} />}
       <meta key="twitter:card" name="twitter:card" content="summary" />
+      <meta key="twitter:image" name="twitter:image" content={imageUrl} />
+      <meta key="twitter:site" name="twitter:site" content={TWITTER_SITE} />
+      <meta
+        key="twitter:creator"
+        name="twitter:creator"
+        content={TWITTER_SITE}
+      />
     </NextHead>
   );
 };
