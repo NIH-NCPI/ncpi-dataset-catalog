@@ -1,5 +1,3 @@
-import fs from "fs";
-
 import {
   GetStaticPaths,
   GetStaticPathsResult,
@@ -11,32 +9,11 @@ import { JSX } from "react";
 import { RESEARCH_TYPE } from "../../../app/views/ResearchView/artifact/types";
 import { StyledMain } from "../../../app/views/ResearchView/components/Main/main.styles";
 import { seedDatabase } from "../../../app/utils/seedDatabase";
+import { getStudyPageTitle } from "../../../app/utils/studyTitles";
 import { getEntities } from "../../[entityListType]/[...params]";
 import { config } from "../../../app/config/config";
 import { StudyDetailView } from "../../../app/views/StudyDetailView/studyDetailView";
 import { NCPICatalogStudy } from "../../../app/apis/catalog/ncpi-catalog/common/entities";
-
-const STUDIES_PATH = "catalog/ncpi-platform-studies.json";
-
-// Parsed once at module load, reused across ~8800 getStaticProps calls.
-let studyTitles: Map<string, string> | null = null;
-
-/**
- * Returns a cached dbGapId-to-title map built from the catalog JSON.
- * @returns Map from dbGapId to study title.
- */
-function getStudyTitles(): Map<string, string> {
-  if (!studyTitles) {
-    const raw = JSON.parse(fs.readFileSync(STUDIES_PATH, "utf-8"));
-    studyTitles = new Map(
-      Object.values(raw).map((s) => {
-        const study = s as { dbGapId: string; title: string };
-        return [study.dbGapId, study.title];
-      })
-    );
-  }
-  return studyTitles;
-}
 
 interface Params extends ParsedUrlQuery {
   researchType: string;
@@ -113,18 +90,14 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
 
   const [studyId, subpath = ""] = studyParams;
 
-  // Look up study title for OG meta tags (O(1) from cached Map).
-  let pageTitle = studyId;
-  try {
-    const title = getStudyTitles().get(studyId);
-    if (title) {
-      pageTitle = `${studyId} — ${title}`;
-    }
-  } catch {
-    // Fall back to studyId if catalog file is unavailable.
-  }
-
-  return { props: { pageTitle, researchType, studyId, subpath } };
+  return {
+    props: {
+      pageTitle: getStudyPageTitle(studyId),
+      researchType,
+      studyId,
+      subpath,
+    },
+  };
 };
 
 /**

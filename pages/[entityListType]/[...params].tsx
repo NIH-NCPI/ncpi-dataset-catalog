@@ -22,6 +22,7 @@ import { EntityDetailView } from "@databiosphere/findable-ui/lib/views/EntityDet
 import { NCPICatalogStudy } from "app/apis/catalog/ncpi-catalog/common/entities";
 import { StudyJsonLd } from "app/components/Detail/components/StudyJsonLd/studyJsonLd";
 import { config } from "app/config/config";
+import { getStudyPageTitle } from "app/utils/studyTitles";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { readFile } from "../../app/utils/tsvParser";
@@ -40,6 +41,7 @@ interface PageUrl extends ParsedUrlQuery {
 export interface EntityDetailPageProps extends AzulEntityStaticResponse {
   browserURL?: string;
   entityListType: string;
+  pageTitle?: string;
 }
 
 /**
@@ -157,6 +159,11 @@ export const getStaticProps: GetStaticProps<AzulEntityStaticResponse> = async ({
   if (!entityConfig || !entityId) return { notFound: true };
 
   const props: EntityDetailPageProps = { browserURL, entityListType };
+
+  // Set page title for study detail pages.
+  if (entityListType === "studies" && entityId) {
+    props.pageTitle = getStudyPageTitle(entityId);
+  }
 
   // Process entity props.
   await processEntityProps(entityConfig, entityTab, entityId, props);
