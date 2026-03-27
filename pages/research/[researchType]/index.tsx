@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
   return {
-    props: { researchType: params!.researchType },
+    props: { pageTitle: "Research", researchType: params!.researchType },
   };
 };
 

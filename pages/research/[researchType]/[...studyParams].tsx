@@ -1,3 +1,5 @@
+import fs from "fs";
+
 import {
   GetStaticPaths,
   GetStaticPathsResult,
@@ -13,6 +15,8 @@ import { getEntities } from "../../[entityListType]/[...params]";
 import { config } from "../../../app/config/config";
 import { StudyDetailView } from "../../../app/views/StudyDetailView/studyDetailView";
 import { NCPICatalogStudy } from "../../../app/apis/catalog/ncpi-catalog/common/entities";
+
+const STUDIES_PATH = "catalog/ncpi-platform-studies.json";
 
 interface Params extends ParsedUrlQuery {
   researchType: string;
@@ -88,7 +92,21 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
 
   const [studyId, subpath = ""] = studyParams;
 
-  return { props: { researchType, studyId, subpath } };
+  // Look up study title for OG meta tags.
+  let pageTitle = studyId;
+  try {
+    const studies = JSON.parse(fs.readFileSync(STUDIES_PATH, "utf-8"));
+    const study = Object.values(studies).find(
+      (s) => (s as { dbGapId: string }).dbGapId === studyId
+    ) as { title?: string } | undefined;
+    if (study?.title) {
+      pageTitle = `${studyId} — ${study.title}`;
+    }
+  } catch {
+    // Fall back to studyId if catalog file is unavailable.
+  }
+
+  return { props: { pageTitle, researchType, studyId, subpath } };
 };
 
 /**
