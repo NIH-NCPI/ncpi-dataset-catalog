@@ -1,8 +1,8 @@
-import { ThemeProps } from "@databiosphere/findable-ui/lib/theme/types";
 import { FONT } from "@databiosphere/findable-ui/lib/styles/common/constants/font";
+import { typographyToCSS } from "@databiosphere/findable-ui/lib/styles/common/mixins/typography";
+import { ThemeProps } from "@databiosphere/findable-ui/lib/theme/types";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { typographyToCSS } from "@databiosphere/findable-ui/lib/styles/common/mixins/typography";
 
 const muiAlert = ({ theme }: ThemeProps) => css`
   .MuiAlert-root {
@@ -24,6 +24,19 @@ const muiAlert = ({ theme }: ThemeProps) => css`
       .MuiAlertTitle-root {
         ${css(theme.typography["heading-small"])};
       }
+
+      ol > li,
+      ul > li {
+        margin: 8px 0;
+
+        &:first-of-type {
+          margin-top: 0;
+        }
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 `;
@@ -39,6 +52,12 @@ const muiBreadcrumbs = () => css`
         margin: 0;
       }
     }
+  }
+`;
+
+const muiDivider = () => css`
+  .MuiDivider-root {
+    margin: 32px 0;
   }
 `;
 
@@ -76,6 +95,12 @@ export const Content = styled.div`
     }
   }
 
+  h1 + ol,
+  h1 + p,
+  h1 + ul {
+    margin-top: 16px;
+  }
+
   p {
     font: ${FONT.BODY_LARGE_400_2_LINES};
     margin: 0 0 16px;
@@ -85,6 +110,7 @@ export const Content = styled.div`
     }
   }
 
+  ol,
   ul {
     font: ${FONT.BODY_LARGE_400_2_LINES};
     margin: 16px 0;
@@ -95,6 +121,11 @@ export const Content = styled.div`
     }
   }
 
+  ol ol {
+    list-style-type: lower-roman;
+  }
+
   ${muiAlert};
   ${muiBreadcrumbs};
+  ${muiDivider};
 `;
