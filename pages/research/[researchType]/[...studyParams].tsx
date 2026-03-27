@@ -18,6 +18,26 @@ import { NCPICatalogStudy } from "../../../app/apis/catalog/ncpi-catalog/common/
 
 const STUDIES_PATH = "catalog/ncpi-platform-studies.json";
 
+// Parsed once at module load, reused across ~8800 getStaticProps calls.
+let studyTitles: Map<string, string> | null = null;
+
+/**
+ * Returns a cached dbGapId-to-title map built from the catalog JSON.
+ * @returns Map from dbGapId to study title.
+ */
+function getStudyTitles(): Map<string, string> {
+  if (!studyTitles) {
+    const raw = JSON.parse(fs.readFileSync(STUDIES_PATH, "utf-8"));
+    studyTitles = new Map(
+      Object.values(raw).map((s) => {
+        const study = s as { dbGapId: string; title: string };
+        return [study.dbGapId, study.title];
+      })
+    );
+  }
+  return studyTitles;
+}
+
 interface Params extends ParsedUrlQuery {
   researchType: string;
   studyParams: string[];
@@ -92,15 +112,12 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
 
   const [studyId, subpath = ""] = studyParams;
 
-  // Look up study title for OG meta tags.
+  // Look up study title for OG meta tags (O(1) from cached Map).
   let pageTitle = studyId;
   try {
-    const studies = JSON.parse(fs.readFileSync(STUDIES_PATH, "utf-8"));
-    const study = Object.values(studies).find(
-      (s) => (s as { dbGapId: string }).dbGapId === studyId
-    ) as { title?: string } | undefined;
-    if (study?.title) {
-      pageTitle = `${studyId} — ${study.title}`;
+    const title = getStudyTitles().get(studyId);
+    if (title) {
+      pageTitle = `${studyId} — ${title}`;
     }
   } catch {
     // Fall back to studyId if catalog file is unavailable.

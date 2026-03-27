@@ -25,7 +25,6 @@ import { createBreakpoints } from "@mui/system";
 import { deepmerge } from "@mui/utils";
 import { StyledHeader } from "app/components/Layout/components/Header/header.styles";
 import { OgMeta } from "app/components/OgMeta/ogMeta";
-
 import { config } from "app/config/config";
 import { FEATURES } from "app/shared/entities";
 import { NextPage } from "next";
