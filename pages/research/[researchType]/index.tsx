@@ -15,6 +15,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 interface Props {
+  pageTitle?: string;
   researchType: ResearchType;
 }
 
@@ -32,7 +33,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
   return {
-    props: { researchType: params!.researchType },
+    props: { pageTitle: "Research", researchType: params!.researchType },
   };
 };
 

@@ -24,6 +24,7 @@ import { createTheme, CssBaseline, Theme, ThemeProvider } from "@mui/material";
 import { createBreakpoints } from "@mui/system";
 import { deepmerge } from "@mui/utils";
 import { StyledHeader } from "app/components/Layout/components/Header/header.styles";
+import { OgMeta } from "app/components/OgMeta/ogMeta";
 import { config } from "app/config/config";
 import { FEATURES } from "app/shared/entities";
 import { NextPage } from "next";
@@ -39,6 +40,7 @@ const SESSION_TIMEOUT = 15 * 60 * 1000; // 15 minutes
 
 export interface PageProps extends AzulEntitiesStaticResponse {
   homePage?: boolean;
+  pageDescription?: string;
   pageTitle?: string;
 }
 
@@ -65,6 +67,7 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
   const {
     entityListType = "platforms",
     homePage,
+    pageDescription,
     pageTitle,
   } = pageProps as PageProps;
   const Main = Component.Main || DXMain;
@@ -77,7 +80,16 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
     }
   }, [gtmAuth, gtmId, gtmPreview]);
 
-  if (!isEntitiesLoaded) return <></>;
+  const ogMeta = (
+    <OgMeta
+      appTitle={appConfig.appTitle}
+      browserURL={appConfig.browserURL}
+      pageDescription={pageDescription}
+      pageTitle={pageTitle}
+    />
+  );
+
+  if (!isEntitiesLoaded) return ogMeta;
 
   if (!aiUrl) throw new Error("AI URL is not defined in the configuration.");
 
@@ -86,6 +98,7 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
       <ThemeProvider theme={theme}>
         <DXConfigProvider config={appConfig} entityListType={entityListType}>
           <Head pageTitle={pageTitle} />
+          {ogMeta}
           <CssBaseline />
           <ServicesProvider>
             <SystemStatusProvider>
