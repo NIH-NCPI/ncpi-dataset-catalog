@@ -158,7 +158,9 @@ function buildOverviewDescription(meta: StudyMeta): string | undefined {
   }
 
   if (meta.participantCount > 0) {
-    parts.push(`(${meta.participantCount.toLocaleString()} participants)`);
+    parts.push(
+      `(${meta.participantCount.toLocaleString("en-US")} participants)`
+    );
   }
 
   return parts.length > 0 ? parts.join(" ") : undefined;
@@ -204,7 +206,7 @@ function buildPublicationsDescription(meta: StudyMeta): string | undefined {
         ? `${top.title.substring(0, MAX_PUB_TITLE_LENGTH)}...`
         : top.title;
     const cited = top.citationCount
-      ? ` (${top.citationCount.toLocaleString()} citations)`
+      ? ` (${top.citationCount.toLocaleString("en-US")} citations)`
       : "";
     parts.push(`including "${truncated}"${cited}`);
   }
