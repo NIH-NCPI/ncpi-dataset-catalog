@@ -1,34 +1,25 @@
 import fs from "fs";
 
+import { Publication } from "../apis/catalog/common/entities";
+import { VariableSummary } from "../apis/catalog/ncpi-catalog/common/entities";
+
 const MAX_CATEGORIES_SHOWN = 3;
 const MAX_DATA_TYPES_SHOWN = 2;
 const MAX_PUB_TITLE_LENGTH = 70;
 const STUDIES_PATH = "catalog/ncpi-platform-studies.json";
-
-interface Publication {
-  citationCount?: number;
-  title?: string;
-}
-
-interface VariableCategory {
-  categoryId: string;
-  categoryName: string;
-  totalCount: number;
-}
-
-interface VariableSummary {
-  categories?: VariableCategory[];
-  totalVariables: number;
-}
 
 interface StudyMeta {
   dataTypes: string[];
   focus: string;
   participantCount: number;
   platforms: string[];
-  publications: Publication[];
+  publicationCount: number;
   title: string;
-  variableSummary: VariableSummary | null;
+  topPublication: Pick<Publication, "citationCount" | "title"> | null;
+  variableSummary: Pick<
+    VariableSummary,
+    "categories" | "totalVariables"
+  > | null;
 }
 
 /**
@@ -41,6 +32,24 @@ export interface StudyPageMeta {
 
 // Parsed on first call, cached and reused across all subsequent calls.
 let studyMetaCache: Map<string, StudyMeta> | null = null;
+
+/**
+ * Returns the most-cited publication from a list.
+ * @param publications - Array of publications.
+ * @returns The publication with the highest citation count, or null.
+ */
+function findTopPublication(
+  publications: Publication[]
+): Pick<Publication, "citationCount" | "title"> | null {
+  if (publications.length === 0) return null;
+  let top = publications[0];
+  for (const p of publications) {
+    if ((p.citationCount ?? 0) > (top.citationCount ?? 0)) {
+      top = p;
+    }
+  }
+  return { citationCount: top.citationCount, title: top.title };
+}
 
 /**
  * Returns a cached dbGapId-to-metadata map built from the catalog JSON.
@@ -61,6 +70,8 @@ function getStudyMeta(): Map<string, StudyMeta> {
           title: string;
           variableSummary?: VariableSummary | null;
         };
+        const pubs = study.publications ?? [];
+        const vs = study.variableSummary;
         return [
           study.dbGapId,
           {
@@ -68,9 +79,19 @@ function getStudyMeta(): Map<string, StudyMeta> {
             focus: study.focus ?? "",
             participantCount: study.participantCount ?? 0,
             platforms: study.platforms ?? [],
-            publications: study.publications ?? [],
+            publicationCount: pubs.length,
             title: study.title,
-            variableSummary: study.variableSummary ?? null,
+            topPublication: findTopPublication(pubs),
+            variableSummary: vs
+              ? {
+                  categories: (vs.categories ?? []).map((c) => ({
+                    categoryId: c.categoryId,
+                    categoryName: c.categoryName,
+                    totalCount: c.totalCount,
+                  })),
+                  totalVariables: vs.totalVariables,
+                }
+              : null,
           },
         ];
       })
@@ -171,15 +192,12 @@ function buildVariablesDescription(meta: StudyMeta): string | undefined {
  * @returns Description like '5 selected publications including "Synaptic..." (2,558 citations)'.
  */
 function buildPublicationsDescription(meta: StudyMeta): string | undefined {
-  if (meta.publications.length === 0) return undefined;
+  if (meta.publicationCount === 0) return undefined;
 
-  const count = meta.publications.length;
+  const count = meta.publicationCount;
   const parts = [`${count} selected publication${count !== 1 ? "s" : ""}`];
 
-  const top = [...meta.publications].sort(
-    (a, b) => (b.citationCount ?? 0) - (a.citationCount ?? 0)
-  )[0];
-
+  const top = meta.topPublication;
   if (top?.title) {
     const truncated =
       top.title.length > MAX_PUB_TITLE_LENGTH

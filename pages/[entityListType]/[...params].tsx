@@ -159,12 +159,15 @@ export const getStaticProps: GetStaticProps<AzulEntityStaticResponse> = async ({
 
   if (!entityConfig || !entityId) return { notFound: true };
 
-  const props: EntityDetailPageProps = { browserURL, entityListType };
-
-  // Set page title and description for study detail pages.
-  if (entityListType === "studies" && entityId) {
-    Object.assign(props, getStudyPageMeta(entityId, entityTab || undefined));
-  }
+  const studyMeta =
+    entityListType === "studies" && entityId
+      ? getStudyPageMeta(entityId, entityTab || undefined)
+      : {};
+  const props: EntityDetailPageProps = {
+    browserURL,
+    entityListType,
+    ...studyMeta,
+  };
 
   // Process entity props.
   await processEntityProps(entityConfig, entityTab, entityId, props);
