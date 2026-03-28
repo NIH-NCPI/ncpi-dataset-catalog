@@ -9,7 +9,7 @@ import { JSX } from "react";
 import { RESEARCH_TYPE } from "../../../app/views/ResearchView/artifact/types";
 import { StyledMain } from "../../../app/views/ResearchView/components/Main/main.styles";
 import { seedDatabase } from "../../../app/utils/seedDatabase";
-import { getStudyPageTitle } from "../../../app/utils/studyTitles";
+import { getStudyPageMeta } from "../../../app/utils/studyTitles";
 import { getEntities } from "../../[entityListType]/[...params]";
 import { config } from "../../../app/config/config";
 import { StudyDetailView } from "../../../app/views/StudyDetailView/studyDetailView";
@@ -21,6 +21,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 interface Props {
+  pageDescription?: string;
   pageTitle?: string;
   researchType: string;
   studyId: string;
@@ -92,7 +93,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
 
   return {
     props: {
-      pageTitle: getStudyPageTitle(studyId, subpath || undefined),
+      ...getStudyPageMeta(studyId, subpath || undefined),
       researchType,
       studyId,
       subpath,

@@ -40,6 +40,7 @@ const SESSION_TIMEOUT = 15 * 60 * 1000; // 15 minutes
 
 export interface PageProps extends AzulEntitiesStaticResponse {
   homePage?: boolean;
+  pageDescription?: string;
   pageTitle?: string;
 }
 
@@ -66,6 +67,7 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
   const {
     entityListType = "platforms",
     homePage,
+    pageDescription,
     pageTitle,
   } = pageProps as PageProps;
   const Main = Component.Main || DXMain;
@@ -82,6 +84,7 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
     <OgMeta
       appTitle={appConfig.appTitle}
       browserURL={appConfig.browserURL}
+      pageDescription={pageDescription}
       pageTitle={pageTitle}
     />
   );

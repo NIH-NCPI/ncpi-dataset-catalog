@@ -10,9 +10,19 @@ const OUT_DIR = path.resolve("out");
  * @returns Content value or null if not found.
  */
 function getOgTag(html: string, property: string): string | null {
-  const re = new RegExp(`property="${property}"\\s+content="([^"]*)"`, "i");
+  const re = new RegExp(
+    `<meta[^>]*property="${property}"[^>]*content="([^"]*)"[^>]*/?>`,
+    "i"
+  );
   const match = html.match(re);
-  return match?.[1] ?? null;
+  if (match) return match[1];
+  // Try reversed attribute order.
+  const reAlt = new RegExp(
+    `<meta[^>]*content="([^"]*)"[^>]*property="${property}"[^>]*/?>`,
+    "i"
+  );
+  const matchAlt = html.match(reAlt);
+  return matchAlt?.[1] ?? null;
 }
 
 /**
@@ -22,9 +32,18 @@ function getOgTag(html: string, property: string): string | null {
  * @returns Content value or null if not found.
  */
 function getMetaByName(html: string, name: string): string | null {
-  const re = new RegExp(`name="${name}"\\s+content="([^"]*)"`, "i");
+  const re = new RegExp(
+    `<meta[^>]*name="${name}"[^>]*content="([^"]*)"[^>]*/?>`,
+    "i"
+  );
   const match = html.match(re);
-  return match?.[1] ?? null;
+  if (match) return match[1];
+  const reAlt = new RegExp(
+    `<meta[^>]*content="([^"]*)"[^>]*name="${name}"[^>]*/?>`,
+    "i"
+  );
+  const matchAlt = html.match(reAlt);
+  return matchAlt?.[1] ?? null;
 }
 
 // Skip if no build output (these tests run after `npm run build:dev`).
@@ -63,6 +82,16 @@ describeIfBuilt("OG meta tags in static export", () => {
     expect(title).toContain("phs000298");
     expect(title).toContain("NCPI Dataset Catalog");
     expect(title).not.toBe("NCPI Dataset Catalog");
+  });
+
+  it("study detail page has generated description", () => {
+    const html = readPage("studies/phs000298.html");
+    const desc = getOgTag(html, "og:description");
+    expect(desc).toContain("Autistic Disorder");
+    expect(desc).toContain("data");
+    expect(desc).not.toBe(
+      "Search 2,944 studies across AnVIL, BDC, CRDC, and KFDRC."
+    );
   });
 
   it("study variables page includes 'Variables' in title", () => {

@@ -10,6 +10,7 @@ const TWITTER_SITE = "@clevercanary";
 interface OgMetaProps {
   appTitle: string;
   browserURL?: string;
+  pageDescription?: string;
   pageTitle?: string;
 }
 
@@ -18,15 +19,18 @@ interface OgMetaProps {
  * @param props - Component props.
  * @param props.appTitle - Application title used as site name and title fallback.
  * @param props.browserURL - Base URL for canonical links and image.
+ * @param props.pageDescription - Page-specific description (falls back to site default).
  * @param props.pageTitle - Page-specific title (combined with appTitle).
  * @returns Head element with OG meta tags.
  */
 export const OgMeta = ({
   appTitle,
   browserURL,
+  pageDescription,
   pageTitle,
 }: OgMetaProps): JSX.Element => {
   const router = useRouter();
+  const description = pageDescription || DEFAULT_DESCRIPTION;
   const title = pageTitle ? `${pageTitle} - ${appTitle}` : appTitle;
   const url = browserURL ? `${browserURL}${router.asPath}` : "";
   const imageUrl = browserURL ? `${browserURL}${OG_IMAGE_PATH}` : OG_IMAGE_PATH;
@@ -36,7 +40,7 @@ export const OgMeta = ({
       <meta
         key="og:description"
         property="og:description"
-        content={DEFAULT_DESCRIPTION}
+        content={description}
       />
       <meta key="og:image" property="og:image" content={imageUrl} />
       <meta key="og:image:width" property="og:image:width" content="512" />
