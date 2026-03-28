@@ -209,9 +209,11 @@ export function getStudyPageMeta(
 
   if (meta) {
     if (subpath === "variables") {
-      pageDescription = buildVariablesDescription(meta);
+      pageDescription =
+        buildVariablesDescription(meta) ?? buildOverviewDescription(meta);
     } else if (subpath === "selected-publications") {
-      pageDescription = buildPublicationsDescription(meta);
+      pageDescription =
+        buildPublicationsDescription(meta) ?? buildOverviewDescription(meta);
     } else {
       pageDescription = buildOverviewDescription(meta);
     }
