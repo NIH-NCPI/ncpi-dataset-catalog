@@ -22,15 +22,23 @@ export function getStudyTitles(): Map<string, string> {
   return studyTitles;
 }
 
+const SUBPATH_LABELS: Record<string, string> = {
+  "selected-publications": "Selected Publications",
+  variables: "Variables",
+};
+
 /**
  * Returns a page title for a study detail page.
  * @param studyId - The dbGaP study ID (e.g. "phs000220").
- * @returns Formatted title like "phs000220 — Study Name", or just the studyId if not found.
+ * @param subpath - Optional subpath (e.g. "variables", "selected-publications").
+ * @returns Formatted title like "Variables — phs000220 — Study Name".
  */
-export function getStudyPageTitle(studyId: string): string {
+export function getStudyPageTitle(studyId: string, subpath?: string): string {
   try {
     const title = getStudyTitles().get(studyId);
-    return title ? `${studyId} — ${title}` : studyId;
+    const base = title ? `${studyId} — ${title}` : studyId;
+    const label = subpath ? SUBPATH_LABELS[subpath] : undefined;
+    return label ? `${label} — ${base}` : base;
   } catch {
     return studyId;
   }

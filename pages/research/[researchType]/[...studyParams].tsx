@@ -92,7 +92,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
 
   return {
     props: {
-      pageTitle: getStudyPageTitle(studyId),
+      pageTitle: getStudyPageTitle(studyId, subpath || undefined),
       researchType,
       studyId,
       subpath,

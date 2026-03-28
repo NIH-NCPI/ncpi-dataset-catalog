@@ -65,9 +65,17 @@ describeIfBuilt("OG meta tags in static export", () => {
     expect(title).not.toBe("NCPI Dataset Catalog");
   });
 
-  it("study publications page has study name in title", () => {
+  it("study variables page includes 'Variables' in title", () => {
+    const html = readPage("studies/phs000298/variables.html");
+    const title = getOgTag(html, "og:title");
+    expect(title).toContain("Variables");
+    expect(title).toContain("phs000298");
+  });
+
+  it("study publications page includes 'Selected Publications' in title", () => {
     const html = readPage("studies/phs000298/selected-publications.html");
     const title = getOgTag(html, "og:title");
+    expect(title).toContain("Selected Publications");
     expect(title).toContain("phs000298");
   });
 
@@ -76,6 +84,13 @@ describeIfBuilt("OG meta tags in static export", () => {
     const title = getOgTag(html, "og:title");
     expect(title).toContain("phs000298");
     expect(title).toContain("NCPI Dataset Catalog");
+  });
+
+  it("research study variables page includes 'Variables' in title", () => {
+    const html = readPage("research/studies/phs000298/variables.html");
+    const title = getOgTag(html, "og:title");
+    expect(title).toContain("Variables");
+    expect(title).toContain("phs000298");
   });
 
   it("all pages have favicon links in HTML", () => {

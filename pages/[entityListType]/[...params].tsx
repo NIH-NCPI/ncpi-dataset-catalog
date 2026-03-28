@@ -162,7 +162,7 @@ export const getStaticProps: GetStaticProps<AzulEntityStaticResponse> = async ({
 
   // Set page title for study detail pages.
   if (entityListType === "studies" && entityId) {
-    props.pageTitle = getStudyPageTitle(entityId);
+    props.pageTitle = getStudyPageTitle(entityId, entityTab || undefined);
   }
 
   // Process entity props.
