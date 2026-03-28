@@ -94,18 +94,23 @@ describeIfBuilt("OG meta tags in static export", () => {
     );
   });
 
-  it("study variables page includes 'Variables' in title", () => {
+  it("study variables page has variables-specific description", () => {
     const html = readPage("studies/phs000298/variables.html");
     const title = getOgTag(html, "og:title");
     expect(title).toContain("Variables");
     expect(title).toContain("phs000298");
+    const desc = getOgTag(html, "og:description");
+    expect(desc).toContain("variables");
+    expect(desc).not.toContain("study with");
   });
 
-  it("study publications page includes 'Selected Publications' in title", () => {
+  it("study publications page has publications-specific description", () => {
     const html = readPage("studies/phs000298/selected-publications.html");
     const title = getOgTag(html, "og:title");
     expect(title).toContain("Selected Publications");
     expect(title).toContain("phs000298");
+    const desc = getOgTag(html, "og:description");
+    expect(desc).toContain("selected publication");
   });
 
   it("research study detail page has study name in title", () => {

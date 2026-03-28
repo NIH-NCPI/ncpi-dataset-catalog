@@ -1,14 +1,34 @@
 import fs from "fs";
 
+const MAX_CATEGORIES_SHOWN = 3;
 const MAX_DATA_TYPES_SHOWN = 2;
+const MAX_PUB_TITLE_LENGTH = 70;
 const STUDIES_PATH = "catalog/ncpi-platform-studies.json";
+
+interface Publication {
+  citationCount?: number;
+  title?: string;
+}
+
+interface VariableCategory {
+  categoryId: string;
+  categoryName: string;
+  totalCount: number;
+}
+
+interface VariableSummary {
+  categories?: VariableCategory[];
+  totalVariables: number;
+}
 
 interface StudyMeta {
   dataTypes: string[];
   focus: string;
   participantCount: number;
   platforms: string[];
+  publications: Publication[];
   title: string;
+  variableSummary: VariableSummary | null;
 }
 
 /**
@@ -37,7 +57,9 @@ function getStudyMeta(): Map<string, StudyMeta> {
           focus?: string;
           participantCount?: number;
           platforms?: string[];
+          publications?: Publication[];
           title: string;
+          variableSummary?: VariableSummary | null;
         };
         return [
           study.dbGapId,
@@ -46,7 +68,9 @@ function getStudyMeta(): Map<string, StudyMeta> {
             focus: study.focus ?? "",
             participantCount: study.participantCount ?? 0,
             platforms: study.platforms ?? [],
+            publications: study.publications ?? [],
             title: study.title,
+            variableSummary: study.variableSummary ?? null,
           },
         ];
       })
@@ -78,11 +102,25 @@ function buildPageTitle(
 }
 
 /**
- * Builds a generated OG description from study metadata.
+ * Joins a list with a cap, appending "+ N more" if truncated.
+ * @param items - Items to join.
+ * @param max - Maximum items to show.
+ * @returns Formatted string like "A, B + 3 more".
+ */
+function joinWithCap(items: string[], max: number): string {
+  const shown = items.slice(0, max);
+  const more = items.length - shown.length;
+  let result = shown.join(", ");
+  if (more > 0) result += ` + ${more} more`;
+  return result;
+}
+
+/**
+ * Builds an overview description from study metadata.
  * @param meta - Study metadata.
  * @returns Description like "Autistic Disorder study with WXS data on AnVIL (12,772 participants)".
  */
-function buildDescription(meta: StudyMeta): string | undefined {
+function buildOverviewDescription(meta: StudyMeta): string | undefined {
   const parts: string[] = [];
 
   if (meta.focus) {
@@ -90,10 +128,7 @@ function buildDescription(meta: StudyMeta): string | undefined {
   }
 
   if (meta.dataTypes.length > 0) {
-    const shown = meta.dataTypes.slice(0, MAX_DATA_TYPES_SHOWN);
-    const more = meta.dataTypes.length - shown.length;
-    let dt = shown.join(", ");
-    if (more > 0) dt += ` + ${more} more`;
+    const dt = joinWithCap(meta.dataTypes, MAX_DATA_TYPES_SHOWN);
     parts.push(`${parts.length > 0 ? "with" : "Study with"} ${dt} data`);
   }
 
@@ -109,6 +144,57 @@ function buildDescription(meta: StudyMeta): string | undefined {
 }
 
 /**
+ * Builds a variables page description from study metadata.
+ * @param meta - Study metadata.
+ * @returns Description like "29 variables across Demographics, Disease Events, Race and Ethnicity".
+ */
+function buildVariablesDescription(meta: StudyMeta): string | undefined {
+  const vs = meta.variableSummary;
+  if (!vs || !vs.totalVariables) return undefined;
+
+  const categories = (vs.categories ?? [])
+    .filter((c) => c.categoryId !== "unclassified")
+    .map((c) => c.categoryName);
+
+  const parts = [`${vs.totalVariables} variables`];
+
+  if (categories.length > 0) {
+    parts.push(`across ${joinWithCap(categories, MAX_CATEGORIES_SHOWN)}`);
+  }
+
+  return parts.join(" ");
+}
+
+/**
+ * Builds a publications page description from study metadata.
+ * @param meta - Study metadata.
+ * @returns Description like '5 selected publications including "Synaptic..." (2,558 citations)'.
+ */
+function buildPublicationsDescription(meta: StudyMeta): string | undefined {
+  if (meta.publications.length === 0) return undefined;
+
+  const count = meta.publications.length;
+  const parts = [`${count} selected publication${count !== 1 ? "s" : ""}`];
+
+  const top = [...meta.publications].sort(
+    (a, b) => (b.citationCount ?? 0) - (a.citationCount ?? 0)
+  )[0];
+
+  if (top?.title) {
+    const truncated =
+      top.title.length > MAX_PUB_TITLE_LENGTH
+        ? `${top.title.substring(0, MAX_PUB_TITLE_LENGTH)}...`
+        : top.title;
+    const cited = top.citationCount
+      ? ` (${top.citationCount.toLocaleString()} citations)`
+      : "";
+    parts.push(`including "${truncated}"${cited}`);
+  }
+
+  return parts.join(" ");
+}
+
+/**
  * Returns OG page title and description for a study page.
  * @param studyId - The dbGaP study ID (e.g. "phs000220").
  * @param subpath - Optional subpath (e.g. "variables", "selected-publications").
@@ -119,8 +205,23 @@ export function getStudyPageMeta(
   subpath?: string
 ): StudyPageMeta {
   const meta = getStudyMeta().get(studyId);
-  return {
-    pageDescription: meta ? buildDescription(meta) : undefined,
+  let pageDescription: string | undefined;
+
+  if (meta) {
+    if (subpath === "variables") {
+      pageDescription = buildVariablesDescription(meta);
+    } else if (subpath === "selected-publications") {
+      pageDescription = buildPublicationsDescription(meta);
+    } else {
+      pageDescription = buildOverviewDescription(meta);
+    }
+  }
+
+  const result: StudyPageMeta = {
     pageTitle: buildPageTitle(meta, studyId, subpath),
   };
+  if (pageDescription) {
+    result.pageDescription = pageDescription;
+  }
+  return result;
 }
