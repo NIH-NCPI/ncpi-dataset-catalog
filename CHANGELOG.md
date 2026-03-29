@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.18.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.17.0...v0.18.0) (2026-03-29)
+
+
+### Features
+
+* add Open Graph meta tags for social link previews ([#319](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/319)) ([4508275](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/450827514432d47232970449d29d6c94dbd71e97))
+* add Open Graph meta tags for social link previews ([#320](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/320)) ([ebac5ca](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/ebac5ca79057c610cfdb00e45d000665a848c597))
+* ensure About page follows standard findable-ui text layout ([#304](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/304)) ([#316](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/316)) ([7ff4a5f](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/7ff4a5ff50a552c5965290d67510265be988f6e7))
+
+
+### Bug Fixes
+
+* move GIT_SHA to bottom of Dockerfile for layer caching ([#312](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/312)) ([f3f57bc](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/f3f57bc147084d07a4461335ed7a801ee7fd7a38))
+* responsive styles for example queries page ([#317](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/317)) ([#318](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/318)) ([1dbe73f](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/1dbe73fcd98bdf3d754aa5170915abcb0c4f72a7))
+
+
+### Chores
+
+* upgrade findable-ui to ^50.3.0 and next to ^15.5.13 ([#324](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/324)) ([a92727c](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/a92727c536c97da99fb0ff1aee56a11f7baad901))
+
 ## [0.17.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.16.1...v0.17.0) (2026-03-26)
 
 
