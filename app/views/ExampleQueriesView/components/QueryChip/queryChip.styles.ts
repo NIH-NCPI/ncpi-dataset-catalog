@@ -4,6 +4,7 @@ import { Chip } from "@mui/material";
 
 export const StyledForm = styled("form")`
   display: inline;
+  min-width: 0;
 `;
 
 export const StyledChip = styled(Chip)`
