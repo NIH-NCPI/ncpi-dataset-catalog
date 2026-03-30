@@ -1,10 +1,9 @@
-/**
- * Dimension configuration for the example queries page.
- */
-export interface ExampleQuery {
-  label: string;
-  query: string;
-}
+import {
+  PromptSuggestion,
+  SUGGESTION_VARIANT,
+} from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
+
+export type ExampleQuery = PromptSuggestion;
 
 export interface FacetValueGroup {
   examples?: ExampleQuery[];
@@ -28,14 +27,17 @@ export const DIMENSIONS: Dimension[] = [
       {
         label: "Whole genome sequencing studies on AnVIL",
         query: "Whole genome sequencing studies on AnVIL",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
       {
         label: "Transcriptomic data in clinical trials",
         query: "Transcriptomic data in clinical trials",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
       {
         label: "Family trio studies with whole exome sequencing",
         query: "Family trio studies with whole exome sequencing",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
     ],
     facetValues: [
@@ -44,10 +46,12 @@ export const DIMENSIONS: Dimension[] = [
           {
             label: "Longitudinal cohort studies on BioData Catalyst",
             query: "Longitudinal cohort studies on BioData Catalyst",
+            variant: SUGGESTION_VARIANT.CHIP,
           },
           {
             label: "Studies on Kids First Data Resource Center",
             query: "Studies on Kids First Data Resource Center",
+            variant: SUGGESTION_VARIANT.CHIP,
           },
         ],
         label: "Platforms",
@@ -58,10 +62,12 @@ export const DIMENSIONS: Dimension[] = [
           {
             label: "Studies with methylation data",
             query: "Studies with methylation data",
+            variant: SUGGESTION_VARIANT.CHIP,
           },
           {
             label: "Case-control studies with genotyping arrays",
             query: "Case-control studies with genotyping arrays",
+            variant: SUGGESTION_VARIANT.CHIP,
           },
         ],
         label: "Data types",
@@ -98,10 +104,12 @@ export const DIMENSIONS: Dimension[] = [
           {
             label: "Cross-sectional studies with genotyping data",
             query: "Cross-sectional studies with genotyping data",
+            variant: SUGGESTION_VARIANT.CHIP,
           },
           {
             label: "Mendelian disease studies",
             query: "Mendelian disease studies",
+            variant: SUGGESTION_VARIANT.CHIP,
           },
         ],
         label: "Study designs",
@@ -132,14 +140,17 @@ export const DIMENSIONS: Dimension[] = [
       {
         label: "Studies measuring systolic blood pressure",
         query: "Studies measuring systolic blood pressure",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
       {
         label: "Studies with smoking data",
         query: "Studies with smoking data",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
       {
         label: "Studies with body mass index and cholesterol measurements",
         query: "Studies with body mass index and cholesterol measurements",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
     ],
     explanation:
@@ -153,14 +164,17 @@ export const DIMENSIONS: Dimension[] = [
       {
         label: "Studies about type 2 diabetes",
         query: "Studies about type 2 diabetes",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
       {
         label: "Pancreatic cancer studies with transcriptomic data",
         query: "Pancreatic cancer studies with transcriptomic data",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
       {
         label: "Respiratory disease studies on BioData Catalyst",
         query: "Respiratory disease studies on BioData Catalyst",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
     ],
     explanation:
@@ -174,14 +188,17 @@ export const DIMENSIONS: Dimension[] = [
       {
         label: "Studies where IRB approval is not required",
         query: "Studies where IRB approval is not required",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
       {
         label: "General research use studies with whole genome sequencing",
         query: "General research use studies with whole genome sequencing",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
       {
         label: "Studies available for commercial use",
         query: "Studies available for commercial use",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
     ],
     explanation:
@@ -195,12 +212,14 @@ export const DIMENSIONS: Dimension[] = [
       {
         label: "Studies with East Asian ancestry participants",
         query: "Studies with East Asian ancestry participants",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
       {
         label:
           "European and African American ancestry with whole genome sequencing",
         query:
           "European and African American ancestry with whole genome sequencing",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
     ],
     facetValues: [
@@ -209,6 +228,7 @@ export const DIMENSIONS: Dimension[] = [
           {
             label: "Studies with South Asian ancestry participants",
             query: "Studies with South Asian ancestry participants",
+            variant: SUGGESTION_VARIANT.CHIP,
           },
         ],
         label: "Computed ancestry values",
@@ -233,10 +253,12 @@ export const DIMENSIONS: Dimension[] = [
       {
         label: "Studies with Hispanic or Latino participants",
         query: "Studies with Hispanic or Latino participants",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
       {
         label: "Cohorts with Native Hawaiian or Pacific Islander participants",
         query: "Cohorts with Native Hawaiian or Pacific Islander participants",
+        variant: SUGGESTION_VARIANT.CHIP,
       },
     ],
     facetValues: [
@@ -245,6 +267,7 @@ export const DIMENSIONS: Dimension[] = [
           {
             label: "Studies with female participants",
             query: "Studies with female participants",
+            variant: SUGGESTION_VARIANT.CHIP,
           },
         ],
         label: "Sex",
@@ -255,6 +278,7 @@ export const DIMENSIONS: Dimension[] = [
           {
             label: "Studies with Black or African American participants",
             query: "Studies with Black or African American participants",
+            variant: SUGGESTION_VARIANT.CHIP,
           },
         ],
         label: "Race/Ethnicity",

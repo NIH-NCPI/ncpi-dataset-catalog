@@ -1,10 +1,8 @@
+import { PromptMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
 import { JSX } from "react";
-import { FacetValueGroup } from "../../constants";
-import {
-  StyledChipStack,
-  StyledValueList,
-} from "../../exampleQueriesView.styles";
-import { QueryChip } from "../QueryChip/queryChip";
+import { FacetValueGroup } from "../../../../constants";
+import { StyledChips } from "../../dimensionSection.styles";
+import { StyledValueList } from "./facetValueList.styles";
 
 interface FacetValueListProps {
   facetValues: FacetValueGroup[];
@@ -24,12 +22,9 @@ export const FacetValueList = ({
       {facetValues.map(({ examples, label, values }) => (
         <div key={label}>
           <h3>{label}</h3>
-          {examples && examples.length > 0 && (
-            <StyledChipStack>
-              {examples.map(({ label: chipLabel, query }) => (
-                <QueryChip key={chipLabel} label={chipLabel} query={query} />
-              ))}
-            </StyledChipStack>
+          {/* Safe cast: Chips only reads message.suggestions. */}
+          {examples && (
+            <StyledChips message={{ suggestions: examples } as PromptMessage} />
           )}
           <p>Available options:</p>
           <StyledValueList>
