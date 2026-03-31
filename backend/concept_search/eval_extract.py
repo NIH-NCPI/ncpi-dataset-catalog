@@ -92,13 +92,13 @@ def _extract_similarity(expected: RawMention, actual: RawMention) -> float:
 
 def _rm(
     text: str,
-    facet: Facet,
+    facets: Facet | list[Facet],
     values: list[str] | None = None,
-    *,
-    facets: list[Facet] | None = None,
 ) -> RawMention:
     """Shorthand for building expected raw mentions."""
-    return RawMention(facets=facets or [facet], text=text, values=values or [])
+    if isinstance(facets, Facet):
+        facets = [facets]
+    return RawMention(facets=facets, text=text, values=values or [])
 
 
 dataset = Dataset[str, ExtractResult, ExtractResult](
@@ -138,7 +138,7 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
             inputs="studies about glucose",
             expected_output=ExtractResult(
                 mentions=[
-                    _rm("glucose", Facet.FOCUS, facets=[Facet.FOCUS, Facet.MEASUREMENT]),
+                    _rm("glucose", [Facet.FOCUS, Facet.MEASUREMENT]),
                 ]
             ),
         ),
@@ -147,7 +147,7 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
             inputs="studies about cholesterol",
             expected_output=ExtractResult(
                 mentions=[
-                    _rm("cholesterol", Facet.FOCUS, facets=[Facet.FOCUS, Facet.MEASUREMENT]),
+                    _rm("cholesterol", [Facet.FOCUS, Facet.MEASUREMENT]),
                 ]
             ),
         ),

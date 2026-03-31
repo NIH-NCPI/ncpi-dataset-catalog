@@ -425,7 +425,7 @@ async def _run_resolve_uncached(
 
     # Collect all viable interpretations across facets
     all_options: list[DisambiguationOption] = []
-    descs = getattr(index, "_concept_descriptions", {}) or {}
+    descs = index._ensure_concept_descriptions() if index else {}
     for facet, result in zip(mention.facets, results, strict=True):
         if result.disambiguation:
             # This facet itself produced disambiguation — include all options
