@@ -25,7 +25,7 @@ from concept_search.models import (
     RouteSelect,
 )
 from concept_search.pipeline import _merge_with_previous
-from concept_search.resolve_agent import _resolve_single_facet
+from concept_search.resolve_agent import _resolve_single_facet, _run_resolve_uncached
 
 
 def _rm(
@@ -564,6 +564,91 @@ class TestDisambiguation:
         assert len(result.disambiguation) == 2
         assert result.values == []
 
+    @pytest.mark.asyncio
+    @patch("concept_search.resolve_agent._resolve_single_facet")
+    async def test_multi_facet_both_viable_returns_cross_facet_disambiguation(
+        self, mock_resolve
+    ) -> None:
+        """When both candidate facets produce results, return cross-facet disambiguation."""
+        from concept_search.models import ResolveResult
+
+        focus_result = ResolveResult(values=["Diabetes Mellitus"])
+        measurement_result = ResolveResult(
+            disambiguation=[
+                DisambiguationOption(
+                    concept_id="phenx:fasting_plasma_glucose_blood_draw",
+                    facet=Facet.MEASUREMENT,
+                    label="Blood glucose measurement",
+                ),
+                DisambiguationOption(
+                    concept_id="topmed:nutrient_intake",
+                    facet=Facet.MEASUREMENT,
+                    label="Dietary glucose intake",
+                ),
+            ],
+            values=[],
+        )
+
+        async def fake_resolve(mention, facet, index, model=None):
+            if facet == Facet.FOCUS:
+                return focus_result
+            return measurement_result
+
+        mock_resolve.side_effect = fake_resolve
+
+        mention = RawMention(facets=[Facet.FOCUS, Facet.MEASUREMENT], text="glucose", values=[])
+        result = await _run_resolve_uncached(mention, index=None)
+
+        # Should get 3 options: 1 from focus + 2 from measurement
+        assert len(result.disambiguation) == 3
+        assert result.values == []
+        facets_in_options = {opt.facet for opt in result.disambiguation}
+        assert Facet.FOCUS in facets_in_options
+        assert Facet.MEASUREMENT in facets_in_options
+
+    @pytest.mark.asyncio
+    @patch("concept_search.resolve_agent._resolve_single_facet")
+    async def test_multi_facet_one_viable_returns_directly(self, mock_resolve) -> None:
+        """When only one candidate facet produces results, return it directly."""
+        from concept_search.models import ResolveResult
+
+        focus_result = ResolveResult(values=[])  # focus finds nothing
+        measurement_result = ResolveResult(values=["phenx:fasting_plasma_glucose_blood_draw"])
+
+        async def fake_resolve(mention, facet, index, model=None):
+            if facet == Facet.FOCUS:
+                return focus_result
+            return measurement_result
+
+        mock_resolve.side_effect = fake_resolve
+
+        mention = RawMention(facets=[Facet.FOCUS, Facet.MEASUREMENT], text="glucose", values=[])
+        result = await _run_resolve_uncached(mention, index=None)
+
+        # Should return the measurement result directly, no disambiguation
+        assert result.values == ["phenx:fasting_plasma_glucose_blood_draw"]
+        assert result.disambiguation == []
+
+    @pytest.mark.asyncio
+    @patch("concept_search.resolve_agent._resolve_single_facet")
+    async def test_multi_facet_none_viable_returns_message(self, mock_resolve) -> None:
+        """When no candidate facets produce results, return empty with message."""
+        from concept_search.models import ResolveResult
+
+        empty_result = ResolveResult(values=[])
+
+        async def fake_resolve(mention, facet, index, model=None):
+            return empty_result
+
+        mock_resolve.side_effect = fake_resolve
+
+        mention = RawMention(facets=[Facet.FOCUS, Facet.MEASUREMENT], text="xyzzy", values=[])
+        result = await _run_resolve_uncached(mention, index=None)
+
+        assert result.values == []
+        assert result.disambiguation == []
+        assert "xyzzy" in result.message
+
 
 class TestRouteHandlers:
     """Tests for _handle_route dispatch in the API."""
@@ -619,6 +704,56 @@ class TestRouteHandlers:
         mentions = data["query"]["mentions"]
         assert len(mentions) == 2
         glucose = [m for m in mentions if m["originalText"] == "glucose"][0]
+        assert glucose["values"] == ["phenx:fasting_plasma_glucose_blood_draw"]
+        assert glucose["disambiguation"] == []
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_router")
+    def test_route_select_cross_facet_changes_mention_facet(self, mock_router, mock_index) -> None:
+        """Selecting a disambiguation option from a different facet updates the mention's facet."""
+        mock_router.return_value = RouteSelect(
+            selected_ids=["phenx:fasting_plasma_glucose_blood_draw"],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post(
+            "/search",
+            json={
+                "query": "blood glucose",
+                "previousQuery": {
+                    "intent": "study",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "glucose",
+                            "values": [],
+                            "exclude": False,
+                            "disambiguation": [
+                                {
+                                    "conceptId": "Diabetes Mellitus",
+                                    "facet": "focus",
+                                    "label": "Diabetes / metabolic disorders",
+                                },
+                                {
+                                    "conceptId": "phenx:fasting_plasma_glucose_blood_draw",
+                                    "facet": "measurement",
+                                    "label": "Blood glucose measurement",
+                                },
+                            ],
+                        },
+                    ],
+                },
+            },
+        )
+        assert resp.status_code == 200
+        data = resp.json()
+        mentions = data["query"]["mentions"]
+        assert len(mentions) == 1
+        glucose = mentions[0]
+        # Facet should have changed from focus to measurement
+        assert glucose["facet"] == "measurement"
         assert glucose["values"] == ["phenx:fasting_plasma_glucose_blood_draw"]
         assert glucose["disambiguation"] == []
 
