@@ -8,7 +8,8 @@ Focus terms have **MeSH ISA closure**: returning a parent automatically includes
 
 1. Call `search_concepts_by_embedding(query=<text>, facet="focus")`.
 2. Pick the **single best match**. Examples: "cancer" → "Neoplasms", "breast cancer" → "Breast Neoplasms", "ALS" → "Amyotrophic Lateral Sclerosis".
-3. If no good matches (all similarities < 0.3), fall back to `get_focus_category_terms` or `search_concepts`.
+3. If results span distinct unrelated domains, disambiguate instead (see Disambiguation section below).
+4. If no good matches (all similarities < 0.3), fall back to `get_focus_category_terms` or `search_concepts`.
 
 ## Measurement Facet
 

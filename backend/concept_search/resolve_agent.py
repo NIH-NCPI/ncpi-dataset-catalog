@@ -425,31 +425,28 @@ async def _run_resolve_uncached(
 
     # Collect all viable interpretations across facets
     all_options: list[DisambiguationOption] = []
+    descs = getattr(index, "_concept_descriptions", {}) or {}
     for facet, result in zip(mention.facets, results, strict=True):
         if result.disambiguation:
             # This facet itself produced disambiguation — include all options
             all_options.extend(result.disambiguation)
         elif result.values:
-            # Confident single-facet result — wrap as a disambiguation option
+            # Confident single-facet result — wrap as a disambiguation option.
+            # Use first value as concept_id (representative for multi-value).
+            concept_id = result.values[0]
+            info = descs.get(concept_id)
+            label = info["name"] if isinstance(info, dict) and "name" in info else concept_id
             all_options.append(
                 DisambiguationOption(
-                    concept_id=result.values[0],
+                    concept_id=concept_id,
                     facet=facet,
-                    label=f"{result.values[0]} ({facet.value})",
+                    label=label,
                 )
             )
 
-    # If only one facet produced results, return it directly
-    viable_facets = [
-        (facet, result)
-        for facet, result in zip(mention.facets, results, strict=True)
-        if result.values or result.disambiguation
-    ]
-    if len(viable_facets) == 1:
-        return viable_facets[0][1]
-
-    # Multiple facets have viable results — cross-facet disambiguation
-    if len(all_options) >= 2:
+    # Multi-facet mentions always disambiguate — even if only one facet
+    # produced results. Extract said it was ambiguous, so let the user confirm.
+    if all_options:
         return ResolveResult(
             disambiguation=all_options,
             values=[],

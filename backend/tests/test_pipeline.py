@@ -623,8 +623,8 @@ class TestDisambiguation:
 
     @pytest.mark.asyncio
     @patch("concept_search.resolve_agent._resolve_single_facet")
-    async def test_multi_facet_one_viable_returns_directly(self, mock_resolve) -> None:
-        """When only one candidate facet produces results, return it directly."""
+    async def test_multi_facet_one_viable_still_disambiguates(self, mock_resolve) -> None:
+        """When only one candidate facet produces results, still disambiguate — don't assume."""
         from concept_search.models import ResolveResult
 
         focus_result = ResolveResult(values=[])  # focus finds nothing
@@ -640,9 +640,11 @@ class TestDisambiguation:
         mention = RawMention(facets=[Facet.FOCUS, Facet.MEASUREMENT], text="glucose", values=[])
         result = await _run_resolve_uncached(mention, index=None)
 
-        # Should return the measurement result directly, no disambiguation
-        assert result.values == ["phenx:fasting_plasma_glucose_blood_draw"]
-        assert result.disambiguation == []
+        # Should still disambiguate — extract said it was ambiguous,
+        # don't silently pick the facet that happened to have results
+        assert len(result.disambiguation) == 1
+        assert result.disambiguation[0].facet == Facet.MEASUREMENT
+        assert result.values == []
 
     @pytest.mark.asyncio
     @patch("concept_search.resolve_agent._resolve_single_facet")
