@@ -56,7 +56,10 @@ async def _resolve_all(
     # Separate pre-resolved (small facets) from those needing API calls
     needs_resolve: list[tuple[int, object]] = []
     for i, mention in enumerate(mentions):
-        if mention.facets[0] in SMALL_FACETS and mention.values:
+        if not mention.facets:
+            # Extract couldn't classify this mention — skip resolve
+            logger.debug("  %r: no facets, skipping resolve", mention.text)
+        elif mention.facets[0] in SMALL_FACETS and mention.values:
             logger.debug("  %r: pre-resolved %s", mention.text, mention.values)
         else:
             needs_resolve.append((i, mention))
@@ -72,7 +75,13 @@ async def _resolve_all(
     # Reassemble in original order
     resolved: list[ResolvedMention] = []
     for i, mention in enumerate(mentions):
-        if mention.facets[0] in SMALL_FACETS and mention.values:
+        if not mention.facets:
+            # Unclassified mention — ask user to clarify
+            messages.append(
+                f"I couldn't determine what facet '{mention.text}' belongs to. "
+                "Could you clarify or restate?"
+            )
+        elif mention.facets[0] in SMALL_FACETS and mention.values:
             resolved.append(
                 ResolvedMention(
                     facet=mention.facets[0],
@@ -120,6 +129,7 @@ async def _structure(
             values=m.values if (m.facets[0] in SMALL_FACETS and m.values) else [],
         )
         for m in mentions
+        if m.facets  # skip unclassified mentions
     ]
     return await run_structure(query, placeholder_mentions, model=model)
 

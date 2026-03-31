@@ -565,6 +565,21 @@ class TestDisambiguation:
         assert result.values == []
 
     @pytest.mark.asyncio
+    @patch("concept_search.resolve_agent.run_resolve")
+    async def test_empty_facets_skips_resolve_and_returns_message(self, mock_resolve) -> None:
+        """Empty facets skips resolve and returns clarification."""
+        from concept_search.pipeline import _resolve_all
+
+        mention = RawMention(facets=[], text="xyzzy", values=[])
+        resolved, messages = await _resolve_all([mention], index=None, model=None)
+
+        assert resolved == []
+        assert len(messages) == 1
+        assert "xyzzy" in messages[0]
+        assert "clarify" in messages[0].lower()
+        mock_resolve.assert_not_called()
+
+    @pytest.mark.asyncio
     @patch("concept_search.resolve_agent._resolve_single_facet")
     async def test_multi_facet_both_viable_returns_cross_facet_disambiguation(
         self, mock_resolve
