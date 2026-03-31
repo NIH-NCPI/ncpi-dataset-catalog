@@ -256,10 +256,15 @@ async def _handle_route(query: str, previous_query: QueryModel) -> QueryModel:
             if not resolved and valid_ids and valid_ids & set(route.selected_ids):
                 # Only keep IDs that actually exist in the disambiguation options
                 filtered_ids = [sid for sid in route.selected_ids if sid in valid_ids]
+                # Determine facet from the selected option (supports cross-facet disambiguation)
+                selected_opts = [
+                    opt for opt in m.disambiguation if opt.concept_id in set(filtered_ids)
+                ]
+                resolved_facet = (selected_opts[0].facet or m.facet) if selected_opts else m.facet
                 mentions.append(
                     ResolvedMention(
                         exclude=m.exclude,
-                        facet=m.facet,
+                        facet=resolved_facet,
                         original_text=m.original_text,
                         values=filtered_ids,
                     )

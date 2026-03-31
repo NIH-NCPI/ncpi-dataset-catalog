@@ -25,7 +25,7 @@ from concept_search.models import (
     RouteSelect,
 )
 from concept_search.pipeline import _merge_with_previous
-from concept_search.resolve_agent import _run_resolve_uncached
+from concept_search.resolve_agent import _resolve_single_facet
 
 
 def _rm(
@@ -236,7 +236,7 @@ class TestRefinePreservesIntent:
         # Extract returns a new mention with default "study" intent
         mock_extract.return_value = ExtractResult(
             intent="study",
-            mentions=[RawMention(facet=Facet.PLATFORM, text="AnVIL", values=["AnVIL"])],
+            mentions=[RawMention(facets=[Facet.PLATFORM], text="AnVIL", values=["AnVIL"])],
         )
         # Resolve returns the mention as-is (pre-resolved small facet skips)
         # Structure returns with no exclude flags
@@ -425,10 +425,12 @@ def _disambig_options() -> list[DisambiguationOption]:
     return [
         DisambiguationOption(
             concept_id="phenx:fasting_plasma_glucose_blood_draw",
+            facet=Facet.MEASUREMENT,
             label="Blood glucose measurement",
         ),
         DisambiguationOption(
             concept_id="topmed:nutrient_intake",
+            facet=Facet.MEASUREMENT,
             label="Dietary glucose intake",
         ),
     ]
@@ -539,21 +541,13 @@ class TestDisambiguation:
 
     @pytest.mark.asyncio
     @patch("concept_search.resolve_agent._get_agent")
-    async def test_disambiguation_on_non_measurement_cleared(self, mock_get_agent) -> None:
-        """Disambiguation on non-measurement facets is silently cleared."""
+    async def test_disambiguation_on_non_measurement_preserved(self, mock_get_agent) -> None:
+        """Disambiguation on non-measurement facets is preserved (cross-facet support)."""
         from concept_search.models import ResolveResult
 
-        # Validator fires first (clears values, sets message), then
-        # _run_resolve_uncached clears disambiguation for non-measurement.
-        mock_result = ResolveResult(
-            disambiguation=_disambig_options(),
-            values=["Heart Diseases"],
-            message=None,
-        )
-        # Re-set values after validator cleared them — simulates what the
-        # agent would need. Instead, build without disambiguation first.
-        mock_result = ResolveResult(values=["Heart Diseases"], message=None)
-        mock_result.disambiguation = _disambig_options()
+        options = _disambig_options()
+        mock_result = ResolveResult(values=[], message=None)
+        mock_result.disambiguation = options
 
         class FakeRunResult:
             output = mock_result
@@ -564,11 +558,11 @@ class TestDisambiguation:
         mock_agent = mock_get_agent.return_value
         mock_agent.run = fake_run
 
-        mention = RawMention(facet=Facet.FOCUS, text="heart", values=[])
-        result = await _run_resolve_uncached(mention, index=None)
+        mention = RawMention(facets=[Facet.FOCUS], text="heart", values=[])
+        result = await _resolve_single_facet(mention, Facet.FOCUS, index=None)
 
-        assert result.disambiguation == []
-        assert result.values == ["Heart Diseases"]
+        assert len(result.disambiguation) == 2
+        assert result.values == []
 
 
 class TestRouteHandlers:
@@ -606,10 +600,12 @@ class TestRouteHandlers:
                             "disambiguation": [
                                 {
                                     "conceptId": "phenx:fasting_plasma_glucose_blood_draw",
+                                    "facet": "measurement",
                                     "label": "Blood glucose measurement",
                                 },
                                 {
                                     "conceptId": "topmed:nutrient_intake",
+                                    "facet": "measurement",
                                     "label": "Dietary glucose intake",
                                 },
                             ],
@@ -995,7 +991,7 @@ class TestRouteHandlers:
         # Extract sees previous focus=diabetes and extracts only the new mention
         mock_extract.return_value = ExtractResult(
             intent="study",
-            mentions=[RawMention(facet=Facet.FOCUS, text="asthma", values=[])],
+            mentions=[RawMention(facets=[Facet.FOCUS], text="asthma", values=[])],
         )
         from concept_search.models import ResolveResult
 
@@ -1055,7 +1051,7 @@ class TestRouteHandlers:
         mock_router.return_value = RouteAdd()
         mock_extract.return_value = ExtractResult(
             intent="variable",
-            mentions=[RawMention(facet=Facet.MEASUREMENT, text="BMI", values=[])],
+            mentions=[RawMention(facets=[Facet.MEASUREMENT], text="BMI", values=[])],
         )
         from concept_search.models import ResolveResult
 

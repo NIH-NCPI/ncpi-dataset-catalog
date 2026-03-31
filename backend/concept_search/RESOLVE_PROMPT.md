@@ -70,9 +70,9 @@ Examples:
 
 **Important:** Disease context and scope (general/health/disease) are NOT your concern — the API layer infers scope from the focus mentions in the query. The consent mention captures ONLY the constraint tags.
 
-## Disambiguation (measurement facet only)
+## Disambiguation
 
-When embedding results for a measurement mention span **distinct semantic domains** (different top-level ancestors like `ncpi:biomarkers` vs `ncpi:diet` vs `ncpi:disease_events`), you MUST disambiguate:
+When embedding results for a mention span **distinct semantic domains** (different top-level ancestors like `ncpi:biomarkers` vs `ncpi:diet` vs `ncpi:disease_events`), you MUST disambiguate. This applies to any facet — measurement, focus, or consent code.
 
 **CRITICAL: When you populate `disambiguation`, you MUST set `values` to an empty list `[]`. Never set both `values` and `disambiguation` — they are mutually exclusive.**
 

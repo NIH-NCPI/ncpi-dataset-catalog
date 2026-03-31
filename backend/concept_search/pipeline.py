@@ -56,7 +56,7 @@ async def _resolve_all(
     # Separate pre-resolved (small facets) from those needing API calls
     needs_resolve: list[tuple[int, object]] = []
     for i, mention in enumerate(mentions):
-        if mention.facet in SMALL_FACETS and mention.values:
+        if mention.facets[0] in SMALL_FACETS and mention.values:
             logger.debug("  %r: pre-resolved %s", mention.text, mention.values)
         else:
             needs_resolve.append((i, mention))
@@ -72,10 +72,10 @@ async def _resolve_all(
     # Reassemble in original order
     resolved: list[ResolvedMention] = []
     for i, mention in enumerate(mentions):
-        if mention.facet in SMALL_FACETS and mention.values:
+        if mention.facets[0] in SMALL_FACETS and mention.values:
             resolved.append(
                 ResolvedMention(
-                    facet=mention.facet,
+                    facet=mention.facets[0],
                     original_text=mention.text,
                     values=mention.values,
                 )
@@ -86,7 +86,7 @@ async def _resolve_all(
             resolved.append(
                 ResolvedMention(
                     disambiguation=rr.disambiguation,
-                    facet=mention.facet,
+                    facet=mention.facets[0],
                     matched_variables=rr.matched_variables or [],
                     original_text=mention.text,
                     values=rr.values,
@@ -115,9 +115,9 @@ async def _structure(
     """
     placeholder_mentions = [
         ResolvedMention(
-            facet=m.facet,
+            facet=m.facets[0],
             original_text=m.text,
-            values=m.values if (m.facet in SMALL_FACETS and m.values) else [],
+            values=m.values if (m.facets[0] in SMALL_FACETS and m.values) else [],
         )
         for m in mentions
     ]

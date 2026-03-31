@@ -54,10 +54,12 @@ def _disambig_previous() -> QueryModel:
                 disambiguation=[
                     DisambiguationOption(
                         concept_id="phenx:fasting_plasma_glucose_blood_draw",
+                        facet=Facet.MEASUREMENT,
                         label="Blood glucose measurement (Biomarkers)",
                     ),
                     DisambiguationOption(
                         concept_id="topmed:nutrient_intake",
+                        facet=Facet.MEASUREMENT,
                         label="Dietary glucose intake (Diet)",
                     ),
                 ],
