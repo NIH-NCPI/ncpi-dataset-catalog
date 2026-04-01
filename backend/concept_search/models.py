@@ -201,10 +201,10 @@ class RouteSelect(BaseModel):
     )
 
 
-class RouteAdd(BaseModel):
-    """User is adding new criteria to the existing query."""
+class RouteRefine(BaseModel):
+    """User is refining the existing query (adding, removing, or adjusting filters)."""
 
-    kind: Literal["add"] = "add"
+    kind: Literal["refine"] = "refine"
 
 
 class RouteRemove(BaseModel):
@@ -231,7 +231,7 @@ class RouteReset(BaseModel):
     new_query: str = Field(description="The new query to run fresh.")
 
 
-RouterResult = RouteSelect | RouteAdd | RouteRemove | RouteReplace | RouteReset
+RouterResult = RouteSelect | RouteRefine | RouteRemove | RouteReplace | RouteReset
 
 
 class QueryModel(BaseModel):

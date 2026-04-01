@@ -30,16 +30,16 @@ def _rm(facet: Facet, text: str, values: list[str]) -> ResolvedMention:
 
 CASES: list[tuple[str, QueryModel, str, str]] = [
     (
-        "additive fragment with 'also' should route to add",
+        "additive fragment with 'also' should route to refine",
         QueryModel(
             intent="study",
             mentions=[_rm(Facet.FOCUS, "diabetes", ["Diabetes Mellitus"])],
         ),
         "also where BMI was measured",
-        "add",
+        "refine",
     ),
     (
-        "additive fragment with 'and' should route to add",
+        "additive fragment with 'and' should route to refine",
         QueryModel(
             intent="study",
             mentions=[
@@ -48,16 +48,16 @@ CASES: list[tuple[str, QueryModel, str, str]] = [
             ],
         ),
         "and on AnVIL",
-        "add",
+        "refine",
     ),
     (
-        "additive fragment 'only in females' should route to add",
+        "additive fragment 'only in females' should route to refine",
         QueryModel(
             intent="study",
             mentions=[_rm(Facet.FOCUS, "cancer", ["Cancer"])],
         ),
         "only in females",
-        "add",
+        "refine",
     ),
     (
         "complete standalone query should route to reset",
@@ -99,7 +99,7 @@ CASES: list[tuple[str, QueryModel, str, str]] = [
             ],
         ),
         "also where BMI was measured",
-        "add",
+        "refine",
     ),
 ]
 

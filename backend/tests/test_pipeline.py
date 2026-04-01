@@ -18,7 +18,7 @@ from concept_search.models import (
     QueryModel,
     RawMention,
     ResolvedMention,
-    RouteAdd,
+    RouteRefine,
     RouteRemove,
     RouteReplace,
     RouteReset,
@@ -232,7 +232,7 @@ class TestRefinePreservesIntent:
     ) -> None:
         """Refine with previousQuery.intent='variable' keeps it even when
         extract returns default 'study' intent."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         # Extract returns a new mention with default "study" intent
         mock_extract.return_value = ExtractResult(
             intent="study",
@@ -280,9 +280,9 @@ class TestRefinePreservesIntent:
     def test_route_add_preserves_previous_intent_over_pipeline(
         self, mock_router, mock_pipeline, mock_index
     ) -> None:
-        """RouteAdd preserves previous intent even when pipeline returns
+        """RouteRefine preserves previous intent even when pipeline returns
         a different one — the user is refining, not changing direction."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         mock_pipeline.return_value = QueryModel(
             intent="study",
             mentions=[
@@ -313,7 +313,7 @@ class TestRefinePreservesIntent:
             },
         )
         assert resp.status_code == 200
-        # RouteAdd preserves previous intent ("variable"), not the
+        # RouteRefine preserves previous intent ("variable"), not the
         # pipeline's inferred intent ("study").
         assert resp.json()["intent"] == "variable"
 
@@ -963,7 +963,7 @@ class TestRouteHandlers:
         self, mock_router, mock_pipeline, mock_index
     ) -> None:
         """Add route falls through to existing refine pipeline."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         mock_pipeline.return_value = QueryModel(
             mentions=[
                 _rm(Facet.FOCUS, "diabetes", ["Diabetes Mellitus"]),
@@ -1004,7 +1004,7 @@ class TestRouteHandlers:
         self, mock_router, mock_pipeline, mock_index
     ) -> None:
         """Add route preserves previous intent even if pipeline infers differently."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         # Pipeline returns "variable" because it saw a measurement term
         mock_pipeline.return_value = QueryModel(
             intent="variable",
@@ -1050,7 +1050,7 @@ class TestRouteHandlers:
         self, mock_router, mock_pipeline, mock_index
     ) -> None:
         """When previous intent is 'ambiguous', let the pipeline resolve it."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         mock_pipeline.return_value = QueryModel(
             intent="variable",
             mentions=[
@@ -1139,7 +1139,7 @@ class TestRouteHandlers:
         mock_index,
     ) -> None:
         """Add 'and asthma' when focus=diabetes already exists merges both."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         # Extract sees previous focus=diabetes and extracts only the new mention
         mock_extract.return_value = ExtractResult(
             intent="study",
@@ -1200,7 +1200,7 @@ class TestRouteHandlers:
         mock_index,
     ) -> None:
         """Add 'also BMI' when measurement=blood_pressure already exists keeps both."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         mock_extract.return_value = ExtractResult(
             intent="variable",
             mentions=[RawMention(facets=[Facet.MEASUREMENT], text="BMI", values=[])],

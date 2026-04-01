@@ -329,7 +329,7 @@ async def _handle_route(query: str, previous_query: QueryModel) -> QueryModel:
         # Fresh pipeline, ignore previous state
         return await run_pipeline(route.new_query)
 
-    # RouteAdd — refine pipeline, but preserve the previous intent.
+    # RouteRefine — refine pipeline, but preserve the previous intent.
     # The extract agent may infer a different intent from the fragment
     # (e.g. "also blood pressure" → "variable") but the user is refining,
     # not changing direction.  Let pipeline win if previous was "ambiguous".
