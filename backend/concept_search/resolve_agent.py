@@ -22,7 +22,7 @@ _agent: Agent[ConceptIndex, ResolveResult] | None = None
 _agent_model: str | None = None
 _lock = threading.Lock()
 
-resolve_cache: LRUCache[tuple[str, str], ResolveResult] = LRUCache(
+resolve_cache: LRUCache[tuple[tuple[str, ...], str], ResolveResult] = LRUCache(
     name="resolve_cache",
     max_size=int(os.environ.get("RESOLVE_CACHE_MAX_SIZE", "10000")),
     ttl_seconds=float(os.environ.get("RESOLVE_CACHE_TTL_SECONDS", "86400")),
