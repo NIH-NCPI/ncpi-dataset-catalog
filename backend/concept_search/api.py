@@ -272,7 +272,7 @@ async def _handle_route(query: str, previous_query: QueryModel) -> QueryModel:
                         exclude=m.exclude,
                         facet=resolved_facet,
                         original_text=m.original_text,
-                        values=same_facet_ids or filtered_ids,
+                        values=same_facet_ids,
                     )
                 )
                 resolved = True
