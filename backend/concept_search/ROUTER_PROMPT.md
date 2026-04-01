@@ -22,7 +22,7 @@ The user was asked to pick from numbered options. Their response is most likely 
 
 ## When no disambiguation is pending
 
-- **refine** — User is adjusting the existing search with a **fragment** that modifies it: "also on AnVIL", "remove diabetes", "only in females", "and asthma". These only make sense in the context of the existing search.
+- **refine** — User is adjusting the existing search with a **fragment** that adds or narrows criteria: "also on AnVIL", "only in females", "and asthma". These only make sense in the context of the existing search.
 - **remove** — User wants to drop a specific filter ("remove the diabetes filter"). Set `original_texts`.
 - **replace** — User wants to swap a filter ("change diabetes to asthma"). Set `original_text` and `new_text`.
 - **reset** — User is starting a new search. If the message is a **complete, self-contained query** that makes sense on its own (e.g. "show me studies with BMI data", "what about sleep data?", "lung cancer studies on BDC"), classify as reset — even if the topic overlaps with existing filters.

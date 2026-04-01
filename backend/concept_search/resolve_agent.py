@@ -414,6 +414,12 @@ async def _run_resolve_uncached(
     Returns:
         ResolveResult with canonical value(s) or cross-facet disambiguation.
     """
+    if not mention.facets:
+        return ResolveResult(
+            values=[],
+            message=f"No candidate facets for '{mention.text}'.",
+        )
+
     # Single facet — straightforward resolution
     if len(mention.facets) == 1:
         return await _resolve_single_facet(mention, mention.facets[0], index, model)
