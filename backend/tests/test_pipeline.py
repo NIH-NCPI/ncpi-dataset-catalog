@@ -18,14 +18,14 @@ from concept_search.models import (
     QueryModel,
     RawMention,
     ResolvedMention,
-    RouteAdd,
+    RouteRefine,
     RouteRemove,
     RouteReplace,
     RouteReset,
     RouteSelect,
 )
 from concept_search.pipeline import _merge_with_previous
-from concept_search.resolve_agent import _run_resolve_uncached
+from concept_search.resolve_agent import _resolve_single_facet, _run_resolve_uncached
 
 
 def _rm(
@@ -232,11 +232,11 @@ class TestRefinePreservesIntent:
     ) -> None:
         """Refine with previousQuery.intent='variable' keeps it even when
         extract returns default 'study' intent."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         # Extract returns a new mention with default "study" intent
         mock_extract.return_value = ExtractResult(
             intent="study",
-            mentions=[RawMention(facet=Facet.PLATFORM, text="AnVIL", values=["AnVIL"])],
+            mentions=[RawMention(facets=[Facet.PLATFORM], text="AnVIL", values=["AnVIL"])],
         )
         # Resolve returns the mention as-is (pre-resolved small facet skips)
         # Structure returns with no exclude flags
@@ -280,9 +280,9 @@ class TestRefinePreservesIntent:
     def test_route_add_preserves_previous_intent_over_pipeline(
         self, mock_router, mock_pipeline, mock_index
     ) -> None:
-        """RouteAdd preserves previous intent even when pipeline returns
+        """RouteRefine preserves previous intent even when pipeline returns
         a different one — the user is refining, not changing direction."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         mock_pipeline.return_value = QueryModel(
             intent="study",
             mentions=[
@@ -313,7 +313,7 @@ class TestRefinePreservesIntent:
             },
         )
         assert resp.status_code == 200
-        # RouteAdd preserves previous intent ("variable"), not the
+        # RouteRefine preserves previous intent ("variable"), not the
         # pipeline's inferred intent ("study").
         assert resp.json()["intent"] == "variable"
 
@@ -425,10 +425,12 @@ def _disambig_options() -> list[DisambiguationOption]:
     return [
         DisambiguationOption(
             concept_id="phenx:fasting_plasma_glucose_blood_draw",
+            facet=Facet.MEASUREMENT,
             label="Blood glucose measurement",
         ),
         DisambiguationOption(
             concept_id="topmed:nutrient_intake",
+            facet=Facet.MEASUREMENT,
             label="Dietary glucose intake",
         ),
     ]
@@ -539,21 +541,13 @@ class TestDisambiguation:
 
     @pytest.mark.asyncio
     @patch("concept_search.resolve_agent._get_agent")
-    async def test_disambiguation_on_non_measurement_cleared(self, mock_get_agent) -> None:
-        """Disambiguation on non-measurement facets is silently cleared."""
+    async def test_disambiguation_on_non_measurement_preserved(self, mock_get_agent) -> None:
+        """Disambiguation on non-measurement facets is preserved (cross-facet support)."""
         from concept_search.models import ResolveResult
 
-        # Validator fires first (clears values, sets message), then
-        # _run_resolve_uncached clears disambiguation for non-measurement.
-        mock_result = ResolveResult(
-            disambiguation=_disambig_options(),
-            values=["Heart Diseases"],
-            message=None,
-        )
-        # Re-set values after validator cleared them — simulates what the
-        # agent would need. Instead, build without disambiguation first.
-        mock_result = ResolveResult(values=["Heart Diseases"], message=None)
-        mock_result.disambiguation = _disambig_options()
+        options = _disambig_options()
+        mock_result = ResolveResult(values=[], message=None)
+        mock_result.disambiguation = options
 
         class FakeRunResult:
             output = mock_result
@@ -564,11 +558,113 @@ class TestDisambiguation:
         mock_agent = mock_get_agent.return_value
         mock_agent.run = fake_run
 
-        mention = RawMention(facet=Facet.FOCUS, text="heart", values=[])
+        mention = RawMention(facets=[Facet.FOCUS], text="heart", values=[])
+        result = await _resolve_single_facet(mention, Facet.FOCUS, index=None)
+
+        assert len(result.disambiguation) == 2
+        assert result.values == []
+
+    @pytest.mark.asyncio
+    @patch("concept_search.resolve_agent.run_resolve")
+    async def test_empty_facets_skips_resolve_and_returns_message(self, mock_resolve) -> None:
+        """Empty facets skips resolve and returns clarification."""
+        from concept_search.pipeline import _resolve_all
+
+        mention = RawMention(facets=[], text="xyzzy", values=[])
+        resolved, messages = await _resolve_all([mention], index=None, model=None)
+
+        assert resolved == []
+        assert len(messages) == 1
+        assert "xyzzy" in messages[0]
+        assert "clarify" in messages[0].lower()
+        mock_resolve.assert_not_called()
+
+    @pytest.mark.asyncio
+    @patch("concept_search.resolve_agent._resolve_single_facet")
+    async def test_multi_facet_both_viable_returns_cross_facet_disambiguation(
+        self, mock_resolve
+    ) -> None:
+        """When both candidate facets produce results, return cross-facet disambiguation."""
+        from concept_search.models import ResolveResult
+
+        focus_result = ResolveResult(values=["Diabetes Mellitus"])
+        measurement_result = ResolveResult(
+            disambiguation=[
+                DisambiguationOption(
+                    concept_id="phenx:fasting_plasma_glucose_blood_draw",
+                    facet=Facet.MEASUREMENT,
+                    label="Blood glucose measurement",
+                ),
+                DisambiguationOption(
+                    concept_id="topmed:nutrient_intake",
+                    facet=Facet.MEASUREMENT,
+                    label="Dietary glucose intake",
+                ),
+            ],
+            values=[],
+        )
+
+        async def fake_resolve(mention, facet, index, model=None):
+            if facet == Facet.FOCUS:
+                return focus_result
+            return measurement_result
+
+        mock_resolve.side_effect = fake_resolve
+
+        mention = RawMention(facets=[Facet.FOCUS, Facet.MEASUREMENT], text="glucose", values=[])
         result = await _run_resolve_uncached(mention, index=None)
 
+        # Should get 3 options: 1 from focus + 2 from measurement
+        assert len(result.disambiguation) == 3
+        assert result.values == []
+        facets_in_options = {opt.facet for opt in result.disambiguation}
+        assert Facet.FOCUS in facets_in_options
+        assert Facet.MEASUREMENT in facets_in_options
+
+    @pytest.mark.asyncio
+    @patch("concept_search.resolve_agent._resolve_single_facet")
+    async def test_multi_facet_one_viable_still_disambiguates(self, mock_resolve) -> None:
+        """When only one candidate facet produces results, still disambiguate — don't assume."""
+        from concept_search.models import ResolveResult
+
+        focus_result = ResolveResult(values=[])  # focus finds nothing
+        measurement_result = ResolveResult(values=["phenx:fasting_plasma_glucose_blood_draw"])
+
+        async def fake_resolve(mention, facet, index, model=None):
+            if facet == Facet.FOCUS:
+                return focus_result
+            return measurement_result
+
+        mock_resolve.side_effect = fake_resolve
+
+        mention = RawMention(facets=[Facet.FOCUS, Facet.MEASUREMENT], text="glucose", values=[])
+        result = await _run_resolve_uncached(mention, index=None)
+
+        # Should still disambiguate — extract said it was ambiguous,
+        # don't silently pick the facet that happened to have results
+        assert len(result.disambiguation) == 1
+        assert result.disambiguation[0].facet == Facet.MEASUREMENT
+        assert result.values == []
+
+    @pytest.mark.asyncio
+    @patch("concept_search.resolve_agent._resolve_single_facet")
+    async def test_multi_facet_none_viable_returns_message(self, mock_resolve) -> None:
+        """When no candidate facets produce results, return empty with message."""
+        from concept_search.models import ResolveResult
+
+        empty_result = ResolveResult(values=[])
+
+        async def fake_resolve(mention, facet, index, model=None):
+            return empty_result
+
+        mock_resolve.side_effect = fake_resolve
+
+        mention = RawMention(facets=[Facet.FOCUS, Facet.MEASUREMENT], text="xyzzy", values=[])
+        result = await _run_resolve_uncached(mention, index=None)
+
+        assert result.values == []
         assert result.disambiguation == []
-        assert result.values == ["Heart Diseases"]
+        assert "xyzzy" in result.message
 
 
 class TestRouteHandlers:
@@ -606,10 +702,12 @@ class TestRouteHandlers:
                             "disambiguation": [
                                 {
                                     "conceptId": "phenx:fasting_plasma_glucose_blood_draw",
+                                    "facet": "measurement",
                                     "label": "Blood glucose measurement",
                                 },
                                 {
                                     "conceptId": "topmed:nutrient_intake",
+                                    "facet": "measurement",
                                     "label": "Dietary glucose intake",
                                 },
                             ],
@@ -623,6 +721,56 @@ class TestRouteHandlers:
         mentions = data["query"]["mentions"]
         assert len(mentions) == 2
         glucose = [m for m in mentions if m["originalText"] == "glucose"][0]
+        assert glucose["values"] == ["phenx:fasting_plasma_glucose_blood_draw"]
+        assert glucose["disambiguation"] == []
+
+    @patch("concept_search.api.get_index")
+    @patch("concept_search.api.run_router")
+    def test_route_select_cross_facet_changes_mention_facet(self, mock_router, mock_index) -> None:
+        """Selecting a disambiguation option from a different facet updates the mention's facet."""
+        mock_router.return_value = RouteSelect(
+            selected_ids=["phenx:fasting_plasma_glucose_blood_draw"],
+        )
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post(
+            "/search",
+            json={
+                "query": "blood glucose",
+                "previousQuery": {
+                    "intent": "study",
+                    "mentions": [
+                        {
+                            "facet": "focus",
+                            "originalText": "glucose",
+                            "values": [],
+                            "exclude": False,
+                            "disambiguation": [
+                                {
+                                    "conceptId": "Diabetes Mellitus",
+                                    "facet": "focus",
+                                    "label": "Diabetes / metabolic disorders",
+                                },
+                                {
+                                    "conceptId": "phenx:fasting_plasma_glucose_blood_draw",
+                                    "facet": "measurement",
+                                    "label": "Blood glucose measurement",
+                                },
+                            ],
+                        },
+                    ],
+                },
+            },
+        )
+        assert resp.status_code == 200
+        data = resp.json()
+        mentions = data["query"]["mentions"]
+        assert len(mentions) == 1
+        glucose = mentions[0]
+        # Facet should have changed from focus to measurement
+        assert glucose["facet"] == "measurement"
         assert glucose["values"] == ["phenx:fasting_plasma_glucose_blood_draw"]
         assert glucose["disambiguation"] == []
 
@@ -815,7 +963,7 @@ class TestRouteHandlers:
         self, mock_router, mock_pipeline, mock_index
     ) -> None:
         """Add route falls through to existing refine pipeline."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         mock_pipeline.return_value = QueryModel(
             mentions=[
                 _rm(Facet.FOCUS, "diabetes", ["Diabetes Mellitus"]),
@@ -856,7 +1004,7 @@ class TestRouteHandlers:
         self, mock_router, mock_pipeline, mock_index
     ) -> None:
         """Add route preserves previous intent even if pipeline infers differently."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         # Pipeline returns "variable" because it saw a measurement term
         mock_pipeline.return_value = QueryModel(
             intent="variable",
@@ -902,7 +1050,7 @@ class TestRouteHandlers:
         self, mock_router, mock_pipeline, mock_index
     ) -> None:
         """When previous intent is 'ambiguous', let the pipeline resolve it."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         mock_pipeline.return_value = QueryModel(
             intent="variable",
             mentions=[
@@ -991,11 +1139,11 @@ class TestRouteHandlers:
         mock_index,
     ) -> None:
         """Add 'and asthma' when focus=diabetes already exists merges both."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         # Extract sees previous focus=diabetes and extracts only the new mention
         mock_extract.return_value = ExtractResult(
             intent="study",
-            mentions=[RawMention(facet=Facet.FOCUS, text="asthma", values=[])],
+            mentions=[RawMention(facets=[Facet.FOCUS], text="asthma", values=[])],
         )
         from concept_search.models import ResolveResult
 
@@ -1052,10 +1200,10 @@ class TestRouteHandlers:
         mock_index,
     ) -> None:
         """Add 'also BMI' when measurement=blood_pressure already exists keeps both."""
-        mock_router.return_value = RouteAdd()
+        mock_router.return_value = RouteRefine()
         mock_extract.return_value = ExtractResult(
             intent="variable",
-            mentions=[RawMention(facet=Facet.MEASUREMENT, text="BMI", values=[])],
+            mentions=[RawMention(facets=[Facet.MEASUREMENT], text="BMI", values=[])],
         )
         from concept_search.models import ResolveResult
 

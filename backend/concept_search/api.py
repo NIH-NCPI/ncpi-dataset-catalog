@@ -256,12 +256,23 @@ async def _handle_route(query: str, previous_query: QueryModel) -> QueryModel:
             if not resolved and valid_ids and valid_ids & set(route.selected_ids):
                 # Only keep IDs that actually exist in the disambiguation options
                 filtered_ids = [sid for sid in route.selected_ids if sid in valid_ids]
+                # Determine facet from the selected option (supports cross-facet disambiguation).
+                # If multiple options are selected, only accept those sharing the same facet.
+                filtered_set = set(filtered_ids)
+                selected_opts = [opt for opt in m.disambiguation if opt.concept_id in filtered_set]
+                resolved_facet = (selected_opts[0].facet or m.facet) if selected_opts else m.facet
+                # Filter to only IDs matching the resolved facet
+                same_facet_ids = [
+                    opt.concept_id
+                    for opt in selected_opts
+                    if opt.facet == resolved_facet or opt.facet is None
+                ]
                 mentions.append(
                     ResolvedMention(
                         exclude=m.exclude,
-                        facet=m.facet,
+                        facet=resolved_facet,
                         original_text=m.original_text,
-                        values=filtered_ids,
+                        values=same_facet_ids,
                     )
                 )
                 resolved = True
@@ -319,7 +330,7 @@ async def _handle_route(query: str, previous_query: QueryModel) -> QueryModel:
         # Fresh pipeline, ignore previous state
         return await run_pipeline(route.new_query)
 
-    # RouteAdd — refine pipeline, but preserve the previous intent.
+    # RouteRefine — refine pipeline, but preserve the previous intent.
     # The extract agent may infer a different intent from the fragment
     # (e.g. "also blood pressure" → "variable") but the user is refining,
     # not changing direction.  Let pipeline win if previous was "ambiguous".

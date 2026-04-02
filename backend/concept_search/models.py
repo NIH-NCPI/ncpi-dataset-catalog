@@ -67,7 +67,11 @@ class ConceptMatch(BaseModel):
 class RawMention(BaseModel):
     """A mention extracted from the user's query by the extract agent."""
 
-    facet: Facet
+    facets: list[Facet] = Field(
+        description="Candidate facets ranked by confidence. Most mentions have "
+        "one facet; ambiguous terms (e.g. 'glucose' could be focus or "
+        "measurement) list multiple candidates.",
+    )
     text: str = Field(description="The raw phrase from the user query")
     values: list[str] = Field(
         default_factory=list,
@@ -102,6 +106,11 @@ class DisambiguationOption(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
     concept_id: str = Field(description="Canonical concept ID")
+    facet: Facet | None = Field(
+        default=None,
+        description="Which facet this interpretation belongs to. "
+        "Set automatically by the resolve agent.",
+    )
     label: str = Field(description="Human-readable label for this interpretation")
 
 
@@ -192,10 +201,10 @@ class RouteSelect(BaseModel):
     )
 
 
-class RouteAdd(BaseModel):
-    """User is adding new criteria to the existing query."""
+class RouteRefine(BaseModel):
+    """User is refining the existing query (adding, removing, or adjusting filters)."""
 
-    kind: Literal["add"] = "add"
+    kind: Literal["refine"] = "refine"
 
 
 class RouteRemove(BaseModel):
@@ -222,7 +231,7 @@ class RouteReset(BaseModel):
     new_query: str = Field(description="The new query to run fresh.")
 
 
-RouterResult = RouteSelect | RouteAdd | RouteRemove | RouteReplace | RouteReset
+RouterResult = RouteSelect | RouteRefine | RouteRemove | RouteReplace | RouteReset
 
 
 class QueryModel(BaseModel):

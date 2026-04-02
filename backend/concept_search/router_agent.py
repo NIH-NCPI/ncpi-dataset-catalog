@@ -10,7 +10,7 @@ from pydantic_ai.settings import ModelSettings
 
 from .models import (
     QueryModel,
-    RouteAdd,
+    RouteRefine,
     RouteRemove,
     RouteReplace,
     RouteReset,
@@ -38,7 +38,7 @@ def _get_agent(model: str | None = None) -> Agent[None, RouterResult]:
             _agent_model = model
             _agent = Agent(
                 model,
-                output_type=[RouteSelect, RouteAdd, RouteRemove, RouteReplace, RouteReset],  # type: ignore[arg-type]
+                output_type=[RouteSelect, RouteRefine, RouteRemove, RouteReplace, RouteReset],  # type: ignore[arg-type]
                 system_prompt=_load_prompt(),
                 model_settings=ModelSettings(
                     anthropic_cache_instructions=True,
@@ -78,7 +78,7 @@ async def run_router(
         model: Override the model (default: Haiku).
 
     Returns:
-        One of RouteSelect, RouteAdd, RouteRemove, RouteReplace, RouteReset.
+        One of RouteSelect, RouteRefine, RouteRemove, RouteReplace, RouteReset.
     """
     agent = _get_agent(model)
     filters = _format_filters(previous_query)

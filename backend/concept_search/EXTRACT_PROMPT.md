@@ -100,7 +100,7 @@ Key rule: "diabetes studies" = focus only. "What diabetes datasets can I use?" =
 
 1. Determine the query **intent** (`"study"`, `"variable"`, or `"ambiguous"`) — see "Query Intent" above.
 2. Read the query and identify each distinct filterable mention.
-3. Assign each mention to a facet.
+3. Assign each mention to one or more facets via the `facets` list (ranked by confidence). Most mentions have a single facet. When a term could plausibly belong to multiple facets (e.g., "glucose" could be focus OR measurement), list all candidates — the resolve agent will disambiguate.
 4. For platform, dataType, studyDesign, sex, raceEthnicity, computedAncestry: set `values` to the matching known value(s).
 5. For focus, measurement, consentCode: set `text` to the relevant phrase, leave `values` empty.
 6. Correct obvious typos in your text output (e.g., "systollic" → "systolic").
@@ -112,9 +112,16 @@ Key rule: "diabetes studies" = focus only. "What diabetes datasets can I use?" =
 
 ### Variable intent examples
 
-- "what variables measure chocolate consumption?" → `intent: "variable"`, mention: `{facet: "measurement", text: "chocolate consumption"}`
-- "which variables capture blood pressure?" → `intent: "variable"`, mention: `{facet: "measurement", text: "blood pressure"}`
-- "what phenotype variables exist for BMI?" → `intent: "variable"`, mention: `{facet: "measurement", text: "body mass index"}`
+- "what variables measure chocolate consumption?" → `intent: "variable"`, mention: `{facets: ["measurement"], text: "chocolate consumption"}`
+- "which variables capture blood pressure?" → `intent: "variable"`, mention: `{facets: ["measurement"], text: "blood pressure"}`
+- "what phenotype variables exist for BMI?" → `intent: "variable"`, mention: `{facets: ["measurement"], text: "body mass index"}`
+
+### Multi-facet examples
+
+When a term is ambiguous across facets, list all candidates:
+
+- "studies about glucose" → `{facets: ["focus", "measurement"], text: "glucose"}` — "about" suggests focus, but glucose is inherently a measurement. Let resolve disambiguate.
+- "studies about cholesterol" → `{facets: ["focus", "measurement"], text: "cholesterol"}` — could be a research focus (cardiovascular disease area) or a measured biomarker.
 
 ## When to Set `message`
 

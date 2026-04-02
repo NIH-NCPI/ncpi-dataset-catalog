@@ -15,7 +15,7 @@ from .models import (
     Facet,
     QueryModel,
     ResolvedMention,
-    RouteAdd,
+    RouteRefine,
     RouteRemove,
     RouteReplace,
     RouteReset,
@@ -54,14 +54,46 @@ def _disambig_previous() -> QueryModel:
                 disambiguation=[
                     DisambiguationOption(
                         concept_id="phenx:fasting_plasma_glucose_blood_draw",
+                        facet=Facet.MEASUREMENT,
                         label="Blood glucose measurement (Biomarkers)",
                     ),
                     DisambiguationOption(
                         concept_id="topmed:nutrient_intake",
+                        facet=Facet.MEASUREMENT,
                         label="Dietary glucose intake (Diet)",
                     ),
                 ],
                 facet=Facet.MEASUREMENT,
+                original_text="glucose",
+                values=[],
+            ),
+        ],
+    )
+
+
+def _cross_facet_disambig_previous() -> QueryModel:
+    """Previous query with cross-facet disambiguation pending (focus + measurement)."""
+    return QueryModel(
+        mentions=[
+            ResolvedMention(
+                disambiguation=[
+                    DisambiguationOption(
+                        concept_id="Diabetes Mellitus",
+                        facet=Facet.FOCUS,
+                        label="Diabetes Mellitus",
+                    ),
+                    DisambiguationOption(
+                        concept_id="phenx:fasting_plasma_glucose_blood_draw",
+                        facet=Facet.MEASUREMENT,
+                        label="Fasting Plasma Glucose - Blood Draw (biomarker)",
+                    ),
+                    DisambiguationOption(
+                        concept_id="topmed:nutrient_intake",
+                        facet=Facet.MEASUREMENT,
+                        label="Glucose Intake from Diet (nutrient intake)",
+                    ),
+                ],
+                facet=Facet.FOCUS,
                 original_text="glucose",
                 values=[],
             ),
@@ -111,7 +143,7 @@ class RouterEvaluator(Evaluator[RouterInput, RouterResult]):
 
         # Kind must match
         if expected is None:
-            scores["route_score"] = 1.0 if actual.kind == "add" else 0.0
+            scores["route_score"] = 1.0 if actual.kind == "refine" else 0.0
             return scores
 
         if actual.kind != expected.kind:
@@ -247,7 +279,7 @@ dataset = Dataset[RouterInput, RouterResult, RouterResult](
                 query="also on AnVIL",
                 previous_query=_disambig_previous(),
             ),
-            expected_output=RouteAdd(),
+            expected_output=RouteRefine(),
         ),
         Case(
             name="reset-with-disambig",
@@ -257,6 +289,37 @@ dataset = Dataset[RouterInput, RouterResult, RouterResult](
             ),
             expected_output=RouteReset(new_query="COPD studies"),
         ),
+        # --- Cross-facet disambiguation ---
+        Case(
+            name="cross-facet-select-by-label",
+            inputs=RouterInput(
+                query="dietary intake",
+                previous_query=_cross_facet_disambig_previous(),
+            ),
+            expected_output=RouteSelect(
+                selected_ids=["topmed:nutrient_intake"],
+            ),
+        ),
+        Case(
+            name="cross-facet-select-focus",
+            inputs=RouterInput(
+                query="diabetes",
+                previous_query=_cross_facet_disambig_previous(),
+            ),
+            expected_output=RouteSelect(
+                selected_ids=["Diabetes Mellitus"],
+            ),
+        ),
+        Case(
+            name="cross-facet-select-biomarker",
+            inputs=RouterInput(
+                query="the blood glucose measurement",
+                previous_query=_cross_facet_disambig_previous(),
+            ),
+            expected_output=RouteSelect(
+                selected_ids=["phenx:fasting_plasma_glucose_blood_draw"],
+            ),
+        ),
         # --- No disambiguation pending ---
         Case(
             name="add-no-disambig",
@@ -264,7 +327,7 @@ dataset = Dataset[RouterInput, RouterResult, RouterResult](
                 query="also on AnVIL",
                 previous_query=_resolved_previous(),
             ),
-            expected_output=RouteAdd(),
+            expected_output=RouteRefine(),
         ),
         Case(
             name="remove-via-chat",
@@ -299,7 +362,7 @@ dataset = Dataset[RouterInput, RouterResult, RouterResult](
                 query="only in females",
                 previous_query=_resolved_previous(),
             ),
-            expected_output=RouteAdd(),
+            expected_output=RouteRefine(),
         ),
         Case(
             name="reset-unrelated",
@@ -316,7 +379,7 @@ dataset = Dataset[RouterInput, RouterResult, RouterResult](
                 query="and asthma",
                 previous_query=_resolved_previous(),
             ),
-            expected_output=RouteAdd(),
+            expected_output=RouteRefine(),
         ),
         Case(
             name="add-or-same-facet",
@@ -324,7 +387,7 @@ dataset = Dataset[RouterInput, RouterResult, RouterResult](
                 query="or asthma",
                 previous_query=_resolved_previous(),
             ),
-            expected_output=RouteAdd(),
+            expected_output=RouteRefine(),
         ),
         Case(
             name="add-also-measurement",
@@ -332,7 +395,7 @@ dataset = Dataset[RouterInput, RouterResult, RouterResult](
                 query="also BMI",
                 previous_query=_resolved_previous(),
             ),
-            expected_output=RouteAdd(),
+            expected_output=RouteRefine(),
         ),
         Case(
             name="add-additional-focus",
@@ -340,7 +403,7 @@ dataset = Dataset[RouterInput, RouterResult, RouterResult](
                 query="include heart disease too",
                 previous_query=_resolved_previous(),
             ),
-            expected_output=RouteAdd(),
+            expected_output=RouteRefine(),
         ),
         # --- Standalone queries should reset, not add ---
         Case(

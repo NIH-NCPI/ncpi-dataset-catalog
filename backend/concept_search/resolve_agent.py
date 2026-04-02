@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import os
 import threading
 from pathlib import Path
@@ -12,7 +13,7 @@ from pydantic_ai.settings import ModelSettings
 from .cache import LRUCache
 from .consent_logic import compute_eligible_codes, resolve_disease_name
 from .index import ConceptIndex
-from .models import ConceptMatch, Facet, RawMention, ResolveResult
+from .models import ConceptMatch, DisambiguationOption, Facet, RawMention, ResolveResult
 
 _PROMPT_PATH = Path(__file__).parent / "RESOLVE_PROMPT.md"
 _DEFAULT_MODEL = "anthropic:claude-haiku-4-5-20251001"
@@ -21,7 +22,7 @@ _agent: Agent[ConceptIndex, ResolveResult] | None = None
 _agent_model: str | None = None
 _lock = threading.Lock()
 
-resolve_cache: LRUCache[tuple[str, str], ResolveResult] = LRUCache(
+resolve_cache: LRUCache[tuple[tuple[str, ...], str], ResolveResult] = LRUCache(
     name="resolve_cache",
     max_size=int(os.environ.get("RESOLVE_CACHE_MAX_SIZE", "10000")),
     ttl_seconds=float(os.environ.get("RESOLVE_CACHE_TTL_SECONDS", "86400")),
@@ -365,15 +366,17 @@ def _dedup_focus_values(values: list[str], index: ConceptIndex) -> list[str]:
     return [v for v in values if v not in to_remove]
 
 
-async def _run_resolve_uncached(
+async def _resolve_single_facet(
     mention: RawMention,
+    facet: Facet,
     index: ConceptIndex,
     model: str | None = None,
 ) -> ResolveResult:
-    """Call the LLM to resolve a mention (no caching).
+    """Resolve a mention against a single facet.
 
     Args:
         mention: The raw mention to resolve.
+        facet: The specific facet to resolve against.
         index: ConceptIndex to search against.
         model: Override the model (default: Haiku).
 
@@ -381,17 +384,85 @@ async def _run_resolve_uncached(
         ResolveResult with canonical value(s).
     """
     agent = _get_agent(model)
-    prompt = f"Resolve this mention:\n- text: {mention.text}\n- facet: {mention.facet.value}"
+    prompt = f"Resolve this mention:\n- text: {mention.text}\n- facet: {facet.value}"
     result = await agent.run(prompt, deps=index)
     output = result.output
-    # Disambiguation is only defined for measurement; clear it on other facets.
-    # (values/message enforcement is handled by ResolveResult.model_validator)
-    if output.disambiguation and mention.facet != Facet.MEASUREMENT:
-        output.disambiguation = []
+    # Tag any disambiguation options with this facet
+    for opt in output.disambiguation:
+        opt.facet = facet
     # Cull descendant focus values — ISA closure makes them redundant
-    if mention.facet == Facet.FOCUS and output.values:
+    if facet == Facet.FOCUS and output.values:
         output.values = _dedup_focus_values(output.values, index)
     return output
+
+
+async def _run_resolve_uncached(
+    mention: RawMention,
+    index: ConceptIndex,
+    model: str | None = None,
+) -> ResolveResult:
+    """Resolve a mention, handling multi-facet candidates.
+
+    When extract provides multiple candidate facets, resolves against each
+    independently and combines results into a cross-facet disambiguation.
+
+    Args:
+        mention: The raw mention to resolve.
+        index: ConceptIndex to search against.
+        model: Override the model (default: Haiku).
+
+    Returns:
+        ResolveResult with canonical value(s) or cross-facet disambiguation.
+    """
+    if not mention.facets:
+        return ResolveResult(
+            values=[],
+            message=f"No candidate facets for '{mention.text}'.",
+        )
+
+    # Single facet — straightforward resolution
+    if len(mention.facets) == 1:
+        return await _resolve_single_facet(mention, mention.facets[0], index, model)
+
+    # Multi-facet — resolve against each candidate independently
+    results = await asyncio.gather(
+        *[_resolve_single_facet(mention, facet, index, model) for facet in mention.facets]
+    )
+
+    # Collect all viable interpretations across facets
+    all_options: list[DisambiguationOption] = []
+    descs = index._ensure_concept_descriptions() if index else {}
+    for facet, result in zip(mention.facets, results, strict=True):
+        if result.disambiguation:
+            # This facet itself produced disambiguation — include all options
+            all_options.extend(result.disambiguation)
+        elif result.values:
+            # Confident single-facet result — wrap as a disambiguation option.
+            # Use first value as concept_id (representative for multi-value).
+            concept_id = result.values[0]
+            info = descs.get(concept_id)
+            label = info["name"] if isinstance(info, dict) and "name" in info else concept_id
+            all_options.append(
+                DisambiguationOption(
+                    concept_id=concept_id,
+                    facet=facet,
+                    label=label,
+                )
+            )
+
+    # Multi-facet mentions always disambiguate — even if only one facet
+    # produced results. Extract said it was ambiguous, so let the user confirm.
+    if all_options:
+        return ResolveResult(
+            disambiguation=all_options,
+            values=[],
+        )
+
+    # Fallback: nothing resolved in any facet
+    return ResolveResult(
+        values=[],
+        message=f"Could not resolve '{mention.text}' in any candidate facet.",
+    )
 
 
 async def run_resolve(
@@ -401,7 +472,7 @@ async def run_resolve(
 ) -> ResolveResult:
     """Resolve a single raw mention to canonical index values.
 
-    Results are cached by ``(facet, normalized_text)`` to avoid redundant
+    Results are cached by ``(facets, normalized_text)`` to avoid redundant
     LLM calls for repeated mentions.
 
     Args:
@@ -412,7 +483,7 @@ async def run_resolve(
     Returns:
         ResolveResult with canonical value(s).
     """
-    key = (mention.facet.value, mention.text.strip().lower())
+    key = (tuple(f.value for f in mention.facets), mention.text.strip().lower())
     return await resolve_cache.get_or_compute(
         key, lambda: _run_resolve_uncached(mention, index, model)
     )

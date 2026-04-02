@@ -71,27 +71,34 @@ class ExtractEvaluator(Evaluator[str, ExtractResult]):
 
 def _extract_similarity(expected: RawMention, actual: RawMention) -> float:
     """Score a single extract mention match (0.0 to 1.0)."""
-    if expected.facet != actual.facet:
+    exp_facets = set(expected.facets)
+    act_facets = set(actual.facets)
+    if not exp_facets & act_facets:
+        # No facet overlap at all
         return 0.0
-    # For small facets, check values using recall
+    # Multi-facet recall: did the LLM identify all expected facets?
+    facet_recall = len(exp_facets & act_facets) / len(exp_facets)
+    # For small facets, also check values using recall
     if expected.values:
         exp_set = {v.lower() for v in expected.values}
         act_set = {v.lower() for v in actual.values}
         if not act_set:
             return 0.0
-        hits = exp_set & act_set
-        return len(hits) / len(exp_set)
-    # For large facets, facet match is sufficient
-    return 1.0
+        value_recall = len(exp_set & act_set) / len(exp_set)
+        return facet_recall * value_recall
+    # For large facets, facet recall is the score
+    return facet_recall
 
 
 def _rm(
     text: str,
-    facet: Facet,
+    facets: Facet | list[Facet],
     values: list[str] | None = None,
 ) -> RawMention:
     """Shorthand for building expected raw mentions."""
-    return RawMention(facet=facet, text=text, values=values or [])
+    if isinstance(facets, Facet):
+        facets = [facets]
+    return RawMention(facets=facets, text=text, values=values or [])
 
 
 dataset = Dataset[str, ExtractResult, ExtractResult](
@@ -122,6 +129,43 @@ dataset = Dataset[str, ExtractResult, ExtractResult](
                     _rm("WGS", Facet.DATA_TYPE, ["WGS"]),
                     _rm("diabetic", Facet.FOCUS),
                     _rm("vitamin K", Facet.MEASUREMENT),
+                ]
+            ),
+        ),
+        # --- Cross-facet ambiguity ---
+        Case(
+            name="ambiguous-glucose",
+            inputs="studies about glucose",
+            expected_output=ExtractResult(
+                mentions=[
+                    _rm("glucose", [Facet.FOCUS, Facet.MEASUREMENT]),
+                ]
+            ),
+        ),
+        Case(
+            name="ambiguous-cholesterol",
+            inputs="studies about cholesterol",
+            expected_output=ExtractResult(
+                mentions=[
+                    _rm("cholesterol", [Facet.FOCUS, Facet.MEASUREMENT]),
+                ]
+            ),
+        ),
+        Case(
+            name="unambiguous-diabetes",
+            inputs="diabetes studies",
+            expected_output=ExtractResult(
+                mentions=[
+                    _rm("diabetes", Facet.FOCUS),
+                ]
+            ),
+        ),
+        Case(
+            name="unambiguous-blood-pressure",
+            inputs="studies with blood pressure data",
+            expected_output=ExtractResult(
+                mentions=[
+                    _rm("blood pressure", Facet.MEASUREMENT),
                 ]
             ),
         ),

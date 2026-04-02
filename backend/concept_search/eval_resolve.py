@@ -32,7 +32,7 @@ class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
         scores: dict[str, float] = {}
 
         # Determine facet from inputs
-        is_measurement = ctx.inputs.facet == Facet.MEASUREMENT
+        is_measurement = ctx.inputs.facets[0] == Facet.MEASUREMENT
 
         # Score disambiguation (when expected has disambiguation options)
         if expected is not None and expected.disambiguation:
@@ -89,7 +89,7 @@ class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
 
 def _mention(text: str, facet: Facet) -> RawMention:
     """Build a raw mention input for the resolve agent."""
-    return RawMention(facet=facet, text=text, values=[])
+    return RawMention(facets=[facet], text=text, values=[])
 
 
 # ---------------------------------------------------------------------------
@@ -157,15 +157,18 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             inputs=_mention("glucose", Facet.MEASUREMENT),
             # "Glucose" spans 3 domains: nutrition (ncpi:diet), biomarker
             # (ncpi:biomarkers), diagnosis (ncpi:disease_events).
-            # Agent should disambiguate with parent concept IDs.
+            # Agent should disambiguate. Dietary option should use the
+            # glucose-specific archetype, not the broad nutrient_intake parent.
             expected_output=ResolveResult(
                 disambiguation=[
                     DisambiguationOption(
                         concept_id="phenx:fasting_plasma_glucose_blood_draw",
+                        facet=Facet.MEASUREMENT,
                         label="Blood glucose measurement",
                     ),
                     DisambiguationOption(
-                        concept_id="topmed:nutrient_intake",
+                        concept_id="ncpi:nutrient_intake_glucose",
+                        facet=Facet.MEASUREMENT,
                         label="Dietary glucose intake",
                     ),
                 ],

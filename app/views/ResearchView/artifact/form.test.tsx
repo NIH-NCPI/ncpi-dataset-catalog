@@ -171,6 +171,87 @@ describe("MultiTurnQueryProvider onSubmit", () => {
     );
   });
 
+  it("preserves disambiguation in previousQuery for follow-up responses", async () => {
+    // First response includes disambiguation in mentions (as the real backend returns).
+    const disambiguationResponse = {
+      intent: "study",
+      message: "Which did you mean?",
+      query: {
+        intent: "study",
+        mentions: [
+          {
+            disambiguation: [
+              {
+                conceptId: "topmed:nutrient_intake",
+                facet: "measurement",
+                label: "Glucose Intake from Diet",
+              },
+              {
+                conceptId: "Diabetes Mellitus",
+                facet: "focus",
+                label: "Diabetes Mellitus",
+              },
+            ],
+            exclude: false,
+            facet: "focus",
+            matchedVariables: [],
+            message: null,
+            originalText: "glucose",
+            values: [],
+          },
+          {
+            disambiguation: [],
+            exclude: false,
+            facet: "platform",
+            matchedVariables: [],
+            message: null,
+            originalText: "BDC",
+            values: ["BDC"],
+          },
+        ],
+        message: null,
+      },
+      timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
+    };
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      json: () => Promise.resolve(disambiguationResponse),
+      ok: true,
+      status: 200,
+    });
+
+    const { result } = renderOnSubmit();
+
+    // First query — response has disambiguation.
+    await act(async () => {
+      await result.current.onSubmit(
+        mockFormEvent(),
+        { query: "glucose on BDC" },
+        defaultOptions
+      );
+    });
+
+    // Second query — previousQuery should include disambiguation.
+    await act(async () => {
+      await result.current.onSubmit(
+        mockFormEvent(),
+        { query: "glucose intake" },
+        defaultOptions
+      );
+    });
+
+    const calls = (global.fetch as jest.Mock).mock.calls;
+    const secondBody = JSON.parse(calls[1][1].body);
+    expect(secondBody).toHaveProperty("previousQuery");
+    const glucoseMention = secondBody.previousQuery.mentions.find(
+      (m: any) => m.originalText === "glucose"
+    );
+    expect(glucoseMention).toBeDefined();
+    expect(glucoseMention.disambiguation).toHaveLength(2);
+    expect(glucoseMention.disambiguation[0].conceptId).toBe(
+      "topmed:nutrient_intake"
+    );
+  });
+
   it("updates lastQueryRef from response for subsequent calls", async () => {
     const { result } = renderOnSubmit();
 

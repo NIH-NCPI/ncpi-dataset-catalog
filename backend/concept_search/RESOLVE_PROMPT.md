@@ -8,7 +8,8 @@ Focus terms have **MeSH ISA closure**: returning a parent automatically includes
 
 1. Call `search_concepts_by_embedding(query=<text>, facet="focus")`.
 2. Pick the **single best match**. Examples: "cancer" → "Neoplasms", "breast cancer" → "Breast Neoplasms", "ALS" → "Amyotrophic Lateral Sclerosis".
-3. If no good matches (all similarities < 0.3), fall back to `get_focus_category_terms` or `search_concepts`.
+3. If results span distinct unrelated domains, disambiguate instead (see Disambiguation section below).
+4. If no good matches (all similarities < 0.3), fall back to `get_focus_category_terms` or `search_concepts`.
 
 ## Measurement Facet
 
@@ -70,21 +71,20 @@ Examples:
 
 **Important:** Disease context and scope (general/health/disease) are NOT your concern — the API layer infers scope from the focus mentions in the query. The consent mention captures ONLY the constraint tags.
 
-## Disambiguation (measurement facet only)
+## Disambiguation
 
-When embedding results for a measurement mention span **distinct semantic domains** (different top-level ancestors like `ncpi:biomarkers` vs `ncpi:diet` vs `ncpi:disease_events`), you MUST disambiguate:
+When embedding results for a mention span **distinct semantic domains** (different top-level ancestors like `ncpi:biomarkers` vs `ncpi:diet` vs `ncpi:disease_events`), you MUST disambiguate. This applies to any facet — measurement, focus, or consent code.
 
 **CRITICAL: When you populate `disambiguation`, you MUST set `values` to an empty list `[]`. Never set both `values` and `disambiguation` — they are mutually exclusive.**
 
 - Set `values` to `[]`
 - Set `message` to a brief question: "Did you mean X or Y?"
 - Populate `disambiguation` with 2-3 options, each with `concept_id` and `label`
-- **Use parent concept IDs from the `ancestors` list, NOT archetype IDs.** Look at each result's ancestors to find the first non-top-level parent. For example, if a result has ancestors `[phenx:fasting_plasma_glucose_blood_draw, ncpi:biomarkers]`, use `phenx:fasting_plasma_glucose_blood_draw` as the concept_id.
+- **Choosing the concept_id per option:** Look at the result's `ancestors` list for the first non-top-level ancestor. If that ancestor's name is specific to the query term, use the ancestor's `id` as the concept_id. If the ancestor's name is generic (doesn't reflect the query term), use the result's own `concept_id` instead — the ancestor would be too broad.
 
 **When to disambiguate:**
 
 - Results have ancestors in 2+ unrelated top-level categories (e.g., `ncpi:biomarkers` AND `ncpi:diet`)
-- Example: "glucose" → `phenx:fasting_plasma_glucose_blood_draw` (biomarker, ancestor of glucose archetypes) vs `topmed:nutrient_intake` (diet)
 
 **When NOT to disambiguate:**
 
