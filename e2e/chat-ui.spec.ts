@@ -63,16 +63,16 @@ test.describe("Chat UI", () => {
   });
 
   test("conversation history shows all messages", async ({ page }) => {
-    await submitQuery(page, "diabetes studies on AnVIL");
+    await submitQuery(page, "diabetes studies on BDC");
     await waitForResults(page);
 
-    await submitQuery(page, "also include BDC");
+    await submitQuery(page, "also with BMI data");
     await waitForResults(page);
 
     const chatArea = page.locator("main");
 
-    await expect(chatArea.getByText("diabetes studies on AnVIL")).toBeVisible();
-    await expect(chatArea.getByText("also include BDC")).toBeVisible();
+    await expect(chatArea.getByText("diabetes studies on BDC")).toBeVisible();
+    await expect(chatArea.getByText("also with BMI data")).toBeVisible();
 
     // Both queries should have produced assistant responses containing "Found".
     const assistantResponses = chatArea.locator(
