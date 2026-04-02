@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.19.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.18.0...v0.19.0) (2026-04-02)
+
+
+### Features
+
+* cross-facet disambiguation for ambiguous mentions ([#326](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/326)) ([adc0d97](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/adc0d97aa8e48d7098f1cf0b53607d69023170aa))
+* refactor example queries page ([#317](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/317)) ([#325](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/325)) ([6d08025](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/6d08025bd4a6934c5dc705b877d9deb0604f75b3))
+
+
+### Bug Fixes
+
+* e2e test over-constrained query produces zero results [#331](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/331) ([8a4bd95](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/8a4bd95c497f3b5b00755077f423276802117e67))
+
 ## [0.18.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.17.0...v0.18.0) (2026-03-29)
 
 
