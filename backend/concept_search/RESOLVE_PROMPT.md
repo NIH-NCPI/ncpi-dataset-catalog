@@ -80,12 +80,11 @@ When embedding results for a mention span **distinct semantic domains** (differe
 - Set `values` to `[]`
 - Set `message` to a brief question: "Did you mean X or Y?"
 - Populate `disambiguation` with 2-3 options, each with `concept_id` and `label`
-- **Use parent concept IDs from the `ancestors` list, NOT archetype IDs.** Look at each result's ancestors to find the first non-top-level parent. For example, if a result has ancestors `[phenx:fasting_plasma_glucose_blood_draw, ncpi:biomarkers]`, use `phenx:fasting_plasma_glucose_blood_draw` as the concept_id.
+- **Choosing the concept_id per option:** Look at the result's `ancestors` list for the first non-top-level ancestor. If that ancestor's name is specific to the query term, use the ancestor's `id` as the concept_id. If the ancestor's name is generic (doesn't reflect the query term), use the result's own `concept_id` instead — the ancestor would be too broad.
 
 **When to disambiguate:**
 
 - Results have ancestors in 2+ unrelated top-level categories (e.g., `ncpi:biomarkers` AND `ncpi:diet`)
-- Example: "glucose" → `phenx:fasting_plasma_glucose_blood_draw` (biomarker, ancestor of glucose archetypes) vs `topmed:nutrient_intake` (diet)
 
 **When NOT to disambiguate:**
 

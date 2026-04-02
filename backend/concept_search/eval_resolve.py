@@ -157,7 +157,8 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
             inputs=_mention("glucose", Facet.MEASUREMENT),
             # "Glucose" spans 3 domains: nutrition (ncpi:diet), biomarker
             # (ncpi:biomarkers), diagnosis (ncpi:disease_events).
-            # Agent should disambiguate with parent concept IDs.
+            # Agent should disambiguate. Dietary option should use the
+            # glucose-specific archetype, not the broad nutrient_intake parent.
             expected_output=ResolveResult(
                 disambiguation=[
                     DisambiguationOption(
@@ -166,7 +167,7 @@ dataset = Dataset[RawMention, ResolveResult, ResolveResult](
                         label="Blood glucose measurement",
                     ),
                     DisambiguationOption(
-                        concept_id="topmed:nutrient_intake",
+                        concept_id="ncpi:nutrient_intake_glucose",
                         facet=Facet.MEASUREMENT,
                         label="Dietary glucose intake",
                     ),

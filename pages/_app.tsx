@@ -19,6 +19,7 @@ import { SystemStatusProvider } from "@databiosphere/findable-ui/lib/providers/s
 import { createAppTheme } from "@databiosphere/findable-ui/lib/theme/theme";
 import { DataExplorerError } from "@databiosphere/findable-ui/lib/types/error";
 import { ChatProvider } from "@databiosphere/findable-ui/lib/views/ResearchView/state/provider";
+import { getSearchApiUrl } from "../app/utils/searchApiUrl";
 import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import { createTheme, CssBaseline, Theme, ThemeProvider } from "@mui/material";
 import { createBreakpoints } from "@mui/system";
@@ -71,7 +72,7 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
     pageTitle,
   } = pageProps as PageProps;
   const Main = Component.Main || DXMain;
-  const { url: aiUrl } = ai || {};
+  const aiUrl = getSearchApiUrl(ai?.url);
 
   // Initialize Google Tag Manager.
   useEffect(() => {
