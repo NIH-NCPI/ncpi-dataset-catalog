@@ -3,38 +3,31 @@ import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/
 import { useQuery } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/hooks/UseQuery/hook";
 import Router from "next/router";
 import { JSX } from "react";
-import { ExampleQuery } from "../../constants";
 import { ROUTES } from "../../../../../routes/constants";
-import { StyledChip, StyledForm } from "./queryChip.styles";
+import { DimensionSection } from "./components/DimensionSection/dimensionSection";
+import { DIMENSIONS } from "./constants";
+import { StyledForm } from "./dimensions.styles";
 
 /**
- * Renders a clickable chip that submits a query and navigates to the research page.
- * @param props - Component props.
- * @param props.label - Display label for the chip.
- * @param props.query - Query string to submit.
- * @returns Query chip component.
+ * Renders all search dimensions with a single form wrapping the page.
+ * @returns Dimensions component.
  */
-export const QueryChip = ({ label, query }: ExampleQuery): JSX.Element => {
+export const Dimensions = (): JSX.Element => {
   const { state } = useChatState();
   const { onSubmit } = useQuery();
   const { status } = state;
   return (
     <StyledForm
-      onSubmit={async (e) => {
+      onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
         await onSubmit(e, getPayload(e), {
           onMutate: () => Router.push(ROUTES.RESEARCH_STUDIES),
           status,
         });
       }}
     >
-      <StyledChip
-        clickable
-        component="button"
-        data-query={query}
-        label={label}
-        type="submit"
-        variant="outlined"
-      />
+      {DIMENSIONS.map((dimension) => (
+        <DimensionSection key={dimension.title} {...dimension} />
+      ))}
     </StyledForm>
   );
 };
