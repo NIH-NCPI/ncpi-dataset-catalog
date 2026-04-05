@@ -20,10 +20,12 @@
     "update-kfdrc-source": "esrun catalog-build/update-kfdrc-source.ts",
     "update-dbgap-source": "esrun catalog-build/update-dbgap-source.ts",
     "update-all-ncpi-sources": "npm run update-crdc-source && npm run update-bdc-source && npm run update-anvil-source && npm run update-kfdrc-source && npm run update-dbgap-source",
-    "fetch-dbgap-selected-publications": "esrun catalog-build/fetch-dbgap-selected-publications.ts"
+    "fetch-dbgap-selected-publications": "esrun catalog-build/fetch-dbgap-selected-publications.ts",
+    "link-findable": "../findable-ui/scripts/link.sh",
+    "unlink-findable": "../findable-ui/scripts/unlink.sh"
   },
   "dependencies": {
-    "@databiosphere/findable-ui": "^50.6.1",
+    "@databiosphere/findable-ui": "^50.7.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mdx-js/loader": "^3.0.1",
