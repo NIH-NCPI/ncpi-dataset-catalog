@@ -8,7 +8,7 @@ on:
     branches:
       - main
     paths:
-      - 'analytics/site/**'
+      - "analytics/site/**"
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -37,7 +37,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'analytics/site'
+          path: "analytics/site"
 
       - name: Deploy to GitHub Pages
         id: deployment
