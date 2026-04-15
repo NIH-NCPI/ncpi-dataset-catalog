@@ -28,6 +28,7 @@ import os
 import sys
 import json
 from datetime import datetime
+from urllib.parse import urlparse
 
 import pandas as pd
 from google.oauth2 import service_account
@@ -46,12 +47,24 @@ from constants import (
 SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
 
 
-def authenticate_service_account(key_path):
-    """Authenticate using a service account key file."""
-    print(f"Authenticating with service account: {key_path}")
-    credentials = service_account.Credentials.from_service_account_file(
-        key_path, scopes=SCOPES
-    )
+def authenticate_service_account(key_path_or_json):
+    """Authenticate using a service account key file or JSON content.
+
+    Args:
+        key_path_or_json: Either a file path to the JSON key, or the JSON content directly.
+    """
+    # Check if it's JSON content (starts with '{') or a file path
+    if key_path_or_json.strip().startswith('{'):
+        print("Authenticating with service account (from JSON content)")
+        key_info = json.loads(key_path_or_json)
+        credentials = service_account.Credentials.from_service_account_info(
+            key_info, scopes=SCOPES
+        )
+    else:
+        print(f"Authenticating with service account: {key_path_or_json}")
+        credentials = service_account.Credentials.from_service_account_file(
+            key_path_or_json, scopes=SCOPES
+        )
     service = build('analyticsdata', 'v1beta', credentials=credentials)
     return service, credentials
 
@@ -83,8 +96,10 @@ def authenticate_oauth():
 def get_auth_mode():
     """Determine which authentication mode to use."""
     service_account_key = os.environ.get('GA_SERVICE_ACCOUNT_KEY')
-    if service_account_key and os.path.exists(service_account_key):
-        return 'service_account', service_account_key
+    if service_account_key:
+        # Support both file path and raw JSON content
+        if service_account_key.strip().startswith('{') or os.path.exists(service_account_key):
+            return 'service_account', service_account_key
     return 'oauth', None
 
 
@@ -103,7 +118,7 @@ def fetch_data_service_account(service, property_id, start_date, end_date):
                 {"name": "totalUsers"},
                 {"name": "screenPageViews"}
             ],
-            "orderBys": [{"dimension": {"dimensionName": "yearMonth"}}]
+            "orderBys": [{"dimension": {"dimensionName": "yearMonth"}, "desc": True}]
         }
     ).execute()
 
@@ -164,16 +179,21 @@ def fetch_data_service_account(service, property_id, start_date, end_date):
         }
     ).execute()
 
+    # First-party hostnames to exclude from outbound links
+    first_party_hosts = {'ncpi-data.org', 'www.ncpi-data.org', 'ncpi-data.dev.clevercanary.com'}
+
     outbound_data = []
     for row in response.get('rows', []):
         link = row['dimensionValues'][0]['value']
-        # Filter to only external links
-        if link.startswith('http') and 'ncpi' not in link.lower():
-            outbound_data.append({
-                'Outbound Link': link,
-                'Total Clicks': int(row['metricValues'][0]['value']),
-                'Total Users Change': None
-            })
+        # Filter to only external links (exclude first-party hosts)
+        if link.startswith('http'):
+            hostname = urlparse(link).hostname or ''
+            if hostname not in first_party_hosts:
+                outbound_data.append({
+                    'Outbound Link': link,
+                    'Total Clicks': int(row['metricValues'][0]['value']),
+                    'Total Users Change': None
+                })
 
     df_outbound = pd.DataFrame(outbound_data) if outbound_data else pd.DataFrame(
         columns=['Outbound Link', 'Total Clicks', 'Total Users Change']
