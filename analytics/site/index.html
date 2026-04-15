@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCPI Dataset Catalog - Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: white;
+            color: #212121;
+            padding: 0 16px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 16px;
+            align-items: center;
+            height: 56px;
+            box-shadow: 0 1px 4px 0 rgba(0,0,0,0.07);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: flex-start;
+        }
+
+        .header-logo {
+            height: 36px;
+            width: auto;
+            flex: none;
+        }
+
+        .header-divider {
+            width: 1px;
+            height: 32px;
+            background: #e0e0e0;
+            flex: none;
+        }
+
+        .header-slogan {
+            font-size: 12px;
+            line-height: 18px;
+            max-width: 180px;
+            font-weight: 400;
+            color: #666;
+        }
+
+        .header-center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .container h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin: 0 0 0.25rem 0;
+            color: #212121;
+        }
+
+        .container .date-range {
+            font-size: 0.875rem;
+            color: #666;
+            margin: 0 0 1.5rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #035C94;
+        }
+
+        .stat-card .label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .stat-card .change {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .stat-card .change.positive {
+            color: #38a169;
+        }
+
+        .stat-card .change.negative {
+            color: #e53e3e;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .chart-card h2 {
+            font-size: 1.1rem;
+            color: #003E76;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .table-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .table-card h2 {
+            font-size: 1.1rem;
+            color: #003E76;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        tr:hover {
+            background: #f7fafc;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto;
+                height: auto;
+                padding: 12px;
+                gap: 0.75rem;
+            }
+
+            .header-left {
+                justify-content: center;
+            }
+
+            .header-slogan {
+                display: none;
+            }
+
+            .header-divider {
+                display: none;
+            }
+
+            .header-center {
+                display: none;
+            }
+
+            .header-right {
+                justify-content: center;
+            }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <a href="https://ncpi-data.org/platforms">
+                <img src="https://ncpi-data.org/images/logoNCPI.png" alt="NCPI" class="header-logo">
+            </a>
+            <div class="header-divider"></div>
+            <span class="header-slogan">NIH Cloud Platform Interoperability Effort</span>
+        </div>
+        <div class="header-center"></div>
+        <div class="header-right"></div>
+    </header>
+
+    <div class="container">
+        <h1>Analytics</h1>
+        <p class="date-range" id="date-range">Loading...</p>
+        <div class="stats-grid" id="stats-grid">
+            <div class="loading">Loading statistics...</div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h2>Monthly Traffic Over Time</h2>
+                <div class="chart-container">
+                    <canvas id="traffic-chart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h2>Monthly Pageviews</h2>
+                <div class="chart-container">
+                    <canvas id="pageviews-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <h2>Top Pages (Current Month)</h2>
+            <table id="pages-table">
+                <thead>
+                    <tr>
+                        <th>Page</th>
+                        <th>Views</th>
+                        <th>Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="3" class="loading">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-card">
+            <h2>Top Outbound Links (Current Month)</h2>
+            <table id="outbound-table">
+                <thead>
+                    <tr>
+                        <th>Link</th>
+                        <th>Clicks</th>
+                        <th>Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="3" class="loading">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-card">
+            <h2>Filter Selections (Current Month)</h2>
+            <table id="filters-table">
+                <thead>
+                    <tr>
+                        <th>Filter Name</th>
+                        <th>Filter Value</th>
+                        <th>Count</th>
+                        <th>Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="4" class="loading">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Data sourced from Google Analytics | Generated <span id="generated-date">-</span></p>
+    </div>
+
+    <script>
+        // Chart.js default configuration
+        Chart.defaults.font.family = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+        Chart.defaults.color = '#666';
+
+        const chartColors = {
+            primary: '#2c5282',
+            secondary: '#38a169',
+            primaryLight: 'rgba(44, 82, 130, 0.1)',
+            secondaryLight: 'rgba(56, 161, 105, 0.1)',
+        };
+
+        async function loadData() {
+            try {
+                const [trafficRes, pageviewsRes, outboundRes, filtersRes, metaRes] = await Promise.all([
+                    fetch('data/monthly_traffic.json'),
+                    fetch('data/pageviews.json'),
+                    fetch('data/outbound_links.json'),
+                    fetch('data/filter_selected.json'),
+                    fetch('data/meta.json')
+                ]);
+
+                const traffic = await trafficRes.json();
+                const pageviews = await pageviewsRes.json();
+                const outbound = await outboundRes.json();
+                const filters = await filtersRes.json();
+                const meta = await metaRes.json();
+
+                renderMeta(meta);
+                renderStats(traffic, meta);
+                renderTrafficChart(traffic);
+                renderPageviewsChart(traffic);
+                renderPagesTable(pageviews);
+                renderOutboundTable(outbound);
+                renderFiltersTable(filters);
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('stats-grid').innerHTML =
+                    `<div class="loading">Error: ${error.message}</div>`;
+            }
+        }
+
+        function renderMeta(meta) {
+            document.getElementById('date-range').textContent =
+                `${meta.current_month_start} to ${meta.current_month_end}`;
+            document.getElementById('generated-date').textContent = meta.generated_at;
+        }
+
+        function renderStats(traffic, meta) {
+            // Data is sorted newest-first, so index 0 is the latest month
+            const latest = traffic[0];
+            const previous = traffic[1];
+
+            const totalUsers = traffic.reduce((sum, m) => sum + (m.users || 0), 0);
+            const totalPageviews = traffic.reduce((sum, m) => sum + (m.pageviews || 0), 0);
+
+            let usersChange = 0;
+            let pageviewsChange = 0;
+            if (previous && previous.users > 0) {
+                usersChange = ((latest.users - previous.users) / previous.users * 100).toFixed(1);
+            }
+            if (previous && previous.pageviews > 0) {
+                pageviewsChange = ((latest.pageviews - previous.pageviews) / previous.pageviews * 100).toFixed(1);
+            }
+
+            document.getElementById('stats-grid').innerHTML = `
+                <div class="stat-card">
+                    <div class="value">${formatNumber(latest.users)}</div>
+                    <div class="label">Users (Current Month)</div>
+                    <div class="change ${usersChange >= 0 ? 'positive' : 'negative'}">
+                        ${usersChange >= 0 ? '+' : ''}${usersChange}% vs prior month
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">${formatNumber(latest.pageviews)}</div>
+                    <div class="label">Pageviews (Current Month)</div>
+                    <div class="change ${pageviewsChange >= 0 ? 'positive' : 'negative'}">
+                        ${pageviewsChange >= 0 ? '+' : ''}${pageviewsChange}% vs prior month
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">${formatNumber(totalUsers)}</div>
+                    <div class="label">Total Users (All Time)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">${formatNumber(totalPageviews)}</div>
+                    <div class="label">Total Pageviews (All Time)</div>
+                </div>
+            `;
+        }
+
+        function renderTrafficChart(traffic) {
+            // Reverse to get chronological order (oldest first) for charts
+            const chronological = [...traffic].reverse();
+            const ctx = document.getElementById('traffic-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chronological.map(d => d.month),
+                    datasets: [
+                        {
+                            label: 'Users',
+                            data: chronological.map(d => d.users),
+                            borderColor: chartColors.primary,
+                            backgroundColor: chartColors.primaryLight,
+                            fill: true,
+                            tension: 0.3,
+                        },
+                        {
+                            label: 'Pageviews',
+                            data: chronological.map(d => d.pageviews),
+                            borderColor: chartColors.secondary,
+                            backgroundColor: chartColors.secondaryLight,
+                            fill: true,
+                            tension: 0.3,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e2e8f0' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderPageviewsChart(traffic) {
+            // Reverse to get chronological order (oldest first) for charts
+            const chronological = [...traffic].reverse();
+            const ctx = document.getElementById('pageviews-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chronological.map(d => d.month),
+                    datasets: [{
+                        label: 'Pageviews',
+                        data: chronological.map(d => d.pageviews),
+                        backgroundColor: chartColors.primary,
+                        borderRadius: 4,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e2e8f0' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        function renderPagesTable(pageviews) {
+            const tbody = document.querySelector('#pages-table tbody');
+            if (!pageviews || pageviews.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3">No data available</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = pageviews.slice(0, 20).map(row => `
+                <tr>
+                    <td>${escapeHtml(row.page || row.pagePath || '-')}</td>
+                    <td>${formatNumber(row.views || row.screenPageViews || 0)}</td>
+                    <td class="${(row.change || 0) >= 0 ? 'positive' : 'negative'}">
+                        ${row.change != null ? ((row.change >= 0 ? '+' : '') + row.change.toFixed(1) + '%') : '-'}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderOutboundTable(outbound) {
+            const tbody = document.querySelector('#outbound-table tbody');
+            if (!outbound || outbound.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3">No data available</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = outbound.slice(0, 20).map(row => `
+                <tr>
+                    <td style="max-width: 400px; overflow: hidden; text-overflow: ellipsis;">
+                        ${escapeHtml(row.link || row.linkUrl || '-')}
+                    </td>
+                    <td>${formatNumber(row.clicks || row.eventCount || 0)}</td>
+                    <td class="${(row.change || 0) >= 0 ? 'positive' : 'negative'}">
+                        ${row.change != null ? ((row.change >= 0 ? '+' : '') + row.change.toFixed(1) + '%') : '-'}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderFiltersTable(filters) {
+            const tbody = document.querySelector('#filters-table tbody');
+            if (!filters || filters.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4">No data available</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = filters.slice(0, 30).map(row => `
+                <tr>
+                    <td>${escapeHtml(row.filterName || '-')}</td>
+                    <td>${escapeHtml(row.filterValue || '-')}</td>
+                    <td>${formatNumber(row.count || 0)}</td>
+                    <td class="${(row.change || 0) >= 0 ? 'positive' : 'negative'}">
+                        ${row.change != null ? ((row.change >= 0 ? '+' : '') + row.change.toFixed(1) + '%') : '-'}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function formatNumber(num) {
+            if (num === undefined || num === null) return '-';
+            return num.toLocaleString();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load data on page load
+        loadData();
+    </script>
+</body>
+</html>
