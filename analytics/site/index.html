@@ -4,363 +4,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NCPI Dataset Catalog - Analytics</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/DataBiosphere/findable-ui@fran/873-static-css/static/analytics.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --fui-primary: #035C94;
+            --fui-primary-dark: #003E76;
         }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
+        /* Stat card layout */
+        .stat-value {
+            font: var(--fui-font-heading-xlarge);
+            color: var(--fui-primary);
         }
 
-        header {
-            background: white;
-            color: #212121;
-            padding: 0 16px;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 16px;
-            align-items: center;
-            height: 56px;
-            box-shadow: 0 1px 4px 0 rgba(0,0,0,0.07);
+        .stat-label {
+            font: var(--fui-font-body-small-400);
+            color: var(--fui-ink-light);
+            margin-top: var(--fui-space-4);
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            justify-content: flex-start;
+        .stat-change {
+            font: var(--fui-font-body-small-400);
+            margin-top: var(--fui-space-8);
         }
 
-        .header-logo {
-            height: 36px;
-            width: auto;
-            flex: none;
-        }
+        .stat-change.positive { color: var(--fui-success); }
+        .stat-change.negative { color: var(--fui-alert); }
 
-        .header-divider {
-            width: 1px;
-            height: 32px;
-            background: #e0e0e0;
-            flex: none;
-        }
-
-        .header-slogan {
-            font-size: 12px;
-            line-height: 18px;
-            max-width: 180px;
-            font-weight: 400;
-            color: #666;
-        }
-
-        .header-center {
-            display: flex;
-            justify-content: center;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            justify-content: flex-end;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .container h1 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin: 0 0 0.25rem 0;
-            color: #212121;
-        }
-
-        .container .date-range {
-            font-size: 0.875rem;
-            color: #666;
-            margin: 0 0 1.5rem 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-
-        .stat-card .value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #035C94;
-        }
-
-        .stat-card .label {
-            color: #666;
-            font-size: 0.9rem;
-            margin-top: 0.25rem;
-        }
-
-        .stat-card .change {
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-        }
-
-        .stat-card .change.positive {
-            color: #38a169;
-        }
-
-        .stat-card .change.negative {
-            color: #e53e3e;
-        }
-
-        /* Table cell change colors */
-        td.positive {
-            color: #38a169;
-        }
-
-        td.negative {
-            color: #e53e3e;
-        }
-
-        .chart-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .chart-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .chart-card h2 {
-            font-size: 1.1rem;
-            color: #003E76;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
+        /* Chart container */
         .chart-container {
             position: relative;
             height: 300px;
         }
 
-        .table-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            margin-bottom: 2rem;
-            overflow-x: auto;
-        }
-
-        .table-card h2 {
-            font-size: 1.1rem;
-            color: #003E76;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
+        /* Table styles */
         table {
             width: 100%;
             border-collapse: collapse;
         }
 
         th, td {
-            padding: 0.75rem 1rem;
+            padding: var(--fui-space-8) var(--fui-space-12);
             text-align: left;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--fui-smoke);
         }
 
         th {
-            background: #f7fafc;
-            font-weight: 600;
-            color: #4a5568;
-            font-size: 0.85rem;
+            font: var(--fui-font-uppercase-500);
+            color: var(--fui-ink-light);
             text-transform: uppercase;
         }
 
         tr:hover {
-            background: #f7fafc;
+            background: var(--fui-smoke-lightest);
         }
 
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-            font-size: 0.85rem;
+        td.positive { color: var(--fui-success); }
+        td.negative { color: var(--fui-alert); }
+
+        /* Stretch stat cards to equal height */
+        #stats-grid .fui-card {
+            align-self: stretch;
         }
 
-        .loading {
-            text-align: center;
-            padding: 3rem;
-            color: #666;
-        }
-
-        @media (max-width: 768px) {
-            header {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto;
-                height: auto;
-                padding: 12px;
-                gap: 0.75rem;
-            }
-
-            .header-left {
-                justify-content: center;
-            }
-
-            .header-slogan {
-                display: none;
-            }
-
-            .header-divider {
-                display: none;
-            }
-
-            .header-center {
-                display: none;
-            }
-
-            .header-right {
-                justify-content: center;
-            }
-
-            .chart-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 1rem;
-            }
+        /* Responsive grid */
+        @media (max-width: 767px) {
+            .fui-card[class*="fui-grid-item"] { grid-column: 1 / -1; }
         }
     </style>
 </head>
-<body>
-    <header>
-        <div class="header-left">
-            <a href="https://ncpi-data.org/platforms">
-                <img src="https://ncpi-data.org/images/logoNCPI.png" alt="NCPI" class="header-logo">
-            </a>
-            <div class="header-divider"></div>
-            <span class="header-slogan">NIH Cloud Platform Interoperability Effort</span>
-        </div>
-        <div class="header-center"></div>
-        <div class="header-right"></div>
+<body class="fui-body">
+    <!-- Header -->
+    <header class="fui-header">
+        <a class="fui-header-logo fui-header-left" href="https://ncpi-data.org/platforms">
+            <img src="https://ncpi-data.org/images/logoNCPI.png" alt="NCPI" />
+        </a>
+        <div class="fui-header-center"></div>
+        <div class="fui-header-right"></div>
     </header>
 
-    <div class="container">
-        <h1>Analytics</h1>
-        <p class="date-range" id="date-range">Loading...</p>
-        <div class="stats-grid" id="stats-grid">
-            <div class="loading">Loading statistics...</div>
-        </div>
+    <!-- Main Content -->
+    <main class="fui-main">
+        <!-- Title -->
+        <section>
+            <h1 class="fui-heading-large">Analytics</h1>
+            <p class="fui-body-small-400 fui-color-ink-light" id="date-range">Loading...</p>
+        </section>
 
-        <div class="chart-grid">
-            <div class="chart-card">
-                <h2>Monthly Traffic Over Time</h2>
-                <div class="chart-container">
-                    <canvas id="traffic-chart"></canvas>
-                </div>
-            </div>
-
-            <div class="chart-card">
-                <h2>Monthly Pageviews</h2>
-                <div class="chart-container">
-                    <canvas id="pageviews-chart"></canvas>
+        <!-- Stats Cards -->
+        <div class="fui-grid-12" id="stats-grid">
+            <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                <div class="fui-card-content">
+                    <p class="fui-color-ink-light">Loading statistics...</p>
                 </div>
             </div>
         </div>
 
-        <div class="table-card">
-            <h2>Top Pages (Current Month)</h2>
-            <table id="pages-table">
-                <thead>
-                    <tr>
-                        <th>Page</th>
-                        <th>Views</th>
-                        <th>Change</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td colspan="3" class="loading">Loading...</td></tr>
-                </tbody>
-            </table>
+        <!-- Charts -->
+        <div class="fui-grid-12">
+            <div class="fui-card fui-grid-item-6">
+                <div class="fui-card-header">
+                    <h3 class="fui-card-header-title fui-heading-xsmall">Monthly Traffic Over Time</h3>
+                </div>
+                <hr class="fui-divider" />
+                <div class="fui-card-content">
+                    <div class="chart-container">
+                        <canvas id="traffic-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fui-card fui-grid-item-6">
+                <div class="fui-card-header">
+                    <h3 class="fui-card-header-title fui-heading-xsmall">Monthly Pageviews</h3>
+                </div>
+                <hr class="fui-divider" />
+                <div class="fui-card-content">
+                    <div class="chart-container">
+                        <canvas id="pageviews-chart"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="table-card">
-            <h2>Top Outbound Links (Current Month)</h2>
-            <table id="outbound-table">
-                <thead>
-                    <tr>
-                        <th>Link</th>
-                        <th>Clicks</th>
-                        <th>Change</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td colspan="3" class="loading">Loading...</td></tr>
-                </tbody>
-            </table>
+        <!-- Top Pages -->
+        <div class="fui-card">
+            <div class="fui-card-header">
+                <h3 class="fui-card-header-title fui-heading-xsmall">Top Pages (Current Month)</h3>
+            </div>
+            <hr class="fui-divider" />
+            <div class="fui-card-content" style="overflow-x: auto;">
+                <table id="pages-table">
+                    <thead>
+                        <tr>
+                            <th>Page</th>
+                            <th>Views</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="3" class="fui-color-ink-light">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <div class="table-card">
-            <h2>Filter Selections (Current Month)</h2>
-            <table id="filters-table">
-                <thead>
-                    <tr>
-                        <th>Filter Name</th>
-                        <th>Filter Value</th>
-                        <th>Count</th>
-                        <th>Change</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td colspan="4" class="loading">Loading...</td></tr>
-                </tbody>
-            </table>
+        <!-- Outbound Links -->
+        <div class="fui-card">
+            <div class="fui-card-header">
+                <h3 class="fui-card-header-title fui-heading-xsmall">Top Outbound Links (Current Month)</h3>
+            </div>
+            <hr class="fui-divider" />
+            <div class="fui-card-content" style="overflow-x: auto;">
+                <table id="outbound-table">
+                    <thead>
+                        <tr>
+                            <th>Link</th>
+                            <th>Clicks</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="3" class="fui-color-ink-light">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
-    <div class="footer">
-        <p>Data sourced from Google Analytics | Generated <span id="generated-date">-</span></p>
-    </div>
+        <!-- Filter Selections -->
+        <div class="fui-card">
+            <div class="fui-card-header">
+                <h3 class="fui-card-header-title fui-heading-xsmall">Filter Selections (Current Month)</h3>
+            </div>
+            <hr class="fui-divider" />
+            <div class="fui-card-content" style="overflow-x: auto;">
+                <table id="filters-table">
+                    <thead>
+                        <tr>
+                            <th>Filter Name</th>
+                            <th>Filter Value</th>
+                            <th>Count</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="4" class="fui-color-ink-light">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <p class="fui-body-small-400 fui-color-ink-light" style="text-align: center;">
+            Data sourced from Google Analytics | Generated <span id="generated-date">-</span>
+        </p>
+    </main>
 
     <script>
         // Chart.js default configuration
         Chart.defaults.font.family = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
-        Chart.defaults.color = '#666';
+        Chart.defaults.color = '#637381';
 
         const chartColors = {
-            primary: '#2c5282',
-            secondary: '#38a169',
-            primaryLight: 'rgba(44, 82, 130, 0.1)',
-            secondaryLight: 'rgba(56, 161, 105, 0.1)',
+            primary: '#035C94',
+            secondary: '#287555',
+            primaryLight: 'rgba(3, 92, 148, 0.1)',
+            secondaryLight: 'rgba(40, 117, 85, 0.1)',
         };
 
         async function loadData() {
@@ -389,7 +240,7 @@
             } catch (error) {
                 console.error('Error loading data:', error);
                 document.getElementById('stats-grid').innerHTML =
-                    `<div class="loading">Error: ${error.message}</div>`;
+                    '<div class="fui-card fui-grid-item-12"><div class="fui-card-content"><p class="fui-color-alert">Error loading data. Make sure the JSON files exist in the data/ directory.</p></div></div>';
             }
         }
 
@@ -400,7 +251,6 @@
         }
 
         function renderStats(traffic, meta) {
-            // Data is sorted newest-first, so index 0 is the latest month
             const latest = traffic[0];
             const previous = traffic[1];
 
@@ -417,33 +267,40 @@
             }
 
             document.getElementById('stats-grid').innerHTML = `
-                <div class="stat-card">
-                    <div class="value">${formatNumber(latest.users)}</div>
-                    <div class="label">Users (Current Month)</div>
-                    <div class="change ${usersChange >= 0 ? 'positive' : 'negative'}">
-                        ${usersChange >= 0 ? '+' : ''}${usersChange}% vs prior month
+                <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                    <div class="fui-card-content">
+                        <div class="stat-value">${formatNumber(latest.users)}</div>
+                        <div class="stat-label">Users (Current Month)</div>
+                        <div class="stat-change ${usersChange >= 0 ? 'positive' : 'negative'}">
+                            ${usersChange >= 0 ? '+' : ''}${usersChange}% vs prior month
+                        </div>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="value">${formatNumber(latest.pageviews)}</div>
-                    <div class="label">Pageviews (Current Month)</div>
-                    <div class="change ${pageviewsChange >= 0 ? 'positive' : 'negative'}">
-                        ${pageviewsChange >= 0 ? '+' : ''}${pageviewsChange}% vs prior month
+                <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                    <div class="fui-card-content">
+                        <div class="stat-value">${formatNumber(latest.pageviews)}</div>
+                        <div class="stat-label">Pageviews (Current Month)</div>
+                        <div class="stat-change ${pageviewsChange >= 0 ? 'positive' : 'negative'}">
+                            ${pageviewsChange >= 0 ? '+' : ''}${pageviewsChange}% vs prior month
+                        </div>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="value">${formatNumber(totalUsers)}</div>
-                    <div class="label">Total Users (All Time)</div>
+                <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                    <div class="fui-card-content">
+                        <div class="stat-value">${formatNumber(totalUsers)}</div>
+                        <div class="stat-label">Total Users (All Time)</div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="value">${formatNumber(totalPageviews)}</div>
-                    <div class="label">Total Pageviews (All Time)</div>
+                <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                    <div class="fui-card-content">
+                        <div class="stat-value">${formatNumber(totalPageviews)}</div>
+                        <div class="stat-label">Total Pageviews (All Time)</div>
+                    </div>
                 </div>
             `;
         }
 
         function renderTrafficChart(traffic) {
-            // Reverse to get chronological order (oldest first) for charts
             const chronological = [...traffic].reverse();
             const ctx = document.getElementById('traffic-chart').getContext('2d');
             new Chart(ctx, {
@@ -472,30 +329,17 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    interaction: {
-                        intersect: false,
-                        mode: 'index',
-                    },
+                    interaction: { intersect: false, mode: 'index' },
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: '#e2e8f0' }
-                        },
-                        x: {
-                            grid: { display: false }
-                        }
+                        y: { beginAtZero: true, grid: { color: '#e1e3e5' } },
+                        x: { grid: { display: false } }
                     },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        }
-                    }
+                    plugins: { legend: { position: 'top' } }
                 }
             });
         }
 
         function renderPageviewsChart(traffic) {
-            // Reverse to get chronological order (oldest first) for charts
             const chronological = [...traffic].reverse();
             const ctx = document.getElementById('pageviews-chart').getContext('2d');
             new Chart(ctx, {
@@ -513,17 +357,10 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: '#e2e8f0' }
-                        },
-                        x: {
-                            grid: { display: false }
-                        }
+                        y: { beginAtZero: true, grid: { color: '#e1e3e5' } },
+                        x: { grid: { display: false } }
                     },
-                    plugins: {
-                        legend: { display: false }
-                    }
+                    plugins: { legend: { display: false } }
                 }
             });
         }
@@ -539,7 +376,7 @@
                 <tr>
                     <td>${escapeHtml(row.page || row.pagePath || '-')}</td>
                     <td>${formatNumber(row.views || row.screenPageViews || 0)}</td>
-                    <td class="${(row.change || 0) >= 0 ? 'positive' : 'negative'}">
+                    <td class="${row.change != null ? (row.change >= 0 ? 'positive' : 'negative') : ''}">
                         ${row.change != null ? ((row.change >= 0 ? '+' : '') + row.change.toFixed(1) + '%') : '-'}
                     </td>
                 </tr>
@@ -559,7 +396,7 @@
                         ${escapeHtml(row.link || row.linkUrl || '-')}
                     </td>
                     <td>${formatNumber(row.clicks || row.eventCount || 0)}</td>
-                    <td class="${(row.change || 0) >= 0 ? 'positive' : 'negative'}">
+                    <td class="${row.change != null ? (row.change >= 0 ? 'positive' : 'negative') : ''}">
                         ${row.change != null ? ((row.change >= 0 ? '+' : '') + row.change.toFixed(1) + '%') : '-'}
                     </td>
                 </tr>
@@ -578,7 +415,7 @@
                     <td>${escapeHtml(row.filterName || '-')}</td>
                     <td>${escapeHtml(row.filterValue || '-')}</td>
                     <td>${formatNumber(row.count || 0)}</td>
-                    <td class="${(row.change || 0) >= 0 ? 'positive' : 'negative'}">
+                    <td class="${row.change != null ? (row.change >= 0 ? 'positive' : 'negative') : ''}">
                         ${row.change != null ? ((row.change >= 0 ? '+' : '') + row.change.toFixed(1) + '%') : '-'}
                     </td>
                 </tr>
@@ -596,7 +433,6 @@
             return div.innerHTML;
         }
 
-        // Load data on page load
         loadData();
     </script>
 </body>
