@@ -250,7 +250,8 @@
         }
 
         function renderMeta(meta) {
-            const date = new Date(meta.current_month_start);
+            const [year, month] = meta.current_month.split('-');
+            const date = new Date(year, month - 1);
             const monthName = date.toLocaleString('default', { month: 'long', year: 'numeric' });
             document.getElementById('report-month').textContent = monthName;
             document.getElementById('generated-date').textContent = meta.generated_at;
