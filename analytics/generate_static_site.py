@@ -240,7 +240,7 @@ def export_data(data, output_dir="site/data"):
     _export_df_as_json(
         data["pageviews"],
         {"Page Path": "page", "Total Pageviews": "views"},
-        "Total Users Change",
+        "Total Pageviews Change",
         "pageviews.json",
         output_dir,
     )
