@@ -235,14 +235,20 @@ def fetch_data_service_account(service, property_id, start_date, end_date):
         columns=['Filter Name', 'Filter Value', 'Total Events', 'Total Users', 'Total Events Change']
     )
 
-    # Fetch chat submissions
+    chat_submitted_stats = fetch_chat_submitted_service_account(
+        service, property_name, start_date, end_date
+    )
+
+    return df_monthly, df_pageviews, df_outbound, df_filter_selected, chat_submitted_stats
+
+
+def fetch_chat_submitted_service_account(service, property_name, start_date, end_date):
+    """Fetch chat_submitted event count using the GA4 Data API directly."""
     print("Fetching chat submissions data...")
     response = service.properties().runReport(
         property=property_name,
         body={
-            "dateRanges": [
-                {"startDate": start_date, "endDate": end_date},
-            ],
+            "dateRanges": [{"startDate": start_date, "endDate": end_date}],
             "dimensions": [{"name": "eventName"}],
             "metrics": [{"name": "eventCount"}],
             "dimensionFilter": {
@@ -254,17 +260,40 @@ def fetch_data_service_account(service, property_id, start_date, end_date):
         }
     ).execute()
 
-    chat_current_count = 0
+    count = 0
     for row in response.get('rows', []):
-        chat_current_count += int(row['metricValues'][0]['value'])
+        count += int(row['metricValues'][0]['value'])
 
-    chat_submitted_stats = {
-        "current": chat_current_count,
-        "prior": 0,
-        "change": None,
-    }
+    return {"current": count, "prior": 0, "change": None}
 
-    return df_monthly, df_pageviews, df_outbound, df_filter_selected, chat_submitted_stats
+
+def fetch_chat_submitted_oauth(params_current, params_prior):
+    """Fetch chat_submitted event count with month-over-month change using the analytics package."""
+    print("Fetching chat submissions data...")
+    from analytics._sheets_utils import get_data_df_from_fields
+    from analytics.entities import METRIC_EVENT_COUNT, DIMENSION_EVENT_NAME
+
+    chat_current = get_data_df_from_fields(
+        [METRIC_EVENT_COUNT],
+        [DIMENSION_EVENT_NAME],
+        dimension_filter="eventName==chat_submitted",
+        **params_current,
+    )
+    current_count = int(chat_current[METRIC_EVENT_COUNT["alias"]].sum()) if len(chat_current) > 0 else 0
+
+    chat_prior = get_data_df_from_fields(
+        [METRIC_EVENT_COUNT],
+        [DIMENSION_EVENT_NAME],
+        dimension_filter="eventName==chat_submitted",
+        **params_prior,
+    )
+    prior_count = int(chat_prior[METRIC_EVENT_COUNT["alias"]].sum()) if len(chat_prior) > 0 else 0
+
+    change = None
+    if prior_count > 0:
+        change = (current_count - prior_count) / prior_count
+
+    return {"current": current_count, "prior": prior_count, "change": change}
 
 
 def fetch_data_oauth(ga_authentication):
@@ -334,36 +363,8 @@ def fetch_data_oauth(ga_authentication):
         end_date_prior
     )
 
-    print("Fetching chat submissions data...")
-    from analytics._sheets_utils import get_data_df_from_fields
-    from analytics.entities import METRIC_EVENT_COUNT, DIMENSION_EVENT_NAME
-
-    chat_current = get_data_df_from_fields(
-        [METRIC_EVENT_COUNT],
-        [DIMENSION_EVENT_NAME],
-        dimension_filter="eventName==chat_submitted",
-        **ncpi_catalog_params,
-    )
-    chat_current_count = int(chat_current[METRIC_EVENT_COUNT["alias"]].sum()) if len(chat_current) > 0 else 0
-
     ncpi_catalog_params_prior = {**ncpi_catalog_params, "start_date": start_date_prior, "end_date": end_date_prior}
-    chat_prior = get_data_df_from_fields(
-        [METRIC_EVENT_COUNT],
-        [DIMENSION_EVENT_NAME],
-        dimension_filter="eventName==chat_submitted",
-        **ncpi_catalog_params_prior,
-    )
-    chat_prior_count = int(chat_prior[METRIC_EVENT_COUNT["alias"]].sum()) if len(chat_prior) > 0 else 0
-
-    chat_change = None
-    if chat_prior_count > 0:
-        chat_change = (chat_current_count - chat_prior_count) / chat_prior_count
-
-    chat_submitted_stats = {
-        "current": chat_current_count,
-        "prior": chat_prior_count,
-        "change": chat_change,
-    }
+    chat_submitted_stats = fetch_chat_submitted_oauth(ncpi_catalog_params, ncpi_catalog_params_prior)
 
     print("Data fetching complete!")
 
@@ -494,17 +495,11 @@ def export_data(data, output_dir="site/data"):
 
     # Export chat submissions data
     print("Exporting chat submissions data...")
-    chat_submitted_stats = data.get("chat_submitted", {"current": 0, "prior": 0, "change": None})
-
-    chat_record = {
-        "current": chat_submitted_stats["current"],
-        "prior": chat_submitted_stats["prior"],
-        "change": chat_submitted_stats["change"],
-    }
+    chat_record = data.get("chat_submitted", {"current": 0, "prior": 0, "change": None})
 
     with open(os.path.join(output_dir, 'chat_submitted.json'), 'w') as f:
         json.dump(chat_record, f, indent=2)
-    print(f"  Wrote chat_submitted.json")
+    print("  Wrote chat_submitted.json")
 
     # Export metadata
     print("Exporting metadata...")
