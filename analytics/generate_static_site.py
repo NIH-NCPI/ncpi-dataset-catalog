@@ -5,34 +5,22 @@ Generate static analytics site from Google Analytics data.
 This script fetches analytics data from GA4 and exports it as JSON files
 for the static site.
 
-Authentication modes:
-- OAuth (interactive): For local development, opens browser for login
-- Service Account (non-interactive): For CI/CD, uses service account key
-
 Usage:
-    # Local development (OAuth):
     cd analytics
     source ./venv/bin/activate
     python generate_static_site.py
 
-    # CI/CD (Service Account):
-    GA_SERVICE_ACCOUNT_KEY=/path/to/key.json python generate_static_site.py
-
 The script will:
-1. Authenticate with Google Analytics
-2. Fetch monthly traffic, pageviews, and outbound links from GA4
+1. Authenticate with Google Analytics via OAuth (browser login)
+2. Fetch monthly traffic, pageviews, outbound links, filter selections, and chat submissions
 3. Export JSON files to site/data/
 """
 
 import os
-import sys
 import json
 from datetime import datetime
-from urllib.parse import urlparse
 
 import pandas as pd
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
 
 from constants import (
     CURRENT_MONTH,
@@ -43,35 +31,9 @@ from constants import (
     OAUTH_PORT,
 )
 
-# GA4 API scopes
-SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
 
-
-def authenticate_service_account(key_path_or_json):
-    """Authenticate using a service account key file or JSON content.
-
-    Args:
-        key_path_or_json: Either a file path to the JSON key, or the JSON content directly.
-    """
-    # Check if it's JSON content (starts with '{') or a file path
-    if key_path_or_json.strip().startswith('{'):
-        print("Authenticating with service account (from JSON content)")
-        key_info = json.loads(key_path_or_json)
-        credentials = service_account.Credentials.from_service_account_info(
-            key_info, scopes=SCOPES
-        )
-    else:
-        print(f"Authenticating with service account: {key_path_or_json}")
-        credentials = service_account.Credentials.from_service_account_file(
-            key_path_or_json, scopes=SCOPES
-        )
-    service = build('analyticsdata', 'v1beta', credentials=credentials)
-    return service, credentials
-
-
-def authenticate_oauth():
+def authenticate():
     """Authenticate using OAuth (interactive browser login)."""
-    # Set the credentials path before importing analytics modules
     creds_path = os.environ.get(
         'NCPI_ANALYTICS_REPORTING_CLIENT_SECRET_PATH',
         '../.env/ga4_credentials.json'
@@ -93,182 +55,8 @@ def authenticate_oauth():
     return ga_authentication
 
 
-def get_auth_mode():
-    """Determine which authentication mode to use."""
-    service_account_key = os.environ.get('GA_SERVICE_ACCOUNT_KEY')
-    if service_account_key:
-        # Support both file path and raw JSON content
-        if service_account_key.strip().startswith('{') or os.path.exists(service_account_key):
-            return 'service_account', service_account_key
-    return 'oauth', None
-
-
-def fetch_data_service_account(service, property_id, start_date, end_date):
-    """Fetch data using the GA4 Data API directly (for service account auth)."""
-    property_name = f"properties/{property_id}"
-
-    # Fetch monthly data
-    print("Fetching monthly traffic data...")
-    response = service.properties().runReport(
-        property=property_name,
-        body={
-            "dateRanges": [{"startDate": start_date, "endDate": end_date}],
-            "dimensions": [{"name": "yearMonth"}],
-            "metrics": [
-                {"name": "totalUsers"},
-                {"name": "screenPageViews"}
-            ],
-            "orderBys": [{"dimension": {"dimensionName": "yearMonth"}, "desc": True}]
-        }
-    ).execute()
-
-    monthly_data = []
-    for row in response.get('rows', []):
-        year_month = row['dimensionValues'][0]['value']
-        month_str = f"{year_month[:4]}-{year_month[4:]}"
-        monthly_data.append({
-            'Month': month_str,
-            'Users': int(row['metricValues'][0]['value']),
-            'Total Pageviews': int(row['metricValues'][1]['value'])
-        })
-
-    df_monthly = pd.DataFrame(monthly_data)
-
-    # Fetch page views
-    print("Fetching pageviews data...")
-    response = service.properties().runReport(
-        property=property_name,
-        body={
-            "dateRanges": [{"startDate": start_date, "endDate": end_date}],
-            "dimensions": [{"name": "pagePath"}],
-            "metrics": [
-                {"name": "screenPageViews"},
-                {"name": "totalUsers"}
-            ],
-            "orderBys": [{"metric": {"metricName": "screenPageViews"}, "desc": True}],
-            "limit": 200
-        }
-    ).execute()
-
-    pageviews_data = []
-    for row in response.get('rows', []):
-        pageviews_data.append({
-            'Page Path': row['dimensionValues'][0]['value'],
-            'Total Pageviews': int(row['metricValues'][0]['value']),
-            'Total Users Change': None  # Can't calculate change with single query
-        })
-
-    df_pageviews = pd.DataFrame(pageviews_data)
-
-    # Fetch outbound links
-    print("Fetching outbound links data...")
-    response = service.properties().runReport(
-        property=property_name,
-        body={
-            "dateRanges": [{"startDate": start_date, "endDate": end_date}],
-            "dimensions": [{"name": "linkUrl"}],
-            "metrics": [{"name": "eventCount"}],
-            "dimensionFilter": {
-                "filter": {
-                    "fieldName": "eventName",
-                    "stringFilter": {"value": "click", "matchType": "EXACT"}
-                }
-            },
-            "orderBys": [{"metric": {"metricName": "eventCount"}, "desc": True}],
-            "limit": 100
-        }
-    ).execute()
-
-    # First-party hostnames to exclude from outbound links
-    first_party_hosts = {'ncpi-data.org', 'www.ncpi-data.org', 'ncpi-data.dev.clevercanary.com'}
-
-    outbound_data = []
-    for row in response.get('rows', []):
-        link = row['dimensionValues'][0]['value']
-        # Filter to only external links (exclude first-party hosts)
-        if link.startswith('http'):
-            hostname = urlparse(link).hostname or ''
-            if hostname not in first_party_hosts:
-                outbound_data.append({
-                    'Outbound Link': link,
-                    'Total Clicks': int(row['metricValues'][0]['value']),
-                    'Total Users Change': None
-                })
-
-    df_outbound = pd.DataFrame(outbound_data) if outbound_data else pd.DataFrame(
-        columns=['Outbound Link', 'Total Clicks', 'Total Users Change']
-    )
-
-    # Fetch filter selections
-    print("Fetching filter selections data...")
-    response = service.properties().runReport(
-        property=property_name,
-        body={
-            "dateRanges": [{"startDate": start_date, "endDate": end_date}],
-            "dimensions": [
-                {"name": "customEvent:filter_name"},
-                {"name": "customEvent:filter_value"}
-            ],
-            "metrics": [{"name": "eventCount"}, {"name": "totalUsers"}],
-            "dimensionFilter": {
-                "filter": {
-                    "fieldName": "eventName",
-                    "stringFilter": {"value": "filter_selected", "matchType": "EXACT"}
-                }
-            },
-            "orderBys": [{"metric": {"metricName": "eventCount"}, "desc": True}],
-            "limit": 200
-        }
-    ).execute()
-
-    filter_data = []
-    for row in response.get('rows', []):
-        filter_data.append({
-            'Filter Name': row['dimensionValues'][0]['value'],
-            'Filter Value': row['dimensionValues'][1]['value'],
-            'Total Events': int(row['metricValues'][0]['value']),
-            'Total Users': int(row['metricValues'][1]['value']),
-            'Total Events Change': None
-        })
-
-    df_filter_selected = pd.DataFrame(filter_data) if filter_data else pd.DataFrame(
-        columns=['Filter Name', 'Filter Value', 'Total Events', 'Total Users', 'Total Events Change']
-    )
-
-    chat_submitted_stats = fetch_chat_submitted_service_account(
-        service, property_name, start_date, end_date
-    )
-
-    return df_monthly, df_pageviews, df_outbound, df_filter_selected, chat_submitted_stats
-
-
-def fetch_chat_submitted_service_account(service, property_name, start_date, end_date):
-    """Fetch chat_submitted event count using the GA4 Data API directly."""
-    print("Fetching chat submissions data...")
-    response = service.properties().runReport(
-        property=property_name,
-        body={
-            "dateRanges": [{"startDate": start_date, "endDate": end_date}],
-            "dimensions": [{"name": "eventName"}],
-            "metrics": [{"name": "eventCount"}],
-            "dimensionFilter": {
-                "filter": {
-                    "fieldName": "eventName",
-                    "stringFilter": {"value": "chat_submitted", "matchType": "EXACT"}
-                }
-            },
-        }
-    ).execute()
-
-    count = 0
-    for row in response.get('rows', []):
-        count += int(row['metricValues'][0]['value'])
-
-    return {"current": count, "prior": 0, "change": None}
-
-
-def fetch_chat_submitted_oauth(params_current, params_prior):
-    """Fetch chat_submitted event count with month-over-month change using the analytics package."""
+def fetch_chat_submitted(params_current, params_prior):
+    """Fetch chat_submitted event count with month-over-month change."""
     print("Fetching chat submissions data...")
     from analytics._sheets_utils import get_data_df_from_fields
     from analytics.entities import METRIC_EVENT_COUNT, DIMENSION_EVENT_NAME
@@ -296,8 +84,8 @@ def fetch_chat_submitted_oauth(params_current, params_prior):
     return {"current": current_count, "prior": prior_count, "change": change}
 
 
-def fetch_data_oauth(ga_authentication):
-    """Fetch analytics data using the analytics package (OAuth auth)."""
+def fetch_data(ga_authentication):
+    """Fetch analytics data using the analytics package."""
     import analytics.sheets_elements as elements
 
     # Calculate date ranges
@@ -364,7 +152,7 @@ def fetch_data_oauth(ga_authentication):
     )
 
     ncpi_catalog_params_prior = {**ncpi_catalog_params, "start_date": start_date_prior, "end_date": end_date_prior}
-    chat_submitted_stats = fetch_chat_submitted_oauth(ncpi_catalog_params, ncpi_catalog_params_prior)
+    chat_submitted_stats = fetch_chat_submitted(ncpi_catalog_params, ncpi_catalog_params_prior)
 
     print("Data fetching complete!")
 
@@ -432,9 +220,9 @@ def export_data(data, output_dir="site/data"):
     print("Exporting outbound links data...")
 
     if len(df_outbound) > 0:
-        link_col = 'Outbound Link' if 'Outbound Link' in df_outbound.columns else 'Link URL'
-        clicks_col = 'Total Clicks' if 'Total Clicks' in df_outbound.columns else 'Event Count'
-        change_col = 'Total Users Change' if 'Total Users Change' in df_outbound.columns else 'Total Clicks Change'
+        link_col = 'Outbound Link'
+        clicks_col = 'Total Clicks'
+        change_col = 'Total Clicks Change'
 
         outbound_cols = [link_col, clicks_col]
         if change_col in df_outbound.columns:
@@ -464,11 +252,10 @@ def export_data(data, output_dir="site/data"):
     df_filter_selected = data.get("filter_selected")
 
     if df_filter_selected is not None and len(df_filter_selected) > 0:
-        # Handle column names from both OAuth and service account paths
-        filter_name_col = 'Filter Name' if 'Filter Name' in df_filter_selected.columns else 'filter_name'
-        filter_value_col = 'Filter Value' if 'Filter Value' in df_filter_selected.columns else 'filter_value'
-        events_col = 'Total Events' if 'Total Events' in df_filter_selected.columns else 'Event Count'
-        change_col = 'Total Events Change' if 'Total Events Change' in df_filter_selected.columns else 'Event Count Change'
+        filter_name_col = 'Filter Name'
+        filter_value_col = 'Filter Value'
+        events_col = 'Total Events'
+        change_col = 'Total Events Change'
 
         filter_cols = [filter_name_col, filter_value_col, events_col]
         if change_col in df_filter_selected.columns:
@@ -532,44 +319,8 @@ def main():
     print("=" * 50)
     print()
 
-    # Determine authentication mode
-    auth_mode, service_account_key = get_auth_mode()
-
-    if auth_mode == 'service_account':
-        print("Using Service Account authentication (CI mode)")
-        service, credentials = authenticate_service_account(service_account_key)
-
-        # Calculate date range
-        import analytics.sheets_elements as elements
-        report_dates = elements.get_bounds_for_month_and_prev(CURRENT_MONTH)
-        start_date = ANALYTICS_START
-        end_date = report_dates["end_current"]
-
-        print(f"Fetching data from {start_date} to {end_date}")
-
-        df_monthly, df_pageviews, df_outbound, df_filter_selected, chat_submitted_stats = fetch_data_service_account(
-            service, NCPI_CATALOG_ID, start_date, end_date
-        )
-
-        data = {
-            "monthly_traffic": df_monthly,
-            "pageviews": df_pageviews,
-            "outbound": df_outbound,
-            "filter_selected": df_filter_selected,
-            "chat_submitted": chat_submitted_stats,
-            "dates": {
-                "start_current": report_dates["start_current"],
-                "end_current": report_dates["end_current"],
-                "start_prior": report_dates["start_previous"],
-                "end_prior": report_dates["end_previous"],
-            }
-        }
-    else:
-        print("Using OAuth authentication (interactive mode)")
-        ga_authentication = authenticate_oauth()
-        data = fetch_data_oauth(ga_authentication)
-
-    # Export data
+    ga_authentication = authenticate()
+    data = fetch_data(ga_authentication)
     export_data(data)
 
 

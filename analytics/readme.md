@@ -51,19 +51,3 @@ The `site/` directory can be deployed directly to GitHub Pages:
 
 1. Push the `site/` directory to a `gh-pages` branch, or
 2. Configure GitHub Pages to serve from `analytics/site/` on main branch
-
-### CI/CD (GitHub Actions)
-
-For automated deployments, the script supports service account authentication. The `GA_SERVICE_ACCOUNT_KEY` environment variable can be either:
-
-1. A file path to the service account JSON key:
-   ```bash
-   GA_SERVICE_ACCOUNT_KEY=/path/to/service-account.json python generate_static_site.py
-   ```
-
-2. The raw JSON content (useful for GitHub secrets):
-   ```bash
-   GA_SERVICE_ACCOUNT_KEY='{"type":"service_account",...}' python generate_static_site.py
-   ```
-
-For GitHub Actions, add the service account JSON as a repository secret named `GA_SERVICE_ACCOUNT_KEY`.
