@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCPI Dataset Catalog - Analytics</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/DataBiosphere/findable-ui@fran/873-static-css/static/analytics.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --fui-primary: #035C94;
+            --fui-primary-dark: #003E76;
+        }
+
+        /* Stat card layout */
+        .stat-value {
+            font: var(--fui-font-heading-xlarge);
+            color: var(--fui-primary);
+        }
+
+        .stat-label {
+            font: var(--fui-font-body-small-400);
+            color: var(--fui-ink-light);
+            margin-top: var(--fui-space-4);
+        }
+
+        .stat-change {
+            font: var(--fui-font-body-small-400);
+            margin-top: var(--fui-space-8);
+        }
+
+        .stat-change.positive { color: var(--fui-success); }
+        .stat-change.negative { color: var(--fui-alert); }
+
+        /* Chart container */
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: var(--fui-space-8) var(--fui-space-12);
+            text-align: left;
+            border-bottom: 1px solid var(--fui-smoke);
+        }
+
+        th {
+            font: var(--fui-font-uppercase-500);
+            color: var(--fui-ink-light);
+            text-transform: uppercase;
+        }
+
+        tr:hover {
+            background: var(--fui-smoke-lightest);
+        }
+
+        td.positive { color: var(--fui-success); }
+        td.negative { color: var(--fui-alert); }
+
+        /* Stretch stat cards to equal height */
+        #stats-grid .fui-card {
+            align-self: stretch;
+        }
+
+        /* Responsive grid */
+        @media (max-width: 767px) {
+            .fui-card[class*="fui-grid-item"] { grid-column: 1 / -1; }
+        }
+    </style>
+</head>
+<body class="fui-body">
+    <!-- Header -->
+    <header class="fui-header">
+        <a class="fui-header-logo fui-header-left" href="https://ncpi-data.org/platforms">
+            <img src="https://ncpi-data.org/images/logoNCPI.png" alt="NCPI" />
+        </a>
+        <div class="fui-header-center"></div>
+        <div class="fui-header-right"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="fui-main">
+        <!-- Title -->
+        <section>
+            <h1 class="fui-heading-large">Analytics</h1>
+            <h2 class="fui-heading-small fui-color-ink-light" id="report-month">Loading...</h2>
+        </section>
+
+        <!-- Stats Cards -->
+        <div class="fui-grid-12" id="stats-grid">
+            <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                <div class="fui-card-content">
+                    <p class="fui-color-ink-light">Loading statistics...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="fui-grid-12">
+            <div class="fui-card fui-grid-item-6">
+                <div class="fui-card-header">
+                    <h3 class="fui-card-header-title fui-heading-xsmall">Monthly Traffic Over Time</h3>
+                </div>
+                <hr class="fui-divider" />
+                <div class="fui-card-content">
+                    <div class="chart-container">
+                        <canvas id="traffic-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fui-card fui-grid-item-6">
+                <div class="fui-card-header">
+                    <h3 class="fui-card-header-title fui-heading-xsmall">Monthly Pageviews</h3>
+                </div>
+                <hr class="fui-divider" />
+                <div class="fui-card-content">
+                    <div class="chart-container">
+                        <canvas id="pageviews-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Pages -->
+        <div class="fui-card">
+            <div class="fui-card-header">
+                <h3 class="fui-card-header-title fui-heading-xsmall">Top Pages (Current Month)</h3>
+            </div>
+            <hr class="fui-divider" />
+            <div class="fui-card-content" style="overflow-x: auto;">
+                <table id="pages-table">
+                    <thead>
+                        <tr>
+                            <th>Page</th>
+                            <th>Views</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="3" class="fui-color-ink-light">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Outbound Links -->
+        <div class="fui-card">
+            <div class="fui-card-header">
+                <h3 class="fui-card-header-title fui-heading-xsmall">Top Outbound Links (Current Month)</h3>
+            </div>
+            <hr class="fui-divider" />
+            <div class="fui-card-content" style="overflow-x: auto;">
+                <table id="outbound-table">
+                    <thead>
+                        <tr>
+                            <th>Link</th>
+                            <th>Clicks</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="3" class="fui-color-ink-light">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Filter Selections -->
+        <div class="fui-card">
+            <div class="fui-card-header">
+                <h3 class="fui-card-header-title fui-heading-xsmall">Filter Selections (Current Month)</h3>
+            </div>
+            <hr class="fui-divider" />
+            <div class="fui-card-content" style="overflow-x: auto;">
+                <table id="filters-table">
+                    <thead>
+                        <tr>
+                            <th>Filter Name</th>
+                            <th>Filter Value</th>
+                            <th>Count</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="4" class="fui-color-ink-light">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Event Stats -->
+        <div class="fui-grid-12" id="event-stats-grid"></div>
+
+        <!-- Footer -->
+        <p class="fui-body-small-400 fui-color-ink-light" style="text-align: center;">
+            Data sourced from Google Analytics | Generated <span id="generated-date">-</span>
+        </p>
+    </main>
+
+    <script>
+        // Chart.js default configuration
+        Chart.defaults.font.family = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+        Chart.defaults.color = '#637381';
+
+        const chartColors = {
+            primary: '#035C94',
+            secondary: '#287555',
+            primaryLight: 'rgba(3, 92, 148, 0.1)',
+            secondaryLight: 'rgba(40, 117, 85, 0.1)',
+        };
+
+        async function loadData() {
+            try {
+                const [trafficRes, pageviewsRes, outboundRes, filtersRes, chatRes, metaRes] = await Promise.all([
+                    fetch('data/monthly_traffic.json'),
+                    fetch('data/pageviews.json'),
+                    fetch('data/outbound_links.json'),
+                    fetch('data/filter_selected.json'),
+                    fetch('data/chat_submitted.json'),
+                    fetch('data/meta.json')
+                ]);
+
+                const traffic = await trafficRes.json();
+                const pageviews = await pageviewsRes.json();
+                const outbound = await outboundRes.json();
+                const filters = await filtersRes.json();
+                const chat = await chatRes.json();
+                const meta = await metaRes.json();
+
+                renderMeta(meta);
+                renderStats(traffic, chat);
+                renderTrafficChart(traffic);
+                renderPageviewsChart(traffic);
+                renderPagesTable(pageviews);
+                renderOutboundTable(outbound);
+                renderFiltersTable(filters);
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('stats-grid').innerHTML =
+                    '<div class="fui-card fui-grid-item-12"><div class="fui-card-content"><p class="fui-color-alert">Error loading data. Make sure the JSON files exist in the data/ directory.</p></div></div>';
+            }
+        }
+
+        function renderMeta(meta) {
+            const [year, month] = meta.current_month.split('-');
+            const date = new Date(year, month - 1);
+            const monthName = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+            document.getElementById('report-month').textContent = monthName;
+            document.getElementById('generated-date').textContent = meta.generated_at;
+        }
+
+        function renderStats(traffic, chat) {
+            const latest = traffic[0];
+            const previous = traffic[1];
+
+            const totalUsers = traffic.reduce((sum, m) => sum + (m.users || 0), 0);
+            const totalPageviews = traffic.reduce((sum, m) => sum + (m.pageviews || 0), 0);
+
+            let usersChange = 0;
+            let pageviewsChange = 0;
+            if (previous && previous.users > 0) {
+                usersChange = ((latest.users - previous.users) / previous.users * 100).toFixed(1);
+            }
+            if (previous && previous.pageviews > 0) {
+                pageviewsChange = ((latest.pageviews - previous.pageviews) / previous.pageviews * 100).toFixed(1);
+            }
+
+            document.getElementById('stats-grid').innerHTML = `
+                <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                    <div class="fui-card-content">
+                        <div class="stat-value">${formatNumber(latest.users)}</div>
+                        <div class="stat-label">Users (Current Month)</div>
+                        <div class="stat-change ${usersChange >= 0 ? 'positive' : 'negative'}">
+                            ${usersChange >= 0 ? '+' : ''}${usersChange}% vs prior month
+                        </div>
+                    </div>
+                </div>
+                <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                    <div class="fui-card-content">
+                        <div class="stat-value">${formatNumber(latest.pageviews)}</div>
+                        <div class="stat-label">Pageviews (Current Month)</div>
+                        <div class="stat-change ${pageviewsChange >= 0 ? 'positive' : 'negative'}">
+                            ${pageviewsChange >= 0 ? '+' : ''}${pageviewsChange}% vs prior month
+                        </div>
+                    </div>
+                </div>
+                <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                    <div class="fui-card-content">
+                        <div class="stat-value">${formatNumber(totalUsers)}</div>
+                        <div class="stat-label">Total Users (All Time)</div>
+                    </div>
+                </div>
+                <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                    <div class="fui-card-content">
+                        <div class="stat-value">${formatNumber(totalPageviews)}</div>
+                        <div class="stat-label">Total Pageviews (All Time)</div>
+                    </div>
+                </div>
+            `;
+
+            // Render event stats at the bottom
+            const chatChange = chat.change != null ? (chat.change * 100).toFixed(1) : null;
+
+            document.getElementById('event-stats-grid').innerHTML = `
+                <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                    <div class="fui-card-content">
+                        <div class="stat-value">${formatNumber(chat.current)}</div>
+                        <div class="stat-label">Chat Submissions (Current Month)</div>
+                        ${chatChange != null ? `
+                        <div class="stat-change ${chatChange >= 0 ? 'positive' : 'negative'}">
+                            ${chatChange >= 0 ? '+' : ''}${chatChange}% vs prior month
+                        </div>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTrafficChart(traffic) {
+            const chronological = [...traffic].reverse();
+            const ctx = document.getElementById('traffic-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chronological.map(d => d.month),
+                    datasets: [
+                        {
+                            label: 'Users',
+                            data: chronological.map(d => d.users),
+                            borderColor: chartColors.primary,
+                            backgroundColor: chartColors.primaryLight,
+                            fill: true,
+                            tension: 0.3,
+                        },
+                        {
+                            label: 'Pageviews',
+                            data: chronological.map(d => d.pageviews),
+                            borderColor: chartColors.secondary,
+                            backgroundColor: chartColors.secondaryLight,
+                            fill: true,
+                            tension: 0.3,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { intersect: false, mode: 'index' },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#e1e3e5' } },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: { legend: { position: 'top' } }
+                }
+            });
+        }
+
+        function renderPageviewsChart(traffic) {
+            const chronological = [...traffic].reverse();
+            const ctx = document.getElementById('pageviews-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chronological.map(d => d.month),
+                    datasets: [{
+                        label: 'Pageviews',
+                        data: chronological.map(d => d.pageviews),
+                        backgroundColor: chartColors.primary,
+                        borderRadius: 4,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#e1e3e5' } },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        function renderPagesTable(pageviews) {
+            const tbody = document.querySelector('#pages-table tbody');
+            if (!pageviews || pageviews.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3">No data available</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = pageviews.slice(0, 20).map(row => `
+                <tr>
+                    <td>${escapeHtml(row.page || row.pagePath || '-')}</td>
+                    <td>${formatNumber(row.views || row.screenPageViews || 0)}</td>
+                    <td class="${row.change != null ? (row.change >= 0 ? 'positive' : 'negative') : ''}">
+                        ${row.change != null ? ((row.change >= 0 ? '+' : '') + (row.change * 100).toFixed(1) + '%') : '-'}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderOutboundTable(outbound) {
+            const tbody = document.querySelector('#outbound-table tbody');
+            if (!outbound || outbound.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3">No data available</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = outbound.slice(0, 20).map(row => `
+                <tr>
+                    <td style="max-width: 400px; overflow: hidden; text-overflow: ellipsis;">
+                        ${escapeHtml(row.link || row.linkUrl || '-')}
+                    </td>
+                    <td>${formatNumber(row.clicks || row.eventCount || 0)}</td>
+                    <td class="${row.change != null ? (row.change >= 0 ? 'positive' : 'negative') : ''}">
+                        ${row.change != null ? ((row.change >= 0 ? '+' : '') + (row.change * 100).toFixed(1) + '%') : '-'}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderFiltersTable(filters) {
+            const tbody = document.querySelector('#filters-table tbody');
+            if (!filters || filters.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4">No data available</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = filters.slice(0, 30).map(row => `
+                <tr>
+                    <td>${escapeHtml(row.filterName || '-')}</td>
+                    <td>${escapeHtml(row.filterValue || '-')}</td>
+                    <td>${formatNumber(row.count || 0)}</td>
+                    <td class="${row.change != null ? (row.change >= 0 ? 'positive' : 'negative') : ''}">
+                        ${row.change != null ? ((row.change >= 0 ? '+' : '') + (row.change * 100).toFixed(1) + '%') : '-'}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function formatNumber(num) {
+            if (num === undefined || num === null) return '-';
+            return num.toLocaleString();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        loadData();
+    </script>
+</body>
+</html>
