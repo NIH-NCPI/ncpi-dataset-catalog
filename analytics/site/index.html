@@ -400,7 +400,7 @@
                     <td>${escapeHtml(row.page || row.pagePath || '-')}</td>
                     <td>${formatNumber(row.views || row.screenPageViews || 0)}</td>
                     <td class="${row.change != null ? (row.change >= 0 ? 'positive' : 'negative') : ''}">
-                        ${row.change != null ? ((row.change >= 0 ? '+' : '') + row.change.toFixed(1) + '%') : '-'}
+                        ${row.change != null ? ((row.change >= 0 ? '+' : '') + (row.change * 100).toFixed(1) + '%') : '-'}
                     </td>
                 </tr>
             `).join('');
@@ -420,7 +420,7 @@
                     </td>
                     <td>${formatNumber(row.clicks || row.eventCount || 0)}</td>
                     <td class="${row.change != null ? (row.change >= 0 ? 'positive' : 'negative') : ''}">
-                        ${row.change != null ? ((row.change >= 0 ? '+' : '') + row.change.toFixed(1) + '%') : '-'}
+                        ${row.change != null ? ((row.change >= 0 ? '+' : '') + (row.change * 100).toFixed(1) + '%') : '-'}
                     </td>
                 </tr>
             `).join('');
@@ -439,7 +439,7 @@
                     <td>${escapeHtml(row.filterValue || '-')}</td>
                     <td>${formatNumber(row.count || 0)}</td>
                     <td class="${row.change != null ? (row.change >= 0 ? 'positive' : 'negative') : ''}">
-                        ${row.change != null ? ((row.change >= 0 ? '+' : '') + row.change.toFixed(1) + '%') : '-'}
+                        ${row.change != null ? ((row.change >= 0 ? '+' : '') + (row.change * 100).toFixed(1) + '%') : '-'}
                     </td>
                 </tr>
             `).join('');
