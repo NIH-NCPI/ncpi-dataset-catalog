@@ -235,7 +235,36 @@ def fetch_data_service_account(service, property_id, start_date, end_date):
         columns=['Filter Name', 'Filter Value', 'Total Events', 'Total Users', 'Total Events Change']
     )
 
-    return df_monthly, df_pageviews, df_outbound, df_filter_selected
+    # Fetch chat submissions
+    print("Fetching chat submissions data...")
+    response = service.properties().runReport(
+        property=property_name,
+        body={
+            "dateRanges": [
+                {"startDate": start_date, "endDate": end_date},
+            ],
+            "dimensions": [{"name": "eventName"}],
+            "metrics": [{"name": "eventCount"}],
+            "dimensionFilter": {
+                "filter": {
+                    "fieldName": "eventName",
+                    "stringFilter": {"value": "chat_submitted", "matchType": "EXACT"}
+                }
+            },
+        }
+    ).execute()
+
+    chat_current_count = 0
+    for row in response.get('rows', []):
+        chat_current_count += int(row['metricValues'][0]['value'])
+
+    chat_submitted_stats = {
+        "current": chat_current_count,
+        "prior": 0,
+        "change": None,
+    }
+
+    return df_monthly, df_pageviews, df_outbound, df_filter_selected, chat_submitted_stats
 
 
 def fetch_data_oauth(ga_authentication):
@@ -305,6 +334,37 @@ def fetch_data_oauth(ga_authentication):
         end_date_prior
     )
 
+    print("Fetching chat submissions data...")
+    from analytics._sheets_utils import get_data_df_from_fields
+    from analytics.entities import METRIC_EVENT_COUNT, DIMENSION_EVENT_NAME
+
+    chat_current = get_data_df_from_fields(
+        [METRIC_EVENT_COUNT],
+        [DIMENSION_EVENT_NAME],
+        dimension_filter="eventName==chat_submitted",
+        **ncpi_catalog_params,
+    )
+    chat_current_count = int(chat_current[METRIC_EVENT_COUNT["alias"]].sum()) if len(chat_current) > 0 else 0
+
+    ncpi_catalog_params_prior = {**ncpi_catalog_params, "start_date": start_date_prior, "end_date": end_date_prior}
+    chat_prior = get_data_df_from_fields(
+        [METRIC_EVENT_COUNT],
+        [DIMENSION_EVENT_NAME],
+        dimension_filter="eventName==chat_submitted",
+        **ncpi_catalog_params_prior,
+    )
+    chat_prior_count = int(chat_prior[METRIC_EVENT_COUNT["alias"]].sum()) if len(chat_prior) > 0 else 0
+
+    chat_change = None
+    if chat_prior_count > 0:
+        chat_change = (chat_current_count - chat_prior_count) / chat_prior_count
+
+    chat_submitted_stats = {
+        "current": chat_current_count,
+        "prior": chat_prior_count,
+        "change": chat_change,
+    }
+
     print("Data fetching complete!")
 
     return {
@@ -312,6 +372,7 @@ def fetch_data_oauth(ga_authentication):
         "pageviews": df_pageviews,
         "outbound": df_outbound,
         "filter_selected": df_filter_selected,
+        "chat_submitted": chat_submitted_stats,
         "dates": {
             "start_current": start_date_current,
             "end_current": end_date_current,
@@ -431,6 +492,20 @@ def export_data(data, output_dir="site/data"):
         json.dump(filter_records, f, indent=2)
     print(f"  Wrote filter_selected.json ({len(filter_records)} records)")
 
+    # Export chat submissions data
+    print("Exporting chat submissions data...")
+    chat_submitted_stats = data.get("chat_submitted", {"current": 0, "prior": 0, "change": None})
+
+    chat_record = {
+        "current": chat_submitted_stats["current"],
+        "prior": chat_submitted_stats["prior"],
+        "change": chat_submitted_stats["change"],
+    }
+
+    with open(os.path.join(output_dir, 'chat_submitted.json'), 'w') as f:
+        json.dump(chat_record, f, indent=2)
+    print(f"  Wrote chat_submitted.json")
+
     # Export metadata
     print("Exporting metadata...")
     meta = {
@@ -477,7 +552,7 @@ def main():
 
         print(f"Fetching data from {start_date} to {end_date}")
 
-        df_monthly, df_pageviews, df_outbound, df_filter_selected = fetch_data_service_account(
+        df_monthly, df_pageviews, df_outbound, df_filter_selected, chat_submitted_stats = fetch_data_service_account(
             service, NCPI_CATALOG_ID, start_date, end_date
         )
 
@@ -486,6 +561,7 @@ def main():
             "pageviews": df_pageviews,
             "outbound": df_outbound,
             "filter_selected": df_filter_selected,
+            "chat_submitted": chat_submitted_stats,
             "dates": {
                 "start_current": report_dates["start_current"],
                 "end_current": report_dates["end_current"],

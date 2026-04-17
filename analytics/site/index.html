@@ -90,7 +90,7 @@
         <!-- Title -->
         <section>
             <h1 class="fui-heading-large">Analytics</h1>
-            <p class="fui-body-small-400 fui-color-ink-light" id="date-range">Loading...</p>
+            <h2 class="fui-heading-small fui-color-ink-light" id="report-month">Loading...</h2>
         </section>
 
         <!-- Stats Cards -->
@@ -196,6 +196,9 @@
             </div>
         </div>
 
+        <!-- Event Stats -->
+        <div class="fui-grid-12" id="event-stats-grid"></div>
+
         <!-- Footer -->
         <p class="fui-body-small-400 fui-color-ink-light" style="text-align: center;">
             Data sourced from Google Analytics | Generated <span id="generated-date">-</span>
@@ -216,11 +219,12 @@
 
         async function loadData() {
             try {
-                const [trafficRes, pageviewsRes, outboundRes, filtersRes, metaRes] = await Promise.all([
+                const [trafficRes, pageviewsRes, outboundRes, filtersRes, chatRes, metaRes] = await Promise.all([
                     fetch('data/monthly_traffic.json'),
                     fetch('data/pageviews.json'),
                     fetch('data/outbound_links.json'),
                     fetch('data/filter_selected.json'),
+                    fetch('data/chat_submitted.json'),
                     fetch('data/meta.json')
                 ]);
 
@@ -228,10 +232,11 @@
                 const pageviews = await pageviewsRes.json();
                 const outbound = await outboundRes.json();
                 const filters = await filtersRes.json();
+                const chat = await chatRes.json();
                 const meta = await metaRes.json();
 
                 renderMeta(meta);
-                renderStats(traffic, meta);
+                renderStats(traffic, chat);
                 renderTrafficChart(traffic);
                 renderPageviewsChart(traffic);
                 renderPagesTable(pageviews);
@@ -245,12 +250,13 @@
         }
 
         function renderMeta(meta) {
-            document.getElementById('date-range').textContent =
-                `${meta.current_month_start} to ${meta.current_month_end}`;
+            const date = new Date(meta.current_month_start);
+            const monthName = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+            document.getElementById('report-month').textContent = monthName;
             document.getElementById('generated-date').textContent = meta.generated_at;
         }
 
-        function renderStats(traffic, meta) {
+        function renderStats(traffic, chat) {
             const latest = traffic[0];
             const previous = traffic[1];
 
@@ -295,6 +301,22 @@
                     <div class="fui-card-content">
                         <div class="stat-value">${formatNumber(totalPageviews)}</div>
                         <div class="stat-label">Total Pageviews (All Time)</div>
+                    </div>
+                </div>
+            `;
+
+            // Render event stats at the bottom
+            const chatChange = chat.change != null ? (chat.change * 100).toFixed(1) : null;
+
+            document.getElementById('event-stats-grid').innerHTML = `
+                <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                    <div class="fui-card-content">
+                        <div class="stat-value">${formatNumber(chat.current)}</div>
+                        <div class="stat-label">Chat Submissions (Current Month)</div>
+                        ${chatChange != null ? `
+                        <div class="stat-change ${chatChange >= 0 ? 'positive' : 'negative'}">
+                            ${chatChange >= 0 ? '+' : ''}${chatChange}% vs prior month
+                        </div>` : ''}
                     </div>
                 </div>
             `;
