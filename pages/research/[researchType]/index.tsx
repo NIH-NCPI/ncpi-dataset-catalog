@@ -1,9 +1,9 @@
-import { JSX } from "react";
-import { GetStaticPaths, GetStaticProps } from "next";
 import { ResearchView } from "@databiosphere/findable-ui/lib/views/ResearchView/researchView";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { ParsedUrlQuery } from "querystring";
+import { JSX } from "react";
 import { Artifact } from "../../../app/views/ResearchView/artifact/artifact";
 import { MultiTurnQueryProvider } from "../../../app/views/ResearchView/artifact/form";
-import { ParsedUrlQuery } from "querystring";
 import {
   RESEARCH_TYPE,
   ResearchType,

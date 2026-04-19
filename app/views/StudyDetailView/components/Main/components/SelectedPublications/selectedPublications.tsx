@@ -1,7 +1,7 @@
-import { JSX } from "react";
-import { Props } from "./types";
-import { StyledPublications } from "./selectedPublications.styles";
 import { RoundedPaper } from "@databiosphere/findable-ui/lib/components/common/Paper/components/RoundedPaper/roundedPaper";
+import { JSX } from "react";
+import { StyledPublications } from "./selectedPublications.styles";
+import { Props } from "./types";
 
 /**
  * Renders the selected publications section of the study detail view.

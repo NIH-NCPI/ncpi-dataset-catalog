@@ -5,10 +5,10 @@ import {
 } from "@databiosphere/findable-ui/lib/components/Links/common/entities";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { Link, Typography } from "@mui/material";
-import React, { JSX } from "react";
+import { JSX } from "react";
 import { StyledStack } from "./publications.styles";
-import { formatCitation, getDOIUrl } from "./utils";
 import { Props } from "./types";
+import { formatCitation, getDOIUrl } from "./utils";
 
 /**
  * Renders a list of publication cards with title, citation, and DOI link.

@@ -1,10 +1,10 @@
 import { KeyValuePairs } from "@databiosphere/findable-ui/lib/components/common/KeyValuePairs/keyValuePairs";
 import { Fragment, JSX } from "react";
-import { StyledSection } from "./keyValueSection.styles";
-import { Props } from "./type";
 import { KeyElType } from "../../../../../EntityView/ui/KeyElType/keyElType";
 import { KeyValueElType } from "../../../../../EntityView/ui/KeyValueElType/keyValueElType";
 import { SectionTitle } from "../../../../../EntityView/ui/SectionTitle/sectionTitle";
+import { StyledSection } from "./keyValueSection.styles";
+import { Props } from "./type";
 
 /**
  * Renders a key-value section.

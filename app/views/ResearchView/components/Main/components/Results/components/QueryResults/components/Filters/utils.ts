@@ -1,11 +1,11 @@
+import { SelectedFilter } from "@databiosphere/findable-ui/lib/common/entities";
 import {
   AssistantMessage,
   Mention,
 } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
-import { Response } from "../../../../../../../../types/response";
 import { Column, RowData, Table } from "@tanstack/react-table";
+import { Response } from "../../../../../../../../types/response";
 import { CATEGORY_LABEL_OVERRIDES } from "./constants";
-import { SelectedFilter } from "@databiosphere/findable-ui/lib/common/entities";
 
 /**
  * Retrieves the category label for a given facet from the table columns.

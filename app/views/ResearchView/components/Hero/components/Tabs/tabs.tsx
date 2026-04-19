@@ -1,9 +1,9 @@
+import { Tab } from "@mui/material";
 import { JSX } from "react";
+import { RESEARCH_TYPE } from "../../../../artifact/types";
 import { useCount } from "./hooks/UseCount/hook";
 import { StyledTabs } from "./tabs.styles";
 import { Props } from "./types";
-import { Tab } from "@mui/material";
-import { RESEARCH_TYPE } from "../../../../artifact/types";
 
 /**
  * Renders research view tabs.

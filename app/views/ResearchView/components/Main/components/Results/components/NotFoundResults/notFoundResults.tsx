@@ -1,8 +1,8 @@
-import { JSX } from "react";
-import { Stack, Typography } from "@mui/material";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { AssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
+import { Stack, Typography } from "@mui/material";
 import { RowData, TableOptions } from "@tanstack/table-core";
+import { JSX } from "react";
 import { Response } from "../../../../../../types/response";
 import { Filters } from "../QueryResults/components/Filters/filters";
 import { useTable } from "../QueryResults/hooks/UseTable/hook";

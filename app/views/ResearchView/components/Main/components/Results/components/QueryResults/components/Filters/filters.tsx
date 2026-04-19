@@ -1,15 +1,15 @@
-import { Fragment, JSX } from "react";
-import { Props } from "./types";
-import { Stack, Typography } from "@mui/material";
+import { CHIP_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/chip";
 import { STACK_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/stack";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
-import { getFilters } from "./utils";
-import { CHIP_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/chip";
-import { RowData } from "@tanstack/react-table";
-import { useMultiTurn } from "../../../../../../../../artifact/form";
 import { useChatDispatch } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatDispatch/hook";
 import { CloseRounded } from "@mui/icons-material";
+import { Stack, Typography } from "@mui/material";
+import { RowData } from "@tanstack/react-table";
+import { Fragment, JSX } from "react";
+import { useMultiTurn } from "../../../../../../../../artifact/form";
 import { StyledChip } from "./filters.styles";
+import { Props } from "./types";
+import { getFilters } from "./utils";
 
 const CONSENT_TAG_LABELS: Record<string, string> = {
   "no-col": "No collaboration required",

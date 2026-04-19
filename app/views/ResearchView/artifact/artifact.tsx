@@ -1,11 +1,11 @@
-import { JSX } from "react";
 import { useLayoutSpacing } from "@databiosphere/findable-ui/lib/hooks/UseLayoutSpacing/hook";
-import { StyledGrid } from "./artifact.styles";
-import { Props } from "./types";
-import { ArtifactSelector } from "./selector/artifactSelector";
 import { Form } from "@databiosphere/findable-ui/lib/views/ResearchView/assistant/components/Form/form";
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
+import { JSX } from "react";
 import { Tabs } from "../components/Hero/components/Tabs/tabs";
+import { StyledGrid } from "./artifact.styles";
+import { ArtifactSelector } from "./selector/artifactSelector";
+import { Props } from "./types";
 
 /**
  * Renders the artifact panel with tabs and content selector.

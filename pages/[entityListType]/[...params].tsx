@@ -4,7 +4,6 @@ import {
   AzulEntityStaticResponse,
   AzulListParams,
 } from "@databiosphere/findable-ui/lib/apis/azul/common/entities";
-import { JSX } from "react";
 import {
   PARAMS_INDEX_TAB,
   PARAMS_INDEX_UUID,
@@ -25,6 +24,7 @@ import { config } from "app/config/config";
 import { getStudyPageMeta } from "app/utils/studyTitles";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
+import { JSX } from "react";
 import { readFile } from "../../app/utils/tsvParser";
 
 const setOfProcessedIds = new Set<string>();

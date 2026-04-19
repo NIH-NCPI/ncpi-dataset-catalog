@@ -1,4 +1,13 @@
+import { BackArrowIcon } from "@databiosphere/findable-ui/lib/components/common/CustomIcon/components/BackArrowIcon/backArrowIcon";
+import { ICON_BUTTON_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/iconButton";
+import { STACK_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/stack";
+import { SVG_ICON_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/svgIcon";
+import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
+import { IconButton, Stack, Tab } from "@mui/material";
+import Link from "next/link";
+import Router from "next/router";
 import { Fragment, JSX } from "react";
+import { ROUTES } from "../../../../../routes/constants";
 import {
   StyledGrid,
   StyledRequestAccess,
@@ -6,15 +15,6 @@ import {
   StyledTitle,
 } from "./hero.styles";
 import { Props } from "./types";
-import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
-import { ICON_BUTTON_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/iconButton";
-import { IconButton, Stack, Tab } from "@mui/material";
-import { BackArrowIcon } from "@databiosphere/findable-ui/lib/components/common/CustomIcon/components/BackArrowIcon/backArrowIcon";
-import { SVG_ICON_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/svgIcon";
-import { ROUTES } from "../../../../../routes/constants";
-import Link from "next/link";
-import { STACK_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/stack";
-import Router from "next/router";
 
 /**
  * Renders the hero section of the study detail view, which includes the request access component.

@@ -1,6 +1,6 @@
+import { CHIP_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/chip";
 import { ChipProps } from "@mui/material";
 import { Attribute } from "../../../../../../viewModelBuilders/dataDictionaryMapper/types";
-import { CHIP_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/chip";
 
 /**
  * Builds string from the given attribute, for range and multivalued.

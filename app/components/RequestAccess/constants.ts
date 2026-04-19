@@ -1,5 +1,5 @@
-import { ListItemTextProps, MenuProps, SvgIconProps } from "@mui/material";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
+import { ListItemTextProps, MenuProps, SvgIconProps } from "@mui/material";
 
 export const LIST_ITEM_TEXT_PROPS: ListItemTextProps = {
   primaryTypographyProps: { variant: TYPOGRAPHY_PROPS.VARIANT.BODY_500 },

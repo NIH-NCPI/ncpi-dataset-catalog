@@ -1,7 +1,7 @@
 import { JSX } from "react";
-import { Props } from "./types";
 import { Variables as VariablesComponent } from "../../../../../../components/Detail/components/Variables/variables";
 import { buildVariables } from "../../../../../../viewModelBuilders/catalog/ncpi-catalog/common/viewModelBuilders";
+import { Props } from "./types";
 
 /**
  * Renders the variables section of the study detail view.

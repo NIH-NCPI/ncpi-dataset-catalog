@@ -1,19 +1,19 @@
+import { LinkCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/LinkCell/linkCell";
+import { Collapse, Typography } from "@mui/material";
 import { CellContext } from "@tanstack/react-table";
 import { JSX } from "react";
+import { COLUMN_IDENTIFIERS } from "../../../../../../viewModelBuilders/dataDictionaryMapper/columnIds";
 import { Attribute } from "../../../../../../viewModelBuilders/dataDictionaryMapper/types";
-import { Collapse, Typography } from "@mui/material";
-import {
-  StyledPaper,
-  StyledCell,
-  StyledStack,
-  StyledCollapse,
-  StyledMarkdownCell,
-} from "./detailCell.styles";
-import { buildExample } from "./utils";
 import { getPartialCellContext } from "../utils";
 import { TYPOGRAPHY_PROPS } from "./constants";
-import { COLUMN_IDENTIFIERS } from "../../../../../../viewModelBuilders/dataDictionaryMapper/columnIds";
-import { LinkCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/LinkCell/linkCell";
+import {
+  StyledCell,
+  StyledCollapse,
+  StyledMarkdownCell,
+  StyledPaper,
+  StyledStack,
+} from "./detailCell.styles";
+import { buildExample } from "./utils";
 
 export const DetailCell = ({
   row,

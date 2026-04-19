@@ -1,6 +1,6 @@
-import { JSX } from "react";
-import { Props } from "./types";
 import { KeyValuePairs } from "@databiosphere/findable-ui/lib/components/common/KeyValuePairs/keyValuePairs";
+import { Links } from "@databiosphere/findable-ui/lib/components/Links/links";
+import { JSX } from "react";
 import {
   buildPlatformLinks,
   buildStudyDetails,
@@ -8,8 +8,8 @@ import {
 } from "../../../../viewModelBuilders/catalog/ncpi-catalog/common/viewModelBuilders";
 import { Section } from "../../../EntityView/ui/Section/section";
 import { KeyValueSection } from "./components/KeyValueSection/keyValueSection";
-import { Links } from "@databiosphere/findable-ui/lib/components/Links/links";
 import { StyledRoundedPaper } from "./side.styles";
+import { Props } from "./types";
 
 /**
  * Renders the side section of the study detail view or null if a subpath is present.

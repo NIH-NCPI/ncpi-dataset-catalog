@@ -1,5 +1,5 @@
-import { JSX } from "react";
 import Head from "next/head";
+import { JSX } from "react";
 import { NCPICatalogStudy } from "../../../../apis/catalog/ncpi-catalog/common/entities";
 import { buildStudyJsonLd } from "../../../../utils/schemaOrg";
 

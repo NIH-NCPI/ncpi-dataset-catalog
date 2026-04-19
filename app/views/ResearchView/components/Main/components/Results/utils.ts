@@ -1,13 +1,13 @@
 import {
+  isAssistantMessage,
+  isInitialPromptMessage,
+} from "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards";
+import {
   AssistantMessage,
   ChatState,
 } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
 import { Response } from "../../../../types/response";
-import { STATUS, ResultsView } from "./types";
-import {
-  isInitialPromptMessage,
-  isAssistantMessage,
-} from "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards";
+import { ResultsView, STATUS } from "./types";
 
 /**
  * Determines the current results view based on messages and status.

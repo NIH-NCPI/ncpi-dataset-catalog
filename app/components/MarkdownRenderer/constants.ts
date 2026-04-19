@@ -1,6 +1,6 @@
 import { MDXComponents } from "mdx/types";
-import { Link } from "../Layout/components/Content/components/Link/link";
 import { Table } from "../Detail/components/MDX/components/Table/table";
+import { Link } from "../Layout/components/Content/components/Link/link";
 import { H1, H2, H3, H4, P } from "./markdownRenderer.styles";
 
 /**

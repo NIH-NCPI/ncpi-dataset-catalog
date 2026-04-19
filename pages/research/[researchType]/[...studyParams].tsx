@@ -6,14 +6,14 @@ import {
 } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { JSX } from "react";
-import { RESEARCH_TYPE } from "../../../app/views/ResearchView/artifact/types";
-import { StyledMain } from "../../../app/views/ResearchView/components/Main/main.styles";
+import { NCPICatalogStudy } from "../../../app/apis/catalog/ncpi-catalog/common/entities";
+import { config } from "../../../app/config/config";
 import { seedDatabase } from "../../../app/utils/seedDatabase";
 import { getStudyPageMeta } from "../../../app/utils/studyTitles";
-import { getEntities } from "../../[entityListType]/[...params]";
-import { config } from "../../../app/config/config";
+import { RESEARCH_TYPE } from "../../../app/views/ResearchView/artifact/types";
+import { StyledMain } from "../../../app/views/ResearchView/components/Main/main.styles";
 import { StudyDetailView } from "../../../app/views/StudyDetailView/studyDetailView";
-import { NCPICatalogStudy } from "../../../app/apis/catalog/ncpi-catalog/common/entities";
+import { getEntities } from "../../[entityListType]/[...params]";
 
 interface Params extends ParsedUrlQuery {
   researchType: string;

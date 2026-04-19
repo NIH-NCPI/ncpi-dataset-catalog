@@ -1,5 +1,5 @@
-import { API } from "./routes";
 import { SiteConfig } from "@databiosphere/findable-ui/lib/config/entities";
+import { API } from "./routes";
 import { getEntitiesById, setEntitiesById, setEntitiesByType } from "./store";
 import { EntityRoute } from "./types";
 
