@@ -1,7 +1,7 @@
 import { TableOptions } from "@tanstack/react-table";
-import { Attribute } from "./types";
-import { COLUMN_DEFS } from "./columnDefs";
 import slugify from "slugify";
+import { COLUMN_DEFS } from "./columnDefs";
+import { Attribute } from "./types";
 
 export const TABLE_OPTIONS: Omit<
   TableOptions<Attribute>,

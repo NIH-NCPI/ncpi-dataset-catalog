@@ -1,9 +1,9 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { Attribute } from "./types";
-import { FieldCell } from "../../components/DataDictionary/components/TableCell/components/FieldCell/fieldCell";
-import { DetailCell } from "../../components/DataDictionary/components/TableCell/components/DetailCell/detailCell";
-import { COLUMN_IDENTIFIERS } from "./columnIds";
 import { GridTrackSize } from "@databiosphere/findable-ui/lib/config/entities";
+import { ColumnDef } from "@tanstack/react-table";
+import { DetailCell } from "../../components/DataDictionary/components/TableCell/components/DetailCell/detailCell";
+import { FieldCell } from "../../components/DataDictionary/components/TableCell/components/FieldCell/fieldCell";
+import { COLUMN_IDENTIFIERS } from "./columnIds";
+import { Attribute } from "./types";
 
 const CLASS_KEY: ColumnDef<Attribute, unknown> = {
   accessorKey: "classKey",

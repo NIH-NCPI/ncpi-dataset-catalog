@@ -1,8 +1,8 @@
-import { Study } from "../../../types/study";
-import * as C from "../../../../../../../../../components";
 import { CellContext } from "@tanstack/react-table";
 import { JSX } from "react";
 import { ROUTES } from "../../../../../../../../../../routes/constants";
+import * as C from "../../../../../../../../../components";
+import { Study } from "../../../types/study";
 
 /**
  * Builds props for the study entity title Link component.

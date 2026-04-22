@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import { RequestAccess } from "../../../../components/RequestAccess/requestAccess";
 import { Title } from "@databiosphere/findable-ui/lib/components/common/Title/title";
+import styled from "@emotion/styled";
 import { Tabs } from "@mui/material";
+import { RequestAccess } from "../../../../components/RequestAccess/requestAccess";
 
 export const StyledGrid = styled.div`
   align-items: flex-start;

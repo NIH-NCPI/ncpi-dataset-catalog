@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- test mocks require flexible typing */
 /* eslint-disable @typescript-eslint/explicit-function-return-type -- test helpers */
+import { QueryContext } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/context";
 import { act, renderHook } from "@testing-library/react";
 import { FormEvent, ReactNode, useContext } from "react";
-import { QueryContext } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/context";
 import { MultiTurnContext, MultiTurnQueryProvider } from "./form";
 
 // --- Mocks ---

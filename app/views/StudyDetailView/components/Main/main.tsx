@@ -1,8 +1,8 @@
 import { Fragment, JSX } from "react";
-import { Props } from "./types";
 import { Overview } from "./components/Overview/overview";
 import { SelectedPublications } from "./components/SelectedPublications/selectedPublications";
 import { Variables } from "./components/Variables/variables";
+import { Props } from "./types";
 
 /**
  * Renders the main section of the study detail view.

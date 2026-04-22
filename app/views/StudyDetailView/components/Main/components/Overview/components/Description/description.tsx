@@ -1,8 +1,8 @@
 import { MarkdownRenderer } from "@databiosphere/findable-ui/lib/components/MarkdownRenderer/markdownRenderer";
-import { ComponentProps, JSX } from "react";
-import { StyledSectionTitle, StyledRoundedPaper } from "./description.styles";
 import { Divider } from "@mui/material";
+import { ComponentProps, JSX } from "react";
 import { SectionContent } from "../../../../../../../EntityView/ui/SectionContent/sectionContent";
+import { StyledRoundedPaper, StyledSectionTitle } from "./description.styles";
 
 /**
  * Renders a description component.

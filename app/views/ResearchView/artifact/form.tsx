@@ -1,11 +1,11 @@
 import { useConfig } from "@databiosphere/findable-ui/lib/hooks/useConfig";
+import { isAssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards";
 import { useChatDispatch } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatDispatch/hook";
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
-import { isAssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards";
 import { QueryContext } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/context";
 import {
-  MessageResponse,
   Mention,
+  MessageResponse,
 } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
 import {
   createContext,

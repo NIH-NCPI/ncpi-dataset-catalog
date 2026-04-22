@@ -2,8 +2,8 @@ import {
   INTENT,
   MessageResponse,
 } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
-import { Variable } from "../components/Main/components/Results/types/variable";
 import { Study } from "../components/Main/components/Results/types/study";
+import { Variable } from "../components/Main/components/Results/types/variable";
 
 export const INTENTS = {
   AUTO: INTENT.AUTO,

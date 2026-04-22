@@ -1,6 +1,6 @@
-import fsp from "fs/promises";
 import { EntityConfig } from "@databiosphere/findable-ui/lib/config/entities";
 import { database } from "@databiosphere/findable-ui/lib/utils/database";
+import fsp from "fs/promises";
 
 /**
  * Seed database.

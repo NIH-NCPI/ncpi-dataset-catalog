@@ -1,9 +1,9 @@
 import { FONT } from "@databiosphere/findable-ui/lib/styles/common/constants/font";
+import { PALETTE } from "@databiosphere/findable-ui/lib/styles/common/constants/palette";
 import styled from "@emotion/styled";
+import { RoundedPaper } from "../../../../../../../EntityView/ui/RoundedPaper/roundedPaper";
 import { SectionTitle } from "../../../../../../../EntityView/ui/SectionTitle/sectionTitle";
 import { SECTION_PADDING } from "../../../../../../../EntityView/ui/styles";
-import { RoundedPaper } from "../../../../../../../EntityView/ui/RoundedPaper/roundedPaper";
-import { PALETTE } from "@databiosphere/findable-ui/lib/styles/common/constants/palette";
 
 export const StyledRoundedPaper = styled(RoundedPaper)`
   align-self: stretch;

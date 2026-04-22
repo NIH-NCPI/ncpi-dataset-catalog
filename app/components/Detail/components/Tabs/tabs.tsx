@@ -1,8 +1,8 @@
-import { JSX } from "react";
-import { useRouter } from "next/router";
-import { buildNextQuery, getTabValue } from "./utils";
 import { NCPICatalogStudy } from "app/apis/catalog/ncpi-catalog/common/entities";
+import { useRouter } from "next/router";
+import { JSX } from "react";
 import { StyledTabs } from "./tabs.styles";
+import { buildNextQuery, getTabValue } from "./utils";
 
 /**
  * Renders tabs for the study detail page, allowing navigation between the "Overview", "Selected Publications", and "Variables" tabs.

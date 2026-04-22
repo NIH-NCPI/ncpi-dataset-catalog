@@ -1,14 +1,13 @@
-import { JSX } from "react";
-import { getResultsView } from "./utils";
-import { STATUS } from "./types";
-import { Welcome } from "./components/Welcome/welcome";
-import { Props } from "./types";
-import { StyledLoadingIcon, StyledRoundedPaper } from "./results.styles";
 import { SVG_ICON_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/svgIcon";
-import { QueryResults } from "./components/QueryResults/queryResults";
-import { NotFoundResults } from "./components/NotFoundResults/notFoundResults";
-import { Typography } from "@mui/material";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
+import { Typography } from "@mui/material";
+import { JSX } from "react";
+import { NotFoundResults } from "./components/NotFoundResults/notFoundResults";
+import { QueryResults } from "./components/QueryResults/queryResults";
+import { Welcome } from "./components/Welcome/welcome";
+import { StyledLoadingIcon, StyledRoundedPaper } from "./results.styles";
+import { Props, STATUS } from "./types";
+import { getResultsView } from "./utils";
 
 /**
  * Selects the appropriate results view based on chat state.

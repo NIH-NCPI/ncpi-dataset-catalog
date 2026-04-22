@@ -1,12 +1,12 @@
+import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
+import { RowData, TableOptions } from "@tanstack/table-core";
 import { JSX } from "react";
-import { Props } from "./types";
+import { Filters } from "./components/Filters/filters";
 import { Table } from "./components/Table/table";
 import { useTable } from "./hooks/UseTable/hook";
-import { getOptions } from "./utils";
-import { RowData, TableOptions } from "@tanstack/table-core";
-import { Filters } from "./components/Filters/filters";
 import { StyledStack, StyledTitle } from "./queryResults.styles";
-import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
+import { Props } from "./types";
+import { getOptions } from "./utils";
 
 /**
  * Component to render the results of a research query, displaying either studies or variables in a table format.

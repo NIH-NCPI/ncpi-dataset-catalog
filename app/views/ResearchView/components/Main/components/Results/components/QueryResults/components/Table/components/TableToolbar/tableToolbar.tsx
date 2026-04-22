@@ -1,12 +1,12 @@
-import { Fragment, JSX } from "react";
-import { Props } from "../../types";
-import {
-  StyledToolbar,
-  StyledStack,
-} from "@databiosphere/findable-ui/lib/components/Table/components/TableToolbar2/tableToolbar2.styles";
 import { TableDownload } from "@databiosphere/findable-ui/lib/components/Table/components/TableFeatures/TableDownload/tableDownload";
+import {
+  StyledStack,
+  StyledToolbar,
+} from "@databiosphere/findable-ui/lib/components/Table/components/TableToolbar2/tableToolbar2.styles";
 import { Divider } from "@mui/material";
 import { RowData } from "@tanstack/react-table";
+import { Fragment, JSX } from "react";
+import { Props } from "../../types";
 
 /**
  * Renders the table toolbar with download functionality.

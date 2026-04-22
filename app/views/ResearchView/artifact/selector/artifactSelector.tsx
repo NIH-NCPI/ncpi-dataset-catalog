@@ -1,7 +1,7 @@
 import { JSX } from "react";
+import { Results } from "../../components/Main/components/Results/results";
 import { RESEARCH_TYPE } from "../types";
 import { Props } from "./types";
-import { Results } from "../../components/Main/components/Results/results";
 
 /**
  * Selects the appropriate artifact view based on research type.

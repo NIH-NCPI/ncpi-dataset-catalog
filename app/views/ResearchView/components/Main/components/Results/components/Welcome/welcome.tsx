@@ -1,9 +1,9 @@
-import { JSX } from "react";
-import { StyledStack } from "./welcome.styles";
-import { Props } from "./types";
-import { Typography, Stack } from "@mui/material";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { Chips } from "@databiosphere/findable-ui/lib/views/ResearchView/assistant/components/Messages/components/PromptMessage/components/Chips/chips";
+import { Stack, Typography } from "@mui/material";
+import { JSX } from "react";
+import { Props } from "./types";
+import { StyledStack } from "./welcome.styles";
 
 /**
  * Renders the welcome message, with pre-configured query chips.

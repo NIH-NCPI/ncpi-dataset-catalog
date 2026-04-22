@@ -1,5 +1,5 @@
-import { ComponentProps, JSX } from "react";
 import { CellContext, RowData } from "@tanstack/react-table";
+import { ComponentProps, JSX } from "react";
 import * as C from "../../../../index";
 import { METADATA_KEY } from "./../../../../Index/common/entities";
 import { getPluralizedMetadataLabel } from "./../../../../Index/common/indexTransformer";

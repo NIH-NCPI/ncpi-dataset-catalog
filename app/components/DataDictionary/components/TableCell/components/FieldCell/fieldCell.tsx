@@ -1,16 +1,16 @@
+import { CodeCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/CodeCell/codeCell";
+import { MarkdownCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/MarkdownCell/markdownCell";
+import { RankedCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/RankedCell/rankedCell";
+import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
+import { Chip, Grid, Typography } from "@mui/material";
 import { CellContext } from "@tanstack/react-table";
 import { JSX } from "react";
-import { Attribute } from "../../../../../../viewModelBuilders/dataDictionaryMapper/types";
-import { Chip, Typography, Grid } from "@mui/material";
-import { StyledGrid } from "./fieldCell.styles";
-import { buildRequired, buildRange } from "./utils";
-import { CodeCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/CodeCell/codeCell";
-import { getPartialCellContext } from "../utils";
-import { MarkdownCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/MarkdownCell/markdownCell";
-import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { COLUMN_IDENTIFIERS } from "../../../../../../viewModelBuilders/dataDictionaryMapper/columnIds";
-import { RankedCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/RankedCell/rankedCell";
+import { Attribute } from "../../../../../../viewModelBuilders/dataDictionaryMapper/types";
+import { getPartialCellContext } from "../utils";
 import { GRID_PROPS } from "./constants";
+import { StyledGrid } from "./fieldCell.styles";
+import { buildRange, buildRequired } from "./utils";
 
 export const FieldCell = ({
   row,

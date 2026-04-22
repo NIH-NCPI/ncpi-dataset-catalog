@@ -1,6 +1,6 @@
 import { LoginView } from "@databiosphere/findable-ui/lib/views/LoginView/loginView";
-import { JSX } from "react";
 import { GetStaticProps } from "next";
+import { JSX } from "react";
 
 export const getStaticProps: GetStaticProps = async () => {
   return {
