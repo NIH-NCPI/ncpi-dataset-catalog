@@ -7,19 +7,16 @@ import { AppLayout } from "@databiosphere/findable-ui/lib/components/Layout/comp
 import { Floating } from "@databiosphere/findable-ui/lib/components/Layout/components/Floating/floating";
 import { Main as DXMain } from "@databiosphere/findable-ui/lib/components/Layout/components/Main/main";
 import { setFeatureFlags } from "@databiosphere/findable-ui/lib/hooks/useFeatureFlag/common/utils";
-import { TerraProfileProvider } from "@databiosphere/findable-ui/lib/providers/authentication/terra/provider";
 import { ConfigProvider as DXConfigProvider } from "@databiosphere/findable-ui/lib/providers/config";
 import { DataDictionaryStateProvider } from "@databiosphere/findable-ui/lib/providers/dataDictionaryState/provider";
 import { ExploreStateProvider } from "@databiosphere/findable-ui/lib/providers/exploreState";
 import { FileManifestStateProvider } from "@databiosphere/findable-ui/lib/providers/fileManifestState";
-import { GoogleSignInAuthenticationProvider } from "@databiosphere/findable-ui/lib/providers/googleSignInAuthentication/provider";
 import { LayoutDimensionsProvider } from "@databiosphere/findable-ui/lib/providers/layoutDimensions/provider";
 import { ServicesProvider } from "@databiosphere/findable-ui/lib/providers/services/provider";
 import { SystemStatusProvider } from "@databiosphere/findable-ui/lib/providers/systemStatus";
 import { createAppTheme } from "@databiosphere/findable-ui/lib/theme/theme";
 import { DataExplorerError } from "@databiosphere/findable-ui/lib/types/error";
 import { ChatProvider } from "@databiosphere/findable-ui/lib/views/ResearchView/state/provider";
-import { getSearchApiUrl } from "../app/utils/searchApiUrl";
 import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import { createTheme, CssBaseline, Theme, ThemeProvider } from "@mui/material";
 import { createBreakpoints } from "@mui/system";
@@ -34,10 +31,10 @@ import { JSX, useEffect } from "react";
 import TagManager from "react-gtm-module";
 import { Footer } from "../app/components/Layout/components/Footer/footer";
 import { useEntities } from "../app/services/workflows/hooks/UseEntities/hook";
+import { getSearchApiUrl } from "../app/utils/searchApiUrl";
 import { BREAKPOINTS } from "../site-config/common/constants";
 
 const FEATURE_FLAGS = Object.values(FEATURES);
-const SESSION_TIMEOUT = 15 * 60 * 1000; // 15 minutes
 
 export interface PageProps extends AzulEntitiesStaticResponse {
   homePage?: boolean;
@@ -103,56 +100,51 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
           <CssBaseline />
           <ServicesProvider>
             <SystemStatusProvider>
-              <GoogleSignInAuthenticationProvider
-                SessionController={TerraProfileProvider}
-                timeout={SESSION_TIMEOUT}
-              >
-                <LayoutDimensionsProvider>
-                  <AppLayout>
-                    <ThemeProvider
-                      theme={(theme: Theme): Theme =>
-                        createTheme(
-                          deepmerge(theme, {
-                            breakpoints: createBreakpoints(BREAKPOINTS),
-                          })
-                        )
-                      }
-                    >
-                      <StyledHeader {...header} transparent={homePage} />
-                    </ThemeProvider>
-                    <ChatProvider initialArgs={ai?.prompt} url={aiUrl}>
-                      <ExploreStateProvider entityListType={entityListType}>
-                        <DataDictionaryStateProvider>
-                          <FileManifestStateProvider>
-                            <Main>
-                              <ErrorBoundary
-                                fallbackRender={({
-                                  error,
-                                  reset,
-                                }: {
-                                  error: DataExplorerError;
-                                  reset: () => void;
-                                }): JSX.Element => (
-                                  <DXError
-                                    errorMessage={error.message}
-                                    requestUrlMessage={error.requestUrlMessage}
-                                    rootPath={redirectRootToPath}
-                                    onReset={reset}
-                                  />
-                                )}
-                              >
-                                <Component {...pageProps} />
-                                <Floating {...floating} />
-                              </ErrorBoundary>
-                            </Main>
-                          </FileManifestStateProvider>
-                        </DataDictionaryStateProvider>
-                      </ExploreStateProvider>
-                    </ChatProvider>
-                    <Footer />
-                  </AppLayout>
-                </LayoutDimensionsProvider>
-              </GoogleSignInAuthenticationProvider>
+              <LayoutDimensionsProvider>
+                <AppLayout>
+                  <ThemeProvider
+                    theme={(theme: Theme): Theme =>
+                      createTheme(
+                        deepmerge(theme, {
+                          breakpoints: createBreakpoints(BREAKPOINTS),
+                        })
+                      )
+                    }
+                  >
+                    <StyledHeader {...header} transparent={homePage} />
+                  </ThemeProvider>
+                  <ChatProvider initialArgs={ai?.prompt} url={aiUrl}>
+                    <ExploreStateProvider entityListType={entityListType}>
+                      <DataDictionaryStateProvider>
+                        <FileManifestStateProvider>
+                          <Main>
+                            <ErrorBoundary
+                              fallbackRender={({
+                                error,
+                                reset,
+                              }: {
+                                error: DataExplorerError;
+                                reset: () => void;
+                              }): JSX.Element => (
+                                <DXError
+                                  errorMessage={error.message}
+                                  requestUrlMessage={error.requestUrlMessage}
+                                  rootPath={redirectRootToPath}
+                                  onReset={reset}
+                                />
+                              )}
+                            >
+                              <Component {...pageProps} />
+                              <Floating {...floating} />
+                            </ErrorBoundary>
+                          </Main>
+                        </FileManifestStateProvider>
+                      </DataDictionaryStateProvider>
+                    </ExploreStateProvider>
+                  </ChatProvider>
+                  <Footer />
+                </AppLayout>
+              </LayoutDimensionsProvider>
             </SystemStatusProvider>
           </ServicesProvider>
         </DXConfigProvider>
