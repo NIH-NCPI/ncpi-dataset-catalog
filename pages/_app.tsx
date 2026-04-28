@@ -114,33 +114,33 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
                     <StyledHeader {...header} transparent={homePage} />
                   </ThemeProvider>
                   <ChatProvider initialArgs={ai?.prompt} url={aiUrl}>
-                    <Main>
-                      <ErrorBoundary
-                        fallbackRender={({
-                          error,
-                          reset,
-                        }: {
-                          error: DataExplorerError;
-                          reset: () => void;
-                        }): JSX.Element => (
-                          <DXError
-                            errorMessage={error.message}
-                            requestUrlMessage={error.requestUrlMessage}
-                            rootPath={redirectRootToPath}
-                            onReset={reset}
-                          />
-                        )}
-                      >
-                        <ExploreStateProvider entityListType={entityListType}>
-                          <DataDictionaryStateProvider>
-                            <FileManifestStateProvider>
+                    <ExploreStateProvider entityListType={entityListType}>
+                      <DataDictionaryStateProvider>
+                        <FileManifestStateProvider>
+                          <Main>
+                            <ErrorBoundary
+                              fallbackRender={({
+                                error,
+                                reset,
+                              }: {
+                                error: DataExplorerError;
+                                reset: () => void;
+                              }): JSX.Element => (
+                                <DXError
+                                  errorMessage={error.message}
+                                  requestUrlMessage={error.requestUrlMessage}
+                                  rootPath={redirectRootToPath}
+                                  onReset={reset}
+                                />
+                              )}
+                            >
                               <Component {...pageProps} />
                               <Floating {...floating} />
-                            </FileManifestStateProvider>
-                          </DataDictionaryStateProvider>
-                        </ExploreStateProvider>
-                      </ErrorBoundary>
-                    </Main>
+                            </ErrorBoundary>
+                          </Main>
+                        </FileManifestStateProvider>
+                      </DataDictionaryStateProvider>
+                    </ExploreStateProvider>
                   </ChatProvider>
                   <Footer />
                 </AppLayout>
