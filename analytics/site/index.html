@@ -37,6 +37,32 @@
             cursor: help;
             color: var(--fui-ink-light);
             font-size: 0.85em;
+            background: none;
+            border: none;
+            padding: 0;
+            position: relative;
+        }
+
+        .stat-tooltip-text {
+            display: none;
+            position: absolute;
+            background: var(--fui-ink-main);
+            color: #fff;
+            padding: var(--fui-space-8);
+            border-radius: 4px;
+            font: var(--fui-font-body-small-400);
+            width: 240px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 100%;
+            margin-bottom: 4px;
+            z-index: 10;
+            text-align: left;
+        }
+
+        .stat-tooltip:hover + .stat-tooltip-text,
+        .stat-tooltip:focus + .stat-tooltip-text {
+            display: block;
         }
 
         /* Chart container */
@@ -263,18 +289,23 @@
             document.getElementById('generated-date').textContent = meta.generated_at;
         }
 
+        let tooltipIdCounter = 0;
+
         function pctChange(current, prior) {
-            if (prior > 0) return ((current - prior) / prior * 100).toFixed(1);
+            if (prior > 0) return (current - prior) / prior * 100;
             return null;
         }
 
         function statCard(value, label, change, tooltip) {
-            const changeHtml = change != null
-                ? `<div class="stat-change ${change >= 0 ? 'positive' : 'negative'}">${change >= 0 ? '+' : ''}${change}% vs prior month</div>`
+            const formattedChange = change != null ? parseFloat(change.toFixed(1)) : null;
+            const changeHtml = formattedChange != null
+                ? `<div class="stat-change ${formattedChange >= 0 ? 'positive' : 'negative'}">${formattedChange >= 0 ? '+' : ''}${formattedChange.toFixed(1)}% vs prior month</div>`
                 : '';
-            const tooltipHtml = tooltip
-                ? `<span class="stat-tooltip" title="${tooltip}">&#9432;</span>`
-                : '';
+            let tooltipHtml = '';
+            if (tooltip) {
+                const tipId = `stat-tip-${tooltipIdCounter++}`;
+                tooltipHtml = `<button class="stat-tooltip" aria-label="More info about ${label}" aria-describedby="${tipId}" type="button">&#9432;</button><span id="${tipId}" role="tooltip" class="stat-tooltip-text">${tooltip}</span>`;
+            }
             return `
                 <div class="fui-card fui-grid-item-3" style="text-align: center;">
                     <div class="fui-card-content">
