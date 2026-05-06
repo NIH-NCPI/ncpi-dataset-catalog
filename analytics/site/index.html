@@ -50,7 +50,9 @@
         }
 
         .stat-tooltip-text {
-            display: none;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
             position: absolute;
             background: var(--fui-ink-main);
             color: #fff;
@@ -64,12 +66,15 @@
             margin-bottom: 4px;
             z-index: 10;
             text-align: left;
+            transition: opacity 0.15s;
         }
 
         .stat-tooltip:hover + .stat-tooltip-text,
         .stat-tooltip:focus + .stat-tooltip-text,
         .stat-tooltip-wrapper:hover .stat-tooltip-text {
-            display: block;
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
         }
 
         /* Chart container */
