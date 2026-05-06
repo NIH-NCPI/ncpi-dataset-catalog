@@ -33,6 +33,12 @@
         .stat-change.positive { color: var(--fui-success); }
         .stat-change.negative { color: var(--fui-alert); }
 
+        .stat-tooltip {
+            cursor: help;
+            color: var(--fui-ink-light);
+            font-size: 0.85em;
+        }
+
         /* Chart container */
         .chart-container {
             position: relative;
@@ -89,7 +95,7 @@
     <main class="fui-main">
         <!-- Title -->
         <section>
-            <h1 class="fui-heading-large">Analytics</h1>
+            <h1 class="fui-heading-large">NCPI Data Catalog User Analytics</h1>
             <h2 class="fui-heading-small fui-color-ink-light" id="report-month">Loading...</h2>
         </section>
 
@@ -236,7 +242,7 @@
                 const meta = await metaRes.json();
 
                 renderMeta(meta);
-                renderStats(traffic, chat);
+                renderStats(traffic, chat, meta);
                 renderTrafficChart(traffic);
                 renderPageviewsChart(traffic);
                 renderPagesTable(pageviews);
@@ -257,54 +263,68 @@
             document.getElementById('generated-date').textContent = meta.generated_at;
         }
 
-        function renderStats(traffic, chat) {
+        function pctChange(current, prior) {
+            if (prior > 0) return ((current - prior) / prior * 100).toFixed(1);
+            return null;
+        }
+
+        function statCard(value, label, change, tooltip) {
+            const changeHtml = change != null
+                ? `<div class="stat-change ${change >= 0 ? 'positive' : 'negative'}">${change >= 0 ? '+' : ''}${change}% vs prior month</div>`
+                : '';
+            const tooltipHtml = tooltip
+                ? `<span class="stat-tooltip" title="${tooltip}">&#9432;</span>`
+                : '';
+            return `
+                <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                    <div class="fui-card-content">
+                        <div class="stat-value">${value}</div>
+                        <div class="stat-label">${label} ${tooltipHtml}</div>
+                        ${changeHtml}
+                    </div>
+                </div>`;
+        }
+
+        function renderStats(traffic, chat, meta) {
             const latest = traffic[0];
-            const previous = traffic[1];
+            const previous = traffic[1] || {};
 
-            const totalUsers = traffic.reduce((sum, m) => sum + (m.users || 0), 0);
-            const totalPageviews = traffic.reduce((sum, m) => sum + (m.pageviews || 0), 0);
+            const sessions = meta.sessions || {};
+            const engagement = meta.engagement_rate || {};
 
-            let usersChange = 0;
-            let pageviewsChange = 0;
-            if (previous && previous.users > 0) {
-                usersChange = ((latest.users - previous.users) / previous.users * 100).toFixed(1);
-            }
-            if (previous && previous.pageviews > 0) {
-                pageviewsChange = ((latest.pageviews - previous.pageviews) / previous.pageviews * 100).toFixed(1);
-            }
+            const usersChange = pctChange(latest.users, previous.users);
+            const sessionsChange = pctChange(sessions.current, sessions.prior);
+            const pageviewsChange = pctChange(latest.pageviews, previous.pageviews);
+            const engagementChange = pctChange(engagement.current, engagement.prior);
 
-            document.getElementById('stats-grid').innerHTML = `
-                <div class="fui-card fui-grid-item-3" style="text-align: center;">
-                    <div class="fui-card-content">
-                        <div class="stat-value">${formatNumber(latest.users)}</div>
-                        <div class="stat-label">Users (Current Month)</div>
-                        <div class="stat-change ${usersChange >= 0 ? 'positive' : 'negative'}">
-                            ${usersChange >= 0 ? '+' : ''}${usersChange}% vs prior month
-                        </div>
-                    </div>
-                </div>
-                <div class="fui-card fui-grid-item-3" style="text-align: center;">
-                    <div class="fui-card-content">
-                        <div class="stat-value">${formatNumber(latest.pageviews)}</div>
-                        <div class="stat-label">Pageviews (Current Month)</div>
-                        <div class="stat-change ${pageviewsChange >= 0 ? 'positive' : 'negative'}">
-                            ${pageviewsChange >= 0 ? '+' : ''}${pageviewsChange}% vs prior month
-                        </div>
-                    </div>
-                </div>
-                <div class="fui-card fui-grid-item-3" style="text-align: center;">
-                    <div class="fui-card-content">
-                        <div class="stat-value">${formatNumber(totalUsers)}</div>
-                        <div class="stat-label">Total Users (All Time)</div>
-                    </div>
-                </div>
-                <div class="fui-card fui-grid-item-3" style="text-align: center;">
-                    <div class="fui-card-content">
-                        <div class="stat-value">${formatNumber(totalPageviews)}</div>
-                        <div class="stat-label">Total Pageviews (All Time)</div>
-                    </div>
-                </div>
-            `;
+            const engagementDisplay = engagement.current != null
+                ? (engagement.current * 100).toFixed(1) + '%'
+                : '-';
+
+            const [year, month] = meta.current_month.split('-');
+            const monthName = new Date(year, month - 1).toLocaleString('default', { month: 'long' });
+
+            document.getElementById('stats-grid').innerHTML =
+                statCard(
+                    formatNumber(latest.users), 'Users',
+                    usersChange,
+                    `Total number of unique individuals who visited the site during ${monthName}.`
+                ) +
+                statCard(
+                    formatNumber(sessions.current || 0), 'User Sessions',
+                    sessionsChange,
+                    `Total number of visits to the site during ${monthName}. A single user can have multiple sessions.`
+                ) +
+                statCard(
+                    formatNumber(latest.pageviews), 'Pageviews',
+                    pageviewsChange,
+                    `Total number of pages viewed during ${monthName}. This includes repeated views of the same page.`
+                ) +
+                statCard(
+                    engagementDisplay, 'Engagement Rate',
+                    engagementChange,
+                    `Percentage of sessions during ${monthName} where users actively engaged with the site (e.g., stayed longer, viewed multiple pages, or triggered events). Higher is better.`
+                );
 
             // Render event stats at the bottom
             const chatChange = chat.change != null ? (chat.change * 100).toFixed(1) : null;

@@ -88,9 +88,17 @@ def get_chat_submitted_change(params_current, params_prior):
     return {"current": current_count, "prior": prior_count, "change": change}
 
 
+METRIC_ENGAGEMENT_RATE = {
+    "id": "engagementRate",
+    "alias": "Engagement Rate",
+}
+
+
 def fetch_data(ga_authentication):
     """Fetch analytics data using the analytics package."""
     import analytics.sheets_elements as elements
+    from analytics.sheets_elements import get_data_df_from_fields
+    from analytics.entities import METRIC_SESSIONS
 
     # Calculate date ranges
     report_dates = elements.get_bounds_for_month_and_prev(CURRENT_MONTH)
@@ -163,9 +171,29 @@ def fetch_data(ga_authentication):
         ncpi_catalog_params, ncpi_catalog_params_prior
     )
 
+    print("Fetching sessions and engagement data...")
+    df_sessions_current = get_data_df_from_fields(
+        [METRIC_SESSIONS, METRIC_ENGAGEMENT_RATE], [], **ncpi_catalog_params,
+    )
+    df_sessions_prior = get_data_df_from_fields(
+        [METRIC_SESSIONS, METRIC_ENGAGEMENT_RATE], [], **ncpi_catalog_params_prior,
+    )
+    sessions_current = int(df_sessions_current[METRIC_SESSIONS["alias"]].sum()) if len(df_sessions_current) > 0 else 0
+    sessions_prior = int(df_sessions_prior[METRIC_SESSIONS["alias"]].sum()) if len(df_sessions_prior) > 0 else 0
+    engagement_current = float(df_sessions_current[METRIC_ENGAGEMENT_RATE["alias"]].mean()) if len(df_sessions_current) > 0 else 0
+    engagement_prior = float(df_sessions_prior[METRIC_ENGAGEMENT_RATE["alias"]].mean()) if len(df_sessions_prior) > 0 else 0
+
     print("Data fetching complete!")
 
     return {
+        "sessions": {
+            "current": sessions_current,
+            "prior": sessions_prior,
+        },
+        "engagement_rate": {
+            "current": engagement_current,
+            "prior": engagement_prior,
+        },
         "monthly_traffic": df_monthly_traffic,
         "pageviews": df_pageviews,
         "outbound": df_outbound,
@@ -257,8 +285,8 @@ def export_data(data, output_dir="site/data"):
     print("Exporting filter selections data...")
     _export_df_as_json(
         data.get("filter_selected"),
-        {"Filter Name": "filterName", "Filter Value": "filterValue", "Total Events": "count"},
-        "Total Events Change",
+        {"Filter Name": "filterName", "Filter Value": "filterValue", "Event Count": "count"},
+        "Event Count Change",
         "filter_selected.json",
         output_dir,
     )
@@ -281,6 +309,8 @@ def export_data(data, output_dir="site/data"):
         "prior_month_start": dates.get("start_prior", ""),
         "prior_month_end": dates.get("end_prior", ""),
         "analytics_start": ANALYTICS_START,
+        "sessions": data.get("sessions", {}),
+        "engagement_rate": data.get("engagement_rate", {}),
     }
 
     with open(os.path.join(output_dir, "meta.json"), "w") as f:
