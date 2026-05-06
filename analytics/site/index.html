@@ -33,6 +33,12 @@
         .stat-change.positive { color: var(--fui-success); }
         .stat-change.negative { color: var(--fui-alert); }
 
+        .stat-tooltip-wrapper {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
         .stat-tooltip {
             cursor: help;
             color: var(--fui-ink-light);
@@ -40,7 +46,6 @@
             background: none;
             border: none;
             padding: 0;
-            position: relative;
         }
 
         .stat-tooltip-text {
@@ -61,7 +66,8 @@
         }
 
         .stat-tooltip:hover + .stat-tooltip-text,
-        .stat-tooltip:focus + .stat-tooltip-text {
+        .stat-tooltip:focus + .stat-tooltip-text,
+        .stat-tooltip-wrapper:hover .stat-tooltip-text {
             display: block;
         }
 
@@ -304,7 +310,7 @@
             let tooltipHtml = '';
             if (tooltip) {
                 const tipId = `stat-tip-${tooltipIdCounter++}`;
-                tooltipHtml = `<button class="stat-tooltip" aria-label="More info about ${label}" aria-describedby="${tipId}" type="button">&#9432;</button><span id="${tipId}" role="tooltip" class="stat-tooltip-text">${tooltip}</span>`;
+                tooltipHtml = `<span class="stat-tooltip-wrapper"><button class="stat-tooltip" aria-label="More info about ${label}" aria-describedby="${tipId}" type="button">&#9432;</button><span id="${tipId}" role="tooltip" class="stat-tooltip-text">${tooltip}</span></span>`;
             }
             return `
                 <div class="fui-card fui-grid-item-3" style="text-align: center;">
