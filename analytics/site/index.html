@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NCPI Dataset Catalog - Analytics</title>
+    <title>NCPI Data Catalog User Analytics</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/DataBiosphere/findable-ui@fran/873-static-css/static/analytics.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -23,6 +23,7 @@
             font: var(--fui-font-body-small-400);
             color: var(--fui-ink-light);
             margin-top: var(--fui-space-4);
+            position: relative;
         }
 
         .stat-change {
@@ -32,6 +33,49 @@
 
         .stat-change.positive { color: var(--fui-success); }
         .stat-change.negative { color: var(--fui-alert); }
+
+        .stat-tooltip-wrapper {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .stat-tooltip {
+            cursor: help;
+            color: var(--fui-ink-light);
+            font-size: 0.85em;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .stat-tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            background: var(--fui-ink-main);
+            color: #fff;
+            padding: var(--fui-space-8);
+            border-radius: 4px;
+            font: var(--fui-font-body-small-400);
+            width: 240px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 100%;
+            margin-bottom: 4px;
+            z-index: 10;
+            text-align: left;
+            transition: opacity 0.15s;
+        }
+
+        .stat-tooltip:hover + .stat-tooltip-text,
+        .stat-tooltip:focus + .stat-tooltip-text,
+        .stat-tooltip-wrapper:hover .stat-tooltip-text {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+        }
 
         /* Chart container */
         .chart-container {
@@ -89,7 +133,7 @@
     <main class="fui-main">
         <!-- Title -->
         <section>
-            <h1 class="fui-heading-large">Analytics</h1>
+            <h1 class="fui-heading-large">NCPI Data Catalog User Analytics</h1>
             <h2 class="fui-heading-small fui-color-ink-light" id="report-month">Loading...</h2>
         </section>
 
@@ -236,7 +280,7 @@
                 const meta = await metaRes.json();
 
                 renderMeta(meta);
-                renderStats(traffic, chat);
+                renderStats(traffic, chat, meta);
                 renderTrafficChart(traffic);
                 renderPageviewsChart(traffic);
                 renderPagesTable(pageviews);
@@ -257,54 +301,73 @@
             document.getElementById('generated-date').textContent = meta.generated_at;
         }
 
-        function renderStats(traffic, chat) {
+        let tooltipIdCounter = 0;
+
+        function pctChange(current, prior) {
+            if (prior > 0) return (current - prior) / prior * 100;
+            return null;
+        }
+
+        function statCard(value, label, change, tooltip) {
+            const formattedChange = change != null ? parseFloat(change.toFixed(1)) : null;
+            const changeHtml = formattedChange != null
+                ? `<div class="stat-change ${formattedChange >= 0 ? 'positive' : 'negative'}">${formattedChange >= 0 ? '+' : ''}${formattedChange.toFixed(1)}% vs prior month</div>`
+                : '';
+            let tooltipHtml = '';
+            if (tooltip) {
+                const tipId = `stat-tip-${tooltipIdCounter++}`;
+                tooltipHtml = `<span class="stat-tooltip-wrapper"><button class="stat-tooltip" aria-label="More info about ${label}" aria-describedby="${tipId}" type="button">&#9432;</button><span id="${tipId}" role="tooltip" class="stat-tooltip-text">${tooltip}</span></span>`;
+            }
+            return `
+                <div class="fui-card fui-grid-item-3" style="text-align: center;">
+                    <div class="fui-card-content">
+                        <div class="stat-value">${value}</div>
+                        <div class="stat-label">${label} ${tooltipHtml}</div>
+                        ${changeHtml}
+                    </div>
+                </div>`;
+        }
+
+        function renderStats(traffic, chat, meta) {
             const latest = traffic[0];
-            const previous = traffic[1];
+            const previous = traffic[1] || {};
 
-            const totalUsers = traffic.reduce((sum, m) => sum + (m.users || 0), 0);
-            const totalPageviews = traffic.reduce((sum, m) => sum + (m.pageviews || 0), 0);
+            const sessions = meta.sessions || {};
+            const engagement = meta.engagement_rate || {};
 
-            let usersChange = 0;
-            let pageviewsChange = 0;
-            if (previous && previous.users > 0) {
-                usersChange = ((latest.users - previous.users) / previous.users * 100).toFixed(1);
-            }
-            if (previous && previous.pageviews > 0) {
-                pageviewsChange = ((latest.pageviews - previous.pageviews) / previous.pageviews * 100).toFixed(1);
-            }
+            const usersChange = pctChange(latest.users, previous.users);
+            const sessionsChange = pctChange(sessions.current, sessions.prior);
+            const pageviewsChange = pctChange(latest.pageviews, previous.pageviews);
+            const engagementChange = pctChange(engagement.current, engagement.prior);
 
-            document.getElementById('stats-grid').innerHTML = `
-                <div class="fui-card fui-grid-item-3" style="text-align: center;">
-                    <div class="fui-card-content">
-                        <div class="stat-value">${formatNumber(latest.users)}</div>
-                        <div class="stat-label">Users (Current Month)</div>
-                        <div class="stat-change ${usersChange >= 0 ? 'positive' : 'negative'}">
-                            ${usersChange >= 0 ? '+' : ''}${usersChange}% vs prior month
-                        </div>
-                    </div>
-                </div>
-                <div class="fui-card fui-grid-item-3" style="text-align: center;">
-                    <div class="fui-card-content">
-                        <div class="stat-value">${formatNumber(latest.pageviews)}</div>
-                        <div class="stat-label">Pageviews (Current Month)</div>
-                        <div class="stat-change ${pageviewsChange >= 0 ? 'positive' : 'negative'}">
-                            ${pageviewsChange >= 0 ? '+' : ''}${pageviewsChange}% vs prior month
-                        </div>
-                    </div>
-                </div>
-                <div class="fui-card fui-grid-item-3" style="text-align: center;">
-                    <div class="fui-card-content">
-                        <div class="stat-value">${formatNumber(totalUsers)}</div>
-                        <div class="stat-label">Total Users (All Time)</div>
-                    </div>
-                </div>
-                <div class="fui-card fui-grid-item-3" style="text-align: center;">
-                    <div class="fui-card-content">
-                        <div class="stat-value">${formatNumber(totalPageviews)}</div>
-                        <div class="stat-label">Total Pageviews (All Time)</div>
-                    </div>
-                </div>
-            `;
+            const engagementDisplay = engagement.current != null
+                ? (engagement.current * 100).toFixed(1) + '%'
+                : '-';
+
+            const [year, month] = meta.current_month.split('-');
+            const monthName = new Date(year, month - 1).toLocaleString('default', { month: 'long' });
+
+            document.getElementById('stats-grid').innerHTML =
+                statCard(
+                    formatNumber(latest.users), 'Users',
+                    usersChange,
+                    `Total number of unique individuals who visited the site during ${monthName}.`
+                ) +
+                statCard(
+                    formatNumber(sessions.current || 0), 'User Sessions',
+                    sessionsChange,
+                    `Total number of visits to the site during ${monthName}. A single user can have multiple sessions.`
+                ) +
+                statCard(
+                    formatNumber(latest.pageviews), 'Pageviews',
+                    pageviewsChange,
+                    `Total number of pages viewed during ${monthName}. This includes repeated views of the same page.`
+                ) +
+                statCard(
+                    engagementDisplay, 'Engagement Rate',
+                    engagementChange,
+                    `Percentage of sessions during ${monthName} where users actively engaged with the site (e.g., stayed longer, viewed multiple pages, or triggered events). Higher is better.`
+                );
 
             // Render event stats at the bottom
             const chatChange = chat.change != null ? (chat.change * 100).toFixed(1) : null;
