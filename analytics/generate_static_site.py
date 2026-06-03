@@ -210,8 +210,9 @@ def fetch_data(ga_authentication):
     )
     sessions_current = int(df_sessions_current[METRIC_SESSIONS["alias"]].sum()) if len(df_sessions_current) > 0 else 0
     sessions_prior = int(df_sessions_prior[METRIC_SESSIONS["alias"]].sum()) if len(df_sessions_prior) > 0 else 0
-    engaged_sessions_current = int(df_sessions_current[METRIC_ENGAGED_SESSIONS["alias"]].sum()) if len(df_sessions_current) > 0 else 0
-    engaged_sessions_prior = int(df_sessions_prior[METRIC_ENGAGED_SESSIONS["alias"]].sum()) if len(df_sessions_prior) > 0 else 0
+    engaged_col = METRIC_ENGAGED_SESSIONS["alias"]
+    engaged_sessions_current = int(df_sessions_current[engaged_col].sum()) if len(df_sessions_current) > 0 and engaged_col in df_sessions_current.columns else 0
+    engaged_sessions_prior = int(df_sessions_prior[engaged_col].sum()) if len(df_sessions_prior) > 0 and engaged_col in df_sessions_prior.columns else 0
     _eng_current = df_sessions_current[METRIC_ENGAGEMENT_RATE["alias"]].mean() if len(df_sessions_current) > 0 else None
     _eng_prior = df_sessions_prior[METRIC_ENGAGEMENT_RATE["alias"]].mean() if len(df_sessions_prior) > 0 else None
     engagement_current = float(_eng_current) if _eng_current is not None and not pd.isna(_eng_current) else None
