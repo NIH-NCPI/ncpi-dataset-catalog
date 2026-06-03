@@ -1,6 +1,8 @@
 import { ListItemTextProps } from "@mui/material";
 import { NCPICatalogStudy } from "../../apis/catalog/ncpi-catalog/common/entities";
 
+const DUOS_ENABLED = false;
+
 /**
  * Generates a list of request access menu options based on the provided study.
  * This function extracts identifiers (DUOS URL and dbGaP ID) from the study and returns an array of menu option objects.
@@ -16,7 +18,7 @@ export function getRequestAccessOptions(
 
   // Build up the request access options based on the presence of dbGaP ID and DUOS URL.
   const options = [];
-  if (duosUrl) {
+  if (DUOS_ENABLED && duosUrl) {
     // If a DUOS ID is present, add a menu option for DUOS.
     options.push({
       href: duosUrl,
