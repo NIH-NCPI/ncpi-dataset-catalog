@@ -1,9 +1,12 @@
 import { ListItemTextProps } from "@mui/material";
 import { NCPICatalogStudy } from "../../apis/catalog/ncpi-catalog/common/entities";
 
+// DUOS access request option temporarily disabled (see #355). Flip to true to re-enable.
+const DUOS_ENABLED = false;
+
 /**
  * Generates a list of request access menu options based on the provided study.
- * This function extracts identifiers (DUOS URL and dbGaP ID) from the study and returns an array of menu option objects.
+ * This function extracts identifiers (DUOS URL and dbGaP ID) from the study and returns an array of menu option objects (the DUOS option is gated by DUOS_ENABLED).
  * Each menu option contains a link `href` and title `primary` and description text `secondary`, to be used in Material UI's `MenuItem` and `ListItemText` component.
  * @param ncpiCatalogStudy - The study object containing identifiers for DUOS and dbGaP.
  * @returns menu option objects with `href`, `primary`, and `secondary` properties.
@@ -16,7 +19,7 @@ export function getRequestAccessOptions(
 
   // Build up the request access options based on the presence of dbGaP ID and DUOS URL.
   const options = [];
-  if (duosUrl) {
+  if (DUOS_ENABLED && duosUrl) {
     // If a DUOS ID is present, add a menu option for DUOS.
     options.push({
       href: duosUrl,
