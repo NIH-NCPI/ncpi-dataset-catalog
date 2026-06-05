@@ -94,10 +94,7 @@ METRIC_ENGAGEMENT_RATE = {
     "alias": "Engagement Rate",
 }
 
-METRIC_ENGAGED_SESSIONS = {
-    "id": "engagedSessions",
-    "alias": "Engaged Sessions",
-}
+
 
 # Regex matching page paths that are clearly not real pages (bot probes,
 # broken markdown links, asset requests, etc.).
@@ -203,16 +200,13 @@ def fetch_data(ga_authentication):
 
     print("Fetching sessions and engagement data...")
     df_sessions_current = get_data_df_from_fields(
-        [METRIC_SESSIONS, METRIC_ENGAGED_SESSIONS, METRIC_ENGAGEMENT_RATE], [], **ncpi_catalog_params,
+        [METRIC_SESSIONS, METRIC_ENGAGEMENT_RATE], [], **ncpi_catalog_params,
     )
     df_sessions_prior = get_data_df_from_fields(
-        [METRIC_SESSIONS, METRIC_ENGAGED_SESSIONS, METRIC_ENGAGEMENT_RATE], [], **ncpi_catalog_params_prior,
+        [METRIC_SESSIONS, METRIC_ENGAGEMENT_RATE], [], **ncpi_catalog_params_prior,
     )
     sessions_current = int(df_sessions_current[METRIC_SESSIONS["alias"]].sum()) if len(df_sessions_current) > 0 else 0
     sessions_prior = int(df_sessions_prior[METRIC_SESSIONS["alias"]].sum()) if len(df_sessions_prior) > 0 else 0
-    engaged_col = METRIC_ENGAGED_SESSIONS["alias"]
-    engaged_sessions_current = int(df_sessions_current[engaged_col].sum()) if len(df_sessions_current) > 0 and engaged_col in df_sessions_current.columns else 0
-    engaged_sessions_prior = int(df_sessions_prior[engaged_col].sum()) if len(df_sessions_prior) > 0 and engaged_col in df_sessions_prior.columns else 0
     _eng_current = df_sessions_current[METRIC_ENGAGEMENT_RATE["alias"]].mean() if len(df_sessions_current) > 0 else None
     _eng_prior = df_sessions_prior[METRIC_ENGAGEMENT_RATE["alias"]].mean() if len(df_sessions_prior) > 0 else None
     engagement_current = float(_eng_current) if _eng_current is not None and not pd.isna(_eng_current) else None
@@ -224,10 +218,6 @@ def fetch_data(ga_authentication):
         "sessions": {
             "current": sessions_current,
             "prior": sessions_prior,
-        },
-        "engaged_sessions": {
-            "current": engaged_sessions_current,
-            "prior": engaged_sessions_prior,
         },
         "engagement_rate": {
             "current": engagement_current,
@@ -349,7 +339,6 @@ def export_data(data, output_dir="site/data"):
         "prior_month_end": dates.get("end_prior", ""),
         "analytics_start": ANALYTICS_START,
         "sessions": data.get("sessions", {}),
-        "engaged_sessions": data.get("engaged_sessions", {}),
         "engagement_rate": data.get("engagement_rate", {}),
     }
 
