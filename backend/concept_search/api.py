@@ -231,12 +231,17 @@ def _build_variable_result(row: dict) -> VariableResult:
     )
 
 
-async def _handle_route(query: str, previous_query: QueryModel) -> QueryModel:
+async def _handle_route(
+    query: str,
+    previous_query: QueryModel,
+    messages: list | None = None,
+) -> QueryModel:
     """Route a follow-up message through the router agent and dispatch.
 
     Args:
         query: The user's follow-up message.
         previous_query: Previous query state with active filters.
+        messages: Optional conversation history for context.
 
     Returns:
         Updated QueryModel after applying the routed action.
@@ -377,7 +382,11 @@ async def search(
                 if mode == "route":
                     assert request.previous_query is not None
                     query_model = await asyncio.wait_for(
-                        _handle_route(request.query, request.previous_query),
+                        _handle_route(
+                            request.query,
+                            request.previous_query,
+                            messages=request.messages or None,
+                        ),
                         timeout=60.0,
                     )
                 else:

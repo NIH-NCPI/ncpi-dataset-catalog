@@ -1,7 +1,10 @@
 import { useConfig } from "@databiosphere/findable-ui/lib/hooks/useConfig";
 import { useChatDispatch } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatDispatch/hook";
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
-import { isAssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards";
+import {
+  isAssistantMessage,
+  isUserMessage,
+} from "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards";
 import { QueryContext } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/context";
 import {
   MessageResponse,
@@ -180,6 +183,21 @@ export function MultiTurnQueryProvider({
       const body: Record<string, unknown> = { query };
       if (lastQueryRef.current) {
         body.previousQuery = lastQueryRef.current;
+      }
+      // Send conversation history so the router can use full context.
+      const conversationMessages = messages
+        .filter((m) => isUserMessage(m) || isAssistantMessage(m))
+        .map((m) =>
+          isUserMessage(m)
+            ? { content: m.text, role: "user" }
+            : {
+                content:
+                  (m as { response: MessageResponse }).response?.message || "",
+                role: "assistant",
+              }
+        );
+      if (conversationMessages.length > 0) {
+        body.messages = conversationMessages;
       }
 
       const data = await postSearch(url, body, abortRef, dispatch);

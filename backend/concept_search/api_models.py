@@ -6,10 +6,21 @@ Separate from models.py to avoid coupling HTTP transport concerns
 
 from __future__ import annotations
 
+from typing import Literal
+
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from pydantic.alias_generators import to_camel
 
 from .models import Facet, Intent, QueryModel
+
+
+class ConversationMessage(BaseModel):
+    """A single message in the conversation history."""
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    content: str
+    role: Literal["user", "assistant"]
 
 
 class QueryClause(BaseModel):
@@ -48,6 +59,7 @@ class SearchRequest(BaseModel):
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
+    messages: list[ConversationMessage] = Field(default_factory=list)
     previous_query: QueryModel | None = None
     query: str = Field(default="", max_length=1000)
 
