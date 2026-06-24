@@ -253,3 +253,19 @@ class QueryModel(BaseModel):
         description="Clarification message from the agents when the query "
         "is vague, ambiguous, or partially unresolved. None on success.",
     )
+
+
+# --- Conversation / session models ---
+
+
+class ConversationMessage(BaseModel):
+    """A single text turn in the conversation history.
+
+    Only the user/assistant text is persisted — never the per-turn tool
+    scratchpad. See ``session_store.SessionState``.
+    """
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    content: str = Field(description="The message text.")
+    role: Literal["user", "assistant"] = Field(description="Who produced the message.")
