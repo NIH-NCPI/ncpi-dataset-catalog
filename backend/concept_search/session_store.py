@@ -13,6 +13,7 @@ step; the lean shape is the schema.
 
 from __future__ import annotations
 
+import math
 import os
 import threading
 import time
@@ -122,23 +123,31 @@ def _resolve_ttl_seconds() -> float:
     """Resolve the in-memory store TTL from ``SESSION_TTL_SECONDS``.
 
     An unset or empty value falls back to the default. A non-empty value that
-    is not a number is a misconfiguration and fails loudly.
+    is not a positive, finite number is a misconfiguration and fails loudly
+    (``"nan"``/``"inf"`` would silently disable expiry, a negative value would
+    expire every session immediately).
 
     Returns:
         The TTL in seconds.
 
     Raises:
-        ValueError: If ``SESSION_TTL_SECONDS`` is set to a non-numeric value.
+        ValueError: If ``SESSION_TTL_SECONDS`` is set but is not a positive,
+            finite number.
     """
     raw = os.getenv("SESSION_TTL_SECONDS", "")
     if not raw.strip():
         return _DEFAULT_TTL_SECONDS
     try:
-        return float(raw)
+        ttl = float(raw)
     except ValueError as exc:
         raise ValueError(
-            f"Invalid SESSION_TTL_SECONDS: {raw!r} (must be a number of seconds)"
+            f"Invalid SESSION_TTL_SECONDS: {raw!r} (must be a positive number of seconds)"
         ) from exc
+    if not math.isfinite(ttl) or ttl <= 0:
+        raise ValueError(
+            f"Invalid SESSION_TTL_SECONDS: {raw!r} (must be a positive number of seconds)"
+        )
+    return ttl
 
 
 def get_session_store() -> SessionStore:

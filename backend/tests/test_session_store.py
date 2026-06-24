@@ -197,9 +197,10 @@ def test_factory_empty_ttl_uses_default(_reset_factory_singleton) -> None:
     assert store._ttl_seconds == 86400.0
 
 
-def test_factory_invalid_ttl_raises(_reset_factory_singleton) -> None:
-    """A non-numeric SESSION_TTL_SECONDS fails loudly."""
+@pytest.mark.parametrize("bad_value", ["30s", "nan", "inf", "-5", "0"])
+def test_factory_invalid_ttl_raises(_reset_factory_singleton, bad_value: str) -> None:
+    """A non-numeric, non-finite, or non-positive SESSION_TTL_SECONDS fails loudly."""
     os.environ.pop("SESSION_STORE_BACKEND", None)
-    os.environ["SESSION_TTL_SECONDS"] = "30s"
+    os.environ["SESSION_TTL_SECONDS"] = bad_value
     with pytest.raises(ValueError, match="Invalid SESSION_TTL_SECONDS"):
         get_session_store()
