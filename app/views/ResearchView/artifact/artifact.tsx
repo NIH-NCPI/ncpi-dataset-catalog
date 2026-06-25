@@ -3,6 +3,7 @@ import { Form } from "@databiosphere/findable-ui/lib/views/ResearchView/assistan
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
 import { JSX } from "react";
 import { Tabs } from "../components/Hero/components/Tabs/tabs";
+import { SearchModeToggle } from "../components/SearchModeToggle/searchModeToggle";
 import { StyledGrid } from "./artifact.styles";
 import { ArtifactSelector } from "./selector/artifactSelector";
 import { Props } from "./types";
@@ -18,6 +19,7 @@ export const Artifact = ({ researchType }: Props): JSX.Element => {
   const { spacing } = useLayoutSpacing();
   return (
     <StyledGrid {...spacing}>
+      <SearchModeToggle />
       <Tabs researchType={researchType} />
       <Form status={state.status}>
         <ArtifactSelector researchType={researchType} state={state} />

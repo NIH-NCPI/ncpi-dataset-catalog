@@ -103,6 +103,47 @@ async function postSearch(
   }
 }
 
+type SearchMode = "agent" | "pipeline";
+
+/**
+ * Resolve the active search backend. A `?searchMode=` query param (runtime
+ * override, set by the toggle) wins, then `NEXT_PUBLIC_SEARCH_MODE`, else the
+ * default deterministic pipeline.
+ * @returns The active search mode.
+ */
+function resolveSearchMode(): SearchMode {
+  if (typeof window !== "undefined") {
+    const param = new URLSearchParams(window.location.search).get("searchMode");
+    if (param === "agent" || param === "pipeline") return param;
+  }
+  return process.env.NEXT_PUBLIC_SEARCH_MODE === "agent" ? "agent" : "pipeline";
+}
+
+/**
+ * Derive the agentic endpoint URL from the configured `/search` URL.
+ * @param url - The configured search URL (ending in `/search`).
+ * @returns The corresponding `/search/agent` URL.
+ */
+function toAgentUrl(url: string): string {
+  if (url.endsWith("/agent")) return url;
+  return url.endsWith("/search")
+    ? `${url}/agent`
+    : url.replace(/\/?$/, "/search/agent");
+}
+
+/**
+ * Generate a session id for an agentic conversation.
+ * @returns A unique session id.
+ */
+function newSessionId(): string {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+    return crypto.randomUUID();
+  }
+  // Non-crypto fallback: a session id needs only to be unique, not secure.
+  // eslint-disable-next-line sonarjs/pseudo-random -- not security-sensitive
+  return `s-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
 /**
  * Provider that tracks query state for multi-turn support.
  * Observes assistant messages from the chat state to capture the latest
@@ -119,6 +160,8 @@ export function MultiTurnQueryProvider({
   const dispatch = useChatDispatch();
   const lastQueryRef = useRef<MessageResponse["query"] | null>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const sessionIdRef = useRef<string | null>(null);
+  if (!sessionIdRef.current) sessionIdRef.current = newSessionId();
 
   // Sync lastQueryRef from chat state whenever a new assistant message arrives.
   const { state } = useChatState();
@@ -177,12 +220,17 @@ export function MultiTurnQueryProvider({
       form.reset();
       options.onMutate?.(form, query);
 
-      const body: Record<string, unknown> = { query };
-      if (lastQueryRef.current) {
+      const mode = resolveSearchMode();
+      const requestUrl = mode === "agent" ? toAgentUrl(url) : url;
+      const body: Record<string, unknown> =
+        mode === "agent"
+          ? { query, sessionId: sessionIdRef.current }
+          : { query };
+      if (mode === "pipeline" && lastQueryRef.current) {
         body.previousQuery = lastQueryRef.current;
       }
 
-      const data = await postSearch(url, body, abortRef, dispatch);
+      const data = await postSearch(requestUrl, body, abortRef, dispatch);
       if (data) {
         lastQueryRef.current = data.query;
         options.onSuccess?.(data);
@@ -198,7 +246,26 @@ export function MultiTurnQueryProvider({
 
   const removeFilter = useCallback(
     (facet: string, value: string): void => {
-      if (!lastQueryRef.current || !url) return;
+      if (!url) return;
+
+      // Agent mode: ask the assistant to drop the filter conversationally.
+      if (resolveSearchMode() === "agent") {
+        dispatch.onSetStatus(true);
+        postSearch(
+          toAgentUrl(url),
+          {
+            query: `Remove ${value} from the ${facet} filter`,
+            sessionId: sessionIdRef.current,
+          },
+          abortRef,
+          dispatch
+        ).then((data) => {
+          if (data) lastQueryRef.current = data.query;
+        });
+        return;
+      }
+
+      if (!lastQueryRef.current) return;
       const filtered = lastQueryRef.current.mentions
         .map((m: Mention) => {
           if (m.facet !== facet) return m;
