@@ -61,6 +61,19 @@ class SearchRequest(BaseModel):
         return self
 
 
+class SearchAgentRequest(BaseModel):
+    """Incoming message for the agentic ``/search/agent`` endpoint.
+
+    The backend owns conversation state keyed by ``session_id`` (via the
+    SessionStore), so the client only sends a session id and the new message.
+    """
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    query: str = Field(default="", max_length=1000)
+    session_id: str = Field(min_length=1, max_length=128)
+
+
 class DemographicCategory(BaseModel):
     """A single category within a demographic distribution."""
 

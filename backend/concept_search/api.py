@@ -20,6 +20,7 @@ from fastapi.responses import JSONResponse
 from .api_models import (
     DemographicCategory,
     DemographicDistribution,
+    SearchAgentRequest,
     SearchRequest,
     SearchResponse,
     SearchTiming,
@@ -29,10 +30,15 @@ from .api_models import (
 )
 from .api_models import QueryClause as ApiQueryClause
 from .api_models import QueryStructure as ApiQueryStructure
+from .conversation_agent import (
+    AgentDeps,
+    deserialize_history,
+    run_conversation,
+    serialize_history,
+)
 from .index import get_index
-from .mention_constraints import split_mentions as _split_mentions
 from .models import (
-    Facet,
+    ConversationMessage,
     QueryModel,
     ResolvedMention,
     RouteRemove,
@@ -45,6 +51,8 @@ from .rate_limit import RateLimiter
 from .resolve_agent import resolve_cache
 from .response_summary import build_message, build_query_structure, diagnose_empty_results
 from .router_agent import run_router
+from .search_execution import execute_query_model
+from .session_store import SessionState, get_session_store, truncate_history
 
 # Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
 logging.basicConfig(
@@ -228,6 +236,25 @@ def _build_variable_result(row: dict) -> VariableResult:
         study_url=_build_dbgap_study_url(study_id),
         table_name=row.get("tableName", ""),
         variable_name=row.get("variableName", ""),
+    )
+
+
+def _to_api_query_structure(query_structure: object) -> ApiQueryStructure | None:
+    """Convert an internal QueryStructure to the API model (or None)."""
+    if query_structure is None:
+        return None
+    return ApiQueryStructure(
+        clauses=[
+            ApiQueryClause(
+                exclude=c.exclude,
+                facet=c.facet,
+                labels=c.labels,
+                operator=c.operator,
+            )
+            for c in query_structure.clauses
+        ],
+        intent=query_structure.intent,
+        summary=query_structure.summary,
     )
 
 
@@ -423,42 +450,10 @@ async def search(
     # Deterministic lookup — branch on intent
     index = get_index()
     intent = query_model.intent
-    studies: list[dict] = []
-    variable_rows: list[dict] = []
-    total_variable_count = 0
-
-    if query_model.mentions:
-        include, exclude = _split_mentions(query_model.mentions, index)
-        if intent == "ambiguous":
-            pass  # Ambiguous — return clarification message only
-        elif intent == "variable":
-            # Apply study-level constraints (platform, dataType, etc.)
-            non_measurement = [c for c in include if c[0] != Facet.MEASUREMENT]
-            study_ids: set[str] | None = None
-            if non_measurement:
-                matched = index.query_studies(non_measurement, exclude or None)
-                study_ids = {s.get("dbGapId", "") for s in matched}
-            elif exclude:
-                matched = index.query_studies([], exclude)
-                study_ids = {s.get("dbGapId", "") for s in matched}
-
-            # Collect all measurement concepts and query variables
-            # via ISA closure (matched_variables are kept for display
-            # but not used as a SQL filter — the concept tag is enough).
-            all_concepts: list[str] = []
-            for m in query_model.mentions:
-                if m.facet != Facet.MEASUREMENT or m.exclude:
-                    continue
-                all_concepts.extend(m.values)
-
-            if all_concepts or study_ids:
-                rows, total_variable_count = index.store.query_variables(
-                    concepts=all_concepts or None,
-                    study_ids=study_ids,
-                )
-                variable_rows.extend(rows)
-        else:
-            studies = index.query_studies(include, exclude or None)
+    execution = execute_query_model(query_model, index)
+    studies = execution.studies
+    variable_rows = execution.variable_rows
+    total_variable_count = execution.total_variable_count
 
     t_lookup = time.monotonic()
 
@@ -499,21 +494,7 @@ async def search(
         message = None
 
     # Convert internal QueryStructure to API model
-    api_query_structure: ApiQueryStructure | None = None
-    if query_structure is not None:
-        api_query_structure = ApiQueryStructure(
-            clauses=[
-                ApiQueryClause(
-                    exclude=c.exclude,
-                    facet=c.facet,
-                    labels=c.labels,
-                    operator=c.operator,
-                )
-                for c in query_structure.clauses
-            ],
-            intent=query_structure.intent,
-            summary=query_structure.summary,
-        )
+    api_query_structure = _to_api_query_structure(query_structure)
 
     response = SearchResponse(
         intent=intent,
@@ -551,6 +532,116 @@ async def search(
         lookup_ms=lookup_ms,
     )
 
+    return response
+
+
+_MAX_AGENT_HISTORY = 40  # messages of pydantic-ai history sent to the model
+
+
+def _timeout_response(elapsed_ms: int, message: str) -> SearchResponse:
+    """Build an empty SearchResponse for a timeout/error on the agent path."""
+    return SearchResponse(
+        message=message,
+        query=QueryModel(mentions=[]),
+        studies=[],
+        timing=SearchTiming(lookup_ms=0, pipeline_ms=elapsed_ms, total_ms=elapsed_ms),
+        total_studies=0,
+    )
+
+
+@app.post("/search/agent", response_model=SearchResponse)
+async def search_agent(
+    request: SearchAgentRequest, fastapi_request: Request
+) -> SearchResponse | JSONResponse:
+    """Agentic multi-turn search (spike #362).
+
+    The orchestrator builds a QueryModel via tools; the backend owns conversation
+    state keyed by ``session_id``. Returns the same SearchResponse shape as
+    ``/search`` — rows from deterministic execution, ``message`` is the agent's reply.
+    """
+    client_ip = _get_client_ip(fastapi_request)
+    if not await _rate_limiter.is_allowed(client_ip):
+        _log_json(event="rate_limited", ip=client_ip, query=request.query)
+        return JSONResponse(
+            content={"detail": "Too many requests — please try again later."},
+            status_code=429,
+        )
+
+    _log_json(event="agent_request", session_id=request.session_id, query=request.query)
+    t_start = time.monotonic()
+
+    store = get_session_store()
+    state = await store.get(request.session_id) or SessionState()
+    index = get_index()
+    deps = AgentDeps(index=index, query_state=state.query or QueryModel())
+    history = truncate_history(
+        deserialize_history(state.agent_message_history), _MAX_AGENT_HISTORY
+    )
+
+    try:
+        async with _pipeline_semaphore:
+            reply, query_model, new_history = await asyncio.wait_for(
+                run_conversation(request.query, deps, message_history=history),
+                timeout=60.0,
+            )
+    except (TimeoutError, asyncio.CancelledError):
+        _log_json(event="agent_timeout", session_id=request.session_id, query=request.query)
+        elapsed_ms = int((time.monotonic() - t_start) * 1000)
+        return _timeout_response(elapsed_ms, "Search timed out — please try again.")
+    except Exception as exc:
+        _log_json(
+            event="agent_error",
+            session_id=request.session_id,
+            query=request.query,
+            error=str(exc),
+            error_type=type(exc).__name__,
+        )
+        elapsed_ms = int((time.monotonic() - t_start) * 1000)
+        return _timeout_response(elapsed_ms, "Something went wrong — please try again.")
+
+    t_pipeline = time.monotonic()
+    execution = execute_query_model(query_model, index)
+    t_lookup = time.monotonic()
+    pipeline_ms = int((t_pipeline - t_start) * 1000)
+    lookup_ms = int((t_lookup - t_pipeline) * 1000)
+
+    query_structure = build_query_structure(query_model, index)
+    response = SearchResponse(
+        intent=query_model.intent,
+        message=reply,
+        query=query_model,
+        query_structure=_to_api_query_structure(query_structure),
+        studies=[_build_study_summary(s) for s in execution.studies],
+        timing=SearchTiming(
+            lookup_ms=lookup_ms,
+            pipeline_ms=pipeline_ms,
+            total_ms=pipeline_ms + lookup_ms,
+        ),
+        total_studies=len(execution.studies),
+        total_variables=execution.total_variable_count,
+        variables=[_build_variable_result(r) for r in execution.variable_rows],
+    )
+
+    # Persist conversation state for the next turn.
+    state.query = query_model
+    state.agent_message_history = serialize_history(new_history)
+    state.messages = [
+        *state.messages,
+        ConversationMessage(content=request.query, role="user"),
+        ConversationMessage(content=reply, role="assistant"),
+    ]
+    await store.save(request.session_id, state)
+
+    _log_json(
+        event="agent_response",
+        session_id=request.session_id,
+        query=request.query,
+        intent=query_model.intent,
+        total_studies=len(execution.studies),
+        total_variables=execution.total_variable_count,
+        pipeline_ms=pipeline_ms,
+        lookup_ms=lookup_ms,
+    )
     return response
 
 

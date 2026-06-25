@@ -37,8 +37,30 @@ class SessionState(BaseModel):
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
+    # Serialized pydantic-ai ModelMessage objects for the agentic loop
+    # (tool calls + results), so the orchestrator has full continuity. Empty
+    # for the deterministic /search pipeline, which carries no agent history.
+    agent_message_history: list[dict] = Field(default_factory=list)
     messages: list[ConversationMessage] = Field(default_factory=list)
     query: QueryModel | None = None
+
+
+def truncate_history(messages: list, max_messages: int) -> list:
+    """Bound the agent message history sent to the model on long conversations.
+
+    Keeps the first message (the original intent) plus the most recent
+    ``max_messages`` entries.
+
+    Args:
+        messages: The full message history, oldest first.
+        max_messages: Maximum number of recent messages to retain.
+
+    Returns:
+        The truncated history, or the original list if already within bounds.
+    """
+    if len(messages) <= max_messages:
+        return messages
+    return messages[:1] + messages[-max_messages:]
 
 
 @runtime_checkable
