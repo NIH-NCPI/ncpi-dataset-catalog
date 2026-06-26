@@ -41,7 +41,12 @@ from .models import (
 from .pipeline import pipeline_cache, run_pipeline
 from .rate_limit import RateLimiter
 from .resolve_agent import resolve_cache
-from .response_summary import build_message, build_query_structure, diagnose_empty_results
+from .response_summary import (
+    QueryStructure,
+    build_message,
+    build_query_structure,
+    diagnose_empty_results,
+)
 from .router_agent import run_router
 from .search_execution import execute_query_model
 
@@ -207,7 +212,7 @@ def _build_dbgap_study_url(study_id: str) -> str:
     return f"https://dbgap.ncbi.nlm.nih.gov/study/{study_id}"
 
 
-def _to_api_query_structure(query_structure: object) -> ApiQueryStructure | None:
+def _to_api_query_structure(query_structure: QueryStructure | None) -> ApiQueryStructure | None:
     """Convert an internal QueryStructure to the API model (or None)."""
     if query_structure is None:
         return None

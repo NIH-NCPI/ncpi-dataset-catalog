@@ -1,10 +1,10 @@
 """Deterministic execution of a resolved ``QueryModel`` against the catalog.
 
-Shared by the live ``/search`` endpoint and the agentic ``/search/agent``
-endpoint so the lookup behaviour is identical: both build a ``QueryModel`` (via
-different means) and run it through the same DuckDB lookup here. This module
-does **not** decide the user-facing message — callers own that (deterministic
-summary for ``/search``; the agent's prose for ``/search/agent``).
+The shared lookup seam: ``/search`` calls it today, and the upcoming
+``/search/agent`` endpoint will run the same DuckDB lookup so both execute a
+``QueryModel`` identically (each builds the model by different means). This
+module does **not** decide the user-facing message — callers own that
+(deterministic summary for ``/search``; the agent's prose for ``/search/agent``).
 """
 
 from __future__ import annotations
@@ -43,17 +43,13 @@ def execute_query_model(query_model: QueryModel, index: ConceptIndex) -> Executi
         An ExecutionResult with the matched study/variable rows and the
         pre-limit variable count.
     """
-    result = ExecutionResult()
-    if not query_model.mentions:
-        return result
+    # Ambiguous intent (or no mentions) — no lookup; the caller returns a message.
+    if not query_model.mentions or query_model.intent == "ambiguous":
+        return ExecutionResult()
 
     include, exclude = split_mentions(query_model.mentions, index)
-    intent = query_model.intent
 
-    if intent == "ambiguous":
-        return result
-
-    if intent == "variable":
+    if query_model.intent == "variable":
         # Apply study-level constraints (platform, dataType, etc.) first.
         non_measurement = [c for c in include if c[0] != Facet.MEASUREMENT]
         study_ids: set[str] | None = None
@@ -72,13 +68,12 @@ def execute_query_model(query_model: QueryModel, index: ConceptIndex) -> Executi
                 continue
             all_concepts.extend(m.values)
 
-        if all_concepts or study_ids:
-            rows, result.total_variable_count = index.store.query_variables(
-                concepts=all_concepts or None,
-                study_ids=study_ids,
-            )
-            result.variable_rows.extend(rows)
-        return result
+        if not (all_concepts or study_ids):
+            return ExecutionResult()
+        rows, total = index.store.query_variables(
+            concepts=all_concepts or None,
+            study_ids=study_ids,
+        )
+        return ExecutionResult(variable_rows=rows, total_variable_count=total)
 
-    result.studies = index.query_studies(include, exclude or None)
-    return result
+    return ExecutionResult(studies=index.query_studies(include, exclude or None))
