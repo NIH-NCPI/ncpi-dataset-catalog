@@ -232,19 +232,19 @@ async def _run_scenario(scenario: Scenario) -> tuple[bool, str]:
 
 
 async def _run_scenario_repeated(scenario: Scenario) -> tuple[int, str]:
-    """Run a scenario REPEATS times (concurrently); return (pass_count, detail)."""
-    runs = await asyncio.gather(
-        *(_run_scenario(scenario) for _ in range(REPEATS)),
-        return_exceptions=True,
-    )
+    """Run a scenario REPEATS times; return (pass_count, detail).
+
+    Runs are sequential: the shared DuckDB connection is not safe for concurrent
+    queries (concurrent runs raise "closed pending query result").
+    """
     passes = 0
     detail = ""
-    for run in runs:
-        if isinstance(run, Exception):
-            detail = f"error: {type(run).__name__}: {run}"
-            continue
-        ok, detail = run
-        passes += int(ok)
+    for _ in range(REPEATS):
+        try:
+            ok, detail = await _run_scenario(scenario)
+            passes += int(ok)
+        except Exception as exc:  # noqa: BLE001 — eval harness: report, don't crash
+            detail = f"error: {type(exc).__name__}: {exc}"
     return passes, detail
 
 
