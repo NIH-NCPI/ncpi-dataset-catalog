@@ -30,9 +30,7 @@ from .api_models import (
 from .api_models import QueryClause as ApiQueryClause
 from .api_models import QueryStructure as ApiQueryStructure
 from .index import get_index
-from .mention_constraints import split_mentions as _split_mentions
 from .models import (
-    Facet,
     QueryModel,
     ResolvedMention,
     RouteRemove,
@@ -43,8 +41,14 @@ from .models import (
 from .pipeline import pipeline_cache, run_pipeline
 from .rate_limit import RateLimiter
 from .resolve_agent import resolve_cache
-from .response_summary import build_message, build_query_structure, diagnose_empty_results
+from .response_summary import (
+    QueryStructure,
+    build_message,
+    build_query_structure,
+    diagnose_empty_results,
+)
 from .router_agent import run_router
+from .search_execution import execute_query_model
 
 # Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
 logging.basicConfig(
@@ -206,6 +210,25 @@ def _build_dbgap_study_url(study_id: str) -> str:
         Full URL to the study page on dbGaP.
     """
     return f"https://dbgap.ncbi.nlm.nih.gov/study/{study_id}"
+
+
+def _to_api_query_structure(query_structure: QueryStructure | None) -> ApiQueryStructure | None:
+    """Convert an internal QueryStructure to the API model (or None)."""
+    if query_structure is None:
+        return None
+    return ApiQueryStructure(
+        clauses=[
+            ApiQueryClause(
+                exclude=c.exclude,
+                facet=c.facet,
+                labels=c.labels,
+                operator=c.operator,
+            )
+            for c in query_structure.clauses
+        ],
+        intent=query_structure.intent,
+        summary=query_structure.summary,
+    )
 
 
 def _build_variable_result(row: dict) -> VariableResult:
@@ -420,45 +443,13 @@ async def search(
             )
         t_pipeline = time.monotonic()
 
-    # Deterministic lookup — branch on intent
+    # Deterministic lookup — branch on intent (shared with /search/agent)
     index = get_index()
     intent = query_model.intent
-    studies: list[dict] = []
-    variable_rows: list[dict] = []
-    total_variable_count = 0
-
-    if query_model.mentions:
-        include, exclude = _split_mentions(query_model.mentions, index)
-        if intent == "ambiguous":
-            pass  # Ambiguous — return clarification message only
-        elif intent == "variable":
-            # Apply study-level constraints (platform, dataType, etc.)
-            non_measurement = [c for c in include if c[0] != Facet.MEASUREMENT]
-            study_ids: set[str] | None = None
-            if non_measurement:
-                matched = index.query_studies(non_measurement, exclude or None)
-                study_ids = {s.get("dbGapId", "") for s in matched}
-            elif exclude:
-                matched = index.query_studies([], exclude)
-                study_ids = {s.get("dbGapId", "") for s in matched}
-
-            # Collect all measurement concepts and query variables
-            # via ISA closure (matched_variables are kept for display
-            # but not used as a SQL filter — the concept tag is enough).
-            all_concepts: list[str] = []
-            for m in query_model.mentions:
-                if m.facet != Facet.MEASUREMENT or m.exclude:
-                    continue
-                all_concepts.extend(m.values)
-
-            if all_concepts or study_ids:
-                rows, total_variable_count = index.store.query_variables(
-                    concepts=all_concepts or None,
-                    study_ids=study_ids,
-                )
-                variable_rows.extend(rows)
-        else:
-            studies = index.query_studies(include, exclude or None)
+    execution = execute_query_model(query_model, index)
+    studies = execution.studies
+    variable_rows = execution.variable_rows
+    total_variable_count = execution.total_variable_count
 
     t_lookup = time.monotonic()
 
@@ -499,21 +490,7 @@ async def search(
         message = None
 
     # Convert internal QueryStructure to API model
-    api_query_structure: ApiQueryStructure | None = None
-    if query_structure is not None:
-        api_query_structure = ApiQueryStructure(
-            clauses=[
-                ApiQueryClause(
-                    exclude=c.exclude,
-                    facet=c.facet,
-                    labels=c.labels,
-                    operator=c.operator,
-                )
-                for c in query_structure.clauses
-            ],
-            intent=query_structure.intent,
-            summary=query_structure.summary,
-        )
+    api_query_structure = _to_api_query_structure(query_structure)
 
     response = SearchResponse(
         intent=intent,

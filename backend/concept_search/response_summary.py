@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from .index import ConceptIndex
 from .mention_constraints import split_mentions
-from .models import Facet, QueryModel, ResolvedMention
+from .models import Facet, Intent, QueryModel, ResolvedMention
 
 # Display names for platform short codes.
 _PLATFORM_DISPLAY: dict[str, str] = {
@@ -60,7 +60,7 @@ class QueryStructure:
     def __init__(
         self,
         clauses: list[QueryClause],
-        intent: str,
+        intent: Intent,
         summary: str = "",
     ) -> None:
         self.clauses = clauses
