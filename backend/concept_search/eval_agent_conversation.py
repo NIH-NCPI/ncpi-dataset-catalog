@@ -1,14 +1,19 @@
 """Multi-turn eval harness for the conversation agent (spike #362).
 
-Runs scripted conversations against ``run_conversation`` and checks the committed
-``QueryModel`` and replies. Multi-turn doesn't fit the single-Case pydantic_evals
-model, so this is a small custom runner. Calls the Anthropic API — run manually:
+Drives scripted conversations against ``run_conversation`` and checks the
+committed ``QueryModel``. The agent has no router to score in isolation, so the
+25 cases from ``eval_router.py`` are re-expressed here as **driven
+conversations**: a setup turn establishes prior state (resolved filters, or a
+pending disambiguation), then the follow-up exercises select / refine / remove /
+replace / reset. Checks are structural and lenient (facet presence/absence,
+key terms) because the agent's exact wording and concept ids vary.
+
+Calls the Anthropic API for every turn — run manually:
 
     uv run python -m concept_search.eval_agent_conversation
 
-``eval_resolve.py`` still guards concept-grounding quality (the resolve agent is
-unchanged); these scenarios cover the new orchestration: routing, small-facet
-mapping, exclusions, disambiguation answers, refine/remove, and back-off.
+``eval_resolve.py`` still guards concept-grounding quality (resolve agent is
+unchanged); these scenarios cover the orchestration/conversation behaviour.
 """
 
 from __future__ import annotations
@@ -25,72 +30,186 @@ from .conversation_agent import AgentDeps, run_conversation
 from .index import get_index
 from .models import Facet, QueryModel
 
+# Setup turns that establish prior conversational state (mirroring the router
+# eval's previous_query fixtures).
+SETUP_RESOLVED = "diabetes studies measuring blood pressure"
+SETUP_DISAMBIG = "diabetes and glucose studies"
+SETUP_CROSS = "glucose studies"
+
 
 @dataclass
 class Scenario:
-    """A scripted multi-turn conversation plus a check on the final state."""
+    """A scripted conversation plus a check on the final committed query."""
 
     name: str
     turns: list[str]
-    check: Callable[[QueryModel, list[str]], tuple[bool, str]]
+    check: Callable[[QueryModel, list[str]], bool]
+
+
+def _t(q: QueryModel) -> str:
+    """Lowercased original_text + values across all mentions (for term checks)."""
+    return " ".join((m.original_text + " " + " ".join(m.values)).lower() for m in q.mentions)
+
+
+def _has(q: QueryModel, facet: Facet) -> bool:
+    """True if any mention is on the given facet."""
+    return any(m.facet == facet for m in q.mentions)
 
 
 def _facets(q: QueryModel) -> list[str]:
     return [m.facet.value for m in q.mentions]
 
 
-def _has(q: QueryModel, facet: Facet) -> bool:
-    return any(m.facet == facet for m in q.mentions)
+def _old_cleared(q: QueryModel) -> bool:
+    """True if the setup's prior terms were cleared (used for reset cases)."""
+    t = _t(q)
+    return "diabetes" not in t and "pressure" not in t and "glucose" not in t
 
 
 SCENARIOS: list[Scenario] = [
+    # --- Unique singles (not covered by router cases) ---
     Scenario(
-        name="fresh-study-with-small-facet",
-        turns=["diabetes studies on BDC"],
-        check=lambda q, _r: (
-            _has(q, Facet.PLATFORM) and _has(q, Facet.FOCUS),
-            f"facets={_facets(q)}",
-        ),
+        "small-facet-mapping",
+        ["diabetes studies on BDC"],
+        lambda q, _r: _has(q, Facet.FOCUS) and _has(q, Facet.PLATFORM),
     ),
     Scenario(
-        name="exclusion",
-        turns=["WGS studies but not pediatric cohorts"],
-        check=lambda q, _r: (
-            any(m.exclude for m in q.mentions),
-            f"mentions={[(m.facet.value, m.exclude) for m in q.mentions]}",
-        ),
+        "exclusion",
+        ["WGS studies but not pediatric cohorts"],
+        lambda q, _r: any(m.exclude for m in q.mentions),
     ),
     Scenario(
-        name="disambiguation-then-select",
-        turns=["glucose studies", "the measurement one"],
-        check=lambda q, _r: (
-            _has(q, Facet.MEASUREMENT),
-            f"facets={_facets(q)}",
-        ),
+        "empty-result-backoff-completes",
+        ["WGS metabolomics Hi-C studies on KFDRC about Alzheimer disease"],
+        lambda _q, r: bool(r and r[-1].strip()),
+    ),
+    # --- Resolved prior state: refine / remove / replace / reset ---
+    Scenario(
+        "add-no-disambig",
+        [SETUP_RESOLVED, "also on AnVIL"],
+        lambda q, _r: _has(q, Facet.PLATFORM) and "diabetes" in _t(q),
     ),
     Scenario(
-        name="refine-add-platform",
-        turns=["diabetes studies", "only on BDC"],
-        check=lambda q, _r: (
-            _has(q, Facet.FOCUS) and _has(q, Facet.PLATFORM),
-            f"facets={_facets(q)}",
-        ),
+        "add-sex-filter",
+        [SETUP_RESOLVED, "only in females"],
+        lambda q, _r: _has(q, Facet.SEX),
     ),
     Scenario(
-        name="remove-filter",
-        turns=["diabetes studies on BDC", "remove the platform filter"],
-        check=lambda q, _r: (
-            _has(q, Facet.FOCUS) and not _has(q, Facet.PLATFORM),
-            f"facets={_facets(q)}",
-        ),
+        "add-and-same-facet",
+        [SETUP_RESOLVED, "and asthma"],
+        lambda q, _r: "asthma" in _t(q) and "diabetes" in _t(q),
     ),
     Scenario(
-        name="empty-result-backoff-completes",
-        turns=["WGS metabolomics ATAC-seq studies on KFDRC about a rare disease"],
-        check=lambda _q, r: (
-            bool(r and r[-1].strip()),
-            f"reply_len={len(r[-1]) if r else 0}",
-        ),
+        "add-or-same-facet",
+        [SETUP_RESOLVED, "or asthma"],
+        lambda q, _r: "asthma" in _t(q) and "diabetes" in _t(q),
+    ),
+    Scenario(
+        "add-also-measurement",
+        [SETUP_RESOLVED, "also BMI"],
+        lambda q, _r: "bmi" in _t(q) or "body mass" in _t(q),
+    ),
+    Scenario(
+        "add-additional-focus",
+        [SETUP_RESOLVED, "include heart disease too"],
+        lambda q, _r: "heart" in _t(q) and "diabetes" in _t(q),
+    ),
+    Scenario(
+        "remove-via-chat",
+        [SETUP_RESOLVED, "remove the diabetes filter"],
+        lambda q, _r: "diabetes" not in _t(q) and _has(q, Facet.MEASUREMENT),
+    ),
+    Scenario(
+        "replace-via-chat",
+        [SETUP_RESOLVED, "change diabetes to asthma"],
+        lambda q, _r: "diabetes" not in _t(q) and "asthma" in _t(q),
+    ),
+    Scenario(
+        "reset-no-disambig",
+        [SETUP_RESOLVED, "show me COPD studies"],
+        lambda q, _r: _old_cleared(q) and _has(q, Facet.FOCUS),
+    ),
+    Scenario(
+        "reset-unrelated",
+        [SETUP_RESOLVED, "what about sleep data?"],
+        lambda q, _r: "diabetes" not in _t(q) and "pressure" not in _t(q),
+    ),
+    Scenario(
+        "reset-standalone-query",
+        [SETUP_RESOLVED, "show me studies with BMI data"],
+        lambda q, _r: "diabetes" not in _t(q) and ("bmi" in _t(q) or "body mass" in _t(q)),
+    ),
+    Scenario(
+        "reset-full-sentence",
+        [SETUP_RESOLVED, "I want to find lung cancer studies on BDC"],
+        lambda q, _r: "diabetes" not in _t(q) and "lung" in _t(q) and _has(q, Facet.PLATFORM),
+    ),
+    Scenario(
+        "reset-new-criteria",
+        [SETUP_RESOLVED, "studies where participants have COPD and are over 65"],
+        lambda q, _r: "diabetes" not in _t(q) and "pressure" not in _t(q),
+    ),
+    # --- Disambiguation pending (diabetes resolved + glucose ambiguous) ---
+    Scenario(
+        "select-first",
+        [SETUP_DISAMBIG, "the blood glucose one"],
+        lambda q, _r: _has(q, Facet.MEASUREMENT) and "diabetes" in _t(q),
+    ),
+    Scenario(
+        "select-multiple",
+        [SETUP_DISAMBIG, "both the blood glucose and the dietary one"],
+        lambda q, _r: _has(q, Facet.MEASUREMENT),
+    ),
+    Scenario(
+        "shorthand-1",
+        [SETUP_DISAMBIG, "the first one"],
+        lambda q, _r: _has(q, Facet.MEASUREMENT),
+    ),
+    Scenario(
+        "shorthand-2",
+        [SETUP_DISAMBIG, "the second one"],
+        lambda q, _r: _has(q, Facet.MEASUREMENT),
+    ),
+    Scenario(
+        "replace-disambig",
+        [SETUP_DISAMBIG, "actually I meant meat consumption"],
+        lambda q, _r: "diabetes" in _t(q) and _has(q, Facet.MEASUREMENT),
+    ),
+    Scenario(
+        "reject-all",
+        [SETUP_DISAMBIG, "forget about glucose"],
+        lambda q, _r: "glucose" not in _t(q) and "diabetes" in _t(q),
+    ),
+    Scenario(
+        "neither",
+        [SETUP_DISAMBIG, "neither of those"],
+        lambda q, _r: "glucose" not in _t(q) and "diabetes" in _t(q),
+    ),
+    Scenario(
+        "add-with-disambig",
+        [SETUP_DISAMBIG, "also on AnVIL"],
+        lambda q, _r: _has(q, Facet.PLATFORM),
+    ),
+    Scenario(
+        "reset-with-disambig",
+        [SETUP_DISAMBIG, "show me COPD studies instead"],
+        lambda q, _r: _old_cleared(q) and _has(q, Facet.FOCUS),
+    ),
+    # --- Cross-facet disambiguation (glucose: focus vs measurement) ---
+    Scenario(
+        "cross-facet-select-by-label",
+        [SETUP_CROSS, "the dietary intake one"],
+        lambda q, _r: _has(q, Facet.MEASUREMENT),
+    ),
+    Scenario(
+        "cross-facet-select-focus",
+        [SETUP_CROSS, "I mean the disease, not the measurement"],
+        lambda q, _r: _has(q, Facet.FOCUS),
+    ),
+    Scenario(
+        "cross-facet-select-biomarker",
+        [SETUP_CROSS, "the blood glucose measurement"],
+        lambda q, _r: _has(q, Facet.MEASUREMENT),
     ),
 ]
 
@@ -101,15 +220,14 @@ async def _run_scenario(scenario: Scenario) -> tuple[bool, str]:
     history: list = []
     replies: list[str] = []
     for message in scenario.turns:
-        reply, _query_state, history = await run_conversation(
-            message, deps, message_history=history
-        )
+        reply, _state, history = await run_conversation(message, deps, message_history=history)
         replies.append(reply)
-    return scenario.check(deps.query_state, replies)
+    passed = scenario.check(deps.query_state, replies)
+    return passed, f"facets={_facets(deps.query_state)}"
 
 
 async def run_evals() -> None:
-    """Run all scenarios and print a report."""
+    """Run all scenarios and print a pass/fail report."""
     passed = 0
     for scenario in SCENARIOS:
         try:
@@ -117,15 +235,13 @@ async def run_evals() -> None:
         except Exception as exc:  # noqa: BLE001 — eval harness: report, don't crash
             ok, detail = False, f"error: {type(exc).__name__}: {exc}"
         passed += int(ok)
-        status = "PASS" if ok else "FAIL"
-        print(f"[{status}] {scenario.name}: {detail}")
+        print(f"[{'PASS' if ok else 'FAIL'}] {scenario.name}: {detail}")
     print(f"\n{passed}/{len(SCENARIOS)} scenarios passed")
 
 
 def main() -> None:
     """CLI entry point for the conversation-agent evals."""
-    backend_dir = Path(__file__).resolve().parent.parent
-    load_dotenv(backend_dir / ".env")
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
     if not os.getenv("ANTHROPIC_API_KEY"):
         print("ANTHROPIC_API_KEY not set — skipping agent conversation evals.")
         return
