@@ -14,13 +14,20 @@ from concept_search.conversation_agent import (
     MentionInput,
     ResolveRequest,
     _facet_counts,
+    _state_preamble,
     deserialize_history,
     query_catalog,
     resolve_concepts,
     serialize_history,
     update_query,
 )
-from concept_search.models import Facet, QueryModel, ResolveResult
+from concept_search.models import (
+    DisambiguationOption,
+    Facet,
+    QueryModel,
+    ResolvedMention,
+    ResolveResult,
+)
 
 
 class _FakeStore:
@@ -109,6 +116,83 @@ def test_update_query_sets_intent() -> None:
     ctx = _ctx(_FakeIndex())
     update_query(ctx, intent="variable")
     assert ctx.deps.query_state.intent == "variable"
+
+
+def test_update_query_reset_clears_filters_and_pending() -> None:
+    """reset=True drops all prior filters and pending choices before applying."""
+    ctx = _ctx(_FakeIndex())
+    update_query(
+        ctx, add=[MentionInput(facet=Facet.FOCUS, original_text="diabetes", values=["DM"])]
+    )
+    ctx.deps.pending = [{"facet": "measurement", "options": [], "text": "glucose"}]
+    update_query(
+        ctx,
+        add=[MentionInput(facet=Facet.PLATFORM, original_text="BDC", values=["BDC"])],
+        reset=True,
+    )
+    assert [m.facet for m in ctx.deps.query_state.mentions] == [Facet.PLATFORM]
+    assert ctx.deps.pending == []
+
+
+def test_update_query_commit_clears_matching_pending() -> None:
+    """Committing a term removes its open disambiguation choice."""
+    ctx = _ctx(_FakeIndex())
+    ctx.deps.pending = [{"facet": "measurement", "options": [], "text": "glucose"}]
+    update_query(
+        ctx, add=[MentionInput(facet=Facet.MEASUREMENT, original_text="glucose", values=["x"])]
+    )
+    assert ctx.deps.pending == []
+
+
+@pytest.mark.asyncio()
+async def test_resolve_concepts_sets_pending_for_ambiguous(monkeypatch) -> None:
+    """An ambiguous term becomes a structured pending choice on deps."""
+
+    async def fake_run_resolve(mention, index, model=None):
+        return ResolveResult(
+            values=[],
+            disambiguation=[
+                DisambiguationOption(
+                    concept_id="a", facet=Facet.MEASUREMENT, label="Blood glucose"
+                ),
+                DisambiguationOption(
+                    concept_id="b", facet=Facet.MEASUREMENT, label="Dietary glucose"
+                ),
+            ],
+            message="which?",
+        )
+
+    monkeypatch.setattr(conversation_agent, "run_resolve", fake_run_resolve)
+    ctx = _ctx(_FakeIndex())
+    await resolve_concepts(ctx, [ResolveRequest(facet=Facet.MEASUREMENT, text="glucose")])
+    assert len(ctx.deps.pending) == 1
+    assert ctx.deps.pending[0]["text"] == "glucose"
+    assert [o["label"] for o in ctx.deps.pending[0]["options"]] == [
+        "Blood glucose",
+        "Dietary glucose",
+    ]
+
+
+def test_state_preamble_renders_filters_and_pending() -> None:
+    """The preamble shows committed filters and numbered pending options."""
+    deps = AgentDeps(
+        index=_FakeIndex(),
+        query_state=QueryModel(
+            intent="study",
+            mentions=[ResolvedMention(facet=Facet.FOCUS, original_text="diabetes", values=["DM"])],
+        ),
+        pending=[
+            {
+                "facet": "measurement",
+                "options": [{"conceptId": "a", "facet": "measurement", "label": "Blood glucose"}],
+                "text": "glucose",
+            }
+        ],
+    )
+    text = _state_preamble(deps)
+    assert 'focus="diabetes"' in text
+    assert 'Pending choice for "glucose"' in text
+    assert "1) Blood glucose" in text
 
 
 def _drop_one_responder(include, exclude=None):

@@ -573,7 +573,9 @@ async def search_agent(
     store = get_session_store()
     state = await store.get(request.session_id) or SessionState()
     index = get_index()
-    deps = AgentDeps(index=index, query_state=state.query or QueryModel())
+    deps = AgentDeps(
+        index=index, query_state=state.query or QueryModel(), pending=list(state.pending)
+    )
     history = truncate_history(
         deserialize_history(state.agent_message_history), _MAX_AGENT_HISTORY
     )
@@ -624,6 +626,7 @@ async def search_agent(
 
     # Persist conversation state for the next turn.
     state.query = query_model
+    state.pending = deps.pending
     state.agent_message_history = serialize_history(new_history)
     state.messages = [
         *state.messages,

@@ -30,9 +30,8 @@ class SessionState(BaseModel):
     """Lean persisted conversation state — text turns plus the resolved query.
 
     Excludes the per-turn tool scratchpad by construction: the agent loop hands
-    the store only the user/assistant text and the resulting ``QueryModel``.
-    Pending disambiguation already lives inside ``QueryModel`` (via each
-    mention's ``disambiguation`` list), so no separate field is needed.
+    the store only the user/assistant text, the resulting ``QueryModel``, and any
+    open disambiguation choices.
     """
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
@@ -42,6 +41,9 @@ class SessionState(BaseModel):
     # for the deterministic /search pipeline, which carries no agent history.
     agent_message_history: list[dict] = Field(default_factory=list)
     messages: list[ConversationMessage] = Field(default_factory=list)
+    # Open disambiguation choices ({text, facet, options}) offered but unresolved,
+    # so they survive into the next turn's injected state block.
+    pending: list[dict] = Field(default_factory=list)
     query: QueryModel | None = None
 
 

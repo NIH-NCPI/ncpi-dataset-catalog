@@ -214,8 +214,13 @@ SCENARIOS: list[Scenario] = [
 ]
 
 
+# The agent is non-deterministic, so each scenario is run REPEATS times and
+# passes on a majority — single runs swing ±2-3 scenarios on noise alone.
+REPEATS = int(os.getenv("AGENT_EVAL_REPEATS", "3"))
+
+
 async def _run_scenario(scenario: Scenario) -> tuple[bool, str]:
-    """Drive one scenario end-to-end, returning (passed, detail)."""
+    """Drive one scenario end-to-end once, returning (passed, detail)."""
     deps = AgentDeps(index=get_index(), query_state=QueryModel())
     history: list = []
     replies: list[str] = []
@@ -226,17 +231,34 @@ async def _run_scenario(scenario: Scenario) -> tuple[bool, str]:
     return passed, f"facets={_facets(deps.query_state)}"
 
 
+async def _run_scenario_repeated(scenario: Scenario) -> tuple[int, str]:
+    """Run a scenario REPEATS times (concurrently); return (pass_count, detail)."""
+    runs = await asyncio.gather(
+        *(_run_scenario(scenario) for _ in range(REPEATS)),
+        return_exceptions=True,
+    )
+    passes = 0
+    detail = ""
+    for run in runs:
+        if isinstance(run, Exception):
+            detail = f"error: {type(run).__name__}: {run}"
+            continue
+        ok, detail = run
+        passes += int(ok)
+    return passes, detail
+
+
 async def run_evals() -> None:
-    """Run all scenarios and print a pass/fail report."""
+    """Run every scenario REPEATS times and print a majority-vote report."""
+    get_index()  # warm the singleton before concurrent runs
+    majority = REPEATS // 2 + 1
     passed = 0
     for scenario in SCENARIOS:
-        try:
-            ok, detail = await _run_scenario(scenario)
-        except Exception as exc:  # noqa: BLE001 — eval harness: report, don't crash
-            ok, detail = False, f"error: {type(exc).__name__}: {exc}"
+        passes, detail = await _run_scenario_repeated(scenario)
+        ok = passes >= majority
         passed += int(ok)
-        print(f"[{'PASS' if ok else 'FAIL'}] {scenario.name}: {detail}")
-    print(f"\n{passed}/{len(SCENARIOS)} scenarios passed")
+        print(f"[{'PASS' if ok else 'FAIL'} {passes}/{REPEATS}] {scenario.name}: {detail}")
+    print(f"\n{passed}/{len(SCENARIOS)} scenarios passed (majority of {REPEATS} runs each)")
 
 
 def main() -> None:

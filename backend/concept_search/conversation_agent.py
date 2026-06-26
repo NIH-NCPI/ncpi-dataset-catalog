@@ -14,7 +14,7 @@ from __future__ import annotations
 import asyncio
 import os
 import threading
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
@@ -42,10 +42,16 @@ _FACET_STUDY_FIELD = {
 
 @dataclass
 class AgentDeps:
-    """Per-request dependencies for the orchestrator and its tools."""
+    """Per-request dependencies for the orchestrator and its tools.
+
+    ``pending`` holds disambiguation choices the agent has offered but the user
+    hasn't resolved yet — each ``{text, facet, options}`` — so the full state
+    (committed filters + open choices) can be injected into every turn.
+    """
 
     index: ConceptIndex
     query_state: QueryModel
+    pending: list[dict] = field(default_factory=list)
 
 
 class MentionInput(BaseModel):
@@ -193,7 +199,15 @@ async def resolve_concepts(
     results = await asyncio.gather(
         *(run_resolve(RawMention(facets=[m.facet], text=m.text), ctx.deps.index) for m in mentions)
     )
-    return [_shape_resolve(m, r) for m, r in zip(mentions, results, strict=True)]
+    out = [_shape_resolve(m, r) for m, r in zip(mentions, results, strict=True)]
+    # Track terms that came back ambiguous as open choices (injected into the
+    # next turn's state block so ordinal/"neither" replies have a referent).
+    ctx.deps.pending = [
+        {"facet": r["facet"], "options": r["disambiguation"], "text": r["text"]}
+        for r in out
+        if r["disambiguation"]
+    ]
+    return out
 
 
 def update_query(
@@ -201,6 +215,7 @@ def update_query(
     add: list[MentionInput] | None = None,
     remove: list[str] | None = None,
     intent: Intent | None = None,
+    reset: bool = False,
 ) -> dict:
     """Commit changes to the active query and return a result summary.
 
@@ -213,6 +228,8 @@ def update_query(
             overwrites the existing one.
         remove: original_text values to drop (case-insensitive, any facet).
         intent: Set the query intent (study | variable | ambiguous).
+        reset: Clear all current filters (and pending choices) before applying —
+            use when the user starts a brand-new, unrelated search.
 
     Returns:
         A summary dict: intent, total_studies, total_variables, active_filters,
@@ -220,7 +237,11 @@ def update_query(
         map ({filter text: results if dropped}) so you can advise which filter to
         relax without extra exploration.
     """
-    query_state = ctx.deps.query_state
+    deps = ctx.deps
+    query_state = deps.query_state
+    if reset:
+        query_state.mentions = []
+        deps.pending = []
     mentions = list(query_state.mentions)
 
     if remove:
@@ -247,7 +268,12 @@ def update_query(
     if intent is not None:
         query_state.intent = intent
 
-    return _summarize(query_state, ctx.deps.index)
+    # A term that was just committed or dropped is no longer an open choice.
+    touched = {t.lower() for t in (remove or [])} | {i.original_text.lower() for i in (add or [])}
+    if touched:
+        deps.pending = [p for p in deps.pending if p["text"].lower() not in touched]
+
+    return _summarize(query_state, deps.index)
 
 
 def query_catalog(
@@ -337,6 +363,29 @@ def serialize_history(messages: list[ModelMessage]) -> list[dict]:
     return to_jsonable_python(messages)
 
 
+def _state_preamble(deps: AgentDeps) -> str:
+    """Render the full live state (committed filters + open choices) for the model.
+
+    Prepended to every user turn so the model reasons over explicit state rather
+    than reconstructing it from prior tool-call history.
+    """
+    query_state = deps.query_state
+    lines: list[str] = []
+    if not query_state.mentions:
+        lines.append("[Current search: empty — no filters committed yet.]")
+    else:
+        parts = []
+        for m in query_state.mentions:
+            prefix = "exclude " if m.exclude else ""
+            values = ", ".join(m.values) if m.values else "(unresolved)"
+            parts.append(f'{prefix}{m.facet.value}="{m.original_text}" -> {values}')
+        lines.append(f"[Current search (intent={query_state.intent}): " + "; ".join(parts) + "]")
+    for pending in deps.pending:
+        options = "; ".join(f"{i + 1}) {o['label']}" for i, o in enumerate(pending["options"]))
+        lines.append(f'[Pending choice for "{pending["text"]}": {options}]')
+    return "\n".join(lines)
+
+
 async def run_conversation(
     message: str,
     deps: AgentDeps,
@@ -356,5 +405,6 @@ async def run_conversation(
         (reply_text, committed query_state, full message history for persistence).
     """
     agent = _get_agent(model)
-    result = await agent.run(message, deps=deps, message_history=message_history or None)
+    augmented = f"{_state_preamble(deps)}\n\n{message}"
+    result = await agent.run(augmented, deps=deps, message_history=message_history or None)
     return result.output, deps.query_state, result.all_messages()
