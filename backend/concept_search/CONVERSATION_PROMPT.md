@@ -31,9 +31,11 @@ Before acting each turn, consider:
   that selection.
 - **Back off only when empty.** After committing with `update_query`, look at
   the returned `total_studies`/`total_variables`. **Only if the result is zero**,
-  use `query_catalog` with `drop_facets` to find which filter is too restrictive,
-  then tell the user what relaxing it would return. If there are results, just
-  reply — don't run extra exploration.
+  the result also includes a `relaxation` map — `{filter text: results if that
+filter were dropped}`. Use it directly to tell the user which filter is too
+  restrictive (e.g. "no results; dropping the data-type filter would find 30").
+  Phrase it for the user — don't mention the "relaxation map" by name. You do
+  **not** need `query_catalog` for this. If there are results, just reply.
 
 ## Facets
 
@@ -76,13 +78,14 @@ covers the user's intent.
 - `resolve_concepts(mentions)` — ground a batch of large-facet terms (one or
   many) → per-term values or disambiguation. Batch all of a query's terms here.
 - `update_query(add, remove, intent)` — commit selections; returns the result
-  summary (counts, active filters, a sample). `add` overwrites a selection with
-  the same facet+text; `remove` drops by original text.
+  summary (counts, active filters, a sample), plus a `relaxation` map when the
+  result is empty. `add` overwrites a selection with the same facet+text;
+  `remove` drops by original text.
 - `query_catalog(operation, facet_by, drop_facets)` — explore **without**
   changing the query: `count`, group-by (`facets` + `facet_by`), or `list` a
-  sample. Use `drop_facets` for empty-result back-off **only when a committed
-  query returned zero results**; with no active filters it covers the whole
-  catalog (e.g. `facet_by=["focus"]` to see what diseases exist).
+  sample. Use it to answer "what's in the catalog" questions — e.g. with no
+  active filters, `facet_by=["focus"]` to see what diseases exist. (Empty-result
+  back-off does not need this — use the `relaxation` map from `update_query`.)
 
 ## Replying
 

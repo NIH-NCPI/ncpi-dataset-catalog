@@ -29,15 +29,22 @@ class _FakeStore:
 
 
 class _FakeIndex:
-    """Minimal ConceptIndex stand-in capturing query_studies calls."""
+    """Minimal ConceptIndex stand-in capturing query_studies calls.
 
-    def __init__(self, studies: list[dict] | None = None) -> None:
+    Pass ``responder(include, exclude) -> list[dict]`` to vary results by the
+    constraints (for drop-one / relaxation tests); otherwise returns ``studies``.
+    """
+
+    def __init__(self, studies: list[dict] | None = None, responder=None) -> None:
         self._studies = studies or []
+        self._responder = responder
         self.store = _FakeStore()
         self.calls: list[tuple] = []
 
     def query_studies(self, include, exclude=None):
         self.calls.append((include, exclude))
+        if self._responder is not None:
+            return self._responder(include, exclude)
         return self._studies
 
 
@@ -102,6 +109,48 @@ def test_update_query_sets_intent() -> None:
     ctx = _ctx(_FakeIndex())
     update_query(ctx, intent="variable")
     assert ctx.deps.query_state.intent == "variable"
+
+
+def _drop_one_responder(include, exclude=None):
+    """Studies only when focus is the sole include filter (for relaxation tests)."""
+    facets = {f for f, _ in include}
+    if facets == {Facet.FOCUS}:
+        return [{"dbGapId": "s1"}, {"dbGapId": "s2"}, {"dbGapId": "s3"}]
+    return []
+
+
+def test_update_query_folds_relaxation_map_on_empty() -> None:
+    """An empty result includes a drop-one relaxation map keyed by filter text."""
+    ctx = _ctx(_FakeIndex(responder=_drop_one_responder))
+    update_query(
+        ctx, add=[MentionInput(facet=Facet.FOCUS, original_text="diabetes", values=["DM"])]
+    )
+    out = update_query(
+        ctx, add=[MentionInput(facet=Facet.PLATFORM, original_text="BDC", values=["BDC"])]
+    )
+    assert out["total_studies"] == 0
+    # Dropping the platform filter recovers 3 studies; dropping focus still 0.
+    assert out["relaxation"] == {"diabetes": 0, "BDC": 3}
+
+
+def test_no_relaxation_when_results_exist() -> None:
+    """A non-empty result omits the relaxation map."""
+    ctx = _ctx(_FakeIndex(studies=[{"dbGapId": "s1"}]))
+    out = update_query(
+        ctx, add=[MentionInput(facet=Facet.FOCUS, original_text="diabetes", values=["DM"])]
+    )
+    assert out["total_studies"] == 1
+    assert "relaxation" not in out
+
+
+def test_no_relaxation_with_single_filter() -> None:
+    """With only one filter there's nothing to choose between, so no map."""
+    ctx = _ctx(_FakeIndex(studies=[]))
+    out = update_query(
+        ctx, add=[MentionInput(facet=Facet.FOCUS, original_text="rare", values=["X"])]
+    )
+    assert out["total_studies"] == 0
+    assert "relaxation" not in out
 
 
 def test_query_catalog_drop_facets_excludes_constraint() -> None:

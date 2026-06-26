@@ -95,10 +95,44 @@ def _facet_counts(studies: list[dict], facet_by: list[str]) -> dict:
     return out
 
 
+def _relaxation_map(query_state: QueryModel, index: ConceptIndex) -> dict[str, int]:
+    """For each active (non-excluded) filter, count results if it alone is dropped.
+
+    A deterministic drop-one analysis computed in a single pass — so the model can
+    recommend which filter to relax on an empty result without driving the
+    exploration through extra query_catalog round-trips. Keyed by each filter's
+    original_text. Returns {} when there are fewer than two include filters (the
+    breakdown only helps when there's a choice of what to relax).
+
+    Args:
+        query_state: The committed query that returned no results.
+        index: ConceptIndex for the lookup.
+
+    Returns:
+        Mapping of filter original_text -> result count if that filter is dropped.
+    """
+    includes = [m for m in query_state.mentions if not m.exclude]
+    if len(includes) < 2:
+        return {}
+    excludes = [m for m in query_state.mentions if m.exclude]
+    out: dict[str, int] = {}
+    for i, mention in enumerate(includes):
+        remaining = includes[:i] + includes[i + 1 :] + excludes
+        execution = execute_query_model(
+            QueryModel(intent=query_state.intent, mentions=remaining), index
+        )
+        out[mention.original_text] = (
+            execution.total_variable_count
+            if query_state.intent == "variable"
+            else len(execution.studies)
+        )
+    return out
+
+
 def _summarize(query_state: QueryModel, index: ConceptIndex) -> dict:
     """Execute the active query and return a summary (no full result rows)."""
     execution = execute_query_model(query_state, index)
-    return {
+    summary = {
         "active_filters": [
             {"exclude": m.exclude, "facet": m.facet.value, "values": m.values}
             for m in query_state.mentions
@@ -108,6 +142,13 @@ def _summarize(query_state: QueryModel, index: ConceptIndex) -> dict:
         "total_studies": len(execution.studies),
         "total_variables": execution.total_variable_count,
     }
+    # On an empty result, fold in the drop-one relaxation map so the model can
+    # advise which filter to relax in this same turn — no query_catalog probing.
+    if not execution.studies and not execution.total_variable_count and query_state.mentions:
+        relax = _relaxation_map(query_state, index)
+        if relax:
+            summary["relaxation"] = relax
+    return summary
 
 
 # --- Tools -----------------------------------------------------------------
@@ -175,7 +216,9 @@ def update_query(
 
     Returns:
         A summary dict: intent, total_studies, total_variables, active_filters,
-        sample_studies.
+        sample_studies. When the result is empty, also includes a ``relaxation``
+        map ({filter text: results if dropped}) so you can advise which filter to
+        relax without extra exploration.
     """
     query_state = ctx.deps.query_state
     mentions = list(query_state.mentions)
