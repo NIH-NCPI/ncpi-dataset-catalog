@@ -22,12 +22,18 @@ Before acting each turn, consider:
   short reply like "the measurement one" is almost certainly answering your last
   disambiguation — resolve it and commit it.
 - For each term: which facet? Is it a **small** facet (map directly) or a
-  **large** facet (use `resolve_concept`)?
+  **large** facet (ground with `resolve_concepts`)?
+- **Resolve large-facet terms together.** If a query names more than one
+  disease/measurement/consent term, pass them **all in a single
+  `resolve_concepts` call** — they resolve in parallel and it's much faster than
+  one call per term.
 - **Exclusions** ("but not", "excluding", "without") → set `exclude=true` on
   that selection.
-- **Empty results?** Don't give up — use `query_catalog` with `drop_facets` to
-  find which filter is too restrictive, then tell the user what relaxing it
-  would return.
+- **Back off only when empty.** After committing with `update_query`, look at
+  the returned `total_studies`/`total_variables`. **Only if the result is zero**,
+  use `query_catalog` with `drop_facets` to find which filter is too restrictive,
+  then tell the user what relaxing it would return. If there are results, just
+  reply — don't run extra exploration.
 
 ## Facets
 
@@ -48,15 +54,16 @@ tool needed; pass them to `update_query`):
 - **computedAncestry**: African, African American, East Asian, European,
   Hispanic1, Hispanic2, Other, Other Asian or Pacific Islander, South Asian
 
-**Large facets — always ground with `resolve_concept(facet, text)`:**
+**Large facets — always ground with `resolve_concepts`:**
 
 - **focus** — disease / condition (e.g. "diabetes", "lung cancer")
 - **measurement** — what was measured / phenotype (e.g. "blood glucose", "BMI")
 - **consentCode** — consent / data-use (e.g. "GRU", "for-profit research")
 
-`resolve_concept` returns either canonical `values` (put them in `update_query`)
-or `disambiguation` options. If it returns disambiguation options, ask the user
-to choose — do not guess.
+Call `resolve_concepts(mentions=[{facet, text}, ...])` with **all** the large-facet
+terms at once. Each result returns either canonical `values` (put them in
+`update_query`) or `disambiguation` options. If a result has disambiguation
+options, ask the user to choose — do not guess.
 
 ## ISA closure
 
@@ -66,16 +73,16 @@ covers the user's intent.
 
 ## Tools
 
-- `resolve_concept(facet, text)` — ground a large-facet term → values or
-  disambiguation.
+- `resolve_concepts(mentions)` — ground a batch of large-facet terms (one or
+  many) → per-term values or disambiguation. Batch all of a query's terms here.
 - `update_query(add, remove, intent)` — commit selections; returns the result
   summary (counts, active filters, a sample). `add` overwrites a selection with
   the same facet+text; `remove` drops by original text.
 - `query_catalog(operation, facet_by, drop_facets)` — explore **without**
   changing the query: `count`, group-by (`facets` + `facet_by`), or `list` a
-  sample. Use `drop_facets` for empty-result back-off; with no active filters it
-  covers the whole catalog (e.g. `facet_by=["focus"]` to see what diseases
-  exist).
+  sample. Use `drop_facets` for empty-result back-off **only when a committed
+  query returned zero results**; with no active filters it covers the whole
+  catalog (e.g. `facet_by=["focus"]` to see what diseases exist).
 
 ## Replying
 

@@ -3,14 +3,15 @@
 One pydantic-ai orchestrator (Sonnet by default) that builds a ``QueryModel``
 incrementally via a small set of composable tools, replacing the
 Extract→Resolve→Structure→Router state machine for the ``/search/agent``
-endpoint. The proven Haiku resolve agent is kept as the ``resolve_concept``
-tool, so concept grounding (and its evals) are unchanged.
+endpoint. The proven Haiku resolve agent is kept as the ``resolve_concepts``
+tool (batched/parallel), so concept grounding (and its evals) are unchanged.
 
 Design: ``docs/DESIGN-agent-loop.md``.
 """
 
 from __future__ import annotations
 
+import asyncio
 import os
 import threading
 from dataclasses import dataclass
@@ -24,7 +25,7 @@ from pydantic_core import to_jsonable_python
 
 from .index import ConceptIndex
 from .mention_constraints import split_mentions
-from .models import Facet, Intent, QueryModel, RawMention, ResolvedMention
+from .models import Facet, Intent, QueryModel, RawMention, ResolvedMention, ResolveResult
 from .resolve_agent import run_resolve
 from .search_execution import execute_query_model
 
@@ -56,6 +57,15 @@ class MentionInput(BaseModel):
     facet: Facet
     original_text: str
     values: list[str] = Field(default_factory=list)
+
+
+class ResolveRequest(BaseModel):
+    """A single large-facet term to ground."""
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    facet: Facet
+    text: str
 
 
 def _study_brief(study: dict) -> dict:
@@ -103,31 +113,46 @@ def _summarize(query_state: QueryModel, index: ConceptIndex) -> dict:
 # --- Tools -----------------------------------------------------------------
 
 
-async def resolve_concept(ctx: RunContext[AgentDeps], facet: Facet, text: str) -> dict:
-    """Ground a free-text term for a LARGE facet into canonical catalog values.
-
-    Use for focus (disease/condition), measurement (phenotype/what was measured),
-    and consentCode (data-use) — NOT for the small enumerated facets, which you
-    map directly via update_query. Returns resolved ``values`` to commit, or
-    ``disambiguation`` options to ask the user about (do not guess between them).
-
-    Args:
-        facet: The large facet to resolve against (focus, measurement, consentCode).
-        text: The user's phrase to ground.
-
-    Returns:
-        Dict with ``values``, ``disambiguation`` (list of {conceptId, facet, label}),
-        and an optional ``message``.
-    """
-    result = await run_resolve(RawMention(facets=[facet], text=text), ctx.deps.index)
+def _shape_resolve(request: ResolveRequest, result: ResolveResult) -> dict:
+    """Shape one resolve result for the model, tagged with its input."""
     return {
         "disambiguation": [
             {"conceptId": d.concept_id, "facet": d.facet, "label": d.label}
             for d in result.disambiguation
         ],
+        "facet": request.facet.value,
         "message": result.message,
+        "text": request.text,
         "values": result.values,
     }
+
+
+async def resolve_concepts(
+    ctx: RunContext[AgentDeps], mentions: list[ResolveRequest]
+) -> list[dict]:
+    """Ground one or more LARGE-facet terms into canonical catalog values.
+
+    Pass ALL of a query's large-facet terms in a single call — they are resolved
+    concurrently, so batching is much faster than calling this once per term. Use
+    for focus (disease/condition), measurement (phenotype/what was measured), and
+    consentCode (data-use) — NOT for the small enumerated facets, which you map
+    directly via update_query.
+
+    Each result is either resolved ``values`` (commit them with update_query) or
+    ``disambiguation`` options to ask the user about (do not guess between them).
+    Results are tagged with their ``facet`` and ``text`` so you can match them.
+
+    Args:
+        mentions: The large-facet terms to ground (facet + text each).
+
+    Returns:
+        One result dict per input, each with ``facet``, ``text``, ``values``,
+        ``disambiguation`` (list of {conceptId, facet, label}), and ``message``.
+    """
+    results = await asyncio.gather(
+        *(run_resolve(RawMention(facets=[m.facet], text=m.text), ctx.deps.index) for m in mentions)
+    )
+    return [_shape_resolve(m, r) for m, r in zip(mentions, results, strict=True)]
 
 
 def update_query(
@@ -247,7 +272,7 @@ def _get_agent(model: str | None = None) -> Agent[AgentDeps, str]:
                 model,
                 deps_type=AgentDeps,
                 system_prompt=_load_prompt(),
-                tools=[resolve_concept, update_query, query_catalog],
+                tools=[resolve_concepts, update_query, query_catalog],
                 model_settings=ModelSettings(
                     anthropic_cache_instructions=True,
                     anthropic_cache_tool_definitions=True,

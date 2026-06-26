@@ -12,10 +12,11 @@ from concept_search import conversation_agent
 from concept_search.conversation_agent import (
     AgentDeps,
     MentionInput,
+    ResolveRequest,
     _facet_counts,
     deserialize_history,
     query_catalog,
-    resolve_concept,
+    resolve_concepts,
     serialize_history,
     update_query,
 )
@@ -130,20 +131,35 @@ def test_query_catalog_facets_groups_results() -> None:
 
 
 @pytest.mark.asyncio()
-async def test_resolve_concept_shapes_result(monkeypatch) -> None:
-    """resolve_concept wraps run_resolve and returns values/disambiguation/message."""
+async def test_resolve_concepts_batches_and_tags(monkeypatch) -> None:
+    """resolve_concepts grounds each term concurrently and tags results by input."""
+    calls: list[tuple] = []
 
     async def fake_run_resolve(mention, index, model=None):
-        assert mention.facets == [Facet.FOCUS]
-        assert mention.text == "diabetes"
-        return ResolveResult(values=["mesh:D003920"], disambiguation=[], message=None)
+        calls.append((mention.facets[0], mention.text))
+        value = f"resolved:{mention.text}"
+        return ResolveResult(values=[value], disambiguation=[], message=None)
 
     monkeypatch.setattr(conversation_agent, "run_resolve", fake_run_resolve)
     ctx = _ctx(_FakeIndex())
-    out = await resolve_concept(ctx, Facet.FOCUS, "diabetes")
-    assert out["values"] == ["mesh:D003920"]
-    assert out["disambiguation"] == []
-    assert out["message"] is None
+    out = await resolve_concepts(
+        ctx,
+        [
+            ResolveRequest(facet=Facet.FOCUS, text="diabetes"),
+            ResolveRequest(facet=Facet.MEASUREMENT, text="glucose"),
+        ],
+    )
+    assert len(out) == 2
+    assert out[0] == {
+        "disambiguation": [],
+        "facet": "focus",
+        "message": None,
+        "text": "diabetes",
+        "values": ["resolved:diabetes"],
+    }
+    assert out[1]["facet"] == "measurement"
+    assert out[1]["values"] == ["resolved:glucose"]
+    assert (Facet.FOCUS, "diabetes") in calls and (Facet.MEASUREMENT, "glucose") in calls
 
 
 def test_history_serialization_round_trips_empty() -> None:
