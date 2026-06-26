@@ -33,8 +33,10 @@ from .models import Facet, QueryModel
 # Setup turns that establish prior conversational state (mirroring the router
 # eval's previous_query fixtures).
 SETUP_RESOLVED = "diabetes studies measuring blood pressure"
-SETUP_DISAMBIG = "diabetes and glucose studies"
-SETUP_CROSS = "glucose studies"
+# A bare ambiguous term genuinely leaves a disambiguation open (focus vs
+# measurement); "diabetes and glucose" does NOT — context resolves glucose
+# directly, so the old setup tested a pending state the agent never enters.
+SETUP_PENDING = "glucose studies"
 
 
 @dataclass
@@ -54,6 +56,11 @@ def _t(q: QueryModel) -> str:
 def _has(q: QueryModel, facet: Facet) -> bool:
     """True if any mention is on the given facet."""
     return any(m.facet == facet for m in q.mentions)
+
+
+def _committed(q: QueryModel) -> list:
+    """Mentions that carry resolved values (i.e. actually committed filters)."""
+    return [m for m in q.mentions if m.values]
 
 
 def _facets(q: QueryModel) -> list[str]:
@@ -149,67 +156,52 @@ SCENARIOS: list[Scenario] = [
         [SETUP_RESOLVED, "studies where participants have COPD and are over 65"],
         lambda q, _r: "diabetes" not in _t(q) and "pressure" not in _t(q),
     ),
-    # --- Disambiguation pending (diabetes resolved + glucose ambiguous) ---
+    # --- Real pending disambiguation (bare "glucose studies" leaves a choice
+    # open: dietary intake / blood-serum measurement / glucose levels). ---
     Scenario(
-        "select-first",
-        [SETUP_DISAMBIG, "the blood glucose one"],
-        lambda q, _r: _has(q, Facet.MEASUREMENT) and "diabetes" in _t(q),
+        "disambig-select-ordinal",
+        [SETUP_PENDING, "the first one"],
+        lambda q, _r: bool(_committed(q)),
     ),
     Scenario(
-        "select-multiple",
-        [SETUP_DISAMBIG, "both the blood glucose and the dietary one"],
+        "disambig-select-number",
+        [SETUP_PENDING, "option 2"],
+        lambda q, _r: bool(_committed(q)),
+    ),
+    Scenario(
+        "disambig-select-by-name",
+        [SETUP_PENDING, "the blood/serum measurement one"],
         lambda q, _r: _has(q, Facet.MEASUREMENT),
     ),
     Scenario(
-        "shorthand-1",
-        [SETUP_DISAMBIG, "the first one"],
-        lambda q, _r: _has(q, Facet.MEASUREMENT),
+        "disambig-select-focus",
+        [SETUP_PENDING, "I mean the disease/metabolic context, not the measurement"],
+        lambda q, _r: bool(_committed(q)),
     ),
     Scenario(
-        "shorthand-2",
-        [SETUP_DISAMBIG, "the second one"],
-        lambda q, _r: _has(q, Facet.MEASUREMENT),
+        "disambig-reject-neither",
+        [SETUP_PENDING, "neither of those"],
+        lambda q, _r: not q.mentions,
     ),
     Scenario(
-        "replace-disambig",
-        [SETUP_DISAMBIG, "actually I meant meat consumption"],
-        lambda q, _r: "diabetes" in _t(q) and _has(q, Facet.MEASUREMENT),
+        "disambig-reject-forget",
+        [SETUP_PENDING, "forget about glucose"],
+        lambda q, _r: not q.mentions,
     ),
     Scenario(
-        "reject-all",
-        [SETUP_DISAMBIG, "forget about glucose"],
-        lambda q, _r: "glucose" not in _t(q) and "diabetes" in _t(q),
-    ),
-    Scenario(
-        "neither",
-        [SETUP_DISAMBIG, "neither of those"],
-        lambda q, _r: "glucose" not in _t(q) and "diabetes" in _t(q),
-    ),
-    Scenario(
-        "add-with-disambig",
-        [SETUP_DISAMBIG, "also on AnVIL"],
+        "disambig-add-platform",
+        [SETUP_PENDING, "also only on BDC"],
         lambda q, _r: _has(q, Facet.PLATFORM),
     ),
     Scenario(
-        "reset-with-disambig",
-        [SETUP_DISAMBIG, "show me COPD studies instead"],
-        lambda q, _r: _old_cleared(q) and _has(q, Facet.FOCUS),
-    ),
-    # --- Cross-facet disambiguation (glucose: focus vs measurement) ---
-    Scenario(
-        "cross-facet-select-by-label",
-        [SETUP_CROSS, "the dietary intake one"],
-        lambda q, _r: _has(q, Facet.MEASUREMENT),
+        "disambig-reset-pivot",
+        [SETUP_PENDING, "actually show me COPD studies instead"],
+        lambda q, _r: _has(q, Facet.FOCUS) and "glucose" not in _t(q),
     ),
     Scenario(
-        "cross-facet-select-focus",
-        [SETUP_CROSS, "I mean the disease, not the measurement"],
-        lambda q, _r: _has(q, Facet.FOCUS),
-    ),
-    Scenario(
-        "cross-facet-select-biomarker",
-        [SETUP_CROSS, "the blood glucose measurement"],
-        lambda q, _r: _has(q, Facet.MEASUREMENT),
+        "disambig-replace",
+        [SETUP_PENDING, "actually I want BMI studies"],
+        lambda q, _r: "bmi" in _t(q) or "body mass" in _t(q),
     ),
 ]
 
