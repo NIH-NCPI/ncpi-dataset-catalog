@@ -112,6 +112,25 @@ def _facet_counts(studies: list[dict], facet_by: list[str]) -> dict:
     return out
 
 
+def _catalog_facet_counts(index: ConceptIndex, facet_by: list[str]) -> dict:
+    """Top values per facet across the WHOLE catalog (no active filters).
+
+    query_studies returns [] for an empty constraint set (by design, so /search
+    doesn't dump the catalog), so catalog-wide exploration reads the store's
+    pre-aggregated facet counts instead.
+    """
+    if not facet_by:
+        return {}
+    wanted = set(facet_by)
+    out: dict[str, dict[str, int]] = {}
+    # get_facet_value_counts is ordered by (facet, count desc), so first-seen
+    # insertion order per facet is already highest-count-first.
+    for facet, value, count in index.store.get_facet_value_counts():
+        if facet in wanted and len(out.setdefault(facet, {})) < 20:
+            out[facet][value] = count
+    return out
+
+
 def _relaxation_map(query_state: QueryModel, index: ConceptIndex) -> dict[str, int]:
     """For each active (non-excluded) filter, count results if it alone is dropped.
 
@@ -325,9 +344,17 @@ def query_catalog(
     drop = {d.lower() for d in (drop_facets or [])}
     mentions = [m for m in deps.query_state.mentions if m.facet.value.lower() not in drop]
     include, exclude = split_mentions(mentions, deps.index)
-    studies = deps.index.query_studies(include, exclude or None)
 
-    out: dict = {"total_studies": len(studies)}
+    if not include and not exclude:
+        # No active filters → explore the whole catalog from store aggregates,
+        # since query_studies([], None) returns [] by design.
+        out: dict = {"total_studies": deps.index.store.study_count}
+        if operation == "facets":
+            out["facets"] = _catalog_facet_counts(deps.index, facet_by or [])
+        return out
+
+    studies = deps.index.query_studies(include, exclude or None)
+    out = {"total_studies": len(studies)}
     if operation == "facets":
         out["facets"] = _facet_counts(studies, facet_by or [])
     elif operation == "list":

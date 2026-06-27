@@ -33,6 +33,19 @@ from concept_search.models import (
 
 
 class _FakeStore:
+    def __init__(
+        self, study_count: int = 0, facet_value_counts: list[tuple[str, str, int]] | None = None
+    ) -> None:
+        self._study_count = study_count
+        self._facet_value_counts = facet_value_counts or []
+
+    @property
+    def study_count(self) -> int:
+        return self._study_count
+
+    def get_facet_value_counts(self) -> list[tuple[str, str, int]]:
+        return self._facet_value_counts
+
     def query_variables(self, concepts=None, limit=500, study_ids=None, variable_names=None):
         return ([], 0)
 
@@ -44,10 +57,16 @@ class _FakeIndex:
     constraints (for drop-one / relaxation tests); otherwise returns ``studies``.
     """
 
-    def __init__(self, studies: list[dict] | None = None, responder=None) -> None:
+    def __init__(
+        self,
+        studies: list[dict] | None = None,
+        responder=None,
+        study_count: int = 0,
+        facet_value_counts: list[tuple[str, str, int]] | None = None,
+    ) -> None:
         self._studies = studies or []
         self._responder = responder
-        self.store = _FakeStore()
+        self.store = _FakeStore(study_count=study_count, facet_value_counts=facet_value_counts)
         self.calls: list[tuple] = []
 
     def query_studies(self, include, exclude=None):
@@ -249,7 +268,11 @@ def test_query_catalog_drop_facets_excludes_constraint() -> None:
     index = _FakeIndex(studies=[])
     ctx = _ctx(index, state)
     update_query(
-        ctx, add=[MentionInput(facet=Facet.PLATFORM, original_text="BDC", values=["BDC"])]
+        ctx,
+        add=[
+            MentionInput(facet=Facet.PLATFORM, original_text="BDC", values=["BDC"]),
+            MentionInput(facet=Facet.FOCUS, original_text="diabetes", values=["DM"]),
+        ],
     )
     index.calls.clear()
 
@@ -258,15 +281,40 @@ def test_query_catalog_drop_facets_excludes_constraint() -> None:
     include, _exclude = index.calls[-1]
     facets_used = {facet for facet, _values in include}
     assert Facet.PLATFORM not in facets_used
+    assert Facet.FOCUS in facets_used  # other filters still applied
 
 
 def test_query_catalog_facets_groups_results() -> None:
-    """query_catalog(operation='facets') returns grouped counts."""
+    """query_catalog(operation='facets') groups the matched studies by facet."""
     studies = [{"platforms": ["BDC"]}, {"platforms": ["BDC", "AnVIL"]}]
-    ctx = _ctx(_FakeIndex(studies=studies))
+    state = QueryModel(
+        intent="study",
+        mentions=[ResolvedMention(facet=Facet.FOCUS, original_text="diabetes", values=["DM"])],
+    )
+    ctx = _ctx(_FakeIndex(studies=studies), state)
     out = query_catalog(ctx, operation="facets", facet_by=["platform"])
     assert out["total_studies"] == 2
     assert out["facets"]["platform"]["BDC"] == 2
+
+
+def test_query_catalog_no_filters_explores_whole_catalog() -> None:
+    """With no active filters, query_catalog reads catalog-wide store aggregates.
+
+    Regression for #374: query_studies([], None) returns [] by design, so the
+    no-filter path must use store.study_count / get_facet_value_counts instead of
+    reporting an empty catalog.
+    """
+    index = _FakeIndex(
+        study_count=42,
+        facet_value_counts=[
+            ("focus", "Diabetes Mellitus", 30),
+            ("focus", "Asthma", 12),
+            ("platform", "BDC", 20),
+        ],
+    )
+    out = query_catalog(_ctx(index), operation="facets", facet_by=["focus"])
+    assert out["total_studies"] == 42
+    assert out["facets"] == {"focus": {"Diabetes Mellitus": 30, "Asthma": 12}}
 
 
 @pytest.mark.asyncio()
