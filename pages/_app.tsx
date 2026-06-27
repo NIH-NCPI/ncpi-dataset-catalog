@@ -1,7 +1,7 @@
 import "@databiosphere/findable-ui";
 import { AzulEntitiesStaticResponse } from "@databiosphere/findable-ui/lib/apis/azul/common/entities";
 import { Error as DXError } from "@databiosphere/findable-ui/lib/components/Error/error";
-import { ErrorBoundary } from "@databiosphere/findable-ui/lib/components/ErrorBoundary";
+import { ErrorBoundary } from "@databiosphere/findable-ui/lib/components/ErrorBoundary/errorBoundary";
 import { Head } from "@databiosphere/findable-ui/lib/components/Head/head";
 import { AppLayout } from "@databiosphere/findable-ui/lib/components/Layout/components/AppLayout/appLayout.styles";
 import { Floating } from "@databiosphere/findable-ui/lib/components/Layout/components/Floating/floating";
@@ -19,6 +19,7 @@ import { DataExplorerError } from "@databiosphere/findable-ui/lib/types/error";
 import { ChatProvider } from "@databiosphere/findable-ui/lib/views/ResearchView/state/provider";
 import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import { createTheme, CssBaseline, Theme, ThemeProvider } from "@mui/material";
+import { AppCacheProvider } from "@mui/material-nextjs/v16-pagesRouter";
 import { createBreakpoints } from "@mui/system";
 import { deepmerge } from "@mui/utils";
 import { StyledHeader } from "app/components/Layout/components/Header/header.styles";
@@ -52,7 +53,8 @@ export type AppPropsWithComponent = AppProps & {
 
 setFeatureFlags(FEATURE_FLAGS);
 
-function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
+function MyApp(props: AppPropsWithComponent): JSX.Element {
+  const { Component, pageProps } = props;
   // Set up the site configuration, layout and theme.
   const appConfig = config();
   // Load entities into the in-memory cache.
@@ -92,64 +94,66 @@ function MyApp({ Component, pageProps }: AppPropsWithComponent): JSX.Element {
   if (!aiUrl) throw new Error("AI URL is not defined in the configuration.");
 
   return (
-    <EmotionThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
-        <DXConfigProvider config={appConfig} entityListType={entityListType}>
-          <Head pageTitle={pageTitle} />
-          {ogMeta}
-          <CssBaseline />
-          <ServicesProvider>
-            <SystemStatusProvider>
-              <LayoutDimensionsProvider>
-                <AppLayout>
-                  <ThemeProvider
-                    theme={(theme: Theme): Theme =>
-                      createTheme(
-                        deepmerge(theme, {
-                          breakpoints: createBreakpoints(BREAKPOINTS),
-                        })
-                      )
-                    }
-                  >
-                    <StyledHeader {...header} transparent={homePage} />
-                  </ThemeProvider>
-                  <ChatProvider initialArgs={ai?.prompt} url={aiUrl}>
-                    <ExploreStateProvider entityListType={entityListType}>
-                      <DataDictionaryStateProvider>
-                        <FileManifestStateProvider>
-                          <Main>
-                            <ErrorBoundary
-                              fallbackRender={({
-                                error,
-                                reset,
-                              }: {
-                                error: DataExplorerError;
-                                reset: () => void;
-                              }): JSX.Element => (
-                                <DXError
-                                  errorMessage={error.message}
-                                  requestUrlMessage={error.requestUrlMessage}
-                                  rootPath={redirectRootToPath}
-                                  onReset={reset}
-                                />
-                              )}
-                            >
-                              <Component {...pageProps} />
-                              <Floating {...floating} />
-                            </ErrorBoundary>
-                          </Main>
-                        </FileManifestStateProvider>
-                      </DataDictionaryStateProvider>
-                    </ExploreStateProvider>
-                  </ChatProvider>
-                  <Footer />
-                </AppLayout>
-              </LayoutDimensionsProvider>
-            </SystemStatusProvider>
-          </ServicesProvider>
-        </DXConfigProvider>
-      </ThemeProvider>
-    </EmotionThemeProvider>
+    <AppCacheProvider {...props}>
+      <EmotionThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <DXConfigProvider config={appConfig} entityListType={entityListType}>
+            <Head pageTitle={pageTitle} />
+            {ogMeta}
+            <CssBaseline />
+            <ServicesProvider>
+              <SystemStatusProvider>
+                <LayoutDimensionsProvider>
+                  <AppLayout>
+                    <ThemeProvider
+                      theme={(theme: Theme): Theme =>
+                        createTheme(
+                          deepmerge(theme, {
+                            breakpoints: createBreakpoints(BREAKPOINTS),
+                          })
+                        )
+                      }
+                    >
+                      <StyledHeader {...header} transparent={homePage} />
+                    </ThemeProvider>
+                    <ChatProvider initialArgs={ai?.prompt} url={aiUrl}>
+                      <ExploreStateProvider entityListType={entityListType}>
+                        <DataDictionaryStateProvider>
+                          <FileManifestStateProvider>
+                            <Main>
+                              <ErrorBoundary
+                                fallbackRender={({
+                                  error,
+                                  reset,
+                                }: {
+                                  error: DataExplorerError;
+                                  reset: () => void;
+                                }): JSX.Element => (
+                                  <DXError
+                                    errorMessage={error.message}
+                                    requestUrlMessage={error.requestUrlMessage}
+                                    rootPath={redirectRootToPath}
+                                    onReset={reset}
+                                  />
+                                )}
+                              >
+                                <Component {...pageProps} />
+                                <Floating {...floating} />
+                              </ErrorBoundary>
+                            </Main>
+                          </FileManifestStateProvider>
+                        </DataDictionaryStateProvider>
+                      </ExploreStateProvider>
+                    </ChatProvider>
+                    <Footer />
+                  </AppLayout>
+                </LayoutDimensionsProvider>
+              </SystemStatusProvider>
+            </ServicesProvider>
+          </DXConfigProvider>
+        </ThemeProvider>
+      </EmotionThemeProvider>
+    </AppCacheProvider>
   );
 }
 

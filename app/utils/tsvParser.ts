@@ -10,6 +10,7 @@ import fs from "fs";
 
 type ReturnType = string | number | boolean;
 
+// eslint-disable-next-line sonarjs/redundant-type-aliases -- FieldKey is a semantic alias documenting that these strings are TSV field keys
 type FieldKey = string;
 
 /**

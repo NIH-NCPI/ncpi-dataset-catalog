@@ -135,6 +135,7 @@ export const Status = (): JSX.Element => {
 
   useEffect(() => {
     if (!searchApiUrl) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- synchronous config-error setState; refactor tracked in #373
       setState({
         error:
           "Search API URL is not configured. Set NEXT_PUBLIC_SEARCH_API_URL or config.ai.url.",

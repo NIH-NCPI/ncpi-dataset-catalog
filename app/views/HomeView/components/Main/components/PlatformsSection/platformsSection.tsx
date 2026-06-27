@@ -31,6 +31,7 @@ export const PlatformsSection = (): JSX.Element => {
         <StyledStack useFlexGap>
           {PLATFORMS.map(({ description, logo, name }) => (
             <StyledRoundedPaper key={name}>
+              {/* eslint-disable-next-line @next/next/no-img-element -- static export (output: "export") disables next/image optimization; these are small static logos */}
               <img alt={name} src={logo} />
               <Stack spacing={1} useFlexGap>
                 <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_500}>
