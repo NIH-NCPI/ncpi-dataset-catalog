@@ -56,11 +56,8 @@ def execute_query_model(query_model: QueryModel, index: ConceptIndex) -> Executi
         # Apply study-level constraints (platform, dataType, etc.) first.
         non_measurement = [c for c in include if c[0] != Facet.MEASUREMENT]
         study_ids: set[str] | None = None
-        if non_measurement:
+        if non_measurement or exclude:
             matched = index.query_studies(non_measurement, exclude or None)
-            study_ids = {s["dbGapId"] for s in matched if s.get("dbGapId")}
-        elif exclude:
-            matched = index.query_studies([], exclude)
             study_ids = {s["dbGapId"] for s in matched if s.get("dbGapId")}
 
         # Collect measurement concepts and query variables via ISA closure
