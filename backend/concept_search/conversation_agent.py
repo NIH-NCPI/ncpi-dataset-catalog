@@ -175,7 +175,11 @@ def _shape_resolve(request: ResolveRequest, result: ResolveResult) -> dict:
     """Shape one resolve result for the model, tagged with its input."""
     return {
         "disambiguation": [
-            {"conceptId": d.concept_id, "facet": d.facet, "label": d.label}
+            {
+                "conceptId": d.concept_id,
+                "facet": d.facet.value if d.facet else None,
+                "label": d.label,
+            }
             for d in result.disambiguation
         ],
         "facet": request.facet.value,
