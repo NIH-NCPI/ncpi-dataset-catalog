@@ -28,7 +28,15 @@ from pydantic_core import to_jsonable_python
 
 from .index import ConceptIndex
 from .mention_constraints import split_mentions
-from .models import Facet, Intent, QueryModel, RawMention, ResolvedMention, ResolveResult
+from .models import (
+    Facet,
+    Intent,
+    PendingChoice,
+    QueryModel,
+    RawMention,
+    ResolvedMention,
+    ResolveResult,
+)
 from .resolve_agent import run_resolve
 from .search_execution import execute_query_model
 
@@ -48,13 +56,13 @@ class AgentDeps:
     """Per-request dependencies for the orchestrator and its tools.
 
     ``pending`` holds disambiguation choices the agent has offered but the user
-    hasn't resolved yet — each ``{text, facet, options}`` — so the full state
-    (committed filters + open choices) can be injected into every turn.
+    hasn't resolved yet, so the full state (committed filters + open choices)
+    can be injected into every turn.
     """
 
     index: ConceptIndex
     query_state: QueryModel
-    pending: list[dict] = field(default_factory=list)
+    pending: list[PendingChoice] = field(default_factory=list)
 
 
 class MentionInput(BaseModel):
@@ -205,11 +213,17 @@ async def resolve_concepts(
     out = [_shape_resolve(m, r) for m, r in zip(mentions, results, strict=True)]
     # Track terms that came back ambiguous as open choices (injected into the
     # next turn's state block so ordinal/"neither" replies have a referent).
-    ctx.deps.pending = [
-        {"facet": r["facet"], "options": r["disambiguation"], "text": r["text"]}
-        for r in out
-        if r["disambiguation"]
+    # Merge, don't replace: this call only speaks to the terms it resolved, so
+    # keep open choices for untouched terms (from earlier calls/turns), drop any
+    # for terms resolved here, and add the ones still ambiguous.
+    touched = {m.text.lower() for m in mentions}
+    new_pending = [
+        PendingChoice(facet=m.facet.value, options=r.disambiguation, text=m.text)
+        for m, r in zip(mentions, results, strict=True)
+        if r.disambiguation
     ]
+    kept = [p for p in ctx.deps.pending if p.text.lower() not in touched]
+    ctx.deps.pending = kept + new_pending
     return out
 
 
@@ -274,7 +288,7 @@ def update_query(
     # A term that was just committed or dropped is no longer an open choice.
     touched = {t.lower() for t in (remove or [])} | {i.original_text.lower() for i in (add or [])}
     if touched:
-        deps.pending = [p for p in deps.pending if p["text"].lower() not in touched]
+        deps.pending = [p for p in deps.pending if p.text.lower() not in touched]
 
     return _summarize(query_state, deps.index)
 
@@ -384,8 +398,8 @@ def _state_preamble(deps: AgentDeps) -> str:
             parts.append(f'{prefix}{m.facet.value}="{m.original_text}" -> {values}')
         lines.append(f"[Current search (intent={query_state.intent}): " + "; ".join(parts) + "]")
     for pending in deps.pending:
-        options = "; ".join(f"{i + 1}) {o['label']}" for i, o in enumerate(pending["options"]))
-        lines.append(f'[Pending choice for "{pending["text"]}": {options}]')
+        options = "; ".join(f"{i + 1}) {o.label}" for i, o in enumerate(pending.options))
+        lines.append(f'[Pending choice for "{pending.text}": {options}]')
     return "\n".join(lines)
 
 

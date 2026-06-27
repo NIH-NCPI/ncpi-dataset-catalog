@@ -114,6 +114,22 @@ class DisambiguationOption(BaseModel):
     label: str = Field(description="Human-readable label for this interpretation")
 
 
+class PendingChoice(BaseModel):
+    """An open disambiguation the agent offered but the user hasn't resolved.
+
+    Carried across conversation turns so an ordinal / "neither" reply has a
+    referent. Distinct from a committed filter — the user still has to pick.
+    """
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    facet: str = Field(description="Facet of the ambiguous term.")
+    options: list[DisambiguationOption] = Field(
+        default_factory=list, description="The candidate interpretations offered."
+    )
+    text: str = Field(description="The original user text that was ambiguous.")
+
+
 class MatchedVariable(BaseModel):
     """A specific variable that matched the user's query at a leaf concept."""
 

@@ -23,7 +23,7 @@ from typing import Protocol, runtime_checkable
 from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
 
-from .models import ConversationMessage, QueryModel
+from .models import ConversationMessage, PendingChoice, QueryModel
 
 
 class SessionState(BaseModel):
@@ -43,9 +43,9 @@ class SessionState(BaseModel):
     # for the deterministic /search pipeline, which carries no agent history.
     agent_message_history: list[dict] = Field(default_factory=list)
     messages: list[ConversationMessage] = Field(default_factory=list)
-    # Open disambiguation choices ({text, facet, options}) offered but unresolved,
-    # so they survive into the next turn's injected state block.
-    pending: list[dict] = Field(default_factory=list)
+    # Open disambiguation choices offered but unresolved, so they survive into
+    # the next turn's injected state block.
+    pending: list[PendingChoice] = Field(default_factory=list)
     query: QueryModel | None = None
 
 
@@ -57,11 +57,14 @@ def truncate_history(messages: list, max_messages: int) -> list:
 
     Args:
         messages: The full message history, oldest first.
-        max_messages: Maximum number of recent messages to retain.
+        max_messages: Maximum number of recent messages to retain. Values <= 0
+            keep only the first message.
 
     Returns:
         The truncated history, or the original list if already within bounds.
     """
+    if max_messages <= 0:
+        return messages[:1]
     if len(messages) <= max_messages:
         return messages
     return messages[:1] + messages[-max_messages:]

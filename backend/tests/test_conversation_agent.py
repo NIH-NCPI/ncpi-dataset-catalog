@@ -7,6 +7,7 @@ the mutation/aggregation logic directly without standing up a real agent.
 from __future__ import annotations
 
 import pytest
+from pydantic_ai.messages import ModelRequest, ModelResponse, TextPart, UserPromptPart
 
 from concept_search import conversation_agent
 from concept_search.conversation_agent import (
@@ -24,6 +25,7 @@ from concept_search.conversation_agent import (
 from concept_search.models import (
     DisambiguationOption,
     Facet,
+    PendingChoice,
     QueryModel,
     ResolvedMention,
     ResolveResult,
@@ -124,7 +126,7 @@ def test_update_query_reset_clears_filters_and_pending() -> None:
     update_query(
         ctx, add=[MentionInput(facet=Facet.FOCUS, original_text="diabetes", values=["DM"])]
     )
-    ctx.deps.pending = [{"facet": "measurement", "options": [], "text": "glucose"}]
+    ctx.deps.pending = [PendingChoice(facet="measurement", options=[], text="glucose")]
     update_query(
         ctx,
         add=[MentionInput(facet=Facet.PLATFORM, original_text="BDC", values=["BDC"])],
@@ -137,7 +139,7 @@ def test_update_query_reset_clears_filters_and_pending() -> None:
 def test_update_query_commit_clears_matching_pending() -> None:
     """Committing a term removes its open disambiguation choice."""
     ctx = _ctx(_FakeIndex())
-    ctx.deps.pending = [{"facet": "measurement", "options": [], "text": "glucose"}]
+    ctx.deps.pending = [PendingChoice(facet="measurement", options=[], text="glucose")]
     update_query(
         ctx, add=[MentionInput(facet=Facet.MEASUREMENT, original_text="glucose", values=["x"])]
     )
@@ -166,8 +168,8 @@ async def test_resolve_concepts_sets_pending_for_ambiguous(monkeypatch) -> None:
     ctx = _ctx(_FakeIndex())
     await resolve_concepts(ctx, [ResolveRequest(facet=Facet.MEASUREMENT, text="glucose")])
     assert len(ctx.deps.pending) == 1
-    assert ctx.deps.pending[0]["text"] == "glucose"
-    assert [o["label"] for o in ctx.deps.pending[0]["options"]] == [
+    assert ctx.deps.pending[0].text == "glucose"
+    assert [o.label for o in ctx.deps.pending[0].options] == [
         "Blood glucose",
         "Dietary glucose",
     ]
@@ -182,11 +184,15 @@ def test_state_preamble_renders_filters_and_pending() -> None:
             mentions=[ResolvedMention(facet=Facet.FOCUS, original_text="diabetes", values=["DM"])],
         ),
         pending=[
-            {
-                "facet": "measurement",
-                "options": [{"conceptId": "a", "facet": "measurement", "label": "Blood glucose"}],
-                "text": "glucose",
-            }
+            PendingChoice(
+                facet="measurement",
+                options=[
+                    DisambiguationOption(
+                        concept_id="a", facet=Facet.MEASUREMENT, label="Blood glucose"
+                    )
+                ],
+                text="glucose",
+            )
         ],
     )
     text = _state_preamble(deps)
@@ -299,3 +305,37 @@ def test_history_serialization_round_trips_empty() -> None:
     """serialize/deserialize handle the empty-history base case."""
     assert deserialize_history([]) == []
     assert serialize_history([]) == []
+
+
+def test_history_serialization_round_trips_messages() -> None:
+    """A real request/response history survives serialize -> deserialize."""
+    messages = [
+        ModelRequest(parts=[UserPromptPart(content="glucose studies")]),
+        ModelResponse(parts=[TextPart(content="Found 3 studies.")]),
+    ]
+    raw = serialize_history(messages)
+    assert raw  # non-empty JSON-able payload
+    restored = deserialize_history(raw)
+    assert len(restored) == 2
+    # Re-serializing the restored history is stable — the round-trip is lossless.
+    assert serialize_history(restored) == raw
+
+
+@pytest.mark.asyncio()
+async def test_resolve_concepts_merges_keeps_prior_pending(monkeypatch) -> None:
+    """A later resolve for a different term must not wipe earlier open choices.
+
+    Regression for #374: resolve_concepts used to replace ``pending`` wholesale,
+    silently dropping a still-open disambiguation from an earlier call/turn.
+    """
+
+    async def fake_run_resolve(mention, index, model=None):
+        return ResolveResult(values=["ASTHMA"], disambiguation=[], message=None)
+
+    monkeypatch.setattr(conversation_agent, "run_resolve", fake_run_resolve)
+    ctx = _ctx(_FakeIndex())
+    ctx.deps.pending = [PendingChoice(facet="focus", options=[], text="cancer")]
+    # Resolve a *different* term that comes back clean (no new choice).
+    await resolve_concepts(ctx, [ResolveRequest(facet=Facet.FOCUS, text="asthma")])
+    # The earlier open "cancer" choice survives.
+    assert [p.text for p in ctx.deps.pending] == ["cancer"]
