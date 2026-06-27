@@ -1,0 +1,35 @@
+name: Backend checks
+
+# Lint + unit tests for the concept-search backend. Evals are intentionally
+# excluded (-m "not evals"): they call the Anthropic API (cost, non-determinism,
+# would need a secret), so they run manually, not as a PR gate.
+on:
+  pull_request:
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend-checks.yml"
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend-checks.yml"
+
+concurrency:
+  group: backend-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.13"
+      - run: uv sync
+      - run: uv run ruff check concept_search/ tests/
+      - run: uv run ruff format --check concept_search/ tests/
+      - run: uv run python -m pytest tests/ -q -m "not evals"
