@@ -412,6 +412,16 @@ def serialize_history(messages: list[ModelMessage]) -> list[dict]:
     return to_jsonable_python(messages)
 
 
+def _clean_state_field(text: str) -> str:
+    """Neutralize characters that would break the bracket-delimited state block.
+
+    Embedded freeform strings (user search text, offered labels) are stripped of
+    newlines and ``[``/``]`` so a value like ``"studies [phase 2]"`` can't split
+    the block or forge a state line. Broader prompt-injection hardening is #364.
+    """
+    return text.replace("\n", " ").replace("\r", " ").replace("[", "(").replace("]", ")").strip()
+
+
 def _state_preamble(deps: AgentDeps) -> str:
     """Render the full live state (committed filters + open choices) for the model.
 
@@ -426,12 +436,18 @@ def _state_preamble(deps: AgentDeps) -> str:
         parts = []
         for m in query_state.mentions:
             prefix = "exclude " if m.exclude else ""
-            values = ", ".join(m.values) if m.values else "(unresolved)"
-            parts.append(f'{prefix}{m.facet.value}="{m.original_text}" -> {values}')
+            values = (
+                ", ".join(_clean_state_field(v) for v in m.values) if m.values else "(unresolved)"
+            )
+            parts.append(
+                f'{prefix}{m.facet.value}="{_clean_state_field(m.original_text)}" -> {values}'
+            )
         lines.append(f"[Current search (intent={query_state.intent}): " + "; ".join(parts) + "]")
     for pending in deps.pending:
-        options = "; ".join(f"{i + 1}) {o.label}" for i, o in enumerate(pending.options))
-        lines.append(f'[Pending choice for "{pending.text}": {options}]')
+        options = "; ".join(
+            f"{i + 1}) {_clean_state_field(o.label)}" for i, o in enumerate(pending.options)
+        )
+        lines.append(f'[Pending choice for "{_clean_state_field(pending.text)}": {options}]')
     return "\n".join(lines)
 
 
