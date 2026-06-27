@@ -326,12 +326,13 @@ def query_catalog(
 
     Use to count results, group them by a facet, or list a sample — and for
     empty-result back-off via ``drop_facets``. With no active filters this covers
-    the whole catalog (e.g. operation="facets", facet_by=["focus"] to see what
-    diseases exist).
+    the whole catalog via ``count`` and ``facets`` (e.g. operation="facets",
+    facet_by=["focus"] to see what diseases exist); ``list`` samples the matched
+    studies, so it needs at least one active filter.
 
     Args:
         operation: "count" (default), "facets" (group-by, needs facet_by), or
-            "list" (a sample of studies).
+            "list" (a sample of the matched studies; needs an active filter).
         facet_by: Facets to group by for operation="facets" (e.g. ["focus"]).
         drop_facets: Active facets to ignore for this exploration — use to test
             how many results relaxing a filter would yield.

@@ -7,7 +7,13 @@ import os
 import pytest
 
 from concept_search import session_store as session_store_module
-from concept_search.models import ConversationMessage, QueryModel, ResolvedMention
+from concept_search.models import (
+    ConversationMessage,
+    DisambiguationOption,
+    PendingChoice,
+    QueryModel,
+    ResolvedMention,
+)
 from concept_search.session_store import (
     InMemorySessionStore,
     SessionState,
@@ -67,6 +73,24 @@ async def test_agent_message_history_round_trips() -> None:
     got = await store.get("sess1")
     assert got is not None
     assert got.agent_message_history == state.agent_message_history
+
+
+@pytest.mark.asyncio()
+async def test_pending_round_trips() -> None:
+    """The pending disambiguation choices survive save/get unchanged."""
+    store = InMemorySessionStore()
+    state = _make_state()
+    state.pending = [
+        PendingChoice(
+            facet="measurement",
+            options=[DisambiguationOption(concept_id="x", label="Blood glucose")],
+            text="glucose",
+        )
+    ]
+    await store.save("sess1", state)
+    got = await store.get("sess1")
+    assert got is not None
+    assert got.pending == state.pending
 
 
 def test_truncate_history_keeps_first_and_recent() -> None:
