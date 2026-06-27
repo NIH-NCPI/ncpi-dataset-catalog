@@ -30,15 +30,39 @@ class SessionState(BaseModel):
     """Lean persisted conversation state — text turns plus the resolved query.
 
     Excludes the per-turn tool scratchpad by construction: the agent loop hands
-    the store only the user/assistant text and the resulting ``QueryModel``.
-    Pending disambiguation already lives inside ``QueryModel`` (via each
-    mention's ``disambiguation`` list), so no separate field is needed.
+    the store only the user/assistant text, the resulting ``QueryModel``, and any
+    open disambiguation choices.
     """
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
+    # Serialized pydantic-ai ModelMessage objects for the agentic loop
+    # (tool calls + results), so the orchestrator has full continuity. Empty
+    # for the deterministic /search pipeline, which carries no agent history.
+    agent_message_history: list[dict] = Field(default_factory=list)
     messages: list[ConversationMessage] = Field(default_factory=list)
+    # Open disambiguation choices ({text, facet, options}) offered but unresolved,
+    # so they survive into the next turn's injected state block.
+    pending: list[dict] = Field(default_factory=list)
     query: QueryModel | None = None
+
+
+def truncate_history(messages: list, max_messages: int) -> list:
+    """Bound the agent message history sent to the model on long conversations.
+
+    Keeps the first message (the original intent) plus the most recent
+    ``max_messages`` entries.
+
+    Args:
+        messages: The full message history, oldest first.
+        max_messages: Maximum number of recent messages to retain.
+
+    Returns:
+        The truncated history, or the original list if already within bounds.
+    """
+    if len(messages) <= max_messages:
+        return messages
+    return messages[:1] + messages[-max_messages:]
 
 
 @runtime_checkable
