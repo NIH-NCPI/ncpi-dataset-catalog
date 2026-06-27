@@ -58,10 +58,10 @@ def execute_query_model(query_model: QueryModel, index: ConceptIndex) -> Executi
         study_ids: set[str] | None = None
         if non_measurement:
             matched = index.query_studies(non_measurement, exclude or None)
-            study_ids = {sid for s in matched if (sid := s.get("dbGapId"))}
+            study_ids = {s["dbGapId"] for s in matched if s.get("dbGapId")}
         elif exclude:
             matched = index.query_studies([], exclude)
-            study_ids = {sid for s in matched if (sid := s.get("dbGapId"))}
+            study_ids = {s["dbGapId"] for s in matched if s.get("dbGapId")}
 
         # Collect measurement concepts and query variables via ISA closure
         # (matched_variables are kept for display but not used as a SQL filter).
