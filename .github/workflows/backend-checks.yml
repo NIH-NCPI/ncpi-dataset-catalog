@@ -29,6 +29,9 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           python-version: "3.13"
+      # setup-uv exports VIRTUAL_ENV pointing at the workspace-root .venv, but the
+      # project lives in backend/; clear it so uv uses backend/.venv without warning.
+      - run: echo "VIRTUAL_ENV=" >> "$GITHUB_ENV"
       - run: uv sync --frozen # fail if uv.lock is out of date (matches Dockerfile)
       - run: uv run ruff check concept_search/ tests/
       - run: uv run ruff format --check concept_search/ tests/
