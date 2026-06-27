@@ -4,11 +4,11 @@ Provides a ``SessionStore`` protocol and an ``InMemorySessionStore``
 implementation. A future DynamoDB-backed store (AWS-native, native TTL)
 implements the same protocol — see issue #360.
 
-The persisted ``SessionState`` is deliberately **lean**: the user/assistant
-text turns plus the current resolved ``QueryModel``. The per-turn tool
-scratchpad (concept-search candidates, study lookups) is never handed to the
-store — the agent loop discards it when a turn ends. There is no trimming
-step; the lean shape is the schema.
+The persisted ``SessionState`` carries the user/assistant text turns, the
+current resolved ``QueryModel``, open disambiguation choices, and — for the
+agentic loop — the serialized pydantic-ai message history (tool calls and
+results) needed for continuity. ``truncate_history`` bounds that history on
+long conversations.
 """
 
 from __future__ import annotations
@@ -27,11 +27,13 @@ from .models import ConversationMessage, QueryModel
 
 
 class SessionState(BaseModel):
-    """Lean persisted conversation state — text turns plus the resolved query.
+    """Persisted conversation state for both search paths.
 
-    Excludes the per-turn tool scratchpad by construction: the agent loop hands
-    the store only the user/assistant text, the resulting ``QueryModel``, and any
-    open disambiguation choices.
+    Holds the user/assistant text turns, the resolved ``QueryModel``, any open
+    disambiguation choices (``pending``), and — for the agentic loop — the
+    serialized pydantic-ai message history (``agent_message_history``: tool calls
+    and results) needed for continuity across turns. The deterministic
+    ``/search`` pipeline leaves the agent fields empty.
     """
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)

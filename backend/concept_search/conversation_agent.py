@@ -16,6 +16,7 @@ from __future__ import annotations
 import asyncio
 import os
 import threading
+from collections import Counter
 from dataclasses import dataclass, field
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -92,14 +93,14 @@ def _facet_counts(studies: list[dict], facet_by: list[str]) -> dict:
         field = _FACET_STUDY_FIELD.get(facet)
         if field is None:
             continue
-        counts: dict[str, int] = {}
+        counts: Counter[str] = Counter()
         for study in studies:
             raw = study.get(field)
-            values = raw if isinstance(raw, list) else ([raw] if raw else [])
-            for value in values:
-                counts[value] = counts.get(value, 0) + 1
-        top = sorted(counts.items(), key=lambda kv: kv[1], reverse=True)[:20]
-        out[facet] = dict(top)
+            if isinstance(raw, list):
+                counts.update(raw)
+            elif raw:
+                counts[raw] += 1
+        out[facet] = dict(counts.most_common(20))
     return out
 
 
