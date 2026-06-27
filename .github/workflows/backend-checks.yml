@@ -29,7 +29,7 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           python-version: "3.13"
-      - run: uv sync
+      - run: uv sync --frozen # fail if uv.lock is out of date (matches Dockerfile)
       - run: uv run ruff check concept_search/ tests/
       - run: uv run ruff format --check concept_search/ tests/
       - run: uv run python -m pytest tests/ -q -m "not evals"
