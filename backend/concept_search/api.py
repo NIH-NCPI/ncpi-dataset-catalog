@@ -536,7 +536,9 @@ async def search(
     return response
 
 
-_MAX_AGENT_HISTORY = 40  # messages of pydantic-ai history sent to the model
+# truncate_history keeps the first message plus the most recent N, so up to N+1
+# pydantic-ai messages are sent to the model (and retained in the stored history).
+_MAX_AGENT_HISTORY = 40
 _MAX_SESSION_MESSAGES = 50  # user/assistant text turns retained in the persisted transcript
 
 
@@ -611,15 +613,17 @@ async def search_agent(
         variables=[_build_variable_result(r) for r in execution.variable_rows],
     )
 
-    # Persist conversation state for the next turn.
+    # Persist conversation state for the next turn. Both histories are bounded
+    # on write so stored state can't grow without limit (matters once the store
+    # is DynamoDB, with per-item size caps). Stopgap — a coherent truncation
+    # policy for both is tracked in #380.
     state.query = query_model
     state.pending = deps.pending
-    state.agent_message_history = serialize_history(new_history)
+    state.agent_message_history = serialize_history(
+        truncate_history(new_history, _MAX_AGENT_HISTORY)
+    )
     state.messages.append(ConversationMessage(content=request.query, role="user"))
     state.messages.append(ConversationMessage(content=reply, role="assistant"))
-    # Stopgap bound so the persisted transcript can't grow without limit (matters
-    # once the store is DynamoDB, with per-item size caps). A coherent on-write
-    # truncation policy for both histories is tracked in #380.
     state.messages = state.messages[-_MAX_SESSION_MESSAGES:]
     await store.save(request.session_id, state)
 
