@@ -7,12 +7,19 @@ import os
 import pytest
 
 from concept_search import session_store as session_store_module
-from concept_search.models import ConversationMessage, QueryModel, ResolvedMention
+from concept_search.models import (
+    ConversationMessage,
+    DisambiguationOption,
+    PendingChoice,
+    QueryModel,
+    ResolvedMention,
+)
 from concept_search.session_store import (
     InMemorySessionStore,
     SessionState,
     SessionStore,
     get_session_store,
+    truncate_history,
 )
 
 
@@ -54,6 +61,54 @@ async def test_save_get_round_trip() -> None:
     await store.save("sess1", state)
     got = await store.get("sess1")
     assert got == state
+
+
+@pytest.mark.asyncio()
+async def test_agent_message_history_round_trips() -> None:
+    """The agent_message_history payload survives save/get unchanged."""
+    store = InMemorySessionStore()
+    state = _make_state()
+    state.agent_message_history = [{"role": "user", "parts": [{"content": "hi"}]}]
+    await store.save("sess1", state)
+    got = await store.get("sess1")
+    assert got is not None
+    assert got.agent_message_history == state.agent_message_history
+
+
+@pytest.mark.asyncio()
+async def test_pending_round_trips() -> None:
+    """The pending disambiguation choices survive save/get unchanged."""
+    store = InMemorySessionStore()
+    state = _make_state()
+    state.pending = [
+        PendingChoice(
+            facet="measurement",
+            options=[DisambiguationOption(concept_id="x", label="Blood glucose")],
+            text="glucose",
+        )
+    ]
+    await store.save("sess1", state)
+    got = await store.get("sess1")
+    assert got is not None
+    assert got.pending == state.pending
+
+
+def test_truncate_history_keeps_first_and_recent() -> None:
+    """truncate_history keeps the first message plus the most recent N."""
+    messages = list(range(10))
+    assert truncate_history(messages, 3) == [0, 7, 8, 9]
+
+
+def test_truncate_history_noop_within_bounds() -> None:
+    """truncate_history returns the list unchanged when within bounds."""
+    messages = [1, 2, 3]
+    assert truncate_history(messages, 5) == [1, 2, 3]
+
+
+def test_truncate_history_noop_at_boundary() -> None:
+    """At first + max_messages total (len == max + 1), the original list is returned."""
+    messages = [0, 1, 2, 3, 4, 5]  # len 6 == max(5) + 1, already fits
+    assert truncate_history(messages, 5) is messages  # unchanged, not a copy
 
 
 @pytest.mark.asyncio()
