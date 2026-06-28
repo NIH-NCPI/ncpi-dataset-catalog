@@ -416,10 +416,18 @@ def _clean_state_field(text: str) -> str:
     """Neutralize characters that would break the bracket-delimited state block.
 
     Embedded freeform strings (user search text, offered labels) are stripped of
-    newlines and ``[``/``]`` so a value like ``"studies [phase 2]"`` can't split
-    the block or forge a state line. Broader prompt-injection hardening is #364.
+    newlines, ``[``/``]``, and ``"`` so a value like ``studies [phase 2]`` or one
+    containing a quote can't split the block, break the ``facet="..."`` quoting,
+    or forge a state line. Broader prompt-injection hardening is #364.
     """
-    return text.replace("\n", " ").replace("\r", " ").replace("[", "(").replace("]", ")").strip()
+    return (
+        text.replace("\n", " ")
+        .replace("\r", " ")
+        .replace("[", "(")
+        .replace("]", ")")
+        .replace('"', "'")
+        .strip()
+    )
 
 
 def _state_preamble(deps: AgentDeps) -> str:
