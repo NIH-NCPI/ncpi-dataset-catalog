@@ -190,3 +190,17 @@ class TestSearchAgentEndpoint:
         client = TestClient(app, raise_server_exceptions=False)
         resp = client.post("/search/agent", json={"query": "diabetes", "sessionId": ""})
         assert resp.status_code == 422
+
+    @patch("concept_search.api.get_index")
+    def test_missing_query_is_rejected(self, mock_index) -> None:
+        """A request without a query fails validation — the agent needs a message."""
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search/agent", json={"sessionId": "s1"})
+        assert resp.status_code == 422
+
+    @patch("concept_search.api.get_index")
+    def test_blank_query_is_rejected(self, mock_index) -> None:
+        """A whitespace-only query fails validation."""
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search/agent", json={"query": "   ", "sessionId": "s1"})
+        assert resp.status_code == 422

@@ -73,6 +73,17 @@ class SearchAgentRequest(BaseModel):
     query: str = Field(default="", max_length=1000)
     session_id: str = Field(min_length=1, max_length=128)
 
+    @model_validator(mode="after")
+    def require_non_empty_query(self) -> SearchAgentRequest:
+        """Require a non-empty user message.
+
+        The agent path carries no ``previousQuery`` — conversation state lives
+        server-side — so every turn must supply a new message to act on.
+        """
+        if not self.query.strip():
+            raise ValueError("'query' must be a non-empty message.")
+        return self
+
 
 class DemographicCategory(BaseModel):
     """A single category within a demographic distribution."""

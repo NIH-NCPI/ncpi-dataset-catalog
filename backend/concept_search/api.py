@@ -537,6 +537,7 @@ async def search(
 
 
 _MAX_AGENT_HISTORY = 40  # messages of pydantic-ai history sent to the model
+_MAX_SESSION_MESSAGES = 50  # user/assistant text turns retained in the persisted transcript
 
 
 @app.post("/search/agent", response_model=SearchResponse)
@@ -616,6 +617,10 @@ async def search_agent(
     state.agent_message_history = serialize_history(new_history)
     state.messages.append(ConversationMessage(content=request.query, role="user"))
     state.messages.append(ConversationMessage(content=reply, role="assistant"))
+    # Stopgap bound so the persisted transcript can't grow without limit (matters
+    # once the store is DynamoDB, with per-item size caps). A coherent on-write
+    # truncation policy for both histories is tracked in #380.
+    state.messages = state.messages[-_MAX_SESSION_MESSAGES:]
     await store.save(request.session_id, state)
 
     _log_json(
