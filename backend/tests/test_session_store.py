@@ -105,6 +105,12 @@ def test_truncate_history_noop_within_bounds() -> None:
     assert truncate_history(messages, 5) == [1, 2, 3]
 
 
+def test_truncate_history_noop_at_boundary() -> None:
+    """At first + max_messages total (len == max + 1), the original list is returned."""
+    messages = [0, 1, 2, 3, 4, 5]  # len 6 == max(5) + 1, already fits
+    assert truncate_history(messages, 5) is messages  # unchanged, not a copy
+
+
 @pytest.mark.asyncio()
 async def test_get_unknown_returns_none() -> None:
     """Getting an unknown session id returns None."""

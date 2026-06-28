@@ -65,7 +65,9 @@ def truncate_history(messages: list, max_messages: int) -> list:
     """
     if max_messages <= 0:
         return messages[:1]
-    if len(messages) <= max_messages:
+    # Result is first + last max_messages, i.e. up to max_messages + 1 entries;
+    # at or below that the history already fits, so return it unchanged.
+    if len(messages) <= max_messages + 1:
         return messages
     return messages[:1] + messages[-max_messages:]
 
