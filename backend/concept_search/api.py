@@ -20,6 +20,7 @@ from fastapi.responses import JSONResponse
 from .api_models import (
     DemographicCategory,
     DemographicDistribution,
+    SearchAgentRequest,
     SearchRequest,
     SearchResponse,
     SearchTiming,
@@ -29,8 +30,15 @@ from .api_models import (
 )
 from .api_models import QueryClause as ApiQueryClause
 from .api_models import QueryStructure as ApiQueryStructure
+from .conversation_agent import (
+    AgentDeps,
+    deserialize_history,
+    run_conversation,
+    serialize_history,
+)
 from .index import get_index
 from .models import (
+    ConversationMessage,
     QueryModel,
     ResolvedMention,
     RouteRemove,
@@ -49,6 +57,7 @@ from .response_summary import (
 )
 from .router_agent import run_router
 from .search_execution import execute_query_model
+from .session_store import SessionState, get_session_store, truncate_history
 
 # Structured JSON logging to stdout (picked up by CloudWatch via App Runner)
 logging.basicConfig(
@@ -363,6 +372,26 @@ async def _handle_route(query: str, previous_query: QueryModel) -> QueryModel:
     return result
 
 
+def _timeout_response(elapsed_ms: int, message: str) -> SearchResponse:
+    """Build an empty SearchResponse for a timeout/error on either search path."""
+    return SearchResponse(
+        message=message,
+        query=QueryModel(mentions=[]),
+        studies=[],
+        timing=SearchTiming(lookup_ms=0, pipeline_ms=elapsed_ms, total_ms=elapsed_ms),
+        total_studies=0,
+    )
+
+
+def _rate_limit_response(client_ip: str, query: str) -> JSONResponse:
+    """Log a rate-limit hit and build the 429 response (shared by both search paths)."""
+    _log_json(event="rate_limited", ip=client_ip, query=query)
+    return JSONResponse(
+        content={"detail": "Too many requests — please try again later."},
+        status_code=429,
+    )
+
+
 @app.post("/search", response_model=SearchResponse)
 async def search(
     request: SearchRequest, fastapi_request: Request
@@ -371,11 +400,7 @@ async def search(
     # 1. Rate limit check
     client_ip = _get_client_ip(fastapi_request)
     if not await _rate_limiter.is_allowed(client_ip):
-        _log_json(event="rate_limited", ip=client_ip, query=request.query)
-        return JSONResponse(
-            content={"detail": "Too many requests — please try again later."},
-            status_code=429,
-        )
+        return _rate_limit_response(client_ip, request.query)
 
     has_query = bool(request.query and request.query.strip())
     has_previous = request.previous_query is not None
@@ -411,17 +436,7 @@ async def search(
         except (TimeoutError, asyncio.CancelledError):
             _log_json(event="search_timeout", query=request.query)
             elapsed_ms = int((time.monotonic() - t_start) * 1000)
-            return SearchResponse(
-                message="Search timed out — please try a simpler query.",
-                query=QueryModel(mentions=[]),
-                studies=[],
-                timing=SearchTiming(
-                    lookup_ms=0,
-                    pipeline_ms=elapsed_ms,
-                    total_ms=elapsed_ms,
-                ),
-                total_studies=0,
-            )
+            return _timeout_response(elapsed_ms, "Search timed out — please try a simpler query.")
         except Exception as exc:
             _log_json(
                 event="search_pipeline_error",
@@ -430,17 +445,7 @@ async def search(
                 error_type=type(exc).__name__,
             )
             elapsed_ms = int((time.monotonic() - t_start) * 1000)
-            return SearchResponse(
-                message="Something went wrong — please try again.",
-                query=QueryModel(mentions=[]),
-                studies=[],
-                timing=SearchTiming(
-                    lookup_ms=0,
-                    pipeline_ms=elapsed_ms,
-                    total_ms=elapsed_ms,
-                ),
-                total_studies=0,
-            )
+            return _timeout_response(elapsed_ms, "Something went wrong — please try again.")
         t_pipeline = time.monotonic()
 
     # Deterministic lookup — branch on intent (shared with /search/agent)
@@ -528,6 +533,110 @@ async def search(
         lookup_ms=lookup_ms,
     )
 
+    return response
+
+
+# truncate_history keeps the first message plus the most recent N, so up to N+1
+# pydantic-ai messages are sent to the model (and retained in the stored history).
+_MAX_AGENT_HISTORY = 40
+_MAX_SESSION_MESSAGES = 50  # user/assistant text turns retained in the persisted transcript
+
+
+@app.post("/search/agent", response_model=SearchResponse)
+async def search_agent(
+    request: SearchAgentRequest, fastapi_request: Request
+) -> SearchResponse | JSONResponse:
+    """Agentic multi-turn search (epic #365).
+
+    The orchestrator builds a QueryModel via tools; the backend owns conversation
+    state keyed by ``session_id``. Returns the same SearchResponse shape as
+    ``/search`` — rows from deterministic execution, ``message`` is the agent's reply.
+    """
+    client_ip = _get_client_ip(fastapi_request)
+    if not await _rate_limiter.is_allowed(client_ip):
+        return _rate_limit_response(client_ip, request.query)
+
+    _log_json(event="agent_request", session_id=request.session_id, query=request.query)
+    t_start = time.monotonic()
+
+    store = get_session_store()
+    state = await store.get(request.session_id) or SessionState()
+    index = get_index()
+    deps = AgentDeps(
+        index=index, query_state=state.query or QueryModel(), pending=list(state.pending)
+    )
+    history = truncate_history(
+        deserialize_history(state.agent_message_history), _MAX_AGENT_HISTORY
+    )
+
+    try:
+        async with _pipeline_semaphore:
+            reply, query_model, new_history = await asyncio.wait_for(
+                run_conversation(request.query, deps, message_history=history),
+                timeout=60.0,
+            )
+    except (TimeoutError, asyncio.CancelledError):
+        _log_json(event="agent_timeout", session_id=request.session_id, query=request.query)
+        elapsed_ms = int((time.monotonic() - t_start) * 1000)
+        return _timeout_response(elapsed_ms, "Search timed out — please try again.")
+    except Exception as exc:  # noqa: BLE001 — surface a friendly reply, log the detail
+        _log_json(
+            event="agent_error",
+            session_id=request.session_id,
+            query=request.query,
+            error=str(exc),
+            error_type=type(exc).__name__,
+        )
+        elapsed_ms = int((time.monotonic() - t_start) * 1000)
+        return _timeout_response(elapsed_ms, "Something went wrong — please try again.")
+
+    t_pipeline = time.monotonic()
+    execution = execute_query_model(query_model, index)
+    t_lookup = time.monotonic()
+    pipeline_ms = int((t_pipeline - t_start) * 1000)
+    lookup_ms = int((t_lookup - t_pipeline) * 1000)
+
+    query_structure = build_query_structure(query_model, index)
+    response = SearchResponse(
+        intent=query_model.intent,
+        message=reply,
+        query=query_model,
+        query_structure=_to_api_query_structure(query_structure),
+        studies=[_build_study_summary(s) for s in execution.studies],
+        timing=SearchTiming(
+            lookup_ms=lookup_ms,
+            pipeline_ms=pipeline_ms,
+            total_ms=pipeline_ms + lookup_ms,
+        ),
+        total_studies=len(execution.studies),
+        total_variables=execution.total_variable_count,
+        variables=[_build_variable_result(r) for r in execution.variable_rows],
+    )
+
+    # Persist conversation state for the next turn. Both histories are bounded
+    # on write so stored state can't grow without limit (matters once the store
+    # is DynamoDB, with per-item size caps). Stopgap — a coherent truncation
+    # policy for both is tracked in #380.
+    state.query = query_model
+    state.pending = deps.pending
+    state.agent_message_history = serialize_history(
+        truncate_history(new_history, _MAX_AGENT_HISTORY)
+    )
+    state.messages.append(ConversationMessage(content=request.query, role="user"))
+    state.messages.append(ConversationMessage(content=reply, role="assistant"))
+    state.messages = state.messages[-_MAX_SESSION_MESSAGES:]
+    await store.save(request.session_id, state)
+
+    _log_json(
+        event="agent_response",
+        session_id=request.session_id,
+        query=request.query,
+        intent=query_model.intent,
+        total_studies=len(execution.studies),
+        total_variables=execution.total_variable_count,
+        pipeline_ms=pipeline_ms,
+        lookup_ms=lookup_ms,
+    )
     return response
 
 
