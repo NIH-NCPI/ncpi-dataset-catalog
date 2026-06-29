@@ -94,4 +94,4 @@ Workflow: `make embeddings` → `make db-reload` → `make build` (Docker).
 
 ## Node Version
 
-Requires Node.js 22.12.0
+Requires Node.js 22.13.0
