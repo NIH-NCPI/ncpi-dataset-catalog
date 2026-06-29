@@ -182,19 +182,30 @@ export function MultiTurnQueryProvider({
 
       const form = e.currentTarget;
 
-      dispatch.onSetQuery(query);
-      dispatch.onSetStatus(true);
-      form.reset();
-      options.onMutate?.(form, query);
-
+      // Build the request body before mutating UI state. crypto.randomUUID()
+      // throws on a non-secure origin (HTTP outside localhost); doing it here
+      // surfaces a visible error instead of leaving the form stuck loading.
       const body: Record<string, unknown> = { query };
       if (agentMode) {
         // Backend owns conversation state keyed by sessionId — no previousQuery.
-        if (!sessionIdRef.current) sessionIdRef.current = crypto.randomUUID();
+        try {
+          if (!sessionIdRef.current) sessionIdRef.current = crypto.randomUUID();
+        } catch {
+          dispatch.onSetError(
+            "Agent search needs a secure (HTTPS) connection."
+          );
+          options.onError?.(new Error("Failed to start an agent session."));
+          return;
+        }
         body.sessionId = sessionIdRef.current;
       } else if (lastQueryRef.current) {
         body.previousQuery = lastQueryRef.current;
       }
+
+      dispatch.onSetQuery(query);
+      dispatch.onSetStatus(true);
+      form.reset();
+      options.onMutate?.(form, query);
 
       const data = await postSearch(submitUrl, body, abortRef, dispatch);
       if (data) {

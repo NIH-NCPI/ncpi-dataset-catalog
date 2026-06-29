@@ -464,6 +464,31 @@ describe("MultiTurnQueryProvider onSubmit (agent mode)", () => {
     expect(secondBody.sessionId).toBe(firstBody.sessionId);
     expect(secondBody).not.toHaveProperty("previousQuery");
   });
+
+  it("surfaces an error and does not get stuck when session id generation fails", async () => {
+    Object.defineProperty(crypto, "randomUUID", {
+      configurable: true,
+      value: () => {
+        throw new Error("insecure context");
+      },
+    });
+    const onError = jest.fn();
+    const { result } = renderOnSubmit();
+
+    await act(async () => {
+      await result.current.onSubmit(
+        mockFormEvent(),
+        { query: "diabetes studies" },
+        { ...defaultOptions, onError }
+      );
+    });
+
+    expect(global.fetch).not.toHaveBeenCalled();
+    expect(onError).toHaveBeenCalled();
+    expect(mockDispatch.onSetError).toHaveBeenCalled();
+    // Loading was never entered, so the UI cannot be stuck.
+    expect(mockDispatch.onSetStatus).not.toHaveBeenCalledWith(true);
+  });
 });
 /* eslint-enable @typescript-eslint/no-explicit-any -- re-enable after test mocks */
 /* eslint-enable @typescript-eslint/explicit-function-return-type -- re-enable after test helpers */
