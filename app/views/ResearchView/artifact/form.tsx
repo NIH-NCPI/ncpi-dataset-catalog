@@ -19,6 +19,7 @@ import {
   useRef,
 } from "react";
 import { getSearchApiUrl } from "../../../utils/searchApiUrl";
+import { useAgentMode } from "../hooks/UseAgentMode/hook";
 
 /**
  * Context for multi-turn filter removal.
@@ -115,9 +116,18 @@ export function MultiTurnQueryProvider({
   children,
 }: MultiTurnQueryProviderProps): JSX.Element {
   const { config } = useConfig();
+  // Opt-in agentic search via the `?agent=1` URL flag. When on, submissions go
+  // to the `/search/agent` endpoint with a server-owned session instead of the
+  // deterministic `/search` previousQuery round-trip.
+  const agentMode = useAgentMode();
   const url = getSearchApiUrl(config.ai?.url);
+  const submitUrl = getSearchApiUrl(config.ai?.url, { agent: agentMode });
   const dispatch = useChatDispatch();
   const lastQueryRef = useRef<MessageResponse["query"] | null>(null);
+  // Conversation id for agent mode; created lazily on first agent submission so
+  // the backend can key multi-turn state. The agent handles resets server-side,
+  // so one id per provider lifetime (one research-view visit) is sufficient.
+  const sessionIdRef = useRef<string>("");
   const abortRef = useRef<AbortController | null>(null);
 
   // Sync lastQueryRef from chat state whenever a new assistant message arrives.
@@ -168,21 +178,36 @@ export function MultiTurnQueryProvider({
       if (options.status.loading) return;
 
       const query = payload.query.trim();
-      if (!query || !url) return;
+      if (!query || !submitUrl) return;
 
       const form = e.currentTarget;
+
+      // Build the request body before mutating UI state. crypto.randomUUID()
+      // throws on a non-secure origin (HTTP outside localhost); doing it here
+      // surfaces a visible error instead of leaving the form stuck loading.
+      const body: Record<string, unknown> = { query };
+      if (agentMode) {
+        // Backend owns conversation state keyed by sessionId — no previousQuery.
+        try {
+          if (!sessionIdRef.current) sessionIdRef.current = crypto.randomUUID();
+        } catch {
+          dispatch.onSetError(
+            "Agent search needs a secure (HTTPS) connection."
+          );
+          options.onError?.(new Error("Failed to start an agent session."));
+          return;
+        }
+        body.sessionId = sessionIdRef.current;
+      } else if (lastQueryRef.current) {
+        body.previousQuery = lastQueryRef.current;
+      }
 
       dispatch.onSetQuery(query);
       dispatch.onSetStatus(true);
       form.reset();
       options.onMutate?.(form, query);
 
-      const body: Record<string, unknown> = { query };
-      if (lastQueryRef.current) {
-        body.previousQuery = lastQueryRef.current;
-      }
-
-      const data = await postSearch(url, body, abortRef, dispatch);
+      const data = await postSearch(submitUrl, body, abortRef, dispatch);
       if (data) {
         lastQueryRef.current = data.query;
         options.onSuccess?.(data);
@@ -191,7 +216,7 @@ export function MultiTurnQueryProvider({
       }
       options.onSettled?.(form);
     },
-    [dispatch, url]
+    [agentMode, dispatch, submitUrl]
   );
 
   const queryContextValue = useMemo(() => ({ onSubmit }), [onSubmit]);
