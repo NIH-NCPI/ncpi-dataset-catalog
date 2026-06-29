@@ -392,6 +392,18 @@ describe("MultiTurnQueryProvider onSubmit (agent mode)", () => {
   // jsdom does not implement crypto.randomUUID; stub it with incrementing ids
   // so the "reuse" test can prove the session id is generated once, not per turn.
   let uuidCounter = 0;
+  const originalRandomUUID = Object.getOwnPropertyDescriptor(
+    crypto,
+    "randomUUID"
+  );
+
+  afterEach(() => {
+    if (originalRandomUUID) {
+      Object.defineProperty(crypto, "randomUUID", originalRandomUUID);
+    } else {
+      delete (crypto as { randomUUID?: unknown }).randomUUID;
+    }
+  });
 
   beforeEach(() => {
     jest.clearAllMocks();

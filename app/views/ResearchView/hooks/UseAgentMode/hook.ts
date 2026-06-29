@@ -14,5 +14,8 @@ const AGENT_MODE_ENABLED = "1";
  */
 export function useAgentMode(): boolean {
   const { query } = useRouter();
-  return query[AGENT_MODE_PARAM] === AGENT_MODE_ENABLED;
+  // A repeated param (`?agent=1&agent=1`) arrives as a string[]; take the first.
+  const raw = query[AGENT_MODE_PARAM];
+  const value = Array.isArray(raw) ? raw[0] : raw;
+  return value === AGENT_MODE_ENABLED;
 }
