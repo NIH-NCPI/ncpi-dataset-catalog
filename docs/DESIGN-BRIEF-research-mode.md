@@ -151,7 +151,7 @@ See [SCHEMA-research-intent.md](SCHEMA-research-intent.md) for the full JSON sch
 These fields exist in the data model, but the card should **not** render as a form with labeled inputs. The challenge: we have structured data but want a conversational feel. Some principles:
 
 - **Start as prose, expand on interaction.** When a slot is first filled from chat, show it as a natural-language summary ("Adults with T2D, diverse ancestry, n > 1,000"). Only reveal the individual fields (condition, age, ancestry, sample size) when the user clicks to edit.
-- **Don't show empty field labels.** An unfilled slot says "What population are you studying?" — not "Condition: **_, Age: _**, Sex: **_, Ancestry: _**". The sub-fields only appear after the slot has content.
+- **Don't show empty field labels.** An unfilled slot says "What population are you studying?" — not `Condition: ___, Age: ___, Sex: ___, Ancestry: ___`. The sub-fields only appear after the slot has content.
 - **Progressive disclosure.** The card starts compact (maybe just P visible) and grows as the conversation fills slots. A fully filled card with all 5 slots expanded is the end state, not the starting state.
 - **Editing is inline, not modal.** Clicking a slot expands it in place. The sub-fields appear as editable chips or inline text, not as a separate form dialog. Think of editing a tag in a note-taking app — light, fast, dismissible.
 - **The chat is always the primary input.** The card is a mirror of the conversation. Most users will fill it by chatting. Direct editing is a power-user shortcut, not the expected path.
