@@ -47,15 +47,16 @@ When the text describes constraints on permitted use (e.g. "for-profit", "no IRB
 Identify which constraints the user expressed and return the applicable `no-*` tags as values. **No tool call needed.**
 
 Available tags:
-| Tag | Meaning |
-|---|---|
-| `no-npu` | For-profit / commercial use OK (excludes NPU modifier) |
-| `no-irb` | No IRB approval required (excludes IRB modifier) |
-| `no-pub` | No publication required (excludes PUB modifier) |
-| `no-col` | No collaboration required (excludes COL modifier) |
+
+| Tag      | Meaning                                                       |
+| -------- | ------------------------------------------------------------- |
+| `no-npu` | For-profit / commercial use OK (excludes NPU modifier)        |
+| `no-irb` | No IRB approval required (excludes IRB modifier)              |
+| `no-pub` | No publication required (excludes PUB modifier)               |
+| `no-col` | No collaboration required (excludes COL modifier)             |
 | `no-mds` | Not restricted to methods development (excludes MDS modifier) |
-| `no-gso` | Not restricted to genetic studies (excludes GSO modifier) |
-| `no-rd` | No rare disease restrictions (excludes RD modifier) |
+| `no-gso` | Not restricted to genetic studies (excludes GSO modifier)     |
+| `no-rd`  | No rare disease restrictions (excludes RD modifier)           |
 
 If the user expresses NO constraints (just "what can I use?", "eligible datasets"), return `values=[]` (empty list). The API layer will apply scope-based filtering without modifier exclusions.
 
