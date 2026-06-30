@@ -17,6 +17,7 @@ const config = [
   {
     ignores: [
       "**/node_modules/**",
+      "**/.venv/**",
       "**/out/**",
       "**/.next/**",
       "**/build/**",
