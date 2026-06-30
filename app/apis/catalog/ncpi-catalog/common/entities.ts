@@ -20,6 +20,7 @@ export interface NCPIStudy extends DbGapStudy {
   variableSummary: VariableSummary | null;
 }
 
+// eslint-disable-next-line sonarjs/redundant-type-aliases -- DbGapId is a semantic alias documenting that these strings are dbGaP study identifiers
 export type DbGapId = string;
 
 export type NCPICatalogEntity = NCPICatalogPlatform | NCPICatalogStudy;
@@ -60,8 +61,8 @@ export interface NCPICatalogStudy {
   consentCode: string[];
   consentLongName: Record<string, string>;
   dataType: string[];
-  duosUrl: string | null;
   dbGapId: string;
+  duosUrl: string | null;
   focus: string;
   gdcProjectId: string | null;
   participantCount: number;

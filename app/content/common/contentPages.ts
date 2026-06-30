@@ -35,6 +35,9 @@ export async function getContentStaticProps(
   const markdownWithMeta = fs.readFileSync(markdownPathname, "utf-8");
   const { content } = matter(markdownWithMeta);
   const mdxSource = await serialize(content, {
+    // next-mdx-remote v6 defaults blockJS to true, which strips JSX expression
+    // attributes from MDX content; disable to preserve existing rendering.
+    blockJS: false,
     mdxOptions: {
       development: false, // See https://github.com/hashicorp/next-mdx-remote/issues/307#issuecomment-1363415249 and https://github.com/hashicorp/next-mdx-remote/issues/307#issuecomment-1378362096.
       rehypePlugins: [],

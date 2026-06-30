@@ -37,6 +37,7 @@ export const DataAccessSection = (): JSX.Element => {
         <StyledStack spacing={2} useFlexGap>
           {ACCESS_OPTIONS.map((option) => (
             <StyledRoundedPaper key={option.name}>
+              {/* eslint-disable-next-line @next/next/no-img-element -- static export (output: "export") disables next/image optimization; these are small static logos */}
               <img alt={option.name} src={option.logo} />
               <Stack spacing={1} useFlexGap>
                 <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_500}>
