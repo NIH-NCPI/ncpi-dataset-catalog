@@ -178,7 +178,8 @@ class DynamoDBSessionStore:
             region_name: AWS region; when None, boto3 resolves it from the env.
             endpoint_url: Override endpoint (e.g. DynamoDB Local); None in cloud.
             client: Preconstructed boto3 DynamoDB client, for tests. When None a
-                client is created lazily.
+                client is constructed here (boto3 is imported lazily so the
+                memory backend needs no AWS SDK).
             _now: Wall-clock source (Unix seconds), injectable for testing.
         """
         self._table_name = table_name
