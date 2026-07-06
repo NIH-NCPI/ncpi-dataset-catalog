@@ -7,11 +7,11 @@ depend on moto's own TTL-reaping timing.
 
 from __future__ import annotations
 
-import os
 from typing import Any
 
 import boto3
 import pytest
+from botocore.exceptions import ClientError
 from moto import mock_aws
 
 from concept_search import session_store as session_store_module
@@ -127,6 +127,18 @@ async def test_save_replaces_existing(ddb_client: Any) -> None:
 
 
 @pytest.mark.asyncio()
+async def test_sessions_are_isolated(ddb_client: Any) -> None:
+    """Distinct session ids hold independent state (no key collision/bleed)."""
+    store = _store()
+    await store.save("a", _make_state("glucose studies"))
+    await store.save("b", _make_state("asthma studies"))
+    got_a = await store.get("a")
+    got_b = await store.get("b")
+    assert got_a is not None and got_a.messages[0].content == "glucose studies"
+    assert got_b is not None and got_b.messages[0].content == "asthma studies"
+
+
+@pytest.mark.asyncio()
 async def test_delete_removes_session(ddb_client: Any) -> None:
     """Delete removes the session; a subsequent get returns None."""
     store = _store()
@@ -164,17 +176,13 @@ async def test_no_ttl_omits_attribute(ddb_client: Any) -> None:
 
 
 class _StubClient:
-    """Minimal DynamoDB client stub returning a canned item."""
+    """Minimal DynamoDB client stub returning a canned item from get_item."""
 
     def __init__(self, item: dict | None) -> None:
         self._item = item
-        self.deleted: list[dict] = []
 
     def get_item(self, **_: Any) -> dict:
         return {"Item": self._item} if self._item is not None else {}
-
-    def delete_item(self, **kwargs: Any) -> None:
-        self.deleted.append(kwargs)
 
 
 def _item_with_ttl(ttl: str) -> dict:
@@ -201,6 +209,50 @@ async def test_get_future_ttl_returns_state() -> None:
     assert await store.get("sess1") == _make_state()
 
 
+# --- error propagation (stub client, no moto) -------------------------------
+
+
+class _RaisingClient:
+    """DynamoDB client stub whose every call raises a ClientError."""
+
+    def _raise(self, op: str) -> None:
+        raise ClientError(
+            {"Error": {"Code": "ProvisionedThroughputExceededException", "Message": "boom"}},
+            op,
+        )
+
+    def get_item(self, **_: Any) -> dict:
+        self._raise("GetItem")
+        return {}  # pragma: no cover - unreachable, keeps the type checker happy
+
+    def put_item(self, **_: Any) -> None:
+        self._raise("PutItem")
+
+    def delete_item(self, **_: Any) -> None:
+        self._raise("DeleteItem")
+
+
+@pytest.mark.asyncio()
+@pytest.mark.parametrize(
+    ("op", "call"),
+    [
+        ("GetItem", lambda s: s.get("sess1")),
+        ("PutItem", lambda s: s.save("sess1", _make_state())),
+        ("DeleteItem", lambda s: s.delete("sess1")),
+    ],
+)
+async def test_client_errors_propagate(op: str, call: Any) -> None:
+    """AWS ClientErrors surface to the caller — the adapter does not swallow them.
+
+    The /search/agent handler owns error handling; the store must not hide a real
+    DynamoDB failure (throttling, missing table, etc.) as a silent miss.
+    """
+    store = DynamoDBSessionStore(table_name=TABLE, client=_RaisingClient())
+    with pytest.raises(ClientError) as excinfo:
+        await call(store)
+    assert excinfo.value.operation_name == op
+
+
 # --- factory wiring ---------------------------------------------------------
 
 
@@ -214,9 +266,11 @@ def _reset_factory_singleton(monkeypatch: pytest.MonkeyPatch):
     session_store_module._session_store = None
 
 
-def test_factory_dynamodb_requires_table_name(_reset_factory_singleton) -> None:
+def test_factory_dynamodb_requires_table_name(
+    _reset_factory_singleton, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """dynamodb backend without SESSION_TABLE_NAME fails loudly."""
-    os.environ["SESSION_STORE_BACKEND"] = "dynamodb"
+    monkeypatch.setenv("SESSION_STORE_BACKEND", "dynamodb")
     with pytest.raises(ValueError, match="requires SESSION_TABLE_NAME"):
         get_session_store()
 

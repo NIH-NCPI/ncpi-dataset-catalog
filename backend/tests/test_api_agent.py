@@ -96,6 +96,40 @@ class TestSearchAgentEndpoint:
 
     @patch("concept_search.api.run_conversation")
     @patch("concept_search.api.get_index")
+    def test_store_get_failure_returns_friendly_error(self, mock_index, mock_run) -> None:
+        """A session-store read failure surfaces a retryable message, not a 500."""
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+        store = InMemorySessionStore()
+        store.get = AsyncMock(side_effect=RuntimeError("dynamodb unavailable"))
+
+        with patch("concept_search.api.get_session_store", return_value=store):
+            client = TestClient(app, raise_server_exceptions=False)
+            resp = client.post("/search/agent", json={"query": "x", "sessionId": "s1"})
+
+        assert resp.status_code == 200  # graceful, not an unhandled 500
+        assert "went wrong" in resp.json()["message"].lower()
+        mock_run.assert_not_called()  # bailed before running the orchestrator
+
+    @patch("concept_search.api.run_conversation")
+    @patch("concept_search.api.get_index")
+    def test_store_save_failure_still_returns_response(self, mock_index, mock_run) -> None:
+        """A persist failure after the response is built does not fail the request."""
+        mock_index.return_value.query_studies.return_value = [_study()]
+        mock_index.return_value.stats = {}
+        mock_run.return_value = ("Here are diabetes studies.", _query(), [])
+        store = InMemorySessionStore()
+        store.save = AsyncMock(side_effect=RuntimeError("dynamodb unavailable"))
+
+        with patch("concept_search.api.get_session_store", return_value=store):
+            client = TestClient(app, raise_server_exceptions=False)
+            resp = client.post("/search/agent", json={"query": "diabetes", "sessionId": "s1"})
+
+        assert resp.status_code == 200
+        assert resp.json()["message"] == "Here are diabetes studies."
+
+    @patch("concept_search.api.run_conversation")
+    @patch("concept_search.api.get_index")
     def test_session_continuity_loads_prior_state(
         self, mock_index, mock_run, agent_client
     ) -> None:

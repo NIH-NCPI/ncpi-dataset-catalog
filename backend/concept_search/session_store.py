@@ -197,8 +197,17 @@ class DynamoDBSessionStore:
             self._client = boto3.client("dynamodb", **kwargs)
 
     async def get(self, session_id: str) -> SessionState | None:
-        """Return the stored state, or None if absent or past its TTL."""
-        item = await asyncio.to_thread(self._get_item, session_id)
+        """Return the stored state, or None if absent or past its TTL.
+
+        ConsistentRead so a turn sees the prior turn's write even across instances.
+        """
+        resp = await asyncio.to_thread(
+            self._client.get_item,
+            TableName=self._table_name,
+            Key={"session_id": {"S": session_id}},
+            ConsistentRead=True,
+        )
+        item = resp.get("Item")
         if item is None:
             return None
         ttl = item.get("ttl", {}).get("N")
@@ -206,17 +215,6 @@ class DynamoDBSessionStore:
             # Expired but not yet reaped by native TTL — treat as absent.
             return None
         return SessionState.model_validate_json(item["state"]["S"])
-
-    def _get_item(self, session_id: str) -> dict | None:
-        """Fetch the raw DynamoDB item (blocking). ConsistentRead so a turn sees
-        the prior turn's write even across instances.
-        """
-        resp = self._client.get_item(
-            TableName=self._table_name,
-            Key={"session_id": {"S": session_id}},
-            ConsistentRead=True,
-        )
-        return resp.get("Item")
 
     async def save(self, session_id: str, state: SessionState) -> None:
         """Persist *state*, replacing any existing item (single-item PutItem)."""

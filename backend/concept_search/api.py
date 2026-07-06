@@ -560,7 +560,18 @@ async def search_agent(
     t_start = time.monotonic()
 
     store = get_session_store()
-    state = await store.get(request.session_id) or SessionState()
+    try:
+        state = await store.get(request.session_id) or SessionState()
+    except Exception as exc:  # noqa: BLE001 — a store read failure is retryable, not a 500
+        _log_json(
+            event="agent_store_error",
+            op="get",
+            session_id=request.session_id,
+            error=str(exc),
+            error_type=type(exc).__name__,
+        )
+        elapsed_ms = int((time.monotonic() - t_start) * 1000)
+        return _timeout_response(elapsed_ms, "Something went wrong — please try again.")
     index = get_index()
     deps = AgentDeps(
         index=index, query_state=state.query or QueryModel(), pending=list(state.pending)
@@ -625,7 +636,16 @@ async def search_agent(
     state.messages.append(ConversationMessage(content=request.query, role="user"))
     state.messages.append(ConversationMessage(content=reply, role="assistant"))
     state.messages = state.messages[-_MAX_SESSION_MESSAGES:]
-    await store.save(request.session_id, state)
+    try:
+        await store.save(request.session_id, state)
+    except Exception as exc:  # noqa: BLE001 — the response is built; a persist failure must not 500
+        _log_json(
+            event="agent_store_error",
+            op="save",
+            session_id=request.session_id,
+            error=str(exc),
+            error_type=type(exc).__name__,
+        )
 
     _log_json(
         event="agent_response",
