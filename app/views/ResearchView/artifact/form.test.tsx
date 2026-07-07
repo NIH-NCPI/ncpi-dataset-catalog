@@ -387,6 +387,96 @@ describe("MultiTurnQueryProvider removeFilter", () => {
   });
 });
 
+describe("MultiTurnQueryProvider removeFilter (agent mode)", () => {
+  const originalRandomUUID = Object.getOwnPropertyDescriptor(
+    crypto,
+    "randomUUID"
+  );
+
+  afterEach(() => {
+    if (originalRandomUUID) {
+      Object.defineProperty(crypto, "randomUUID", originalRandomUUID);
+    } else {
+      delete (crypto as { randomUUID?: unknown }).randomUUID;
+    }
+  });
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockChatState.state.messages = [];
+    mockRouter.query = { agent: "1" };
+    Object.defineProperty(crypto, "randomUUID", {
+      configurable: true,
+      value: () => "uuid-1",
+    });
+    global.fetch = jest.fn().mockResolvedValue({
+      json: () =>
+        Promise.resolve({
+          intent: "study",
+          message: "Removed.",
+          query: { intent: "study", mentions: [], message: null },
+          timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
+        }),
+      ok: true,
+      status: 200,
+    });
+  });
+
+  /**
+   * Renders both contexts from a single provider instance.
+   * @returns Hook result with onSubmit and removeFilter.
+   */
+  function renderBoth() {
+    return renderHook(
+      () => ({
+        multiTurn: useContext(MultiTurnContext),
+        query: useContext(QueryContext),
+      }),
+      {
+        wrapper: ({ children }: { children: ReactNode }) => (
+          <MultiTurnQueryProvider>{children}</MultiTurnQueryProvider>
+        ),
+      }
+    );
+  }
+
+  it("posts to the agent filter endpoint with sessionId, no previousQuery", async () => {
+    const { result } = renderBoth();
+
+    // Establish the agent session with a first submission.
+    await act(async () => {
+      await result.current.query.onSubmit(
+        mockFormEvent(),
+        { query: "diabetes studies" },
+        defaultOptions
+      );
+    });
+
+    await act(async () => {
+      result.current.multiTurn.removeFilter("focus", "DM");
+      await new Promise((r) => setTimeout(r, 0));
+    });
+
+    const calls = (global.fetch as jest.Mock).mock.calls;
+    expect(calls).toHaveLength(2);
+    const [calledUrl, init] = calls[1];
+    expect(calledUrl).toBe("https://test-api/search/agent/filter");
+    const body = JSON.parse(init.body);
+    expect(body).toEqual({ facet: "focus", sessionId: "uuid-1", value: "DM" });
+  });
+
+  it("is a no-op before an agent session exists", async () => {
+    const { result } = renderBoth();
+
+    await act(async () => {
+      result.current.multiTurn.removeFilter("focus", "DM");
+      await new Promise((r) => setTimeout(r, 0));
+    });
+
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+});
+
 describe("MultiTurnQueryProvider onSubmit (agent mode)", () => {
   // jsdom does not implement crypto.randomUUID; stub it with incrementing ids
   // so the "reuse" test can prove the session id is generated once, not per turn.

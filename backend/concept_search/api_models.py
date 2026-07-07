@@ -87,6 +87,23 @@ class SearchAgentRequest(BaseModel):
         return self
 
 
+class SearchAgentFilterRequest(BaseModel):
+    """Structured filter removal for the agentic ``/search/agent/filter`` endpoint.
+
+    Sent when the user clicks the × on a filter chip in agent mode. This is a
+    deterministic operation — no LLM turn: the backend drops the value from the
+    session's persisted query state and re-runs the lookup. The next
+    conversational turn sees the updated filters via the state preamble, which
+    is rebuilt from the persisted query each turn.
+    """
+
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
+
+    facet: Facet
+    session_id: str = Field(min_length=1, max_length=128)
+    value: str = Field(min_length=1, max_length=500)
+
+
 class DemographicCategory(BaseModel):
     """A single category within a demographic distribution."""
 

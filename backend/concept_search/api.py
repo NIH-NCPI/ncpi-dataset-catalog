@@ -20,6 +20,7 @@ from fastapi.responses import JSONResponse
 from .api_models import (
     DemographicCategory,
     DemographicDistribution,
+    SearchAgentFilterRequest,
     SearchAgentRequest,
     SearchRequest,
     SearchResponse,
@@ -36,9 +37,10 @@ from .conversation_agent import (
     run_conversation,
     serialize_history,
 )
-from .index import get_index
+from .index import ConceptIndex, get_index
 from .models import (
     ConversationMessage,
+    Facet,
     QueryModel,
     ResolvedMention,
     RouteRemove,
@@ -383,6 +385,93 @@ def _timeout_response(elapsed_ms: int, message: str) -> SearchResponse:
     )
 
 
+def _build_response_message(
+    query_model: QueryModel,
+    query_structure: QueryStructure | None,
+    studies: list,
+    variable_rows: list,
+    total_variable_count: int,
+    index: ConceptIndex,
+) -> str | None:
+    """Build the deterministic response message for a lookup result.
+
+    Shared by ``/search`` and ``/search/agent/filter`` (``/search/agent`` uses
+    the agent's own reply instead). Also populates ``query_structure.summary``
+    as a side effect when it is empty.
+
+    Args:
+        query_model: The resolved query model that was executed.
+        query_structure: Structured query built from the model (may be None).
+        studies: Matched studies from execution.
+        variable_rows: Matched variable rows from execution.
+        total_variable_count: Total matched variable count.
+        index: The concept index (for empty-result diagnosis).
+
+    Returns:
+        The message to display, or None when there is nothing to say.
+    """
+    intent = query_model.intent
+    if query_model.message:
+        # Disambiguation/removal — keep existing message.
+        # Still populate query_structure.summary independently so it
+        # always describes the query, not the disambiguation text.
+        message = query_model.message
+        # Populate summary independently — but skip for intent=="ambiguous"
+        # where lookup was skipped and counts would be misleading (0).
+        if query_structure is not None and not query_structure.summary and intent != "ambiguous":
+            build_message(
+                query_structure,
+                len(studies),
+                total_variable_count,
+                query_model,
+            )
+        return message
+    if not studies and not variable_rows and query_model.mentions:
+        # Zero results — recovery guidance.
+        # Set summary to just the header line (e.g. "No studies found where…").
+        message = diagnose_empty_results(query_model, index)
+        if query_structure is not None and not query_structure.summary:
+            query_structure.summary = message.split("\n", 1)[0]
+        return message
+    if query_model.mentions:
+        # Normal results — build_message sets summary as side effect
+        return build_message(
+            query_structure,
+            len(studies),
+            total_variable_count,
+            query_model,
+        )
+    return None
+
+
+def _remove_filter_value(query: QueryModel, facet: Facet, value: str) -> QueryModel:
+    """Drop a single facet value from the query, removing emptied mentions.
+
+    Value-granular to match filter-chip clicks: a mention with several OR-ed
+    values keeps the rest; a mention left with no values is dropped entirely.
+    Any stale clarification message is cleared — the result reflects a plain
+    lookup, not a pending disambiguation.
+
+    Args:
+        query: The query model to remove the value from (not mutated).
+        facet: Facet of the chip that was removed.
+        value: Canonical value of the chip that was removed.
+
+    Returns:
+        A new QueryModel without the given facet value.
+    """
+    mentions: list[ResolvedMention] = []
+    for mention in query.mentions:
+        if mention.facet != facet:
+            mentions.append(mention)
+            continue
+        values = [v for v in mention.values if v != value]
+        if not values:
+            continue
+        mentions.append(mention.model_copy(update={"values": values}))
+    return query.model_copy(update={"mentions": mentions, "message": None})
+
+
 def _rate_limit_response(client_ip: str, query: str) -> JSONResponse:
     """Log a rate-limit hit and build the 429 response (shared by both search paths)."""
     _log_json(event="rate_limited", ip=client_ip, query=query)
@@ -463,36 +552,14 @@ async def search(
 
     # Build structured query and response message
     query_structure = build_query_structure(query_model, index)
-    if query_model.message:
-        # Disambiguation/removal — keep existing message.
-        # Still populate query_structure.summary independently so it
-        # always describes the query, not the disambiguation text.
-        message = query_model.message
-        # Populate summary independently — but skip for intent=="ambiguous"
-        # where lookup was skipped and counts would be misleading (0).
-        if query_structure is not None and not query_structure.summary and intent != "ambiguous":
-            build_message(
-                query_structure,
-                len(studies),
-                total_variable_count,
-                query_model,
-            )
-    elif not studies and not variable_rows and query_model.mentions:
-        # Zero results — recovery guidance.
-        # Set summary to just the header line (e.g. "No studies found where…").
-        message = diagnose_empty_results(query_model, index)
-        if query_structure is not None and not query_structure.summary:
-            query_structure.summary = message.split("\n", 1)[0]
-    elif query_model.mentions:
-        # Normal results — build_message sets summary as side effect
-        message = build_message(
-            query_structure,
-            len(studies),
-            total_variable_count,
-            query_model,
-        )
-    else:
-        message = None
+    message = _build_response_message(
+        query_model,
+        query_structure,
+        studies,
+        variable_rows,
+        total_variable_count,
+        index,
+    )
 
     # Convert internal QueryStructure to API model
     api_query_structure = _to_api_query_structure(query_structure)
@@ -655,6 +722,97 @@ async def search_agent(
         total_studies=len(execution.studies),
         total_variables=execution.total_variable_count,
         pipeline_ms=pipeline_ms,
+        lookup_ms=lookup_ms,
+    )
+    return response
+
+
+@app.post("/search/agent/filter", response_model=SearchResponse)
+async def search_agent_filter(
+    request: SearchAgentFilterRequest, fastapi_request: Request
+) -> SearchResponse | JSONResponse:
+    """Structured filter removal for agent mode (#382).
+
+    Deterministic sibling of ``/search/agent`` — no LLM turn. Drops one facet
+    value from the session's persisted query state, re-runs the lookup, and
+    saves the session. The next conversational turn sees the updated filters
+    because the state preamble is rebuilt from ``state.query`` each turn.
+    """
+    client_ip = _get_client_ip(fastapi_request)
+    if not await _rate_limiter.is_allowed(client_ip):
+        return _rate_limit_response(client_ip, f"remove {request.facet.value}={request.value}")
+
+    _log_json(
+        event="agent_filter_request",
+        session_id=request.session_id,
+        facet=request.facet.value,
+        value=request.value,
+    )
+    t_start = time.monotonic()
+
+    store = get_session_store()
+    try:
+        state = await store.get(request.session_id) or SessionState()
+    except Exception as exc:  # noqa: BLE001 — a store read failure is retryable, not a 500
+        _log_json(
+            event="agent_store_error",
+            op="get",
+            session_id=request.session_id,
+            error=str(exc),
+            error_type=type(exc).__name__,
+        )
+        elapsed_ms = int((time.monotonic() - t_start) * 1000)
+        return _timeout_response(elapsed_ms, "Something went wrong — please try again.")
+
+    query_model = _remove_filter_value(state.query or QueryModel(), request.facet, request.value)
+
+    index = get_index()
+    execution = execute_query_model(query_model, index)
+    t_lookup = time.monotonic()
+    lookup_ms = int((t_lookup - t_start) * 1000)
+
+    query_structure = build_query_structure(query_model, index)
+    message = _build_response_message(
+        query_model,
+        query_structure,
+        execution.studies,
+        execution.variable_rows,
+        execution.total_variable_count,
+        index,
+    )
+    response = SearchResponse(
+        intent=query_model.intent,
+        message=message,
+        query=query_model,
+        query_structure=_to_api_query_structure(query_structure),
+        studies=[_build_study_summary(s) for s in execution.studies],
+        timing=SearchTiming(lookup_ms=lookup_ms, pipeline_ms=0, total_ms=lookup_ms),
+        total_studies=len(execution.studies),
+        total_variables=execution.total_variable_count,
+        variables=[_build_variable_result(r) for r in execution.variable_rows],
+    )
+
+    # Persist the updated query so the next agent turn reasons over it.
+    state.query = query_model
+    try:
+        await store.save(request.session_id, state)
+    except Exception as exc:  # noqa: BLE001 — the response is built; a persist failure must not 500
+        _log_json(
+            event="agent_store_error",
+            op="save",
+            session_id=request.session_id,
+            error=str(exc),
+            error_type=type(exc).__name__,
+        )
+
+    _log_json(
+        event="agent_filter_response",
+        session_id=request.session_id,
+        facet=request.facet.value,
+        value=request.value,
+        intent=query_model.intent,
+        total_studies=len(execution.studies),
+        total_variables=execution.total_variable_count,
         lookup_ms=lookup_ms,
     )
     return response
