@@ -8,10 +8,22 @@ if ! command -v s5cmd >/dev/null 2>&1; then
   exit 1
 fi
 
-echo \"Deleting ./out/\"
+# Scrub local env overrides — `next build` loads .env.local / .env.*.local, so a
+# developer's local override (e.g. a localhost API URL) would silently ship in
+# the deployed artifact (#403).
+for f in .env.local .env.development.local .env.production.local; do
+  if [ -f "$f" ]; then
+    echo "Removing local env override $f so it can't leak into the build"
+    rm -f "$f"
+  fi
+done
+
+echo "Deleting ./out/"
 rm -rf ./out
 
-n 22.12.0
+# Node version comes from .nvmrc — the single pin, kept in sync with
+# package.json engines and CI (#403).
+n "$(cat .nvmrc)"
 npm ci
 
 # Build

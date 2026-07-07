@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "./scripts/dev.sh ncpi-catalog dev && ./scripts/set-version.sh dev && ./scripts/sync-api.sh && next dev --webpack",
+    "dev:local-api": "NEXT_PUBLIC_SEARCH_API_URL=http://localhost:8000/search npm run dev",
     "build:dev": "scripts/common-build.sh ncpi-catalog dev && ./scripts/set-version.sh && ./scripts/sync-api.sh && next build --webpack && npm run postbuild",
     "build:prod": "./scripts/common-build.sh ncpi-catalog prod && ./scripts/set-version.sh && ./scripts/sync-api.sh && next build --webpack && npm run postbuild",
     "postbuild": "next-sitemap --config next-sitemap.config.mjs",
