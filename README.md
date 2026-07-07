@@ -6,7 +6,7 @@ Built with Next.js, TypeScript, React, and Material-UI. Uses static site generat
 
 ## Prerequisites
 
-- Node.js 22.13.0 (pinned in `.nvmrc`; matches `engines` in package.json — `nvm use` or `n "$(cat .nvmrc)"`)
+- Node.js 22.13.0 (pinned in `.nvmrc`, which `nvm use` picks up automatically; matches `engines` in package.json)
 - npm
 
 ## Getting Started
@@ -31,7 +31,7 @@ npm run dev:local-api
 
 This inlines `NEXT_PUBLIC_SEARCH_API_URL=http://localhost:8000/search` for that run only, overriding the deployed URL configured in `site-config/`. If the env var is not set, the app falls back to the `ai.url` value from the site config.
 
-Do **not** create a `.env.local` for this — `next build` loads it too, so a local override can silently ship in a deployed artifact. The deploy scripts delete any `.env.local`/`.env.*.local` before building as a safety net.
+Do **not** create a `.env.local` for this — `next build` loads it too, so a local override can silently ship in a deployed artifact. As safety nets, the shared build script refuses to build while a `.env.local`/`.env.*.local` exists, and the deploy scripts delete them before building.
 
 ## Building the Site
 
