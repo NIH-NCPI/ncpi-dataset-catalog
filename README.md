@@ -6,7 +6,7 @@ Built with Next.js, TypeScript, React, and Material-UI. Uses static site generat
 
 ## Prerequisites
 
-- Node.js 22.13.0 (pinned in `.nvmrc`, which `nvm use` picks up automatically; matches `engines` in package.json)
+- Node.js (version pinned in `.nvmrc`, which `nvm use` picks up automatically; mirrored in `engines` in package.json)
 - npm
 
 ## Getting Started
@@ -23,15 +23,15 @@ The site will be available at http://localhost:3000.
 
 ### Local backend override
 
-To point the AI search UI at a local backend (when you're also running the backend on :8000), use the dedicated script:
+To point the AI search UI at a local backend (when you're also running the backend on :8000), select the `local` environment:
 
 ```bash
-npm run dev:local-api
+npm run dev:local
 ```
 
-This inlines `NEXT_PUBLIC_SEARCH_API_URL=http://localhost:8000/search` for that run only, overriding the deployed URL configured in `site-config/`. If the env var is not set, the app falls back to the `ai.url` value from the site config.
+This uses `site-config/ncpi-catalog/local/.env` (which sets the search API URL to `http://localhost:8000/search`) instead of the default dev environment — the same site-config mechanism as every other environment. For a one-off custom URL, run `NEXT_PUBLIC_SEARCH_API_URL=<url> npm run dev`.
 
-Do **not** create a `.env.local` for this — `next build` loads it too, so a local override can silently ship in a deployed artifact. As safety nets, the shared build script refuses to build while a `.env.local`/`.env.*.local` exists, and the deploy scripts delete them before building.
+Do **not** create a `.env.local` for this — `next build` loads it too, so a local override can silently ship in a deployed artifact. As safety nets, the shared build script refuses to build while a `.env.local`/`.env.*.local` exists (or while the root `.env` contains `NEXT_PUBLIC_*` vars), and the deploy scripts move such files aside (`*.bak`) before building.
 
 ## Building the Site
 

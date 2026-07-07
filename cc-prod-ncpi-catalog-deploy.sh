@@ -6,6 +6,14 @@ set -e
 # (env scrub, .nvmrc, npm ci, out/) assumes it.
 cd "$(cd "$(dirname "$0")" && pwd)"
 
+# Preflight: confirm this really is the repo root with the Node pin present,
+# BEFORE anything destructive below runs (protects symlinked/copied
+# invocations and checkouts predating .nvmrc).
+if [ ! -f package.json ] || [ ! -f .nvmrc ]; then
+  echo "Error: $(pwd) is not the repo root (package.json/.nvmrc missing)." >&2
+  exit 1
+fi
+
 # Preflight: ensure s5cmd is available
 if ! command -v s5cmd >/dev/null 2>&1; then
   echo "Error: s5cmd is not installed. Install with: brew install peak/tap/s5cmd" >&2
@@ -18,8 +26,13 @@ if ! command -v n >/dev/null 2>&1; then
   exit 1
 fi
 
-# Scrub local env overrides so they can't ship in the build (#403; see README).
-rm -fv .env.local .env.*.local
+# Move local env overrides aside so they can't ship in the build (#403; see
+# README). mv, not rm — the files are untracked and may hold real local config.
+for f in .env.local .env.*.local; do
+  if [ -f "$f" ]; then
+    mv -v "$f" "$f.bak"
+  fi
+done
 
 echo "Deleting ./out/"
 rm -rf ./out
