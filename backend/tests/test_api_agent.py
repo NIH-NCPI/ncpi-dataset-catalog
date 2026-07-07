@@ -9,6 +9,7 @@ harnesses (``eval_agent_conversation`` / ``eval_agent_decision``).
 
 from __future__ import annotations
 
+import asyncio
 from unittest.mock import AsyncMock, patch
 
 import pytest
@@ -17,7 +18,7 @@ from fastapi.testclient import TestClient
 from concept_search import api as api_module
 from concept_search.api import app
 from concept_search.models import Facet, QueryModel, ResolvedMention
-from concept_search.session_store import InMemorySessionStore
+from concept_search.session_store import InMemorySessionStore, SessionState
 
 
 def _study(title: str = "Study A", db_gap_id: str = "phs000001") -> dict:
@@ -63,12 +64,42 @@ def _recording_run(seen: list[list[str]]):
     return fake_run
 
 
+def _multi_value_query() -> QueryModel:
+    """A query with a two-value focus mention plus a platform mention."""
+    return QueryModel(
+        intent="study",
+        mentions=[
+            ResolvedMention(
+                facet=Facet.FOCUS,
+                original_text="diabetes",
+                values=["Diabetes Mellitus", "Diabetes Mellitus, Type 2"],
+            ),
+            ResolvedMention(
+                facet=Facet.PLATFORM,
+                original_text="anvil",
+                values=["AnVIL"],
+            ),
+        ],
+    )
+
+
+def _seed_session(store: InMemorySessionStore, session_id: str, query: QueryModel) -> None:
+    """Persist a session with the given committed query state."""
+    asyncio.run(store.save(session_id, SessionState(query=query)))
+
+
 @pytest.fixture
-def agent_client():
-    """A TestClient backed by a fresh in-memory session store per test."""
+def agent_store():
+    """A fresh in-memory session store patched into the API module."""
     store = InMemorySessionStore()
     with patch("concept_search.api.get_session_store", return_value=store):
-        yield TestClient(app, raise_server_exceptions=False)
+        yield store
+
+
+@pytest.fixture
+def agent_client(agent_store):
+    """A TestClient backed by a fresh in-memory session store per test."""
+    yield TestClient(app, raise_server_exceptions=False)
 
 
 class TestSearchAgentEndpoint:
@@ -238,3 +269,166 @@ class TestSearchAgentEndpoint:
         client = TestClient(app, raise_server_exceptions=False)
         resp = client.post("/search/agent", json={"query": "   ", "sessionId": "s1"})
         assert resp.status_code == 422
+
+
+class TestSearchAgentFilterEndpoint:
+    """HTTP-level tests for POST /search/agent/filter (structured chip removal)."""
+
+    @patch("concept_search.api.run_conversation")
+    @patch("concept_search.api.get_index")
+    def test_removes_single_value_keeps_mention(
+        self, mock_index, mock_run, agent_store, agent_client
+    ) -> None:
+        """Removing one of two OR-ed values keeps the mention with the rest — no LLM call."""
+        mock_index.return_value.query_studies.return_value = [_study()]
+        mock_index.return_value.stats = {}
+        _seed_session(agent_store, "s1", _multi_value_query())
+
+        resp = agent_client.post(
+            "/search/agent/filter",
+            json={"facet": "focus", "sessionId": "s1", "value": "Diabetes Mellitus"},
+        )
+
+        assert resp.status_code == 200
+        data = resp.json()
+        focus = [m for m in data["query"]["mentions"] if m["facet"] == "focus"]
+        assert len(focus) == 1
+        assert focus[0]["values"] == ["Diabetes Mellitus, Type 2"]
+        mock_run.assert_not_called()
+
+    @patch("concept_search.api.run_conversation")
+    @patch("concept_search.api.get_index")
+    def test_removing_last_value_drops_mention(
+        self, mock_index, mock_run, agent_store, agent_client
+    ) -> None:
+        """A mention emptied by the removal is dropped entirely."""
+        mock_index.return_value.query_studies.return_value = [_study()]
+        mock_index.return_value.stats = {}
+        _seed_session(agent_store, "s1", _multi_value_query())
+
+        resp = agent_client.post(
+            "/search/agent/filter",
+            json={"facet": "platform", "sessionId": "s1", "value": "AnVIL"},
+        )
+
+        assert resp.status_code == 200
+        facets = [m["facet"] for m in resp.json()["query"]["mentions"]]
+        assert facets == ["focus"]
+
+    @patch("concept_search.api.run_conversation")
+    @patch("concept_search.api.get_index")
+    def test_removal_is_persisted_for_next_agent_turn(
+        self, mock_index, mock_run, agent_store, agent_client
+    ) -> None:
+        """The next /search/agent turn is handed the query state minus the removed filter."""
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+        _seed_session(agent_store, "s1", _multi_value_query())
+
+        seen: list[list[str]] = []
+        mock_run.side_effect = _recording_run(seen)
+
+        r1 = agent_client.post(
+            "/search/agent/filter",
+            json={"facet": "focus", "sessionId": "s1", "value": "Diabetes Mellitus, Type 2"},
+        )
+        r2 = agent_client.post("/search/agent", json={"query": "and BMI", "sessionId": "s1"})
+
+        assert r1.status_code == 200
+        assert r2.status_code == 200
+        # The agent turn saw the persisted state with the platform mention intact
+        # and the focus mention still present (one value remained).
+        assert seen == [["diabetes", "anvil"]]
+        state = asyncio.run(agent_store.get("s1"))
+        assert state is not None
+
+    @patch("concept_search.api.run_conversation")
+    @patch("concept_search.api.get_index")
+    def test_unknown_session_returns_empty_query(
+        self, mock_index, mock_run, agent_store, agent_client
+    ) -> None:
+        """A filter removal on an unknown session degrades to an empty query, not an error."""
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+
+        resp = agent_client.post(
+            "/search/agent/filter",
+            json={"facet": "focus", "sessionId": "missing", "value": "Diabetes Mellitus"},
+        )
+
+        assert resp.status_code == 200
+        assert resp.json()["query"]["mentions"] == []
+
+    @patch("concept_search.api.run_conversation")
+    @patch("concept_search.api.get_index")
+    def test_store_get_failure_returns_friendly_error(self, mock_index, mock_run) -> None:
+        """A session-store read failure surfaces a retryable message, not a 500."""
+        mock_index.return_value.stats = {}
+        store = InMemorySessionStore()
+        store.get = AsyncMock(side_effect=RuntimeError("dynamodb unavailable"))
+
+        with patch("concept_search.api.get_session_store", return_value=store):
+            client = TestClient(app, raise_server_exceptions=False)
+            resp = client.post(
+                "/search/agent/filter",
+                json={"facet": "focus", "sessionId": "s1", "value": "x"},
+            )
+
+        assert resp.status_code == 200
+        assert "went wrong" in resp.json()["message"].lower()
+
+    @patch("concept_search.api.run_conversation")
+    @patch("concept_search.api.get_index")
+    def test_store_save_failure_still_returns_response(self, mock_index, mock_run) -> None:
+        """A persist failure after the response is built does not fail the request."""
+        mock_index.return_value.query_studies.return_value = [_study()]
+        mock_index.return_value.stats = {}
+        store = InMemorySessionStore()
+        _seed_session(store, "s1", _multi_value_query())
+        store.save = AsyncMock(side_effect=RuntimeError("dynamodb unavailable"))
+
+        with patch("concept_search.api.get_session_store", return_value=store):
+            client = TestClient(app, raise_server_exceptions=False)
+            resp = client.post(
+                "/search/agent/filter",
+                json={"facet": "platform", "sessionId": "s1", "value": "AnVIL"},
+            )
+
+        assert resp.status_code == 200
+        facets = [m["facet"] for m in resp.json()["query"]["mentions"]]
+        assert facets == ["focus"]
+
+    @patch("concept_search.api.get_index")
+    def test_invalid_facet_is_rejected(self, mock_index) -> None:
+        """An unknown facet fails validation (422)."""
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post(
+            "/search/agent/filter",
+            json={"facet": "nonsense", "sessionId": "s1", "value": "x"},
+        )
+        assert resp.status_code == 422
+
+    @patch("concept_search.api.get_index")
+    def test_missing_session_id_is_rejected(self, mock_index) -> None:
+        """A request without a session id fails validation (422)."""
+        client = TestClient(app, raise_server_exceptions=False)
+        resp = client.post("/search/agent/filter", json={"facet": "focus", "value": "x"})
+        assert resp.status_code == 422
+
+    @patch("concept_search.api.get_index")
+    def test_rate_limit_returns_429(self, mock_index) -> None:
+        """A rate-limited client gets a 429 before any store access."""
+        with (
+            patch.object(
+                api_module._rate_limiter, "is_allowed", new=AsyncMock(return_value=False)
+            ),
+            patch("concept_search.api.get_session_store") as mock_store,
+        ):
+            client = TestClient(app, raise_server_exceptions=False)
+            resp = client.post(
+                "/search/agent/filter",
+                json={"facet": "focus", "sessionId": "s1", "value": "x"},
+            )
+
+        assert resp.status_code == 429
+        mock_store.assert_not_called()

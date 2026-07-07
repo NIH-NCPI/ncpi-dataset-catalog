@@ -223,6 +223,20 @@ export function MultiTurnQueryProvider({
 
   const removeFilter = useCallback(
     (facet: string, value: string): void => {
+      if (agentMode) {
+        // Agent mode: conversation state lives server-side, keyed by sessionId.
+        // Ask the backend to drop the value from the session's query — the
+        // deterministic previousQuery round-trip below would bypass it.
+        if (!sessionIdRef.current || !submitUrl) return;
+        dispatch.onSetStatus(true);
+        postSearch(
+          `${submitUrl}/filter`,
+          { facet, sessionId: sessionIdRef.current, value },
+          abortRef,
+          dispatch
+        );
+        return;
+      }
       if (!lastQueryRef.current || !url) return;
       const filtered = lastQueryRef.current.mentions
         .map((m: Mention) => {
@@ -247,7 +261,7 @@ export function MultiTurnQueryProvider({
         }
       });
     },
-    [dispatch, url]
+    [agentMode, dispatch, submitUrl, url]
   );
 
   return (
