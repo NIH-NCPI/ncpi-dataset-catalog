@@ -17,7 +17,7 @@ done
 # Root .env is also loaded by `next build`. It legitimately holds build-tool
 # secrets (never inlined), but NEXT_PUBLIC_* vars in it WOULD be inlined into
 # the client bundle — refuse those (#403).
-if [ -f .env ] && grep -q '^NEXT_PUBLIC_' .env; then
+if [ -f .env ] && grep -Eq '^[[:space:]]*(export[[:space:]]+)?NEXT_PUBLIC_' .env; then
 	echo "Error: .env contains NEXT_PUBLIC_* vars that would leak into the build. Move them to site-config/ or remove them." >&2
 	exit 1
 fi
