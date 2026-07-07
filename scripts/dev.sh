@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 DIR="./site-config/$1/images/favicons/"
 PUBLIC_DIR="./public/favicons/"
