@@ -29,9 +29,9 @@ To point the AI search UI at a local backend (when you're also running the backe
 npm run dev:local
 ```
 
-This uses `site-config/ncpi-catalog/local/.env` (which sets the search API URL to `http://localhost:8000/search`) instead of the default dev environment — the same site-config mechanism as every other environment. For a one-off custom URL, run `NEXT_PUBLIC_SEARCH_API_URL=<url> npm run dev`.
+This selects the `local` environment (`site-config/ncpi-catalog/local/`), a sibling of `dev` and `prod` with its own site config that points the search API at `http://localhost:8000/search` and disables analytics. For a one-off custom URL, run `NEXT_PUBLIC_SEARCH_API_URL=<url> npm run dev`.
 
-Do **not** create a `.env.local` for this — `next build` loads it too, so a local override can silently ship in a deployed artifact. As safety nets, the shared build script refuses to build while a `.env.local`/`.env.*.local` exists (or while the root `.env` contains `NEXT_PUBLIC_*` vars), and the deploy scripts move such files aside (`*.bak`) before building.
+Do **not** create a `.env.local` for this — `next build` loads it too, so a local override can silently ship in a deployed artifact. As safety nets, both the deploy scripts and the shared build script refuse to run while a `.env.local`/`.env.*.local` exists (or, for the build script, while the root `.env` contains `NEXT_PUBLIC_*` vars).
 
 ## Building the Site
 

@@ -1,10 +1,12 @@
 import { setConfig } from "@databiosphere/findable-ui/lib/config/config";
 import { SiteConfig } from "@databiosphere/findable-ui/lib/config/entities";
 import ncpiMapDev from "../../site-config/ncpi-catalog/dev/config";
+import ncpiMapLocal from "../../site-config/ncpi-catalog/local/config";
 import ncpiMapProd from "../../site-config/ncpi-catalog/prod/config";
 
 const CONFIGS: { [k: string]: SiteConfig } = {
   "ncpi-catalog-dev": ncpiMapDev,
+  "ncpi-catalog-local": ncpiMapLocal,
   "ncpi-catalog-prod": ncpiMapProd,
 };
 

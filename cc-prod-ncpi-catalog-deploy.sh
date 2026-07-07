@@ -26,12 +26,13 @@ if ! command -v n >/dev/null 2>&1; then
   exit 1
 fi
 
-# Move local env overrides aside so they can't ship in the build (#403; see
-# README). mv, not rm — the files are untracked and may hold real local config;
-# the timestamp keeps repeated deploys from clobbering an earlier backup.
+# Local env overrides must not ship in the build (#403; see README). The build
+# itself also refuses (scripts/common-build.sh) — this earlier check just fails
+# fast, before the minutes-long npm ci/build.
 for f in .env.local .env.*.local; do
   if [ -f "$f" ]; then
-    mv -v "$f" "$f.$(date +%Y%m%d-%H%M%S).bak"
+    echo "Error: $f would leak into the build. Remove it, then re-run the deploy." >&2
+    exit 1
   fi
 done
 
