@@ -224,7 +224,8 @@ class DynamoDBSessionStore:
             "state": {"S": state.model_dump_json()},
         }
         if self._ttl_seconds is not None:
-            item["ttl"] = {"N": str(int(self._now() + self._ttl_seconds))}
+            # ceil so the epoch-second TTL is never shorter than ttl_seconds.
+            item["ttl"] = {"N": str(math.ceil(self._now() + self._ttl_seconds))}
         await asyncio.to_thread(self._client.put_item, TableName=self._table_name, Item=item)
 
     async def delete(self, session_id: str) -> None:
