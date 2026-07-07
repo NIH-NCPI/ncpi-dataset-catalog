@@ -27,10 +27,11 @@ if ! command -v n >/dev/null 2>&1; then
 fi
 
 # Move local env overrides aside so they can't ship in the build (#403; see
-# README). mv, not rm — the files are untracked and may hold real local config.
+# README). mv, not rm — the files are untracked and may hold real local config;
+# the timestamp keeps repeated deploys from clobbering an earlier backup.
 for f in .env.local .env.*.local; do
   if [ -f "$f" ]; then
-    mv -v "$f" "$f.bak"
+    mv -v "$f" "$f.$(date +%Y%m%d-%H%M%S).bak"
   fi
 done
 
