@@ -29,16 +29,4 @@ describe("getSearchApiUrl", () => {
     delete process.env.NEXT_PUBLIC_SEARCH_API_URL;
     expect(getSearchApiUrl()).toBe("");
   });
-
-  it("appends /agent when agent mode is requested", () => {
-    delete process.env.NEXT_PUBLIC_SEARCH_API_URL;
-    expect(
-      getSearchApiUrl("https://api.example.com/search", { agent: true })
-    ).toBe("https://api.example.com/search/agent");
-  });
-
-  it("returns an empty string for agent mode when no base URL is set", () => {
-    delete process.env.NEXT_PUBLIC_SEARCH_API_URL;
-    expect(getSearchApiUrl(undefined, { agent: true })).toBe("");
-  });
 });

@@ -17,14 +17,6 @@ const mockChatState = {
   state: { messages: [], status: { loading: false } },
 };
 
-const mockRouter = {
-  query: {} as Record<string, string | string[] | undefined>,
-};
-
-jest.mock("next/router", () => ({
-  useRouter: (): any => mockRouter,
-}));
-
 jest.mock("@databiosphere/findable-ui/lib/hooks/useConfig", () => ({
   useConfig: (): any => ({
     config: { ai: { url: "https://test-api/search" } },
@@ -53,8 +45,7 @@ jest.mock(
 );
 
 jest.mock("../../../utils/searchApiUrl", () => ({
-  getSearchApiUrl: (url: string, options?: { agent?: boolean }): string =>
-    url ? (options?.agent ? `${url}/agent` : url) : "",
+  getSearchApiUrl: (url: string): string => url || "",
 }));
 
 // --- Helpers ---
@@ -70,6 +61,47 @@ const defaultOptions = {
   status: { loading: false },
 };
 
+const okResponse = () => ({
+  json: () =>
+    Promise.resolve({
+      intent: "study",
+      message: "Here are diabetes studies.",
+      query: {
+        intent: "study",
+        mentions: [
+          { facet: "focus", originalText: "diabetes", values: ["DM"] },
+        ],
+        message: null,
+      },
+      timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
+    }),
+  ok: true,
+  status: 200,
+});
+
+// jsdom does not implement crypto.randomUUID; stub it with incrementing ids so
+// tests can prove the session id is generated once and reused across turns.
+let uuidCounter = 0;
+const originalRandomUUID = Object.getOwnPropertyDescriptor(
+  crypto,
+  "randomUUID"
+);
+
+const stubRandomUUID = (): void => {
+  Object.defineProperty(crypto, "randomUUID", {
+    configurable: true,
+    value: () => `uuid-${++uuidCounter}`,
+  });
+};
+
+const restoreRandomUUID = (): void => {
+  if (originalRandomUUID) {
+    Object.defineProperty(crypto, "randomUUID", originalRandomUUID);
+  } else {
+    delete (crypto as { randomUUID?: unknown }).randomUUID;
+  }
+};
+
 /**
  * Returns onSubmit from QueryContext as provided by MultiTurnQueryProvider.
  * @returns Hook result with onSubmit.
@@ -82,33 +114,38 @@ function renderOnSubmit() {
   });
 }
 
+/**
+ * Renders both the query and multi-turn contexts from one provider instance.
+ * @returns Hook result with onSubmit and removeFilter.
+ */
+function renderBoth() {
+  return renderHook(
+    () => ({
+      multiTurn: useContext(MultiTurnContext),
+      query: useContext(QueryContext),
+    }),
+    {
+      wrapper: ({ children }: { children: ReactNode }) => (
+        <MultiTurnQueryProvider>{children}</MultiTurnQueryProvider>
+      ),
+    }
+  );
+}
+
 // --- Tests ---
 
 describe("MultiTurnQueryProvider onSubmit", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockChatState.state.messages = [];
-    mockRouter.query = {};
-    global.fetch = jest.fn().mockResolvedValue({
-      json: () =>
-        Promise.resolve({
-          intent: "study",
-          message: null,
-          query: {
-            intent: "study",
-            mentions: [
-              { facet: "focus", originalText: "diabetes", values: ["DM"] },
-            ],
-            message: null,
-          },
-          timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
-        }),
-      ok: true,
-      status: 200,
-    });
+    uuidCounter = 0;
+    stubRandomUUID();
+    global.fetch = jest.fn().mockResolvedValue(okResponse());
   });
 
-  it("sends only query on first submission (no previousQuery)", async () => {
+  afterEach(restoreRandomUUID);
+
+  it("posts to the agent endpoint with sessionId and no previousQuery", async () => {
     const { result } = renderOnSubmit();
 
     await act(async () => {
@@ -119,15 +156,17 @@ describe("MultiTurnQueryProvider onSubmit", () => {
       );
     });
 
-    const body = JSON.parse((global.fetch as jest.Mock).mock.calls[0][1].body);
-    expect(body).toEqual({ query: "diabetes studies" });
+    const [calledUrl, init] = (global.fetch as jest.Mock).mock.calls[0];
+    expect(calledUrl).toBe("https://test-api/search/agent");
+    const body = JSON.parse(init.body);
+    expect(body.query).toBe("diabetes studies");
+    expect(body.sessionId).toBe("uuid-1");
     expect(body).not.toHaveProperty("previousQuery");
   });
 
-  it("sends previousQuery on follow-up after first response", async () => {
+  it("reuses the same sessionId across turns", async () => {
     const { result } = renderOnSubmit();
 
-    // First query — sets lastQueryRef via response.
     await act(async () => {
       await result.current.onSubmit(
         mockFormEvent(),
@@ -135,157 +174,19 @@ describe("MultiTurnQueryProvider onSubmit", () => {
         defaultOptions
       );
     });
-
-    // Simulate assistant message arriving (syncs lastQueryRef).
-    act(() => {
-      mockChatState.state.messages = [
-        {
-          response: {
-            intent: "study",
-            message: null,
-            query: {
-              intent: "study",
-              mentions: [
-                { facet: "focus", originalText: "diabetes", values: ["DM"] },
-              ],
-              message: null,
-            },
-            timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
-          },
-          type: "ASSISTANT",
-        },
-      ] as any;
-    });
-
-    // Re-render to pick up the message change.
-    const { result: result2 } = renderOnSubmit();
-
-    // Second query — should include previousQuery.
     await act(async () => {
-      await result2.current.onSubmit(
+      await result.current.onSubmit(
         mockFormEvent(),
-        { query: "also where BMI was measured" },
+        { query: "only on BDC" },
         defaultOptions
       );
     });
 
     const calls = (global.fetch as jest.Mock).mock.calls;
-    const secondBody = JSON.parse(calls[calls.length - 1][1].body);
-    expect(secondBody.query).toBe("also where BMI was measured");
-    expect(secondBody).toHaveProperty("previousQuery");
-    expect(secondBody.previousQuery.mentions).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ facet: "focus", originalText: "diabetes" }),
-      ])
-    );
-  });
-
-  it("preserves disambiguation in previousQuery for follow-up responses", async () => {
-    // First response includes disambiguation in mentions (as the real backend returns).
-    const disambiguationResponse = {
-      intent: "study",
-      message: "Which did you mean?",
-      query: {
-        intent: "study",
-        mentions: [
-          {
-            disambiguation: [
-              {
-                conceptId: "topmed:nutrient_intake",
-                facet: "measurement",
-                label: "Glucose Intake from Diet",
-              },
-              {
-                conceptId: "Diabetes Mellitus",
-                facet: "focus",
-                label: "Diabetes Mellitus",
-              },
-            ],
-            exclude: false,
-            facet: "focus",
-            matchedVariables: [],
-            message: null,
-            originalText: "glucose",
-            values: [],
-          },
-          {
-            disambiguation: [],
-            exclude: false,
-            facet: "platform",
-            matchedVariables: [],
-            message: null,
-            originalText: "BDC",
-            values: ["BDC"],
-          },
-        ],
-        message: null,
-      },
-      timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
-    };
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
-      json: () => Promise.resolve(disambiguationResponse),
-      ok: true,
-      status: 200,
-    });
-
-    const { result } = renderOnSubmit();
-
-    // First query — response has disambiguation.
-    await act(async () => {
-      await result.current.onSubmit(
-        mockFormEvent(),
-        { query: "glucose on BDC" },
-        defaultOptions
-      );
-    });
-
-    // Second query — previousQuery should include disambiguation.
-    await act(async () => {
-      await result.current.onSubmit(
-        mockFormEvent(),
-        { query: "glucose intake" },
-        defaultOptions
-      );
-    });
-
-    const calls = (global.fetch as jest.Mock).mock.calls;
+    const firstBody = JSON.parse(calls[0][1].body);
     const secondBody = JSON.parse(calls[1][1].body);
-    expect(secondBody).toHaveProperty("previousQuery");
-    const glucoseMention = secondBody.previousQuery.mentions.find(
-      (m: any) => m.originalText === "glucose"
-    );
-    expect(glucoseMention).toBeDefined();
-    expect(glucoseMention.disambiguation).toHaveLength(2);
-    expect(glucoseMention.disambiguation[0].conceptId).toBe(
-      "topmed:nutrient_intake"
-    );
-  });
-
-  it("updates lastQueryRef from response for subsequent calls", async () => {
-    const { result } = renderOnSubmit();
-
-    // First query.
-    await act(async () => {
-      await result.current.onSubmit(
-        mockFormEvent(),
-        { query: "diabetes studies" },
-        defaultOptions
-      );
-    });
-
-    // The onSubmit itself updates lastQueryRef from the response (line 145).
-    // Second query should carry that forward.
-    await act(async () => {
-      await result.current.onSubmit(
-        mockFormEvent(),
-        { query: "also on AnVIL" },
-        defaultOptions
-      );
-    });
-
-    const calls = (global.fetch as jest.Mock).mock.calls;
-    const secondBody = JSON.parse(calls[1][1].body);
-    expect(secondBody).toHaveProperty("previousQuery");
+    expect(secondBody.sessionId).toBe(firstBody.sessionId);
+    expect(secondBody).not.toHaveProperty("previousQuery");
   });
 
   it("does not submit when loading", async () => {
@@ -317,254 +218,6 @@ describe("MultiTurnQueryProvider onSubmit", () => {
 
     expect(global.fetch).not.toHaveBeenCalled();
   });
-});
-
-describe("MultiTurnQueryProvider removeFilter", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-    mockRouter.query = {};
-    mockChatState.state.messages = [
-      {
-        response: {
-          intent: "study",
-          message: null,
-          query: {
-            intent: "study",
-            mentions: [
-              { facet: "focus", originalText: "diabetes", values: ["DM"] },
-              {
-                facet: "platform",
-                originalText: "AnVIL",
-                values: ["AnVIL"],
-              },
-            ],
-            message: null,
-          },
-          timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
-        },
-        type: "ASSISTANT",
-      },
-    ] as any;
-    global.fetch = jest.fn().mockResolvedValue({
-      json: () =>
-        Promise.resolve({
-          intent: "study",
-          message: null,
-          query: {
-            intent: "study",
-            mentions: [
-              { facet: "focus", originalText: "diabetes", values: ["DM"] },
-            ],
-            message: null,
-          },
-          timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
-        }),
-      ok: true,
-      status: 200,
-    });
-  });
-
-  it("sends requery with previousQuery and empty query", async () => {
-    const { result } = renderHook(() => useContext(MultiTurnContext), {
-      wrapper: ({ children }: { children: ReactNode }) => (
-        <MultiTurnQueryProvider>{children}</MultiTurnQueryProvider>
-      ),
-    });
-
-    await act(async () => {
-      result.current.removeFilter("platform", "AnVIL");
-      // Allow the postSearch promise to resolve.
-      await new Promise((r) => setTimeout(r, 0));
-    });
-
-    expect(global.fetch).toHaveBeenCalledTimes(1);
-    const body = JSON.parse((global.fetch as jest.Mock).mock.calls[0][1].body);
-    expect(body.query).toBe("");
-    expect(body).toHaveProperty("previousQuery");
-    expect(body.previousQuery.mentions).toEqual([
-      expect.objectContaining({ facet: "focus", originalText: "diabetes" }),
-    ]);
-  });
-});
-
-describe("MultiTurnQueryProvider removeFilter (agent mode)", () => {
-  const originalRandomUUID = Object.getOwnPropertyDescriptor(
-    crypto,
-    "randomUUID"
-  );
-
-  afterEach(() => {
-    if (originalRandomUUID) {
-      Object.defineProperty(crypto, "randomUUID", originalRandomUUID);
-    } else {
-      delete (crypto as { randomUUID?: unknown }).randomUUID;
-    }
-  });
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-    mockChatState.state.messages = [];
-    mockRouter.query = { agent: "1" };
-    Object.defineProperty(crypto, "randomUUID", {
-      configurable: true,
-      value: () => "uuid-1",
-    });
-    global.fetch = jest.fn().mockResolvedValue({
-      json: () =>
-        Promise.resolve({
-          intent: "study",
-          message: "Removed.",
-          query: { intent: "study", mentions: [], message: null },
-          timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
-        }),
-      ok: true,
-      status: 200,
-    });
-  });
-
-  /**
-   * Renders both contexts from a single provider instance.
-   * @returns Hook result with onSubmit and removeFilter.
-   */
-  function renderBoth() {
-    return renderHook(
-      () => ({
-        multiTurn: useContext(MultiTurnContext),
-        query: useContext(QueryContext),
-      }),
-      {
-        wrapper: ({ children }: { children: ReactNode }) => (
-          <MultiTurnQueryProvider>{children}</MultiTurnQueryProvider>
-        ),
-      }
-    );
-  }
-
-  it("posts to the agent filter endpoint with sessionId, no previousQuery", async () => {
-    const { result } = renderBoth();
-
-    // Establish the agent session with a first submission.
-    await act(async () => {
-      await result.current.query.onSubmit(
-        mockFormEvent(),
-        { query: "diabetes studies" },
-        defaultOptions
-      );
-    });
-
-    await act(async () => {
-      result.current.multiTurn.removeFilter("focus", "DM");
-      await new Promise((r) => setTimeout(r, 0));
-    });
-
-    const calls = (global.fetch as jest.Mock).mock.calls;
-    expect(calls).toHaveLength(2);
-    const [calledUrl, init] = calls[1];
-    expect(calledUrl).toBe("https://test-api/search/agent/filter");
-    const body = JSON.parse(init.body);
-    expect(body).toEqual({ facet: "focus", sessionId: "uuid-1", value: "DM" });
-  });
-
-  it("is a no-op before an agent session exists", async () => {
-    const { result } = renderBoth();
-
-    await act(async () => {
-      result.current.multiTurn.removeFilter("focus", "DM");
-      await new Promise((r) => setTimeout(r, 0));
-    });
-
-    expect(global.fetch).not.toHaveBeenCalled();
-  });
-});
-
-describe("MultiTurnQueryProvider onSubmit (agent mode)", () => {
-  // jsdom does not implement crypto.randomUUID; stub it with incrementing ids
-  // so the "reuse" test can prove the session id is generated once, not per turn.
-  let uuidCounter = 0;
-  const originalRandomUUID = Object.getOwnPropertyDescriptor(
-    crypto,
-    "randomUUID"
-  );
-
-  afterEach(() => {
-    if (originalRandomUUID) {
-      Object.defineProperty(crypto, "randomUUID", originalRandomUUID);
-    } else {
-      delete (crypto as { randomUUID?: unknown }).randomUUID;
-    }
-  });
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-    mockChatState.state.messages = [];
-    mockRouter.query = { agent: "1" };
-    uuidCounter = 0;
-    Object.defineProperty(crypto, "randomUUID", {
-      configurable: true,
-      value: () => `uuid-${++uuidCounter}`,
-    });
-    global.fetch = jest.fn().mockResolvedValue({
-      json: () =>
-        Promise.resolve({
-          intent: "study",
-          message: "Here are diabetes studies.",
-          query: {
-            intent: "study",
-            mentions: [
-              { facet: "focus", originalText: "diabetes", values: ["DM"] },
-            ],
-            message: null,
-          },
-          timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
-        }),
-      ok: true,
-      status: 200,
-    });
-  });
-
-  it("posts to the agent endpoint with sessionId and no previousQuery", async () => {
-    const { result } = renderOnSubmit();
-
-    await act(async () => {
-      await result.current.onSubmit(
-        mockFormEvent(),
-        { query: "diabetes studies" },
-        defaultOptions
-      );
-    });
-
-    const [calledUrl, init] = (global.fetch as jest.Mock).mock.calls[0];
-    expect(calledUrl).toBe("https://test-api/search/agent");
-    const body = JSON.parse(init.body);
-    expect(body.query).toBe("diabetes studies");
-    expect(body.sessionId).toBe("uuid-1");
-    expect(body).not.toHaveProperty("previousQuery");
-  });
-
-  it("reuses the same sessionId and never sends previousQuery across turns", async () => {
-    const { result } = renderOnSubmit();
-
-    await act(async () => {
-      await result.current.onSubmit(
-        mockFormEvent(),
-        { query: "diabetes studies" },
-        defaultOptions
-      );
-    });
-    await act(async () => {
-      await result.current.onSubmit(
-        mockFormEvent(),
-        { query: "only on BDC" },
-        defaultOptions
-      );
-    });
-
-    const calls = (global.fetch as jest.Mock).mock.calls;
-    const firstBody = JSON.parse(calls[0][1].body);
-    const secondBody = JSON.parse(calls[1][1].body);
-    expect(secondBody.sessionId).toBe(firstBody.sessionId);
-    expect(secondBody).not.toHaveProperty("previousQuery");
-  });
 
   it("surfaces an error and does not get stuck when session id generation fails", async () => {
     Object.defineProperty(crypto, "randomUUID", {
@@ -589,6 +242,54 @@ describe("MultiTurnQueryProvider onSubmit (agent mode)", () => {
     expect(mockDispatch.onSetError).toHaveBeenCalled();
     // Loading was never entered, so the UI cannot be stuck.
     expect(mockDispatch.onSetStatus).not.toHaveBeenCalledWith(true);
+  });
+});
+
+describe("MultiTurnQueryProvider removeFilter", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockChatState.state.messages = [];
+    uuidCounter = 0;
+    stubRandomUUID();
+    global.fetch = jest.fn().mockResolvedValue(okResponse());
+  });
+
+  afterEach(restoreRandomUUID);
+
+  it("posts to the agent filter endpoint with sessionId and no previousQuery", async () => {
+    const { result } = renderBoth();
+
+    // Establish the session with a first submission.
+    await act(async () => {
+      await result.current.query.onSubmit(
+        mockFormEvent(),
+        { query: "diabetes studies" },
+        defaultOptions
+      );
+    });
+
+    await act(async () => {
+      result.current.multiTurn.removeFilter("focus", "DM");
+      await new Promise((r) => setTimeout(r, 0));
+    });
+
+    const calls = (global.fetch as jest.Mock).mock.calls;
+    expect(calls).toHaveLength(2);
+    const [calledUrl, init] = calls[1];
+    expect(calledUrl).toBe("https://test-api/search/agent/filter");
+    const body = JSON.parse(init.body);
+    expect(body).toEqual({ facet: "focus", sessionId: "uuid-1", value: "DM" });
+  });
+
+  it("is a no-op before a session exists", async () => {
+    const { result } = renderBoth();
+
+    await act(async () => {
+      result.current.multiTurn.removeFilter("focus", "DM");
+      await new Promise((r) => setTimeout(r, 0));
+    });
+
+    expect(global.fetch).not.toHaveBeenCalled();
   });
 });
 

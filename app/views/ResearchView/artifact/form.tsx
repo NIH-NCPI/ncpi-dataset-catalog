@@ -3,10 +3,7 @@ import { isAssistantMessage } from "@databiosphere/findable-ui/lib/views/Researc
 import { useChatDispatch } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatDispatch/hook";
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
 import { QueryContext } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/context";
-import {
-  Mention,
-  MessageResponse,
-} from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
+import { MessageResponse } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
 import {
   createContext,
   FormEvent,
@@ -19,7 +16,6 @@ import {
   useRef,
 } from "react";
 import { getSearchApiUrl } from "../../../utils/searchApiUrl";
-import { useAgentMode } from "../hooks/UseAgentMode/hook";
 
 /**
  * Context for multi-turn filter removal.
@@ -105,9 +101,10 @@ async function postSearch(
 }
 
 /**
- * Provider that tracks query state for multi-turn support.
- * Observes assistant messages from the chat state to capture the latest
- * QueryModel, enabling filter removal via requery.
+ * Provider that drives the conversational agent search. Every submission goes to
+ * the `/search/agent` endpoint with a client-generated `sessionId`; the backend
+ * owns the multi-turn conversation state keyed by that id, so the client sends no
+ * prior query.
  * @param props - Component props.
  * @param props.children - Children to render.
  * @returns Provider wrapping children with multi-turn context.
@@ -116,47 +113,37 @@ export function MultiTurnQueryProvider({
   children,
 }: MultiTurnQueryProviderProps): JSX.Element {
   const { config } = useConfig();
-  // Opt-in agentic search via the `?agent=1` URL flag. When on, submissions go
-  // to the `/search/agent` endpoint with a server-owned session instead of the
-  // deterministic `/search` previousQuery round-trip.
-  const agentMode = useAgentMode();
-  const url = getSearchApiUrl(config.ai?.url);
-  const submitUrl = getSearchApiUrl(config.ai?.url, { agent: agentMode });
+  const baseUrl = getSearchApiUrl(config.ai?.url);
+  const submitUrl = baseUrl ? `${baseUrl}/agent` : "";
   const dispatch = useChatDispatch();
-  const lastQueryRef = useRef<MessageResponse["query"] | null>(null);
-  // Conversation id for agent mode; created lazily on first agent submission so
-  // the backend can key multi-turn state. The agent handles resets server-side,
-  // so one id per provider lifetime (one research-view visit) is sufficient.
+  // Conversation id created lazily on first submission so the backend can key
+  // multi-turn state. The agent handles resets server-side, so one id per
+  // provider lifetime (one research-view visit) is sufficient.
   const sessionIdRef = useRef<string>("");
   const abortRef = useRef<AbortController | null>(null);
+  const placeholderSetRef = useRef(false);
 
-  // Sync lastQueryRef from chat state whenever a new assistant message arrives.
+  // After the first assistant response, switch the input placeholder to refine
+  // mode. Guarded so the DOM query/write happens once per visit, not on every
+  // message; the guard is set only once the write succeeds, so it still retries
+  // if the input isn't mounted yet on the first assistant message.
   const { state } = useChatState();
   const messages = state.messages;
   const lastMessage = messages[messages.length - 1];
   useEffect(() => {
-    if (lastMessage && isAssistantMessage(lastMessage)) {
-      const response = (lastMessage as { response: MessageResponse }).response;
-      if (response?.query) {
-        lastQueryRef.current = response.query;
-      }
-    }
-  }, [lastMessage]);
-
-  // Update the input placeholder to indicate refine mode after first results.
-  useEffect(() => {
-    if (!lastQueryRef.current) return;
+    if (placeholderSetRef.current) return;
+    if (!lastMessage || !isAssistantMessage(lastMessage)) return;
     const input = document.querySelector<HTMLTextAreaElement>(
       'textarea[name="ai-prompt"]'
     );
     if (input) {
-      input.placeholder =
-        "Refine, e.g. \u201Calso where BMI was measured\u201D";
+      input.placeholder = "Refine, e.g. “also where BMI was measured”";
+      placeholderSetRef.current = true;
     }
   }, [lastMessage]);
 
   /**
-   * Submits a query to the search API, injecting previousQuery when available.
+   * Submits a query to the agent search API under the current session.
    * @param e - Form event used to prevent default submission and access the form element.
    * @param payload - Payload containing the query string.
    * @param options - Callbacks for the submit lifecycle.
@@ -178,7 +165,16 @@ export function MultiTurnQueryProvider({
       if (options.status.loading) return;
 
       const query = payload.query.trim();
-      if (!query || !submitUrl) return;
+      if (!query) return;
+      if (!submitUrl) {
+        // Empty only on misconfiguration (no config.ai.url / env var). Fail loud
+        // rather than leaving the box silently unresponsive.
+        dispatch.onSetError(
+          "Search is unavailable — the API endpoint is not configured."
+        );
+        options.onError?.(new Error("Search API URL is not configured."));
+        return;
+      }
 
       const form = e.currentTarget;
 
@@ -186,21 +182,14 @@ export function MultiTurnQueryProvider({
       // throws on a non-secure origin (HTTP outside localhost); doing it here
       // surfaces a visible error instead of leaving the form stuck loading.
       const body: Record<string, unknown> = { query };
-      if (agentMode) {
-        // Backend owns conversation state keyed by sessionId — no previousQuery.
-        try {
-          if (!sessionIdRef.current) sessionIdRef.current = crypto.randomUUID();
-        } catch {
-          dispatch.onSetError(
-            "Agent search needs a secure (HTTPS) connection."
-          );
-          options.onError?.(new Error("Failed to start an agent session."));
-          return;
-        }
-        body.sessionId = sessionIdRef.current;
-      } else if (lastQueryRef.current) {
-        body.previousQuery = lastQueryRef.current;
+      try {
+        if (!sessionIdRef.current) sessionIdRef.current = crypto.randomUUID();
+      } catch {
+        dispatch.onSetError("Search needs a secure (HTTPS) connection.");
+        options.onError?.(new Error("Failed to start a search session."));
+        return;
       }
+      body.sessionId = sessionIdRef.current;
 
       dispatch.onSetQuery(query);
       dispatch.onSetStatus(true);
@@ -209,59 +198,31 @@ export function MultiTurnQueryProvider({
 
       const data = await postSearch(submitUrl, body, abortRef, dispatch);
       if (data) {
-        lastQueryRef.current = data.query;
         options.onSuccess?.(data);
       } else {
         options.onError?.(new Error("Search request failed"));
       }
       options.onSettled?.(form);
     },
-    [agentMode, dispatch, submitUrl]
+    [dispatch, submitUrl]
   );
 
   const queryContextValue = useMemo(() => ({ onSubmit }), [onSubmit]);
 
   const removeFilter = useCallback(
     (facet: string, value: string): void => {
-      if (agentMode) {
-        // Agent mode: conversation state lives server-side, keyed by sessionId.
-        // Ask the backend to drop the value from the session's query — the
-        // deterministic previousQuery round-trip below would bypass it.
-        if (!sessionIdRef.current || !submitUrl) return;
-        dispatch.onSetStatus(true);
-        postSearch(
-          `${submitUrl}/filter`,
-          { facet, sessionId: sessionIdRef.current, value },
-          abortRef,
-          dispatch
-        );
-        return;
-      }
-      if (!lastQueryRef.current || !url) return;
-      const filtered = lastQueryRef.current.mentions
-        .map((m: Mention) => {
-          if (m.facet !== facet) return m;
-          const values = m.values.filter((v) => v !== value);
-          if (values.length === 0) return null;
-          return { ...m, values };
-        })
-        .filter((m): m is Mention => m !== null);
-      const updatedQuery = { ...lastQueryRef.current, mentions: filtered };
-      lastQueryRef.current = updatedQuery;
+      // Conversation state lives server-side, keyed by sessionId; ask the backend
+      // to drop the value from the session's query (#382).
+      if (!sessionIdRef.current || !submitUrl) return;
       dispatch.onSetStatus(true);
-
       postSearch(
-        url,
-        { previousQuery: updatedQuery, query: "" },
+        `${submitUrl}/filter`,
+        { facet, sessionId: sessionIdRef.current, value },
         abortRef,
         dispatch
-      ).then((data) => {
-        if (data) {
-          lastQueryRef.current = data.query;
-        }
-      });
+      );
     },
-    [agentMode, dispatch, submitUrl, url]
+    [dispatch, submitUrl]
   );
 
   return (
