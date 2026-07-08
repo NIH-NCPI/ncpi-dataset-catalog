@@ -18,8 +18,7 @@ export default defineConfig({
       timeout: 30_000,
     },
     {
-      command:
-        "./scripts/dev.sh ncpi-catalog dev && ./scripts/set-version.sh dev && ./scripts/sync-api.sh && npx next dev --webpack",
+      command: "npm run dev",
       env: { NEXT_PUBLIC_SEARCH_API_URL: "http://localhost:8000/search" },
       port: 3000,
       reuseExistingServer: true,
