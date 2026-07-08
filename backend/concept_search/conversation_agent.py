@@ -482,8 +482,10 @@ def _fence_user_message(message: str) -> str:
     The body is delimited by ``<user_input>``/``</user_input>``; the system prompt
     instructs the model to treat everything between them as data describing a
     search, never as instructions. Any closing-tag variant inside the body is
-    defanged with a zero-width space (U+200B) so the message cannot terminate the
-    fence early — the model still reads the original text.
+    rewritten to a canonical, defanged form — ``</`` + a zero-width space (U+200B)
+    + ``user_input>`` — so the message cannot terminate the fence early. Only the
+    matched close-tags are touched (and only their case/whitespace normalized as a
+    side effect); the rest of the message is unchanged and fully readable.
 
     Args:
         message: The raw user message for this turn.
