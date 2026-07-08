@@ -2,12 +2,12 @@
 
 One pydantic-ai orchestrator (Sonnet by default) that builds a ``QueryModel``
 incrementally via a small set of composable tools, replacing the
-Extract→Resolve→Structure→Router state machine for the ``/search/agent``
+Extract→Resolve→Structure→Router state machine for the ``/search``
 endpoint. The proven Haiku resolve agent is kept as the ``resolve_concepts``
 tool (batched/parallel), so concept grounding (and its evals) are unchanged.
 
 Validated on spike ``noopdog/362``; productionized in slices under epic #365.
-This module is the orchestrator + tools; the ``/search/agent`` endpoint that
+This module is the orchestrator + tools; the ``/search`` endpoint that
 drives it is wired separately.
 """
 
@@ -472,7 +472,7 @@ _USER_INPUT_CLOSE_TAG = re.compile(r"</\s*user_input\s*>", re.IGNORECASE)
 # Cap on model requests (≈ tool-call rounds) per turn. Normal turns use ~2-4
 # (resolve + update_query); this bounds a hostile or confused turn from fanning
 # out tool calls unbounded (#364). On exceed, pydantic-ai raises
-# UsageLimitExceeded; it has no dedicated branch in the /search/agent handler —
+# UsageLimitExceeded; it has no dedicated branch in the /search handler —
 # the generic ``except Exception`` catches it and returns a generic error reply.
 _MAX_REQUESTS_PER_TURN = 10
 

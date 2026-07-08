@@ -157,7 +157,7 @@ describe("MultiTurnQueryProvider onSubmit", () => {
     });
 
     const [calledUrl, init] = (global.fetch as jest.Mock).mock.calls[0];
-    expect(calledUrl).toBe("https://test-api/search/agent");
+    expect(calledUrl).toBe("https://test-api/search");
     const body = JSON.parse(init.body);
     expect(body.query).toBe("diabetes studies");
     expect(body.sessionId).toBe("uuid-1");
@@ -276,7 +276,7 @@ describe("MultiTurnQueryProvider removeFilter", () => {
     const calls = (global.fetch as jest.Mock).mock.calls;
     expect(calls).toHaveLength(2);
     const [calledUrl, init] = calls[1];
-    expect(calledUrl).toBe("https://test-api/search/agent/filter");
+    expect(calledUrl).toBe("https://test-api/search/filter");
     const body = JSON.parse(init.body);
     expect(body).toEqual({ facet: "focus", sessionId: "uuid-1", value: "DM" });
   });

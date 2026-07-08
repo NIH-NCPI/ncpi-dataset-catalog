@@ -20,8 +20,8 @@ from fastapi.responses import JSONResponse
 from .api_models import (
     DemographicCategory,
     DemographicDistribution,
-    SearchAgentFilterRequest,
-    SearchAgentRequest,
+    SearchFilterRequest,
+    SearchRequest,
     SearchResponse,
     SearchTiming,
     StudyDemographics,
@@ -279,9 +279,8 @@ def _build_response_message(
 ) -> str | None:
     """Build the deterministic response message for a lookup result.
 
-    Used by ``/search/agent/filter`` (``/search/agent`` uses the agent's own reply
-    instead). Also populates ``query_structure.summary`` as a side effect when it
-    is empty.
+    Used by ``/search/filter`` (``/search`` uses the agent's own reply instead).
+    Also populates ``query_structure.summary`` as a side effect when it is empty.
 
     Args:
         query_model: The resolved query model that was executed.
@@ -371,9 +370,12 @@ _MAX_AGENT_HISTORY = 40
 _MAX_SESSION_MESSAGES = 50  # user/assistant text turns retained in the persisted transcript
 
 
-@app.post("/search/agent", response_model=SearchResponse)
-async def search_agent(
-    request: SearchAgentRequest, fastapi_request: Request
+@app.post("/search", response_model=SearchResponse)
+# Deprecated alias so a previously-deployed frontend keeps working during the
+# rename cutover; remove once the frontend is on /search (follow-up).
+@app.post("/search/agent", response_model=SearchResponse, include_in_schema=False)
+async def search(
+    request: SearchRequest, fastapi_request: Request
 ) -> SearchResponse | JSONResponse:
     """Agentic multi-turn search (epic #365).
 
@@ -490,13 +492,15 @@ async def search_agent(
     return response
 
 
-@app.post("/search/agent/filter", response_model=SearchResponse)
-async def search_agent_filter(
-    request: SearchAgentFilterRequest, fastapi_request: Request
+@app.post("/search/filter", response_model=SearchResponse)
+# Deprecated alias; remove once the frontend is on /search/filter (follow-up).
+@app.post("/search/agent/filter", response_model=SearchResponse, include_in_schema=False)
+async def search_filter(
+    request: SearchFilterRequest, fastapi_request: Request
 ) -> SearchResponse | JSONResponse:
-    """Structured filter removal for agent mode (#382).
+    """Structured filter removal (#382).
 
-    Deterministic sibling of ``/search/agent`` — no LLM turn. Drops one facet
+    Deterministic sibling of ``/search`` — no LLM turn. Drops one facet
     value from the session's persisted query state, re-runs the lookup, and
     saves the session. The next conversational turn sees the updated filters
     because the state preamble is rebuilt from ``state.query`` each turn.
