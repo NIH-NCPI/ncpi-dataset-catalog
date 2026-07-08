@@ -116,8 +116,8 @@ export function MultiTurnQueryProvider({
   const submitUrl = getSearchApiUrl(config.ai?.url);
   const dispatch = useChatDispatch();
   // Conversation id created lazily on first submission so the backend can key
-  // multi-turn state. The agent handles resets server-side, so one id per
-  // provider lifetime (one research-view visit) is sufficient.
+  // multi-turn state. This provider is mounted app-wide (in _app), so one id per
+  // app session is sufficient; the agent handles new-topic resets server-side.
   const sessionIdRef = useRef<string>("");
   const abortRef = useRef<AbortController | null>(null);
   const placeholderSetRef = useRef(false);

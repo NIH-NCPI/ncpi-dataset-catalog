@@ -33,6 +33,7 @@ import TagManager from "react-gtm-module";
 import { Footer } from "../app/components/Layout/components/Footer/footer";
 import { useEntities } from "../app/services/workflows/hooks/UseEntities/hook";
 import { getSearchApiUrl } from "../app/utils/searchApiUrl";
+import { MultiTurnQueryProvider } from "../app/views/ResearchView/artifact/form";
 import { BREAKPOINTS } from "../site-config/common/constants";
 
 const FEATURE_FLAGS = Object.values(FEATURES);
@@ -117,33 +118,37 @@ function MyApp(props: AppPropsWithComponent): JSX.Element {
                       <StyledHeader {...header} transparent={homePage} />
                     </ThemeProvider>
                     <ChatProvider initialArgs={ai?.prompt} url={aiUrl}>
-                      <ExploreStateProvider entityListType={entityListType}>
-                        <DataDictionaryStateProvider>
-                          <FileManifestStateProvider>
-                            <Main>
-                              <ErrorBoundary
-                                fallbackRender={({
-                                  error,
-                                  reset,
-                                }: {
-                                  error: DataExplorerError;
-                                  reset: () => void;
-                                }): JSX.Element => (
-                                  <DXError
-                                    errorMessage={error.message}
-                                    requestUrlMessage={error.requestUrlMessage}
-                                    rootPath={redirectRootToPath}
-                                    onReset={reset}
-                                  />
-                                )}
-                              >
-                                <Component {...pageProps} />
-                                <Floating {...floating} />
-                              </ErrorBoundary>
-                            </Main>
-                          </FileManifestStateProvider>
-                        </DataDictionaryStateProvider>
-                      </ExploreStateProvider>
+                      <MultiTurnQueryProvider>
+                        <ExploreStateProvider entityListType={entityListType}>
+                          <DataDictionaryStateProvider>
+                            <FileManifestStateProvider>
+                              <Main>
+                                <ErrorBoundary
+                                  fallbackRender={({
+                                    error,
+                                    reset,
+                                  }: {
+                                    error: DataExplorerError;
+                                    reset: () => void;
+                                  }): JSX.Element => (
+                                    <DXError
+                                      errorMessage={error.message}
+                                      requestUrlMessage={
+                                        error.requestUrlMessage
+                                      }
+                                      rootPath={redirectRootToPath}
+                                      onReset={reset}
+                                    />
+                                  )}
+                                >
+                                  <Component {...pageProps} />
+                                  <Floating {...floating} />
+                                </ErrorBoundary>
+                              </Main>
+                            </FileManifestStateProvider>
+                          </DataDictionaryStateProvider>
+                        </ExploreStateProvider>
+                      </MultiTurnQueryProvider>
                     </ChatProvider>
                     <Footer />
                   </AppLayout>
