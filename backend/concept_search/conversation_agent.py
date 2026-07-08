@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import asyncio
 import os
+import re
 import threading
 from collections import Counter
 from dataclasses import dataclass, field
@@ -24,6 +25,7 @@ from pydantic.alias_generators import to_camel
 from pydantic_ai import Agent, RunContext
 from pydantic_ai.messages import ModelMessage, ModelMessagesTypeAdapter
 from pydantic_ai.settings import ModelSettings
+from pydantic_ai.usage import UsageLimits
 from pydantic_core import to_jsonable_python
 
 from .index import ConceptIndex
@@ -459,6 +461,43 @@ def _state_preamble(deps: AgentDeps) -> str:
     return "\n".join(lines)
 
 
+# Every user message is delivered to the orchestrator fenced inside
+# ``<user_input>…</user_input>`` so the system prompt can treat it as untrusted
+# data, never instructions (#364). This regex matches any closing-tag variant a
+# tokenizer might still read as the fence terminator — case-insensitive, with
+# optional internal whitespace/newlines — so a crafted message can't close the
+# fence early and have trailing text interpreted as instructions.
+_USER_INPUT_CLOSE_TAG = re.compile(r"</\s*user_input\s*>", re.IGNORECASE)
+
+# Cap on model requests (≈ tool-call rounds) per turn. Normal turns use ~2-4
+# (resolve + update_query); this bounds a hostile or confused turn from fanning
+# out tool calls unbounded (#364). On exceed, pydantic-ai raises
+# UsageLimitExceeded; it has no dedicated branch in the /search/agent handler —
+# the generic ``except Exception`` catches it and returns a generic error reply.
+_MAX_REQUESTS_PER_TURN = 10
+
+
+def _fence_user_message(message: str) -> str:
+    """Wrap the raw user message as untrusted data for the orchestrator.
+
+    The body is delimited by ``<user_input>``/``</user_input>``; the system prompt
+    instructs the model to treat everything between them as data describing a
+    search, never as instructions. Any closing-tag variant inside the body is
+    rewritten to a canonical, defanged form — ``</`` + a zero-width space (U+200B)
+    + ``user_input>`` — so the message cannot terminate the fence early. Only the
+    matched close-tags are touched (and only their case/whitespace normalized as a
+    side effect); the rest of the message is unchanged and fully readable.
+
+    Args:
+        message: The raw user message for this turn.
+
+    Returns:
+        The message wrapped in a ``<user_input>`` fence with close-tags defanged.
+    """
+    safe_body = _USER_INPUT_CLOSE_TAG.sub("</\u200buser_input>", message)
+    return f"<user_input>\n{safe_body}\n</user_input>"
+
+
 async def run_conversation(
     message: str,
     deps: AgentDeps,
@@ -478,6 +517,13 @@ async def run_conversation(
         (reply_text, committed query_state, full message history for persistence).
     """
     agent = _get_agent(model)
-    augmented = f"{_state_preamble(deps)}\n\n{message}"
-    result = await agent.run(augmented, deps=deps, message_history=message_history or None)
+    # The state preamble is trusted (system-generated, already sanitized by
+    # _clean_state_field); the user's own message is fenced as untrusted data.
+    augmented = f"{_state_preamble(deps)}\n\n{_fence_user_message(message)}"
+    result = await agent.run(
+        augmented,
+        deps=deps,
+        message_history=message_history or None,
+        usage_limits=UsageLimits(request_limit=_MAX_REQUESTS_PER_TURN),
+    )
     return result.output, deps.query_state, result.all_messages()
