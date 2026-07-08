@@ -16,8 +16,10 @@ trap 'git worktree remove --force "$BUILD_DIR" >/dev/null 2>&1 || true; rm -rf "
 git worktree add --detach "$BUILD_DIR" HEAD
 
 # Node pin comes from .nvmrc; package.json engines and CI mirror it (#403).
-n "$(tr -d '[:space:]' < .nvmrc)"
-(cd "$BUILD_DIR" && npm ci && npm run build:dev)
+# `n exec` scopes the pinned Node to the build subprocess without switching
+# the machine's global Node version.
+NODE_VERSION="$(tr -d '[:space:]' < .nvmrc)"
+(cd "$BUILD_DIR" && n exec "$NODE_VERSION" npm ci && n exec "$NODE_VERSION" npm run build:dev)
 
 AWS_PROFILE=excira s5cmd sync --delete "$BUILD_DIR/out/" s3://g78-ncpi-data.humancellatlas.dev/
 aws cloudfront create-invalidation --distribution-id EJ5E27A5IGM2B --paths "/*" --profile excira

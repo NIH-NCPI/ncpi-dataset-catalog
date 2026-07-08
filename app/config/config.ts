@@ -17,20 +17,19 @@ export const config = (): SiteConfig => {
     return appConfig;
   }
 
-  const config = process.env.NEXT_PUBLIC_SITE_CONFIG;
+  const configKey = process.env.NEXT_PUBLIC_SITE_CONFIG;
+  const siteConfig = configKey ? CONFIGS[configKey] : undefined;
 
-  if (!config) {
-    console.error(`Config not found. config: ${config}`);
+  if (!siteConfig) {
+    throw new Error(
+      `Unknown site config "${configKey}" — set NEXT_PUBLIC_SITE_CONFIG to one of: ${Object.keys(
+        CONFIGS
+      ).join(", ")}`
+    );
   }
 
-  appConfig = CONFIGS[config as string];
-
-  if (!appConfig) {
-    console.error(`No app config was found for the config: ${config}`);
-  } else {
-    console.log(`Using app config ${config}`);
-  }
-
+  console.log(`Using app config ${configKey}`);
+  appConfig = siteConfig;
   setConfig(appConfig); // Sets app config.
   return appConfig;
 };
