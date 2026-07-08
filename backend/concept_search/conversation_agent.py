@@ -472,7 +472,8 @@ _USER_INPUT_CLOSE_TAG = re.compile(r"</\s*user_input\s*>", re.IGNORECASE)
 # Cap on model requests (≈ tool-call rounds) per turn. Normal turns use ~2-4
 # (resolve + update_query); this bounds a hostile or confused turn from fanning
 # out tool calls unbounded (#364). On exceed, pydantic-ai raises
-# UsageLimitExceeded, which the /search/agent handler catches → friendly reply.
+# UsageLimitExceeded; it has no dedicated branch in the /search/agent handler —
+# the generic ``except Exception`` catches it and returns a generic error reply.
 _MAX_REQUESTS_PER_TURN = 10
 
 
