@@ -1,4 +1,4 @@
-"""Endpoint tests for the agentic ``/search/agent`` route (no LLM calls).
+"""Endpoint tests for the agentic ``/search`` route (no LLM calls).
 
 The orchestrator (``run_conversation``) and the index are mocked, so these
 tests exercise only the HTTP wiring: request validation, rate limiting, the
@@ -103,7 +103,7 @@ def agent_client(agent_store):
 
 
 class TestSearchAgentEndpoint:
-    """HTTP-level tests for POST /search/agent."""
+    """HTTP-level tests for POST /search."""
 
     @patch("concept_search.api.run_conversation")
     @patch("concept_search.api.get_index")
@@ -114,7 +114,7 @@ class TestSearchAgentEndpoint:
         mock_run.return_value = ("Here are diabetes studies.", _query(), [])
 
         resp = agent_client.post(
-            "/search/agent",
+            "/search",
             json={"query": "diabetes studies", "sessionId": "s1"},
         )
 
@@ -127,6 +127,21 @@ class TestSearchAgentEndpoint:
 
     @patch("concept_search.api.run_conversation")
     @patch("concept_search.api.get_index")
+    def test_deprecated_agent_alias_still_routes(self, mock_index, mock_run, agent_client) -> None:
+        """The deprecated /search/agent alias routes to the same handler.
+
+        Kept temporarily so a previously-deployed frontend survives the rename
+        cutover; remove with the alias once the frontend is on /search.
+        """
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+        mock_run.return_value = ("ok", _query(), [])
+
+        resp = agent_client.post("/search/agent", json={"query": "x", "sessionId": "s1"})
+        assert resp.status_code == 200
+
+    @patch("concept_search.api.run_conversation")
+    @patch("concept_search.api.get_index")
     def test_store_get_failure_returns_friendly_error(self, mock_index, mock_run) -> None:
         """A session-store read failure surfaces a retryable message, not a 500."""
         mock_index.return_value.query_studies.return_value = []
@@ -136,7 +151,7 @@ class TestSearchAgentEndpoint:
 
         with patch("concept_search.api.get_session_store", return_value=store):
             client = TestClient(app, raise_server_exceptions=False)
-            resp = client.post("/search/agent", json={"query": "x", "sessionId": "s1"})
+            resp = client.post("/search", json={"query": "x", "sessionId": "s1"})
 
         assert resp.status_code == 200  # graceful, not an unhandled 500
         assert "went wrong" in resp.json()["message"].lower()
@@ -154,7 +169,7 @@ class TestSearchAgentEndpoint:
 
         with patch("concept_search.api.get_session_store", return_value=store):
             client = TestClient(app, raise_server_exceptions=False)
-            resp = client.post("/search/agent", json={"query": "diabetes", "sessionId": "s1"})
+            resp = client.post("/search", json={"query": "diabetes", "sessionId": "s1"})
 
         assert resp.status_code == 200
         assert resp.json()["message"] == "Here are diabetes studies."
@@ -171,8 +186,8 @@ class TestSearchAgentEndpoint:
         seen: list[list[str]] = []
         mock_run.side_effect = _recording_run(seen)
 
-        r1 = agent_client.post("/search/agent", json={"query": "diabetes", "sessionId": "s1"})
-        r2 = agent_client.post("/search/agent", json={"query": "only on BDC", "sessionId": "s1"})
+        r1 = agent_client.post("/search", json={"query": "diabetes", "sessionId": "s1"})
+        r2 = agent_client.post("/search", json={"query": "only on BDC", "sessionId": "s1"})
 
         assert r1.status_code == 200
         assert r2.status_code == 200
@@ -190,8 +205,8 @@ class TestSearchAgentEndpoint:
         seen: list[list[str]] = []
         mock_run.side_effect = _recording_run(seen)
 
-        agent_client.post("/search/agent", json={"query": "diabetes", "sessionId": "s1"})
-        agent_client.post("/search/agent", json={"query": "asthma", "sessionId": "s2"})
+        agent_client.post("/search", json={"query": "diabetes", "sessionId": "s1"})
+        agent_client.post("/search", json={"query": "asthma", "sessionId": "s2"})
 
         assert seen[0] == []  # s1 first turn
         assert seen[1] == []  # s2 first turn — not polluted by s1
@@ -206,7 +221,7 @@ class TestSearchAgentEndpoint:
             patch("concept_search.api.run_conversation") as mock_run,
         ):
             client = TestClient(app, raise_server_exceptions=False)
-            resp = client.post("/search/agent", json={"query": "x", "sessionId": "s1"})
+            resp = client.post("/search", json={"query": "x", "sessionId": "s1"})
 
         assert resp.status_code == 429
         mock_run.assert_not_called()
@@ -218,7 +233,7 @@ class TestSearchAgentEndpoint:
         mock_index.return_value.stats = {}
         mock_run.side_effect = TimeoutError
 
-        resp = agent_client.post("/search/agent", json={"query": "x", "sessionId": "s1"})
+        resp = agent_client.post("/search", json={"query": "x", "sessionId": "s1"})
 
         assert resp.status_code == 200
         data = resp.json()
@@ -235,7 +250,7 @@ class TestSearchAgentEndpoint:
         mock_index.return_value.stats = {}
         mock_run.side_effect = RuntimeError("boom")
 
-        resp = agent_client.post("/search/agent", json={"query": "x", "sessionId": "s1"})
+        resp = agent_client.post("/search", json={"query": "x", "sessionId": "s1"})
 
         assert resp.status_code == 200
         data = resp.json()
@@ -246,33 +261,33 @@ class TestSearchAgentEndpoint:
     def test_missing_session_id_is_rejected(self, mock_index) -> None:
         """A request without a session id fails validation (422)."""
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search/agent", json={"query": "diabetes"})
+        resp = client.post("/search", json={"query": "diabetes"})
         assert resp.status_code == 422
 
     @patch("concept_search.api.get_index")
     def test_empty_session_id_is_rejected(self, mock_index) -> None:
         """An empty session id fails validation (min_length=1)."""
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search/agent", json={"query": "diabetes", "sessionId": ""})
+        resp = client.post("/search", json={"query": "diabetes", "sessionId": ""})
         assert resp.status_code == 422
 
     @patch("concept_search.api.get_index")
     def test_missing_query_is_rejected(self, mock_index) -> None:
         """A request without a query fails validation — the agent needs a message."""
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search/agent", json={"sessionId": "s1"})
+        resp = client.post("/search", json={"sessionId": "s1"})
         assert resp.status_code == 422
 
     @patch("concept_search.api.get_index")
     def test_blank_query_is_rejected(self, mock_index) -> None:
         """A whitespace-only query fails validation."""
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search/agent", json={"query": "   ", "sessionId": "s1"})
+        resp = client.post("/search", json={"query": "   ", "sessionId": "s1"})
         assert resp.status_code == 422
 
 
 class TestSearchAgentFilterEndpoint:
-    """HTTP-level tests for POST /search/agent/filter (structured chip removal)."""
+    """HTTP-level tests for POST /search/filter (structured chip removal)."""
 
     @patch("concept_search.api.run_conversation")
     @patch("concept_search.api.get_index")
@@ -285,7 +300,7 @@ class TestSearchAgentFilterEndpoint:
         _seed_session(agent_store, "s1", _multi_value_query())
 
         resp = agent_client.post(
-            "/search/agent/filter",
+            "/search/filter",
             json={"facet": "focus", "sessionId": "s1", "value": "Diabetes Mellitus"},
         )
 
@@ -298,6 +313,26 @@ class TestSearchAgentFilterEndpoint:
 
     @patch("concept_search.api.run_conversation")
     @patch("concept_search.api.get_index")
+    def test_deprecated_agent_filter_alias_still_routes(
+        self, mock_index, mock_run, agent_store, agent_client
+    ) -> None:
+        """The deprecated /search/agent/filter alias routes to the same handler.
+
+        Kept for the rename cutover; remove with the alias once the frontend is
+        on /search/filter.
+        """
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+        _seed_session(agent_store, "s1", _multi_value_query())
+
+        resp = agent_client.post(
+            "/search/agent/filter",
+            json={"facet": "focus", "sessionId": "s1", "value": "Diabetes Mellitus"},
+        )
+        assert resp.status_code == 200
+
+    @patch("concept_search.api.run_conversation")
+    @patch("concept_search.api.get_index")
     def test_removing_last_value_drops_mention(
         self, mock_index, mock_run, agent_store, agent_client
     ) -> None:
@@ -307,7 +342,7 @@ class TestSearchAgentFilterEndpoint:
         _seed_session(agent_store, "s1", _multi_value_query())
 
         resp = agent_client.post(
-            "/search/agent/filter",
+            "/search/filter",
             json={"facet": "platform", "sessionId": "s1", "value": "AnVIL"},
         )
 
@@ -320,7 +355,7 @@ class TestSearchAgentFilterEndpoint:
     def test_removal_is_persisted_for_next_agent_turn(
         self, mock_index, mock_run, agent_store, agent_client
     ) -> None:
-        """The next /search/agent turn is handed the query state minus the removed filter."""
+        """The next /search turn is handed the query state minus the removed filter."""
         mock_index.return_value.query_studies.return_value = []
         mock_index.return_value.stats = {}
         _seed_session(agent_store, "s1", _multi_value_query())
@@ -329,10 +364,10 @@ class TestSearchAgentFilterEndpoint:
         mock_run.side_effect = _recording_run(seen)
 
         r1 = agent_client.post(
-            "/search/agent/filter",
+            "/search/filter",
             json={"facet": "focus", "sessionId": "s1", "value": "Diabetes Mellitus, Type 2"},
         )
-        r2 = agent_client.post("/search/agent", json={"query": "and BMI", "sessionId": "s1"})
+        r2 = agent_client.post("/search", json={"query": "and BMI", "sessionId": "s1"})
 
         assert r1.status_code == 200
         assert r2.status_code == 200
@@ -352,7 +387,7 @@ class TestSearchAgentFilterEndpoint:
         mock_index.return_value.stats = {}
 
         resp = agent_client.post(
-            "/search/agent/filter",
+            "/search/filter",
             json={"facet": "focus", "sessionId": "missing", "value": "Diabetes Mellitus"},
         )
 
@@ -370,7 +405,7 @@ class TestSearchAgentFilterEndpoint:
         with patch("concept_search.api.get_session_store", return_value=store):
             client = TestClient(app, raise_server_exceptions=False)
             resp = client.post(
-                "/search/agent/filter",
+                "/search/filter",
                 json={"facet": "focus", "sessionId": "s1", "value": "x"},
             )
 
@@ -390,7 +425,7 @@ class TestSearchAgentFilterEndpoint:
         with patch("concept_search.api.get_session_store", return_value=store):
             client = TestClient(app, raise_server_exceptions=False)
             resp = client.post(
-                "/search/agent/filter",
+                "/search/filter",
                 json={"facet": "platform", "sessionId": "s1", "value": "AnVIL"},
             )
 
@@ -403,7 +438,7 @@ class TestSearchAgentFilterEndpoint:
         """An unknown facet fails validation (422)."""
         client = TestClient(app, raise_server_exceptions=False)
         resp = client.post(
-            "/search/agent/filter",
+            "/search/filter",
             json={"facet": "nonsense", "sessionId": "s1", "value": "x"},
         )
         assert resp.status_code == 422
@@ -412,7 +447,7 @@ class TestSearchAgentFilterEndpoint:
     def test_missing_session_id_is_rejected(self, mock_index) -> None:
         """A request without a session id fails validation (422)."""
         client = TestClient(app, raise_server_exceptions=False)
-        resp = client.post("/search/agent/filter", json={"facet": "focus", "value": "x"})
+        resp = client.post("/search/filter", json={"facet": "focus", "value": "x"})
         assert resp.status_code == 422
 
     @patch("concept_search.api.get_index")
@@ -426,7 +461,7 @@ class TestSearchAgentFilterEndpoint:
         ):
             client = TestClient(app, raise_server_exceptions=False)
             resp = client.post(
-                "/search/agent/filter",
+                "/search/filter",
                 json={"facet": "focus", "sessionId": "s1", "value": "x"},
             )
 

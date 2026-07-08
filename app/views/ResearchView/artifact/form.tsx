@@ -101,10 +101,10 @@ async function postSearch(
 }
 
 /**
- * Provider that drives the conversational agent search. Every submission goes to
- * the `/search/agent` endpoint with a client-generated `sessionId`; the backend
- * owns the multi-turn conversation state keyed by that id, so the client sends no
- * prior query.
+ * Provider that drives the conversational search. Every submission goes to the
+ * `/search` endpoint with a client-generated `sessionId`; the backend owns the
+ * multi-turn conversation state keyed by that id, so the client sends no prior
+ * query. Filter-chip removals post to `/search/filter`.
  * @param props - Component props.
  * @param props.children - Children to render.
  * @returns Provider wrapping children with multi-turn context.
@@ -113,8 +113,7 @@ export function MultiTurnQueryProvider({
   children,
 }: MultiTurnQueryProviderProps): JSX.Element {
   const { config } = useConfig();
-  const baseUrl = getSearchApiUrl(config.ai?.url);
-  const submitUrl = baseUrl ? `${baseUrl}/agent` : "";
+  const submitUrl = getSearchApiUrl(config.ai?.url);
   const dispatch = useChatDispatch();
   // Conversation id created lazily on first submission so the backend can key
   // multi-turn state. The agent handles resets server-side, so one id per

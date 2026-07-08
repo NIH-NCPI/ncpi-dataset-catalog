@@ -34,35 +34,7 @@ class QueryStructure(BaseModel):
 
 
 class SearchRequest(BaseModel):
-    """Incoming search query.
-
-    Three modes based on which fields are present:
-
-    1. **Fresh** — ``query`` is set, no ``previous_query``.  Full pipeline.
-    2. **Refine** — ``query`` is set *and* ``previous_query`` is present.
-       Extract only new mentions, merge onto previous state.
-    3. **Lookup-only** — ``query`` is empty/absent, ``previous_query`` is
-       present.  Skip LLM pipeline; re-run deterministic lookup with the
-       (possibly mutated) previous query model.
-    """
-
-    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
-
-    previous_query: QueryModel | None = None
-    query: str = Field(default="", max_length=1000)
-
-    @model_validator(mode="after")
-    def require_query_or_previous(self) -> SearchRequest:
-        """Ensure at least one of query or previous_query is provided."""
-        if not (self.query and self.query.strip()) and self.previous_query is None:
-            raise ValueError(
-                "Either 'query' must be non-empty or 'previousQuery' must be provided."
-            )
-        return self
-
-
-class SearchAgentRequest(BaseModel):
-    """Incoming message for the agentic ``/search/agent`` endpoint.
+    """Incoming message for the ``/search`` endpoint.
 
     The backend owns conversation state keyed by ``session_id`` (via the
     SessionStore), so the client only sends a session id and the new message.
@@ -74,24 +46,24 @@ class SearchAgentRequest(BaseModel):
     session_id: str = Field(min_length=1, max_length=128)
 
     @model_validator(mode="after")
-    def require_non_empty_query(self) -> SearchAgentRequest:
+    def require_non_empty_query(self) -> SearchRequest:
         """Reject a whitespace-only ``query``.
 
         ``query`` is required (a missing field is rejected by the schema); this
-        additionally guards against a blank message. The agent path carries no
-        ``previousQuery`` — conversation state lives server-side — so every turn
-        must supply a real message to act on.
+        additionally guards against a blank message. There is no ``previousQuery``
+        — conversation state lives server-side — so every turn must supply a real
+        message to act on.
         """
         if not self.query.strip():
             raise ValueError("'query' must be a non-empty message.")
         return self
 
 
-class SearchAgentFilterRequest(BaseModel):
-    """Structured filter removal for the agentic ``/search/agent/filter`` endpoint.
+class SearchFilterRequest(BaseModel):
+    """Structured filter removal for the ``/search/filter`` endpoint.
 
-    Sent when the user clicks the × on a filter chip in agent mode. This is a
-    deterministic operation — no LLM turn: the backend drops the value from the
+    Sent when the user clicks the × on a filter chip. This is a deterministic
+    operation — no LLM turn: the backend drops the value from the
     session's persisted query state and re-runs the lookup. The next
     conversational turn sees the updated filters via the state preamble, which
     is rebuilt from the persisted query each turn.
@@ -179,7 +151,8 @@ class VariableResult(BaseModel):
 
 
 class SearchResponse(BaseModel):
-    """Top-level response for POST /search."""
+    """Top-level response for the search endpoints (``/search`` and
+    ``/search/filter``)."""
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 

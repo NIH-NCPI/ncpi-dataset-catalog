@@ -28,20 +28,18 @@ from .models import ConversationMessage, PendingChoice, QueryModel
 
 
 class SessionState(BaseModel):
-    """Persisted conversation state for both search paths.
+    """Persisted conversation state for the agentic search loop.
 
     Holds the user/assistant text turns, the resolved ``QueryModel``, any open
-    disambiguation choices (``pending``), and — for the agentic loop — the
-    serialized pydantic-ai message history (``agent_message_history``: tool calls
-    and results) needed for continuity across turns. The deterministic
-    ``/search`` pipeline leaves the agent fields empty.
+    disambiguation choices (``pending``), and the serialized pydantic-ai message
+    history (``agent_message_history``: tool calls and results) needed for
+    continuity across turns.
     """
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
-    # Serialized pydantic-ai ModelMessage objects for the agentic loop
-    # (tool calls + results), so the orchestrator has full continuity. Empty
-    # for the deterministic /search pipeline, which carries no agent history.
+    # Serialized pydantic-ai ModelMessage objects (tool calls + results) so the
+    # orchestrator has full continuity across turns.
     agent_message_history: list[dict] = Field(default_factory=list)
     messages: list[ConversationMessage] = Field(default_factory=list)
     # Open disambiguation choices offered but unresolved, so they survive into

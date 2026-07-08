@@ -20,8 +20,7 @@ from fastapi.responses import JSONResponse
 from .api_models import (
     DemographicCategory,
     DemographicDistribution,
-    SearchAgentFilterRequest,
-    SearchAgentRequest,
+    SearchFilterRequest,
     SearchRequest,
     SearchResponse,
     SearchTiming,
@@ -43,12 +42,7 @@ from .models import (
     Facet,
     QueryModel,
     ResolvedMention,
-    RouteRemove,
-    RouteReplace,
-    RouteReset,
-    RouteSelect,
 )
-from .pipeline import pipeline_cache, run_pipeline
 from .rate_limit import RateLimiter
 from .resolve_agent import resolve_cache
 from .response_summary import (
@@ -57,7 +51,6 @@ from .response_summary import (
     build_query_structure,
     diagnose_empty_results,
 )
-from .router_agent import run_router
 from .search_execution import execute_query_model
 from .session_store import SessionState, get_session_store, truncate_history
 
@@ -265,115 +258,6 @@ def _build_variable_result(row: dict) -> VariableResult:
     )
 
 
-async def _handle_route(query: str, previous_query: QueryModel) -> QueryModel:
-    """Route a follow-up message through the router agent and dispatch.
-
-    Args:
-        query: The user's follow-up message.
-        previous_query: Previous query state with active filters.
-
-    Returns:
-        Updated QueryModel after applying the routed action.
-    """
-    route = await run_router(query, previous_query)
-    logger.info("Router: %s", route.kind)
-
-    if isinstance(route, RouteSelect):
-        # Resolve the first disambiguation-pending mention whose options
-        # overlap with selected_ids.  Only one mention is resolved per
-        # select action — this avoids accidentally resolving a second
-        # unrelated disambiguation.
-        mentions: list[ResolvedMention] = []
-        resolved = False
-        for m in previous_query.mentions:
-            valid_ids = {opt.concept_id for opt in m.disambiguation} if m.disambiguation else set()
-            if not resolved and valid_ids and valid_ids & set(route.selected_ids):
-                # Only keep IDs that actually exist in the disambiguation options
-                filtered_ids = [sid for sid in route.selected_ids if sid in valid_ids]
-                # Determine facet from the selected option (supports cross-facet disambiguation).
-                # If multiple options are selected, only accept those sharing the same facet.
-                filtered_set = set(filtered_ids)
-                selected_opts = [opt for opt in m.disambiguation if opt.concept_id in filtered_set]
-                resolved_facet = (selected_opts[0].facet or m.facet) if selected_opts else m.facet
-                # Filter to only IDs matching the resolved facet
-                same_facet_ids = [
-                    opt.concept_id
-                    for opt in selected_opts
-                    if opt.facet == resolved_facet or opt.facet is None
-                ]
-                mentions.append(
-                    ResolvedMention(
-                        exclude=m.exclude,
-                        facet=resolved_facet,
-                        original_text=m.original_text,
-                        values=same_facet_ids,
-                    )
-                )
-                resolved = True
-            else:
-                mentions.append(m)
-        if not resolved:
-            # No disambiguation matched — preserve previous state as-is
-            return previous_query
-        return QueryModel(
-            intent=previous_query.intent,
-            mentions=mentions,
-        )
-
-    if isinstance(route, RouteRemove):
-        # Drop matching mentions, report what was actually removed
-        remove_set = {t.lower() for t in route.original_texts}
-        kept: list[ResolvedMention] = []
-        actually_removed: list[str] = []
-        for m in previous_query.mentions:
-            if m.original_text.lower() in remove_set:
-                actually_removed.append(m.original_text)
-            else:
-                kept.append(m)
-        message = f"Removed {', '.join(actually_removed)}." if actually_removed else None
-        return QueryModel(
-            intent=previous_query.intent,
-            mentions=kept,
-            message=message,
-        )
-
-    if isinstance(route, RouteReplace):
-        # Drop the old mention, run pipeline on new text with remaining mentions.
-        # If original_text doesn't match, fall through to add behavior.
-        remaining = [
-            m
-            for m in previous_query.mentions
-            if m.original_text.lower() != route.original_text.lower()
-        ]
-        if len(remaining) == len(previous_query.mentions):
-            # No match found — treat as add
-            result = await run_pipeline(query, previous_query=previous_query)
-            if previous_query.intent != "ambiguous":
-                result.intent = previous_query.intent
-            return result
-        modified_previous = QueryModel(
-            intent=previous_query.intent,
-            mentions=remaining,
-        )
-        result = await run_pipeline(route.new_text, previous_query=modified_previous)
-        if previous_query.intent != "ambiguous":
-            result.intent = previous_query.intent
-        return result
-
-    if isinstance(route, RouteReset):
-        # Fresh pipeline, ignore previous state
-        return await run_pipeline(route.new_query)
-
-    # RouteRefine — refine pipeline, but preserve the previous intent.
-    # The extract agent may infer a different intent from the fragment
-    # (e.g. "also blood pressure" → "variable") but the user is refining,
-    # not changing direction.  Let pipeline win if previous was "ambiguous".
-    result = await run_pipeline(query, previous_query=previous_query)
-    if previous_query.intent != "ambiguous":
-        result.intent = previous_query.intent
-    return result
-
-
 def _timeout_response(elapsed_ms: int, message: str) -> SearchResponse:
     """Build an empty SearchResponse for a timeout/error on either search path."""
     return SearchResponse(
@@ -395,9 +279,8 @@ def _build_response_message(
 ) -> str | None:
     """Build the deterministic response message for a lookup result.
 
-    Shared by ``/search`` and ``/search/agent/filter`` (``/search/agent`` uses
-    the agent's own reply instead). Also populates ``query_structure.summary``
-    as a side effect when it is empty.
+    Used by ``/search/filter`` (``/search`` uses the agent's own reply instead).
+    Also populates ``query_structure.summary`` as a side effect when it is empty.
 
     Args:
         query_model: The resolved query model that was executed.
@@ -481,143 +364,25 @@ def _rate_limit_response(client_ip: str, query: str) -> JSONResponse:
     )
 
 
-@app.post("/search", response_model=SearchResponse)
-async def search(
-    request: SearchRequest, fastapi_request: Request
-) -> SearchResponse | JSONResponse:
-    """Run the concept search pipeline and return matching studies."""
-    # 1. Rate limit check
-    client_ip = _get_client_ip(fastapi_request)
-    if not await _rate_limiter.is_allowed(client_ip):
-        return _rate_limit_response(client_ip, request.query)
-
-    has_query = bool(request.query and request.query.strip())
-    has_previous = request.previous_query is not None
-    if has_query and has_previous:
-        mode = "route"
-    elif has_previous:
-        mode = "requery"
-    else:
-        mode = "fresh"
-
-    _log_json(event="search_request", mode=mode, query=request.query)
-    t_start = time.monotonic()
-
-    if mode == "requery":
-        # Requery: skip LLM pipeline entirely, use previous query as-is.
-        assert request.previous_query is not None
-        query_model = request.previous_query
-        t_pipeline = t_start  # No pipeline work — zero out pipeline_ms.
-    else:
-        try:
-            async with _pipeline_semaphore:
-                if mode == "route":
-                    assert request.previous_query is not None
-                    query_model = await asyncio.wait_for(
-                        _handle_route(request.query, request.previous_query),
-                        timeout=60.0,
-                    )
-                else:
-                    query_model = await asyncio.wait_for(
-                        run_pipeline(request.query),
-                        timeout=60.0,
-                    )
-        except (TimeoutError, asyncio.CancelledError):
-            _log_json(event="search_timeout", query=request.query)
-            elapsed_ms = int((time.monotonic() - t_start) * 1000)
-            return _timeout_response(elapsed_ms, "Search timed out — please try a simpler query.")
-        except Exception as exc:
-            _log_json(
-                event="search_pipeline_error",
-                query=request.query,
-                error=str(exc),
-                error_type=type(exc).__name__,
-            )
-            elapsed_ms = int((time.monotonic() - t_start) * 1000)
-            return _timeout_response(elapsed_ms, "Something went wrong — please try again.")
-        t_pipeline = time.monotonic()
-
-    # Deterministic lookup — branch on intent (shared with /search/agent)
-    index = get_index()
-    intent = query_model.intent
-    execution = execute_query_model(query_model, index)
-    studies = execution.studies
-    variable_rows = execution.variable_rows
-    total_variable_count = execution.total_variable_count
-
-    t_lookup = time.monotonic()
-
-    pipeline_ms = int((t_pipeline - t_start) * 1000)
-    lookup_ms = int((t_lookup - t_pipeline) * 1000)
-
-    # Build structured query and response message
-    query_structure = build_query_structure(query_model, index)
-    message = _build_response_message(
-        query_model,
-        query_structure,
-        studies,
-        variable_rows,
-        total_variable_count,
-        index,
-    )
-
-    # Convert internal QueryStructure to API model
-    api_query_structure = _to_api_query_structure(query_structure)
-
-    response = SearchResponse(
-        intent=intent,
-        message=message,
-        query=query_model,
-        query_structure=api_query_structure,
-        studies=[_build_study_summary(s) for s in studies],
-        timing=SearchTiming(
-            lookup_ms=lookup_ms,
-            pipeline_ms=pipeline_ms,
-            total_ms=pipeline_ms + lookup_ms,
-        ),
-        total_studies=len(studies),
-        total_variables=total_variable_count,
-        variables=[_build_variable_result(r) for r in variable_rows],
-    )
-
-    _log_json(
-        event="search_response",
-        intent=intent,
-        mode=mode,
-        query=request.query,
-        mentions=[
-            {
-                "facet": m.facet.value,
-                "values": m.values,
-                "exclude": m.exclude,
-            }
-            for m in query_model.mentions
-        ],
-        message=message,
-        total_studies=len(studies),
-        total_variables=total_variable_count,
-        pipeline_ms=pipeline_ms,
-        lookup_ms=lookup_ms,
-    )
-
-    return response
-
-
 # truncate_history keeps the first message plus the most recent N, so up to N+1
 # pydantic-ai messages are sent to the model (and retained in the stored history).
 _MAX_AGENT_HISTORY = 40
 _MAX_SESSION_MESSAGES = 50  # user/assistant text turns retained in the persisted transcript
 
 
-@app.post("/search/agent", response_model=SearchResponse)
-async def search_agent(
-    request: SearchAgentRequest, fastapi_request: Request
+@app.post("/search", response_model=SearchResponse)
+# Deprecated alias so a previously-deployed frontend keeps working during the
+# rename cutover; remove once the frontend is on /search (follow-up).
+@app.post("/search/agent", response_model=SearchResponse, include_in_schema=False)
+async def search(
+    request: SearchRequest, fastapi_request: Request
 ) -> SearchResponse | JSONResponse:
     """Agentic multi-turn search (epic #365).
 
     The orchestrator builds a QueryModel via tools; the backend owns conversation
-    state keyed by ``session_id``. Returns the same SearchResponse shape as
-    ``/search`` — rows from deterministic execution, ``message`` is the agent's reply.
+    state keyed by ``session_id``. Returns a SearchResponse — study/variable rows
+    from deterministic execution of the committed QueryModel, with ``message`` set
+    to the agent's reply.
     """
     client_ip = _get_client_ip(fastapi_request)
     if not await _rate_limiter.is_allowed(client_ip):
@@ -727,13 +492,15 @@ async def search_agent(
     return response
 
 
-@app.post("/search/agent/filter", response_model=SearchResponse)
-async def search_agent_filter(
-    request: SearchAgentFilterRequest, fastapi_request: Request
+@app.post("/search/filter", response_model=SearchResponse)
+# Deprecated alias; remove once the frontend is on /search/filter (follow-up).
+@app.post("/search/agent/filter", response_model=SearchResponse, include_in_schema=False)
+async def search_filter(
+    request: SearchFilterRequest, fastapi_request: Request
 ) -> SearchResponse | JSONResponse:
-    """Structured filter removal for agent mode (#382).
+    """Structured filter removal (#382).
 
-    Deterministic sibling of ``/search/agent`` — no LLM turn. Drops one facet
+    Deterministic sibling of ``/search`` — no LLM turn. Drops one facet
     value from the session's persisted query state, re-runs the lookup, and
     saves the session. The next conversational turn sees the updated filters
     because the state preamble is rebuilt from ``state.query`` each turn.
@@ -825,7 +592,6 @@ async def health() -> dict:
     return {
         "gitSha": os.environ.get("GIT_SHA", "unknown"),
         "indexStats": index.stats,
-        "pipelineCache": pipeline_cache.stats,
         "resolveCache": resolve_cache.stats,
         "status": "ok",
     }

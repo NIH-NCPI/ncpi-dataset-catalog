@@ -89,7 +89,7 @@ class ResolveEvaluator(Evaluator[RawMention, ResolveResult]):
 
 def _mention(text: str, facet: Facet) -> RawMention:
     """Build a raw mention input for the resolve agent."""
-    return RawMention(facets=[facet], text=text, values=[])
+    return RawMention(facets=[facet], text=text)
 
 
 # ---------------------------------------------------------------------------
