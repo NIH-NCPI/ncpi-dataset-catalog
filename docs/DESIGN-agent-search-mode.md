@@ -4,7 +4,7 @@
 > Refs: epic #365 · backend endpoint #379 · this PR #383 · follow-ups #381 (markdown), #382 (filter chips), #380 (history)
 
 > **⚠️ SUPERSEDED (Jul 2026, #410/#412).** This note describes the original
-> *opt-in* rollout — the `?agent=1` flag, the deterministic `/search` pipeline as
+> _opt-in_ rollout — the `?agent=1` flag, the deterministic `/search` pipeline as
 > the default, and the agent behind `/search/agent`. Agent search has since been
 > promoted to the **default and only** search path: the deterministic pipeline,
 > the `?agent=1` flag, and the `previousQuery` round-trip were removed, and the
