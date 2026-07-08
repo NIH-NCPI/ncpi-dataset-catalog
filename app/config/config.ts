@@ -22,9 +22,11 @@ export const config = (): SiteConfig => {
 
   if (!siteConfig) {
     throw new Error(
-      `Unknown site config "${configKey}" — set NEXT_PUBLIC_SITE_CONFIG to one of: ${Object.keys(
-        CONFIGS
-      ).join(", ")}`
+      `${
+        configKey
+          ? `Unknown site config "${configKey}"`
+          : "NEXT_PUBLIC_SITE_CONFIG is not set"
+      } — expected one of: ${Object.keys(CONFIGS).join(", ")}`
     );
   }
 
