@@ -165,7 +165,16 @@ export function MultiTurnQueryProvider({
       if (options.status.loading) return;
 
       const query = payload.query.trim();
-      if (!query || !submitUrl) return;
+      if (!query) return;
+      if (!submitUrl) {
+        // Empty only on misconfiguration (no config.ai.url / env var). Fail loud
+        // rather than leaving the box silently unresponsive.
+        dispatch.onSetError(
+          "Search is unavailable — the API endpoint is not configured."
+        );
+        options.onError?.(new Error("Search API URL is not configured."));
+        return;
+      }
 
       const form = e.currentTarget;
 
