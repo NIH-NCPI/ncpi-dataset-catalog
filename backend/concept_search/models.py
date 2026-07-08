@@ -58,12 +58,6 @@ class RawMention(BaseModel):
         "measurement) list multiple candidates.",
     )
     text: str = Field(description="The raw phrase from the user query")
-    values: list[str] = Field(
-        default_factory=list,
-        description="Pre-resolved values for small facets (platform, dataType, "
-        "studyDesign, sex, raceEthnicity, computedAncestry). "
-        "Empty for facets that need the resolve agent.",
-    )
 
 
 # --- Resolve agent models ---
