@@ -313,6 +313,26 @@ class TestSearchAgentFilterEndpoint:
 
     @patch("concept_search.api.run_conversation")
     @patch("concept_search.api.get_index")
+    def test_deprecated_agent_filter_alias_still_routes(
+        self, mock_index, mock_run, agent_store, agent_client
+    ) -> None:
+        """The deprecated /search/agent/filter alias routes to the same handler.
+
+        Kept for the rename cutover; remove with the alias once the frontend is
+        on /search/filter.
+        """
+        mock_index.return_value.query_studies.return_value = []
+        mock_index.return_value.stats = {}
+        _seed_session(agent_store, "s1", _multi_value_query())
+
+        resp = agent_client.post(
+            "/search/agent/filter",
+            json={"facet": "focus", "sessionId": "s1", "value": "Diabetes Mellitus"},
+        )
+        assert resp.status_code == 200
+
+    @patch("concept_search.api.run_conversation")
+    @patch("concept_search.api.get_index")
     def test_removing_last_value_drops_mention(
         self, mock_index, mock_run, agent_store, agent_client
     ) -> None:

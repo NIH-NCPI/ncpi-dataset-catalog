@@ -244,8 +244,9 @@ class _RaisingClient:
 async def test_client_errors_propagate(op: str, call: Any) -> None:
     """AWS ClientErrors surface to the caller — the adapter does not swallow them.
 
-    The /search handler owns error handling; the store must not hide a real
-    DynamoDB failure (throttling, missing table, etc.) as a silent miss.
+    The /search and /search/filter handlers own error handling; the store must
+    not hide a real DynamoDB failure (throttling, missing table, etc.) as a
+    silent miss.
     """
     store = DynamoDBSessionStore(table_name=TABLE, client=_RaisingClient())
     with pytest.raises(ClientError) as excinfo:
