@@ -1,8 +1,9 @@
 /**
  * Returns the base search API URL, preferring the env var over the site config
- * value. The resolved URL ends in `/search`; the agent endpoint is that with
- * `/agent` appended, and the health endpoint (see `Status`) replaces the
- * `/search` suffix with `/health`.
+ * value. Returned verbatim (no validation or normalization). By convention the
+ * configured value ends in `/search`, which callers rely on: the form appends
+ * `/agent` for the agent endpoint and `Status` swaps the `/search` suffix for
+ * `/health`.
  * @param configUrl - The URL from site config (`config.ai?.url`).
  * @returns Resolved base search API URL, or empty string if neither is set.
  */
