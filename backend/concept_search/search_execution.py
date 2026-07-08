@@ -5,8 +5,9 @@ endpoints run this same lookup, executing a ``QueryModel`` identically regardles
 of how the model was built. The lookup goes through ``ConceptIndex`` and its
 swappable ``StudyStore`` backend (DuckDB today).
 
-This module does **not** decide the user-facing message — callers own that
-(deterministic summary for ``/search``; the agent's prose for ``/search/agent``).
+This module does **not** decide the user-facing message — callers own that (the
+agent's prose for ``/search/agent``; a deterministic summary for
+``/search/agent/filter``).
 """
 
 from __future__ import annotations
