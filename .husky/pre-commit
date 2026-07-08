@@ -11,11 +11,11 @@ npm run check-format ||
 npm run lint ||
 (
         echo '🤔  ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
-        false; 
+        false;
 )
 
 # Check TypeScript
-npx tsc --noEmit ||
+npm run typecheck ||
 (
 	echo 'TypeScript compile failed';
 	false;
