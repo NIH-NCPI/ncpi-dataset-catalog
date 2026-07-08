@@ -10,19 +10,8 @@ jobs:
         with:
           node-version-file: ".nvmrc"
       # .nvmrc is the operative Node pin (deploy scripts + setup-node above);
-      # assert package.json engines still mirrors it, and that the env-leak
-      # guard in common-build.sh actually trips (#403). The clean run first
-      # proves a failure with .env.local present is the guard, not some other
-      # breakage in the script.
-      - run: |
-          test "$(tr -d '[:space:]' < .nvmrc)" = "$(node -p 'require("./package.json").engines.node')"
-          scripts/common-build.sh ncpi-catalog dev
-          touch .env.local
-          if scripts/common-build.sh ncpi-catalog dev; then
-            echo "env-leak guard failed to trip on .env.local" >&2
-            exit 1
-          fi
-          rm .env.local
+      # assert package.json engines still mirrors it (#403).
+      - run: test "$(tr -d '[:space:]' < .nvmrc)" = "$(node -p 'require("./package.json").engines.node')"
       - run: |
           npm ci
           npm run check-format

@@ -31,7 +31,7 @@ npm run dev:local
 
 This selects the `local` environment (`site-config/ncpi-catalog/local/`), a sibling of `dev` and `prod` with its own site config that points the search API at `http://localhost:8000/search` and disables analytics. For a one-off custom URL, run `NEXT_PUBLIC_SEARCH_API_URL=<url> npm run dev`.
 
-Do **not** create a `.env.local` for this — `next build` loads it too, so a local override can silently ship in a deployed artifact. As safety nets, both the deploy scripts and the shared build script refuse to run while a `.env.local`/`.env.*.local` exists (or, for the build script, while the root `.env` contains `NEXT_PUBLIC_*` vars).
+Do **not** create a `.env.local` for this — `next build` loads it too (it outranks the per-environment file copied from `site-config/`), so a local override can silently ship in a locally built artifact. The deploy scripts are immune by construction: they build in a fresh git worktree of `HEAD`, where untracked files like `.env.local` don't exist, and they refuse to run while tracked files have uncommitted changes.
 
 ## Building the Site
 
