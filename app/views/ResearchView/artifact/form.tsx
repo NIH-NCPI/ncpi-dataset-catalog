@@ -4,6 +4,7 @@ import { useChatDispatch } from "@databiosphere/findable-ui/lib/views/ResearchVi
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
 import { QueryContext } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/context";
 import { MessageResponse } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
+import { useRouter } from "next/router";
 import {
   createContext,
   FormEvent,
@@ -121,14 +122,17 @@ export function MultiTurnQueryProvider({
   const sessionIdRef = useRef<string>("");
   const abortRef = useRef<AbortController | null>(null);
 
-  // After the first assistant response, switch the input placeholder to refine
-  // mode. Idempotent — only writes when it isn't already set — so it re-applies
-  // to a fresh textarea after navigation (the provider is app-wide) without
-  // rewriting on every message.
+  // After the first assistant response, switch the research prompt's placeholder
+  // to refine mode. This provider is app-wide, and the home hero uses the same
+  // `ai-prompt` input name, so gate on the research route to avoid touching it.
+  // Re-runs on route change too (idempotent placeholder check), so it re-applies
+  // to the textarea when the research view remounts on a later visit.
+  const { pathname } = useRouter();
   const { state } = useChatState();
   const messages = state.messages;
   const lastMessage = messages[messages.length - 1];
   useEffect(() => {
+    if (!pathname.startsWith("/research")) return;
     if (!lastMessage || !isAssistantMessage(lastMessage)) return;
     const input = document.querySelector<HTMLTextAreaElement>(
       'textarea[name="ai-prompt"]'
@@ -137,7 +141,7 @@ export function MultiTurnQueryProvider({
     if (input && input.placeholder !== refine) {
       input.placeholder = refine;
     }
-  }, [lastMessage]);
+  }, [lastMessage, pathname]);
 
   /**
    * Submits a query to the agent search API under the current session.
