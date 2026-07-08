@@ -169,7 +169,7 @@ class ResolvedMention(BaseModel):
 
 
 class QueryModel(BaseModel):
-    """Structured query output from the structure agent.
+    """The structured query the conversation agent builds and maintains.
 
     All non-excluded mentions are AND-ed together.  Values within each
     mention are OR-ed.  Excluded mentions remove matching studies.
@@ -179,7 +179,7 @@ class QueryModel(BaseModel):
 
     intent: Intent = Field(
         default="study",
-        description="Query intent carried through from extract agent.",
+        description="Query intent (study | variable | ambiguous).",
     )
     mentions: list[ResolvedMention] = Field(default_factory=list)
     message: str | None = Field(

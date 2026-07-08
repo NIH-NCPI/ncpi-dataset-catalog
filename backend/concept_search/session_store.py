@@ -38,9 +38,8 @@ class SessionState(BaseModel):
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
-    # Serialized pydantic-ai ModelMessage objects for the agentic loop
-    # (tool calls + results), so the orchestrator has full continuity. Empty
-    # for the deterministic /search pipeline, which carries no agent history.
+    # Serialized pydantic-ai ModelMessage objects (tool calls + results) so the
+    # orchestrator has full continuity across turns.
     agent_message_history: list[dict] = Field(default_factory=list)
     messages: list[ConversationMessage] = Field(default_factory=list)
     # Open disambiguation choices offered but unresolved, so they survive into

@@ -279,9 +279,9 @@ def _build_response_message(
 ) -> str | None:
     """Build the deterministic response message for a lookup result.
 
-    Shared by ``/search`` and ``/search/agent/filter`` (``/search/agent`` uses
-    the agent's own reply instead). Also populates ``query_structure.summary``
-    as a side effect when it is empty.
+    Used by ``/search/agent/filter`` (``/search/agent`` uses the agent's own reply
+    instead). Also populates ``query_structure.summary`` as a side effect when it
+    is empty.
 
     Args:
         query_model: The resolved query model that was executed.
@@ -378,8 +378,9 @@ async def search_agent(
     """Agentic multi-turn search (epic #365).
 
     The orchestrator builds a QueryModel via tools; the backend owns conversation
-    state keyed by ``session_id``. Returns the same SearchResponse shape as
-    ``/search`` — rows from deterministic execution, ``message`` is the agent's reply.
+    state keyed by ``session_id``. Returns a SearchResponse — study/variable rows
+    from deterministic execution of the committed QueryModel, with ``message`` set
+    to the agent's reply.
     """
     client_ip = _get_client_ip(fastapi_request)
     if not await _rate_limiter.is_allowed(client_ip):
