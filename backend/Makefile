@@ -43,7 +43,7 @@ help:
 	@echo "  embeddings        - Generate concept embeddings (uses GPU if available)"
 	@echo "  db-reload         - Rebuild DuckDB index and restart server (needs embeddings)"
 	@echo "  clean-embeddings  - Delete cached embedding files (forces regeneration)"
-	@echo "  evals             - Run extract agent evals"
+	@echo "  evals             - Run resolve-agent evals (concept grounding)"
 	@echo "  lint              - Run ruff linter"
 	@echo "  format            - Run ruff formatter"
 	@echo ""
@@ -103,11 +103,11 @@ clean-embeddings:
 	@rm -f ../catalog-build/classification/output/concept-embeddings.sha256
 	@echo "Embedding cache cleared."
 
-# Run extract, resolve, and end-to-end pipeline evals
+# Run resolve-agent evals (concept grounding). The multi-turn agent conversation
+# eval runs separately (hits the API heavily):
+#   uv run python -m concept_search.eval_agent_conversation
 evals:
-	uv run python -m concept_search.eval_extract
 	uv run python -m concept_search.eval_resolve
-	uv run python -m concept_search.eval_pipeline
 
 # Lint Python files with ruff
 lint:

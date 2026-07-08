@@ -28,7 +28,6 @@ interface CacheStats {
 interface HealthResponse {
   gitSha: string;
   indexStats: Record<string, number>;
-  pipelineCache: CacheStats;
   resolveCache: CacheStats;
   status: string;
 }
@@ -279,7 +278,6 @@ export const Status = (): JSX.Element => {
               </Table>
             </TableContainer>
 
-            <CacheSection cache={data.pipelineCache} title="Pipeline Cache" />
             <CacheSection cache={data.resolveCache} title="Resolve Cache" />
           </StatusContent>
         </Content>

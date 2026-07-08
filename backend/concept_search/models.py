@@ -1,10 +1,7 @@
 """Pydantic models for concept search queries and results.
 
-Three-agent pipeline models
----------------------------
-1. **Extract agent** → ``ExtractResult`` containing ``RawMention`` items
-2. **Resolve agent** → ``ResolveResult`` (values for a single mention)
-3. **Structure agent** → ``QueryModel`` containing ``ResolvedMention`` items
+The agent loop grounds each user term via the resolve agent (``ResolveResult``)
+and commits selections into a ``QueryModel`` of ``ResolvedMention`` items.
 
 Boolean semantics (QueryModel)
 ------------------------------
@@ -41,18 +38,6 @@ class Facet(StrEnum):
     STUDY_DESIGN = "studyDesign"
 
 
-# Small facets whose full value lists fit in the extract agent's prompt.
-# The extract agent resolves these directly — no resolve agent call needed.
-SMALL_FACETS = {
-    Facet.COMPUTED_ANCESTRY,
-    Facet.DATA_TYPE,
-    Facet.PLATFORM,
-    Facet.RACE_ETHNICITY,
-    Facet.SEX,
-    Facet.STUDY_DESIGN,
-}
-
-
 class ConceptMatch(BaseModel):
     """A concept/value found in the index."""
 
@@ -61,11 +46,11 @@ class ConceptMatch(BaseModel):
     value: str
 
 
-# --- Extract agent models ---
+# --- Mention models ---
 
 
 class RawMention(BaseModel):
-    """A mention extracted from the user's query by the extract agent."""
+    """A raw user term to ground, with candidate facets (fed to the resolve agent)."""
 
     facets: list[Facet] = Field(
         description="Candidate facets ranked by confidence. Most mentions have "
@@ -78,22 +63,6 @@ class RawMention(BaseModel):
         description="Pre-resolved values for small facets (platform, dataType, "
         "studyDesign, sex, raceEthnicity, computedAncestry). "
         "Empty for facets that need the resolve agent.",
-    )
-
-
-class ExtractResult(BaseModel):
-    """Output of the extract agent."""
-
-    intent: Intent = Field(
-        default="study",
-        description="Query intent: 'study' to search datasets, 'variable' to "
-        "search measured variables, 'ambiguous' when intent is unclear (ask user).",
-    )
-    mentions: list[RawMention] = Field(default_factory=list)
-    message: str | None = Field(
-        default=None,
-        description="Clarification message when the query is too vague or "
-        "ambiguous to extract mentions from. None when extraction succeeds.",
     )
 
 
@@ -173,7 +142,7 @@ class ResolveResult(BaseModel):
         return self
 
 
-# --- Structure agent / final query models ---
+# --- Query models ---
 
 
 class ResolvedMention(BaseModel):
@@ -203,51 +172,6 @@ class ResolvedMention(BaseModel):
         description="Resolved canonical value(s), combined with OR. "
         "Empty list if the concept could not be resolved.",
     )
-
-
-# --- Router agent models ---
-
-
-class RouteSelect(BaseModel):
-    """User selected one or more of the offered disambiguation options."""
-
-    kind: Literal["select"] = "select"
-    selected_ids: list[str] = Field(
-        description="concept_id values from the disambiguation options the user chose."
-    )
-
-
-class RouteRefine(BaseModel):
-    """User is refining the existing query (adding, removing, or adjusting filters)."""
-
-    kind: Literal["refine"] = "refine"
-
-
-class RouteRemove(BaseModel):
-    """User wants to drop one or more mentions entirely."""
-
-    kind: Literal["remove"] = "remove"
-    original_texts: list[str] = Field(
-        description="original_text values of the mentions to remove."
-    )
-
-
-class RouteReplace(BaseModel):
-    """User wants to replace an existing mention with a different term."""
-
-    kind: Literal["replace"] = "replace"
-    original_text: str = Field(description="original_text of the mention to replace.")
-    new_text: str = Field(description="The replacement term to extract and resolve.")
-
-
-class RouteReset(BaseModel):
-    """User is starting a completely new query."""
-
-    kind: Literal["reset"] = "reset"
-    new_query: str = Field(description="The new query to run fresh.")
-
-
-RouterResult = RouteSelect | RouteRefine | RouteRemove | RouteReplace | RouteReset
 
 
 class QueryModel(BaseModel):
