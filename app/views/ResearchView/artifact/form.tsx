@@ -120,24 +120,22 @@ export function MultiTurnQueryProvider({
   // app session is sufficient; the agent handles new-topic resets server-side.
   const sessionIdRef = useRef<string>("");
   const abortRef = useRef<AbortController | null>(null);
-  const placeholderSetRef = useRef(false);
 
   // After the first assistant response, switch the input placeholder to refine
-  // mode. Guarded so the DOM query/write happens once per visit, not on every
-  // message; the guard is set only once the write succeeds, so it still retries
-  // if the input isn't mounted yet on the first assistant message.
+  // mode. Idempotent — only writes when it isn't already set — so it re-applies
+  // to a fresh textarea after navigation (the provider is app-wide) without
+  // rewriting on every message.
   const { state } = useChatState();
   const messages = state.messages;
   const lastMessage = messages[messages.length - 1];
   useEffect(() => {
-    if (placeholderSetRef.current) return;
     if (!lastMessage || !isAssistantMessage(lastMessage)) return;
     const input = document.querySelector<HTMLTextAreaElement>(
       'textarea[name="ai-prompt"]'
     );
-    if (input) {
-      input.placeholder = "Refine, e.g. “also where BMI was measured”";
-      placeholderSetRef.current = true;
+    const refine = "Refine, e.g. “also where BMI was measured”";
+    if (input && input.placeholder !== refine) {
+      input.placeholder = refine;
     }
   }, [lastMessage]);
 
