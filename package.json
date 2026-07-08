@@ -3,9 +3,10 @@
   "version": "0.19.0",
   "private": true,
   "scripts": {
-    "dev": "./scripts/dev.sh ncpi-catalog dev && ./scripts/set-version.sh dev && ./scripts/sync-api.sh && next dev --webpack",
-    "build:dev": "scripts/common-build.sh ncpi-catalog dev && ./scripts/set-version.sh && ./scripts/sync-api.sh && next build --webpack && npm run postbuild",
-    "build:prod": "./scripts/common-build.sh ncpi-catalog prod && ./scripts/set-version.sh && ./scripts/sync-api.sh && next build --webpack && npm run postbuild",
+    "dev": "./scripts/prepare-env.sh ncpi-catalog dev .env.development && ./scripts/set-version.sh dev && ./scripts/sync-api.sh && next dev --webpack",
+    "dev:local": "./scripts/prepare-env.sh ncpi-catalog local .env.development && ./scripts/set-version.sh dev && ./scripts/sync-api.sh && next dev --webpack",
+    "build:dev": "./scripts/prepare-env.sh ncpi-catalog dev .env.production && ./scripts/set-version.sh && ./scripts/sync-api.sh && next build --webpack && npm run postbuild",
+    "build:prod": "./scripts/prepare-env.sh ncpi-catalog prod .env.production && ./scripts/set-version.sh && ./scripts/sync-api.sh && next build --webpack && npm run postbuild",
     "postbuild": "next-sitemap --config next-sitemap.config.mjs",
     "start": "npx serve out",
     "lint": "eslint .",

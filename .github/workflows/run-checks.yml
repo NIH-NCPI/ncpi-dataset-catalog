@@ -8,7 +8,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "22.13.0"
+          node-version-file: ".nvmrc"
+      # .nvmrc is the operative Node pin (deploy scripts + setup-node above);
+      # assert package.json engines still mirrors it (#403).
+      - run: test "$(tr -d '[:space:]' < .nvmrc)" = "$(node -p 'require("./package.json").engines.node')"
       - run: |
           npm ci
           npm run check-format

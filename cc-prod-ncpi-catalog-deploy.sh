@@ -1,24 +1,25 @@
 #!/usr/bin/env bash
-# Set the script to exit immediately on error
 set -e
+cd "$(cd "$(dirname "$0")" && pwd)"
 
-# Preflight: ensure s5cmd is available
-if ! command -v s5cmd >/dev/null 2>&1; then
-  echo "Error: s5cmd is not installed. Install with: brew install peak/tap/s5cmd" >&2
+# Deploys ship HEAD exactly — refuse to run with uncommitted tracked changes.
+if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+  echo "Error: uncommitted changes to tracked files. Commit or stash them, then re-run." >&2
   exit 1
 fi
 
-echo \"Deleting ./out/\"
-rm -rf ./out
+# Build in a fresh worktree of HEAD so untracked local files (.env.local etc.)
+# can't leak into the artifact (#403).
+BUILD_ROOT="$(mktemp -d)"
+BUILD_DIR="$BUILD_ROOT/repo"
+trap 'git worktree remove --force "$BUILD_DIR" >/dev/null 2>&1 || true; rm -rf "$BUILD_ROOT"; git worktree prune >/dev/null 2>&1 || true' EXIT
+git worktree add --detach "$BUILD_DIR" HEAD
 
-n 22.12.0
-npm ci
+# Node pin comes from .nvmrc; package.json engines and CI mirror it (#403).
+# `n exec` scopes the pinned Node to the build subprocess without switching
+# the machine's global Node version.
+NODE_VERSION="$(tr -d '[:space:]' < .nvmrc)"
+(cd "$BUILD_DIR" && n exec "$NODE_VERSION" npm ci && n exec "$NODE_VERSION" npm run build:prod)
 
-# Build
-npm run build:prod
-
-export BUCKET=s3://bhy-ncpi-data.org
-export SRCDIR=out/
-
-AWS_PROFILE=ncpi-prod-deployer s5cmd sync --delete "$SRCDIR" "$BUCKET"
+AWS_PROFILE=ncpi-prod-deployer s5cmd sync --delete "$BUILD_DIR/out/" s3://bhy-ncpi-data.org
 aws cloudfront create-invalidation --distribution-id ENV5LQ3SY9LXL --paths "/*" --profile ncpi-prod-deployer

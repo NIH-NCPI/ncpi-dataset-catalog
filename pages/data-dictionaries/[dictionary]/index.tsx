@@ -1,5 +1,6 @@
 import { Main } from "@databiosphere/findable-ui/lib/components/Layout/components/ContentLayout/components/Main/main";
 import { DataDictionaryView } from "@databiosphere/findable-ui/lib/views/DataDictionaryView/dataDictionaryView";
+import { config } from "app/config/config";
 import {
   GetStaticPaths,
   GetStaticPropsContext,
@@ -7,7 +8,6 @@ import {
 } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { JSX } from "react";
-import { config } from "../../../config/config";
 
 interface PageUrlParams extends ParsedUrlQuery {
   dictionary: string;
