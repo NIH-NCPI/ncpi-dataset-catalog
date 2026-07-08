@@ -102,8 +102,9 @@ async function postSearch(
 
 /**
  * Provider that drives the conversational agent search. Every submission goes to
- * the `/search/agent` endpoint with a server-owned `sessionId`; the backend owns
- * multi-turn conversation state, so the client sends no prior query.
+ * the `/search/agent` endpoint with a client-generated `sessionId`; the backend
+ * owns the multi-turn conversation state keyed by that id, so the client sends no
+ * prior query.
  * @param props - Component props.
  * @param props.children - Children to render.
  * @returns Provider wrapping children with multi-turn context.
