@@ -127,21 +127,6 @@ class TestSearchAgentEndpoint:
 
     @patch("concept_search.api.run_conversation")
     @patch("concept_search.api.get_index")
-    def test_deprecated_agent_alias_still_routes(self, mock_index, mock_run, agent_client) -> None:
-        """The deprecated /search/agent alias routes to the same handler.
-
-        Kept temporarily so a previously-deployed frontend survives the rename
-        cutover; remove with the alias once the frontend is on /search.
-        """
-        mock_index.return_value.query_studies.return_value = []
-        mock_index.return_value.stats = {}
-        mock_run.return_value = ("ok", _query(), [])
-
-        resp = agent_client.post("/search/agent", json={"query": "x", "sessionId": "s1"})
-        assert resp.status_code == 200
-
-    @patch("concept_search.api.run_conversation")
-    @patch("concept_search.api.get_index")
     def test_store_get_failure_returns_friendly_error(self, mock_index, mock_run) -> None:
         """A session-store read failure surfaces a retryable message, not a 500."""
         mock_index.return_value.query_studies.return_value = []
@@ -310,26 +295,6 @@ class TestSearchAgentFilterEndpoint:
         assert len(focus) == 1
         assert focus[0]["values"] == ["Diabetes Mellitus, Type 2"]
         mock_run.assert_not_called()
-
-    @patch("concept_search.api.run_conversation")
-    @patch("concept_search.api.get_index")
-    def test_deprecated_agent_filter_alias_still_routes(
-        self, mock_index, mock_run, agent_store, agent_client
-    ) -> None:
-        """The deprecated /search/agent/filter alias routes to the same handler.
-
-        Kept for the rename cutover; remove with the alias once the frontend is
-        on /search/filter.
-        """
-        mock_index.return_value.query_studies.return_value = []
-        mock_index.return_value.stats = {}
-        _seed_session(agent_store, "s1", _multi_value_query())
-
-        resp = agent_client.post(
-            "/search/agent/filter",
-            json={"facet": "focus", "sessionId": "s1", "value": "Diabetes Mellitus"},
-        )
-        assert resp.status_code == 200
 
     @patch("concept_search.api.run_conversation")
     @patch("concept_search.api.get_index")
