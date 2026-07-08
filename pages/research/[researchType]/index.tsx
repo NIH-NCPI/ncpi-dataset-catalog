@@ -3,7 +3,6 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { JSX } from "react";
 import { Artifact } from "../../../app/views/ResearchView/artifact/artifact";
-import { MultiTurnQueryProvider } from "../../../app/views/ResearchView/artifact/form";
 import {
   RESEARCH_TYPE,
   ResearchType,
@@ -39,11 +38,9 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 
 const Page = ({ researchType }: Props): JSX.Element => {
   return (
-    <MultiTurnQueryProvider>
-      <ResearchView>
-        <Artifact researchType={researchType} />
-      </ResearchView>
-    </MultiTurnQueryProvider>
+    <ResearchView>
+      <Artifact researchType={researchType} />
+    </ResearchView>
   );
 };
 

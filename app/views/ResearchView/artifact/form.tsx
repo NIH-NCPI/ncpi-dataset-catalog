@@ -4,6 +4,7 @@ import { useChatDispatch } from "@databiosphere/findable-ui/lib/views/ResearchVi
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
 import { QueryContext } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/context";
 import { MessageResponse } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
+import { useRouter } from "next/router";
 import {
   createContext,
   FormEvent,
@@ -116,30 +117,31 @@ export function MultiTurnQueryProvider({
   const submitUrl = getSearchApiUrl(config.ai?.url);
   const dispatch = useChatDispatch();
   // Conversation id created lazily on first submission so the backend can key
-  // multi-turn state. The agent handles resets server-side, so one id per
-  // provider lifetime (one research-view visit) is sufficient.
+  // multi-turn state. This provider is mounted app-wide (in _app), so one id per
+  // app session is sufficient; the agent handles new-topic resets server-side.
   const sessionIdRef = useRef<string>("");
   const abortRef = useRef<AbortController | null>(null);
-  const placeholderSetRef = useRef(false);
 
-  // After the first assistant response, switch the input placeholder to refine
-  // mode. Guarded so the DOM query/write happens once per visit, not on every
-  // message; the guard is set only once the write succeeds, so it still retries
-  // if the input isn't mounted yet on the first assistant message.
+  // After the first assistant response, switch the research prompt's placeholder
+  // to refine mode. This provider is app-wide, and the home hero uses the same
+  // `ai-prompt` input name, so gate on the research route to avoid touching it.
+  // Re-runs on route change too (idempotent placeholder check), so it re-applies
+  // to the textarea when the research view remounts on a later visit.
+  const { pathname } = useRouter();
   const { state } = useChatState();
   const messages = state.messages;
   const lastMessage = messages[messages.length - 1];
   useEffect(() => {
-    if (placeholderSetRef.current) return;
+    if (!pathname.startsWith("/research")) return;
     if (!lastMessage || !isAssistantMessage(lastMessage)) return;
     const input = document.querySelector<HTMLTextAreaElement>(
       'textarea[name="ai-prompt"]'
     );
-    if (input) {
-      input.placeholder = "Refine, e.g. “also where BMI was measured”";
-      placeholderSetRef.current = true;
+    const refine = "Refine, e.g. “also where BMI was measured”";
+    if (input && input.placeholder !== refine) {
+      input.placeholder = refine;
     }
-  }, [lastMessage]);
+  }, [lastMessage, pathname]);
 
   /**
    * Submits a query to the agent search API under the current session.

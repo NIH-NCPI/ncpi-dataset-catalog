@@ -17,6 +17,10 @@ const mockChatState = {
   state: { messages: [], status: { loading: false } },
 };
 
+jest.mock("next/router", () => ({
+  useRouter: (): any => ({ pathname: "/research/studies" }),
+}));
+
 jest.mock("@databiosphere/findable-ui/lib/hooks/useConfig", () => ({
   useConfig: (): any => ({
     config: { ai: { url: "https://test-api/search" } },
