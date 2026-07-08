@@ -1,10 +1,9 @@
 """Deterministic execution of a resolved ``QueryModel`` against the catalog.
 
-The shared lookup seam: ``/search`` calls it today, and the upcoming
-``/search/agent`` endpoint will run the same lookup, so both execute a
-``QueryModel`` identically (each builds the model by different means). The lookup
-goes through ``ConceptIndex`` and its swappable ``StudyStore`` backend (DuckDB
-today).
+The shared lookup seam: the ``/search/agent`` and ``/search/agent/filter``
+endpoints run this same lookup, executing a ``QueryModel`` identically regardless
+of how the model was built. The lookup goes through ``ConceptIndex`` and its
+swappable ``StudyStore`` backend (DuckDB today).
 
 This module does **not** decide the user-facing message — callers own that
 (deterministic summary for ``/search``; the agent's prose for ``/search/agent``).

@@ -151,7 +151,7 @@ class VariableResult(BaseModel):
 
 
 class SearchResponse(BaseModel):
-    """Top-level response for POST /search."""
+    """Top-level response for the search endpoints (``/search/agent``)."""
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 

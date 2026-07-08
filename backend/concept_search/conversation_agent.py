@@ -117,9 +117,9 @@ def _facet_counts(studies: list[dict], facet_by: list[str]) -> dict:
 def _catalog_facet_counts(index: ConceptIndex, facet_by: list[str]) -> dict:
     """Top values per facet across the WHOLE catalog (no active filters).
 
-    query_studies returns [] for an empty constraint set (by design, so /search
-    doesn't dump the catalog), so catalog-wide exploration reads the store's
-    pre-aggregated facet counts instead.
+    query_studies returns [] for an empty constraint set (by design, so an
+    unfiltered search doesn't dump the catalog), so catalog-wide exploration reads
+    the store's pre-aggregated facet counts instead.
     """
     if not facet_by:
         return {}
