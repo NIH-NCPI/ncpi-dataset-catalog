@@ -689,3 +689,35 @@ def test_refusal_counts_are_nonzero_for_ambiguous_intent() -> None:
     assert out["error"] == "unsatisfiable_and"
     assert out["terms"] == {"diabetes": 1, "asthma": 1}
     assert out["if_or"] == 2
+
+
+def test_three_terms_unsatisfiable_without_any_pair_being_disjoint() -> None:
+    """Refusal triggers on an empty intersection, not on pairwise disjointness.
+
+    ``cancer`` overlaps ``lung cancer`` (a lung-cancer study is indexed under
+    both), and overlaps ``breast cancer`` likewise — no pair is disjoint. But no
+    study holds all three, so the commit is still impossible. The reason string
+    must not claim the terms are disjoint.
+    """
+    studies = [
+        {"dbGapId": "phs1", "facets": {"focus": ["Lung Neoplasms", "Neoplasms"]}},
+        {"dbGapId": "phs2", "facets": {"focus": ["Breast Neoplasms", "Neoplasms"]}},
+    ]
+    ctx = _ctx(_isa_index(studies))
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(facet=Facet.FOCUS, original_text="cancer", values=["Neoplasms"]),
+            MentionInput(
+                facet=Facet.FOCUS, original_text="lung cancer", values=["Lung Neoplasms"]
+            ),
+            MentionInput(
+                facet=Facet.FOCUS, original_text="breast cancer", values=["Breast Neoplasms"]
+            ),
+        ],
+    )
+    assert out["error"] == "unsatisfiable_and"
+    assert "disjoint" not in out["reason"]
+    # Each term alone is answerable; the counts prove no pair is disjoint either.
+    assert out["terms"] == {"cancer": 2, "lung cancer": 1, "breast cancer": 1}
+    assert out["if_or"] == 2

@@ -157,11 +157,13 @@ def _unsatisfiable_and(
     """Detect an AND over one single-valued facet that no study can satisfy.
 
     A study holds exactly one value of a ``SINGLE_VALUED_FACETS`` facet, but it
-    is indexed under that value's whole ancestor closure. So two included
-    mentions on such a facet are satisfiable when one subsumes the other
-    ("cancer and lung cancer" → the lung cancer studies) and impossible when
-    they are disjoint ("diabetes and asthma"). Rather than reason over the ISA
-    table, ask the index: taken alone, do these mentions match any study?
+    is indexed under that value's whole ancestor closure. So included mentions on
+    such a facet are satisfiable when one subsumes the others ("cancer and lung
+    cancer" → the lung cancer studies) and impossible when their intersection is
+    empty ("diabetes and asthma"). Note this is emptiness of the intersection
+    across *all* of them, not pairwise disjointness: cancer ∧ lung cancer is 78
+    studies, yet adding breast cancer takes it to 0. Rather than reason over the
+    ISA table, ask the index: taken alone, do these mentions match any study?
 
     Only the conflicting mentions take part in that test — other facets are
     ignored, so an unrelated empty result (a platform filter that excludes
@@ -213,7 +215,13 @@ def _unsatisfiable_and(
                 "counts above."
             ),
             "if_or": _count([*others, merged], count_intent, index),
-            "reason": f"each study has exactly one {facet.value}; these terms are disjoint",
+            # Not "these terms are disjoint": the test is whether the intersection
+            # across ALL conflicting mentions is empty, which three terms can be
+            # without any pair being disjoint (cancer ∧ lung cancer = 78 studies,
+            # yet cancer ∧ lung cancer ∧ breast cancer = 0). Say what is true.
+            "reason": (
+                f"a study has exactly one {facet.value}; no study matches all of these at once"
+            ),
             "terms": {
                 m.original_text: _count([*others, m], count_intent, index) for m in conflicting
             },
