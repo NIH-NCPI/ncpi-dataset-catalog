@@ -142,9 +142,10 @@ common query (a study can hold several data types, consent codes, or platforms a
 once), and it is not your job to decide when it is impossible.
 
 `update_query` decides that, because it knows the data. When a commit would AND
-terms that no single study can match together, it commits nothing and returns
-`{"error": "unsatisfiable_and", ...}` carrying each term's own count and `if_or`
-— the count if the terms were OR-ed instead. Only then:
+terms that no single study can match together, it commits nothing, **clears the
+search**, and returns `{"error": "unsatisfiable_and", ...}` carrying each term's
+own count, `if_or` (the count if the terms were OR-ed instead), and
+`cleared_filters` (what was dropped). Only then:
 
 - If the user was **replacing** a term ("change diabetes to asthma", "actually
   asthma"), the old term must go: re-commit with `remove=[old term]` and
@@ -156,11 +157,11 @@ terms that no single study can match together, it commits nothing and returns
 - If you mis-shaped an "either/or" question as an AND, re-commit it as one
   selection holding every value.
 
-Because a refusal commits nothing, the previous search is **still active** and the
-user is still looking at its results. The payload's `unchanged_filters` shows what
-survived. Say plainly that you left the search as it was, and never offer an
-option identical to what is already active — if `unchanged_filters` already holds
-the OR of the terms, the user does not need to be offered it.
+A refusal **clears the search**, so the user is looking at no results while they
+read your reply. Say that plainly — they asked for something no study can satisfy,
+so there is nothing to show — then offer the alternatives from the payload's
+counts. If `cleared_filters` held filters the user still wants (a platform, a
+measurement), name them and re-commit them with whichever alternative they pick.
 
 Negation ("not", "except", "excluding") sets `exclude` on its own selection. An
 excluded term never conflicts with an included one.

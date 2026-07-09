@@ -212,10 +212,9 @@ def _unsatisfiable_and(
                 "Replacing a term? Pass remove=[old term] together with add=[new term] "
                 "in one call. Asking for either term? Commit ONE selection holding both "
                 "values. Asking for both at once? Impossible — tell the user, using the "
-                "counts above. Nothing was committed, so the filters in "
-                "unchanged_filters are still active and the user is still looking at "
-                "their results: say the search is unchanged, and never offer an option "
-                "identical to what is already active."
+                "counts above. Nothing was committed and the search has been CLEARED, so "
+                "the user now sees no results: say so, and offer the alternatives below. "
+                "Any filters in cleared_filters they still want must be re-committed."
             ),
             "if_or": _count([*others, merged], count_intent, index),
             # Not "these terms are disjoint": the test is whether the intersection
@@ -374,11 +373,13 @@ def update_query(
         Instead of a summary, returns ``{"error": "unsatisfiable_and", ...}`` when
         the commit would AND terms that no single study can match together, on a
         facet each study holds only one of (e.g. focus: "diabetes and asthma").
-        Nothing is committed. The payload carries each term's own count plus
-        ``if_or`` — the count if the terms were OR-ed instead. If the user asked
-        for them all at once, tell them no study matches all of them and offer
-        those alternatives; if they meant any one of them, re-commit a single
-        mention holding every value.
+        Nothing is committed and the search is **cleared**, so the user sees no
+        results instead of the previous search's rows. The payload carries each
+        term's own count, ``if_or`` (the count if the terms were OR-ed instead),
+        and ``cleared_filters`` (what was dropped). If the user asked for them all
+        at once, tell them no study matches all of them, say the search is now
+        empty, and offer those alternatives; if they meant any one of them,
+        re-commit a single mention holding every value.
     """
     deps = ctx.deps
     query_state = deps.query_state
@@ -404,18 +405,20 @@ def update_query(
             )
         )
 
-    # Validate before mutating: a refused commit must leave the user's existing
-    # filters (and pending choices) exactly as they were, not strand them on a
-    # zero-result query.
+    # An impossible query commits nothing AND clears the search, so the user sees
+    # no results rather than a flash of the previous search's rows. Leaving the old
+    # filters active was worse: results appear to answer the question that was just
+    # declared unanswerable, and the chips cannot show whether the terms are AND-ed
+    # or OR-ed, so nothing on screen contradicts them. The explanation has to be
+    # the only thing on the page.
     conflict = _unsatisfiable_and(mentions, intent or query_state.intent, deps.index)
     if conflict:
-        # Report what survived. Otherwise the agent explains the impossibility
-        # while the user is still looking at the *previous* search's results, and
-        # can even offer an option identical to what is already active.
-        conflict["unchanged_filters"] = [
+        conflict["cleared_filters"] = [
             {"exclude": m.exclude, "facet": m.facet.value, "values": m.values}
             for m in query_state.mentions
         ]
+        query_state.mentions = []
+        deps.pending = []
         return conflict
 
     if reset:

@@ -604,8 +604,14 @@ def test_update_query_exclusion_is_exempt_from_the_check() -> None:
     assert out["total_studies"] == 1
 
 
-def test_refused_commit_leaves_prior_state_untouched() -> None:
-    """A refusal preserves existing filters, pending choices, and survives reset=True."""
+def test_refused_commit_clears_the_search_and_reports_what_it_dropped() -> None:
+    """A refusal clears the query so the user sees no results, not stale rows.
+
+    Leaving the previous filters active meant results stayed on screen that
+    appeared to answer the question just declared unanswerable — and the chips
+    cannot show whether terms are AND-ed or OR-ed, so nothing on screen
+    contradicted them. The reply must be the only thing the user sees.
+    """
     state = QueryModel(mentions=[_focus("diabetes", "Diabetes Mellitus")])
     ctx = _ctx(_isa_index(_DISJOINT), state)
     ctx.deps.pending = [PendingChoice(facet="focus", options=[], text="glucose")]
@@ -617,14 +623,19 @@ def test_refused_commit_leaves_prior_state_untouched() -> None:
         ],
     )
     assert out["error"] == "unsatisfiable_and"
-    # Counts keep the rest of the query applied, so they match what the user sees.
+    # Counts are computed BEFORE the clear, against the query the user asked for.
     assert out["terms"] == {"diabetes": 1, "asthma": 1}
-    assert ctx.deps.query_state.mentions == [_focus("diabetes", "Diabetes Mellitus")]
-    assert [p.text for p in ctx.deps.pending] == ["glucose"]
+    # The impossible terms are not committed, and the search is emptied.
+    assert ctx.deps.query_state.mentions == []
+    assert ctx.deps.pending == []
+    # What was dropped is reported, so the agent can offer to restore it.
+    assert out["cleared_filters"] == [
+        {"exclude": False, "facet": "focus", "values": ["Diabetes Mellitus"]}
+    ]
 
 
-def test_refused_reset_does_not_clear_state() -> None:
-    """reset=True must not wipe the query when the same call is then refused."""
+def test_refused_reset_clears_state_and_commits_nothing() -> None:
+    """reset=True plus a refused commit ends with an empty query, not the impossible one."""
     state = QueryModel(mentions=[_focus("sickle cell", "Anemia, Sickle Cell")])
     ctx = _ctx(_isa_index(_DISJOINT), state)
     out = update_query(
@@ -638,7 +649,10 @@ def test_refused_reset_does_not_clear_state() -> None:
         ],
     )
     assert out["error"] == "unsatisfiable_and"
-    assert ctx.deps.query_state.mentions == [_focus("sickle cell", "Anemia, Sickle Cell")]
+    assert ctx.deps.query_state.mentions == []
+    assert out["cleared_filters"] == [
+        {"exclude": False, "facet": "focus", "values": ["Anemia, Sickle Cell"]}
+    ]
 
 
 def test_single_mention_on_single_valued_facet_is_never_refused() -> None:
@@ -723,13 +737,12 @@ def test_three_terms_unsatisfiable_without_any_pair_being_disjoint() -> None:
     assert out["if_or"] == 2
 
 
-def test_refusal_reports_the_filters_that_survived() -> None:
-    """A refusal must tell the agent what is still active.
+def test_refusal_reports_the_filters_it_cleared() -> None:
+    """A refusal must tell the agent what it dropped.
 
-    Nothing is committed, so the user keeps looking at the previous search's
-    results. Without ``unchanged_filters`` the agent explains that the query is
-    impossible while the UI still shows the old result count — and can even offer
-    an option identical to the search already running.
+    The search is cleared so the user sees no results rather than the previous
+    search's rows. ``cleared_filters`` lets the agent name what went away and
+    offer to restore it alongside whichever alternative the user picks.
     """
     state = QueryModel(mentions=[_focus("diabetes or asthma", "Diabetes Mellitus", "Asthma")])
     ctx = _ctx(_isa_index(_DISJOINT), state)
@@ -743,9 +756,9 @@ def test_refusal_reports_the_filters_that_survived() -> None:
         ],
     )
     assert out["error"] == "unsatisfiable_and"
-    assert out["unchanged_filters"] == [
+    assert out["cleared_filters"] == [
         {"exclude": False, "facet": "focus", "values": ["Diabetes Mellitus", "Asthma"]}
     ]
-    assert "unchanged_filters" in out["hint"]
-    # And the state really is untouched.
-    assert ctx.deps.query_state.mentions == state.mentions
+    assert "cleared_filters" in out["hint"]
+    # The search really is emptied — the user sees no results while they read.
+    assert ctx.deps.query_state.mentions == []
