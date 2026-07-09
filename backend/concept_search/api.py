@@ -371,9 +371,6 @@ _MAX_SESSION_MESSAGES = 50  # user/assistant text turns retained in the persiste
 
 
 @app.post("/search", response_model=SearchResponse)
-# Deprecated alias so a previously-deployed frontend keeps working during the
-# rename cutover; remove once the frontend is on /search (follow-up).
-@app.post("/search/agent", response_model=SearchResponse, include_in_schema=False)
 async def search(
     request: SearchRequest, fastapi_request: Request
 ) -> SearchResponse | JSONResponse:
@@ -493,8 +490,6 @@ async def search(
 
 
 @app.post("/search/filter", response_model=SearchResponse)
-# Deprecated alias; remove once the frontend is on /search/filter (follow-up).
-@app.post("/search/agent/filter", response_model=SearchResponse, include_in_schema=False)
 async def search_filter(
     request: SearchFilterRequest, fastapi_request: Request
 ) -> SearchResponse | JSONResponse:
