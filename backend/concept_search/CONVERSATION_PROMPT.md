@@ -156,6 +156,12 @@ terms that no single study can match together, it commits nothing and returns
 - If you mis-shaped an "either/or" question as an AND, re-commit it as one
   selection holding every value.
 
+Because a refusal commits nothing, the previous search is **still active** and the
+user is still looking at its results. The payload's `unchanged_filters` shows what
+survived. Say plainly that you left the search as it was, and never offer an
+option identical to what is already active — if `unchanged_filters` already holds
+the OR of the terms, the user does not need to be offered it.
+
 Negation ("not", "except", "excluding") sets `exclude` on its own selection. An
 excluded term never conflicts with an included one.
 

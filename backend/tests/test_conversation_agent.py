@@ -721,3 +721,31 @@ def test_three_terms_unsatisfiable_without_any_pair_being_disjoint() -> None:
     # Each term alone is answerable; the counts prove no pair is disjoint either.
     assert out["terms"] == {"cancer": 2, "lung cancer": 1, "breast cancer": 1}
     assert out["if_or"] == 2
+
+
+def test_refusal_reports_the_filters_that_survived() -> None:
+    """A refusal must tell the agent what is still active.
+
+    Nothing is committed, so the user keeps looking at the previous search's
+    results. Without ``unchanged_filters`` the agent explains that the query is
+    impossible while the UI still shows the old result count — and can even offer
+    an option identical to the search already running.
+    """
+    state = QueryModel(mentions=[_focus("diabetes or asthma", "Diabetes Mellitus", "Asthma")])
+    ctx = _ctx(_isa_index(_DISJOINT), state)
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(
+                facet=Facet.FOCUS, original_text="diabetes", values=["Diabetes Mellitus"]
+            ),
+            MentionInput(facet=Facet.FOCUS, original_text="asthma", values=["Asthma"]),
+        ],
+    )
+    assert out["error"] == "unsatisfiable_and"
+    assert out["unchanged_filters"] == [
+        {"exclude": False, "facet": "focus", "values": ["Diabetes Mellitus", "Asthma"]}
+    ]
+    assert "unchanged_filters" in out["hint"]
+    # And the state really is untouched.
+    assert ctx.deps.query_state.mentions == state.mentions

@@ -212,7 +212,10 @@ def _unsatisfiable_and(
                 "Replacing a term? Pass remove=[old term] together with add=[new term] "
                 "in one call. Asking for either term? Commit ONE selection holding both "
                 "values. Asking for both at once? Impossible — tell the user, using the "
-                "counts above."
+                "counts above. Nothing was committed, so the filters in "
+                "unchanged_filters are still active and the user is still looking at "
+                "their results: say the search is unchanged, and never offer an option "
+                "identical to what is already active."
             ),
             "if_or": _count([*others, merged], count_intent, index),
             # Not "these terms are disjoint": the test is whether the intersection
@@ -406,6 +409,13 @@ def update_query(
     # zero-result query.
     conflict = _unsatisfiable_and(mentions, intent or query_state.intent, deps.index)
     if conflict:
+        # Report what survived. Otherwise the agent explains the impossibility
+        # while the user is still looking at the *previous* search's results, and
+        # can even offer an option identical to what is already active.
+        conflict["unchanged_filters"] = [
+            {"exclude": m.exclude, "facet": m.facet.value, "values": m.values}
+            for m in query_state.mentions
+        ]
         return conflict
 
     if reset:
