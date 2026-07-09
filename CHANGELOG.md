@@ -1,5 +1,61 @@
 # Changelog
 
+## [0.20.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.19.0...v0.20.0) (2026-07-09)
+
+
+### Features
+
+* /search/agent endpoint (wire orchestrator + session store) ([#379](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/379)) ([003dc31](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/003dc31da5f96a1de0bdffbc3df3f015dba15944))
+* add bot traffic filtering and engaged sessions metric ([#357](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/357)) ([cd13f9e](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/cd13f9e9be3540a7fcc258047a8874292a03397b))
+* add session store abstraction + in-memory conversation store ([#360](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/360)) ([#361](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/361)) ([e624cfa](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/e624cfac2db03b6afc8e1f3d390dac7a86c27f0d))
+* agent orchestrator + session state (no endpoint) ([#375](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/375)) ([b9bffbc](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/b9bffbcf6906d6953fb2d9cc22fdc436915b8b60))
+* agent search mode behind ?agent=1 URL flag ([#384](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/384)) ([3aeba3e](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/3aeba3eea08f2fdda94a3cfa534392689dd2fa8b))
+* **analytics:** add static analytics site generator [#341](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/341) ([#340](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/340)) ([6cf17f2](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/6cf17f22a1f55591268d9627f2a95c9b3b9c52e3))
+* **analytics:** update analytics page for April 2026 ([#353](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/353)) ([a5a652d](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/a5a652dc3e7cfeeb4fc3e8cc5b68e978a114804a))
+* constrain agent reply markdown vocabulary + ignore backend/.venv in eslint ([#381](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/381)) ([#388](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/388)) ([f9c6903](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/f9c6903b1de2c4c1cee47f486e7e7dee93e0a788))
+* defense-in-depth prompt-injection hardening for /search/agent ([#364](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/364)) ([#409](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/409)) ([1bb3e46](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/1bb3e46effc27acaea31725703aeb32ba6e4c4c8))
+* DynamoDB SessionStore backend for agent-loop persistence ([#400](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/400)) ([#402](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/402)) ([68f8434](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/68f8434abda3f601331343e302327c3b0e3013e5))
+* make agent search the only frontend path; remove ?agent=1 flag (part 1 of [#410](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/410)) ([#411](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/411)) ([5683adc](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/5683adcdf329d8035d05853337014f625085533a))
+* remove deterministic /search + promote agent loop to /search (part 2 of [#410](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/410)) ([#412](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/412)) ([0df0d22](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/0df0d22cb9d98d1e1baae38be0c9f2f780811b83))
+
+
+### Bug Fixes
+
+* deploy scripts read Node pin from .nvmrc + scrub local env overrides ([#403](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/403)) ([#405](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/405)) ([487713d](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/487713df5f9101c3c1c29d8ae2ef485c4efb675c))
+* drop blank dbGapId from study_ids set in variable lookup ([#371](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/371)) ([e4c769e](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/e4c769ec6a338ca33dfab18abcce760b8cf0e02e))
+* filter-chip removal in agent mode via POST /search/agent/filter ([#382](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/382)) ([#404](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/404)) ([9e138c9](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/9e138c9c354670f9ab36abaa407c913e742b6a1a))
+* home-page search 422 — hoist MultiTurnQueryProvider so all entry points send sessionId ([#415](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/415)) ([#416](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/416)) ([70d9373](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/70d93734ebf9800424dd9bc09acd5d6a09686e6e))
+* move state providers inside errorboundary to prevent crash loop ([#348](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/348)) ([#349](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/349)) ([4b079ea](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/4b079eafc20b09f58af0b7f119c1ee4c9f177b61))
+* render assistant markdown in findable-ui assistantmessage (part 1 of [#381](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/381)) ([#392](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/392)) ([fd1b7e5](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/fd1b7e5709b9c1d445ba5d99d70a85ff8d7332cc))
+* revert providers outside ErrorBoundary and upgrade findable-ui to v51.1.0 ([#351](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/351)) ([519bc6b](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/519bc6bc1992bf8893d80f58ec9ae1634a97344e))
+
+
+### Chores
+
+* add link-findable and unlink-findable npm scripts ([#337](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/337)) ([2cba075](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/2cba07584badb67f025dd1c6bc5b76264cf4f82c))
+* bump findable-ui to ^50.6.1 ([#336](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/336)) ([1916f77](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/1916f774f6248f80f8637dd40c77b8fec543905a))
+* disable duos access request option for ncpi studies ([#355](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/355)) ([#356](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/356)) ([38737f0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/38737f0c2ea1a8b63a700939405af323b4a34786))
+* drop next-compose-plugins and clear `browserdebuginfointerminal` deprecation warning ([#385](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/385)) ([#391](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/391)) ([7104ed0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/7104ed068b6afd29bff2c271f0fe8553c6697bdb))
+* enable `prettier-plugin-organize-imports` ([#342](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/342)) ([#344](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/344)) ([c961136](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/c96113644851a208f5a65070d54adea633d04cdc))
+* regenerate package-lock to drop stale next-auth ([#389](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/389)) ([#390](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/390)) ([f55629b](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/f55629b40eb6e4005ec04d5aee452701524bc50e))
+* remove deprecated /search/agent* aliases ([#413](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/413)) ([#414](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/414)) ([5845af9](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/5845af904fd18f0c328e8e8589aef9d274243787))
+* untrack next-env.d.ts; typegen before tsc ([#406](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/406)) ([#407](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/407)) ([bf5a6a9](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/bf5a6a924e1fd2bfe0934796a4978fe0eb1fb323))
+* update analytics to May 2026 ([#359](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/359)) ([b6f2549](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/b6f25497d3b8939d2bffe1d7bdf5c8aa4583a362))
+* upgrade findable-ui from ^50.3.0 to ^50.6.0 ([#335](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/335)) ([fc2e3a0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/fc2e3a0d7dec93d64029d572c605e1c5f1e2a433))
+* upgrade findable-ui to 51.0.1, remove next-auth ([#346](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/346)) ([#347](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/347)) ([fc08d16](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/fc08d16d1a7ce9b3d34a072d5aaf5e5a97d6dd17))
+* upgrade to next.js 16 + new findable-ui major (phase 2 from findable-ui[#952](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/952)) ([#372](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/372)) ([#376](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/376)) ([506b989](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/506b989a10e37d7065ce0d4de39a9e2fb5d954c2))
+
+
+### Code Refactoring
+
+* extract execute_query_model + query-structure helper from /search ([#367](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/367)) ([22b05b0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/22b05b00b58c75084e94870bc361f569a65c677f))
+
+
+### Continuous Integration
+
+* add backend lint + unit-test checks ([#370](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/370)) ([2053b7a](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/2053b7a59dc5ec6e372d55236f00381671990a83))
+* add GitHub Actions workflow for analytics site deployment [#341](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/341) ([#345](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/345)) ([aaa5b78](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/aaa5b7878e5a10beb996bfa5fbff5bb5c1946044))
+
 ## [0.19.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.18.0...v0.19.0) (2026-04-02)
 
 
