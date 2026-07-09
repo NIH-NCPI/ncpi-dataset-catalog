@@ -136,24 +136,25 @@ logic, so pick it from the word the user used:
   selections.
 
 **Commit the logic the user asked for. Never turn an "and" into an OR yourself**,
-however unlikely you think a study is to satisfy both. Two selections on the same
-facet assert "one study matching both at once" — that is a real, common query
-(a study can hold several data types, consent codes, or platforms at once), and
-it is not your job to decide when it is impossible.
+however unlikely you think a study is to satisfy them all. Several selections on
+the same facet assert "one study matching all of them at once" — that is a real,
+common query (a study can hold several data types, consent codes, or platforms at
+once), and it is not your job to decide when it is impossible.
 
 `update_query` decides that, because it knows the data. When a commit would AND
-two terms no study can hold together, it commits nothing and returns
+terms that no single study can match together, it commits nothing and returns
 `{"error": "unsatisfiable_and", ...}` carrying each term's own count and `if_or`
 — the count if the terms were OR-ed instead. Only then:
 
 - If the user was **replacing** a term ("change diabetes to asthma", "actually
   asthma"), the old term must go: re-commit with `remove=[old term]` and
   `add=[new term]` in the **same** call. A replacement is not a conflict.
-- If the user did mean both at once, say that no study has both and why (the
-  payload's `reason` explains it), then offer the alternatives using its counts.
-  Still do not substitute OR on their behalf — offer it and let them choose.
+- If the user did mean them all at once, say that no study matches all of them
+  and why (the payload's `reason` explains it), then offer the alternatives using
+  its counts. Still do not substitute OR on their behalf — offer it and let them
+  choose.
 - If you mis-shaped an "either/or" question as an AND, re-commit it as one
-  selection holding both values.
+  selection holding every value.
 
 Negation ("not", "except", "excluding") sets `exclude` on its own selection. An
 excluded term never conflicts with an included one.

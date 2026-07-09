@@ -1,9 +1,9 @@
 """Pin SINGLE_VALUED_FACETS to the actual catalog.
 
-``update_query`` refuses to AND two disjoint terms on a single-valued facet,
-telling the user no study can hold both. That refusal is only correct while the
-catalog agrees. If a study ever gains a second focus, the refusal would start
-rejecting a query that has become answerable — so these tests fail loudly
+``update_query`` refuses to AND terms on a single-valued facet when no single
+study can match all of them, telling the user so. That refusal is only correct
+while the catalog agrees. If a study ever gains a second focus, the refusal would
+start rejecting a query that has become answerable — so these tests fail loudly
 rather than let that happen silently.
 
 The counterpart matters too: ``platform`` is deliberately NOT single-valued
