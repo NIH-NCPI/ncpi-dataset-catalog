@@ -134,7 +134,7 @@ SCENARIOS: list[Scenario] = [
         # no study has both. Either is fine. Two AND-ed focus mentions is not.
         "add-and-same-facet",
         [SETUP_RESOLVED, "and asthma"],
-        lambda q, r: len(_on(q, Facet.FOCUS)) < 2 and "asthma" in (_t(q) + " ".join(r)).lower(),
+        lambda q, r: len(_on(q, Facet.FOCUS)) < 2 and "asthma" in " ".join([_t(q), *r]).lower(),
     ),
     Scenario(
         "add-or-same-facet",

@@ -369,12 +369,13 @@ def update_query(
         relax without extra exploration.
 
         Instead of a summary, returns ``{"error": "unsatisfiable_and", ...}`` when
-        the commit would AND two disjoint terms on a facet each study holds only
-        one of (e.g. focus: "diabetes and asthma"). Nothing is committed. The
-        payload carries each term's own count plus ``if_or`` — the count if the
-        terms were OR-ed instead. If the user asked for both at once, tell them
-        no study can have both and offer those alternatives; if they meant either
-        one, re-commit a single mention holding both values.
+        the commit would AND terms that no single study can match together, on a
+        facet each study holds only one of (e.g. focus: "diabetes and asthma").
+        Nothing is committed. The payload carries each term's own count plus
+        ``if_or`` — the count if the terms were OR-ed instead. If the user asked
+        for them all at once, tell them no study matches all of them and offer
+        those alternatives; if they meant any one of them, re-commit a single
+        mention holding every value.
     """
     deps = ctx.deps
     query_state = deps.query_state
