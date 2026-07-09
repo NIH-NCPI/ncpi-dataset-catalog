@@ -31,6 +31,7 @@ from pydantic_core import to_jsonable_python
 from .index import ConceptIndex
 from .mention_constraints import split_mentions
 from .models import (
+    SINGLE_VALUED_FACETS,
     Facet,
     Intent,
     PendingChoice,
@@ -133,6 +134,93 @@ def _catalog_facet_counts(index: ConceptIndex, facet_by: list[str]) -> dict:
     return out
 
 
+def _count(mentions: list[ResolvedMention], intent: Intent, index: ConceptIndex) -> int:
+    """Count the results a set of mentions would return.
+
+    Args:
+        mentions: The mentions to execute.
+        intent: Query intent, selecting the study or variable count.
+        index: ConceptIndex for the lookup.
+
+    Returns:
+        Number of matching studies, or variables when the intent is "variable".
+    """
+    execution = execute_query_model(QueryModel(intent=intent, mentions=mentions), index)
+    return execution.total_variable_count if intent == "variable" else len(execution.studies)
+
+
+def _unsatisfiable_and(
+    mentions: list[ResolvedMention],
+    intent: Intent,
+    index: ConceptIndex,
+) -> dict | None:
+    """Detect an AND over one single-valued facet that no study can satisfy.
+
+    A study holds exactly one value of a ``SINGLE_VALUED_FACETS`` facet, but it
+    is indexed under that value's whole ancestor closure. So two included
+    mentions on such a facet are satisfiable when one subsumes the other
+    ("cancer and lung cancer" → the lung cancer studies) and impossible when
+    they are disjoint ("diabetes and asthma"). Rather than reason over the ISA
+    table, ask the index: taken alone, do these mentions match any study?
+
+    Only the conflicting mentions take part in that test — other facets are
+    ignored, so an unrelated empty result (a platform filter that excludes
+    everything) is never mistaken for an impossible one. The reported counts,
+    by contrast, keep the rest of the query applied, so they match what the
+    user would actually see.
+
+    Args:
+        mentions: The mentions the caller is about to commit.
+        intent: Query intent, selecting study or variable counts.
+        index: ConceptIndex for the lookups.
+
+    Returns:
+        A refusal payload describing the conflict, or None when the commit is
+        satisfiable.
+    """
+    # execute_query_model returns nothing at all for the "ambiguous" intent, which
+    # would report every term as 0 studies — numbers the agent is told to show the
+    # user. Count as a study query instead; the refusal itself does not depend on
+    # intent, only the numbers we hand back do.
+    count_intent: Intent = "study" if intent == "ambiguous" else intent
+
+    for facet in sorted(SINGLE_VALUED_FACETS):
+
+        def conflicts(mention: ResolvedMention, facet: Facet = facet) -> bool:
+            return mention.facet == facet and not mention.exclude and bool(mention.values)
+
+        conflicting = [m for m in mentions if conflicts(m)]
+        if len(conflicting) < 2:
+            continue
+        if index.query_studies([(facet, m.values) for m in conflicting]):
+            continue  # one term subsumes the other — redundant, not impossible
+        others = [m for m in mentions if not conflicts(m)]
+        merged = ResolvedMention(
+            facet=facet,
+            original_text=" or ".join(m.original_text for m in conflicting),
+            values=list(dict.fromkeys(v for m in conflicting for v in m.values)),
+        )
+        return {
+            "error": "unsatisfiable_and",
+            "facet": facet.value,
+            # A refusal without a way forward strands a legitimate turn: the user
+            # may be *replacing* a term ("change diabetes to asthma"), in which
+            # case the old one has to go in the same call. Spell out every exit.
+            "hint": (
+                "Replacing a term? Pass remove=[old term] together with add=[new term] "
+                "in one call. Asking for either term? Commit ONE selection holding both "
+                "values. Asking for both at once? Impossible — tell the user, using the "
+                "counts above."
+            ),
+            "if_or": _count([*others, merged], count_intent, index),
+            "reason": f"each study has exactly one {facet.value}; these terms are disjoint",
+            "terms": {
+                m.original_text: _count([*others, m], count_intent, index) for m in conflicting
+            },
+        }
+    return None
+
+
 def _relaxation_map(query_state: QueryModel, index: ConceptIndex) -> dict[str, int]:
     """For each active (non-excluded) filter, count results if it alone is dropped.
 
@@ -156,14 +244,7 @@ def _relaxation_map(query_state: QueryModel, index: ConceptIndex) -> dict[str, i
     out: dict[str, int] = {}
     for i, mention in enumerate(includes):
         remaining = includes[:i] + includes[i + 1 :] + excludes
-        execution = execute_query_model(
-            QueryModel(intent=query_state.intent, mentions=remaining), index
-        )
-        out[mention.original_text] = (
-            execution.total_variable_count
-            if query_state.intent == "variable"
-            else len(execution.studies)
-        )
+        out[mention.original_text] = _count(remaining, query_state.intent, index)
     return out
 
 
@@ -278,13 +359,18 @@ def update_query(
         sample_studies. When the result is empty, also includes a ``relaxation``
         map ({filter text: results if dropped}) so you can advise which filter to
         relax without extra exploration.
+
+        Instead of a summary, returns ``{"error": "unsatisfiable_and", ...}`` when
+        the commit would AND two disjoint terms on a facet each study holds only
+        one of (e.g. focus: "diabetes and asthma"). Nothing is committed. The
+        payload carries each term's own count plus ``if_or`` — the count if the
+        terms were OR-ed instead. If the user asked for both at once, tell them
+        no study can have both and offer those alternatives; if they meant either
+        one, re-commit a single mention holding both values.
     """
     deps = ctx.deps
     query_state = deps.query_state
-    if reset:
-        query_state.mentions = []
-        deps.pending = []
-    mentions = list(query_state.mentions)
+    mentions = [] if reset else list(query_state.mentions)
 
     if remove:
         drop = {r.lower() for r in remove}
@@ -306,6 +392,15 @@ def update_query(
             )
         )
 
+    # Validate before mutating: a refused commit must leave the user's existing
+    # filters (and pending choices) exactly as they were, not strand them on a
+    # zero-result query.
+    conflict = _unsatisfiable_and(mentions, intent or query_state.intent, deps.index)
+    if conflict:
+        return conflict
+
+    if reset:
+        deps.pending = []
     query_state.mentions = mentions
     if intent is not None:
         query_state.intent = intent
