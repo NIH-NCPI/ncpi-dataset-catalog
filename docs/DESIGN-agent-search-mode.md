@@ -1,6 +1,6 @@
 # Design Note: Agent Search Mode (`?agent=1`)
 
-> Status: DRAFT — Jun 2026
+> Status: SUPERSEDED (Jul 2026) — originally DRAFT, Jun 2026
 > Refs: epic #365 · backend endpoint #379 · this PR #383 · follow-ups #381 (markdown), #382 (filter chips), #380 (history)
 
 > **⚠️ SUPERSEDED (Jul 2026, #410/#412).** This note describes the original
