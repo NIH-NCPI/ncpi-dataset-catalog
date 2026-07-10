@@ -13,10 +13,10 @@ The counterpart matters too: ``platform`` is deliberately NOT single-valued
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
 import pytest
 
+from concept_search.index import _resolve_paths
 from concept_search.models import SINGLE_VALUED_FACETS, Facet
 
 # Study-record field backing each facet whose cardinality we constrain.
@@ -28,12 +28,17 @@ _FIELD_BY_FACET = {
 
 
 def _catalog() -> list[dict]:
-    """Load the study catalog, skipping the test when it is not built.
+    """Load the study catalog the runtime would load, skipping if not built.
+
+    Resolves through ``index._resolve_paths()`` rather than hardcoding a path, so
+    that NCPI_PLATFORM_STUDIES_PATH / NCPI_REPO_ROOT point this test at the same
+    file the agent will query. A hardcoded path silently validates a catalog the
+    runtime never reads.
 
     Returns:
         Every study record in the catalog.
     """
-    path = Path(__file__).resolve().parents[2] / "catalog" / "ncpi-platform-studies.json"
+    _llm_dir, path = _resolve_paths()
     if not path.exists():
         pytest.skip(f"catalog not built: {path}")
     with open(path) as f:
@@ -59,7 +64,12 @@ def _cardinality(study: dict, field: str) -> int:
 @pytest.mark.parametrize("facet", sorted(SINGLE_VALUED_FACETS))
 def test_single_valued_facet_holds_at_most_one_value(facet: Facet) -> None:
     """No study carries two values of a facet we treat as single-valued."""
-    field = _FIELD_BY_FACET[facet]
+    field = _FIELD_BY_FACET.get(facet)
+    assert field is not None, (
+        f"{facet.value} was added to SINGLE_VALUED_FACETS but not to _FIELD_BY_FACET, "
+        f"so its cardinality is unverified. Add the study-record field backing it — "
+        f"update_query refuses queries on this facet and must not do so unchecked."
+    )
     offenders = [(s["dbGapId"], s[field]) for s in _catalog() if _cardinality(s, field) > 1]
     assert not offenders, (
         f"{facet.value} is in SINGLE_VALUED_FACETS but {len(offenders)} studies hold "

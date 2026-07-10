@@ -137,6 +137,14 @@ def _catalog_facet_counts(index: ConceptIndex, facet_by: list[str]) -> dict:
 def _count(mentions: list[ResolvedMention], intent: Intent, index: ConceptIndex) -> int:
     """Count the results a set of mentions would return.
 
+    ``execute_query_model`` does no lookup at all for the "ambiguous" intent — it
+    short-circuits to an empty result, because the caller is expected to ask the
+    user what they meant rather than run a query. Counting with it verbatim would
+    report every term as 0, and these counts are quoted back to the user: the
+    relaxation map would advise dropping a filter that "would find 0 studies",
+    and a refusal would claim each of its terms matches nothing. Count an
+    ambiguous query as a study query; only the numbers depend on intent.
+
     Args:
         mentions: The mentions to execute.
         intent: Query intent, selecting the study or variable count.
@@ -145,8 +153,9 @@ def _count(mentions: list[ResolvedMention], intent: Intent, index: ConceptIndex)
     Returns:
         Number of matching studies, or variables when the intent is "variable".
     """
-    execution = execute_query_model(QueryModel(intent=intent, mentions=mentions), index)
-    return execution.total_variable_count if intent == "variable" else len(execution.studies)
+    counted: Intent = "study" if intent == "ambiguous" else intent
+    execution = execute_query_model(QueryModel(intent=counted, mentions=mentions), index)
+    return execution.total_variable_count if counted == "variable" else len(execution.studies)
 
 
 def _unsatisfiable_and(
@@ -180,12 +189,6 @@ def _unsatisfiable_and(
         A refusal payload describing the conflict, or None when the commit is
         satisfiable.
     """
-    # execute_query_model returns nothing at all for the "ambiguous" intent, which
-    # would report every term as 0 studies — numbers the agent is told to show the
-    # user. Count as a study query instead; the refusal itself does not depend on
-    # intent, only the numbers we hand back do.
-    count_intent: Intent = "study" if intent == "ambiguous" else intent
-
     for facet in sorted(SINGLE_VALUED_FACETS):
 
         def conflicts(mention: ResolvedMention, facet: Facet = facet) -> bool:
@@ -216,7 +219,7 @@ def _unsatisfiable_and(
                 "the user now sees no results: say so, and offer the alternatives below. "
                 "Any filters in cleared_filters they still want must be re-committed."
             ),
-            "if_or": _count([*others, merged], count_intent, index),
+            "if_or": _count([*others, merged], intent, index),
             # Not "these terms are disjoint": the test is whether the intersection
             # across ALL conflicting mentions is empty, which three terms can be
             # without any pair being disjoint (cancer ∧ lung cancer = 78 studies,
@@ -224,9 +227,7 @@ def _unsatisfiable_and(
             "reason": (
                 f"a study has exactly one {facet.value}; no study matches all of these at once"
             ),
-            "terms": {
-                m.original_text: _count([*others, m], count_intent, index) for m in conflicting
-            },
+            "terms": {m.original_text: _count([*others, m], intent, index) for m in conflicting},
         }
     return None
 

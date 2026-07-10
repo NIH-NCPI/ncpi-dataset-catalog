@@ -780,3 +780,32 @@ def test_conversation_prompt_forbids_cross_facet_or() -> None:
     prompt = conversation_agent._load_prompt()
     assert "OR only works inside one facet" in prompt
     assert "Never offer it as an option" in prompt
+
+
+def test_relaxation_map_is_not_zeroed_by_ambiguous_intent() -> None:
+    """The drop-one counts must survive an "ambiguous" intent.
+
+    ``execute_query_model`` short-circuits to an empty result for that intent, so
+    counting with it verbatim reported every filter as "dropping this finds 0
+    studies" — advice the agent relays to the user. Reachable in practice:
+    ``_summarize`` builds the relaxation map whenever the result is empty, and an
+    ambiguous query is *always* empty.
+    """
+    studies = [
+        {"dbGapId": "phs1", "facets": {"focus": ["Diabetes Mellitus"], "platform": ["BDC"]}},
+        {"dbGapId": "phs2", "facets": {"focus": ["Asthma"], "platform": ["BDC"]}},
+    ]
+    index = _isa_index(studies)
+    mentions = [
+        _focus("diabetes", "Diabetes Mellitus"),
+        ResolvedMention(facet=Facet.PLATFORM, original_text="KFDRC", values=["KFDRC"]),
+    ]
+    ambiguous = conversation_agent._relaxation_map(
+        QueryModel(intent="ambiguous", mentions=mentions), index
+    )
+    study = conversation_agent._relaxation_map(
+        QueryModel(intent="study", mentions=mentions), index
+    )
+    # Dropping the KFDRC filter leaves the diabetes study; dropping diabetes
+    # leaves nothing (no study is on KFDRC). Identical either way.
+    assert ambiguous == study == {"diabetes": 0, "KFDRC": 1}
