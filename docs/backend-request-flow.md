@@ -2,223 +2,156 @@
 
 How a `/search` request is processed, step by step.
 
+The backend runs a **single conversation-aware agent** (Sonnet) that builds a
+`QueryModel` incrementally by calling tools. It replaced the
+Extract → Resolve → Structure → Router state machine in #412. Conversation state
+lives on the **server**, keyed by `sessionId`; the client sends only text.
+
 ---
 
 ## 1. HTTP Entry — Front Controller
 
-**File**: [api.py](../backend/concept_search/api.py) (line 332)
+**File**: [api.py](../backend/concept_search/api.py)
 
-The `POST /search` endpoint receives a `SearchRequest`:
+`POST /search` receives a `SearchRequest`:
 
-- `query` — natural language text (may be empty)
-- `previous_query` — a `QueryModel` round-tripped from the client (may be null)
+- `query` — natural language text
+- `sessionId` — client-generated, created once per visit and sent on every request
 
-Rate limiting is checked per-IP. Then the controller determines the **mode**:
+Rate limiting is checked per client IP. There are no modes: every request is one
+turn of the same conversation. Whether it starts a fresh search, refines the
+current one, or answers a question the agent asked is decided by the agent
+itself, from the conversation history.
 
-| Condition           | Mode        | What happens                                                                                                                                                  |
-| ------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| query + no previous | **fresh**   | Full 3-agent pipeline                                                                                                                                         |
-| query + previous    | **route**   | Router agent classifies the follow-up                                                                                                                         |
-| no query + previous | **requery** | Skip LLM, re-run lookup on previous QueryModel (e.g., after the UI removes a filter — the client patches the QueryModel and resubmits without new query text) |
+Two other endpoints:
+
+| Endpoint              | LLM? | Purpose                                                              |
+| --------------------- | ---- | -------------------------------------------------------------------- |
+| `POST /search`        | yes  | One conversational turn                                              |
+| `POST /search/filter` | no   | Deterministic chip removal — drop one facet value, re-run the lookup |
+| `GET /health`         | no   | `status`, `gitSha`, `indexStats`, `resolveCache`                     |
 
 ---
 
-## 2. Mode: Fresh — Full Pipeline
+## 2. Load Session State
 
-**File**: [pipeline.py](../backend/concept_search/pipeline.py) (line 298)
+**File**: [session_store.py](../backend/concept_search/session_store.py)
 
-Entry: `run_pipeline(query)`. Checks the **pipeline cache** first
-(key: `query.strip().lower()`, LRU with TTL). On miss, runs the three agents:
+`get_session_store()` returns an `InMemorySessionStore` or a
+`DynamoDBSessionStore`, selected by `SESSION_STORE_BACKEND` (dev and prod both
+use DynamoDB, with a 24h TTL).
 
-### 2.1 Extract Agent (sequential)
+A `SessionState` holds:
 
-**File**: [extract_agent.py](../backend/concept_search/extract_agent.py)
-**Prompt**: [EXTRACT_PROMPT.md](../backend/concept_search/EXTRACT_PROMPT.md)
-**Model**: Haiku
+- `query` — the committed `QueryModel`
+- `pending` — disambiguation choices offered but not yet answered
+- `agent_message_history` — serialized pydantic-ai messages (tool calls **and**
+  their results), so the agent has full continuity across turns
+- `messages` — the user/assistant text transcript
 
-**Input**: raw query string
-**Output**: `ExtractResult` — a list of `RawMention` items + an `intent`
+A store read failure is **retryable, not a 500**: the handler logs and returns a
+friendly message.
 
-Each `RawMention` has:
+---
 
-- `facet` — which dimension (platform, focus, measurement, consentCode, etc.)
-- `text` — the user's phrase
-- `values` — **pre-resolved** for small-cardinality facets (see below)
+## 3. Run One Conversational Turn
 
-**Small facets** (resolved here, not by the resolve agent):
+**File**: [conversation_agent.py](../backend/concept_search/conversation_agent.py)
+**Prompt**: [CONVERSATION_PROMPT.md](../backend/concept_search/CONVERSATION_PROMPT.md)
 
-- platform, dataType, studyDesign, sex, raceEthnicity, computedAncestry
-- The full value list is in the prompt; the LLM picks matches directly
+`run_conversation(message, deps, message_history)` builds the turn's input as:
 
-**Large facets** (text only, resolved later):
+```
+[Current search: …]              ← trusted state preamble, outside the fence
+[Pending choice for "X": 1) … ]
 
-- focus, measurement, consentCode
-- `values` left empty; the resolve agent handles them
+<user_input>
+…the user's message…             ← untrusted, fenced (#364)
+</user_input>
+```
 
-**Intent detection**: `"study"` (find datasets), `"variable"` (find measured
-variables), or `"auto"` (ambiguous — ask for clarification)
+The close tag is defanged with a zero-width space so a user cannot break out of
+the fence. The agent is bounded by `UsageLimits(request_limit=10)` per turn, and
+the whole turn by a 60s timeout and a concurrency semaphore of 5.
 
-### 2.2 Resolve Agent + Structure Agent (parallel)
+The agent has exactly three tools:
 
-These two run concurrently via `asyncio.gather()`.
+### 3.1 `resolve_concepts(mentions)`
 
-#### 2.2.1 Resolve Agent
+Grounds large-facet terms (`focus`, `measurement`, `consentCode`) against the
+concept index. Batched — all of a query's terms resolve in parallel. Delegates to
+the **resolve agent** (Haiku), unchanged since the pipeline days.
 
-**File**: [resolve_agent.py](../backend/concept_search/resolve_agent.py)
 **Prompt**: [RESOLVE_PROMPT.md](../backend/concept_search/RESOLVE_PROMPT.md)
-**Model**: Haiku
-**Deps**: `ConceptIndex` (injected via pydantic-ai `deps`)
 
-**Input**: one `RawMention` (called per-mention, in parallel)
-**Output**: `ResolveResult` — either `values` (resolved) or `disambiguation` (ambiguous)
+Returns per term either canonical `values` or `disambiguation` options. Ambiguous
+terms become `pending` choices; the agent asks the user rather than guessing.
+Results are LRU-cached (`resolve_cache`, surfaced on `/health`).
 
-Each mention that wasn't pre-resolved by extract gets its own resolve call.
-Results are cached per `(facet, normalized_text)` in the **resolve cache** (LRU
-with TTL).
+Small facets (`platform`, `dataType`, `studyDesign`, `sex`, `raceEthnicity`,
+`computedAncestry`) need no tool — the prompt lists their values and the agent
+maps the user's wording directly.
 
-**Resolution strategy depends on the facet type:**
+### 3.2 `update_query(add, remove, intent, reset)`
 
-##### Focus (disease/condition)
+The **source of truth** for what the user sees. Commits selections and returns a
+summary: counts, active filters, and a 5-study sample.
 
-1. **Primary**: `search_concepts_by_embedding()` — semantic KNN over MeSH
-   disease embeddings
-2. **Drill-down**: `get_focus_category_terms()` — browse MeSH category tree
-3. **Fallback**: `search_concepts()` — keyword substring match
-4. **Post-processing**: ISA deduplication — if both a parent and its descendant
-   are selected, the descendant is dropped (the parent's closure already
-   includes it)
+Boolean semantics — the shape the agent commits _is_ the logic:
 
-##### Measurement (what was measured)
+> Values within one mention are **OR**-ed. Separate mentions are **AND**-ed.
+> Excluded mentions subtract.
 
-1. **Primary**: `search_concepts_by_embedding()` — semantic KNN over
-   measurement concept embeddings (TOPMed, PhenX, NCPI vocabularies)
-2. **Drill-down**: `get_concept_children()` — navigate the measurement
-   hierarchy; `list_variables_for_concept()` — verify at leaf level
-3. **Category browse**: `get_measurement_category_concepts()` — keyword search
-   within concept namespaces
-4. **Ancestor preference**: the resolve prompt instructs the LLM to prefer
-   parent concepts from the `ancestors` list returned by embedding search,
-   giving broader coverage
+So `"diabetes or asthma"` must be **one** focus mention holding both values, and
+`"WGS and WXS"` must be **two** dataType mentions.
 
-##### Consent Code
+Two things the tool decides, not the agent:
 
-Two resolution patterns:
+- **Empty result** → the summary carries a `relaxation` map, giving the result
+  count if each filter alone were dropped, so the agent can say which filter is
+  too restrictive without extra exploration.
+- **Impossible query** → committing two terms that no single study can hold on a
+  facet each study has only one of (`focus`, `studyDesign`) returns
+  `{"error": "unsatisfiable_and", …}`. Nothing is committed **and the search is
+  cleared**, so the user sees no results rather than the previous search's rows.
+  The payload carries each term's count, `if_or`, and `cleared_filters`. See #363.
 
-- **Pattern A — explicit code**: user says "GRU" or "HMB-IRB" →
-  `values=["explicit:GRU"]`. Tools: `get_consent_code_categories()`,
-  `get_consent_codes_for_base()`, `get_disease_specific_codes()`
-- **Pattern B — research use case**: user says "for-profit research" →
-  `values=["no-npu"]` (a symbolic tag). Tool:
-  `compute_consent_eligibility()` determines which codes are eligible
+Satisfiability is decided by asking the index, not by reasoning over the ISA
+table: a study is indexed under its focus value's whole ancestor closure, so
+`cancer ∧ lung cancer` intersects (78 studies) while `diabetes ∧ asthma` cannot.
 
-Tags are expanded to actual code lists later in step 4.
+### 3.3 `query_catalog(operation, facet_by, drop_facets)`
 
-##### Disambiguation
-
-If the resolve agent can't determine a unique match, it returns
-`disambiguation` — a list of 2-3 options with labels. When disambiguation is
-present, `values` is forced empty (mutual exclusivity invariant). The client
-shows the options; the user picks one in a follow-up (handled by the router
-agent's `RouteSelect`).
-
-#### 2.2.2 Structure Agent
-
-**File**: [structure_agent.py](../backend/concept_search/structure_agent.py)
-**Prompt**: [STRUCTURE_PROMPT.md](../backend/concept_search/STRUCTURE_PROMPT.md)
-**Model**: Haiku
-
-**Input**: query text + placeholder mentions (facet + text only, no values)
-**Output**: `QueryModel` with `exclude` flag set per mention
-
-Determines boolean logic: which mentions are inclusive (AND) vs. exclusive
-(NOT). Runs on placeholders so it doesn't need to wait for resolve.
-
-### 2.3 Merge (deterministic)
-
-**File**: [pipeline.py](../backend/concept_search/pipeline.py) (line 132)
-
-Zips together:
-
-- **Values** from resolve (step 2.2.1)
-- **Exclude flags** from structure (step 2.2.2)
-
-Produces a `QueryModel` with fully resolved mentions, each carrying both its
-canonical values and its boolean role.
-
-### 2.4 Multi-turn Merge (if previous_query exists)
-
-**File**: [pipeline.py](../backend/concept_search/pipeline.py) (line 168)
-
-When the user is refining a previous query (via route → add/replace), the new
-mentions are merged with previous ones:
-
-- Key: `(facet, original_text)` — new mentions overwrite previous on collision
-- Intent: preserved from previous unless the new extraction explicitly returns
-  a non-default intent
-
----
-
-## 3. Mode: Route — Multi-turn Follow-up
-
-**File**: [api.py](../backend/concept_search/api.py) (line 234)
-**Router**: [router_agent.py](../backend/concept_search/router_agent.py)
-**Prompt**: [ROUTER_PROMPT.md](../backend/concept_search/ROUTER_PROMPT.md)
-**Model**: Haiku
-
-**Input**: new query text + previous QueryModel
-**Output**: one of five route types (discriminated union)
-
-| Route          | User intent                 | What happens                                      |
-| -------------- | --------------------------- | ------------------------------------------------- |
-| `RouteAdd`     | "also filter by X"          | Run pipeline on new text with previous as context |
-| `RouteRemove`  | "drop the sex filter"       | Remove matching mentions by original_text         |
-| `RouteReplace` | "change cancer to diabetes" | Remove old mention, pipeline on new text          |
-| `RouteSelect`  | "the second one"            | Pick from disambiguation options                  |
-| `RouteReset`   | "start over with Y"         | Fresh pipeline, ignore previous state             |
-
-All routes except Reset preserve the previous intent.
+Explores **without** changing the committed query: `count`, group-by, or `list` a
+sample. Used to answer "what's in the catalog" questions.
 
 ---
 
 ## 4. Constraint Expansion
 
-**File**: [mention_constraints.py](../backend/concept_search/mention_constraints.py) (line 48)
+**File**: [mention_constraints.py](../backend/concept_search/mention_constraints.py)
 
-Converts `ResolvedMention` list into two lists of `(facet, values)` constraint
-tuples: **include** and **exclude**.
+`split_mentions()` turns resolved mentions into include/exclude constraint
+tuples. Each tuple is one AND constraint; values within it are OR-ed.
 
-**Consent tag expansion** (NCPI-specific):
-
-1. Infer scope from sibling focus mentions: `"general"` | `"health"` | `"disease"`
-2. If disease scope, resolve disease name from focus mentions
-3. Expand symbolic tags (e.g., `"no-npu"`, `"explicit:GRU"`) into actual
-   consent code lists via [consent_logic.py](../backend/concept_search/consent_logic.py)
+`consentCode` tags (`no-*`, `explicit:*`) expand here into actual consent codes,
+using a scope inferred from sibling focus mentions (general / health / disease).
+An expansion that yields nothing becomes a `__NO_MATCH__` sentinel, so the
+constraint stays active and returns zero rather than silently broadening.
 
 ---
 
 ## 5. Deterministic Lookup
 
-**File**: [api.py](../backend/concept_search/api.py) (line 412)
-**Store**: [store.py](../backend/concept_search/store.py)
-**Index**: [index.py](../backend/concept_search/index.py)
+**File**: [search_execution.py](../backend/concept_search/search_execution.py)
 
-Branches on intent:
+`execute_query_model(query_model, index)` — no LLM.
 
-| Intent     | Lookup                                                                                                                      |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `auto`     | Skip — return clarification message only                                                                                    |
-| `study`    | `store.query_studies(include, exclude)` — faceted study search                                                              |
-| `variable` | Filter studies by non-measurement constraints, then `store.query_variables(concepts, study_ids)` with ISA closure expansion |
-
-**Boolean semantics**:
-
-- Within a mention: values are **OR**-ed
-- Between include mentions: **AND**-ed
-- Exclude mentions: subtracted (**NOT**)
-
-**ISA closure**: querying for a parent concept (e.g., `ncpi:biomarkers`)
-matches all descendant variables. Implemented via `concept_ids_closure` array
-stored on each variable row.
+- **study** intent → `query_studies(include, exclude)` against DuckDB
+- **variable** intent → apply study-level constraints first, then
+  `query_variables()` over the concept **ISA closure**, so a parent concept
+  matches variables tagged with any descendant
+- **ambiguous** intent → no lookup at all; the caller asks the user what they meant
 
 ---
 
@@ -226,104 +159,62 @@ stored on each variable row.
 
 **File**: [response_summary.py](../backend/concept_search/response_summary.py)
 
-### 6.1 Query Structure
-
-`build_query_structure()` (line 55) converts the QueryModel into a
-`QueryStructure` — a list of `QueryClause` items, each with human-readable
-labels, the facet, and the boolean operator.
-
-### 6.2 Message
-
-Three paths:
-
-| Condition              | Function                   | Result                                                          |
-| ---------------------- | -------------------------- | --------------------------------------------------------------- |
-| Results found          | `build_message()`          | "Found 42 studies in focus Lung Neoplasms on BioData Catalyst." |
-| Zero results           | `diagnose_empty_results()` | "Found 0 studies. Removing the platform filter would find 15."  |
-| Disambiguation pending | (keep resolve message)     | "Which did you mean? 1) Current Age 2) Age at Diagnosis"        |
-
-`diagnose_empty_results()` does a **drop-one-at-a-time** analysis: re-queries
-without each constraint to tell the user which filter is too restrictive.
+- `query_structure` — one clause per mention, with concept IDs resolved to
+  **display labels** (`ncpi:cancer_…_treatment_response` → "Treatment Response
+  Assessment")
+- `message` — the agent's own reply, rendered as markdown by the frontend
+- `timing` — `pipeline_ms` (the agent turn) and `lookup_ms`
 
 ---
 
-## 7. HTTP Response
+## 7. Persist and Respond
 
-**File**: [api_models.py](../backend/concept_search/api_models.py)
+The committed `QueryModel`, `pending` choices, and the agent's message history
+are written back to the session store. Both histories are **bounded on write**
+(`_MAX_AGENT_HISTORY = 40`, `_MAX_SESSION_MESSAGES = 50`) so stored state cannot
+grow past DynamoDB's per-item size cap. A coherent truncation policy is tracked
+in #380.
 
-Returns `SearchResponse`:
-
-- `intent` — study / variable / auto
-- `message` — human-readable summary or disambiguation prompt
-- `query` — the full `QueryModel` (round-tripped to client for multi-turn)
-- `query_structure` — clauses with labels for the UI filter display
-- `studies` — matched study summaries (study intent)
-- `variables` — matched variable rows (variable intent)
-- `timing` — pipeline_ms, lookup_ms, total_ms
-- `total_studies`, `total_variables` — counts (variables may be capped at 500)
-
----
-
-## Caching
-
-| Layer    | Key                             | Scope                | Default TTL | Default Size |
-| -------- | ------------------------------- | -------------------- | ----------- | ------------ |
-| Pipeline | `query.strip().lower()`         | Full QueryModel      | 24h         | 10,000       |
-| Resolve  | `(facet, text.strip().lower())` | Single ResolveResult | 24h         | 10,000       |
-
-Pipeline cache is **bypassed** for multi-turn requests (session-specific state).
-Resolve cache is **always active** — even in multi-turn, individual mention
-resolutions are reused.
+A persist failure does **not** 500 — the response is already built.
 
 ---
 
 ## Data Flow Diagram
 
 ```
-POST /search(query, previous_query?)
+POST /search(query, sessionId)
   │
-  ├── requery ──────────────────────────────────────┐
-  │                                                  │
-  ├── route ─→ Router Agent ─→ RouteAdd/Remove/...  │
-  │              │                                   │
-  │              ├─ RouteSelect → patch mention      │
-  │              ├─ RouteRemove → drop mentions      │
-  │              ├─ RouteReplace → remove + pipeline  │
-  │              ├─ RouteReset → fresh pipeline       │
-  │              └─ RouteAdd → pipeline + merge       │
-  │                                                  │
-  ├── fresh ─→ Pipeline                              │
-  │    │                                             │
-  │    ├─ 1. Extract Agent                           │
-  │    │     query → RawMention[] + intent           │
-  │    │                                             │
-  │    ├─ 2. (parallel)                              │
-  │    │     ├─ Resolve Agent (per mention)           │
-  │    │     │    RawMention → ResolveResult          │
-  │    │     │    (values or disambiguation)          │
-  │    │     │                                       │
-  │    │     └─ Structure Agent                      │
-  │    │          mentions → exclude flags            │
-  │    │                                             │
-  │    ├─ 3. Merge                                   │
-  │    │     values + flags → QueryModel             │
-  │    │                                             │
-  │    └─ 4. Multi-turn merge (if previous)          │
-  │          new + previous → merged QueryModel      │
-  │                                                  │
-  ▼                                                  │
-QueryModel ◄────────────────────────────────────────┘
+  ├─ rate limit (per IP)
   │
-  ├─ Constraint expansion (consent tag → code lists)
+  ├─ load SessionState  (DynamoDB, keyed by sessionId)
+  │     query_state · pending · agent_message_history
   │
-  ├─ Deterministic lookup (DuckDB)
-  │    ├─ study intent  → query_studies()
-  │    └─ variable intent → query_variables() with ISA closure
+  ▼
+run_conversation()  ── one Sonnet turn, ≤10 requests, 60s timeout
   │
-  ├─ Response building
-  │    ├─ query_structure (clauses + labels)
-  │    ├─ message (summary or diagnosis)
-  │    └─ timing
+  │   state preamble  +  <user_input>…</user_input>   (fenced, untrusted)
   │
-  └─ SearchResponse
+  ├─ resolve_concepts()  → values | disambiguation → pending
+  ├─ query_catalog()     → explore, no commit
+  └─ update_query()      → COMMIT
+        │
+        ├─ unsatisfiable AND? → clear search, return counts + cleared_filters
+        ├─ empty result?      → attach relaxation map
+        └─ otherwise          → counts + active filters + 5-study sample
+  │
+  ▼
+QueryModel (committed)
+  │
+  ├─ split_mentions()        include/exclude tuples; consent tags expanded
+  │
+  ├─ execute_query_model()   DuckDB, no LLM
+  │    ├─ study    → query_studies()
+  │    ├─ variable → query_variables() over ISA closure
+  │    └─ ambiguous→ no lookup
+  │
+  ├─ build_query_structure() clauses + display labels
+  │
+  ├─ persist SessionState    (bounded on write)
+  │
+  └─ SearchResponse(message = the agent's reply)
 ```
