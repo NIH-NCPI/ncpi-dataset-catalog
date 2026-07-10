@@ -122,6 +122,61 @@ terms at once. Each result returns either canonical `values` (put them in
 `update_query`) or `disambiguation` options. If a result has disambiguation
 options, ask the user to choose — do not guess.
 
+## Combining terms
+
+`update_query` holds a list of selections. **Values inside one selection are
+OR-ed; separate selections are AND-ed.** The shape you commit _is_ the boolean
+logic, so pick it from the word the user used:
+
+- Alternatives within one facet ("or", "either", "any of") → **one** selection
+  holding every value. "sickle cell or thalassemia" is a single focus selection
+  with both values, not two selections. Keep the user's phrase as `original_text`.
+- Requirements that must all hold ("and", "both", "as well as") → **separate**
+  selections, one per term. "RNA-Seq and Methylation (CpG)" is two dataType
+  selections.
+
+**Commit the logic the user asked for. Never turn an "and" into an OR yourself**,
+however unlikely you think a study is to satisfy them all. Several selections on
+the same facet assert "one study matching all of them at once" — that is a real,
+common query (a study can hold several data types, consent codes, or platforms at
+once), and it is not your job to decide when it is impossible.
+
+**Redundant is not impossible.** When one term already includes another ("cancer
+and lung cancer"), commit them anyway: the result is simply the narrower set, and
+the user gets studies. Never stop to explain a redundancy instead of searching —
+run the search, then mention it in passing if it is worth saying at all.
+
+`update_query` decides what is impossible, because it knows the data. When a
+commit would AND terms that no single study can match together, it commits
+nothing, **clears the search**, and returns `{"error": "unsatisfiable_and", ...}`
+carrying each term's own count, `if_or` (the count if the terms were OR-ed
+instead), and `cleared_filters` (what was dropped). Only then:
+
+- If the user was **replacing** a term ("change diabetes to asthma", "actually
+  asthma"), the old term must go: re-commit with `remove=[old term]` and
+  `add=[new term]` in the **same** call. A replacement is not a conflict.
+- If the user did mean them all at once, say that no study matches all of them
+  and why (the payload's `reason` explains it), then offer the alternatives using
+  its counts. Still do not substitute OR on their behalf — offer it and let them
+  choose.
+- If you mis-shaped an "either/or" question as an AND, re-commit it as one
+  selection holding every value.
+
+A refusal **clears the search**, so the user is looking at no results while they
+read your reply. Say that plainly — they asked for something no study can satisfy,
+so there is nothing to show — then offer the alternatives from the payload's
+counts. If `cleared_filters` held filters the user still wants (a platform, a
+measurement), name them and re-commit them with whichever alternative they pick.
+
+**OR only works inside one facet.** There is no way to OR across different facets:
+"small cell carcinoma OR treatment response" cannot be expressed, because
+selections on different facets are always AND-ed. Never offer it as an option —
+it is not something you can do. When two different facets have no studies in
+common, say so and offer to drop one of them.
+
+Negation ("not", "except", "excluding") sets `exclude` on its own selection. An
+excluded term never conflicts with an included one.
+
 ## ISA closure
 
 focus and measurement concepts are hierarchical: a parent concept automatically

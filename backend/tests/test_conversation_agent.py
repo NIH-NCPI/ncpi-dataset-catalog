@@ -462,3 +462,381 @@ def test_conversation_prompt_has_untrusted_input_section() -> None:
     prompt = conversation_agent._load_prompt()
     assert "## Handling untrusted input" in prompt
     assert "<user_input>" in prompt
+
+
+# ---------------------------------------------------------------------------
+# unsatisfiable AND on a single-valued facet (#363)
+# ---------------------------------------------------------------------------
+
+
+def _isa_index(studies: list[dict]) -> _FakeIndex:
+    """Build a fake index whose studies carry pre-expanded facet values.
+
+    Mirrors the real store: each study is indexed under the whole ancestor
+    closure of its focus, so "Neoplasms" matches a lung-cancer study. Include
+    constraints are AND-ed, values within one constraint OR-ed.
+
+    Args:
+        studies: Study dicts with a ``facets`` map of {facet value: [values]}.
+
+    Returns:
+        A _FakeIndex resolving query_studies against those studies.
+    """
+
+    def hits(study: dict, constraint: tuple) -> bool:
+        facet, values = constraint
+        return bool(set(values) & set(study["facets"].get(facet.value, [])))
+
+    def responder(include, exclude=None):
+        return [
+            study
+            for study in studies
+            if all(hits(study, c) for c in include)
+            and not any(hits(study, c) for c in exclude or [])
+        ]
+
+    return _FakeIndex(responder=responder)
+
+
+def _focus(text: str, *values: str, exclude: bool = False) -> ResolvedMention:
+    return ResolvedMention(
+        exclude=exclude, facet=Facet.FOCUS, original_text=text, values=list(values)
+    )
+
+
+_DISJOINT = [
+    {"dbGapId": "phs1", "facets": {"focus": ["Diabetes Mellitus"]}},
+    {"dbGapId": "phs2", "facets": {"focus": ["Asthma"]}},
+]
+# One study, indexed under its focus AND that focus's ancestor.
+_SUBSUMING = [
+    {"dbGapId": "phs3", "facets": {"focus": ["Lung Neoplasms", "Neoplasms"]}},
+    {"dbGapId": "phs4", "facets": {"focus": ["Neoplasms"]}},
+]
+
+
+def test_update_query_refuses_disjoint_and_on_single_valued_facet() -> None:
+    """focus is single-valued: "diabetes and asthma" can never match."""
+    ctx = _ctx(_isa_index(_DISJOINT))
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(
+                facet=Facet.FOCUS, original_text="diabetes", values=["Diabetes Mellitus"]
+            ),
+            MentionInput(facet=Facet.FOCUS, original_text="asthma", values=["Asthma"]),
+        ],
+    )
+    assert out["error"] == "unsatisfiable_and"
+    assert out["facet"] == "focus"
+    # Each term alone is answerable, and the OR reading is the union.
+    assert out["terms"] == {"diabetes": 1, "asthma": 1}
+    assert out["if_or"] == 2
+    # A refusal must carry the way out, or a legitimate replace ("change X to Y")
+    # is stranded: the agent has no way to learn it should drop the old term.
+    assert "remove=" in out["hint"]
+    # Nothing was committed — the user keeps an empty query, not a zero-result one.
+    assert ctx.deps.query_state.mentions == []
+
+
+def test_update_query_allows_subsuming_and_on_single_valued_facet() -> None:
+    """ "cancer and lung cancer" is redundant, not impossible — ISA closure intersects."""
+    ctx = _ctx(_isa_index(_SUBSUMING))
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(facet=Facet.FOCUS, original_text="cancer", values=["Neoplasms"]),
+            MentionInput(
+                facet=Facet.FOCUS, original_text="lung cancer", values=["Lung Neoplasms"]
+            ),
+        ],
+    )
+    assert "error" not in out
+    assert out["total_studies"] == 1  # the narrower set
+    assert len(ctx.deps.query_state.mentions) == 2
+
+
+def test_update_query_allows_and_on_multi_valued_facet() -> None:
+    """dataType is multi-valued: "WGS and WXS" is a real intersection, never refused."""
+    studies = [{"dbGapId": "phs1", "facets": {"dataType": ["WGS", "WXS"]}}]
+    ctx = _ctx(_isa_index(studies))
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(facet=Facet.DATA_TYPE, original_text="WGS", values=["WGS"]),
+            MentionInput(facet=Facet.DATA_TYPE, original_text="WXS", values=["WXS"]),
+        ],
+    )
+    assert "error" not in out
+    assert out["total_studies"] == 1
+
+
+def test_update_query_empty_and_on_multi_valued_facet_is_not_refused() -> None:
+    """An empty AND on a multi-valued facet is a legitimate zero, not an impossibility."""
+    studies = [{"dbGapId": "phs1", "facets": {"dataType": ["WGS"]}}]
+    ctx = _ctx(_isa_index(studies))
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(facet=Facet.DATA_TYPE, original_text="WGS", values=["WGS"]),
+            MentionInput(facet=Facet.DATA_TYPE, original_text="ATAC-seq", values=["ATAC-seq"]),
+        ],
+    )
+    assert "error" not in out
+    assert out["total_studies"] == 0
+
+
+def test_update_query_exclusion_is_exempt_from_the_check() -> None:
+    """ "diabetes but not asthma" is one include + one exclude — satisfiable."""
+    ctx = _ctx(_isa_index(_DISJOINT))
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(
+                facet=Facet.FOCUS, original_text="diabetes", values=["Diabetes Mellitus"]
+            ),
+            MentionInput(
+                exclude=True, facet=Facet.FOCUS, original_text="asthma", values=["Asthma"]
+            ),
+        ],
+    )
+    assert "error" not in out
+    assert out["total_studies"] == 1
+
+
+def test_refused_commit_clears_the_search_and_reports_what_it_dropped() -> None:
+    """A refusal clears the query so the user sees no results, not stale rows.
+
+    Leaving the previous filters active meant results stayed on screen that
+    appeared to answer the question just declared unanswerable — and the chips
+    cannot show whether terms are AND-ed or OR-ed, so nothing on screen
+    contradicted them. The reply must be the only thing the user sees.
+    """
+    state = QueryModel(mentions=[_focus("diabetes", "Diabetes Mellitus")])
+    ctx = _ctx(_isa_index(_DISJOINT), state)
+    ctx.deps.pending = [PendingChoice(facet="focus", options=[], text="glucose")]
+
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(facet=Facet.FOCUS, original_text="asthma", values=["Asthma"]),
+        ],
+    )
+    assert out["error"] == "unsatisfiable_and"
+    # Counts are computed BEFORE the clear, against the query the user asked for.
+    assert out["terms"] == {"diabetes": 1, "asthma": 1}
+    # The impossible terms are not committed, and the search is emptied.
+    assert ctx.deps.query_state.mentions == []
+    assert ctx.deps.pending == []
+    # What was dropped is reported, so the agent can offer to restore it.
+    assert out["cleared_filters"] == [
+        {"exclude": False, "facet": "focus", "values": ["Diabetes Mellitus"]}
+    ]
+
+
+def test_refused_reset_clears_state_and_commits_nothing() -> None:
+    """reset=True plus a refused commit ends with an empty query, not the impossible one."""
+    state = QueryModel(mentions=[_focus("sickle cell", "Anemia, Sickle Cell")])
+    ctx = _ctx(_isa_index(_DISJOINT), state)
+    out = update_query(
+        ctx,
+        reset=True,
+        add=[
+            MentionInput(
+                facet=Facet.FOCUS, original_text="diabetes", values=["Diabetes Mellitus"]
+            ),
+            MentionInput(facet=Facet.FOCUS, original_text="asthma", values=["Asthma"]),
+        ],
+    )
+    assert out["error"] == "unsatisfiable_and"
+    assert ctx.deps.query_state.mentions == []
+    assert out["cleared_filters"] == [
+        {"exclude": False, "facet": "focus", "values": ["Anemia, Sickle Cell"]}
+    ]
+
+
+def test_single_mention_on_single_valued_facet_is_never_refused() -> None:
+    """One focus mention with two OR-ed values is the correct shape — always allowed."""
+    ctx = _ctx(_isa_index(_DISJOINT))
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(
+                facet=Facet.FOCUS,
+                original_text="diabetes or asthma",
+                values=["Diabetes Mellitus", "Asthma"],
+            ),
+        ],
+    )
+    assert "error" not in out
+    assert out["total_studies"] == 2
+
+
+def test_conversation_prompt_has_combining_terms_section() -> None:
+    """The system prompt must retain the OR/AND shaping guidance (#363).
+
+    Without it the agent coin-flips between one multi-value mention (OR, correct)
+    and two mentions (AND, zero results) for "X or Y" queries.
+    """
+    prompt = conversation_agent._load_prompt()
+    assert "## Combining terms" in prompt
+    assert "unsatisfiable_and" in prompt
+
+
+def test_refusal_counts_are_nonzero_for_ambiguous_intent() -> None:
+    """An "ambiguous" intent must not zero out the counts shown to the user.
+
+    execute_query_model short-circuits to an empty result for that intent, so
+    counting with it verbatim reported every term as 0 studies — and the agent is
+    told to quote those numbers back. The refusal itself is intent-independent.
+    """
+    ctx = _ctx(_isa_index(_DISJOINT), QueryModel(intent="ambiguous"))
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(
+                facet=Facet.FOCUS, original_text="diabetes", values=["Diabetes Mellitus"]
+            ),
+            MentionInput(facet=Facet.FOCUS, original_text="asthma", values=["Asthma"]),
+        ],
+    )
+    assert out["error"] == "unsatisfiable_and"
+    assert out["terms"] == {"diabetes": 1, "asthma": 1}
+    assert out["if_or"] == 2
+
+
+def test_three_terms_unsatisfiable_without_any_pair_being_disjoint() -> None:
+    """Refusal triggers on an empty intersection, not on pairwise disjointness.
+
+    ``cancer`` overlaps ``lung cancer`` (a lung-cancer study is indexed under
+    both), and overlaps ``breast cancer`` likewise — no pair is disjoint. But no
+    study holds all three, so the commit is still impossible. The reason string
+    must not claim the terms are disjoint.
+    """
+    studies = [
+        {"dbGapId": "phs1", "facets": {"focus": ["Lung Neoplasms", "Neoplasms"]}},
+        {"dbGapId": "phs2", "facets": {"focus": ["Breast Neoplasms", "Neoplasms"]}},
+    ]
+    ctx = _ctx(_isa_index(studies))
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(facet=Facet.FOCUS, original_text="cancer", values=["Neoplasms"]),
+            MentionInput(
+                facet=Facet.FOCUS, original_text="lung cancer", values=["Lung Neoplasms"]
+            ),
+            MentionInput(
+                facet=Facet.FOCUS, original_text="breast cancer", values=["Breast Neoplasms"]
+            ),
+        ],
+    )
+    assert out["error"] == "unsatisfiable_and"
+    assert "disjoint" not in out["reason"]
+    # Each term alone is answerable; the counts prove no pair is disjoint either.
+    assert out["terms"] == {"cancer": 2, "lung cancer": 1, "breast cancer": 1}
+    assert out["if_or"] == 2
+
+
+def test_refusal_reports_the_filters_it_cleared() -> None:
+    """A refusal must tell the agent what it dropped.
+
+    The search is cleared so the user sees no results rather than the previous
+    search's rows. ``cleared_filters`` lets the agent name what went away and
+    offer to restore it alongside whichever alternative the user picks.
+    """
+    state = QueryModel(mentions=[_focus("diabetes or asthma", "Diabetes Mellitus", "Asthma")])
+    ctx = _ctx(_isa_index(_DISJOINT), state)
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(
+                facet=Facet.FOCUS, original_text="diabetes", values=["Diabetes Mellitus"]
+            ),
+            MentionInput(facet=Facet.FOCUS, original_text="asthma", values=["Asthma"]),
+        ],
+    )
+    assert out["error"] == "unsatisfiable_and"
+    assert out["cleared_filters"] == [
+        {"exclude": False, "facet": "focus", "values": ["Diabetes Mellitus", "Asthma"]}
+    ]
+    assert "cleared_filters" in out["hint"]
+    # The search really is emptied — the user sees no results while they read.
+    assert ctx.deps.query_state.mentions == []
+
+
+def test_conversation_prompt_forbids_cross_facet_or() -> None:
+    """The agent must never offer to OR across facets — the model cannot express it.
+
+    Mentions on different facets are always AND-ed (``QueryModel``), so an offer
+    like "search with OR: studies matching either criterion" promises a query the
+    system cannot run. Observed once in manual UI testing.
+
+    This deterministic check is the only guard. An LLM eval scenario was written
+    and deleted: the behaviour did not reproduce in 6 runs against the *unguarded*
+    prompt, so the scenario passed with and without the rule and would have been a
+    green check that proved nothing. Do not re-add one without first showing it
+    fails when this paragraph is removed.
+    """
+    prompt = conversation_agent._load_prompt()
+    assert "OR only works inside one facet" in prompt
+    assert "Never offer it as an option" in prompt
+
+
+def test_relaxation_map_is_not_zeroed_by_ambiguous_intent() -> None:
+    """The drop-one counts must survive an "ambiguous" intent.
+
+    ``execute_query_model`` short-circuits to an empty result for that intent, so
+    counting with it verbatim reported every filter as "dropping this finds 0
+    studies" — advice the agent relays to the user. Reachable in practice:
+    ``_summarize`` builds the relaxation map whenever the result is empty, and an
+    ambiguous query is *always* empty.
+    """
+    studies = [
+        {"dbGapId": "phs1", "facets": {"focus": ["Diabetes Mellitus"], "platform": ["BDC"]}},
+        {"dbGapId": "phs2", "facets": {"focus": ["Asthma"], "platform": ["BDC"]}},
+    ]
+    index = _isa_index(studies)
+    mentions = [
+        _focus("diabetes", "Diabetes Mellitus"),
+        ResolvedMention(facet=Facet.PLATFORM, original_text="KFDRC", values=["KFDRC"]),
+    ]
+    ambiguous = conversation_agent._relaxation_map(
+        QueryModel(intent="ambiguous", mentions=mentions), index
+    )
+    study = conversation_agent._relaxation_map(
+        QueryModel(intent="study", mentions=mentions), index
+    )
+    # Dropping the KFDRC filter leaves the diabetes study; dropping diabetes
+    # leaves nothing (no study is on KFDRC). Identical either way.
+    assert ambiguous == study == {"diabetes": 0, "KFDRC": 1}
+
+
+def test_refusal_hint_is_n_term_and_references_keys_not_positions() -> None:
+    """The hint is model-facing text: it must describe the real, N-term condition.
+
+    Two failure modes it guards against, both of which shipped once:
+    - two-term phrasing ("either term", "both at once") when 3+ mentions can
+      conflict without any pair being disjoint;
+    - positional references ("the counts above") to a JSON object, where key
+      order carries no meaning.
+    """
+    ctx = _ctx(_isa_index(_DISJOINT))
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(
+                facet=Facet.FOCUS, original_text="diabetes", values=["Diabetes Mellitus"]
+            ),
+            MentionInput(facet=Facet.FOCUS, original_text="asthma", values=["Asthma"]),
+        ],
+    )
+    hint = out["hint"]
+    # Names every key it tells the agent to read.
+    for key in ("if_or", "terms", "cleared_filters", "remove="):
+        assert key in hint, f"hint should name {key}"
+    # No positional references into a JSON object.
+    for positional in ("counts above", "alternatives below", "listed above", "listed below"):
+        assert positional not in hint.lower(), f"hint refers to position: {positional!r}"
+    # No two-term framing.
+    for two_term in ("either term", "both at once", "both values"):
+        assert two_term not in hint.lower(), f"hint assumes exactly two terms: {two_term!r}"

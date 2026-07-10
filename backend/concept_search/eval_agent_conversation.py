@@ -30,6 +30,7 @@ from dotenv import load_dotenv
 from .conversation_agent import AgentDeps, run_conversation
 from .index import get_index
 from .models import Facet, QueryModel
+from .search_execution import execute_query_model
 
 # Setup turns that establish prior conversational state (mirroring the router
 # eval's previous_query fixtures).
@@ -54,6 +55,17 @@ def _t(q: QueryModel) -> str:
     return " ".join((m.original_text + " " + " ".join(m.values)).lower() for m in q.mentions)
 
 
+def _v(q: QueryModel) -> str:
+    """Lowercased resolved values only — the actual filter, ignoring stale labels.
+
+    ``update_query(add=...)`` overwrites a selection with the same facet+text, so
+    a replaced term can keep its old ``original_text`` while carrying the new
+    value (focus text="diabetes", values=["Asthma"]). Assertions about what the
+    query *filters on* must read values; only ``_t`` sees the user's wording.
+    """
+    return " ".join(v.lower() for m in q.mentions for v in m.values)
+
+
 def _has(q: QueryModel, facet: Facet) -> bool:
     """True if any mention is on the given facet."""
     return any(m.facet == facet for m in q.mentions)
@@ -72,6 +84,16 @@ def _old_cleared(q: QueryModel) -> bool:
     """True if the setup's prior terms were cleared (used for reset cases)."""
     t = _t(q)
     return "diabetes" not in t and "pressure" not in t and "glucose" not in t
+
+
+def _on(q: QueryModel, facet: Facet) -> list:
+    """Committed, non-excluded mentions on one facet."""
+    return [m for m in q.mentions if m.facet == facet and m.values and not m.exclude]
+
+
+def _studies(q: QueryModel) -> int:
+    """Number of studies the committed query returns."""
+    return len(execute_query_model(q, get_index()).studies)
 
 
 SCENARIOS: list[Scenario] = [
@@ -103,9 +125,16 @@ SCENARIOS: list[Scenario] = [
         lambda q, _r: _has(q, Facet.SEX),
     ),
     Scenario(
+        # "and asthma" against a focus that already holds diabetes. This check
+        # used to assert both terms appear in the query — which it satisfied by
+        # committing two AND-ed focus mentions, a guaranteed zero-result query.
+        # It was rubber-stamping the #363 bug. What matters is that the
+        # impossible shape is never committed and asthma is not silently
+        # dropped: the agent may widen to one OR-ed selection, or explain that
+        # no study has both. Either is fine. Two AND-ed focus mentions is not.
         "add-and-same-facet",
         [SETUP_RESOLVED, "and asthma"],
-        lambda q, _r: "asthma" in _t(q) and "diabetes" in _t(q),
+        lambda q, r: len(_on(q, Facet.FOCUS)) < 2 and "asthma" in " ".join([_t(q), *r]).lower(),
     ),
     Scenario(
         "add-or-same-facet",
@@ -128,9 +157,12 @@ SCENARIOS: list[Scenario] = [
         lambda q, _r: "diabetes" not in _t(q) and _has(q, Facet.MEASUREMENT),
     ),
     Scenario(
+        # Assert on values, not original_text: the agent may overwrite the focus
+        # selection in place (text stays "diabetes", values become ["Asthma"]),
+        # which is a correct replace that a text check would fail ~1 run in 5.
         "replace-via-chat",
         [SETUP_RESOLVED, "change diabetes to asthma"],
-        lambda q, _r: "diabetes" not in _t(q) and "asthma" in _t(q),
+        lambda q, _r: "diabetes" not in _v(q) and "asthma" in _v(q),
     ),
     Scenario(
         "reset-no-disambig",
@@ -203,6 +235,56 @@ SCENARIOS: list[Scenario] = [
         "disambig-replace",
         [SETUP_PENDING, "actually I want BMI studies"],
         lambda q, _r: "bmi" in _t(q) or "body mass" in _t(q),
+    ),
+    # --- Intra-facet OR / AND (#363) ---
+    # Baseline before the fix: or-single-mention passed 1 run in 3 (the other two
+    # committed two focus mentions, AND-ed to zero results). The others are
+    # regression guards — a naive "merge same-facet mentions" fix breaks them by
+    # widening an intersection into a union (WGS ∧ WXS: 118 studies -> 1064).
+    # These strings intentionally differ from the prompt's own examples.
+    Scenario(
+        # "or" within one facet must become ONE mention holding both values,
+        # because values within a mention are OR-ed and mentions are AND-ed.
+        "or-single-mention",
+        ["diabetes or asthma studies"],
+        lambda q, _r: len(_on(q, Facet.FOCUS)) == 1 and _studies(q) == 104,
+    ),
+    Scenario(
+        # dataType is multi-valued per study: "and" is a real intersection.
+        "and-multi-valued-facet",
+        ["studies with WGS and WXS"],
+        lambda q, _r: len(_on(q, Facet.DATA_TYPE)) == 2 and _studies(q) == 118,
+    ),
+    Scenario(
+        # platform is multi-valued too: 6 studies span two platforms, so an
+        # intersection is a real answer. "both" makes the AND unambiguous.
+        "and-platform-intersects",
+        ["studies that are on both AnVIL and BDC"],
+        lambda q, _r: len(_on(q, Facet.PLATFORM)) == 2 and _studies(q) == 4,
+    ),
+    Scenario(
+        # The same facet, OR-phrased, must widen instead — one merged mention.
+        # Bare "studies on AnVIL and BDC" is deliberately NOT asserted either
+        # way: in ordinary English it reads as the union, and the agent commits
+        # the union. We test the two unambiguous readings, not our preference
+        # about the ambiguous one.
+        "or-platform-unions",
+        ["studies on either AnVIL or BDC"],
+        lambda q, _r: len(_on(q, Facet.PLATFORM)) == 1 and _studies(q) == 288,
+    ),
+    Scenario(
+        # focus is single-valued, and the terms are disjoint: no study can have
+        # both. The agent must commit nothing and explain — never silently OR.
+        "and-impossible-explains",
+        ["diabetes and asthma studies"],
+        lambda q, r: not _on(q, Facet.FOCUS) and "asthma" in " ".join(r).lower(),
+    ),
+    Scenario(
+        # focus is single-valued, but ISA closure makes a subsuming pair
+        # satisfiable — redundant, not impossible. Must NOT be refused.
+        "and-subsumption-allowed",
+        ["studies about both cancer and lung cancer"],
+        lambda q, _r: _studies(q) == 78,
     ),
     # --- Prompt-injection canaries (#364; defense-in-depth) ---
     # IMPORTANT: both scenarios below also PASS on bare Sonnet *without* the
@@ -279,12 +361,18 @@ async def _run_scenario_repeated(scenario: Scenario) -> tuple[int, str]:
     """
     passes = 0
     detail = ""
+    errors: list[str] = []
     for _ in range(REPEATS):
         try:
             ok, detail = await _run_scenario(scenario)
             passes += int(ok)
         except Exception as exc:  # noqa: BLE001 — eval harness: report, don't crash
-            detail = f"error: {type(exc).__name__}: {exc}"
+            errors.append(f"{type(exc).__name__}: {exc}")
+    # A later successful run used to overwrite the failing run's detail, hiding
+    # the exception entirely — a scenario could fail for a reason the report
+    # never showed. Errors now always survive into the printed detail.
+    if errors:
+        detail = f"{detail} | {len(errors)} errored: {'; '.join(errors[:2])}".strip(" |")
     return passes, detail
 
 

@@ -38,6 +38,22 @@ class Facet(StrEnum):
     STUDY_DESIGN = "studyDesign"
 
 
+# Facets where a study carries exactly one value. ``focus`` is a scalar string on
+# the study record; ``studyDesign`` is a list that never exceeds one element. Both
+# are pinned by test_facet_cardinality.py, which fails loudly if the catalog ever
+# gains a multi-valued study — the refusal in ``update_query`` would otherwise
+# start rejecting queries that have become answerable.
+#
+# This does NOT mean two included mentions on these facets can never both hold: a
+# study is indexed under its value's whole ancestor closure, so "cancer" and "lung
+# cancer" both match a lung-cancer study. ``_unsatisfiable_and`` refuses only when
+# the intersection across the mentions is empty — see its docstring.
+#
+# Deliberately excludes ``platform``: 6 studies span two platforms (AnVIL+BDC,
+# CRDC+KFDRC), so "on AnVIL and BDC" is a real query returning real studies.
+SINGLE_VALUED_FACETS = frozenset({Facet.FOCUS, Facet.STUDY_DESIGN})
+
+
 class ConceptMatch(BaseModel):
     """A concept/value found in the index."""
 

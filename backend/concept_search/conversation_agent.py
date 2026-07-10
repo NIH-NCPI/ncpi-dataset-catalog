@@ -31,6 +31,7 @@ from pydantic_core import to_jsonable_python
 from .index import ConceptIndex
 from .mention_constraints import split_mentions
 from .models import (
+    SINGLE_VALUED_FACETS,
     Facet,
     Intent,
     PendingChoice,
@@ -133,6 +134,110 @@ def _catalog_facet_counts(index: ConceptIndex, facet_by: list[str]) -> dict:
     return out
 
 
+def _count(mentions: list[ResolvedMention], intent: Intent, index: ConceptIndex) -> int:
+    """Count the results a set of mentions would return.
+
+    ``execute_query_model`` does no lookup at all for the "ambiguous" intent — it
+    short-circuits to an empty result, because the caller is expected to ask the
+    user what they meant rather than run a query. Counting with it verbatim would
+    report every term as 0, and these counts are quoted back to the user: the
+    relaxation map would advise dropping a filter that "would find 0 studies",
+    and a refusal would claim each of its terms matches nothing. Count an
+    ambiguous query as a study query; only the numbers depend on intent.
+
+    Args:
+        mentions: The mentions to execute.
+        intent: Query intent, selecting the study or variable count.
+        index: ConceptIndex for the lookup.
+
+    Returns:
+        Number of matching studies, or variables when the intent is "variable".
+    """
+    counted: Intent = "study" if intent == "ambiguous" else intent
+    execution = execute_query_model(QueryModel(intent=counted, mentions=mentions), index)
+    return execution.total_variable_count if counted == "variable" else len(execution.studies)
+
+
+def _unsatisfiable_and(
+    mentions: list[ResolvedMention],
+    intent: Intent,
+    index: ConceptIndex,
+) -> dict | None:
+    """Detect an AND over one single-valued facet that no study can satisfy.
+
+    A study holds exactly one value of a ``SINGLE_VALUED_FACETS`` facet, but it
+    is indexed under that value's whole ancestor closure. So included mentions on
+    such a facet are satisfiable when one subsumes the others ("cancer and lung
+    cancer" → the lung cancer studies) and impossible when their intersection is
+    empty ("diabetes and asthma"). Note this is emptiness of the intersection
+    across *all* of them, not pairwise disjointness: cancer ∧ lung cancer is 78
+    studies, yet adding breast cancer takes it to 0. Rather than reason over the
+    ISA table, ask the index: taken alone, do these mentions match any study?
+
+    Only the conflicting mentions take part in that test — other facets are
+    ignored, so an unrelated empty result (a platform filter that excludes
+    everything) is never mistaken for an impossible one. The reported counts,
+    by contrast, keep the rest of the query applied, so they match what the
+    user would actually see.
+
+    Args:
+        mentions: The mentions the caller is about to commit.
+        intent: Query intent, selecting study or variable counts.
+        index: ConceptIndex for the lookups.
+
+    Returns:
+        A refusal payload describing the conflict, or None when the commit is
+        satisfiable.
+    """
+    for facet in sorted(SINGLE_VALUED_FACETS):
+
+        def conflicts(mention: ResolvedMention, facet: Facet = facet) -> bool:
+            return mention.facet == facet and not mention.exclude and bool(mention.values)
+
+        conflicting = [m for m in mentions if conflicts(m)]
+        if len(conflicting) < 2:
+            continue
+        if index.query_studies([(facet, m.values) for m in conflicting]):
+            continue  # one term subsumes the other — redundant, not impossible
+        others = [m for m in mentions if not conflicts(m)]
+        merged = ResolvedMention(
+            facet=facet,
+            original_text=" or ".join(m.original_text for m in conflicting),
+            values=list(dict.fromkeys(v for m in conflicting for v in m.values)),
+        )
+        return {
+            "error": "unsatisfiable_and",
+            "facet": facet.value,
+            # A refusal without a way forward strands a legitimate turn: the user
+            # may be *replacing* a term ("change diabetes to asthma"), in which
+            # case the old one has to go in the same call. Spell out every exit.
+            #
+            # Refer to payload keys by name, never to position ("the counts
+            # above"): this is a JSON object handed to the model, not a document,
+            # and key order carries no meaning. Phrase for N terms, not two —
+            # three or more mentions can conflict without any pair being disjoint.
+            "hint": (
+                "Replacing a term? Pass remove=[old term] together with add=[new term] "
+                "in one call. Did the user mean ANY of these terms? Commit ONE selection "
+                "holding every value (`if_or` is that count). Did they mean ALL of them "
+                "at once? Impossible — tell the user, quoting the per-term counts in "
+                "`terms`. Nothing was committed and the search has been CLEARED, so the "
+                "user now sees no results: say so. Any filters in `cleared_filters` they "
+                "still want must be re-committed."
+            ),
+            "if_or": _count([*others, merged], intent, index),
+            # Not "these terms are disjoint": the test is whether the intersection
+            # across ALL conflicting mentions is empty, which three terms can be
+            # without any pair being disjoint (cancer ∧ lung cancer = 78 studies,
+            # yet cancer ∧ lung cancer ∧ breast cancer = 0). Say what is true.
+            "reason": (
+                f"a study has exactly one {facet.value}; no study matches all of these at once"
+            ),
+            "terms": {m.original_text: _count([*others, m], intent, index) for m in conflicting},
+        }
+    return None
+
+
 def _relaxation_map(query_state: QueryModel, index: ConceptIndex) -> dict[str, int]:
     """For each active (non-excluded) filter, count results if it alone is dropped.
 
@@ -156,14 +261,7 @@ def _relaxation_map(query_state: QueryModel, index: ConceptIndex) -> dict[str, i
     out: dict[str, int] = {}
     for i, mention in enumerate(includes):
         remaining = includes[:i] + includes[i + 1 :] + excludes
-        execution = execute_query_model(
-            QueryModel(intent=query_state.intent, mentions=remaining), index
-        )
-        out[mention.original_text] = (
-            execution.total_variable_count
-            if query_state.intent == "variable"
-            else len(execution.studies)
-        )
+        out[mention.original_text] = _count(remaining, query_state.intent, index)
     return out
 
 
@@ -278,13 +376,21 @@ def update_query(
         sample_studies. When the result is empty, also includes a ``relaxation``
         map ({filter text: results if dropped}) so you can advise which filter to
         relax without extra exploration.
+
+        Instead of a summary, returns ``{"error": "unsatisfiable_and", ...}`` when
+        the commit would AND terms that no single study can match together, on a
+        facet each study holds only one of (e.g. focus: "diabetes and asthma").
+        Nothing is committed and the search is **cleared**, so the user sees no
+        results instead of the previous search's rows. The payload carries each
+        term's own count, ``if_or`` (the count if the terms were OR-ed instead),
+        and ``cleared_filters`` (what was dropped). If the user asked for them all
+        at once, tell them no study matches all of them, say the search is now
+        empty, and offer those alternatives; if they meant any one of them,
+        re-commit a single mention holding every value.
     """
     deps = ctx.deps
     query_state = deps.query_state
-    if reset:
-        query_state.mentions = []
-        deps.pending = []
-    mentions = list(query_state.mentions)
+    mentions = [] if reset else list(query_state.mentions)
 
     if remove:
         drop = {r.lower() for r in remove}
@@ -306,6 +412,24 @@ def update_query(
             )
         )
 
+    # An impossible query commits nothing AND clears the search, so the user sees
+    # no results rather than a flash of the previous search's rows. Leaving the old
+    # filters active was worse: results appear to answer the question that was just
+    # declared unanswerable, and the chips cannot show whether the terms are AND-ed
+    # or OR-ed, so nothing on screen contradicts them. The explanation has to be
+    # the only thing on the page.
+    conflict = _unsatisfiable_and(mentions, intent or query_state.intent, deps.index)
+    if conflict:
+        conflict["cleared_filters"] = [
+            {"exclude": m.exclude, "facet": m.facet.value, "values": m.values}
+            for m in query_state.mentions
+        ]
+        query_state.mentions = []
+        deps.pending = []
+        return conflict
+
+    if reset:
+        deps.pending = []
     query_state.mentions = mentions
     if intent is not None:
         query_state.intent = intent
