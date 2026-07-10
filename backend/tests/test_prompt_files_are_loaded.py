@@ -9,10 +9,18 @@ read for three PRs.
 
 This test fails when a prompt is orphaned (delete it) or when a new prompt is
 added without being wired up (load it).
+
+Deliberately a substring check over the package's source rather than an AST walk
+of ``open()`` calls: it catches the wholesale orphan it exists for, and it stays
+readable. Comment lines are stripped first, so a filename that survives only in a
+comment does not keep an orphan alive — ``CONVERSATION_PROMPT.md`` is mentioned in
+one such comment today. A mention inside a docstring would still pass; an AST walk
+is not worth the machinery for that.
 """
 
 from __future__ import annotations
 
+import functools
 from pathlib import Path
 
 import pytest
@@ -25,9 +33,23 @@ def _prompt_files() -> list[Path]:
     return sorted(_PACKAGE.glob("*.md"))
 
 
+@functools.cache
 def _python_sources() -> str:
-    """The concatenated text of every module in the package."""
-    return "\n".join(p.read_text() for p in _PACKAGE.glob("*.py"))
+    """Every module in the package, comment lines removed.
+
+    Read once and cached: the parametrized test below calls this per prompt file.
+    The encoding is explicit because the sources carry UTF-8 (em dashes, arrows)
+    and the platform default is not guaranteed to be UTF-8.
+
+    Dropping ``#`` lines means a filename left behind in a comment no longer
+    counts as "this prompt is loaded".
+    """
+    lines: list[str] = []
+    for path in _PACKAGE.glob("*.py"):
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.lstrip().startswith("#"):
+                lines.append(line)
+    return "\n".join(lines)
 
 
 def test_there_are_prompt_files_to_check() -> None:

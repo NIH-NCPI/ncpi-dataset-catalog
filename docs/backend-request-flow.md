@@ -5,7 +5,8 @@ How a `/search` request is processed, step by step.
 The backend runs a **single conversation-aware agent** (Sonnet) that builds a
 `QueryModel` incrementally by calling tools. It replaced the
 Extract → Resolve → Structure → Router state machine in #412. Conversation state
-lives on the **server**, keyed by `sessionId`; the client sends only text.
+lives on the **server**: the client sends its message text plus a `sessionId`,
+and never round-trips a `QueryModel` (it did until #411).
 
 ---
 
@@ -38,8 +39,10 @@ Two other endpoints:
 **File**: [session_store.py](../backend/concept_search/session_store.py)
 
 `get_session_store()` returns an `InMemorySessionStore` or a
-`DynamoDBSessionStore`, selected by `SESSION_STORE_BACKEND` (dev and prod both
-use DynamoDB, with a 24h TTL).
+`DynamoDBSessionStore`, selected by `SESSION_STORE_BACKEND` — **`"memory"` by
+default**, so a local run needs no AWS. Deployed environments set `"dynamodb"`
+(and `SESSION_TABLE_NAME`) from outside this repo. Both honour
+`SESSION_TTL_SECONDS`, defaulting to 86400s (24h).
 
 A `SessionState` holds:
 
@@ -118,7 +121,8 @@ Two things the tool decides, not the agent:
 
 Satisfiability is decided by asking the index, not by reasoning over the ISA
 table: a study is indexed under its focus value's whole ancestor closure, so
-`cancer ∧ lung cancer` intersects (78 studies) while `diabetes ∧ asthma` cannot.
+`cancer ∧ lung cancer` still intersects (the lung-cancer studies — redundant, not
+impossible) while `diabetes ∧ asthma` cannot.
 
 ### 3.3 `query_catalog(operation, facet_by, drop_facets)`
 
@@ -186,7 +190,7 @@ POST /search(query, sessionId)
   │
   ├─ rate limit (per IP)
   │
-  ├─ load SessionState  (DynamoDB, keyed by sessionId)
+  ├─ load SessionState  (session store, keyed by sessionId)
   │     query_state · pending · agent_message_history
   │
   ▼
