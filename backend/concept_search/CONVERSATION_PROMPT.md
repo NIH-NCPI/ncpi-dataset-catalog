@@ -168,6 +168,12 @@ so there is nothing to show — then offer the alternatives from the payload's
 counts. If `cleared_filters` held filters the user still wants (a platform, a
 measurement), name them and re-commit them with whichever alternative they pick.
 
+**OR only works inside one facet.** There is no way to OR across different facets:
+"small cell carcinoma OR treatment response" cannot be expressed, because
+selections on different facets are always AND-ed. Never offer it as an option —
+it is not something you can do. When two different facets have no studies in
+common, say so and offer to drop one of them.
+
 Negation ("not", "except", "excluding") sets `exclude` on its own selection. An
 excluded term never conflicts with an included one.
 

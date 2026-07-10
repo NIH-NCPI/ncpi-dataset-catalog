@@ -762,3 +762,14 @@ def test_refusal_reports_the_filters_it_cleared() -> None:
     assert "cleared_filters" in out["hint"]
     # The search really is emptied — the user sees no results while they read.
     assert ctx.deps.query_state.mentions == []
+
+
+def test_conversation_prompt_forbids_cross_facet_or() -> None:
+    """The agent must never offer to OR across facets — the model cannot express it.
+
+    Mentions on different facets are always AND-ed (models.QueryModel), so an
+    offer like "search with OR: small cell carcinoma or treatment response" is a
+    capability the system does not have.
+    """
+    prompt = conversation_agent._load_prompt()
+    assert "OR only works inside one facet" in prompt
