@@ -767,9 +767,16 @@ def test_refusal_reports_the_filters_it_cleared() -> None:
 def test_conversation_prompt_forbids_cross_facet_or() -> None:
     """The agent must never offer to OR across facets — the model cannot express it.
 
-    Mentions on different facets are always AND-ed (models.QueryModel), so an
-    offer like "search with OR: small cell carcinoma or treatment response" is a
-    capability the system does not have.
+    Mentions on different facets are always AND-ed (``QueryModel``), so an offer
+    like "search with OR: studies matching either criterion" promises a query the
+    system cannot run. Observed once in manual UI testing.
+
+    This deterministic check is the only guard. An LLM eval scenario was written
+    and deleted: the behaviour did not reproduce in 6 runs against the *unguarded*
+    prompt, so the scenario passed with and without the rule and would have been a
+    green check that proved nothing. Do not re-add one without first showing it
+    fails when this paragraph is removed.
     """
     prompt = conversation_agent._load_prompt()
     assert "OR only works inside one facet" in prompt
+    assert "Never offer it as an option" in prompt
