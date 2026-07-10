@@ -809,3 +809,34 @@ def test_relaxation_map_is_not_zeroed_by_ambiguous_intent() -> None:
     # Dropping the KFDRC filter leaves the diabetes study; dropping diabetes
     # leaves nothing (no study is on KFDRC). Identical either way.
     assert ambiguous == study == {"diabetes": 0, "KFDRC": 1}
+
+
+def test_refusal_hint_is_n_term_and_references_keys_not_positions() -> None:
+    """The hint is model-facing text: it must describe the real, N-term condition.
+
+    Two failure modes it guards against, both of which shipped once:
+    - two-term phrasing ("either term", "both at once") when 3+ mentions can
+      conflict without any pair being disjoint;
+    - positional references ("the counts above") to a JSON object, where key
+      order carries no meaning.
+    """
+    ctx = _ctx(_isa_index(_DISJOINT))
+    out = update_query(
+        ctx,
+        add=[
+            MentionInput(
+                facet=Facet.FOCUS, original_text="diabetes", values=["Diabetes Mellitus"]
+            ),
+            MentionInput(facet=Facet.FOCUS, original_text="asthma", values=["Asthma"]),
+        ],
+    )
+    hint = out["hint"]
+    # Names every key it tells the agent to read.
+    for key in ("if_or", "terms", "cleared_filters", "remove="):
+        assert key in hint, f"hint should name {key}"
+    # No positional references into a JSON object.
+    for positional in ("counts above", "alternatives below", "listed above", "listed below"):
+        assert positional not in hint.lower(), f"hint refers to position: {positional!r}"
+    # No two-term framing.
+    for two_term in ("either term", "both at once", "both values"):
+        assert two_term not in hint.lower(), f"hint assumes exactly two terms: {two_term!r}"

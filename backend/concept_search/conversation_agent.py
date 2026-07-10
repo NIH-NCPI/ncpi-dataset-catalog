@@ -211,13 +211,19 @@ def _unsatisfiable_and(
             # A refusal without a way forward strands a legitimate turn: the user
             # may be *replacing* a term ("change diabetes to asthma"), in which
             # case the old one has to go in the same call. Spell out every exit.
+            #
+            # Refer to payload keys by name, never to position ("the counts
+            # above"): this is a JSON object handed to the model, not a document,
+            # and key order carries no meaning. Phrase for N terms, not two —
+            # three or more mentions can conflict without any pair being disjoint.
             "hint": (
                 "Replacing a term? Pass remove=[old term] together with add=[new term] "
-                "in one call. Asking for either term? Commit ONE selection holding both "
-                "values. Asking for both at once? Impossible — tell the user, using the "
-                "counts above. Nothing was committed and the search has been CLEARED, so "
-                "the user now sees no results: say so, and offer the alternatives below. "
-                "Any filters in cleared_filters they still want must be re-committed."
+                "in one call. Did the user mean ANY of these terms? Commit ONE selection "
+                "holding every value (`if_or` is that count). Did they mean ALL of them "
+                "at once? Impossible — tell the user, quoting the per-term counts in "
+                "`terms`. Nothing was committed and the search has been CLEARED, so the "
+                "user now sees no results: say so. Any filters in `cleared_filters` they "
+                "still want must be re-committed."
             ),
             "if_or": _count([*others, merged], intent, index),
             # Not "these terms are disjoint": the test is whether the intersection
