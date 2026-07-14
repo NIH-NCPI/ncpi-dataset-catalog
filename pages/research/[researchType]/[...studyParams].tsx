@@ -8,12 +8,11 @@ import { ParsedUrlQuery } from "querystring";
 import { JSX } from "react";
 import { NCPICatalogStudy } from "../../../app/apis/catalog/ncpi-catalog/common/entities";
 import { config } from "../../../app/config/config";
-import { seedDatabase } from "../../../app/utils/seedDatabase";
+import { getBuildTimeEntities } from "../../../app/utils/seedDatabase";
 import { getStudyPageMeta } from "../../../app/utils/studyTitles";
 import { RESEARCH_TYPE } from "../../../app/views/ResearchView/artifact/types";
 import { StyledMain } from "../../../app/views/ResearchView/components/Main/main.styles";
 import { StudyDetailView } from "../../../app/views/StudyDetailView/studyDetailView";
-import { getEntities } from "../../[entityListType]/[...params]";
 
 interface Params extends ParsedUrlQuery {
   researchType: string;
@@ -38,11 +37,9 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   for (const entityConfig of config().entities) {
     if (entityConfig.route !== "studies") continue;
 
-    await seedDatabase(entityConfig.route, entityConfig);
+    const entities = await getBuildTimeEntities(entityConfig);
 
-    const entities = await getEntities(entityConfig);
-
-    for (const entity of entities.hits) {
+    for (const entity of entities) {
       const study = entity as NCPICatalogStudy;
 
       if (!study.dbGapId) continue;

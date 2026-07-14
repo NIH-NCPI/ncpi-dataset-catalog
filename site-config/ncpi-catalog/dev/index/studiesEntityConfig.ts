@@ -12,6 +12,7 @@ import {
   NCPIStudyInputMapper,
 } from "../../../../app/apis/catalog/ncpi-catalog/common/utils";
 import * as C from "../../../../app/components";
+import { API } from "../../../../app/services/workflows/routes";
 import * as V from "../../../../app/viewModelBuilders/catalog/ncpi-catalog/common/viewModelBuilders";
 import {
   NCPI_CATALOG_CATEGORY_KEY,
@@ -27,6 +28,10 @@ import { variablesMainColumn } from "../detail/study/variablesMainColumn";
  * Entity config object responsible for config related to the /studies route.
  */
 export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
+  // Served at runtime to the studies list (SS_FETCH_CS_FILTERING); the same
+  // artifact also preloads the workflows store in `_app` — see
+  // app/services/workflows/routes.ts.
+  apiPath: API.studies,
   detail: {
     detailOverviews: ["Overview"],
     staticLoad: true,
@@ -51,7 +56,7 @@ export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
     top: top,
   },
   entityMapper: NCPIStudyInputMapper,
-  exploreMode: EXPLORE_MODE.CS_FETCH_CS_FILTERING,
+  exploreMode: EXPLORE_MODE.SS_FETCH_CS_FILTERING,
   getId: getStudyId,
   getTitle: getTitle,
   hideTabs: true,

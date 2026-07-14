@@ -62,7 +62,19 @@ const IndexPage = ({
   ...props
 }: ListPageProps): JSX.Element => {
   if (!entityListType) return <></>;
-  return <ExploreView entityListType={entityListType} {...props} />;
+  // Key by entity type so switching list tabs remounts ExploreView. Both list
+  // routes render this same page component, so without the key React reuses
+  // the component instance and useEntityList's fetched response survives the
+  // switch; during the transition the explore state's tabValue lags the page
+  // config, and the stale response gets mapped with the other entity's
+  // mapper — crashing the list (e.g. studies ⇄ platforms).
+  return (
+    <ExploreView
+      key={entityListType}
+      entityListType={entityListType}
+      {...props}
+    />
+  );
 };
 
 /**

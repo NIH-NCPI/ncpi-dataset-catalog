@@ -120,7 +120,10 @@ const config: SiteConfig = {
       size: "25",
       sort: "entryId",
     },
-    url: "https://service.nadove2.dev.singlecell.gi.ucsc.edu/",
+    // Base URL for entity-service fetches (the studies list apiPath). "/"
+    // resolves same-origin in every environment; this catalog has no Azul
+    // backend. (Replaces a vestigial single-cell explorer service URL.)
+    url: "/",
   },
   enableEntitiesView: true,
   entities: [platformsEntityConfig, studiesEntityConfig],

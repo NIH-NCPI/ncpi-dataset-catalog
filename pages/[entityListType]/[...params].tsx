@@ -16,16 +16,19 @@ import { getEntityConfig } from "@databiosphere/findable-ui/lib/config/utils";
 import { fetchCatalog } from "@databiosphere/findable-ui/lib/entity/api/service";
 import { getEntityService } from "@databiosphere/findable-ui/lib/hooks/useEntityService";
 import { EXPLORE_MODE } from "@databiosphere/findable-ui/lib/hooks/useExploreMode/types";
-import { database } from "@databiosphere/findable-ui/lib/utils/database";
 import { EntityDetailView } from "@databiosphere/findable-ui/lib/views/EntityDetailView/entityDetailView";
 import { NCPICatalogStudy } from "app/apis/catalog/ncpi-catalog/common/entities";
 import { StudyJsonLd } from "app/components/Detail/components/StudyJsonLd/studyJsonLd";
 import { config } from "app/config/config";
+import {
+  getBuildTimeEntities,
+  getBuildTimeEntity,
+  seedDatabase,
+} from "app/utils/seedDatabase";
 import { getStudyPageMeta } from "app/utils/studyTitles";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { JSX } from "react";
-import { readFile } from "../../app/utils/tsvParser";
 
 const setOfProcessedIds = new Set<string>();
 
@@ -67,38 +70,6 @@ const EntityDetailPage = (props: EntityDetailPageProps): JSX.Element => {
 };
 
 /**
- * Seed database.
- * @param entityListType - Entity list type.
- * @param entityConfig - Entity config.
- * @returns Promise<void>.
- */
-const seedDatabase = async function seedDatabase(
-  entityListType: string,
-  entityConfig: EntityConfig
-): Promise<void> {
-  const { entityMapper, label, staticLoadFile } = entityConfig;
-
-  if (!staticLoadFile) {
-    throw new Error(`staticLoadFile not found for entity entity ${label}`);
-  }
-
-  // Build database from configured TSV, if any.
-  const rawData = await readFile(staticLoadFile);
-
-  if (!rawData) {
-    throw new Error(`File ${staticLoadFile} not found for entity ${label}`);
-  }
-
-  const object = JSON.parse(rawData.toString());
-  const entities = entityMapper
-    ? Object.values(object).map(entityMapper)
-    : Object.values(object);
-
-  // Seed entities.
-  database.get().seed(entityListType, entities);
-};
-
-/**
  * getStaticPaths - return the list of paths to prerender for each entity type and its tabs.
  * @returns Promise<GetStaticPaths<PageUrl>>.
  */
@@ -111,15 +82,11 @@ export const getStaticPaths: GetStaticPaths<PageUrl> = async () => {
   const paths: StaticPath[] = [];
 
   for (const entityConfig of entities) {
-    const { exploreMode, route: entityListType } = entityConfig;
+    const { exploreMode } = entityConfig;
     // Process static paths.
     if (entityConfig.detail.staticLoad) {
-      // Client-side fetch, client-side filtering.
-      if (exploreMode === EXPLORE_MODE.CS_FETCH_CS_FILTERING) {
-        await seedDatabase(entityListType, entityConfig);
-        const entitiesResponse = await getEntities(entityConfig);
-        processEntityPaths(entityConfig, entitiesResponse, paths);
-      }
+      // Paths sourced from the build-time entity cache.
+      await processSeededEntityPaths(entityConfig, paths);
       // Server-side fetch, server-side filtering.
       if (exploreMode === EXPLORE_MODE.SS_FETCH_SS_FILTERING) {
         // Fetch catalogs and generate a list of catalogs associated with the default catalog.
@@ -220,7 +187,7 @@ function getCatalogs(
  * @param listParams - List params.
  * @returns entities response.
  */
-export async function getEntities(
+async function getEntities(
   entityConfig: EntityConfig,
   catalog?: string,
   listParams?: AzulListParams
@@ -233,12 +200,19 @@ export async function getEntities(
  * Fetches the entity for the given entity ID.
  * @param entityConfig - Entity config.
  * @param entityId - Entity ID.
- * @returns entity response.
+ * @returns entity response, or undefined when the entity is not found.
  */
 async function getEntity(
   entityConfig: EntityConfig,
   entityId: string
-): Promise<AzulEntityStaticResponse> {
+): Promise<AzulEntityStaticResponse | undefined> {
+  // Server-side fetch, client-side filtering: read the build-time entity
+  // cache directly — the entity service for this mode (API_CF) does not
+  // implement fetchEntityDetail and would throw.
+  if (entityConfig.exploreMode === EXPLORE_MODE.SS_FETCH_CS_FILTERING) {
+    return (await getBuildTimeEntity(entityConfig, entityId)) as
+      AzulEntityStaticResponse | undefined;
+  }
   const { fetchEntityDetail, path } = getEntityService(entityConfig, undefined);
   return await fetchEntityDetail(
     entityId,
@@ -277,7 +251,7 @@ function getTabRoutes(tabs: BackPageTabConfig[]): string[] {
  */
 function processEntityPaths(
   entityConfig: EntityConfig,
-  entitiesResponse: AzulEntitiesResponse,
+  entitiesResponse: Pick<AzulEntitiesResponse, "hits">,
   paths: StaticPath[]
 ): void {
   const { detail, route: entityListType } = entityConfig;
@@ -325,12 +299,36 @@ async function processEntityProps(
   // When the entity detail is to be fetched from API, we only do so for the first tab.
   if (exploreMode === EXPLORE_MODE.SS_FETCH_SS_FILTERING && entityTab) return;
   if (exploreMode === EXPLORE_MODE.CS_FETCH_CS_FILTERING) {
-    // Seed database.
-    await seedDatabase(entityConfig.route, entityConfig);
+    // Seed database; this mode's detail fetch goes through the TSV entity
+    // service, which reads the database internally. SS_FETCH_CS_FILTERING
+    // details are read from the build-time entity cache — see getEntity.
+    await seedDatabase(entityConfig);
   }
   // Fetch entity detail, either from database or API.
   const entityResponse = await getEntity(entityConfig, entityId);
   if (entityResponse) {
     props.data = entityResponse;
   }
+}
+
+/**
+ * Processes static paths for entities whose paths are sourced from the
+ * build-time entity cache: client-side fetch mode, and server-side fetch
+ * with client-side filtering — see getBuildTimeEntities.
+ * @param entityConfig - Entity config.
+ * @param paths - Static paths.
+ */
+async function processSeededEntityPaths(
+  entityConfig: EntityConfig,
+  paths: StaticPath[]
+): Promise<void> {
+  const { exploreMode } = entityConfig;
+  if (
+    exploreMode !== EXPLORE_MODE.CS_FETCH_CS_FILTERING &&
+    exploreMode !== EXPLORE_MODE.SS_FETCH_CS_FILTERING
+  ) {
+    return;
+  }
+  const hits = await getBuildTimeEntities(entityConfig);
+  processEntityPaths(entityConfig, { hits }, paths);
 }
