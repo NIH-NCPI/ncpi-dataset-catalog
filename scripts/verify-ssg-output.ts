@@ -47,10 +47,18 @@ const OUT_DIR = path.resolve(process.cwd(), "out");
 
 /**
  * Marker emitted by the Next.js pages router around the app's rendered HTML.
- * A blank page renders the open and close tags with nothing between them.
+ * A blank page renders nothing but whitespace or comments between the open
+ * tag and its closing `</div>`.
  */
 const NEXT_ROOT_OPEN = '<div id="__next">';
-const NEXT_ROOT_BLANK = '<div id="__next"></div>';
+
+/**
+ * How many bytes after the root div open tag are inspected when classifying
+ * the body as blank vs rendered, and how much of it is quoted in failure
+ * messages.
+ */
+const ROOT_WINDOW_BYTES = 512;
+const ROOT_SNIPPET_LENGTH = 80;
 
 /**
  * Byte budgets (see epic #425). The windows are categorical, not precise:
@@ -125,6 +133,16 @@ const ROUTE_EXPECTATIONS: RouteExpectation[] = [
 ];
 
 /**
+ * Classifies the content following the root div open tag as blank.
+ * @param rootContent - Content immediately following the root div open tag.
+ * @returns True when the root div holds nothing but whitespace or comments.
+ */
+function isBlankRootContent(rootContent: string): boolean {
+  const content = rootContent.replace(/^(\s|<!--[\s\S]*?-->)*/, "");
+  return content.startsWith("</div>");
+}
+
+/**
  * Asserts a single route's emitted HTML matches its expectation.
  * @param expectation - Route expectation to verify.
  * @returns Error messages for the route; empty when the route passes.
@@ -147,25 +165,34 @@ async function verifyRoute(expectation: RouteExpectation): Promise<string[]> {
       `${relPath}: ${html.length} bytes is outside budget [${minBytes}, ${maxBytes}] (${comment})`
     );
   }
-  if (!html.includes(NEXT_ROOT_OPEN)) {
+  const rootIndex = html.indexOf(NEXT_ROOT_OPEN);
+  if (rootIndex === -1) {
     errors.push(`${relPath}: no ${NEXT_ROOT_OPEN} root found (${comment})`);
-  } else if (body === BODY_EXPECTATION.BLANK) {
-    if (!html.includes(NEXT_ROOT_BLANK)) {
-      errors.push(
-        `${relPath}: expected a blank body (exactly ${NEXT_ROOT_BLANK}) but found rendered content (${comment})`
-      );
-    }
-  } else if (html.includes(NEXT_ROOT_BLANK)) {
+    return errors;
+  }
+  const contentStart = rootIndex + NEXT_ROOT_OPEN.length;
+  const rootContent = html
+    .subarray(contentStart, contentStart + ROOT_WINDOW_BYTES)
+    .toString("utf8");
+  const isBlank = isBlankRootContent(rootContent);
+  if (body === BODY_EXPECTATION.BLANK && !isBlank) {
+    const snippet = JSON.stringify(rootContent.slice(0, ROOT_SNIPPET_LENGTH));
     errors.push(
-      `${relPath}: expected rendered body content but found ${NEXT_ROOT_BLANK} (${comment})`
+      `${relPath}: expected a blank ${NEXT_ROOT_OPEN} body but found content starting with ${snippet} (${comment})`
+    );
+  } else if (body === BODY_EXPECTATION.RENDERED && isBlank) {
+    errors.push(
+      `${relPath}: expected rendered body content but the ${NEXT_ROOT_OPEN} root is blank (${comment})`
     );
   }
   return errors;
 }
 
 /**
- * Verifies every route expectation against the build output and exits
- * non-zero when any assertion fails.
+ * Verifies every route expectation against the build output and sets a
+ * non-zero exit code when any assertion fails. Uses `process.exitCode` rather
+ * than `process.exit()` so queued stderr writes flush before the process
+ * ends (stdio is asynchronous when piped, as in CI).
  * @returns Promise that resolves when verification completes.
  */
 async function verifySsgOutput(): Promise<void> {
@@ -175,7 +202,8 @@ async function verifySsgOutput(): Promise<void> {
   if (errors.length > 0) {
     console.error("SSG output-shape guardrail failed:");
     for (const error of errors) console.error(`  - ${error}`);
-    process.exit(1);
+    process.exitCode = 1;
+    return;
   }
   console.log(
     `SSG output-shape guardrail passed (${ROUTE_EXPECTATIONS.length} routes checked).`
@@ -184,5 +212,5 @@ async function verifySsgOutput(): Promise<void> {
 
 verifySsgOutput().catch((error) => {
   console.error("SSG output-shape guardrail crashed:", error);
-  process.exit(1);
+  process.exitCode = 1;
 });
