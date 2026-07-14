@@ -4,8 +4,6 @@ import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/
 import Router from "next/router";
 import { JSX, useEffect } from "react";
 import { ROUTES } from "../../../routes/constants";
-import { NCPICatalogStudy } from "../../apis/catalog/ncpi-catalog/common/entities";
-import { getStudy } from "../../services/workflows/entities";
 import { Hero } from "./components/Hero/hero";
 import { Main } from "./components/Main/main";
 import { Side } from "./components/Side/side";
@@ -21,7 +19,7 @@ export const StudyDetailView = (props: Props): JSX.Element => {
   const { spacing } = useLayoutSpacing();
   const { state } = useChatState();
 
-  const study = getStudy<NCPICatalogStudy>(props.studyId);
+  const { study } = props;
 
   useEffect(() => {
     // Any new request in the chat will trigger a navigation to the research studies page,
@@ -34,7 +32,7 @@ export const StudyDetailView = (props: Props): JSX.Element => {
     <ResearchView>
       <StyledGrid {...spacing}>
         <StyledContainer maxWidth={false}>
-          <Hero study={study} {...props} />
+          <Hero {...props} />
           <Main study={study} subpath={props.subpath} />
           <Side study={study} subpath={props.subpath} />
         </StyledContainer>

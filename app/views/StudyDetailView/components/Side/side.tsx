@@ -7,6 +7,7 @@ import {
   buildStudySummary,
 } from "../../../../viewModelBuilders/catalog/ncpi-catalog/common/viewModelBuilders";
 import { Section } from "../../../EntityView/ui/Section/section";
+import { STUDY_DETAIL_SUBPATH } from "../../constants";
 import { KeyValueSection } from "./components/KeyValueSection/keyValueSection";
 import { StyledRoundedPaper } from "./side.styles";
 import { Props } from "./types";
@@ -19,7 +20,7 @@ import { Props } from "./types";
  * @returns Side section of the study detail view.
  */
 export const Side = ({ study, subpath }: Props): JSX.Element | null => {
-  if (subpath !== "") return null;
+  if (subpath !== STUDY_DETAIL_SUBPATH.OVERVIEW) return null;
   return (
     <StyledRoundedPaper>
       <Section>

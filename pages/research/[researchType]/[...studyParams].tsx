@@ -1,3 +1,4 @@
+import { getEntityConfig } from "@databiosphere/findable-ui/lib/config/utils";
 import {
   GetStaticPaths,
   GetStaticPathsResult,
@@ -8,23 +9,28 @@ import { ParsedUrlQuery } from "querystring";
 import { JSX } from "react";
 import { NCPICatalogStudy } from "../../../app/apis/catalog/ncpi-catalog/common/entities";
 import { config } from "../../../app/config/config";
-import { getBuildTimeEntities } from "../../../app/utils/seedDatabase";
+import {
+  getBuildTimeEntities,
+  getBuildTimeEntity,
+} from "../../../app/utils/seedDatabase";
+import { sliceStudyBySubpath } from "../../../app/utils/studyDetailSlice";
 import { getStudyPageMeta } from "../../../app/utils/studyTitles";
 import { RESEARCH_TYPE } from "../../../app/views/ResearchView/artifact/types";
 import { StyledMain } from "../../../app/views/ResearchView/components/Main/main.styles";
+import { STUDY_DETAIL_SUBPATH } from "../../../app/views/StudyDetailView/constants";
 import { StudyDetailView } from "../../../app/views/StudyDetailView/studyDetailView";
+import type { Props as StudyDetailViewProps } from "../../../app/views/StudyDetailView/types";
+
+const STUDIES_ROUTE = "studies";
 
 interface Params extends ParsedUrlQuery {
   researchType: string;
   studyParams: string[];
 }
 
-interface Props {
+interface Props extends StudyDetailViewProps {
   pageDescription?: string;
   pageTitle?: string;
-  researchType: string;
-  studyId: string;
-  subpath: string;
 }
 
 /**
@@ -34,40 +40,40 @@ interface Props {
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const paths: GetStaticPathsResult<Params>["paths"] = [];
 
-  for (const entityConfig of config().entities) {
-    if (entityConfig.route !== "studies") continue;
+  const entityConfig = getEntityConfig(config().entities, STUDIES_ROUTE);
+  const entities = await getBuildTimeEntities(entityConfig);
 
-    const entities = await getBuildTimeEntities(entityConfig);
+  for (const entity of entities) {
+    const study = entity as NCPICatalogStudy;
 
-    for (const entity of entities) {
-      const study = entity as NCPICatalogStudy;
+    if (!study.dbGapId) continue;
 
-      if (!study.dbGapId) continue;
+    // Overview subpath "".
+    paths.push({
+      params: {
+        researchType: RESEARCH_TYPE.RESULTS,
+        studyParams: [study.dbGapId],
+      },
+    });
 
-      // Overview subpath "".
-      paths.push({
-        params: {
-          researchType: RESEARCH_TYPE.RESULTS,
-          studyParams: [study.dbGapId],
-        },
-      });
+    // Selected publications subpath "selected-publications".
+    paths.push({
+      params: {
+        researchType: RESEARCH_TYPE.RESULTS,
+        studyParams: [
+          study.dbGapId,
+          STUDY_DETAIL_SUBPATH.SELECTED_PUBLICATIONS,
+        ],
+      },
+    });
 
-      // Selected publications subpath "selected-publications".
-      paths.push({
-        params: {
-          researchType: RESEARCH_TYPE.RESULTS,
-          studyParams: [study.dbGapId, "selected-publications"],
-        },
-      });
-
-      // Variables subpath "variables".
-      paths.push({
-        params: {
-          researchType: RESEARCH_TYPE.RESULTS,
-          studyParams: [study.dbGapId, "variables"],
-        },
-      });
-    }
+    // Variables subpath "variables".
+    paths.push({
+      params: {
+        researchType: RESEARCH_TYPE.RESULTS,
+        studyParams: [study.dbGapId, STUDY_DETAIL_SUBPATH.VARIABLES],
+      },
+    });
   }
 
   return { fallback: false, paths };
@@ -86,14 +92,25 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
   if (!researchType) return { notFound: true };
   if (!studyParams || studyParams.length === 0) return { notFound: true };
 
-  const [studyId, subpath = ""] = studyParams;
+  const [studyId, subpath = STUDY_DETAIL_SUBPATH.OVERVIEW] = studyParams;
+
+  const entityConfig = getEntityConfig(config().entities, STUDIES_ROUTE);
+
+  const study = await getBuildTimeEntity<NCPICatalogStudy>(
+    entityConfig,
+    studyId
+  );
+
+  if (!study) return { notFound: true };
 
   return {
     props: {
       ...getStudyPageMeta(studyId, subpath || undefined),
+      publicationsCount: study.publications.length,
       researchType,
-      studyId,
+      study: sliceStudyBySubpath(study, subpath),
       subpath,
+      variablesCount: study.variableSummary?.totalVariables ?? 0,
     },
   };
 };
@@ -101,9 +118,11 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
 /**
  * Page component for the study detail view.
  * @param props - Props.
+ * @param props.publicationsCount - Count of the study's publications (survives slicing for the Hero tab label).
  * @param props.researchType - Research type for the study detail view ("results").
- * @param props.studyId - Study ID.
+ * @param props.study - Study, sliced for the subpath.
  * @param props.subpath - Subpath for the study detail view.
+ * @param props.variablesCount - Count of the study's variables (survives slicing for the Hero tab label).
  * @returns Study detail view page.
  */
 const Page = (props: Props): JSX.Element => {

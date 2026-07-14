@@ -8,6 +8,7 @@ import Link from "next/link";
 import Router from "next/router";
 import { Fragment, JSX } from "react";
 import { ROUTES } from "../../../../../routes/constants";
+import { STUDY_DETAIL_SUBPATH } from "../../constants";
 import {
   StyledGrid,
   StyledRequestAccess,
@@ -19,17 +20,19 @@ import { Props } from "./types";
 /**
  * Renders the hero section of the study detail view, which includes the request access component.
  * @param props - Props.
+ * @param props.publicationsCount - Count of the study's publications (the sliced study may omit them).
  * @param props.researchType - Research type for the study detail view ("results").
  * @param props.study - Study to display.
- * @param props.studyId - Study ID.
  * @param props.subpath - Subpath for the study detail view.
+ * @param props.variablesCount - Count of the study's variables (the sliced study may omit the variable summary).
  * @returns Hero component.
  */
 export const Hero = ({
+  publicationsCount,
   researchType,
   study,
-  studyId,
   subpath,
+  variablesCount,
 }: Props): JSX.Element => {
   return (
     <Fragment>
@@ -58,19 +61,19 @@ export const Hero = ({
       </StyledGrid>
       <StyledTabs
         onChange={(_, v) => {
-          const studyParams = v ? [studyId, v] : [studyId];
+          const studyParams = v ? [study.dbGapId, v] : [study.dbGapId];
           Router.push({ query: { researchType, studyParams } });
         }}
         value={subpath}
       >
-        <Tab label="Overview" value="" />
+        <Tab label="Overview" value={STUDY_DETAIL_SUBPATH.OVERVIEW} />
         <Tab
-          label={`Selected Publications (${(study.publications ?? []).length})`}
-          value="selected-publications"
+          label={`Selected Publications (${publicationsCount})`}
+          value={STUDY_DETAIL_SUBPATH.SELECTED_PUBLICATIONS}
         />
         <Tab
-          label={`Variables (${(study.variableSummary?.totalVariables ?? 0).toLocaleString()})`}
-          value="variables"
+          label={`Variables (${variablesCount.toLocaleString()})`}
+          value={STUDY_DETAIL_SUBPATH.VARIABLES}
         />
       </StyledTabs>
     </Fragment>

@@ -35,14 +35,15 @@ export async function getBuildTimeEntities(
 /**
  * Returns the entity with the given id for the given entity config at build
  * time, loaded from the config's static-load file — see getBuildTimeEntities.
+ * The type parameter is caller-asserted, as with the entity service readers.
  * @param entityConfig - Entity config.
  * @param entityId - Entity id.
  * @returns Entity with the given id, or undefined when not found.
  */
-export async function getBuildTimeEntity(
+export async function getBuildTimeEntity<T = unknown>(
   entityConfig: EntityConfig,
   entityId: string
-): Promise<unknown> {
+): Promise<T | undefined> {
   const { getId, label, route } = entityConfig;
   let entityById = entityByIdByRoute.get(route);
   if (!entityById) {
@@ -51,7 +52,7 @@ export async function getBuildTimeEntity(
     entityById = new Map(entities.map((entity) => [getId(entity), entity]));
     entityByIdByRoute.set(route, entityById);
   }
-  return entityById.get(entityId);
+  return entityById.get(entityId) as T | undefined;
 }
 
 /**
