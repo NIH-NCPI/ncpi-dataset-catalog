@@ -1,5 +1,16 @@
 name: Run checks
-on: [pull_request]
+# Also run on pushes to main: each PR is only checked against its own merge
+# ref, so the merged combination of PRs is otherwise never verified.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Cancel superseded runs — the ssg-output job builds ~26.5k static pages, so
+# stacked pushes to a PR would otherwise queue full builds.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -8,6 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
+          cache: "npm"
           node-version-file: ".nvmrc"
       # .nvmrc is the operative Node pin (deploy scripts + setup-node above);
       # assert package.json engines still mirrors it (#403).
@@ -20,3 +32,26 @@ jobs:
           cd catalog-build
           npm ci
           npx tsc --noEmit
+  # SSG output-shape guardrail: build the static export and assert on the
+  # emitted HTML. Every route currently ships a blank <div id="__next"> body;
+  # the guardrail locks that baseline in so each stage of the SSG restoration
+  # flips one expectation deliberately instead of regressing silently.
+  ssg-output:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: "npm"
+          node-version-file: ".nvmrc"
+      # Restore Next's compiler/build cache (setup-node's npm cache only
+      # covers package downloads) — the full export takes ~16 minutes cold.
+      - uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
+      - run: npm ci
+      - run: npm run build:dev
+      - run: npm run verify-ssg-output
