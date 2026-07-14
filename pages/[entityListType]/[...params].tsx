@@ -200,20 +200,18 @@ async function getEntities(
  * Fetches the entity for the given entity ID.
  * @param entityConfig - Entity config.
  * @param entityId - Entity ID.
- * @returns entity response.
+ * @returns entity response, or undefined when the entity is not found.
  */
 async function getEntity(
   entityConfig: EntityConfig,
   entityId: string
-): Promise<AzulEntityStaticResponse> {
+): Promise<AzulEntityStaticResponse | undefined> {
   // Server-side fetch, client-side filtering: read the build-time entity
   // cache directly — the entity service for this mode (API_CF) does not
   // implement fetchEntityDetail and would throw.
   if (entityConfig.exploreMode === EXPLORE_MODE.SS_FETCH_CS_FILTERING) {
-    return (await getBuildTimeEntity(
-      entityConfig,
-      entityId
-    )) as AzulEntityStaticResponse;
+    return (await getBuildTimeEntity(entityConfig, entityId)) as
+      AzulEntityStaticResponse | undefined;
   }
   const { fetchEntityDetail, path } = getEntityService(entityConfig, undefined);
   return await fetchEntityDetail(
