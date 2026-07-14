@@ -1,6 +1,12 @@
 name: Run checks
 on: [pull_request]
 
+# Cancel superseded runs — the ssg-output job builds ~26.5k static pages, so
+# stacked pushes to a PR would otherwise queue full builds.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,3 +26,18 @@ jobs:
           cd catalog-build
           npm ci
           npx tsc --noEmit
+  # SSG output-shape guardrail: build the static export and assert on the
+  # emitted HTML. Every route currently ships a blank <div id="__next"> body;
+  # the guardrail locks that baseline in so each stage of the SSG restoration
+  # flips one expectation deliberately instead of regressing silently.
+  ssg-output:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: "npm"
+          node-version-file: ".nvmrc"
+      - run: npm ci
+      - run: npm run build:dev
+      - run: npm run verify-ssg-output
