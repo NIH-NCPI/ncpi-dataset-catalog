@@ -2,27 +2,24 @@
  * SSG output-shape guardrail.
  *
  * Asserts on the HTML emitted by `next build` into `out/`, locking in the
- * CURRENT output shape so the staged restoration of server-rendered HTML is
- * verifiable. Today every route is statically exported with an empty
- * `<div id="__next"></div>` because `pages/_app.tsx` gates the whole tree
- * behind a client-side entities fetch — the failure mode is blank HTML, not a
- * crash, so without these assertions a regression looks identical to success.
+ * output shape so the staged restoration of server-rendered HTML stays
+ * verifiable. Every route now server-renders: `pages/_app.tsx` no longer gates
+ * the tree behind a client-side entities fetch, so a regression that reblanks a
+ * route (e.g. reintroducing a client-side gate) fails the RENDERED assertion
+ * below rather than looking identical to success.
  *
- * The asymmetry encoded below is deliberate:
- * - `/studies` is EXPECTED to remain a blank shell permanently — it is an
- *   interactive table behind a client-side fetch of its apiPath JSON. Do not
- *   "fix" it.
- * - `/studies/<id>` pages must keep baking the study into `__NEXT_DATA__`
- *   (props.data feeds the detail view statically); `/research/studies/<id>`
- *   pages bake a per-tab slice of the study into `__NEXT_DATA__`
- *   (props.study feeds the detail view).
- * - `/`, `/platforms`, `/studies/<id>` and `/research/studies/<id>` are blank
- *   only until the `_app` entities gate is deleted, which flips them to
- *   server-rendered HTML.
+ * The byte budgets encode the remaining distinctions:
+ * - `/studies` server-renders its interactive-table SHELL only — the list is
+ *   fetched at runtime from its apiPath JSON and must NOT be baked into
+ *   `__NEXT_DATA__` (its ceiling sits far below the list size to catch that).
+ * - `/platforms` bakes the platforms list into `__NEXT_DATA__` (~0.5 MB).
+ * - `/studies/<id>` bakes the full study (props.data); `/research/studies/<id>`
+ *   bakes a per-tab slice of the study (props.study).
+ * - `/` is presentational and bakes no entity payload.
  *
  * The remaining stage flips one expectation here:
- * - `_app` entities gate deleted: `/`, `/platforms`, `/studies/<id>` and
- *   `/research/studies/<id>` body → RENDERED
+ * - Stage 3b (#430): the runtime list JSON is slimmed, so
+ *   LIST_ARTIFACT_MIN/MAX_BYTES shrinks from its current 10–40 MB window.
  */
 import fsp from "fs/promises";
 import path from "path";
@@ -73,28 +70,33 @@ const ROOT_SNIPPET_LENGTH = 80;
 
 /**
  * Byte budgets (see epic #425). The windows are categorical, not precise:
- * blank shells are a few KB of head + `__NEXT_DATA__`; `/studies` no longer
- * bakes the studies list (fetched at runtime from its apiPath); `/studies/<id>`
- * bakes one study (~24 KB) into `__NEXT_DATA__`; `/platforms` bakes the
- * platforms list (~0.5 MB). They are wide enough that routine catalog data
- * refreshes never trip them, while still distinguishing "baked payload" from
- * "small shell" — any flip must be made deliberately.
+ * a rendered SHELL (the homepage, and the `/studies` table chrome with no baked
+ * entity payload) is tens of KB; `/platforms` bakes the platforms list
+ * (~0.5 MB); a study detail page bakes one study — see
+ * STUDY_DETAIL_HTML_MAX_BYTES below. They are wide enough that routine catalog
+ * data refreshes never trip them, while still distinguishing "baked payload"
+ * from "shell" — in particular the shell ceiling sits far below the runtime
+ * list size, so a `/studies` regression that bakes the list into the HTML trips
+ * it. Any flip must be made deliberately.
  */
-const BLANK_SHELL_MAX_BYTES = 50_000;
+const SHELL_HTML_MIN_BYTES = 10_000;
+const SHELL_HTML_MAX_BYTES = 150_000;
 const PLATFORMS_HTML_MIN_BYTES = 200_000;
 const PLATFORMS_HTML_MAX_BYTES = 1_500_000;
 const STUDY_DETAIL_HTML_MIN_BYTES = 10_000;
-const STUDY_DETAIL_HTML_MAX_BYTES = 150_000;
 
 /**
- * `/research/studies/<id>` pages are blank-bodied but bake a per-tab study
- * slice into `__NEXT_DATA__`. Most slices are a few KB, but the
- * selected-publications slice carries the study's full publication list,
- * which reaches ~200 KB for the most published study in today's catalog —
- * so this family needs a ceiling above the blank-shell budget that still
- * catches a whole-catalog or full-study regression.
+ * Both study detail route families bake the study's publication list into
+ * `__NEXT_DATA__`: the list-linked `/studies/<id>` bakes the full study on
+ * every tab (props.data), and `/research/studies/<id>` bakes it on the
+ * selected-publications tab (props.study slice). That list dominates the page
+ * size — a few KB for a typical study, but ~760 KB for the most-published study
+ * (phs000209, 635 publications). This single ceiling covers both families: it
+ * gives ~2x headroom over that worst case so refreshes that add publications
+ * don't trip it, while staying ~16x below the 24 MB full catalog so a
+ * regression that bakes the whole list into a page is still caught.
  */
-const RESEARCH_STUDY_DETAIL_HTML_MAX_BYTES = 250_000;
+const STUDY_DETAIL_HTML_MAX_BYTES = 1_500_000;
 
 /**
  * The studies list JSON served at runtime (the studies entity's apiPath,
@@ -118,26 +120,26 @@ const LIST_ARTIFACT_MAX_BYTES = 40_000_000;
 const KNOWN_STUDY_ID = "phs000220";
 
 /**
- * The two prerendered study detail route families:
+ * The two prerendered study detail route families, both server-rendered and
+ * both bounded by STUDY_DETAIL_HTML_MAX_BYTES (the baked publication list
+ * dominates either way):
  * - `/research/studies/<id>` bakes a per-tab slice of the study into
- *   `__NEXT_DATA__` (typically a few KB; the selected-publications slice
- *   scales with the publication list — see
- *   RESEARCH_STUDY_DETAIL_HTML_MAX_BYTES); the body stays blank until the
- *   `_app` gate is deleted.
- * - `/studies/<id>` is linked from the studies list and must keep baking the
- *   study into `__NEXT_DATA__` (props.data feeds the detail view statically);
- *   hence its minimum byte budget.
+ *   `__NEXT_DATA__` (a few KB per tab; the selected-publications slice carries
+ *   the full publication list).
+ * - `/studies/<id>` is linked from the studies list and bakes the full study
+ *   into `__NEXT_DATA__` on every tab (props.data feeds the detail view
+ *   statically).
  */
 const STUDY_DETAIL_FAMILIES: StudyDetailFamily[] = [
   {
-    comment: "research study detail — blank until the _app gate is deleted",
-    maxBytes: RESEARCH_STUDY_DETAIL_HTML_MAX_BYTES,
-    minBytes: 0,
+    comment:
+      "research study detail — per-tab study slice baked into __NEXT_DATA__",
+    maxBytes: STUDY_DETAIL_HTML_MAX_BYTES,
+    minBytes: STUDY_DETAIL_HTML_MIN_BYTES,
     pathPrefix: "research/studies/",
   },
   {
-    comment:
-      "list-linked study detail — blank until the _app gate is deleted; must bake the study into __NEXT_DATA__",
+    comment: "list-linked study detail — full study baked into __NEXT_DATA__",
     maxBytes: STUDY_DETAIL_HTML_MAX_BYTES,
     minBytes: STUDY_DETAIL_HTML_MIN_BYTES,
     pathPrefix: "studies/",
@@ -161,7 +163,7 @@ function buildStudyDetailExpectation(
   tab: StudyDetailTab
 ): RouteExpectation {
   return {
-    body: BODY_EXPECTATION.BLANK,
+    body: BODY_EXPECTATION.RENDERED,
     comment: `${family.comment} (${tab.label})`,
     maxBytes: family.maxBytes,
     minBytes: family.minBytes,
@@ -171,25 +173,25 @@ function buildStudyDetailExpectation(
 
 const ROUTE_EXPECTATIONS: RouteExpectation[] = [
   {
-    body: BODY_EXPECTATION.BLANK,
-    comment: "homepage — blank until the _app entities gate is deleted",
-    maxBytes: BLANK_SHELL_MAX_BYTES,
-    minBytes: 0,
+    body: BODY_EXPECTATION.RENDERED,
+    comment: "homepage — presentational shell, no baked entity payload",
+    maxBytes: SHELL_HTML_MAX_BYTES,
+    minBytes: SHELL_HTML_MIN_BYTES,
     relPath: "index.html",
   },
   {
-    body: BODY_EXPECTATION.BLANK,
+    body: BODY_EXPECTATION.RENDERED,
     comment:
-      "studies list — blank body is PERMANENT (interactive table, client-side " +
-      "fetch of the apiPath JSON); the list must NOT be baked into __NEXT_DATA__",
-    maxBytes: BLANK_SHELL_MAX_BYTES,
-    minBytes: 0,
+      "studies list — interactive-table SHELL; the list is fetched at runtime " +
+      "from the apiPath JSON and must NOT be baked into __NEXT_DATA__ (the " +
+      "shell ceiling sits far below the list size to catch that)",
+    maxBytes: SHELL_HTML_MAX_BYTES,
+    minBytes: SHELL_HTML_MIN_BYTES,
     relPath: "studies.html",
   },
   {
-    body: BODY_EXPECTATION.BLANK,
-    comment:
-      "platforms list — control route; already small, blank until the _app gate is deleted",
+    body: BODY_EXPECTATION.RENDERED,
+    comment: "platforms list — platforms list baked into __NEXT_DATA__",
     maxBytes: PLATFORMS_HTML_MAX_BYTES,
     minBytes: PLATFORMS_HTML_MIN_BYTES,
     relPath: "platforms.html",

@@ -31,7 +31,6 @@ import type { AppProps } from "next/app";
 import { JSX, useEffect } from "react";
 import TagManager from "react-gtm-module";
 import { Footer } from "../app/components/Layout/components/Footer/footer";
-import { useEntities } from "../app/services/workflows/hooks/UseEntities/hook";
 import { getSearchApiUrl } from "../app/utils/searchApiUrl";
 import { MultiTurnQueryProvider } from "../app/views/ResearchView/artifact/form";
 import { BREAKPOINTS } from "../site-config/common/constants";
@@ -58,8 +57,6 @@ function MyApp(props: AppPropsWithComponent): JSX.Element {
   const { Component, pageProps } = props;
   // Set up the site configuration, layout and theme.
   const appConfig = config();
-  // Load entities into the in-memory cache.
-  const isEntitiesLoaded = useEntities();
 
   const { ai, analytics, layout, redirectRootToPath, themeOptions } = appConfig;
   const { gtmAuth, gtmId, gtmPreview } = analytics || {};
@@ -81,17 +78,6 @@ function MyApp(props: AppPropsWithComponent): JSX.Element {
     }
   }, [gtmAuth, gtmId, gtmPreview]);
 
-  const ogMeta = (
-    <OgMeta
-      appTitle={appConfig.appTitle}
-      browserURL={appConfig.browserURL}
-      pageDescription={pageDescription}
-      pageTitle={pageTitle}
-    />
-  );
-
-  if (!isEntitiesLoaded) return ogMeta;
-
   if (!aiUrl) throw new Error("AI URL is not defined in the configuration.");
 
   return (
@@ -100,7 +86,12 @@ function MyApp(props: AppPropsWithComponent): JSX.Element {
         <ThemeProvider theme={theme}>
           <DXConfigProvider config={appConfig} entityListType={entityListType}>
             <Head pageTitle={pageTitle} />
-            {ogMeta}
+            <OgMeta
+              appTitle={appConfig.appTitle}
+              browserURL={appConfig.browserURL}
+              pageDescription={pageDescription}
+              pageTitle={pageTitle}
+            />
             <CssBaseline />
             <ServicesProvider>
               <SystemStatusProvider>
