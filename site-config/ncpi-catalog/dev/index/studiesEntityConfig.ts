@@ -12,7 +12,6 @@ import {
   NCPIStudyInputMapper,
 } from "../../../../app/apis/catalog/ncpi-catalog/common/utils";
 import * as C from "../../../../app/components";
-import { API } from "../../../../app/services/workflows/routes";
 import * as V from "../../../../app/viewModelBuilders/catalog/ncpi-catalog/common/viewModelBuilders";
 import {
   NCPI_CATALOG_CATEGORY_KEY,
@@ -24,14 +23,16 @@ import { publicationsMainColumn } from "../detail/study/publicationsMainColumn";
 import { top } from "../detail/study/top";
 import { variablesMainColumn } from "../detail/study/variablesMainColumn";
 
+// Runtime data source for the studies list (SS_FETCH_CS_FILTERING).
+// scripts/sync-api.sh copies it from catalog/ into public/api/, which Next then
+// includes in the export.
+const STUDIES_LIST_API_PATH = "/api/ncpi-platform-studies.json";
+
 /**
  * Entity config object responsible for config related to the /studies route.
  */
 export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
-  // Served at runtime to the studies list (SS_FETCH_CS_FILTERING); the same
-  // artifact also preloads the workflows store in `_app` — see
-  // app/services/workflows/routes.ts.
-  apiPath: API.studies,
+  apiPath: STUDIES_LIST_API_PATH,
   detail: {
     detailOverviews: ["Overview"],
     staticLoad: true,
