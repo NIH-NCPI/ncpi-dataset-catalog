@@ -1,4 +1,5 @@
 import type { NCPICatalogStudy } from "../apis/catalog/ncpi-catalog/common/entities";
+import type { StudyDetailSubpath } from "../views/StudyDetailView/constants";
 import { STUDY_DETAIL_SUBPATH } from "../views/StudyDetailView/constants";
 
 /**
@@ -16,7 +17,7 @@ import { STUDY_DETAIL_SUBPATH } from "../views/StudyDetailView/constants";
  */
 export function sliceStudyBySubpath(
   study: NCPICatalogStudy,
-  subpath: string
+  subpath: StudyDetailSubpath
 ): NCPICatalogStudy {
   return {
     ...study,

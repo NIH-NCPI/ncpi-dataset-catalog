@@ -17,7 +17,10 @@ import { sliceStudyBySubpath } from "../../../app/utils/studyDetailSlice";
 import { getStudyPageMeta } from "../../../app/utils/studyTitles";
 import { RESEARCH_TYPE } from "../../../app/views/ResearchView/artifact/types";
 import { StyledMain } from "../../../app/views/ResearchView/components/Main/main.styles";
-import { STUDY_DETAIL_SUBPATH } from "../../../app/views/StudyDetailView/constants";
+import {
+  isStudyDetailSubpath,
+  STUDY_DETAIL_SUBPATH,
+} from "../../../app/views/StudyDetailView/constants";
 import { StudyDetailView } from "../../../app/views/StudyDetailView/studyDetailView";
 import type { Props as StudyDetailViewProps } from "../../../app/views/StudyDetailView/types";
 
@@ -93,6 +96,10 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
   if (!studyParams || studyParams.length === 0) return { notFound: true };
 
   const [studyId, subpath = STUDY_DETAIL_SUBPATH.OVERVIEW] = studyParams;
+
+  // fallback: false only generates the known subpaths; an unrecognized one 404s
+  // rather than silently slicing away all heavy fields.
+  if (!isStudyDetailSubpath(subpath)) return { notFound: true };
 
   const entityConfig = getEntityConfig(config().entities, STUDIES_ROUTE);
 
