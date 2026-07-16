@@ -17,9 +17,10 @@
  *   bakes a per-tab slice of the study (props.study).
  * - `/` is presentational and bakes no entity payload.
  *
- * The remaining stage flips one expectation here:
- * - Stage 3b (#430): the runtime list JSON is slimmed, so
- *   LIST_ARTIFACT_MIN/MAX_BYTES shrinks from its current 10–40 MB window.
+ * The runtime studies-list artifact is now slimmed (epic #425 stage 3b, #430):
+ * the apiPath JSON carries only the list-column fields (see verifyListArtifact),
+ * with the full-record set kept alongside for one release for rollback. This was
+ * the epic's last staged flip; there are no further expectation changes queued.
  */
 import fsp from "fs/promises";
 import path from "path";
@@ -105,15 +106,33 @@ const STUDY_DETAIL_HTML_MAX_BYTES = 1_500_000;
 
 /**
  * The studies list JSON served at runtime (the studies entity's apiPath).
- * scripts/sync-api.sh copies it from catalog/ into public/api/, which Next then
- * includes in the export. It is now the sole source of the studies list, so the
- * export must contain it — a broken artifact pipeline would otherwise stay green
- * while the deployed list fails its runtime fetch. The size window flips to
- * small when the list JSON is slimmed (see epic #425).
+ * scripts/slim-list-artifact.mjs projects it to the list-column fields and
+ * minifies it into public/api/, which Next then includes in the export. It is
+ * the sole source of the studies list, so the export must contain it — a broken
+ * artifact pipeline would otherwise stay green while the deployed list fails its
+ * runtime fetch. The budget is now the slim window (epic #425 stage 3b): well
+ * below the ~24 MB full catalog, so a regression that ships the un-slimmed file
+ * trips it. LIST_ARTIFACT_DROPPED_FIELDS are the detail-only fields the slimming
+ * strips — asserted absent below so a no-op slim (size alone) can't pass.
  */
 const LIST_ARTIFACT_REL_PATH = "api/ncpi-platform-studies.json";
-const LIST_ARTIFACT_MIN_BYTES = 10_000_000;
-const LIST_ARTIFACT_MAX_BYTES = 40_000_000;
+const LIST_ARTIFACT_MIN_BYTES = 1_000_000;
+const LIST_ARTIFACT_MAX_BYTES = 5_000_000;
+const LIST_ARTIFACT_DROPPED_FIELDS = [
+  "description",
+  "publications",
+  "variableSummary",
+];
+
+/**
+ * The full-record studies JSON kept alongside the slim artifact for one release
+ * (scripts/sync-api.sh) so a revert is a code change — point the entity's
+ * apiPath back at it — rather than a rebuild. Drop it (and this assertion) once
+ * the slim artifact has shipped for a release.
+ */
+const LIST_ARTIFACT_FULL_REL_PATH = "api/ncpi-platform-studies-full.json";
+const LIST_ARTIFACT_FULL_MIN_BYTES = 10_000_000;
+const LIST_ARTIFACT_FULL_MAX_BYTES = 40_000_000;
 
 /**
  * dbGaP ids with variables and selected-publications subpages, spot-checked
@@ -222,6 +241,27 @@ const ROUTE_EXPECTATIONS: RouteExpectation[] = [
 ];
 
 /**
+ * Formats a byte-budget-range violation message for a file, or null when the
+ * file is within budget.
+ * @param label - Label for the checked file (its export-relative path).
+ * @param bytes - Actual byte length.
+ * @param minBytes - Minimum allowed bytes.
+ * @param maxBytes - Maximum allowed bytes.
+ * @returns Violation message when out of budget; null when within.
+ */
+function byteBudgetError(
+  label: string,
+  bytes: number,
+  minBytes: number,
+  maxBytes: number
+): string | null {
+  if (bytes < minBytes || bytes > maxBytes) {
+    return `${label}: ${bytes} bytes is outside budget [${minBytes}, ${maxBytes}]`;
+  }
+  return null;
+}
+
+/**
  * Classifies the content following the root div open tag as blank.
  * @param rootContent - Content immediately following the root div open tag.
  * @returns True when the root div holds nothing but whitespace or comments.
@@ -232,29 +272,81 @@ function isBlankRootContent(rootContent: string): boolean {
 }
 
 /**
- * Asserts the runtime studies-list JSON artifact exists in the export within
- * its byte budget.
+ * Asserts no slim-artifact record still carries a dropped detail-only field, so
+ * a slim step that ran but stripped nothing cannot pass on size alone.
+ * @param slimRaw - Raw slim artifact JSON text.
+ * @returns Error messages for the artifact; empty when every record is stripped.
+ */
+function verifyDroppedFields(slimRaw: string): string[] {
+  let records: Record<string, Record<string, unknown>>;
+  try {
+    records = JSON.parse(slimRaw);
+  } catch (error) {
+    return [`${LIST_ARTIFACT_REL_PATH}: not valid JSON — ${String(error)}`];
+  }
+  for (const [id, record] of Object.entries(records)) {
+    for (const field of LIST_ARTIFACT_DROPPED_FIELDS) {
+      if (field in record) {
+        return [
+          `${LIST_ARTIFACT_REL_PATH}: study ${id} still carries dropped field "${field}" — the list artifact was not slimmed`,
+        ];
+      }
+    }
+  }
+  return [];
+}
+
+/**
+ * Asserts the full-record rollback artifact exists in the export within its
+ * byte budget.
  * @returns Error messages for the artifact; empty when it passes.
  */
-async function verifyListArtifact(): Promise<string[]> {
-  const filePath = path.join(OUT_DIR, LIST_ARTIFACT_REL_PATH);
+async function verifyFullArtifact(): Promise<string[]> {
+  const filePath = path.join(OUT_DIR, LIST_ARTIFACT_FULL_REL_PATH);
   let byteLength: number;
   try {
     byteLength = (await fsp.stat(filePath)).size;
   } catch {
     return [
+      `${LIST_ARTIFACT_FULL_REL_PATH}: missing — the full-record rollback artifact must ship for one release`,
+    ];
+  }
+  const budgetError = byteBudgetError(
+    LIST_ARTIFACT_FULL_REL_PATH,
+    byteLength,
+    LIST_ARTIFACT_FULL_MIN_BYTES,
+    LIST_ARTIFACT_FULL_MAX_BYTES
+  );
+  return budgetError ? [budgetError] : [];
+}
+
+/**
+ * Asserts the runtime studies-list JSON artifact exists in the export within
+ * its slim byte budget, carries none of the dropped detail-only fields, and
+ * that the full-record rollback artifact ships alongside it.
+ * @returns Error messages for the artifacts; empty when they pass.
+ */
+async function verifyListArtifact(): Promise<string[]> {
+  const filePath = path.join(OUT_DIR, LIST_ARTIFACT_REL_PATH);
+  let slimRaw: string;
+  try {
+    slimRaw = await fsp.readFile(filePath, "utf8");
+  } catch {
+    return [
       `${LIST_ARTIFACT_REL_PATH}: missing — the studies list has no runtime data source`,
     ];
   }
-  if (
-    byteLength < LIST_ARTIFACT_MIN_BYTES ||
-    byteLength > LIST_ARTIFACT_MAX_BYTES
-  ) {
-    return [
-      `${LIST_ARTIFACT_REL_PATH}: ${byteLength} bytes is outside budget [${LIST_ARTIFACT_MIN_BYTES}, ${LIST_ARTIFACT_MAX_BYTES}]`,
-    ];
-  }
-  return [];
+  const errors: string[] = [];
+  const budgetError = byteBudgetError(
+    LIST_ARTIFACT_REL_PATH,
+    Buffer.byteLength(slimRaw),
+    LIST_ARTIFACT_MIN_BYTES,
+    LIST_ARTIFACT_MAX_BYTES
+  );
+  if (budgetError) errors.push(budgetError);
+  errors.push(...verifyDroppedFields(slimRaw));
+  errors.push(...(await verifyFullArtifact()));
+  return errors;
 }
 
 /**
@@ -275,11 +367,8 @@ async function verifyRoute(expectation: RouteExpectation): Promise<string[]> {
       ? [`${relPath}: file not found (${comment})`]
       : [`${relPath}: failed to read file — ${String(error)} (${comment})`];
   }
-  if (html.length < minBytes || html.length > maxBytes) {
-    errors.push(
-      `${relPath}: ${html.length} bytes is outside budget [${minBytes}, ${maxBytes}] (${comment})`
-    );
-  }
+  const budgetError = byteBudgetError(relPath, html.length, minBytes, maxBytes);
+  if (budgetError) errors.push(`${budgetError} (${comment})`);
   const rootIndex = html.indexOf(NEXT_ROOT_OPEN);
   if (rootIndex === -1) {
     errors.push(`${relPath}: no ${NEXT_ROOT_OPEN} root found (${comment})`);

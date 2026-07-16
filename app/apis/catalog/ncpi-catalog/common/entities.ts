@@ -17,7 +17,9 @@ export interface NCPIStudy extends DbGapStudy {
   consentLongNames: Record<string, string>;
   duosUrl: string | null;
   platforms: PLATFORM[];
-  variableSummary: VariableSummary | null;
+  // Optional: dropped from the slimmed studies list artifact (epic #425 stage
+  // 3b); present on the full catalog that feeds the detail pages.
+  variableSummary?: VariableSummary | null;
 }
 
 // eslint-disable-next-line sonarjs/redundant-type-aliases -- DbGapId is a semantic alias documenting that these strings are dbGaP study identifiers
@@ -69,7 +71,10 @@ export interface NCPICatalogStudy {
   platform: PLATFORM[];
   publications: Publication[];
   studyAccession: string;
-  studyDescription: string;
+  // Optional: sourced from the slimmed list artifact for the /studies list
+  // (where it is absent — epic #425 stage 3b) and from the full catalog on the
+  // detail pages (where it is present).
+  studyDescription?: string;
   studyDesign: string[];
   title: string;
   variableSummary: VariableSummary | null;
