@@ -110,13 +110,15 @@ const STUDY_DETAIL_HTML_MAX_BYTES = 1_500_000;
  * minifies it into public/api/, which Next then includes in the export. It is
  * the sole source of the studies list, so the export must contain it — a broken
  * artifact pipeline would otherwise stay green while the deployed list fails its
- * runtime fetch. The budget is now the slim window (epic #425 stage 3b): well
- * below the ~24 MB full catalog, so a regression that ships the un-slimmed file
- * trips it. LIST_ARTIFACT_DROPPED_FIELDS are the detail-only fields the slimming
- * strips — asserted absent below so a no-op slim (size alone) can't pass.
+ * runtime fetch. The MAX is the slim window (epic #425 stage 3b): well below the
+ * ~24 MB full catalog, so a regression that ships the un-slimmed file trips it.
+ * The MIN is only a non-empty/truncation sanity floor — far below today's ~1.7 MB
+ * so a legitimate shrink (further field drops, a smaller catalog) does not
+ * false-fail. LIST_ARTIFACT_DROPPED_FIELDS are the detail-only fields the
+ * slimming strips — asserted absent below so a no-op slim (size alone) can't pass.
  */
 const LIST_ARTIFACT_REL_PATH = "api/ncpi-platform-studies.json";
-const LIST_ARTIFACT_MIN_BYTES = 1_000_000;
+const LIST_ARTIFACT_MIN_BYTES = 250_000;
 const LIST_ARTIFACT_MAX_BYTES = 5_000_000;
 const LIST_ARTIFACT_DROPPED_FIELDS = [
   "description",

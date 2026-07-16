@@ -38,10 +38,19 @@ if (!srcPath || !destPath) {
   process.exit(1);
 }
 
-// Project each raw study record down to the kept list fields.
+// Project each raw study record down to the kept list fields. Shape checks keep
+// a corrupted catalog from failing with a low-signal TypeError.
 const raw = JSON.parse(readFileSync(srcPath, "utf8"));
+if (typeof raw !== "object" || raw === null || Array.isArray(raw)) {
+  console.error(`${srcPath}: expected a JSON object keyed by study`);
+  process.exit(1);
+}
 const slim = {};
 for (const [id, study] of Object.entries(raw)) {
+  if (typeof study !== "object" || study === null || Array.isArray(study)) {
+    console.error(`${srcPath}: study ${id} is not an object`);
+    process.exit(1);
+  }
   const record = {};
   for (const field of KEEP_FIELDS) {
     if (field in study) record[field] = study[field];
