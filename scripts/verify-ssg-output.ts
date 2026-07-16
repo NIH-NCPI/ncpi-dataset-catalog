@@ -31,6 +31,11 @@ const BODY_EXPECTATION = {
 
 type BodyExpectation = (typeof BODY_EXPECTATION)[keyof typeof BODY_EXPECTATION];
 
+interface KnownStudy {
+  id: string;
+  note: string;
+}
+
 interface RouteExpectation {
   body: BodyExpectation;
   comment: string;
@@ -111,13 +116,21 @@ const LIST_ARTIFACT_MIN_BYTES = 10_000_000;
 const LIST_ARTIFACT_MAX_BYTES = 40_000_000;
 
 /**
- * A known dbGaP id with variables and selected-publications subpages, used to
- * spot-check both prerendered study detail route families (`/studies/<id>`
- * and `/research/studies/<id>`, 8,832 paths each). If this study is ever
- * dropped from the catalog, swap in any other id present in
- * `catalog/ncpi-platform-studies.json`.
+ * dbGaP ids with variables and selected-publications subpages, spot-checked
+ * across both prerendered study detail route families (`/studies/<id>` and
+ * `/research/studies/<id>`, 8,832 paths each). Two are checked so the budget is
+ * exercised at both ends: phs000220 is a typical small study, and phs000209 is
+ * the most-published study in the catalog (635 publications, ~760 KB) that
+ * STUDY_DETAIL_HTML_MAX_BYTES was sized against — without it the ceiling is
+ * never actually tested, so a regression that bloats heavy studies would pass.
+ * If either is dropped from the catalog, swap in another id present in
+ * `catalog/ncpi-platform-studies.json` (a small study, and the heaviest by
+ * publication count, respectively).
  */
-const KNOWN_STUDY_ID = "phs000220";
+const KNOWN_STUDY_IDS: KnownStudy[] = [
+  { id: "phs000220", note: "typical study" },
+  { id: "phs000209", note: "heaviest study — 635 publications, ~760 KB" },
+];
 
 /**
  * The two prerendered study detail route families, both server-rendered and
@@ -153,21 +166,24 @@ const STUDY_DETAIL_TABS: StudyDetailTab[] = [
 ];
 
 /**
- * Builds the expectation for one study detail tab of the given route family.
+ * Builds the expectation for one study detail tab of the given route family
+ * and spot-checked study.
  * @param family - Study detail route family to build the expectation for.
+ * @param study - Spot-checked study to build the expectation for.
  * @param tab - Study detail tab to build the expectation for.
  * @returns Route expectation for the tab.
  */
 function buildStudyDetailExpectation(
   family: StudyDetailFamily,
+  study: KnownStudy,
   tab: StudyDetailTab
 ): RouteExpectation {
   return {
     body: BODY_EXPECTATION.RENDERED,
-    comment: `${family.comment} (${tab.label})`,
+    comment: `${family.comment} — ${study.id}, ${study.note} (${tab.label})`,
     maxBytes: family.maxBytes,
     minBytes: family.minBytes,
-    relPath: `${family.pathPrefix}${KNOWN_STUDY_ID}${tab.suffix}`,
+    relPath: `${family.pathPrefix}${study.id}${tab.suffix}`,
   };
 }
 
@@ -197,7 +213,11 @@ const ROUTE_EXPECTATIONS: RouteExpectation[] = [
     relPath: "platforms.html",
   },
   ...STUDY_DETAIL_FAMILIES.flatMap((family) =>
-    STUDY_DETAIL_TABS.map((tab) => buildStudyDetailExpectation(family, tab))
+    KNOWN_STUDY_IDS.flatMap((study) =>
+      STUDY_DETAIL_TABS.map((tab) =>
+        buildStudyDetailExpectation(family, study, tab)
+      )
+    )
   ),
 ];
 
