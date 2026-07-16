@@ -23,8 +23,9 @@ import { publicationsMainColumn } from "../detail/study/publicationsMainColumn";
 import { top } from "../detail/study/top";
 import { variablesMainColumn } from "../detail/study/variablesMainColumn";
 
-// Runtime data source for the studies list (SS_FETCH_CS_FILTERING), copied into
-// the export by scripts/sync-api.sh.
+// Runtime data source for the studies list (SS_FETCH_CS_FILTERING).
+// scripts/sync-api.sh copies it from catalog/ into public/api/, which Next then
+// includes in the export.
 const STUDIES_LIST_API_PATH = "/api/ncpi-platform-studies.json";
 
 /**

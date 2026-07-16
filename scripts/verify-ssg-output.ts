@@ -104,12 +104,12 @@ const STUDY_DETAIL_HTML_MIN_BYTES = 10_000;
 const STUDY_DETAIL_HTML_MAX_BYTES = 1_500_000;
 
 /**
- * The studies list JSON served at runtime (the studies entity's apiPath,
- * copied into the export by scripts/sync-api.sh). It is now the sole source
- * of the studies list, so the export must contain it — a broken artifact
- * pipeline would otherwise stay green while the deployed list fails its
- * runtime fetch. The size window flips to small when the list JSON is
- * slimmed (see epic #425).
+ * The studies list JSON served at runtime (the studies entity's apiPath).
+ * scripts/sync-api.sh copies it from catalog/ into public/api/, which Next then
+ * includes in the export. It is now the sole source of the studies list, so the
+ * export must contain it — a broken artifact pipeline would otherwise stay green
+ * while the deployed list fails its runtime fetch. The size window flips to
+ * small when the list JSON is slimmed (see epic #425).
  */
 const LIST_ARTIFACT_REL_PATH = "api/ncpi-platform-studies.json";
 const LIST_ARTIFACT_MIN_BYTES = 10_000_000;
