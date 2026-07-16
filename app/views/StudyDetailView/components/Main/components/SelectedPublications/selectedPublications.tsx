@@ -1,5 +1,6 @@
 import { RoundedPaper } from "@databiosphere/findable-ui/lib/components/common/Paper/components/RoundedPaper/roundedPaper";
 import { JSX } from "react";
+import { STUDY_DETAIL_SUBPATH } from "../../../../constants";
 import { StyledPublications } from "./selectedPublications.styles";
 import { Props } from "./types";
 
@@ -14,7 +15,7 @@ export const SelectedPublications = ({
   study,
   subpath,
 }: Props): JSX.Element | null => {
-  if (subpath !== "selected-publications") return null;
+  if (subpath !== STUDY_DETAIL_SUBPATH.SELECTED_PUBLICATIONS) return null;
   return (
     <StyledPublications
       Paper={RoundedPaper}

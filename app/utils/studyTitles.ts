@@ -2,6 +2,7 @@ import fs from "fs";
 
 import { Publication } from "../apis/catalog/common/entities";
 import { VariableSummary } from "../apis/catalog/ncpi-catalog/common/entities";
+import { STUDY_DETAIL_SUBPATH } from "../views/StudyDetailView/constants";
 
 const MAX_CATEGORIES_SHOWN = 3;
 const MAX_DATA_TYPES_SHOWN = 2;
@@ -101,8 +102,8 @@ function getStudyMeta(): Map<string, StudyMeta> {
 }
 
 const SUBPATH_LABELS: Record<string, string> = {
-  "selected-publications": "Selected Publications",
-  variables: "Variables",
+  [STUDY_DETAIL_SUBPATH.SELECTED_PUBLICATIONS]: "Selected Publications",
+  [STUDY_DETAIL_SUBPATH.VARIABLES]: "Variables",
 };
 
 /**
@@ -228,10 +229,10 @@ export function getStudyPageMeta(
   let pageDescription: string | undefined;
 
   if (meta) {
-    if (subpath === "variables") {
+    if (subpath === STUDY_DETAIL_SUBPATH.VARIABLES) {
       pageDescription =
         buildVariablesDescription(meta) ?? buildOverviewDescription(meta);
-    } else if (subpath === "selected-publications") {
+    } else if (subpath === STUDY_DETAIL_SUBPATH.SELECTED_PUBLICATIONS) {
       pageDescription =
         buildPublicationsDescription(meta) ?? buildOverviewDescription(meta);
     } else {

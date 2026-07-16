@@ -14,7 +14,8 @@
  *   "fix" it.
  * - `/studies/<id>` pages must keep baking the study into `__NEXT_DATA__`
  *   (props.data feeds the detail view statically); `/research/studies/<id>`
- *   pages carry no baked study — the view reads the workflows store.
+ *   pages bake a per-tab slice of the study into `__NEXT_DATA__`
+ *   (props.study feeds the detail view).
  * - `/`, `/platforms`, `/studies/<id>` and `/research/studies/<id>` are blank
  *   only until the `_app` entities gate is deleted, which flips them to
  *   server-rendered HTML.
@@ -86,6 +87,16 @@ const STUDY_DETAIL_HTML_MIN_BYTES = 10_000;
 const STUDY_DETAIL_HTML_MAX_BYTES = 150_000;
 
 /**
+ * `/research/studies/<id>` pages are blank-bodied but bake a per-tab study
+ * slice into `__NEXT_DATA__`. Most slices are a few KB, but the
+ * selected-publications slice carries the study's full publication list,
+ * which reaches ~200 KB for the most published study in today's catalog —
+ * so this family needs a ceiling above the blank-shell budget that still
+ * catches a whole-catalog or full-study regression.
+ */
+const RESEARCH_STUDY_DETAIL_HTML_MAX_BYTES = 250_000;
+
+/**
  * The studies list JSON served at runtime (the studies entity's apiPath,
  * copied into the export by scripts/sync-api.sh). It is now the sole source
  * of the studies list, so the export must contain it — a broken artifact
@@ -108,8 +119,11 @@ const KNOWN_STUDY_ID = "phs000220";
 
 /**
  * The two prerendered study detail route families:
- * - `/research/studies/<id>` carries no baked study — the view reads the
- *   workflows store client-side — so it is a plain blank shell.
+ * - `/research/studies/<id>` bakes a per-tab slice of the study into
+ *   `__NEXT_DATA__` (typically a few KB; the selected-publications slice
+ *   scales with the publication list — see
+ *   RESEARCH_STUDY_DETAIL_HTML_MAX_BYTES); the body stays blank until the
+ *   `_app` gate is deleted.
  * - `/studies/<id>` is linked from the studies list and must keep baking the
  *   study into `__NEXT_DATA__` (props.data feeds the detail view statically);
  *   hence its minimum byte budget.
@@ -117,7 +131,7 @@ const KNOWN_STUDY_ID = "phs000220";
 const STUDY_DETAIL_FAMILIES: StudyDetailFamily[] = [
   {
     comment: "research study detail — blank until the _app gate is deleted",
-    maxBytes: BLANK_SHELL_MAX_BYTES,
+    maxBytes: RESEARCH_STUDY_DETAIL_HTML_MAX_BYTES,
     minBytes: 0,
     pathPrefix: "research/studies/",
   },
