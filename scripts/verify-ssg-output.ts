@@ -262,6 +262,17 @@ function byteBudgetError(
 }
 
 /**
+ * Describes a parsed JSON value's shape for guardrail error messages.
+ * @param value - Parsed value.
+ * @returns Human-readable shape (e.g. "null", "an array", "a string").
+ */
+function describeShape(value: unknown): string {
+  if (value === null) return "null";
+  if (Array.isArray(value)) return "an array";
+  return `a ${typeof value}`;
+}
+
+/**
  * Classifies the content following the root div open tag as blank.
  * @param rootContent - Content immediately following the root div open tag.
  * @returns True when the root div holds nothing but whitespace or comments.
@@ -272,19 +283,38 @@ function isBlankRootContent(rootContent: string): boolean {
 }
 
 /**
+ * Type guard for a plain (non-null, non-array) object.
+ * @param value - Value to test.
+ * @returns True when the value is a non-null, non-array object.
+ */
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+/**
  * Asserts no slim-artifact record still carries a dropped detail-only field, so
  * a slim step that ran but stripped nothing cannot pass on size alone.
  * @param slimRaw - Raw slim artifact JSON text.
  * @returns Error messages for the artifact; empty when every record is stripped.
  */
 function verifyDroppedFields(slimRaw: string): string[] {
-  let records: Record<string, Record<string, unknown>>;
+  let parsed: unknown;
   try {
-    records = JSON.parse(slimRaw);
+    parsed = JSON.parse(slimRaw);
   } catch (error) {
     return [`${LIST_ARTIFACT_REL_PATH}: not valid JSON — ${String(error)}`];
   }
-  for (const [id, record] of Object.entries(records)) {
+  if (!isRecord(parsed)) {
+    return [
+      `${LIST_ARTIFACT_REL_PATH}: expected a JSON object keyed by study, got ${describeShape(parsed)}`,
+    ];
+  }
+  for (const [id, record] of Object.entries(parsed)) {
+    if (!isRecord(record)) {
+      return [
+        `${LIST_ARTIFACT_REL_PATH}: study ${id} is not an object (${describeShape(record)})`,
+      ];
+    }
     for (const field of LIST_ARTIFACT_DROPPED_FIELDS) {
       if (field in record) {
         return [

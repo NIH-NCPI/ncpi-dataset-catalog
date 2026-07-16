@@ -7,9 +7,11 @@ export interface DbGapStudy {
   description?: string;
   focus: string;
   gdcProjectId?: string;
-  numChildren: number;
-  parentStudyId: string | null;
-  parentStudyName: string | null;
+  // Optional: dropped from the slimmed studies list artifact (epic #425 stage
+  // 3b); present on the full catalog that feeds the detail pages.
+  numChildren?: number;
+  parentStudyId?: string | null;
+  parentStudyName?: string | null;
   participantCount: number;
   // Optional: dropped from the slimmed studies list artifact (epic #425 stage
   // 3b); present on the full catalog that feeds the detail pages.
