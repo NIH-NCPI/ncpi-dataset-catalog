@@ -2,9 +2,15 @@ import {
   sanitizeString,
   sanitizeStringArray,
 } from "@databiosphere/findable-ui/lib/viewModelBuilders/common/utils";
-import { NCPICatalogPlatform, NCPICatalogStudy, NCPIStudy } from "./entities";
+import {
+  NCPICatalogPlatform,
+  NCPICatalogStudy,
+  NCPIStudyMapperInput,
+} from "./entities";
 
-export function NCPIStudyInputMapper(ncpiStudy: NCPIStudy): NCPICatalogStudy {
+export function NCPIStudyInputMapper(
+  ncpiStudy: NCPIStudyMapperInput
+): NCPICatalogStudy {
   const ncpiCatalogStudy: NCPICatalogStudy = {
     consentCode: sanitizeStringArray(ncpiStudy.consentCodes),
     consentLongName: ncpiStudy.consentLongNames,

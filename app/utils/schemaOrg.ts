@@ -89,7 +89,9 @@ export function buildStudyJsonLd(
   const jsonLd: SchemaDataset = {
     "@context": "https://schema.org",
     "@type": "Dataset",
-    description: truncateDescription(stripHtmlTags(study.studyDescription)),
+    description: truncateDescription(
+      stripHtmlTags(study.studyDescription ?? "")
+    ),
     identifier: [study.dbGapId, study.studyAccession],
     includedInDataCatalog: {
       "@type": "DataCatalog",
