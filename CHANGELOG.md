@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.21.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.20.0...v0.21.0) (2026-07-17)
+
+
+### Features
+
+* stage 0: ssg output-shape guardrail (lock in current blank-html baseline) ([#426](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/426)) ([#431](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/431)) ([4dd8e12](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/4dd8e120e5488772867f293a765ae474db79085a))
+* stage 1: thread the study through getstaticprops (no-op for users) ([#428](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/428)) ([#433](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/433)) ([6be7100](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/6be7100f5dd2ebe8dd9a1172999bb361e8ac50d8))
+* stage 2: delete the _app entities gate + dead workflows store ([#429](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/429)) ([#434](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/434)) ([a97da11](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/a97da115786fc06391fccae2d55e23d5082dc8e0))
+* stage 3a: switch studies list to ss_fetch_cs_filtering (full json, no slimming) ([#427](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/427)) ([#432](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/432)) ([4d5145e](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/4d5145e3a39dd1cc299bad8ddd6275346088ea4a))
+* stage 3b: slim + minify the studies list json artifact ([#430](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/430)) ([#435](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/435)) ([70fdbbb](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/70fdbbb54eee3fa2e9634ab10643d6bc6fcb7ede))
+
+
+### Bug Fixes
+
+* intra-facet OR returns zero results; explain impossible same-facet AND ([#363](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/363)) ([#417](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/417)) ([b68d297](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/b68d29740f4605ec35582e2fe109df47de052b82))
+* typecheck fails while dev server is running ([#419](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/419)) ([#424](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/424)) ([7e37ce2](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/7e37ce20be1e79cfe292bb8eefd860469976665b))
+
+
+### Chores
+
+* delete prompt files orphaned by the pipeline removal ([#421](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/421)) ([#423](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/423)) ([e0fb4a4](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/e0fb4a49ef34574910d02d699006b08187b2a053))
+
 ## [0.20.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.19.0...v0.20.0) (2026-07-09)
 
 
