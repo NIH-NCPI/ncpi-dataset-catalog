@@ -10,25 +10,7 @@
 
 import { readFileSync, writeFileSync } from "fs";
 
-// Fields kept on each slim record: only the raw fields NCPIStudyInputMapper
-// reads to build the list rows. consentLongNames is kept so the consent-code
-// column keeps its tooltip. The detail-only fields (description, publications,
-// variableSummary) are intentionally omitted — the detail pages source those
-// from props instead.
-const KEEP_FIELDS = [
-  "consentCodes",
-  "consentLongNames",
-  "dataTypes",
-  "dbGapId",
-  "duosUrl",
-  "focus",
-  "gdcProjectId",
-  "participantCount",
-  "platforms",
-  "studyAccession",
-  "studyDesigns",
-  "title",
-];
+import { KEEP_FIELDS } from "./list-artifact-fields.mjs";
 
 const [, , srcPath, destPath] = process.argv;
 if (!srcPath || !destPath) {

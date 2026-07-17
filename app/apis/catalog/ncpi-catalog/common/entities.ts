@@ -17,10 +17,35 @@ export interface NCPIStudy extends DbGapStudy {
   consentLongNames: Record<string, string>;
   duosUrl: string | null;
   platforms: PLATFORM[];
-  // Optional: dropped from the slimmed studies list artifact (epic #425 stage
-  // 3b); present on the full catalog that feeds the detail pages.
-  variableSummary?: VariableSummary | null;
+  variableSummary: VariableSummary | null;
 }
+
+/**
+ * Fields the slimmed studies list artifact omits — kept only in the full
+ * catalog that feeds the detail pages (epic #425 stage 3b; see
+ * scripts/slim-list-artifact.mjs, whose KEEP_FIELDS is the complement of this).
+ */
+export const SLIM_DROPPED_FIELDS = [
+  "description",
+  "numChildren",
+  "parentStudyId",
+  "parentStudyName",
+  "publications",
+  "variableSummary",
+] as const;
+
+/**
+ * Input accepted by NCPIStudyInputMapper: either a full NCPIStudy (detail
+ * pages, from the full catalog) or a slim studies-list record fetched at
+ * runtime, which omits SLIM_DROPPED_FIELDS. Keeping NCPIStudy/DbGapStudy strict
+ * means catalog-build still fails to typecheck if it drops any of these from the
+ * full catalog; only this mapper boundary tolerates their absence.
+ */
+export type NCPIStudyMapperInput = Omit<
+  NCPIStudy,
+  (typeof SLIM_DROPPED_FIELDS)[number]
+> &
+  Partial<Pick<NCPIStudy, (typeof SLIM_DROPPED_FIELDS)[number]>>;
 
 // eslint-disable-next-line sonarjs/redundant-type-aliases -- DbGapId is a semantic alias documenting that these strings are dbGaP study identifiers
 export type DbGapId = string;
