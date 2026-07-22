@@ -24,6 +24,7 @@ const config = [
       "analytics/**",
       "catalog/**",
       "catalog-build/**",
+      "coverage/**",
       ".gitlab/**",
       "next-env.d.ts",
       "next.config.mjs",
