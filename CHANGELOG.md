@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.21.2](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.21.1...v0.21.2) (2026-07-22)
+
+
+### Bug Fixes
+
+* never commit intent=ambiguous with a non-empty query ([#441](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/441)) ([#445](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/445)) ([5602663](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/560266361378fb3f671e854a89a206134aa3c3d3))
+
+
+### Chores
+
+* ignore coverage/ in ESLint config ([#446](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/446)) ([#447](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/447)) ([9f26b4b](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/9f26b4b917b245aa1a6c7114cdf5ea80e694d649))
+* reduce npm install deprecation warnings ([#437](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/437)) ([#442](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/442)) ([16e3dff](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/16e3dffd6d7c85b0031e2c7ac792a0c9e79dd976))
+
 ## [0.21.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.21.0...v0.21.1) (2026-07-22)
 
 
