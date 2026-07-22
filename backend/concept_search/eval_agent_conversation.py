@@ -256,6 +256,17 @@ SCENARIOS: list[Scenario] = [
         lambda q, _r: len(_on(q, Facet.DATA_TYPE)) == 2 and _studies(q) == 118,
     ),
     Scenario(
+        # Terse "X and Y" phrasing must behave identically to the verbose form
+        # above (#441): the agent used to commit these mentions while tagging
+        # intent=ambiguous, so execution short-circuited to 0 and was narrated as
+        # an "impossible" combination. A committed query is never ambiguous.
+        "and-terse-datatype",
+        ["WGS and WXS"],
+        lambda q, _r: (
+            len(_on(q, Facet.DATA_TYPE)) == 2 and q.intent != "ambiguous" and _studies(q) == 118
+        ),
+    ),
+    Scenario(
         # platform is multi-valued too: 6 studies span two platforms, so an
         # intersection is a real answer. "both" makes the AND unambiguous.
         "and-platform-intersects",

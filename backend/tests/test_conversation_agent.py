@@ -139,6 +139,43 @@ def test_update_query_sets_intent() -> None:
     assert ctx.deps.query_state.intent == "variable"
 
 
+def test_update_query_coerces_ambiguous_intent_on_committed_query() -> None:
+    """A committed query is never intent=ambiguous (#441).
+
+    Committing concrete facets with intent=ambiguous is a contradiction:
+    execute_query_model short-circuits ambiguous to an empty result, which the
+    agent then narrates as a false "0 results / impossible". The commit must
+    coerce intent to study so the summary reports the real count, not 0.
+    """
+    index = _FakeIndex(studies=[{"dbGapId": "phs1", "title": "S1", "focus": "X"}])
+    ctx = _ctx(index)
+    out = update_query(
+        ctx,
+        add=[MentionInput(facet=Facet.DATA_TYPE, original_text="WGS", values=["WGS"])],
+        intent="ambiguous",
+    )
+    assert ctx.deps.query_state.intent == "study"
+    assert out["intent"] == "study"
+    assert out["total_studies"] == 1
+
+
+def test_update_query_coerces_ambiguous_measurement_only_to_variable() -> None:
+    """A committed measurement-only ambiguous query coerces to variable, not study.
+
+    The intent a mislabeled query is coerced to must match the facets it holds: a
+    query whose only committed filter is a measurement concept is a variable
+    lookup, so coercing it to "study" would return the wrong result type (#441).
+    """
+    ctx = _ctx(_FakeIndex())
+    out = update_query(
+        ctx,
+        add=[MentionInput(facet=Facet.MEASUREMENT, original_text="glucose", values=["gluc"])],
+        intent="ambiguous",
+    )
+    assert ctx.deps.query_state.intent == "variable"
+    assert out["intent"] == "variable"
+
+
 def test_update_query_reset_clears_filters_and_pending() -> None:
     """reset=True drops all prior filters and pending choices before applying."""
     ctx = _ctx(_FakeIndex())
