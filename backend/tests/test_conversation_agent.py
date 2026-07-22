@@ -176,6 +176,22 @@ def test_update_query_coerces_ambiguous_measurement_only_to_variable() -> None:
     assert out["intent"] == "variable"
 
 
+def test_update_query_leaves_ambiguous_when_no_values_committed() -> None:
+    """A value-less mention commits no filter, so intent stays ambiguous (#441).
+
+    "ambiguous" means "no committed facets — ask the user". A mention carrying no
+    resolved values has not committed a filter, so the coercion must not fire;
+    firing would force a misleading 0-result study search over an empty query.
+    """
+    ctx = _ctx(_FakeIndex())
+    update_query(
+        ctx,
+        add=[MentionInput(facet=Facet.FOCUS, original_text="x", values=[])],
+        intent="ambiguous",
+    )
+    assert ctx.deps.query_state.intent == "ambiguous"
+
+
 def test_update_query_reset_clears_filters_and_pending() -> None:
     """reset=True drops all prior filters and pending choices before applying."""
     ctx = _ctx(_FakeIndex())

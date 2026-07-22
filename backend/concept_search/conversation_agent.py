@@ -439,17 +439,22 @@ def update_query(
 
     # A committed query is never intent-"ambiguous". "ambiguous" means "run no
     # lookup; ask the user what they meant" (execute_query_model short-circuits to
-    # empty), which contradicts having concrete facets to search on. Left as-is,
-    # the empty result is narrated back as a real "0 results / impossible" answer.
-    # Coerce to the intent the committed facets imply so the summary, the persisted
-    # state, and the API response all report real counts: a query whose only
-    # committed filters are measurement concepts is a variable lookup; anything
-    # carrying a study-level facet is a study search.
-    if query_state.mentions and query_state.intent == "ambiguous":
-        committed = [m for m in query_state.mentions if m.values and not m.exclude]
+    # empty), which contradicts having committed filter values to search on. Left
+    # as-is, the empty result is narrated back as a real "0 results / impossible"
+    # answer. A mention with no resolved values commits no filter, so gate on
+    # actual values, not on mere mention presence.
+    #
+    # Coerce to a concrete intent so the summary, the persisted state, and the API
+    # response all report real counts. This is a best-effort default for a
+    # mislabeled commit, not a claim about what execute_query_model can run: it
+    # handles variable intent with study-level constraints too, but the agent is
+    # meant to set that explicitly. The heuristic: committed includes that are all
+    # measurement concepts read as a variable lookup; otherwise default to study.
+    if query_state.intent == "ambiguous" and any(m.values for m in query_state.mentions):
+        includes = [m for m in query_state.mentions if m.values and not m.exclude]
         coerced: Intent = (
             "variable"
-            if committed and all(m.facet == Facet.MEASUREMENT for m in committed)
+            if includes and all(m.facet == Facet.MEASUREMENT for m in includes)
             else "study"
         )
         logger.warning(
