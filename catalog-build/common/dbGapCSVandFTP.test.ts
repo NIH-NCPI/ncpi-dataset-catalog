@@ -1,9 +1,4 @@
 // Mock dependencies that use ESM syntax
-jest.mock("node-fetch", () => ({
-  __esModule: true,
-  default: jest.fn(),
-}));
-
 jest.mock("./dbGaP", () => ({
   markdownToHTML: jest.fn((s: string) => s),
 }));
@@ -12,7 +7,6 @@ jest.mock("./utils", () => ({
   delayFetch: jest.fn(),
 }));
 
-import fetch from "node-fetch";
 import { DbGapCSVRow } from "../entities";
 import {
   getLatestVersionXmlUrl,
@@ -30,7 +24,8 @@ import {
   sortVersions,
 } from "./dbGapCSVandFTP";
 
-const mockFetch = fetch as jest.MockedFunction<typeof fetch>;
+const mockFetch = jest.fn();
+global.fetch = mockFetch as unknown as typeof fetch;
 
 describe("parseConsentCodes", () => {
   it("parses multiple consent codes with complex descriptions", () => {
