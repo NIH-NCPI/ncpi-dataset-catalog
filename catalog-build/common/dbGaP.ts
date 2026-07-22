@@ -1,6 +1,5 @@
 import { Bundle, Coding, Extension, ResearchStudy } from "fhir/r4";
 import { decode } from "html-entities";
-import fetch, { Response } from "node-fetch";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import rehypeStringify from "rehype-stringify";

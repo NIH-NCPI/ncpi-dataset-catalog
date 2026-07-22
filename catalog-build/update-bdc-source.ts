@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import { Platform } from "./constants";
 import {
   getPlatformStudiesStudyIds,

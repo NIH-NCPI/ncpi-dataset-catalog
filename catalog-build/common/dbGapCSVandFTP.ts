@@ -1,5 +1,4 @@
 import { decode } from "html-entities";
-import fetch from "node-fetch";
 import { DbGapStudy } from "../../app/apis/catalog/common/entities";
 import { DbGapCSVRow } from "../entities";
 import { markdownToHTML } from "./dbGaP";

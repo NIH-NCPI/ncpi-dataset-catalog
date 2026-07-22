@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import { DbGapId } from "../app/apis/catalog/ncpi-catalog/common/entities";
 import { Platform } from "./constants";
 import {
