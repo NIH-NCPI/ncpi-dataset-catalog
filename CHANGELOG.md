@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.21.0...v0.21.1) (2026-07-22)
+
+
+### Bug Fixes
+
+* turn-aware history truncation to prevent orphaned tool-return 400 ([#438](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/438)) ([#439](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/439)) ([3e99c30](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/3e99c3039fc47575f6007613b3c20bad9f1b12ad))
+
 ## [0.21.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.20.0...v0.21.0) (2026-07-17)
 
 
