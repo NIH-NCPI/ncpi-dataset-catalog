@@ -145,16 +145,24 @@ def _turns(count: int) -> list:
 
 
 def _assert_valid_sequence(messages: list) -> None:
-    """Assert no tool-return precedes its tool-call — the API's 400 condition."""
-    seen_calls: set[str] = set()
-    for message in messages:
-        for part in message.parts:
-            if isinstance(part, ToolCallPart):
-                seen_calls.add(part.tool_call_id)
-            elif isinstance(part, ToolReturnPart):
-                assert part.tool_call_id in seen_calls, (
-                    f"orphaned tool-return {part.tool_call_id!r} with no preceding tool-call"
-                )
+    """Assert every tool-return's tool-call sits in the immediately preceding message.
+
+    This is the exact Anthropic 400 condition: a ``tool_result`` must have its
+    ``tool_use`` in the *previous* message, not merely somewhere earlier.
+    """
+    for i, message in enumerate(messages):
+        returns = [p.tool_call_id for p in message.parts if isinstance(p, ToolReturnPart)]
+        if not returns:
+            continue
+        prev_calls = (
+            {p.tool_call_id for p in messages[i - 1].parts if isinstance(p, ToolCallPart)}
+            if i > 0
+            else set()
+        )
+        for tool_call_id in returns:
+            assert tool_call_id in prev_calls, (
+                f"tool-return {tool_call_id!r} has no matching tool-call in the previous message"
+            )
 
 
 def test_truncate_history_keeps_first_and_recent_turns() -> None:
