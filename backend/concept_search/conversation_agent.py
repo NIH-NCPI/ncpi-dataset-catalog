@@ -14,6 +14,7 @@ drives it is wired separately.
 from __future__ import annotations
 
 import asyncio
+import logging
 import os
 import re
 import threading
@@ -42,6 +43,8 @@ from .models import (
 )
 from .resolve_agent import run_resolve
 from .search_execution import execute_query_model
+
+logger = logging.getLogger(__name__)
 
 # Study-dict field backing each facet, for query_catalog aggregation.
 # (No SQL GROUP BY exists today — we aggregate from returned study dicts.)
@@ -433,6 +436,33 @@ def update_query(
     query_state.mentions = mentions
     if intent is not None:
         query_state.intent = intent
+
+    # A committed query is never intent-"ambiguous". "ambiguous" means "run no
+    # lookup; ask the user what they meant" (execute_query_model short-circuits to
+    # empty), which contradicts having committed filter values to search on. Left
+    # as-is, the empty result is narrated back as a real "0 results / impossible"
+    # answer. A mention with no resolved values commits no filter, so gate on
+    # actual values, not on mere mention presence.
+    #
+    # Coerce to a concrete intent so the summary, the persisted state, and the API
+    # response all report real counts. This is a best-effort default for a
+    # mislabeled commit, not a claim about what execute_query_model can run: it
+    # handles variable intent with study-level constraints too, but the agent is
+    # meant to set that explicitly. The heuristic: committed includes that are all
+    # measurement concepts read as a variable lookup; otherwise default to study.
+    if query_state.intent == "ambiguous" and any(m.values for m in query_state.mentions):
+        includes = [m for m in query_state.mentions if m.values and not m.exclude]
+        coerced: Intent = (
+            "variable"
+            if includes and all(m.facet == Facet.MEASUREMENT for m in includes)
+            else "study"
+        )
+        logger.warning(
+            "coerced intent=ambiguous to %s on a committed query (%d mentions)",
+            coerced,
+            len(query_state.mentions),
+        )
+        query_state.intent = coerced
 
     # A term that was just committed or dropped is no longer an open choice.
     touched = {t.lower() for t in (remove or [])} | {i.original_text.lower() for i in (add or [])}
