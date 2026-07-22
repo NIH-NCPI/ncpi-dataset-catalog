@@ -5,6 +5,15 @@ from __future__ import annotations
 import os
 
 import pytest
+from pydantic_ai.messages import (
+    ModelRequest,
+    ModelResponse,
+    SystemPromptPart,
+    TextPart,
+    ToolCallPart,
+    ToolReturnPart,
+    UserPromptPart,
+)
 
 from concept_search import session_store as session_store_module
 from concept_search.models import (
@@ -18,6 +27,7 @@ from concept_search.session_store import (
     InMemorySessionStore,
     SessionState,
     SessionStore,
+    _is_turn_start,
     get_session_store,
     truncate_history,
 )
@@ -93,22 +103,119 @@ async def test_pending_round_trips() -> None:
     assert got.pending == state.pending
 
 
-def test_truncate_history_keeps_first_and_recent() -> None:
-    """truncate_history keeps the first message plus the most recent N."""
-    messages = list(range(10))
-    assert truncate_history(messages, 3) == [0, 7, 8, 9]
+def _user_turn(text: str, *, system: bool = False) -> ModelRequest:
+    """A request that opens a user turn (optionally carrying the system prompt)."""
+    parts: list = [SystemPromptPart(content="you are a search assistant")] if system else []
+    parts.append(UserPromptPart(content=text))
+    return ModelRequest(parts=parts)
+
+
+def _tool_call(tool_call_id: str) -> ModelResponse:
+    """An assistant response that calls ``update_query``."""
+    return ModelResponse(
+        parts=[ToolCallPart(args={}, tool_call_id=tool_call_id, tool_name="update_query")]
+    )
+
+
+def _tool_return(tool_call_id: str) -> ModelRequest:
+    """The request delivering a tool result back to the model."""
+    return ModelRequest(
+        parts=[ToolReturnPart(content="ok", tool_call_id=tool_call_id, tool_name="update_query")]
+    )
+
+
+def _text_reply(text: str) -> ModelResponse:
+    """An assistant response with a plain text reply."""
+    return ModelResponse(parts=[TextPart(content=text)])
+
+
+def _turns(count: int) -> list:
+    """Build ``count`` full turns: user → tool-call → tool-return → text reply.
+
+    The first turn also carries the system prompt, mirroring pydantic-ai. Each
+    tool-call/tool-return pair shares a unique id so orphaning can be detected.
+    """
+    history: list = []
+    for i in range(count):
+        history.append(_user_turn(f"turn {i}", system=(i == 0)))
+        history.append(_tool_call(f"call-{i}"))
+        history.append(_tool_return(f"call-{i}"))
+        history.append(_text_reply(f"reply {i}"))
+    return history
+
+
+def _assert_valid_sequence(messages: list) -> None:
+    """Assert no tool-return precedes its tool-call — the API's 400 condition."""
+    seen_calls: set[str] = set()
+    for message in messages:
+        for part in message.parts:
+            if isinstance(part, ToolCallPart):
+                seen_calls.add(part.tool_call_id)
+            elif isinstance(part, ToolReturnPart):
+                assert part.tool_call_id in seen_calls, (
+                    f"orphaned tool-return {part.tool_call_id!r} with no preceding tool-call"
+                )
+
+
+def test_truncate_history_keeps_first_and_recent_turns() -> None:
+    """Truncation keeps the original intent plus the most recent ``max_turns`` turns."""
+    history = _turns(5)  # 20 messages, 5 user turns
+    result = truncate_history(history, 2)
+    # First message (system + original intent) is retained...
+    assert result[0] is history[0]
+    # ...and the tail resumes at a user-turn boundary (turn 3, index 12), so the
+    # kept turns are the original plus the last two.
+    assert result[1:] == history[12:]
+    assert _is_turn_start(result[1])
+    _assert_valid_sequence(result)
+
+
+def test_truncate_history_never_starts_tail_on_tool_return() -> None:
+    """A window that would open on a tool-return is cut back to a user boundary.
+
+    This is the #438 crash: a raw ``[-N:]`` slice can begin on a tool-return
+    whose tool-call was dropped, which the model API rejects with a 400.
+    """
+    history = _turns(6)
+    # A naive last-N slice landing mid-turn would begin on a tool-return.
+    naive_tail = history[-10:]
+    assert isinstance(naive_tail[0].parts[0], ToolReturnPart)
+    # Turn-aware truncation must not.
+    result = truncate_history(history, 3)
+    assert _is_turn_start(result[1])
+    _assert_valid_sequence(result)
+
+
+def test_truncate_history_replays_poisoned_session_shape() -> None:
+    """Regression for session 696f5758: long pair run truncates to a valid sequence."""
+    history = _turns(30)  # well over the retained window
+    result = truncate_history(history, 20)
+    assert result[0] is history[0]
+    assert _is_turn_start(result[1])
+    _assert_valid_sequence(result)
 
 
 def test_truncate_history_noop_within_bounds() -> None:
-    """truncate_history returns the list unchanged when within bounds."""
-    messages = [1, 2, 3]
-    assert truncate_history(messages, 5) == [1, 2, 3]
+    """Within ``max_turns`` boundaries the original list is returned unchanged."""
+    history = _turns(3)  # 3 user turns
+    assert truncate_history(history, 5) is history
 
 
 def test_truncate_history_noop_at_boundary() -> None:
-    """At first + max_messages total (len == max + 1), the original list is returned."""
-    messages = [0, 1, 2, 3, 4, 5]  # len 6 == max(5) + 1, already fits
-    assert truncate_history(messages, 5) is messages  # unchanged, not a copy
+    """At exactly ``max_turns`` turns the history already fits and is returned as-is."""
+    history = _turns(5)
+    assert truncate_history(history, 5) is history  # unchanged, not a copy
+
+
+def test_truncate_history_non_positive_keeps_only_first() -> None:
+    """``max_turns <= 0`` keeps only the original-intent message."""
+    history = _turns(4)
+    assert truncate_history(history, 0) == history[:1]
+
+
+def test_truncate_history_empty() -> None:
+    """An empty history is returned unchanged."""
+    assert truncate_history([], 20) == []
 
 
 @pytest.mark.asyncio()
