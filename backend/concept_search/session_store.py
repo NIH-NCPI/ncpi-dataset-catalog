@@ -23,6 +23,7 @@ from typing import Any, Protocol, runtime_checkable
 
 from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
+from pydantic_ai.messages import UserPromptPart
 
 from .models import ConversationMessage, PendingChoice, QueryModel
 
@@ -48,27 +49,56 @@ class SessionState(BaseModel):
     query: QueryModel | None = None
 
 
-def truncate_history(messages: list, max_messages: int) -> list:
-    """Bound the agent message history sent to the model on long conversations.
+def _is_turn_start(message: Any) -> bool:
+    """True if *message* begins a user turn: a request carrying a user prompt.
 
-    Keeps the first message (the original intent) plus the most recent
-    ``max_messages`` entries.
+    Only a ``ModelRequest`` produced from a user message holds a
+    ``UserPromptPart``, so this marks the safe boundaries to cut a history
+    on — points where no ``tool-return`` is left without its ``tool-call``.
+
+    Args:
+        message: A pydantic-ai ``ModelMessage`` (or anything exposing ``parts``).
+
+    Returns:
+        Whether the message opens a new user turn.
+    """
+    return any(isinstance(part, UserPromptPart) for part in getattr(message, "parts", []))
+
+
+def truncate_history(messages: list, max_turns: int) -> list:
+    """Bound the agent message history to the most recent ``max_turns`` turns.
+
+    Keeps the first message (the original intent) plus every message from the
+    start of the ``max_turns``-th most recent user turn onward. Cutting on a
+    user-turn boundary guarantees the retained tail never begins with an
+    orphaned ``tool-return`` (a ``tool_result`` whose ``tool_use`` lived in a
+    dropped message), which the model API rejects with a 400. A raw
+    message-count slice cannot make that guarantee.
 
     Args:
         messages: The full message history, oldest first.
-        max_messages: Maximum number of recent messages to retain. Values <= 0
+        max_turns: Maximum number of recent user turns to retain. Values <= 0
             keep only the first message.
 
     Returns:
         The truncated history, or the original list if already within bounds.
     """
-    if max_messages <= 0:
-        return messages[:1]
-    # Result is first + last max_messages, i.e. up to max_messages + 1 entries;
-    # at or below that the history already fits, so return it unchanged.
-    if len(messages) <= max_messages + 1:
+    if not messages:
         return messages
-    return messages[:1] + messages[-max_messages:]
+    if max_turns <= 0:
+        return messages[:1]
+    turn_starts = [i for i, message in enumerate(messages) if _is_turn_start(message)]
+    # At or below max_turns boundaries the history already fits — return as-is.
+    if len(turn_starts) <= max_turns:
+        return messages
+    # Cut at the start of the max_turns-th most recent turn.
+    cut = turn_starts[-max_turns]
+    # cut == 1 would re-slice into an identical list; cut == 0 (unreachable — the
+    # check above guarantees a boundary before it) would duplicate the first
+    # message. Return as-is rather than do either.
+    if cut <= 1:
+        return messages
+    return messages[:1] + messages[cut:]
 
 
 @runtime_checkable

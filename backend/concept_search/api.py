@@ -364,9 +364,10 @@ def _rate_limit_response(client_ip: str, query: str) -> JSONResponse:
     )
 
 
-# truncate_history keeps the first message plus the most recent N, so up to N+1
-# pydantic-ai messages are sent to the model (and retained in the stored history).
-_MAX_AGENT_HISTORY = 40
+# truncate_history keeps the first message (original intent) plus the most
+# recent N user turns, cutting only on turn boundaries so the retained history
+# never begins with an orphaned tool-return (which the model API 400s on).
+_MAX_AGENT_TURNS = 20
 _MAX_SESSION_MESSAGES = 50  # user/assistant text turns retained in the persisted transcript
 
 
@@ -405,9 +406,7 @@ async def search(
     deps = AgentDeps(
         index=index, query_state=state.query or QueryModel(), pending=list(state.pending)
     )
-    history = truncate_history(
-        deserialize_history(state.agent_message_history), _MAX_AGENT_HISTORY
-    )
+    history = truncate_history(deserialize_history(state.agent_message_history), _MAX_AGENT_TURNS)
 
     try:
         async with _pipeline_semaphore:
@@ -460,7 +459,7 @@ async def search(
     state.query = query_model
     state.pending = deps.pending
     state.agent_message_history = serialize_history(
-        truncate_history(new_history, _MAX_AGENT_HISTORY)
+        truncate_history(new_history, _MAX_AGENT_TURNS)
     )
     state.messages.append(ConversationMessage(content=request.query, role="user"))
     state.messages.append(ConversationMessage(content=reply, role="assistant"))
