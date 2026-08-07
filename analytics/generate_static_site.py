@@ -36,7 +36,7 @@ from constants import (
 def authenticate():
     """Authenticate using OAuth (interactive browser login)."""
     creds_path = os.environ.get(
-        "NCPI_ANALYTICS_REPORTING_CLIENT_SECRET_PATH", "../.env/ga4_credentials.json"
+        "NCPI_ANALYTICS_REPORTING_CLIENT_SECRET_PATH", "../.credentials/ga4_credentials.json"
     )
     os.environ["NCPI_ANALYTICS_REPORTING_CLIENT_SECRET_PATH"] = creds_path
 
@@ -45,11 +45,9 @@ def authenticate():
     print("Authenticating with Google Analytics via OAuth...")
     print("(A browser window will open for you to log in)")
 
-    ga_authentication, _, _ = ga.authenticate(
+    ga_authentication = ga.authenticate(
         SECRET_NAME,
         ga.ga4_service_params,
-        ga.drive_service_params,
-        ga.sheets_service_params,
         port=OAUTH_PORT,
     )
     return ga_authentication
