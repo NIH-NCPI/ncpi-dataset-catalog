@@ -22,6 +22,7 @@ import re
 from datetime import datetime
 
 import pandas as pd
+from pandas.api.types import is_object_dtype, is_string_dtype
 
 from constants import (
     CURRENT_MONTH,
@@ -45,11 +46,9 @@ def authenticate():
     print("Authenticating with Google Analytics via OAuth...")
     print("(A browser window will open for you to log in)")
 
-    ga_authentication, _, _ = ga.authenticate(
+    ga_authentication = ga.authenticate(
         SECRET_NAME,
         ga.ga4_service_params,
-        ga.drive_service_params,
-        ga.sheets_service_params,
         port=OAUTH_PORT,
     )
     return ga_authentication
@@ -57,7 +56,7 @@ def authenticate():
 
 def get_chat_submitted_change(params_current, params_prior):
     """Fetch chat_submitted event count with month-over-month change."""
-    from analytics.sheets_elements import get_data_df_from_fields
+    from analytics.report_elements import get_data_df_from_fields
     from analytics.entities import METRIC_EVENT_COUNT, DIMENSION_EVENT_NAME
 
     chat_current = get_data_df_from_fields(
@@ -115,8 +114,8 @@ SUSPICIOUS_PAGE_PATH_RE = re.compile(
 
 def fetch_data(ga_authentication):
     """Fetch analytics data using the analytics package."""
-    import analytics.sheets_elements as elements
-    from analytics.sheets_elements import get_data_df_from_fields
+    import analytics.report_elements as elements
+    from analytics.report_elements import get_data_df_from_fields
     from analytics.entities import METRIC_SESSIONS
 
     # Calculate date ranges
@@ -261,7 +260,8 @@ def _export_df_as_json(df, col_map, change_col, filename, output_dir):
 
         # Fill NaN in numeric columns with 0, cast to int
         for col in output_names:
-            if col != "change" and export[col].dtype != object:
+            col_dtype = export[col].dtype
+            if not (col == "change" or is_object_dtype(col_dtype) or is_string_dtype(col_dtype)):
                 export[col] = export[col].fillna(0).astype(int)
 
         records = export.to_dict(orient="records")

@@ -14,13 +14,6 @@ This directory contains tools for generating analytics reports from Google Analy
 - To deactivate the environment, run `deactivate`
 - To activate the environment again, run `source ./venv/bin/activate`
 
-## Generating Google Sheets Reports
-
-- Update `constants.py` to reflect the date ranges and file name you would like for the report
-- Open `./generate_sheets_report.ipynb` using your favorite IDE or by running `jupyter notebook`
-- Run all cells in the Jupyter notebook. You will be prompted to log in to your Google Account, which must have access to the relevant analytics property
-- Check your Google Drive to ensure that the desired spreadsheet is present
-
 ## Generating Static Analytics Site
 
 The `generate_static_site.py` script creates a static HTML site with interactive charts, suitable for hosting on GitHub Pages.
