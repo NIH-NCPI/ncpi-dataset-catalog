@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.21.3](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.21.2...v0.21.3) (2026-08-19)
+
+
+### Chores
+
+* remove legacy google sheets analytics report generator ([#451](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/451)) ([#452](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/452)) ([de37cc1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/de37cc11014bbcd976c0e05df88c993690617745))
+* use non-editable install for analytics package ([#454](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/454)) ([#455](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/455)) ([6eb8062](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/6eb80622b0819a5073f87904b4e397f2fc374e2f))
+
 ## [0.21.2](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.21.1...v0.21.2) (2026-07-22)
 
 
