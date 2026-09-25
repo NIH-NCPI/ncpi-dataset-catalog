@@ -211,7 +211,8 @@ async function getEntity(
   // implement fetchEntityDetail and would throw.
   if (entityConfig.exploreMode === EXPLORE_MODE.SS_FETCH_CS_FILTERING) {
     return (await getBuildTimeEntity(entityConfig, entityId)) as
-      AzulEntityStaticResponse | undefined;
+      | AzulEntityStaticResponse
+      | undefined;
   }
   const { fetchEntityDetail, path } = getEntityService(entityConfig, undefined);
   return await fetchEntityDetail(
