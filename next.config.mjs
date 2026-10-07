@@ -4,6 +4,7 @@ const withMDX = nextMDX({ extension: /\.mdx?$/ });
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  agentRules: false,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
   experimental: {
     // The tsc CLI checker type-checks .next/dev/types, which clash with
