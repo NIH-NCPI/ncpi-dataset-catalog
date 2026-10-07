@@ -56,7 +56,7 @@ def authenticate():
 
 def get_chat_submitted_change(params_current, params_prior):
     """Fetch chat_submitted event count with month-over-month change."""
-    from analytics._sheets_utils import get_data_df_from_fields
+    from analytics.report_elements import get_data_df_from_fields
     from analytics.entities import METRIC_EVENT_COUNT, DIMENSION_EVENT_NAME
 
     chat_current = get_data_df_from_fields(
@@ -114,8 +114,8 @@ SUSPICIOUS_PAGE_PATH_RE = re.compile(
 
 def fetch_data(ga_authentication):
     """Fetch analytics data using the analytics package."""
-    import analytics.sheets_elements as elements
-    from analytics._sheets_utils import get_data_df_from_fields
+    import analytics.report_elements as elements
+    from analytics.report_elements import get_data_df_from_fields
     from analytics.entities import METRIC_SESSIONS
 
     # Calculate date ranges
