@@ -1110,6 +1110,17 @@ class TestQueryVariables:
         rows, total = var_store.query_variables()
         assert total == 0
 
+    def test_limit_window_follows_concept_order(self, var_store: DuckDBStore) -> None:
+        """The LIMIT keeps the first rows by concept, not by study id.
+
+        The results table shows variables sorted by concept, so the rows
+        kept under the limit must be the first by concept: BMI (phs000002)
+        comes before the phs000001 blood pressure variables.
+        """
+        rows, total = var_store.query_variables(study_ids={"phs000001", "phs000002"}, limit=2)
+        assert total == 3
+        assert [r["variableName"] for r in rows] == ["BMI", "DBP"]
+
 
 # ---------------------------------------------------------------------------
 # _build_dbgap_variable_url

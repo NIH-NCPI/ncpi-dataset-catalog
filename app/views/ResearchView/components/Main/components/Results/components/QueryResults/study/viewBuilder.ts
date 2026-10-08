@@ -1,7 +1,7 @@
+import { IdentityCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/IdentityCell/identityCell";
 import { CellContext } from "@tanstack/react-table";
 import { JSX } from "react";
 import { ROUTES } from "../../../../../../../../../../routes/constants";
-import * as C from "../../../../../../../../../components";
 import { buildStudyIdentityChips } from "../../../../../../../../../viewModelBuilders/catalog/ncpi-catalog/common/studyIdentity/utils";
 import { Study } from "../../../types/study";
 import { getConsentLongNames } from "./utils";
@@ -16,7 +16,7 @@ export const renderStudyIdentity = (
   ctx: CellContext<Study, unknown>
 ): JSX.Element => {
   const { consentCodes, dbGapId, platforms, title } = ctx.row.original;
-  return C.IdentityCell({
+  return IdentityCell({
     chips: buildStudyIdentityChips({
       consentCodes,
       consentLongNames: getConsentLongNames(ctx.table),

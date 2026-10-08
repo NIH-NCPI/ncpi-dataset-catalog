@@ -12,6 +12,7 @@ import {
   NCPIStudyInputMapper,
 } from "../../../../app/apis/catalog/ncpi-catalog/common/utils";
 import * as C from "../../../../app/components";
+import { ALWAYS_HIDDEN_COLUMN } from "../../../../app/components/common/Table/columns/constants";
 import * as V from "../../../../app/viewModelBuilders/catalog/ncpi-catalog/common/viewModelBuilders";
 import {
   NCPI_CATALOG_CATEGORY_KEY,
@@ -27,10 +28,6 @@ import { variablesMainColumn } from "../detail/study/variablesMainColumn";
 // scripts/sync-api.sh copies it from catalog/ into public/api/, which Next then
 // includes in the export.
 const STUDIES_LIST_API_PATH = "/api/ncpi-platform-studies.json";
-
-// Settings for columns that are always hidden (also listed in
-// tableOptions.initialState.columnVisibility).
-const ALWAYS_HIDDEN_COLUMN = { enableHiding: false, enableSorting: false };
 
 /**
  * Entity config object responsible for config related to the /studies route.

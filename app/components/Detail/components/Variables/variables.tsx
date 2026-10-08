@@ -1,23 +1,16 @@
 import { FluidPaper } from "@databiosphere/findable-ui/lib/components/common/Paper/components/FluidPaper/fluidPaper";
+import { IdentityCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/IdentityCell/identityCell";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { Link, Typography } from "@mui/material";
 import { JSX } from "react";
-import { Props } from "./types";
-import { StyledStack, VariableItem, VariableList } from "./variables.styles";
+import { buildVariableIdentityChips } from "../../../../viewModelBuilders/catalog/ncpi-catalog/common/variableIdentity/utils";
+import type { Props } from "./types";
+import { buildDbGapVariableUrl } from "./utils";
+import { StyledStack, VariableRow, VariableRows } from "./variables.styles";
 
 /**
- * Build a dbGaP variable page URL.
- * @param studyAccession - Study accession with version (e.g., "phs000007.v1.p1").
- * @param phvId - Variable PHV ID (e.g., "phv00481718.v2.p1").
- * @returns Full URL to the variable page on dbGaP.
- */
-function buildDbGapVariableUrl(studyAccession: string, phvId: string): string {
-  const phvNum = phvId.split(".")[0].replace("phv", "");
-  return `https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/variable.cgi?study_id=${studyAccession}&phv=${phvNum}`;
-}
-
-/**
- * Renders a list of variables grouped by category.
+ * Renders variables grouped by category: one card per category, with a row per
+ * variable (name chip, description, dbGaP link).
  * @param props - Component props.
  * @param props.studyAccession - Study accession with version for building dbGaP links.
  * @param props.variableSummary - Variable summary data.
@@ -53,28 +46,26 @@ export const Variables = ({
           </Typography>
 
           {category.variables && category.variables.length > 0 && (
-            <VariableList>
+            <VariableRows>
               {category.variables.map((variable) => (
-                <VariableItem key={variable.id}>
-                  <Typography
-                    component="span"
+                <VariableRow key={variable.id}>
+                  <IdentityCell
+                    chips={buildVariableIdentityChips(variable.name)}
+                  />
+                  <Typography variant={TYPOGRAPHY_PROPS.VARIANT.BODY_400}>
+                    {variable.description}
+                  </Typography>
+                  <Link
+                    href={buildDbGapVariableUrl(studyAccession, variable.id)}
+                    rel="noopener noreferrer"
+                    target="_blank"
                     variant={TYPOGRAPHY_PROPS.VARIANT.BODY_400}
                   >
-                    {variable.name}
-                    {variable.description && ` - ${variable.description}`}
-                    {" ("}
-                    <Link
-                      href={buildDbGapVariableUrl(studyAccession, variable.id)}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {variable.id}
-                    </Link>
-                    {")"}
-                  </Typography>
-                </VariableItem>
+                    {variable.id}
+                  </Link>
+                </VariableRow>
               ))}
-            </VariableList>
+            </VariableRows>
           )}
         </FluidPaper>
       ))}

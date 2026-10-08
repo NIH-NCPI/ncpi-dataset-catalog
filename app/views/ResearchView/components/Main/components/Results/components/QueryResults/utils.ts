@@ -4,11 +4,14 @@ import { Response } from "../../../../../../types/response";
 import { Study } from "../../types/study";
 import { Variable } from "../../types/variable";
 import {
-  HIDDEN_COLUMN_VISIBILITY,
   COLUMNS as STUDY_COLUMNS,
+  INITIAL_STATE as STUDY_INITIAL_STATE,
 } from "./study/columns";
 import type { StudyTableMeta } from "./study/types";
-import { COLUMNS as VARIABLE_COLUMNS } from "./variable/columns";
+import {
+  COLUMNS as VARIABLE_COLUMNS,
+  INITIAL_STATE as VARIABLE_INITIAL_STATE,
+} from "./variable/columns";
 
 type StudyOptions = Omit<TableOptions<Study>, "getCoreRowModel">;
 type VariableOptions = Omit<TableOptions<Variable>, "getCoreRowModel">;
@@ -28,7 +31,7 @@ export function getOptions(
       columns: STUDY_COLUMNS,
       data: message.response.studies,
       getRowId: (row: Study) => row.dbGapId,
-      initialState: { columnVisibility: HIDDEN_COLUMN_VISIBILITY },
+      initialState: STUDY_INITIAL_STATE,
       meta: {
         consentLongNames: message.response.consentLongNames ?? {},
       } satisfies StudyTableMeta,
@@ -38,5 +41,6 @@ export function getOptions(
     columns: VARIABLE_COLUMNS,
     data: message.response.variables,
     getRowId: (row: Variable, index: number) => `${row.variableName}-${index}`,
+    initialState: VARIABLE_INITIAL_STATE,
   };
 }
