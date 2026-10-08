@@ -330,9 +330,9 @@ class DuckDBStore:
             "FROM variables v "
             "LEFT JOIN studies s ON v.study_id = s.db_gap_id "
             f"WHERE {where} "  # noqa: S608
-            # Concept first, so the LIMIT window matches the concept order
-            # the results table displays.
-            "ORDER BY v.concept, v.variable_name, v.study_id "
+            # Case-insensitive lexical concept order, matching the results
+            # table's "text" sort, so the LIMIT window is the rows it shows first.
+            "ORDER BY LOWER(v.concept), LOWER(v.variable_name), v.study_id "
             f"LIMIT {limit}"
         )
         rows = self._conn.execute(sql, params).fetchall()

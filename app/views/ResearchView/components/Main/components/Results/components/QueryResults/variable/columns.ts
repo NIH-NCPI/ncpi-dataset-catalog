@@ -49,8 +49,10 @@ const VARIABLE: ColumnDef<Variable> = {
   header: "Variable",
   id: VARIABLE_ID,
   meta: { columnPinned: true, width: { max: "1fr", min: "240px" } },
-  // Explicit: TanStack's "auto" picks a case-sensitive sort for 10 or fewer rows.
-  sortingFn: "alphanumeric",
+  // Case-insensitive lexical order, matching the backend's ORDER BY so its
+  // 500-row LIMIT keeps the rows shown first. ("auto" would also go
+  // case-sensitive for 10 or fewer rows.)
+  sortingFn: "text",
 };
 
 const VARIABLE_NAME: ColumnDef<Variable> = {

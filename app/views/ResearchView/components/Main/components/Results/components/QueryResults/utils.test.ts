@@ -204,4 +204,15 @@ describe("research table display order", () => {
       ["bmi", "Glucose", "zinc"]
     );
   });
+
+  // Must match the backend's ORDER BY LOWER(concept) (case-insensitive,
+  // lexical), so its 500-row LIMIT keeps the rows the table shows first.
+  it("sorts variables lexically like the backend, not naturally", () => {
+    const variables = ["topmed:il6", "Topmed:zinc", "topmed:il10"].map(
+      (concept) => ({ ...VARIABLE, concept })
+    );
+    expect(getDisplayOrder(buildVariableMessage(variables), "concept")).toEqual(
+      ["topmed:il10", "topmed:il6", "Topmed:zinc"]
+    );
+  });
 });
