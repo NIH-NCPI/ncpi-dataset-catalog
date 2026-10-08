@@ -17,7 +17,7 @@ export const StyledStack = styled(Stack)`
   }
 `;
 
-export const VariableRow = styled.div`
+export const VariableRow = styled.li`
   align-items: flex-start;
   border-top: 1px solid ${PALETTE.SMOKE_MAIN};
   display: grid;
@@ -32,6 +32,8 @@ export const VariableRow = styled.div`
   }
 `;
 
-export const VariableRows = styled.div`
-  margin-top: 8px;
+export const VariableRows = styled.ul`
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
 `;
