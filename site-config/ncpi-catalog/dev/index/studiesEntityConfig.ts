@@ -28,6 +28,10 @@ import { variablesMainColumn } from "../detail/study/variablesMainColumn";
 // includes in the export.
 const STUDIES_LIST_API_PATH = "/api/ncpi-platform-studies.json";
 
+// Settings for columns that are always hidden (also listed in
+// tableOptions.initialState.columnVisibility).
+const ALWAYS_HIDDEN_COLUMN = { enableHiding: false, enableSorting: false };
+
 /**
  * Entity config object responsible for config related to the /studies route.
  */
@@ -65,32 +69,48 @@ export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
   list: {
     columns: [
       {
-        componentConfig: {
-          component: C.NTagCell,
-          viewBuilder: V.buildPlatforms,
-        } as ComponentConfig<typeof C.NTagCell>,
-        header: NCPI_CATALOG_CATEGORY_LABEL.PLATFORM,
-        id: NCPI_CATALOG_CATEGORY_KEY.PLATFORM,
-        width: { max: "1fr", min: "100px" },
-      },
-      {
         columnPinned: true,
         componentConfig: {
-          component: C.Link,
-          viewBuilder: V.buildStudyTitle,
-        } as ComponentConfig<typeof C.Link>,
+          component: C.IdentityCell,
+          viewBuilder: V.buildStudyIdentity,
+        } as ComponentConfig<typeof C.IdentityCell>,
         header: NCPI_CATALOG_CATEGORY_LABEL.TITLE,
         id: NCPI_CATALOG_CATEGORY_KEY.TITLE,
-        width: { max: "2fr", min: "200px" },
+        width: { max: "1.5fr", min: "340px" },
       },
+      // dbGaP Id, Platform and Consent Code render as chips in the Study
+      // column. Their columns stay, always hidden, because client-side facets
+      // and the table download are both built from the table's columns. Their
+      // cell components never render; ColumnConfig requires one.
       {
         componentConfig: {
           component: C.BasicCell,
           viewBuilder: V.buildDbGapId,
         } as ComponentConfig<typeof C.BasicCell>,
+        ...ALWAYS_HIDDEN_COLUMN,
         header: NCPI_CATALOG_CATEGORY_LABEL.DB_GAP_ID,
         id: NCPI_CATALOG_CATEGORY_KEY.DB_GAP_ID,
         width: { max: "1.24fr", min: "124px" },
+      },
+      {
+        componentConfig: {
+          component: C.NTagCell,
+          viewBuilder: V.buildPlatforms,
+        } as ComponentConfig<typeof C.NTagCell>,
+        ...ALWAYS_HIDDEN_COLUMN,
+        header: NCPI_CATALOG_CATEGORY_LABEL.PLATFORM,
+        id: NCPI_CATALOG_CATEGORY_KEY.PLATFORM,
+        width: { max: "1fr", min: "100px" },
+      },
+      {
+        componentConfig: {
+          component: C.ConsentCodesCell,
+          viewBuilder: V.buildConsentCodes,
+        } as ComponentConfig<typeof C.ConsentCodesCell>,
+        ...ALWAYS_HIDDEN_COLUMN,
+        header: NCPI_CATALOG_CATEGORY_LABEL.CONSENT_CODE,
+        id: NCPI_CATALOG_CATEGORY_KEY.CONSENT_CODE,
+        width: { max: "1.6fr", min: "160px" },
       },
       {
         componentConfig: {
@@ -121,15 +141,6 @@ export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
       },
       {
         componentConfig: {
-          component: C.ConsentCodesCell,
-          viewBuilder: V.buildConsentCodes,
-        } as ComponentConfig<typeof C.ConsentCodesCell>,
-        header: NCPI_CATALOG_CATEGORY_LABEL.CONSENT_CODE,
-        id: NCPI_CATALOG_CATEGORY_KEY.CONSENT_CODE,
-        width: { max: "1.6fr", min: "160px" },
-      },
-      {
-        componentConfig: {
           component: C.BasicCell,
           viewBuilder: V.buildParticipantCount,
         } as ComponentConfig<typeof C.BasicCell>,
@@ -143,10 +154,15 @@ export const studiesEntityConfig: EntityConfig<NCPICatalogStudy> = {
       downloadFilename: "studies",
       enableTableDownload: true,
       initialState: {
+        columnVisibility: {
+          [NCPI_CATALOG_CATEGORY_KEY.CONSENT_CODE]: false,
+          [NCPI_CATALOG_CATEGORY_KEY.DB_GAP_ID]: false,
+          [NCPI_CATALOG_CATEGORY_KEY.PLATFORM]: false,
+        },
         sorting: [
           {
             desc: SORT_DIRECTION.ASCENDING,
-            id: NCPI_CATALOG_CATEGORY_KEY.PLATFORM,
+            id: NCPI_CATALOG_CATEGORY_KEY.TITLE,
           },
         ],
       },

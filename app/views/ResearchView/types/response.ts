@@ -12,6 +12,8 @@ export const INTENTS = {
 } as const;
 
 export interface Response extends MessageResponse {
+  // Optional so the page still renders against a backend that predates it.
+  consentLongNames?: Record<string, string>;
   intent: (typeof INTENTS)[keyof typeof INTENTS];
   studies: Study[];
   totalStudies: number;

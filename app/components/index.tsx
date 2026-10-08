@@ -20,6 +20,7 @@ export { Links } from "@databiosphere/findable-ui/lib/components/Links/links";
 export { MarkdownRenderer } from "@databiosphere/findable-ui/lib/components/MarkdownRenderer/markdownRenderer";
 export { Details } from "@databiosphere/findable-ui/lib/components/Project/components/Details/details";
 export { BasicCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/BasicCell/basicCell";
+export { IdentityCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/IdentityCell/identityCell";
 export { NTagCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/NTagCell/nTagCell";
 export { ExportMethodView } from "@databiosphere/findable-ui/lib/views/ExportMethodView/exportMethodView";
 export { AlertTitle } from "@mui/material";

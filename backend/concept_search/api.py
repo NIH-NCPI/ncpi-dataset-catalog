@@ -170,6 +170,24 @@ def _build_demographics(study: dict) -> StudyDemographics | None:
     )
 
 
+def _collect_consent_long_names(studies: list[dict]) -> dict[str, str]:
+    """Map each consent code in ``studies`` to its long name.
+
+    Studies with a missing or malformed ``consentLongNames`` are skipped, so
+    one bad record drops its tooltips instead of failing the response.
+    """
+    long_names: dict[str, str] = {}
+    for study in studies:
+        names = study.get("consentLongNames")
+        if not isinstance(names, dict):
+            continue
+        for code in study.get("consentCodes") or []:
+            name = names.get(code)
+            if isinstance(name, str):
+                long_names.setdefault(code, name)
+    return long_names
+
+
 def _build_study_summary(study: dict) -> StudySummary:
     """Project a full study dict into a lean StudySummary."""
     return StudySummary(
@@ -437,6 +455,7 @@ async def search(
 
     query_structure = build_query_structure(query_model, index)
     response = SearchResponse(
+        consent_long_names=_collect_consent_long_names(execution.studies),
         intent=query_model.intent,
         message=reply,
         query=query_model,
@@ -542,6 +561,7 @@ async def search_filter(
         index,
     )
     response = SearchResponse(
+        consent_long_names=_collect_consent_long_names(execution.studies),
         intent=query_model.intent,
         message=message,
         query=query_model,
