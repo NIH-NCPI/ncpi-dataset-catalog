@@ -1102,6 +1102,30 @@ def _build_store_with_variables() -> DuckDBStore:
             "labs",
             "IL10",
         ),
+        (
+            "phenx:weight",
+            "phenx:weight",
+            "",
+            json.dumps(["phenx:weight"]),
+            "ds4",
+            "Weight",
+            "phv007",
+            "phs000004",
+            "anthro",
+            "WT",
+        ),
+        (
+            "topmed:age",
+            "topmed:age",
+            "",
+            json.dumps(["topmed:age"]),
+            "ds4",
+            "Age",
+            "phv008",
+            "phs000004",
+            "anthro",
+            "AGE",
+        ),
     ]
     store.load_variables_batch(rows)
     store.finalize()
@@ -1166,6 +1190,17 @@ class TestQueryVariables:
         rows, total = var_store.query_variables(study_ids={"phs000003"})
         assert total == 3
         assert [r["variableName"] for r in rows] == ["IL10", "IL6", "ZINC"]
+
+    def test_limit_window_ignores_concept_namespace(self, var_store: DuckDBStore) -> None:
+        """The LIMIT keeps the first rows by displayed concept, without its namespace.
+
+        The API strips the ``namespace:`` prefix before the table sorts, so
+        ``topmed:age`` ("age") comes before ``phenx:weight`` ("weight"), even
+        though ``phenx`` sorts before ``topmed``.
+        """
+        rows, total = var_store.query_variables(study_ids={"phs000004"}, limit=1)
+        assert total == 2
+        assert [r["variableName"] for r in rows] == ["AGE"]
 
 
 # ---------------------------------------------------------------------------
