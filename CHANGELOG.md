@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.22.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.21.2...v0.22.0) (2026-10-09)
+
+
+### Features
+
+* consolidate studies tables around an identity column with tag chips ([#458](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/458)) ([#464](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/464)) ([316db15](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/316db15056502f5993ceb50ecab954975a107ed2))
+* consolidate variable views around a concept identity column ([#459](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/459)) ([#465](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/465)) ([b5a2b70](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/b5a2b70c583f3db75810123b337177908d28052a))
+
+
+### Chores
+
+* remove legacy google sheets analytics report generator ([#451](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/451)) ([#452](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/452)) ([de37cc1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/de37cc11014bbcd976c0e05df88c993690617745))
+* upgrade @databiosphere/findable-ui to v57.0.0 ([#460](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/460)) ([#463](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/463)) ([86f87a7](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/86f87a7333cb1bcdc84b70e3e2aa2dd53f2baa28))
+* use non-editable install for analytics package ([#454](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/454)) ([#455](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/455)) ([6eb8062](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/6eb80622b0819a5073f87904b4e397f2fc374e2f))
+
 ## [0.21.2](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.21.1...v0.21.2) (2026-07-22)
 
 
