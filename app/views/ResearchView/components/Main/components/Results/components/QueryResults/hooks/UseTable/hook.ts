@@ -9,7 +9,9 @@ import { CORE_OPTIONS } from "../../../../../../../../../../components/common/Ta
 
 /**
  * React hook to create and configure a table instance using TanStack Table.
- * Rows follow the sorting in `options.initialState`; header clicks don't sort.
+ * Rows start in the sorting from `options.initialState`. Columns are unsortable unless
+ * their definition sets `enableSorting: true`; clicking a sortable header toggles
+ * ascending/descending.
  * @param options - Table options.
  * @returns Table.
  */
@@ -18,8 +20,10 @@ export const useTable = <T extends RowData>(
 ): { table: Table<T> } => {
   const table = useReactTable<T>({
     ...CORE_OPTIONS,
+    defaultColumn: { enableSorting: false },
     enableHiding: true,
-    enableSortingInteraction: false,
+    enableSortingInteraction: true,
+    enableSortingRemoval: false,
     enableTableDownload: true,
     getSortedRowModel: getSortedRowModel(),
     ...options,

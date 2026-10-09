@@ -45,6 +45,7 @@ const VARIABLE_ID = "variable";
 const VARIABLE: ColumnDef<Variable> = {
   accessorKey: "concept",
   cell: renderVariableIdentity,
+  enableSorting: true,
   enableTableDownload: false,
   header: "Variable",
   id: VARIABLE_ID,
@@ -74,7 +75,7 @@ export const COLUMNS: ColumnDef<Variable>[] = [
   DB_GAP_URL,
 ];
 
-// Rows start sorted by concept; headers stay unsortable (see useTable).
+// Rows start sorted by concept; only the Variable header sorts (see useTable).
 export const INITIAL_STATE: InitialTableState = {
   columnVisibility: buildHiddenColumnVisibility(HIDDEN_COLUMNS),
   sorting: [{ desc: false, id: VARIABLE_ID }],

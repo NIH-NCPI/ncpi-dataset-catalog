@@ -70,6 +70,7 @@ const STUDY_ID = "title";
 const STUDY: ColumnDef<Study> = {
   accessorKey: STUDY_ID,
   cell: renderStudyIdentity,
+  enableSorting: true,
   header: "Study",
   id: STUDY_ID,
   meta: { columnPinned: true, width: { max: "1.5fr", min: "340px" } },
@@ -95,7 +96,7 @@ export const COLUMNS: ColumnDef<Study>[] = [
   PARTICIPANT_COUNT,
 ];
 
-// Rows start sorted by title; headers stay unsortable (see useTable).
+// Rows start sorted by title; only the Study header sorts (see useTable).
 export const INITIAL_STATE: InitialTableState = {
   columnVisibility: buildHiddenColumnVisibility(HIDDEN_COLUMNS),
   sorting: [{ desc: false, id: STUDY_ID }],
