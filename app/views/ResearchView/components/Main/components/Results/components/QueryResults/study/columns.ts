@@ -1,21 +1,24 @@
-import { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
 import {
   buildNTagProps,
   renderNTagCell,
 } from "../../../../../../../../../components/common/Table/components/NTagCell/utils";
 import { METADATA_KEY } from "../../../../../../../../../components/Index/common/entities";
 import { Study } from "../../../types/study";
-import { renderTitle } from "./viewBuilder";
+import { renderStudyIdentity } from "./viewBuilder";
+
+// Settings for columns that are always hidden (see HIDDEN_COLUMNS).
+const ALWAYS_HIDDEN: Pick<
+  ColumnDef<Study>,
+  "enableHiding" | "enableSorting"
+> = { enableHiding: false, enableSorting: false };
 
 const CONSENT_CODES: ColumnDef<Study> = {
+  ...ALWAYS_HIDDEN,
   accessorKey: "consentCodes",
-  cell: renderNTagCell<Study>(
-    buildNTagProps(METADATA_KEY.CONSENT_CODE, "consentCodes")
-  ),
   header: "Consent Code",
   // Rename id to `consentCodes` to avoid conflict with the consentCode facet "Study Consent"
   id: "consentCodes",
-  meta: { width: { max: "1fr", min: "140px" } },
 };
 
 const DATA_TYPES: ColumnDef<Study> = {
@@ -29,10 +32,10 @@ const DATA_TYPES: ColumnDef<Study> = {
 };
 
 const DB_GAP_ID: ColumnDef<Study> = {
+  ...ALWAYS_HIDDEN,
   accessorKey: "dbGapId",
   header: "dbGap Id",
   id: "dbGapId",
-  meta: { width: { max: "1fr", min: "120px" } },
 };
 
 const FOCUS: ColumnDef<Study> = {
@@ -50,13 +53,10 @@ const PARTICIPANT_COUNT: ColumnDef<Study> = {
 };
 
 const PLATFORMS: ColumnDef<Study> = {
+  ...ALWAYS_HIDDEN,
   accessorKey: "platforms",
-  cell: renderNTagCell<Study>(
-    buildNTagProps(METADATA_KEY.PLATFORM, "platforms")
-  ),
   header: "Platform",
   id: "platform",
-  meta: { width: { max: "1fr", min: "120px" } },
 };
 
 const STUDY_DESIGNS: ColumnDef<Study> = {
@@ -69,21 +69,32 @@ const STUDY_DESIGNS: ColumnDef<Study> = {
   meta: { width: { max: "1fr", min: "140px" } },
 };
 
-const TITLE: ColumnDef<Study> = {
+const STUDY: ColumnDef<Study> = {
   accessorKey: "title",
-  cell: renderTitle,
+  cell: renderStudyIdentity,
   header: "Study",
   id: "title",
-  meta: { width: { max: "2fr", min: "160px" } },
+  meta: { columnPinned: true, width: { max: "1.5fr", min: "340px" } },
 };
 
-export const COLUMNS: ColumnDef<Study>[] = [
-  TITLE,
+// dbGaP Id, Platform and Consent Code render as chips in the Study column.
+// Their columns stay, always hidden, so the table download keeps them and the
+// filters can still resolve their labels.
+const HIDDEN_COLUMNS: ColumnDef<Study>[] = [
   DB_GAP_ID,
   PLATFORMS,
-  FOCUS,
-  DATA_TYPES,
-  PARTICIPANT_COUNT,
-  STUDY_DESIGNS,
   CONSENT_CODES,
 ];
+
+export const COLUMNS: ColumnDef<Study>[] = [
+  STUDY,
+  ...HIDDEN_COLUMNS,
+  FOCUS,
+  DATA_TYPES,
+  STUDY_DESIGNS,
+  PARTICIPANT_COUNT,
+];
+
+export const HIDDEN_COLUMN_VISIBILITY: VisibilityState = Object.fromEntries(
+  HIDDEN_COLUMNS.map(({ id }) => [id, false])
+);

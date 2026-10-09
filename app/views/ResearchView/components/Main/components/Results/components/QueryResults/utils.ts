@@ -3,7 +3,11 @@ import { TableOptions } from "@tanstack/react-table";
 import { Response } from "../../../../../../types/response";
 import { Study } from "../../types/study";
 import { Variable } from "../../types/variable";
-import { COLUMNS as STUDY_COLUMNS } from "./study/columns";
+import {
+  HIDDEN_COLUMN_VISIBILITY,
+  COLUMNS as STUDY_COLUMNS,
+} from "./study/columns";
+import type { StudyTableMeta } from "./study/types";
 import { COLUMNS as VARIABLE_COLUMNS } from "./variable/columns";
 
 type StudyOptions = Omit<TableOptions<Study>, "getCoreRowModel">;
@@ -23,7 +27,11 @@ export function getOptions(
     return {
       columns: STUDY_COLUMNS,
       data: message.response.studies,
-      getRowId: (row: Study) => row.title,
+      getRowId: (row: Study) => row.dbGapId,
+      initialState: { columnVisibility: HIDDEN_COLUMN_VISIBILITY },
+      meta: {
+        consentLongNames: message.response.consentLongNames ?? {},
+      } satisfies StudyTableMeta,
     };
   }
   return {

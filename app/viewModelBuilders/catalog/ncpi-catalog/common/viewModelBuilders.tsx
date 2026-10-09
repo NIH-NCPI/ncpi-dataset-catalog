@@ -11,6 +11,7 @@ import {
   PLATFORM,
 } from "../../../../apis/catalog/ncpi-catalog/common/entities";
 import * as C from "../../../../components";
+import { buildStudyIdentityChips } from "./studyIdentity/utils";
 import { METADATA_KEY } from "../../../../components/Index/common/entities";
 import { getPluralizedMetadataLabel } from "../../../../components/Index/common/indexTransformer";
 import { getPlatformUrl } from "../../../../utils/platformUrls";
@@ -260,6 +261,37 @@ export const buildStudyHero = (
 };
 
 /**
+ * Build props for the study IdentityCell component from the given NCPI study.
+ * The title links to the study detail page only when the study has an accession.
+ * @param ncpiCatalogStudy - NCPI catalog study.
+ * @returns Model to be used as props for the IdentityCell component.
+ */
+export const buildStudyIdentity = (
+  ncpiCatalogStudy: NCPICatalogStudy,
+): React.ComponentProps<typeof C.IdentityCell> => {
+  const {
+    consentCode,
+    consentLongName,
+    dbGapId,
+    platform,
+    studyAccession,
+    title,
+  } = ncpiCatalogStudy;
+  return {
+    chips: buildStudyIdentityChips({
+      consentCodes: consentCode,
+      consentLongNames: consentLongName,
+      dbGapId,
+      platforms: platform,
+    }),
+    title: {
+      label: title,
+      url: studyAccession ? `/studies/${dbGapId}` : "",
+    },
+  };
+};
+
+/**
  * Build props for Details component from the given NCPI entity.
  * @param ncpiCatalogStudy - NCPI catalog study.
  * @returns model to be used as props for the Details component.
@@ -287,21 +319,6 @@ export const buildStudySummary = (
   return {
     keyValuePairs,
     title: "Summary",
-  };
-};
-
-/**
- * Build props for study name Link component from the given NCPI entity.
- * @param ncpiCatalogStudy - NCPI catalog study.
- * @returns Model to be used as props for the Link component.
- */
-export const buildStudyTitle = (
-  ncpiCatalogStudy: NCPICatalogStudy,
-): React.ComponentProps<typeof C.Link> => {
-  const { dbGapId, studyAccession, title } = ncpiCatalogStudy;
-  return {
-    label: title,
-    url: studyAccession ? `/studies/${dbGapId}` : "",
   };
 };
 

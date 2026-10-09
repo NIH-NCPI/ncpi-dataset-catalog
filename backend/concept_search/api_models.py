@@ -156,6 +156,9 @@ class SearchResponse(BaseModel):
 
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
+    # Long name for each consent code in ``studies``. A code's long name is the
+    # same in every study, so it is sent once here rather than on each study.
+    consent_long_names: dict[str, str] = Field(default_factory=dict)
     intent: Intent = "study"
     message: str | None
     query: QueryModel
