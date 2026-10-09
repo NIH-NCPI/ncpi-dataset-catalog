@@ -1,7 +1,9 @@
+import { Link } from "@databiosphere/findable-ui/lib/components/Links/components/Link/link";
+import { IdentityCell } from "@databiosphere/findable-ui/lib/components/Table/components/TableCell/components/IdentityCell/identityCell";
 import { CellContext } from "@tanstack/react-table";
 import { JSX } from "react";
 import { ROUTES } from "../../../../../../../../../../routes/constants";
-import * as C from "../../../../../../../../../components";
+import { buildVariableIdentityChips } from "../../../../../../../../../viewModelBuilders/catalog/ncpi-catalog/common/variableIdentity/utils";
 import { Variable } from "../../../types/variable";
 
 /**
@@ -12,7 +14,7 @@ import { Variable } from "../../../types/variable";
 export const renderDbGapUrl = (
   ctx: CellContext<Variable, unknown>
 ): JSX.Element => {
-  return C.Link({
+  return Link({
     label: ctx.row.original.phvId,
     url: ctx.row.original.dbGapUrl,
   });
@@ -26,8 +28,23 @@ export const renderDbGapUrl = (
 export const renderStudyTitle = (
   ctx: CellContext<Variable, unknown>
 ): JSX.Element => {
-  return C.Link({
+  return Link({
     label: ctx.row.original.studyTitle ?? ctx.row.original.studyId,
     url: `${ROUTES.RESEARCH_STUDIES}/${ctx.row.original.studyId}`,
+  });
+};
+
+/**
+ * Renders the variable IdentityCell: the concept as plain text, with a variable name chip.
+ * @param ctx - Cell context.
+ * @returns IdentityCell component.
+ */
+export const renderVariableIdentity = (
+  ctx: CellContext<Variable, unknown>
+): JSX.Element => {
+  const { concept, variableName } = ctx.row.original;
+  return IdentityCell({
+    chips: buildVariableIdentityChips(variableName),
+    title: { label: concept, url: "" },
   });
 };

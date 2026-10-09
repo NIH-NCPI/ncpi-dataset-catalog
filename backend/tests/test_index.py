@@ -1066,6 +1066,66 @@ def _build_store_with_variables() -> DuckDBStore:
             "baseline",
             "BMI",
         ),
+        (
+            "topmed:il6",
+            "topmed:il6",
+            "",
+            json.dumps(["topmed:il6"]),
+            "ds3",
+            "IL6",
+            "phv004",
+            "phs000003",
+            "labs",
+            "IL6",
+        ),
+        (
+            "Topmed:zinc",
+            "topmed:zinc",
+            "",
+            json.dumps(["topmed:zinc"]),
+            "ds3",
+            "ZINC",
+            "phv005",
+            "phs000003",
+            "labs",
+            "ZINC",
+        ),
+        (
+            "topmed:il10",
+            "topmed:il10",
+            "",
+            json.dumps(["topmed:il10"]),
+            "ds3",
+            "IL10",
+            "phv006",
+            "phs000003",
+            "labs",
+            "IL10",
+        ),
+        (
+            "phenx:weight",
+            "phenx:weight",
+            "",
+            json.dumps(["phenx:weight"]),
+            "ds4",
+            "Weight",
+            "phv007",
+            "phs000004",
+            "anthro",
+            "WT",
+        ),
+        (
+            "topmed:age",
+            "topmed:age",
+            "",
+            json.dumps(["topmed:age"]),
+            "ds4",
+            "Age",
+            "phv008",
+            "phs000004",
+            "anthro",
+            "AGE",
+        ),
     ]
     store.load_variables_batch(rows)
     store.finalize()
@@ -1109,6 +1169,38 @@ class TestQueryVariables:
         """Neither concepts nor study_ids — return empty."""
         rows, total = var_store.query_variables()
         assert total == 0
+
+    def test_limit_window_follows_concept_order(self, var_store: DuckDBStore) -> None:
+        """The LIMIT keeps the first rows by concept, not by study id.
+
+        The results table shows variables sorted by concept, so the rows
+        kept under the limit must be the first by concept: BMI (phs000002)
+        comes before the phs000001 blood pressure variables.
+        """
+        rows, total = var_store.query_variables(study_ids={"phs000001", "phs000002"}, limit=2)
+        assert total == 3
+        assert [r["variableName"] for r in rows] == ["BMI", "DBP"]
+
+    def test_concept_order_is_case_insensitive_lexical(self, var_store: DuckDBStore) -> None:
+        """Concepts sort case-insensitively and lexically, like the table's "text" sort.
+
+        ``topmed:il10`` sorts before ``topmed:il6`` (lexical, not natural), and
+        ``Topmed:zinc`` sorts after them (case-insensitive, not uppercase-first).
+        """
+        rows, total = var_store.query_variables(study_ids={"phs000003"})
+        assert total == 3
+        assert [r["variableName"] for r in rows] == ["IL10", "IL6", "ZINC"]
+
+    def test_limit_window_ignores_concept_namespace(self, var_store: DuckDBStore) -> None:
+        """The LIMIT keeps the first rows by displayed concept, without its namespace.
+
+        The API strips the ``namespace:`` prefix before the table sorts, so
+        ``topmed:age`` ("age") comes before ``phenx:weight`` ("weight"), even
+        though ``phenx`` sorts before ``topmed``.
+        """
+        rows, total = var_store.query_variables(study_ids={"phs000004"}, limit=1)
+        assert total == 2
+        assert [r["variableName"] for r in rows] == ["AGE"]
 
 
 # ---------------------------------------------------------------------------

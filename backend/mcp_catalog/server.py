@@ -220,8 +220,9 @@ def search_variables(
     """Search for measured variables by concept and optionally by study.
 
     Returns individual dbGaP variables (phv IDs) with descriptions,
-    grouped by study. Use get_concept_children() to find specific
-    concept IDs to search.
+    ordered by concept (ignoring its namespace prefix), then variable name,
+    then study (concept and variable name case-insensitive). Use
+    get_concept_children() to find specific concept IDs to search.
 
     Args:
         concepts: Concept IDs to search for (e.g. ["ncpi:biomarkers",

@@ -1,4 +1,6 @@
-import type { ColumnDef, VisibilityState } from "@tanstack/react-table";
+import type { ColumnDef, InitialTableState } from "@tanstack/react-table";
+import { ALWAYS_HIDDEN_COLUMN } from "../../../../../../../../../components/common/Table/columns/constants";
+import { buildHiddenColumnVisibility } from "../../../../../../../../../components/common/Table/columns/utils";
 import {
   buildNTagProps,
   renderNTagCell,
@@ -7,14 +9,8 @@ import { METADATA_KEY } from "../../../../../../../../../components/Index/common
 import { Study } from "../../../types/study";
 import { renderStudyIdentity } from "./viewBuilder";
 
-// Settings for columns that are always hidden (see HIDDEN_COLUMNS).
-const ALWAYS_HIDDEN: Pick<
-  ColumnDef<Study>,
-  "enableHiding" | "enableSorting"
-> = { enableHiding: false, enableSorting: false };
-
 const CONSENT_CODES: ColumnDef<Study> = {
-  ...ALWAYS_HIDDEN,
+  ...ALWAYS_HIDDEN_COLUMN,
   accessorKey: "consentCodes",
   header: "Consent Code",
   // Rename id to `consentCodes` to avoid conflict with the consentCode facet "Study Consent"
@@ -32,7 +28,7 @@ const DATA_TYPES: ColumnDef<Study> = {
 };
 
 const DB_GAP_ID: ColumnDef<Study> = {
-  ...ALWAYS_HIDDEN,
+  ...ALWAYS_HIDDEN_COLUMN,
   accessorKey: "dbGapId",
   header: "dbGap Id",
   id: "dbGapId",
@@ -53,7 +49,7 @@ const PARTICIPANT_COUNT: ColumnDef<Study> = {
 };
 
 const PLATFORMS: ColumnDef<Study> = {
-  ...ALWAYS_HIDDEN,
+  ...ALWAYS_HIDDEN_COLUMN,
   accessorKey: "platforms",
   header: "Platform",
   id: "platform",
@@ -69,12 +65,17 @@ const STUDY_DESIGNS: ColumnDef<Study> = {
   meta: { width: { max: "1fr", min: "140px" } },
 };
 
+const STUDY_ID = "title";
+
 const STUDY: ColumnDef<Study> = {
-  accessorKey: "title",
+  accessorKey: STUDY_ID,
   cell: renderStudyIdentity,
+  enableSorting: true,
   header: "Study",
-  id: "title",
+  id: STUDY_ID,
   meta: { columnPinned: true, width: { max: "1.5fr", min: "340px" } },
+  // Explicit: TanStack's "auto" picks a case-sensitive sort for 10 or fewer rows.
+  sortingFn: "alphanumeric",
 };
 
 // dbGaP Id, Platform and Consent Code render as chips in the Study column.
@@ -95,6 +96,8 @@ export const COLUMNS: ColumnDef<Study>[] = [
   PARTICIPANT_COUNT,
 ];
 
-export const HIDDEN_COLUMN_VISIBILITY: VisibilityState = Object.fromEntries(
-  HIDDEN_COLUMNS.map(({ id }) => [id, false])
-);
+// Rows start sorted by title; only the Study header sorts (see useTable).
+export const INITIAL_STATE: InitialTableState = {
+  columnVisibility: buildHiddenColumnVisibility(HIDDEN_COLUMNS),
+  sorting: [{ desc: false, id: STUDY_ID }],
+};
