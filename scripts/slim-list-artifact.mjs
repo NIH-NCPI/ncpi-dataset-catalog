@@ -3,8 +3,8 @@
 // (SS_FETCH_CS_FILTERING), so it must carry only the list-column fields — the
 // heavy detail-only fields (description, publications, variableSummary) are
 // dropped here and instead come from props on the detail pages. See epic #425
-// (stage 3b, #430). The full catalog stays the build-time input for
-// seedDatabase and is emitted separately for rollback by sync-api.sh.
+// (stage 3b, #430). The full catalog stays the input for the build-time entity
+// readers and is emitted separately for rollback by sync-api.sh.
 //
 // Usage: node scripts/slim-list-artifact.mjs <src.json> <dest.json>
 

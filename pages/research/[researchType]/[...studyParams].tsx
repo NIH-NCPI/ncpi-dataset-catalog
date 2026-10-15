@@ -12,7 +12,7 @@ import { config } from "../../../app/config/config";
 import {
   getBuildTimeEntities,
   getBuildTimeEntity,
-} from "../../../app/utils/seedDatabase";
+} from "../../../app/utils/buildTimeEntities";
 import { sliceStudyBySubpath } from "../../../app/utils/studyDetailSlice";
 import { getStudyPageMeta } from "../../../app/utils/studyTitles";
 import { RESEARCH_TYPE } from "../../../app/views/ResearchView/artifact/types";
