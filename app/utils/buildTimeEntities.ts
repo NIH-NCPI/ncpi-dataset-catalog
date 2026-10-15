@@ -1,16 +1,20 @@
-import { EntityConfig } from "@databiosphere/findable-ui/lib/config/entities";
-import { database } from "@databiosphere/findable-ui/lib/utils/database";
+import type { EntityConfig } from "@databiosphere/findable-ui/lib/config/entities";
 import fsp from "fs/promises";
 import path from "path";
 
 /**
- * Parsed-and-mapped entities per route, memoized for the lifetime of the
- * build worker. Reading, parsing and mapping the static-load file is
+ * Promises of parsed-and-mapped entities per route, memoized for the lifetime
+ * of the build worker. Reading, parsing and mapping the static-load file is
  * expensive (ncpi-platform-studies.json is ~24 MB and getStaticProps runs
  * once per prerendered page), so it happens once per route here and every
- * build-time consumer reads from this cache.
+ * build-time reader in this module reads from this cache.
+ *
+ * Database seeding is separate: it goes through findable-ui's seedDatabase,
+ * whose memoized entities are private, so a route that is both seeded and
+ * read here is parsed once by each. Studies, the large catalog, are only ever
+ * read here and never seeded, so they are still parsed once per worker.
  */
-const entitiesByRoute = new Map<string, unknown[]>();
+const entitiesByRoute = new Map<string, Promise<unknown[]>>();
 
 /**
  * Entity-by-id indexes per route, derived lazily from entitiesByRoute.
@@ -56,51 +60,59 @@ export async function getBuildTimeEntity<T = unknown>(
 }
 
 /**
- * Reads, parses and maps the entity config's static-load file, memoized per
- * route for the lifetime of the build worker.
+ * Returns the entities for the entity config's route, memoized per route for
+ * the lifetime of the build worker. The in-flight promise is cached, so pages
+ * prerendered concurrently share one read, parse and map rather than each
+ * starting their own. A failed load is evicted so a later call retries.
  * @param entityConfig - Entity config.
  * @returns Entities from the static-load file.
  */
-async function loadEntities(entityConfig: EntityConfig): Promise<unknown[]> {
-  const { entityMapper, label, route, staticLoadFile } = entityConfig;
+function loadEntities(entityConfig: EntityConfig): Promise<unknown[]> {
+  const { route } = entityConfig;
+  let entities = entitiesByRoute.get(route);
+  if (!entities) {
+    entities = readEntities(entityConfig).catch((error) => {
+      entitiesByRoute.delete(route);
+      throw error;
+    });
+    entitiesByRoute.set(route, entities);
+  }
+  return entities;
+}
+
+/**
+ * Reads, parses and maps the entity config's static-load file.
+ * @param entityConfig - Entity config.
+ * @returns Entities from the static-load file.
+ */
+async function readEntities(entityConfig: EntityConfig): Promise<unknown[]> {
+  const { entityMapper, label, staticLoadFile } = entityConfig;
 
   if (!staticLoadFile) throw new Error(`No static file for ${label}`);
-
-  let entities = entitiesByRoute.get(route);
-  if (entities) return entities;
 
   // Read file.
   const filePath = path.resolve(process.cwd(), staticLoadFile);
   let fileContent;
   try {
     fileContent = await fsp.readFile(filePath, "utf8");
-  } catch {
-    throw new Error(`File not found: ${staticLoadFile}`);
+  } catch (error) {
+    throw new Error(`Failed to read file ${staticLoadFile} for ${label}`, {
+      cause: error,
+    });
   }
 
   // Parse file content.
-  const object = JSON.parse(fileContent);
+  let object;
+  try {
+    object = JSON.parse(fileContent);
+  } catch (error) {
+    throw new Error(`Failed to parse file ${staticLoadFile} for ${label}`, {
+      cause: error,
+    });
+  }
 
   // Map entities.
-  entities = entityMapper
+  return entityMapper
     ? Object.values(object).map(entityMapper)
     : Object.values(object);
-
-  entitiesByRoute.set(route, entities);
-  return entities;
-}
-
-/**
- * Seed database. Required only where findable-ui's TSV entity service is the
- * reader (CS_FETCH_CS_FILTERING detail fetches go through the service, which
- * reads this database internally); our own build-time code reads the memoized
- * cache via getBuildTimeEntities/getBuildTimeEntity instead. The seed write
- * runs on every call — other build-time code (the local seedDatabase in
- * pages/[entityListType]/index.tsx) seeds the same routes with UNMAPPED
- * entities and build workers interleave pages, so a "skip if already seeded"
- * guard could leave the wrong shape in the database.
- * @param entityConfig - Entity config.
- */
-export async function seedDatabase(entityConfig: EntityConfig): Promise<void> {
-  database.get().seed(entityConfig.route, await loadEntities(entityConfig));
 }

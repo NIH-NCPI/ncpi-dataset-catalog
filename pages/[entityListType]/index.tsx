@@ -1,16 +1,14 @@
 import { AzulEntitiesStaticResponse } from "@databiosphere/findable-ui/lib/apis/azul/common/entities";
 import { Main as DXMain } from "@databiosphere/findable-ui/lib/components/Layout/components/Main/main.styles";
-import { EntityConfig } from "@databiosphere/findable-ui/lib/config/entities";
 import { getEntityConfig } from "@databiosphere/findable-ui/lib/config/utils";
 import { getEntityService } from "@databiosphere/findable-ui/lib/hooks/useEntityService";
 import { EXPLORE_MODE } from "@databiosphere/findable-ui/lib/hooks/useExploreMode/types";
-import { database } from "@databiosphere/findable-ui/lib/utils/database";
+import { seedDatabase } from "@databiosphere/findable-ui/lib/utils/seedDatabase";
 import { ExploreView } from "@databiosphere/findable-ui/lib/views/ExploreView/exploreView";
 import { config } from "app/config/config";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { JSX } from "react";
-import { readFile } from "../../app/utils/tsvParser";
 
 interface PageUrl extends ParsedUrlQuery {
   entityListType: string;
@@ -20,36 +18,6 @@ interface ListPageProps extends AzulEntitiesStaticResponse {
   entityListType: string;
   pageTitle?: string;
 }
-
-/**
- * Seed database.
- * @param entityListType - Entity list type.
- * @param entityConfig - Entity config.
- * @returns Promise<void>.
- */
-const seedDatabase = async function seedDatabase( // TODO get rid of this duplicated code
-  entityListType: string,
-  entityConfig: EntityConfig
-): Promise<void> {
-  const { label, staticLoadFile } = entityConfig;
-
-  if (!staticLoadFile) {
-    throw new Error(`staticLoadFile not found for entity entity ${label}`);
-  }
-
-  // Build database from configured TSV, if any.
-  const rawData = await readFile(staticLoadFile);
-
-  if (!rawData) {
-    throw new Error(`File ${staticLoadFile} not found for entity ${label}`);
-  }
-
-  const object = JSON.parse(rawData.toString());
-  const entities = Object.values(object); // Client-side fetched entities are mapped prior to dispatch to explore state.
-
-  // Seed entities.
-  database.get().seed(entityListType, entities);
-};
 
 /**
  * Explore view page.
@@ -117,7 +85,9 @@ export const getStaticProps: GetStaticProps<
 
   const props: ListPageProps = { entityListType, pageTitle };
 
-  // Seed database.
+  // Seed database. findable-ui's seedDatabase seeds mapped entities, and the
+  // client maps them again before dispatching them to explore state. That is
+  // safe only while the entity mapper gives the same result when run twice.
   if (exploreMode === EXPLORE_MODE.CS_FETCH_CS_FILTERING) {
     await seedDatabase(entityListType, entityConfig);
   } else {
@@ -125,7 +95,7 @@ export const getStaticProps: GetStaticProps<
     return { props };
   }
 
-  // Entities are client-side fetched from a local database seeded from a configured TSV.
+  // Entities are read from the database seeded above from the static-load file.
   props.data = await fetchAllEntities(entityListType, undefined);
 
   return {

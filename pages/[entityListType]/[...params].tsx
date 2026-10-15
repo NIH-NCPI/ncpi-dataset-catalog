@@ -16,6 +16,7 @@ import { getEntityConfig } from "@databiosphere/findable-ui/lib/config/utils";
 import { fetchCatalog } from "@databiosphere/findable-ui/lib/entity/api/service";
 import { getEntityService } from "@databiosphere/findable-ui/lib/hooks/useEntityService";
 import { EXPLORE_MODE } from "@databiosphere/findable-ui/lib/hooks/useExploreMode/types";
+import { seedDatabase } from "@databiosphere/findable-ui/lib/utils/seedDatabase";
 import { EntityDetailView } from "@databiosphere/findable-ui/lib/views/EntityDetailView/entityDetailView";
 import { NCPICatalogStudy } from "app/apis/catalog/ncpi-catalog/common/entities";
 import { StudyJsonLd } from "app/components/Detail/components/StudyJsonLd/studyJsonLd";
@@ -23,8 +24,7 @@ import { config } from "app/config/config";
 import {
   getBuildTimeEntities,
   getBuildTimeEntity,
-  seedDatabase,
-} from "app/utils/seedDatabase";
+} from "app/utils/buildTimeEntities";
 import { getStudyPageMeta } from "app/utils/studyTitles";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
@@ -86,7 +86,7 @@ export const getStaticPaths: GetStaticPaths<PageUrl> = async () => {
     // Process static paths.
     if (entityConfig.detail.staticLoad) {
       // Paths sourced from the build-time entity cache.
-      await processSeededEntityPaths(entityConfig, paths);
+      await processBuildTimeEntityPaths(entityConfig, paths);
       // Server-side fetch, server-side filtering.
       if (exploreMode === EXPLORE_MODE.SS_FETCH_SS_FILTERING) {
         // Fetch catalogs and generate a list of catalogs associated with the default catalog.
@@ -244,6 +244,28 @@ function getTabRoutes(tabs: BackPageTabConfig[]): string[] {
 }
 
 /**
+ * Processes static paths for entities whose paths are sourced from the
+ * build-time entity cache: client-side fetch mode, and server-side fetch
+ * with client-side filtering — see getBuildTimeEntities.
+ * @param entityConfig - Entity config.
+ * @param paths - Static paths.
+ */
+async function processBuildTimeEntityPaths(
+  entityConfig: EntityConfig,
+  paths: StaticPath[]
+): Promise<void> {
+  const { exploreMode } = entityConfig;
+  if (
+    exploreMode !== EXPLORE_MODE.CS_FETCH_CS_FILTERING &&
+    exploreMode !== EXPLORE_MODE.SS_FETCH_CS_FILTERING
+  ) {
+    return;
+  }
+  const hits = await getBuildTimeEntities(entityConfig);
+  processEntityPaths(entityConfig, { hits }, paths);
+}
+
+/**
  * Processes the static paths for the given entity response.
  * @param entityConfig - Entity config.
  * @param entitiesResponse - Entities response.
@@ -302,33 +324,11 @@ async function processEntityProps(
     // Seed database; this mode's detail fetch goes through the TSV entity
     // service, which reads the database internally. SS_FETCH_CS_FILTERING
     // details are read from the build-time entity cache — see getEntity.
-    await seedDatabase(entityConfig);
+    await seedDatabase(entityConfig.route, entityConfig);
   }
-  // Fetch entity detail, either from database or API.
+  // Fetch entity detail from the database, the build-time entity cache, or the API.
   const entityResponse = await getEntity(entityConfig, entityId);
   if (entityResponse) {
     props.data = entityResponse;
   }
-}
-
-/**
- * Processes static paths for entities whose paths are sourced from the
- * build-time entity cache: client-side fetch mode, and server-side fetch
- * with client-side filtering — see getBuildTimeEntities.
- * @param entityConfig - Entity config.
- * @param paths - Static paths.
- */
-async function processSeededEntityPaths(
-  entityConfig: EntityConfig,
-  paths: StaticPath[]
-): Promise<void> {
-  const { exploreMode } = entityConfig;
-  if (
-    exploreMode !== EXPLORE_MODE.CS_FETCH_CS_FILTERING &&
-    exploreMode !== EXPLORE_MODE.SS_FETCH_CS_FILTERING
-  ) {
-    return;
-  }
-  const hits = await getBuildTimeEntities(entityConfig);
-  processEntityPaths(entityConfig, { hits }, paths);
 }
