@@ -1,11 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import {
-  getResultsTab,
-  SEARCH_INPUT,
-  TABLE_BODY,
-  waitForResults,
-} from "./helpers";
+import { getResultsTab, TABLE_BODY, waitForResults } from "./helpers";
 
 test.describe("Example Queries page", () => {
   test.beforeEach(async ({ page }) => {
@@ -45,11 +40,9 @@ test.describe("Example Queries page", () => {
     const queryText = await chip.getAttribute("data-query");
     expect(queryText).not.toBeNull();
 
-    await chip.click();
-
+    // The search fires after navigating to the research page.
+    await waitForResults(page, () => chip.click());
     await page.waitForURL(/\/research\/studies/);
-    await page.locator(SEARCH_INPUT).waitFor({ state: "visible" });
-    await waitForResults(page);
 
     // Verify the chip's query text appears on the research page.
     await expect(page.locator("main")).toContainText(queryText as string);

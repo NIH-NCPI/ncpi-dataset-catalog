@@ -25,8 +25,7 @@ test.describe("Chat UI", () => {
     const queryText = await suggestionChip.first().getAttribute("data-query");
     expect(queryText).not.toBeNull();
 
-    await suggestionChip.first().click();
-    await waitForResults(page);
+    await waitForResults(page, () => suggestionChip.first().click());
 
     await expect(page.locator("main")).toContainText(queryText as string);
 
@@ -35,8 +34,9 @@ test.describe("Chat UI", () => {
   });
 
   test("clicking a study row navigates to study detail", async ({ page }) => {
-    await submitQuery(page, "type 1 diabetes studies on AnVIL");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "type 1 diabetes studies on AnVIL")
+    );
 
     await expect(page.locator(TABLE_BODY)).toBeVisible();
 
@@ -57,8 +57,9 @@ test.describe("Chat UI", () => {
       "Search for studies or variables"
     );
 
-    await submitQuery(page, "diabetes studies on AnVIL");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "diabetes studies on AnVIL")
+    );
 
     await expect(input).toHaveAttribute("placeholder", /[Rr]efine/);
   });
@@ -68,12 +69,12 @@ test.describe("Chat UI", () => {
     // LLM-written summary, so it is a stable signal that each turn completed.
     const tab = getResultsTab(page);
 
-    await submitQuery(page, "diabetes studies on BDC");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "diabetes studies on BDC")
+    );
     await expect(tab).toBeVisible();
 
-    await submitQuery(page, "also with BMI data");
-    await waitForResults(page);
+    await waitForResults(page, () => submitQuery(page, "also with BMI data"));
     await expect(tab).toBeVisible();
 
     // Exact match: the assistant's summary may echo the query text.
@@ -88,8 +89,9 @@ test.describe("Chat UI", () => {
   });
 
   test("download TSV button triggers a download", async ({ page }) => {
-    await submitQuery(page, "diabetes studies on AnVIL");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "diabetes studies on AnVIL")
+    );
 
     await expect(page.locator(TABLE_BODY)).toBeVisible();
 

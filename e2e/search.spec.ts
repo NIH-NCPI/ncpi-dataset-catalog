@@ -17,8 +17,9 @@ test.describe("Core search flow", () => {
   });
 
   test("study search returns results table", async ({ page }) => {
-    await submitQuery(page, "diabetes studies on AnVIL");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "diabetes studies on AnVIL")
+    );
 
     const heading = page.locator(RESULTS_HEADING).first();
     await expect(heading).toHaveText(/Studies|Variables/);
@@ -28,8 +29,9 @@ test.describe("Core search flow", () => {
   });
 
   test("variable search returns results", async ({ page }) => {
-    await submitQuery(page, "what variables measure blood pressure?");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "what variables measure blood pressure?")
+    );
 
     const heading = page.locator(RESULTS_HEADING).first();
     await expect(heading).toHaveText(/Studies|Variables/);
@@ -39,8 +41,9 @@ test.describe("Core search flow", () => {
   });
 
   test("filter chips render after query", async ({ page }) => {
-    await submitQuery(page, "diabetes studies on AnVIL");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "diabetes studies on AnVIL")
+    );
 
     const chips = page.locator(FILTER_CHIP);
     await expect(chips.first()).toBeVisible();
@@ -48,11 +51,12 @@ test.describe("Core search flow", () => {
   });
 
   test("zero results shows diagnostic message", async ({ page }) => {
-    await submitQuery(
-      page,
-      "xyzzy nonexistent impossible query that matches nothing 12345"
+    await waitForResults(page, () =>
+      submitQuery(
+        page,
+        "xyzzy nonexistent impossible query that matches nothing 12345"
+      )
     );
-    await waitForResults(page);
 
     await expect(page.getByText("No results found.")).toBeVisible();
   });
