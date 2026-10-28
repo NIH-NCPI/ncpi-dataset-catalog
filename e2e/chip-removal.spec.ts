@@ -20,8 +20,9 @@ test.describe("Filter chip removal", () => {
   // Querying for the combination should yield 0 results.
   // Removing the KFDRC platform chip should broaden results to include AnVIL.
   test("removing over-constraining chip reveals results", async ({ page }) => {
-    await submitQuery(page, "type 1 diabetes studies on KFDRC");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "type 1 diabetes studies on KFDRC")
+    );
 
     await expect(page.getByText("No results found.")).toBeVisible();
 
@@ -30,16 +31,16 @@ test.describe("Filter chip removal", () => {
 
     const platformChip = chips.filter({ hasText: /KFDRC/ });
     await expect(platformChip).toBeVisible();
-    await platformChip.locator(CHIP_DELETE).click();
-    await waitForResults(page);
+    await waitForResults(page, () => platformChip.locator(CHIP_DELETE).click());
 
     await expect(page.locator(TABLE_BODY)).toBeVisible();
     await expect(page.getByText("No results found.")).not.toBeVisible();
   });
 
   test("removing focus chip broadens results", async ({ page }) => {
-    await submitQuery(page, "type 1 diabetes studies on AnVIL");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "type 1 diabetes studies on AnVIL")
+    );
 
     await expect(page.locator(TABLE_BODY)).toBeVisible();
     const tab = page.getByRole("tab", { name: /Results/ });
@@ -48,8 +49,7 @@ test.describe("Filter chip removal", () => {
     const chips = page.locator(FILTER_CHIP);
     const focusChip = chips.filter({ hasText: /Diabetes/ });
     await expect(focusChip).toBeVisible();
-    await focusChip.locator(CHIP_DELETE).click();
-    await waitForResults(page);
+    await waitForResults(page, () => focusChip.locator(CHIP_DELETE).click());
 
     await expect(page.locator(TABLE_BODY)).toBeVisible();
     const afterLabel = await tab.innerText();

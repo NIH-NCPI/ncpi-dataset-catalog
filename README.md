@@ -98,6 +98,8 @@ npm run lint         # Run ESLint
 npm run check-format # Check Prettier formatting
 ```
 
+E2E searches go to the deployed dev search API by default. To run them against a local backend on `:8000` instead, set `E2E_LOCAL_BACKEND=true` (the backend needs `ANTHROPIC_API_KEY`). Playwright reuses any server already listening on `:3000`, so stop other dev servers first.
+
 ## Project Structure
 
 ```

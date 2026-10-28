@@ -14,11 +14,11 @@ test.describe("Multi-turn conversation", () => {
   });
 
   test("follow-up refines filters", async ({ page }) => {
-    await submitQuery(page, "diabetes studies on AnVIL");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "diabetes studies on AnVIL")
+    );
 
-    await submitQuery(page, "also include BDC");
-    await waitForResults(page);
+    await waitForResults(page, () => submitQuery(page, "also include BDC"));
 
     const chipsAfter = await getChipLabels(page);
     const afterText = chipsAfter.join(" ").toLowerCase();
@@ -30,25 +30,29 @@ test.describe("Multi-turn conversation", () => {
   test("follow-up preserves study intent when adding criteria", async ({
     page,
   }) => {
-    await submitQuery(page, "studies with transcriptomic data on diabetes");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "studies with transcriptomic data on diabetes")
+    );
 
     const headingBefore = page.locator("h1").first();
     await expect(headingBefore).toHaveText("Studies");
 
-    await submitQuery(page, "also where BMI was measured");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "also where BMI was measured")
+    );
 
     const headingAfter = page.locator("h1").first();
     await expect(headingAfter).toHaveText("Studies");
   });
 
   test("follow-up replaces a filter", async ({ page }) => {
-    await submitQuery(page, "cancer studies on AnVIL");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "cancer studies on AnVIL")
+    );
 
-    await submitQuery(page, "change cancer to diabetes");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "change cancer to diabetes")
+    );
 
     const chipsAfter = await getChipLabels(page);
     const afterText = chipsAfter.join(" ").toLowerCase();

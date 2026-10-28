@@ -2,8 +2,9 @@ import { expect, test } from "@playwright/test";
 
 import {
   FILTER_CHIP,
+  getResultsTab,
+  getSubmitButton,
   SEARCH_INPUT,
-  SUBMIT_BUTTON,
   submitQuery,
   TABLE_BODY,
   waitForResults,
@@ -24,18 +25,18 @@ test.describe("Chat UI", () => {
     const queryText = await suggestionChip.first().getAttribute("data-query");
     expect(queryText).not.toBeNull();
 
-    await suggestionChip.first().click();
-    await waitForResults(page);
+    await waitForResults(page, () => suggestionChip.first().click());
 
     await expect(page.locator("main")).toContainText(queryText as string);
 
-    const tab = page.getByRole("tab", { name: /Results \(\d+\)/ });
+    const tab = getResultsTab(page);
     await expect(tab).toBeVisible();
   });
 
   test("clicking a study row navigates to study detail", async ({ page }) => {
-    await submitQuery(page, "type 1 diabetes studies on AnVIL");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "type 1 diabetes studies on AnVIL")
+    );
 
     await expect(page.locator(TABLE_BODY)).toBeVisible();
 
@@ -56,34 +57,41 @@ test.describe("Chat UI", () => {
       "Search for studies or variables"
     );
 
-    await submitQuery(page, "diabetes studies on AnVIL");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "diabetes studies on AnVIL")
+    );
 
     await expect(input).toHaveAttribute("placeholder", /[Rr]efine/);
   });
 
   test("conversation history shows all messages", async ({ page }) => {
-    await submitQuery(page, "diabetes studies on BDC");
-    await waitForResults(page);
+    // The results count comes from the response data, unlike the assistant's
+    // LLM-written summary, so it is a stable signal that each turn completed.
+    const tab = getResultsTab(page);
 
-    await submitQuery(page, "also with BMI data");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "diabetes studies on BDC")
+    );
+    await expect(tab).toBeVisible();
 
+    await waitForResults(page, () => submitQuery(page, "also with BMI data"));
+    await expect(tab).toBeVisible();
+
+    // Exact match: the assistant's summary may echo the query text.
     const chatArea = page.locator("main");
 
-    await expect(chatArea.getByText("diabetes studies on BDC")).toBeVisible();
-    await expect(chatArea.getByText("also with BMI data")).toBeVisible();
-
-    // Both queries should have produced assistant responses containing "Found".
-    const assistantResponses = chatArea.locator(
-      ':text-matches("Found \\\\d+")'
-    );
-    expect(await assistantResponses.count()).toBeGreaterThanOrEqual(2);
+    await expect(
+      chatArea.getByText("diabetes studies on BDC", { exact: true })
+    ).toBeVisible();
+    await expect(
+      chatArea.getByText("also with BMI data", { exact: true })
+    ).toBeVisible();
   });
 
   test("download TSV button triggers a download", async ({ page }) => {
-    await submitQuery(page, "diabetes studies on AnVIL");
-    await waitForResults(page);
+    await waitForResults(page, () =>
+      submitQuery(page, "diabetes studies on AnVIL")
+    );
 
     await expect(page.locator(TABLE_BODY)).toBeVisible();
 
@@ -99,15 +107,15 @@ test.describe("Chat UI", () => {
   });
 
   test("empty query does not trigger a search", async ({ page }) => {
-    const input = page.locator(SEARCH_INPUT);
+    const submitButton = getSubmitButton(page);
 
-    await input.fill("");
-    await page.locator(SUBMIT_BUTTON).click();
+    await page.locator(SEARCH_INPUT).fill("");
+    await submitButton.click();
 
-    await expect(input).toBeEnabled();
+    await expect(submitButton).toBeEnabled();
     expect(await page.locator(FILTER_CHIP).count()).toBe(0);
 
-    const tab = page.getByRole("tab", { name: /Results \(\d+\)/ });
+    const tab = getResultsTab(page);
     await expect(tab).not.toBeVisible();
   });
 });

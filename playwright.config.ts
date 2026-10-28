@@ -1,5 +1,11 @@
 import { defineConfig } from "@playwright/test";
 
+// Searches go to the deployed dev API from .env.development by default.
+// Set E2E_LOCAL_BACKEND=true to start the local backend on :8000 and serve
+// the app with `npm run dev:local`, which points search at it (the backend
+// needs ANTHROPIC_API_KEY to parse queries).
+const useLocalBackend = process.env.E2E_LOCAL_BACKEND === "true";
+
 export default defineConfig({
   fullyParallel: false,
   projects: [{ name: "chromium", use: { browserName: "chromium" } }],
@@ -11,15 +17,18 @@ export default defineConfig({
     baseURL: "http://localhost:3000",
   },
   webServer: [
+    ...(useLocalBackend
+      ? [
+          {
+            command: "make -C backend start",
+            port: 8000,
+            reuseExistingServer: true,
+            timeout: 30_000,
+          },
+        ]
+      : []),
     {
-      command: "make -C backend start",
-      port: 8000,
-      reuseExistingServer: true,
-      timeout: 30_000,
-    },
-    {
-      command: "npm run dev",
-      env: { NEXT_PUBLIC_SEARCH_API_URL: "http://localhost:8000/search" },
+      command: useLocalBackend ? "npm run dev:local" : "npm run dev",
       port: 3000,
       reuseExistingServer: true,
       timeout: 60_000,
