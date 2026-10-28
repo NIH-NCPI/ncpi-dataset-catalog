@@ -1,4 +1,3 @@
-import { useLayoutSpacing } from "@databiosphere/findable-ui/lib/hooks/UseLayoutSpacing/hook";
 import { TYPOGRAPHY_PROPS } from "@databiosphere/findable-ui/lib/styles/common/mui/typography";
 import { Stack, Typography } from "@mui/material";
 import { JSX } from "react";
@@ -18,9 +17,8 @@ import { Props } from "./types";
  * @returns Hero section.
  */
 export const HeroSection = ({ ref }: Props): JSX.Element => {
-  const { spacing } = useLayoutSpacing();
   return (
-    <StyledSection ref={ref} spacing={spacing}>
+    <StyledSection ref={ref}>
       <StyledContainer>
         <HeroImage />
         <StyledStack spacing={8} useFlexGap>

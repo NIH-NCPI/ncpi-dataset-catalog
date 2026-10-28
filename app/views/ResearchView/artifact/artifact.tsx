@@ -1,4 +1,3 @@
-import { useLayoutSpacing } from "@databiosphere/findable-ui/lib/hooks/UseLayoutSpacing/hook";
 import { Form } from "@databiosphere/findable-ui/lib/views/ResearchView/assistant/components/Form/form";
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
 import { JSX } from "react";
@@ -15,9 +14,8 @@ import { Props } from "./types";
  */
 export const Artifact = ({ researchType }: Props): JSX.Element => {
   const { state } = useChatState();
-  const { spacing } = useLayoutSpacing();
   return (
-    <StyledGrid {...spacing}>
+    <StyledGrid>
       <Tabs researchType={researchType} />
       <Form status={state.status}>
         <ArtifactSelector researchType={researchType} state={state} />
