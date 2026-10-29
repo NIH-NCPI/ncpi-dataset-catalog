@@ -1,4 +1,3 @@
-import { useLayoutSpacing } from "@databiosphere/findable-ui/lib/hooks/UseLayoutSpacing/hook";
 import { ResearchView } from "@databiosphere/findable-ui/lib/views/ResearchView/researchView";
 import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
 import Router from "next/router";
@@ -16,7 +15,6 @@ import { Props } from "./types";
  * @returns Study detail view.
  */
 export const StudyDetailView = (props: Props): JSX.Element => {
-  const { spacing } = useLayoutSpacing();
   const { state } = useChatState();
 
   const { study } = props;
@@ -30,7 +28,7 @@ export const StudyDetailView = (props: Props): JSX.Element => {
 
   return (
     <ResearchView>
-      <StyledGrid {...spacing}>
+      <StyledGrid>
         <StyledContainer maxWidth={false}>
           <Hero {...props} />
           <Main study={study} subpath={props.subpath} />

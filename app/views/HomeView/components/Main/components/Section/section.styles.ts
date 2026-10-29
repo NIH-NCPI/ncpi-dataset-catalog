@@ -1,3 +1,4 @@
+import { HEADER_HEIGHT_VAR } from "@databiosphere/findable-ui/lib/components/Layout/components/Header/common/constants";
 import { FONT } from "@databiosphere/findable-ui/lib/styles/common/constants/font";
 import { PALETTE } from "@databiosphere/findable-ui/lib/styles/common/constants/palette";
 import { bpDownSm } from "@databiosphere/findable-ui/lib/styles/common/mixins/breakpoints";
@@ -14,8 +15,11 @@ export const StyledContainer = styled(Container)`
   }
 `;
 
+// Pulls the sky up under the sticky, transparent header so its gradient shows through.
 export const StyledSkyline = styled.div`
   background: linear-gradient(180deg, #c6e1ef 0%, #fefefe 54%);
+  margin-top: calc(-1 * ${HEADER_HEIGHT_VAR});
+  padding-top: ${HEADER_HEIGHT_VAR};
 
   ${bpDownSm} {
     background: linear-gradient(180deg, #c6e1ef 0%, #fefefe 36%);

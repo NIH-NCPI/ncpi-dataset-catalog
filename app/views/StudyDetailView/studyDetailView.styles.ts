@@ -1,17 +1,13 @@
-import { LayoutSpacing } from "@databiosphere/findable-ui/lib/hooks/UseLayoutSpacing/types";
 import styled from "@emotion/styled";
 import { Container } from "@mui/material";
 
-export const StyledGrid = styled("div", {
-  shouldForwardProp: (prop) => prop !== "bottom" && prop !== "top",
-})<LayoutSpacing>`
+export const StyledGrid = styled("div")`
   align-items: flex-start;
+  contain: size; /* fills the main row without growing it, so the view scrolls inside the window */
   display: grid;
   height: 100%;
-  max-height: 100vh;
   min-width: 1028px;
   overflow: auto;
-  padding-top: ${({ top }) => top}px;
   width: 100%;
 `;
 

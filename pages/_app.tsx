@@ -11,7 +11,6 @@ import { ConfigProvider as DXConfigProvider } from "@databiosphere/findable-ui/l
 import { DataDictionaryStateProvider } from "@databiosphere/findable-ui/lib/providers/dataDictionaryState/provider";
 import { ExploreStateProvider } from "@databiosphere/findable-ui/lib/providers/exploreState";
 import { FileManifestStateProvider } from "@databiosphere/findable-ui/lib/providers/fileManifestState";
-import { LayoutDimensionsProvider } from "@databiosphere/findable-ui/lib/providers/layoutDimensions/provider";
 import { ServicesProvider } from "@databiosphere/findable-ui/lib/providers/services/provider";
 import { SystemStatusProvider } from "@databiosphere/findable-ui/lib/providers/systemStatus";
 import { createAppTheme } from "@databiosphere/findable-ui/lib/theme/theme";
@@ -95,55 +94,51 @@ function MyApp(props: AppPropsWithComponent): JSX.Element {
             <CssBaseline />
             <ServicesProvider>
               <SystemStatusProvider>
-                <LayoutDimensionsProvider>
-                  <AppLayout>
-                    <ThemeProvider
-                      theme={(theme: Theme): Theme =>
-                        createTheme(
-                          deepmerge(theme, {
-                            breakpoints: createBreakpoints(BREAKPOINTS),
-                          })
-                        )
-                      }
-                    >
-                      <StyledHeader {...header} transparent={homePage} />
-                    </ThemeProvider>
-                    <ChatProvider initialArgs={ai?.prompt} url={aiUrl}>
-                      <MultiTurnQueryProvider>
-                        <ExploreStateProvider entityListType={entityListType}>
-                          <DataDictionaryStateProvider>
-                            <FileManifestStateProvider>
-                              <Main>
-                                <ErrorBoundary
-                                  fallbackRender={({
-                                    error,
-                                    reset,
-                                  }: {
-                                    error: DataExplorerError;
-                                    reset: () => void;
-                                  }): JSX.Element => (
-                                    <DXError
-                                      errorMessage={error.message}
-                                      requestUrlMessage={
-                                        error.requestUrlMessage
-                                      }
-                                      rootPath={redirectRootToPath}
-                                      onReset={reset}
-                                    />
-                                  )}
-                                >
-                                  <Component {...pageProps} />
-                                  <Floating {...floating} />
-                                </ErrorBoundary>
-                              </Main>
-                            </FileManifestStateProvider>
-                          </DataDictionaryStateProvider>
-                        </ExploreStateProvider>
-                      </MultiTurnQueryProvider>
-                    </ChatProvider>
-                    <Footer />
-                  </AppLayout>
-                </LayoutDimensionsProvider>
+                <AppLayout>
+                  <ThemeProvider
+                    theme={(theme: Theme): Theme =>
+                      createTheme(
+                        deepmerge(theme, {
+                          breakpoints: createBreakpoints(BREAKPOINTS),
+                        })
+                      )
+                    }
+                  >
+                    <StyledHeader {...header} transparent={homePage} />
+                  </ThemeProvider>
+                  <ChatProvider initialArgs={ai?.prompt} url={aiUrl}>
+                    <MultiTurnQueryProvider>
+                      <ExploreStateProvider entityListType={entityListType}>
+                        <DataDictionaryStateProvider>
+                          <FileManifestStateProvider>
+                            <Main>
+                              <ErrorBoundary
+                                fallbackRender={({
+                                  error,
+                                  reset,
+                                }: {
+                                  error: DataExplorerError;
+                                  reset: () => void;
+                                }): JSX.Element => (
+                                  <DXError
+                                    errorMessage={error.message}
+                                    requestUrlMessage={error.requestUrlMessage}
+                                    rootPath={redirectRootToPath}
+                                    onReset={reset}
+                                  />
+                                )}
+                              >
+                                <Component {...pageProps} />
+                                <Floating {...floating} />
+                              </ErrorBoundary>
+                            </Main>
+                          </FileManifestStateProvider>
+                        </DataDictionaryStateProvider>
+                      </ExploreStateProvider>
+                    </MultiTurnQueryProvider>
+                  </ChatProvider>
+                  <Footer />
+                </AppLayout>
               </SystemStatusProvider>
             </ServicesProvider>
           </DXConfigProvider>

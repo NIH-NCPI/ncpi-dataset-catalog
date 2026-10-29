@@ -5,7 +5,8 @@ import {
   Links,
 } from "@databiosphere/findable-ui/lib/components/Layout/components/Footer/footer.styles";
 import { Logo } from "@databiosphere/findable-ui/lib/components/Layout/components/Header/components/Content/components/Logo/logo";
-import { useLayoutDimensions } from "@databiosphere/findable-ui/lib/providers/layoutDimensions/hook";
+import { useLayoutHeight } from "@databiosphere/findable-ui/lib/components/Layout/hooks/UseLayoutHeight/hook";
+import { PROPERTY } from "@databiosphere/findable-ui/lib/hooks/useHtmlStyle/constants";
 import { Toolbar } from "@mui/material";
 import { JSX } from "react";
 import {
@@ -20,7 +21,7 @@ import {
  * @returns Footer.
  */
 export const Footer = (): JSX.Element => {
-  const { footerRef } = useLayoutDimensions();
+  const { ref: footerRef } = useLayoutHeight(PROPERTY.FOOTER_HEIGHT);
   return (
     <AppBar {...APP_BAR_PROPS} ref={footerRef}>
       <Toolbar variant="dense">
