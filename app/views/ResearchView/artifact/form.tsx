@@ -53,9 +53,8 @@ interface SearchDispatch {
 
 /**
  * Posts a search request, handling abort, timeout, rate-limit, and errors.
- * Dispatches the response with the refine input placeholder (unless the
- * response sets its own), so the chat input renders, and sizes itself to, that
- * placeholder from then on.
+ * Dispatches the response with the refine input placeholder, so the chat input
+ * renders, and sizes itself to, that placeholder from then on.
  * @param url - Search API URL.
  * @param body - Request body to send as JSON.
  * @param abortRef - Shared abort controller ref (previous request is aborted).
@@ -92,7 +91,7 @@ async function postSearch(
     const data: MessageResponse = await res.json();
     const message = {
       ...data,
-      inputPlaceholder: data.inputPlaceholder ?? REFINE_PLACEHOLDER,
+      inputPlaceholder: REFINE_PLACEHOLDER,
     };
     dispatch.onSetMessage(message);
     return message;

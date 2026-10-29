@@ -43,7 +43,7 @@ const defaultOptions = {
   status: { loading: false },
 };
 
-const okResponse = (overrides: Record<string, unknown> = {}) => ({
+const okResponse = () => ({
   json: () =>
     Promise.resolve({
       intent: "study",
@@ -56,7 +56,6 @@ const okResponse = (overrides: Record<string, unknown> = {}) => ({
         message: null,
       },
       timing: { lookupMs: 0, pipelineMs: 0, totalMs: 0 },
-      ...overrides,
     }),
   ok: true,
   status: 200,
@@ -186,25 +185,6 @@ describe("MultiTurnQueryProvider onSubmit", () => {
     const [message] = mockDispatch.onSetMessage.mock.calls[0];
     expect(message.inputPlaceholder).toMatch(/^Refine/);
     expect(onSuccess).toHaveBeenCalledWith(message);
-  });
-
-  it("keeps an input placeholder the response sets", async () => {
-    global.fetch = jest
-      .fn()
-      .mockResolvedValue(okResponse({ inputPlaceholder: "Which disease?" }));
-    const { result } = renderOnSubmit();
-
-    await act(async () => {
-      await result.current.onSubmit(
-        mockFormEvent(),
-        { query: "diabetes studies" },
-        defaultOptions
-      );
-    });
-
-    expect(mockDispatch.onSetMessage).toHaveBeenCalledWith(
-      expect.objectContaining({ inputPlaceholder: "Which disease?" })
-    );
   });
 
   it("does not submit when loading", async () => {
