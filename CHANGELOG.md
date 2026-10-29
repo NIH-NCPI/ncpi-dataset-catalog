@@ -1,5 +1,38 @@
 # Changelog
 
+## [0.22.0](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.21.2...v0.22.0) (2026-10-29)
+
+
+### Features
+
+* consolidate studies tables around an identity column with tag chips ([#458](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/458)) ([#464](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/464)) ([316db15](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/316db15056502f5993ceb50ecab954975a107ed2))
+* consolidate variable views around a concept identity column ([#459](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/459)) ([#465](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/465)) ([b5a2b70](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/b5a2b70c583f3db75810123b337177908d28052a))
+
+
+### Bug Fixes
+
+* analytics page tooltip background, logo size and released stylesheet ([#467](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/467)) ([#475](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/475)) ([86dd6ff](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/86dd6ff1615e546fc8d03e6197db6dc79e70cc91))
+* input placeholder truncated — support multi-line placeholder in search input ([#265](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/265)) ([#474](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/474)) ([5bd33e9](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/5bd33e9830f75954ac844d2836d6cc44b34e688b))
+
+
+### Chores
+
+* remove legacy google sheets analytics report generator ([#451](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/451)) ([#452](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/452)) ([de37cc1](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/de37cc11014bbcd976c0e05df88c993690617745))
+* upgrade @databiosphere/findable-ui to v57.0.0 ([#460](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/460)) ([#463](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/463)) ([86f87a7](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/86f87a7333cb1bcdc84b70e3e2aa2dd53f2baa28))
+* upgrade @databiosphere/findable-ui to v58.0.0 ([#472](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/472)) ([#473](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/473)) ([161062f](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/161062f16709aff049716354202343bf97310f08))
+* upgrade next.js and its packages to a release with the security fix ([#468](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/468)) ([#469](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/469)) ([7686d68](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/7686d680de5a5a796802a5f1494e9cbc307003e0))
+* use non-editable install for analytics package ([#454](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/454)) ([#455](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/455)) ([6eb8062](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/6eb80622b0819a5073f87904b4e397f2fc374e2f))
+
+
+### Code Refactoring
+
+* replace local seeddatabase copies with findable-ui's seeddatabase ([#462](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/462)) ([#466](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/466)) ([faacb46](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/faacb46eba834aedd6bfc63cde442ec4a0627f81))
+
+
+### Tests
+
+* update playwright e2e tests that have drifted from the app ([#470](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/470)) ([#471](https://github.com/NIH-NCPI/ncpi-dataset-catalog/issues/471)) ([d3c963f](https://github.com/NIH-NCPI/ncpi-dataset-catalog/commit/d3c963fabca436038636512aa1214c14a5be23d0))
+
 ## [0.21.2](https://github.com/NIH-NCPI/ncpi-dataset-catalog/compare/v0.21.1...v0.21.2) (2026-07-22)
 
 
