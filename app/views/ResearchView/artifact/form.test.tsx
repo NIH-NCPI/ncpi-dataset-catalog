@@ -13,14 +13,6 @@ const mockDispatch = {
   onSetStatus: jest.fn(),
 };
 
-const mockChatState = {
-  state: { messages: [], status: { loading: false } },
-};
-
-jest.mock("next/router", () => ({
-  useRouter: (): any => ({ pathname: "/research/studies" }),
-}));
-
 jest.mock("@databiosphere/findable-ui/lib/hooks/useConfig", () => ({
   useConfig: (): any => ({
     config: { ai: { url: "https://test-api/search" } },
@@ -31,20 +23,6 @@ jest.mock(
   "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatDispatch/hook",
   () => ({
     useChatDispatch: (): any => mockDispatch,
-  })
-);
-
-jest.mock(
-  "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook",
-  () => ({
-    useChatState: (): any => mockChatState,
-  })
-);
-
-jest.mock(
-  "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards",
-  () => ({
-    isAssistantMessage: (m: any): boolean => m?.type === "ASSISTANT",
   })
 );
 
@@ -141,7 +119,6 @@ function renderBoth() {
 describe("MultiTurnQueryProvider onSubmit", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    mockChatState.state.messages = [];
     uuidCounter = 0;
     stubRandomUUID();
     global.fetch = jest.fn().mockResolvedValue(okResponse());
@@ -191,6 +168,23 @@ describe("MultiTurnQueryProvider onSubmit", () => {
     const secondBody = JSON.parse(calls[1][1].body);
     expect(secondBody.sessionId).toBe(firstBody.sessionId);
     expect(secondBody).not.toHaveProperty("previousQuery");
+  });
+
+  it("dispatches the response with the refine input placeholder", async () => {
+    const onSuccess = jest.fn();
+    const { result } = renderOnSubmit();
+
+    await act(async () => {
+      await result.current.onSubmit(
+        mockFormEvent(),
+        { query: "diabetes studies" },
+        { ...defaultOptions, onSuccess }
+      );
+    });
+
+    const [message] = mockDispatch.onSetMessage.mock.calls[0];
+    expect(message.inputPlaceholder).toMatch(/^Refine/);
+    expect(onSuccess).toHaveBeenCalledWith(message);
   });
 
   it("does not submit when loading", async () => {
@@ -252,7 +246,6 @@ describe("MultiTurnQueryProvider onSubmit", () => {
 describe("MultiTurnQueryProvider removeFilter", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    mockChatState.state.messages = [];
     uuidCounter = 0;
     stubRandomUUID();
     global.fetch = jest.fn().mockResolvedValue(okResponse());
@@ -283,6 +276,28 @@ describe("MultiTurnQueryProvider removeFilter", () => {
     expect(calledUrl).toBe("https://test-api/search/filter");
     const body = JSON.parse(init.body);
     expect(body).toEqual({ facet: "focus", sessionId: "uuid-1", value: "DM" });
+  });
+
+  it("dispatches the filter response with the refine input placeholder", async () => {
+    const { result } = renderBoth();
+
+    // Establish the session with a first submission.
+    await act(async () => {
+      await result.current.query.onSubmit(
+        mockFormEvent(),
+        { query: "diabetes studies" },
+        defaultOptions
+      );
+    });
+
+    await act(async () => {
+      result.current.multiTurn.removeFilter("focus", "DM");
+      await new Promise((r) => setTimeout(r, 0));
+    });
+
+    expect(mockDispatch.onSetMessage).toHaveBeenCalledTimes(2);
+    const [message] = mockDispatch.onSetMessage.mock.calls[1];
+    expect(message.inputPlaceholder).toMatch(/^Refine/);
   });
 
   it("is a no-op before a session exists", async () => {

@@ -1,10 +1,7 @@
 import { useConfig } from "@databiosphere/findable-ui/lib/hooks/useConfig";
-import { isAssistantMessage } from "@databiosphere/findable-ui/lib/views/ResearchView/state/guards/guards";
 import { useChatDispatch } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatDispatch/hook";
-import { useChatState } from "@databiosphere/findable-ui/lib/views/ResearchView/state/hooks/UseChatState/hook";
 import { QueryContext } from "@databiosphere/findable-ui/lib/views/ResearchView/state/query/context";
 import { MessageResponse } from "@databiosphere/findable-ui/lib/views/ResearchView/state/types";
-import { useRouter } from "next/router";
 import {
   createContext,
   FormEvent,
@@ -12,11 +9,16 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useRef,
 } from "react";
 import { getSearchApiUrl } from "../../../utils/searchApiUrl";
+
+/**
+ * Input placeholder shown from the first search response on, prompting the
+ * user to refine the current results rather than start a new search.
+ */
+const REFINE_PLACEHOLDER = "Refine, e.g. “also where BMI was measured”";
 
 /**
  * Context for multi-turn filter removal.
@@ -51,11 +53,13 @@ interface SearchDispatch {
 
 /**
  * Posts a search request, handling abort, timeout, rate-limit, and errors.
+ * Dispatches the response with the refine input placeholder, so the chat input
+ * renders, and sizes itself to, that placeholder from then on.
  * @param url - Search API URL.
  * @param body - Request body to send as JSON.
  * @param abortRef - Shared abort controller ref (previous request is aborted).
  * @param dispatch - Chat dispatch actions.
- * @returns The parsed response, or undefined on error/abort.
+ * @returns The dispatched response, or undefined on error/abort.
  */
 async function postSearch(
   url: string,
@@ -85,8 +89,12 @@ async function postSearch(
     if (!res.ok) throw new Error(`Search failed (${res.status})`);
 
     const data: MessageResponse = await res.json();
-    dispatch.onSetMessage(data);
-    return data;
+    const message = {
+      ...data,
+      inputPlaceholder: REFINE_PLACEHOLDER,
+    };
+    dispatch.onSetMessage(message);
+    return message;
   } catch (error) {
     if (controller.signal.aborted) return undefined;
     const message =
@@ -121,27 +129,6 @@ export function MultiTurnQueryProvider({
   // app session is sufficient; the agent handles new-topic resets server-side.
   const sessionIdRef = useRef<string>("");
   const abortRef = useRef<AbortController | null>(null);
-
-  // After the first assistant response, switch the research prompt's placeholder
-  // to refine mode. This provider is app-wide, and the home hero uses the same
-  // `ai-prompt` input name, so gate on the research route to avoid touching it.
-  // Re-runs on route change too (idempotent placeholder check), so it re-applies
-  // to the textarea when the research view remounts on a later visit.
-  const { pathname } = useRouter();
-  const { state } = useChatState();
-  const messages = state.messages;
-  const lastMessage = messages[messages.length - 1];
-  useEffect(() => {
-    if (!pathname.startsWith("/research")) return;
-    if (!lastMessage || !isAssistantMessage(lastMessage)) return;
-    const input = document.querySelector<HTMLTextAreaElement>(
-      'textarea[name="ai-prompt"]'
-    );
-    const refine = "Refine, e.g. “also where BMI was measured”";
-    if (input && input.placeholder !== refine) {
-      input.placeholder = refine;
-    }
-  }, [lastMessage, pathname]);
 
   /**
    * Submits a query to the agent search API under the current session.
