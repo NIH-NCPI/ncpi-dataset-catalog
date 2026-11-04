@@ -31,10 +31,14 @@ const IndexPage = ({
   if (!entityListType) return <></>;
   // Key by entity type so switching list tabs remounts ExploreView. Both list
   // routes render this same page component, so without the key React reuses
-  // the component instance and useEntityList's fetched response survives the
-  // switch; during the transition the explore state's tabValue lags the page
-  // config, and the stale response gets mapped with the other entity's
-  // mapper — crashing the list (e.g. studies ⇄ platforms).
+  // the component instance across the switch. On findable-ui v58 and earlier,
+  // the explore state's tabValue lagged the page config during the switch and
+  // a stale response was mapped with the other entity's mapper, crashing the
+  // list (e.g. studies ⇄ platforms). From v60 the entity list is fetched with
+  // the API path and mapper taken from the same tabValue, and is only stored
+  // when tabValue matches the page, so the crash no longer reproduces. The key
+  // stays as a precaution until findable-ui drives explore state from the
+  // page's entityListType across tab changes; remove it then.
   return (
     <ExploreView
       key={entityListType}
