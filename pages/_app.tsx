@@ -1,5 +1,4 @@
 import "@databiosphere/findable-ui";
-import { AzulEntitiesStaticResponse } from "@databiosphere/findable-ui/lib/apis/azul/common/entities";
 import { Error as DXError } from "@databiosphere/findable-ui/lib/components/Error/error";
 import { ErrorBoundary } from "@databiosphere/findable-ui/lib/components/ErrorBoundary/errorBoundary";
 import { Head } from "@databiosphere/findable-ui/lib/components/Head/head";
@@ -36,7 +35,8 @@ import { BREAKPOINTS } from "../site-config/common/constants";
 
 const FEATURE_FLAGS = Object.values(FEATURES);
 
-export interface PageProps extends AzulEntitiesStaticResponse {
+export interface PageProps {
+  entityListType?: string;
   homePage?: boolean;
   pageDescription?: string;
   pageTitle?: string;

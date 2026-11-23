@@ -1,20 +1,23 @@
-import { AzulEntitiesStaticResponse } from "@databiosphere/findable-ui/lib/apis/azul/common/entities";
 import { getEntityConfig } from "@databiosphere/findable-ui/lib/config/utils";
 import { getEntityService } from "@databiosphere/findable-ui/lib/hooks/useEntityService";
 import { EXPLORE_MODE } from "@databiosphere/findable-ui/lib/hooks/useExploreMode/types";
 import { seedDatabase } from "@databiosphere/findable-ui/lib/utils/seedDatabase";
 import { ExploreView } from "@databiosphere/findable-ui/lib/views/ExploreView/exploreView";
+import type { ExploreViewProps } from "@databiosphere/findable-ui/lib/views/ExploreView/types";
 import { config } from "app/config/config";
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
-import { ParsedUrlQuery } from "querystring";
-import { JSX } from "react";
+import type {
+  GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsContext,
+} from "next";
+import type { ParsedUrlQuery } from "querystring";
+import type { JSX } from "react";
 
 interface PageUrl extends ParsedUrlQuery {
   entityListType: string;
 }
 
-interface ListPageProps extends AzulEntitiesStaticResponse {
-  entityListType: string;
+interface ListPageProps extends ExploreViewProps {
   pageTitle?: string;
 }
 
@@ -34,11 +37,11 @@ const IndexPage = ({
   // the component instance across the switch. On findable-ui v58 and earlier,
   // the explore state's tabValue lagged the page config during the switch and
   // a stale response was mapped with the other entity's mapper, crashing the
-  // list (e.g. studies ⇄ platforms). From v60 the entity list is fetched with
-  // the API path and mapper taken from the same tabValue, and is only stored
-  // when tabValue matches the page, so the crash no longer reproduces. The key
-  // stays as a precaution until findable-ui drives explore state from the
-  // page's entityListType across tab changes; remove it then.
+  // list (e.g. studies ⇄ platforms). From v61 each explore mode loads its
+  // entity list through its own strategy, and from v63 ExploreView takes the
+  // entity array directly. The key stays as a precaution until findable-ui
+  // drives explore state from the page's entityListType across tab changes;
+  // remove it then.
   return (
     <ExploreView
       key={entityListType}
@@ -71,9 +74,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
  * @param context - Object containing values related to the current context.
  * @returns static props.
  */
-export const getStaticProps: GetStaticProps<
-  AzulEntitiesStaticResponse
-> = async (context: GetStaticPropsContext) => {
+export const getStaticProps: GetStaticProps<ListPageProps> = async (
+  context: GetStaticPropsContext
+) => {
   const appConfig = config();
   const { entityListType } = context.params as PageUrl;
   const { entities } = appConfig;
@@ -99,7 +102,7 @@ export const getStaticProps: GetStaticProps<
   }
 
   // Entities are read from the database seeded above from the static-load file.
-  props.data = await fetchAllEntities(entityListType, undefined);
+  props.data = (await fetchAllEntities(entityListType, undefined)).hits;
 
   return {
     props,

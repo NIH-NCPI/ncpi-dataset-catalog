@@ -1,13 +1,13 @@
 import { CallToActionButton } from "@databiosphere/findable-ui/lib/components/common/Button/components/CallToActionButton/callToActionButton";
-import { BUTTON_PROPS } from "@databiosphere/findable-ui/lib/components/common/Button/constants";
 import { Actions } from "@databiosphere/findable-ui/lib/components/Layout/components/BackPage/components/BackPageHero/components/Actions/actions";
 import {
   ANCHOR_TARGET,
   REL_ATTRIBUTE,
 } from "@databiosphere/findable-ui/lib/components/Links/common/entities";
+import { BUTTON_PRESETS } from "@databiosphere/findable-ui/lib/contracts/mui/Button/presets";
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
 import { ListItemText, MenuItem } from "@mui/material";
-import { JSX } from "react";
+import type { JSX } from "react";
 import { LIST_ITEM_TEXT_PROPS, MENU_PROPS, SVG_ICON_PROPS } from "./constants";
 import { StyledButton, StyledDropdownMenu } from "./requestAccess.styles";
 import { Props } from "./types";
@@ -36,7 +36,7 @@ export const RequestAccess = ({
         {...MENU_PROPS}
         button={(props) => (
           <StyledButton
-            {...BUTTON_PROPS.PRIMARY_CONTAINED}
+            {...BUTTON_PRESETS.PRIMARY_CONTAINED}
             endIcon={<ArrowDropDownRoundedIcon {...SVG_ICON_PROPS} />}
             {...props}
           >
