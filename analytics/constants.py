@@ -1,6 +1,6 @@
 # CHANGE THESE VALUES TO GENERATE NEW REPORTS
 # The date of the current month to report on (yyyy-mm)
-CURRENT_MONTH = "2026-05"
+CURRENT_MONTH = "2026-08"
 
 HISTORIC_UA_DATA_PATH = "./users_over_time_history.json"
 NCPI_CATALOG_ID = "367350417"
